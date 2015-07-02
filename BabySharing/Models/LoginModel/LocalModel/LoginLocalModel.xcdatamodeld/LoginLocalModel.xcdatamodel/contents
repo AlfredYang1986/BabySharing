@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6254" systemVersion="13F34" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="CurrentToken" representedClassName="CurrentToken" syncable="YES">
+        <attribute name="last_login_data" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="who" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LoginToken" inverseName="logined" inverseEntity="LoginToken" syncable="YES"/>
+    </entity>
+    <entity name="LoginToken" representedClassName="LoginToken" syncable="YES">
+        <attribute name="auth_token" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="phoneNo" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="screen_image" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="screen_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="user_id" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="connectWith" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Providers" inverseName="user" inverseEntity="Providers" syncable="YES"/>
+        <relationship name="logined" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CurrentToken" inverseName="who" inverseEntity="CurrentToken" syncable="YES"/>
+    </entity>
+    <entity name="Providers" representedClassName="Providers" syncable="YES">
+        <attribute name="provider_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="provider_screen_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="provider_token" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="provider_user_id" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LoginToken" inverseName="connectWith" inverseEntity="LoginToken" syncable="YES"/>
+    </entity>
+    <entity name="RegTmpToken" representedClassName="RegTmpToken" syncable="YES">
+        <attribute name="phoneNo" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="reg_token" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="CurrentToken" positionX="-470" positionY="-49" width="128" height="73"/>
+        <element name="LoginToken" positionX="-173" positionY="-324" width="128" height="148"/>
+        <element name="Providers" positionX="-423" positionY="-252" width="128" height="120"/>
+        <element name="RegTmpToken" positionX="-63" positionY="0" width="128" height="73"/>
+    </elements>
+</model>

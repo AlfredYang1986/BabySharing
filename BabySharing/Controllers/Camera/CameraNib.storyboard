@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="aC4-3h-v9r">
+            <objects>
+                <viewController storyboardIdentifier="camera" id="P7s-xE-8B5" customClass="CVViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="eH5-Tv-wpf"/>
+                        <viewControllerLayoutGuide type="bottom" id="Gn6-yv-GYW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xUo-Ck-ogN">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Elg-B1-Jic">
+                                <rect key="frame" x="264" y="509" width="73" height="37"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="37" id="VlV-OE-CNm"/>
+                                    <constraint firstAttribute="width" constant="73" id="xiG-Y1-VyL"/>
+                                </constraints>
+                                <state key="normal" title="movie">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didSelectTake" destination="P7s-xE-8B5" eventType="touchUpInside" id="GbT-Uc-5Sp"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U7Q-zy-6e1">
+                                <rect key="frame" x="96" y="512" width="44" height="30"/>
+                                <color key="backgroundColor" red="0.32993064509999998" green="1" blue="0.37411665960000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="6uo-Oo-CYh"/>
+                                    <constraint firstAttribute="width" constant="44" id="mTk-FQ-0wU"/>
+                                </constraints>
+                                <state key="normal" title="Album">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didSelectAblum" destination="P7s-xE-8B5" eventType="touchUpInside" id="pqU-KG-zpR"/>
+                                </connections>
+                            </button>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ugO-I1-2S5">
+                                <rect key="frame" x="276" y="492" width="51" height="31"/>
+                                <connections>
+                                    <action selector="didSwitchInputType:" destination="P7s-xE-8B5" eventType="valueChanged" id="pSm-Cc-8Mc"/>
+                                </connections>
+                            </switch>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Gn6-yv-GYW" firstAttribute="top" secondItem="U7Q-zy-6e1" secondAttribute="bottom" constant="29" id="44q-te-jYv"/>
+                            <constraint firstAttribute="centerX" secondItem="Elg-B1-Jic" secondAttribute="centerX" id="4YH-ck-zO9"/>
+                            <constraint firstItem="Gn6-yv-GYW" firstAttribute="top" secondItem="Elg-B1-Jic" secondAttribute="bottom" constant="25" id="4lv-TB-y0W"/>
+                            <constraint firstItem="U7Q-zy-6e1" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="xUo-Ck-ogN" secondAttribute="leadingMargin" constant="30" id="5ky-WV-H6G"/>
+                            <constraint firstAttribute="centerX" relation="greaterThanOrEqual" secondItem="U7Q-zy-6e1" secondAttribute="centerX" constant="80" id="Kei-Re-Xo5"/>
+                            <constraint firstAttribute="centerX" secondItem="ugO-I1-2S5" secondAttribute="centerX" id="X2b-aB-Lpu"/>
+                            <constraint firstItem="Elg-B1-Jic" firstAttribute="top" secondItem="ugO-I1-2S5" secondAttribute="bottom" constant="15" id="zeW-cQ-xeY"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="y70-PX-fMd"/>
+                    <connections>
+                        <outlet property="takeBtn" destination="Elg-B1-Jic" id="IK4-MO-O5f"/>
+                        <segue destination="zG8-eP-VeR" kind="push" identifier="savePic" id="IAO-E0-vKZ"/>
+                        <segue destination="Dgv-yI-LA6" kind="push" identifier="saveVid" id="bcr-CV-WER"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yjU-b5-lgG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1253" y="386"/>
+        </scene>
+        <!--save picture-->
+        <scene sceneID="uAq-1h-9oR">
+            <objects>
+                <viewController id="zG8-eP-VeR" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mbf-VF-JSh"/>
+                        <viewControllerLayoutGuide type="bottom" id="13P-K0-3Cx"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="oTS-Ss-D3i">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="save picture" id="2fP-Ao-9um"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yAd-wy-2kv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2095" y="152"/>
+        </scene>
+        <!--save video-->
+        <scene sceneID="OFg-cj-00Q">
+            <objects>
+                <viewController id="Dgv-yI-LA6" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Io7-Je-yqD"/>
+                        <viewControllerLayoutGuide type="bottom" id="3GF-t5-GgD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="7Bc-sd-49L">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="save video" id="fEo-aH-X7y"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qPu-g0-S8G" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2095" y="878"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Zye-bp-83B">
+            <objects>
+                <navigationController storyboardIdentifier="cameraNav" automaticallyAdjustsScrollViewInsets="NO" id="Vc6-hZ-lkR" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="KgU-fI-ZAU">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="P7s-xE-8B5" kind="relationship" relationship="rootViewController" id="P0e-AT-Nt1"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sEY-GT-ZHB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="576" y="386"/>
+        </scene>
+    </scenes>
+</document>

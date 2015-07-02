@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7549" systemVersion="14D136" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="QueryComments" representedClassName="QueryComments" syncable="YES">
+        <attribute name="comment_content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="comment_owner_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_owner_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_owner_photo" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="commentTo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QueryContent" inverseName="comments" inverseEntity="QueryContent" syncable="YES"/>
+    </entity>
+    <entity name="QueryContent" representedClassName="QueryContent" syncable="YES">
+        <attribute name="comment_count" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="comment_time_span" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="content_description" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="content_post_date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="content_post_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="content_post_location" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="content_title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="likes_count" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="likes_time_span" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="owner_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="owner_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="owner_photo" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="comments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="QueryComments" inverseName="commentTo" inverseEntity="QueryComments" syncable="YES"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="QueryContentItem" inverseName="holdsBy" inverseEntity="QueryContentItem" syncable="YES"/>
+        <relationship name="likes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="QueryLikes" inverseName="likeTo" inverseEntity="QueryLikes" syncable="YES"/>
+        <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="QueryContentTag" inverseName="tagsTo" inverseEntity="QueryContentTag" syncable="YES"/>
+    </entity>
+    <entity name="QueryContentItem" representedClassName="QueryContentItem" syncable="YES">
+        <attribute name="item_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="item_type" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="holdsBy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QueryContent" inverseName="items" inverseEntity="QueryContent" syncable="YES"/>
+    </entity>
+    <entity name="QueryContentTag" representedClassName="QueryContentTag" syncable="YES">
+        <attribute name="tag_content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tag_offset_x" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="tag_offset_y" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="tag_type" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="tagsTo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QueryContent" inverseName="tags" inverseEntity="QueryContent" syncable="YES"/>
+    </entity>
+    <entity name="QueryLikes" representedClassName="QueryLikes" syncable="YES">
+        <attribute name="like_date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="like_owner_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="like_owner_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="like_owner_photo" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="likeTo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QueryContent" inverseName="likes" inverseEntity="QueryContent" syncable="YES"/>
+    </entity>
+    <entity name="QueryTimeSpan" representedClassName="QueryTimeSpan" syncable="YES">
+        <attribute name="content_time_span" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="QueryComments" positionX="-4077" positionY="-2275" width="128" height="133"/>
+        <element name="QueryContent" positionX="-3899" positionY="-2493" width="128" height="283"/>
+        <element name="QueryContentItem" positionX="-3699" positionY="-2478" width="128" height="88"/>
+        <element name="QueryContentTag" positionX="-3897" positionY="-2025" width="128" height="118"/>
+        <element name="QueryLikes" positionX="-3638" positionY="-2187" width="128" height="118"/>
+        <element name="QueryTimeSpan" positionX="-4221" positionY="-2518" width="128" height="58"/>
+    </elements>
+</model>

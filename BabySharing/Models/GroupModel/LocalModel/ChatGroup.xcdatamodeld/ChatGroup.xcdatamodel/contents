@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7549" systemVersion="14D136" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Group" representedClassName="Group" syncable="YES">
+        <attribute name="group_found_time" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="group_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="group_name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="subGroups" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SubGroup" inverseName="group" inverseEntity="SubGroup" syncable="YES"/>
+    </entity>
+    <entity name="Messages" representedClassName="Messages" syncable="YES">
+        <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="owner" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="belongs" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SubGroup" inverseName="messages" inverseEntity="SubGroup" syncable="YES"/>
+    </entity>
+    <entity name="SubGroup" representedClassName="SubGroup" syncable="YES">
+        <attribute name="sub_group_found_time" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="sub_group_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sub_group_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sub_group_update_time" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="group" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Group" inverseName="subGroups" inverseEntity="Group" syncable="YES"/>
+        <relationship name="messages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Messages" inverseName="belongs" inverseEntity="Messages" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Group" positionX="-8802" positionY="-5202" width="128" height="105"/>
+        <element name="Messages" positionX="-8370" positionY="-5031" width="128" height="133"/>
+        <element name="SubGroup" positionX="-8577" positionY="-5121" width="128" height="133"/>
+    </elements>
+</model>

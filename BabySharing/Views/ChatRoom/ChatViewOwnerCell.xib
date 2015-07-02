@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="OwnerCell" id="y6P-vZ-SlS" customClass="ChatViewOwnerCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="y6P-vZ-SlS" id="EyK-i3-eAE">
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jSE-Cc-fnK">
+                        <rect key="frame" x="280" y="6" width="32" height="32"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xni-Se-S7o">
+                        <rect key="frame" x="8" y="10" width="264" height="24"/>
+                        <color key="backgroundColor" red="0.1575035102" green="1" blue="0.2256678731" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="jSE-Cc-fnK" firstAttribute="top" secondItem="EyK-i3-eAE" secondAttribute="topMargin" constant="-2" id="Di8-Lw-7Rr"/>
+                    <constraint firstItem="jSE-Cc-fnK" firstAttribute="leading" secondItem="Xni-Se-S7o" secondAttribute="trailing" constant="8" id="dKN-GX-IU5"/>
+                    <constraint firstItem="jSE-Cc-fnK" firstAttribute="trailing" secondItem="EyK-i3-eAE" secondAttribute="trailingMargin" id="tv8-0T-hfY"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="imgView" destination="jSE-Cc-fnK" id="jEv-9C-dX7"/>
+                <outlet property="textContentLabel" destination="Xni-Se-S7o" id="dFN-nK-I3h"/>
+            </connections>
+            <point key="canvasLocation" x="258" y="290"/>
+        </tableViewCell>
+    </objects>
+</document>

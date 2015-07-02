@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Movie Controller-->
+        <scene sceneID="0vo-aF-atC">
+            <objects>
+                <viewController storyboardIdentifier="MovieNib" id="uDf-cm-VdX" customClass="CVMovieController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="KJl-ry-6Z4"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ccf-vJ-DYo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Y3p-b9-YMF">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Pb-9F-6yJ">
+                                <rect key="frame" x="500" y="20" width="84" height="30"/>
+                                <state key="normal" title="change side">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didChangeCameraBtn" destination="uDf-cm-VdX" eventType="touchUpInside" id="S2K-ZI-lBv"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WtH-Zy-2mg">
+                                <rect key="frame" x="277" y="522" width="31" height="30"/>
+                                <state key="normal" title="start">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didSelectTakePicBtn" destination="uDf-cm-VdX" eventType="touchUpInside" id="DJN-8V-iVr"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tfa-Mw-g5P">
+                                <rect key="frame" x="446" y="522" width="43" height="30"/>
+                                <state key="normal" title="merge">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didSelectMergeBtn" destination="uDf-cm-VdX" eventType="touchUpInside" id="Cw9-gD-2qM"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lmq-9W-e7l">
+                                <rect key="frame" x="75" y="522" width="44" height="30"/>
+                                <state key="normal" title="Album">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didSelectAlbumBtn" destination="uDf-cm-VdX" eventType="touchUpInside" id="MDG-Sd-hN8"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3aD-JT-5OQ">
+                                <rect key="frame" x="16" y="20" width="30" height="30"/>
+                                <state key="normal" title="X">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="dismissCVViewController:" destination="uDf-cm-VdX" eventType="touchUpInside" id="7F0-ty-gXx"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="3aD-JT-5OQ" firstAttribute="top" secondItem="KJl-ry-6Z4" secondAttribute="bottom" id="Eb8-IL-XUz"/>
+                            <constraint firstItem="3aD-JT-5OQ" firstAttribute="leading" secondItem="Y3p-b9-YMF" secondAttribute="leadingMargin" id="IYE-Be-cAH"/>
+                            <constraint firstAttribute="centerX" secondItem="WtH-Zy-2mg" secondAttribute="centerX" id="IcJ-eZ-HN5"/>
+                            <constraint firstItem="lmq-9W-e7l" firstAttribute="top" secondItem="WtH-Zy-2mg" secondAttribute="top" id="NZW-Ka-L9i"/>
+                            <constraint firstItem="Tfa-Mw-g5P" firstAttribute="leading" secondItem="WtH-Zy-2mg" secondAttribute="trailing" constant="60" id="NwG-Ce-klt"/>
+                            <constraint firstItem="Ccf-vJ-DYo" firstAttribute="top" secondItem="WtH-Zy-2mg" secondAttribute="bottom" constant="48" id="VvN-Jo-B1Z"/>
+                            <constraint firstItem="3Pb-9F-6yJ" firstAttribute="top" secondItem="KJl-ry-6Z4" secondAttribute="bottom" id="a8Y-2f-9Ij"/>
+                            <constraint firstItem="3aD-JT-5OQ" firstAttribute="top" secondItem="3Pb-9F-6yJ" secondAttribute="top" id="euV-mq-pXP"/>
+                            <constraint firstItem="3aD-JT-5OQ" firstAttribute="leading" secondItem="Y3p-b9-YMF" secondAttribute="leadingMargin" constant="8" id="fHL-ES-0vu"/>
+                            <constraint firstItem="WtH-Zy-2mg" firstAttribute="leading" secondItem="3aD-JT-5OQ" secondAttribute="trailing" constant="60" id="jol-0X-wsw"/>
+                            <constraint firstItem="WtH-Zy-2mg" firstAttribute="leading" secondItem="lmq-9W-e7l" secondAttribute="trailing" constant="60" id="lfU-re-sbA"/>
+                            <constraint firstItem="3Pb-9F-6yJ" firstAttribute="trailing" secondItem="Y3p-b9-YMF" secondAttribute="trailingMargin" id="t3m-TY-dbF"/>
+                            <constraint firstItem="Tfa-Mw-g5P" firstAttribute="top" secondItem="WtH-Zy-2mg" secondAttribute="top" id="yZU-px-p6e"/>
+                            <constraint firstItem="3aD-JT-5OQ" firstAttribute="top" secondItem="WtH-Zy-2mg" secondAttribute="top" id="zsL-JE-mhM"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="euV-mq-pXP"/>
+                                <exclude reference="fHL-ES-0vu"/>
+                                <exclude reference="zsL-JE-mhM"/>
+                                <exclude reference="jol-0X-wsw"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="camPosBtn" destination="3Pb-9F-6yJ" id="huI-be-Sii"/>
+                        <outlet property="cancelBtn" destination="3aD-JT-5OQ" id="jlb-kc-Cg7"/>
+                        <outlet property="takeBtn" destination="WtH-Zy-2mg" id="kZD-Ug-IFl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GKc-63-ori" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="423" y="439"/>
+        </scene>
+    </scenes>
+</document>
