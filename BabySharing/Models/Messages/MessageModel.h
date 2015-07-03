@@ -20,6 +20,7 @@
 #pragma mark -- constructor
 - (id)initWithDelegate:(AppDelegate*)delegate;
 
+#pragma mark -- tmp group message
 - (void)addMessageWithData:(NSDictionary*)data;
 - (NSArray*)queryAllMessagesWithReceiver:(NSString*)receiver andUser:(NSString*)user_id;
 @end

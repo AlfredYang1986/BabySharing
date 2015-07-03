@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		EE7951971B45065200CC28A2 /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EE7951961B45065200CC28A2 /* libGPUImage.a */; };
+		EE7EB54B1B4628D9003281F7 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7EB54A1B4628D9003281F7 /* MessageViewController.m */; };
+		EE7EB5501B4630C0003281F7 /* MessageViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7EB54E1B4630C0003281F7 /* MessageViewCell.m */; };
+		EE7EB5511B4630C0003281F7 /* MessageViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE7EB54F1B4630C0003281F7 /* MessageViewCell.xib */; };
 		EEAAC8FE1B44E81A00D05C0B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAAC8FD1B44E81A00D05C0B /* main.m */; };
 		EEAAC91B1B44E81A00D05C0B /* BabySharingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAAC91A1B44E81A00D05C0B /* BabySharingTests.m */; };
 		EEAACC9A1B44E90400D05C0B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACAF11B44E90300D05C0B /* AppDelegate.m */; };
@@ -189,6 +192,11 @@
 
 /* Begin PBXFileReference section */
 		EE7951961B45065200CC28A2 /* libGPUImage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGPUImage.a; path = GPUImage.framework/libGPUImage.a; sourceTree = "<group>"; };
+		EE7EB5491B4628D9003281F7 /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
+		EE7EB54A1B4628D9003281F7 /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
+		EE7EB54D1B4630C0003281F7 /* MessageViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewCell.h; sourceTree = "<group>"; };
+		EE7EB54E1B4630C0003281F7 /* MessageViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewCell.m; sourceTree = "<group>"; };
+		EE7EB54F1B4630C0003281F7 /* MessageViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageViewCell.xib; sourceTree = "<group>"; };
 		EEAAC8F81B44E81A00D05C0B /* BabySharing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BabySharing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEAAC8FC1B44E81A00D05C0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EEAAC8FD1B44E81A00D05C0B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -622,11 +630,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EE7EB54C1B46309D003281F7 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				EE7EB54D1B4630C0003281F7 /* MessageViewCell.h */,
+				EE7EB54E1B4630C0003281F7 /* MessageViewCell.m */,
+				EE7EB54F1B4630C0003281F7 /* MessageViewCell.xib */,
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
 		EEAAC8EF1B44E81A00D05C0B = {
 			isa = PBXGroup;
 			children = (
-				EEAACDB91B44FAA300D05C0B /* libGPUImage */,
 				EEAACD791B44EA8800D05C0B /* BabySharing.mobileprovision */,
+				EEAACDB91B44FAA300D05C0B /* libGPUImage */,
 				EEAACD5E1B44EA2D00D05C0B /* libQQSDK */,
 				EEAACD611B44EA2D00D05C0B /* libWeChatSDK */,
 				EEAACD661B44EA2D00D05C0B /* libWeiboSDK */,
@@ -770,6 +788,8 @@
 		EEAACB141B44E90300D05C0B /* Message */ = {
 			isa = PBXGroup;
 			children = (
+				EE7EB5491B4628D9003281F7 /* MessageViewController.h */,
+				EE7EB54A1B4628D9003281F7 /* MessageViewController.m */,
 			);
 			path = Message;
 			sourceTree = "<group>";
@@ -1116,6 +1136,7 @@
 		EEAACBBB1B44E90300D05C0B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				EE7EB54C1B46309D003281F7 /* Message */,
 				EEAACBBC1B44E90300D05C0B /* Album */,
 				EEAACBC11B44E90300D05C0B /* ChatRoom */,
 				EEAACBCC1B44E90300D05C0B /* DropDownView */,
@@ -1803,6 +1824,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE7EB5511B4630C0003281F7 /* MessageViewCell.xib in Resources */,
 				EEAACD741B44EA2D00D05C0B /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				EEAACD471B44E90400D05C0B /* ProfileDetailChatGroupCell.xib in Resources */,
 				EEAACC9B1B44E90400D05C0B /* LaunchScreen.xib in Resources */,
@@ -1899,6 +1921,7 @@
 				EEAACCF11B44E90400D05C0B /* AlbumTableCell.m in Sources */,
 				EEAACD2F1B44E90400D05C0B /* CommentsHeaderAndFooterCell.m in Sources */,
 				EEAACD1F1B44E90400D05C0B /* SGActionView.m in Sources */,
+				EE7EB54B1B4628D9003281F7 /* MessageViewController.m in Sources */,
 				EEAACCA91B44E90400D05C0B /* NicknameInputViewController.m in Sources */,
 				EEAACCA41B44E90400D05C0B /* CVViewController2.m in Sources */,
 				EEAACCD31B44E90400D05C0B /* SubGroup.m in Sources */,
@@ -1945,6 +1968,7 @@
 				EEAACD101B44E90400D05C0B /* PhotoTagView.m in Sources */,
 				EEAACCF01B44E90400D05C0B /* AlbumGridCell.m in Sources */,
 				EEAACC9E1B44E90400D05C0B /* AlbumViewController.m in Sources */,
+				EE7EB5501B4630C0003281F7 /* MessageViewCell.m in Sources */,
 				EEAACCAD1B44E90400D05C0B /* PhotoPreViewController.m in Sources */,
 				EEAACCD61B44E90400D05C0B /* LoginLocalModel.xcdatamodeld in Sources */,
 				EEAACCE51B44E90400D05C0B /* QueryContentTag.m in Sources */,

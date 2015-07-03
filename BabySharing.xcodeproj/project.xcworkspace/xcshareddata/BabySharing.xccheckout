@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>EC1082A1-629F-4829-9D2B-32C09E427C9B</string>
+	<key>IDESourceControlProjectName</key>
+	<string>project</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>2D4431F6B87097DE4DC9C02A8AE32574FD8B1FCA</key>
+		<string>https://github.com/AlfredYang1986/BabySharing.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>BabySharing.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>2D4431F6B87097DE4DC9C02A8AE32574FD8B1FCA</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/AlfredYang1986/BabySharing.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>2D4431F6B87097DE4DC9C02A8AE32574FD8B1FCA</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>2D4431F6B87097DE4DC9C02A8AE32574FD8B1FCA</string>
+			<key>IDESourceControlWCCName</key>
+			<string>BabySharing2</string>
+		</dict>
+	</array>
+</dict>
+</plist>
