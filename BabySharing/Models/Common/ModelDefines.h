@@ -14,8 +14,8 @@ typedef NS_ENUM(NSInteger, ModelAttchmentType) {
 };
 
 #pragma mark -- HOST DOMAIN
-#define HOST_DOMAIN                     @"http://www.altlys.com:9000/"
-//#define HOST_DOMAIN                     @"http://192.168.1.100:9000/"
+//#define HOST_DOMAIN                     @"http://www.altlys.com:9000/"
+#define HOST_DOMAIN                     @"http://192.168.1.103:9000/"
 //#define HOST_DOMAIN_SENDBOX             @"http://192.168.1.105:9000/"
 
 #pragma mark -- DOWNLOAD
@@ -81,6 +81,9 @@ typedef NS_ENUM(NSInteger, ModelAttchmentType) {
 //#define MESSAGE_FRIEND_ADD_SENDBOX          [HOST_DOMAIN_SENDBOX stringByAppendingString:@"addOneFriend"]
 //#define MESSAGE_FRIEND_QUERY_SENDBOX        [HOST_DOMAIN_SENDBOX stringByAppendingString:@"queryAllFriend"]
 
+#pragma mark -- DEVICE 
+#define DEVICE_DOMAIN                       [HOST_DOMAIN stringByAppendingString:@"devices/"]
+#define DEVICE_REGISTRATION                 [DEVICE_DOMAIN stringByAppendingString:@"registerUserDevice"]
 
 
 #pragma mark -- database

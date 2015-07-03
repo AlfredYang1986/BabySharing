@@ -7,11 +7,21 @@
 //
 
 #import "AppDelegate.h"
+#import "RemoteInstance/RemoteInstance.h"
+#import "ModelDefines.h"
 
 @interface AppDelegate ()
 
+/**
+ * for weibo login
+ */
 @property (strong, nonatomic) NSString *wbtoken;
 @property (strong, nonatomic) NSString *wbCurrentUserID;
+
+/**
+ * for notification 
+ */
+@property (strong, nonatomic) NSString *apns_token;
 
 @end
 
@@ -22,6 +32,11 @@
 @synthesize qm = _qm;
 @synthesize gm = _gm;
 @synthesize mm = _mm;
+
+@synthesize wbtoken = _wbtoken;
+@synthesize wbCurrentUserID = _wbCurrentUserID;
+
+@synthesize apns_token = _apns_token;
 
 - (void)createQueryModel {
     _qm = [[QueryModel alloc]initWithDelegate:self];
@@ -109,11 +124,41 @@
 }
 
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken {
-    NSLog(@"My token is: %@", deviceToken);
+    _apns_token = [NSString stringWithFormat:@"%@",(NSString*)deviceToken];
+    _apns_token = [_apns_token stringByReplacingOccurrencesOfString:@" " withString:@""];
+    _apns_token = [_apns_token lowercaseString];
+    _apns_token = [_apns_token substringToIndex:_apns_token.length-1];
+    _apns_token = [_apns_token substringFromIndex:1];
+    NSLog(@"My token is: %@", _apns_token);
+
+    [self registerDeviceTokenWithCurrentUser];
 }
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error {
     NSLog(@"Failed to get token, error: %@", error);
+}
+
+#pragma mark -- register device to service
+- (void)registerDeviceTokenWithCurrentUser {
+    if (_apns_token == nil || _lm.current_user_id == nil) {
+        return;
+    }
+    
+    NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
+    [dic setValue:_lm.current_user_id forKey:@"user_id"];
+    [dic setValue:_lm.current_auth_token forKey:@"auth_token"];
+    [dic setValue:_apns_token forKey:@"device_token"];
+    
+    NSError * error = nil;
+    NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
+    
+    NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:DEVICE_REGISTRATION]];
+    
+    if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
+        NSLog(@"register device success");
+    } else {
+        NSLog(@"register device failed");
+    }
 }
 
 #pragma mark -- weibo delegate

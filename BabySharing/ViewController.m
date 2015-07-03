@@ -520,6 +520,8 @@ enum DisplaySide {
 
 - (void)userLogedIn:(id)sender {
     NSLog(@"login success");
+    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    [app registerDeviceTokenWithCurrentUser];
     
     [self.navigationController popToRootViewControllerAnimated:NO];
     
@@ -550,6 +552,7 @@ enum DisplaySide {
     if ([_lm isLoginedByUser]) {
         AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
         [delegate createQueryModel];
+        [delegate registerDeviceTokenWithCurrentUser];
     }
 }
 

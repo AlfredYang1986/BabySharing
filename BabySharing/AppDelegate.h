@@ -31,4 +31,6 @@
 
 - (void)createQueryModel;
 - (void)createGroupModel;
+
+- (void)registerDeviceTokenWithCurrentUser;
 @end
