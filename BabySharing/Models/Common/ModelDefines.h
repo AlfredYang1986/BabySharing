@@ -15,7 +15,7 @@ typedef NS_ENUM(NSInteger, ModelAttchmentType) {
 
 #pragma mark -- HOST DOMAIN
 #define HOST_DOMAIN                     @"http://www.altlys.com:9000/"
-//#define HOST_DOMAIN                     @"http://192.168.1.103:9000/"
+//#define HOST_DOMAIN                     @"http://192.168.1.104:9000/"
 //#define HOST_DOMAIN_SENDBOX             @"http://192.168.1.105:9000/"
 
 #pragma mark -- DOWNLOAD
@@ -73,7 +73,7 @@ typedef NS_ENUM(NSInteger, ModelAttchmentType) {
 
 #pragma mark -- MESSAGE SNEDBOX
 //#define MESSAGES_HOST_DOMAIN_SENDBOX        [HOST_DOMAIN_SENDBOX stringByAppendingString:@"messages/"]
-#define MESSAGE_WEB_SOCKET_SENDBOX          @"ws://192.168.1.103:9000/messages/registerDevice/"
+#define MESSAGE_WEB_SOCKET_SENDBOX          @"ws://192.168.1.104:9000/messages/registerDevice/"
 //
 //#define MESSAGE_SEND_SENDBOX                [HOST_DOMAIN_SENDBOX stringByAppendingString:@"sendMessage"]
 //#define MESSAGE_QUERY_SENDBOX               [HOST_DOMAIN_SENDBOX stringByAppendingString:@"queryMessages"]

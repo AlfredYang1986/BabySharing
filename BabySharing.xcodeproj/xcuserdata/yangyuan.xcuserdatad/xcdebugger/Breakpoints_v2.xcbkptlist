@@ -9,13 +9,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BabySharing/AppDelegate.m"
-            timestampString = "457609564.773107"
+            filePath = "BabySharing/ViewController.m"
+            timestampString = "457856519.99142"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "172"
-            endingLineNumber = "172"
-            landmarkName = "-didReceiveWeiboResponse:"
+            startingLineNumber = "496"
+            endingLineNumber = "496"
+            landmarkName = "-didSelectNextStep"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BabySharing/AppDelegate.m"
-            timestampString = "457607218.832739"
+            filePath = "BabySharing/Models/LoginModel/LoginModel.m"
+            timestampString = "457846851.995165"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "56"
-            endingLineNumber = "56"
-            landmarkName = "-application:didFinishLaunchingWithOptions:"
+            startingLineNumber = "113"
+            endingLineNumber = "113"
+            landmarkName = "-sendConfirrmCode:ToPhone:withToken:toResult:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,93 +41,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BabySharing/Views/Message/MessageViewCell.m"
-            timestampString = "457590795.432947"
+            filePath = "BabySharing/Models/LoginModel/LoginModel.m"
+            timestampString = "457847391.267651"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
-            landmarkName = "-handlePan:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BabySharing/Views/Message/MessageViewCell.m"
-            timestampString = "457590795.432947"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
-            landmarkName = "-showButtons"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BabySharing/AppDelegate.m"
-            timestampString = "457609961.452554"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "133"
-            endingLineNumber = "133"
-            landmarkName = "-application:didRegisterForRemoteNotificationsWithDeviceToken:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BabySharing/AppDelegate.m"
-            timestampString = "457609564.773107"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
-            landmarkName = "-application:didRegisterForRemoteNotificationsWithDeviceToken:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BabySharing/AppDelegate.m"
-            timestampString = "457610109.635081"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "155"
-            endingLineNumber = "155"
-            landmarkName = "-registerDeviceTokenWithCurrentUser"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BabySharing/AppDelegate.m"
-            timestampString = "457610232.560294"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "143"
-            endingLineNumber = "143"
-            landmarkName = "-registerDeviceTokenWithCurrentUser"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
+            landmarkName = "-sendConfirrmCode:ToPhone:withToken:toResult:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -138,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BabySharing/RemoteInstance/RemoteInstance.m"
-            timestampString = "457610307.972544"
+            timestampString = "457847424.547897"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
             landmarkName = "+remoteSeverRequestData:toUrl:"
             landmarkType = "5">
          </BreakpointContent>
@@ -150,16 +70,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BabySharing/AppDelegate.m"
-            timestampString = "457610361.797027"
+            filePath = "BabySharing/Models/LoginModel/LoginModel.m"
+            timestampString = "457848006.698739"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "153"
-            endingLineNumber = "153"
-            landmarkName = "-registerDeviceTokenWithCurrentUser"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
+            landmarkName = "-sendConfirrmCode:ToPhone:withToken:toResult:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

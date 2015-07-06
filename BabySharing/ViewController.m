@@ -90,6 +90,9 @@ enum DisplaySide {
     CGFloat v_offset_input;
     
     BOOL isHerMoved;
+    
+    NSTimer* timer;
+    NSInteger seconds;
 }
 
 @synthesize lm = _lm;
@@ -164,6 +167,13 @@ enum DisplaySide {
     _termsButton.enabled = NO;
     _loginButton.enabled = NO;
     [self initialSubViewsProperties];
+    
+    timer = [NSTimer scheduledTimerWithTimeInterval: 1.0
+                                             target: self
+                                           selector: @selector(handleTimer:)
+                                           userInfo: nil
+                                            repeats: YES];
+    [timer setFireDate:[NSDate distantFuture]];
 }
 
 - (void)initialSubViewsProperties {
@@ -453,11 +463,27 @@ enum DisplaySide {
     
     if ([self isValidPhoneNumber:phoneNo inArea:@"+86"] && [self.lm sendLoginRequestToPhone:phoneNo]) {
         NSLog(@"Start counting down");
+        seconds = 60;
+        _confirmCodeBtn.enabled = NO;
+        [_confirmCodeBtn setTitle:[NSString stringWithFormat:@"(%d)秒重试", seconds] forState:UIControlStateDisabled];
+        [timer setFireDate:[NSDate distantPast]];
+
         
     } else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"input wrong phone number" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
         [alert show];
     }
+}
+
+- (void)handleTimer:(NSTimer*)sender {
+    if (-- seconds > 0) {
+        [_confirmCodeBtn setTitle:[NSString stringWithFormat:@"(%d)秒重试", seconds] forState:UIControlStateDisabled];
+    } else {
+        seconds = 60;
+        [timer setFireDate:[NSDate distantFuture]];
+        _confirmCodeBtn.enabled = YES;
+    }
+    
 }
 
 - (BOOL)isValidPhoneCode:(NSString*)phoneCode {
