@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LoginInputView.h"
 
-@interface ViewController : UIViewController <UITextFieldDelegate>
+@interface ViewController : UIViewController <LoginInputViewDelegate>
 //@property (weak, nonatomic) IBOutlet UIButton *entryButton;
 
 @end

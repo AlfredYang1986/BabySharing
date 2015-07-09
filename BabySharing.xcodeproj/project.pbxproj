@@ -178,6 +178,8 @@
 		EEAACDAC1B44EEDD00D05C0B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEAACDA41B44EEB500D05C0B /* MobileCoreServices.framework */; };
 		EEAACDAD1B44EEDD00D05C0B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEAACDA21B44EEAA00D05C0B /* Security.framework */; };
 		EEAACDAE1B44EEDD00D05C0B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEAACDA01B44EE9D00D05C0B /* CFNetwork.framework */; };
+		EEFD6F4F1B4E44C1008AC4F5 /* LoginInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEFD6F4E1B4E44C1008AC4F5 /* LoginInputView.m */; };
+		EEFD6F521B4E452D008AC4F5 /* SloganView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEFD6F511B4E452D008AC4F5 /* SloganView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -587,6 +589,10 @@
 		EEAACDA61B44EEBF00D05C0B /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		EEAACDA81B44EEC700D05C0B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		EEAACDBA1B44FAA300D05C0B /* GPUImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GPUImage.framework; sourceTree = "<group>"; };
+		EEFD6F4D1B4E44C1008AC4F5 /* LoginInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginInputView.h; sourceTree = "<group>"; };
+		EEFD6F4E1B4E44C1008AC4F5 /* LoginInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginInputView.m; sourceTree = "<group>"; };
+		EEFD6F501B4E452D008AC4F5 /* SloganView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SloganView.h; sourceTree = "<group>"; };
+		EEFD6F511B4E452D008AC4F5 /* SloganView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SloganView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1136,6 +1142,7 @@
 		EEAACBBB1B44E90300D05C0B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				EEFD6F4C1B4E4443008AC4F5 /* Landing */,
 				EE7EB54C1B46309D003281F7 /* Message */,
 				EEAACBBC1B44E90300D05C0B /* Album */,
 				EEAACBC11B44E90300D05C0B /* ChatRoom */,
@@ -1744,6 +1751,17 @@
 			path = libGPUImage;
 			sourceTree = "<group>";
 		};
+		EEFD6F4C1B4E4443008AC4F5 /* Landing */ = {
+			isa = PBXGroup;
+			children = (
+				EEFD6F4D1B4E44C1008AC4F5 /* LoginInputView.h */,
+				EEFD6F4E1B4E44C1008AC4F5 /* LoginInputView.m */,
+				EEFD6F501B4E452D008AC4F5 /* SloganView.h */,
+				EEFD6F511B4E452D008AC4F5 /* SloganView.m */,
+			);
+			path = Landing;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1944,6 +1962,7 @@
 				EEAACCEA1B44E90400D05C0B /* TagQueryModel.m in Sources */,
 				EEAACD2A1B44E90400D05C0B /* ChatViewOwnerCell.m in Sources */,
 				EEAACCA21B44E90400D05C0B /* CVViewController+ImageOpt.m in Sources */,
+				EEFD6F521B4E452D008AC4F5 /* SloganView.m in Sources */,
 				EEAACD461B44E90400D05C0B /* ProfileDetailChatGroupCell.m in Sources */,
 				EEAACCE61B44E90400D05C0B /* QueryLikes.m in Sources */,
 				EEAACD431B44E90400D05C0B /* PhotoTagRoundPointLayer.m in Sources */,
@@ -1962,6 +1981,7 @@
 				EEAACCDF1B44E90400D05C0B /* MessageModel.m in Sources */,
 				EEAACCE91B44E90400D05C0B /* QueryModel.m in Sources */,
 				EEAACCCE1B44E90400D05C0B /* ChatGroup.xcdatamodeld in Sources */,
+				EEFD6F4F1B4E44C1008AC4F5 /* LoginInputView.m in Sources */,
 				EEAACCEC1B44E90400D05C0B /* MoviePlayTrait.m in Sources */,
 				EEAACCDC1B44E90400D05C0B /* RegTmpToken.m in Sources */,
 				EEAACCCD1B44E90400D05C0B /* GroupModel.m in Sources */,

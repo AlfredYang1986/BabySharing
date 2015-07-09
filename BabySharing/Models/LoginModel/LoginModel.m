@@ -90,7 +90,6 @@
     NSError * error = nil;
     NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
 
-//    NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:@"http://192.168.0.104:8888/login/authWithPhone"]];
     NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:[AUTH_HOST_DOMAIN stringByAppendingString:AUTH_WITH_PHONE]]];
  
     if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
