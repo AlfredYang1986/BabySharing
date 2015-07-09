@@ -202,6 +202,14 @@ enum DisplaySide {
 
 - (void)queryGroupIsReady:(id)sender {
     NSLog(@"query group is ready");
+    
+    if (inputView.frame.origin.y + inputView.frame.size.height != [UIScreen mainScreen].bounds.size.height) {
+        CGFloat height = [UIScreen mainScreen].bounds.size.height;
+        
+        CGFloat last_height = inputView.bounds.size.height;
+        inputView.frame = CGRectMake(0, height - last_height, inputView.bounds.size.width, last_height);
+    }
+    
     [self performSegueWithIdentifier:@"contentSegue" sender:nil];
 }
 
@@ -237,7 +245,7 @@ enum DisplaySide {
 #pragma mark -- pan gusture
 - (void)handlePan:(UIPanGestureRecognizer*)gesture {
     NSLog(@"pan gesture");
-    if (inputView.isEditing == YES) {
+    if (inputView.frame.origin.y + inputView.frame.size.height != [UIScreen mainScreen].bounds.size.height) {
         if (gesture.state == UIGestureRecognizerStateBegan) {
             point = [gesture translationInView:self.view];
             
