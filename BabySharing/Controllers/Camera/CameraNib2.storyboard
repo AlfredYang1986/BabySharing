@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller2-->
@@ -16,68 +15,8 @@
                     <view key="view" contentMode="scaleToFill" id="Pu6-Jd-VGP">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DHb-Ur-HhP">
-                                <rect key="frame" x="500" y="28" width="84" height="30"/>
-                                <state key="normal" title="change side">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="didChangeCameraBtn" destination="ZtA-KC-ZeO" eventType="touchUpInside" id="ti8-HS-YKE"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dZw-x6-Qdm">
-                                <rect key="frame" x="277" y="535" width="58" height="30"/>
-                                <state key="normal" title="Take Pic">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="didSelectTakePicBtn" destination="ZtA-KC-ZeO" eventType="touchUpInside" id="jmy-nz-4zV"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XNh-UK-P63">
-                                <rect key="frame" x="16" y="28" width="45" height="30"/>
-                                <state key="normal" title="X">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="dismissCVViewController:" destination="ZtA-KC-ZeO" eventType="touchUpInside" id="8X2-i9-upi"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vOF-Iw-VhA">
-                                <rect key="frame" x="120" y="535" width="44" height="30"/>
-                                <state key="normal" title="Album">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="didSelectAlbumBtn" destination="ZtA-KC-ZeO" eventType="touchUpInside" id="CBv-QY-tOQ"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="DHb-Ur-HhP" firstAttribute="trailing" secondItem="Pu6-Jd-VGP" secondAttribute="trailingMargin" id="NDB-Kr-H5l"/>
-                            <constraint firstItem="XNh-UK-P63" firstAttribute="top" secondItem="dZw-x6-Qdm" secondAttribute="top" id="SBv-3q-N6U"/>
-                            <constraint firstItem="vOF-Iw-VhA" firstAttribute="top" secondItem="dZw-x6-Qdm" secondAttribute="top" id="byZ-81-RE6"/>
-                            <constraint firstItem="XNh-UK-P63" firstAttribute="leading" secondItem="Pu6-Jd-VGP" secondAttribute="leadingMargin" id="eYJ-wk-VTL"/>
-                            <constraint firstItem="dZw-x6-Qdm" firstAttribute="leading" secondItem="vOF-Iw-VhA" secondAttribute="trailing" constant="60" id="ocC-H3-bdJ"/>
-                            <constraint firstItem="DHb-Ur-HhP" firstAttribute="top" secondItem="1to-jW-Kmb" secondAttribute="bottom" constant="8" id="rGE-I8-Xgr"/>
-                            <constraint firstAttribute="centerX" secondItem="dZw-x6-Qdm" secondAttribute="centerX" id="rI2-3F-6kH"/>
-                            <constraint firstItem="s7p-pv-W7q" firstAttribute="top" secondItem="dZw-x6-Qdm" secondAttribute="bottom" constant="35" id="tia-NI-sMC"/>
-                            <constraint firstItem="dZw-x6-Qdm" firstAttribute="leading" secondItem="XNh-UK-P63" secondAttribute="trailing" constant="60" id="wgA-uM-r7P"/>
-                            <constraint firstItem="XNh-UK-P63" firstAttribute="top" secondItem="1to-jW-Kmb" secondAttribute="bottom" constant="8" id="zIF-BS-baT"/>
-                        </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="SBv-3q-N6U"/>
-                                <exclude reference="wgA-uM-r7P"/>
-                            </mask>
-                        </variation>
                     </view>
-                    <connections>
-                        <outlet property="camPosBtn" destination="DHb-Ur-HhP" id="pKv-cU-Ykm"/>
-                        <outlet property="cancelBtn" destination="XNh-UK-P63" id="vSn-zA-mcD"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uyY-9y-7Wq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

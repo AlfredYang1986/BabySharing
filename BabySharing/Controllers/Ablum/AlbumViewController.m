@@ -14,6 +14,8 @@
 //#import "PostPreViewController.h"
 #import "PhotoPreViewController.h"
 
+#import "AlbumModule.h"
+
 #define PHONE_PER_LINE 3
 
 @interface AlbumViewController ()
@@ -21,7 +23,20 @@
 
 @end
 
-@implementation AlbumViewController
+@implementation AlbumViewController {
+    NSArray* images_arr;
+    NSMutableArray* images_select_arr;
+    NSArray* album_name_arr;
+    //    ALAssetsLibrary* assetsLibrary;
+    
+    //    UIBarButtonItem* doneBtn;
+    //    UIBarButtonItem* selectBtn;
+   
+    BOOL bLoadData;
+    DropDownView* dp;
+    
+    AlbumModule* am;
+}
 
 @synthesize delegate = _delegate;
 @synthesize photoTableView = _photoTableView;
@@ -47,16 +62,15 @@
     
 //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:(UIBarButtonSystemItem)UIBarButtonSystemItemCompose target:self action:@selector(didSelectClearBtn:)];
    
-    bLoadData = NO;
     images_arr = [[NSMutableArray alloc]init];
     images_select_arr = [[NSMutableArray alloc]init];
     album_name_arr = [[NSMutableArray alloc]init];
    
     [_photoTableView registerClass:[AlbumTableCell class] forCellReuseIdentifier:@"AlbumTableViewCell"];
-    assetsLibrary = [[ALAssetsLibrary alloc] init];
-//    [self enumPhoteAlumName];
-//    [self enumAllSavedPhotes];
-//    
+   
+    bLoadData = NO;
+    am = [[AlbumModule alloc]init];
+    
     /**
      * set drop down list view
      */
@@ -229,67 +243,28 @@
 #pragma mark -- photo ablum access
 
 - (void)enumPhoteAlumName {
-    [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
-        NSString* album_name = [group valueForProperty:ALAssetsGroupPropertyName];
-        NSLog(@"enum group success %@", album_name);
-        NSLog(@"enum group number %ld", (long)[group numberOfAssets]);
-        if (album_name != nil) {
-//            [album_name_arr addObject:album_name];
-            [album_name_arr addObject:group];
-        } else {
-            // finished
-            [self enumAllAssetWithProprty:ALAssetTypePhoto];
-        }
-        
-    } failureBlock:^(NSError *error) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:error.domain message:error.description delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-        [alert show];
+    [am enumPhoteAlumNameWithBlock:^(NSArray *result) {
+        album_name_arr = result;
     }];
+    [self enumAllAssetWithProprty:ALAssetTypePhoto];
 }
 
 - (void)enumAllAssetWithProprty:(NSString*)type {
     bLoadData = NO;
-    [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
-        NSString* album_name = [group valueForProperty:ALAssetsGroupPropertyName];
-        if (album_name != nil) {
-            [group enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
-
-                if (result == nil) {
-                    bLoadData = YES;
-                    [_photoTableView reloadData];
-                } else {
-//                    NSURL* asset_url = [result valueForProperty:ALAssetPropertyAssetURL];
-//                    [images_arr addObject:asset_url];
-                    NSString* cur_type = [result valueForProperty:ALAssetPropertyType];
-                    if ([cur_type isEqualToString:type]) {
-                        [images_arr addObject:result];
-                    }
-                }
-            }];
-        }
-        
-    } failureBlock:^(NSError *error) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:error.domain message:error.description delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-        [alert show];
+    [am enumAllAssetWithProprty:type finishBlock:^(NSArray *result) {
+        bLoadData = YES;
+        images_arr = result;
+        [_photoTableView reloadData];
     }];
 }
 
 //- (void)enumPhotoAblumByAlbumName:(NSString*)album_name {
 - (void)enumPhotoAblumByAlbumName:(ALAssetsGroup*)group {
     bLoadData = NO;
-    [images_arr removeAllObjects];
-    [group enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
-        if (result == nil) {
-            bLoadData = YES;
-            [_photoTableView reloadData];
-        } else {
-            NSString* type = [result valueForProperty:ALAssetPropertyType];
-            NSLog(@"alsset type %@", type);
-
-            if (type == ALAssetTypePhoto) {
-                [images_arr addObject:result];
-            }
-        }
+    [am enumPhotoAblumByAlbumName:group finishBlock:^(NSArray *result) {
+        bLoadData = YES;
+        images_arr = result;
+        [_photoTableView reloadData];
     }];
 }
 

@@ -13,18 +13,7 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "AlbumActionProtocol.h"
 
-@interface AlbumViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, AlbumTableCellDelegate, DropDownDatasource, DropDownDelegate> {
-    NSMutableArray* images_arr;
-    NSMutableArray* images_select_arr;
-    NSMutableArray* album_name_arr;
-    ALAssetsLibrary* assetsLibrary;
-    
-//    UIBarButtonItem* doneBtn;
-//    UIBarButtonItem* selectBtn;
-    BOOL bLoadData;
-    
-    DropDownView* dp;
-}
+@interface AlbumViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, AlbumTableCellDelegate, DropDownDatasource, DropDownDelegate> 
 
 @property (nonatomic, weak) id<AlbumActionDelegate> delegate;
 @property (nonatomic)  BOOL isEditing;

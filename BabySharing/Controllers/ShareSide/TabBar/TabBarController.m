@@ -356,6 +356,22 @@
     }];
 }
 
+- (void)didSelectMovieBtn2:(UIViewController*)cur {
+    [cur dismissViewControllerAnimated:YES completion:^{
+        [self showMovieControllerOnController:self];
+    }];
+}
+
+- (void)didSelectCameraBtn2:(UIViewController*)cur {
+    [cur dismissViewControllerAnimated:YES completion:^{
+        [self showCameraControllerOnController:self];
+    }];
+}
+
+- (void)didSelectAlbumBtn2:(UIViewController*)cur {
+    
+}
+
 #pragma mark -- post buttons at tabbar and buttons animation
 - (void)didSelectCompareBtn:(id)sender {
     NSLog(@"did select ablum button");

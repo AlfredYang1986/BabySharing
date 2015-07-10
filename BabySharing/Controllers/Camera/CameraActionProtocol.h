@@ -13,6 +13,9 @@
 
 @protocol CameraActionProtocol <NSObject>
 - (void)didSelectAlbumBtn:(UIViewController*)cur andCurrentType:(AlbumControllerType)type;
+- (void)didSelectMovieBtn2:(UIViewController*)cur;
+- (void)didSelectCameraBtn2:(UIViewController*)cur;
+- (void)didSelectAlbumBtn2:(UIViewController*)cur;
 @end
 
 
