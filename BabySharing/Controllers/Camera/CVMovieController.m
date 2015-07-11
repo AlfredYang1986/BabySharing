@@ -13,6 +13,7 @@
 #import "PostPreViewController.h"
 #import "AlbumModule.h"
 #import "INTUAnimationEngine.h"
+#import "AlbumViewController2.h"
 
 #define MOVIE_MAX_SECONDS       15
 #define MOVIE_CALL_BACK_STEP    (1.0 / 12.0)
@@ -374,7 +375,10 @@
 }
 
 - (void)didSelectAlbumBtn {
-    [_delegate didSelectAlbumBtn:self andCurrentType:AlbumControllerTypeMovie];
+//    [_delegate didSelectAlbumBtn:self andCurrentType:AlbumControllerTypeMovie];
+    AlbumViewController2* distination = [[AlbumViewController2 alloc]init];
+    distination.type = AlbumControllerTypeMovie;
+    [self.navigationController pushViewController:distination animated:YES];
 }
 
 #pragma mark -- save image callback

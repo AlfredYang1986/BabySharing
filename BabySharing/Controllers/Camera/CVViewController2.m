@@ -13,6 +13,7 @@
 #import "AlbumModule.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "INTUAnimationEngine.h"
+#import "AlbumViewController2.h"
 
 @interface CVViewController2 () {
     GPUImageOutput<GPUImageInput> *filter;
@@ -255,7 +256,9 @@
 }
 
 - (void)didSelectAlbumBtn {
-    [_delegate didSelectAlbumBtn:self andCurrentType:AlbumControllerTypePhoto];
+//    [_delegate didSelectAlbumBtn:self andCurrentType:AlbumControllerTypePhoto];
+    AlbumViewController2* distination = [[AlbumViewController2 alloc]init];
+    [self.navigationController pushViewController:distination animated:YES];
 }
 
 - (void)didSelectMovieBtn {
