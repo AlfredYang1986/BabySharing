@@ -221,8 +221,7 @@ enum DisplaySide {
     }
 }
 
-- (void)moveView:(float)move
-{
+- (void)moveView:(float)move {
     static const CGFloat kAnimationDuration = 0.30; // in seconds
     CGPoint p_start = inputView.center;
     CGPoint p_end = CGPointMake(p_start.x, p_start.y + move);

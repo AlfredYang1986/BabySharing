@@ -12,6 +12,7 @@
 #import "PostPreViewController.h"
 #import "AlbumModule.h"
 #import <AssetsLibrary/AssetsLibrary.h>
+#import "INTUAnimationEngine.h"
 
 @interface CVViewController2 () {
     GPUImageOutput<GPUImageInput> *filter;
@@ -24,6 +25,10 @@
     NSMutableArray* layout_help_layers;
     
     UIButton* f_btn_2;
+    
+    // take animation
+    UIButton* take_btn;
+    CALayer* inner_take_btn_layer;
 }
 
 @end
@@ -115,7 +120,7 @@
      * action buttons
      */
     CGFloat last_height = [UIScreen mainScreen].bounds.size.height - height - 44;
-    UIButton* take_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, last_height * 0.8, last_height * 0.8)];
+    take_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, last_height * 0.8, last_height * 0.8)];
     take_btn.layer.cornerRadius = last_height * 0.4;
     take_btn.layer.borderColor = [UIColor whiteColor].CGColor;
     take_btn.layer.borderWidth = 5.f;
@@ -124,7 +129,7 @@
     [take_btn addTarget:self action:@selector(didSelectTakePicBtn) forControlEvents:UIControlEventTouchDown];
     take_btn.center = CGPointMake(width / 2, height + 44 + last_height / 2);
     
-    CALayer* inner_take_btn_layer = [CALayer layer];
+    inner_take_btn_layer = [CALayer layer];
     inner_take_btn_layer.frame = CGRectMake(7, 7, last_height * 0.8 - 14, last_height * 0.8 - 14);
     inner_take_btn_layer.cornerRadius = inner_take_btn_layer.frame.size.width / 2;
     inner_take_btn_layer.backgroundColor = [UIColor whiteColor].CGColor;
@@ -257,19 +262,93 @@
     [_delegate didSelectMovieBtn2:self];
 }
 
+- (void)takePicAnimation1 {
+
+    static const CGFloat kAnimationDuration = 0.15; // in seconds
+    CGRect outer = take_btn.frame;
+    CGRect rc_start = CGRectMake(7, 7, outer.size.width - 14, outer.size.height - 14);
+    CGRect rc_end = CGRectMake(outer.size.width / 2, outer.size.height / 2, 1, 1);
+    [INTUAnimationEngine animateWithDuration:kAnimationDuration
+                                       delay:0.0
+                                      easing:INTUEaseInOutQuadratic
+                                     options:INTUAnimationOptionAutoreverse
+                                  animations:^(CGFloat progress) {
+                                      inner_take_btn_layer.frame = INTUInterpolateCGRect(rc_start, rc_end, progress);
+                                      inner_take_btn_layer.cornerRadius = inner_take_btn_layer.frame.size.width / 2;
+                                      // NSLog(@"Progress: %.2f", progress);
+                                  }
+                                  completion:^(BOOL finished) {
+                                      // NOTE: When passing INTUAnimationOptionRepeat, this completion block is NOT executed at the end of each cycle. It will only run if the animation is canceled.
+                                      NSLog(@"%@", finished ? @"Animation Completed" : @"Animation Canceled");
+                                      // self.animationID = NSNotFound;
+                                      [self takePicAnimation2];
+                                      
+                                  }];
+}
+
+- (void)takePicAnimation2 {
+
+    static const CGFloat kAnimationDuration = 0.15; // in seconds
+    CGRect outer = take_btn.frame;
+    CGRect rc_start = CGRectMake(7, 7, outer.size.width - 14, outer.size.height - 14);
+    CGRect rc_end = CGRectMake(outer.size.width / 2, outer.size.height / 2, 1, 1);
+//    CGRect rc_end = CGRectMake(outer.size.width / 2 - 7, outer.size.height / 2 - 7, 14, 14);
+    [INTUAnimationEngine animateWithDuration:kAnimationDuration
+                                       delay:0.0
+                                      easing:INTUEaseInOutQuadratic
+                                     options:INTUAnimationOptionNone
+                                  animations:^(CGFloat progress) {
+                                      inner_take_btn_layer.frame = INTUInterpolateCGRect(rc_end, rc_start, progress);
+                                      inner_take_btn_layer.cornerRadius = inner_take_btn_layer.frame.size.width / 2;
+                                      // NSLog(@"Progress: %.2f", progress);
+                                  }
+                                  completion:^(BOOL finished) {
+                                      // NOTE: When passing INTUAnimationOptionRepeat, this completion block is NOT executed at the end of each cycle. It will only run if the animation is canceled.
+                                      NSLog(@"%@", finished ? @"Animation Completed" : @"Animation Canceled");
+                                      // self.animationID = NSNotFound;
+                                      dispatch_queue_t queue = dispatch_queue_create("capture pic", NULL);
+                                      dispatch_async(queue, ^{
+                                          
+                                          [stillCamera capturePhotoAsImageProcessedUpToFilter:filter withCompletionHandler:^(UIImage *processedImage, NSError *error) {
+                                              
+                                              // TODO: save image to local sandbox
+                                              UIImageWriteToSavedPhotosAlbum(processedImage, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
+                                              
+                                              dispatch_async(dispatch_get_main_queue(), ^{
+                                                  UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"PostPreView" bundle:nil];
+                                                  PostPreViewController* postNav = [storyboard instantiateViewControllerWithIdentifier:@"PostPreView"];
+                                                  postNav.postArray = @[processedImage];
+                                                  postNav.type = PostPreViewPhote;
+                                                  sleep(0.5);
+                                                  [self.navigationController pushViewController:postNav animated:YES];
+                                              });
+                                          }];
+                                      });
+                                  }];
+}
+
 - (void)didSelectTakePicBtn {
     
-    [stillCamera capturePhotoAsImageProcessedUpToFilter:filter withCompletionHandler:^(UIImage *processedImage, NSError *error) {
-        
-        // TODO: save image to local sandbox
-        UIImageWriteToSavedPhotosAlbum(processedImage, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
-        
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"PostPreView" bundle:nil];
-        PostPreViewController* postNav = [storyboard instantiateViewControllerWithIdentifier:@"PostPreView"];
-        postNav.postArray = @[processedImage];
-        postNav.type = PostPreViewPhote;
-        [self.navigationController pushViewController:postNav animated:YES];
-    }];
+    [self takePicAnimation1];
+   
+//    dispatch_queue_t queue = dispatch_queue_create("capture pic", NULL);
+//    dispatch_async(queue, ^{
+//
+//        [stillCamera capturePhotoAsImageProcessedUpToFilter:filter withCompletionHandler:^(UIImage *processedImage, NSError *error) {
+//            
+//            // TODO: save image to local sandbox
+//            UIImageWriteToSavedPhotosAlbum(processedImage, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
+//          
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"PostPreView" bundle:nil];
+//                PostPreViewController* postNav = [storyboard instantiateViewControllerWithIdentifier:@"PostPreView"];
+//                postNav.postArray = @[processedImage];
+//                postNav.type = PostPreViewPhote;
+//                sleep(0.5);
+//                [self.navigationController pushViewController:postNav animated:YES];
+//            });
+//        }];
+//    });
 }
 
 #pragma mark -- save image callback
