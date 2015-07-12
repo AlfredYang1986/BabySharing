@@ -241,7 +241,6 @@
 }
 
 #pragma mark -- photo ablum access
-
 - (void)enumPhoteAlumName {
     [am enumPhoteAlumNameWithBlock:^(NSArray *result) {
         album_name_arr = result;

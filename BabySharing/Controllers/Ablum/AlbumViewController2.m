@@ -9,7 +9,11 @@
 #import "AlbumViewController2.h"
 #import "AlbumModule.h"
 #import <AssetsLibrary/AssetsLibrary.h>
+#import <AVFoundation/AVFoundation.h>
 #import "INTUAnimationEngine.h"
+#import "AlbumGridCell.h"
+
+#define PHOTO_PER_LINE  3
 
 @interface AlbumViewController2 () 
 
@@ -18,9 +22,23 @@
 @implementation AlbumViewController2 {
     UIView* mainContentView;
     UIView* f_bar;
+    UIView* bar;
     UITableView* albumView;
     
     CGFloat aspectRatio;
+    
+    AlbumModule* am;
+    NSArray* images_arr;
+    NSArray* album_name_arr;
+    NSMutableArray * images_select_arr;
+    BOOL isAllowMutiSelection;
+    BOOL bLoadData;
+    
+    BOOL isMainContentViewShown;
+    CALayer * mainContentPhotoLayer;
+    
+    AVPlayer* player;
+    AVPlayerLayer *avPlayerLayer;
 }
 
 @synthesize type = _type;
@@ -48,7 +66,7 @@
     /**
      * fake navigation bar
      */
-    UIView * bar = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, 49)];
+    bar = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, 49)];
     bar.backgroundColor = [UIColor colorWithWhite:0.f alpha:0.3];
     [self.view addSubview:bar];
     [self.view bringSubviewToFront:bar];
@@ -133,8 +151,31 @@
         [self createButtonsForView:tab_bar inRect:CGRectMake(width * 2 / 3, 0, width / 3, 44) andTitle:@"地点"];
     } else {
         [self createButtonsForView:tab_bar inRect:CGRectMake(0, 0, width, 44) andTitle:@"视频"];
+        
+        if (player == nil) {
+            player = [[AVPlayer alloc]init];
+            avPlayerLayer = [AVPlayerLayer playerLayerWithPlayer:player];
+        }
     }
     /***************************************************************************************/
+    
+    am = [[AlbumModule alloc]init];
+    if (_type == AlbumControllerTypePhoto) {
+        [self enumAllAssetWithProprty:ALAssetTypePhoto];
+    } else if (_type == AlbumControllerTypeMovie) {
+        [self enumAllAssetWithProprty:ALAssetTypeVideo];
+    } else {
+        // error
+    }
+    [albumView registerClass:[AlbumTableCell class] forCellReuseIdentifier:@"AlbumTableViewCell"];
+    
+    isMainContentViewShown = YES;
+    isAllowMutiSelection = NO;
+    images_select_arr = [[NSMutableArray alloc]init];
+}
+
+- (void)dealloc {
+    [player.currentItem removeObserver:self forKeyPath:@"status"];
 }
 
 - (void)createButtonsForView:(UIView*)tab_bar inRect:(CGRect)rc andTitle:(NSString*)title{
@@ -149,7 +190,71 @@
 }
 
 - (void)changeMainContentWithAsset:(ALAsset*)asset {
+    NSString* cur_type = [asset valueForProperty:ALAssetPropertyType];
+    if ([cur_type isEqualToString:ALAssetTypePhoto]) {
+        if (mainContentPhotoLayer == nil) {
+            mainContentPhotoLayer = [CALayer layer];
+        }
+        
+        [mainContentPhotoLayer removeFromSuperlayer];
+        mainContentPhotoLayer.frame = mainContentView.bounds;
+        mainContentPhotoLayer.contents = (id)asset.defaultRepresentation.fullResolutionImage;
+        [mainContentView.layer addSublayer:mainContentPhotoLayer];
+        
+    } else if ([cur_type isEqualToString:ALAssetTypeVideo]) {
+        
+        if (![mainContentView.layer.sublayers containsObject:avPlayerLayer]) {
+            avPlayerLayer.frame = mainContentView.bounds;
+            avPlayerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+            [mainContentView.layer addSublayer:avPlayerLayer];
+        }
+       
+        [player.currentItem removeObserver:self forKeyPath:@"status"];
+        
+        AVPlayerItem* tmp = [AVPlayerItem playerItemWithURL:asset.defaultRepresentation.url];
+        [tmp addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];// 监听status属性
+//        [tmp addObserver:self forKeyPath:@"loadedTimeRanges" options:NSKeyValueObservingOptionNew context:nil];// 监听loadedTimeRanges属性
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(moviePlayDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:tmp];
+        [player replaceCurrentItemWithPlayerItem:tmp];
+        
+        player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
+//        [player seekToTime:kCMTimeZero completionHandler:^(BOOL finished) {
+//            [player play];
+//        }];
+//        
+    } else {
+        // error asset type
+    }
     
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if ([keyPath isEqualToString:@"status"]) {
+        AVPlayerItem* playerItem = player.currentItem;
+        if (playerItem.status == AVPlayerStatusReadyToPlay) {
+            NSLog(@"AVPlayerStatusReadyToPlay");
+//            CMTime duration = self.playerItem.duration;// 获取视频总长度
+//            CGFloat totalSecond = playerItem.duration.value / playerItem.duration.timescale;// 转换成秒
+//            _totalTime = [self convertTime:totalSecond];// 转换成播放时间
+//            [self customVideoSlider:duration];// 自定义UISlider外观
+//            NSLog(@"movie total duration:%f",CMTimeGetSeconds(duration));
+//            [self monitoringPlayback:self.playerItem];// 监听播放状态
+
+            [player seekToTime:kCMTimeZero completionHandler:^(BOOL finished) {
+                [player play];
+            }];
+            
+            
+        } else if (playerItem.status == AVPlayerStatusFailed) {
+            NSLog(@"AVPlayerStatusFailed");
+        }
+    }
+}
+
+-(void)moviePlayDidEnd:(AVPlayerItem*)item {
+    [player seekToTime:kCMTimeZero completionHandler:^(BOOL finished) {
+        [player play];
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -184,6 +289,58 @@
 
 - (void)didTapFunctionBar:(UITapGestureRecognizer*)gesture {
     
+    static const CGFloat kAnimationDuration = 0.15; // in seconds
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    CGFloat height = width * aspectRatio;
+    CGRect f_bar_start = CGRectMake(0, height - 44, width, 44);
+    CGRect f_bar_end = CGRectMake(0, 5, width, 44);
+
+    CGFloat tab_bar_height_offset = [UIScreen mainScreen].bounds.size.height - 44;
+    CGRect table_view_start = CGRectMake(0, height, width, tab_bar_height_offset - height);
+    CGRect table_view_end = CGRectMake(0, 49, width, tab_bar_height_offset - 49);
+    
+    if (isMainContentViewShown) {
+
+        [INTUAnimationEngine animateWithDuration:kAnimationDuration
+                                           delay:0.0
+                                          easing:INTUEaseInOutQuadratic
+                                         options:INTUAnimationOptionAutoreverse
+                                      animations:^(CGFloat progress) {
+                                          f_bar.frame = INTUInterpolateCGRect(f_bar_start, f_bar_end, progress);
+                                          albumView.frame = INTUInterpolateCGRect(table_view_start, table_view_end, progress);
+                                          // NSLog(@"Progress: %.2f", progress);
+                                      }
+                                      completion:^(BOOL finished) {
+                                          // NOTE: When passing INTUAnimationOptionRepeat, this completion block is NOT executed at the end of each cycle. It will only run if the animation is canceled.
+                                          NSLog(@"%@", finished ? @"Animation Completed" : @"Animation Canceled");
+                                          // self.animationID = NSNotFound;
+                                          bar.hidden = YES;
+                                          
+                                      }];
+        
+        isMainContentViewShown = NO;
+    } else {
+        
+        [INTUAnimationEngine animateWithDuration:kAnimationDuration
+                                           delay:0.0
+                                          easing:INTUEaseInOutQuadratic
+                                         options:INTUAnimationOptionAutoreverse
+                                      animations:^(CGFloat progress) {
+                                          f_bar.frame = INTUInterpolateCGRect(f_bar_end, f_bar_start, progress);
+                                          albumView.frame = INTUInterpolateCGRect(table_view_end, table_view_start, progress);
+                                          // NSLog(@"Progress: %.2f", progress);
+                                      }
+                                      completion:^(BOOL finished) {
+                                          // NOTE: When passing INTUAnimationOptionRepeat, this completion block is NOT executed at the end of each cycle. It will only run if the animation is canceled.
+                                          NSLog(@"%@", finished ? @"Animation Completed" : @"Animation Canceled");
+                                          // self.animationID = NSNotFound;
+                                          bar.hidden = NO;
+                                          
+                                      }];
+        
+        isMainContentViewShown = YES;
+    }
+    
 }
 
 - (void)didSelectTabBtn:(UIButton*)sender {
@@ -203,25 +360,84 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 44;
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    return width / 3;
 }
 
 #pragma mark -- table view datasource
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"default"];
+    AlbumTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AlbumTableViewCell"];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"default"];
+        cell = [[AlbumTableCell alloc]init];
     }
     
-    cell.textLabel.text = @"alfred test...";
+    cell.delegate = self;
+    NSInteger row = indexPath.row;
+    NSArray* arr_content = [images_arr objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(row * PHOTO_PER_LINE, PHOTO_PER_LINE)]];
+    [cell setUpContentViewWithImageURLs2:arr_content atLine:row andType:_type];
+    
     return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
+    if (bLoadData) return ((images_arr.count) / PHOTO_PER_LINE) + 1;
+    else return 0;
 }
 
+#pragma mark -- photo ablum access
+- (void)enumAllAssetWithProprty:(NSString*)type {
+    bLoadData = NO;
+    [am enumAllAssetWithProprty:type finishBlock:^(NSArray *result) {
+        bLoadData = YES;
+        images_arr = result;
+        [albumView reloadData];
+        
+        [self changeMainContentWithAsset:images_arr.firstObject];
+    }];
+}
+
+#pragma mark -- PostTableCellDelegate
+
+- (void)didSelectOneImageAtIndex:(NSInteger)index {
+    NSLog(@"select index %ld", (long)index);
+    
+    if (!isAllowMutiSelection) {
+        for (NSNumber* index in images_select_arr) {
+            AlbumGridCell* tmp = [self queryCellByIndex:index.integerValue];
+            [tmp setCellViewSelected:NO];
+            [self didUnSelectOneImageAtIndex:index.integerValue];
+        }
+    }
+    [images_select_arr addObject:[NSNumber numberWithInteger:index]];
+    [self changeMainContentWithAsset:[images_arr objectAtIndex:index]];
+}
+
+- (void)didUnSelectOneImageAtIndex:(NSInteger)index {
+    NSLog(@"unselect index %ld", (long)index);
+    for (int i = 0; i < images_select_arr.count; ++i) {
+        if (((NSNumber*)[images_select_arr objectAtIndex:i]).integerValue == index)
+            [images_select_arr removeObjectAtIndex:i];
+    }
+}
+
+- (AlbumGridCell*)queryCellByIndex:(NSInteger)index {
+    NSIndexPath* i = [NSIndexPath indexPathForRow:index / 3 inSection:0];
+    AlbumTableCell* cell = (AlbumTableCell*)[albumView cellForRowAtIndexPath:i];
+    
+    return [cell queryGridCellByIndex:(index) % 3];
+}
+
+- (NSInteger)indexByRow:(NSInteger)row andCol:(NSInteger)col {
+    return row * PHOTO_PER_LINE + col;
+}
+
+- (NSInteger)getViewsCount {
+    return PHOTO_PER_LINE;
+}
+
+- (BOOL)isSelectedAtIndex:(NSInteger)index {
+    return [images_select_arr containsObject:[NSNumber numberWithInteger:index]];
+}
 @end

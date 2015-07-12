@@ -19,7 +19,7 @@
 - (NSInteger)getViewsCount;
 - (BOOL)isSelectedAtIndex:(NSInteger)index;
 
-@required
+@optional
 - (void)didSelectCameraBtn;
 - (void)didSelectMovieBtn;
 - (void)didSelectCompareBtn;
@@ -38,6 +38,7 @@
 @property (nonatomic, weak) id<AlbumTableCellDelegate> delegate;
 
 - (CGFloat)prefferCellHeight;
+- (void)setUpContentViewWithImageURLs2:(NSArray*)image_arr atLine:(NSInteger)row andType:(AlbumControllerType)type;
 - (void)setUpContentViewWithImageURLs:(NSArray*)image_arr atLine:(NSInteger)row andType:(AlbumControllerType)type;
 
 - (void)didSelectCameraBtn;

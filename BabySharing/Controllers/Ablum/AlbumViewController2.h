@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "AlbumActionProtocol.h"
+#import "AlbumTableCell.h"
 
-@interface AlbumViewController2 : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface AlbumViewController2 : UIViewController <UITableViewDelegate, UITableViewDataSource, AlbumTableCellDelegate>
 
 @property (nonatomic) AlbumControllerType type;
 @end

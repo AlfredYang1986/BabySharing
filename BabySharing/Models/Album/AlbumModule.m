@@ -89,7 +89,8 @@
                     //                    [images_arr addObject:asset_url];
                     NSString* cur_type = [result valueForProperty:ALAssetPropertyType];
                     if ([cur_type isEqualToString:type]) {
-                        [assets addObject:result];
+//                        [assets addObject:result];
+                        [assets insertObject:result atIndex:0];
                     }
                 }
             }];
