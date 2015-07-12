@@ -10,6 +10,8 @@
 #import "AlbumActionProtocol.h"
 #import "AlbumTableCell.h"
 
+@class ALAsset;
+
 @interface AlbumViewController2 : UIViewController <UITableViewDelegate, UITableViewDataSource, AlbumTableCellDelegate>
 
 @property (nonatomic) AlbumControllerType type;

@@ -12,6 +12,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "INTUAnimationEngine.h"
 #import "AlbumGridCell.h"
+#import "PostPreViewEffectController.h"
 
 #define PHOTO_PER_LINE  3
 
@@ -33,12 +34,15 @@
     NSMutableArray * images_select_arr;
     BOOL isAllowMutiSelection;
     BOOL bLoadData;
-    
+   
     BOOL isMainContentViewShown;
     CALayer * mainContentPhotoLayer;
     
     AVPlayer* player;
     AVPlayerLayer *avPlayerLayer;
+    
+    CGPoint point;
+    CGFloat last_scale;
 }
 
 @synthesize type = _type;
@@ -60,7 +64,16 @@
      */
     mainContentView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, width, img_height)];
     mainContentView.backgroundColor = [UIColor clearColor];
+    mainContentView.userInteractionEnabled = YES;
     [self.view addSubview:mainContentView];
+    
+    if (_type == AlbumControllerTypePhoto) {
+        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+        [mainContentView addGestureRecognizer:pan];
+        
+        UIPinchGestureRecognizer* pinch = [[UIPinchGestureRecognizer alloc]initWithTarget:self action:@selector(handlePinch:)];
+        [mainContentView addGestureRecognizer:pinch];
+    }
    
     /***************************************************************************************/
     /**
@@ -172,6 +185,7 @@
     isMainContentViewShown = YES;
     isAllowMutiSelection = NO;
     images_select_arr = [[NSMutableArray alloc]init];
+    last_scale = 1.f;
 }
 
 - (void)dealloc {
@@ -195,9 +209,10 @@
         if (mainContentPhotoLayer == nil) {
             mainContentPhotoLayer = [CALayer layer];
         }
-        
+       
+        UIImage* img = [UIImage imageWithCGImage:asset.defaultRepresentation.fullResolutionImage];
         [mainContentPhotoLayer removeFromSuperlayer];
-        mainContentPhotoLayer.frame = mainContentView.bounds;
+        mainContentPhotoLayer.frame = CGRectMake(0, 0, img.size.width, img.size.height);
         mainContentPhotoLayer.contents = (id)asset.defaultRepresentation.fullResolutionImage;
         [mainContentView.layer addSublayer:mainContentPhotoLayer];
         
@@ -284,7 +299,8 @@
 }
 
 - (void)didNextBtnSelected {
-    
+    PostPreViewEffectController * distination = [[PostPreViewEffectController alloc]init];
+    [self.navigationController pushViewController:distination animated:YES];
 }
 
 - (void)didTapFunctionBar:(UITapGestureRecognizer*)gesture {
@@ -439,5 +455,120 @@
 
 - (BOOL)isSelectedAtIndex:(NSInteger)index {
     return [images_select_arr containsObject:[NSNumber numberWithInteger:index]];
+}
+
+#pragma mark -- handle gesture
+- (void)handlePan:(UIPanGestureRecognizer*)gesture {
+    NSLog(@"pan gesture");
+    if (gesture.state == UIGestureRecognizerStateBegan) {
+        NSLog(@"begin");
+        point = [gesture translationInView:albumView];
+        
+    } else if (gesture.state == UIGestureRecognizerStateEnded) {
+        NSLog(@"end");
+        point = CGPointMake(-1, -1);
+        CGFloat move_x = [self distanceMoveHer];
+        CGFloat move_y = [self distanceMoveVer];
+        [self moveView:move_x and:move_y];
+        
+    } else if (gesture.state == UIGestureRecognizerStateChanged) {
+        NSLog(@"changeed");
+        CGPoint newPoint = [gesture translationInView:mainContentView];
+        
+        mainContentPhotoLayer.position = CGPointMake(mainContentPhotoLayer.position.x + (newPoint.x - point.x) / last_scale, mainContentPhotoLayer.position.y + (newPoint.y - point.y) / last_scale);
+        point = newPoint;
+    }
+}
+
+- (CGFloat)distanceMoveVer {
+    CGFloat top_margin = 0;
+    if (mainContentPhotoLayer.frame.origin.y > top_margin)
+        return -mainContentPhotoLayer.frame.origin.y + top_margin;
+    else if (mainContentPhotoLayer.frame.origin.y + mainContentPhotoLayer.frame.size.height < mainContentView.frame.size.height)
+        return mainContentView.frame.size.height - (mainContentPhotoLayer.frame.origin.y + mainContentPhotoLayer.frame.size.height);
+    else return 0;
+}
+
+- (CGFloat)distanceMoveHer {
+    
+    if (mainContentPhotoLayer.frame.origin.x > 0)
+        return -mainContentPhotoLayer.frame.origin.x;
+    else if (mainContentPhotoLayer.frame.origin.x + mainContentPhotoLayer.frame.size.width < mainContentView.frame.size.width)
+        return mainContentView.frame.size.width - (mainContentPhotoLayer.frame.origin.x + mainContentPhotoLayer.frame.size.width);
+    else return 0;
+}
+
+- (void)moveView:(float)move_x and:(float)move_y {
+    static const CGFloat kAnimationDuration = 0.30; // in seconds
+    CGPoint center = mainContentPhotoLayer.position;
+    CGPoint newCenter = CGPointMake(mainContentPhotoLayer.position.x + move_x, mainContentPhotoLayer.position.y + move_y);
+    [INTUAnimationEngine animateWithDuration:kAnimationDuration
+                                       delay:0.0
+                                      easing:INTUEaseInOutQuadratic
+                                     options:INTUAnimationOptionNone
+                                  animations:^(CGFloat progress) {
+                                      mainContentPhotoLayer.position = INTUInterpolateCGPoint(center, newCenter, progress);
+                                      
+                                      // NSLog(@"Progress: %.2f", progress);
+                                  }
+                                  completion:^(BOOL finished) {
+                                      // NOTE: When passing INTUAnimationOptionRepeat, this completion block is NOT executed at the end of each cycle. It will only run if the animation is canceled.
+                                      NSLog(@"%@", finished ? @"Animation Completed" : @"Animation Canceled");
+                                      //                                                         self.animationID = NSNotFound;
+                                  }];
+}
+
+- (void)scaleView:(CGRect)frame_old and:(CGRect)frame_new {
+    static const CGFloat kAnimationDuration = 0.30; // in seconds
+    [INTUAnimationEngine animateWithDuration:kAnimationDuration
+                                       delay:0.0
+                                      easing:INTUEaseInOutQuadratic
+                                     options:INTUAnimationOptionNone
+                                  animations:^(CGFloat progress) {
+                                      mainContentPhotoLayer.frame = INTUInterpolateCGRect(frame_old, frame_new, progress);
+                                      
+                                      // NSLog(@"Progress: %.2f", progress);
+                                  }
+                                  completion:^(BOOL finished) {
+                                      // NOTE: When passing INTUAnimationOptionRepeat, this completion block is NOT executed at the end of each cycle. It will only run if the animation is canceled.
+                                      NSLog(@"%@", finished ? @"Animation Completed" : @"Animation Canceled");
+                                      //                                                         self.animationID = NSNotFound;
+                                  }];
+}
+
+#pragma mark -- scale the pic
+- (void)handlePinch:(UIPinchGestureRecognizer*)gesture {
+    NSLog(@"pinch gesture");
+    if (gesture.state == UIGestureRecognizerStateBegan) {
+        NSLog(@"begin");
+        
+    } else if (gesture.state == UIGestureRecognizerStateEnded) {
+        NSLog(@"end: scale: %f", last_scale);
+        [self checkScale];
+        
+    } else if (gesture.state == UIGestureRecognizerStateChanged) {
+        NSLog(@"changeed");
+        gesture.scale= gesture.scale - last_scale + 1;
+        //        mainContentPhotoLayer.transform = CGAffineTransformScale(mainContentPhotoLayer.transform, gesture.scale,gesture.scale);
+        CGPoint cp = mainContentPhotoLayer.position;
+        mainContentPhotoLayer.frame = CGRectMake(mainContentPhotoLayer.frame.origin.x, mainContentPhotoLayer.frame.origin.y, mainContentPhotoLayer.frame.size.width * gesture.scale, mainContentPhotoLayer.frame.size.height * gesture.scale);
+        mainContentPhotoLayer.position = cp;
+        last_scale = gesture.scale;;
+    }
+}
+
+- (void)checkScale {
+    CGFloat top_margin = 0;
+    if (mainContentPhotoLayer.bounds.size.width > mainContentPhotoLayer.bounds.size.height) {
+        if (mainContentPhotoLayer.frame.size.height < mainContentView.frame.size.height) {
+            CGFloat width = (mainContentView.frame.size.height - top_margin) / mainContentPhotoLayer.frame.size.height * mainContentPhotoLayer.frame.size.width;
+            [self scaleView:mainContentPhotoLayer.frame and:CGRectMake(0, top_margin, width, mainContentView.frame.size.height)];
+        }
+    } else {
+        if (mainContentPhotoLayer.frame.size.width < mainContentView.frame.size.width) {
+            CGFloat height = mainContentView.frame.size.width / mainContentPhotoLayer.frame.size.width * mainContentPhotoLayer.frame.size.height;
+            [self scaleView:mainContentPhotoLayer.frame and:CGRectMake(0, top_margin, mainContentView.frame.size.width, height - top_margin)];
+        }
+    }
 }
 @end

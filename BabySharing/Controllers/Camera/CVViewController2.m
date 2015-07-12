@@ -9,11 +9,12 @@
 #import "CVViewController2.h"
 #import "GPUImage.h"
 #import "TmpFileStorageModel.h"
-#import "PostPreViewController.h"
+//#import "PostPreViewController.h"
 #import "AlbumModule.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "INTUAnimationEngine.h"
 #import "AlbumViewController2.h"
+#import "PhotoPreViewController.h"
 
 @interface CVViewController2 () {
     GPUImageOutput<GPUImageInput> *filter;
@@ -318,10 +319,10 @@
                                               UIImageWriteToSavedPhotosAlbum(processedImage, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
                                               
                                               dispatch_async(dispatch_get_main_queue(), ^{
-                                                  UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"PostPreView" bundle:nil];
-                                                  PostPreViewController* postNav = [storyboard instantiateViewControllerWithIdentifier:@"PostPreView"];
-                                                  postNav.postArray = @[processedImage];
-                                                  postNav.type = PostPreViewPhote;
+                                                  UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"PhotoPreView" bundle:nil];
+                                                  PhotoPreViewController* postNav = [storyboard instantiateViewControllerWithIdentifier:@"PhotoPreView"];
+                                                  postNav.photoArray = @[processedImage];
+//                                                  postNav.type = PostPreViewPhote;
                                                   sleep(0.5);
                                                   [self.navigationController pushViewController:postNav animated:YES];
                                               });
