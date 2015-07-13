@@ -9,6 +9,8 @@
 #import "PostEffectAdapter.h"
 #import "GPUImage.h"
 
+#import "PhotoTagView.h"
+
 #include <vector>
 using std::vector;
 
@@ -21,6 +23,12 @@ struct tableNode {
 struct effectNode {
     const char* name;
     UIImage* (*fp)(UIImage*, PostEffectAdapter*);
+};
+
+struct tagNode {
+    const char* name;
+    TagType tag_type;
+    void (*fp)(PostEffectAdapter*, UIImage*);
 };
 
 /*******************************************************************/
@@ -38,15 +46,30 @@ UIButton* addPhotoEffectBtn(NSString* title, CGRect bounds, CGPoint center, NSOb
     return btn;
 }
 
+UIButton* addTagBtn(NSString* title, CGRect bounds, CGPoint center, NSObject* callBackObj, SEL callBack, UIImage* img) {
+
+    UIButton* btn = [[UIButton alloc]initWithFrame:bounds];
+    btn.center = center;
+    [btn setImage:img forState:UIControlStateNormal];
+    [btn addTarget:callBackObj action:callBack forControlEvents:UIControlEventTouchDown];
+    [btn setTitle:title forState:UIControlStateNormal];
+    
+//    btn.layer.borderWidth = 1.f;
+//    btn.layer.borderColor = [UIColor blueColor].CGColor;
+    return btn;
+}
+
 UIView* effectFilterForPhoto(PostEffectAdapter* adapter, CGFloat height) {
     
     /**
      * 4 filter effect
      */
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
     CGFloat margin = height / 4;
     CGFloat button_height = height / 2;
 
-    UIView* reVal = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 4 * (margin + button_height), height)];
+    UIView* reVal = [[UIView alloc]initWithFrame:CGRectMake(0, 0, MAX(width, 4 * (margin + button_height)), height)];
+    reVal.backgroundColor = [UIColor grayColor];
   
     [reVal addSubview:addPhotoEffectBtn(@"Tilt", CGRectMake(0, 0, button_height, button_height), CGPointMake(margin + button_height / 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:))];
     [reVal addSubview:addPhotoEffectBtn(@"Sketch", CGRectMake(0, 0, button_height, button_height), CGPointMake(2 * margin + button_height * 3/ 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:))];
@@ -57,12 +80,25 @@ UIView* effectFilterForPhoto(PostEffectAdapter* adapter, CGFloat height) {
 }
 
 
+UIView* tagForPhoto(PostEffectAdapter* adapter, CGFloat height) {
+    
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
 
-UIView* tagForPhoto(CGFloat height) {
-    return nil;
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    CGFloat button_height = height / 3;
+
+    UIView* reVal = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, height)];
+    reVal.backgroundColor = [UIColor grayColor];
+    
+    [reVal addSubview:addTagBtn(@"地点", CGRectMake(0, 0, 3 * button_height, button_height), CGPointMake(reVal.frame.size.width / 2 - 10 - 3 * button_height, reVal.frame.size.height / 2), adapter, @selector(didSelectTagForPhoto:), [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Location"] ofType:@"png"]])];
+    [reVal addSubview:addTagBtn(@"时间", CGRectMake(0, 0, 3 * button_height, button_height), CGPointMake(reVal.frame.size.width / 2, reVal.frame.size.height / 2), adapter, @selector(didSelectTagForPhoto:), [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Time"] ofType:@"png"]])];
+    [reVal addSubview:addTagBtn(@"标签", CGRectMake(0, 0, 3 * button_height, button_height), CGPointMake(reVal.frame.size.width / 2 + 10 + 3 * button_height, reVal.frame.size.height / 2), adapter, @selector(didSelectTagForPhoto:), [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Tag"] ofType:@"png"]])];
+    
+    return reVal;
 }
 
-UIView* pasteForPhoto(CGFloat height) {
+UIView* pasteForPhoto(PostEffectAdapter* adapter, CGFloat height) {
     return nil;
 }
 
@@ -133,6 +169,23 @@ UIImage* smoothToonEffect(UIImage* source, PostEffectAdapter* obj) {
     return [obj.smoothToonFilter imageFromCurrentFramebuffer];
 }
 /*******************************************************************/
+
+/*******************************************************************/
+/**
+ * tags
+ */
+void locationTagView(PostEffectAdapter* obj, UIImage* tag_img) {
+    [obj.delegate queryTagContetnWithTagType:TagTypeLocation andImg:tag_img];
+}
+
+void timeTagView(PostEffectAdapter* obj, UIImage* tag_img) {
+    [obj.delegate queryTagContetnWithTagType:TagTypeTime andImg:tag_img];
+}
+
+void otherTagView(PostEffectAdapter* obj, UIImage* tag_img) {
+    [obj.delegate queryTagContetnWithTagType:TagTypeTags andImg:tag_img];
+}
+/*******************************************************************/
 @implementation PostEffectAdapter {
     // for effort of the image
 //    GPUImagePicture* ip;
@@ -196,8 +249,8 @@ UIImage* smoothToonEffect(UIImage* source, PostEffectAdapter* obj) {
          * for photos
          */
         tableNode {"滤镜", 0, &effectFilterForPhoto},
-//        tableNode {"标签", 0, &tagForPhoto},
-//        tableNode {"贴图", 0, &pasteForPhoto},
+        tableNode {"标签", 0, &tagForPhoto},
+        tableNode {"贴图", 0, &pasteForPhoto},
 //        tableNode {"工具", 0, &toolForPhoto},
         
         /**
@@ -237,6 +290,21 @@ UIImage* smoothToonEffect(UIImage* source, PostEffectAdapter* obj) {
     }
     if (result) {
         [_delegate imageWithEffect:result];
+    }
+}
+
+- (void)didSelectTagForPhoto:(UIButton*)sender {
+    static const vector<tagNode> vec = {
+        tagNode{"地点", TagTypeLocation, &locationTagView},
+        tagNode{"时间", TagTypeTime, &timeTagView},
+        tagNode{"标签", TagTypeTags, &otherTagView},
+    };
+    
+    for (int index = 0; index < vec.size(); ++index) {
+        if (strcmp([sender.titleLabel.text UTF8String], vec[index].name) == 0) {
+            vec[index].fp(self, sender.imageView.image);
+            break;
+        }
     }
 }
 @end

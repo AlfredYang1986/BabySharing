@@ -152,7 +152,7 @@
         <!--Add Tags-->
         <scene sceneID="5GF-Hv-4Pn">
             <objects>
-                <viewController id="OdL-s7-wgm" customClass="PhotoAddTagController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddTags" id="OdL-s7-wgm" customClass="PhotoAddTagController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="KAo-L6-zW1"/>
                         <viewControllerLayoutGuide type="bottom" id="fZu-g5-iLc"/>

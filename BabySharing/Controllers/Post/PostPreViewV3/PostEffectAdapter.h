@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "POstDefine.h"
+#import "PostDefine.h"
+#import "PhotoTagView.h"
 
 @class GPUImagePicture;
 @class GPUImageTiltShiftFilter;
@@ -19,6 +20,10 @@
 @protocol PostEffectAdapterProtocol <NSObject>
 - (UIImage*)originImage;
 - (void)imageWithEffect:(UIImage*)img;
+
+- (BOOL)canCreateNewTag:(TagType)tag_type;
+- (void)tagView:(PhotoTagView*)view forTagType:(TagType)tag_type;
+- (void)queryTagContetnWithTagType:(TagType)tag_type andImg:(UIImage*)tag_img;
 @end
 
 @interface PostEffectAdapter : NSObject
@@ -36,4 +41,5 @@
 
 - (UIView*)getFunctionViewByTitle:(NSString*)title andType:(PostPreViewType)type andPreferedHeight:(CGFloat)height;
 - (void)didSelectEffectFilterForPhoto:(UIButton*)sender;
+- (void)didSelectTagForPhoto:(UIButton*)sender;
 @end

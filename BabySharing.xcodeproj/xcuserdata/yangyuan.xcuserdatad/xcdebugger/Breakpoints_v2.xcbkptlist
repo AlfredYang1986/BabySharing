@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BabySharing/Controllers/Post/PostPreViewV3/PostEffectAdapter.mm"
-            timestampString = "458476060.913403"
+            timestampString = "458490126.18507"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
-            landmarkName = "effectFilterForPhoto(PostEffectAdapter* adapter, CGFloat height)"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "addTagBtn(NSString* title, CGRect bounds, CGPoint center, NSObject* callBackObj, SEL callBack, UIImage* img)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BabySharing/Controllers/Post/PostPreViewV3/PostEffectAdapter.mm"
-            timestampString = "458476657.076251"
+            timestampString = "458490126.18507"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "231"
-            endingLineNumber = "231"
-            landmarkName = "-didSelectEffectFilterForPhoto:"
+            startingLineNumber = "258"
+            endingLineNumber = "258"
+            landmarkName = "-getFunctionViewByTitle:andType:andPreferedHeight:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -42,12 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BabySharing/Controllers/Post/PostPreViewV3/PostEffectAdapter.mm"
-            timestampString = "458476657.076251"
+            timestampString = "458490126.18507"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "234"
-            endingLineNumber = "234"
-            landmarkName = "-didSelectEffectFilterForPhoto:"
+            startingLineNumber = "261"
+            endingLineNumber = "261"
+            landmarkName = "-getFunctionViewByTitle:andType:andPreferedHeight:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -58,12 +58,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BabySharing/Controllers/Post/PostPreViewV3/PostEffectAdapter.mm"
-            timestampString = "458476657.076251"
+            timestampString = "458490126.18507"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "238"
-            endingLineNumber = "238"
-            landmarkName = "-didSelectEffectFilterForPhoto:"
+            startingLineNumber = "265"
+            endingLineNumber = "265"
+            landmarkName = "-getFunctionViewByTitle:andType:andPreferedHeight:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -74,13 +74,61 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BabySharing/Controllers/Post/PostPreViewV3/PostEffectAdapter.mm"
-            timestampString = "458476657.076251"
+            timestampString = "458490126.18507"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "239"
-            endingLineNumber = "239"
-            landmarkName = "-didSelectEffectFilterForPhoto:"
+            startingLineNumber = "266"
+            endingLineNumber = "266"
+            landmarkName = "-getFunctionViewByTitle:andType:andPreferedHeight:"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BabySharing/Controllers/Post/PostPreViewV3/PostPreViewEffectController.m"
+            timestampString = "458490126.18507"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
+            landmarkName = "-didSelectFunctionBtn:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BabySharing/Controllers/Post/PostPreViewV3/PostEffectAdapter.mm"
+            timestampString = "458490126.18507"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "269"
+            endingLineNumber = "269"
+            landmarkName = "-getFunctionViewByTitle:andType:andPreferedHeight:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BabySharing/Controllers/Post/PostPreViewV3/PostEffectAdapter.mm"
+            timestampString = "458490126.18507"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
+            landmarkName = "pasteForPhoto(PostEffectAdapter* adapter, CGFloat height)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

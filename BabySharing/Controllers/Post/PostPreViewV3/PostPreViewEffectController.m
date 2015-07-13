@@ -8,8 +8,9 @@
 
 #import "PostPreViewEffectController.h"
 #import "PostEffectAdapter.h"
+#import "PhotoAddTagController.h"
 
-@interface PostPreViewEffectController () <PostEffectAdapterProtocol>
+@interface PostPreViewEffectController () <PostEffectAdapterProtocol, addingTagsProtocol>
 
 @end
 
@@ -20,6 +21,10 @@
     
     PostEffectAdapter* adapter;
     CALayer* img_layer;
+    
+    NSMutableDictionary* function_dic;
+    
+    NSMutableDictionary* tags;
 }
 
 @synthesize type = _type;
@@ -145,8 +150,14 @@
    
     UIView* tmp = [adapter getFunctionViewByTitle:@"滤镜" andType:_type andPreferedHeight:prefered_height];
     tmp.frame = CGRectMake(0, height + 44, tmp.frame.size.width, tmp.frame.size.height);
+    
+    function_dic = [[NSMutableDictionary alloc]init];
+    [function_dic setValue:tmp forKey:@"滤镜"];
+    
     [self.view addSubview:tmp];
     /***************************************************************************************/
+    
+    tags = [[NSMutableDictionary alloc]initWithCapacity:3];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -174,7 +185,48 @@
 }
 
 - (void)didSelectFunctionBtn:(UIButton*)sender {
+    NSString* title = sender.titleLabel.text;
     
+    for (UIView* iter in function_dic.allValues) {
+        [iter removeFromSuperview];
+    }
+    
+    UIView* tmp = [function_dic objectForKey:title];
+    if (!tmp) {
+        CGFloat width = [UIScreen mainScreen].bounds.size.width;
+        CGFloat height = width * aspectRatio;
+        CGFloat prefered_height = [UIScreen mainScreen].bounds.size.height - height - 44;
+        tmp = [adapter getFunctionViewByTitle:title andType:_type andPreferedHeight:prefered_height];
+        tmp.frame = CGRectMake(0, height + 44, tmp.frame.size.width, tmp.frame.size.height);
+    }
+    [self.view addSubview:tmp];
+    
+}
+
+#pragma mark -- adding tag protocol
+- (void)didSelectTag:(NSString *)tag andType:(TagType)type {
+    // TODO: adding tag
+    NSLog(@"adding tags: %@, %d", tag, (int)type);
+    
+//    PhotoTagView* view = [self queryTagViewByType:type];
+//    if (view) {
+//        [view removeFromSuperview];
+//    }
+//    
+//    PhotoTagView* tmp = [[PhotoTagView alloc]initWithTagName:tag andType:type];
+//    tmp.frame = CGRectMake(point.x, point.y, tmp.bounds.size.width, tmp.bounds.size.height);
+//    [_imgView addSubview:tmp];
+//    [_imgView bringSubviewToFront:tmp];
+//    [already_taged_views setObject:tmp forKey:[NSNumber numberWithInt:type]];
+//    
+//    UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleTagTapped:)];
+//    [tmp addGestureRecognizer:tap];
+//    
+//    UILongPressGestureRecognizer* lg = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(handleLongPress:)];
+//    [tmp addGestureRecognizer:lg];
+//    
+//    UIPanGestureRecognizer* pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(handleTagPan:)];
+//    [tmp addGestureRecognizer:pan];
 }
 
 #pragma mark -- function button protocol
@@ -186,4 +238,21 @@
     img_layer.contents = (id)img.CGImage;
 }
 
+- (BOOL)canCreateNewTag:(TagType)tag_type {
+    return ![tags.allKeys containsObject:[NSNumber numberWithInteger:tag_type]];
+}
+
+- (void)tagView:(PhotoTagView*)view forTagType:(TagType)tag_type {
+    [tags setObject:view forKey:[NSNumber numberWithInteger:tag_type]];
+}
+
+- (void)queryTagContetnWithTagType:(TagType)tag_type andImg:(UIImage*)tag_img {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"PhotoPreView" bundle:nil];
+    PhotoAddTagController* addTagController = [storyboard instantiateViewControllerWithIdentifier:@"AddTags"];
+    addTagController.tagImg = tag_img;
+    addTagController.type = tag_type;
+    addTagController.delegate = self;
+    
+    [self.navigationController pushViewController:addTagController animated:YES];
+}
 @end
