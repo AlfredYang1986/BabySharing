@@ -43,6 +43,7 @@
     
     CGPoint point;
     CGFloat last_scale;
+    UIImage* img;
 }
 
 @synthesize type = _type;
@@ -210,9 +211,12 @@
             mainContentPhotoLayer = [CALayer layer];
         }
        
-        UIImage* img = [UIImage imageWithCGImage:asset.defaultRepresentation.fullResolutionImage];
+        img = [UIImage imageWithCGImage:asset.defaultRepresentation.fullResolutionImage];
         [mainContentPhotoLayer removeFromSuperlayer];
-        mainContentPhotoLayer.frame = CGRectMake(0, 0, img.size.width, img.size.height);
+        
+        last_scale = MAX(mainContentView.frame.size.width /  img.size.width, mainContentView.frame.size.height / img.size.height);
+        
+        mainContentPhotoLayer.frame = CGRectMake(0, 0, img.size.width * last_scale, img.size.height * last_scale);
         mainContentPhotoLayer.contents = (id)asset.defaultRepresentation.fullResolutionImage;
         [mainContentView.layer addSublayer:mainContentPhotoLayer];
         
@@ -300,6 +304,29 @@
 
 - (void)didNextBtnSelected {
     PostPreViewEffectController * distination = [[PostPreViewEffectController alloc]init];
+    
+    if (_type == AlbumControllerTypePhoto) {
+        CGFloat width = mainContentView.frame.size.width;
+        CGFloat height = mainContentView.frame.size.height;
+
+        CGFloat scale_x = img.size.width / mainContentPhotoLayer.frame.size.width;
+        CGFloat scale_y = img.size.height / mainContentPhotoLayer.frame.size.height;
+       
+        CGFloat top_margin = 0;
+        CGFloat offset_x = fabs(mainContentPhotoLayer.frame.origin.x);
+        CGFloat offset_y = fabs(mainContentPhotoLayer.frame.origin.y - top_margin);
+        
+        distination.cutted_img = [self clipImage:img withRect:CGRectMake(offset_x * scale_x, offset_y * scale_y, width * scale_x, height * scale_y)];
+
+    } else if (_type == AlbumControllerTypeMovie) {
+        
+    } else {
+        // error
+    }
+    
+
+    distination.type = (NSInteger)_type;
+    
     [self.navigationController pushViewController:distination animated:YES];
 }
 
@@ -475,7 +502,7 @@
         NSLog(@"changeed");
         CGPoint newPoint = [gesture translationInView:mainContentView];
         
-        mainContentPhotoLayer.position = CGPointMake(mainContentPhotoLayer.position.x + (newPoint.x - point.x) / last_scale, mainContentPhotoLayer.position.y + (newPoint.y - point.y) / last_scale);
+        mainContentPhotoLayer.position = CGPointMake(mainContentPhotoLayer.position.x + (newPoint.x - point.x), mainContentPhotoLayer.position.y + (newPoint.y - point.y));
         point = newPoint;
     }
 }
@@ -533,6 +560,9 @@
                                       // NOTE: When passing INTUAnimationOptionRepeat, this completion block is NOT executed at the end of each cycle. It will only run if the animation is canceled.
                                       NSLog(@"%@", finished ? @"Animation Completed" : @"Animation Canceled");
                                       //                                                         self.animationID = NSNotFound;
+                                      CGFloat move_x = [self distanceMoveHer];
+                                      CGFloat move_y = [self distanceMoveVer];
+                                      [self moveView:move_x and:move_y];
                                   }];
 }
 
@@ -543,17 +573,18 @@
         NSLog(@"begin");
         
     } else if (gesture.state == UIGestureRecognizerStateEnded) {
-        NSLog(@"end: scale: %f", last_scale);
         [self checkScale];
+        
+        
+        last_scale = MAX(mainContentView.frame.size.width /  img.size.width, mainContentView.frame.size.height / img.size.height);
         
     } else if (gesture.state == UIGestureRecognizerStateChanged) {
         NSLog(@"changeed");
-        gesture.scale= gesture.scale - last_scale + 1;
         //        mainContentPhotoLayer.transform = CGAffineTransformScale(mainContentPhotoLayer.transform, gesture.scale,gesture.scale);
         CGPoint cp = mainContentPhotoLayer.position;
-        mainContentPhotoLayer.frame = CGRectMake(mainContentPhotoLayer.frame.origin.x, mainContentPhotoLayer.frame.origin.y, mainContentPhotoLayer.frame.size.width * gesture.scale, mainContentPhotoLayer.frame.size.height * gesture.scale);
+        CGFloat scale = 1 + (gesture.scale - 1) * 0.1;
+        mainContentPhotoLayer.frame = CGRectMake(mainContentPhotoLayer.frame.origin.x, mainContentPhotoLayer.frame.origin.y, mainContentPhotoLayer.frame.size.width * scale, mainContentPhotoLayer.frame.size.height * scale);
         mainContentPhotoLayer.position = cp;
-        last_scale = gesture.scale;;
     }
 }
 
@@ -570,5 +601,35 @@
             [self scaleView:mainContentPhotoLayer.frame and:CGRectMake(0, top_margin, mainContentView.frame.size.width, height - top_margin)];
         }
     }
+}
+
+#pragma mark -- cut img
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+//    if ([segue.identifier isEqualToString:@"editSegue"]) {
+//        CGFloat width = screen_width;
+//        CGFloat height = screen_height - control_pane_height - top_margin;
+//        CGFloat scale_x = _preImgView.image.size.width / _preImgView.frame.size.width;
+//        CGFloat scale_y = _preImgView.image.size.height / _preImgView.frame.size.height;
+//        
+//        CGFloat offset_x = fabs(_preImgView.frame.origin.x);
+//        CGFloat offset_y = fabs(_preImgView.frame.origin.y - top_margin);
+//        
+//        UIImage* cutted_img = [self clipImage:_preImgView.image withRect:CGRectMake(offset_x * scale_x, offset_y * scale_y, width * scale_x, height * scale_y)];
+//        ((PhotoPreViewEffectController*)segue.destinationViewController).edting_img = cutted_img;
+//    }
+//}
+
+- (UIImage*)clipImage:(UIImage*)image withRect:(CGRect)rect {
+    
+    CGImageRef subImageRef = CGImageCreateWithImageInRect(image.CGImage, rect);
+    //    CGRect smallBounds = CGRectMake(0, 0, CGImageGetWidth(subImageRef), CGImageGetHeight(subImageRef));
+    
+    //    UIGraphicsBeginImageContext(smallBounds.size);
+    //    CGContextRef context = UIGraphicsGetCurrentContext();
+    //    CGContextDrawImage(context, smallBounds, subImageRef);
+    UIImage* smallImage = [UIImage imageWithCGImage:subImageRef];
+    //    UIGraphicsEndImageContext();
+    
+    return smallImage;
 }
 @end

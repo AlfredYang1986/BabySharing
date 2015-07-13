@@ -7,8 +7,9 @@
 //
 
 #import "PostPreViewEffectController.h"
+#import "PostEffectAdapter.h"
 
-@interface PostPreViewEffectController ()
+@interface PostPreViewEffectController () <PostEffectAdapterProtocol>
 
 @end
 
@@ -16,6 +17,9 @@
     CGFloat aspectRatio;
     
     UIView* mainContentView;
+    
+    PostEffectAdapter* adapter;
+    CALayer* img_layer;
 }
 
 @synthesize type = _type;
@@ -43,7 +47,11 @@
     mainContentView.backgroundColor = [UIColor clearColor];
     mainContentView.userInteractionEnabled = YES;
     [self.view addSubview:mainContentView];
-    mainContentView.backgroundColor = [UIColor redColor];
+//    mainContentView.backgroundColor = [UIColor redColor];
+    img_layer = [CALayer layer];
+    img_layer.frame = mainContentView.bounds;
+    img_layer.contents = (id)_cutted_img.CGImage;
+    [mainContentView.layer addSublayer:img_layer];
     
     /***************************************************************************************/
     /**
@@ -90,13 +98,54 @@
     gl.startPoint = CGPointMake(0.5, 0.5);
     gl.endPoint = CGPointMake(0.5, 1.0);
     [f_bar.layer addSublayer:gl];
-    
+   
+    /**
+     * function bar button
+     */
+    if (_type == PostPreViewPhote) {
+        UIButton* f_btn_0 = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, width / 4, f_bar.frame.size.height)];
+        [f_btn_0 setTitle:@"滤镜" forState:UIControlStateNormal];
+        [f_btn_0 addTarget:self action:@selector(didSelectFunctionBtn:) forControlEvents:UIControlEventTouchDown];
+        f_btn_0.center = CGPointMake(f_btn_0.frame.size.width / 2, f_btn_0.frame.size.height / 2);
+        [f_bar addSubview:f_btn_0];
+        
+        UIButton* f_btn_1 = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, width / 4, f_bar.frame.size.height)];
+        [f_btn_1 setTitle:@"标签" forState:UIControlStateNormal];
+        [f_btn_1 addTarget:self action:@selector(didSelectFunctionBtn:) forControlEvents:UIControlEventTouchDown];
+        f_btn_1.center = CGPointMake(f_btn_1.frame.size.width / 2 * 3, f_btn_1.frame.size.height / 2);
+        [f_bar addSubview:f_btn_1];
+        
+        UIButton* f_btn_2 = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, width / 4, f_bar.frame.size.height)];
+        [f_btn_2 setTitle:@"贴图" forState:UIControlStateNormal];
+        [f_btn_2 addTarget:self action:@selector(didSelectFunctionBtn:) forControlEvents:UIControlEventTouchDown];
+        f_btn_2.center = CGPointMake(f_btn_2.frame.size.width / 2 * 5, f_btn_2.frame.size.height / 2);
+        [f_bar addSubview:f_btn_2];
+        
+        UIButton* f_btn_3 = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, width / 4, f_bar.frame.size.height)];
+        [f_btn_3 setTitle:@"工具" forState:UIControlStateNormal];
+        [f_btn_3 addTarget:self action:@selector(didSelectFunctionBtn:) forControlEvents:UIControlEventTouchDown];
+        f_btn_3.center = CGPointMake(f_btn_3.frame.size.width / 2 * 7, f_btn_3.frame.size.height / 2);
+        [f_bar addSubview:f_btn_3];
+        
+        
+    } else if (_type == PostPreViewMovie) {
+        
+    } else {
+        // error
+    }   
     /***************************************************************************************/
     
     /***************************************************************************************/
     /**
      * function area
      */
+    adapter = [[PostEffectAdapter alloc]init];
+    adapter.delegate = self;
+    CGFloat prefered_height = [UIScreen mainScreen].bounds.size.height - height - 44;
+   
+    UIView* tmp = [adapter getFunctionViewByTitle:@"滤镜" andType:_type andPreferedHeight:prefered_height];
+    tmp.frame = CGRectMake(0, height + 44, tmp.frame.size.width, tmp.frame.size.height);
+    [self.view addSubview:tmp];
     /***************************************************************************************/
 }
 
@@ -122,6 +171,19 @@
 
 - (void)didNextBtnSelected {
     
+}
+
+- (void)didSelectFunctionBtn:(UIButton*)sender {
+    
+}
+
+#pragma mark -- function button protocol
+- (UIImage*)originImage {
+    return _cutted_img;
+}
+
+- (void)imageWithEffect:(UIImage *)img {
+    img_layer.contents = (id)img.CGImage;
 }
 
 @end
