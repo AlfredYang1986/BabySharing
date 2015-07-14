@@ -448,8 +448,14 @@
     
     cell.delegate = self;
     NSInteger row = indexPath.row;
-    NSArray* arr_content = [images_arr objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(row * PHOTO_PER_LINE, PHOTO_PER_LINE)]];     // there is a bug
-    [cell setUpContentViewWithImageURLs2:arr_content atLine:row andType:_type];
+    @try {
+        NSArray* arr_content = [images_arr objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(row * PHOTO_PER_LINE, PHOTO_PER_LINE)]];     // there is a bug
+        [cell setUpContentViewWithImageURLs2:arr_content atLine:row andType:_type];
+    }
+    @catch (NSException *exception) {
+        NSArray* arr_content = [images_arr objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(row * PHOTO_PER_LINE, images_arr.count - row * PHOTO_PER_LINE)]];     // there is a bug
+        [cell setUpContentViewWithImageURLs2:arr_content atLine:row andType:_type];
+    }
     
     return cell;
 }

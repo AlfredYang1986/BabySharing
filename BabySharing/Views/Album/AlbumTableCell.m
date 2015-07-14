@@ -33,7 +33,7 @@
     }
     [image_view removeAllObjects];
     
-    for (int index = 0; index < views_count; ++index) {
+    for (int index = 0; index < image_arr.count; ++index) {
         
         if (index > image_arr.count)
             continue;
