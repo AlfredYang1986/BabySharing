@@ -13,6 +13,7 @@
 @interface PostModel : NSObject
 
 - (BOOL)postJsonContentWithFileName:(NSString *)path withMessage:(NSString *)message;
+- (BOOL)postJsonContentWithFileURL:(NSURL*)path withMessage:(NSString *)message;
 - (BOOL)postJsonContentToServieWithTags:(NSArray*)tags andDescription:(NSString*)message andPhotos:(NSArray*)photos;
 
 - (QueryContent*)postCommentToServiceWithPostID:(NSString*)post_id andCommentContent:(NSString*)comment_content;

@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "QueryModel.h"
 #import "PhototagView.h"
+#import "TmpFileStorageModel.h"
 
 //#define LOCATION        0
 //#define TIME            1
@@ -31,6 +32,9 @@
 @synthesize imgView = _imgView;
 @synthesize descriptionView = _descriptionView;
 @synthesize tagLabel = _tagLabel;
+
+@synthesize movie_url = _movie_url;
+@synthesize type = _type;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -101,22 +105,34 @@
 
 - (void)didSelectPostBtn:(id)sender {
     NSLog(@"Post Content");
+    
     AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     PostModel* pm = delegate.pm;
-        
-    /**
-     * create tag dictionary
-     */
-    NSMutableArray* arr = [[NSMutableArray alloc]init];
-    for (PhotoTagView* view in _already_taged) {
-        NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
-        [dic setObject:[NSNumber numberWithInt:view.type] forKey:@"type"];
-        [dic setObject:view.content forKey:@"content"];
-        [dic setObject:[NSNumber numberWithFloat:view.offset_x] forKey:@"offsetX"];
-        [dic setObject:[NSNumber numberWithFloat:view.offset_y] forKey:@"offsetY"];
-        
-        [arr addObject:[dic copy]];
+
+    if (_type == PostPreViewPhote) {
+        /**
+         * create tag dictionary
+         */
+        NSMutableArray* arr = [[NSMutableArray alloc]init];
+        for (PhotoTagView* view in _already_taged) {
+            NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
+            [dic setObject:[NSNumber numberWithInt:view.type] forKey:@"type"];
+            [dic setObject:view.content forKey:@"content"];
+            [dic setObject:[NSNumber numberWithFloat:view.offset_x] forKey:@"offsetX"];
+            [dic setObject:[NSNumber numberWithFloat:view.offset_y] forKey:@"offsetY"];
+            
+            [arr addObject:[dic copy]];
+        }
+        [pm postJsonContentToServieWithTags:[arr copy] andDescription:_descriptionView.text andPhotos:[[NSArray alloc]initWithObjects:_preViewImg, nil]];
+    
+    } else if (_type == PostPreViewMovie) {
+
+        NSString* filename = [_movie_url path];
+        if ([filename containsString:@"assert"]) {
+            [pm postJsonContentWithFileURL:_movie_url withMessage:_descriptionView.text];
+        } else {
+            [pm postJsonContentWithFileName:filename withMessage:_descriptionView.text];
+        }
     }
-    [pm postJsonContentToServieWithTags:[arr copy] andDescription:_descriptionView.text andPhotos:[[NSArray alloc]initWithObjects:_preViewImg, nil]];
 }
 @end

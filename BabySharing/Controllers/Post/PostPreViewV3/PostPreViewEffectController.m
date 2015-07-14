@@ -11,6 +11,7 @@
 #import "PhotoAddTagController.h"
 #import "INTUAnimationEngine.h"
 #import "PhotoPublishController.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface PostPreViewEffectController () <PostEffectAdapterProtocol, addingTagsProtocol, UIAlertViewDelegate>
 
@@ -22,6 +23,9 @@
     UIView* mainContentView;
     
     PostEffectAdapter* adapter;
+    
+    /***********************************************************************/
+    // photo
     CALayer* img_layer;
     
     NSMutableDictionary* function_dic;
@@ -33,10 +37,17 @@
     UIView* cur_long_press;
     
     UIImage* result_img;
+   
+    /***********************************************************************/
+    // movie
+    AVPlayer* player;
+    AVPlayerLayer *avPlayerLayer;
+    /***********************************************************************/
 }
 
 @synthesize type = _type;
 @synthesize cutted_img = _cutted_img;
+@synthesize editing_movie = _editing_movie;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -116,33 +127,21 @@
      * function bar button
      */
     if (_type == PostPreViewPhote) {
-        UIButton* f_btn_0 = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, width / 4, f_bar.frame.size.height)];
-        [f_btn_0 setTitle:@"滤镜" forState:UIControlStateNormal];
-        [f_btn_0 addTarget:self action:@selector(didSelectFunctionBtn:) forControlEvents:UIControlEventTouchDown];
-        f_btn_0.center = CGPointMake(f_btn_0.frame.size.width / 2, f_btn_0.frame.size.height / 2);
-        [f_bar addSubview:f_btn_0];
-        
-        UIButton* f_btn_1 = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, width / 4, f_bar.frame.size.height)];
-        [f_btn_1 setTitle:@"标签" forState:UIControlStateNormal];
-        [f_btn_1 addTarget:self action:@selector(didSelectFunctionBtn:) forControlEvents:UIControlEventTouchDown];
-        f_btn_1.center = CGPointMake(f_btn_1.frame.size.width / 2 * 3, f_btn_1.frame.size.height / 2);
-        [f_bar addSubview:f_btn_1];
-        
-        UIButton* f_btn_2 = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, width / 4, f_bar.frame.size.height)];
-        [f_btn_2 setTitle:@"贴图" forState:UIControlStateNormal];
-        [f_btn_2 addTarget:self action:@selector(didSelectFunctionBtn:) forControlEvents:UIControlEventTouchDown];
-        f_btn_2.center = CGPointMake(f_btn_2.frame.size.width / 2 * 5, f_btn_2.frame.size.height / 2);
-        [f_bar addSubview:f_btn_2];
-        
-        UIButton* f_btn_3 = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, width / 4, f_bar.frame.size.height)];
-        [f_btn_3 setTitle:@"工具" forState:UIControlStateNormal];
-        [f_btn_3 addTarget:self action:@selector(didSelectFunctionBtn:) forControlEvents:UIControlEventTouchDown];
-        f_btn_3.center = CGPointMake(f_btn_3.frame.size.width / 2 * 7, f_btn_3.frame.size.height / 2);
-        [f_bar addSubview:f_btn_3];
-        
+     
+        NSInteger button_count = 4;
+        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"滤镜" andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 1 / (2*button_count),f_bar.frame.size.height / 2)]];
+        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"标签" andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 3 / (2*button_count),f_bar.frame.size.height / 2)]];
+        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"贴图" andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 5 / (2*button_count),f_bar.frame.size.height / 2)]];
+        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"工具" andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 7 / (2*button_count),f_bar.frame.size.height / 2)]];
         
     } else if (_type == PostPreViewMovie) {
-        
+
+        NSInteger button_count = 5;
+        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"滤镜" andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 1 / (2*button_count), f_bar.frame.size.height / 2)]];
+        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"剪切" andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 3 / (2*button_count), f_bar.frame.size.height / 2)]];
+        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"变速" andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 5 / (2*button_count), f_bar.frame.size.height / 2)]];
+        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"封面" andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 7 / (2*button_count), f_bar.frame.size.height / 2)]];
+        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"声音" andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 9 / (2*button_count), f_bar.frame.size.height / 2)]];
     } else {
         // error
     }   
@@ -164,12 +163,79 @@
     
     [self.view addSubview:tmp];
     /***************************************************************************************/
+   
+    /***************************************************************************************/
+    // photo
+    if (_type == PostPreViewPhote) {
+
+        tags = [[NSMutableDictionary alloc]initWithCapacity:3];
+        paste_img_arr = [[NSMutableArray alloc]init];
+        result_img = _cutted_img;
+    }
+    /***************************************************************************************/
+    // movie
+    else if (_type == PostPreViewMovie) {
+        
+        if (player == nil) {
+            player = [[AVPlayer alloc]init];
+            avPlayerLayer = [AVPlayerLayer playerLayerWithPlayer:player];
+        }
+        
+        if (![mainContentView.layer.sublayers containsObject:avPlayerLayer]) {
+            avPlayerLayer.frame = mainContentView.bounds;
+            avPlayerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+            [mainContentView.layer addSublayer:avPlayerLayer];
+        }
+        
+//        [player.currentItem removeObserver:self forKeyPath:@"status"];
+        
+        AVPlayerItem* tmp = [AVPlayerItem playerItemWithURL:_editing_movie];
+//        [tmp addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];// 监听status属性
+        //        [tmp addObserver:self forKeyPath:@"loadedTimeRanges" options:NSKeyValueObservingOptionNew context:nil];// 监听loadedTimeRanges属性
+//        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(moviePlayDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:tmp];
+        [player replaceCurrentItemWithPlayerItem:tmp];
+        
+        player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
+    }
     
-    tags = [[NSMutableDictionary alloc]initWithCapacity:3];
-    
-    paste_img_arr = [[NSMutableArray alloc]init];
-    
-    result_img = _cutted_img;
+    /***************************************************************************************/
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if ([keyPath isEqualToString:@"status"]) {
+        AVPlayerItem* playerItem = player.currentItem;
+        if (playerItem.status == AVPlayerStatusReadyToPlay) {
+            NSLog(@"AVPlayerStatusReadyToPlay");
+            //            CMTime duration = self.playerItem.duration;// 获取视频总长度
+            //            CGFloat totalSecond = playerItem.duration.value / playerItem.duration.timescale;// 转换成秒
+            //            _totalTime = [self convertTime:totalSecond];// 转换成播放时间
+            //            [self customVideoSlider:duration];// 自定义UISlider外观
+            //            NSLog(@"movie total duration:%f",CMTimeGetSeconds(duration));
+            //            [self monitoringPlayback:self.playerItem];// 监听播放状态
+            
+            [player seekToTime:kCMTimeZero completionHandler:^(BOOL finished) {
+                [player play];
+            }];
+            
+            
+        } else if (playerItem.status == AVPlayerStatusFailed) {
+            NSLog(@"AVPlayerStatusFailed");
+        }
+    }
+}
+
+-(void)moviePlayDidEnd:(AVPlayerItem*)item {
+    [player seekToTime:kCMTimeZero completionHandler:^(BOOL finished) {
+        [player play];
+    }];
+}
+
+- (UIButton*)addFunctionBarBtnWithTitle:(NSString*)title andCallBack:(SEL)callBack andRect:(CGRect)bounds andCenter:(CGPoint)center {
+    UIButton* f_btn = [[UIButton alloc]initWithFrame:bounds];
+    [f_btn setTitle:title forState:UIControlStateNormal];
+    [f_btn addTarget:self action:callBack forControlEvents:UIControlEventTouchDown];
+    f_btn.center = center;
+    return f_btn;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -180,6 +246,36 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES];
+    if (_type == PostPreViewMovie) {
+        if (![mainContentView.layer.sublayers containsObject:avPlayerLayer]) {
+            avPlayerLayer.frame = mainContentView.bounds;
+            avPlayerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+            [mainContentView.layer addSublayer:avPlayerLayer];
+        }
+        
+        if (player.currentItem) {
+            if (player.currentItem.status == AVPlayerStatusReadyToPlay) {
+                [player seekToTime:kCMTimeZero completionHandler:^(BOOL finished) {
+                    [player play];
+                }];
+            }
+            [player.currentItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];// 监听status属性
+            [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(moviePlayDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:player.currentItem];
+        }
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    if (_type == PostPreViewMovie) {
+        if (player.currentItem) {
+            [player.currentItem removeObserver:self forKeyPath:@"status"];
+            [player pause];
+        }
+        if ([mainContentView.layer.sublayers containsObject:avPlayerLayer]) {
+            [avPlayerLayer removeFromSuperlayer];
+        }
+    }
 }
 
 /*
@@ -198,23 +294,34 @@
 }
 
 - (void)didNextBtnSelected {
-    UIImage* final_img = [self mergePasteAndEffect:result_img];
+
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"PhotoPreView" bundle:nil];
     PhotoPublishController* publishController = [storyboard instantiateViewControllerWithIdentifier:@"publishController"];
-   
-    publishController.preViewImg = final_img;
-   
-    NSMutableArray* arr = [[NSMutableArray alloc]initWithCapacity:tags.count];
-    for (int index = 0; index < tags.allValues.count; ++index) {
-        PhotoTagView* view = [tags.allValues objectAtIndex:index];
-        if (view) {
-            PhotoTagView* tmp = [[PhotoTagView alloc]initWithTagName:view.content andType:view.type];
-            tmp.offset_x = view.frame.origin.x;
-            tmp.offset_y = view.frame.origin.y;
-            [arr addObject:tmp];
+
+    if (_type == PostPreViewPhote) {
+    
+        UIImage* final_img = [self mergePasteAndEffect:result_img];
+       
+        publishController.preViewImg = final_img;
+       
+        NSMutableArray* arr = [[NSMutableArray alloc]initWithCapacity:tags.count];
+        for (int index = 0; index < tags.allValues.count; ++index) {
+            PhotoTagView* view = [tags.allValues objectAtIndex:index];
+            if (view) {
+                PhotoTagView* tmp = [[PhotoTagView alloc]initWithTagName:view.content andType:view.type];
+                tmp.offset_x = view.frame.origin.x;
+                tmp.offset_y = view.frame.origin.y;
+                [arr addObject:tmp];
+            }
         }
+        publishController.already_taged = [arr copy];
+        
+    } else if (_type == PostPreViewMovie) {
+       
+        publishController.movie_url = _editing_movie;
     }
-    publishController.already_taged = [arr copy];
+
+    publishController.type = _type;
     [self.navigationController pushViewController:publishController animated:YES];
 }
 

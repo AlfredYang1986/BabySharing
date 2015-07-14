@@ -26,6 +26,7 @@
 //+ (id)uploadPicture:(NSDictionary*)params toUrl:(NSURL*)url;
 typedef void (^blockUploadCallback)(BOOL successs, NSString* message);
 + (void)uploadPicture:(UIImage*)image withName:(NSString*)filename toUrl:(NSURL*)url callBack:(blockUploadCallback)callback;
++ (void)uploadFileUrl:(NSURL*)path withName:(NSString*)filename toUrl:(NSURL*)url callBack:(blockUploadCallback)callback;
 + (void)uploadFile:(NSString*)path withName:(NSString*)filename toUrl:(NSURL*)url callBack:(blockUploadCallback)callback;
 
 #pragma mark -- download image files

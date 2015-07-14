@@ -33,6 +33,29 @@ struct tagNode {
 
 /*******************************************************************/
 /**
+ * not implement
+ */
+UIView* thisViewIsNotImplemented(CGFloat height) {
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    CGFloat margin = height / 4;
+    CGFloat button_height = height / 2;
+
+    UIView* reVal = [[UIView alloc]initWithFrame:CGRectMake(0, 0, MAX(width, 4 * (margin + button_height)), height)];
+    reVal.backgroundColor = [UIColor grayColor];
+    
+    UILabel* label = [[UILabel alloc]init];
+    label.text = @"This View is not implemented";
+    [label sizeToFit];
+    [reVal addSubview:label];
+    label.center = CGPointMake(reVal.frame.size.width / 2, reVal.frame.size.height / 2);
+    
+    return reVal;
+}
+
+/*******************************************************************/
+
+/*******************************************************************/
+/**
  * for photos
  */
 UIButton* addPhotoEffectBtn(NSString* title, CGRect bounds, CGPoint center, NSObject* callBackObj, SEL callBack) {
@@ -128,8 +151,8 @@ UIView* pasteForPhoto(PostEffectAdapter* adapter, CGFloat height) {
     return reVal;
 }
 
-UIView* toolForPhoto(CGFloat height) {
-    return nil;
+UIView* toolForPhoto(PostEffectAdapter* adapter, CGFloat height) {
+    return thisViewIsNotImplemented(height);
 }
 /*******************************************************************/
 
@@ -137,24 +160,24 @@ UIView* toolForPhoto(CGFloat height) {
 /**
  * for movies
  */
-UIView* effectFilterForMovie(CGFloat height) {
-    return nil;
+UIView* effectFilterForMovie(PostEffectAdapter* adapter, CGFloat height) {
+    return thisViewIsNotImplemented(height);
 }
 
-UIView* editForMovie(CGFloat height) {
-    return nil;
+UIView* editForMovie(PostEffectAdapter* adapter, CGFloat height) {
+    return thisViewIsNotImplemented(height);
 }
 
-UIView* asserateForMovie(CGFloat height) {
-    return nil;
+UIView* asserateForMovie(PostEffectAdapter* adapter, CGFloat height) {
+    return thisViewIsNotImplemented(height);
 }
 
-UIView* coverForMovie(CGFloat height) {
-    return nil;
+UIView* coverForMovie(PostEffectAdapter* adapter, CGFloat height) {
+    return thisViewIsNotImplemented(height);
 }
 
-UIView* soundForMovie(CGFloat height) {
-    return nil;
+UIView* soundForMovie(PostEffectAdapter* adapter, CGFloat height) {
+    return thisViewIsNotImplemented(height);
 }
 
 /*******************************************************************/
@@ -279,16 +302,16 @@ void otherTagView(PostEffectAdapter* obj, UIImage* tag_img) {
         tableNode {"滤镜", 0, &effectFilterForPhoto},
         tableNode {"标签", 0, &tagForPhoto},
         tableNode {"贴图", 0, &pasteForPhoto},
-//        tableNode {"工具", 0, &toolForPhoto},
+        tableNode {"工具", 0, &toolForPhoto},
         
         /**
          * for movies
          */
-//        tableNode {"滤镜", 1, &effectFilterForMovie},
-//        tableNode {"标签", 1, &editForMovie},
-//        tableNode {"贴图", 1, &asserateForMovie},
-//        tableNode {"封面", 1, &coverForMovie},
-//        tableNode {"声音", 1, &soundForMovie},
+        tableNode {"滤镜", 1, &effectFilterForMovie},
+        tableNode {"剪切", 1, &editForMovie},
+        tableNode {"变速", 1, &asserateForMovie},
+        tableNode {"封面", 1, &coverForMovie},
+        tableNode {"声音", 1, &soundForMovie},
     };
    
     UIView* result = nil;

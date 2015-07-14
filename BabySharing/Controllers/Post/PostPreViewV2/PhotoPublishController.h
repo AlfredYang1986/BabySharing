@@ -7,9 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PostDefine.h"
 
 @interface PhotoPublishController : UIViewController
 
 @property (nonatomic, strong) UIImage* preViewImg;
 @property (nonatomic, strong) NSArray* already_taged;
+
+@property (nonatomic, weak) NSURL* movie_url;
+@property (nonatomic) PostPreViewType type;
 @end

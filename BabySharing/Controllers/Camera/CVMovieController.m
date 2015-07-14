@@ -10,10 +10,11 @@
 #import "GPUImage.h"
 #import "TmpFileStorageModel.h"
 #import <AssetsLibrary/AssetsLibrary.h>
-#import "PostPreViewController.h"
+//#import "PostPreViewController.h"
 #import "AlbumModule.h"
 #import "INTUAnimationEngine.h"
 #import "AlbumViewController2.h"
+#import "PostPreViewEffectController.h"
 
 #define MOVIE_MAX_SECONDS       15
 #define MOVIE_CALL_BACK_STEP    (1.0 / 12.0)
@@ -407,10 +408,15 @@
     NSLog(@"Merge Movie Successful");
 //    [self dismissCVViewController:nil];
 
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"PostPreView" bundle:nil];
-    PostPreViewController* postNav = [storyboard instantiateViewControllerWithIdentifier:@"PostPreView"];
-    postNav.type = PostPreViewMovie;
-    postNav.movieURL = url;
-    [self.navigationController pushViewController:postNav animated:YES];
+    PostPreViewEffectController * distination = [[PostPreViewEffectController alloc]init];
+    distination.editing_movie = url;
+    distination.type = PostPreViewMovie;
+    [self.navigationController pushViewController:distination animated:YES];
+    
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"PostPreView" bundle:nil];
+//    PostPreViewController* postNav = [storyboard instantiateViewControllerWithIdentifier:@"PostPreView"];
+//    postNav.type = PostPreViewMovie;
+//    postNav.movieURL = url;
+//    [self.navigationController pushViewController:postNav animated:YES];
 }
 @end

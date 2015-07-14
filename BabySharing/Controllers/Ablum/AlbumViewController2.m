@@ -44,6 +44,7 @@
     CGPoint point;
     CGFloat last_scale;
     UIImage* img;
+    NSURL* cur_movie_url;
 }
 
 @synthesize type = _type;
@@ -189,8 +190,40 @@
     last_scale = 1.f;
 }
 
-- (void)dealloc {
-    [player.currentItem removeObserver:self forKeyPath:@"status"];
+//- (void)dealloc {
+//    [player.currentItem removeObserver:self forKeyPath:@"status"];
+//}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES];
+    if (_type == AlbumControllerTypeMovie) {
+        if (![mainContentView.layer.sublayers containsObject:avPlayerLayer]) {
+            avPlayerLayer.frame = mainContentView.bounds;
+            avPlayerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+            [mainContentView.layer addSublayer:avPlayerLayer];
+        }
+        
+        if (player.currentItem) {
+            [player.currentItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];// 监听status属性
+            [player seekToTime:kCMTimeZero completionHandler:^(BOOL finished) {
+                [player play];
+            }];
+        }
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    if (_type == AlbumControllerTypeMovie) {
+        if (player.currentItem) {
+            [player.currentItem removeObserver:self forKeyPath:@"status"];
+            [player pause];
+        }
+        if ([mainContentView.layer.sublayers containsObject:avPlayerLayer]) {
+            [avPlayerLayer removeFromSuperlayer];
+        }
+    }
 }
 
 - (void)createButtonsForView:(UIView*)tab_bar inRect:(CGRect)rc andTitle:(NSString*)title{
@@ -230,6 +263,7 @@
        
         [player.currentItem removeObserver:self forKeyPath:@"status"];
         
+        cur_movie_url = asset.defaultRepresentation.url;
         AVPlayerItem* tmp = [AVPlayerItem playerItemWithURL:asset.defaultRepresentation.url];
         [tmp addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];// 监听status属性
 //        [tmp addObserver:self forKeyPath:@"loadedTimeRanges" options:NSKeyValueObservingOptionNew context:nil];// 监听loadedTimeRanges属性
@@ -276,11 +310,6 @@
     }];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    [self.navigationController setNavigationBarHidden:YES];
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -320,6 +349,7 @@
         distination.type = (int)_type;
 
     } else if (_type == AlbumControllerTypeMovie) {
+        distination.editing_movie = cur_movie_url;
         
     } else {
         // error
@@ -418,7 +448,7 @@
     
     cell.delegate = self;
     NSInteger row = indexPath.row;
-    NSArray* arr_content = [images_arr objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(row * PHOTO_PER_LINE, PHOTO_PER_LINE)]];
+    NSArray* arr_content = [images_arr objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(row * PHOTO_PER_LINE, PHOTO_PER_LINE)]];     // there is a bug
     [cell setUpContentViewWithImageURLs2:arr_content atLine:row andType:_type];
     
     return cell;
