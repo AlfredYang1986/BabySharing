@@ -18,12 +18,30 @@
 @class GPUImageSmoothToonFilter;
 
 @protocol PostEffectAdapterProtocol <NSObject>
+
+/**
+ * type
+ */
+- (PostPreViewType)currentType;
+
+/**
+ * photo effect
+ */
 - (UIImage*)originImage;
 - (void)imageWithEffect:(UIImage*)img;
 
+/**
+ * tags
+ */
 - (BOOL)canCreateNewTag:(TagType)tag_type;
 - (void)tagView:(PhotoTagView*)view forTagType:(TagType)tag_type;
 - (void)queryTagContetnWithTagType:(TagType)tag_type andImg:(UIImage*)tag_img;
+
+/**
+ * paste img
+ */
+- (void)pasteWithImage:(UIImage*)img;
+
 @end
 
 @interface PostEffectAdapter : NSObject
@@ -42,4 +60,5 @@
 - (UIView*)getFunctionViewByTitle:(NSString*)title andType:(PostPreViewType)type andPreferedHeight:(CGFloat)height;
 - (void)didSelectEffectFilterForPhoto:(UIButton*)sender;
 - (void)didSelectTagForPhoto:(UIButton*)sender;
+- (void)didSelectPasteForPhoto:(UIButton*)sender;
 @end

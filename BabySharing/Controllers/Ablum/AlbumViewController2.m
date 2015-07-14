@@ -317,6 +317,7 @@
         CGFloat offset_y = fabs(mainContentPhotoLayer.frame.origin.y - top_margin);
         
         distination.cutted_img = [self clipImage:img withRect:CGRectMake(offset_x * scale_x, offset_y * scale_y, width * scale_x, height * scale_y)];
+        distination.type = (int)_type;
 
     } else if (_type == AlbumControllerTypeMovie) {
         
@@ -326,7 +327,6 @@
     
 
     distination.type = (NSInteger)_type;
-    
     [self.navigationController pushViewController:distination animated:YES];
 }
 

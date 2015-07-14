@@ -9,8 +9,10 @@
 #import "PostPreViewEffectController.h"
 #import "PostEffectAdapter.h"
 #import "PhotoAddTagController.h"
+#import "INTUAnimationEngine.h"
+#import "PhotoPublishController.h"
 
-@interface PostPreViewEffectController () <PostEffectAdapterProtocol, addingTagsProtocol>
+@interface PostPreViewEffectController () <PostEffectAdapterProtocol, addingTagsProtocol, UIAlertViewDelegate>
 
 @end
 
@@ -25,6 +27,12 @@
     NSMutableDictionary* function_dic;
     
     NSMutableDictionary* tags;
+    
+    NSMutableArray* paste_img_arr;
+    CGPoint point;
+    UIView* cur_long_press;
+    
+    UIImage* result_img;
 }
 
 @synthesize type = _type;
@@ -158,11 +166,20 @@
     /***************************************************************************************/
     
     tags = [[NSMutableDictionary alloc]initWithCapacity:3];
+    
+    paste_img_arr = [[NSMutableArray alloc]init];
+    
+    result_img = _cutted_img;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES];
 }
 
 /*
@@ -181,7 +198,58 @@
 }
 
 - (void)didNextBtnSelected {
+    UIImage* final_img = [self mergePasteAndEffect:result_img];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"PhotoPreView" bundle:nil];
+    PhotoPublishController* publishController = [storyboard instantiateViewControllerWithIdentifier:@"publishController"];
+   
+    publishController.preViewImg = final_img;
+   
+    NSMutableArray* arr = [[NSMutableArray alloc]initWithCapacity:tags.count];
+    for (int index = 0; index < tags.allValues.count; ++index) {
+        PhotoTagView* view = [tags.allValues objectAtIndex:index];
+        if (view) {
+            PhotoTagView* tmp = [[PhotoTagView alloc]initWithTagName:view.content andType:view.type];
+            tmp.offset_x = view.frame.origin.x;
+            tmp.offset_y = view.frame.origin.y;
+            [arr addObject:tmp];
+        }
+    }
+    publishController.already_taged = [arr copy];
+    [self.navigationController pushViewController:publishController animated:YES];
+}
+
+- (UIImage*)mergePasteAndEffect:(UIImage*)baseImg {
+    CGImageRef baseImageRef = CGImageCreateWithImageInRect(baseImg.CGImage, CGRectMake(0, 0, baseImg.size.width, baseImg.size.height));
+    CGRect baseBounds = CGRectMake(0, 0, CGImageGetWidth(baseImageRef), CGImageGetHeight(baseImageRef));
     
+    CGFloat scale_x = _cutted_img.size.width / mainContentView.frame.size.width;
+    CGFloat scale_y = _cutted_img.size.height / mainContentView.frame.size.height;
+    
+    UIGraphicsBeginImageContext(baseBounds.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextTranslateCTM(context, 0.0, baseBounds.size.height);
+    CGContextScaleCTM(context, 1.0, -1.0);
+    CGContextDrawImage(context, baseBounds, baseImageRef);
+    
+    for (UIImageView* view in paste_img_arr) {
+        
+        CGImageRef subImgRef = CGImageCreateWithImageInRect(view.image.CGImage, CGRectMake(0, 0, view.image.size.width, view.image.size.height));
+        CGRect rect = view.frame;
+        
+        CGFloat offset_x = rect.origin.x;
+        CGFloat offset_y = mainContentView.frame.size.height - (rect.origin.y + rect.size.height);
+        
+        CGRect smallBounds = CGRectMake(offset_x * scale_x, offset_y * scale_y, rect.size.width * scale_x, rect.size.height * scale_y);
+        CGContextDrawImage(context, smallBounds, subImgRef);
+    }
+    
+    
+    CGImageRef newImageRef = CGBitmapContextCreateImage(context);
+    UIImage* newImage = [UIImage imageWithCGImage:newImageRef];
+    UIGraphicsEndImageContext();
+    //
+    return newImage;
 }
 
 - (void)didSelectFunctionBtn:(UIButton*)sender {
@@ -208,15 +276,33 @@
     // TODO: adding tag
     NSLog(@"adding tags: %@, %d", tag, (int)type);
     
-//    PhotoTagView* view = [self queryTagViewByType:type];
-//    if (view) {
-//        [view removeFromSuperview];
-//    }
-//    
-//    PhotoTagView* tmp = [[PhotoTagView alloc]initWithTagName:tag andType:type];
-//    tmp.frame = CGRectMake(point.x, point.y, tmp.bounds.size.width, tmp.bounds.size.height);
-//    [_imgView addSubview:tmp];
-//    [_imgView bringSubviewToFront:tmp];
+    if ([tags.allKeys containsObject:[NSNumber numberWithInteger:type]]) {
+        UIView* last = [tags objectForKey:[NSNumber numberWithInteger:type]];
+        [last removeFromSuperview];
+        [tags removeObjectForKey:[NSNumber numberWithInteger:type]];
+    }
+    
+    PhotoTagView* tmp = [[PhotoTagView alloc]initWithTagName:tag andType:type];
+    CGFloat width = mainContentView.frame.size.width;
+    CGFloat height = mainContentView.frame.size.height;
+    CGPoint point_tmp;
+    switch (type) {
+        case TagTypeLocation:
+            point_tmp = CGPointMake(width / 4 - tmp.bounds.size.width / 2, height / 2);
+            break;
+        case TagTypeTime:
+            point_tmp = CGPointMake(width / 2 - tmp.bounds.size.width / 2, height * 3 / 4);
+            break;
+        case TagTypeTags:
+            point_tmp = CGPointMake(width * 3 / 4 - tmp.bounds.size.width / 2, height / 2);
+        default:
+            break;
+    }
+    tmp.frame = CGRectMake(point_tmp.x, point_tmp.y, tmp.bounds.size.width, tmp.bounds.size.height);
+    [mainContentView addSubview:tmp];
+    [mainContentView bringSubviewToFront:tmp];
+    
+    [tags setObject:tmp forKey:[NSNumber numberWithInteger:type]];
 //    [already_taged_views setObject:tmp forKey:[NSNumber numberWithInt:type]];
 //    
 //    UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleTagTapped:)];
@@ -230,16 +316,22 @@
 }
 
 #pragma mark -- function button protocol
+- (PostPreViewType)currentType {
+    return _type;
+}
+
 - (UIImage*)originImage {
     return _cutted_img;
 }
 
 - (void)imageWithEffect:(UIImage *)img {
+    result_img = img;
     img_layer.contents = (id)img.CGImage;
 }
 
 - (BOOL)canCreateNewTag:(TagType)tag_type {
-    return ![tags.allKeys containsObject:[NSNumber numberWithInteger:tag_type]];
+//    return ![tags.allKeys containsObject:[NSNumber numberWithInteger:tag_type]];
+    return YES;
 }
 
 - (void)tagView:(PhotoTagView*)view forTagType:(TagType)tag_type {
@@ -254,5 +346,110 @@
     addTagController.delegate = self;
     
     [self.navigationController pushViewController:addTagController animated:YES];
+}
+
+- (void)pasteWithImage:(UIImage*)img {
+    UIImageView* tmp = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, img.size.width, img.size.height)];
+    tmp.center = CGPointMake(mainContentView.frame.size.width / 2, mainContentView.frame.size.height / 2);
+    tmp.userInteractionEnabled = YES;
+    tmp.contentMode = UIViewContentModeScaleToFill;
+    tmp.image = img;
+   
+    UIPanGestureRecognizer* pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(handlePastePan:)];
+    [tmp addGestureRecognizer:pan];
+    UILongPressGestureRecognizer* lp = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(handleLongPress:)];
+    [tmp addGestureRecognizer:lp];
+    
+    [mainContentView addSubview:tmp];
+    [mainContentView bringSubviewToFront:tmp];
+    
+    [paste_img_arr addObject:tmp];
+}
+
+#pragma mark -- paste img pan handle
+- (void)handlePastePan:(UIPanGestureRecognizer*)gesture {
+    NSLog(@"pan gesture");
+    UIView* tmp = gesture.view;
+    if (gesture.state == UIGestureRecognizerStateBegan) {
+        NSLog(@"begin");
+        point = [gesture translationInView:mainContentView];
+        [mainContentView bringSubviewToFront:tmp];
+        
+    } else if (gesture.state == UIGestureRecognizerStateEnded) {
+        NSLog(@"end");
+        point = CGPointMake(-1, -1);
+        CGFloat move_x = [self distanceMoveHerWithView:tmp];
+        CGFloat move_y = [self distanceMoveVerWithView:tmp];
+        [self moveView:move_x and:move_y withView:tmp];
+        
+    } else if (gesture.state == UIGestureRecognizerStateChanged) {
+        NSLog(@"changeed");
+        CGPoint newPoint = [gesture translationInView:mainContentView];
+        
+        tmp.center = CGPointMake(tmp.center.x + (newPoint.x - point.x), tmp.center.y + (newPoint.y - point.y));
+        point = newPoint;
+    }
+}
+
+- (void)moveView:(float)move_x and:(float)move_y withView:(UIView*)view {
+    static const CGFloat kAnimationDuration = 0.30; // in seconds
+    CGPoint center = view.center;
+    CGPoint newCenter = CGPointMake(view.center.x + move_x, view.center.y + move_y);
+    [INTUAnimationEngine animateWithDuration:kAnimationDuration
+                                       delay:0.0
+                                      easing:INTUEaseInOutQuadratic
+                                     options:INTUAnimationOptionNone
+                                  animations:^(CGFloat progress) {
+                                      view.center = INTUInterpolateCGPoint(center, newCenter, progress);
+                                      
+                                      // NSLog(@"Progress: %.2f", progress);
+                                  }
+                                  completion:^(BOOL finished) {
+                                      // NOTE: When passing INTUAnimationOptionRepeat, this completion block is NOT executed at the end of each cycle. It will only run if the animation is canceled.
+                                      NSLog(@"%@", finished ? @"Animation Completed" : @"Animation Canceled");
+                                      //                                                         self.animationID = NSNotFound;
+                                  }];
+}
+
+- (CGFloat)distanceMoveVerWithView:(UIView*)view {
+    if (view.frame.origin.y < 0)
+        return -view.frame.origin.y;
+    else if (view.frame.origin.y + view.frame.size.height > mainContentView.frame.size.height)
+        return -(view.frame.origin.y + view.frame.size.height - mainContentView.frame.size.height);
+    else return 0;
+}
+
+- (CGFloat)distanceMoveHerWithView:(UIView*)view {
+    
+    if (view.frame.origin.x < 0)
+        return -view.frame.origin.x;
+    else if (view.frame.origin.x + view.frame.size.width > mainContentView.frame.size.width)
+        return -(view.frame.origin.x + view.frame.size.width - mainContentView.frame.size.width);
+    else return 0;
+}
+
+- (void)handleLongPress:(UILongPressGestureRecognizer*)gesture {
+    NSLog(@"long gesture");
+    if (gesture.state == UIGestureRecognizerStateBegan) {
+        NSLog(@"begin");
+        
+        cur_long_press = gesture.view;
+        UIAlertView* view = [[UIAlertView alloc]initWithTitle:@"delect" message:@"remove paste image" delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"yes", nil];
+        [view show];
+        
+    } else if (gesture.state == UIGestureRecognizerStateChanged) {
+        NSLog(@"changeed");
+        
+    }
+}
+
+#pragma mark -- alert view delegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSLog(@"index at %ld", (long)buttonIndex);
+    if (buttonIndex == 1) {
+        [cur_long_press removeFromSuperview];
+        [paste_img_arr removeObject:cur_long_press];
+    }
+    cur_long_press = nil;
 }
 @end

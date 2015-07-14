@@ -73,7 +73,7 @@
         <!--Publish-->
         <scene sceneID="xeE-LX-iA2">
             <objects>
-                <viewController id="j7N-bF-HCB" customClass="PhotoPublishController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="publishController" id="j7N-bF-HCB" customClass="PhotoPublishController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HcC-J5-DFP"/>
                         <viewControllerLayoutGuide type="bottom" id="bKR-pl-dog"/>

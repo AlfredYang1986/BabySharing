@@ -95,8 +95,8 @@
     [self.view bringSubviewToFront:backView];
     backView.hidden = YES;
     
-    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(movingAnimation:)];
-    [backView addGestureRecognizer:gesture];
+//    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(movingAnimation:)];
+//    [backView addGestureRecognizer:gesture];
     
 //    [self.view addSubview:photoBtn];
 //    [self.view addSubview:movieBtn];

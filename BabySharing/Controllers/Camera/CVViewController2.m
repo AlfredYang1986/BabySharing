@@ -14,7 +14,8 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "INTUAnimationEngine.h"
 #import "AlbumViewController2.h"
-#import "PhotoPreViewController.h"
+//#import "PhotoPreViewController.h"
+#import "PostPreViewEffectController.h"
 
 @interface CVViewController2 () {
     GPUImageOutput<GPUImageInput> *filter;
@@ -319,12 +320,12 @@
                                               UIImageWriteToSavedPhotosAlbum(processedImage, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
                                               
                                               dispatch_async(dispatch_get_main_queue(), ^{
-                                                  UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"PhotoPreView" bundle:nil];
-                                                  PhotoPreViewController* postNav = [storyboard instantiateViewControllerWithIdentifier:@"PhotoPreView"];
-                                                  postNav.photoArray = @[processedImage];
-//                                                  postNav.type = PostPreViewPhote;
+                                                  PostPreViewEffectController * distination = [[PostPreViewEffectController alloc]init];
+                                                  distination.cutted_img = processedImage;
+                                                  distination.type = PostPreViewPhote;
                                                   sleep(0.5);
-                                                  [self.navigationController pushViewController:postNav animated:YES];
+                                                  [self.navigationController pushViewController:distination animated:YES];
+                                                  
                                               });
                                           }];
                                       });

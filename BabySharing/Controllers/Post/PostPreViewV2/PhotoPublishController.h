@@ -10,6 +10,6 @@
 
 @interface PhotoPublishController : UIViewController
 
-@property (nonatomic, weak) UIImage* preViewImg;
+@property (nonatomic, strong) UIImage* preViewImg;
 @property (nonatomic, strong) NSArray* already_taged;
 @end

@@ -49,6 +49,13 @@
     for (UIView * view in _already_taged) {
         [self.view addSubview:view];
     }
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismissPostViewController) name:@"post success" object:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -69,6 +76,12 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dismissPostViewController {
+    [self dismissViewControllerAnimated:YES completion:^{
+        NSLog(@"Post Success");
+    }];
 }
 
 /*

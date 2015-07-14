@@ -59,6 +59,19 @@ UIButton* addTagBtn(NSString* title, CGRect bounds, CGPoint center, NSObject* ca
     return btn;
 }
 
+UIButton* addPasteBtn(CGRect bounds, CGPoint center, NSObject* callBackObj, SEL callBack, UIImage* img) {
+    UIButton* btn = [[UIButton alloc]initWithFrame:bounds];
+    btn.center = center;
+    [btn setBackgroundImage:img forState:UIControlStateNormal];
+    [btn addTarget:callBackObj action:callBack forControlEvents:UIControlEventTouchDown];
+    
+    btn.layer.borderWidth = 1.f;
+    btn.layer.borderColor = [UIColor blueColor].CGColor;
+    btn.layer.cornerRadius = 4.f;
+    btn.clipsToBounds = YES;
+    return btn;
+}
+
 UIView* effectFilterForPhoto(PostEffectAdapter* adapter, CGFloat height) {
     
     /**
@@ -99,7 +112,20 @@ UIView* tagForPhoto(PostEffectAdapter* adapter, CGFloat height) {
 }
 
 UIView* pasteForPhoto(PostEffectAdapter* adapter, CGFloat height) {
-    return nil;
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+    
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    CGFloat button_height = height / 2;
+    
+    UIView* reVal = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, height)];
+    reVal.backgroundColor = [UIColor grayColor];
+    
+    [reVal addSubview:addPasteBtn(CGRectMake(0, 0, button_height, button_height), CGPointMake(reVal.frame.size.width / 2 - 10 - 2 * button_height, reVal.frame.size.height / 2), adapter, @selector(didSelectPasteForPhoto:), [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Dice1"] ofType:@"png"]])];
+    [reVal addSubview:addPasteBtn(CGRectMake(0, 0, button_height, button_height), CGPointMake(reVal.frame.size.width / 2, reVal.frame.size.height / 2), adapter, @selector(didSelectPasteForPhoto:), [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Dice2"] ofType:@"png"]])];
+    [reVal addSubview:addPasteBtn(CGRectMake(0, 0, button_height, button_height), CGPointMake(reVal.frame.size.width / 2 + 10 + 2 * button_height, reVal.frame.size.height / 2), adapter, @selector(didSelectPasteForPhoto:), [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Dice2"] ofType:@"png"]])];
+    
+    return reVal;
 }
 
 UIView* toolForPhoto(CGFloat height) {
@@ -205,27 +231,29 @@ void otherTagView(PostEffectAdapter* obj, UIImage* tag_img) {
 @synthesize smoothToonFilter = _smoothToonFilter;
 
 - (void)setUp {
-    if (_tiltShiftFilter == nil) {
-        _tiltShiftFilter = [[GPUImageTiltShiftFilter alloc] init];
-        [_tiltShiftFilter setTopFocusLevel:1.f];
-        [_tiltShiftFilter setBottomFocusLevel:1.f];
-        [_tiltShiftFilter setFocusFallOffRate:0.2];
-    }
-    
-    if (_sketchFilter == nil) {
-        _sketchFilter = [[GPUImageSketchFilter alloc] init];
-    }
-    
-    if (_colorInvertFilter == nil) {
-        _colorInvertFilter  = [[GPUImageColorInvertFilter alloc] init];
-    }
-    
-    if (_smoothToonFilter == nil) {
-        _smoothToonFilter = [[GPUImageSmoothToonFilter alloc] init];
-    }
-    
-    if (_ip == nil) {
-        _ip = [[GPUImagePicture alloc]initWithImage:[_delegate originImage]];
+    if ([_delegate currentType] == PostPreViewPhote) {
+        if (_tiltShiftFilter == nil) {
+            _tiltShiftFilter = [[GPUImageTiltShiftFilter alloc] init];
+            [_tiltShiftFilter setTopFocusLevel:1.f];
+            [_tiltShiftFilter setBottomFocusLevel:1.f];
+            [_tiltShiftFilter setFocusFallOffRate:0.2];
+        }
+        
+        if (_sketchFilter == nil) {
+            _sketchFilter = [[GPUImageSketchFilter alloc] init];
+        }
+        
+        if (_colorInvertFilter == nil) {
+            _colorInvertFilter  = [[GPUImageColorInvertFilter alloc] init];
+        }
+        
+        if (_smoothToonFilter == nil) {
+            _smoothToonFilter = [[GPUImageSmoothToonFilter alloc] init];
+        }
+        
+        if (_ip == nil) {
+            _ip = [[GPUImagePicture alloc]initWithImage:[_delegate originImage]];
+        }
     }
 }
 
@@ -306,5 +334,9 @@ void otherTagView(PostEffectAdapter* obj, UIImage* tag_img) {
             break;
         }
     }
+}
+
+- (void)didSelectPasteForPhoto:(UIButton*)sender {
+    [_delegate pasteWithImage:[sender backgroundImageForState:UIControlStateNormal]];
 }
 @end
