@@ -17,6 +17,7 @@
 		EE2D4B7E1B525E0A00B58A1F /* PhotoPreViewEffectController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2D4B731B525E0A00B58A1F /* PhotoPreViewEffectController.m */; };
 		EE2D4B7F1B525E0A00B58A1F /* PhotoPublishController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2D4B751B525E0A00B58A1F /* PhotoPublishController.m */; };
 		EE2D4B801B525E0A00B58A1F /* PhotoTagsController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2D4B771B525E0A00B58A1F /* PhotoTagsController.m */; };
+		EE59A7751B5936170014F9C3 /* SearchUserTagsController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE59A7741B5936170014F9C3 /* SearchUserTagsController.m */; };
 		EE5C7E4F1B511CC000104CAB /* AlbumViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5C7E4E1B511CC000104CAB /* AlbumViewController2.m */; };
 		EE7951971B45065200CC28A2 /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EE7951961B45065200CC28A2 /* libGPUImage.a */; };
 		EE7EB54B1B4628D9003281F7 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7EB54A1B4628D9003281F7 /* MessageViewController.m */; };
@@ -217,6 +218,8 @@
 		EE2D4B751B525E0A00B58A1F /* PhotoPublishController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoPublishController.m; sourceTree = "<group>"; };
 		EE2D4B761B525E0A00B58A1F /* PhotoTagsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoTagsController.h; sourceTree = "<group>"; };
 		EE2D4B771B525E0A00B58A1F /* PhotoTagsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoTagsController.m; sourceTree = "<group>"; };
+		EE59A7731B5936170014F9C3 /* SearchUserTagsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchUserTagsController.h; sourceTree = "<group>"; };
+		EE59A7741B5936170014F9C3 /* SearchUserTagsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchUserTagsController.m; sourceTree = "<group>"; };
 		EE5C7E4D1B511CC000104CAB /* AlbumViewController2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumViewController2.h; sourceTree = "<group>"; };
 		EE5C7E4E1B511CC000104CAB /* AlbumViewController2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumViewController2.m; sourceTree = "<group>"; };
 		EE7951961B45065200CC28A2 /* libGPUImage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGPUImage.a; path = GPUImage.framework/libGPUImage.a; sourceTree = "<group>"; };
@@ -844,6 +847,8 @@
 				EEAACB111B44E90300D05C0B /* NicknameInputViewController.m */,
 				EEAACB121B44E90300D05C0B /* PhoneInputViewController.h */,
 				EEAACB131B44E90300D05C0B /* PhoneInputViewController.m */,
+				EE59A7731B5936170014F9C3 /* SearchUserTagsController.h */,
+				EE59A7741B5936170014F9C3 /* SearchUserTagsController.m */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -2056,6 +2061,7 @@
 				EEAACCC01B44E90400D05C0B /* PersonalCentreTmpViewController.m in Sources */,
 				EEAACCBC1B44E90400D05C0B /* HomeSearchController.m in Sources */,
 				EEAACD0B1B44E90400D05C0B /* MovingButton.m in Sources */,
+				EE59A7751B5936170014F9C3 /* SearchUserTagsController.m in Sources */,
 				EEAACCDB1B44E90400D05C0B /* RegTmpToken+ContextOpt.m in Sources */,
 				EEAACCC11B44E90400D05C0B /* ProfileDetailController.m in Sources */,
 				EEAACCBB1B44E90400D05C0B /* HomeDetailViewController.m in Sources */,

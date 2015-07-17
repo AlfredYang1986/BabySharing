@@ -316,7 +316,7 @@ enum DisplaySide {
 //            NSLog(@"already login by others");
 //        }
 //    }
-    [self performSegueWithIdentifier:@"loginSuccessSegue" sender:nil];
+    [self performSegueWithIdentifier:@"alreadyLogSegue" sender:nil];
 }
 
 - (void)didStartEditing {

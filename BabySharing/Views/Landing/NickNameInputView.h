@@ -8,8 +8,24 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NickNameInputView : UIView
+@protocol NickNameInputViewDelegate <NSObject>
+
+- (void)didStartInputName;
+- (void)didEndInputName;
+
+- (void)didStartInputTags;
+
+@end
+
+@interface NickNameInputView : UIView <UITextFieldDelegate>
+
+@property (nonatomic, weak) id<NickNameInputViewDelegate> delegate;
 
 - (id)init;
 - (CGSize)getPreferredBounds;
+
+- (void)resetTags:(NSString*)tags;
+
+- (NSString*)getInputName;
+- (NSString*)getInputTags;
 @end
