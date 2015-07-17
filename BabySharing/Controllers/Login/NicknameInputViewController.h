@@ -11,10 +11,7 @@
 
 @interface NicknameInputViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet UIView *img;
-@property (weak, nonatomic) IBOutlet UITextField *nicknameTextbox;
 
 @property (nonatomic, weak) LoginModel* lm;
-
 @property (nonatomic, weak) NSDictionary* login_attr;
 @end

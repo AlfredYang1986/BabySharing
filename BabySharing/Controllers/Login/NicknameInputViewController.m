@@ -8,23 +8,34 @@
 
 #import "NicknameInputViewController.h"
 #import "LoginToken+ContextOpt.h"
+#import "NickNameInputView.h"
 
 @interface NicknameInputViewController ()
-
+@property (weak, nonatomic) IBOutlet UIButton *loginImgBtn;
+@property (weak, nonatomic) IBOutlet UIButton *nextBtn;
 @end
 
-@implementation NicknameInputViewController
+@implementation NicknameInputViewController {
+    NickNameInputView* inputView;
+}
 
-@synthesize img = _img;
-@synthesize nicknameTextbox = _nicknameTextbox;
+@synthesize loginImgBtn = _loginImgBtn;
+@synthesize nextBtn = _nextBtn;
+
 @synthesize lm = _lm;
-
 @synthesize login_attr = _login_attr;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.navigationController setNavigationBarHidden:NO animated:NO];
+    
+    inputView = [[NickNameInputView alloc]init];
+    CGSize s = [inputView getPreferredBounds];
+    inputView.bounds = CGRectMake(0, 0, s.width, s.height);
+    
+    [self.view addSubview:inputView];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,6 +46,15 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:NO];
+}
+
+- (void)viewDidLayoutSubviews {
+    /**
+     * layout subview then layout input view
+     */
+    CGFloat width = [UIScreen mainScreen].bounds.size.width / 2;
+    CGFloat height = [UIScreen mainScreen].bounds.size.height / 2 + inputView.bounds.size.height / 2;
+    inputView.center = CGPointMake(width, height);
 }
 
 /*

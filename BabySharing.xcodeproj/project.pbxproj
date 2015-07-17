@@ -183,6 +183,7 @@
 		EEAACDAD1B44EEDD00D05C0B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEAACDA21B44EEAA00D05C0B /* Security.framework */; };
 		EEAACDAE1B44EEDD00D05C0B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEAACDA01B44EE9D00D05C0B /* CFNetwork.framework */; };
 		EEF538F51B525F7F009C8CB9 /* PostPreViewEffectController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEF538F41B525F7F009C8CB9 /* PostPreViewEffectController.m */; };
+		EEFA44FE1B58F7D4007DF294 /* NickNameInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEFA44FD1B58F7D4007DF294 /* NickNameInputView.m */; };
 		EEFD6F4F1B4E44C1008AC4F5 /* LoginInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEFD6F4E1B4E44C1008AC4F5 /* LoginInputView.m */; };
 		EEFD6F521B4E452D008AC4F5 /* SloganView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEFD6F511B4E452D008AC4F5 /* SloganView.m */; };
 /* End PBXBuildFile section */
@@ -602,6 +603,8 @@
 		EEAACDBA1B44FAA300D05C0B /* GPUImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GPUImage.framework; sourceTree = "<group>"; };
 		EEF538F31B525F7F009C8CB9 /* PostPreViewEffectController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostPreViewEffectController.h; sourceTree = "<group>"; };
 		EEF538F41B525F7F009C8CB9 /* PostPreViewEffectController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostPreViewEffectController.m; sourceTree = "<group>"; };
+		EEFA44FC1B58F7D4007DF294 /* NickNameInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NickNameInputView.h; sourceTree = "<group>"; };
+		EEFA44FD1B58F7D4007DF294 /* NickNameInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NickNameInputView.m; sourceTree = "<group>"; };
 		EEFD6F4D1B4E44C1008AC4F5 /* LoginInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginInputView.h; sourceTree = "<group>"; };
 		EEFD6F4E1B4E44C1008AC4F5 /* LoginInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginInputView.m; sourceTree = "<group>"; };
 		EEFD6F501B4E452D008AC4F5 /* SloganView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SloganView.h; sourceTree = "<group>"; };
@@ -1803,6 +1806,8 @@
 				EEFD6F4E1B4E44C1008AC4F5 /* LoginInputView.m */,
 				EEFD6F501B4E452D008AC4F5 /* SloganView.h */,
 				EEFD6F511B4E452D008AC4F5 /* SloganView.m */,
+				EEFA44FC1B58F7D4007DF294 /* NickNameInputView.h */,
+				EEFA44FD1B58F7D4007DF294 /* NickNameInputView.m */,
 			);
 			path = Landing;
 			sourceTree = "<group>";
@@ -1970,6 +1975,7 @@
 				EEAACD4E1B44E90400D05C0B /* ProfileDetailTagsCell.m in Sources */,
 				EEAACCD71B44E90400D05C0B /* LoginToken+ContextOpt.m in Sources */,
 				EEAACCBE1B44E90400D05C0B /* HomeViewController.m in Sources */,
+				EEFA44FE1B58F7D4007DF294 /* NickNameInputView.m in Sources */,
 				EE2D4B7A1B525E0A00B58A1F /* PostPreViewController.m in Sources */,
 				EEAACCAA1B44E90400D05C0B /* PhoneInputViewController.m in Sources */,
 				EEAACCEB1B44E90400D05C0B /* TmpFileStorageModel.m in Sources */,

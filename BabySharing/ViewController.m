@@ -290,32 +290,33 @@ enum DisplaySide {
 }
 
 - (void)didSelectNextBtn {
-    NSString* code = [inputView getInputConfirmCode];
-    NSString* phoneNo = [inputView getInputPhoneNumber];
-    
-    if (![self isValidPhoneCode:code]) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"input wrong phone number" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-        [alert show];
-        return;
-    }
-    
-    RegTmpToken* token = [RegTmpToken enumRegTokenINContext:self.lm.doc.managedObjectContext WithPhoneNo:phoneNo];
-    
-    if (token == nil) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"input wrong phone number" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-        [alert show];
-    } else {
-        NSDictionary* tmp =[[NSDictionary alloc]init];
-        LoginModelConfirmResult reVal = [self.lm sendConfirrmCode:code ToPhone:phoneNo withToken:token.reg_token toResult:&tmp];
-        result = tmp;
-        if (reVal == LoginModelResultSuccess) {
-            [self performSegueWithIdentifier:@"loginSuccessSegue" sender:nil];
-            NSLog(@"login success");
-        } else if (reVal ==LoginModelResultOthersLogin) {
-            [self performSegueWithIdentifier:@"alreadyLogSegue" sender:nil];
-            NSLog(@"already login by others");
-        }
-    }
+//    NSString* code = [inputView getInputConfirmCode];
+//    NSString* phoneNo = [inputView getInputPhoneNumber];
+//    
+//    if (![self isValidPhoneCode:code]) {
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"input wrong phone number" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+//        [alert show];
+//        return;
+//    }
+//    
+//    RegTmpToken* token = [RegTmpToken enumRegTokenINContext:self.lm.doc.managedObjectContext WithPhoneNo:phoneNo];
+//    
+//    if (token == nil) {
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"input wrong phone number" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+//        [alert show];
+//    } else {
+//        NSDictionary* tmp =[[NSDictionary alloc]init];
+//        LoginModelConfirmResult reVal = [self.lm sendConfirrmCode:code ToPhone:phoneNo withToken:token.reg_token toResult:&tmp];
+//        result = tmp;
+//        if (reVal == LoginModelResultSuccess) {
+//            [self performSegueWithIdentifier:@"loginSuccessSegue" sender:nil];
+//            NSLog(@"login success");
+//        } else if (reVal ==LoginModelResultOthersLogin) {
+//            [self performSegueWithIdentifier:@"alreadyLogSegue" sender:nil];
+//            NSLog(@"already login by others");
+//        }
+//    }
+    [self performSegueWithIdentifier:@"loginSuccessSegue" sender:nil];
 }
 
 - (void)didStartEditing {
