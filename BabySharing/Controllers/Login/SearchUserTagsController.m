@@ -17,6 +17,8 @@
 
 @implementation SearchUserTagsController {
     NSArray* test_tag_arr;
+    
+    NSArray* final_tag_arr;
 }
 
 @synthesize delegate = _delegate;
@@ -42,6 +44,7 @@
     _queryView.dataSource = self;
     
     test_tag_arr = @[@"a_tag1", @"b_tag2", @"c_tag3", @"d_tag4", @"e_tag5"];
+    final_tag_arr = test_tag_arr;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -70,12 +73,25 @@
 */
 
 #pragma mark -- Search Bar Delegate
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    NSLog(@"Start Search");
-}
-
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     NSLog(@"Search text change");
+    
+    if ([searchText isEqualToString:@""]) {
+        final_tag_arr = test_tag_arr;
+    } else {
+        NSString *regex = [NSString stringWithFormat:@"^[%@]\\w*", searchText];
+        NSPredicate* p = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+       
+        NSMutableArray* tmp = [[NSMutableArray alloc]initWithCapacity:test_tag_arr.count];
+        for (NSString* iter in test_tag_arr) {
+            if ([p evaluateWithObject:iter]) {
+                [tmp addObject:iter];
+            }
+        }
+        final_tag_arr = [tmp copy];
+    }
+    
+    [_queryView reloadData];
 }
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
@@ -87,7 +103,10 @@
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    searchBar.text = @"";
     [searchBar resignFirstResponder];
+    final_tag_arr = test_tag_arr;
+    [_queryView reloadData];
 }
 
 #pragma mark -- table view delegate
@@ -102,7 +121,8 @@
 
 #pragma mark -- table view data source
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [test_tag_arr count];
+//    return [test_tag_arr count];
+    return [final_tag_arr count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -119,7 +139,7 @@
     
     cell.imageView.image = img_0;
     NSInteger index = indexPath.row;
-    cell.textLabel.text = [test_tag_arr objectAtIndex:index];
+    cell.textLabel.text = [final_tag_arr objectAtIndex:index];
     return cell;
 }
 
