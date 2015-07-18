@@ -19,6 +19,8 @@
 
 @implementation NicknameInputViewController {
     NickNameInputView* inputView;
+    
+    NSURL* user_img_url;
 }
 
 @synthesize loginImgBtn = _loginImgBtn;
@@ -84,8 +86,16 @@
 
     NSString* auth_token = [_login_attr objectForKey:@"auth_token"];
     NSString* user_id = [_login_attr objectForKey:@"user_id"];
-    if ([_lm sendScreenName:[inputView getInputName] forToken:auth_token andUserID:user_id]) {
-//    if ([_lm sendScreenName:@"alfred" forToken:auth_token andUserID:user_id]) {
+    
+    NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
+    [dic setValue:[inputView getInputName] forKey:@"screen_name"];
+    [dic setValue:[inputView getInputTags] forKey:@"role_tag"];
+
+    [dic setValue:auth_token forKey:@"auth_token"];
+    [dic setValue:user_id forKey:@"user_id"];
+    
+    if ([_lm updateUserProfile:[dic copy]]) {
+//    if ([_lm sendScreenName:[inputView getInputName] forToken:auth_token andUserID:user_id]) {
         NSString* phoneNo = (NSString*)[_login_attr objectForKey:@"phoneNo"];
         [LoginToken unbindTokenInContext:_lm.doc.managedObjectContext WithPhoneNum:phoneNo];
         LoginToken* token = [LoginToken createTokenInContext:_lm.doc.managedObjectContext withUserID:user_id andAttrs:_login_attr];

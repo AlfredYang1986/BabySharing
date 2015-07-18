@@ -115,7 +115,7 @@
     
     NSInteger index = indexPath.row;
     
-    [_delegate didSelectTag:[test_tag_arr objectAtIndex:index]];
+    [_delegate didSelectTag:[final_tag_arr objectAtIndex:index]];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
