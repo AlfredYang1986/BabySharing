@@ -27,5 +27,6 @@
 - (void)resetTags:(NSString*)tags;
 
 - (NSString*)getInputName;
+- (void)endInputName;
 - (NSString*)getInputTags;
 @end

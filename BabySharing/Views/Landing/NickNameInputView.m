@@ -141,4 +141,8 @@
 - (NSString*)getInputTags {
     return tag_text_field.text;
 }
+
+- (void)endInputName {
+    [name_text_field resignFirstResponder];
+}
 @end

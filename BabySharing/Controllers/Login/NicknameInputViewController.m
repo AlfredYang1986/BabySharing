@@ -115,6 +115,7 @@
 
 - (void)didStartInputTags {
     NSLog(@"Start input tags");
+    [inputView endInputName];
     [self performSegueWithIdentifier:@"SeachRoleTags" sender:nil];
 }
 

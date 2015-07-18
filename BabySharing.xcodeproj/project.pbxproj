@@ -24,6 +24,7 @@
 		EE7EB5501B4630C0003281F7 /* MessageViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7EB54E1B4630C0003281F7 /* MessageViewCell.m */; };
 		EE7EB5511B4630C0003281F7 /* MessageViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE7EB54F1B4630C0003281F7 /* MessageViewCell.xib */; };
 		EE86D1B21B537469001C4650 /* PostEffectAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = EE86D1B11B537469001C4650 /* PostEffectAdapter.mm */; };
+		EE981F861B5A10400029723A /* LoginToken.m in Sources */ = {isa = PBXBuildFile; fileRef = EE981F851B5A10400029723A /* LoginToken.m */; };
 		EEAAC8FE1B44E81A00D05C0B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAAC8FD1B44E81A00D05C0B /* main.m */; };
 		EEAAC91B1B44E81A00D05C0B /* BabySharingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAAC91A1B44E81A00D05C0B /* BabySharingTests.m */; };
 		EEAACC9A1B44E90400D05C0B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACAF11B44E90300D05C0B /* AppDelegate.m */; };
@@ -79,7 +80,6 @@
 		EEAACCD51B44E90400D05C0B /* CurrentToken.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB7C1B44E90300D05C0B /* CurrentToken.m */; };
 		EEAACCD61B44E90400D05C0B /* LoginLocalModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB7D1B44E90300D05C0B /* LoginLocalModel.xcdatamodeld */; };
 		EEAACCD71B44E90400D05C0B /* LoginToken+ContextOpt.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB801B44E90300D05C0B /* LoginToken+ContextOpt.m */; };
-		EEAACCD81B44E90400D05C0B /* LoginToken.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB821B44E90300D05C0B /* LoginToken.m */; };
 		EEAACCD91B44E90400D05C0B /* Providers+ContextOpt.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB841B44E90300D05C0B /* Providers+ContextOpt.m */; };
 		EEAACCDA1B44E90400D05C0B /* Providers.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB861B44E90300D05C0B /* Providers.m */; };
 		EEAACCDB1B44E90400D05C0B /* RegTmpToken+ContextOpt.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB881B44E90300D05C0B /* RegTmpToken+ContextOpt.m */; };
@@ -230,6 +230,8 @@
 		EE7EB54F1B4630C0003281F7 /* MessageViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageViewCell.xib; sourceTree = "<group>"; };
 		EE86D1B01B537469001C4650 /* PostEffectAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostEffectAdapter.h; sourceTree = "<group>"; };
 		EE86D1B11B537469001C4650 /* PostEffectAdapter.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = PostEffectAdapter.mm; sourceTree = "<group>"; };
+		EE981F841B5A10400029723A /* LoginToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginToken.h; sourceTree = "<group>"; };
+		EE981F851B5A10400029723A /* LoginToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginToken.m; sourceTree = "<group>"; };
 		EEAAC8F81B44E81A00D05C0B /* BabySharing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BabySharing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEAAC8FC1B44E81A00D05C0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EEAAC8FD1B44E81A00D05C0B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -336,8 +338,6 @@
 		EEAACB7E1B44E90300D05C0B /* LoginLocalModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LoginLocalModel.xcdatamodel; sourceTree = "<group>"; };
 		EEAACB7F1B44E90300D05C0B /* LoginToken+ContextOpt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LoginToken+ContextOpt.h"; sourceTree = "<group>"; };
 		EEAACB801B44E90300D05C0B /* LoginToken+ContextOpt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "LoginToken+ContextOpt.m"; sourceTree = "<group>"; };
-		EEAACB811B44E90300D05C0B /* LoginToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginToken.h; sourceTree = "<group>"; };
-		EEAACB821B44E90300D05C0B /* LoginToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginToken.m; sourceTree = "<group>"; };
 		EEAACB831B44E90300D05C0B /* Providers+ContextOpt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Providers+ContextOpt.h"; sourceTree = "<group>"; };
 		EEAACB841B44E90300D05C0B /* Providers+ContextOpt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Providers+ContextOpt.m"; sourceTree = "<group>"; };
 		EEAACB851B44E90300D05C0B /* Providers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Providers.h; sourceTree = "<group>"; };
@@ -1070,6 +1070,8 @@
 		EEAACB781B44E90300D05C0B /* LocalModel */ = {
 			isa = PBXGroup;
 			children = (
+				EE981F841B5A10400029723A /* LoginToken.h */,
+				EE981F851B5A10400029723A /* LoginToken.m */,
 				EEAACB791B44E90300D05C0B /* CurrentToken+ContextOpt.h */,
 				EEAACB7A1B44E90300D05C0B /* CurrentToken+ContextOpt.m */,
 				EEAACB7B1B44E90300D05C0B /* CurrentToken.h */,
@@ -1077,8 +1079,6 @@
 				EEAACB7D1B44E90300D05C0B /* LoginLocalModel.xcdatamodeld */,
 				EEAACB7F1B44E90300D05C0B /* LoginToken+ContextOpt.h */,
 				EEAACB801B44E90300D05C0B /* LoginToken+ContextOpt.m */,
-				EEAACB811B44E90300D05C0B /* LoginToken.h */,
-				EEAACB821B44E90300D05C0B /* LoginToken.m */,
 				EEAACB831B44E90300D05C0B /* Providers+ContextOpt.h */,
 				EEAACB841B44E90300D05C0B /* Providers+ContextOpt.m */,
 				EEAACB851B44E90300D05C0B /* Providers.h */,
@@ -1957,6 +1957,7 @@
 				EEAACCCB1B44E90400D05C0B /* INTUInterpolationFunctions.m in Sources */,
 				EEAACCCF1B44E90400D05C0B /* Group+ContextOpt.m in Sources */,
 				EEAACD171B44E90400D05C0B /* ProfileDetailSNCell.m in Sources */,
+				EE981F861B5A10400029723A /* LoginToken.m in Sources */,
 				EEAACC9A1B44E90400D05C0B /* AppDelegate.m in Sources */,
 				EEAACCB71B44E90400D05C0B /* ChatSubGroupController.m in Sources */,
 				EEAACCE21B44E90400D05C0B /* QueryContent+ContextOpt.m in Sources */,
@@ -2009,7 +2010,6 @@
 				EEAACD0F1B44E90400D05C0B /* PhotoTagTariangleLayer.m in Sources */,
 				EEAACCA81B44E90400D05C0B /* LoginViewController.m in Sources */,
 				EEAACD561B44E90400D05C0B /* SGBaseMenu.m in Sources */,
-				EEAACCD81B44E90400D05C0B /* LoginToken.m in Sources */,
 				EEAAC8FE1B44E81A00D05C0B /* main.m in Sources */,
 				EEAACCC71B44E90400D05C0B /* WebSearchController.m in Sources */,
 				EEAACCC51B44E90400D05C0B /* UserProfileViewController.m in Sources */,

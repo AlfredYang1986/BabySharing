@@ -1,9 +1,9 @@
 //
 //  LoginToken.m
-//  YYBabyAndMother
+//  
 //
-//  Created by Alfred Yang on 25/01/2015.
-//  Copyright (c) 2015 YY. All rights reserved.
+//  Created by Alfred Yang on 18/07/2015.
+//
 //
 
 #import "LoginToken.h"
@@ -18,6 +18,7 @@
 @dynamic screen_image;
 @dynamic screen_name;
 @dynamic user_id;
+@dynamic role_tag;
 @dynamic connectWith;
 @dynamic logined;
 

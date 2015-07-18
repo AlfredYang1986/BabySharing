@@ -40,8 +40,6 @@ enum DisplaySide {
     
     BOOL isMoved;
 
-    NSDictionary* result;
-    
     CGFloat h_offset;
     CGFloat v_offset_title;
     CGFloat v_offset_input;
@@ -143,10 +141,10 @@ enum DisplaySide {
         NSLog(@"area code controller");
         // set protocol and set comfired country code
     } else if ([segue.identifier isEqualToString:@"loginSuccessSegue"]) {
-        ((NicknameInputViewController*)segue.destinationViewController).login_attr = result;
+        ((NicknameInputViewController*)segue.destinationViewController).login_attr = (NSDictionary*)sender;
         ((NicknameInputViewController*)segue.destinationViewController).lm = _lm;
     } else if ([segue.identifier isEqualToString:@"alreadyLogSegue"]) {
-        ((AlreadLogedViewController*)segue.destinationViewController).login_attr = result;
+        ((AlreadLogedViewController*)segue.destinationViewController).login_attr = (NSDictionary*)sender;
         ((AlreadLogedViewController*)segue.destinationViewController).lm = _lm;
     } else {
         _contentController = [segue destinationViewController];
@@ -290,33 +288,31 @@ enum DisplaySide {
 }
 
 - (void)didSelectNextBtn {
-//    NSString* code = [inputView getInputConfirmCode];
-//    NSString* phoneNo = [inputView getInputPhoneNumber];
-//    
-//    if (![self isValidPhoneCode:code]) {
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"input wrong phone number" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-//        [alert show];
-//        return;
-//    }
-//    
-//    RegTmpToken* token = [RegTmpToken enumRegTokenINContext:self.lm.doc.managedObjectContext WithPhoneNo:phoneNo];
-//    
-//    if (token == nil) {
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"input wrong phone number" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-//        [alert show];
-//    } else {
-//        NSDictionary* tmp =[[NSDictionary alloc]init];
-//        LoginModelConfirmResult reVal = [self.lm sendConfirrmCode:code ToPhone:phoneNo withToken:token.reg_token toResult:&tmp];
-//        result = tmp;
-//        if (reVal == LoginModelResultSuccess) {
-//            [self performSegueWithIdentifier:@"loginSuccessSegue" sender:nil];
-//            NSLog(@"login success");
-//        } else if (reVal ==LoginModelResultOthersLogin) {
-//            [self performSegueWithIdentifier:@"alreadyLogSegue" sender:nil];
-//            NSLog(@"already login by others");
-//        }
-//    }
-    [self performSegueWithIdentifier:@"alreadyLogSegue" sender:nil];
+    NSString* code = [inputView getInputConfirmCode];
+    NSString* phoneNo = [inputView getInputPhoneNumber];
+    
+    if (![self isValidPhoneCode:code]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"input wrong phone number" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
+    RegTmpToken* token = [RegTmpToken enumRegTokenINContext:self.lm.doc.managedObjectContext WithPhoneNo:phoneNo];
+    
+    if (token == nil) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"input wrong phone number" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+        [alert show];
+    } else {
+        NSDictionary* tmp =[[NSDictionary alloc]init];
+        LoginModelConfirmResult reVal = [self.lm sendConfirrmCode:code ToPhone:phoneNo withToken:token.reg_token toResult:&tmp];
+        if (reVal == LoginModelResultSuccess) {
+            [self performSegueWithIdentifier:@"loginSuccessSegue" sender:tmp];
+            NSLog(@"login success");
+        } else if (reVal ==LoginModelResultOthersLogin) {
+            [self performSegueWithIdentifier:@"alreadyLogSegue" sender:tmp];
+            NSLog(@"already login by others");
+        }
+    }
 }
 
 - (void)didStartEditing {

@@ -1,9 +1,9 @@
 //
 //  LoginToken.h
-//  YYBabyAndMother
+//  
 //
-//  Created by Alfred Yang on 25/01/2015.
-//  Copyright (c) 2015 YY. All rights reserved.
+//  Created by Alfred Yang on 18/07/2015.
+//
 //
 
 #import <Foundation/Foundation.h>
@@ -18,6 +18,7 @@
 @property (nonatomic, retain) NSString * screen_image;
 @property (nonatomic, retain) NSString * screen_name;
 @property (nonatomic, retain) NSString * user_id;
+@property (nonatomic, retain) NSString * role_tag;
 @property (nonatomic, retain) NSSet *connectWith;
 @property (nonatomic, retain) CurrentToken *logined;
 @end

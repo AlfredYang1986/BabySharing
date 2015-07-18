@@ -90,6 +90,8 @@
             tmp.screen_image = [dic objectForKey:iter];
         } else if ([iter isEqualToString:@"connectWith"]) {
             tmp.connectWith = [dic objectForKey:iter];
+        } else if ([iter isEqualToString:@"role_tag"]) {
+            tmp.role_tag = [dic objectForKey:iter];
         } else if ([iter isEqualToString:@"user_id"]) {
             if (tmp.user_id == nil) {
                 tmp.user_id = [dic objectForKey:iter];

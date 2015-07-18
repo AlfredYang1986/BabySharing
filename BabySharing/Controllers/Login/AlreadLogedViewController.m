@@ -29,8 +29,6 @@
 @synthesize yesBtn = _yesBtn;
 @synthesize noBtn = _noBtn;
 
-@synthesize login_dic = _login_dic;
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -50,7 +48,11 @@
     /**
      * add under line for nick name label
      */
-    NSMutableAttributedString *content = [[NSMutableAttributedString alloc] initWithString:_nickNameLabel.text];
+    NSString* name = [_login_attr objectForKey:@"screen_name"];
+    if ([name isEqualToString:@""]) {
+        name = [_login_attr objectForKey:@"phoneNo"];
+    }
+    NSMutableAttributedString *content = [[NSMutableAttributedString alloc] initWithString:name];
     NSRange contentRange = {0, [content length]};
     [content addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:contentRange];
     
@@ -60,6 +62,11 @@
     /**
      * border for role tags
      */
+    NSString* tag =[_login_attr objectForKey:@"role_tag"];
+    if ([tag isEqualToString:@""]) {
+        tag = @"请添加一个标签";
+    }
+    _currentTagLabel.text = tag;
     _currentTagLabel.layer.borderWidth = 1.f;
     _currentTagLabel.layer.borderColor = [UIColor blueColor].CGColor;
     _currentTagLabel.layer.cornerRadius = 4.f;
@@ -119,14 +126,13 @@
 - (IBAction)didSelectCreateNewAccount {
     NSDictionary* tmp = [[NSDictionary alloc]init];
     if ([_lm sendCreateNewUserWithPhone:[_login_attr objectForKey:@"phoneNo"] toResult:&tmp]) {
-        _login_attr = tmp;
-        [self performSegueWithIdentifier:@"bindNewAccountSegue" sender:nil];
+        [self performSegueWithIdentifier:@"bindNewAccountSegue" sender:tmp];
     }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"bindNewAccountSegue"]){
-        ((NicknameInputViewController*)segue.destinationViewController).login_attr = _login_attr;
+        ((NicknameInputViewController*)segue.destinationViewController).login_attr = (NSDictionary*)sender;
         ((NicknameInputViewController*)segue.destinationViewController).lm = _lm;
     }
 }

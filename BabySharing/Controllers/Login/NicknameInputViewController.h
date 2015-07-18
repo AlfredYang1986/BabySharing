@@ -11,7 +11,6 @@
 
 @interface NicknameInputViewController : UIViewController
 
-
 @property (nonatomic, weak) LoginModel* lm;
-@property (nonatomic, weak) NSDictionary* login_attr;
+@property (nonatomic, strong) NSDictionary* login_attr;
 @end
