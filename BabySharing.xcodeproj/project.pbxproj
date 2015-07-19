@@ -23,6 +23,7 @@
 		EE7415C91B5B7097002CA1BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE7415C61B5B7097002CA1BC /* Main.storyboard */; };
 		EE7415CC1B5B70D5002CA1BC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EE7415CE1B5B70D5002CA1BC /* InfoPlist.strings */; };
 		EE7415D21B5B7215002CA1BC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EE7415D41B5B7215002CA1BC /* Localizable.strings */; };
+		EE7415D71B5B7740002CA1BC /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = EE7415D61B5B7740002CA1BC /* icon.png */; };
 		EE7951971B45065200CC28A2 /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EE7951961B45065200CC28A2 /* libGPUImage.a */; };
 		EE7EB54B1B4628D9003281F7 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7EB54A1B4628D9003281F7 /* MessageViewController.m */; };
 		EE7EB5501B4630C0003281F7 /* MessageViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7EB54E1B4630C0003281F7 /* MessageViewCell.m */; };
@@ -232,6 +233,7 @@
 		EE7415CF1B5B70D9002CA1BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EE7415D31B5B7215002CA1BC /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		EE7415D51B5B7217002CA1BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		EE7415D61B5B7740002CA1BC /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		EE7951961B45065200CC28A2 /* libGPUImage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGPUImage.a; path = GPUImage.framework/libGPUImage.a; sourceTree = "<group>"; };
 		EE7EB5491B4628D9003281F7 /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
 		EE7EB54A1B4628D9003281F7 /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
@@ -763,6 +765,7 @@
 		EEAAC8FB1B44E81A00D05C0B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				EE7415D61B5B7740002CA1BC /* icon.png */,
 				EEAACD5A1B44E91A00D05C0B /* YYBoundle.bundle */,
 				EEAAC8FC1B44E81A00D05C0B /* Info.plist */,
 				EEAAC8FD1B44E81A00D05C0B /* main.m */,
@@ -1912,6 +1915,7 @@
 				EEAACD051B44E90400D05C0B /* QueryDescriptionCell.xib in Resources */,
 				EE7415C81B5B7097002CA1BC /* LaunchScreen.xib in Resources */,
 				EEAACD491B44E90400D05C0B /* ProfileDetailLocationCell.xib in Resources */,
+				EE7415D71B5B7740002CA1BC /* icon.png in Resources */,
 				EEAACD5B1B44E91A00D05C0B /* YYBoundle.bundle in Resources */,
 				EEAACD2B1B44E90400D05C0B /* ChatViewOwnerCell.xib in Resources */,
 				EEAACCC21B44E90400D05C0B /* ProfileDetailNib.storyboard in Resources */,
