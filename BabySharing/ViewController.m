@@ -19,8 +19,9 @@
 #import "AlreadLogedViewController.h"
 
 #import "LoginInputView.h"
+#import "ChooseAreaViewController.h"
 
-@interface ViewController ()
+@interface ViewController () <LoginInputViewDelegate, AreaViewControllerDelegate>
 
 @property (nonatomic, weak) LoginModel* lm;
 @property (nonatomic, weak) UIViewController* loginController;
@@ -51,15 +52,9 @@ enum DisplaySide {
    
     /**********************************************/
     UILabel * title;                // title
-
-//    UILabel * slogan_00;            // slogan
-//    UIImage * bgImg_00;
-//    UILabel * slogan_01;
-//    UIImage * bgImg_01;
-//    UILabel * slogan_02;
-//    UIImage * bgImg_02;
     
     LoginInputView* inputView;
+    BOOL isSNSLogin;
 }
 
 @synthesize lm = _lm;
@@ -77,6 +72,8 @@ enum DisplaySide {
     _lm = del.lm;
    
     [self createSubviews];
+   
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(SNSLogedIn:) name:@"SNS login success" object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogedIn:) name:@"login success" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appIsReady:) name:@"app ready" object:nil];
@@ -89,6 +86,8 @@ enum DisplaySide {
    
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
     [self.view addGestureRecognizer:pan];
+    
+    isSNSLogin = NO;
 }
 
 - (void)createSubviews {
@@ -139,10 +138,15 @@ enum DisplaySide {
 //        ((LoginViewController*)((UINavigationController*)[segue destinationViewController]).childViewControllers[0]).lm = self.lm;
     } else if ([segue.identifier isEqualToString:@"areaCode"]) {
         NSLog(@"area code controller");
+        ((ChooseAreaViewController*)segue.destinationViewController).delegate = self;
         // set protocol and set comfired country code
+    } else if ([segue.identifier isEqualToString:@"UserPrivacy"]) {
+        // do nothing ....
+        
     } else if ([segue.identifier isEqualToString:@"loginSuccessSegue"]) {
         ((NicknameInputViewController*)segue.destinationViewController).login_attr = (NSDictionary*)sender;
         ((NicknameInputViewController*)segue.destinationViewController).lm = _lm;
+        ((NicknameInputViewController*)segue.destinationViewController).isSNSLogIn = isSNSLogin;
     } else if ([segue.identifier isEqualToString:@"alreadyLogSegue"]) {
         ((AlreadLogedViewController*)segue.destinationViewController).login_attr = (NSDictionary*)sender;
         ((AlreadLogedViewController*)segue.destinationViewController).lm = _lm;
@@ -154,8 +158,21 @@ enum DisplaySide {
     }
 }
 
+- (void)SNSLogedIn:(id)sender {
+    NSLog(@"SNS login success");
+    if ([_lm isLoginedByUser]) {
+        isSNSLogin = YES;
+        [self performSegueWithIdentifier:@"loginSuccessSegue" sender:[_lm getCurrentUserAttr]];
+    
+    } else {
+        // ERROR
+        NSLog(@"something error with SNS login");
+    }
+}
+
 - (void)userLogedIn:(id)sender {
     NSLog(@"login success");
+    isSNSLogin = NO;
     AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
     [app registerDeviceTokenWithCurrentUser];
     
@@ -324,4 +341,14 @@ enum DisplaySide {
 - (void)didEndEditing {
     [self moveView:210];
 }
+
+- (void)didSelectUserPrivacyBtn {
+    [self performSegueWithIdentifier:@"UserPrivacy" sender:nil];
+}
+
+#pragma mark -- choose area controller delegate
+- (void)didSelectArea:(NSString*)code {
+    [inputView setAreaCode:code];
+}
+
 @end

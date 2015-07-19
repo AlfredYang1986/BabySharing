@@ -8,25 +8,10 @@
 
 #import "ChooseAreaViewController.h"
 #import "LoginViewController.h"
+#import "AreaTableCell.h"
 
-@implementation AreaNode
-
-@synthesize areaCode = _areaCode;
-@synthesize areaName = _areaName;
-
-- (id)initWithAreaName:(NSString*)name andAreaCode:(NSString*)code {
-    self = [super init];
-    if (self != nil) {
-        _areaName = name;
-        _areaCode = code;
-    }
-    return self;
-}
-@end
-
-@interface ChooseAreaViewController () {
+@interface ChooseAreaViewController () <UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate> {
     NSArray* arr;
-    NSString* filter;
     NSArray* filter_arr;
 }
 
@@ -35,22 +20,32 @@
 @implementation ChooseAreaViewController
 
 @synthesize areaTableView = _areaTableView;
+@synthesize areaSearchBar = _areaSearchBar;
+@synthesize delegate = _delegate;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.navigationController setNavigationBarHidden:NO animated:NO];
-    arr = [[NSArray alloc] initWithObjects:
-           [[AreaNode alloc] initWithAreaName:@"China" andAreaCode:@"+86"],
-           [[AreaNode alloc] initWithAreaName:@"USA" andAreaCode:@"+01"],
-           [[AreaNode alloc] initWithAreaName:@"CAD" andAreaCode:@"+01"],
-           [[AreaNode alloc] initWithAreaName:@"AU" andAreaCode:@"+61"],
-           nil];
+//    arr = [[NSArray alloc] initWithObjects:
+//           [[AreaNode alloc] initWithAreaName:@"China" andAreaCode:@"+86"],
+//           [[AreaNode alloc] initWithAreaName:@"USA" andAreaCode:@"+01"],
+//           [[AreaNode alloc] initWithAreaName:@"CAD" andAreaCode:@"+01"],
+//           [[AreaNode alloc] initWithAreaName:@"AU" andAreaCode:@"+61"],
+//           nil];
+//    
+//    NSSortDescriptor* ordering = [[NSSortDescriptor alloc]initWithKey:@"areaCode" ascending:YES];
+//    arr = [arr sortedArrayUsingDescriptors: [NSArray arrayWithObject: ordering]];
     
-    NSSortDescriptor* ordering = [[NSSortDescriptor alloc]initWithKey:@"areaCode" ascending:YES];
-    arr = [arr sortedArrayUsingDescriptors: [NSArray arrayWithObject: ordering]];
+    NSString *areaPath = [[NSBundle mainBundle] pathForResource:@"AreaCodeJson" ofType:@"txt"];
+    NSData *data = [NSData dataWithContentsOfFile:areaPath];
+    NSError* error;
+    NSDictionary* dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves | NSJSONReadingMutableContainers error:&error];
+    
+    arr = [dic objectForKey:@"Area"];
     filter_arr = arr;
-    filter = @"";
+    
+    [_areaTableView registerNib:[UINib nibWithNibName:@"AreaTableCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"Area Table Cell"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -75,25 +70,29 @@
 */
 
 #pragma mark -- table view datasource
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"default"];
+    AreaTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Area Table Cell"];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"default"];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell = [[AreaTableCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Area Table Cell"];
+    }
+  
+    NSArray *languages = [NSLocale preferredLanguages];
+    NSString *currentLanguage = [languages objectAtIndex:0];
+    
+    NSDictionary* cur = [filter_arr objectAtIndex:indexPath.row];
+    NSString* cur_name;
+    if ([currentLanguage isEqualToString:@"zh-Hans"]) {
+        cur_name = [cur objectForKey:@"cn"];
+    } else {
+        cur_name = [cur objectForKey:@"en"];
     }
    
-    NSString* cur_name = ((AreaNode*)[filter_arr objectAtIndex:indexPath.row]).areaName;
-    NSString* cur_code = ((AreaNode*)[filter_arr objectAtIndex:indexPath.row]).areaCode;
-    
-    NSString* show_name = [cur_name stringByAppendingString:@"    "];
-    show_name = [show_name stringByAppendingString: cur_code];
-    cell.textLabel.text = show_name;
-    //    NSString *path = [[NSBundle mainBundle] pathForResource:[item objectForKey:@"imageKey"] ofType:@"png"];
-    //    UIImage *theImage = [UIImage imageWithContentsOfFile:path];
-    //    cell.imageView.image = theImage;
+    NSString* cur_code = [cur objectForKey:@"code"];
+   
+    cell.countryLabel.text = cur_name;
+    cell.codeLabel.text = cur_code;
     
     return cell;
 }
@@ -103,39 +102,58 @@
 }
 
 #pragma mark -- table view delegate
-
-- (void)confirmSelectAreaCode:(NSString*)select {
-    NSArray* controllers = ((UINavigationController*)self.navigationController).viewControllers;
-    for (UIViewController* contorller in controllers) {
-        if ([contorller isKindOfClass:[LoginViewController class]]) {
-            ((LoginViewController*)contorller).areaCodeSelected = select;
-            break;
-        }
-    }
-}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    AreaNode* node = [filter_arr objectAtIndex: indexPath.row];
-    [self confirmSelectAreaCode:[NSString stringWithFormat:@"(%@)", node.areaCode]];
+    NSDictionary* item = [filter_arr objectAtIndex:indexPath.row];
+    [_delegate didSelectArea:[item objectForKey:@"code"]];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+//    sleep(0.5);
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-#pragma mark -- text filed delegate
-
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+#pragma mark -- search bar delegate
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     
-    NSString* final_string = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    NSLog(@"%@", final_string);
-    NSLog(@"%@", textField.text);
-    NSLog(@"%@", string);
-    if ([final_string isEqualToString:@""]) {
+    if ([searchText isEqualToString:@""]) {
         filter_arr = arr;
+        [_areaTableView reloadData];
+        return;
+    }
+    
+    NSString* regex = @"[^x00-xff]+";
+    NSPredicate* p = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    
+    
+    if ([p evaluateWithObject:searchText]) {
+
+        NSString *regex2 = [NSString stringWithFormat:@"^[%@]\\w*", searchText];
+        NSPredicate* p2 = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex2];
+       
+        NSMutableArray* tmp = [[NSMutableArray alloc]init];
+        for (NSDictionary* iter in arr) {
+            if ([p2 evaluateWithObject:[iter objectForKey:@"cn"]]) {
+                [tmp addObject:iter];
+            }
+        }
+        filter_arr = [tmp copy];
     } else {
-        NSPredicate* predicate = [NSPredicate predicateWithFormat: @"SELF.areaName contains[c] %@", final_string];
-        filter_arr = [arr filteredArrayUsingPredicate:predicate];
+        
+        NSString *regex2 = [NSString stringWithFormat:@"^%@\\w*", [searchText lowercaseString]];
+        NSPredicate* p2 = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex2];
+       
+        NSMutableArray* tmp = [[NSMutableArray alloc]init];
+        for (NSDictionary* iter in arr) {
+            if ([p2 evaluateWithObject:[(NSString*)[iter objectForKey:@"en"] lowercaseString]]) {
+                [tmp addObject:iter];
+            }
+        }
+        filter_arr = [tmp copy];
     }
     [_areaTableView reloadData];
-    
-    return YES;
 }
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [searchBar resignFirstResponder];
+}
+
 @end

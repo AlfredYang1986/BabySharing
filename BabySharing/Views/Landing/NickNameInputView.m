@@ -16,6 +16,8 @@
 @implementation NickNameInputView {
     UITextField* name_text_field;
     UITextField* tag_text_field;
+    
+    BOOL isSNSLogin;
 }
 
 @synthesize delegate = _delegate;
@@ -28,10 +30,10 @@
 }
 */
 
-- (id)init {
+- (id)initWithSNSLogin:(BOOL)sns_login {
     self = [super init];
     if (self) {
-//        self.backgroundColor = [UIColor greenColor];
+        isSNSLogin = sns_login;
         [self setUpViews];
     }
     return self;
@@ -52,16 +54,23 @@
     UIImage* img_2 = [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Female"] ofType:@"png"]];
     
     CGFloat width = [UIScreen mainScreen].bounds.size.width * 0.6;
-    name_text_field = [[UITextField alloc]init];
-    name_text_field.delegate = self;
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(phoneTextFieldChanged:) name:UITextFieldTextDidChangeNotification object:name_text_field];
-    [self addSubview:[self inputLineWithImage:img_0 andPlaceHolder:@"为你的咚哒起个名字" andInjectView:name_text_field inRect:CGRectMake(0, 0, width, MARGIN + IMG_HEIGHT) isNeedUnderLine:YES]];
     
-    tag_text_field = [[UITextField alloc]init];
-    tag_text_field.delegate = self;
-    [self addSubview:[self inputLineWithImage:img_1 andPlaceHolder:@"添加你的角色" andInjectView:tag_text_field inRect:CGRectMake(0, MARGIN + IMG_HEIGHT, width, MARGIN + IMG_HEIGHT) isNeedUnderLine:YES]];
-    [self addSubview:[self inputLineWithImage:img_2 andPlaceHolder:@"只为妈咪" andInjectView:[[UILabel alloc]init] inRect:CGRectMake(0, 2 * (MARGIN + IMG_HEIGHT), width, MARGIN + IMG_HEIGHT) isNeedUnderLine:NO]];
-    [self addSubview:[self inputLineWithImage:nil andPlaceHolder:@"爸比暂时靠边站" andInjectView:[[UILabel alloc]init] inRect:CGRectMake(0, 3 * (MARGIN + IMG_HEIGHT), width, MARGIN + IMG_HEIGHT) isNeedUnderLine:NO]];
+    if (isSNSLogin) {
+        tag_text_field = [[UITextField alloc]init];
+        tag_text_field.delegate = self;
+        [self addSubview:[self inputLineWithImage:img_1 andPlaceHolder:@"添加你的角色" andInjectView:tag_text_field inRect:CGRectMake(0, MARGIN + IMG_HEIGHT, width, MARGIN + IMG_HEIGHT) isNeedUnderLine:YES]];
+    } else {
+        name_text_field = [[UITextField alloc]init];
+        name_text_field.delegate = self;
+        
+        [self addSubview:[self inputLineWithImage:img_0 andPlaceHolder:@"为你的咚哒起个名字" andInjectView:name_text_field inRect:CGRectMake(0, 0, width, MARGIN + IMG_HEIGHT) isNeedUnderLine:YES]];
+        
+        tag_text_field = [[UITextField alloc]init];
+        tag_text_field.delegate = self;
+        [self addSubview:[self inputLineWithImage:img_1 andPlaceHolder:@"添加你的角色" andInjectView:tag_text_field inRect:CGRectMake(0, MARGIN + IMG_HEIGHT, width, MARGIN + IMG_HEIGHT) isNeedUnderLine:YES]];
+        [self addSubview:[self inputLineWithImage:img_2 andPlaceHolder:@"只为妈咪" andInjectView:[[UILabel alloc]init] inRect:CGRectMake(0, 2 * (MARGIN + IMG_HEIGHT), width, MARGIN + IMG_HEIGHT) isNeedUnderLine:NO]];
+        [self addSubview:[self inputLineWithImage:nil andPlaceHolder:@"爸比暂时靠边站" andInjectView:[[UILabel alloc]init] inRect:CGRectMake(0, 3 * (MARGIN + IMG_HEIGHT), width, MARGIN + IMG_HEIGHT) isNeedUnderLine:NO]];
+    }
 }
 
 - (UIView*)inputLineWithImage:(UIImage*)img andPlaceHolder:(NSString*)place_holder andInjectView:(UIView*)inject_view inRect:(CGRect)rc isNeedUnderLine:(BOOL)bUnderLine {

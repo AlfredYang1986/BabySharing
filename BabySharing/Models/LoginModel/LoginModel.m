@@ -358,7 +358,7 @@
              */
             [_doc.managedObjectContext save:nil];
             NSLog(@"end get user info from weibo");
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"login success" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"SNS login success" object:nil];
         }
     }];
 }
@@ -376,6 +376,11 @@
 - (CurrentToken*)getCurrentUser {
     _current_user = [CurrentToken enumCurrentLoginUserInContext:_doc.managedObjectContext];
     return _current_user;
+}
+
+- (NSDictionary*)getCurrentUserAttr {
+    CurrentToken* cur = [CurrentToken enumCurrentLoginUserInContext:_doc.managedObjectContext];
+    return [LoginToken userToken2Attr:cur.who];
 }
 
 - (void)signOutCurrentUser {

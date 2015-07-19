@@ -52,7 +52,7 @@
 
     UIFont* font = [UIFont systemFontOfSize:19.f];
     CGSize phone_area_size = [@"888 888 88888" sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
-    CGSize area_code_size = [@"+86" sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
+    CGSize area_code_size = [@"+8888" sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
     CGSize confirm_btn_size = [@"发送验证码" sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
     CGSize user_private_btn_size = [@"用户协议" sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
    
@@ -171,6 +171,7 @@
     user_private_btn.titleLabel.font = [UIFont systemFontOfSize:15.f];
     [user_private_btn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [user_private_btn setTitle:@"用户协议" forState:UIControlStateNormal];
+    [user_private_btn addTarget:self action:@selector(userPrivacyBtnSelected) forControlEvents:UIControlEventTouchDown];
     [self addSubview:user_private_btn];
     
     CGFloat height = fifth_line_ver_line + user_private_btn_size.height + BASICMARGIN;
@@ -234,6 +235,10 @@
     return confirm_area.text;
 }
 
+- (void)userPrivacyBtnSelected {
+    [_delegate didSelectUserPrivacyBtn];
+}
+
 - (void)sendConfirmCodeRequestSuccess {
     seconds = 60;
     confirm_btn.enabled = NO;
@@ -268,5 +273,9 @@
 
 - (BOOL)isEditing {
     return confirm_area.isEditing || phone_area.isEditing;
+}
+
+- (void)setAreaCode:(NSString*)code {
+    [area_code_btn setTitle:[@"+" stringByAppendingString:code] forState:UIControlStateNormal];
 }
 @end

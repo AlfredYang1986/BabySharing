@@ -61,6 +61,7 @@ typedef NS_ENUM(NSInteger, LoginModelConnectSNResult) {
 
 - (void)setCurrentUser:(LoginToken*)token;
 - (CurrentToken*)getCurrentUser;
+- (NSDictionary*)getCurrentUserAttr;
 - (void)signOutCurrentUser;
 
 - (NSString*)getCurrentUserID;

@@ -24,6 +24,10 @@
 		EE7415CC1B5B70D5002CA1BC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EE7415CE1B5B70D5002CA1BC /* InfoPlist.strings */; };
 		EE7415D21B5B7215002CA1BC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EE7415D41B5B7215002CA1BC /* Localizable.strings */; };
 		EE7415D71B5B7740002CA1BC /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = EE7415D61B5B7740002CA1BC /* icon.png */; };
+		EE7416261B5B8CDF002CA1BC /* AreaCodeJson.txt in Resources */ = {isa = PBXBuildFile; fileRef = EE7416251B5B8CDF002CA1BC /* AreaCodeJson.txt */; };
+		EE74162A1B5B9659002CA1BC /* AreaTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7416281B5B9659002CA1BC /* AreaTableCell.m */; };
+		EE74162B1B5B9659002CA1BC /* AreaTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE7416291B5B9659002CA1BC /* AreaTableCell.xib */; };
+		EE74162E1B5BA6F7002CA1BC /* UserPrivacyController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE74162D1B5BA6F7002CA1BC /* UserPrivacyController.m */; };
 		EE7951971B45065200CC28A2 /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EE7951961B45065200CC28A2 /* libGPUImage.a */; };
 		EE7EB54B1B4628D9003281F7 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7EB54A1B4628D9003281F7 /* MessageViewController.m */; };
 		EE7EB5501B4630C0003281F7 /* MessageViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7EB54E1B4630C0003281F7 /* MessageViewCell.m */; };
@@ -234,6 +238,12 @@
 		EE7415D31B5B7215002CA1BC /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		EE7415D51B5B7217002CA1BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		EE7415D61B5B7740002CA1BC /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		EE7416251B5B8CDF002CA1BC /* AreaCodeJson.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AreaCodeJson.txt; sourceTree = "<group>"; };
+		EE7416271B5B9659002CA1BC /* AreaTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AreaTableCell.h; sourceTree = "<group>"; };
+		EE7416281B5B9659002CA1BC /* AreaTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AreaTableCell.m; sourceTree = "<group>"; };
+		EE7416291B5B9659002CA1BC /* AreaTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AreaTableCell.xib; sourceTree = "<group>"; };
+		EE74162C1B5BA6F7002CA1BC /* UserPrivacyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserPrivacyController.h; sourceTree = "<group>"; };
+		EE74162D1B5BA6F7002CA1BC /* UserPrivacyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserPrivacyController.m; sourceTree = "<group>"; };
 		EE7951961B45065200CC28A2 /* libGPUImage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGPUImage.a; path = GPUImage.framework/libGPUImage.a; sourceTree = "<group>"; };
 		EE7EB5491B4628D9003281F7 /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
 		EE7EB54A1B4628D9003281F7 /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
@@ -765,6 +775,7 @@
 		EEAAC8FB1B44E81A00D05C0B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				EE7416251B5B8CDF002CA1BC /* AreaCodeJson.txt */,
 				EE7415D61B5B7740002CA1BC /* icon.png */,
 				EEAACD5A1B44E91A00D05C0B /* YYBoundle.bundle */,
 				EEAAC8FC1B44E81A00D05C0B /* Info.plist */,
@@ -853,6 +864,8 @@
 				EEAACB131B44E90300D05C0B /* PhoneInputViewController.m */,
 				EE59A7731B5936170014F9C3 /* SearchUserTagsController.h */,
 				EE59A7741B5936170014F9C3 /* SearchUserTagsController.m */,
+				EE74162C1B5BA6F7002CA1BC /* UserPrivacyController.h */,
+				EE74162D1B5BA6F7002CA1BC /* UserPrivacyController.m */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -1818,6 +1831,9 @@
 				EEFD6F511B4E452D008AC4F5 /* SloganView.m */,
 				EEFA44FC1B58F7D4007DF294 /* NickNameInputView.h */,
 				EEFA44FD1B58F7D4007DF294 /* NickNameInputView.m */,
+				EE7416271B5B9659002CA1BC /* AreaTableCell.h */,
+				EE7416281B5B9659002CA1BC /* AreaTableCell.m */,
+				EE7416291B5B9659002CA1BC /* AreaTableCell.xib */,
 			);
 			path = Landing;
 			sourceTree = "<group>";
@@ -1906,6 +1922,7 @@
 				EE7EB5511B4630C0003281F7 /* MessageViewCell.xib in Resources */,
 				EEAACD741B44EA2D00D05C0B /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				EEAACD471B44E90400D05C0B /* ProfileDetailChatGroupCell.xib in Resources */,
+				EE7416261B5B8CDF002CA1BC /* AreaCodeJson.txt in Resources */,
 				EEAACD301B44E90400D05C0B /* CommentsHeaderAndFooterCell.xib in Resources */,
 				EEAACD341B44E90400D05C0B /* QueryCommentsCell.xib in Resources */,
 				EE7415CC1B5B70D5002CA1BC /* InfoPlist.strings in Resources */,
@@ -1929,6 +1946,7 @@
 				EEAACD071B44E90400D05C0B /* FoundPCGCell.xib in Resources */,
 				EEAACD381B44E90400D05C0B /* QueryOwnerCell.xib in Resources */,
 				EE7415D21B5B7215002CA1BC /* Localizable.strings in Resources */,
+				EE74162B1B5B9659002CA1BC /* AreaTableCell.xib in Resources */,
 				EE2D4B791B525E0A00B58A1F /* PostPreView.storyboard in Resources */,
 				EEAACCB41B44E90400D05C0B /* SecretNib.storyboard in Resources */,
 				EEAACD3E1B44E90400D05C0B /* QueryCell.xib in Resources */,
@@ -2031,6 +2049,7 @@
 				EE2D4B7F1B525E0A00B58A1F /* PhotoPublishController.m in Sources */,
 				EEAACD431B44E90400D05C0B /* PhotoTagRoundPointLayer.m in Sources */,
 				EE2D4B7B1B525E0A00B58A1F /* PhotoAddTagController.m in Sources */,
+				EE74162E1B5BA6F7002CA1BC /* UserPrivacyController.m in Sources */,
 				EEAACD2E1B44E90400D05C0B /* DropDownView.m in Sources */,
 				EEAACCD11B44E90400D05C0B /* Messages+ContextOpt.m in Sources */,
 				EE86D1B21B537469001C4650 /* PostEffectAdapter.mm in Sources */,
@@ -2047,6 +2066,7 @@
 				EEAACCE41B44E90400D05C0B /* QueryContentItem.m in Sources */,
 				EEAACD241B44E90400D05C0B /* TagQueryCell.m in Sources */,
 				EEAACCDF1B44E90400D05C0B /* MessageModel.m in Sources */,
+				EE74162A1B5B9659002CA1BC /* AreaTableCell.m in Sources */,
 				EEAACCE91B44E90400D05C0B /* QueryModel.m in Sources */,
 				EEAACCCE1B44E90400D05C0B /* ChatGroup.xcdatamodeld in Sources */,
 				EEFD6F4F1B4E44C1008AC4F5 /* LoginInputView.m in Sources */,

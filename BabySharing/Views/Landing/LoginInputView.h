@@ -22,6 +22,9 @@
 - (void)didSelectQQBtn;
 - (void)didSelectWeiboBtn;
 - (void)didSelectWechatBtn;
+
+#pragma mark -- user privacy actions
+- (void)didSelectUserPrivacyBtn;
 @end
 
 @interface LoginInputView : UIView <UITextFieldDelegate>
@@ -37,4 +40,6 @@
 - (void)endEditing;
 
 - (BOOL)isEditing;
+
+- (void)setAreaCode:(NSString*)code;
 @end

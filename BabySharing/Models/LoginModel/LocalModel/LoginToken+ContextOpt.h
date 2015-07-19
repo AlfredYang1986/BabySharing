@@ -25,4 +25,7 @@
 + (void)removeTokenInContext:(NSManagedObjectContext*)context withUserID:(NSString*)user_id;
 + (BOOL)updataLoginUserInContext:(NSManagedObjectContext*)context withUserID:(NSString*)user_id andAttrs:(NSDictionary*)dic;
 + (LoginToken*)enumLoginUserInContext:(NSManagedObjectContext*)context withUserID:(NSString*)user_id;
+
+#pragma mark -- user attr
++ (NSDictionary*)userToken2Attr:(LoginToken*)user;
 @end

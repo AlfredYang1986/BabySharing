@@ -73,6 +73,20 @@
     }
 }
 
+#pragma mark -- user attr
++ (NSDictionary*)userToken2Attr:(LoginToken*)user {
+    NSMutableDictionary* reVal = [[NSMutableDictionary alloc]init];
+   
+    [reVal setValue:user.user_id forKey:@"user_id"];
+    [reVal setValue:user.auth_token forKey:@"auth_token"];
+    [reVal setValue:user.phoneNo forKey:@"phoneNo"];
+    [reVal setValue:user.screen_name forKey:@"name"];
+    [reVal setValue:user.screen_image forKey:@"screen_photo"];
+    [reVal setValue:user.role_tag forKey:@"role_tag"];
+    
+    return [reVal copy];
+}
+
 #pragma mark -- operation with user id (primary key)
 + (void)handlerAttrInLoginToken:(LoginToken*)tmp withAttrs:(NSDictionary*)dic {
     NSEnumerator* enumerator = dic.keyEnumerator;

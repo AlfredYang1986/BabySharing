@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "LoginInputView.h"
 
-@interface ViewController : UIViewController <LoginInputViewDelegate>
+@interface ViewController : UIViewController
 //@property (weak, nonatomic) IBOutlet UIButton *entryButton;
 
 @end

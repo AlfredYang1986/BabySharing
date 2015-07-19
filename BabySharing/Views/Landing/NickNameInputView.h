@@ -21,7 +21,7 @@
 
 @property (nonatomic, weak) id<NickNameInputViewDelegate> delegate;
 
-- (id)init;
+- (id)initWithSNSLogin:(BOOL)sns_login;
 - (CGSize)getPreferredBounds;
 
 - (void)resetTags:(NSString*)tags;

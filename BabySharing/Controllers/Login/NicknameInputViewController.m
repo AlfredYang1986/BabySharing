@@ -28,27 +28,32 @@
 
 @synthesize lm = _lm;
 @synthesize login_attr = _login_attr;
+@synthesize isSNSLogIn = _isSNSLogIn;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.navigationController setNavigationBarHidden:NO animated:NO];
     
-    inputView = [[NickNameInputView alloc]init];
+    inputView = [[NickNameInputView alloc]initWithSNSLogin:_isSNSLogIn];
     CGSize s = [inputView getPreferredBounds];
     inputView.bounds = CGRectMake(0, 0, s.width, s.height);
     inputView.delegate = self;
     
     [self.view addSubview:inputView];
    
-    
-    _loginImgBtn.clipsToBounds = YES;
-    
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
-    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-    UIImage* img = [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Plus_Big"] ofType:@"png"]];
-    [_loginImgBtn setBackgroundImage:img forState:UIControlStateNormal];
-    _loginImgBtn.backgroundColor = [UIColor clearColor];
+    if (_isSNSLogIn) {
+        _loginImgBtn.hidden = YES;
+    } else {
+         _loginImgBtn.clipsToBounds = YES;
+        
+        NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+        NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+        UIImage* img = [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Plus_Big"] ofType:@"png"]];
+        [_loginImgBtn setBackgroundImage:img forState:UIControlStateNormal];
+        _loginImgBtn.backgroundColor = [UIColor clearColor];
+        _loginImgBtn.layer.cornerRadius = _loginImgBtn.frame.size.width / 2;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -68,8 +73,6 @@
     CGFloat width = [UIScreen mainScreen].bounds.size.width / 2;
     CGFloat height = [UIScreen mainScreen].bounds.size.height / 2 + inputView.bounds.size.height / 2;
     inputView.center = CGPointMake(width, height);
-
-    _loginImgBtn.layer.cornerRadius = _loginImgBtn.frame.size.width / 2;
 }
 
 /*
@@ -84,15 +87,22 @@
 
 - (IBAction)didConfirm {
 
+    
     NSString* auth_token = [_login_attr objectForKey:@"auth_token"];
     NSString* user_id = [_login_attr objectForKey:@"user_id"];
     
     NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
-    [dic setValue:[inputView getInputName] forKey:@"screen_name"];
-    [dic setValue:[inputView getInputTags] forKey:@"role_tag"];
+    
+    if (_isSNSLogIn) {
+        [dic setValue:[inputView getInputTags] forKey:@"role_tag"];
+    } else {
+        [dic setValue:[inputView getInputName] forKey:@"screen_name"];
+        [dic setValue:[inputView getInputTags] forKey:@"role_tag"];
+    }
 
     [dic setValue:auth_token forKey:@"auth_token"];
     [dic setValue:user_id forKey:@"user_id"];
+
     
     if ([_lm updateUserProfile:[dic copy]]) {
 //    if ([_lm sendScreenName:[inputView getInputName] forToken:auth_token andUserID:user_id]) {
