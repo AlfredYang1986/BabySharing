@@ -1,0 +1,123 @@
+
+/* Class = "UINavigationItem"; title = "Create Chat Room"; ObjectID = "1U7-hy-T7p"; */
+"1U7-hy-T7p.title" = "Create Chat Room";
+
+/* Class = "UIButton"; normalTitle = "关联我的社交账户"; ObjectID = "4W6-zR-qQQ"; */
+"4W6-zR-qQQ.normalTitle" = "关联我的社交账户";
+
+/* Class = "UIButton"; normalTitle = "是"; ObjectID = "4zD-eH-WTN"; */
+"4zD-eH-WTN.normalTitle" = "是";
+
+/* Class = "UITabBarItem"; title = "Chat"; ObjectID = "7V4-c0-skT"; */
+"7V4-c0-skT.title" = "Chat";
+
+/* Class = "UINavigationItem"; title = "Messages"; ObjectID = "B4D-UT-ROc"; */
+"B4D-UT-ROc.title" = "Messages";
+
+/* Class = "UILabel"; text = "Name:"; ObjectID = "BQc-8E-qds"; */
+"BQc-8E-qds.text" = "Name:";
+
+/* Class = "UILabel"; text = "这是你么？"; ObjectID = "D20-VR-gid"; */
+"D20-VR-gid.text" = "这是你么？";
+
+/* Class = "UILabel"; text = "Role Tag"; ObjectID = "DgJ-6x-cRU"; */
+"DgJ-6x-cRU.text" = "Role Tag";
+
+/* Class = "UINavigationItem"; title = "SubGroup"; ObjectID = "EQ6-9O-mWf"; */
+"EQ6-9O-mWf.title" = "SubGroup";
+
+/* Class = "UILabel"; text = "name"; ObjectID = "EVB-Ci-emN"; */
+"EVB-Ci-emN.text" = "name";
+
+/* Class = "UIButton"; normalTitle = "用户"; ObjectID = "FOm-aP-dGi"; */
+"FOm-aP-dGi.normalTitle" = "用户";
+
+/* Class = "UINavigationItem"; title = "添加你的角色"; ObjectID = "FvD-on-bzc"; */
+"FvD-on-bzc.title" = "添加你的角色";
+
+/* Class = "UINavigationItem"; title = "Detail"; ObjectID = "GFG-Z5-nh0"; */
+"GFG-Z5-nh0.title" = "Detail";
+
+/* Class = "UITabBarItem"; title = "Message"; ObjectID = "GJY-jY-Mlv"; */
+"GJY-jY-Mlv.title" = "Message";
+
+/* Class = "UINavigationItem"; title = "Home"; ObjectID = "GSb-1t-IAY"; */
+"GSb-1t-IAY.title" = "Home";
+
+/* Class = "UILabel"; text = "location"; ObjectID = "Hjp-Fq-k0S"; */
+"Hjp-Fq-k0S.text" = "location";
+
+/* Class = "UINavigationItem"; title = "Network"; ObjectID = "Jm6-ee-E2N"; */
+"Jm6-ee-E2N.title" = "Network";
+
+/* Class = "UIButton"; normalTitle = "Send"; ObjectID = "Ofo-NX-OrG"; */
+"Ofo-NX-OrG.normalTitle" = "Send";
+
+/* Class = "UINavigationItem"; title = "Comments"; ObjectID = "PP3-N9-zeG"; */
+"PP3-N9-zeG.title" = "Comments";
+
+/* Class = "UINavigationItem"; title = "Profile"; ObjectID = "THt-kv-l5G"; */
+"THt-kv-l5G.title" = "Profile";
+
+/* Class = "UITabBarItem"; title = "Personal Center"; ObjectID = "Ta3-I3-abj"; */
+"Ta3-I3-abj.title" = "Personal Center";
+
+/* Class = "UILabel"; text = "Post"; ObjectID = "Uda-UH-l0u"; */
+"Uda-UH-l0u.text" = "Post";
+
+/* Class = "UITabBarItem"; title = "Post"; ObjectID = "XOm-aa-iDP"; */
+"XOm-aa-iDP.title" = "Post";
+
+/* Class = "UIButton"; normalTitle = "内容"; ObjectID = "ZWl-nf-Ga2"; */
+"ZWl-nf-Ga2.normalTitle" = "内容";
+
+/* Class = "UILabel"; text = "咚哒"; ObjectID = "bEJ-S7-iSF"; */
+"bEJ-S7-iSF.text" = "咚哒";
+
+/* Class = "UIButton"; normalTitle = "face"; ObjectID = "cUj-D6-lQx"; */
+"cUj-D6-lQx.normalTitle" = "face";
+
+/* Class = "UINavigationItem"; title = "Tags"; ObjectID = "cvz-3o-LQK"; */
+"cvz-3o-LQK.title" = "Tags";
+
+/* Class = "UILabel"; text = "咚哒"; ObjectID = "j0m-zu-7Lx"; */
+"j0m-zu-7Lx.text" = "咚哒";
+
+/* Class = "UILabel"; text = "Name"; ObjectID = "j3B-hA-H7n"; */
+"j3B-hA-H7n.text" = "Name";
+
+/* Class = "UIButton"; normalTitle = "cancel"; ObjectID = "nGY-39-F0R"; */
+"nGY-39-F0R.normalTitle" = "cancel";
+
+/* Class = "UIButton"; normalTitle = "否"; ObjectID = "nMg-Lr-GNw"; */
+"nMg-Lr-GNw.normalTitle" = "否";
+
+/* Class = "UITextField"; text = "Add a Comment"; ObjectID = "opU-94-XTT"; */
+"opU-94-XTT.text" = "Add a Comment";
+
+/* Class = "UINavigationItem"; title = "search"; ObjectID = "qUR-Kn-0DC"; */
+"qUR-Kn-0DC.title" = "search";
+
+/* Class = "UINavigationItem"; title = "Chat Room"; ObjectID = "rJP-Ty-81S"; */
+"rJP-Ty-81S.title" = "Chat Room";
+
+/* Class = "UINavigationItem"; title = "Personal Center"; ObjectID = "rb3-pf-0Xv"; */
+"rb3-pf-0Xv.title" = "Personal Center";
+
+/* Class = "UIButton"; normalTitle = "点击完成开始分享全新的生活体验"; ObjectID = "sua-iy-39U"; */
+"sua-iy-39U.normalTitle" = "点击完成开始分享全新的生活体验";
+
+/* Class = "UITabBarItem"; title = "Home"; ObjectID = "xS7-d9-dWJ"; */
+"xS7-d9-dWJ.title" = "Home";
+
+/* Class = "UIButton"; normalTitle = "say hi"; ObjectID = "yFK-Bv-0cf"; */
+"yFK-Bv-0cf.normalTitle" = "say hi";
+
+/* Class = "UINavigationItem"; title = "Choose Contry or Area"; ObjectID = "yTl-BN-o3b"; */
+"yTl-BN-o3b.title" = "Choose Contry or Area";
+
+/* Class = "UIButton"; normalTitle = "ask friends"; ObjectID = "yVn-ER-UBy"; */
+"yVn-ER-UBy.normalTitle" = "ask friends";
+
+/* Class = "UIButton"; normalTitle = "send"; ObjectID = "yoe-8D-1Qz"; */
+"yoe-8D-1Qz.normalTitle" = "send";
