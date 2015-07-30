@@ -34,6 +34,7 @@
 		EE7EB5511B4630C0003281F7 /* MessageViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE7EB54F1B4630C0003281F7 /* MessageViewCell.xib */; };
 		EE86D1B21B537469001C4650 /* PostEffectAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = EE86D1B11B537469001C4650 /* PostEffectAdapter.mm */; };
 		EE981F861B5A10400029723A /* LoginToken.m in Sources */ = {isa = PBXBuildFile; fileRef = EE981F851B5A10400029723A /* LoginToken.m */; };
+		EE98D14C1B69AF9B004D88DF /* QueryHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = EE98D14B1B69AF9B004D88DF /* QueryHeader.m */; };
 		EEAAC8FE1B44E81A00D05C0B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAAC8FD1B44E81A00D05C0B /* main.m */; };
 		EEAAC91B1B44E81A00D05C0B /* BabySharingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAAC91A1B44E81A00D05C0B /* BabySharingTests.m */; };
 		EEAACC9A1B44E90400D05C0B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACAF11B44E90300D05C0B /* AppDelegate.m */; };
@@ -254,6 +255,8 @@
 		EE86D1B11B537469001C4650 /* PostEffectAdapter.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = PostEffectAdapter.mm; sourceTree = "<group>"; };
 		EE981F841B5A10400029723A /* LoginToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginToken.h; sourceTree = "<group>"; };
 		EE981F851B5A10400029723A /* LoginToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginToken.m; sourceTree = "<group>"; };
+		EE98D14A1B69AF9B004D88DF /* QueryHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryHeader.h; sourceTree = "<group>"; };
+		EE98D14B1B69AF9B004D88DF /* QueryHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryHeader.m; sourceTree = "<group>"; };
 		EEAAC8F81B44E81A00D05C0B /* BabySharing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BabySharing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEAAC8FC1B44E81A00D05C0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EEAAC8FD1B44E81A00D05C0B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -1338,6 +1341,8 @@
 				EEAACBF11B44E90300D05C0B /* QueryCell.m */,
 				EEAACBF21B44E90300D05C0B /* QueryCell.xib */,
 				EEAACBF31B44E90300D05C0B /* TagsRowCell */,
+				EE98D14A1B69AF9B004D88DF /* QueryHeader.h */,
+				EE98D14B1B69AF9B004D88DF /* QueryHeader.m */,
 			);
 			path = HomeCell;
 			sourceTree = "<group>";
@@ -2027,6 +2032,7 @@
 				EEAACCA91B44E90400D05C0B /* NicknameInputViewController.m in Sources */,
 				EEAACCA41B44E90400D05C0B /* CVViewController2.m in Sources */,
 				EEAACCD31B44E90400D05C0B /* SubGroup.m in Sources */,
+				EE98D14C1B69AF9B004D88DF /* QueryHeader.m in Sources */,
 				EEAACD1D1B44E90400D05C0B /* ProfileUserHeaderCell.m in Sources */,
 				EEAACD021B44E90400D05C0B /* QueryOwnerCell.m in Sources */,
 				EEAACCDD1B44E90400D05C0B /* LoginModel.m in Sources */,
@@ -2196,7 +2202,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -2234,7 +2240,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";

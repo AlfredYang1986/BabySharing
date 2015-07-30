@@ -19,16 +19,23 @@
 #import "MoviePlayTrait.h"
 #import "HomeViewFoundDelegateAndDatasource.h"
 #import "INTUAnimationEngine.h"
+#import "QueryCell.h"
+#import "QueryHeader.h"
 
-#define VIEW_BOUNTDS        CGRect rc = _queryView.bounds;
+#define VIEW_BOUNTDS        CGFloat screen_width = [UIScreen mainScreen].bounds.size.width; \
+                            CGFloat screen_height = [UIScreen mainScreen].bounds.size.height; \
+                            CGRect rc = CGRectMake(0, 0, screen_width, screen_height);
+
+
 #define QUERY_VIEW_START    CGRectMake(0, -44, rc.size.width, rc.size.height)
+#define QUERY_VIEW_SCROLL   CGRectMake(0, 0, rc.size.width, rc.size.height)
 #define QUERY_VIEW_END      CGRectMake(-rc.size.width, -44, rc.size.width, rc.size.height)
 
 #define FOUND_BOUNDS        CGRect rc1 = _foundView.bounds;
 #define FOUND_VIEW_START    CGRectMake(rc.size.width, 19, rc.size.width, rc1.size.height)
 #define FOUND_VIEW_END      CGRectMake(0, 19, rc.size.width, rc1.size.height)
 
-@interface HomeViewController ()
+@interface HomeViewController () <UITableViewDelegate, UITableViewDataSource, QueryCellActionProtocol>
     
 @property (weak, nonatomic) IBOutlet UITableView *queryView;
 @property (weak, nonatomic, readonly) NSString* current_user_id;
@@ -44,6 +51,8 @@
     MoviePlayTrait* trait;
     
     HomeViewFoundDelegateAndDatasource* found_datasource;
+    
+    UIView* bkView;
 }
 
 @synthesize queryView = _queryView;
@@ -60,6 +69,7 @@
 
     UINib* nib = [UINib nibWithNibName:@"QueryCell" bundle:[NSBundle mainBundle]];
     [_queryView registerNib:nib forCellReuseIdentifier:@"query cell"];
+    [_queryView registerClass:[QueryHeader class] forHeaderFooterViewReuseIdentifier:@"query header"];
     
     AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     _current_user_id = delegate.lm.current_user_id;
@@ -93,14 +103,13 @@
     found_datasource = [[HomeViewFoundDelegateAndDatasource alloc]init];
     _foundView.delegate = found_datasource;
     _foundView.dataSource = found_datasource;
+
+    [self layoutTableViews];
     
 }
 
-- (void)viewDidLayoutSubviews {
-    [super viewDidLayoutSubviews];
-    
-    // TODO: layout the subview
-    NSLog(@"layout the subview");
+- (void)layoutTableViews {
+    NSLog(@"layout the tableviews");
     VIEW_BOUNTDS
     FOUND_BOUNDS
     if (sg.selectedSegmentIndex == 0) {
@@ -111,6 +120,10 @@
         _foundView.frame = FOUND_VIEW_END;
     }
 //    [self changeViews];
+    bkView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, screen_width, 20)];
+    bkView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:bkView];
+    [self.view bringSubviewToFront:bkView];
 }
 
 - (void)changeViews {
@@ -182,9 +195,16 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSInteger total = [self tableView:tableView numberOfRowsInSection:indexPath.section];
-    if (indexPath.row == 0 || indexPath.row == total - 1) return 44;
+//    NSInteger total = [self tableView:tableView numberOfRowsInSection:indexPath.section];
+    NSInteger total = [self numberOfSectionsInTableView:tableView];
+    if (indexPath.section == 0 || indexPath.section == total - 1) return 44;
     else return [QueryCell preferredHeight];
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
+    if ([view isKindOfClass:[UITableViewHeaderFooterView class]]) {
+        ((UITableViewHeaderFooterView *)view).backgroundView.backgroundColor = [UIColor colorWithWhite:0.4 alpha:0.6];
+    }
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -208,12 +228,58 @@
     }
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+//    NSInteger total = [self numberOfSectionsInTableView:tableView];
+//    if (section == 0 || section == total - 1) {
+//        return 0;
+//    } else {
+//        return 44;
+//    }
+    return 44;
+}
+
+- (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    NSInteger total = [self numberOfSectionsInTableView:tableView];
+    if (section == 0 || section == total - 1) {
+        
+        UITableViewHeaderFooterView* view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"default header"];
+        
+        if (view == nil) {
+            view = [[UITableViewHeaderFooterView alloc]initWithReuseIdentifier:@"default header"];
+        }
+        
+        view.textLabel.text = @"alfred...";
+        
+        return view;
+        
+    } else {
+        
+        QueryHeader* header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"query header"];
+        
+        if (header == nil) {
+            header = [[QueryHeader alloc]initWithReuseIdentifier:@"query header"];
+        }
+
+        [header setUpSubviews];
+        QueryContent* tmp = [self.qm.querydata objectAtIndex:section - 1];
+        [header setUserPhoto:tmp.owner_photo];
+        [header setUserName:tmp.owner_name];
+        [header setLocation:@"中国 北京"];
+        [header setRoleTag:@"role tag"];
+        [header setTimes:@"1000"];
+        
+        return header;
+    }
+}
+
 #pragma mark -- table view datasource
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   
-    NSInteger total = [self tableView:tableView numberOfRowsInSection:indexPath.section];
-    if (indexPath.row == 0) {
+//    NSInteger total = [self tableView:tableView numberOfRowsInSection:indexPath.section];
+    NSInteger total = [self numberOfSectionsInTableView:tableView];
+//    if (indexPath.row == 0) {
+    if (indexPath.section == 0) {
         UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"default"];
         
         if (cell == nil) {
@@ -222,7 +288,9 @@
         
         cell.textLabel.text = @"refreshing...";
         return cell;
-    } else if (indexPath.row == total - 1){
+        
+//    } else if (indexPath.row == total - 1){
+    } else if (indexPath.section == total - 1){
          UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"default"];
         
         if (cell == nil) {
@@ -239,7 +307,8 @@
             cell = [nib objectAtIndex:0];
         }
      
-        QueryContent* tmp = [self.qm.querydata objectAtIndex:indexPath.row - 1];
+//        QueryContent* tmp = [self.qm.querydata objectAtIndex:indexPath.row - 1];
+        QueryContent* tmp = [self.qm.querydata objectAtIndex:indexPath.section - 1];
         QueryContentItem* tmp_item = [tmp.items.objectEnumerator nextObject];
         if (tmp_item.item_type.unsignedIntegerValue == PostPreViewPhote) {
             NSLog(@"photo field");
@@ -326,30 +395,6 @@
             NSLog(@"text field");
         }
      
-        UIImage* userImg = [TmpFileStorageModel enumImageWithName:tmp.owner_photo withDownLoadFinishBolck:^(BOOL success, UIImage *user_img) {
-            if (success) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    if (cell) {
-                        cell.ownerImg.image = user_img;
-                        NSLog(@"owner img download success");
-                    }
-                });
-            } else {
-                NSLog(@"down load owner image %@ failed", tmp.owner_photo);
-                NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
-                NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-                NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"User"] ofType:@"png"];
-                UIImage *image = [UIImage imageNamed:filePath];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    if (cell) {
-                        cell.ownerImg.image = image;
-                        NSLog(@"owner img download success");
-                    }
-                });
-            }
-        }];
-        [cell.ownerImg setImage:userImg];
-        
         // date
 //        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 //        formatter.formatterBehavior = NSDateFormatterBehavior10_4;
@@ -358,19 +403,28 @@
 //         NSString *result = [formatter stringForObjectValue:tmp.content_post_date];
 //          
         cell.desLabel.text = tmp.content_description;
-        cell.timeNumber.text = [NSString stringWithFormat:@"%d", 1000];
-        cell.nameLabel.text = tmp.owner_name;
         [cell.likeBtn setTitle:[NSString stringWithFormat:@"%@ likes", tmp.likes_count] forState:UIControlStateNormal];
         [cell.commentsBtn setTitle:[NSString stringWithFormat:@"%@ comments", tmp.comment_count] forState:UIControlStateNormal];
         cell.delegate = self;
-        cell.content = [_qm.querydata objectAtIndex:indexPath.row - 1];
+        cell.content = [_qm.querydata objectAtIndex:indexPath.section - 1];
+//        cell.content = [_qm.querydata objectAtIndex:indexPath.row - 1];
         
         return cell;
     }
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {     // Default is 1 if not implemented
     return 2 + self.qm.querydata.count;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    NSInteger total = [self numberOfSectionsInTableView:tableView];
+    if (section == 0 || section == total - 1) {
+        return 0;
+    } else {
+        return 1;
+    }
+//    return 2 + self.qm.querydata.count;
 }
 
 #pragma mark -- scroll refresh
@@ -385,6 +439,15 @@
         // 如果内容高度大于UITableView高度，就取TableView高度
         // 如果内容高度小于UITableView高度，就取内容的实际高度
         float height = scrollView.contentSize.height > _queryView.frame.size.height ?_queryView.frame.size.height : scrollView.contentSize.height;
+       
+        VIEW_BOUNTDS
+        if (scrollView.contentOffset.y > [QueryCell preferredHeight] * 0.4) {
+            [self.navigationController setNavigationBarHidden:YES animated:YES];
+            _queryView.frame = QUERY_VIEW_SCROLL;
+        } else {
+            [self.navigationController setNavigationBarHidden:NO animated:YES];
+            _queryView.frame = QUERY_VIEW_START;
+        }
         
         if ((height - scrollView.contentSize.height + scrollView.contentOffset.y) / height > 0.2) { // 调用上拉刷新方
             CGRect rc = _queryView.frame;

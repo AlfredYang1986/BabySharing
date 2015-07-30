@@ -23,12 +23,8 @@
 }
 
 @property (weak, nonatomic) IBOutlet UIImageView *imgView;
-@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UIButton *likeBtn;
 @property (weak, nonatomic) IBOutlet UIButton *shareBtn;
-@property (weak, nonatomic) IBOutlet UILabel *sharingScoreLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *ownerImg;
-@property (weak, nonatomic) IBOutlet UILabel *timeNumber;
 @property (weak, nonatomic) IBOutlet UILabel *desLabel;
 @property (weak, nonatomic) IBOutlet UIView *tagsLabelView;
 @property (weak, nonatomic) IBOutlet UIButton *commentsBtn;

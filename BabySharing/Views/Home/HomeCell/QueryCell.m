@@ -22,12 +22,8 @@
 }
 
 @synthesize imgView = _imgView;
-@synthesize nameLabel = _nameLabel;
 @synthesize likeBtn = _likeBtn;
 @synthesize shareBtn = _shareBtn;
-@synthesize sharingScoreLabel = _sharingScoreLabel;
-@synthesize ownerImg = _ownerImg;
-@synthesize timeNumber = _timeNumber;
 @synthesize desLabel = _desLabel;
 @synthesize tagsLabelView = _tagsLabelView;
 @synthesize commentsBtn = _commentsBtn;
@@ -43,14 +39,13 @@
 
 #pragma mark -- layout
 + (CGFloat)preferredHeight {
-//    return VER_MARGIN +
-    return 368;
+//    return 368;
+    return 337;
 }
 
 - (void)awakeFromNib {
     // Initialization code
     _imgView.contentMode = UIViewContentModeScaleToFill;
-    _ownerImg.contentMode = UIViewContentModeScaleToFill;
     
     _imgView.userInteractionEnabled = YES;
     UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didClickImage:)];

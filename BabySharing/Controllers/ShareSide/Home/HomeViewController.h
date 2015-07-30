@@ -7,10 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "QueryCell.h"
 
 #import "ShareSideBaseController.h"
 
-@interface HomeViewController : ShareSideBaseController <UITableViewDelegate, UITableViewDataSource, QueryCellActionProtocol>
+@interface HomeViewController : ShareSideBaseController
 
 @end
