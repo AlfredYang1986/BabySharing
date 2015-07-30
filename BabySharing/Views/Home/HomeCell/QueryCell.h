@@ -23,11 +23,10 @@
 }
 
 @property (weak, nonatomic) IBOutlet UIImageView *imgView;
-@property (weak, nonatomic) IBOutlet UIButton *likeBtn;
-@property (weak, nonatomic) IBOutlet UIButton *shareBtn;
-@property (weak, nonatomic) IBOutlet UILabel *desLabel;
-@property (weak, nonatomic) IBOutlet UIView *tagsLabelView;
-@property (weak, nonatomic) IBOutlet UIButton *commentsBtn;
+@property (weak, nonatomic) IBOutlet UILabel *tagsLabelView;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property (weak, nonatomic) IBOutlet UIView *bkgView;
+@property (weak, nonatomic) IBOutlet UIButton *funcBtn;
 
 @property (nonatomic) PostPreViewType type;
 @property (nonatomic, strong) NSURL* movieURL;
@@ -39,8 +38,13 @@
 #pragma mark -- constractor
 
 #pragma mark -- layout
-+ (CGFloat)preferredHeight;
++ (CGFloat)preferredHeightWithDescription:(NSString*)description;
 - (void)movieContentWithURL:(NSURL*)url withTriat:(MoviePlayTrait*)trait;
 - (void)playMovie;
 - (void)stopMovie;
+
+#pragma mark -- set values
+- (void)setTime:(NSDate*)date;
+- (void)setTags:(NSString*)tags;
+- (void)setDescription:(NSString*)description;
 @end

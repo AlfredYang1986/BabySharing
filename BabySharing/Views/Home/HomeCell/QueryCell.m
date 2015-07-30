@@ -11,7 +11,7 @@
 #import "MoviePlayTrait.h"
 #import <AVFoundation/AVFoundation.h>
 
-#define HER_MARGIN  16
+#define HER_MARGIN  8
 #define VER_MARGIN  1
 
 #define IMG_HEIGHT  226
@@ -19,14 +19,17 @@
 @implementation QueryCell {
 //    MPMoviePlayerController* movie;
     AVPlayerLayer *avPlayerLayer;
+    
+    UITextView* descriptionView;
+    UIView* funcView;
 }
 
 @synthesize imgView = _imgView;
-@synthesize likeBtn = _likeBtn;
-@synthesize shareBtn = _shareBtn;
-@synthesize desLabel = _desLabel;
+
 @synthesize tagsLabelView = _tagsLabelView;
-@synthesize commentsBtn = _commentsBtn;
+@synthesize timeLabel = _timeLabel;
+@synthesize bkgView = _bkgView;
+@synthesize funcBtn = _funcBtn;
 
 @synthesize delegate = _delegate;
 @synthesize content = _content;
@@ -38,9 +41,20 @@
 #pragma mark -- constractor
 
 #pragma mark -- layout
-+ (CGFloat)preferredHeight {
-//    return 368;
-    return 337;
++ (CGFloat)preferredHeightWithDescription:(NSString*)description {
+   
+    if ([description isEqualToString:@""]) {
+        return 340;
+    }
+    
+    return 340 + HER_MARGIN + [self getSizeBaseOnDescription:description].height;
+}
+
++ (CGSize)getSizeBaseOnDescription:(NSString*)description {
+    UIFont* font = [UIFont systemFontOfSize:14.f];
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    
+    return [description sizeWithFont:font constrainedToSize:CGSizeMake(width - HER_MARGIN * 2, FLT_MAX)];
 }
 
 - (void)awakeFromNib {
@@ -158,5 +172,70 @@
 
 - (void)didClickImage:(UITapGestureRecognizer*)gesture {
     [self playMovie];
+}
+
+#pragma mark -- set values
+- (void)setTime:(NSDate*)date {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.formatterBehavior = NSDateFormatterBehavior10_4;
+    formatter.dateStyle = NSDateFormatterShortStyle;
+    formatter.timeStyle = NSDateFormatterShortStyle;
+    NSString *result = [formatter stringForObjectValue:date];
+    _timeLabel.text = result;
+}
+
+- (void)setTags:(NSString*)tags {
+    _tagsLabelView.text = tags;
+}
+
+- (void)setDescription:(NSString*)description {
+    if (descriptionView == nil) {
+        descriptionView = [[UITextView alloc]init];
+        [_bkgView addSubview:descriptionView];
+        descriptionView.scrollEnabled = NO;
+    }
+   
+    CGSize size = [QueryCell getSizeBaseOnDescription:description];
+    descriptionView.frame = CGRectMake(HER_MARGIN, HER_MARGIN, [UIScreen mainScreen].bounds.size.width - HER_MARGIN * 2, size.height);
+    descriptionView.text = description;
+    [descriptionView sizeToFit];
+}
+
+- (IBAction)didSelectFuncBtn {
+    if (funcView == nil) {
+        funcView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 32 * 3, 32)];
+
+        NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+        NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+        [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Cross"] ofType:@"png"]];
+        
+        UIButton* didnotlikeBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 32)];
+        [didnotlikeBtn setImage:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Cross"] ofType:@"png"]] forState:UIControlStateNormal];
+        UIButton* collectBtn = [[UIButton alloc]initWithFrame:CGRectMake(32, 0, 32, 32)];
+        [collectBtn setImage:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Star"] ofType:@"png"]] forState:UIControlStateNormal];
+        UIButton* commentsBtn = [[UIButton alloc]initWithFrame:CGRectMake(32 * 2, 0, 32, 32)];
+        [commentsBtn setImage:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Comments"] ofType:@"png"]] forState:UIControlStateNormal];
+        
+        [funcView addSubview:didnotlikeBtn];
+        [funcView addSubview:collectBtn];
+        [funcView addSubview:commentsBtn];
+        
+        [self addSubview:funcView];
+        funcView.frame = CGRectMake(_funcBtn.frame.origin.x - 32 * 3, _funcBtn.frame.origin.y - HER_MARGIN, 32 * 3, 32);
+        
+        funcView.layer.borderColor = [UIColor blueColor].CGColor;
+        funcView.layer.borderWidth = 1.f;
+        funcView.layer.cornerRadius = 4.f;
+        funcView.clipsToBounds = YES;
+        
+        funcView.hidden = YES;
+        [self bringSubviewToFront:funcView];
+    }
+    
+    if ([funcView isHidden]) {
+        funcView.hidden = NO;
+    } else {
+        funcView.hidden = YES;
+    }
 }
 @end

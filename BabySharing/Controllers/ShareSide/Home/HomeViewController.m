@@ -198,12 +198,18 @@
 //    NSInteger total = [self tableView:tableView numberOfRowsInSection:indexPath.section];
     NSInteger total = [self numberOfSectionsInTableView:tableView];
     if (indexPath.section == 0 || indexPath.section == total - 1) return 44;
-    else return [QueryCell preferredHeight];
+    else {
+        
+        QueryContent* tmp = [self.qm.querydata objectAtIndex:indexPath.section - 1];
+        return [QueryCell preferredHeightWithDescription:tmp.content_description];
+    }
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
     if ([view isKindOfClass:[UITableViewHeaderFooterView class]]) {
-        ((UITableViewHeaderFooterView *)view).backgroundView.backgroundColor = [UIColor colorWithWhite:0.4 alpha:0.6];
+        NSInteger total = [self numberOfSectionsInTableView:tableView];
+        if (section == 0 || section == total - 1) return;
+        else ((UITableViewHeaderFooterView *)view).backgroundView.backgroundColor = [UIColor colorWithWhite:0.4 alpha:0.6];
     }
 }
 
@@ -229,12 +235,6 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-//    NSInteger total = [self numberOfSectionsInTableView:tableView];
-//    if (section == 0 || section == total - 1) {
-//        return 0;
-//    } else {
-//        return 44;
-//    }
     return 44;
 }
 
@@ -395,19 +395,13 @@
             NSLog(@"text field");
         }
      
-        // date
-//        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-//        formatter.formatterBehavior = NSDateFormatterBehavior10_4;
-//        formatter.dateStyle = NSDateFormatterShortStyle;
-//        formatter.timeStyle = NSDateFormatterShortStyle;
-//         NSString *result = [formatter stringForObjectValue:tmp.content_post_date];
-//          
-        cell.desLabel.text = tmp.content_description;
-        [cell.likeBtn setTitle:[NSString stringWithFormat:@"%@ likes", tmp.likes_count] forState:UIControlStateNormal];
-        [cell.commentsBtn setTitle:[NSString stringWithFormat:@"%@ comments", tmp.comment_count] forState:UIControlStateNormal];
         cell.delegate = self;
         cell.content = [_qm.querydata objectAtIndex:indexPath.section - 1];
 //        cell.content = [_qm.querydata objectAtIndex:indexPath.row - 1];
+        [cell setDescription:tmp.content_description];
+        
+        [cell setTime:tmp.content_post_date];
+        [cell setTags:@"tags"];
         
         return cell;
     }
@@ -441,7 +435,7 @@
         float height = scrollView.contentSize.height > _queryView.frame.size.height ?_queryView.frame.size.height : scrollView.contentSize.height;
        
         VIEW_BOUNTDS
-        if (scrollView.contentOffset.y > [QueryCell preferredHeight] * 0.4) {
+        if (scrollView.contentOffset.y > [QueryCell preferredHeightWithDescription:@""] * 0.4) {
             [self.navigationController setNavigationBarHidden:YES animated:YES];
             _queryView.frame = QUERY_VIEW_SCROLL;
         } else {
