@@ -515,6 +515,14 @@
     [self performSegueWithIdentifier:@"HomeDetailSegue" sender:content];
 }
 
+- (void)didSelectCollectionBtn:(id)content {
+    
+}
+
+- (void)didSelectNotLikeBtn:(id)content {
+    
+}
+
 #pragma mark -- search controller
 - (void)didSelectSearchBtn:(id)content {
     [self performSegueWithIdentifier:@"search" sender:nil];

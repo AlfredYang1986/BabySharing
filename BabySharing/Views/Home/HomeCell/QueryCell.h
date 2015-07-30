@@ -13,6 +13,9 @@
 - (void)didSelectLikeBtn:(id)content;
 - (void)didSelectShareBtn:(id)content;
 - (void)didSelectCommentsBtn:(id)content;
+
+- (void)didSelectCollectionBtn:(id)content;
+- (void)didSelectNotLikeBtn:(id)content;
 @end
 
 @class AVPlayer;

@@ -158,18 +158,6 @@
 }
 
 #pragma mark -- handler
-- (IBAction)didSelectLikeBtn {
-    [_delegate didSelectLikeBtn:_content];
-}
-
-- (IBAction)didSelectShareBtn {
-    [_delegate didSelectShareBtn:_content];
-}
-
-- (IBAction)didSelectCommentsBtn {
-    [_delegate didSelectCommentsBtn:self];
-}
-
 - (void)didClickImage:(UITapGestureRecognizer*)gesture {
     [self playMovie];
 }
@@ -210,11 +198,14 @@
         [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Cross"] ofType:@"png"]];
         
         UIButton* didnotlikeBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 32)];
+        [didnotlikeBtn addTarget:self action:@selector(notLikeBtnSelected) forControlEvents:UIControlEventTouchDown];
         [didnotlikeBtn setImage:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Cross"] ofType:@"png"]] forState:UIControlStateNormal];
         UIButton* collectBtn = [[UIButton alloc]initWithFrame:CGRectMake(32, 0, 32, 32)];
         [collectBtn setImage:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Star"] ofType:@"png"]] forState:UIControlStateNormal];
+        [collectBtn addTarget:self action:@selector(collectBtnSelected) forControlEvents:UIControlEventTouchDown];
         UIButton* commentsBtn = [[UIButton alloc]initWithFrame:CGRectMake(32 * 2, 0, 32, 32)];
         [commentsBtn setImage:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Comments"] ofType:@"png"]] forState:UIControlStateNormal];
+        [commentsBtn addTarget:self action:@selector(commentsBtnSelected) forControlEvents:UIControlEventTouchDown];
         
         [funcView addSubview:didnotlikeBtn];
         [funcView addSubview:collectBtn];
@@ -237,5 +228,17 @@
     } else {
         funcView.hidden = YES;
     }
+}
+
+- (void)notLikeBtnSelected {
+    [_delegate didSelectNotLikeBtn:_content];
+}
+
+- (void)collectBtnSelected {
+    [_delegate didSelectCollectionBtn:_content];
+}
+
+- (void)commentsBtnSelected {
+    [_delegate didSelectCommentsBtn:self];
 }
 @end
