@@ -75,9 +75,6 @@
         [self addSubview:pushLabel];
     }
    
-//    CGFloat width = [UIScreen mainScreen].bounds.size.width;
-//    self.bounds = CGRectMake(0, 0, width, HEADER_HEIGHT);
-
     self.backgroundView.backgroundColor = [UIColor colorWithWhite:0.4 alpha:0.3];
 }
 

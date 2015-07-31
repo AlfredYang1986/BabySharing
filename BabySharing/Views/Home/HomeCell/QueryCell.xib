@@ -72,12 +72,14 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="Ckm-qT-QZn" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="Da5-s5-nCS"/>
+                    <constraint firstItem="7kN-Ff-pNJ" firstAttribute="top" secondItem="Ckm-qT-QZn" secondAttribute="bottom" id="F5I-TP-IgE"/>
                     <constraint firstItem="Ckm-qT-QZn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="Hti-0S-Fy1"/>
                     <constraint firstItem="eQk-jw-Rfk" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="Jsg-Df-kXx"/>
                     <constraint firstItem="Ckm-qT-QZn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="K1q-u3-c1Z"/>
                     <constraint firstItem="eQk-jw-Rfk" firstAttribute="top" secondItem="7kN-Ff-pNJ" secondAttribute="bottom" constant="8" id="M27-au-csp"/>
                     <constraint firstAttribute="trailingMargin" secondItem="Ckm-qT-QZn" secondAttribute="trailing" constant="-3" id="MbZ-We-4iI"/>
                     <constraint firstItem="Ckm-qT-QZn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-2" id="Nu4-ld-MEt"/>
+                    <constraint firstItem="7kN-Ff-pNJ" firstAttribute="top" secondItem="Ckm-qT-QZn" secondAttribute="bottom" id="VpS-o0-QPx"/>
                     <constraint firstItem="eQk-jw-Rfk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-16" id="bhq-g9-hHY"/>
                     <constraint firstItem="Ckm-qT-QZn" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="cnV-Q0-gnz"/>
                     <constraint firstAttribute="trailingMargin" secondItem="Ckm-qT-QZn" secondAttribute="trailing" constant="1" id="g3K-92-LRm"/>
@@ -96,6 +98,9 @@
                         <exclude reference="g3K-92-LRm"/>
                         <exclude reference="iwx-WU-OGL"/>
                         <exclude reference="loP-bl-BpE"/>
+                        <exclude reference="M27-au-csp"/>
+                        <exclude reference="F5I-TP-IgE"/>
+                        <exclude reference="vgz-T2-sLh"/>
                     </mask>
                 </variation>
             </tableViewCellContentView>

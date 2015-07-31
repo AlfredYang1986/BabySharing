@@ -42,6 +42,7 @@
 @property (weak, nonatomic, readonly) NSString* current_auth_token;
 @property (weak, nonatomic, readonly) QueryModel* qm;
 @property (nonatomic) BOOL isLoading;
+@property (nonatomic) BOOL isHandleScrolling;
 
 @property (weak, nonatomic) IBOutlet UITableView *foundView;
 @end
@@ -60,6 +61,7 @@
 @synthesize current_user_id = _current_user_id;
 @synthesize qm = _qm;
 @synthesize isLoading = _isLoading;
+@synthesize isHandleScrolling = _isHandleScrolling;
 
 @synthesize foundView = _foundView;
 
@@ -166,6 +168,12 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = NO;
+    _isHandleScrolling = YES;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    _isHandleScrolling = NO;
 }
 
 /*
@@ -427,6 +435,11 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    if (!_isHandleScrolling) {
+        return;
+    }
+    
     // 假设偏移表格高度的20%进行刷新
     if (!_isLoading) { // 判断是否处于刷新状态，刷新中就不执行
         // 取内容的高度：

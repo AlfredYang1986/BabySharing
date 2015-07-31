@@ -31,18 +31,18 @@
 #import "HomeTagsController.h"
 
 #pragma mark -- secter numbers
-#define REFERSH_HEADER                  0
-#define OWNER_NAME_SECTOR               1
-#define ITEM_SECTOR                     2
-#define OWNER_DESCRIPTION_SECTOR        3
-#define LIKES_SECTOR                    4
-#define HOT_COMMENTS_TITLE_SECTOR       5
-#define HOT_COMMENTS_SECTOR             6
-#define RESENT_COMMENTS_TITLE_SECTOR    7
-#define RESENT_COMMENTS_SECTOR          8
-#define APPEND_FOOTER                   9
+//#define REFERSH_HEADER                  0
+#define OWNER_NAME_SECTOR               0
+#define ITEM_SECTOR                     1
+#define OWNER_DESCRIPTION_SECTOR        2
+#define LIKES_SECTOR                    3
+#define HOT_COMMENTS_TITLE_SECTOR       4
+#define HOT_COMMENTS_SECTOR             5
+#define RESENT_COMMENTS_TITLE_SECTOR    6
+#define RESENT_COMMENTS_SECTOR          7
+#define APPEND_FOOTER                   8
 
-#define TOTAL_SECTORS                   10
+#define TOTAL_SECTORS                   9
 
 #define CHECK_SECTOR(lhs, rhs)        \
     if (lhs == rhs) break;
@@ -54,6 +54,12 @@
 }
 @property (weak, nonatomic) IBOutlet UITableView *queryView;
 @property (weak, nonatomic) IBOutlet UITextField *inputView;
+
+@property (weak, nonatomic) IBOutlet UIButton *commentsBtn;
+@property (weak, nonatomic) IBOutlet UIButton *collectionBtn;
+@property (weak, nonatomic) IBOutlet UIButton *pushBtn;
+@property (weak, nonatomic) IBOutlet UIButton *backBtn;
+
 @end
 
 @implementation HomeDetailViewController {
@@ -72,6 +78,11 @@
 #pragma mark -- only for move play
 @synthesize player = _player;
 @synthesize current_image = _current_image;
+
+@synthesize commentsBtn = _commentsBtn;
+@synthesize collectionBtn = _collectionBtn;
+@synthesize pushBtn = _pushBtn;
+@synthesize backBtn = _backBtn;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -117,11 +128,47 @@
     
     _inputView.delegate = self;
     isLoading = NO;
+    
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+    [_commentsBtn setImage:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Comments"] ofType:@"png"]] forState:UIControlStateNormal];
+    _commentsBtn.layer.borderWidth = 1.f;
+    _commentsBtn.layer.borderColor = [UIColor blueColor].CGColor;
+    _commentsBtn.layer.cornerRadius = 15.f;
+    _commentsBtn.clipsToBounds = YES;
+    
+    [_collectionBtn setImage:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Star"] ofType:@"png"]] forState:UIControlStateNormal];
+    _collectionBtn.layer.borderWidth = 1.f;
+    _collectionBtn.layer.borderColor = [UIColor blueColor].CGColor;
+    _collectionBtn.layer.cornerRadius = 15.f;
+    _collectionBtn.clipsToBounds = YES;
+    
+    [_pushBtn setImage:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Push"] ofType:@"png"]] forState:UIControlStateNormal];
+    _pushBtn.layer.borderWidth = 1.f;
+    _pushBtn.layer.borderColor = [UIColor blueColor].CGColor;
+    _pushBtn.layer.cornerRadius = 15.f;
+    _pushBtn.clipsToBounds = YES;
+    
+    [_backBtn setImage:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Previous_blue"] ofType:@"png"]] forState:UIControlStateNormal];
+    _backBtn.layer.borderWidth = 1.f;
+    _backBtn.layer.borderColor = [UIColor blueColor].CGColor;
+    _backBtn.layer.cornerRadius = 15.f;
+    _backBtn.clipsToBounds = YES;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:NO];
 }
 
 /*
@@ -149,7 +196,7 @@
     NSInteger range = [self checkRangeNameWithIndex:indexPath.row];
     
     switch (range) {
-        case REFERSH_HEADER:
+//        case REFERSH_HEADER:
         case APPEND_FOOTER:
             return 44;
             
@@ -160,7 +207,7 @@
             return [QueryDetailImageCell getPerferCellHeight];
             
         case OWNER_DESCRIPTION_SECTOR:
-            return 46;
+            return [QueryDescriptionCell preferHeightWithUserDescription:_current_content.content_description];
             
         case LIKES_SECTOR:
             return 44;
@@ -179,29 +226,6 @@
             NSLog(@"wrong with ranges");
             return -1;
     }
-//    
-//    NSInteger item_count = _current_content.items.count;
-//    NSInteger index = indexPath.row;
-//    NSInteger height = 0;
-//    NSInteger hot_comment_count = [self enumMostPopularCommentsCount];
-//    if (index >= 0 && index < item_count) {
-//        height = 241; // image
-//    } else if (index == item_count) {
-//        height = 133; // owner
-//    } else if (index == item_count + 1) {
-//        height = 44; // like
-//    } else if (index == item_count + 2) {
-//        height = 30; // comment header
-//    } else if (index > item_count + 2 && index < item_count + 3 + hot_comment_count) {
-//        height = 133; // comment
-//    } else if (index == item_count + 3 + hot_comment_count) {
-//        height = 30; // comment footer
-//    } else {
-//        // todo: related items
-//        NSLog(@"error");
-//    }
-//    
-//    return height;
 }
 
 #pragma mark -- table view datasource
@@ -211,8 +235,8 @@
     NSInteger range = [self checkRangeNameWithIndex:indexPath.row];
     
     switch (range) {
-        case REFERSH_HEADER:
-            return [self queryDefaultCellInitWithTableView:tableView withTitle:@"refreshing ..."];
+//        case REFERSH_HEADER:
+//            return [self queryDefaultCellInitWithTableView:tableView withTitle:@"refreshing ..."];
         case APPEND_FOOTER:
             return [self queryDefaultCellInitWithTableView:tableView withTitle:@"more comments ..."];
             
@@ -253,29 +277,6 @@
             NSLog(@"wrong with ranges");
             return nil;
     }
-    
-//    NSInteger item_count = _current_content.items.count;
-//    NSInteger index = indexPath.row;
-//    UITableViewCell* cell = nil;
-//    NSInteger resent_comment_count = [self enumMostPopularCommentsCount];
-//    if (index >= 0 && index < item_count) {
-//        cell = [self queryImageCellInitWithTableView:tableView andIndex:indexPath];
-//    } else if (index == item_count) {
-//        cell = [self queryOwnerCellInitWithTableView:tableView];
-//    } else if (index == item_count + 1) {
-//        cell = [self queryLikesCellInitWithTableView:tableView];
-//    } else if (index == item_count + 2) {
-//        cell = [self queryCommentsHeaderCellWithTableView:tableView];
-//    } else if (index > item_count + 2 && index < item_count + 3 + resent_comment_count) {
-//        cell = [self queryCommentsCellWithTableView:tableView andIndex:index - item_count - 3];
-//    } else if (index == item_count + 3 + resent_comment_count) {
-//        cell = [self queryCommentsFooterCellWithTableView:tableView];
-//    } else {
-//        // todo: related items
-//        NSLog(@"error");
-//    }
-//    
-//    return cell;
 }
 
 - (NSInteger)checkRangeNameWithIndex:(NSInteger)index {
@@ -293,7 +294,7 @@
     NSRange result;
     
     switch (secter) {
-        case REFERSH_HEADER:
+//        case REFERSH_HEADER:
         case OWNER_NAME_SECTOR:
         case ITEM_SECTOR:
         case OWNER_DESCRIPTION_SECTOR:
@@ -304,10 +305,10 @@
         case RESENT_COMMENTS_SECTOR:
         case APPEND_FOOTER:
             result.location = 0;
-            result.length = 1;
-            CHECK_SECTOR(secter,REFERSH_HEADER);
-            
-            result.location += result.length;
+//            result.length = 1;
+//            CHECK_SECTOR(secter,REFERSH_HEADER);
+//            
+//            result.location += result.length;
             result.length = [self enumOwnerNameCount];
             CHECK_SECTOR(secter, OWNER_NAME_SECTOR);
             
@@ -363,7 +364,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   
-    return 1 + [self enumOwnerNameCount] // Owner name Sector
+    return //1 +        // refresh header
+           [self enumOwnerNameCount] // Owner name Sector
          + [self enumItemCount] // item (photo or movie)
          + [self enumOwnerDescriptionCount] // owner description input
          + [self enumLikeColCount]      // like coloum
@@ -430,9 +432,10 @@
         NSArray* nib = [[NSBundle mainBundle] loadNibNamed:@"QueryDescriptionCell" owner:self options:nil];
         cell = [nib firstObject];
     }
-    
-    cell.user_description.text = _current_content.content_description;
-    cell.content_tags.text = @"alfred test";
+   
+    [cell setDescription:_current_content.content_description];
+    [cell setTags:@"alfred tags"];
+    [cell setTime:_current_content.content_post_date];
     
     return cell;
 }
@@ -500,39 +503,13 @@
         cell = [nib objectAtIndex:0];
     }
 
-    cell.owner_name.text = _current_content.owner_name;
-//    cell.owner_img.backgroundColor = [UIColor greenColor];
-    cell.owner_img.image =[TmpFileStorageModel enumImageWithName:_current_content.owner_photo withDownLoadFinishBolck:^(BOOL success, UIImage *download_img) {
-        if (success) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (cell) {
-                    cell.owner_img.image = download_img;
-                    NSLog(@"change img success");
-                }
-            });
-        } else {
-            NSLog(@"down load image %@ failed", _current_content.owner_photo);
-            NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
-            NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-            NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"User"] ofType:@"png"];
-            UIImage *image = [UIImage imageNamed:filePath];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (cell) {
-                    cell.owner_img.image = image;
-                }
-            });
-        }
-    }];
-    cell.owner_tags.text = @"Unknown";
-    cell.content_share_number.text = [[NSNumber numberWithInt:1000] stringValue];
-    // date
-//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-//    formatter.formatterBehavior = NSDateFormatterBehavior10_4;
-//    formatter.dateStyle = NSDateFormatterShortStyle;
-//    formatter.timeStyle = NSDateFormatterShortStyle;
-//    NSString *result = [formatter stringForObjectValue:_current_content.content_post_date];
-//    cell.post_date.text = result;
-
+    [cell setUserName:_current_content.owner_name];
+    [cell setUserPhoto:_current_content.owner_photo];
+    [cell setLocation:@"中国 北京"];
+    [cell setRoleTag:@"role tag"];
+    
+    cell.owner_id = _current_content.owner_id;
+    
     cell.delegate = self;
     return cell;
 }
@@ -595,21 +572,6 @@
     
     return cell;
 }
-
-//- (CommentsHeaderAndFooterCell*)queryCommentsFooterCellWithTableView:(UITableView*)tableView {
-//    
-//    CommentsHeaderAndFooterCell* cell = [tableView dequeueReusableCellWithIdentifier:@"comments header and footer"];
-//    
-//    if (cell == nil) {
-//        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"CommentsHeaderAndFooterCell" owner:self options:nil];
-//        cell = [nib objectAtIndex:0];
-//    }
-//   
-//    cell.messageLabel.text = @"More Comments";
-//    cell.state = CommentsHeaderAndFooterStatesFooter;
-//    cell.delegate = self;
-//    return cell;
-//}
 
 
 #pragma mark -- QueryDetailActionDelegate
@@ -747,4 +709,22 @@
     }];
     [_queryView reloadData];
 }
+
+#pragma mark -- button actions
+- (IBAction)collectionBtnSelected {
+    NSLog(@"collect for this user");
+}
+
+- (IBAction)commentsBtnSelected {
+    NSLog(@"start to add a comment");
+}
+
+- (IBAction)pushBtnSelected {
+    NSLog(@"start to push");
+}
+
+- (IBAction)backBtnSelected {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 @end

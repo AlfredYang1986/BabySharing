@@ -8,10 +8,20 @@
 
 #import "QueryDescriptionCell.h"
 
-@implementation QueryDescriptionCell
+#define MARGIN 8
 
-@synthesize user_description = _user_description;
-@synthesize content_tags = _content_tags;
+@interface QueryDescriptionCell ()
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *tagsLabelView;
+
+@end
+
+@implementation QueryDescriptionCell {
+    UITextView* descriptionView;
+}
+
+@synthesize timeLabel = _timeLabel;
+@synthesize tagsLabelView = _tagsLabelView;
 
 - (void)awakeFromNib {
     // Initialization code
@@ -23,7 +33,45 @@
     // Configure the view for the selected state
 }
 
-+ (CGFloat)preferHeight {
-    return 52;
++ (CGFloat)preferHeightWithUserDescription:(NSString*)description {
+    if ([description isEqualToString:@""]) {
+        return 75;
+    }
+    
+    return 75 + 2 * MARGIN + [self getSizeBaseOnDescription:description].height;
+}
+
++ (CGSize)getSizeBaseOnDescription:(NSString*)description {
+    UIFont* font = [UIFont systemFontOfSize:14.f];
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    
+    return [description sizeWithFont:font constrainedToSize:CGSizeMake(width - MARGIN * 2, FLT_MAX)];
+}
+
+#pragma mark -- set values
+- (void)setTime:(NSDate*)date {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.formatterBehavior = NSDateFormatterBehavior10_4;
+    formatter.dateStyle = NSDateFormatterShortStyle;
+    formatter.timeStyle = NSDateFormatterShortStyle;
+    NSString *result = [formatter stringForObjectValue:date];
+    _timeLabel.text = result;
+}
+
+- (void)setTags:(NSString*)tags {
+    _tagsLabelView.text = tags;
+}
+
+- (void)setDescription:(NSString*)description {
+    if (descriptionView == nil) {
+        descriptionView = [[UITextView alloc]init];
+        [self addSubview:descriptionView];
+        descriptionView.scrollEnabled = NO;
+    }
+    
+    CGSize size = [QueryDescriptionCell getSizeBaseOnDescription:description];
+    descriptionView.frame = CGRectMake(MARGIN, MARGIN, [UIScreen mainScreen].bounds.size.width - MARGIN * 2, size.height);
+    descriptionView.text = description;
+    [descriptionView sizeToFit];
 }
 @end

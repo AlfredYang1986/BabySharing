@@ -10,13 +10,20 @@
 #import "QueryDetailActionDelegate.h"
 
 @interface QueryOwnerCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UIImageView *owner_img;
-@property (weak, nonatomic) IBOutlet UILabel *owner_name;
-@property (weak, nonatomic) IBOutlet UILabel *owner_tags;
-@property (weak, nonatomic) IBOutlet UILabel *content_share_number;
+@property (nonatomic, strong) UIImageView* userImg;
+@property (nonatomic, strong) UIButton* userRoleTagBtn;
+@property (nonatomic, strong) UILabel* userNameLabel;
+@property (nonatomic, strong) UIButton* pushBtn;
+
+@property (nonatomic, strong) UILabel* locationLabel;
 
 @property (weak, nonatomic) NSString* owner_id;
 @property (weak, nonatomic) id<QueryDetailActionDelegate> delegate;
 
 + (CGFloat)preferHeight;
+
+- (void)setUserPhoto:(NSString*)photo_name;
+- (void)setUserName:(NSString*)name;
+- (void)setLocation:(NSString*)location;
+- (void)setRoleTag:(NSString*)role_tag;
 @end

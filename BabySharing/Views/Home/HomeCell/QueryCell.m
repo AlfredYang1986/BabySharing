@@ -212,7 +212,7 @@
         [funcView addSubview:commentsBtn];
         
         [self addSubview:funcView];
-        funcView.frame = CGRectMake(_funcBtn.frame.origin.x - 32 * 3, _funcBtn.frame.origin.y - HER_MARGIN, 32 * 3, 32);
+        funcView.frame = CGRectMake(_funcBtn.frame.origin.x - 32 * 3, _funcBtn.frame.origin.y, 32 * 3, 32);
         
         funcView.layer.borderColor = [UIColor blueColor].CGColor;
         funcView.layer.borderWidth = 1.f;

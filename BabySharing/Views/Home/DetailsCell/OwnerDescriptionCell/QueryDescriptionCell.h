@@ -10,8 +10,9 @@
 
 @interface QueryDescriptionCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UILabel *user_description;
-@property (weak, nonatomic) IBOutlet UILabel *content_tags;
++ (CGFloat)preferHeightWithUserDescription:(NSString*)description;
 
-+ (CGFloat)preferHeight;
+- (void)setTime:(NSDate*)date;
+- (void)setTags:(NSString*)tags;
+- (void)setDescription:(NSString*)description;
 @end
