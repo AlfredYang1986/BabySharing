@@ -180,6 +180,7 @@
     if (descriptionView == nil) {
         descriptionView = [[UITextView alloc]init];
         [_bkgView addSubview:descriptionView];
+        descriptionView.editable = NO;
         descriptionView.scrollEnabled = NO;
     }
    
@@ -195,7 +196,6 @@
 
         NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
         NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-        [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Cross"] ofType:@"png"]];
         
         UIButton* didnotlikeBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 32)];
         [didnotlikeBtn addTarget:self action:@selector(notLikeBtnSelected) forControlEvents:UIControlEventTouchDown];

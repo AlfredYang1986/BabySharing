@@ -668,7 +668,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="e9f-af-LGS">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="e9f-af-LGS">
                                 <rect key="frame" x="0.0" y="64" width="600" height="445"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -744,6 +744,14 @@
                             <constraint firstItem="e9f-af-LGS" firstAttribute="top" secondItem="rqK-yN-DbQ" secondAttribute="bottom" id="fje-XZ-cgF"/>
                             <constraint firstItem="Mnx-9N-dSO" firstAttribute="top" secondItem="e9f-af-LGS" secondAttribute="bottom" id="hap-76-1L0"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="IdR-yo-3Zo"/>
+                                <exclude reference="WfS-CG-f8d"/>
+                                <exclude reference="fje-XZ-cgF"/>
+                                <exclude reference="hap-76-1L0"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Detail" id="GFG-Z5-nh0"/>
                     <connections>

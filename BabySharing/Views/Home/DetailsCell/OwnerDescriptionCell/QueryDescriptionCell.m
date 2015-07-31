@@ -67,6 +67,7 @@
         descriptionView = [[UITextView alloc]init];
         [self addSubview:descriptionView];
         descriptionView.scrollEnabled = NO;
+        descriptionView.editable = NO;
     }
     
     CGSize size = [QueryDescriptionCell getSizeBaseOnDescription:description];

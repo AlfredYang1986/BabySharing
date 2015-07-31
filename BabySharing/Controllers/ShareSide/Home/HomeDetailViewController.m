@@ -21,6 +21,7 @@
 #import "CommentsHeaderAndFooterCell.h"
 #import "QueryOwnerCell.h"
 #import "QueryDescriptionCell.h"
+#import "CommentsHeader.h"
 
 #pragma mark -- for animation
 #import "INTUAnimationEngine.h"
@@ -36,13 +37,13 @@
 #define ITEM_SECTOR                     1
 #define OWNER_DESCRIPTION_SECTOR        2
 #define LIKES_SECTOR                    3
-#define HOT_COMMENTS_TITLE_SECTOR       4
-#define HOT_COMMENTS_SECTOR             5
-#define RESENT_COMMENTS_TITLE_SECTOR    6
-#define RESENT_COMMENTS_SECTOR          7
-#define APPEND_FOOTER                   8
+//#define HOT_COMMENTS_TITLE_SECTOR       4
+//#define HOT_COMMENTS_SECTOR             5
+//#define RESENT_COMMENTS_TITLE_SECTOR    6
+//#define RESENT_COMMENTS_SECTOR          7
+//#define APPEND_FOOTER                   8
 
-#define TOTAL_SECTORS                   9
+#define TOTAL_SECTORS                   4
 
 #define CHECK_SECTOR(lhs, rhs)        \
     if (lhs == rhs) break;
@@ -65,6 +66,8 @@
 @implementation HomeDetailViewController {
     NSInteger selected_tag_type;
     NSString* selected_tag_name;
+    
+    UIView* inputContainer;
 }
 
 @synthesize queryView = _queryView;
@@ -97,7 +100,7 @@
     /**
      * comments header and footer
      */
-    [_queryView registerNib:[UINib nibWithNibName:@"CommentsHeaderAndFooterCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"comments header and footer"];
+//    [_queryView registerNib:[UINib nibWithNibName:@"CommentsHeaderAndFooterCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"comments header and footer"];
     
     /**
      * comments cell
@@ -124,7 +127,13 @@
      */
     [_queryView registerNib:[UINib nibWithNibName:@"QueryDescriptionCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"owner description cell"];
 
+    /**
+     * header
+     */
+    [_queryView registerClass:[CommentsHeader class] forHeaderFooterViewReuseIdentifier:@"Comments Header"];
 //    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(didFinishDownloadImage:) name:@"download finish" object:nil];
+  
+    _queryView.frame = CGRectMake(0, 20, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
     
     _inputView.delegate = self;
     isLoading = NO;
@@ -197,8 +206,8 @@
     
     switch (range) {
 //        case REFERSH_HEADER:
-        case APPEND_FOOTER:
-            return 44;
+//        case APPEND_FOOTER:
+//            return 44;
             
         case OWNER_NAME_SECTOR:
             return 46;
@@ -212,15 +221,15 @@
         case LIKES_SECTOR:
             return 44;
             
-        case HOT_COMMENTS_TITLE_SECTOR:
-            return 36;
-            
-        case RESENT_COMMENTS_TITLE_SECTOR:
-            return 36;
-            
-        case HOT_COMMENTS_SECTOR:
-        case RESENT_COMMENTS_SECTOR:
-            return 101;
+//        case HOT_COMMENTS_TITLE_SECTOR:
+//            return 36;
+//            
+//        case RESENT_COMMENTS_TITLE_SECTOR:
+//            return 36;
+//            
+//        case HOT_COMMENTS_SECTOR:
+//        case RESENT_COMMENTS_SECTOR:
+//            return 101;
             
         default:
             NSLog(@"wrong with ranges");
@@ -230,52 +239,89 @@
 
 #pragma mark -- table view datasource
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2;
+}
+
+- (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    if (section == 0) {
+        return nil;
+    }
+
+    CommentsHeader* header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"Comments Header"];
+    
+    if (header == nil) {
+        header = [[CommentsHeader alloc]initWithReuseIdentifier:@"Comments Header"];
+    }
+    
+    return header;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (section == 0) {
+        return 0;
+    } else {
+        return 44;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
+    if ([view isKindOfClass:[UITableViewHeaderFooterView class]]) {
+        ((UITableViewHeaderFooterView*)view).backgroundView.backgroundColor = [UIColor colorWithWhite:0.4 alpha:0.6];
+    }
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
- 
-    NSInteger range = [self checkRangeNameWithIndex:indexPath.row];
-    
-    switch (range) {
-//        case REFERSH_HEADER:
-//            return [self queryDefaultCellInitWithTableView:tableView withTitle:@"refreshing ..."];
-        case APPEND_FOOTER:
-            return [self queryDefaultCellInitWithTableView:tableView withTitle:@"more comments ..."];
-            
-        case OWNER_NAME_SECTOR:
-            return [self queryOwnerCellInitWithTableView:tableView];
-            
-        case ITEM_SECTOR: {
-            NSRange r = [self rangeOfSector:range];
-            NSInteger item_index = indexPath.row - r.location;
-            return [self queryImageCellInitWithTableView:tableView andIndex:item_index];
+
+    if (indexPath.section == 0) {
+        NSInteger range = [self checkRangeNameWithIndex:indexPath.row];
+        
+        switch (range) {
+                //        case REFERSH_HEADER:
+                //            return [self queryDefaultCellInitWithTableView:tableView withTitle:@"refreshing ..."];
+//            case APPEND_FOOTER:
+//                return [self queryDefaultCellInitWithTableView:tableView withTitle:@"more comments ..."];
+                
+            case OWNER_NAME_SECTOR:
+                return [self queryOwnerCellInitWithTableView:tableView];
+                
+            case ITEM_SECTOR: {
+                NSRange r = [self rangeOfSector:range];
+                NSInteger item_index = indexPath.row - r.location;
+                return [self queryImageCellInitWithTableView:tableView andIndex:item_index];
             }
-            
-        case OWNER_DESCRIPTION_SECTOR:
-            return [self queryDescriptionCellInitWithTableView:tableView];
-            
-        case LIKES_SECTOR:
-            return [self queryLikesCellInitWithTableView:tableView];
-            
-        case HOT_COMMENTS_TITLE_SECTOR:
-            return [self queryCommentsTitleWithTableView:tableView andTitle:@"Hot Comments"];
-            
-        case HOT_COMMENTS_SECTOR: {
-            NSRange r = [self rangeOfSector:range];
-            NSInteger comment_index = indexPath.row - r.location;
-            return [self queryCommentsCellWithTableView:tableView andIndex:comment_index];
-            }
-    
-        case RESENT_COMMENTS_TITLE_SECTOR:
-            return [self queryCommentsTitleWithTableView:tableView andTitle:@"Resent Comments"];
-            
-        case RESENT_COMMENTS_SECTOR: {
-            NSRange r = [self rangeOfSector:range];
-            NSInteger comment_index = indexPath.row - r.location;
-            return [self queryCommentsCellWithTableView:tableView andIndex:comment_index];
-            }
-            
-        default:
-            NSLog(@"wrong with ranges");
-            return nil;
+                
+            case OWNER_DESCRIPTION_SECTOR:
+                return [self queryDescriptionCellInitWithTableView:tableView];
+                
+            case LIKES_SECTOR:
+                return [self queryLikesCellInitWithTableView:tableView];
+                
+//            case HOT_COMMENTS_TITLE_SECTOR:
+//                return [self queryCommentsTitleWithTableView:tableView andTitle:@"Hot Comments"];
+//                
+//            case HOT_COMMENTS_SECTOR: {
+//                NSRange r = [self rangeOfSector:range];
+//                NSInteger comment_index = indexPath.row - r.location;
+//                return [self queryCommentsCellWithTableView:tableView andIndex:comment_index];
+//            }
+//                
+//            case RESENT_COMMENTS_TITLE_SECTOR:
+//                return [self queryCommentsTitleWithTableView:tableView andTitle:@"Resent Comments"];
+//                
+//            case RESENT_COMMENTS_SECTOR: {
+//                NSRange r = [self rangeOfSector:range];
+//                NSInteger comment_index = indexPath.row - r.location;
+//                return [self queryCommentsCellWithTableView:tableView andIndex:comment_index];
+//            }
+                
+            default:
+                NSLog(@"wrong with ranges");
+                return nil;
+        }
+    } else {
+        NSInteger comment_index = indexPath.row;
+        return [self queryCommentsCellWithTableView:tableView andIndex:comment_index];
     }
 }
 
@@ -299,11 +345,11 @@
         case ITEM_SECTOR:
         case OWNER_DESCRIPTION_SECTOR:
         case LIKES_SECTOR:
-        case HOT_COMMENTS_TITLE_SECTOR:
-        case HOT_COMMENTS_SECTOR:
-        case RESENT_COMMENTS_TITLE_SECTOR:
-        case RESENT_COMMENTS_SECTOR:
-        case APPEND_FOOTER:
+//        case HOT_COMMENTS_TITLE_SECTOR:
+//        case HOT_COMMENTS_SECTOR:
+//        case RESENT_COMMENTS_TITLE_SECTOR:
+//        case RESENT_COMMENTS_SECTOR:
+//        case APPEND_FOOTER:
             result.location = 0;
 //            result.length = 1;
 //            CHECK_SECTOR(secter,REFERSH_HEADER);
@@ -324,25 +370,25 @@
             result.length = [self enumLikeColCount];
             CHECK_SECTOR(secter, LIKES_SECTOR);
            
-            result.location += result.length;
-            result.length = [self enumMostPopularTitleCount];
-            CHECK_SECTOR(secter, HOT_COMMENTS_TITLE_SECTOR);
-            
-            result.location += result.length;
-            result.length = [self enumMostPopularCommentsCount];
-            CHECK_SECTOR(secter, HOT_COMMENTS_SECTOR);
-           
-            result.location += result.length;
-            result.length = [self enumResentsCommentsTitleCount];
-            CHECK_SECTOR(secter, RESENT_COMMENTS_TITLE_SECTOR);
-           
-            result.location += result.length;
-            result.length = [self enumResentsCommentsCount];
-            CHECK_SECTOR(secter, RESENT_COMMENTS_SECTOR);
-
-            result.location += result.length;
-            result.length = 1;
-            CHECK_SECTOR(secter, APPEND_FOOTER);
+//            result.location += result.length;
+//            result.length = [self enumMostPopularTitleCount];
+//            CHECK_SECTOR(secter, HOT_COMMENTS_TITLE_SECTOR);
+//            
+//            result.location += result.length;
+//            result.length = [self enumMostPopularCommentsCount];
+//            CHECK_SECTOR(secter, HOT_COMMENTS_SECTOR);
+//           
+//            result.location += result.length;
+//            result.length = [self enumResentsCommentsTitleCount];
+//            CHECK_SECTOR(secter, RESENT_COMMENTS_TITLE_SECTOR);
+//           
+//            result.location += result.length;
+//            result.length = [self enumResentsCommentsCount];
+//            CHECK_SECTOR(secter, RESENT_COMMENTS_SECTOR);
+//
+//            result.location += result.length;
+//            result.length = 1;
+//            CHECK_SECTOR(secter, APPEND_FOOTER);
       
         default:
             NSLog(@"wrong with ranges");
@@ -363,18 +409,21 @@
 - (NSInteger)enumResentsCommentsCount { return _current_content.comments.count; }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  
-    return //1 +        // refresh header
+ 
+    if (section == 0) {
+        return //1 +        // refresh header
            [self enumOwnerNameCount] // Owner name Sector
          + [self enumItemCount] // item (photo or movie)
          + [self enumOwnerDescriptionCount] // owner description input
-         + [self enumLikeColCount]      // like coloum
-         + [self enumMostPopularTitleCount]     // title says hot comments
-         + [self enumMostPopularCommentsCount]  // hot comment
-         + [self enumResentsCommentsTitleCount] // resent comments title
-         + [self enumResentsCommentsCount] + 1;      // all comments goes here
-    
-//    return [_current_content.items count]  /*image count*/ + 1 /*name area*/ + 1 /*like area*/ + 1 /*comments header*/ + [self enumMostPopularCommentsCount] /*comments*/ + 1 /*comments footer*/;
+         + [self enumLikeColCount];      // like coloum
+//         + [self enumMostPopularTitleCount]     // title says hot comments
+//         + [self enumMostPopularCommentsCount]  // hot comment
+//         + [self enumResentsCommentsTitleCount] // resent comments title
+//         + [self enumResentsCommentsCount] + 1;      // all comments goes here
+    } else {
+//        return [self enumResentsCommentsCount] + 1;
+        return [self enumResentsCommentsCount];
+    }
 }
 
 - (void)dealloc {
@@ -717,6 +766,24 @@
 
 - (IBAction)commentsBtnSelected {
     NSLog(@"start to add a comment");
+    if (inputContainer == nil) {
+        CGFloat width = [UIScreen mainScreen].bounds.size.width;
+        CGFloat height_offset = [UIScreen mainScreen].bounds.size.height - 44;
+    
+        inputContainer = [[UIView alloc]initWithFrame:CGRectMake(0, height_offset, width, 44)];
+        inputContainer.backgroundColor = [UIColor blueColor];
+        
+        UITextField* input = [[UITextField alloc]initWithFrame:CGRectMake(8, 6, width - 100, 32)];
+        input.layer.borderWidth = 1.f;
+        input.layer.borderColor = [UIColor blackColor].CGColor;
+        input.layer.cornerRadius = 4.f;
+        input.clipsToBounds = YES;
+        [inputContainer addSubview:input];
+        
+        [self.view addSubview:inputContainer];
+    }
+
+    [self.view bringSubviewToFront:inputContainer];
 }
 
 - (IBAction)pushBtnSelected {
