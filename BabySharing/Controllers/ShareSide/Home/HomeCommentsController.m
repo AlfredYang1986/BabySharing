@@ -115,18 +115,6 @@
         if (comments_array.count > 0) {
             QueryComments* item = [comments_array objectAtIndex:indexPath.row - 1];
             cell.current_comments = item;
-
-            cell.commentField.text = item.comment_content;
-            cell.owner_name_label.text = item.comment_owner_name;
-    
-            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-            formatter.formatterBehavior = NSDateFormatterBehavior10_4;
-            formatter.dateStyle = NSDateFormatterShortStyle;
-            formatter.timeStyle = NSDateFormatterShortStyle;
-            NSString *result = [formatter stringForObjectValue:item.comment_date];
-            cell.comment_post_date_label.text = result;
-            
-            [cell setCommentOwnerImg:nil];
         }
        
         return cell;

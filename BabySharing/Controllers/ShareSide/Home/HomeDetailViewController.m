@@ -68,6 +68,7 @@
     NSString* selected_tag_name;
     
     UIView* inputContainer;
+    UITextField* input;
 }
 
 @synthesize queryView = _queryView;
@@ -202,39 +203,44 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
    
-    NSInteger range = [self checkRangeNameWithIndex:indexPath.row];
-    
-    switch (range) {
-//        case REFERSH_HEADER:
-//        case APPEND_FOOTER:
-//            return 44;
-            
-        case OWNER_NAME_SECTOR:
-            return 46;
-            
-        case ITEM_SECTOR:
-            return [QueryDetailImageCell getPerferCellHeight];
-            
-        case OWNER_DESCRIPTION_SECTOR:
-            return [QueryDescriptionCell preferHeightWithUserDescription:_current_content.content_description];
-            
-        case LIKES_SECTOR:
-            return 44;
-            
-//        case HOT_COMMENTS_TITLE_SECTOR:
-//            return 36;
-//            
-//        case RESENT_COMMENTS_TITLE_SECTOR:
-//            return 36;
-//            
-//        case HOT_COMMENTS_SECTOR:
-//        case RESENT_COMMENTS_SECTOR:
-//            return 101;
-            
-        default:
-            NSLog(@"wrong with ranges");
-            return -1;
+    if (indexPath.section == 0) {
+        NSInteger range = [self checkRangeNameWithIndex:indexPath.row];
+        switch (range) {
+    //        case REFERSH_HEADER:
+    //        case APPEND_FOOTER:
+    //            return 44;
+                
+            case OWNER_NAME_SECTOR:
+                return 46;
+                
+            case ITEM_SECTOR:
+                return [QueryDetailImageCell getPerferCellHeight];
+                
+            case OWNER_DESCRIPTION_SECTOR:
+                return [QueryDescriptionCell preferHeightWithUserDescription:_current_content.content_description];
+                
+            case LIKES_SECTOR:
+                return 44;
+                
+    //        case HOT_COMMENTS_TITLE_SECTOR:
+    //            return 36;
+    //            
+    //        case RESENT_COMMENTS_TITLE_SECTOR:
+    //            return 36;
+    //            
+    //        case HOT_COMMENTS_SECTOR:
+    //        case RESENT_COMMENTS_SECTOR:
+    //            return 101;
+                
+            default:
+                NSLog(@"wrong with ranges");
+                return -1;
+        }
+    } else {
+        QueryComments* item = [comments_array objectAtIndex:indexPath.row];
+        return [QueryCommentsCell preferredHeightWithComment:item.comment_content];
     }
+
 }
 
 #pragma mark -- table view datasource
@@ -605,18 +611,12 @@
 
         QueryComments* item = [comments_array objectAtIndex:index];
         cell.current_comments = item;
-
-        cell.commentField.text = item.comment_content;
-        cell.owner_name_label.text = item.comment_owner_name;
-    
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        formatter.formatterBehavior = NSDateFormatterBehavior10_4;
-        formatter.dateStyle = NSDateFormatterShortStyle;
-        formatter.timeStyle = NSDateFormatterShortStyle;
-        NSString *result = [formatter stringForObjectValue:item.comment_date];
-        cell.comment_post_date_label.text = result;
-            
-        [cell setCommentOwnerImg:nil];
+        
+        [cell setTime:item.comment_date];
+        [cell setCommentOwnerName:item.comment_owner_name];
+        [cell setCommentOwnerPhoto:item.comment_owner_photo];
+        [cell setTags:@"tags test"];
+        [cell setComments:item.comment_content];
     }
     
     return cell;
@@ -674,19 +674,9 @@
 }
 
 #pragma mark -- text field delegate
-- (void)textFieldDidBeginEditing:(UITextField *)textField {
-    if (textField.tag==0) {
-        [self moveView:-250];
-    }
-    
-    if (textField.tag==1) {
-        [self moveView:-600];
-    }
-}
-
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     if (textField.tag==0) {
-        [self moveView:250];
+        [self moveView:296];
     }
     
     if (textField.tag==1) {
@@ -696,26 +686,24 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
-    if (![_inputView.text isEqualToString:@""]) {
+    if (input && ![input.text isEqualToString:@""]) {
         [self postComment];
-        _inputView.text = @"";
+        input.text = @"";
     }
-    [_inputView resignFirstResponder];
+    [input resignFirstResponder];
     return NO;
 }
 
-- (void)moveView:(float)move
-{
+- (void)moveView:(float)move {
     static const CGFloat kAnimationDuration = 0.30; // in seconds
-    CGRect frame = self.view.frame;
-    //    CGRect frameNew = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, frame.size.height + move);
-    CGRect frameNew = CGRectMake(0, 0, frame.size.width, frame.size.height + move);
+    CGRect frame = inputContainer.frame;
+    CGRect frameNew = CGRectMake(frame.origin.x, frame.origin.y + move, frame.size.width, frame.size.height);
     [INTUAnimationEngine animateWithDuration:kAnimationDuration
                                        delay:0.0
                                       easing:INTUEaseInOutQuadratic
                                      options:INTUAnimationOptionNone
                                   animations:^(CGFloat progress) {
-                                      self.view.frame = INTUInterpolateCGRect(frame, frameNew, progress);
+                                      inputContainer.frame = INTUInterpolateCGRect(frame, frameNew, progress);
                                       
                                       // NSLog(@"Progress: %.2f", progress);
                                   }
@@ -737,7 +725,7 @@
      */
     AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     
-    _current_content = [delegate.pm postCommentToServiceWithPostID:_current_content.content_post_id andCommentContent:_inputView.text];
+    _current_content = [delegate.pm postCommentToServiceWithPostID:_current_content.content_post_id andCommentContent:input.text];
     
     /**
      * 3. refresh local comment database via return value
@@ -768,22 +756,40 @@
     NSLog(@"start to add a comment");
     if (inputContainer == nil) {
         CGFloat width = [UIScreen mainScreen].bounds.size.width;
-        CGFloat height_offset = [UIScreen mainScreen].bounds.size.height - 44;
+        CGFloat height_offset = [UIScreen mainScreen].bounds.size.height;
     
         inputContainer = [[UIView alloc]initWithFrame:CGRectMake(0, height_offset, width, 44)];
-        inputContainer.backgroundColor = [UIColor blueColor];
+        inputContainer.backgroundColor = [UIColor grayColor];
         
-        UITextField* input = [[UITextField alloc]initWithFrame:CGRectMake(8, 6, width - 100, 32)];
+        input = [[UITextField alloc]initWithFrame:CGRectMake(8, 6, width - 100, 32)];
         input.layer.borderWidth = 1.f;
         input.layer.borderColor = [UIColor blackColor].CGColor;
         input.layer.cornerRadius = 4.f;
         input.clipsToBounds = YES;
+        input.delegate = self;
+        input.backgroundColor = [UIColor whiteColor];
         [inputContainer addSubview:input];
         
+        UIButton* btn_emoji = [[UIButton alloc]initWithFrame:CGRectMake(width - 90, 6, 30, 30)];
+        
+        NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+        NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+        [btn_emoji setImage:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Face"] ofType:@"png"]] forState:UIControlStateNormal];
+        [inputContainer addSubview:btn_emoji];
+       
+       
+        UIButton* btn_func = [[UIButton alloc]initWithFrame:CGRectMake(width - 40, 6, 30, 30)];
+        [btn_func setImage:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Plus"] ofType:@"png"]] forState:UIControlStateNormal];
+        [inputContainer addSubview:btn_func];
+        
         [self.view addSubview:inputContainer];
+        [self.view bringSubviewToFront:inputContainer];
     }
-
-    [self.view bringSubviewToFront:inputContainer];
+ 
+    if (![input isFirstResponder]) {
+        [input becomeFirstResponder];
+        [self moveView:-296];
+    }
 }
 
 - (IBAction)pushBtnSelected {

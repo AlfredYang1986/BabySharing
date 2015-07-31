@@ -10,17 +10,31 @@
 #import "QueryComments.h"
 #import "TmpFileStorageModel.h"
 
-@implementation QueryCommentsCell
+#define MARGIN 8
+
+@interface QueryCommentsCell ()
+@property (unsafe_unretained, nonatomic) IBOutlet UIButton *roleTagBtn;
+@property (unsafe_unretained, nonatomic) IBOutlet UILabel *dateLabel;
+@property (unsafe_unretained, nonatomic) IBOutlet UILabel *nameLabel;
+@property (unsafe_unretained, nonatomic) IBOutlet UIImageView *imgView;
+
+@end
+
+@implementation QueryCommentsCell {
+    UITextView* commentView;
+}
 
 @synthesize delegate = _delegate;
-@synthesize comment_post_date_label = _comment_post_date_label;
-@synthesize owner_name_label = _owner_name_label;
-@synthesize owner_photo_view = _owner_photo_view;
-@synthesize commentField = _commentField;
 @synthesize current_comments = _current_comments;
 
+@synthesize roleTagBtn = _roleTagBtn;
+@synthesize dateLabel = _dateLabel;
+@synthesize nameLabel = _nameLabel;
+@synthesize imgView = _imgView;
+
 - (void)awakeFromNib {
-    // Initialization code
+    _imgView.layer.cornerRadius = _imgView.frame.size.width / 2;
+    _imgView.clipsToBounds = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -29,28 +43,73 @@
     // Configure the view for the selected state
 }
 
-- (void)setCommentOwnerImg:(NSString*)name {
-    _owner_photo_view.image = [TmpFileStorageModel enumImageWithName:_current_comments.comment_owner_photo withDownLoadFinishBolck:^(BOOL success, UIImage* download_img) {
++ (CGFloat)preferredHeightWithComment:(NSString*)comment {
+    if ([comment isEqualToString:@""]) {
+        return 54;
+    }
+    
+    return 54 + MARGIN + [self getSizeBaseOnDescription:comment].height;
+}
+
++ (CGSize)getSizeBaseOnDescription:(NSString*)comment {
+    UIFont* font = [UIFont systemFontOfSize:14.f];
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    
+    return [comment sizeWithFont:font constrainedToSize:CGSizeMake(width - MARGIN * 2, FLT_MAX)];
+}
+
+- (void)setTime:(NSDate*)date {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.formatterBehavior = NSDateFormatterBehavior10_4;
+    formatter.dateStyle = NSDateFormatterShortStyle;
+    formatter.timeStyle = NSDateFormatterShortStyle;
+    NSString *result = [formatter stringForObjectValue:date];
+    _dateLabel.text = result;
+}
+
+- (void)setTags:(NSString*)tags {
+    [_roleTagBtn setTitle:tags forState:UIControlStateNormal];
+}
+
+- (void)setComments:(NSString *)comment {
+    if (commentView == nil) {
+        commentView = [[UITextView alloc]init];
+        [self addSubview:commentView];
+        commentView.editable = NO;
+        commentView.scrollEnabled = NO;
+    }
+    
+    CGSize size = [QueryCommentsCell getSizeBaseOnDescription:comment];
+    commentView.frame = CGRectMake(MARGIN, _imgView.frame.origin.y + _imgView.frame.size.height + MARGIN, [UIScreen mainScreen].bounds.size.width - MARGIN * 2, size.height);
+    commentView.text = comment;
+    [commentView sizeToFit];
+}
+
+- (void)setCommentOwnerName:(NSString*)name {
+    _nameLabel.text = name;
+}
+
+- (void)setCommentOwnerPhoto:(NSString*)photo {
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+    NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"User"] ofType:@"png"];
+    
+    UIImage* userImg = [TmpFileStorageModel enumImageWithName:photo withDownLoadFinishBolck:^(BOOL success, UIImage *user_img) {
         if (success) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                _owner_photo_view.image = download_img;
-                NSLog(@"change img success");
+                if (self) {
+                    self.imgView.image = user_img;
+                    NSLog(@"owner img download success");
+                }
             });
         } else {
-            NSLog(@"down load image %@ failed", _current_comments.comment_owner_photo);
-            NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
-            NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-            NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"User"] ofType:@"png"];
-            UIImage *image = [UIImage imageNamed:filePath];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.owner_photo_view.image = image;
-            });
+            NSLog(@"down load owner image %@ failed", photo);
         }
     }];
-
-//    _owner_photo_view.backgroundColor = [UIColor redColor];
-    _owner_photo_view.userInteractionEnabled = YES;
-//    UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didselectImg:)];
-//    [img addGestureRecognizer:tap];
+    
+    if (userImg == nil) {
+        userImg = [UIImage imageNamed:filePath];
+    }
+    [self.imgView setImage:userImg];
 }
 @end

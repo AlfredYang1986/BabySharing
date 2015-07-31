@@ -154,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BabySharing/Controllers/ShareSide/Home/HomeDetailViewController.m"
-            timestampString = "460015041.766097"
+            timestampString = "460025167.872892"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "770"
-            endingLineNumber = "770"
+            startingLineNumber = "758"
+            endingLineNumber = "758"
             landmarkName = "-commentsBtnSelected"
             landmarkType = "5">
          </BreakpointContent>
@@ -170,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BabySharing/Controllers/ShareSide/Home/HomeDetailViewController.m"
-            timestampString = "460015041.766097"
+            timestampString = "460025167.872892"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "769"
-            endingLineNumber = "769"
+            startingLineNumber = "757"
+            endingLineNumber = "757"
             landmarkName = "-commentsBtnSelected"
             landmarkType = "5">
          </BreakpointContent>
@@ -186,11 +186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BabySharing/Controllers/ShareSide/Home/HomeDetailViewController.m"
-            timestampString = "460016009.848396"
+            timestampString = "460025167.872892"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "786"
-            endingLineNumber = "786"
+            startingLineNumber = "759"
+            endingLineNumber = "759"
             landmarkName = "-commentsBtnSelected"
             landmarkType = "5">
          </BreakpointContent>
@@ -202,12 +202,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BabySharing/Controllers/ShareSide/Home/HomeDetailViewController.m"
-            timestampString = "460015729.174863"
+            timestampString = "460025167.872892"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "771"
-            endingLineNumber = "771"
-            landmarkName = "-commentsBtnSelected"
+            startingLineNumber = "700"
+            endingLineNumber = "700"
+            landmarkName = "-moveView:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
