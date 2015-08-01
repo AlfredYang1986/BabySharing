@@ -388,13 +388,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="yJf-GU-xty">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="yJf-GU-xty">
                                 <rect key="frame" x="0.0" y="0.0" width="612" height="551"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="rbW-Wj-tzd" id="CwI-Ad-jKX"/>
-                                    <outlet property="delegate" destination="rbW-Wj-tzd" id="faF-FK-yGS"/>
-                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -416,7 +412,11 @@
                                 <exclude reference="SUQ-xH-0JJ"/>
                                 <exclude reference="baX-9a-iy3"/>
                                 <exclude reference="cZs-ce-TYj"/>
+                                <exclude reference="dsO-EU-DMy"/>
                                 <exclude reference="juq-PH-Vz7"/>
+                                <exclude reference="sKV-wZ-ITl"/>
+                                <exclude reference="uH9-sm-WG7"/>
+                                <exclude reference="l5s-sw-BEQ"/>
                                 <exclude reference="t5s-rm-otC"/>
                             </mask>
                         </variation>

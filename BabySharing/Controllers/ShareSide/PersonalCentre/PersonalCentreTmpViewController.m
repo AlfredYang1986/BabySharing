@@ -12,7 +12,13 @@
 #import "TmpFileStorageModel.h"
 #import "ProfileDetailController.h"
 
-@interface PersonalCentreTmpViewController ()
+#import "PersonalCenterOwnerDelegate.h"
+#import "ProfileUserHeaderCell.h"
+
+#import "RemoteInstance.h"
+#import "ModelDefines.h"
+
+@interface PersonalCentreTmpViewController () <UITableViewDelegate, UITableViewDataSource, ProfileUserHeaderProtocol, PersonalCenterProtocol>
 @property (weak, nonatomic, readonly) NSString* current_user_id;
 @property (weak, nonatomic, readonly) NSString* current_auth_token;
 @property (weak, nonatomic) IBOutlet UITableView *selfTabeView;
@@ -24,6 +30,10 @@
 @implementation PersonalCentreTmpViewController {
     NSArray* section_content;
     UIImage* next_indicator;
+    
+    PersonalCenterOwnerDelegate* owner_delegate;
+    
+    NSDictionary* dic_profile_details;
 }
 
 @synthesize current_auth_token = _current_auth_token;
@@ -55,6 +65,18 @@
     next_indicator = [UIImage imageNamed:[resourceBundle pathForResource:@"Next2" ofType:@"png"]];
     
     section_content = @[@[@[@"分享", @"标签", @"收集", @"讨论组"], @[image0, image1, image2, image3]], @[@[@"反馈信息中心", @"设置"], @[image4, image5]]];
+    
+   
+    [_selfTabeView registerNib:[UINib nibWithNibName:@"ProfileOverView" bundle:[NSBundle mainBundle]] forHeaderFooterViewReuseIdentifier:@"Profile Overview"];
+    
+    owner_delegate = [[PersonalCenterOwnerDelegate alloc]init];
+    _selfTabeView.delegate = owner_delegate;
+    _selfTabeView.dataSource = owner_delegate;
+    owner_delegate.delegate = self;
+    
+    _selfTabeView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
+
+    [self updateProfileDetails];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -75,6 +97,38 @@
 //- (IBAction)didSelectSignOutBtn {
 //    [[NSNotificationCenter defaultCenter]postNotificationName:@"current user sign out" object:nil];
 //}
+
+- (void)updateProfileDetails {
+    dispatch_queue_t up = dispatch_queue_create("Get Profile Details", nil);
+    dispatch_async(up, ^{
+        
+        NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
+        [dic setValue:_current_auth_token forKey:@"query_auth_token"];
+        [dic setValue:_current_user_id forKey:@"query_user_id"];
+        [dic setValue:_current_user_id forKey:@"owner_user_id"];
+        
+        NSError * error = nil;
+        NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
+        
+        NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:[PROFILE_HOST_DOMAIN stringByAppendingString:PROFILE_QUERY_DETAILS]]];
+        
+        if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
+            dic_profile_details = [result objectForKey:@"result"];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [_selfTabeView reloadData];
+                self.navigationItem.title = [dic_profile_details objectForKey:@"screen_name"];
+            });
+            
+        } else {
+            NSDictionary* reError = [result objectForKey:@"error"];
+            NSString* msg = [reError objectForKey:@"message"];
+            
+            NSLog(@"query user profile failed");
+            NSLog(@"%@", msg);
+        }
+    });
+}
 
 #pragma mark -- table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -304,4 +358,42 @@
     profileNav.query_user_id = _current_user_id;
     [self.navigationController pushViewController:profileNav animated:YES];
 }
+
+#pragma mark -- personaal center overview delegate
+- (NSString*)getOwnerPhotoName {
+    if (dic_profile_details) {
+        return [dic_profile_details objectForKey:@"screen_photo"];
+    } else return nil;
+}
+
+- (NSInteger)getSharedCount {
+    if (dic_profile_details) {
+        return ((NSNumber*)[dic_profile_details objectForKey:@"posts_count"]).integerValue;
+    } else return 0;
+}
+
+- (NSInteger)getFriendsCount {
+    if (dic_profile_details) {
+        return ((NSNumber*)[dic_profile_details objectForKey:@"posts_count"]).integerValue;
+    } else return 0;
+}
+
+- (NSInteger)getCycleCount {
+    if (dic_profile_details) {
+        return ((NSNumber*)[dic_profile_details objectForKey:@"posts_count"]).integerValue;
+    } else return 0;
+}
+
+- (NSString*)getOwnerLocation {
+    return @"Not Implemented";
+}
+
+- (NSString*)getOwnerSign {
+    return @"Not Implemented";
+}
+
+- (NSString*)getOwnerRoleTag {
+    return @"Not Implemented";
+}
+
 @end

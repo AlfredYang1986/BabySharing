@@ -19,6 +19,9 @@
 		EE2D4B801B525E0A00B58A1F /* PhotoTagsController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2D4B771B525E0A00B58A1F /* PhotoTagsController.m */; };
 		EE59A7751B5936170014F9C3 /* SearchUserTagsController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE59A7741B5936170014F9C3 /* SearchUserTagsController.m */; };
 		EE5C7E4F1B511CC000104CAB /* AlbumViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5C7E4E1B511CC000104CAB /* AlbumViewController2.m */; };
+		EE6C741D1B6C3CE700EDE0AA /* PersonalCenterOwnerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6C741C1B6C3CE700EDE0AA /* PersonalCenterOwnerDelegate.m */; };
+		EE6C74211B6C45E500EDE0AA /* ProfileOverView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6C74201B6C45E500EDE0AA /* ProfileOverView.m */; };
+		EE6C74231B6C465800EDE0AA /* ProfileOverView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE6C74221B6C465800EDE0AA /* ProfileOverView.xib */; };
 		EE7415C81B5B7097002CA1BC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE7415C41B5B7097002CA1BC /* LaunchScreen.xib */; };
 		EE7415C91B5B7097002CA1BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE7415C61B5B7097002CA1BC /* Main.storyboard */; };
 		EE7415CC1B5B70D5002CA1BC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EE7415CE1B5B70D5002CA1BC /* InfoPlist.strings */; };
@@ -231,6 +234,11 @@
 		EE59A7741B5936170014F9C3 /* SearchUserTagsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchUserTagsController.m; sourceTree = "<group>"; };
 		EE5C7E4D1B511CC000104CAB /* AlbumViewController2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumViewController2.h; sourceTree = "<group>"; };
 		EE5C7E4E1B511CC000104CAB /* AlbumViewController2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumViewController2.m; sourceTree = "<group>"; };
+		EE6C741B1B6C3CE700EDE0AA /* PersonalCenterOwnerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalCenterOwnerDelegate.h; sourceTree = "<group>"; };
+		EE6C741C1B6C3CE700EDE0AA /* PersonalCenterOwnerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalCenterOwnerDelegate.m; sourceTree = "<group>"; };
+		EE6C741F1B6C45E500EDE0AA /* ProfileOverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileOverView.h; sourceTree = "<group>"; };
+		EE6C74201B6C45E500EDE0AA /* ProfileOverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileOverView.m; sourceTree = "<group>"; };
+		EE6C74221B6C465800EDE0AA /* ProfileOverView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileOverView.xib; sourceTree = "<group>"; };
 		EE7415C51B5B7097002CA1BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		EE7415C71B5B7097002CA1BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EE7415CA1B5B70C7002CA1BC /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
@@ -720,6 +728,16 @@
 			path = PostPreViewV2;
 			sourceTree = "<group>";
 		};
+		EE6C741E1B6C452400EDE0AA /* PersonalCenter */ = {
+			isa = PBXGroup;
+			children = (
+				EE6C741F1B6C45E500EDE0AA /* ProfileOverView.h */,
+				EE6C74201B6C45E500EDE0AA /* ProfileOverView.m */,
+				EE6C74221B6C465800EDE0AA /* ProfileOverView.xib */,
+			);
+			path = PersonalCenter;
+			sourceTree = "<group>";
+		};
 		EE7EB54C1B46309D003281F7 /* Message */ = {
 			isa = PBXGroup;
 			children = (
@@ -962,6 +980,8 @@
 				EEAACB471B44E90300D05C0B /* ProfileDetailController.h */,
 				EEAACB481B44E90300D05C0B /* ProfileDetailController.m */,
 				EEAACB491B44E90300D05C0B /* ProfileDetailNib.storyboard */,
+				EE6C741B1B6C3CE700EDE0AA /* PersonalCenterOwnerDelegate.h */,
+				EE6C741C1B6C3CE700EDE0AA /* PersonalCenterOwnerDelegate.m */,
 			);
 			path = PersonalCentre;
 			sourceTree = "<group>";
@@ -1408,6 +1428,7 @@
 		EEAACC051B44E90300D05C0B /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				EE6C741E1B6C452400EDE0AA /* PersonalCenter */,
 				EEAACC061B44E90400D05C0B /* ProfileDetail */,
 				EEAACC191B44E90400D05C0B /* ProfileThumbnail */,
 			);
@@ -1938,6 +1959,7 @@
 				EE7415CC1B5B70D5002CA1BC /* InfoPlist.strings in Resources */,
 				EEAACCFD1B44E90400D05C0B /* QueryLikesCell.xib in Resources */,
 				EEAACD1E1B44E90400D05C0B /* ProfileUserHeaderCell.xib in Resources */,
+				EE6C74231B6C465800EDE0AA /* ProfileOverView.xib in Resources */,
 				EEAACD4B1B44E90400D05C0B /* ProfileDetailPostCell.xib in Resources */,
 				EEAACD051B44E90400D05C0B /* QueryDescriptionCell.xib in Resources */,
 				EE7415C81B5B7097002CA1BC /* LaunchScreen.xib in Resources */,
@@ -2037,6 +2059,7 @@
 				EE7EB54B1B4628D9003281F7 /* MessageViewController.m in Sources */,
 				EEAACCA91B44E90400D05C0B /* NicknameInputViewController.m in Sources */,
 				EEAACCA41B44E90400D05C0B /* CVViewController2.m in Sources */,
+				EE6C741D1B6C3CE700EDE0AA /* PersonalCenterOwnerDelegate.m in Sources */,
 				EEAACCD31B44E90400D05C0B /* SubGroup.m in Sources */,
 				EE98D14C1B69AF9B004D88DF /* QueryHeader.m in Sources */,
 				EEAACD1D1B44E90400D05C0B /* ProfileUserHeaderCell.m in Sources */,
@@ -2092,6 +2115,7 @@
 				EE7EB5501B4630C0003281F7 /* MessageViewCell.m in Sources */,
 				EEAACCD61B44E90400D05C0B /* LoginLocalModel.xcdatamodeld in Sources */,
 				EEAACCE51B44E90400D05C0B /* QueryContentTag.m in Sources */,
+				EE6C74211B6C45E500EDE0AA /* ProfileOverView.m in Sources */,
 				EEAACCEE1B44E90400D05C0B /* SRWebSocket.m in Sources */,
 				EEAACCA11B44E90400D05C0B /* CVMovieController.m in Sources */,
 				EEAACCB81B44E90400D05C0B /* ChatViewController.m in Sources */,

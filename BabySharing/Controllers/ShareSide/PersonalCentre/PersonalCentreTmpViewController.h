@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ProfileUserHeaderCell.h"
 
-@interface PersonalCentreTmpViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, ProfileUserHeaderProtocol>
+@interface PersonalCentreTmpViewController : UIViewController
 
 @end
