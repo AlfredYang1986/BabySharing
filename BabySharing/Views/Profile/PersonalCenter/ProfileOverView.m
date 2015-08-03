@@ -25,6 +25,8 @@
 @property (weak, nonatomic) IBOutlet UIView *buttomContainer;
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 @property (weak, nonatomic) IBOutlet UILabel *personalSignLabel;
+
+@property (weak, nonatomic) IBOutlet UISegmentedControl *seg;
 @end
 
 @implementation ProfileOverView
@@ -43,6 +45,7 @@
 @synthesize locationLabel = _locationLabel;
 @synthesize personalSignLabel = _personalSignLabel;
 
+@synthesize seg = _seg;
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
@@ -60,6 +63,14 @@
     _editBtn.layer.borderWidth = 1.f;
     _editBtn.layer.cornerRadius = 8.f;
     _editBtn.clipsToBounds = YES;
+    
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+    _seg.backgroundColor = [UIColor whiteColor];
+    [_seg setImage:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Grid"] ofType:@"png"]] forSegmentAtIndex:0];
+    [_seg setImage:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Tag"] ofType:@"png"]] forSegmentAtIndex:1];
+    [_seg setImage:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Location"] ofType:@"png"]] forSegmentAtIndex:2];
+    [_seg setImage:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Star"] ofType:@"png"]] forSegmentAtIndex:3];
 }
 
 - (void)setOwnerPhoto:(NSString*)photo_name {
@@ -111,5 +122,9 @@
 
 - (void)setRoleTag:(NSString*)role_tag {
     [_roleTagBtn setTitle:role_tag forState:UIControlStateNormal];
+}
+
++ (CGFloat)preferredHeight {
+    return 270;
 }
 @end

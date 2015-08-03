@@ -14,8 +14,8 @@ typedef NS_ENUM(NSInteger, ModelAttchmentType) {
 };
 
 #pragma mark -- HOST DOMAIN
-#define HOST_DOMAIN                     @"http://www.altlys.com:9000/"
-//#define HOST_DOMAIN                     @"http://192.168.1.101:9000/"
+//#define HOST_DOMAIN                     @"http://www.altlys.com:9000/"
+#define HOST_DOMAIN                     @"http://192.168.1.102:9000/"
 //#define HOST_DOMAIN_SENDBOX             @"http://192.168.1.105:9000/"
 
 #pragma mark -- DOWNLOAD

@@ -18,6 +18,8 @@
 #import "RemoteInstance.h"
 #import "ModelDefines.h"
 
+#import "ProfileSettingController.h"
+
 @interface PersonalCentreTmpViewController () <UITableViewDelegate, UITableViewDataSource, ProfileUserHeaderProtocol, PersonalCenterProtocol>
 @property (weak, nonatomic, readonly) NSString* current_user_id;
 @property (weak, nonatomic, readonly) NSString* current_auth_token;
@@ -77,6 +79,8 @@
     _selfTabeView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
 
     [self updateProfileDetails];
+    
+    self.navigationItem.rightBarButtonItem =[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Setting" ofType:@"png"]] style:UIBarButtonItemStylePlain target:self action:@selector(didSelectSettingBtn)];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -84,15 +88,20 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
 #pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    if ([segue.identifier isEqualToString:@"MoreSetting"]) {
+        ((ProfileSettingController*)segue.destinationViewController).current_user_id = self.current_user_id;
+        ((ProfileSettingController*)segue.destinationViewController).current_auth_token = self.current_auth_token;
+    }
 }
-*/
+
+- (void)didSelectSettingBtn {
+    [self performSegueWithIdentifier:@"MoreSetting" sender:nil];
+}
 
 //- (IBAction)didSelectSignOutBtn {
 //    [[NSNotificationCenter defaultCenter]postNotificationName:@"current user sign out" object:nil];

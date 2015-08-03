@@ -17,4 +17,6 @@
 - (void)setLoation:(NSString*)location;
 - (void)setPersonalSign:(NSString*)sign_content;
 - (void)setRoleTag:(NSString*)role_tag;
+
++ (CGFloat)preferredHeight;
 @end

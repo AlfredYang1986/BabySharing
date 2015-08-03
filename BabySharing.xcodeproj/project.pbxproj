@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		EE03E9831B4FABFB00F21EF5 /* AlbumModule.m in Sources */ = {isa = PBXBuildFile; fileRef = EE03E9821B4FABFB00F21EF5 /* AlbumModule.m */; };
+		EE20BECE1B6F1B8600DE8455 /* PersonalSettingController.mm in Sources */ = {isa = PBXBuildFile; fileRef = EE20BECD1B6F1B8600DE8455 /* PersonalSettingController.mm */; };
+		EE20BED11B6F3B3C00DE8455 /* NewMessageSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE20BED01B6F3B3C00DE8455 /* NewMessageSettingController.m */; };
 		EE2D4B781B525E0A00B58A1F /* PostInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2D4B681B525E0A00B58A1F /* PostInputViewController.m */; };
 		EE2D4B791B525E0A00B58A1F /* PostPreView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE2D4B691B525E0A00B58A1F /* PostPreView.storyboard */; };
 		EE2D4B7A1B525E0A00B58A1F /* PostPreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2D4B6B1B525E0A00B58A1F /* PostPreViewController.m */; };
@@ -19,6 +21,7 @@
 		EE2D4B801B525E0A00B58A1F /* PhotoTagsController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2D4B771B525E0A00B58A1F /* PhotoTagsController.m */; };
 		EE59A7751B5936170014F9C3 /* SearchUserTagsController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE59A7741B5936170014F9C3 /* SearchUserTagsController.m */; };
 		EE5C7E4F1B511CC000104CAB /* AlbumViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5C7E4E1B511CC000104CAB /* AlbumViewController2.m */; };
+		EE6192551B6F07B900303A0E /* ProfileSettingController.mm in Sources */ = {isa = PBXBuildFile; fileRef = EE6192541B6F07B900303A0E /* ProfileSettingController.mm */; };
 		EE6C741D1B6C3CE700EDE0AA /* PersonalCenterOwnerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6C741C1B6C3CE700EDE0AA /* PersonalCenterOwnerDelegate.m */; };
 		EE6C74211B6C45E500EDE0AA /* ProfileOverView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6C74201B6C45E500EDE0AA /* ProfileOverView.m */; };
 		EE6C74231B6C465800EDE0AA /* ProfileOverView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE6C74221B6C465800EDE0AA /* ProfileOverView.xib */; };
@@ -214,6 +217,10 @@
 /* Begin PBXFileReference section */
 		EE03E9811B4FABFB00F21EF5 /* AlbumModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumModule.h; sourceTree = "<group>"; };
 		EE03E9821B4FABFB00F21EF5 /* AlbumModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumModule.m; sourceTree = "<group>"; };
+		EE20BECC1B6F1B8600DE8455 /* PersonalSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalSettingController.h; sourceTree = "<group>"; };
+		EE20BECD1B6F1B8600DE8455 /* PersonalSettingController.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = PersonalSettingController.mm; sourceTree = "<group>"; };
+		EE20BECF1B6F3B3C00DE8455 /* NewMessageSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMessageSettingController.h; sourceTree = "<group>"; };
+		EE20BED01B6F3B3C00DE8455 /* NewMessageSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMessageSettingController.m; sourceTree = "<group>"; };
 		EE2D4B671B525E0A00B58A1F /* PostInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostInputViewController.h; sourceTree = "<group>"; };
 		EE2D4B681B525E0A00B58A1F /* PostInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostInputViewController.m; sourceTree = "<group>"; };
 		EE2D4B691B525E0A00B58A1F /* PostPreView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PostPreView.storyboard; sourceTree = "<group>"; };
@@ -234,6 +241,8 @@
 		EE59A7741B5936170014F9C3 /* SearchUserTagsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchUserTagsController.m; sourceTree = "<group>"; };
 		EE5C7E4D1B511CC000104CAB /* AlbumViewController2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumViewController2.h; sourceTree = "<group>"; };
 		EE5C7E4E1B511CC000104CAB /* AlbumViewController2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumViewController2.m; sourceTree = "<group>"; };
+		EE6192531B6F07B900303A0E /* ProfileSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileSettingController.h; sourceTree = "<group>"; };
+		EE6192541B6F07B900303A0E /* ProfileSettingController.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = ProfileSettingController.mm; sourceTree = "<group>"; };
 		EE6C741B1B6C3CE700EDE0AA /* PersonalCenterOwnerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalCenterOwnerDelegate.h; sourceTree = "<group>"; };
 		EE6C741C1B6C3CE700EDE0AA /* PersonalCenterOwnerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalCenterOwnerDelegate.m; sourceTree = "<group>"; };
 		EE6C741F1B6C45E500EDE0AA /* ProfileOverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileOverView.h; sourceTree = "<group>"; };
@@ -982,6 +991,12 @@
 				EEAACB491B44E90300D05C0B /* ProfileDetailNib.storyboard */,
 				EE6C741B1B6C3CE700EDE0AA /* PersonalCenterOwnerDelegate.h */,
 				EE6C741C1B6C3CE700EDE0AA /* PersonalCenterOwnerDelegate.m */,
+				EE6192531B6F07B900303A0E /* ProfileSettingController.h */,
+				EE6192541B6F07B900303A0E /* ProfileSettingController.mm */,
+				EE20BECC1B6F1B8600DE8455 /* PersonalSettingController.h */,
+				EE20BECD1B6F1B8600DE8455 /* PersonalSettingController.mm */,
+				EE20BECF1B6F3B3C00DE8455 /* NewMessageSettingController.h */,
+				EE20BED01B6F3B3C00DE8455 /* NewMessageSettingController.m */,
 			);
 			path = PersonalCentre;
 			sourceTree = "<group>";
@@ -2032,6 +2047,7 @@
 				EEAACCE81B44E90400D05C0B /* QueryTimeSpan.m in Sources */,
 				EEAACD151B44E90400D05C0B /* ProfileDetailPostCell.m in Sources */,
 				EEAACCDE1B44E90400D05C0B /* LoginUser.m in Sources */,
+				EE6192551B6F07B900303A0E /* ProfileSettingController.mm in Sources */,
 				EEAACCD41B44E90400D05C0B /* CurrentToken+ContextOpt.m in Sources */,
 				EEAACCD01B44E90400D05C0B /* Group.m in Sources */,
 				EEAACD271B44E90400D05C0B /* ChatViewCell.m in Sources */,
@@ -2043,6 +2059,7 @@
 				EEFA44FE1B58F7D4007DF294 /* NickNameInputView.m in Sources */,
 				EE2D4B7A1B525E0A00B58A1F /* PostPreViewController.m in Sources */,
 				EEAACCAA1B44E90400D05C0B /* PhoneInputViewController.m in Sources */,
+				EE20BECE1B6F1B8600DE8455 /* PersonalSettingController.mm in Sources */,
 				EEAACCEB1B44E90400D05C0B /* TmpFileStorageModel.m in Sources */,
 				EEAACD0D1B44E90400D05C0B /* PhotoTagControlView.m in Sources */,
 				EEAACCEF1B44E90400D05C0B /* ViewController.m in Sources */,
@@ -2117,6 +2134,7 @@
 				EEAACCE51B44E90400D05C0B /* QueryContentTag.m in Sources */,
 				EE6C74211B6C45E500EDE0AA /* ProfileOverView.m in Sources */,
 				EEAACCEE1B44E90400D05C0B /* SRWebSocket.m in Sources */,
+				EE20BED11B6F3B3C00DE8455 /* NewMessageSettingController.m in Sources */,
 				EEAACCA11B44E90400D05C0B /* CVMovieController.m in Sources */,
 				EEAACCB81B44E90400D05C0B /* ChatViewController.m in Sources */,
 				EEAACCED1B44E90400D05C0B /* RemoteInstance.m in Sources */,
