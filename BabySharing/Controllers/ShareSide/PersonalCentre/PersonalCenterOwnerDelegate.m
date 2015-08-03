@@ -10,6 +10,7 @@
 #import "ProfileOverview.h"
 #import "OwnerQueryModel.h"
 #import "QueryContent+ContextOpt.h"
+#import "QueryContentItem.h"
 
 @interface PersonalCenterOwnerDelegate ()
 
@@ -56,28 +57,71 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 44;
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    return width / 3;
 }
 
+#define PHOTO_PER_LINE 3
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     OwnerQueryModel* om = [_delegate getOM];
-    return om.querydata.count;
+    return ((om.querydata.count) / PHOTO_PER_LINE) + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"default"];
+//    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"default"];
+//    
+//    if (cell == nil) {
+//        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"default"];
+//    }
+//   
+//    OwnerQueryModel* om = [_delegate getOM];
+//    QueryContent* tmp = [om.querydata objectAtIndex:indexPath.row];
+//    
+//    cell.textLabel.text = tmp.owner_name;
+//    
+//    return cell;
+   
+    
+    AlbumTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AlbumTableViewCell"];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"default"];
+        cell = [[AlbumTableCell alloc]init];
     }
-   
-    OwnerQueryModel* om = [_delegate getOM];
-    QueryContent* tmp = [om.querydata objectAtIndex:indexPath.row];
     
-    cell.textLabel.text = tmp.owner_name;
+    cell.delegate = self;
+    OwnerQueryModel* om = [_delegate getOM];
+    NSInteger row = indexPath.row;
+    @try {
+        NSArray* arr_tmp = [om.querydata objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(row * PHOTO_PER_LINE, PHOTO_PER_LINE)]];
+        NSMutableArray* arr_content = [[NSMutableArray alloc]initWithCapacity:PHOTO_PER_LINE];
+        for (QueryContent* item in arr_tmp) {
+            [arr_content addObject:((QueryContentItem*)item.items.allObjects.firstObject).item_name];
+        }
+        [cell setUpContentViewWithImageNames:arr_content atLine:row andType:AlbumControllerTypePhoto];
+    }
+    @catch (NSException *exception) {
+        NSArray* arr_tmp = [om.querydata objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(row * PHOTO_PER_LINE, om.querydata.count - row * PHOTO_PER_LINE)]];
+        NSMutableArray* arr_content = [[NSMutableArray alloc]initWithCapacity:PHOTO_PER_LINE];
+        for (QueryContent* item in arr_tmp) {
+            [arr_content addObject:((QueryContentItem*)item.items.allObjects.firstObject).item_name];
+        }
+        [cell setUpContentViewWithImageNames:arr_content atLine:row andType:AlbumControllerTypePhoto];
+    }
     
     return cell;
 }
 
+#pragma mark -- album cell delegate
+- (NSInteger)getViewsCount {
+    return PHOTO_PER_LINE;
+}
+
+- (NSInteger)indexByRow:(NSInteger)row andCol:(NSInteger)col {
+    return row * PHOTO_PER_LINE + col;
+}
+
+- (BOOL)isSelectedAtIndex:(NSInteger)index {
+    return false;
+}
 @end

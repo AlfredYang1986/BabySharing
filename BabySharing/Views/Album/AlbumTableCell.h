@@ -13,11 +13,14 @@
 
 @protocol AlbumTableCellDelegate <NSObject>
 
-- (void)didSelectOneImageAtIndex:(NSInteger)index;
-- (void)didUnSelectOneImageAtIndex:(NSInteger)index;
+@required
 - (NSInteger)indexByRow:(NSInteger)row andCol:(NSInteger)col;
 - (NSInteger)getViewsCount;
 - (BOOL)isSelectedAtIndex:(NSInteger)index;
+
+@optional
+- (void)didSelectOneImageAtIndex:(NSInteger)index;
+- (void)didUnSelectOneImageAtIndex:(NSInteger)index;
 
 @optional
 - (void)didSelectCameraBtn;

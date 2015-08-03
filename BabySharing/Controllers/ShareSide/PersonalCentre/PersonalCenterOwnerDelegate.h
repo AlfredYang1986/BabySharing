@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 
 #import "OwnerQueryModel.h"
+#import "AlbumTableCell.h"
 
 @protocol PersonalCenterProtocol <NSObject>
 - (NSString*)getOwnerPhotoName;
@@ -23,6 +24,6 @@
 - (OwnerQueryModel*)getOM;
 @end
 
-@interface PersonalCenterOwnerDelegate : NSObject <UITableViewDelegate, UITableViewDataSource>
+@interface PersonalCenterOwnerDelegate : NSObject <UITableViewDelegate, UITableViewDataSource, AlbumTableCellDelegate>
 @property (nonatomic, weak) id<PersonalCenterProtocol> delegate;
 @end
