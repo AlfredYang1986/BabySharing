@@ -33,6 +33,9 @@
 @synthesize gm = _gm;
 @synthesize mm = _mm;
 
+@synthesize tm = _tm;
+@synthesize om = _om;
+
 @synthesize wbtoken = _wbtoken;
 @synthesize wbCurrentUserID = _wbCurrentUserID;
 
@@ -41,6 +44,7 @@
 - (void)createQueryModel {
     _qm = [[QueryModel alloc]initWithDelegate:self];
     _tm = [[TagQueryModel alloc]initWithDelegate:self];
+    _om = [[OwnerQueryModel alloc]initWithDelegate:self];
 }
 
 - (void)createGroupModel {

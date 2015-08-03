@@ -19,11 +19,14 @@
 #import "ModelDefines.h"
 
 #import "ProfileSettingController.h"
+#import "OwnerQueryModel.h"
 
 @interface PersonalCentreTmpViewController () <UITableViewDelegate, UITableViewDataSource, ProfileUserHeaderProtocol, PersonalCenterProtocol>
 @property (weak, nonatomic, readonly) NSString* current_user_id;
 @property (weak, nonatomic, readonly) NSString* current_auth_token;
 @property (weak, nonatomic) IBOutlet UITableView *selfTabeView;
+
+@property (weak, nonatomic, readonly) OwnerQueryModel* om;
 @end
 
 #define TITLE 0
@@ -42,6 +45,8 @@
 @synthesize current_user_id = _current_user_id;
 @synthesize selfTabeView = _selfTabeView;
 
+@synthesize om = _om;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -49,7 +54,8 @@
     AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     _current_user_id = delegate.lm.current_user_id;
     _current_auth_token = delegate.lm.current_auth_token;
-  
+ 
+    _om = delegate.om;
     /**
      * Profile Header Cell
      */
@@ -79,6 +85,9 @@
     _selfTabeView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
 
     [self updateProfileDetails];
+    [_om queryContentsByUser:_current_user_id withToken:_current_auth_token andOwner:_current_user_id withStartIndex:0 finishedBlock:^(BOOL success) {
+        [_selfTabeView reloadData];
+    }];
     
     self.navigationItem.rightBarButtonItem =[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Setting" ofType:@"png"]] style:UIBarButtonItemStylePlain target:self action:@selector(didSelectSettingBtn)];
 }
@@ -405,4 +414,7 @@
     return @"Not Implemented";
 }
 
+- (OwnerQueryModel*)getOM {
+    return _om;
+}
 @end

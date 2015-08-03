@@ -15,6 +15,7 @@
 #import "GroupModel.h"
 #import "MessageModel.h"
 #import "TagQueryModel.h"
+#import "OwnerQueryModel.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, WeiboSDKDelegate, WXApiDelegate> {
     enum WXScene _scene;
@@ -28,6 +29,7 @@
 @property (strong, nonatomic, readonly) GroupModel* gm;
 @property (strong, nonatomic, readonly) MessageModel* mm;
 @property (strong, nonatomic, readonly) TagQueryModel* tm;
+@property (strong, nonatomic, readonly) OwnerQueryModel* om;
 
 - (void)createQueryModel;
 - (void)createGroupModel;

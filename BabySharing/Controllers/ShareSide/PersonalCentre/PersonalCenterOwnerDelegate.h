@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+#import "OwnerQueryModel.h"
+
 @protocol PersonalCenterProtocol <NSObject>
 - (NSString*)getOwnerPhotoName;
 - (NSInteger)getSharedCount;
@@ -17,6 +19,8 @@
 - (NSString*)getOwnerLocation;
 - (NSString*)getOwnerSign;
 - (NSString*)getOwnerRoleTag;
+
+- (OwnerQueryModel*)getOM;
 @end
 
 @interface PersonalCenterOwnerDelegate : NSObject <UITableViewDelegate, UITableViewDataSource>

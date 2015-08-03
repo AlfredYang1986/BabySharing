@@ -38,6 +38,7 @@
 @property (nonatomic, weak) id<AlbumTableCellDelegate> delegate;
 
 - (CGFloat)prefferCellHeight;
+- (void)setUpContentViewWithImageNames:(NSArray*)image_arr atLine:(NSInteger)row andType:(AlbumControllerType)type;
 - (void)setUpContentViewWithImageURLs2:(NSArray*)image_arr atLine:(NSInteger)row andType:(AlbumControllerType)type;
 - (void)setUpContentViewWithImageURLs:(NSArray*)image_arr atLine:(NSInteger)row andType:(AlbumControllerType)type;
 

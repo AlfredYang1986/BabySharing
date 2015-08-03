@@ -8,6 +8,8 @@
 
 #import "PersonalCenterOwnerDelegate.h"
 #import "ProfileOverview.h"
+#import "OwnerQueryModel.h"
+#import "QueryContent+ContextOpt.h"
 
 @interface PersonalCenterOwnerDelegate ()
 
@@ -40,7 +42,13 @@
     } else return nil;
 }
 
-#pragma mark -- UITableView DataSource
+#pragma mark -- UITableView DataSource 
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
+    if (section == 0 && [view isKindOfClass:[UITableViewHeaderFooterView class]]) {
+        ((UITableViewHeaderFooterView *)view).tintColor = [UIColor whiteColor];
+    }
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (section == 0) {
         return [ProfileOverView preferredHeight];
@@ -52,7 +60,8 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    OwnerQueryModel* om = [_delegate getOM];
+    return om.querydata.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -62,8 +71,11 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"default"];
     }
+   
+    OwnerQueryModel* om = [_delegate getOM];
+    QueryContent* tmp = [om.querydata objectAtIndex:indexPath.row];
     
-    cell.textLabel.text = @"alfred";
+    cell.textLabel.text = tmp.owner_name;
     
     return cell;
 }

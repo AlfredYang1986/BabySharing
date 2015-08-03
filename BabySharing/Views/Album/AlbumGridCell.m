@@ -7,6 +7,8 @@
 //
 
 #import "AlbumGridCell.h"
+#import "RemoteInstance.h"
+#import "TmpFileStorageModel.h"
 
 #define LAYER_WIDTH 20
 
@@ -66,5 +68,29 @@
     secends = secends - hours * 3600 - minutes * 60;
    
     return [NSString stringWithFormat:@"%2d:%2d:%2d", hours, minutes, secends];
+}
+
+- (void)setShowingPhotoWithName:(NSString*)photo_name {
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+    NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"User"] ofType:@"png"];
+    
+    UIImage* userImg = [TmpFileStorageModel enumImageWithName:photo_name withDownLoadFinishBolck:^(BOOL success, UIImage *user_img) {
+        if (success) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (self) {
+                    self.image = user_img;
+                    NSLog(@"owner img download success");
+                }
+            });
+        } else {
+            NSLog(@"down load owner image %@ failed", photo_name);
+        }
+    }];
+    
+    if (userImg == nil) {
+        userImg = [UIImage imageNamed:filePath];
+    }
+    [self setImage:userImg];
 }
 @end

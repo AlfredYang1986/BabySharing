@@ -10,6 +10,7 @@
 		EE03E9831B4FABFB00F21EF5 /* AlbumModule.m in Sources */ = {isa = PBXBuildFile; fileRef = EE03E9821B4FABFB00F21EF5 /* AlbumModule.m */; };
 		EE20BECE1B6F1B8600DE8455 /* PersonalSettingController.mm in Sources */ = {isa = PBXBuildFile; fileRef = EE20BECD1B6F1B8600DE8455 /* PersonalSettingController.mm */; };
 		EE20BED11B6F3B3C00DE8455 /* NewMessageSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE20BED01B6F3B3C00DE8455 /* NewMessageSettingController.m */; };
+		EE20BED41B6F430D00DE8455 /* OwnerQueryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EE20BED31B6F430D00DE8455 /* OwnerQueryModel.m */; };
 		EE2D4B781B525E0A00B58A1F /* PostInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2D4B681B525E0A00B58A1F /* PostInputViewController.m */; };
 		EE2D4B791B525E0A00B58A1F /* PostPreView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE2D4B691B525E0A00B58A1F /* PostPreView.storyboard */; };
 		EE2D4B7A1B525E0A00B58A1F /* PostPreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2D4B6B1B525E0A00B58A1F /* PostPreViewController.m */; };
@@ -221,6 +222,8 @@
 		EE20BECD1B6F1B8600DE8455 /* PersonalSettingController.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = PersonalSettingController.mm; sourceTree = "<group>"; };
 		EE20BECF1B6F3B3C00DE8455 /* NewMessageSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMessageSettingController.h; sourceTree = "<group>"; };
 		EE20BED01B6F3B3C00DE8455 /* NewMessageSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMessageSettingController.m; sourceTree = "<group>"; };
+		EE20BED21B6F430D00DE8455 /* OwnerQueryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OwnerQueryModel.h; sourceTree = "<group>"; };
+		EE20BED31B6F430D00DE8455 /* OwnerQueryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OwnerQueryModel.m; sourceTree = "<group>"; };
 		EE2D4B671B525E0A00B58A1F /* PostInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostInputViewController.h; sourceTree = "<group>"; };
 		EE2D4B681B525E0A00B58A1F /* PostInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostInputViewController.m; sourceTree = "<group>"; };
 		EE2D4B691B525E0A00B58A1F /* PostPreView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PostPreView.storyboard; sourceTree = "<group>"; };
@@ -1176,6 +1179,8 @@
 				EEAACBA91B44E90300D05C0B /* QueryModel.m */,
 				EEAACBAA1B44E90300D05C0B /* TagQueryModel.h */,
 				EEAACBAB1B44E90300D05C0B /* TagQueryModel.m */,
+				EE20BED21B6F430D00DE8455 /* OwnerQueryModel.h */,
+				EE20BED31B6F430D00DE8455 /* OwnerQueryModel.m */,
 			);
 			path = QueryModel;
 			sourceTree = "<group>";
@@ -2115,6 +2120,7 @@
 				EEAACCE31B44E90400D05C0B /* QueryContent.m in Sources */,
 				EEAACD411B44E90400D05C0B /* PhotoPreViewEditView.m in Sources */,
 				EEAACD3B1B44E90400D05C0B /* FoundPCGCell.m in Sources */,
+				EE20BED41B6F430D00DE8455 /* OwnerQueryModel.m in Sources */,
 				EEAACCE41B44E90400D05C0B /* QueryContentItem.m in Sources */,
 				EEAACD241B44E90400D05C0B /* TagQueryCell.m in Sources */,
 				EEAACCDF1B44E90400D05C0B /* MessageModel.m in Sources */,

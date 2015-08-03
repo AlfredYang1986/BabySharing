@@ -18,6 +18,47 @@
     return (AlbumGridCell*)[image_view objectAtIndex:index % 3];
 }
 
+- (void)setUpContentViewWithImageNames:(NSArray*)image_arr atLine:(NSInteger)row andType:(AlbumControllerType)type {
+    views_count = [_delegate getViewsCount];
+    if (image_view == nil) {
+        image_view = [[NSMutableArray alloc]initWithCapacity:views_count];
+    }
+    CGFloat screen_width = [UIScreen mainScreen].bounds.size.width;
+    CGFloat step_width = screen_width / views_count;
+    //      CGFloat height = rc.size.height;
+    CGFloat height = [self prefferCellHeight];
+    
+    for (int index = 0; index < image_view.count; ++index) {
+        [((UIView*)[image_view objectAtIndex:index]) removeFromSuperview];
+    }
+    [image_view removeAllObjects];
+    
+    for (int index = 0; index < image_arr.count; ++index) {
+        
+        if (index > image_arr.count)
+            continue;
+        
+        AlbumGridCell* tmp = [[AlbumGridCell alloc]initWithFrame:CGRectMake(index * step_width, 0, step_width, height)];
+        tmp.userInteractionEnabled = YES;
+        
+        UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageSubViewTaped:)];
+        tap.numberOfTapsRequired = 1;
+        [tmp addGestureRecognizer:tap];
+        
+        [tmp setShowingPhotoWithName:[image_arr objectAtIndex:index]];
+        tmp.row = row;
+        tmp.col = index;
+        
+        NSInteger iter = [_delegate indexByRow:row andCol:index];
+        if ([_delegate isSelectedAtIndex:iter]) {
+            tmp.viewSelected = YES;
+        }
+        
+        [image_view addObject:tmp];
+        [self addSubview:tmp];
+    }
+}
+
 - (void)setUpContentViewWithImageURLs2:(NSArray*)image_arr atLine:(NSInteger)row andType:(AlbumControllerType)type {
     views_count = [_delegate getViewsCount];
     if (image_view == nil) {
