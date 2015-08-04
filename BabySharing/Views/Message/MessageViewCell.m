@@ -33,28 +33,28 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    CGRect rc = [self startRect];
-    _deleteBtn = [[UIButton alloc]initWithFrame:rc];
-    [_deleteBtn setTitle:@"删除" forState:UIControlStateNormal];
-    _deleteBtn.hidden = YES;
-    _deleteBtn.backgroundColor = [UIColor redColor];
-    [self addSubview:_deleteBtn];
-    [_deleteBtn addTarget:self action:@selector(didSelectButton:) forControlEvents:UIControlEventTouchDown];
-    
-    _cancelBtn = [[UIButton alloc]initWithFrame:rc];
-    [_cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
-    _cancelBtn.hidden = YES;
-    _cancelBtn.backgroundColor = [UIColor grayColor];
-    [self addSubview:_cancelBtn];
-    [_cancelBtn addTarget:self action:@selector(didSelectButton:) forControlEvents:UIControlEventTouchDown];
+//    CGRect rc = [self startRect];
+//    _deleteBtn = [[UIButton alloc]initWithFrame:rc];
+//    [_deleteBtn setTitle:@"删除" forState:UIControlStateNormal];
+//    _deleteBtn.hidden = YES;
+//    _deleteBtn.backgroundColor = [UIColor redColor];
+//    [self addSubview:_deleteBtn];
+//    [_deleteBtn addTarget:self action:@selector(didSelectButton:) forControlEvents:UIControlEventTouchDown];
+//    
+//    _cancelBtn = [[UIButton alloc]initWithFrame:rc];
+//    [_cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
+//    _cancelBtn.hidden = YES;
+//    _cancelBtn.backgroundColor = [UIColor grayColor];
+//    [self addSubview:_cancelBtn];
+//    [_cancelBtn addTarget:self action:@selector(didSelectButton:) forControlEvents:UIControlEventTouchDown];
     
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
     NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"User"] ofType:@"png"];
     _imgView.image = [UIImage imageNamed:filePath];
     
-    UIPanGestureRecognizer* pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(handlePan:)];
-    [self addGestureRecognizer:pan];
+//    UIPanGestureRecognizer* pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(handlePan:)];
+//    [self addGestureRecognizer:pan];
     
     isEditing = NO;
 }

@@ -1319,32 +1319,120 @@
                     <view key="view" contentMode="scaleToFill" id="t0P-LK-rGK">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="pyy-Hh-hbg">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="yaZ-zx-97W" id="ygf-zJ-V3E"/>
-                                    <outlet property="delegate" destination="yaZ-zx-97W" id="JkH-aU-EMC"/>
-                                </connections>
-                            </tableView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="pyy-Hh-hbg" secondAttribute="trailing" constant="-16" id="4No-gN-87q"/>
-                            <constraint firstItem="pyy-Hh-hbg" firstAttribute="leading" secondItem="t0P-LK-rGK" secondAttribute="leadingMargin" constant="-16" id="OQe-42-YHx"/>
-                            <constraint firstItem="pyy-Hh-hbg" firstAttribute="top" secondItem="t0P-LK-rGK" secondAttribute="topMargin" id="oVq-0C-ZCv"/>
-                            <constraint firstItem="pyy-Hh-hbg" firstAttribute="bottom" secondItem="t0P-LK-rGK" secondAttribute="bottomMargin" id="r56-tP-Jh6"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Messages" id="B4D-UT-ROc"/>
                     <connections>
-                        <outlet property="queryView" destination="pyy-Hh-hbg" id="LsM-m4-qla"/>
+                        <segue destination="fav-i3-Xga" kind="push" identifier="addFriends" id="Z8a-iE-MvE"/>
+                        <segue destination="vu1-ps-3xT" kind="push" identifier="startChat" id="2Bs-UG-c18"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qnc-mR-mVz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1566" y="3252"/>
+        </scene>
+        <!--用户昵称-->
+        <scene sceneID="X20-Fs-0OF">
+            <objects>
+                <viewController id="vu1-ps-3xT" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Q1E-bh-fHM"/>
+                        <viewControllerLayoutGuide type="bottom" id="LoS-gm-neE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="swX-IM-cia">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="用户昵称" id="HYC-gH-gVt"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H4V-N8-IQx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1566" y="2496"/>
+        </scene>
+        <!--添加好友-->
+        <scene sceneID="3yB-0q-i35">
+            <objects>
+                <viewController id="fav-i3-Xga" customClass="AddingFriendsController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qfA-9O-jco"/>
+                        <viewControllerLayoutGuide type="bottom" id="lz4-14-1BE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="t0m-Wo-yvt">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="9JL-e0-pcS">
+                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="ooZ-Cq-P0Q">
+                                <rect key="frame" x="0.0" y="144" width="600" height="407"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="DZY-46-T37">
+                                <rect key="frame" x="0.0" y="108" width="600" height="29"/>
+                                <segments>
+                                    <segment title="通讯录"/>
+                                    <segment title="微信"/>
+                                    <segment title="微博"/>
+                                    <segment title="QQ"/>
+                                </segments>
+                            </segmentedControl>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="9JL-e0-pcS" firstAttribute="top" secondItem="qfA-9O-jco" secondAttribute="bottom" id="3MH-UQ-si5"/>
+                            <constraint firstItem="ooZ-Cq-P0Q" firstAttribute="top" secondItem="DZY-46-T37" secondAttribute="bottom" id="3lS-63-Jkm"/>
+                            <constraint firstItem="lz4-14-1BE" firstAttribute="top" secondItem="ooZ-Cq-P0Q" secondAttribute="bottom" id="MFr-g3-WAE"/>
+                            <constraint firstItem="9JL-e0-pcS" firstAttribute="leading" secondItem="t0m-Wo-yvt" secondAttribute="leadingMargin" constant="-16" id="VRG-nM-rij"/>
+                            <constraint firstItem="DZY-46-T37" firstAttribute="leading" secondItem="t0m-Wo-yvt" secondAttribute="leadingMargin" constant="-16" id="YtX-77-5Bn"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ooZ-Cq-P0Q" secondAttribute="trailing" constant="-16" id="jgP-zI-bdj"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="DZY-46-T37" secondAttribute="trailing" constant="-16" id="lVG-W4-c7b"/>
+                            <constraint firstItem="DZY-46-T37" firstAttribute="top" secondItem="9JL-e0-pcS" secondAttribute="bottom" id="mqm-XI-P3o"/>
+                            <constraint firstItem="ooZ-Cq-P0Q" firstAttribute="leading" secondItem="t0m-Wo-yvt" secondAttribute="leadingMargin" constant="-16" id="svr-oz-0KF"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="9JL-e0-pcS" secondAttribute="trailing" constant="-16" id="xwQ-gV-v8k"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="添加好友" id="xGd-WH-lHw"/>
+                    <connections>
+                        <segue destination="ACV-6I-bvh" kind="push" id="tQd-di-kh2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eRV-c9-hj9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2412" y="3252"/>
+        </scene>
+        <!--通讯录-->
+        <scene sceneID="HqT-Iv-Qiq">
+            <objects>
+                <viewController id="ACV-6I-bvh" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="0KP-IG-SIN"/>
+                        <viewControllerLayoutGuide type="bottom" id="gny-KS-c54"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="uSH-mh-JXp">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="ohD-TD-K1H">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottomMargin" secondItem="ohD-TD-K1H" secondAttribute="bottom" id="Opg-ju-7Dd"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ohD-TD-K1H" secondAttribute="trailing" constant="-16" id="bHb-sZ-owF"/>
+                            <constraint firstItem="ohD-TD-K1H" firstAttribute="leading" secondItem="uSH-mh-JXp" secondAttribute="leadingMargin" constant="-16" id="biL-jx-e6l"/>
+                            <constraint firstItem="ohD-TD-K1H" firstAttribute="top" secondItem="uSH-mh-JXp" secondAttribute="topMargin" id="cEa-ub-lOQ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="通讯录" id="zI4-W3-aBb"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FpM-kN-gHc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3226" y="3252"/>
         </scene>
         <!--Home-->
         <scene sceneID="xpf-RK-Rv1">

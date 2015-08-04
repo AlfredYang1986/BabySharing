@@ -17,6 +17,8 @@
 #import "TagQueryModel.h"
 #import "OwnerQueryModel.h"
 
+#import "GotyeOCAPI.h"  // for IM
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate, WeiboSDKDelegate, WXApiDelegate> {
     enum WXScene _scene;
 }

@@ -8,29 +8,101 @@
 
 #import "MessageViewController.h"
 #import "MessageViewCell.h"
+#import "MesssageTableDelegate.h"
+#import "FriendsTableDelegate.h"
+#import "INTUAnimationEngine.h"
 
-@interface MessageViewController ()
-@property (weak, nonatomic) IBOutlet UITableView *queryView;
-
+@interface MessageViewController () <UISearchBarDelegate>
+@property (strong, nonatomic) UITableView *queryView;
+@property (strong, nonatomic) UITableView *friendsQueryView;
+@property (strong, nonatomic) UISegmentedControl *friendSeg;
+@property (strong, nonatomic) UISearchBar *friendsSearchBar;
 @end
 
 @implementation MessageViewController {
-    BOOL isLoading;
+    MesssageTableDelegate* md;
+    FriendsTableDelegate* fd;
+    
+    UISegmentedControl* title_seg;
 }
 
-@synthesize queryView = _queryView;
+@synthesize queryView = _queryView;     // message
+
+// friends
+@synthesize friendSeg = _friendSeg;
+@synthesize friendsQueryView = _friendsQueryView;
+@synthesize friendsSearchBar = _friendsSearchBar;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    isLoading = NO;
-   
+    _queryView = [[UITableView alloc]init];
+    [self.view addSubview:_queryView];
+    md = [[MesssageTableDelegate alloc]init];
+    _queryView.delegate = md;
+    _queryView.dataSource = md;
+    md.queryView = _queryView;
     [_queryView registerNib:[UINib nibWithNibName:@"MessageViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"Message View Cell"];
+    
+    _friendsQueryView = [[UITableView alloc]init];
+    [self.view addSubview:_friendsQueryView];
+    fd = [[FriendsTableDelegate alloc]init];
+    _friendsQueryView.delegate = fd;
+    _friendsQueryView.dataSource = fd;
+    fd.queryView = _queryView;
+    
+    _friendSeg = [[UISegmentedControl alloc]initWithItems:@[@"好友", @"关注", @"粉丝"]];
+    [self.view addSubview:_friendSeg];
+    
+    _friendsSearchBar = [[UISearchBar alloc]init];
+    _friendsSearchBar.delegate = self;
+    for (UIView* v in _friendsSearchBar.subviews)
+    {
+        if ( [v isKindOfClass: [UITextField class]] )
+        {
+            UITextField *tf = (UITextField *)v;
+            tf.clearButtonMode = UITextFieldViewModeWhileEditing;
+            break;
+        }
+    }
+    [self.view addSubview:_friendsSearchBar];
+    
+    [self layoutSubviews];
+    
+    title_seg = [[UISegmentedControl alloc]initWithItems:@[@"消息", @"好友"]];
+    self.navigationItem.titleView = title_seg;
+    [title_seg addTarget:self action:@selector(titleSegValueChanged:) forControlEvents:UIControlEventValueChanged];
+   
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"添加好友" style:UIBarButtonItemStylePlain target:self action:@selector(friendsAddingBtnSelected)];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+- (void)layoutSubviews {
+    CGFloat width  = [UIScreen mainScreen].bounds.size.width;
+    CGFloat height = [UIScreen mainScreen].bounds.size.height;
+   
+    CGFloat offset_x = 0;
+    CGFloat offset_y = 0;
+   
+    _queryView.frame = CGRectMake(offset_x, offset_y, width, height);
+    offset_x += width;
+
+#define SEARCH_BAR_HEIGHT   44
+    offset_y += 64;
+    _friendsSearchBar.frame = CGRectMake(offset_x, offset_y, width, SEARCH_BAR_HEIGHT);
+    offset_y += SEARCH_BAR_HEIGHT;
+
+#define SEGAMENT_HEGHT      29
+    _friendSeg.frame = CGRectMake(offset_x, offset_y, width, SEGAMENT_HEGHT);
+    offset_y += SEGAMENT_HEGHT;
+    
+    CGFloat height_last = height - offset_y;
+    _friendsQueryView.frame = CGRectMake(offset_x, offset_y, width, height_last);
 }
 
 /*
@@ -43,96 +115,49 @@
 }
 */
 
-#pragma mark -- table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"selet row");
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    //    [self performSegueWithIdentifier:@"HomeDetailSegue" sender:indexPath];
-    
-    //    QueryContent* cur = [_qm.querydata objectAtIndex:indexPath.row - 1];
-    //    [self performSegueWithIdentifier:@"HomeDetailSegue" sender:cur];
-}
-
-- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [MessageViewCell getPreferredHeight];
-}
-
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
-}
-
--(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return UITableViewCellEditingStyleDelete;
-}
-
-/*改变删除按钮的title*/
--(NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return @"删除";
-}
-
-/*删除用到的函数*/
--(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        NSLog(@"delete one row");
+- (void)titleSegValueChanged:(id)sender {
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    if (title_seg.selectedSegmentIndex == 0 && _queryView.frame.origin.x < 0) {
+        [self moveContentView:width];
+    } else if (title_seg.selectedSegmentIndex == 1 && _queryView.frame.origin.x >= 0) {
+        [self moveContentView:-width];
     }
 }
 
-#pragma mark -- table view datasource
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    MessageViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"Message View Cell"];
-    
-    if (cell == nil) {
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MessageViewCell" owner:self options:nil];
-        cell = [nib objectAtIndex:0];
-    }
-
-    return cell;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
-}
-
-#pragma mark -- scroll refresh
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    // 假设偏移表格高度的20%进行刷新
-    if (!isLoading) { // 判断是否处于刷新状态，刷新中就不执行
-        // 取内容的高度：
-        // 如果内容高度大于UITableView高度，就取TableView高度
-        // 如果内容高度小于UITableView高度，就取内容的实际高度
-        float height = scrollView.contentSize.height > _queryView.frame.size.height ?_queryView.frame.size.height : scrollView.contentSize.height;
-        
-        if ((height - scrollView.contentSize.height + scrollView.contentOffset.y) / height > 0.2) { // 调用上拉刷新方
-//            CGRect rc = _queryView.frame;
-//            rc.origin.y = rc.origin.y - 44;
-//            [_queryView setFrame:rc];
-//            rc.origin.y = rc.origin.y + 44;
-//            [_queryView setFrame:rc];
-//            [_queryView reloadData];
-            return;
-            
-        } else if (- scrollView.contentOffset.y / _queryView.frame.size.height > 0.2) { // 调用下拉刷新方法
-//            CGRect rc = _queryView.frame;
-//            rc.origin.y = rc.origin.y + 44;
-//            [_queryView setFrame:rc];
-//            rc.origin.y = rc.origin.y - 44;
-//            [_queryView setFrame:rc];
-//            [_queryView reloadData];
-            
-            return;
-        }
-        
-        
-        // move and change
-    }
+- (void)friendsAddingBtnSelected {
     
 }
 
+- (void)moveContentView:(CGFloat)offset {
+    static const CGFloat kAnimationDuration = 0.30; // in seconds
+    CGPoint p_query_start = _queryView.center;
+    CGPoint p_query_end = CGPointMake(p_query_start.x + offset, p_query_start.y);
+
+    CGPoint p_friend_query_start = _friendsQueryView.center;
+    CGPoint p_friend_query_end = CGPointMake(p_friend_query_start.x + offset, p_friend_query_start.y);
+
+    CGPoint p_friend_seg_start = _friendSeg.center;
+    CGPoint p_friend_seg_end = CGPointMake(p_friend_seg_start.x + offset, p_friend_seg_start.y);
+
+    CGPoint p_friend_search_start = _friendsSearchBar.center;
+    CGPoint p_friend_search_end = CGPointMake(p_friend_search_start.x + offset, p_friend_search_start.y);
+    [INTUAnimationEngine animateWithDuration:kAnimationDuration
+                                       delay:0.0
+                                      easing:INTUEaseInOutQuadratic
+                                     options:INTUAnimationOptionNone
+                                  animations:^(CGFloat progress) {
+                                      _queryView.center = INTUInterpolateCGPoint(p_query_start, p_query_end, progress);
+                                      _friendsQueryView.center = INTUInterpolateCGPoint(p_friend_query_start, p_friend_query_end, progress);
+                                      _friendsSearchBar.center = INTUInterpolateCGPoint(p_friend_search_start, p_friend_search_end, progress);
+                                      _friendSeg.center = INTUInterpolateCGPoint(p_friend_seg_start, p_friend_seg_end, progress);
+                                      
+                                      // NSLog(@"Progress: %.2f", progress);
+                                      
+                                  }
+                                  completion:^(BOOL finished) {
+                                      // NOTE: When passing INTUAnimationOptionRepeat, this completion block is NOT executed at the end of each cycle. It will only run if the animation is canceled.
+                                      NSLog(@"%@", finished ? @"Animation Completed" : @"Animation Canceled");
+                                      //                                                         self.animationID = NSNotFound;
+                                  }];
+}
 @end

@@ -21,7 +21,10 @@
 #import "LoginInputView.h"
 #import "ChooseAreaViewController.h"
 
-@interface ViewController () <LoginInputViewDelegate, AreaViewControllerDelegate>
+#import "GotyeOCAPI.h"
+#import "GotyeOCDeleget.h"
+
+@interface ViewController () <LoginInputViewDelegate, AreaViewControllerDelegate, GotyeOCDelegate>
 
 @property (nonatomic, weak) LoginModel* lm;
 @property (nonatomic, weak) UIViewController* loginController;
@@ -351,4 +354,30 @@ enum DisplaySide {
     [inputView setAreaCode:code];
 }
 
+#pragma mark -- Gotaye Delegate
+/**
+ * @brief 登录回调
+ * @param code: 状态id
+ * @param user: 当前登录用户
+ */
+-(void) onLogin:(GotyeStatusCode)code user:(GotyeOCUser*)user {
+    
+}
+
+/**
+ * @brief  正在重连回调
+ * @param code: 状态id
+ * @param user: 当前登录用户
+ */
+-(void) onReconnecting:(GotyeStatusCode)code user:(GotyeOCUser*)user {
+    
+}
+
+/**
+ * @brief  退出登录回调
+ * @param code: 状态id
+ */
+-(void) onLogout:(GotyeStatusCode)code {
+    
+}
 @end

@@ -85,7 +85,13 @@
     //3.创建UIUserNotificationSettings，并设置消息的显示类类型
     UIUserNotificationSettings *notiSettings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeAlert | UIUserNotificationTypeSound) categories:[NSSet setWithObjects:categorys, nil]];
     [[UIApplication sharedApplication] registerUserNotificationSettings:notiSettings];
-    
+   
+    status im_register_result = [GotyeOCAPI init:@"1afd2cc8-4060-41eb-aa5a-ee9460370156" packageName:@"DongDa"];
+    if (im_register_result != GotyeStatusCodeOK) {
+        NSLog(@"IM Register Error!");
+    } else {
+        NSLog(@"IM Register Success!");
+    }
     return YES;
 }
 
@@ -99,10 +105,20 @@
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     [_qm saveTop:50];
     NSLog(@"save content");
+    [GotyeOCAPI exit];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    /**
+     * add IM service
+     */
+    status im_register_result = [GotyeOCAPI init:@"1afd2cc8-4060-41eb-aa5a-ee9460370156" packageName:@"DongDa"];
+    if (im_register_result != GotyeStatusCodeOK) {
+        NSLog(@"IM Register Error!");
+    } else {
+        NSLog(@"IM Register Success!");
+    }
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -113,6 +129,7 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     [_qm saveTop:50];
     NSLog(@"save content");
+    [GotyeOCAPI exit];
 }
 
 #pragma mark -- notification callback
