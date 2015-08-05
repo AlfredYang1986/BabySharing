@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "QueryModel.h"
+#import "ConnectionModel.h"
 #import "QueryDetailActionDelegate.h"
 
 #import "ShareSideBaseController.h"
@@ -16,6 +17,7 @@
 
 @interface HomeDetailViewController : ShareSideBaseController <UITableViewDelegate, UITableViewDataSource, QueryDetailActionDelegate, UITextFieldDelegate>
 @property (nonatomic, weak) QueryModel* qm;
+@property (nonatomic, weak, readonly) ConnectionModel* cm;
 @property (nonatomic, weak) QueryContent* current_content;
 @property (weak, nonatomic) NSString* current_user_id;
 @property (weak, nonatomic) NSString* current_auth_token;

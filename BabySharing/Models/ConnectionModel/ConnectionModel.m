@@ -8,7 +8,9 @@
 
 #import "ConnectionModel.h"
 #import "ModelDefines.h"
-#import <CoreData/CoreData.h>
+//#import <CoreData/CoreData.h>
+#import "RemoteInstance.h"
+#import "AppDelegate.h"
 
 @implementation ConnectionModel
 @synthesize querydata = _querydata;
@@ -61,4 +63,62 @@
     
     return self;
 }
+
+#pragma mark -- follow and unfollow
+- (void)followOneUser:(NSString*)follow_user_id withFinishBlock:(followFinishBlock)block {
+    NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
+    
+    [dic setValue:_delegate.lm.current_auth_token forKey:@"auth_token"];
+    [dic setValue:_delegate.lm.current_user_id forKey:@"user_id"];
+    [dic setValue:follow_user_id forKey:@"follow_user_id"];
+    [dic setValue:_delegate.lm.current_user_id forKey:@"owner_id"];
+    
+    NSError * error = nil;
+    NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
+    
+//    NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:RELATIONSHIP_FOLLOW]];
+    NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:RELATIONSHIP_UNFOLLOW]];
+    
+    if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
+        NSDictionary* reVal = [result objectForKey:@"result"];
+        NSLog(@"connections result: %@", reVal);
+        block(YES, @"");
+        
+    } else {
+        //        NSDictionary* reError = [result objectForKey:@"error"];
+        //        NSString* msg = [reError objectForKey:@"message"];
+        //        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:msg delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+        //        [alert show];
+        block(NO, @"");
+    }
+}
+
+- (void)unfollowOneUser:(NSString*)follow_user_id withFinishBlock:(followFinishBlock)block {
+    NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
+
+    [dic setValue:_delegate.lm.current_auth_token forKey:@"auth_token"];
+    [dic setValue:_delegate.lm.current_user_id forKey:@"user_id"];
+    [dic setValue:follow_user_id forKey:@"follow_user_id"];
+    [dic setValue:_delegate.lm.current_user_id forKey:@"owner_id"];
+    
+    NSError * error = nil;
+    NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
+    
+    NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:[RELATIONSHIP_DOMAIN stringByAppendingString:RELATIONSHIP_UNFOLLOW]]];
+    
+    if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
+        NSDictionary* reVal = [result objectForKey:@"result"];
+        NSLog(@"connections result: %@", reVal);
+        block(YES, @"");
+        
+    } else {
+        //        NSDictionary* reError = [result objectForKey:@"error"];
+        //        NSString* msg = [reError objectForKey:@"message"];
+        //        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:msg delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+        //        [alert show];
+        block(NO, @"");
+    }
+}
+
+#pragma mark -- query connections
 @end

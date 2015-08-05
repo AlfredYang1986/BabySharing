@@ -75,6 +75,7 @@
 @synthesize inputView = _inputView;
 
 @synthesize qm = _qm;
+@synthesize cm = _cm;
 @synthesize current_content = _current_content;
 @synthesize current_user_id = _current_user_id;
 @synthesize current_auth_token = _current_auth_token;
@@ -97,6 +98,9 @@
         else
             return NSOrderedAscending;
     }];
+   
+    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    _cm = app.cm;
     
     /**
      * comments header and footer
@@ -630,6 +634,15 @@
 
 - (void)didSelectDetialFollowOwner {
     NSLog(@"folow");
+    NSString* follow_user_id = _current_content.owner_id;
+   
+    [_cm followOneUser:follow_user_id withFinishBlock:^(BOOL success, NSString *message) {
+        if (success) {
+            NSLog(@"follow success");
+        } else {
+            NSLog(@"follow error, %@", message);
+        }
+    }];
 }
 
 - (void)didSelectDetialOwnerNameOrImage:(NSString*)owner_id {

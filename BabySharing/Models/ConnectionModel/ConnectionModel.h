@@ -11,6 +11,8 @@
 
 @class AppDelegate;
 
+typedef void(^followFinishBlock)(BOOL success, NSString* message);
+
 @interface ConnectionModel : NSObject
 
 @property (strong, nonatomic) UIManagedDocument* doc;
@@ -19,4 +21,10 @@
 
 #pragma mark -- constractor
 - (id)initWithDelegate:(AppDelegate*)app;
+
+#pragma mark -- follow and unfollow
+- (void)followOneUser:(NSString*)follow_user_id withFinishBlock:(followFinishBlock)block;
+- (void)unfollowOneUser:(NSString*)follow_user_id withFinishBlock:(followFinishBlock)block;
+
+#pragma mark -- query connections
 @end

@@ -26,6 +26,8 @@
         CurrentToken* tmp = [matches lastObject];
         if ([tmp.who.user_id isEqualToString:lgt.user_id]) {
             tmp.last_login_data = [NSDate date];
+        } else {
+            tmp.who = lgt;
         }
         [context save:nil];
         return tmp;
