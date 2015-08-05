@@ -24,7 +24,7 @@
 @synthesize userImg = _userImg;
 @synthesize userRoleTagBtn = _userRoleTagBtn;
 @synthesize userNameLabel = _userNameLabel;
-@synthesize pushBtn = _pushBtn;
+@synthesize followBtn = _followBtn;
 @synthesize locationLabel = _locationLabel;
 
 @synthesize owner_id = _owner_id;
@@ -51,9 +51,9 @@
         [self addSubview:_locationLabel];
     }
     
-    if (!_pushBtn) {
-        _pushBtn = [[UIButton alloc]init];
-        [self addSubview:_pushBtn];
+    if (!_followBtn) {
+        _followBtn = [[UIButton alloc]init];
+        [self addSubview:_followBtn];
     }
 }
 
@@ -90,15 +90,16 @@
     _userRoleTagBtn.backgroundColor = [UIColor whiteColor];
     [_userRoleTagBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     
-    _pushBtn.bounds = CGRectMake(0, 0, 50, 25);
+    _followBtn.bounds = CGRectMake(0, 0, 50, 25);
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
-    _pushBtn.center = CGPointMake(width - MARGIN * 2 - 25, HEADER_HEIGHT / 2);
-    [_pushBtn setTitle:@"+关注" forState:UIControlStateNormal];
-    [_pushBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-    _pushBtn.layer.borderColor = [UIColor blueColor].CGColor;
-    _pushBtn.layer.borderWidth = 1.f;
-    _pushBtn.layer.cornerRadius = 4.f;
-    _pushBtn.clipsToBounds = YES;
+    _followBtn.center = CGPointMake(width - MARGIN * 2 - 25, HEADER_HEIGHT / 2);
+    [_followBtn setTitle:@"+关注" forState:UIControlStateNormal];
+    [_followBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    _followBtn.layer.borderColor = [UIColor blueColor].CGColor;
+    _followBtn.layer.borderWidth = 1.f;
+    _followBtn.layer.cornerRadius = 4.f;
+    _followBtn.clipsToBounds = YES;
+    [_followBtn addTarget:self action:@selector(followBtnSelected) forControlEvents:UIControlEventTouchDown];
 }
 
 + (CGFloat)preferHeight {
@@ -156,5 +157,9 @@
 
 - (void)setRoleTag:(NSString *)role_tag {
     [_userRoleTagBtn setTitle:role_tag forState:UIControlStateNormal];
+}
+
+- (void)followBtnSelected {
+    [_delegate didSelectDetialFollowOwner];
 }
 @end

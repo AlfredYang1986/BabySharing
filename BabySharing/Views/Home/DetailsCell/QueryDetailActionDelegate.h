@@ -29,6 +29,9 @@
 
 #pragma mark -- tags actions
 - (void)didSelectTagWithType:(NSInteger)type andName:(NSString*)name;
+
+#pragma mark -- follow
+- (void)didSelectFollowBtn;
 @end
 
 #endif

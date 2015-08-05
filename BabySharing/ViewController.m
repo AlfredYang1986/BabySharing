@@ -119,6 +119,12 @@ enum DisplaySide {
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [GotyeOCAPI addListener:self];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [GotyeOCAPI removeListener:self];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -184,8 +190,9 @@ enum DisplaySide {
 //    if (_loginController) {
 //        [_loginController dismissViewControllerAnimated:YES completion:^(void){
             if ([_lm isLoginedByUser]) {
-                AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-                [delegate createQueryModel];
+//                AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//                [delegate createQueryModel];
+                [GotyeOCAPI login:_lm.current_user_id password:nil];
             }
 //        }];
 //    }
@@ -203,9 +210,10 @@ enum DisplaySide {
     NSLog(@"application is ready");
     
     if ([_lm isLoginedByUser]) {
-        AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-        [delegate createQueryModel];
-        [delegate registerDeviceTokenWithCurrentUser];
+//        AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//        [delegate createQueryModel];
+//        [delegate registerDeviceTokenWithCurrentUser];
+        [GotyeOCAPI login:_lm.current_user_id password:nil];
     }
 }
 
@@ -361,7 +369,11 @@ enum DisplaySide {
  * @param user: 当前登录用户
  */
 -(void) onLogin:(GotyeStatusCode)code user:(GotyeOCUser*)user {
-    
+    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    app.im_user = user;
+    [app createQueryModel];
+    [app registerDeviceTokenWithCurrentUser];
+//    [self performSegueWithIdentifier:@"contentSegue" sender:nil];
 }
 
 /**
@@ -370,7 +382,8 @@ enum DisplaySide {
  * @param user: 当前登录用户
  */
 -(void) onReconnecting:(GotyeStatusCode)code user:(GotyeOCUser*)user {
-    
+    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    app.im_user = user;
 }
 
 /**
@@ -378,6 +391,7 @@ enum DisplaySide {
  * @param code: 状态id
  */
 -(void) onLogout:(GotyeStatusCode)code {
-    
+    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    app.im_user = nil;
 }
 @end

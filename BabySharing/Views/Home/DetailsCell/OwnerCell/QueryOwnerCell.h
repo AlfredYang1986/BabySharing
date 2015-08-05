@@ -13,7 +13,7 @@
 @property (nonatomic, strong) UIImageView* userImg;
 @property (nonatomic, strong) UIButton* userRoleTagBtn;
 @property (nonatomic, strong) UILabel* userNameLabel;
-@property (nonatomic, strong) UIButton* pushBtn;
+@property (nonatomic, strong) UIButton* followBtn;
 
 @property (nonatomic, strong) UILabel* locationLabel;
 

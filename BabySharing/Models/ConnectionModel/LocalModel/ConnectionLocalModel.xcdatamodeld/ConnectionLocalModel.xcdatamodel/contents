@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14E46" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="ConnectionOwner" representedClassName="ConnectionOwner" syncable="YES">
+        <attribute name="user_id" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="followed" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Followed" inverseName="followedBy" inverseEntity="Followed" syncable="YES"/>
+        <relationship name="following" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Following" inverseName="followingBy" inverseEntity="Following" syncable="YES"/>
+    </entity>
+    <entity name="Followed" representedClassName="Followed" syncable="YES">
+        <attribute name="user_id" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="followedBy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ConnectionOwner" inverseName="followed" inverseEntity="ConnectionOwner" syncable="YES"/>
+    </entity>
+    <entity name="Following" representedClassName="Following" syncable="YES">
+        <attribute name="user_id" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="followingBy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ConnectionOwner" inverseName="following" inverseEntity="ConnectionOwner" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="ConnectionOwner" positionX="-3888" positionY="9" width="128" height="88"/>
+        <element name="Following" positionX="-3600" positionY="-97" width="128" height="73"/>
+        <element name="Followed" positionX="-3602" positionY="74" width="128" height="73"/>
+    </elements>
+</model>

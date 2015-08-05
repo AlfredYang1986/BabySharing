@@ -14,8 +14,8 @@ typedef NS_ENUM(NSInteger, ModelAttchmentType) {
 };
 
 #pragma mark -- HOST DOMAIN
-#define HOST_DOMAIN                     @"http://www.altlys.com:9000/"
-//#define HOST_DOMAIN                     @"http://192.168.1.102:9000/"
+//#define HOST_DOMAIN                     @"http://www.altlys.com:9000/"
+#define HOST_DOMAIN                     @"http://192.168.1.102:9000/"
 //#define HOST_DOMAIN_SENDBOX             @"http://192.168.1.105:9000/"
 
 #pragma mark -- DOWNLOAD
@@ -85,10 +85,15 @@ typedef NS_ENUM(NSInteger, ModelAttchmentType) {
 #define DEVICE_DOMAIN                       [HOST_DOMAIN stringByAppendingString:@"devices/"]
 #define DEVICE_REGISTRATION                 [DEVICE_DOMAIN stringByAppendingString:@"registerUserDevice"]
 
+#pragma mark -- RELATIONSHIP
+#define RELATIONSHIP_DOMAIN                 [HOST_DOMAIN stringByAppendingString:@"connections/"]
+#define RELATIONSHIP_FOLLOW                 [RELATIONSHIP_DOMAIN stringByAppendingString:@"follow"]
+#define RELATIONSHIP_UNFOLLOW               [RELATIONSHIP_DOMAIN stringByAppendingString:@"unfollow"]
 
 #pragma mark -- database
 #define LOCALDB_LOGIN                       @"loginData23.sqlite"
 #define LOCALDB_QUERY                       @"quertData12.sqlite"
 #define LOCALDB_GROUP                       @"groupData03.sqlite"
 #define LOCALDB_TAG_QUERY                   @"tagQuery00.sqlite"
+#define LOCALDB_RELATIONSHIP                @"Relationship00.sqlite"
 //#define LOCALDB_CHAT                      @"chatData01.sqlite"

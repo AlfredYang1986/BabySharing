@@ -36,6 +36,8 @@
 @synthesize tm = _tm;
 @synthesize om = _om;
 
+@synthesize cm = _cm;
+
 @synthesize wbtoken = _wbtoken;
 @synthesize wbCurrentUserID = _wbCurrentUserID;
 
@@ -45,6 +47,7 @@
     _qm = [[QueryModel alloc]initWithDelegate:self];
     _tm = [[TagQueryModel alloc]initWithDelegate:self];
     _om = [[OwnerQueryModel alloc]initWithDelegate:self];
+    _cm = [[ConnectionModel alloc]initWithDelegate:self];
 }
 
 - (void)createGroupModel {
@@ -105,7 +108,7 @@
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     [_qm saveTop:50];
     NSLog(@"save content");
-    [GotyeOCAPI exit];
+//    [GotyeOCAPI exit];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -113,12 +116,12 @@
     /**
      * add IM service
      */
-    status im_register_result = [GotyeOCAPI init:@"1afd2cc8-4060-41eb-aa5a-ee9460370156" packageName:@"DongDa"];
-    if (im_register_result != GotyeStatusCodeOK) {
-        NSLog(@"IM Register Error!");
-    } else {
-        NSLog(@"IM Register Success!");
-    }
+//    status im_register_result = [GotyeOCAPI init:@"1afd2cc8-4060-41eb-aa5a-ee9460370156" packageName:@"DongDa"];
+//    if (im_register_result != GotyeStatusCodeOK) {
+//        NSLog(@"IM Register Error!");
+//    } else {
+//        NSLog(@"IM Register Success!");
+//    }
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {

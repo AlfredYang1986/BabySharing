@@ -16,6 +16,7 @@
 #import "MessageModel.h"
 #import "TagQueryModel.h"
 #import "OwnerQueryModel.h"
+#import "ConnectionModel.h"
 
 #import "GotyeOCAPI.h"  // for IM
 
@@ -32,6 +33,9 @@
 @property (strong, nonatomic, readonly) MessageModel* mm;
 @property (strong, nonatomic, readonly) TagQueryModel* tm;
 @property (strong, nonatomic, readonly) OwnerQueryModel* om;
+@property (strong, nonatomic, readonly) ConnectionModel* cm;
+
+@property (strong, nonatomic) GotyeOCUser* im_user;
 
 - (void)createQueryModel;
 - (void)createGroupModel;

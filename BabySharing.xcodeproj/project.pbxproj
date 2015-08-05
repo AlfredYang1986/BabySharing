@@ -43,6 +43,12 @@
 		EE74162B1B5B9659002CA1BC /* AreaTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE7416291B5B9659002CA1BC /* AreaTableCell.xib */; };
 		EE74162E1B5BA6F7002CA1BC /* UserPrivacyController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE74162D1B5BA6F7002CA1BC /* UserPrivacyController.m */; };
 		EE7537761B6B1AC400EC1616 /* CommentsHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7537751B6B1AC400EC1616 /* CommentsHeader.m */; };
+		EE76A56D1B72021900036747 /* ConnectionLocalModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EE76A56B1B72021800036747 /* ConnectionLocalModel.xcdatamodeld */; };
+		EE76A5741B72056800036747 /* Following.m in Sources */ = {isa = PBXBuildFile; fileRef = EE76A56F1B72056800036747 /* Following.m */; };
+		EE76A5751B72056800036747 /* ConnectionOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = EE76A5711B72056800036747 /* ConnectionOwner.m */; };
+		EE76A5761B72056800036747 /* Followed.m in Sources */ = {isa = PBXBuildFile; fileRef = EE76A5731B72056800036747 /* Followed.m */; };
+		EE76A5791B7205CF00036747 /* ConnectionOwner+ContextOpt.m in Sources */ = {isa = PBXBuildFile; fileRef = EE76A5781B7205CF00036747 /* ConnectionOwner+ContextOpt.m */; };
+		EE76A57C1B72181300036747 /* ConnectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EE76A57B1B72181300036747 /* ConnectionModel.m */; };
 		EE7951971B45065200CC28A2 /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EE7951961B45065200CC28A2 /* libGPUImage.a */; };
 		EE7EB54B1B4628D9003281F7 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7EB54A1B4628D9003281F7 /* MessageViewController.m */; };
 		EE7EB5501B4630C0003281F7 /* MessageViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7EB54E1B4630C0003281F7 /* MessageViewCell.m */; };
@@ -294,6 +300,17 @@
 		EE74162D1B5BA6F7002CA1BC /* UserPrivacyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserPrivacyController.m; sourceTree = "<group>"; };
 		EE7537741B6B1AC400EC1616 /* CommentsHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentsHeader.h; sourceTree = "<group>"; };
 		EE7537751B6B1AC400EC1616 /* CommentsHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentsHeader.m; sourceTree = "<group>"; };
+		EE76A56C1B72021900036747 /* ConnectionLocalModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ConnectionLocalModel.xcdatamodel; sourceTree = "<group>"; };
+		EE76A56E1B72056800036747 /* Following.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Following.h; sourceTree = "<group>"; };
+		EE76A56F1B72056800036747 /* Following.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Following.m; sourceTree = "<group>"; };
+		EE76A5701B72056800036747 /* ConnectionOwner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionOwner.h; sourceTree = "<group>"; };
+		EE76A5711B72056800036747 /* ConnectionOwner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionOwner.m; sourceTree = "<group>"; };
+		EE76A5721B72056800036747 /* Followed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Followed.h; sourceTree = "<group>"; };
+		EE76A5731B72056800036747 /* Followed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Followed.m; sourceTree = "<group>"; };
+		EE76A5771B7205CF00036747 /* ConnectionOwner+ContextOpt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ConnectionOwner+ContextOpt.h"; sourceTree = "<group>"; };
+		EE76A5781B7205CF00036747 /* ConnectionOwner+ContextOpt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ConnectionOwner+ContextOpt.m"; sourceTree = "<group>"; };
+		EE76A57A1B72181300036747 /* ConnectionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionModel.h; sourceTree = "<group>"; };
+		EE76A57B1B72181300036747 /* ConnectionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionModel.m; sourceTree = "<group>"; };
 		EE7951961B45065200CC28A2 /* libGPUImage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGPUImage.a; path = GPUImage.framework/libGPUImage.a; sourceTree = "<group>"; };
 		EE7EB5491B4628D9003281F7 /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
 		EE7EB54A1B4628D9003281F7 /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
@@ -822,6 +839,32 @@
 			path = PersonalCenter;
 			sourceTree = "<group>";
 		};
+		EE76A5691B72019D00036747 /* ConnectionModel */ = {
+			isa = PBXGroup;
+			children = (
+				EE76A56A1B7201C200036747 /* LocalModel */,
+				EE76A57A1B72181300036747 /* ConnectionModel.h */,
+				EE76A57B1B72181300036747 /* ConnectionModel.m */,
+			);
+			path = ConnectionModel;
+			sourceTree = "<group>";
+		};
+		EE76A56A1B7201C200036747 /* LocalModel */ = {
+			isa = PBXGroup;
+			children = (
+				EE76A56B1B72021800036747 /* ConnectionLocalModel.xcdatamodeld */,
+				EE76A56E1B72056800036747 /* Following.h */,
+				EE76A56F1B72056800036747 /* Following.m */,
+				EE76A5701B72056800036747 /* ConnectionOwner.h */,
+				EE76A5711B72056800036747 /* ConnectionOwner.m */,
+				EE76A5721B72056800036747 /* Followed.h */,
+				EE76A5731B72056800036747 /* Followed.m */,
+				EE76A5771B7205CF00036747 /* ConnectionOwner+ContextOpt.h */,
+				EE76A5781B7205CF00036747 /* ConnectionOwner+ContextOpt.m */,
+			);
+			path = LocalModel;
+			sourceTree = "<group>";
+		};
 		EE7EB54C1B46309D003281F7 /* Message */ = {
 			isa = PBXGroup;
 			children = (
@@ -1147,6 +1190,7 @@
 		EEAACB641B44E90300D05C0B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				EE76A5691B72019D00036747 /* ConnectionModel */,
 				EE03E9801B4FABDC00F21EF5 /* Album */,
 				EEAACB651B44E90300D05C0B /* Common */,
 				EEAACB671B44E90300D05C0B /* GroupModel */,
@@ -2146,6 +2190,7 @@
 				EEAACD4E1B44E90400D05C0B /* ProfileDetailTagsCell.m in Sources */,
 				EEAACCD71B44E90400D05C0B /* LoginToken+ContextOpt.m in Sources */,
 				EEAACCBE1B44E90400D05C0B /* HomeViewController.m in Sources */,
+				EE76A5751B72056800036747 /* ConnectionOwner.m in Sources */,
 				EEFA44FE1B58F7D4007DF294 /* NickNameInputView.m in Sources */,
 				EE2D4B7A1B525E0A00B58A1F /* PostPreViewController.m in Sources */,
 				EEAACCAA1B44E90400D05C0B /* PhoneInputViewController.m in Sources */,
@@ -2153,13 +2198,16 @@
 				EEAACCEB1B44E90400D05C0B /* TmpFileStorageModel.m in Sources */,
 				EEAACD0D1B44E90400D05C0B /* PhotoTagControlView.m in Sources */,
 				EEAACCEF1B44E90400D05C0B /* ViewController.m in Sources */,
+				EE76A56D1B72021900036747 /* ConnectionLocalModel.xcdatamodeld in Sources */,
 				EEAACD201B44E90400D05C0B /* SGAlertMenu.m in Sources */,
 				EEAACCCA1B44E90400D05C0B /* INTUEasingFunctions.m in Sources */,
 				EEAACCB51B44E90400D05C0B /* SecretViewController.m in Sources */,
+				EE76A57C1B72181300036747 /* ConnectionModel.m in Sources */,
 				EE7537761B6B1AC400EC1616 /* CommentsHeader.m in Sources */,
 				EEAACD001B44E90400D05C0B /* QueryDetailImageCell.m in Sources */,
 				EEAACCA61B44E90400D05C0B /* AlreadLogedViewController.m in Sources */,
 				EE9D9CB11B7062EB001DADCC /* AddingFriendsController.m in Sources */,
+				EE76A5761B72056800036747 /* Followed.m in Sources */,
 				EEAACCF11B44E90400D05C0B /* AlbumTableCell.m in Sources */,
 				EE2D4B801B525E0A00B58A1F /* PhotoTagsController.m in Sources */,
 				EEAACD2F1B44E90400D05C0B /* CommentsHeaderAndFooterCell.m in Sources */,
@@ -2215,6 +2263,7 @@
 				EEAACCE91B44E90400D05C0B /* QueryModel.m in Sources */,
 				EEAACCCE1B44E90400D05C0B /* ChatGroup.xcdatamodeld in Sources */,
 				EEFD6F4F1B4E44C1008AC4F5 /* LoginInputView.m in Sources */,
+				EE76A5741B72056800036747 /* Following.m in Sources */,
 				EEAACCEC1B44E90400D05C0B /* MoviePlayTrait.m in Sources */,
 				EEAACCDC1B44E90400D05C0B /* RegTmpToken.m in Sources */,
 				EE2D4B7E1B525E0A00B58A1F /* PhotoPreViewEffectController.m in Sources */,
@@ -2234,6 +2283,7 @@
 				EEAACD3F1B44E90400D05C0B /* TagsRowCell.m in Sources */,
 				EEF538F51B525F7F009C8CB9 /* PostPreViewEffectController.m in Sources */,
 				EE03E9831B4FABFB00F21EF5 /* AlbumModule.m in Sources */,
+				EE76A5791B7205CF00036747 /* ConnectionOwner+ContextOpt.m in Sources */,
 				EEAACCC01B44E90400D05C0B /* PersonalCentreTmpViewController.m in Sources */,
 				EEAACCBC1B44E90400D05C0B /* HomeSearchController.m in Sources */,
 				EEAACD0B1B44E90400D05C0B /* MovingButton.m in Sources */,
@@ -2515,6 +2565,16 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
+		EE76A56B1B72021800036747 /* ConnectionLocalModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				EE76A56C1B72021900036747 /* ConnectionLocalModel.xcdatamodel */,
+			);
+			currentVersion = EE76A56C1B72021900036747 /* ConnectionLocalModel.xcdatamodel */;
+			path = ConnectionLocalModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
 		EEAACB6B1B44E90300D05C0B /* ChatGroup.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
