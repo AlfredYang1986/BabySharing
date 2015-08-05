@@ -76,8 +76,8 @@
     NSError * error = nil;
     NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
     
-//    NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:RELATIONSHIP_FOLLOW]];
-    NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:RELATIONSHIP_UNFOLLOW]];
+    NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:RELATIONSHIP_FOLLOW]];
+//    NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:RELATIONSHIP_UNFOLLOW]];
     
     if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
         NSDictionary* reVal = [result objectForKey:@"result"];
