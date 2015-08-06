@@ -58,6 +58,9 @@ enum DisplaySide {
     
     LoginInputView* inputView;
     BOOL isSNSLogin;
+    
+    BOOL isQueryModelReady;
+    BOOL isGroupModelReady;
 }
 
 @synthesize lm = _lm;
@@ -93,6 +96,9 @@ enum DisplaySide {
     isSNSLogin = NO;
 
     [GotyeOCAPI addListener:self];
+    
+    isQueryModelReady = NO;
+    isGroupModelReady = NO;
 }
 
 - (void)createSubviews {
@@ -219,7 +225,8 @@ enum DisplaySide {
     NSLog(@"the login user token is : %@", _lm.current_auth_token);
     
     AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    [delegate createGroupModel];
+    if (!isGroupModelReady) [delegate createGroupModel];
+    else [self queryGroupIsReady:nil];
 }
 
 - (void)queryGroupIsReady:(id)sender {
@@ -367,8 +374,9 @@ enum DisplaySide {
 -(void) onLogin:(GotyeStatusCode)code user:(GotyeOCUser*)user {
     AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
     app.im_user = user;
-    [app createQueryModel];
     [app registerDeviceTokenWithCurrentUser];
+    if (!isQueryModelReady) [app createQueryModel];
+    else [self queryDataIsReady:nil];
 //    [self performSegueWithIdentifier:@"contentSegue" sender:nil];
 }
 

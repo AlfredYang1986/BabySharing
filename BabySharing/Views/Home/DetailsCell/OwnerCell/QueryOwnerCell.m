@@ -165,7 +165,7 @@
 - (void)setConnections:(UserPostOwnerConnections)relations {
     switch (relations) {
         case UserPostOwnerConnectionsSamePerson:
-            [_followBtn setTitle:@"你发的" forState:UIControlStateNormal];
+            [_followBtn setTitle:@"我发的" forState:UIControlStateNormal];
             break;
         case UserPostOwnerConnectionsNone:
         case UserPostOwnerConnectionsFollowed:

@@ -84,17 +84,20 @@
     
     _selfTabeView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
 
-    [self updateProfileDetails];
-    [_om queryContentsByUser:_current_user_id withToken:_current_auth_token andOwner:_current_user_id withStartIndex:0 finishedBlock:^(BOOL success) {
-        [_selfTabeView reloadData];
-    }];
-    
+
     self.navigationItem.rightBarButtonItem =[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Setting" ofType:@"png"]] style:UIBarButtonItemStylePlain target:self action:@selector(didSelectSettingBtn)];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [self updateProfileDetails];
+    [_om queryContentsByUser:_current_user_id withToken:_current_auth_token andOwner:_current_user_id withStartIndex:0 finishedBlock:^(BOOL success) {
+        [_selfTabeView reloadData];
+    }];
 }
 
 #pragma mark - Navigation
@@ -392,13 +395,13 @@
 
 - (NSInteger)getFriendsCount {
     if (dic_profile_details) {
-        return ((NSNumber*)[dic_profile_details objectForKey:@"posts_count"]).integerValue;
+        return ((NSNumber*)[dic_profile_details objectForKey:@"friends_count"]).integerValue;
     } else return 0;
 }
 
 - (NSInteger)getCycleCount {
     if (dic_profile_details) {
-        return ((NSNumber*)[dic_profile_details objectForKey:@"posts_count"]).integerValue;
+        return ((NSNumber*)[dic_profile_details objectForKey:@"cycle_count"]).integerValue;
     } else return 0;
 }
 
@@ -411,7 +414,9 @@
 }
 
 - (NSString*)getOwnerRoleTag {
-    return @"Not Implemented";
+    if (dic_profile_details) {
+        return [dic_profile_details objectForKey:@"role_tag"];
+    } else return nil;
 }
 
 - (OwnerQueryModel*)getOM {

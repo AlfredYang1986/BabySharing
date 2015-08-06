@@ -44,15 +44,15 @@
 @synthesize apns_token = _apns_token;
 
 - (void)createQueryModel {
-    _qm = [[QueryModel alloc]initWithDelegate:self];
-    _tm = [[TagQueryModel alloc]initWithDelegate:self];
-    _om = [[OwnerQueryModel alloc]initWithDelegate:self];
-    _cm = [[ConnectionModel alloc]initWithDelegate:self];
+    if (!_qm) _qm = [[QueryModel alloc]initWithDelegate:self];
+    if (!_tm) _tm = [[TagQueryModel alloc]initWithDelegate:self];
+    if (!_om) _om = [[OwnerQueryModel alloc]initWithDelegate:self];
+    if (!_cm) _cm = [[ConnectionModel alloc]initWithDelegate:self];
 }
 
 - (void)createGroupModel {
-    _gm = [[GroupModel alloc]initWithDelegate:self];
-    _mm = [[MessageModel alloc]initWithDelegate:self];
+    if (!_gm) _gm = [[GroupModel alloc]initWithDelegate:self];
+    if (!_mm) _mm = [[MessageModel alloc]initWithDelegate:self];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
