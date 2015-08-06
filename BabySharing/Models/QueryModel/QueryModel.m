@@ -8,11 +8,11 @@
 
 #import "QueryModel.h"
 #import <CoreData/CoreData.h>
-#import "QueryContent+ContextOpt.h"
 #import "RemoteInstance.h"
 #import "AppDelegate.h"
 #import "ModelDefines.h"
 #import "ModelDefines.h"
+#import "QueryContent+ContextOpt.h"
 
 @implementation QueryModel {
 
@@ -93,7 +93,7 @@
     }
 }
 
-- (void)refreshQueryDataByUser:(NSString*)user_id withToken:(NSString*)token withFinishBlock:(queryDataFinishBlock)block {
+- (void)refreshQueryDataByUser:(NSString*)user_id withToken:(NSString*)token withFinishBlock:(finishBlock)block {
     
     NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
     [dic setValue:token forKey:@"auth_token"];
@@ -219,5 +219,46 @@
     return content;
 }
 
+#pragma mark -- query relations between owner and current user
+- (UserPostOwnerConnections)queryRelationsWithPost:(NSString*)post_id withFinishBlock:(finishBlock)block {
 
+    NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
+    [dic setValue:self.delegate.lm.current_auth_token forKey:@"auth_token"];
+    [dic setValue:self.delegate.lm.current_user_id forKey:@"user_id"];
+
+    QueryContent* content = [QueryContent enumQueryContentByPostID:post_id inContext:_doc.managedObjectContext];
+    [dic setValue:content.owner_id forKey:@"owner_id"];
+    
+    
+    NSError * error = nil;
+    NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
+    
+    NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:RELATIONSHIP_RELATION]];
+
+    UserPostOwnerConnections reVal = UserPostOwnerConnectionsNone;
+    if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
+        UserPostOwnerConnections reVal = ((NSNumber*)[result objectForKeyedSubscript:@"result"]).integerValue;
+        [QueryContent refreshRelationsWithPost:post_id withConnections:reVal inContext:_doc.managedObjectContext];
+        reVal = [self queryLocalRelationsWithPost:post_id];
+        block();
+        
+    } else {
+        NSDictionary* reError = [result objectForKey:@"error"];
+        NSString* msg = [reError objectForKey:@"message"];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:msg delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+        [alert show];
+    }
+    return reVal;
+}
+
+- (void)refreshLocalRelationsWithPost:(NSString*)post_id withConnections:(UserPostOwnerConnections)reVal {
+    [QueryContent refreshRelationsWithPost:post_id withConnections:reVal inContext:_doc.managedObjectContext];
+}
+
+- (UserPostOwnerConnections)queryLocalRelationsWithPost:(NSString*)post_id {
+    UserPostOwnerConnections result = [QueryContent queryRelationsWithPost:post_id inContext:_doc.managedObjectContext];
+    NSPredicate* pred = [NSPredicate predicateWithFormat:@"SELF.content_post_id=%@", post_id];
+    ((QueryContent*)[_querydata filteredArrayUsingPredicate:pred].firstObject).relations = [NSNumber numberWithInt:result];
+    return result;
+}
 @end

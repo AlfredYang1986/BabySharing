@@ -11,13 +11,15 @@
 
 #import <Foundation/Foundation.h>
 
+@class QueryOwnerCell;
+
 @protocol QueryDetailActionDelegate <NSObject>
 
 #pragma mark -- image cell
 - (void)didSelectDetialImageTagsWithContents:(NSString*)tag_name;
 
 #pragma mark -- owner cell
-- (void)didSelectDetialFollowOwner;
+- (void)didSelectDetialFollowOwner:(QueryOwnerCell*)cell;
 - (void)didSelectDetialOwnerNameOrImage:(NSString*)owner_id;
 
 #pragma mark -- like cell

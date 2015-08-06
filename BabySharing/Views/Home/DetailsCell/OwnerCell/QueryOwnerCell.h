@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "QueryDetailActionDelegate.h"
+#import "ModelDefines.h"
 
 @interface QueryOwnerCell : UITableViewCell
 @property (nonatomic, strong) UIImageView* userImg;
@@ -26,4 +27,5 @@
 - (void)setUserName:(NSString*)name;
 - (void)setLocation:(NSString*)location;
 - (void)setRoleTag:(NSString*)role_tag;
+- (void)setConnections:(UserPostOwnerConnections)relations;
 @end

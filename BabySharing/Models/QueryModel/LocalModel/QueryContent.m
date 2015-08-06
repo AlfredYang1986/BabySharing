@@ -1,14 +1,15 @@
 //
 //  QueryContent.m
-//  YYBabyAndMother
+//  
 //
-//  Created by Alfred Yang on 14/06/2015.
-//  Copyright (c) 2015 YY. All rights reserved.
+//  Created by Alfred Yang on 6/08/2015.
+//
 //
 
 #import "QueryContent.h"
 #import "QueryComments.h"
 #import "QueryContentItem.h"
+#import "QueryContentTag.h"
 #import "QueryLikes.h"
 
 
@@ -26,6 +27,7 @@
 @dynamic owner_id;
 @dynamic owner_name;
 @dynamic owner_photo;
+@dynamic relations;
 @dynamic comments;
 @dynamic items;
 @dynamic likes;

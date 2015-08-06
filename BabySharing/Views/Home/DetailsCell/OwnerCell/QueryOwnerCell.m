@@ -92,8 +92,11 @@
     
     _followBtn.bounds = CGRectMake(0, 0, 50, 25);
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    font = [UIFont systemFontOfSize:13.f];
+    _followBtn.font = font;
+    CGSize follow_size = [@"杨杨杨杨杨" sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
+    _followBtn.bounds = CGRectMake(0, 0, follow_size.width, follow_size.height);
     _followBtn.center = CGPointMake(width - MARGIN * 2 - 25, HEADER_HEIGHT / 2);
-    [_followBtn setTitle:@"+关注" forState:UIControlStateNormal];
     [_followBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     _followBtn.layer.borderColor = [UIColor blueColor].CGColor;
     _followBtn.layer.borderWidth = 1.f;
@@ -110,10 +113,6 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
-}
-
-- (IBAction)didSelectFollowBtn {
-    [_delegate didSelectDetialFollowOwner];
 }
 
 - (void)didSelectImageOrName:(UITapGestureRecognizer*)sender {
@@ -160,6 +159,25 @@
 }
 
 - (void)followBtnSelected {
-    [_delegate didSelectDetialFollowOwner];
+    [_delegate didSelectDetialFollowOwner:self];
+}
+
+- (void)setConnections:(UserPostOwnerConnections)relations {
+    switch (relations) {
+        case UserPostOwnerConnectionsSamePerson:
+            [_followBtn setTitle:@"你发的" forState:UIControlStateNormal];
+            break;
+        case UserPostOwnerConnectionsNone:
+        case UserPostOwnerConnectionsFollowed:
+            [_followBtn setTitle:@"+关注" forState:UIControlStateNormal];
+            break;
+        case UserPostOwnerConnectionsFollowing:
+        case UserPostOwnerConnectionsFriends:
+            [_followBtn setTitle:@"取消关注" forState:UIControlStateNormal];
+            break;
+        default:
+            break;
+    }
+//    [_followBtn sizeToFit];
 }
 @end

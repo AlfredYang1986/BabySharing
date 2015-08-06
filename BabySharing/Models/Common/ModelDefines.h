@@ -13,6 +13,24 @@ typedef NS_ENUM(NSInteger, ModelAttchmentType) {
     ModelAttchmentTypeMovie,
 };
 
+typedef NS_ENUM(NSInteger, PostCommentsError) {
+    PostCommentsErrorNoError,
+    PostCommentsErrorPostIDNotExisting,
+};
+
+typedef NS_ENUM(NSInteger, PostLikesError) {
+    PostLikesErrorNoError,
+    PostLikesErrorPostIDNotExisting,
+};
+
+typedef NS_ENUM(NSInteger, UserPostOwnerConnections) {
+    UserPostOwnerConnectionsNone,
+    UserPostOwnerConnectionsSamePerson,
+    UserPostOwnerConnectionsFollowing,
+    UserPostOwnerConnectionsFollowed,
+    UserPostOwnerConnectionsFriends
+};
+
 #pragma mark -- HOST DOMAIN
 //#define HOST_DOMAIN                     @"http://www.altlys.com:9000/"
 #define HOST_DOMAIN                     @"http://192.168.1.102:9000/"
@@ -89,6 +107,7 @@ typedef NS_ENUM(NSInteger, ModelAttchmentType) {
 #define RELATIONSHIP_DOMAIN                 [HOST_DOMAIN stringByAppendingString:@"connections/"]
 #define RELATIONSHIP_FOLLOW                 [RELATIONSHIP_DOMAIN stringByAppendingString:@"follow"]
 #define RELATIONSHIP_UNFOLLOW               [RELATIONSHIP_DOMAIN stringByAppendingString:@"unfollow"]
+#define RELATIONSHIP_RELATION               [RELATIONSHIP_DOMAIN stringByAppendingString:@"queryRelationsBetweenUsers"]
 
 #pragma mark -- database
 #define LOCALDB_LOGIN                       @"loginData23.sqlite"

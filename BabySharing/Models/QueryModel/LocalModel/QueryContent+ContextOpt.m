@@ -13,6 +13,8 @@
 #import "QueryTimeSpan.h"
 #import "QueryContentTag.h"
 
+
+
 @implementation QueryContent (ContextOpt)
 
 #pragma mark -- enum posts
@@ -106,6 +108,8 @@
     
     tmp.comment_time_span = [NSNumber numberWithLongLong:[NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970] * 1000].longLongValue];
     tmp.likes_time_span = tmp.comment_time_span;
+    
+    tmp.relations = [attr objectForKey:@"relations"];
    
     NSArray* items = [attr objectForKey:@"items"];
     for (NSDictionary* item in items) {
@@ -401,5 +405,17 @@
     
     QueryContent* content = [QueryContent enumQueryContentByPostID:post_id inContext:context];
     content.comment_time_span = time;
+}
+
+#pragma mark -- query relations between owner and current user
++ (UserPostOwnerConnections)queryRelationsWithPost:(NSString*)post_id inContext:(NSManagedObjectContext*)context {
+    
+    QueryContent* content = [QueryContent enumQueryContentByPostID:post_id inContext:context];
+    return (UserPostOwnerConnections)content.relations.integerValue;
+}
+
++ (void)refreshRelationsWithPost:(NSString*)post_id withConnections:(UserPostOwnerConnections)relation inContext:(NSManagedObjectContext*)context {
+    QueryContent* content = [QueryContent enumQueryContentByPostID:post_id inContext:context];
+    content.relations = [NSNumber numberWithInt:relation];
 }
 @end

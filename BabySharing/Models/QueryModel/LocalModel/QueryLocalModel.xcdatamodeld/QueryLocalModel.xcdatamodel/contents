@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7549" systemVersion="14D136" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14E46" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="QueryComments" representedClassName="QueryComments" syncable="YES">
         <attribute name="comment_content" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="comment_date" optional="YES" attributeType="Date" syncable="YES"/>
@@ -21,6 +21,7 @@
         <attribute name="owner_id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="owner_name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="owner_photo" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="relations" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="comments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="QueryComments" inverseName="commentTo" inverseEntity="QueryComments" syncable="YES"/>
         <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="QueryContentItem" inverseName="holdsBy" inverseEntity="QueryContentItem" syncable="YES"/>
         <relationship name="likes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="QueryLikes" inverseName="likeTo" inverseEntity="QueryLikes" syncable="YES"/>
@@ -50,7 +51,7 @@
     </entity>
     <elements>
         <element name="QueryComments" positionX="-4077" positionY="-2275" width="128" height="133"/>
-        <element name="QueryContent" positionX="-3899" positionY="-2493" width="128" height="283"/>
+        <element name="QueryContent" positionX="-3899" positionY="-2493" width="128" height="298"/>
         <element name="QueryContentItem" positionX="-3699" positionY="-2478" width="128" height="88"/>
         <element name="QueryContentTag" positionX="-3897" positionY="-2025" width="128" height="118"/>
         <element name="QueryLikes" positionX="-3638" positionY="-2187" width="128" height="118"/>

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "ModelDefines.h"
 
 @class AppDelegate;
 @class QueryContent;
@@ -24,8 +25,8 @@
 
 #pragma mark -- home query operation
 - (void)refreshQueryDataByUser:(NSString*)user_id withToken:(NSString*)token;
-typedef void(^queryDataFinishBlock)(void);
-- (void)refreshQueryDataByUser:(NSString*)user_id withToken:(NSString*)token withFinishBlock:(queryDataFinishBlock)block;
+typedef void(^finishBlock)(void);
+- (void)refreshQueryDataByUser:(NSString*)user_id withToken:(NSString*)token withFinishBlock:(finishBlock)block;
 - (void)appendQueryDataByUser:(NSString*)user_id withToken:(NSString*)token andBeginIndex:(NSInteger)skip;
 
 #pragma mark -- save content
@@ -34,4 +35,10 @@ typedef void(^queryDataFinishBlock)(void);
 #pragma mark -- comments query operation
 - (QueryContent*)refreshCommentsByUser:(NSString*)user_id withToken:(NSString*)token andPostID:(NSString*)post_id;
 - (QueryContent*)appendCommentsByUser:(NSString*)user_id withToken:(NSString*)token andBeginIndex:(NSInteger)skip andPostID:(NSString*)post_id;
+
+#pragma mark -- query relations between owner and current user
+- (UserPostOwnerConnections)queryRelationsWithPost:(NSString*)post_id withFinishBlock:(finishBlock)block;
+- (UserPostOwnerConnections)queryLocalRelationsWithPost:(NSString*)post_id;
+- (void)refreshLocalRelationsWithPost:(NSString*)post_id withConnections:(UserPostOwnerConnections)reVal;
+//- (void)refreshRelationsWithPost:(NSString*)post_id withConnections:(UserPostOwnerConnections)relation;
 @end

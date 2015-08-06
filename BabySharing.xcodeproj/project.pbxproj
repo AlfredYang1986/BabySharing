@@ -30,6 +30,7 @@
 		EE59A7751B5936170014F9C3 /* SearchUserTagsController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE59A7741B5936170014F9C3 /* SearchUserTagsController.m */; };
 		EE5C7E4F1B511CC000104CAB /* AlbumViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5C7E4E1B511CC000104CAB /* AlbumViewController2.m */; };
 		EE6192551B6F07B900303A0E /* ProfileSettingController.mm in Sources */ = {isa = PBXBuildFile; fileRef = EE6192541B6F07B900303A0E /* ProfileSettingController.mm */; };
+		EE664E9A1B73145000ACD57E /* QueryContent.m in Sources */ = {isa = PBXBuildFile; fileRef = EE664E991B73145000ACD57E /* QueryContent.m */; };
 		EE6C741D1B6C3CE700EDE0AA /* PersonalCenterOwnerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6C741C1B6C3CE700EDE0AA /* PersonalCenterOwnerDelegate.m */; };
 		EE6C74211B6C45E500EDE0AA /* ProfileOverView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6C74201B6C45E500EDE0AA /* ProfileOverView.m */; };
 		EE6C74231B6C465800EDE0AA /* ProfileOverView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE6C74221B6C465800EDE0AA /* ProfileOverView.xib */; };
@@ -122,7 +123,6 @@
 		EEAACCE01B44E90400D05C0B /* PostModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB951B44E90300D05C0B /* PostModel.m */; };
 		EEAACCE11B44E90400D05C0B /* QueryComments.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB991B44E90300D05C0B /* QueryComments.m */; };
 		EEAACCE21B44E90400D05C0B /* QueryContent+ContextOpt.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB9B1B44E90300D05C0B /* QueryContent+ContextOpt.m */; };
-		EEAACCE31B44E90400D05C0B /* QueryContent.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB9D1B44E90300D05C0B /* QueryContent.m */; };
 		EEAACCE41B44E90400D05C0B /* QueryContentItem.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB9F1B44E90300D05C0B /* QueryContentItem.m */; };
 		EEAACCE51B44E90400D05C0B /* QueryContentTag.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACBA11B44E90300D05C0B /* QueryContentTag.m */; };
 		EEAACCE61B44E90400D05C0B /* QueryLikes.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACBA31B44E90300D05C0B /* QueryLikes.m */; };
@@ -278,6 +278,8 @@
 		EE5C7E4E1B511CC000104CAB /* AlbumViewController2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumViewController2.m; sourceTree = "<group>"; };
 		EE6192531B6F07B900303A0E /* ProfileSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileSettingController.h; sourceTree = "<group>"; };
 		EE6192541B6F07B900303A0E /* ProfileSettingController.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = ProfileSettingController.mm; sourceTree = "<group>"; };
+		EE664E981B73145000ACD57E /* QueryContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryContent.h; sourceTree = "<group>"; };
+		EE664E991B73145000ACD57E /* QueryContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryContent.m; sourceTree = "<group>"; };
 		EE6C741B1B6C3CE700EDE0AA /* PersonalCenterOwnerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalCenterOwnerDelegate.h; sourceTree = "<group>"; };
 		EE6C741C1B6C3CE700EDE0AA /* PersonalCenterOwnerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalCenterOwnerDelegate.m; sourceTree = "<group>"; };
 		EE6C741F1B6C45E500EDE0AA /* ProfileOverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileOverView.h; sourceTree = "<group>"; };
@@ -454,8 +456,6 @@
 		EEAACB991B44E90300D05C0B /* QueryComments.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryComments.m; sourceTree = "<group>"; };
 		EEAACB9A1B44E90300D05C0B /* QueryContent+ContextOpt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QueryContent+ContextOpt.h"; sourceTree = "<group>"; };
 		EEAACB9B1B44E90300D05C0B /* QueryContent+ContextOpt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "QueryContent+ContextOpt.m"; sourceTree = "<group>"; };
-		EEAACB9C1B44E90300D05C0B /* QueryContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryContent.h; sourceTree = "<group>"; };
-		EEAACB9D1B44E90300D05C0B /* QueryContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryContent.m; sourceTree = "<group>"; };
 		EEAACB9E1B44E90300D05C0B /* QueryContentItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryContentItem.h; sourceTree = "<group>"; };
 		EEAACB9F1B44E90300D05C0B /* QueryContentItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryContentItem.m; sourceTree = "<group>"; };
 		EEAACBA01B44E90300D05C0B /* QueryContentTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryContentTag.h; sourceTree = "<group>"; };
@@ -1311,12 +1311,12 @@
 		EEAACB971B44E90300D05C0B /* LocalModel */ = {
 			isa = PBXGroup;
 			children = (
+				EE664E981B73145000ACD57E /* QueryContent.h */,
+				EE664E991B73145000ACD57E /* QueryContent.m */,
 				EEAACB981B44E90300D05C0B /* QueryComments.h */,
 				EEAACB991B44E90300D05C0B /* QueryComments.m */,
 				EEAACB9A1B44E90300D05C0B /* QueryContent+ContextOpt.h */,
 				EEAACB9B1B44E90300D05C0B /* QueryContent+ContextOpt.m */,
-				EEAACB9C1B44E90300D05C0B /* QueryContent.h */,
-				EEAACB9D1B44E90300D05C0B /* QueryContent.m */,
 				EEAACB9E1B44E90300D05C0B /* QueryContentItem.h */,
 				EEAACB9F1B44E90300D05C0B /* QueryContentItem.m */,
 				EEAACBA01B44E90300D05C0B /* QueryContentTag.h */,
@@ -2201,6 +2201,7 @@
 				EE76A56D1B72021900036747 /* ConnectionLocalModel.xcdatamodeld in Sources */,
 				EEAACD201B44E90400D05C0B /* SGAlertMenu.m in Sources */,
 				EEAACCCA1B44E90400D05C0B /* INTUEasingFunctions.m in Sources */,
+				EE664E9A1B73145000ACD57E /* QueryContent.m in Sources */,
 				EEAACCB51B44E90400D05C0B /* SecretViewController.m in Sources */,
 				EE76A57C1B72181300036747 /* ConnectionModel.m in Sources */,
 				EE7537761B6B1AC400EC1616 /* CommentsHeader.m in Sources */,
@@ -2252,7 +2253,6 @@
 				EEAACD571B44E90400D05C0B /* SGGridMenu.m in Sources */,
 				EE5C7E4F1B511CC000104CAB /* AlbumViewController2.m in Sources */,
 				EE2D4B781B525E0A00B58A1F /* PostInputViewController.m in Sources */,
-				EEAACCE31B44E90400D05C0B /* QueryContent.m in Sources */,
 				EEAACD411B44E90400D05C0B /* PhotoPreViewEditView.m in Sources */,
 				EEAACD3B1B44E90400D05C0B /* FoundPCGCell.m in Sources */,
 				EE20BED41B6F430D00DE8455 /* OwnerQueryModel.m in Sources */,

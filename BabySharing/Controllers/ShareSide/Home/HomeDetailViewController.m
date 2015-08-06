@@ -202,7 +202,7 @@
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
+    return NO;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -566,6 +566,18 @@
     [cell setUserPhoto:_current_content.owner_photo];
     [cell setLocation:@"中国 北京"];
     [cell setRoleTag:@"role tag"];
+    UserPostOwnerConnections con = _current_content.relations.integerValue;
+    [cell setConnections:con];
+   
+    dispatch_queue_t q = dispatch_queue_create("relation query", nil);
+    dispatch_async(q, ^{
+        [_qm queryRelationsWithPost:_current_content.content_post_id withFinishBlock:^{
+            UserPostOwnerConnections con = _current_content.relations.integerValue;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [cell setConnections:con];
+            });
+        }];
+    });
     
     cell.owner_id = _current_content.owner_id;
     
@@ -632,17 +644,51 @@
     NSLog(@"tag select with %@", tag_name);
 }
 
-- (void)didSelectDetialFollowOwner {
+- (void)didSelectDetialFollowOwner:(QueryOwnerCell*)cell {
     NSLog(@"folow");
     NSString* follow_user_id = _current_content.owner_id;
-   
-    [_cm followOneUser:follow_user_id withFinishBlock:^(BOOL success, NSString *message) {
-        if (success) {
-            NSLog(@"follow success");
-        } else {
-            NSLog(@"follow error, %@", message);
-        }
-    }];
+ 
+    switch (_current_content.relations.integerValue) {
+        case UserPostOwnerConnectionsSamePerson:
+            // my own post, do nothing
+            break;
+        case UserPostOwnerConnectionsNone:
+        case UserPostOwnerConnectionsFollowed: {
+            [_cm followOneUser:follow_user_id withFinishBlock:^(BOOL success, NSString *message) {
+                if (success) {
+                    NSLog(@"follow success");
+                    if (_current_content.relations.integerValue == UserPostOwnerConnectionsNone) {
+                        [_qm refreshLocalRelationsWithPost:_current_content.content_post_id withConnections:UserPostOwnerConnectionsFollowing];
+                    } else {
+                        [_qm refreshLocalRelationsWithPost:_current_content.content_post_id withConnections:UserPostOwnerConnectionsFriends];
+                    }
+                    UserPostOwnerConnections con = [_qm queryLocalRelationsWithPost:_current_content.content_post_id];
+                    [cell setConnections:con];
+                } else {
+                    NSLog(@"follow error, %@", message);
+                }
+            }];}
+            break;
+        case UserPostOwnerConnectionsFollowing:
+        case UserPostOwnerConnectionsFriends: {
+            [_cm unfollowOneUser:follow_user_id withFinishBlock:^(BOOL success, NSString *message) {
+                if (success) {
+                    NSLog(@"follow success");
+                    if (_current_content.relations.integerValue == UserPostOwnerConnectionsFollowing) {
+                        [_qm refreshLocalRelationsWithPost:_current_content.content_post_id withConnections:UserPostOwnerConnectionsNone];
+                    } else {
+                        [_qm refreshLocalRelationsWithPost:_current_content.content_post_id withConnections:UserPostOwnerConnectionsFollowed];
+                    }
+                    UserPostOwnerConnections con = [_qm queryLocalRelationsWithPost:_current_content.content_post_id];
+                    [cell setConnections:con];
+                } else {
+                    NSLog(@"follow error, %@", message);
+                }
+            }];}
+            break;
+        default:
+            break;
+    }
 }
 
 - (void)didSelectDetialOwnerNameOrImage:(NSString*)owner_id {

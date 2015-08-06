@@ -1,15 +1,15 @@
 //
 //  QueryContent.h
-//  YYBabyAndMother
+//  
 //
-//  Created by Alfred Yang on 14/06/2015.
-//  Copyright (c) 2015 YY. All rights reserved.
+//  Created by Alfred Yang on 6/08/2015.
+//
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class NSManagedObject, QueryComments, QueryContentItem, QueryLikes;
+@class QueryComments, QueryContentItem, QueryContentTag, QueryLikes;
 
 @interface QueryContent : NSManagedObject
 
@@ -25,6 +25,7 @@
 @property (nonatomic, retain) NSString * owner_id;
 @property (nonatomic, retain) NSString * owner_name;
 @property (nonatomic, retain) NSString * owner_photo;
+@property (nonatomic, retain) NSNumber * relations;
 @property (nonatomic, retain) NSSet *comments;
 @property (nonatomic, retain) NSSet *items;
 @property (nonatomic, retain) NSSet *likes;
@@ -48,8 +49,8 @@
 - (void)addLikes:(NSSet *)values;
 - (void)removeLikes:(NSSet *)values;
 
-- (void)addTagsObject:(NSManagedObject *)value;
-- (void)removeTagsObject:(NSManagedObject *)value;
+- (void)addTagsObject:(QueryContentTag *)value;
+- (void)removeTagsObject:(QueryContentTag *)value;
 - (void)addTags:(NSSet *)values;
 - (void)removeTags:(NSSet *)values;
 

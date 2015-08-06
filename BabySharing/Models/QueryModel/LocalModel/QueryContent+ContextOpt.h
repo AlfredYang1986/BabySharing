@@ -8,16 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "QueryContent.h"
-
-typedef NS_ENUM(NSInteger, PostCommentsError) {
-    PostCommentsErrorNoError,
-    PostCommentsErrorPostIDNotExisting,
-};
-
-typedef NS_ENUM(NSInteger, PostLikesError) {
-    PostLikesErrorNoError,
-    PostLikesErrorPostIDNotExisting,
-};
+#import "ModelDefines.h"
 
 @interface QueryContent (ContextOpt)
 
@@ -62,4 +53,8 @@ typedef NS_ENUM(NSInteger, PostLikesError) {
 
 #pragma mark -- query comment time span
 + (void)changeCommentTimeSpan:(NSNumber*)time forPostID:(NSString*)post_id inContext:(NSManagedObjectContext*)context;
+
+#pragma mark -- query relations between owner and current user
++ (UserPostOwnerConnections)queryRelationsWithPost:(NSString*)post_id inContext:(NSManagedObjectContext*)context;
++ (void)refreshRelationsWithPost:(NSString*)post_id withConnections:(UserPostOwnerConnections)relation inContext:(NSManagedObjectContext*)context;
 @end
