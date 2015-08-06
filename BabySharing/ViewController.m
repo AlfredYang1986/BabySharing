@@ -91,6 +91,8 @@ enum DisplaySide {
     [self.view addGestureRecognizer:pan];
     
     isSNSLogin = NO;
+
+    [GotyeOCAPI addListener:self];
 }
 
 - (void)createSubviews {
@@ -116,14 +118,7 @@ enum DisplaySide {
     [self.view addSubview:title];
 }
 
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [GotyeOCAPI addListener:self];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
+- (void)dealloc {
     [GotyeOCAPI removeListener:self];
 }
 
@@ -201,6 +196,7 @@ enum DisplaySide {
 - (void)userLogedOut:(id)sender {
     NSLog(@"user login out");
     [_lm signOutCurrentUser];
+    [GotyeOCAPI logout];
     if (_contentController) {
         [_contentController dismissViewControllerAnimated:YES completion:nil];
     }

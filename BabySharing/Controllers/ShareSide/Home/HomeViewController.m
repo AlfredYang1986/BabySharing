@@ -21,6 +21,7 @@
 #import "INTUAnimationEngine.h"
 #import "QueryCell.h"
 #import "QueryHeader.h"
+#import "INTUAnimationEngine.h"
 
 #define VIEW_BOUNTDS        CGFloat screen_width = [UIScreen mainScreen].bounds.size.width; \
                             CGFloat screen_height = [UIScreen mainScreen].bounds.size.height; \
@@ -467,22 +468,45 @@
             return;
             
         } else if (- scrollView.contentOffset.y / _queryView.frame.size.height > 0.2) { // 调用下拉刷新方法
-            CGRect rc = _queryView.frame;
+            _isLoading = YES;
+            __block CGRect rc = _queryView.frame;
             rc.origin.y = rc.origin.y + 44;
             [_queryView setFrame:rc];
-            [_qm refreshQueryDataByUser:_current_user_id withToken:_current_auth_token];
-            rc.origin.y = rc.origin.y - 44;
-            [_queryView setFrame:rc];
-            [_queryView reloadData];
+            [_qm refreshQueryDataByUser:_current_user_id withToken:_current_auth_token withFinishBlock:^{
+                CGRect tmp = rc;
+                rc.origin.y = rc.origin.y - 44;
+//                [_queryView setFrame:rc];
+                [_queryView reloadData];
+                [self moveViewFromRect:tmp toRect:rc];
+            }];
 
             return;
         }
-       
         
         // move and change
     }
 
 }
+
+- (void)moveViewFromRect:(CGRect)begin toRect:(CGRect)end {
+    static const CGFloat kAnimationDuration = 0.30; // in seconds
+    [INTUAnimationEngine animateWithDuration:kAnimationDuration
+                                       delay:0.0
+                                      easing:INTUEaseInOutQuadratic
+                                     options:INTUAnimationOptionNone
+                                  animations:^(CGFloat progress) {
+                                      _queryView.frame = INTUInterpolateCGRect(begin, end, progress);
+                                      
+                                      // NSLog(@"Progress: %.2f", progress);
+                                  }
+                                  completion:^(BOOL finished) {
+                                      // NOTE: When passing INTUAnimationOptionRepeat, this completion block is NOT executed at the end of each cycle. It will only run if the animation is canceled.
+                                      NSLog(@"%@", finished ? @"Animation Completed" : @"Animation Canceled");
+                                      //                                                         self.animationID = NSNotFound;
+                                      _isLoading = NO;
+                                  }];
+}
+
 
 #pragma mark -- segue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
