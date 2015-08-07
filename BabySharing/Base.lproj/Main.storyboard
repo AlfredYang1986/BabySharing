@@ -379,7 +379,7 @@
         <!--Personal Center-->
         <scene sceneID="7g8-W7-1Hc">
             <objects>
-                <viewController id="rbW-Wj-tzd" customClass="PersonalCentreTmpViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PersonalCenter" id="rbW-Wj-tzd" customClass="PersonalCentreTmpViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="C4t-58-Pk8"/>
                         <viewControllerLayoutGuide type="bottom" id="knz-W5-fbc"/>
@@ -1551,7 +1551,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="qbd-0n-vJA"/>
-        <segue reference="mYA-47-s6C"/>
         <segue reference="4Ao-yR-LGJ"/>
+        <segue reference="Xl7-6t-OQ8"/>
     </inferredMetricsTieBreakers>
 </document>

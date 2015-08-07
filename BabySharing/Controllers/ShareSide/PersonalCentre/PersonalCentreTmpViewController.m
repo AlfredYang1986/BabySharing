@@ -46,6 +46,7 @@
 @synthesize om = _om;
 
 @synthesize current_delegate = _current_delegate;
+@synthesize owner_id = _owner_id;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -77,14 +78,18 @@
    
     [_queryView registerNib:[UINib nibWithNibName:@"ProfileOverView" bundle:[NSBundle mainBundle]] forHeaderFooterViewReuseIdentifier:@"Profile Overview"];
     [_queryView registerNib:[UINib nibWithNibName:@"ProfileOthersOverView" bundle:[NSBundle mainBundle]] forHeaderFooterViewReuseIdentifier:@"Profile Others Overview"];
-    
-    _current_delegate = [[PersonalCenterOwnerDelegate alloc]init];
+  
+    if (!_current_delegate) {
+        self.current_delegate = [[PersonalCenterOwnerDelegate alloc]init];
+    }
     _queryView.delegate = _current_delegate;
     _queryView.dataSource = _current_delegate;
-    [_current_delegate setDelegate:self];
+    
+    if (!_owner_id || [_owner_id isEqualToString:@""]) {
+        _owner_id = _current_user_id;
+    }
     
     _queryView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
-
 
     self.navigationItem.rightBarButtonItem =[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Setting" ofType:@"png"]] style:UIBarButtonItemStylePlain target:self action:@selector(didSelectSettingBtn)];
 }
@@ -96,7 +101,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [self updateProfileDetails];
-    [_om queryContentsByUser:_current_user_id withToken:_current_auth_token andOwner:_current_user_id withStartIndex:0 finishedBlock:^(BOOL success) {
+    [_om queryContentsByUser:_current_user_id withToken:_current_auth_token andOwner:_owner_id withStartIndex:0 finishedBlock:^(BOOL success) {
         [_queryView reloadData];
     }];
 }
@@ -127,7 +132,7 @@
         NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
         [dic setValue:_current_auth_token forKey:@"query_auth_token"];
         [dic setValue:_current_user_id forKey:@"query_user_id"];
-        [dic setValue:_current_user_id forKey:@"owner_user_id"];
+        [dic setValue:_owner_id forKey:@"owner_user_id"];
         
         NSError * error = nil;
         NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
@@ -150,6 +155,11 @@
             NSLog(@"%@", msg);
         }
     });
+}
+
+- (void)setProfileDelegate:(id<UITableViewDelegate, UITableViewDataSource, PersonalCenterCallBack>)delegate {
+    _current_delegate = delegate;
+    [_current_delegate setDelegate:self];
 }
 
 #pragma mark -- personaal center overview delegate

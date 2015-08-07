@@ -12,6 +12,9 @@
 #import "LoginModel.h"
 #import "TmpFileStorageModel.h"
 
+#import "PersonalCentreTmpViewController.h"
+#import "PersonalCentreOthersDelegate.h"
+
 @interface FriendsTableDelegate ()
 @property (nonatomic, weak, readonly) LoginModel* lm;
 @end
@@ -39,8 +42,13 @@
     NSLog(@"selet row");
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    // TODO: view personal details
-    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    PersonalCentreTmpViewController* pc = [storyboard instantiateViewControllerWithIdentifier:@"PersonalCenter"];
+    PersonalCentreOthersDelegate* delegate = [[PersonalCentreOthersDelegate alloc]init];
+    pc.current_delegate = delegate;
+    NSDictionary* tmp = [data_arr objectAtIndex:indexPath.row];
+    pc.owner_id = [tmp objectForKey:@"user_id"];
+    [self.current.navigationController pushViewController:pc animated:YES];
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {

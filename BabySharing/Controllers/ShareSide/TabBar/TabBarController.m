@@ -67,48 +67,11 @@
     CGRect rc = [UIScreen mainScreen].bounds;
     CGRect rc_tb = self.tabBar.bounds;
     backView = [[UIView alloc]initWithFrame:CGRectMake(rc.origin.x, rc.origin.y, rc.size.width, rc.size.height - rc_tb.size.height)];
-//    backView.backgroundColor =  [UIColor colorWithWhite:0.0 alpha:0.8];
     backView.backgroundColor =  [UIColor colorWithWhite:0.0 alpha:0.0];
     [self.view addSubview:backView];
     
-//    CGPoint start_pos = self.tabBar.center;
-//    CGPoint end_pos_1 = CGPointMake(start_pos.x - MOVING_DISTANCE, start_pos.y - MOVING_BASE - MOVING_DISTANCE * 0.5);
-//    CGPoint end_pos_2 = CGPointMake(start_pos.x, start_pos.y - MOVING_BASE - MOVING_DISTANCE);
-//    CGPoint end_pos_3 = CGPointMake(start_pos.x + MOVING_DISTANCE, start_pos.y - MOVING_BASE - MOVING_DISTANCE * 0.5);
-    
-//    photoBtn = [[MovingButton alloc]initWithOrigin:start_pos andFinal:end_pos_1 andRangle:-MOVING_ANGLE];
-//    [photoBtn setBackgroundImage:[UIImage imageNamed:[bundle pathForResource:@"Camera_Small" ofType:@"png"]] forState:UIControlStateNormal];
-//    [photoBtn addTarget:self action:@selector(didSelectPhotoBtn:) forControlEvents:UIControlEventTouchDown];
-//    
-//    movieBtn = [[MovingButton alloc]initWithOrigin:start_pos andFinal:end_pos_2 andRangle:0];
-//    [movieBtn setBackgroundImage:[UIImage imageNamed:[bundle pathForResource:@"Movie_Small" ofType:@"png"]] forState:UIControlStateNormal];
-//    [movieBtn addTarget:self action:@selector(didSelectMovieBtn:) forControlEvents:UIControlEventTouchDown];
-//    
-//    compareBtn = [[MovingButton alloc]initWithOrigin:start_pos andFinal:end_pos_3 andRangle:MOVING_ANGLE];
-//    [compareBtn setBackgroundImage:[UIImage imageNamed:[bundle pathForResource:@"Compare" ofType:@"png"]] forState:UIControlStateNormal];
-//    [compareBtn addTarget:self action:@selector(didSelectCompareBtn:) forControlEvents:UIControlEventTouchDown];
-    
-//    [backView addSubview:ablumBtn];
-//    [backView addSubview:photoBtn];
-//    [backView addSubview:movieBtn];
-    
     [self.view bringSubviewToFront:backView];
     backView.hidden = YES;
-    
-//    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(movingAnimation:)];
-//    [backView addGestureRecognizer:gesture];
-    
-//    [self.view addSubview:photoBtn];
-//    [self.view addSubview:movieBtn];
-//    [self.view addSubview:compareBtn];
-//    
-//    [self.view bringSubviewToFront:photoBtn];
-//    [self.view bringSubviewToFront:movieBtn];
-//    [self.view bringSubviewToFront:compareBtn];
-//    
-//    photoBtn.hidden = YES;
-//    movieBtn.hidden = YES;
-//    compareBtn.hidden = YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -138,7 +101,6 @@
         NSLog(@"Secret running ...");
     }];
 }
-
 
 #pragma marks - tabBar delegate
 
@@ -191,15 +153,6 @@
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item {
     NSLog(@"select tab %@", item.title);
    
-//    if (backView.hidden == NO) {
-//        [self movingAnimation:nil];
-//    }
-//    
-//    else if ([item.title isEqualToString: @"Post"]) {
-//        // [self showAblumCameraController:self];
-//        [self movingAnimation:nil];
-//    }
-    
     if ([item.title isEqualToString:@"Post"]) {
         [self showCameraControllerOnController:self];
     }
@@ -277,70 +230,4 @@
 - (void)didSelectAlbumBtn2:(UIViewController*)cur {
     
 }
-
-#pragma mark -- post buttons at tabbar and buttons animation
-//- (void)didSelectCompareBtn:(id)sender {
-//    NSLog(@"did select ablum button");
-//    [self showAblumCameraController:self andType:AlbumControllerTypeCompire];
-//    [self resetMovingAnimation];
-//}
-//
-//- (void)didSelectPhotoBtn:(id)sender {
-//    NSLog(@"did select camera button");
-////    [self showCameraControllerOnController:self];
-//    [self showAblumCameraController:self andType:AlbumControllerTypePhoto];
-//    [self resetMovingAnimation];
-//}
-//
-//- (void)didSelectMovieBtn:(id)sender {
-//    NSLog(@"did select movie button");
-//    [self showMovieControllerOnController:self];
-//    [self resetMovingAnimation];
-//}
-//
-//- (void)resetMovingAnimation {
-//    backView.hidden = YES;
-//    [compareBtn resetPos];
-//    compareBtn.hidden = YES;
-//    [photoBtn resetPos];
-//    photoBtn.hidden = YES;
-//    [movieBtn resetPos];
-//    movieBtn.hidden = YES;
-//}
-//
-//- (void)movingAnimation:(id)sender {
-//    // [self showAblumCameraController:self];
-//    compareBtn.hidden = NO;
-//    photoBtn.hidden = NO;
-//    movieBtn.hidden = NO;
-//    backView.hidden = NO;
-//    
-//    [compareBtn moveWithFinishBlock:^(BOOL finished, MovingButton *btn) {
-//        if (btn.isMoved == YES) {
-//            btn.hidden = NO;
-//            backView.hidden = NO;
-//        } else {
-//            btn.hidden = YES;
-//            backView.hidden = YES;
-//        }
-//    }];
-//    [photoBtn moveWithFinishBlock:^(BOOL finished, MovingButton *btn) {
-//        if (btn.isMoved == YES) {
-//            btn.hidden = NO;
-//            backView.hidden = NO;
-//        } else {
-//            btn.hidden = YES;
-//            backView.hidden = YES;
-//        }
-//    }];
-//    [movieBtn moveWithFinishBlock:^(BOOL finished, MovingButton *btn) {
-//        if (btn.isMoved == YES) {
-//            btn.hidden = NO;
-//            backView.hidden = NO;
-//        } else {
-//            btn.hidden = YES;
-//            backView.hidden = YES;
-//        }
-//    }];
-//}
 @end

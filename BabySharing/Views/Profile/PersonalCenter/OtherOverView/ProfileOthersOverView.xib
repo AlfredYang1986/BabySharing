@@ -231,7 +231,6 @@
                 <outlet property="buttomContainer" destination="KRp-V9-jze" id="IlF-aK-PlP"/>
                 <outlet property="chatBtn" destination="oIE-cF-Igp" id="dDh-ry-vhQ"/>
                 <outlet property="cycleCountLabel" destination="wae-wQ-Jqu" id="GMW-RR-X93"/>
-                <outlet property="editBtn" destination="Or5-YQ-3lT" id="7ec-ed-EMd"/>
                 <outlet property="followBtn" destination="Or5-YQ-3lT" id="teU-1h-oFV"/>
                 <outlet property="friendsCountLabel" destination="4CQ-yF-SuO" id="fll-AK-G9D"/>
                 <outlet property="imgView" destination="0KJ-wA-qvi" id="0Vi-gy-pre"/>

@@ -58,6 +58,7 @@
     _friendsQueryView.delegate = fd;
     _friendsQueryView.dataSource = fd;
     fd.queryView = _friendsQueryView;
+    fd.current = self;
     
     _friendSeg = [[UISegmentedControl alloc]initWithItems:@[@"好友", @"关注", @"粉丝"]];
     [_friendSeg addTarget:self action:@selector(friendSegValueChanged:) forControlEvents:UIControlEventValueChanged];

@@ -11,4 +11,5 @@
 
 @interface MesssageTableDelegate : NSObject <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, weak) UITableView* queryView;
+@property (nonatomic, weak) UIViewController* current;
 @end
