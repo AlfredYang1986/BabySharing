@@ -8,12 +8,31 @@
 
 #import "FriendsTableDelegate.h"
 #import "MessageViewCell.h"
+#import "AppDelegate.h"
+#import "LoginModel.h"
+#import "TmpFileStorageModel.h"
+
+@interface FriendsTableDelegate ()
+@property (nonatomic, weak, readonly) LoginModel* lm;
+@end
 
 @implementation FriendsTableDelegate {
     BOOL isLoading;
+    
+    NSArray* data_arr;
 }
 
 @synthesize queryView = _queryView;
+@synthesize lm = _lm;
+
+- (id)init {
+    self = [super init];
+    if (self) {
+        AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+        _lm = app.lm;
+    }
+    return self;
+}
 
 #pragma mark -- table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -26,7 +45,7 @@
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
+    return NO;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -57,18 +76,46 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    MessageViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"Message View Cell"];
+    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"friends cell"];
     
     if (cell == nil) {
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MessageViewCell" owner:self options:nil];
-        cell = [nib objectAtIndex:0];
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"friends cell"];
     }
+    
+    cell.imageView.layer.cornerRadius = cell.imageView.bounds.size.width / 2;
+    cell.imageView.clipsToBounds = YES;
+   
+    NSDictionary* tmp = [data_arr objectAtIndex:indexPath.row];
+    cell.textLabel.text = [tmp objectForKey:@"screen_name"];
+    cell.detailTextLabel.text = [tmp objectForKey:@"role_tag"];
+    
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+    NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"User"] ofType:@"png"];
+    
+    UIImage* userImg = [TmpFileStorageModel enumImageWithName:[tmp objectForKey:@"screen_photo"] withDownLoadFinishBolck:^(BOOL success, UIImage *user_img) {
+        if (success) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (cell) {
+                    cell.imageView.image = user_img;
+                    NSLog(@"owner img download success");
+                }
+            });
+        } else {
+            NSLog(@"down load owner image");
+        }
+    }];
+    
+    if (userImg == nil) {
+        userImg = [UIImage imageNamed:filePath];
+    }
+    [cell.imageView setImage:userImg];
     
     return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    return data_arr.count;
 }
 
 #pragma mark -- scroll refresh
@@ -104,5 +151,19 @@
         // move and change
     }
     
+}
+
+#pragma mark -- refresh user list
+/**
+ * user_lst is object, need to change it to string list
+ */
+- (void)refreshShowingListWithUserList:(NSArray*)user_lst {
+    NSMutableArray* ma = [[NSMutableArray alloc]initWithCapacity:user_lst.count];
+    for (NSManagedObject* iter in user_lst) {
+        [ma addObject:[iter valueForKey:@"user_id"]];
+    }
+    data_arr = [_lm querMultipleProlfiles:[ma copy]];
+    NSLog(@"%@", data_arr);
+    [_queryView reloadData];
 }
 @end

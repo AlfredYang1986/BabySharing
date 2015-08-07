@@ -46,7 +46,6 @@
 		EE7537761B6B1AC400EC1616 /* CommentsHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7537751B6B1AC400EC1616 /* CommentsHeader.m */; };
 		EE76A56D1B72021900036747 /* ConnectionLocalModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EE76A56B1B72021800036747 /* ConnectionLocalModel.xcdatamodeld */; };
 		EE76A5741B72056800036747 /* Following.m in Sources */ = {isa = PBXBuildFile; fileRef = EE76A56F1B72056800036747 /* Following.m */; };
-		EE76A5751B72056800036747 /* ConnectionOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = EE76A5711B72056800036747 /* ConnectionOwner.m */; };
 		EE76A5761B72056800036747 /* Followed.m in Sources */ = {isa = PBXBuildFile; fileRef = EE76A5731B72056800036747 /* Followed.m */; };
 		EE76A5791B7205CF00036747 /* ConnectionOwner+ContextOpt.m in Sources */ = {isa = PBXBuildFile; fileRef = EE76A5781B7205CF00036747 /* ConnectionOwner+ContextOpt.m */; };
 		EE76A57C1B72181300036747 /* ConnectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EE76A57B1B72181300036747 /* ConnectionModel.m */; };
@@ -60,6 +59,8 @@
 		EE9D9CAB1B704436001DADCC /* MesssageTableDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9D9CAA1B704436001DADCC /* MesssageTableDelegate.m */; };
 		EE9D9CAE1B70444A001DADCC /* FriendsTableDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9D9CAD1B70444A001DADCC /* FriendsTableDelegate.m */; };
 		EE9D9CB11B7062EB001DADCC /* AddingFriendsController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9D9CB01B7062EB001DADCC /* AddingFriendsController.m */; };
+		EEA2017C1B744E59006B81E4 /* ConnectionOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = EEA201791B744E59006B81E4 /* ConnectionOwner.m */; };
+		EEA2017D1B744E59006B81E4 /* Friends.m in Sources */ = {isa = PBXBuildFile; fileRef = EEA2017B1B744E59006B81E4 /* Friends.m */; };
 		EEAAC8FE1B44E81A00D05C0B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAAC8FD1B44E81A00D05C0B /* main.m */; };
 		EEAAC91B1B44E81A00D05C0B /* BabySharingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAAC91A1B44E81A00D05C0B /* BabySharingTests.m */; };
 		EEAACC9A1B44E90400D05C0B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACAF11B44E90300D05C0B /* AppDelegate.m */; };
@@ -305,8 +306,6 @@
 		EE76A56C1B72021900036747 /* ConnectionLocalModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ConnectionLocalModel.xcdatamodel; sourceTree = "<group>"; };
 		EE76A56E1B72056800036747 /* Following.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Following.h; sourceTree = "<group>"; };
 		EE76A56F1B72056800036747 /* Following.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Following.m; sourceTree = "<group>"; };
-		EE76A5701B72056800036747 /* ConnectionOwner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionOwner.h; sourceTree = "<group>"; };
-		EE76A5711B72056800036747 /* ConnectionOwner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionOwner.m; sourceTree = "<group>"; };
 		EE76A5721B72056800036747 /* Followed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Followed.h; sourceTree = "<group>"; };
 		EE76A5731B72056800036747 /* Followed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Followed.m; sourceTree = "<group>"; };
 		EE76A5771B7205CF00036747 /* ConnectionOwner+ContextOpt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ConnectionOwner+ContextOpt.h"; sourceTree = "<group>"; };
@@ -331,6 +330,10 @@
 		EE9D9CAD1B70444A001DADCC /* FriendsTableDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsTableDelegate.m; sourceTree = "<group>"; };
 		EE9D9CAF1B7062EA001DADCC /* AddingFriendsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddingFriendsController.h; sourceTree = "<group>"; };
 		EE9D9CB01B7062EB001DADCC /* AddingFriendsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddingFriendsController.m; sourceTree = "<group>"; };
+		EEA201781B744E59006B81E4 /* ConnectionOwner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionOwner.h; sourceTree = "<group>"; };
+		EEA201791B744E59006B81E4 /* ConnectionOwner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionOwner.m; sourceTree = "<group>"; };
+		EEA2017A1B744E59006B81E4 /* Friends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Friends.h; sourceTree = "<group>"; };
+		EEA2017B1B744E59006B81E4 /* Friends.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Friends.m; sourceTree = "<group>"; };
 		EEAAC8F81B44E81A00D05C0B /* BabySharing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BabySharing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEAAC8FC1B44E81A00D05C0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EEAAC8FD1B44E81A00D05C0B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -852,11 +855,13 @@
 		EE76A56A1B7201C200036747 /* LocalModel */ = {
 			isa = PBXGroup;
 			children = (
+				EEA201781B744E59006B81E4 /* ConnectionOwner.h */,
+				EEA201791B744E59006B81E4 /* ConnectionOwner.m */,
+				EEA2017A1B744E59006B81E4 /* Friends.h */,
+				EEA2017B1B744E59006B81E4 /* Friends.m */,
 				EE76A56B1B72021800036747 /* ConnectionLocalModel.xcdatamodeld */,
 				EE76A56E1B72056800036747 /* Following.h */,
 				EE76A56F1B72056800036747 /* Following.m */,
-				EE76A5701B72056800036747 /* ConnectionOwner.h */,
-				EE76A5711B72056800036747 /* ConnectionOwner.m */,
 				EE76A5721B72056800036747 /* Followed.h */,
 				EE76A5731B72056800036747 /* Followed.m */,
 				EE76A5771B7205CF00036747 /* ConnectionOwner+ContextOpt.h */,
@@ -2190,7 +2195,6 @@
 				EEAACD4E1B44E90400D05C0B /* ProfileDetailTagsCell.m in Sources */,
 				EEAACCD71B44E90400D05C0B /* LoginToken+ContextOpt.m in Sources */,
 				EEAACCBE1B44E90400D05C0B /* HomeViewController.m in Sources */,
-				EE76A5751B72056800036747 /* ConnectionOwner.m in Sources */,
 				EEFA44FE1B58F7D4007DF294 /* NickNameInputView.m in Sources */,
 				EE2D4B7A1B525E0A00B58A1F /* PostPreViewController.m in Sources */,
 				EEAACCAA1B44E90400D05C0B /* PhoneInputViewController.m in Sources */,
@@ -2222,6 +2226,7 @@
 				EEAACD1D1B44E90400D05C0B /* ProfileUserHeaderCell.m in Sources */,
 				EEAACD021B44E90400D05C0B /* QueryOwnerCell.m in Sources */,
 				EEAACCDD1B44E90400D05C0B /* LoginModel.m in Sources */,
+				EEA2017D1B744E59006B81E4 /* Friends.m in Sources */,
 				EEAACD041B44E90400D05C0B /* QueryDescriptionCell.m in Sources */,
 				EEAACD2D1B44E90400D05C0B /* DropDownItem.m in Sources */,
 				EEAACCF31B44E90400D05C0B /* ChatViewOtherCell.m in Sources */,
@@ -2276,6 +2281,7 @@
 				EEAACCE51B44E90400D05C0B /* QueryContentTag.m in Sources */,
 				EE6C74211B6C45E500EDE0AA /* ProfileOverView.m in Sources */,
 				EEAACCEE1B44E90400D05C0B /* SRWebSocket.m in Sources */,
+				EEA2017C1B744E59006B81E4 /* ConnectionOwner.m in Sources */,
 				EE20BED11B6F3B3C00DE8455 /* NewMessageSettingController.m in Sources */,
 				EEAACCA11B44E90400D05C0B /* CVMovieController.m in Sources */,
 				EEAACCB81B44E90400D05C0B /* ChatViewController.m in Sources */,

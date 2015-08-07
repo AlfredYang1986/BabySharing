@@ -65,6 +65,7 @@ typedef NS_ENUM(NSInteger, UserPostOwnerConnections) {
 #define PROFILE_HOST_DOMAIN                 [HOST_DOMAIN stringByAppendingString:@"profile/"]
 #define PROFILE_UPDATE_DETAILS              @"updateProfile"
 #define PROFILE_QUERY_DETAILS               @"userProfile"
+#define PROFILE_QUERY_MULTIPLE              @"multipleUserProfile"
 
 //#define PROFILE_HOST_DOMAIN_SENDBOX         [HOST_DOMAIN_SENDBOX stringByAppendingString:@"profile/"]
 
@@ -108,11 +109,14 @@ typedef NS_ENUM(NSInteger, UserPostOwnerConnections) {
 #define RELATIONSHIP_FOLLOW                 [RELATIONSHIP_DOMAIN stringByAppendingString:@"follow"]
 #define RELATIONSHIP_UNFOLLOW               [RELATIONSHIP_DOMAIN stringByAppendingString:@"unfollow"]
 #define RELATIONSHIP_RELATION               [RELATIONSHIP_DOMAIN stringByAppendingString:@"queryRelationsBetweenUsers"]
+#define RELATIONSHIP_QUERY_FOLLOWING        [RELATIONSHIP_DOMAIN stringByAppendingString:@"queryFollowingUsers"]
+#define RELATIONSHIP_QUERY_FOLLOWED         [RELATIONSHIP_DOMAIN stringByAppendingString:@"queryFollowedUsers"]
+#define RELATIONSHIP_QUERY_FRIENDS          [RELATIONSHIP_DOMAIN stringByAppendingString:@"queryMutureFollowingUsers"]
 
 #pragma mark -- database
-#define LOCALDB_LOGIN                       @"loginData23.sqlite"
-#define LOCALDB_QUERY                       @"quertData12.sqlite"
-#define LOCALDB_GROUP                       @"groupData03.sqlite"
-#define LOCALDB_TAG_QUERY                   @"tagQuery00.sqlite"
-#define LOCALDB_RELATIONSHIP                @"Relationship00.sqlite"
-//#define LOCALDB_CHAT                      @"chatData01.sqlite"
+#define LOCALDB_LOGIN                       @"loginData.sqlite"
+#define LOCALDB_QUERY                       @"quertData.sqlite"
+#define LOCALDB_GROUP                       @"groupData.sqlite"
+#define LOCALDB_TAG_QUERY                   @"tagQuery.sqlite"
+#define LOCALDB_RELATIONSHIP                @"Relationship.sqlite"
+//#define LOCALDB_CHAT                      @"chatData.sqlite"

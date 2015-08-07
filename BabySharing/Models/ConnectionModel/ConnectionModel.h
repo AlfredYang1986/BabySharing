@@ -12,6 +12,7 @@
 @class AppDelegate;
 
 typedef void(^followFinishBlock)(BOOL success, NSString* message);
+typedef void(^queryFinishBlock)(BOOL success);
 
 @interface ConnectionModel : NSObject
 
@@ -26,5 +27,13 @@ typedef void(^followFinishBlock)(BOOL success, NSString* message);
 - (void)followOneUser:(NSString*)follow_user_id withFinishBlock:(followFinishBlock)block;
 - (void)unfollowOneUser:(NSString*)follow_user_id withFinishBlock:(followFinishBlock)block;
 
-#pragma mark -- query connections
+#pragma mark -- query connections from server
+- (void)queryFollowingWithUser:(NSString*)owner_id andFinishBlock:(queryFinishBlock)block;
+- (void)queryFollowedWithUser:(NSString*)owner_id andFinishBlock:(queryFinishBlock)block;
+- (void)queryFriendsWithUser:(NSString*)owner_id andFinishBlock:(queryFinishBlock)block;
+
+#pragma mark -- query connections from local
+- (NSArray*)queryLocalFollowingWithUser:(NSString*)owner_id;
+- (NSArray*)queryLocalFollowedWithUser:(NSString*)owner_id;
+- (NSArray*)queryLocalFriendsWithUser:(NSString*)owner_id;
 @end

@@ -66,4 +66,7 @@ typedef NS_ENUM(NSInteger, LoginModelConnectSNResult) {
 
 - (NSString*)getCurrentUserID;
 - (NSString*)getCurrentAuthToken;
+
+#pragma mark -- query mutiple user simple profiles
+- (NSArray*)querMultipleProlfiles:(NSArray*)user_ids;
 @end

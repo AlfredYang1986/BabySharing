@@ -11,12 +11,17 @@
 #import "MesssageTableDelegate.h"
 #import "FriendsTableDelegate.h"
 #import "INTUAnimationEngine.h"
+#import "ConnectionModel.h"
+#import "AppDelegate.h"
 
 @interface MessageViewController () <UISearchBarDelegate>
 @property (strong, nonatomic) UITableView *queryView;
 @property (strong, nonatomic) UITableView *friendsQueryView;
 @property (strong, nonatomic) UISegmentedControl *friendSeg;
 @property (strong, nonatomic) UISearchBar *friendsSearchBar;
+
+@property (weak, nonatomic, readonly) ConnectionModel *cm;
+@property (weak, nonatomic, readonly) LoginModel *lm;
 @end
 
 @implementation MessageViewController {
@@ -32,6 +37,9 @@
 @synthesize friendSeg = _friendSeg;
 @synthesize friendsQueryView = _friendsQueryView;
 @synthesize friendsSearchBar = _friendsSearchBar;
+
+@synthesize cm = _cm; // for query relationships
+@synthesize lm = _lm;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -49,9 +57,11 @@
     fd = [[FriendsTableDelegate alloc]init];
     _friendsQueryView.delegate = fd;
     _friendsQueryView.dataSource = fd;
-    fd.queryView = _queryView;
+    fd.queryView = _friendsQueryView;
     
     _friendSeg = [[UISegmentedControl alloc]initWithItems:@[@"好友", @"关注", @"粉丝"]];
+    [_friendSeg addTarget:self action:@selector(friendSegValueChanged:) forControlEvents:UIControlEventValueChanged];
+    _friendSeg.selectedSegmentIndex = 0;
     [self.view addSubview:_friendSeg];
     
     _friendsSearchBar = [[UISearchBar alloc]init];
@@ -70,10 +80,15 @@
     [self layoutSubviews];
     
     title_seg = [[UISegmentedControl alloc]initWithItems:@[@"消息", @"好友"]];
+    title_seg.selectedSegmentIndex = 0;
     self.navigationItem.titleView = title_seg;
     [title_seg addTarget:self action:@selector(titleSegValueChanged:) forControlEvents:UIControlEventValueChanged];
    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"添加好友" style:UIBarButtonItemStylePlain target:self action:@selector(friendsAddingBtnSelected)];
+    
+    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    _cm = app.cm;
+    _lm = app.lm;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -124,6 +139,29 @@
     }
 }
 
+- (void)friendSegValueChanged:(id)sender {
+    
+    switch (_friendSeg.selectedSegmentIndex) {
+        case 0: {
+            [_cm queryFriendsWithUser:_lm.current_user_id andFinishBlock:^(BOOL success) {
+                [fd refreshShowingListWithUserList:[_cm queryLocalFriendsWithUser:_lm.current_user_id]];
+            }];}
+            break;
+        case 1: {
+            [_cm queryFollowingWithUser:_lm.current_user_id andFinishBlock:^(BOOL success) {
+                [fd refreshShowingListWithUserList:[_cm queryLocalFollowingWithUser:_lm.current_user_id]];
+            }];}
+            break;
+        case 2: {
+            [_cm queryFollowedWithUser:_lm.current_user_id andFinishBlock:^(BOOL success) {
+                [fd refreshShowingListWithUserList:[_cm queryLocalFollowedWithUser:_lm.current_user_id]];
+            }];}
+            break;
+        default:
+            break;
+    }
+}
+
 - (void)friendsAddingBtnSelected {
     
 }
@@ -158,6 +196,9 @@
                                       // NOTE: When passing INTUAnimationOptionRepeat, this completion block is NOT executed at the end of each cycle. It will only run if the animation is canceled.
                                       NSLog(@"%@", finished ? @"Animation Completed" : @"Animation Canceled");
                                       //                                                         self.animationID = NSNotFound;
+                                      if (title_seg.selectedSegmentIndex == 1) {
+                                          [self friendSegValueChanged:nil];
+                                      }
                                   }];
 }
 @end

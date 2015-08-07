@@ -12,4 +12,5 @@
 @interface FriendsTableDelegate : NSObject <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, weak) UITableView* queryView;
 
+- (void)refreshShowingListWithUserList:(NSArray*)user_lst;
 @end

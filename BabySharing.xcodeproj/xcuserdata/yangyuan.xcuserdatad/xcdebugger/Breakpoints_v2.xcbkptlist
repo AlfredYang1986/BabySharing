@@ -9,13 +9,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BabySharing/Controllers/ShareSide/Home/HomeDetailViewController.m"
-            timestampString = "460550614.683126"
+            filePath = "BabySharing/Models/LoginModel/LoginModel.m"
+            timestampString = "460616450.150914"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "649"
-            endingLineNumber = "649"
-            landmarkName = "-didSelectDetialFollowOwner:"
+            startingLineNumber = "412"
+            endingLineNumber = "412"
+            landmarkName = "-querMultipleProlfiles:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BabySharing/Controllers/ShareSide/Home/HomeDetailViewController.m"
-            timestampString = "460550657.027547"
+            filePath = "BabySharing/Controllers/Message/FriendsTableDelegate.m"
+            timestampString = "460619284.787638"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "659"
-            endingLineNumber = "659"
-            landmarkName = "-didSelectDetialFollowOwner:"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
+            landmarkName = "-tableView:numberOfRowsInSection:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,29 +41,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BabySharing/Controllers/ShareSide/Home/HomeDetailViewController.m"
-            timestampString = "460550664.080369"
+            filePath = "BabySharing/Controllers/Message/FriendsTableDelegate.m"
+            timestampString = "460619486.841496"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "660"
-            endingLineNumber = "660"
-            landmarkName = "-didSelectDetialFollowOwner:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BabySharing/Controllers/ShareSide/PersonalCentre/PersonalCentreTmpViewController.m"
-            timestampString = "460551732.296424"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "397"
-            endingLineNumber = "397"
-            landmarkName = "-getFriendsCount"
+            startingLineNumber = "165"
+            endingLineNumber = "165"
+            landmarkName = "-refreshShowingListWithUserList:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

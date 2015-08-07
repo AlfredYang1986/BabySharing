@@ -394,4 +394,30 @@
 - (NSString*)getCurrentAuthToken {
     return _current_user.who.auth_token;
 }
+
+#pragma mark -- query mutiple user simple profiles
+- (NSArray*)querMultipleProlfiles:(NSArray*)user_ids {
+    NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
+    
+    [dic setObject:_current_user.who.user_id forKey:@"user_id"];
+    [dic setObject:_current_user.who.auth_token forKey:@"auth_token"];
+    
+    [dic setObject:user_ids forKey:@"query_list"];
+    
+    NSError * error = nil;
+    NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
+    
+    NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:[PROFILE_HOST_DOMAIN stringByAppendingString:PROFILE_QUERY_MULTIPLE]]];
+    
+    if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
+       
+        return [result objectForKey:@"result"];
+    } else {
+        NSDictionary* reError = [result objectForKey:@"error"];
+        NSString* msg = [reError objectForKey:@"message"];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:msg delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+        [alert show];
+        return nil;
+    }
+}
 @end

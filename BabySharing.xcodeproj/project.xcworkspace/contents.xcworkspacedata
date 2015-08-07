@@ -2,6 +2,18 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:../BabySharing/Models/ConnectionModel/LocalModel/ConnectionOwner.h">
+   </FileRef>
+   <FileRef
+      location = "group:../BabySharing/Models/ConnectionModel/LocalModel/ConnectionOwner.m">
+   </FileRef>
+   <FileRef
+      location = "group:../BabySharing/Models/ConnectionModel/LocalModel/Friends.h">
+   </FileRef>
+   <FileRef
+      location = "group:../BabySharing/Models/ConnectionModel/LocalModel/Friends.m">
+   </FileRef>
+   <FileRef
       location = "self:BabySharing.xcodeproj">
    </FileRef>
 </Workspace>

@@ -4,6 +4,7 @@
         <attribute name="user_id" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="followed" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Followed" inverseName="followedBy" inverseEntity="Followed" syncable="YES"/>
         <relationship name="following" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Following" inverseName="followingBy" inverseEntity="Following" syncable="YES"/>
+        <relationship name="friends" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Friends" inverseName="friendsWith" inverseEntity="Friends" syncable="YES"/>
     </entity>
     <entity name="Followed" representedClassName="Followed" syncable="YES">
         <attribute name="user_id" optional="YES" attributeType="String" syncable="YES"/>
@@ -13,9 +14,14 @@
         <attribute name="user_id" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="followingBy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ConnectionOwner" inverseName="following" inverseEntity="ConnectionOwner" syncable="YES"/>
     </entity>
+    <entity name="Friends" representedClassName="Friends" syncable="YES">
+        <attribute name="user_id" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="friendsWith" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ConnectionOwner" inverseName="friends" inverseEntity="ConnectionOwner" syncable="YES"/>
+    </entity>
     <elements>
-        <element name="ConnectionOwner" positionX="-3888" positionY="9" width="128" height="88"/>
+        <element name="ConnectionOwner" positionX="-3888" positionY="9" width="128" height="103"/>
+        <element name="Followed" positionX="-4169" positionY="99" width="128" height="73"/>
         <element name="Following" positionX="-3600" positionY="-97" width="128" height="73"/>
-        <element name="Followed" positionX="-3602" positionY="74" width="128" height="73"/>
+        <element name="Friends" positionX="-3863" positionY="279" width="128" height="73"/>
     </elements>
 </model>

@@ -11,6 +11,7 @@
 //#import <CoreData/CoreData.h>
 #import "RemoteInstance.h"
 #import "AppDelegate.h"
+#import "ConnectionOwner+ContextOpt.h"
 
 @implementation ConnectionModel
 @synthesize querydata = _querydata;
@@ -120,4 +121,103 @@
 }
 
 #pragma mark -- query connections
+- (void)queryFollowingWithUser:(NSString*)owner_id andFinishBlock:(queryFinishBlock)block {
+    
+    NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
+    
+    [dic setValue:_delegate.lm.current_user_id forKey:@"user_id"];
+    [dic setValue:_delegate.lm.current_auth_token forKey:@"auth_token"];
+    [dic setValue:owner_id forKey:@"owner_id"];
+    
+    NSError* error = nil;
+    NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
+    
+    NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:RELATIONSHIP_QUERY_FOLLOWING]];
+    
+    if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
+        NSArray* reVal = [[result objectForKey:@"result"] objectForKey:@"following"];
+        NSLog(@"following success : %@", reVal);
+        [ConnectionOwner createOrUpdateOwner:owner_id andFollowings:reVal inContext:_doc.managedObjectContext];
+        block(YES);
+        
+    } else {
+        //        NSDictionary* reError = [result objectForKey:@"error"];
+        //        NSString* msg = [reError objectForKey:@"message"];
+        //        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:msg delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+        //        [alert show];
+        NSLog(@"following query error");
+        block(NO);
+    }
+}
+
+- (void)queryFollowedWithUser:(NSString*)owner_id andFinishBlock:(queryFinishBlock)block {
+    
+    NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
+    
+    [dic setValue:_delegate.lm.current_user_id forKey:@"user_id"];
+    [dic setValue:_delegate.lm.current_auth_token forKey:@"auth_token"];
+    [dic setValue:owner_id forKey:@"owner_id"];
+    
+    NSError* error = nil;
+    NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
+    
+    NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:RELATIONSHIP_QUERY_FOLLOWED]];
+    
+    if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
+        NSArray* reVal = [[result objectForKey:@"result"] objectForKey:@"followed"];
+        NSLog(@"following success : %@", reVal);
+        [ConnectionOwner createOrUpdateOwner:owner_id andFollowed:reVal inContext:_doc.managedObjectContext];
+        block(YES);
+        
+    } else {
+        //        NSDictionary* reError = [result objectForKey:@"error"];
+        //        NSString* msg = [reError objectForKey:@"message"];
+        //        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:msg delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+        //        [alert show];
+        NSLog(@"following query error");
+        block(NO);
+    }
+}
+
+- (void)queryFriendsWithUser:(NSString*)owner_id andFinishBlock:(queryFinishBlock)block {
+    
+    NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
+    
+    [dic setValue:_delegate.lm.current_user_id forKey:@"user_id"];
+    [dic setValue:_delegate.lm.current_auth_token forKey:@"auth_token"];
+    [dic setValue:owner_id forKey:@"owner_id"];
+    
+    NSError* error = nil;
+    NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
+    
+    NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:RELATIONSHIP_QUERY_FRIENDS]];
+    
+    if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
+        NSArray* reVal = [[result objectForKey:@"result"] objectForKey:@"friends"];
+        NSLog(@"following success : %@", reVal);
+        [ConnectionOwner createOrUpdateOwner:owner_id andFriends:reVal inContext:_doc.managedObjectContext];
+        block(YES);
+        
+    } else {
+        //        NSDictionary* reError = [result objectForKey:@"error"];
+        //        NSString* msg = [reError objectForKey:@"message"];
+        //        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:msg delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+        //        [alert show];
+        NSLog(@"following query error");
+        block(NO);
+    }
+}
+
+#pragma mark -- query connections from local
+- (NSArray*)queryLocalFollowingWithUser:(NSString*)owner_id {
+    return [ConnectionOwner queryFollowingsWithOwner:owner_id inContext:_doc.managedObjectContext];
+}
+
+- (NSArray*)queryLocalFollowedWithUser:(NSString*)owner_id {
+    return [ConnectionOwner queryFollowedWithOwner:owner_id inContext:_doc.managedObjectContext];
+}
+
+- (NSArray*)queryLocalFriendsWithUser:(NSString*)owner_id {
+    return [ConnectionOwner queryMutureFriendsWithOwner:owner_id inContext:_doc.managedObjectContext];
+}
 @end
