@@ -20,7 +20,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="咚哒隐私政策" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wH0-yO-rar">
                                 <rect key="frame" x="249" y="417" width="102" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="登录即表示同意用户协议&amp;隐私政策" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fJh-Ts-ais">
@@ -29,7 +29,7 @@
                                     <constraint firstAttribute="height" constant="44" id="ukJ-NR-XY8"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -423,7 +423,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Personal Center" id="rb3-pf-0Xv"/>
                     <connections>
-                        <outlet property="selfTabeView" destination="yJf-GU-xty" id="6lw-ju-Svw"/>
+                        <outlet property="queryView" destination="yJf-GU-xty" id="TmT-ud-Iiz"/>
                         <segue destination="Epo-Wf-qOr" kind="push" identifier="MoreSetting" id="fZo-Wa-84s"/>
                         <segue destination="Qni-nN-2Jw" kind="push" identifier="PersonalSetting" id="Xl7-6t-OQ8"/>
                     </connections>
@@ -1396,6 +1396,9 @@
                     </view>
                     <navigationItem key="navigationItem" title="添加好友" id="xGd-WH-lHw"/>
                     <connections>
+                        <outlet property="queryView" destination="ooZ-Cq-P0Q" id="i17-oS-cNf"/>
+                        <outlet property="searchBar" destination="9JL-e0-pcS" id="EJd-YT-tEq"/>
+                        <outlet property="seg" destination="DZY-46-T37" id="V9U-nI-xnZ"/>
                         <segue destination="ACV-6I-bvh" kind="push" id="tQd-di-kh2"/>
                     </connections>
                 </viewController>
@@ -1548,7 +1551,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="qbd-0n-vJA"/>
-        <segue reference="Xl7-6t-OQ8"/>
+        <segue reference="mYA-47-s6C"/>
         <segue reference="4Ao-yR-LGJ"/>
     </inferredMetricsTieBreakers>
 </document>

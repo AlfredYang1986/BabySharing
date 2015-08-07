@@ -223,6 +223,8 @@ enum DisplaySide {
     NSLog(@"queryDataIsReady");
     NSLog(@"the login user is : %@", _lm.current_user_id);
     NSLog(@"the login user token is : %@", _lm.current_auth_token);
+   
+    isQueryModelReady = YES;
     
     AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     if (!isGroupModelReady) [delegate createGroupModel];
@@ -231,6 +233,8 @@ enum DisplaySide {
 
 - (void)queryGroupIsReady:(id)sender {
     NSLog(@"query group is ready");
+    
+    isGroupModelReady = YES;
     
     if (inputView.frame.origin.y + inputView.frame.size.height != [UIScreen mainScreen].bounds.size.height) {
         CGFloat height = [UIScreen mainScreen].bounds.size.height;

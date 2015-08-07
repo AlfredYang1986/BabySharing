@@ -1,0 +1,18 @@
+//
+//  PersonalCenterOwnerDelegate.h
+//  BabySharing
+//
+//  Created by Alfred Yang on 1/08/2015.
+//  Copyright (c) 2015 BM. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
+#import "OwnerQueryModel.h"
+#import "AlbumTableCell.h"
+#import "PersonalCenterProtocol.h"
+
+@interface PersonalCenterOwnerDelegate : NSObject <UITableViewDelegate, UITableViewDataSource, AlbumTableCellDelegate, PersonalCenterCallBack>
+@property (nonatomic, weak) id<PersonalCenterProtocol> delegate;
+@end

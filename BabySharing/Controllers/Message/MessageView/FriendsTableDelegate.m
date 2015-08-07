@@ -38,14 +38,13 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"selet row");
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    //    [self performSegueWithIdentifier:@"HomeDetailSegue" sender:indexPath];
     
-    //    QueryContent* cur = [_qm.querydata objectAtIndex:indexPath.row - 1];
-    //    [self performSegueWithIdentifier:@"HomeDetailSegue" sender:cur];
+    // TODO: view personal details
+    
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-    return NO;
+    return YES;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

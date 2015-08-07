@@ -7,16 +7,34 @@
 //
 
 #import "AddingFriendsController.h"
+#import "AddressBookDelegate.h"
 
-@interface AddingFriendsController () <UITableViewDataSource, UITableViewDelegate>
+@interface AddingFriendsController ()
+@property (weak, nonatomic) IBOutlet UITableView *queryView;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *seg;
 
 @end
 
-@implementation AddingFriendsController
+@implementation AddingFriendsController {
+    AddressBookDelegate* ab;
+}
+
+@synthesize queryView = _queryView;
+@synthesize searchBar = _searchBar;
+@synthesize seg = _seg;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    _seg.selectedSegmentIndex = 0;
+    [_seg addTarget:self action:@selector(segValueChanged) forControlEvents:UIControlEventValueChanged];
+    
+    ab = [[AddressBookDelegate alloc]init];
+    if ([ab isAddressDelegateReady]) {
+        _queryView.delegate = ab;
+        _queryView.dataSource = ab;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -34,21 +52,7 @@
 }
 */
 
-#pragma mark -- tableview delegate
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)segValueChanged {
     
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"default"];
-    
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"default"];
-    }
-    
-    cell.textLabel.text = @"alfred";
-    
-    return cell;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
 }
 @end

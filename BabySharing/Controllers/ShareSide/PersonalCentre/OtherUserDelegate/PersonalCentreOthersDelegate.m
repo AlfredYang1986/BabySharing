@@ -1,49 +1,48 @@
 //
-//  PersonalCenterOwnerDelegate.m
+//  PersonalCentreOthersDelegate.m
 //  BabySharing
 //
-//  Created by Alfred Yang on 1/08/2015.
+//  Created by Alfred Yang on 7/08/2015.
 //  Copyright (c) 2015 BM. All rights reserved.
 //
-
-#import "PersonalCenterOwnerDelegate.h"
+#import "PersonalCentreOthersDelegate.h"
 #import "ProfileOverview.h"
 #import "OwnerQueryModel.h"
 #import "QueryContent+ContextOpt.h"
 #import "QueryContentItem.h"
 
-@interface PersonalCenterOwnerDelegate ()
+@interface PersonalCentreOthersDelegate ()
 
 @end
 
-@implementation PersonalCenterOwnerDelegate
+@implementation PersonalCentreOthersDelegate
 
 @synthesize delegate = _delegate;
 
 #pragma mark -- UITableView Delegate
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     if (section == 0) {
-        ProfileOverView* header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"Profile Overview"];
+        ProfileOverView* header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"Profile Others Overview"];
         
         if (header == nil) {
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ProfileOverView" owner:self options:nil];
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ProfileOthersOverView" owner:self options:nil];
             header = [nib objectAtIndex:0];
         }
-       
-        [header setOwnerPhoto:[_delegate getOwnerPhotoName]];
-        [header setLoation:[_delegate getOwnerLocation]];
-        [header setRoleTag:[_delegate getOwnerRoleTag]];
+        
+        [header setOwnerPhoto:[_delegate getPhotoName]];
+        [header setLoation:[_delegate getLocation]];
+        [header setRoleTag:[_delegate getRoleTag]];
         [header setFriendsCount:[_delegate getFriendsCount]];
         [header setShareCount:[_delegate getSharedCount]];
         [header setCycleCount:[_delegate getCycleCount]];
-        [header setPersonalSign:[_delegate getOwnerSign]];
+        [header setPersonalSign:[_delegate getSign]];
         
         return header;
         
     } else return nil;
 }
 
-#pragma mark -- UITableView DataSource 
+#pragma mark -- UITableView DataSource
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
     if (section == 0 && [view isKindOfClass:[UITableViewHeaderFooterView class]]) {
         ((UITableViewHeaderFooterView *)view).tintColor = [UIColor whiteColor];
@@ -68,20 +67,6 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-//    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"default"];
-//    
-//    if (cell == nil) {
-//        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"default"];
-//    }
-//   
-//    OwnerQueryModel* om = [_delegate getOM];
-//    QueryContent* tmp = [om.querydata objectAtIndex:indexPath.row];
-//    
-//    cell.textLabel.text = tmp.owner_name;
-//    
-//    return cell;
-   
     
     AlbumTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AlbumTableViewCell"];
     
@@ -123,5 +108,10 @@
 
 - (BOOL)isSelectedAtIndex:(NSInteger)index {
     return false;
+}
+
+#pragma mark -- Personal Center Callback 
+- (void)setDelegate:(id<PersonalCenterProtocol>)delegate {
+    _delegate = delegate;
 }
 @end
