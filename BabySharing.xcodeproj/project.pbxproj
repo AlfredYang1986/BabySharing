@@ -27,6 +27,12 @@
 		EE40826A1B70C18E0094A88B /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EE4082691B70C18E0094A88B /* libstdc++.dylib */; };
 		EE59A7751B5936170014F9C3 /* SearchUserTagsController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE59A7741B5936170014F9C3 /* SearchUserTagsController.m */; };
 		EE5C7E4F1B511CC000104CAB /* AlbumViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5C7E4E1B511CC000104CAB /* AlbumViewController2.m */; };
+		EE5D686C1B75A55A0067A2DF /* MessageAndNotificationModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EE5D686A1B75A55A0067A2DF /* MessageAndNotificationModel.xcdatamodeld */; };
+		EE5D686F1B75A9FC0067A2DF /* NotificationOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5D686E1B75A9FC0067A2DF /* NotificationOwner.m */; };
+		EE5D68721B75A9FD0067A2DF /* Notifications.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5D68711B75A9FD0067A2DF /* Notifications.m */; };
+		EE5D68751B75A9FD0067A2DF /* Targets.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5D68741B75A9FD0067A2DF /* Targets.m */; };
+		EE5D68781B75A9FD0067A2DF /* Messages.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5D68771B75A9FD0067A2DF /* Messages.m */; };
+		EE5D687B1B75B12B0067A2DF /* NotificationOwner+ContextOpt.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5D687A1B75B12B0067A2DF /* NotificationOwner+ContextOpt.m */; };
 		EE664E9A1B73145000ACD57E /* QueryContent.m in Sources */ = {isa = PBXBuildFile; fileRef = EE664E991B73145000ACD57E /* QueryContent.m */; };
 		EE7415C81B5B7097002CA1BC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE7415C41B5B7097002CA1BC /* LaunchScreen.xib */; };
 		EE7415C91B5B7097002CA1BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE7415C61B5B7097002CA1BC /* Main.storyboard */; };
@@ -91,13 +97,6 @@
 		EEAACCCA1B44E90400D05C0B /* INTUEasingFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB5D1B44E90300D05C0B /* INTUEasingFunctions.m */; };
 		EEAACCCB1B44E90400D05C0B /* INTUInterpolationFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB5F1B44E90300D05C0B /* INTUInterpolationFunctions.m */; };
 		EEAACCCC1B44E90400D05C0B /* INTUSpringSolver.c in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB611B44E90300D05C0B /* INTUSpringSolver.c */; };
-		EEAACCCD1B44E90400D05C0B /* GroupModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB691B44E90300D05C0B /* GroupModel.m */; };
-		EEAACCCE1B44E90400D05C0B /* ChatGroup.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB6B1B44E90300D05C0B /* ChatGroup.xcdatamodeld */; };
-		EEAACCCF1B44E90400D05C0B /* Group+ContextOpt.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB6E1B44E90300D05C0B /* Group+ContextOpt.m */; };
-		EEAACCD01B44E90400D05C0B /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB701B44E90300D05C0B /* Group.m */; };
-		EEAACCD11B44E90400D05C0B /* Messages+ContextOpt.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB721B44E90300D05C0B /* Messages+ContextOpt.m */; };
-		EEAACCD21B44E90400D05C0B /* Messages.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB741B44E90300D05C0B /* Messages.m */; };
-		EEAACCD31B44E90400D05C0B /* SubGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB761B44E90300D05C0B /* SubGroup.m */; };
 		EEAACCD41B44E90400D05C0B /* CurrentToken+ContextOpt.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB7A1B44E90300D05C0B /* CurrentToken+ContextOpt.m */; };
 		EEAACCD51B44E90400D05C0B /* CurrentToken.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB7C1B44E90300D05C0B /* CurrentToken.m */; };
 		EEAACCD61B44E90400D05C0B /* LoginLocalModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB7D1B44E90300D05C0B /* LoginLocalModel.xcdatamodeld */; };
@@ -277,6 +276,17 @@
 		EE59A7741B5936170014F9C3 /* SearchUserTagsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchUserTagsController.m; sourceTree = "<group>"; };
 		EE5C7E4D1B511CC000104CAB /* AlbumViewController2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumViewController2.h; sourceTree = "<group>"; };
 		EE5C7E4E1B511CC000104CAB /* AlbumViewController2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumViewController2.m; sourceTree = "<group>"; };
+		EE5D686B1B75A55A0067A2DF /* MessageAndNotificationModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MessageAndNotificationModel.xcdatamodel; sourceTree = "<group>"; };
+		EE5D686D1B75A9FC0067A2DF /* NotificationOwner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationOwner.h; sourceTree = "<group>"; };
+		EE5D686E1B75A9FC0067A2DF /* NotificationOwner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationOwner.m; sourceTree = "<group>"; };
+		EE5D68701B75A9FD0067A2DF /* Notifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notifications.h; sourceTree = "<group>"; };
+		EE5D68711B75A9FD0067A2DF /* Notifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Notifications.m; sourceTree = "<group>"; };
+		EE5D68731B75A9FD0067A2DF /* Targets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Targets.h; sourceTree = "<group>"; };
+		EE5D68741B75A9FD0067A2DF /* Targets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Targets.m; sourceTree = "<group>"; };
+		EE5D68761B75A9FD0067A2DF /* Messages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Messages.h; sourceTree = "<group>"; };
+		EE5D68771B75A9FD0067A2DF /* Messages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Messages.m; sourceTree = "<group>"; };
+		EE5D68791B75B12B0067A2DF /* NotificationOwner+ContextOpt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NotificationOwner+ContextOpt.h"; sourceTree = "<group>"; };
+		EE5D687A1B75B12B0067A2DF /* NotificationOwner+ContextOpt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NotificationOwner+ContextOpt.m"; sourceTree = "<group>"; };
 		EE664E981B73145000ACD57E /* QueryContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryContent.h; sourceTree = "<group>"; };
 		EE664E991B73145000ACD57E /* QueryContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryContent.m; sourceTree = "<group>"; };
 		EE7415C51B5B7097002CA1BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -400,19 +410,6 @@
 		EEAACB621B44E90300D05C0B /* INTUSpringSolver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INTUSpringSolver.h; sourceTree = "<group>"; };
 		EEAACB631B44E90300D05C0B /* INTUVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INTUVector.h; sourceTree = "<group>"; };
 		EEAACB661B44E90300D05C0B /* ModelDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelDefines.h; sourceTree = "<group>"; };
-		EEAACB681B44E90300D05C0B /* GroupModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupModel.h; sourceTree = "<group>"; };
-		EEAACB691B44E90300D05C0B /* GroupModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupModel.m; sourceTree = "<group>"; };
-		EEAACB6C1B44E90300D05C0B /* ChatGroup.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ChatGroup.xcdatamodel; sourceTree = "<group>"; };
-		EEAACB6D1B44E90300D05C0B /* Group+ContextOpt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Group+ContextOpt.h"; sourceTree = "<group>"; };
-		EEAACB6E1B44E90300D05C0B /* Group+ContextOpt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Group+ContextOpt.m"; sourceTree = "<group>"; };
-		EEAACB6F1B44E90300D05C0B /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Group.h; sourceTree = "<group>"; };
-		EEAACB701B44E90300D05C0B /* Group.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Group.m; sourceTree = "<group>"; };
-		EEAACB711B44E90300D05C0B /* Messages+ContextOpt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Messages+ContextOpt.h"; sourceTree = "<group>"; };
-		EEAACB721B44E90300D05C0B /* Messages+ContextOpt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Messages+ContextOpt.m"; sourceTree = "<group>"; };
-		EEAACB731B44E90300D05C0B /* Messages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Messages.h; sourceTree = "<group>"; };
-		EEAACB741B44E90300D05C0B /* Messages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Messages.m; sourceTree = "<group>"; };
-		EEAACB751B44E90300D05C0B /* SubGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubGroup.h; sourceTree = "<group>"; };
-		EEAACB761B44E90300D05C0B /* SubGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubGroup.m; sourceTree = "<group>"; };
 		EEAACB791B44E90300D05C0B /* CurrentToken+ContextOpt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CurrentToken+ContextOpt.h"; sourceTree = "<group>"; };
 		EEAACB7A1B44E90300D05C0B /* CurrentToken+ContextOpt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CurrentToken+ContextOpt.m"; sourceTree = "<group>"; };
 		EEAACB7B1B44E90300D05C0B /* CurrentToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentToken.h; sourceTree = "<group>"; };
@@ -844,6 +841,24 @@
 			path = libs;
 			sourceTree = "<group>";
 		};
+		EE5D68691B75A5360067A2DF /* LocalModel */ = {
+			isa = PBXGroup;
+			children = (
+				EE5D68761B75A9FD0067A2DF /* Messages.h */,
+				EE5D68771B75A9FD0067A2DF /* Messages.m */,
+				EE5D68731B75A9FD0067A2DF /* Targets.h */,
+				EE5D68741B75A9FD0067A2DF /* Targets.m */,
+				EE5D68701B75A9FD0067A2DF /* Notifications.h */,
+				EE5D68711B75A9FD0067A2DF /* Notifications.m */,
+				EE5D686D1B75A9FC0067A2DF /* NotificationOwner.h */,
+				EE5D686E1B75A9FC0067A2DF /* NotificationOwner.m */,
+				EE5D686A1B75A55A0067A2DF /* MessageAndNotificationModel.xcdatamodeld */,
+				EE5D68791B75B12B0067A2DF /* NotificationOwner+ContextOpt.h */,
+				EE5D687A1B75B12B0067A2DF /* NotificationOwner+ContextOpt.m */,
+			);
+			path = LocalModel;
+			sourceTree = "<group>";
+		};
 		EE6C741E1B6C452400EDE0AA /* PersonalCenter */ = {
 			isa = PBXGroup;
 			children = (
@@ -1197,7 +1212,6 @@
 				EE76A5691B72019D00036747 /* ConnectionModel */,
 				EE03E9801B4FABDC00F21EF5 /* Album */,
 				EEAACB651B44E90300D05C0B /* Common */,
-				EEAACB671B44E90300D05C0B /* GroupModel */,
 				EEAACB771B44E90300D05C0B /* LoginModel */,
 				EEAACB8F1B44E90300D05C0B /* Messages */,
 				EEAACB931B44E90300D05C0B /* PostModel */,
@@ -1213,34 +1227,6 @@
 				EEAACB661B44E90300D05C0B /* ModelDefines.h */,
 			);
 			path = Common;
-			sourceTree = "<group>";
-		};
-		EEAACB671B44E90300D05C0B /* GroupModel */ = {
-			isa = PBXGroup;
-			children = (
-				EEAACB681B44E90300D05C0B /* GroupModel.h */,
-				EEAACB691B44E90300D05C0B /* GroupModel.m */,
-				EEAACB6A1B44E90300D05C0B /* LocalModel */,
-			);
-			path = GroupModel;
-			sourceTree = "<group>";
-		};
-		EEAACB6A1B44E90300D05C0B /* LocalModel */ = {
-			isa = PBXGroup;
-			children = (
-				EEAACB6B1B44E90300D05C0B /* ChatGroup.xcdatamodeld */,
-				EEAACB6D1B44E90300D05C0B /* Group+ContextOpt.h */,
-				EEAACB6E1B44E90300D05C0B /* Group+ContextOpt.m */,
-				EEAACB6F1B44E90300D05C0B /* Group.h */,
-				EEAACB701B44E90300D05C0B /* Group.m */,
-				EEAACB711B44E90300D05C0B /* Messages+ContextOpt.h */,
-				EEAACB721B44E90300D05C0B /* Messages+ContextOpt.m */,
-				EEAACB731B44E90300D05C0B /* Messages.h */,
-				EEAACB741B44E90300D05C0B /* Messages.m */,
-				EEAACB751B44E90300D05C0B /* SubGroup.h */,
-				EEAACB761B44E90300D05C0B /* SubGroup.m */,
-			);
-			path = LocalModel;
 			sourceTree = "<group>";
 		};
 		EEAACB771B44E90300D05C0B /* LoginModel */ = {
@@ -1282,6 +1268,7 @@
 		EEAACB8F1B44E90300D05C0B /* Messages */ = {
 			isa = PBXGroup;
 			children = (
+				EE5D68691B75A5360067A2DF /* LocalModel */,
 				EEAACB901B44E90300D05C0B /* EnumDefines.h */,
 				EEAACB911B44E90300D05C0B /* MessageModel.h */,
 				EEAACB921B44E90300D05C0B /* MessageModel.m */,
@@ -2254,7 +2241,6 @@
 				EEAACD1B1B44E90400D05C0B /* ProfileDetailUserHeaderCell.m in Sources */,
 				EEAACCCB1B44E90400D05C0B /* INTUInterpolationFunctions.m in Sources */,
 				EEE94E0B1B74A8C20011321A /* MessageViewController.m in Sources */,
-				EEAACCCF1B44E90400D05C0B /* Group+ContextOpt.m in Sources */,
 				EEAACD171B44E90400D05C0B /* ProfileDetailSNCell.m in Sources */,
 				EE981F861B5A10400029723A /* LoginToken.m in Sources */,
 				EEAACC9A1B44E90400D05C0B /* AppDelegate.m in Sources */,
@@ -2269,11 +2255,11 @@
 				EE2D4B7D1B525E0A00B58A1F /* PhotoPreViewController.m in Sources */,
 				EEAACD131B44E90400D05C0B /* ProfileDetailLocationCell.m in Sources */,
 				EEAACCD51B44E90400D05C0B /* CurrentToken.m in Sources */,
+				EE5D68751B75A9FD0067A2DF /* Targets.m in Sources */,
 				EEAACCE81B44E90400D05C0B /* QueryTimeSpan.m in Sources */,
 				EEAACD151B44E90400D05C0B /* ProfileDetailPostCell.m in Sources */,
 				EEAACCDE1B44E90400D05C0B /* LoginUser.m in Sources */,
 				EEAACCD41B44E90400D05C0B /* CurrentToken+ContextOpt.m in Sources */,
-				EEAACCD01B44E90400D05C0B /* Group.m in Sources */,
 				EEAACD271B44E90400D05C0B /* ChatViewCell.m in Sources */,
 				EEAACCDA1B44E90400D05C0B /* Providers.m in Sources */,
 				EEAACCFE1B44E90400D05C0B /* QueryCommentsCell.m in Sources */,
@@ -2285,17 +2271,21 @@
 				EE2D4B7A1B525E0A00B58A1F /* PostPreViewController.m in Sources */,
 				EEAACCAA1B44E90400D05C0B /* PhoneInputViewController.m in Sources */,
 				EEAACCEB1B44E90400D05C0B /* TmpFileStorageModel.m in Sources */,
+				EE5D687B1B75B12B0067A2DF /* NotificationOwner+ContextOpt.m in Sources */,
+				EE5D68781B75A9FD0067A2DF /* Messages.m in Sources */,
 				EEAACD0D1B44E90400D05C0B /* PhotoTagControlView.m in Sources */,
 				EEAACCEF1B44E90400D05C0B /* ViewController.m in Sources */,
 				EE76A56D1B72021900036747 /* ConnectionLocalModel.xcdatamodeld in Sources */,
 				EEAACD201B44E90400D05C0B /* SGAlertMenu.m in Sources */,
 				EEAACCCA1B44E90400D05C0B /* INTUEasingFunctions.m in Sources */,
+				EE5D68721B75A9FD0067A2DF /* Notifications.m in Sources */,
 				EE664E9A1B73145000ACD57E /* QueryContent.m in Sources */,
 				EEAACCB51B44E90400D05C0B /* SecretViewController.m in Sources */,
 				EE76A57C1B72181300036747 /* ConnectionModel.m in Sources */,
 				EE7537761B6B1AC400EC1616 /* CommentsHeader.m in Sources */,
 				EEE94E371B74C0810011321A /* ProfileOthersOverView.m in Sources */,
 				EEAACD001B44E90400D05C0B /* QueryDetailImageCell.m in Sources */,
+				EE5D686C1B75A55A0067A2DF /* MessageAndNotificationModel.xcdatamodeld in Sources */,
 				EEAACCA61B44E90400D05C0B /* AlreadLogedViewController.m in Sources */,
 				EE76A5761B72056800036747 /* Followed.m in Sources */,
 				EEAACCF11B44E90400D05C0B /* AlbumTableCell.m in Sources */,
@@ -2306,7 +2296,6 @@
 				EEAACCA91B44E90400D05C0B /* NicknameInputViewController.m in Sources */,
 				EEE94E261B74BE3B0011321A /* PersonalSettingController.mm in Sources */,
 				EEAACCA41B44E90400D05C0B /* CVViewController2.m in Sources */,
-				EEAACCD31B44E90400D05C0B /* SubGroup.m in Sources */,
 				EE98D14C1B69AF9B004D88DF /* QueryHeader.m in Sources */,
 				EEAACD1D1B44E90400D05C0B /* ProfileUserHeaderCell.m in Sources */,
 				EEAACD021B44E90400D05C0B /* QueryOwnerCell.m in Sources */,
@@ -2337,7 +2326,7 @@
 				EE74162E1B5BA6F7002CA1BC /* UserPrivacyController.m in Sources */,
 				EEE94E0A1B74A8C20011321A /* FriendsTableDelegate.m in Sources */,
 				EEAACD2E1B44E90400D05C0B /* DropDownView.m in Sources */,
-				EEAACCD11B44E90400D05C0B /* Messages+ContextOpt.m in Sources */,
+				EE5D686F1B75A9FC0067A2DF /* NotificationOwner.m in Sources */,
 				EE86D1B21B537469001C4650 /* PostEffectAdapter.mm in Sources */,
 				EEAACCB91B44E90400D05C0B /* CreateChatController.m in Sources */,
 				EEE94E131B74AB6B0011321A /* AddressBookDelegate.m in Sources */,
@@ -2355,13 +2344,11 @@
 				EEAACCDF1B44E90400D05C0B /* MessageModel.m in Sources */,
 				EE74162A1B5B9659002CA1BC /* AreaTableCell.m in Sources */,
 				EEAACCE91B44E90400D05C0B /* QueryModel.m in Sources */,
-				EEAACCCE1B44E90400D05C0B /* ChatGroup.xcdatamodeld in Sources */,
 				EEFD6F4F1B4E44C1008AC4F5 /* LoginInputView.m in Sources */,
 				EE76A5741B72056800036747 /* Following.m in Sources */,
 				EEAACCEC1B44E90400D05C0B /* MoviePlayTrait.m in Sources */,
 				EEAACCDC1B44E90400D05C0B /* RegTmpToken.m in Sources */,
 				EE2D4B7E1B525E0A00B58A1F /* PhotoPreViewEffectController.m in Sources */,
-				EEAACCCD1B44E90400D05C0B /* GroupModel.m in Sources */,
 				EEAACD101B44E90400D05C0B /* PhotoTagView.m in Sources */,
 				EEAACCF01B44E90400D05C0B /* AlbumGridCell.m in Sources */,
 				EEAACC9E1B44E90400D05C0B /* AlbumViewController.m in Sources */,
@@ -2388,7 +2375,6 @@
 				EEAACCBB1B44E90400D05C0B /* HomeDetailViewController.m in Sources */,
 				EEAACCC41B44E90400D05C0B /* TabBarController.m in Sources */,
 				EEAACCE71B44E90400D05C0B /* QueryLocalModel.xcdatamodeld in Sources */,
-				EEAACCD21B44E90400D05C0B /* Messages.m in Sources */,
 				EEAACCA31B44E90400D05C0B /* CVViewController.m in Sources */,
 				EEAACCBD1B44E90400D05C0B /* HomeTagsController.m in Sources */,
 			);
@@ -2659,6 +2645,16 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
+		EE5D686A1B75A55A0067A2DF /* MessageAndNotificationModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				EE5D686B1B75A55A0067A2DF /* MessageAndNotificationModel.xcdatamodel */,
+			);
+			currentVersion = EE5D686B1B75A55A0067A2DF /* MessageAndNotificationModel.xcdatamodel */;
+			path = MessageAndNotificationModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
 		EE76A56B1B72021800036747 /* ConnectionLocalModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
@@ -2666,16 +2662,6 @@
 			);
 			currentVersion = EE76A56C1B72021900036747 /* ConnectionLocalModel.xcdatamodel */;
 			path = ConnectionLocalModel.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-		EEAACB6B1B44E90300D05C0B /* ChatGroup.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				EEAACB6C1B44E90300D05C0B /* ChatGroup.xcdatamodel */,
-			);
-			currentVersion = EEAACB6C1B44E90300D05C0B /* ChatGroup.xcdatamodel */;
-			path = ChatGroup.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

@@ -30,7 +30,7 @@
 @synthesize lm = _lm;
 @synthesize pm = _pm;
 @synthesize qm = _qm;
-@synthesize gm = _gm;
+//@synthesize gm = _gm;
 @synthesize mm = _mm;
 
 @synthesize tm = _tm;
@@ -51,7 +51,7 @@
 }
 
 - (void)createGroupModel {
-    if (!_gm) _gm = [[GroupModel alloc]initWithDelegate:self];
+//    if (!_gm) _gm = [[GroupModel alloc]initWithDelegate:self];
     if (!_mm) _mm = [[MessageModel alloc]initWithDelegate:self];
 }
 
@@ -107,6 +107,7 @@
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     [_qm saveTop:50];
+    [_lm.doc.managedObjectContext save:nil];
     NSLog(@"save content");
 }
 
@@ -121,6 +122,7 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     [_qm saveTop:50];
+    [_lm.doc.managedObjectContext save:nil];
     NSLog(@"save content");
     [GotyeOCAPI exit];
 }

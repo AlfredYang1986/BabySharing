@@ -8,7 +8,7 @@
 
 #import "CreateChatController.h"
 #import "AppDelegate.h"
-#import "GroupModel.h"
+//#import "GroupModel.h"
 
 @interface CreateChatController ()
 
@@ -28,10 +28,10 @@
 - (void)didSelectCreateChatRoomBtn:(id)sender {
     NSLog(@"Creating a chat room");
   
-    AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    GroupModel* gm = delegate.gm;
+//    AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//    GroupModel* gm = delegate.gm;
     
-    [_delegate didCreateSubGroup:[gm createSubGroup:@"alfred Test" inGroup:_current_group]];
+//    [_delegate didCreateSubGroup:[gm createSubGroup:@"alfred Test" inGroup:_current_group]];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

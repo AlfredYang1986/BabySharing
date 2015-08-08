@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+//#import "NotificationOwner+ContextOpt.h"
 
-@class Targets;
+//@class Targets;
 @class AppDelegate;
+@class Notifications;
 
 @interface MessageModel : NSObject
 
@@ -20,7 +22,12 @@
 #pragma mark -- constructor
 - (id)initWithDelegate:(AppDelegate*)delegate;
 
-#pragma mark -- tmp group message
-- (void)addMessageWithData:(NSDictionary*)data;
-- (NSArray*)queryAllMessagesWithReceiver:(NSString*)receiver andUser:(NSString*)user_id;
+#pragma mark -- save notifications
+- (void)save;
+
+#pragma mark -- notification functions
+- (void)addNotification:(NSDictionary*)notification;
+- (NSArray*)enumNotifications;
+- (void)removeAllNotifications;
+- (void)removeOneNotification:(Notifications*)notification;
 @end

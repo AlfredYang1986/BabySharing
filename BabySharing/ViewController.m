@@ -60,7 +60,7 @@ enum DisplaySide {
     BOOL isSNSLogin;
     
     BOOL isQueryModelReady;
-    BOOL isGroupModelReady;
+    BOOL isMessageModelReady;
 }
 
 @synthesize lm = _lm;
@@ -84,7 +84,7 @@ enum DisplaySide {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogedIn:) name:@"login success" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appIsReady:) name:@"app ready" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(queryDataIsReady:) name:@"query data ready" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(queryGroupIsReady:) name:@"group data ready" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(messageAndNotificationDataIsReady:) name:@"message data ready" object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogedOut:) name:@"current user sign out" object:nil];
 
@@ -98,7 +98,7 @@ enum DisplaySide {
     [GotyeOCAPI addListener:self];
     
     isQueryModelReady = NO;
-    isGroupModelReady = NO;
+    isMessageModelReady = NO;
 }
 
 - (void)createSubviews {
@@ -227,14 +227,14 @@ enum DisplaySide {
     isQueryModelReady = YES;
     
     AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    if (!isGroupModelReady) [delegate createGroupModel];
-    else [self queryGroupIsReady:nil];
+    if (!isMessageModelReady) [delegate createGroupModel];
+    else [self messageAndNotificationDataIsReady:nil];
 }
 
-- (void)queryGroupIsReady:(id)sender {
-    NSLog(@"query group is ready");
+- (void)messageAndNotificationDataIsReady:(id)sender {
+    NSLog(@"message is ready");
     
-    isGroupModelReady = YES;
+    isMessageModelReady = YES;
     
     if (inputView.frame.origin.y + inputView.frame.size.height != [UIScreen mainScreen].bounds.size.height) {
         CGFloat height = [UIScreen mainScreen].bounds.size.height;

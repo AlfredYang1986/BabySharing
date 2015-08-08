@@ -12,7 +12,7 @@
 #import "LoginModel.h"
 #import "PostModel.h"
 #import "QueryModel.h"
-#import "GroupModel.h"
+//#import "GroupModel.h"
 #import "MessageModel.h"
 #import "TagQueryModel.h"
 #import "OwnerQueryModel.h"
@@ -29,7 +29,7 @@
 @property (strong, nonatomic, readonly) LoginModel* lm;
 @property (strong, nonatomic, readonly) PostModel* pm;
 @property (strong, nonatomic, readonly) QueryModel* qm;
-@property (strong, nonatomic, readonly) GroupModel* gm;
+//@property (strong, nonatomic, readonly) GroupModel* gm;
 @property (strong, nonatomic, readonly) MessageModel* mm;
 @property (strong, nonatomic, readonly) TagQueryModel* tm;
 @property (strong, nonatomic, readonly) OwnerQueryModel* om;

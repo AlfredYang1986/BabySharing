@@ -10,30 +10,78 @@
 #import "ModelDefines.h"
 #import <CoreData/CoreData.h>
 #import "RemoteInstance.h"
-#import "Messages+ContextOpt.h"
+//#import "Messages+ContextOpt.h"
 #import "AppDelegate.h"
-#import "Messages+ContextOpt.h"
 #import "EnumDefines.h"
+#import "NotificationOwner+ContextOpt.h"
 
 @implementation MessageModel
 
 @synthesize delegate = _delegate;
 @synthesize doc = _doc;
 
-- (id)initWithDelegate:(AppDelegate*)delegate {
+#pragma mark -- constractor
+- (void)enumDataFromLocalDB:(UIManagedDocument*)document {
+    dispatch_queue_t aq = dispatch_queue_create("load_message_queue", NULL);
+    
+    dispatch_async(aq, ^(void){
+        dispatch_async(dispatch_get_main_queue(), ^(void){
+            [document.managedObjectContext performBlock:^(void){
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"message data ready" object:nil];
+            }];
+        });
+    });
+}
+
+- (id)initWithDelegate:(AppDelegate*)app {
     self = [super init];
     if (self) {
-        _delegate = delegate;
-        _doc = _delegate.gm.doc;
+        
+        _delegate = app;
+        /**
+         * get previous data from local database
+         */
+        NSString* docs=[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+        NSURL* url =[NSURL fileURLWithPath:[docs stringByAppendingPathComponent:LOCALDB_MESSAGEG_NOTIFICATION]];
+        _doc = (UIManagedDocument*)[[UIManagedDocument alloc]initWithFileURL:url];
+        
+        if (![[NSFileManager defaultManager]fileExistsAtPath:[url path] isDirectory:nil]) {
+            [_doc saveToURL:url forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
+                NSLog(@"create query database callback");
+                [self enumDataFromLocalDB:_doc];
+            }];
+        } else if (_doc.documentState == UIDocumentStateClosed) {
+            [_doc openWithCompletionHandler:^(BOOL success) {
+                NSLog(@"open query database callback");
+                [self enumDataFromLocalDB:_doc];
+            }];
+        } else {
+            
+        }
     }
+    
     return self;
 }
 
-- (void)addMessageWithData:(NSDictionary*)data {
-    [Messages addMessageWithData:data inContext:_doc.managedObjectContext];
+#pragma mark -- save notifications
+- (void)save {
+    [_doc.managedObjectContext save:nil];
 }
 
-- (NSArray*)queryAllMessagesWithReceiver:(NSString*)receiver andUser:(NSString*)user_id {
-    return [Messages enumAllMessageWithReceiverType:MessageReceiverTypeTmpGroup andReceiver:receiver andUser:user_id inContext:_doc.managedObjectContext];
+#pragma mark -- notification functions
+- (void)addNotification:(NSDictionary*)notification {
+    [NotificationOwner addNotification:notification forUser:_delegate.lm.current_user_id inContext:_doc.managedObjectContext];
+}
+
+- (NSArray*)enumNotifications {
+    return [NotificationOwner enumNotificationsForOwner:_delegate.lm.current_user_id inContext:_doc.managedObjectContext];
+}
+
+- (void)removeAllNotifications {
+    [NotificationOwner removeAllNotificationsForOwner:_delegate.lm.current_user_id inContext:_doc.managedObjectContext];
+}
+
+- (void)removeOneNotification:(Notifications*)notification {
+    [NotificationOwner removeOneNotification:notification ForOwner:_delegate.lm.current_user_id inContext:_doc.managedObjectContext];
 }
 @end

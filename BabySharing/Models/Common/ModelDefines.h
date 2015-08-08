@@ -32,8 +32,8 @@ typedef NS_ENUM(NSInteger, UserPostOwnerConnections) {
 };
 
 #pragma mark -- HOST DOMAIN
-#define HOST_DOMAIN                     @"http://www.altlys.com:9000/"
-//#define HOST_DOMAIN                     @"http://192.168.1.102:9000/"
+//#define HOST_DOMAIN                     @"http://www.altlys.com:9000/"
+#define HOST_DOMAIN                     @"http://192.168.1.102:9000/"
 //#define HOST_DOMAIN_SENDBOX             @"http://192.168.1.105:9000/"
 
 #pragma mark -- DOWNLOAD
@@ -116,7 +116,8 @@ typedef NS_ENUM(NSInteger, UserPostOwnerConnections) {
 #pragma mark -- database
 #define LOCALDB_LOGIN                       @"loginData.sqlite"
 #define LOCALDB_QUERY                       @"quertData.sqlite"
-#define LOCALDB_GROUP                       @"groupData.sqlite"
+//#define LOCALDB_GROUP                       @"groupData.sqlite"
+#define LOCALDB_MESSAGEG_NOTIFICATION       @"messageData.sqlite"
 #define LOCALDB_TAG_QUERY                   @"tagQuery.sqlite"
 #define LOCALDB_RELATIONSHIP                @"Relationship.sqlite"
 //#define LOCALDB_CHAT                      @"chatData.sqlite"

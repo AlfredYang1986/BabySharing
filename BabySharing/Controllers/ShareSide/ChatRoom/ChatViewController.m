@@ -13,8 +13,6 @@
 #import "ModelDefines.h"
 #import "EnumDefines.h"
 #import "AppDelegate.h"
-#import "SubGroup.h"
-#import "Group.h"
 #import "MessageModel.h"
 #import "UserHeadView.h"
 #import "INTUAnimationEngine.h"
@@ -23,7 +21,8 @@
 #define HEAD_VIEW_WIDTH     32
 #define HEAD_VIEW_MARGIN    3
 
-@interface ChatViewController () <UITableViewDataSource, UITableViewDelegate, SRWebSocketDelegate, UITextFieldDelegate>
+//@interface ChatViewController () <UITableViewDataSource, UITableViewDelegate, SRWebSocketDelegate, UITextFieldDelegate>
+@interface ChatViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *queryView;
 @property (weak, nonatomic) IBOutlet UITextField *messageTextField;
 @property (weak, nonatomic) IBOutlet UIView *resentUserView;
@@ -57,12 +56,12 @@
     AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     _current_user_id = delegate.lm.current_user_id;
     _mm = delegate.mm;
-    NSString* url = [MESSAGE_WEB_SOCKET_SENDBOX stringByAppendingString:_current_user_id];
+//    NSString* url = [MESSAGE_WEB_SOCKET_SENDBOX stringByAppendingString:_current_user_id];
 //    NSString* url = [MESSAGE_WEB_SOCKET stringByAppendingString:_current_user_id];
     
-    NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
-    _socket = [[SRWebSocket alloc]initWithURLRequest:request];
-    _socket.delegate = self;
+//    NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+//    _socket = [[SRWebSocket alloc]initWithURLRequest:request];
+//    _socket.delegate = self;
 
     /**
      * chat view cell
@@ -138,40 +137,43 @@
         return cell;
     } else {
        
-        Messages* cur = [self enumMessageAtIndex:indexPath.row - 1];
-        ChatViewCell* cell = nil;
-        if ([cur.owner isEqualToString:_current_user_id]) {
-            cell = [tableView dequeueReusableCellWithIdentifier:@"OwnerCell"];
-            
-            if (cell == nil) {
-                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ChatViewOwnerCell" owner:self options:nil];
-                cell = [nib objectAtIndex:0];
-            }
-            
-        } else {
-            cell = [tableView dequeueReusableCellWithIdentifier:@"OtherCell"];
-            
-            if (cell == nil) {
-                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ChatViewOtherCell" owner:self options:nil];
-                cell = [nib objectAtIndex:0];
-            }           
-        }
-
-        cell.chat_content = [NSString stringWithFormat:@"%@ (%@)",
-                               [self enumMessageContentAtIndex:indexPath.row - 1],
-                               [self enumMessageDateAtIndex:indexPath.row - 1]];
-        cell.user_id = cur.owner;
-        
-        return cell;
+//        Messages* cur = [self enumMessageAtIndex:indexPath.row - 1];
+//        ChatViewCell* cell = nil;
+//        if ([cur.owner isEqualToString:_current_user_id]) {
+//            cell = [tableView dequeueReusableCellWithIdentifier:@"OwnerCell"];
+//            
+//            if (cell == nil) {
+//                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ChatViewOwnerCell" owner:self options:nil];
+//                cell = [nib objectAtIndex:0];
+//            }
+//            
+//        } else {
+//            cell = [tableView dequeueReusableCellWithIdentifier:@"OtherCell"];
+//            
+//            if (cell == nil) {
+//                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ChatViewOtherCell" owner:self options:nil];
+//                cell = [nib objectAtIndex:0];
+//            }           
+//        }
+//
+//        cell.chat_content = [NSString stringWithFormat:@"%@ (%@)",
+//                               [self enumMessageContentAtIndex:indexPath.row - 1],
+//                               [self enumMessageDateAtIndex:indexPath.row - 1]];
+//        cell.user_id = cur.owner;
+//        
+//        return cell;
+        return nil;
     }
 }
 
 - (NSString*)enumMessageContentAtIndex:(NSInteger)index {
-    return ((Messages*)[_chat_list objectAtIndex:index]).content;
+//    return ((Messages*)[_chat_list objectAtIndex:index]).content;
+    return nil;
 }
 
 - (NSString*)enumMessageDateAtIndex:(NSInteger)index {
-    NSDate* date = ((Messages*)[_chat_list objectAtIndex:index]).date;
+//    NSDate* date = ((Messages*)[_chat_list objectAtIndex:index]).date;
+    NSDate* date = [NSDate date];
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.timeStyle = NSDateFormatterNoStyle;
@@ -190,8 +192,9 @@
 }
 
 - (MessageStatus)enumMessageStatusAtIndex:(NSInteger)index {
-    Messages* m = ((Messages*)[_chat_list objectAtIndex:index]);
-    return (MessageStatus)m.status.intValue;
+//    Messages* m = ((Messages*)[_chat_list objectAtIndex:index]);
+//    return (MessageStatus)m.status.intValue;
+    return MessagesStatusReaded;
 }
             
 - (Messages*)enumMessageAtIndex:(NSInteger)index {
@@ -270,73 +273,73 @@
 //    NSError * error = nil;
 //    NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
     
-    NSString* txt = _messageTextField.text;
+//    NSString* txt = _messageTextField.text;
     
-    if (txt.length != 0) {
-        NSString* jsonData = [NSString stringWithFormat: @"{\"method\":\"message\", \"user_id\":\"%@\", \"receiver_type\":%d, \"receiver\":\"%@\", \"message_type\":%d, \"message_content\":\"%@\"}", _current_user_id, (int)MessageReceiverTypeTmpGroup, _sub_group.sub_group_id, (int)MessageTypeTextMessage, txt];
-    
-        [_socket send:jsonData];
+//    if (txt.length != 0) {
+//        NSString* jsonData = [NSString stringWithFormat: @"{\"method\":\"message\", \"user_id\":\"%@\", \"receiver_type\":%d, \"receiver\":\"%@\", \"message_type\":%d, \"message_content\":\"%@\"}", _current_user_id, (int)MessageReceiverTypeTmpGroup, _sub_group.sub_group_id, (int)MessageTypeTextMessage, txt];
+//    
+//        [_socket send:jsonData];
     
 //        [_mm addMessageToTarget:_target_id Content:txt];
 //        _chat_list = [_mm localMessagesWithTargetID:_target_id];
-        [_queryView reloadData];
+//        [_queryView reloadData];
     
         // add this to historical chat
 //        [_mm addFriendToHistoryChat:_target_id];
-    }
+//    }
 }
 
-#pragma mark -- SRWebSocketDelegate
-- (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message {
-    NSString *receiveData = message;
-    NSData *utf8Data = [receiveData dataUsingEncoding:NSUTF8StringEncoding];
-//    NSData* data = (NSData*)message;
-    NSLog(@"%@", utf8Data);
-   
-    NSError * error = nil;
-    NSDictionary * apperals = [NSJSONSerialization JSONObjectWithData:utf8Data options:NSJSONReadingMutableLeaves | NSJSONReadingMutableContainers error:&error];
-    NSLog(@"%@", apperals);
-
-    if ([[apperals objectForKey:@"method"] isEqualToString:@"message"]) {
-        [_mm addMessageWithData:apperals];
-        _chat_list = [_mm queryAllMessagesWithReceiver:_sub_group.sub_group_id andUser:_current_user_id];
-        [_queryView reloadData];
-    } else if ([[apperals objectForKey:@"method"] isEqualToString:@"joinTmpGroup"]) {
-        if ([[apperals objectForKey:@"status"] isEqualToString:@"success"]) {
-            NSLog(@"joinTmpGroup success");
-            NSArray* arr = [apperals objectForKey:@"resent_users"];
-          
-            for (UserHeadView* uv in _resentUserView.subviews) {
-                [uv removeFromSuperview];
-            }
-            
-            for (NSInteger index = 0; index < arr.count; ++index) {
-               
-                CGFloat origin_x = HEAD_VIEW_MARGIN + index * HEAD_VIEW_WIDTH;
-                CGFloat origin_y = HEAD_VIEW_MARGIN;
-                UserHeadView* uv = [[UserHeadView alloc]initWithFrame:CGRectMake(origin_x, origin_y, HEAD_VIEW_WIDTH, HEAD_VIEW_WIDTH)];
-         
-                uv.backgroundColor = [UIColor redColor];
-                [_resentUserView addSubview:uv];
-                uv.user_id = [arr objectAtIndex:index];
-            }
-        }
-    }
-}
-
-- (void)webSocketDidOpen:(SRWebSocket *)webSocket {
-    NSLog(@"Opened success");
-    NSString* jsonData = [NSString stringWithFormat: @"{\"method\":\"joinTmpGroup\", \"user_id\":\"%@\", \"receiver\":\"%@\"}", _current_user_id, _sub_group.sub_group_id];
-    [_socket send:jsonData];
-}
-
-- (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error {
-    NSLog(@"Web Socket error: %@", error.description);
-}
-
-- (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean {
-    NSLog(@"Close web socket");
-}
+//#pragma mark -- SRWebSocketDelegate
+//- (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message {
+//    NSString *receiveData = message;
+//    NSData *utf8Data = [receiveData dataUsingEncoding:NSUTF8StringEncoding];
+////    NSData* data = (NSData*)message;
+//    NSLog(@"%@", utf8Data);
+//   
+//    NSError * error = nil;
+//    NSDictionary * apperals = [NSJSONSerialization JSONObjectWithData:utf8Data options:NSJSONReadingMutableLeaves | NSJSONReadingMutableContainers error:&error];
+//    NSLog(@"%@", apperals);
+//
+//    if ([[apperals objectForKey:@"method"] isEqualToString:@"message"]) {
+//        [_mm addMessageWithData:apperals];
+//        _chat_list = [_mm queryAllMessagesWithReceiver:_sub_group.sub_group_id andUser:_current_user_id];
+//        [_queryView reloadData];
+//    } else if ([[apperals objectForKey:@"method"] isEqualToString:@"joinTmpGroup"]) {
+//        if ([[apperals objectForKey:@"status"] isEqualToString:@"success"]) {
+//            NSLog(@"joinTmpGroup success");
+//            NSArray* arr = [apperals objectForKey:@"resent_users"];
+//          
+//            for (UserHeadView* uv in _resentUserView.subviews) {
+//                [uv removeFromSuperview];
+//            }
+//            
+//            for (NSInteger index = 0; index < arr.count; ++index) {
+//               
+//                CGFloat origin_x = HEAD_VIEW_MARGIN + index * HEAD_VIEW_WIDTH;
+//                CGFloat origin_y = HEAD_VIEW_MARGIN;
+//                UserHeadView* uv = [[UserHeadView alloc]initWithFrame:CGRectMake(origin_x, origin_y, HEAD_VIEW_WIDTH, HEAD_VIEW_WIDTH)];
+//         
+//                uv.backgroundColor = [UIColor redColor];
+//                [_resentUserView addSubview:uv];
+//                uv.user_id = [arr objectAtIndex:index];
+//            }
+//        }
+//    }
+//}
+//
+//- (void)webSocketDidOpen:(SRWebSocket *)webSocket {
+//    NSLog(@"Opened success");
+//    NSString* jsonData = [NSString stringWithFormat: @"{\"method\":\"joinTmpGroup\", \"user_id\":\"%@\", \"receiver\":\"%@\"}", _current_user_id, _sub_group.sub_group_id];
+//    [_socket send:jsonData];
+//}
+//
+//- (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error {
+//    NSLog(@"Web Socket error: %@", error.description);
+//}
+//
+//- (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean {
+//    NSLog(@"Close web socket");
+//}
 
 #pragma mark -- UITextFieldDelegate
 - (void)textFieldDidBeginEditing:(UITextField *) textField

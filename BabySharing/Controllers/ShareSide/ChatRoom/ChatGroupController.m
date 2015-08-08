@@ -7,14 +7,14 @@
 //
 
 #import "ChatGroupController.h"
-#import "GroupModel.h"
+//#import "GroupModel.h"
 #import "AppDelegate.h"
-#import "Group.h"
+//#import "Group.h"
 
 #import "ChatSubGroupController.h"
 
 @interface ChatGroupController ()
-@property (nonatomic, weak, readonly) GroupModel* gm;
+//@property (nonatomic, weak, readonly) GroupModel* gm;
 @property (weak, nonatomic) IBOutlet UITableView *queryView;
 @end
 
@@ -22,15 +22,15 @@
     BOOL isLoading;
 }
 
-@synthesize gm = _gm;
+//@synthesize gm = _gm;
 @synthesize queryView = _queryView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
    
-    AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    _gm = delegate.gm;
+//    AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//    _gm = delegate.gm;
    
     isLoading = NO;
 }
@@ -56,8 +56,8 @@
     NSLog(@"selet row");
     if ([self tableView:tableView shouldHighlightRowAtIndexPath:indexPath]) {
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
-        Group* g = [_gm.groupdata objectAtIndex:indexPath.row - 2];
-        [self performSegueWithIdentifier:@"showSubGroup" sender:g];
+//        Group* g = [_gm.groupdata objectAtIndex:indexPath.row - 2];
+//        [self performSegueWithIdentifier:@"showSubGroup" sender:g];
     }
 }
 
@@ -106,14 +106,15 @@
             cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"default_with_title"];
         }
         NSInteger index = indexPath.row - 2;
-        Group* g = [_gm.groupdata objectAtIndex:index];
+//        Group* g = [_gm.groupdata objectAtIndex:index];
         NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
         NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
         NSString * filePath = [resourceBundle pathForResource:@"Talk" ofType:@"png"];
         UIImage *image = [UIImage imageNamed:filePath];
        
         cell.imageView.image = image;
-        cell.textLabel.text = g.group_name;
+//        cell.textLabel.text = g.group_name;
+        cell.textLabel.text = @"abcde";
         cell.detailTextLabel.text = @"description";
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
         cell.detailTextLabel.textAlignment = NSTextAlignmentCenter;
@@ -122,7 +123,8 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _gm.groupdata.count + 2 + 1;
+//    return _gm.groupdata.count + 2 + 1;
+    return 0;
 }
 
 #pragma mark -- query cell
@@ -152,7 +154,7 @@
             rc.origin.y = rc.origin.y - 44;
             [_queryView setFrame:rc];
 //            [_qm appendQueryDataByUser:_current_user_id withToken:_current_auth_token andBeginIndex:_qm.querydata.count];
-            [_gm refreshGroups];
+//            [_gm refreshGroups];
             rc.origin.y = rc.origin.y + 44;
             [_queryView setFrame:rc];
             [_queryView reloadData];
@@ -163,7 +165,7 @@
             CGRect rc = _queryView.frame;
             rc.origin.y = rc.origin.y + 44;
             [_queryView setFrame:rc];
-            [_gm refreshGroups];
+//            [_gm refreshGroups];
 //            [qm refreshQueryDataByUser:_current_user_id withToken:_current_auth_token];
             rc.origin.y = rc.origin.y - 44;
             [_queryView setFrame:rc];
