@@ -50,7 +50,7 @@
     if (!_cm) _cm = [[ConnectionModel alloc]initWithDelegate:self];
 }
 
-- (void)createGroupModel {
+- (void)createMessageAndNotificationModel {
 //    if (!_gm) _gm = [[GroupModel alloc]initWithDelegate:self];
     if (!_mm) _mm = [[MessageModel alloc]initWithDelegate:self];
 }

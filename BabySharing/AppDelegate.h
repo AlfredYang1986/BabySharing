@@ -38,7 +38,7 @@
 @property (strong, nonatomic) GotyeOCUser* im_user;
 
 - (void)createQueryModel;
-- (void)createGroupModel;
+- (void)createMessageAndNotificationModel;
 
 - (void)registerDeviceTokenWithCurrentUser;
 @end

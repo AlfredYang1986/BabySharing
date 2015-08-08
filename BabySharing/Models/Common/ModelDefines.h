@@ -116,8 +116,8 @@ typedef NS_ENUM(NSInteger, UserPostOwnerConnections) {
 #pragma mark -- database
 #define LOCALDB_LOGIN                       @"loginData.sqlite"
 #define LOCALDB_QUERY                       @"quertData.sqlite"
-//#define LOCALDB_GROUP                       @"groupData.sqlite"
-#define LOCALDB_MESSAGEG_NOTIFICATION       @"messageData.sqlite"
+#define LOCALDB_MESSAGEG_NOTIFICATION       @"notifyData.sqlite"
 #define LOCALDB_TAG_QUERY                   @"tagQuery.sqlite"
 #define LOCALDB_RELATIONSHIP                @"Relationship.sqlite"
 //#define LOCALDB_CHAT                      @"chatData.sqlite"
+//#define LOCALDB_GROUP                     @"groupData.sqlite"

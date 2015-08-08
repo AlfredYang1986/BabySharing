@@ -17,7 +17,7 @@
 @interface MessageModel : NSObject
 
 @property (nonatomic, weak, readonly) AppDelegate* delegate;
-@property (weak, nonatomic, readonly) UIManagedDocument* doc;
+@property (strong, nonatomic, readonly) UIManagedDocument* doc;
 
 #pragma mark -- constructor
 - (id)initWithDelegate:(AppDelegate*)delegate;

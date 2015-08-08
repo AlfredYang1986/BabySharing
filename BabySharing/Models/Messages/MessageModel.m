@@ -35,31 +35,24 @@
 
 - (id)initWithDelegate:(AppDelegate*)app {
     self = [super init];
-    if (self) {
-        
-        _delegate = app;
-        /**
-         * get previous data from local database
-         */
-        NSString* docs=[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-        NSURL* url =[NSURL fileURLWithPath:[docs stringByAppendingPathComponent:LOCALDB_MESSAGEG_NOTIFICATION]];
-        _doc = (UIManagedDocument*)[[UIManagedDocument alloc]initWithFileURL:url];
-        
-        if (![[NSFileManager defaultManager]fileExistsAtPath:[url path] isDirectory:nil]) {
-            [_doc saveToURL:url forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
-                NSLog(@"create query database callback");
-                [self enumDataFromLocalDB:_doc];
-            }];
-        } else if (_doc.documentState == UIDocumentStateClosed) {
-            [_doc openWithCompletionHandler:^(BOOL success) {
-                NSLog(@"open query database callback");
-                [self enumDataFromLocalDB:_doc];
-            }];
-        } else {
-            
-        }
-    }
+    /**
+     * get authorised user array in the local database
+     */
+    NSString* docs=[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    NSURL* url =[NSURL fileURLWithPath:[docs stringByAppendingPathComponent:LOCALDB_MESSAGEG_NOTIFICATION]];
+    _doc = (UIManagedDocument*)[[UIManagedDocument alloc]initWithFileURL:url];
     
+    if (![[NSFileManager defaultManager]fileExistsAtPath:[url path] isDirectory:NO]) {
+        [_doc saveToURL:url forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success){
+            [self enumDataFromLocalDB:_doc];
+        }];
+    } else if (_doc.documentState == UIDocumentStateClosed) {
+        [_doc openWithCompletionHandler:^(BOOL success){
+            [self enumDataFromLocalDB:_doc];
+        }];
+    } else {
+        
+    }
     return self;
 }
 

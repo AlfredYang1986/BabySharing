@@ -1072,7 +1072,7 @@
         <!--Network-->
         <scene sceneID="txH-Pe-lPu">
             <objects>
-                <viewController id="OyS-hf-ms2" customClass="ChatGroupController" sceneMemberID="viewController">
+                <viewController id="OyS-hf-ms2" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xWG-CY-Sxy"/>
                         <viewControllerLayoutGuide type="bottom" id="h8D-l3-fU6"/>
@@ -1084,10 +1084,6 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="IjL-J3-Ju3">
                                 <rect key="frame" x="0.0" y="-44" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="OyS-hf-ms2" id="mJF-j3-ZgZ"/>
-                                    <outlet property="delegate" destination="OyS-hf-ms2" id="JBn-wZ-AiJ"/>
-                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1100,7 +1096,6 @@
                     </view>
                     <navigationItem key="navigationItem" title="Network" id="Jm6-ee-E2N"/>
                     <connections>
-                        <outlet property="queryView" destination="IjL-J3-Ju3" id="g5n-JO-jsd"/>
                         <segue destination="86t-BN-MKm" kind="push" identifier="showSubGroup" id="XXE-tl-ZeM"/>
                     </connections>
                 </viewController>
@@ -1111,7 +1106,7 @@
         <!--SubGroup-->
         <scene sceneID="JH2-tC-EJS">
             <objects>
-                <viewController id="86t-BN-MKm" customClass="ChatSubGroupController" sceneMemberID="viewController">
+                <viewController id="86t-BN-MKm" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="24x-V1-8bP"/>
                         <viewControllerLayoutGuide type="bottom" id="E2W-1M-GlS"/>
@@ -1123,10 +1118,6 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="ukN-2L-Slj">
                                 <rect key="frame" x="0.0" y="-44" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="86t-BN-MKm" id="zYo-RO-Kje"/>
-                                    <outlet property="delegate" destination="86t-BN-MKm" id="Gev-lO-P8B"/>
-                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1139,7 +1130,6 @@
                     </view>
                     <navigationItem key="navigationItem" title="SubGroup" id="EQ6-9O-mWf"/>
                     <connections>
-                        <outlet property="subGroupView" destination="ukN-2L-Slj" id="nio-Gd-BJD"/>
                         <segue destination="nWR-mG-9VY" kind="push" identifier="charRoom" id="kCe-Ez-n2M"/>
                         <segue destination="riP-ef-giD" kind="push" identifier="CreateChatRoom" id="oaV-NQ-Ei0"/>
                     </connections>
@@ -1151,7 +1141,7 @@
         <!--Create Chat Room-->
         <scene sceneID="ZF9-MI-7CK">
             <objects>
-                <viewController id="riP-ef-giD" customClass="CreateChatController" sceneMemberID="viewController">
+                <viewController id="riP-ef-giD" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0ht-kS-SjQ"/>
                         <viewControllerLayoutGuide type="bottom" id="W5T-Kb-y6w"/>
@@ -1208,7 +1198,7 @@
         <!--Chat Room-->
         <scene sceneID="wBS-WI-9tO">
             <objects>
-                <viewController id="nWR-mG-9VY" customClass="ChatViewController" sceneMemberID="viewController">
+                <viewController id="nWR-mG-9VY" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="krB-eY-FHM"/>
                         <viewControllerLayoutGuide type="bottom" id="NtH-0P-mdg"/>
@@ -1255,10 +1245,6 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="rI2-wV-i80">
                                 <rect key="frame" x="0.0" y="126" width="600" height="454"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="nWR-mG-9VY" id="SeN-C7-wPf"/>
-                                    <outlet property="delegate" destination="nWR-mG-9VY" id="FCP-4d-ZJv"/>
-                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1300,8 +1286,6 @@
                     <navigationItem key="navigationItem" title="Chat Room" id="rJP-Ty-81S"/>
                     <connections>
                         <outlet property="messageTextField" destination="wz8-He-yuC" id="NLK-g6-00u"/>
-                        <outlet property="queryView" destination="rI2-wV-i80" id="kLZ-fw-K8H"/>
-                        <outlet property="resentUserView" destination="EZu-cQ-ZFh" id="kxV-TW-dGE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pg0-an-ZOn" userLabel="First Responder" sceneMemberID="firstResponder"/>

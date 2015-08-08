@@ -76,10 +76,6 @@
 		EEAACCAA1B44E90400D05C0B /* PhoneInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB131B44E90300D05C0B /* PhoneInputViewController.m */; };
 		EEAACCB41B44E90400D05C0B /* SecretNib.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEAACB2A1B44E90300D05C0B /* SecretNib.storyboard */; };
 		EEAACCB51B44E90400D05C0B /* SecretViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB2C1B44E90300D05C0B /* SecretViewController.m */; };
-		EEAACCB61B44E90400D05C0B /* ChatGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB301B44E90300D05C0B /* ChatGroupController.m */; };
-		EEAACCB71B44E90400D05C0B /* ChatSubGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB321B44E90300D05C0B /* ChatSubGroupController.m */; };
-		EEAACCB81B44E90400D05C0B /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB341B44E90300D05C0B /* ChatViewController.m */; };
-		EEAACCB91B44E90400D05C0B /* CreateChatController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB361B44E90300D05C0B /* CreateChatController.m */; };
 		EEAACCBA1B44E90400D05C0B /* HomeCommentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB391B44E90300D05C0B /* HomeCommentsController.m */; };
 		EEAACCBB1B44E90400D05C0B /* HomeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB3B1B44E90300D05C0B /* HomeDetailViewController.m */; };
 		EEAACCBC1B44E90400D05C0B /* HomeSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB3D1B44E90300D05C0B /* HomeSearchController.m */; };
@@ -367,14 +363,6 @@
 		EEAACB2A1B44E90300D05C0B /* SecretNib.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SecretNib.storyboard; sourceTree = "<group>"; };
 		EEAACB2B1B44E90300D05C0B /* SecretViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecretViewController.h; sourceTree = "<group>"; };
 		EEAACB2C1B44E90300D05C0B /* SecretViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecretViewController.m; sourceTree = "<group>"; };
-		EEAACB2F1B44E90300D05C0B /* ChatGroupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatGroupController.h; sourceTree = "<group>"; };
-		EEAACB301B44E90300D05C0B /* ChatGroupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatGroupController.m; sourceTree = "<group>"; };
-		EEAACB311B44E90300D05C0B /* ChatSubGroupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatSubGroupController.h; sourceTree = "<group>"; };
-		EEAACB321B44E90300D05C0B /* ChatSubGroupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatSubGroupController.m; sourceTree = "<group>"; };
-		EEAACB331B44E90300D05C0B /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
-		EEAACB341B44E90300D05C0B /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
-		EEAACB351B44E90300D05C0B /* CreateChatController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateChatController.h; sourceTree = "<group>"; };
-		EEAACB361B44E90300D05C0B /* CreateChatController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateChatController.m; sourceTree = "<group>"; };
 		EEAACB381B44E90300D05C0B /* HomeCommentsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCommentsController.h; sourceTree = "<group>"; };
 		EEAACB391B44E90300D05C0B /* HomeCommentsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCommentsController.m; sourceTree = "<group>"; };
 		EEAACB3A1B44E90300D05C0B /* HomeDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeDetailViewController.h; sourceTree = "<group>"; };
@@ -1087,7 +1075,6 @@
 		EEAACB2D1B44E90300D05C0B /* ShareSide */ = {
 			isa = PBXGroup;
 			children = (
-				EEAACB2E1B44E90300D05C0B /* ChatRoom */,
 				EEAACB371B44E90300D05C0B /* Home */,
 				EEAACB441B44E90300D05C0B /* PersonalCentre */,
 				EEAACB4A1B44E90300D05C0B /* ShareSideBase */,
@@ -1095,21 +1082,6 @@
 				EEAACB501B44E90300D05C0B /* UserProfile */,
 			);
 			path = ShareSide;
-			sourceTree = "<group>";
-		};
-		EEAACB2E1B44E90300D05C0B /* ChatRoom */ = {
-			isa = PBXGroup;
-			children = (
-				EEAACB2F1B44E90300D05C0B /* ChatGroupController.h */,
-				EEAACB301B44E90300D05C0B /* ChatGroupController.m */,
-				EEAACB311B44E90300D05C0B /* ChatSubGroupController.h */,
-				EEAACB321B44E90300D05C0B /* ChatSubGroupController.m */,
-				EEAACB331B44E90300D05C0B /* ChatViewController.h */,
-				EEAACB341B44E90300D05C0B /* ChatViewController.m */,
-				EEAACB351B44E90300D05C0B /* CreateChatController.h */,
-				EEAACB361B44E90300D05C0B /* CreateChatController.m */,
-			);
-			path = ChatRoom;
 			sourceTree = "<group>";
 		};
 		EEAACB371B44E90300D05C0B /* Home */ = {
@@ -2244,7 +2216,6 @@
 				EEAACD171B44E90400D05C0B /* ProfileDetailSNCell.m in Sources */,
 				EE981F861B5A10400029723A /* LoginToken.m in Sources */,
 				EEAACC9A1B44E90400D05C0B /* AppDelegate.m in Sources */,
-				EEAACCB71B44E90400D05C0B /* ChatSubGroupController.m in Sources */,
 				EEAACCE21B44E90400D05C0B /* QueryContent+ContextOpt.m in Sources */,
 				EEAACCA71B44E90400D05C0B /* ChooseAreaViewController.m in Sources */,
 				EEAACD081B44E90400D05C0B /* QueryCell.m in Sources */,
@@ -2328,9 +2299,7 @@
 				EEAACD2E1B44E90400D05C0B /* DropDownView.m in Sources */,
 				EE5D686F1B75A9FC0067A2DF /* NotificationOwner.m in Sources */,
 				EE86D1B21B537469001C4650 /* PostEffectAdapter.mm in Sources */,
-				EEAACCB91B44E90400D05C0B /* CreateChatController.m in Sources */,
 				EEE94E131B74AB6B0011321A /* AddressBookDelegate.m in Sources */,
-				EEAACCB61B44E90400D05C0B /* ChatGroupController.m in Sources */,
 				EEAACCE01B44E90400D05C0B /* PostModel.m in Sources */,
 				EEAACCE11B44E90400D05C0B /* QueryComments.m in Sources */,
 				EEAACD571B44E90400D05C0B /* SGGridMenu.m in Sources */,
@@ -2358,7 +2327,6 @@
 				EEAACCEE1B44E90400D05C0B /* SRWebSocket.m in Sources */,
 				EEA2017C1B744E59006B81E4 /* ConnectionOwner.m in Sources */,
 				EEAACCA11B44E90400D05C0B /* CVMovieController.m in Sources */,
-				EEAACCB81B44E90400D05C0B /* ChatViewController.m in Sources */,
 				EEAACCED1B44E90400D05C0B /* RemoteInstance.m in Sources */,
 				EEAACD3F1B44E90400D05C0B /* TagsRowCell.m in Sources */,
 				EEF538F51B525F7F009C8CB9 /* PostPreViewEffectController.m in Sources */,

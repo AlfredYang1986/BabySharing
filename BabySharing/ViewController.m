@@ -227,7 +227,7 @@ enum DisplaySide {
     isQueryModelReady = YES;
     
     AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    if (!isMessageModelReady) [delegate createGroupModel];
+    if (!isMessageModelReady) [delegate createMessageAndNotificationModel];
     else [self messageAndNotificationDataIsReady:nil];
 }
 
@@ -376,6 +376,7 @@ enum DisplaySide {
  * @param user: 当前登录用户
  */
 -(void) onLogin:(GotyeStatusCode)code user:(GotyeOCUser*)user {
+    NSLog(@"XMPP on Login");
     AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
     app.im_user = user;
     [app registerDeviceTokenWithCurrentUser];
@@ -390,6 +391,7 @@ enum DisplaySide {
  * @param user: 当前登录用户
  */
 -(void) onReconnecting:(GotyeStatusCode)code user:(GotyeOCUser*)user {
+    NSLog(@"XMPP on Reconnecting");
     AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
     app.im_user = user;
 }
@@ -399,6 +401,7 @@ enum DisplaySide {
  * @param code: 状态id
  */
 -(void) onLogout:(GotyeStatusCode)code {
+    NSLog(@"XMPP on Logout");
     AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
     app.im_user = nil;
 }
