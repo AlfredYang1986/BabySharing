@@ -1,9 +1,9 @@
 //
 //  Notifications.m
-//  BabySharing
+//  
 //
-//  Created by Alfred Yang on 8/08/2015.
-//  Copyright (c) 2015 BM. All rights reserved.
+//  Created by Alfred Yang on 9/08/2015.
+//
 //
 
 #import "Notifications.h"
@@ -12,10 +12,12 @@
 
 @implementation Notifications
 
-@dynamic from;
-@dynamic data;
+@dynamic date;
+@dynamic sender_id;
+@dynamic sender_screen_name;
 @dynamic type;
-@dynamic to;
+@dynamic sender_screen_photo;
+@dynamic status;
 @dynamic beNotified;
 
 @end

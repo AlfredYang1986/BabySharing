@@ -27,4 +27,12 @@ typedef NS_ENUM(NSInteger, MessageReceiverType) {
     MessageReceiverTypeUser,
     MessageReceiverTypeUserGroup,
 };
+
+typedef NS_ENUM(NSInteger, NotificationActionType) {
+    NotificationActionTypeFollow,
+    NotificationActionTypeUnFollow,
+    NotificationActionTypeLike,
+    NotificationActionTypePush,
+    NotificationActionTypeMessage,
+};
 #endif

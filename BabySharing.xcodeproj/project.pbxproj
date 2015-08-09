@@ -29,7 +29,6 @@
 		EE5C7E4F1B511CC000104CAB /* AlbumViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5C7E4E1B511CC000104CAB /* AlbumViewController2.m */; };
 		EE5D686C1B75A55A0067A2DF /* MessageAndNotificationModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EE5D686A1B75A55A0067A2DF /* MessageAndNotificationModel.xcdatamodeld */; };
 		EE5D686F1B75A9FC0067A2DF /* NotificationOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5D686E1B75A9FC0067A2DF /* NotificationOwner.m */; };
-		EE5D68721B75A9FD0067A2DF /* Notifications.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5D68711B75A9FD0067A2DF /* Notifications.m */; };
 		EE5D68751B75A9FD0067A2DF /* Targets.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5D68741B75A9FD0067A2DF /* Targets.m */; };
 		EE5D68781B75A9FD0067A2DF /* Messages.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5D68771B75A9FD0067A2DF /* Messages.m */; };
 		EE5D687B1B75B12B0067A2DF /* NotificationOwner+ContextOpt.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5D687A1B75B12B0067A2DF /* NotificationOwner+ContextOpt.m */; };
@@ -57,6 +56,7 @@
 		EE98D14C1B69AF9B004D88DF /* QueryHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = EE98D14B1B69AF9B004D88DF /* QueryHeader.m */; };
 		EEA2017C1B744E59006B81E4 /* ConnectionOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = EEA201791B744E59006B81E4 /* ConnectionOwner.m */; };
 		EEA2017D1B744E59006B81E4 /* Friends.m in Sources */ = {isa = PBXBuildFile; fileRef = EEA2017B1B744E59006B81E4 /* Friends.m */; };
+		EEAAA9771B77177C00BEDA6D /* Notifications.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAAA9761B77177C00BEDA6D /* Notifications.m */; };
 		EEAAC8FE1B44E81A00D05C0B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAAC8FD1B44E81A00D05C0B /* main.m */; };
 		EEAAC91B1B44E81A00D05C0B /* BabySharingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAAC91A1B44E81A00D05C0B /* BabySharingTests.m */; };
 		EEAACC9A1B44E90400D05C0B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACAF11B44E90300D05C0B /* AppDelegate.m */; };
@@ -275,8 +275,6 @@
 		EE5D686B1B75A55A0067A2DF /* MessageAndNotificationModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MessageAndNotificationModel.xcdatamodel; sourceTree = "<group>"; };
 		EE5D686D1B75A9FC0067A2DF /* NotificationOwner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationOwner.h; sourceTree = "<group>"; };
 		EE5D686E1B75A9FC0067A2DF /* NotificationOwner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationOwner.m; sourceTree = "<group>"; };
-		EE5D68701B75A9FD0067A2DF /* Notifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notifications.h; sourceTree = "<group>"; };
-		EE5D68711B75A9FD0067A2DF /* Notifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Notifications.m; sourceTree = "<group>"; };
 		EE5D68731B75A9FD0067A2DF /* Targets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Targets.h; sourceTree = "<group>"; };
 		EE5D68741B75A9FD0067A2DF /* Targets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Targets.m; sourceTree = "<group>"; };
 		EE5D68761B75A9FD0067A2DF /* Messages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Messages.h; sourceTree = "<group>"; };
@@ -325,6 +323,8 @@
 		EEA201791B744E59006B81E4 /* ConnectionOwner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionOwner.m; sourceTree = "<group>"; };
 		EEA2017A1B744E59006B81E4 /* Friends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Friends.h; sourceTree = "<group>"; };
 		EEA2017B1B744E59006B81E4 /* Friends.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Friends.m; sourceTree = "<group>"; };
+		EEAAA9751B77177C00BEDA6D /* Notifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notifications.h; sourceTree = "<group>"; };
+		EEAAA9761B77177C00BEDA6D /* Notifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Notifications.m; sourceTree = "<group>"; };
 		EEAAC8F81B44E81A00D05C0B /* BabySharing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BabySharing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEAAC8FC1B44E81A00D05C0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EEAAC8FD1B44E81A00D05C0B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -832,12 +832,12 @@
 		EE5D68691B75A5360067A2DF /* LocalModel */ = {
 			isa = PBXGroup;
 			children = (
+				EEAAA9751B77177C00BEDA6D /* Notifications.h */,
+				EEAAA9761B77177C00BEDA6D /* Notifications.m */,
 				EE5D68761B75A9FD0067A2DF /* Messages.h */,
 				EE5D68771B75A9FD0067A2DF /* Messages.m */,
 				EE5D68731B75A9FD0067A2DF /* Targets.h */,
 				EE5D68741B75A9FD0067A2DF /* Targets.m */,
-				EE5D68701B75A9FD0067A2DF /* Notifications.h */,
-				EE5D68711B75A9FD0067A2DF /* Notifications.m */,
 				EE5D686D1B75A9FC0067A2DF /* NotificationOwner.h */,
 				EE5D686E1B75A9FC0067A2DF /* NotificationOwner.m */,
 				EE5D686A1B75A55A0067A2DF /* MessageAndNotificationModel.xcdatamodeld */,
@@ -2242,6 +2242,7 @@
 				EE2D4B7A1B525E0A00B58A1F /* PostPreViewController.m in Sources */,
 				EEAACCAA1B44E90400D05C0B /* PhoneInputViewController.m in Sources */,
 				EEAACCEB1B44E90400D05C0B /* TmpFileStorageModel.m in Sources */,
+				EEAAA9771B77177C00BEDA6D /* Notifications.m in Sources */,
 				EE5D687B1B75B12B0067A2DF /* NotificationOwner+ContextOpt.m in Sources */,
 				EE5D68781B75A9FD0067A2DF /* Messages.m in Sources */,
 				EEAACD0D1B44E90400D05C0B /* PhotoTagControlView.m in Sources */,
@@ -2249,7 +2250,6 @@
 				EE76A56D1B72021900036747 /* ConnectionLocalModel.xcdatamodeld in Sources */,
 				EEAACD201B44E90400D05C0B /* SGAlertMenu.m in Sources */,
 				EEAACCCA1B44E90400D05C0B /* INTUEasingFunctions.m in Sources */,
-				EE5D68721B75A9FD0067A2DF /* Notifications.m in Sources */,
 				EE664E9A1B73145000ACD57E /* QueryContent.m in Sources */,
 				EEAACCB51B44E90400D05C0B /* SecretViewController.m in Sources */,
 				EE76A57C1B72181300036747 /* ConnectionModel.m in Sources */,

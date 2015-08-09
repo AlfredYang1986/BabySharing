@@ -1,9 +1,9 @@
 //
 //  Notifications.h
-//  BabySharing
+//  
 //
-//  Created by Alfred Yang on 8/08/2015.
-//  Copyright (c) 2015 BM. All rights reserved.
+//  Created by Alfred Yang on 9/08/2015.
+//
 //
 
 #import <Foundation/Foundation.h>
@@ -13,10 +13,12 @@
 
 @interface Notifications : NSManagedObject
 
-@property (nonatomic, retain) NSString * from;
-@property (nonatomic, retain) NSDate * data;
+@property (nonatomic, retain) NSDate * date;
+@property (nonatomic, retain) NSString * sender_id;
+@property (nonatomic, retain) NSString * sender_screen_name;
 @property (nonatomic, retain) NSNumber * type;
-@property (nonatomic, retain) NSString * to;
+@property (nonatomic, retain) NSString * sender_screen_photo;
+@property (nonatomic, retain) NSNumber * status;
 @property (nonatomic, retain) NotificationOwner *beNotified;
 
 @end

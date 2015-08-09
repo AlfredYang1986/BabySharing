@@ -24,6 +24,8 @@
 #import "GotyeOCAPI.h"
 #import "GotyeOCDeleget.h"
 
+#import "RemoteInstance.h"
+
 @interface ViewController () <LoginInputViewDelegate, AreaViewControllerDelegate, GotyeOCDelegate>
 
 @property (nonatomic, weak) LoginModel* lm;
@@ -404,5 +406,24 @@ enum DisplaySide {
     NSLog(@"XMPP on Logout");
     AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
     app.im_user = nil;
+}
+
+/**
+ * @brief 接收消息回调
+ * @param message: 接收到的消息对象
+ * @param downloadMediaIfNeed: 是否自动下载
+ */
+-(void) onReceiveMessage:(GotyeOCMessage*)message downloadMediaIfNeed:(bool*)downloadMediaIfNeed {
+    if ([message.sender.name isEqualToString:@"alfred_test"]) {
+        NSLog(@"this is a system notification");
+    
+        NSString* text = message.text;
+        NSData * textData = [text dataUsingEncoding:NSUTF8StringEncoding];
+        NSLog(@"json data %@", [RemoteInstance searchDataFromData:textData]);
+    } else {
+        NSLog(@"this is a chat message");
+       
+        // TODO: add logic for chat message
+    }
 }
 @end
