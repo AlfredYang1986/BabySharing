@@ -29,8 +29,9 @@
 @interface ViewController () <LoginInputViewDelegate, AreaViewControllerDelegate, GotyeOCDelegate>
 
 @property (nonatomic, weak) LoginModel* lm;
+@property (nonatomic, weak) MessageModel* mm;
 @property (nonatomic, weak) UIViewController* loginController;
-@property (nonatomic, weak) UIViewController* contentController;
+@property (nonatomic, weak) TabBarController* contentController;
 @property (nonatomic, weak) UIViewController* secretController;
 
 enum DisplaySide {
@@ -165,6 +166,7 @@ enum DisplaySide {
     } else {
         _contentController = [segue destinationViewController];
         ((TabBarController*)[segue destinationViewController]).lm = self.lm;
+        ((TabBarController*)[segue destinationViewController]).mm = self.mm;
         _loginController = nil;
         _currentDispley = shareSide;
     }
@@ -185,17 +187,15 @@ enum DisplaySide {
 - (void)userLogedIn:(id)sender {
     NSLog(@"login success");
     isSNSLogin = NO;
-    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    [app registerDeviceTokenWithCurrentUser];
-    
     [self.navigationController popToRootViewControllerAnimated:NO];
     
 //    if (_loginController) {
 //        [_loginController dismissViewControllerAnimated:YES completion:^(void){
             if ([_lm isLoginedByUser]) {
-//                AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-//                [delegate createQueryModel];
-                [GotyeOCAPI login:_lm.current_user_id password:nil];
+                AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+                [delegate createQueryModel];
+                [delegate registerDeviceTokenWithCurrentUser];
+//                [GotyeOCAPI login:_lm.current_user_id password:nil];
             }
 //        }];
 //    }
@@ -207,6 +207,7 @@ enum DisplaySide {
     [GotyeOCAPI logout];
     if (_contentController) {
         [_contentController dismissViewControllerAnimated:YES completion:nil];
+        _contentController = nil;
     }
 }
 
@@ -214,10 +215,10 @@ enum DisplaySide {
     NSLog(@"application is ready");
     
     if ([_lm isLoginedByUser]) {
-//        AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-//        [delegate createQueryModel];
-//        [delegate registerDeviceTokenWithCurrentUser];
-        [GotyeOCAPI login:_lm.current_user_id password:nil];
+        AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+        [delegate createQueryModel];
+        [delegate registerDeviceTokenWithCurrentUser];
+//        [GotyeOCAPI login:_lm.current_user_id password:nil];
     }
 }
 
@@ -237,6 +238,8 @@ enum DisplaySide {
     NSLog(@"message is ready");
     
     isMessageModelReady = YES;
+    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    _mm = app.mm;
     
     if (inputView.frame.origin.y + inputView.frame.size.height != [UIScreen mainScreen].bounds.size.height) {
         CGFloat height = [UIScreen mainScreen].bounds.size.height;
@@ -244,8 +247,8 @@ enum DisplaySide {
         CGFloat last_height = inputView.bounds.size.height;
         inputView.frame = CGRectMake(0, height - last_height, inputView.bounds.size.width, last_height);
     }
-    
-    [self performSegueWithIdentifier:@"contentSegue" sender:nil];
+   
+    [GotyeOCAPI login:_lm.current_user_id password:nil];
 }
 
 - (void)changingSide:(NSNotification*)sender {
@@ -381,10 +384,13 @@ enum DisplaySide {
     NSLog(@"XMPP on Login");
     AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
     app.im_user = user;
-    [app registerDeviceTokenWithCurrentUser];
-    if (!isQueryModelReady) [app createQueryModel];
-    else [self queryDataIsReady:nil];
+//    [app registerDeviceTokenWithCurrentUser];
+//    if (!isQueryModelReady) [app createQueryModel];
+//    else [self queryDataIsReady:nil];
 //    [self performSegueWithIdentifier:@"contentSegue" sender:nil];
+    if (_contentController == nil) {
+        [self performSegueWithIdentifier:@"contentSegue" sender:nil];
+    }
 }
 
 /**
@@ -416,10 +422,11 @@ enum DisplaySide {
 -(void) onReceiveMessage:(GotyeOCMessage*)message downloadMediaIfNeed:(bool*)downloadMediaIfNeed {
     if ([message.sender.name isEqualToString:@"alfred_test"]) {
         NSLog(@"this is a system notification");
-    
-        NSString* text = message.text;
-        NSData * textData = [text dataUsingEncoding:NSUTF8StringEncoding];
-        NSLog(@"json data %@", [RemoteInstance searchDataFromData:textData]);
+        
+        [_mm addNotification:[RemoteInstance searchDataFromData:[message.text dataUsingEncoding:NSUTF8StringEncoding]] withFinishBlock:^{
+            [_contentController addOneNotification];
+        }];
+        
     } else {
         NSLog(@"this is a chat message");
        

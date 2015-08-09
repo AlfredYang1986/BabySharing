@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+#import "MessageModel.h"
 #import "LoginModel.h"
 #import "CameraActionProtocol.h"
 #import "AlbumActionProtocol.h"
@@ -15,6 +16,10 @@
 @interface TabBarController : UITabBarController <UITabBarDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITabBarControllerDelegate, AlbumActionDelegate, CameraActionProtocol>
 
 @property (nonatomic, weak) LoginModel* lm;
+@property (nonatomic, weak) MessageModel* mm;
 
 - (void)showSecretSideOnController:(UIViewController*)parent;
+
+#pragma mark -- notifications
+- (void)addOneNotification;
 @end

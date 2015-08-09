@@ -9,7 +9,10 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+@class MessageModel;
+
 @interface MesssageTableDelegate : NSObject <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, weak) UITableView* queryView;
 @property (nonatomic, weak) UIViewController* current;
+@property (nonatomic, weak) MessageModel* mm;
 @end

@@ -9,11 +9,16 @@
 #import "MesssageTableDelegate.h"
 #import "messageViewCell.h"
 
+#import "UIBadgeView.h"
+#import "MessageModel.h"
+
 @implementation MesssageTableDelegate {
     BOOL isLoading;
 }
 
 @synthesize queryView = _queryView;
+@synthesize current = _current;
+@synthesize mm = _mm;
 
 #pragma mark -- table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -23,6 +28,7 @@
     
     //    QueryContent* cur = [_qm.querydata objectAtIndex:indexPath.row - 1];
     //    [self performSegueWithIdentifier:@"HomeDetailSegue" sender:cur];
+    [_current performSegueWithIdentifier:@"showNotifications" sender:nil];
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -64,11 +70,27 @@
         cell = [nib objectAtIndex:0];
     }
     
+    cell.nickNameLabel.text = @"互动提示信息";
+    cell.messageLabel.text = @"";
+    cell.number.backgroundColor = [UIColor clearColor];
+
+    NSInteger unread_count = [_mm unReadNotificationCount];
+    if (unread_count > 0) {
+        cell.number.badgeString = [NSString stringWithFormat:@"%d", unread_count];
+        cell.number.badgeColor = [UIColor redColor];
+        cell.number.badgeColorHighlighted = [UIColor redColor];
+        cell.number.font = [UIFont boldSystemFontOfSize: 14];
+        cell.number.parent = cell;
+        cell.number.hidden = NO;
+    } else {
+        cell.number.hidden = YES;
+    }
+    
     return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    return 1;
 }
 
 #pragma mark -- scroll refresh

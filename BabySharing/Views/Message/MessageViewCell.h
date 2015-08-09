@@ -8,7 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class UIBadgeView;
+
 @interface MessageViewCell : UITableViewCell
 @property (nonatomic) NSInteger currentIndex;
+@property (weak, nonatomic) IBOutlet UIBadgeView *number;
+@property (weak, nonatomic) IBOutlet UILabel *nickNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *messageLabel;
 + (CGFloat)getPreferredHeight;
 @end

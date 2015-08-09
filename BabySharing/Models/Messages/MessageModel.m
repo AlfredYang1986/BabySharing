@@ -62,8 +62,9 @@
 }
 
 #pragma mark -- notification functions
-- (void)addNotification:(NSDictionary*)notification {
+- (void)addNotification:(NSDictionary*)notification withFinishBlock:(receiveNotification)block {
     [NotificationOwner addNotification:notification forUser:_delegate.lm.current_user_id inContext:_doc.managedObjectContext];
+    if (block) block();
 }
 
 - (NSArray*)enumNotifications {
@@ -76,5 +77,9 @@
 
 - (void)removeOneNotification:(Notifications*)notification {
     [NotificationOwner removeOneNotification:notification ForOwner:_delegate.lm.current_user_id inContext:_doc.managedObjectContext];
+}
+
+- (NSInteger)unReadNotificationCount {
+    return [NotificationOwner unReadNotificationCountForOwner:_delegate.lm.current_user_id inContext:_doc.managedObjectContext];
 }
 @end

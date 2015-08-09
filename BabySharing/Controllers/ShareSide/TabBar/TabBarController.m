@@ -61,6 +61,8 @@
     item4.image =[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Personal_Center"] ofType:@"png"]];
 
     [self setUpMovingButtonsWithBoundle:resourceBundle];
+
+    ((UITabBarItem*)[self.tabBar.items objectAtIndex:3]).badgeValue = [NSString stringWithFormat:@"%d",[_mm unReadNotificationCount]];
 }
 
 - (void)setUpMovingButtonsWithBoundle:(NSBundle*)bundle {
@@ -229,5 +231,10 @@
 
 - (void)didSelectAlbumBtn2:(UIViewController*)cur {
     
+}
+
+#pragma mark -- notifications
+- (void)addOneNotification {
+    ((UITabBarItem*)[self.tabBar.items objectAtIndex:3]).badgeValue = [NSString stringWithFormat:@"%d",[_mm unReadNotificationCount]];
 }
 @end

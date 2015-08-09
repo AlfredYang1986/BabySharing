@@ -8,10 +8,11 @@
 
 #import "MessageViewCell.h"
 #import "INTUAnimationEngine.h"
+#import "UIBadgeView.h"
 
 @interface MessageViewCell ()
-@property (strong, nonatomic) UIButton *deleteBtn;
-@property (strong, nonatomic) UIButton *cancelBtn;
+//@property (strong, nonatomic) UIButton *deleteBtn;
+//@property (strong, nonatomic) UIButton *cancelBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *imgView;
 
 @end
@@ -22,10 +23,14 @@
     CGPoint point;
 }
 
-@synthesize deleteBtn = _deleteBtn;
-@synthesize cancelBtn = _cancelBtn;
+//@synthesize deleteBtn = _deleteBtn;
+//@synthesize cancelBtn = _cancelBtn;
 @synthesize imageView = _imageView;
+
 @synthesize currentIndex = _currentIndex;
+@synthesize number = _number;
+@synthesize nickNameLabel = _nickNameLabel;
+@synthesize messageLabel = _messageLabel;
 
 + (CGFloat)getPreferredHeight {
     return 66;
@@ -65,101 +70,101 @@
     // Configure the view for the selected state
 }
 
-#pragma mark -- handle pan
-- (void)handlePan:(UIPanGestureRecognizer*)gesture {
-    NSLog(@"pan gesture");
-    if (gesture.state == UIGestureRecognizerStateBegan) {
-        point = [gesture translationInView:self];
-            
-    } else if (gesture.state == UIGestureRecognizerStateEnded) {
-        CGPoint newPos = [gesture translationInView:self];
-        
-        if (newPos.x - point.x > 50) {
-            if (isEditing) {
-                NSLog(@"right gesture");
-                [self hiddenButtons];
-            }
-        } else if (newPos.x - point.x < 50) {
-            if (!isEditing) {
-                NSLog(@"left gesture");
-                [self showButtons];
-            }
-        }
-    }
-}
-
-- (CGRect)cancelBtnRect {
-    CGFloat width = [UIScreen mainScreen].bounds.size.width;
-    CGFloat height = [MessageViewCell getPreferredHeight];
-    return CGRectMake(width - height, 0, height, height);
-}
-
-- (CGRect)delectBtnRect {
-    CGFloat width = [UIScreen mainScreen].bounds.size.width;
-    CGFloat height = [MessageViewCell getPreferredHeight];
-    return CGRectMake(width - 2 * height, 0, height, height);
-}
-
-- (CGRect)startRect {
-    CGFloat width = [UIScreen mainScreen].bounds.size.width;
-    CGFloat height = [MessageViewCell getPreferredHeight];
-    return CGRectMake(width, 0, 0, height);
-}
-
-- (void)showButtons {
-    _cancelBtn.hidden = NO;
-    _deleteBtn.hidden = NO;
-    static const CGFloat kAnimationDuration = 0.30; // in seconds
-    CGRect cancelRc = [self cancelBtnRect];
-    CGRect deleteRc = [self delectBtnRect];
-    CGRect rc = [self startRect];
-    [INTUAnimationEngine animateWithDuration:kAnimationDuration
-                                       delay:0.0
-                                      easing:INTUEaseInOutQuadratic
-                                     options:INTUAnimationOptionNone
-                                  animations:^(CGFloat progress) {
-                                      _deleteBtn.frame = INTUInterpolateCGRect(rc, deleteRc, progress);
-                                      _cancelBtn.frame = INTUInterpolateCGRect(rc, cancelRc, progress);
-                                      
-                                      // NSLog(@"Progress: %.2f", progress);
-                                  }
-                                  completion:^(BOOL finished) {
-                                      // NOTE: When passing INTUAnimationOptionRepeat, this completion block is NOT executed at the end of each cycle. It will only run if the animation is canceled.
-                                      NSLog(@"%@", finished ? @"Animation Completed" : @"Animation Canceled");
-                                      //                                                         self.animationID = NSNotFound;
-                                  }];
-}
-
-- (void)hiddenButtons {
-    static const CGFloat kAnimationDuration = 0.30; // in seconds
-    CGRect cancelRc = [self cancelBtnRect];
-    CGRect deleteRc = [self delectBtnRect];
-    CGRect rc = [self startRect];
-    [INTUAnimationEngine animateWithDuration:kAnimationDuration
-                                       delay:0.0
-                                      easing:INTUEaseInOutQuadratic
-                                     options:INTUAnimationOptionNone
-                                  animations:^(CGFloat progress) {
-                                      _deleteBtn.frame = INTUInterpolateCGRect(deleteRc, rc, progress);
-                                      _cancelBtn.frame = INTUInterpolateCGRect(cancelRc, rc, progress);
-                                      
-                                      // NSLog(@"Progress: %.2f", progress);
-                                  }
-                                  completion:^(BOOL finished) {
-                                      // NOTE: When passing INTUAnimationOptionRepeat, this completion block is NOT executed at the end of each cycle. It will only run if the animation is canceled.
-                                      NSLog(@"%@", finished ? @"Animation Completed" : @"Animation Canceled");
-                                      //                                                         self.animationID = NSNotFound;
-                                      _cancelBtn.hidden = YES;
-                                      _deleteBtn.hidden = YES;
-                                  }];
-}
-
-- (void)didSelectButton:(UIButton*)btn {
-    if (btn == _deleteBtn) {
-        NSLog(@"delete button selected");
-    } else if (btn == _cancelBtn) {
-        NSLog(@"cancel button selected");
-        [self hiddenButtons];
-    }
-}
+//#pragma mark -- handle pan
+//- (void)handlePan:(UIPanGestureRecognizer*)gesture {
+//    NSLog(@"pan gesture");
+//    if (gesture.state == UIGestureRecognizerStateBegan) {
+//        point = [gesture translationInView:self];
+//            
+//    } else if (gesture.state == UIGestureRecognizerStateEnded) {
+//        CGPoint newPos = [gesture translationInView:self];
+//        
+//        if (newPos.x - point.x > 50) {
+//            if (isEditing) {
+//                NSLog(@"right gesture");
+//                [self hiddenButtons];
+//            }
+//        } else if (newPos.x - point.x < 50) {
+//            if (!isEditing) {
+//                NSLog(@"left gesture");
+//                [self showButtons];
+//            }
+//        }
+//    }
+//}
+//
+//- (CGRect)cancelBtnRect {
+//    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+//    CGFloat height = [MessageViewCell getPreferredHeight];
+//    return CGRectMake(width - height, 0, height, height);
+//}
+//
+//- (CGRect)delectBtnRect {
+//    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+//    CGFloat height = [MessageViewCell getPreferredHeight];
+//    return CGRectMake(width - 2 * height, 0, height, height);
+//}
+//
+//- (CGRect)startRect {
+//    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+//    CGFloat height = [MessageViewCell getPreferredHeight];
+//    return CGRectMake(width, 0, 0, height);
+//}
+//
+//- (void)showButtons {
+//    _cancelBtn.hidden = NO;
+//    _deleteBtn.hidden = NO;
+//    static const CGFloat kAnimationDuration = 0.30; // in seconds
+//    CGRect cancelRc = [self cancelBtnRect];
+//    CGRect deleteRc = [self delectBtnRect];
+//    CGRect rc = [self startRect];
+//    [INTUAnimationEngine animateWithDuration:kAnimationDuration
+//                                       delay:0.0
+//                                      easing:INTUEaseInOutQuadratic
+//                                     options:INTUAnimationOptionNone
+//                                  animations:^(CGFloat progress) {
+//                                      _deleteBtn.frame = INTUInterpolateCGRect(rc, deleteRc, progress);
+//                                      _cancelBtn.frame = INTUInterpolateCGRect(rc, cancelRc, progress);
+//                                      
+//                                      // NSLog(@"Progress: %.2f", progress);
+//                                  }
+//                                  completion:^(BOOL finished) {
+//                                      // NOTE: When passing INTUAnimationOptionRepeat, this completion block is NOT executed at the end of each cycle. It will only run if the animation is canceled.
+//                                      NSLog(@"%@", finished ? @"Animation Completed" : @"Animation Canceled");
+//                                      //                                                         self.animationID = NSNotFound;
+//                                  }];
+//}
+//
+//- (void)hiddenButtons {
+//    static const CGFloat kAnimationDuration = 0.30; // in seconds
+//    CGRect cancelRc = [self cancelBtnRect];
+//    CGRect deleteRc = [self delectBtnRect];
+//    CGRect rc = [self startRect];
+//    [INTUAnimationEngine animateWithDuration:kAnimationDuration
+//                                       delay:0.0
+//                                      easing:INTUEaseInOutQuadratic
+//                                     options:INTUAnimationOptionNone
+//                                  animations:^(CGFloat progress) {
+//                                      _deleteBtn.frame = INTUInterpolateCGRect(deleteRc, rc, progress);
+//                                      _cancelBtn.frame = INTUInterpolateCGRect(cancelRc, rc, progress);
+//                                      
+//                                      // NSLog(@"Progress: %.2f", progress);
+//                                  }
+//                                  completion:^(BOOL finished) {
+//                                      // NOTE: When passing INTUAnimationOptionRepeat, this completion block is NOT executed at the end of each cycle. It will only run if the animation is canceled.
+//                                      NSLog(@"%@", finished ? @"Animation Completed" : @"Animation Canceled");
+//                                      //                                                         self.animationID = NSNotFound;
+//                                      _cancelBtn.hidden = YES;
+//                                      _deleteBtn.hidden = YES;
+//                                  }];
+//}
+//
+//- (void)didSelectButton:(UIButton*)btn {
+//    if (btn == _deleteBtn) {
+//        NSLog(@"delete button selected");
+//    } else if (btn == _cancelBtn) {
+//        NSLog(@"cancel button selected");
+//        [self hiddenButtons];
+//    }
+//}
 @end

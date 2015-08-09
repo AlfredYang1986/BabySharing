@@ -14,6 +14,8 @@
 @class AppDelegate;
 @class Notifications;
 
+typedef void(^receiveNotification)(void);
+
 @interface MessageModel : NSObject
 
 @property (nonatomic, weak, readonly) AppDelegate* delegate;
@@ -26,8 +28,10 @@
 - (void)save;
 
 #pragma mark -- notification functions
-- (void)addNotification:(NSDictionary*)notification;
+- (void)addNotification:(NSDictionary*)notification withFinishBlock:(receiveNotification)block;
 - (NSArray*)enumNotifications;
 - (void)removeAllNotifications;
 - (void)removeOneNotification:(Notifications*)notification;
+
+- (NSInteger)unReadNotificationCount;
 @end

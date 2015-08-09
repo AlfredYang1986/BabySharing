@@ -7,6 +7,7 @@
 //
 
 #import "NotificationOwner+ContextOpt.h"
+#import "EnumDefines.h"
 
 @implementation NotificationOwner(ContextOpt)
 
@@ -43,6 +44,7 @@
     tmp.sender_id = user_id;
     tmp.sender_screen_name = [notification objectForKey:@"sender_screen_name"];
     tmp.sender_screen_photo = [notification objectForKey:@"sender_screen_photo"];
+    tmp.status = [NSNumber numberWithInt:MessagesStatusUnread];
 
     tmp.beNotified = owner;
     [owner addNotificationsObject:tmp];
@@ -71,5 +73,14 @@
     NotificationOwner* owner = [self enumNotificationOwnerWithID:user_id inContext:context];
     [owner removeNotificationsObject:notification];
     [context deleteObject:notification];
+}
+
++ (NSInteger)unReadNotificationCountForOwner:(NSString*)user_id inContext:(NSManagedObjectContext*)context {
+    NotificationOwner* owner = [self enumNotificationOwnerWithID:user_id inContext:context];
+
+    NSArray* notify_arr = owner.notifications.allObjects;
+    NSPredicate* pred = [NSPredicate predicateWithFormat:@"status=%d", [NSNumber numberWithInt:MessagesStatusUnread].integerValue];
+   
+    return [notify_arr filteredArrayUsingPredicate:pred].count;
 }
 @end

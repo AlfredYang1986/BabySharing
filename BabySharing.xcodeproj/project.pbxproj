@@ -56,6 +56,8 @@
 		EE98D14C1B69AF9B004D88DF /* QueryHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = EE98D14B1B69AF9B004D88DF /* QueryHeader.m */; };
 		EEA2017C1B744E59006B81E4 /* ConnectionOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = EEA201791B744E59006B81E4 /* ConnectionOwner.m */; };
 		EEA2017D1B744E59006B81E4 /* Friends.m in Sources */ = {isa = PBXBuildFile; fileRef = EEA2017B1B744E59006B81E4 /* Friends.m */; };
+		EEA991441B773F1B001F6CC6 /* UIBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEA991431B773F1B001F6CC6 /* UIBadgeView.m */; };
+		EEA991481B775B4F001F6CC6 /* DDNNotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEA991471B775B4F001F6CC6 /* DDNNotificationViewController.m */; };
 		EEAAA9771B77177C00BEDA6D /* Notifications.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAAA9761B77177C00BEDA6D /* Notifications.m */; };
 		EEAAC8FE1B44E81A00D05C0B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAAC8FD1B44E81A00D05C0B /* main.m */; };
 		EEAAC91B1B44E81A00D05C0B /* BabySharingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAAC91A1B44E81A00D05C0B /* BabySharingTests.m */; };
@@ -323,6 +325,10 @@
 		EEA201791B744E59006B81E4 /* ConnectionOwner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionOwner.m; sourceTree = "<group>"; };
 		EEA2017A1B744E59006B81E4 /* Friends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Friends.h; sourceTree = "<group>"; };
 		EEA2017B1B744E59006B81E4 /* Friends.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Friends.m; sourceTree = "<group>"; };
+		EEA991421B773F1B001F6CC6 /* UIBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBadgeView.h; sourceTree = "<group>"; };
+		EEA991431B773F1B001F6CC6 /* UIBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBadgeView.m; sourceTree = "<group>"; };
+		EEA991461B775B4F001F6CC6 /* DDNNotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDNNotificationViewController.h; sourceTree = "<group>"; };
+		EEA991471B775B4F001F6CC6 /* DDNNotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDNNotificationViewController.m; sourceTree = "<group>"; };
 		EEAAA9751B77177C00BEDA6D /* Notifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notifications.h; sourceTree = "<group>"; };
 		EEAAA9761B77177C00BEDA6D /* Notifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Notifications.m; sourceTree = "<group>"; };
 		EEAAC8F81B44E81A00D05C0B /* BabySharing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BabySharing.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -894,6 +900,24 @@
 			path = Message;
 			sourceTree = "<group>";
 		};
+		EEA991411B773F1B001F6CC6 /* BadgeView */ = {
+			isa = PBXGroup;
+			children = (
+				EEA991421B773F1B001F6CC6 /* UIBadgeView.h */,
+				EEA991431B773F1B001F6CC6 /* UIBadgeView.m */,
+			);
+			path = BadgeView;
+			sourceTree = "<group>";
+		};
+		EEA991451B775B35001F6CC6 /* NotificationsView */ = {
+			isa = PBXGroup;
+			children = (
+				EEA991461B775B4F001F6CC6 /* DDNNotificationViewController.h */,
+				EEA991471B775B4F001F6CC6 /* DDNNotificationViewController.m */,
+			);
+			path = NotificationsView;
+			sourceTree = "<group>";
+		};
 		EEAAC8EF1B44E81A00D05C0B = {
 			isa = PBXGroup;
 			children = (
@@ -1044,6 +1068,7 @@
 		EEAACB141B44E90300D05C0B /* Message */ = {
 			isa = PBXGroup;
 			children = (
+				EEA991451B775B35001F6CC6 /* NotificationsView */,
 				EEE94E0D1B74A8E80011321A /* AddFriends */,
 				EEE94E001B74A8C20011321A /* MessageView */,
 			);
@@ -1333,6 +1358,7 @@
 		EEAACBBB1B44E90300D05C0B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				EEA991411B773F1B001F6CC6 /* BadgeView */,
 				EEFD6F4C1B4E4443008AC4F5 /* Landing */,
 				EE7EB54C1B46309D003281F7 /* Message */,
 				EEAACBBC1B44E90300D05C0B /* Album */,
@@ -2267,6 +2293,7 @@
 				EEAACCA91B44E90400D05C0B /* NicknameInputViewController.m in Sources */,
 				EEE94E261B74BE3B0011321A /* PersonalSettingController.mm in Sources */,
 				EEAACCA41B44E90400D05C0B /* CVViewController2.m in Sources */,
+				EEA991481B775B4F001F6CC6 /* DDNNotificationViewController.m in Sources */,
 				EE98D14C1B69AF9B004D88DF /* QueryHeader.m in Sources */,
 				EEAACD1D1B44E90400D05C0B /* ProfileUserHeaderCell.m in Sources */,
 				EEAACD021B44E90400D05C0B /* QueryOwnerCell.m in Sources */,
@@ -2302,6 +2329,7 @@
 				EEE94E131B74AB6B0011321A /* AddressBookDelegate.m in Sources */,
 				EEAACCE01B44E90400D05C0B /* PostModel.m in Sources */,
 				EEAACCE11B44E90400D05C0B /* QueryComments.m in Sources */,
+				EEA991441B773F1B001F6CC6 /* UIBadgeView.m in Sources */,
 				EEAACD571B44E90400D05C0B /* SGGridMenu.m in Sources */,
 				EE5C7E4F1B511CC000104CAB /* AlbumViewController2.m in Sources */,
 				EE2D4B781B525E0A00B58A1F /* PostInputViewController.m in Sources */,

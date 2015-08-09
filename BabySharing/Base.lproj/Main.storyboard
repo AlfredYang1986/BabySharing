@@ -1138,6 +1138,40 @@
             </objects>
             <point key="canvasLocation" x="2412" y="1742"/>
         </scene>
+        <!--Notifications-->
+        <scene sceneID="dfA-GK-KH0">
+            <objects>
+                <viewController id="ox0-xj-qsG" customClass="DDNNotificationViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ebf-5i-c86"/>
+                        <viewControllerLayoutGuide type="bottom" id="Zsa-Fd-te7"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kEw-xK-UfQ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="7zl-w3-xdj">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="ox0-xj-qsG" id="ZZ8-eG-icF"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="7zl-w3-xdj" secondAttribute="trailing" constant="-16" id="BEc-XV-Il0"/>
+                            <constraint firstItem="7zl-w3-xdj" firstAttribute="leading" secondItem="kEw-xK-UfQ" secondAttribute="leadingMargin" constant="-16" id="JZq-cz-Shc"/>
+                            <constraint firstItem="7zl-w3-xdj" firstAttribute="top" secondItem="kEw-xK-UfQ" secondAttribute="topMargin" id="KsK-UX-fo9"/>
+                            <constraint firstItem="7zl-w3-xdj" firstAttribute="bottom" secondItem="kEw-xK-UfQ" secondAttribute="bottomMargin" id="UIr-qg-8MG"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Notifications" id="g3z-Ow-7HE"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EyX-Ck-RRk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3226" y="2496"/>
+        </scene>
         <!--Create Chat Room-->
         <scene sceneID="ZF9-MI-7CK">
             <objects>
@@ -1309,6 +1343,7 @@
                     <connections>
                         <segue destination="fav-i3-Xga" kind="push" identifier="addFriends" id="Z8a-iE-MvE"/>
                         <segue destination="vu1-ps-3xT" kind="push" identifier="startChat" id="2Bs-UG-c18"/>
+                        <segue destination="ox0-xj-qsG" kind="push" identifier="showNotifications" id="Uuv-9c-sfa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qnc-mR-mVz" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -33,10 +33,20 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ryq-yM-piy" customClass="UIBadgeView">
+                        <rect key="frame" x="476" y="19" width="32" height="27"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="aPT-b8-rEK"/>
+                            <constraint firstAttribute="width" constant="30" id="ky2-4f-cVo"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="USM-yD-QLg" firstAttribute="leading" secondItem="9pY-qN-ksa" secondAttribute="trailing" constant="8" id="2Sq-ne-Xjt"/>
+                    <constraint firstItem="Ryq-yM-piy" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="6jA-Hz-gRP"/>
                     <constraint firstItem="USM-yD-QLg" firstAttribute="top" secondItem="9pY-qN-ksa" secondAttribute="top" id="7bZ-EX-u6b"/>
+                    <constraint firstAttribute="centerY" secondItem="Ryq-yM-piy" secondAttribute="centerY" id="KKF-oc-ulb"/>
                     <constraint firstItem="ZJT-aC-Rgd" firstAttribute="bottom" secondItem="9pY-qN-ksa" secondAttribute="bottom" id="O0N-eT-rpZ"/>
                     <constraint firstItem="9pY-qN-ksa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="QTA-sn-GvR"/>
                     <constraint firstItem="ZJT-aC-Rgd" firstAttribute="leading" secondItem="USM-yD-QLg" secondAttribute="leading" id="WZV-cW-5YM"/>
@@ -45,6 +55,9 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="imgView" destination="9pY-qN-ksa" id="abF-Y4-WcQ"/>
+                <outlet property="messageLabel" destination="ZJT-aC-Rgd" id="hIk-jj-pN0"/>
+                <outlet property="nickNameLabel" destination="USM-yD-QLg" id="VRT-Q7-TJA"/>
+                <outlet property="number" destination="Ryq-yM-piy" id="e9j-Ju-ubB"/>
             </connections>
             <point key="canvasLocation" x="464" y="330"/>
         </tableViewCell>

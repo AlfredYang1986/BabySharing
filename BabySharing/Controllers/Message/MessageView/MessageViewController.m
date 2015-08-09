@@ -13,6 +13,7 @@
 #import "INTUAnimationEngine.h"
 #import "ConnectionModel.h"
 #import "AppDelegate.h"
+#import "DDNNotificationViewController.h"
 
 @interface MessageViewController () <UISearchBarDelegate>
 @property (strong, nonatomic) UITableView *queryView;
@@ -21,6 +22,7 @@
 @property (strong, nonatomic) UISearchBar *friendsSearchBar;
 
 @property (weak, nonatomic, readonly) ConnectionModel *cm;
+@property (weak, nonatomic, readonly) MessageModel *mm;
 @property (weak, nonatomic, readonly) LoginModel *lm;
 @end
 
@@ -38,6 +40,7 @@
 @synthesize friendsQueryView = _friendsQueryView;
 @synthesize friendsSearchBar = _friendsSearchBar;
 
+@synthesize mm = _mm; // for query messages
 @synthesize cm = _cm; // for query relationships
 @synthesize lm = _lm;
 
@@ -50,6 +53,7 @@
     _queryView.delegate = md;
     _queryView.dataSource = md;
     md.queryView = _queryView;
+    md.current = self;
     [_queryView registerNib:[UINib nibWithNibName:@"MessageViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"Message View Cell"];
     
     _friendsQueryView = [[UITableView alloc]init];
@@ -90,6 +94,8 @@
     AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
     _cm = app.cm;
     _lm = app.lm;
+    _mm = app.mm;
+    md.mm = _mm;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -127,6 +133,9 @@
 
     if ([segue.identifier isEqualToString:@"addFriends"]) {
         
+    } else if ([segue.identifier isEqualToString:@"showNotifications"]) {
+        ((DDNNotificationViewController*)segue.destinationViewController).lm = self.lm;
+        ((DDNNotificationViewController*)segue.destinationViewController).mm = self.mm;
     }
 }
 

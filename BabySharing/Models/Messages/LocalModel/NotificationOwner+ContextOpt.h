@@ -19,4 +19,6 @@
 + (NSArray*)enumNotificationsForOwner:(NSString*)user_id inContext:(NSManagedObjectContext*)context;
 + (void)removeAllNotificationsForOwner:(NSString*)user_id inContext:(NSManagedObjectContext*)context;
 + (void)removeOneNotification:(Notifications*)notification ForOwner:(NSString*)user_id inContext:(NSManagedObjectContext*)context;
+
++ (NSInteger)unReadNotificationCountForOwner:(NSString*)user_id inContext:(NSManagedObjectContext*)context;
 @end
