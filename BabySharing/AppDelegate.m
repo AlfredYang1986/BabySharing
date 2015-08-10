@@ -156,6 +156,10 @@
     NSLog(@"Failed to get token, error: %@", error);
 }
 
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    NSLog(@"didReceiveRemoteNotification : %@", userInfo);
+}
+
 #pragma mark -- register device to service
 - (void)registerDeviceTokenWithCurrentUser {
     if (_apns_token == nil || _lm.current_user_id == nil) {
