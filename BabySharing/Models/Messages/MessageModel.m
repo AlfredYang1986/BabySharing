@@ -82,4 +82,21 @@
 - (NSInteger)unReadNotificationCount {
     return [NotificationOwner unReadNotificationCountForOwner:_delegate.lm.current_user_id inContext:_doc.managedObjectContext];
 }
+
+- (void)markAllNotificationsAsReaded {
+    [NotificationOwner markAllNotificationAsReadedForOwner:_delegate.lm.current_user_id inContext:_doc.managedObjectContext];
+}
+
+#pragma mark -- p2p chat message and group chat message
+- (void)addMessage:(NSDictionary*)message {
+    [NotificationOwner addMessageWith:_delegate.lm.current_user_id message:message inContext:_doc.managedObjectContext];
+}
+
+- (NSArray*)enumAllTargets {
+    return [NotificationOwner enumAllTargetForOwner:_delegate.lm.current_user_id inContext:_doc.managedObjectContext];
+}
+
+- (NSArray*)enumAllMessagesWithTarget:(Targets*)target {
+    return [NotificationOwner enumAllMessagesForTarget:target inContext:_doc.managedObjectContext];
+}
 @end

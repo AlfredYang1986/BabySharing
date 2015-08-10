@@ -11,8 +11,10 @@
 #import "MessageModel.h"
 #import "LoginModel.h"
 #import "EnumDefines.h"
+#import "MessageNotificationDetailCell.h"
 
 @interface DDNNotificationViewController () <UITableViewDataSource, UITableViewDelegate>
+@property (weak, nonatomic) IBOutlet UITableView *queryView;
 
 @end
 
@@ -23,10 +25,17 @@
 @synthesize mm = _mm;
 @synthesize lm = _lm;
 
+@synthesize queryView = _queryView;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     queryData = [_mm enumNotifications];
+   
+    [_queryView registerNib:[UINib nibWithNibName:@"MessageNotificationDetailCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"Notificaton Detail View Cell"];
+    
+    [_mm markAllNotificationsAsReaded];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"unRead Message Changed" object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -59,7 +68,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 44;
+    return [MessageNotificationDetailCell preferedHeight];
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -85,23 +94,19 @@
 #pragma mark -- table view datasource
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"default"];
+   
+    MessageNotificationDetailCell* cell = [tableView dequeueReusableCellWithIdentifier:@"Notificaton Detail View Cell"];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"default"];
-    }
-  
-    Notifications* tmp = [queryData objectAtIndex:indexPath.row];
-    switch (tmp.type.integerValue) {
-        case NotificationActionTypeFollow:
-            cell.textLabel.text = [NSString stringWithFormat:@"%@ folows you", tmp.sender_screen_name];
-            break;
-            
-        default:
-            break;
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MessageNotificationDetailCell" owner:self options:nil];
+        cell = [nib objectAtIndex:0];
     }
     
+    Notifications* tmp = [queryData objectAtIndex:indexPath.row];
+    
+    [cell setUserImage:tmp.sender_screen_photo];
+    cell.detailView.text = [NSString stringWithFormat:[cell getActtionTmplate:tmp.type.integerValue], tmp.sender_screen_name];
+   
     return cell;
 }
 

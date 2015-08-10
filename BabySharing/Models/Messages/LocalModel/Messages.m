@@ -1,9 +1,9 @@
 //
 //  Messages.m
-//  BabySharing
+//  
 //
-//  Created by Alfred Yang on 8/08/2015.
-//  Copyright (c) 2015 BM. All rights reserved.
+//  Created by Alfred Yang on 10/08/2015.
+//
 //
 
 #import "Messages.h"
@@ -12,9 +12,10 @@
 
 @implementation Messages
 
-@dynamic message_type;
-@dynamic messageContent;
 @dynamic message_date;
+@dynamic message_type;
+@dynamic message_content;
+@dynamic message_status;
 @dynamic messageFrom;
 
 @end

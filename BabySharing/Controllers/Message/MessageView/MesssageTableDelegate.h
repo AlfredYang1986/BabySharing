@@ -15,4 +15,6 @@
 @property (nonatomic, weak) UITableView* queryView;
 @property (nonatomic, weak) UIViewController* current;
 @property (nonatomic, weak) MessageModel* mm;
+
+- (void)resetTableData;
 @end

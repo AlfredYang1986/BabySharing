@@ -13,6 +13,7 @@
 //@class Targets;
 @class AppDelegate;
 @class Notifications;
+@class Targets;
 
 typedef void(^receiveNotification)(void);
 
@@ -34,4 +35,10 @@ typedef void(^receiveNotification)(void);
 - (void)removeOneNotification:(Notifications*)notification;
 
 - (NSInteger)unReadNotificationCount;
+- (void)markAllNotificationsAsReaded;
+
+#pragma mark -- p2p chat message and group chat message
+- (void)addMessageWith:(NSString*)target message:(NSDictionary*)message;
+- (NSArray*)enumAllTargets;
+- (NSArray*)enumAllMessagesWithTarget:(Targets*)target;
 @end

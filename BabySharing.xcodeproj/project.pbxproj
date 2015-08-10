@@ -53,6 +53,10 @@
 		EE7EB5511B4630C0003281F7 /* MessageViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE7EB54F1B4630C0003281F7 /* MessageViewCell.xib */; };
 		EE86D1B21B537469001C4650 /* PostEffectAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = EE86D1B11B537469001C4650 /* PostEffectAdapter.mm */; };
 		EE97440E1B78699A00E81A70 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = EE97440D1B78699A00E81A70 /* Reachability.m */; };
+		EE9744171B78886300E81A70 /* MessageNotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9744151B78886300E81A70 /* MessageNotificationCell.m */; };
+		EE9744181B78886300E81A70 /* MessageNotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE9744161B78886300E81A70 /* MessageNotificationCell.xib */; };
+		EE97441E1B78944600E81A70 /* MessageNotificationDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE97441C1B78944600E81A70 /* MessageNotificationDetailCell.m */; };
+		EE97441F1B78944600E81A70 /* MessageNotificationDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE97441D1B78944600E81A70 /* MessageNotificationDetailCell.xib */; };
 		EE981F861B5A10400029723A /* LoginToken.m in Sources */ = {isa = PBXBuildFile; fileRef = EE981F851B5A10400029723A /* LoginToken.m */; };
 		EE98D14C1B69AF9B004D88DF /* QueryHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = EE98D14B1B69AF9B004D88DF /* QueryHeader.m */; };
 		EEA2017C1B744E59006B81E4 /* ConnectionOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = EEA201791B744E59006B81E4 /* ConnectionOwner.m */; };
@@ -105,7 +109,6 @@
 		EEAACCDB1B44E90400D05C0B /* RegTmpToken+ContextOpt.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB881B44E90300D05C0B /* RegTmpToken+ContextOpt.m */; };
 		EEAACCDC1B44E90400D05C0B /* RegTmpToken.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB8A1B44E90300D05C0B /* RegTmpToken.m */; };
 		EEAACCDD1B44E90400D05C0B /* LoginModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB8C1B44E90300D05C0B /* LoginModel.m */; };
-		EEAACCDE1B44E90400D05C0B /* LoginUser.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB8E1B44E90300D05C0B /* LoginUser.m */; };
 		EEAACCDF1B44E90400D05C0B /* MessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB921B44E90300D05C0B /* MessageModel.m */; };
 		EEAACCE01B44E90400D05C0B /* PostModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB951B44E90300D05C0B /* PostModel.m */; };
 		EEAACCE11B44E90400D05C0B /* QueryComments.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB991B44E90300D05C0B /* QueryComments.m */; };
@@ -320,6 +323,12 @@
 		EE86D1B11B537469001C4650 /* PostEffectAdapter.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = PostEffectAdapter.mm; sourceTree = "<group>"; };
 		EE97440C1B78699A00E81A70 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		EE97440D1B78699A00E81A70 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		EE9744141B78886300E81A70 /* MessageNotificationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageNotificationCell.h; sourceTree = "<group>"; };
+		EE9744151B78886300E81A70 /* MessageNotificationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageNotificationCell.m; sourceTree = "<group>"; };
+		EE9744161B78886300E81A70 /* MessageNotificationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageNotificationCell.xib; sourceTree = "<group>"; };
+		EE97441B1B78944600E81A70 /* MessageNotificationDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageNotificationDetailCell.h; sourceTree = "<group>"; };
+		EE97441C1B78944600E81A70 /* MessageNotificationDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageNotificationDetailCell.m; sourceTree = "<group>"; };
+		EE97441D1B78944600E81A70 /* MessageNotificationDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageNotificationDetailCell.xib; sourceTree = "<group>"; };
 		EE981F841B5A10400029723A /* LoginToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginToken.h; sourceTree = "<group>"; };
 		EE981F851B5A10400029723A /* LoginToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginToken.m; sourceTree = "<group>"; };
 		EE98D14A1B69AF9B004D88DF /* QueryHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryHeader.h; sourceTree = "<group>"; };
@@ -424,8 +433,6 @@
 		EEAACB8A1B44E90300D05C0B /* RegTmpToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegTmpToken.m; sourceTree = "<group>"; };
 		EEAACB8B1B44E90300D05C0B /* LoginModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginModel.h; sourceTree = "<group>"; };
 		EEAACB8C1B44E90300D05C0B /* LoginModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginModel.m; sourceTree = "<group>"; };
-		EEAACB8D1B44E90300D05C0B /* LoginUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginUser.h; sourceTree = "<group>"; };
-		EEAACB8E1B44E90300D05C0B /* LoginUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginUser.m; sourceTree = "<group>"; };
 		EEAACB901B44E90300D05C0B /* EnumDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumDefines.h; sourceTree = "<group>"; };
 		EEAACB911B44E90300D05C0B /* MessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageModel.h; sourceTree = "<group>"; };
 		EEAACB921B44E90300D05C0B /* MessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageModel.m; sourceTree = "<group>"; };
@@ -896,6 +903,7 @@
 		EE7EB54C1B46309D003281F7 /* Message */ = {
 			isa = PBXGroup;
 			children = (
+				EE9744131B78884E00E81A70 /* MessageNotificationCell */,
 				EE7EB54D1B4630C0003281F7 /* MessageViewCell.h */,
 				EE7EB54E1B4630C0003281F7 /* MessageViewCell.m */,
 				EE7EB54F1B4630C0003281F7 /* MessageViewCell.xib */,
@@ -910,6 +918,19 @@
 				EE97440D1B78699A00E81A70 /* Reachability.m */,
 			);
 			path = Reachability;
+			sourceTree = "<group>";
+		};
+		EE9744131B78884E00E81A70 /* MessageNotificationCell */ = {
+			isa = PBXGroup;
+			children = (
+				EE9744141B78886300E81A70 /* MessageNotificationCell.h */,
+				EE9744151B78886300E81A70 /* MessageNotificationCell.m */,
+				EE9744161B78886300E81A70 /* MessageNotificationCell.xib */,
+				EE97441B1B78944600E81A70 /* MessageNotificationDetailCell.h */,
+				EE97441C1B78944600E81A70 /* MessageNotificationDetailCell.m */,
+				EE97441D1B78944600E81A70 /* MessageNotificationDetailCell.xib */,
+			);
+			path = MessageNotificationCell;
 			sourceTree = "<group>";
 		};
 		EEA991411B773F1B001F6CC6 /* BadgeView */ = {
@@ -1245,8 +1266,6 @@
 				EEAACB781B44E90300D05C0B /* LocalModel */,
 				EEAACB8B1B44E90300D05C0B /* LoginModel.h */,
 				EEAACB8C1B44E90300D05C0B /* LoginModel.m */,
-				EEAACB8D1B44E90300D05C0B /* LoginUser.h */,
-				EEAACB8E1B44E90300D05C0B /* LoginUser.m */,
 			);
 			path = LoginModel;
 			sourceTree = "<group>";
@@ -2191,6 +2210,7 @@
 				EEAACD471B44E90400D05C0B /* ProfileDetailChatGroupCell.xib in Resources */,
 				EE7416261B5B8CDF002CA1BC /* AreaCodeJson.txt in Resources */,
 				EEAACD301B44E90400D05C0B /* CommentsHeaderAndFooterCell.xib in Resources */,
+				EE9744181B78886300E81A70 /* MessageNotificationCell.xib in Resources */,
 				EEAACD341B44E90400D05C0B /* QueryCommentsCell.xib in Resources */,
 				EE7415CC1B5B70D5002CA1BC /* InfoPlist.strings in Resources */,
 				EEAACCFD1B44E90400D05C0B /* QueryLikesCell.xib in Resources */,
@@ -2224,6 +2244,7 @@
 				EEAACCA01B44E90400D05C0B /* CameraNib2.storyboard in Resources */,
 				EEAACD781B44EA2D00D05C0B /* WeiboSDK.bundle in Resources */,
 				EEE94E341B74BFBD0011321A /* ProfileOthersOverView.xib in Resources */,
+				EE97441F1B78944600E81A70 /* MessageNotificationDetailCell.xib in Resources */,
 				EEAACC9D1B44E90400D05C0B /* AlbumNib.storyboard in Resources */,
 				EE2D4B7C1B525E0A00B58A1F /* PhotoPreView.storyboard in Resources */,
 				EEAACD291B44E90400D05C0B /* ChatViewOtherCell.xib in Resources */,
@@ -2268,8 +2289,8 @@
 				EE5D68751B75A9FD0067A2DF /* Targets.m in Sources */,
 				EEAACCE81B44E90400D05C0B /* QueryTimeSpan.m in Sources */,
 				EEAACD151B44E90400D05C0B /* ProfileDetailPostCell.m in Sources */,
-				EEAACCDE1B44E90400D05C0B /* LoginUser.m in Sources */,
 				EEAACCD41B44E90400D05C0B /* CurrentToken+ContextOpt.m in Sources */,
+				EE97441E1B78944600E81A70 /* MessageNotificationDetailCell.m in Sources */,
 				EEAACD271B44E90400D05C0B /* ChatViewCell.m in Sources */,
 				EEAACCDA1B44E90400D05C0B /* Providers.m in Sources */,
 				EEAACCFE1B44E90400D05C0B /* QueryCommentsCell.m in Sources */,
@@ -2359,6 +2380,7 @@
 				EE76A5741B72056800036747 /* Following.m in Sources */,
 				EEAACCEC1B44E90400D05C0B /* MoviePlayTrait.m in Sources */,
 				EEAACCDC1B44E90400D05C0B /* RegTmpToken.m in Sources */,
+				EE9744171B78886300E81A70 /* MessageNotificationCell.m in Sources */,
 				EE2D4B7E1B525E0A00B58A1F /* PhotoPreViewEffectController.m in Sources */,
 				EEAACD101B44E90400D05C0B /* PhotoTagView.m in Sources */,
 				EEAACCF01B44E90400D05C0B /* AlbumGridCell.m in Sources */,

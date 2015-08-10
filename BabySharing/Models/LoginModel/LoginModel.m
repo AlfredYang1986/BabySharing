@@ -74,10 +74,6 @@
     return self;
 }
 
-- (LoginUser*)getFirstAuthorisedUser {
-    return nil;
-}
-
 - (BOOL)isLoginedByUser {
     return _current_user != nil;
 //    return NO;
@@ -424,6 +420,10 @@
 }
 
 - (BOOL)offlineCurrentUser {
+  
+    if (self.current_user == nil)
+        return NO;
+    
     NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
     
     [dic setObject:_current_user.who.user_id forKey:@"user_id"];

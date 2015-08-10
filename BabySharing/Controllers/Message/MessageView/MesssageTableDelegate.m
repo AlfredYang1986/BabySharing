@@ -11,14 +11,23 @@
 
 #import "UIBadgeView.h"
 #import "MessageModel.h"
+#import "Targets.h"
+#import "Messages.h"
+#import "MessageNotificationCell.h"
 
 @implementation MesssageTableDelegate {
     BOOL isLoading;
+    
+    NSArray* queryTargetData;
 }
 
 @synthesize queryView = _queryView;
 @synthesize current = _current;
 @synthesize mm = _mm;
+
+- (void)resetTableData {
+    queryTargetData = [_mm enumAllTargets];
+}
 
 #pragma mark -- table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -62,35 +71,48 @@
 #pragma mark -- table view datasource
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    MessageViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"Message View Cell"];
-    
-    if (cell == nil) {
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MessageViewCell" owner:self options:nil];
-        cell = [nib objectAtIndex:0];
-    }
-    
-    cell.nickNameLabel.text = @"互动提示信息";
-    cell.messageLabel.text = @"";
-    cell.number.backgroundColor = [UIColor clearColor];
-
-    NSInteger unread_count = [_mm unReadNotificationCount];
-    if (unread_count > 0) {
-        cell.number.badgeString = [NSString stringWithFormat:@"%d", unread_count];
-        cell.number.badgeColor = [UIColor redColor];
-        cell.number.badgeColorHighlighted = [UIColor redColor];
-        cell.number.font = [UIFont boldSystemFontOfSize: 14];
-        cell.number.parent = cell;
-        cell.number.hidden = NO;
+   
+    if (indexPath.row == 0) {
+        
+        MessageNotificationCell* cell = [tableView dequeueReusableCellWithIdentifier:@"Notificaton View Cell"];
+        
+        if (cell == nil) {
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MessageNotificationCell" owner:self options:nil];
+            cell = [nib objectAtIndex:0];
+        }
+      
+        NSInteger unread_count = [_mm unReadNotificationCount];
+        if (unread_count > 0) {
+            [cell setBadgeValue:[NSString stringWithFormat:@"%d", unread_count]];
+        }
+        
+        return cell;
+        
     } else {
-        cell.number.hidden = YES;
+        MessageViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"Message View Cell"];
+        
+        if (cell == nil) {
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MessageViewCell" owner:self options:nil];
+            cell = [nib objectAtIndex:0];
+        }
+   
+        Targets* tmp = [queryTargetData objectAtIndex:indexPath.row - 1];
+        [cell setUserImage:tmp.target_photo];
+        cell.nickNameLabel.text = tmp.target_name;
+        cell.messageLabel.text = ((Messages*)tmp.messages.allObjects.lastObject).message_content;
+        
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        formatter.formatterBehavior = NSDateFormatterBehavior10_4;
+        formatter.dateStyle = NSDateFormatterShortStyle;
+        formatter.timeStyle = NSDateFormatterShortStyle;
+        NSString *result = [formatter stringForObjectValue:tmp.last_time];
+        cell.dateLabel.text = result;
+        return cell;
     }
-    
-    return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return 1 + queryTargetData.count;
 }
 
 #pragma mark -- scroll refresh

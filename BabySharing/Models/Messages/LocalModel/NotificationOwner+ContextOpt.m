@@ -8,6 +8,8 @@
 
 #import "NotificationOwner+ContextOpt.h"
 #import "EnumDefines.h"
+#import "Targets.h"
+#import "Messages.h"
 
 @implementation NotificationOwner(ContextOpt)
 
@@ -82,5 +84,62 @@
     NSPredicate* pred = [NSPredicate predicateWithFormat:@"status=%d", [NSNumber numberWithInt:MessagesStatusUnread].integerValue];
    
     return [notify_arr filteredArrayUsingPredicate:pred].count;
+}
+
++ (void)markAllNotificationAsReadedForOwner:(NSString*)user_id inContext:(NSManagedObjectContext*)context {
+    
+    NotificationOwner* owner = [self enumNotificationOwnerWithID:user_id inContext:context];
+    for (Notifications* iter in owner.notifications.allObjects) {
+        iter.status = [NSNumber numberWithInt:MessagesStatusReaded];
+    }
+}
+
+#pragma mark -- p2p chat
++ (void)addMessageWith:(NSString*)owner_id message:(NSDictionary*)message_dic inContext:(NSManagedObjectContext*)context {
+    NotificationOwner* owner = [self enumNotificationOwnerWithID:owner_id inContext:context];
+    
+    MessageReceiverType receiver_type = ((NSNumber*)[message_dic objectForKey:@"receiverType"]).intValue;
+    NSString* target_id = [message_dic objectForKey:@"sender_id"];
+    
+    Targets* target = [self enumTargetWith:owner andID:target_id];
+    if (target == nil) {
+        target = [NSEntityDescription insertNewObjectForEntityForName:@"Targets" inManagedObjectContext:context];
+        target.target_id = target_id;
+        target.target_type = [NSNumber numberWithInt:receiver_type];
+        target.target_name = [message_dic objectForKey:@"sender_screen_name"];
+        target.target_photo = [message_dic objectForKey:@"sender_screen_photo"];
+        target.chatFrom = owner;
+        [owner addChatWithObject:target];
+    }
+
+    NSDate* message_date = [NSDate dateWithTimeIntervalSince1970:((NSNumber*)[message_dic objectForKey:@"date"]).longLongValue / 1000];
+    target.last_time = message_date;
+
+    Messages* message = [NSEntityDescription insertNewObjectForEntityForName:@"Messages" inManagedObjectContext:context];
+   
+    message.message_type = ((NSNumber*)[message_dic objectForKey:@"messageType"]);
+    message.message_date = message_date;
+    message.message_content = [message_dic objectForKey:@"content"];
+    message.message_status = [NSNumber numberWithInt:MessagesStatusUnread];
+    
+    message.messageFrom = target;
+    [target addMessagesObject:message];
+}
+
++ (Targets*)enumTargetWith:(NotificationOwner*)owner andID:(NSString*)target_id {
+    NSPredicate* pred = [NSPredicate predicateWithFormat:@"target_id=%@", target_id];
+    NSArray* result = [owner.chatWith.allObjects filteredArrayUsingPredicate:pred];
+    if (result.count != 1) return nil;
+    else return result.firstObject;
+}
+
++ (NSArray*)enumAllTargetForOwner:(NSString*)owner_id inContext:(NSManagedObjectContext*)context {
+    
+    NotificationOwner* owner = [self enumNotificationOwnerWithID:owner_id inContext:context];
+    return owner.chatWith.allObjects;
+}
+
++ (NSArray*)enumAllMessagesForTarget:(Targets*)target inContext:(NSManagedObjectContext*)context {
+    return target.messages.allObjects;
 }
 @end

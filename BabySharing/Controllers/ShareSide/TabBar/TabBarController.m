@@ -62,7 +62,12 @@
 
     [self setUpMovingButtonsWithBoundle:resourceBundle];
 
-    ((UITabBarItem*)[self.tabBar.items objectAtIndex:3]).badgeValue = [NSString stringWithFormat:@"%d",[_mm unReadNotificationCount]];
+    int unReadCount = [_mm unReadNotificationCount];
+    if (unReadCount != 0) {
+        ((UITabBarItem*)[self.tabBar.items objectAtIndex:3]).badgeValue = [NSString stringWithFormat:@"%d", unReadCount];
+    }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unReadMessageCountChanged:) name:@"unRead Message Changed" object:nil];
 }
 
 - (void)setUpMovingButtonsWithBoundle:(NSBundle*)bundle {
@@ -81,8 +86,9 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 /*
@@ -236,5 +242,14 @@
 #pragma mark -- notifications
 - (void)addOneNotification {
     ((UITabBarItem*)[self.tabBar.items objectAtIndex:3]).badgeValue = [NSString stringWithFormat:@"%d",[_mm unReadNotificationCount]];
+}
+
+- (void)unReadMessageCountChanged:(id)sender {
+    int unReadCount = [_mm unReadNotificationCount];
+    if (unReadCount != 0) {
+        ((UITabBarItem*)[self.tabBar.items objectAtIndex:3]).badgeValue = [NSString stringWithFormat:@"%d", unReadCount];
+    } else {
+        ((UITabBarItem*)[self.tabBar.items objectAtIndex:3]).badgeValue = nil;
+    }
 }
 @end

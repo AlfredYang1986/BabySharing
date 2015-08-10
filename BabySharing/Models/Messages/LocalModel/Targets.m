@@ -1,22 +1,24 @@
 //
 //  Targets.m
-//  BabySharing
+//  
 //
-//  Created by Alfred Yang on 8/08/2015.
-//  Copyright (c) 2015 BM. All rights reserved.
+//  Created by Alfred Yang on 10/08/2015.
+//
 //
 
 #import "Targets.h"
-//#import "NSManagedObject.h"
+#import "Messages.h"
 #import "NotificationOwner.h"
 
 
 @implementation Targets
 
+@dynamic last_time;
 @dynamic target_id;
 @dynamic target_type;
-@dynamic last_time;
-@dynamic messages;
+@dynamic target_photo;
+@dynamic target_name;
 @dynamic chatFrom;
+@dynamic messages;
 
 @end

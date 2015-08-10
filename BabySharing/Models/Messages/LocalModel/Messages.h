@@ -1,9 +1,9 @@
 //
 //  Messages.h
-//  BabySharing
+//  
 //
-//  Created by Alfred Yang on 8/08/2015.
-//  Copyright (c) 2015 BM. All rights reserved.
+//  Created by Alfred Yang on 10/08/2015.
+//
 //
 
 #import <Foundation/Foundation.h>
@@ -13,9 +13,10 @@
 
 @interface Messages : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * message_type;
-@property (nonatomic, retain) NSString * messageContent;
 @property (nonatomic, retain) NSDate * message_date;
+@property (nonatomic, retain) NSNumber * message_type;
+@property (nonatomic, retain) NSString * message_content;
+@property (nonatomic, retain) NSNumber * message_status;
 @property (nonatomic, retain) Targets *messageFrom;
 
 @end

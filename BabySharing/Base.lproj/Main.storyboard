@@ -1155,6 +1155,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="ox0-xj-qsG" id="ZZ8-eG-icF"/>
+                                    <outlet property="delegate" destination="ox0-xj-qsG" id="I2y-Ys-HhZ"/>
                                 </connections>
                             </tableView>
                         </subviews>
@@ -1167,6 +1168,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Notifications" id="g3z-Ow-7HE"/>
+                    <connections>
+                        <outlet property="queryView" destination="7zl-w3-xdj" id="gKN-fD-UjM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EyX-Ck-RRk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

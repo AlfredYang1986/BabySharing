@@ -11,6 +11,8 @@
 #import <CoreData/CoreData.h>
 #import "Notifications.h"
 
+@class Targets;
+
 @interface NotificationOwner(ContextOpt)
 
 #pragma mark -- notification functions
@@ -21,4 +23,10 @@
 + (void)removeOneNotification:(Notifications*)notification ForOwner:(NSString*)user_id inContext:(NSManagedObjectContext*)context;
 
 + (NSInteger)unReadNotificationCountForOwner:(NSString*)user_id inContext:(NSManagedObjectContext*)context;
++ (void)markAllNotificationAsReadedForOwner:(NSString*)user_id inContext:(NSManagedObjectContext*)context;
+
+#pragma mark -- p2p and user Group
++ (void)addMessageWith:(NSString*)owner_id message:(NSDictionary*)message inContext:(NSManagedObjectContext*)context;
++ (NSArray*)enumAllTargetForOwner:(NSString*)owner_id inContext:(NSManagedObjectContext*)context;
++ (NSArray*)enumAllMessagesForTarget:(Targets*)target inContext:(NSManagedObjectContext*)context;
 @end

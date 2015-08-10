@@ -15,5 +15,8 @@
 @property (weak, nonatomic) IBOutlet UIBadgeView *number;
 @property (weak, nonatomic) IBOutlet UILabel *nickNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *messageLabel;
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 + (CGFloat)getPreferredHeight;
+
+- (void)setUserImage:(NSString*)photo_name;
 @end

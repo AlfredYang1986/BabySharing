@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "LoginUser.h"
 #import "Providers.h"
 #import "CurrentToken.h"
+#import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSInteger, LoginModelConfirmResult) {
     LoginModelResultSuccess,
@@ -51,7 +51,6 @@ typedef NS_ENUM(NSInteger, LoginModelConnectSNResult) {
 #pragma mark -- qq login and call back
 - (void)loginWithQQ;
 
-- (LoginUser*)getFirstAuthorisedUser;
 - (NSArray*)enumAllAuthorisedUsers;
 - (void)reloadDataFromLocalDB;
 
