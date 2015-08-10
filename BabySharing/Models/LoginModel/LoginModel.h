@@ -62,10 +62,15 @@ typedef NS_ENUM(NSInteger, LoginModelConnectSNResult) {
 - (void)setCurrentUser:(LoginToken*)token;
 - (CurrentToken*)getCurrentUser;
 - (NSDictionary*)getCurrentUserAttr;
-- (void)signOutCurrentUser;
 
 - (NSString*)getCurrentUserID;
 - (NSString*)getCurrentAuthToken;
+
+#pragma mark -- logout
+- (BOOL)signOutCurrentUser;
+- (BOOL)offlineCurrentUser;
+- (BOOL)onlineCurrentUser;
+- (BOOL)isCurrentUserOffline;
 
 #pragma mark -- query mutiple user simple profiles
 - (NSArray*)querMultipleProlfiles:(NSArray*)user_ids;

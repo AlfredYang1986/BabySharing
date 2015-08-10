@@ -247,8 +247,10 @@ enum DisplaySide {
         CGFloat last_height = inputView.bounds.size.height;
         inputView.frame = CGRectMake(0, height - last_height, inputView.bounds.size.width, last_height);
     }
-   
-    [GotyeOCAPI login:_lm.current_user_id password:nil];
+  
+    if (![GotyeOCAPI isOnline]) {
+        [GotyeOCAPI login:_lm.current_user_id password:nil];
+    }
 }
 
 - (void)changingSide:(NSNotification*)sender {
@@ -402,6 +404,8 @@ enum DisplaySide {
     NSLog(@"XMPP on Reconnecting");
     AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
     app.im_user = user;
+    
+    [GotyeOCAPI beginReceiveOfflineMessage];
 }
 
 /**
@@ -432,5 +436,15 @@ enum DisplaySide {
        
         // TODO: add logic for chat message
     }
+}
+
+/**
+ * @brief 获取历史/离线消息回调
+ * @param code: 状态id
+ * @param msglist: 消息列表
+ * @param downloadMediaIfNeed: 是否需要下载
+ */
+-(void) onGetMessageList:(GotyeStatusCode)code totalCount:(unsigned)totalCount downloadMediaIfNeed:(bool*)downloadMediaIfNeed {
+    NSLog(@"get message count : %d", totalCount);
 }
 @end

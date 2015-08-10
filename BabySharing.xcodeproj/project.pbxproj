@@ -52,6 +52,7 @@
 		EE7EB5501B4630C0003281F7 /* MessageViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7EB54E1B4630C0003281F7 /* MessageViewCell.m */; };
 		EE7EB5511B4630C0003281F7 /* MessageViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE7EB54F1B4630C0003281F7 /* MessageViewCell.xib */; };
 		EE86D1B21B537469001C4650 /* PostEffectAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = EE86D1B11B537469001C4650 /* PostEffectAdapter.mm */; };
+		EE97440E1B78699A00E81A70 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = EE97440D1B78699A00E81A70 /* Reachability.m */; };
 		EE981F861B5A10400029723A /* LoginToken.m in Sources */ = {isa = PBXBuildFile; fileRef = EE981F851B5A10400029723A /* LoginToken.m */; };
 		EE98D14C1B69AF9B004D88DF /* QueryHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = EE98D14B1B69AF9B004D88DF /* QueryHeader.m */; };
 		EEA2017C1B744E59006B81E4 /* ConnectionOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = EEA201791B744E59006B81E4 /* ConnectionOwner.m */; };
@@ -317,6 +318,8 @@
 		EE7EB54F1B4630C0003281F7 /* MessageViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageViewCell.xib; sourceTree = "<group>"; };
 		EE86D1B01B537469001C4650 /* PostEffectAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostEffectAdapter.h; sourceTree = "<group>"; };
 		EE86D1B11B537469001C4650 /* PostEffectAdapter.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = PostEffectAdapter.mm; sourceTree = "<group>"; };
+		EE97440C1B78699A00E81A70 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		EE97440D1B78699A00E81A70 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		EE981F841B5A10400029723A /* LoginToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginToken.h; sourceTree = "<group>"; };
 		EE981F851B5A10400029723A /* LoginToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginToken.m; sourceTree = "<group>"; };
 		EE98D14A1B69AF9B004D88DF /* QueryHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryHeader.h; sourceTree = "<group>"; };
@@ -900,6 +903,15 @@
 			path = Message;
 			sourceTree = "<group>";
 		};
+		EE97440B1B78699A00E81A70 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				EE97440C1B78699A00E81A70 /* Reachability.h */,
+				EE97440D1B78699A00E81A70 /* Reachability.m */,
+			);
+			path = Reachability;
+			sourceTree = "<group>";
+		};
 		EEA991411B773F1B001F6CC6 /* BadgeView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1206,6 +1218,7 @@
 		EEAACB641B44E90300D05C0B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				EE97440B1B78699A00E81A70 /* Reachability */,
 				EE76A5691B72019D00036747 /* ConnectionModel */,
 				EE03E9801B4FABDC00F21EF5 /* Album */,
 				EEAACB651B44E90300D05C0B /* Common */,
@@ -2280,6 +2293,7 @@
 				EEAACCB51B44E90400D05C0B /* SecretViewController.m in Sources */,
 				EE76A57C1B72181300036747 /* ConnectionModel.m in Sources */,
 				EE7537761B6B1AC400EC1616 /* CommentsHeader.m in Sources */,
+				EE97440E1B78699A00E81A70 /* Reachability.m in Sources */,
 				EEE94E371B74C0810011321A /* ProfileOthersOverView.m in Sources */,
 				EEAACD001B44E90400D05C0B /* QueryDetailImageCell.m in Sources */,
 				EE5D686C1B75A55A0067A2DF /* MessageAndNotificationModel.xcdatamodeld in Sources */,

@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "RemoteInstance/RemoteInstance.h"
 #import "ModelDefines.h"
+#import "Reachability.h"
 
 @interface AppDelegate ()
 
@@ -22,6 +23,11 @@
  * for notification 
  */
 @property (strong, nonatomic) NSString *apns_token;
+
+/**
+ * for reachability
+ */
+@property (strong, nonatomic) Reachability* reachability;
 
 @end
 
@@ -42,6 +48,8 @@
 @synthesize wbCurrentUserID = _wbCurrentUserID;
 
 @synthesize apns_token = _apns_token;
+
+@synthesize reachability = _reachability;
 
 - (void)createQueryModel {
     if (!_qm) _qm = [[QueryModel alloc]initWithDelegate:self];
@@ -95,6 +103,11 @@
     } else {
         NSLog(@"IM Register Success!");
     }
+    
+    /**
+     * reach ability
+     */
+    _reachability = [Reachability reachabilityForInternetConnection];
     return YES;
 }
 
@@ -109,6 +122,10 @@
     [_qm saveTop:50];
     [_lm.doc.managedObjectContext save:nil];
     [_mm save];
+    if (_reachability) {
+        [_reachability stopNotifier];
+    }
+    [_lm offlineCurrentUser];
     NSLog(@"save content");
 }
 
@@ -118,6 +135,10 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    if (_reachability) {
+        [_reachability startNotifier];
+    }
+    [_lm onlineCurrentUser];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -125,7 +146,8 @@
     [_qm saveTop:50];
     [_lm.doc.managedObjectContext save:nil];
     [_mm save];
-    NSLog(@"save content");
+    NSLog(@"save content in termination");
+    [_lm offlineCurrentUser];
     [GotyeOCAPI exit];
 }
 
@@ -158,6 +180,7 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     NSLog(@"didReceiveRemoteNotification : %@", userInfo);
+    completionHandler(UIBackgroundFetchResultNewData);
 }
 
 #pragma mark -- register device to service

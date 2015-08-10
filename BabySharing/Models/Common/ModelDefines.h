@@ -53,6 +53,10 @@ typedef NS_ENUM(NSInteger, UserPostOwnerConnections) {
 #define AUTH_WITH_THIRD                     @"authWithThird"
 #define AUTH_CREATE_WITH_PHONE              @"authCreateUserWithPhone"
 
+#define AUTH_ONLINE_USER                    [AUTH_HOST_DOMAIN stringByAppendingString:@"online"]
+#define AUTH_OFFLINE_USER                   [AUTH_HOST_DOMAIN stringByAppendingString:@"offline"]
+#define AUTH_SINGOUT_USER                   [AUTH_HOST_DOMAIN stringByAppendingString:@"signout"]
+
 #pragma mark -- POST
 #define POST_HOST_DOMAIN                    [HOST_DOMAIN stringByAppendingString:@"post/"]
 

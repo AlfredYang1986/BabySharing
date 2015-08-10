@@ -20,4 +20,7 @@
 
 #pragma mark -- log out
 + (BOOL)logOutCurrentLoginUserInContext:(NSManagedObjectContext*)context;
++ (BOOL)offlineCurrentLoginUserInContext:(NSManagedObjectContext*)context;
++ (BOOL)onlineCurrentLoginUserInContext:(NSManagedObjectContext*)context;
++ (BOOL)isCurrentOfflineInContext:(NSManagedObjectContext*)context;
 @end

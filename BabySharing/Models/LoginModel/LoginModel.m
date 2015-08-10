@@ -16,6 +16,7 @@
 #import "WeiboUser.h"
 #import "ModelDefines.h"
 #import "TmpFileStorageModel.h"
+#import "Reachability.h"
 
 @interface LoginModel ()
 @property (strong, nonatomic) CurrentToken* current_user;
@@ -64,6 +65,12 @@
     } else {
         
     }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reachabilityChanged:)
+                                                 name:kReachabilityChangedNotification
+                                               object:nil];
+    
     return self;
 }
 
@@ -364,7 +371,6 @@
 }
 
 #pragma mark -- current token
-
 - (void)setCurrentUser:(LoginToken*)user {
     NSLog(@"set token : %@", user.auth_token);
     NSLog(@"set user id : %@", user.user_id);
@@ -383,16 +389,94 @@
     return [LoginToken userToken2Attr:cur.who];
 }
 
-- (void)signOutCurrentUser {
-    [CurrentToken logOutCurrentLoginUserInContext:_doc.managedObjectContext];
-    _current_user = nil;
-}
-
 - (NSString*)getCurrentUserID {
     return _current_user.who.user_id;
 }
+
 - (NSString*)getCurrentAuthToken {
     return _current_user.who.auth_token;
+}
+
+#pragma mark -- logout and online, offline users
+- (BOOL)signOutCurrentUser {
+    NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
+   
+    [dic setObject:_current_user.who.user_id forKey:@"user_id"];
+    [dic setObject:_current_user.who.auth_token forKey:@"auth_token"];
+    
+    NSError * error = nil;
+    NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
+    
+    NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:AUTH_SINGOUT_USER]];
+    
+    if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
+        [CurrentToken logOutCurrentLoginUserInContext:_doc.managedObjectContext];
+        _current_user = nil;
+        return YES;
+        
+    } else {
+//        NSDictionary* reError = [result objectForKey:@"error"];
+//        NSString* msg = [reError objectForKey:@"message"];
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:msg delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+//        [alert show];
+        return NO;
+    }
+}
+
+- (BOOL)offlineCurrentUser {
+    NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
+    
+    [dic setObject:_current_user.who.user_id forKey:@"user_id"];
+    [dic setObject:_current_user.who.auth_token forKey:@"auth_token"];
+    
+    NSError * error = nil;
+    NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
+    
+    NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:AUTH_OFFLINE_USER]];
+    
+    if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
+        [CurrentToken offlineCurrentLoginUserInContext:_doc.managedObjectContext];
+        return YES;
+        
+    } else {
+        //        NSDictionary* reError = [result objectForKey:@"error"];
+        //        NSString* msg = [reError objectForKey:@"message"];
+        //        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:msg delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+        //        [alert show];
+        return NO;
+    }
+}
+
+- (BOOL)onlineCurrentUser {
+    
+    if (self.current_user == nil)
+        return NO;
+    
+    NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
+    
+    [dic setObject:_current_user.who.user_id forKey:@"user_id"];
+    [dic setObject:_current_user.who.auth_token forKey:@"auth_token"];
+    
+    NSError * error = nil;
+    NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
+    
+    NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:AUTH_ONLINE_USER]];
+    
+    if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
+        [CurrentToken onlineCurrentLoginUserInContext:_doc.managedObjectContext];
+        return YES;
+        
+    } else {
+        //        NSDictionary* reError = [result objectForKey:@"error"];
+        //        NSString* msg = [reError objectForKey:@"message"];
+        //        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:msg delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+        //        [alert show];
+        return NO;
+    }
+}
+
+- (BOOL)isCurrentUserOffline {
+    return [CurrentToken isCurrentOfflineInContext:_doc.managedObjectContext];
 }
 
 #pragma mark -- query mutiple user simple profiles
@@ -418,6 +502,25 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:msg delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
         [alert show];
         return nil;
+    }
+}
+
+#pragma mark -- reachability change
+- (void)reachabilityChanged:(NSNotification*)notify {
+    Reachability * reach = [notify object];
+    
+    if([reach isReachable]) {
+        NSString * temp = [NSString stringWithFormat:@"InternetConnection Notification Says Reachable(%@)", reach.currentReachabilityString];
+        NSLog(@"%@", temp);
+      
+        if ([self isCurrentUserOffline]) {
+            [self onlineCurrentUser];
+        }
+        
+    } else {
+        NSString * temp = [NSString stringWithFormat:@"InternetConnection Notification Says Unreachable(%@)", reach.currentReachabilityString];
+        NSLog(@"%@", temp);
+        
     }
 }
 @end

@@ -2,6 +2,7 @@
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14E46" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="CurrentToken" representedClassName="CurrentToken" syncable="YES">
         <attribute name="last_login_data" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="who" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LoginToken" inverseName="logined" inverseEntity="LoginToken" syncable="YES"/>
     </entity>
     <entity name="LoginToken" representedClassName="LoginToken" syncable="YES">
@@ -26,7 +27,7 @@
         <attribute name="reg_token" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="CurrentToken" positionX="-470" positionY="-49" width="128" height="73"/>
+        <element name="CurrentToken" positionX="-470" positionY="-49" width="128" height="88"/>
         <element name="LoginToken" positionX="-173" positionY="-324" width="128" height="163"/>
         <element name="Providers" positionX="-423" positionY="-252" width="128" height="120"/>
         <element name="RegTmpToken" positionX="-63" positionY="0" width="128" height="73"/>
