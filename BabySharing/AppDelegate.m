@@ -19,10 +19,7 @@
 @property (strong, nonatomic) NSString *wbtoken;
 @property (strong, nonatomic) NSString *wbCurrentUserID;
 
-/**
- * for notification 
- */
-@property (strong, nonatomic) NSString *apns_token;
+
 
 /**
  * for reachability
@@ -201,6 +198,7 @@
     
     if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
         NSLog(@"register device success");
+        _lm.apns_token = _apns_token;
     } else {
         NSLog(@"register device failed");
     }

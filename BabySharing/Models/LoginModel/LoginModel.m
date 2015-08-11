@@ -27,6 +27,8 @@
 @synthesize doc = _doc;
 @synthesize current_user = _current_user;
 
+@synthesize apns_token = _apns_token;
+
 - (void)reloadDataFromLocalDB {
     authorised_users = [LoginToken enumAllLoginUsersWithContext:_doc.managedObjectContext];
 }
@@ -399,6 +401,8 @@
    
     [dic setObject:_current_user.who.user_id forKey:@"user_id"];
     [dic setObject:_current_user.who.auth_token forKey:@"auth_token"];
+
+    [dic setObject:_apns_token forKey:@"device_token"];
     
     NSError * error = nil;
     NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];

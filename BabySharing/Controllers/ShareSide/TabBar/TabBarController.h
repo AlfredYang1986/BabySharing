@@ -19,7 +19,5 @@
 @property (nonatomic, weak) MessageModel* mm;
 
 - (void)showSecretSideOnController:(UIViewController*)parent;
-
-#pragma mark -- notifications
-- (void)addOneNotification;
+- (void)unReadMessageCountChanged:(id)sender;
 @end

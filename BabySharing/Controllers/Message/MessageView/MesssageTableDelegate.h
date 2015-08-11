@@ -10,11 +10,12 @@
 #import <UIKit/UIKit.h>
 
 @class MessageModel;
+@class LoginModel;
 
 @interface MesssageTableDelegate : NSObject <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, weak) UITableView* queryView;
 @property (nonatomic, weak) UIViewController* current;
 @property (nonatomic, weak) MessageModel* mm;
+@property (nonatomic, weak) LoginModel* lm;
 
-- (void)resetTableData;
 @end

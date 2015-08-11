@@ -193,7 +193,8 @@ enum DisplaySide {
 //        [_loginController dismissViewControllerAnimated:YES completion:^(void){
             if ([_lm isLoginedByUser]) {
                 AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-                [delegate createQueryModel];
+                if (!isQueryModelReady) [delegate createQueryModel];
+                else [self queryDataIsReady:nil];
                 [delegate registerDeviceTokenWithCurrentUser];
 //                [GotyeOCAPI login:_lm.current_user_id password:nil];
             }
@@ -216,7 +217,9 @@ enum DisplaySide {
     
     if ([_lm isLoginedByUser]) {
         AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-        [delegate createQueryModel];
+        if (!isQueryModelReady) [delegate createQueryModel];
+        else [self queryDataIsReady:nil];
+
         [delegate registerDeviceTokenWithCurrentUser];
 //        [GotyeOCAPI login:_lm.current_user_id password:nil];
     }
@@ -247,8 +250,10 @@ enum DisplaySide {
         CGFloat last_height = inputView.bounds.size.height;
         inputView.frame = CGRectMake(0, height - last_height, inputView.bounds.size.width, last_height);
     }
-  
+ 
     if (![GotyeOCAPI isOnline]) {
+        [GotyeOCAPI login:_lm.current_user_id password:nil];
+    } else if ([GotyeOCAPI getLoginUser].name != _lm.current_user_id) {
         [GotyeOCAPI login:_lm.current_user_id password:nil];
     }
 }
@@ -386,6 +391,7 @@ enum DisplaySide {
     NSLog(@"XMPP on Login");
     AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
     app.im_user = user;
+//    [GotyeOCAPI activeSession:[GotyeOCUser userWithName:@"alfred_test"]];
 //    [app registerDeviceTokenWithCurrentUser];
 //    if (!isQueryModelReady) [app createQueryModel];
 //    else [self queryDataIsReady:nil];
@@ -404,7 +410,8 @@ enum DisplaySide {
     NSLog(@"XMPP on Reconnecting");
     AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
     app.im_user = user;
-    
+   
+//    [GotyeOCAPI activeSession:[GotyeOCUser userWithName:@"alfred_test"]];
     [GotyeOCAPI beginReceiveOfflineMessage];
 }
 
@@ -428,13 +435,16 @@ enum DisplaySide {
         NSLog(@"this is a system notification");
         
         [_mm addNotification:[RemoteInstance searchDataFromData:[message.text dataUsingEncoding:NSUTF8StringEncoding]] withFinishBlock:^{
-            [_contentController addOneNotification];
+            [_contentController unReadMessageCountChanged:nil];
         }];
+        
+        [GotyeOCAPI markOneMessageAsRead:message isRead:YES];
         
     } else {
         NSLog(@"this is a chat message");
        
         // TODO: add logic for chat message
+        [_contentController unReadMessageCountChanged:nil];
     }
 }
 
@@ -446,5 +456,36 @@ enum DisplaySide {
  */
 -(void) onGetMessageList:(GotyeStatusCode)code totalCount:(unsigned)totalCount downloadMediaIfNeed:(bool*)downloadMediaIfNeed {
     NSLog(@"get message count : %d", totalCount);
+
+    /**
+     * for notification
+     */
+    GotyeOCUser* u = [GotyeOCUser userWithName:@"alfred_test"];
+    NSArray* arr = [GotyeOCAPI getMessageList:u more:YES];
+    for (int index = 0; index < arr.count; ++index) {
+        GotyeOCMessage* m = [arr objectAtIndex:index];
+        if (m.status == GotyeMessageStatusUnread) {
+            
+            [_mm addNotification:[RemoteInstance searchDataFromData:[m.text dataUsingEncoding:NSUTF8StringEncoding]] withFinishBlock:^{
+//                [_contentController addOneNotification];
+            }];
+        
+            [GotyeOCAPI markOneMessageAsRead:m isRead:YES];
+        }
+    }
+    
+    /**
+     * for messages
+     */
+    [_contentController unReadMessageCountChanged:nil];
+}
+
+/**
+ * @brief 发送消息回调
+ * @param code: 状态id
+ * @param message: 消息对象
+ */
+-(void) onSendMessage:(GotyeStatusCode)code message:(GotyeOCMessage*)message {
+    NSLog(@"send message success: %@", message);
 }
 @end

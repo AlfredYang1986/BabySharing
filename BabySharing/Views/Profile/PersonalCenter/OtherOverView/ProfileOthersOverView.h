@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ProfileViewDelegate.h"
 
 @interface ProfileOthersOverView : UITableViewHeaderFooterView
 
@@ -18,5 +19,9 @@
 - (void)setPersonalSign:(NSString*)sign_content;
 - (void)setRoleTag:(NSString*)role_tag;
 
+- (void)setRelations:(NSString*)relations;
+
 + (CGFloat)preferredHeight;
+
+@property (nonatomic, weak) id<ProfileViewDelegate> deleagate;
 @end

@@ -37,6 +37,11 @@
 
 @property (strong, nonatomic) GotyeOCUser* im_user;
 
+/**
+ * for notification 
+ */
+@property (strong, nonatomic) NSString *apns_token;
+
 - (void)createQueryModel;
 - (void)createMessageAndNotificationModel;
 

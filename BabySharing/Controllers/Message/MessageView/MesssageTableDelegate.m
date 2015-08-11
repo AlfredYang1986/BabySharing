@@ -11,23 +11,23 @@
 
 #import "UIBadgeView.h"
 #import "MessageModel.h"
+#import "LoginModel.h"
 #import "Targets.h"
 #import "Messages.h"
 #import "MessageNotificationCell.h"
 
+#import "GotyeOCChatTarget.h"
+#import "RemoteInstance.h"
+#import "ModelDefines.h"
+
 @implementation MesssageTableDelegate {
     BOOL isLoading;
-    
-    NSArray* queryTargetData;
 }
 
 @synthesize queryView = _queryView;
 @synthesize current = _current;
 @synthesize mm = _mm;
-
-- (void)resetTableData {
-    queryTargetData = [_mm enumAllTargets];
-}
+@synthesize lm = _lm;
 
 #pragma mark -- table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -37,7 +37,11 @@
     
     //    QueryContent* cur = [_qm.querydata objectAtIndex:indexPath.row - 1];
     //    [self performSegueWithIdentifier:@"HomeDetailSegue" sender:cur];
-    [_current performSegueWithIdentifier:@"showNotifications" sender:nil];
+    if (indexPath.row == 0) {
+        [_current performSegueWithIdentifier:@"showNotifications" sender:nil];
+    } else {
+        [_current performSegueWithIdentifier:@"startChat" sender:indexPath];
+    }
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -83,7 +87,7 @@
       
         NSInteger unread_count = [_mm unReadNotificationCount];
         if (unread_count > 0) {
-            [cell setBadgeValue:[NSString stringWithFormat:@"%d", unread_count]];
+            [cell setBadgeValue:[NSString stringWithFormat:@"%ld", unread_count]];
         }
         
         return cell;
@@ -96,23 +100,65 @@
             cell = [nib objectAtIndex:0];
         }
    
-        Targets* tmp = [queryTargetData objectAtIndex:indexPath.row - 1];
-        [cell setUserImage:tmp.target_photo];
-        cell.nickNameLabel.text = tmp.target_name;
-        cell.messageLabel.text = ((Messages*)tmp.messages.allObjects.lastObject).message_content;
+        GotyeOCChatTarget* gotTarget = [_mm getTargetByIndex:indexPath.row - 1];
+        Targets* tmp = [_mm enumAllTargetWithTargetID:gotTarget.name];
+        if (tmp != nil) {
+            [cell setUserImage:tmp.target_photo];
+            cell.nickNameLabel.text = tmp.target_name;
+            cell.messageLabel.text = [_mm getLastestMessageWith:gotTarget];
+        } else {
+            dispatch_queue_t up = dispatch_queue_create("Get Profile Details", nil);
+            dispatch_async(up, ^{
+                
+                NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
+                [dic setValue:_lm.current_auth_token forKey:@"query_auth_token"];
+                [dic setValue:_lm.current_user_id forKey:@"query_user_id"];
+                [dic setValue:gotTarget.name forKey:@"owner_user_id"];
+                
+                NSError * error = nil;
+                NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
+                
+                NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:[PROFILE_HOST_DOMAIN stringByAppendingString:PROFILE_QUERY_DETAILS]]];
+                
+                if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
+                    NSDictionary* dic_profile_details = [result objectForKey:@"result"];
+                    Targets* t = [_mm addTarget:dic_profile_details];
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [cell setUserImage:t.target_photo];
+                        cell.nickNameLabel.text = t.target_name;
+                        cell.messageLabel.text = [_mm getLastestMessageWith:gotTarget];
+                    });
+                    
+                } else {
+                    NSDictionary* reError = [result objectForKey:@"error"];
+                    NSString* msg = [reError objectForKey:@"message"];
+                    
+                    NSLog(@"query user profile failed");
+                    NSLog(@"%@", msg);
+                }
+            });
+        }
         
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        formatter.formatterBehavior = NSDateFormatterBehavior10_4;
-        formatter.dateStyle = NSDateFormatterShortStyle;
-        formatter.timeStyle = NSDateFormatterShortStyle;
-        NSString *result = [formatter stringForObjectValue:tmp.last_time];
-        cell.dateLabel.text = result;
+        
+        NSInteger unread_count = [_mm getUnreadMessageCount:gotTarget];
+        if (unread_count > 0) {
+            [cell setBadgeValue:[NSString stringWithFormat:@"%ld", unread_count]];
+        }
+
+        
+//        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//        formatter.formatterBehavior = NSDateFormatterBehavior10_4;
+//        formatter.dateStyle = NSDateFormatterShortStyle;
+//        formatter.timeStyle = NSDateFormatterShortStyle;
+//        NSString *result = [formatter stringForObjectValue:tmp.last_time];
+//        cell.dateLabel.text = result;
         return cell;
     }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1 + queryTargetData.count;
+    return 1 + [_mm getMesssageSessionCount];
 }
 
 #pragma mark -- scroll refresh

@@ -142,4 +142,24 @@
 + (NSArray*)enumAllMessagesForTarget:(Targets*)target inContext:(NSManagedObjectContext*)context {
     return target.messages.allObjects;
 }
+
++ (Targets*)addTargetWith:(NSString*)owner_id targetDic:(NSDictionary*)tar inContext:(NSManagedObjectContext*)context {
+    NotificationOwner* owner = [self enumNotificationOwnerWithID:owner_id inContext:context];
+    
+    MessageReceiverType receiver_type = MessageReceiverTypeUser;
+    NSString* target_id = [tar objectForKey:@"user_id"];
+    
+    Targets* target = [self enumTargetWith:owner andID:target_id];
+    if (target == nil) {
+        target = [NSEntityDescription insertNewObjectForEntityForName:@"Targets" inManagedObjectContext:context];
+        target.target_id = target_id;
+        target.target_type = [NSNumber numberWithInt:receiver_type];
+        target.target_name = [tar objectForKey:@"screen_name"];
+        target.target_photo = [tar objectForKey:@"screen_photo"];
+        target.chatFrom = owner;
+        [owner addChatWithObject:target];
+    }
+    
+    return target;
+}
 @end

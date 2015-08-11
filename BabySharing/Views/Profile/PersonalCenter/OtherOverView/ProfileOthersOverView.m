@@ -48,6 +48,8 @@
 @synthesize personalSignLabel = _personalSignLabel;
 
 @synthesize seg = _seg;
+
+@synthesize deleagate = _deleagate;
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
@@ -72,6 +74,8 @@
     [_seg setImage:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Grid"] ofType:@"png"]] forSegmentAtIndex:0];
     [_seg setImage:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Tag"] ofType:@"png"]] forSegmentAtIndex:1];
     [_seg setImage:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Location"] ofType:@"png"]] forSegmentAtIndex:2];
+    
+    [_chatBtn addTarget:_deleagate action:@selector(chatBtnSelected) forControlEvents:UIControlEventTouchDown];
 }
 
 - (void)setOwnerPhoto:(NSString*)photo_name {
@@ -119,6 +123,10 @@
 
 - (void)setPersonalSign:(NSString*)sign_content {
     _personalSignLabel.text = sign_content;
+}
+
+- (void)setRelations:(NSString*)relations {
+    [_followBtn setTitle:relations forState:UIControlStateNormal];
 }
 
 - (void)setRoleTag:(NSString*)role_tag {

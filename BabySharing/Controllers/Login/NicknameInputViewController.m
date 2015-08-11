@@ -108,7 +108,7 @@
 //    if ([_lm sendScreenName:[inputView getInputName] forToken:auth_token andUserID:user_id]) {
         NSString* phoneNo = (NSString*)[_login_attr objectForKey:@"phoneNo"];
         [LoginToken unbindTokenInContext:_lm.doc.managedObjectContext WithPhoneNum:phoneNo];
-        LoginToken* token = [LoginToken createTokenInContext:_lm.doc.managedObjectContext withUserID:user_id andAttrs:_login_attr];
+        LoginToken* token = [LoginToken enumLoginUserInContext:_lm.doc.managedObjectContext withUserID:user_id];
         [_lm setCurrentUser:token];
         [_lm.doc.managedObjectContext save:nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"login success" object:nil];

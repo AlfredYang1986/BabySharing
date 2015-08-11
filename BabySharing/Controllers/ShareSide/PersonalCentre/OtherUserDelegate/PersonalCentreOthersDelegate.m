@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 BM. All rights reserved.
 //
 #import "PersonalCentreOthersDelegate.h"
-#import "ProfileOverview.h"
+#import "ProfileOthersOverview.h"
 #import "OwnerQueryModel.h"
 #import "QueryContent+ContextOpt.h"
 #import "QueryContentItem.h"
@@ -22,7 +22,7 @@
 #pragma mark -- UITableView Delegate
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     if (section == 0) {
-        ProfileOverView* header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"Profile Others Overview"];
+        ProfileOthersOverView* header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"Profile Others Overview"];
         
         if (header == nil) {
             NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ProfileOthersOverView" owner:self options:nil];
@@ -36,6 +36,10 @@
         [header setShareCount:[_delegate getSharedCount]];
         [header setCycleCount:[_delegate getCycleCount]];
         [header setPersonalSign:[_delegate getSign]];
+        
+        [header setRelations:[_delegate getRelations]];
+        
+        header.deleagate = _delegate;
         
         return header;
         
@@ -51,7 +55,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (section == 0) {
-        return [ProfileOverView preferredHeight];
+        return [ProfileOthersOverView preferredHeight];
     } else return 0;
 }
 
@@ -111,7 +115,7 @@
 }
 
 #pragma mark -- Personal Center Callback 
-- (void)setDelegate:(id<PersonalCenterProtocol>)delegate {
+- (void)setDelegate:(id<PersonalCenterProtocol, ProfileViewDelegate>)delegate {
     _delegate = delegate;
 }
 @end

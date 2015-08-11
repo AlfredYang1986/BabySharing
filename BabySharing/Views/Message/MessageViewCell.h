@@ -19,4 +19,5 @@
 + (CGFloat)getPreferredHeight;
 
 - (void)setUserImage:(NSString*)photo_name;
+- (void)setBadgeValue:(NSString*)value;
 @end

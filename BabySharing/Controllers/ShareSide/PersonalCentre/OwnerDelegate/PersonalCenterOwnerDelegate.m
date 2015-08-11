@@ -112,7 +112,7 @@
 }
 
 #pragma mark -- Personal Center Callback
-- (void)setDelegate:(id<PersonalCenterProtocol>)delegate {
+- (void)setDelegate:(id<PersonalCenterProtocol, ProfileViewDelegate>)delegate {
     _delegate = delegate;
 }
 @end

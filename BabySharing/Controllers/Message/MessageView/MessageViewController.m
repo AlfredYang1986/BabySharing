@@ -14,9 +14,10 @@
 #import "ConnectionModel.h"
 #import "AppDelegate.h"
 #import "DDNNotificationViewController.h"
+#import "UserChatController.h"
+#import "Targets.h"
 
 @interface MessageViewController () <UISearchBarDelegate>
-@property (strong, nonatomic) UITableView *queryView;
 @property (strong, nonatomic) UITableView *friendsQueryView;
 @property (strong, nonatomic) UISegmentedControl *friendSeg;
 @property (strong, nonatomic) UISearchBar *friendsSearchBar;
@@ -98,6 +99,7 @@
     _lm = app.lm;
     _mm = app.mm;
     md.mm = _mm;
+    md.lm = _lm;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -142,6 +144,23 @@
     } else if ([segue.identifier isEqualToString:@"showNotifications"]) {
         ((DDNNotificationViewController*)segue.destinationViewController).lm = self.lm;
         ((DDNNotificationViewController*)segue.destinationViewController).mm = self.mm;
+    } else if ([segue.identifier isEqualToString:@"startChat"]) {
+        UserChatController* con = (UserChatController*)segue.destinationViewController;
+        con.lm = self.lm;
+        con.mm = self.mm;
+      
+        NSIndexPath* index = (NSIndexPath*)sender;
+        GotyeOCChatTarget* gotTarget = [_mm getTargetByIndex:index.row - 1];
+        Targets* tmp = [_mm enumAllTargetWithTargetID:gotTarget.name];
+        if (tmp != nil) {
+            con.chat_user_id = tmp.target_id;
+            con.chat_user_name = tmp.target_name;
+            con.chat_user_photo = tmp.target_photo;
+        } else {
+            con.chat_user_id = gotTarget.name;
+        }
+        
+        con.hidesBottomBarWhenPushed = YES;
     }
 }
 

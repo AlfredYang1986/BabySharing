@@ -10,7 +10,8 @@
 #import "OwnerQueryModel.h"
 #import "AlbumTableCell.h"
 #import "PersonalCenterProtocol.h"
+#import "ProfileViewDelegate.h"
 
 @interface PersonalCentreOthersDelegate : NSObject <UITableViewDelegate, UITableViewDataSource, AlbumTableCellDelegate, PersonalCenterCallBack>
-@property (nonatomic, weak) id<PersonalCenterProtocol> delegate;
+@property (nonatomic, weak) id<PersonalCenterProtocol, ProfileViewDelegate> delegate;
 @end

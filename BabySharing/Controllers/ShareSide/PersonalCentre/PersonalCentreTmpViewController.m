@@ -21,7 +21,9 @@
 #import "ProfileSettingController.h"
 #import "OwnerQueryModel.h"
 
-@interface PersonalCentreTmpViewController () <PersonalCenterProtocol>
+#import "UserChatController.h"
+
+@interface PersonalCentreTmpViewController () <PersonalCenterProtocol, ProfileViewDelegate>
 @property (weak, nonatomic, readonly) NSString* current_user_id;
 @property (weak, nonatomic, readonly) NSString* current_auth_token;
 @property (weak, nonatomic) IBOutlet UITableView *queryView;
@@ -82,6 +84,7 @@
     if (!_current_delegate) {
         self.current_delegate = [[PersonalCenterOwnerDelegate alloc]init];
     }
+    
     _queryView.delegate = _current_delegate;
     _queryView.dataSource = _current_delegate;
     
@@ -201,7 +204,36 @@
     } else return nil;
 }
 
+- (NSString*)getRelations {
+    if (dic_profile_details) {
+        switch (((NSNumber*)[dic_profile_details objectForKey:@"relations"]).integerValue) {
+            case UserPostOwnerConnectionsSamePerson:
+                // my own post, do nothing
+                return nil;
+            case UserPostOwnerConnectionsNone:
+            case UserPostOwnerConnectionsFollowed:
+                return @"+关注";
+            case UserPostOwnerConnectionsFollowing:
+            case UserPostOwnerConnectionsFriends:
+                return @"取消关注";
+            default:
+                return nil;
+    }} else return nil;
+}
+
 - (OwnerQueryModel*)getOM {
     return _om;
+}
+
+#pragma mark -- profile view delegate
+- (void)chatBtnSelected {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UserChatController* chat = [storyboard instantiateViewControllerWithIdentifier:@"userChatController"];
+    chat.hidesBottomBarWhenPushed = YES;
+    chat.chat_user_id = _owner_id;
+    chat.chat_user_name = [dic_profile_details objectForKey:@"screen_name"];
+    chat.chat_user_photo = [self getPhotoName];
+    
+    [self.navigationController pushViewController:chat animated:YES];
 }
 @end

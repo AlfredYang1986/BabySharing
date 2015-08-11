@@ -10,4 +10,5 @@
 
 @interface MessageViewController : UIViewController 
 
+@property (strong, nonatomic) UITableView *queryView;
 @end

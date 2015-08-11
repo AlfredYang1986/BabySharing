@@ -9,6 +9,8 @@
 #ifndef BabySharing_PersonalCenterProtocol_h
 #define BabySharing_PersonalCenterProtocol_h
 
+#import "ProfileViewDelegate.h"
+
 @class OwnerQueryModel;
 
 @protocol PersonalCenterProtocol <NSObject>
@@ -19,11 +21,12 @@
 - (NSString*)getLocation;
 - (NSString*)getSign;
 - (NSString*)getRoleTag;
+- (NSString*)getRelations;
 
 - (OwnerQueryModel*)getOM;
 @end
 
 @protocol PersonalCenterCallBack <NSObject>
-- (void)setDelegate:(id<PersonalCenterProtocol>)delegate;
+- (void)setDelegate:(id<PersonalCenterProtocol, ProfileViewDelegate>)delegate;
 @end
 #endif

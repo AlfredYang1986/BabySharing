@@ -30,6 +30,8 @@ typedef NS_ENUM(NSInteger, LoginModelConnectSNResult) {
 @property (weak, nonatomic, readonly, getter=getCurrentUserID) NSString* current_user_id;
 @property (weak, nonatomic, readonly, getter=getCurrentAuthToken) NSString* current_auth_token;
 
+@property (nonatomic, weak) NSString* apns_token;
+
 - (id)init;
 
 - (BOOL)sendLoginRequestToPhone:(NSString*) phoneNum;

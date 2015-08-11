@@ -20,6 +20,9 @@
 #import "CVViewController2.h"
 #import "WebSearchController.h"
 
+#import "UserChatController.h"
+#import "MessageViewController.h"
+
 //#define MOVING_DISTANCE     90
 //#define MOVING_BASE         20
 //#define MOVING_ANGLE        0.6
@@ -62,10 +65,7 @@
 
     [self setUpMovingButtonsWithBoundle:resourceBundle];
 
-    int unReadCount = [_mm unReadNotificationCount];
-    if (unReadCount != 0) {
-        ((UITabBarItem*)[self.tabBar.items objectAtIndex:3]).badgeValue = [NSString stringWithFormat:@"%d", unReadCount];
-    }
+    [self unReadMessageCountChanged:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unReadMessageCountChanged:) name:@"unRead Message Changed" object:nil];
 }
@@ -240,16 +240,61 @@
 }
 
 #pragma mark -- notifications
-- (void)addOneNotification {
-    ((UITabBarItem*)[self.tabBar.items objectAtIndex:3]).badgeValue = [NSString stringWithFormat:@"%d",[_mm unReadNotificationCount]];
+- (void)unReadMessageCountChanged:(id)sender {
+    
+    if (self.selectedIndex == 3) {
+        UIViewController* cv = self.selectedViewController.childViewControllers.lastObject;
+        if ([cv isKindOfClass:[MessageViewController class]]) {
+            [((MessageViewController*)cv).queryView reloadData];
+        } else if ([cv isKindOfClass:[UserChatController class]]) {
+            [((UserChatController*)cv).queryView reloadData];
+        }
+        
+    } else {
+        NSInteger unReadCount = [_mm unReadNotificationCount] + [_mm getAllUnreadMessageCount];
+        if (unReadCount != 0) {
+            ((UITabBarItem*)[self.tabBar.items objectAtIndex:3]).badgeValue = [NSString stringWithFormat:@"%ld", unReadCount];
+        } else {
+            ((UITabBarItem*)[self.tabBar.items objectAtIndex:3]).badgeValue = nil;
+        }
+    }
 }
 
-- (void)unReadMessageCountChanged:(id)sender {
-    int unReadCount = [_mm unReadNotificationCount];
-    if (unReadCount != 0) {
-        ((UITabBarItem*)[self.tabBar.items objectAtIndex:3]).badgeValue = [NSString stringWithFormat:@"%d", unReadCount];
-    } else {
-        ((UITabBarItem*)[self.tabBar.items objectAtIndex:3]).badgeValue = nil;
+// 获取当前处于activity状态的view controller
+- (UIViewController *)activityViewController {
+    UIViewController* activityViewController = nil;
+    
+    UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+    if(window.windowLevel != UIWindowLevelNormal)
+    {
+        NSArray *windows = [[UIApplication sharedApplication] windows];
+        for(UIWindow *tmpWin in windows)
+        {
+            if(tmpWin.windowLevel == UIWindowLevelNormal)
+            {
+                window = tmpWin;
+                break;
+            }
+        }
     }
+    
+    NSArray *viewsArray = [window subviews];
+    if([viewsArray count] > 0)
+    {
+        UIView *frontView = [viewsArray objectAtIndex:0];
+        
+        id nextResponder = [frontView nextResponder];
+        
+        if([nextResponder isKindOfClass:[UIViewController class]])
+        {
+            activityViewController = nextResponder;
+        }
+        else
+        {
+            activityViewController = window.rootViewController;
+        }
+    }
+    
+    return activityViewController;
 }
 @end

@@ -27,6 +27,7 @@
 
 #pragma mark -- p2p and user Group
 + (void)addMessageWith:(NSString*)owner_id message:(NSDictionary*)message inContext:(NSManagedObjectContext*)context;
++ (Targets*)addTargetWith:(NSString*)owner_id targetDic:(NSDictionary*)tar inContext:(NSManagedObjectContext*)context;
 + (NSArray*)enumAllTargetForOwner:(NSString*)owner_id inContext:(NSManagedObjectContext*)context;
 + (NSArray*)enumAllMessagesForTarget:(Targets*)target inContext:(NSManagedObjectContext*)context;
 @end
