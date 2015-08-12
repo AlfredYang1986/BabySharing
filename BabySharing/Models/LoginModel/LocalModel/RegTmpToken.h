@@ -1,9 +1,9 @@
 //
 //  RegTmpToken.h
-//  YYBabyAndMother
+//  
 //
-//  Created by Alfred Yang on 29/12/2014.
-//  Copyright (c) 2014 YY. All rights reserved.
+//  Created by Alfred Yang on 12/08/2015.
+//
 //
 
 #import <Foundation/Foundation.h>
@@ -12,7 +12,7 @@
 
 @interface RegTmpToken : NSManagedObject
 
-@property (nonatomic, retain) NSString * reg_token;
 @property (nonatomic, retain) NSString * phoneNo;
+@property (nonatomic, retain) NSString * reg_token;
 
 @end

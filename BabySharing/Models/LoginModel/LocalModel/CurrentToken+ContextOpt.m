@@ -8,6 +8,7 @@
 
 #import "CurrentToken+ContextOpt.h"
 #import "LoginToken+ContextOpt.h"
+#import "DetailInfo.h"
 
 @implementation CurrentToken (ContextOpt)
 
@@ -151,5 +152,11 @@
         NSLog(@"nothing need to be delected");
         return NO;
     }
+}
+
+#pragma mark -- local detail info
++ (BOOL)isCurrentHasDetailInfoInContext:(NSManagedObjectContext*)context {
+    LoginToken* current = [self enumCurrentLoginUserInContext:context].who;
+    return current.detailInfo != nil;
 }
 @end

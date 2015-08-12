@@ -33,6 +33,12 @@
 		EE5D68781B75A9FD0067A2DF /* Messages.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5D68771B75A9FD0067A2DF /* Messages.m */; };
 		EE5D687B1B75B12B0067A2DF /* NotificationOwner+ContextOpt.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5D687A1B75B12B0067A2DF /* NotificationOwner+ContextOpt.m */; };
 		EE664E9A1B73145000ACD57E /* QueryContent.m in Sources */ = {isa = PBXBuildFile; fileRef = EE664E991B73145000ACD57E /* QueryContent.m */; };
+		EE6D6DB31B7B28A6004D29C8 /* UIBarButtonItem+WEPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6D6DA91B7B28A6004D29C8 /* UIBarButtonItem+WEPopover.m */; };
+		EE6D6DB41B7B28A6004D29C8 /* WEBlockingGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6D6DAB1B7B28A6004D29C8 /* WEBlockingGestureRecognizer.m */; };
+		EE6D6DB51B7B28A6004D29C8 /* WEPopoverContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6D6DAD1B7B28A6004D29C8 /* WEPopoverContainerView.m */; };
+		EE6D6DB61B7B28A6004D29C8 /* WEPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6D6DAF1B7B28A6004D29C8 /* WEPopoverController.m */; };
+		EE6D6DB71B7B28A6004D29C8 /* WETouchableView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6D6DB21B7B28A6004D29C8 /* WETouchableView.m */; };
+		EE6D6DE21B7B404E004D29C8 /* CycleDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6D6DE11B7B404E004D29C8 /* CycleDetailController.m */; };
 		EE7415C81B5B7097002CA1BC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE7415C41B5B7097002CA1BC /* LaunchScreen.xib */; };
 		EE7415C91B5B7097002CA1BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE7415C61B5B7097002CA1BC /* Main.storyboard */; };
 		EE7415CC1B5B70D5002CA1BC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EE7415CE1B5B70D5002CA1BC /* InfoPlist.strings */; };
@@ -206,6 +212,10 @@
 		EEAACDAC1B44EEDD00D05C0B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEAACDA41B44EEB500D05C0B /* MobileCoreServices.framework */; };
 		EEAACDAD1B44EEDD00D05C0B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEAACDA21B44EEAA00D05C0B /* Security.framework */; };
 		EEAACDAE1B44EEDD00D05C0B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEAACDA01B44EE9D00D05C0B /* CFNetwork.framework */; };
+		EEB3DDD01B7B0505003750A2 /* DropDownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB3DDCF1B7B0505003750A2 /* DropDownMenu.m */; };
+		EEB8122C1B7AECF800BC0774 /* CycleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB8122B1B7AECF800BC0774 /* CycleViewController.m */; };
+		EEB812311B7AF2ED00BC0774 /* DetailInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB8122E1B7AF2ED00BC0774 /* DetailInfo.m */; };
+		EEB812321B7AF2ED00BC0774 /* UserKids.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB812301B7AF2ED00BC0774 /* UserKids.m */; };
 		EEE94E0A1B74A8C20011321A /* FriendsTableDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE94E041B74A8C20011321A /* FriendsTableDelegate.m */; };
 		EEE94E0B1B74A8C20011321A /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE94E061B74A8C20011321A /* MessageViewController.m */; };
 		EEE94E0C1B74A8C20011321A /* MesssageTableDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE94E081B74A8C20011321A /* MesssageTableDelegate.m */; };
@@ -222,6 +232,7 @@
 		EEE94E321B74BF870011321A /* ProfileOverView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEE94E301B74BF870011321A /* ProfileOverView.xib */; };
 		EEE94E341B74BFBD0011321A /* ProfileOthersOverView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEE94E331B74BFBD0011321A /* ProfileOthersOverView.xib */; };
 		EEE94E371B74C0810011321A /* ProfileOthersOverView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE94E361B74C0810011321A /* ProfileOthersOverView.m */; };
+		EEEEA0CB1B7B456C001D949D /* MyCycleCellHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = EEEEA0CA1B7B456C001D949D /* MyCycleCellHeader.m */; };
 		EEF538F51B525F7F009C8CB9 /* PostPreViewEffectController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEF538F41B525F7F009C8CB9 /* PostPreViewEffectController.m */; };
 		EEFA44FE1B58F7D4007DF294 /* NickNameInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEFA44FD1B58F7D4007DF294 /* NickNameInputView.m */; };
 		EEFD6F4F1B4E44C1008AC4F5 /* LoginInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEFD6F4E1B4E44C1008AC4F5 /* LoginInputView.m */; };
@@ -290,6 +301,19 @@
 		EE5D687A1B75B12B0067A2DF /* NotificationOwner+ContextOpt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NotificationOwner+ContextOpt.m"; sourceTree = "<group>"; };
 		EE664E981B73145000ACD57E /* QueryContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryContent.h; sourceTree = "<group>"; };
 		EE664E991B73145000ACD57E /* QueryContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryContent.m; sourceTree = "<group>"; };
+		EE6D6DA81B7B28A6004D29C8 /* UIBarButtonItem+WEPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+WEPopover.h"; sourceTree = "<group>"; };
+		EE6D6DA91B7B28A6004D29C8 /* UIBarButtonItem+WEPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+WEPopover.m"; sourceTree = "<group>"; };
+		EE6D6DAA1B7B28A6004D29C8 /* WEBlockingGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WEBlockingGestureRecognizer.h; sourceTree = "<group>"; };
+		EE6D6DAB1B7B28A6004D29C8 /* WEBlockingGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WEBlockingGestureRecognizer.m; sourceTree = "<group>"; };
+		EE6D6DAC1B7B28A6004D29C8 /* WEPopoverContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WEPopoverContainerView.h; sourceTree = "<group>"; };
+		EE6D6DAD1B7B28A6004D29C8 /* WEPopoverContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WEPopoverContainerView.m; sourceTree = "<group>"; };
+		EE6D6DAE1B7B28A6004D29C8 /* WEPopoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WEPopoverController.h; sourceTree = "<group>"; };
+		EE6D6DAF1B7B28A6004D29C8 /* WEPopoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WEPopoverController.m; sourceTree = "<group>"; };
+		EE6D6DB01B7B28A6004D29C8 /* WEPopoverParentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WEPopoverParentView.h; sourceTree = "<group>"; };
+		EE6D6DB11B7B28A6004D29C8 /* WETouchableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WETouchableView.h; sourceTree = "<group>"; };
+		EE6D6DB21B7B28A6004D29C8 /* WETouchableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WETouchableView.m; sourceTree = "<group>"; };
+		EE6D6DE01B7B404E004D29C8 /* CycleDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleDetailController.h; sourceTree = "<group>"; };
+		EE6D6DE11B7B404E004D29C8 /* CycleDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleDetailController.m; sourceTree = "<group>"; };
 		EE7415C51B5B7097002CA1BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		EE7415C71B5B7097002CA1BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EE7415CA1B5B70C7002CA1BC /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
@@ -689,6 +713,14 @@
 		EEAACDA61B44EEBF00D05C0B /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		EEAACDA81B44EEC700D05C0B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		EEAACDBA1B44FAA300D05C0B /* GPUImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GPUImage.framework; sourceTree = "<group>"; };
+		EEB3DDCE1B7B0505003750A2 /* DropDownMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropDownMenu.h; sourceTree = "<group>"; };
+		EEB3DDCF1B7B0505003750A2 /* DropDownMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropDownMenu.m; sourceTree = "<group>"; };
+		EEB8122A1B7AECF800BC0774 /* CycleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleViewController.h; sourceTree = "<group>"; };
+		EEB8122B1B7AECF800BC0774 /* CycleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleViewController.m; sourceTree = "<group>"; };
+		EEB8122D1B7AF2ED00BC0774 /* DetailInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailInfo.h; sourceTree = "<group>"; };
+		EEB8122E1B7AF2ED00BC0774 /* DetailInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailInfo.m; sourceTree = "<group>"; };
+		EEB8122F1B7AF2ED00BC0774 /* UserKids.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserKids.h; sourceTree = "<group>"; };
+		EEB812301B7AF2ED00BC0774 /* UserKids.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserKids.m; sourceTree = "<group>"; };
 		EEE94E031B74A8C20011321A /* FriendsTableDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsTableDelegate.h; sourceTree = "<group>"; };
 		EEE94E041B74A8C20011321A /* FriendsTableDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsTableDelegate.m; sourceTree = "<group>"; };
 		EEE94E051B74A8C20011321A /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
@@ -719,6 +751,8 @@
 		EEE94E351B74C0810011321A /* ProfileOthersOverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileOthersOverView.h; sourceTree = "<group>"; };
 		EEE94E361B74C0810011321A /* ProfileOthersOverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileOthersOverView.m; sourceTree = "<group>"; };
 		EEE94E381B74C3840011321A /* PersonalCenterProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonalCenterProtocol.h; sourceTree = "<group>"; };
+		EEEEA0C91B7B456C001D949D /* MyCycleCellHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCycleCellHeader.h; sourceTree = "<group>"; };
+		EEEEA0CA1B7B456C001D949D /* MyCycleCellHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCycleCellHeader.m; sourceTree = "<group>"; };
 		EEF538F31B525F7F009C8CB9 /* PostPreViewEffectController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostPreViewEffectController.h; sourceTree = "<group>"; };
 		EEF538F41B525F7F009C8CB9 /* PostPreViewEffectController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostPreViewEffectController.m; sourceTree = "<group>"; };
 		EEFA44FC1B58F7D4007DF294 /* NickNameInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NickNameInputView.h; sourceTree = "<group>"; };
@@ -875,6 +909,24 @@
 				EE817F4A1B79B1E600988734 /* ProfileViewDelegate.h */,
 			);
 			path = PersonalCenter;
+			sourceTree = "<group>";
+		};
+		EE6D6DA71B7B28A6004D29C8 /* Popover */ = {
+			isa = PBXGroup;
+			children = (
+				EE6D6DA81B7B28A6004D29C8 /* UIBarButtonItem+WEPopover.h */,
+				EE6D6DA91B7B28A6004D29C8 /* UIBarButtonItem+WEPopover.m */,
+				EE6D6DAA1B7B28A6004D29C8 /* WEBlockingGestureRecognizer.h */,
+				EE6D6DAB1B7B28A6004D29C8 /* WEBlockingGestureRecognizer.m */,
+				EE6D6DAC1B7B28A6004D29C8 /* WEPopoverContainerView.h */,
+				EE6D6DAD1B7B28A6004D29C8 /* WEPopoverContainerView.m */,
+				EE6D6DAE1B7B28A6004D29C8 /* WEPopoverController.h */,
+				EE6D6DAF1B7B28A6004D29C8 /* WEPopoverController.m */,
+				EE6D6DB01B7B28A6004D29C8 /* WEPopoverParentView.h */,
+				EE6D6DB11B7B28A6004D29C8 /* WETouchableView.h */,
+				EE6D6DB21B7B28A6004D29C8 /* WETouchableView.m */,
+			);
+			path = Popover;
 			sourceTree = "<group>";
 		};
 		EE76A5691B72019D00036747 /* ConnectionModel */ = {
@@ -1048,6 +1100,7 @@
 		EEAACAF71B44E90300D05C0B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				EEB812291B7AECD500BC0774 /* Cycle */,
 				EE817F461B79A76E00988734 /* Chat */,
 				EEAACAF81B44E90300D05C0B /* Ablum */,
 				EEAACAFC1B44E90300D05C0B /* Camera */,
@@ -1288,6 +1341,10 @@
 		EEAACB781B44E90300D05C0B /* LocalModel */ = {
 			isa = PBXGroup;
 			children = (
+				EEB8122D1B7AF2ED00BC0774 /* DetailInfo.h */,
+				EEB8122E1B7AF2ED00BC0774 /* DetailInfo.m */,
+				EEB8122F1B7AF2ED00BC0774 /* UserKids.h */,
+				EEB812301B7AF2ED00BC0774 /* UserKids.m */,
 				EE981F841B5A10400029723A /* LoginToken.h */,
 				EE981F851B5A10400029723A /* LoginToken.m */,
 				EEAACB791B44E90300D05C0B /* CurrentToken+ContextOpt.h */,
@@ -1405,6 +1462,7 @@
 		EEAACBBB1B44E90300D05C0B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				EEEEA0C41B7B4512001D949D /* Cycle */,
 				EEA991411B773F1B001F6CC6 /* BadgeView */,
 				EEFD6F4C1B4E4443008AC4F5 /* Landing */,
 				EE7EB54C1B46309D003281F7 /* Message */,
@@ -1708,10 +1766,13 @@
 		EEAACC3B1B44E90400D05C0B /* DropDownView */ = {
 			isa = PBXGroup;
 			children = (
+				EE6D6DA71B7B28A6004D29C8 /* Popover */,
 				EEAACC3C1B44E90400D05C0B /* DropDownItem.h */,
 				EEAACC3D1B44E90400D05C0B /* DropDownItem.m */,
 				EEAACC3E1B44E90400D05C0B /* DropDownView.h */,
 				EEAACC3F1B44E90400D05C0B /* DropDownView.m */,
+				EEB3DDCE1B7B0505003750A2 /* DropDownMenu.h */,
+				EEB3DDCF1B7B0505003750A2 /* DropDownMenu.m */,
 			);
 			name = DropDownView;
 			path = Views/DropDownView;
@@ -2027,6 +2088,17 @@
 			path = libGPUImage;
 			sourceTree = "<group>";
 		};
+		EEB812291B7AECD500BC0774 /* Cycle */ = {
+			isa = PBXGroup;
+			children = (
+				EEB8122A1B7AECF800BC0774 /* CycleViewController.h */,
+				EEB8122B1B7AECF800BC0774 /* CycleViewController.m */,
+				EE6D6DE01B7B404E004D29C8 /* CycleDetailController.h */,
+				EE6D6DE11B7B404E004D29C8 /* CycleDetailController.m */,
+			);
+			path = Cycle;
+			sourceTree = "<group>";
+		};
 		EEE94E001B74A8C20011321A /* MessageView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2110,6 +2182,23 @@
 				EEE94E301B74BF870011321A /* ProfileOverView.xib */,
 			);
 			path = OwnerOverView;
+			sourceTree = "<group>";
+		};
+		EEEEA0C41B7B4512001D949D /* Cycle */ = {
+			isa = PBXGroup;
+			children = (
+				EEEEA0C81B7B456C001D949D /* CycleView */,
+			);
+			path = Cycle;
+			sourceTree = "<group>";
+		};
+		EEEEA0C81B7B456C001D949D /* CycleView */ = {
+			isa = PBXGroup;
+			children = (
+				EEEEA0C91B7B456C001D949D /* MyCycleCellHeader.h */,
+				EEEEA0CA1B7B456C001D949D /* MyCycleCellHeader.m */,
+			);
+			path = CycleView;
 			sourceTree = "<group>";
 		};
 		EEF538F21B525EC3009C8CB9 /* PostPreViewV3 */ = {
@@ -2289,6 +2378,7 @@
 				EEAACD1B1B44E90400D05C0B /* ProfileDetailUserHeaderCell.m in Sources */,
 				EEAACCCB1B44E90400D05C0B /* INTUInterpolationFunctions.m in Sources */,
 				EEE94E0B1B74A8C20011321A /* MessageViewController.m in Sources */,
+				EEB3DDD01B7B0505003750A2 /* DropDownMenu.m in Sources */,
 				EEAACD171B44E90400D05C0B /* ProfileDetailSNCell.m in Sources */,
 				EE981F861B5A10400029723A /* LoginToken.m in Sources */,
 				EEAACC9A1B44E90400D05C0B /* AppDelegate.m in Sources */,
@@ -2303,14 +2393,17 @@
 				EEAACD131B44E90400D05C0B /* ProfileDetailLocationCell.m in Sources */,
 				EEAACCD51B44E90400D05C0B /* CurrentToken.m in Sources */,
 				EE5D68751B75A9FD0067A2DF /* Targets.m in Sources */,
+				EE6D6DB61B7B28A6004D29C8 /* WEPopoverController.m in Sources */,
 				EEAACCE81B44E90400D05C0B /* QueryTimeSpan.m in Sources */,
 				EEAACD151B44E90400D05C0B /* ProfileDetailPostCell.m in Sources */,
+				EE6D6DB51B7B28A6004D29C8 /* WEPopoverContainerView.m in Sources */,
 				EEAACCD41B44E90400D05C0B /* CurrentToken+ContextOpt.m in Sources */,
 				EE97441E1B78944600E81A70 /* MessageNotificationDetailCell.m in Sources */,
 				EEAACD271B44E90400D05C0B /* ChatViewCell.m in Sources */,
 				EEAACCDA1B44E90400D05C0B /* Providers.m in Sources */,
 				EEAACCFE1B44E90400D05C0B /* QueryCommentsCell.m in Sources */,
 				EEAACD4E1B44E90400D05C0B /* ProfileDetailTagsCell.m in Sources */,
+				EEB8122C1B7AECF800BC0774 /* CycleViewController.m in Sources */,
 				EEAACCD71B44E90400D05C0B /* LoginToken+ContextOpt.m in Sources */,
 				EEE94E251B74BE3B0011321A /* NewMessageSettingController.m in Sources */,
 				EEAACCBE1B44E90400D05C0B /* HomeViewController.m in Sources */,
@@ -2331,6 +2424,7 @@
 				EE76A57C1B72181300036747 /* ConnectionModel.m in Sources */,
 				EE7537761B6B1AC400EC1616 /* CommentsHeader.m in Sources */,
 				EE97440E1B78699A00E81A70 /* Reachability.m in Sources */,
+				EE6D6DE21B7B404E004D29C8 /* CycleDetailController.m in Sources */,
 				EEE94E371B74C0810011321A /* ProfileOthersOverView.m in Sources */,
 				EEAACD001B44E90400D05C0B /* QueryDetailImageCell.m in Sources */,
 				EE5D686C1B75A55A0067A2DF /* MessageAndNotificationModel.xcdatamodeld in Sources */,
@@ -2347,6 +2441,7 @@
 				EEA991481B775B4F001F6CC6 /* DDNNotificationViewController.m in Sources */,
 				EE98D14C1B69AF9B004D88DF /* QueryHeader.m in Sources */,
 				EEAACD1D1B44E90400D05C0B /* ProfileUserHeaderCell.m in Sources */,
+				EE6D6DB31B7B28A6004D29C8 /* UIBarButtonItem+WEPopover.m in Sources */,
 				EEAACD021B44E90400D05C0B /* QueryOwnerCell.m in Sources */,
 				EEAACCDD1B44E90400D05C0B /* LoginModel.m in Sources */,
 				EEA2017D1B744E59006B81E4 /* Friends.m in Sources */,
@@ -2354,6 +2449,7 @@
 				EEE94E2B1B74BE910011321A /* PersonalCentreOthersDelegate.m in Sources */,
 				EEAACD2D1B44E90400D05C0B /* DropDownItem.m in Sources */,
 				EEAACCF31B44E90400D05C0B /* ChatViewOtherCell.m in Sources */,
+				EE6D6DB71B7B28A6004D29C8 /* WETouchableView.m in Sources */,
 				EEAACCD91B44E90400D05C0B /* Providers+ContextOpt.m in Sources */,
 				EEAACD0F1B44E90400D05C0B /* PhotoTagTariangleLayer.m in Sources */,
 				EEAACCA81B44E90400D05C0B /* LoginViewController.m in Sources */,
@@ -2379,6 +2475,7 @@
 				EE86D1B21B537469001C4650 /* PostEffectAdapter.mm in Sources */,
 				EEE94E131B74AB6B0011321A /* AddressBookDelegate.m in Sources */,
 				EEAACCE01B44E90400D05C0B /* PostModel.m in Sources */,
+				EEEEA0CB1B7B456C001D949D /* MyCycleCellHeader.m in Sources */,
 				EEAACCE11B44E90400D05C0B /* QueryComments.m in Sources */,
 				EEA991441B773F1B001F6CC6 /* UIBadgeView.m in Sources */,
 				EEAACD571B44E90400D05C0B /* SGGridMenu.m in Sources */,
@@ -2400,13 +2497,16 @@
 				EE2D4B7E1B525E0A00B58A1F /* PhotoPreViewEffectController.m in Sources */,
 				EEAACD101B44E90400D05C0B /* PhotoTagView.m in Sources */,
 				EEAACCF01B44E90400D05C0B /* AlbumGridCell.m in Sources */,
+				EE6D6DB41B7B28A6004D29C8 /* WEBlockingGestureRecognizer.m in Sources */,
 				EEAACC9E1B44E90400D05C0B /* AlbumViewController.m in Sources */,
 				EE7EB5501B4630C0003281F7 /* MessageViewCell.m in Sources */,
 				EEAACCD61B44E90400D05C0B /* LoginLocalModel.xcdatamodeld in Sources */,
 				EEAACCE51B44E90400D05C0B /* QueryContentTag.m in Sources */,
 				EEAACCEE1B44E90400D05C0B /* SRWebSocket.m in Sources */,
 				EEA2017C1B744E59006B81E4 /* ConnectionOwner.m in Sources */,
+				EEB812321B7AF2ED00BC0774 /* UserKids.m in Sources */,
 				EEAACCA11B44E90400D05C0B /* CVMovieController.m in Sources */,
+				EEB812311B7AF2ED00BC0774 /* DetailInfo.m in Sources */,
 				EEAACCED1B44E90400D05C0B /* RemoteInstance.m in Sources */,
 				EEAACD3F1B44E90400D05C0B /* TagsRowCell.m in Sources */,
 				EEF538F51B525F7F009C8CB9 /* PostPreViewEffectController.m in Sources */,

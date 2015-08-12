@@ -5,6 +5,15 @@
         <attribute name="status" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="who" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LoginToken" inverseName="logined" inverseEntity="LoginToken" syncable="YES"/>
     </entity>
+    <entity name="DetailInfo" representedClassName="DetailInfo" syncable="YES">
+        <attribute name="age" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="dob" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="home" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="horoscope" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="school" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="kids" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="UserKids" inverseName="parent" inverseEntity="UserKids" syncable="YES"/>
+        <relationship name="who" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LoginToken" inverseName="detailInfo" inverseEntity="LoginToken" syncable="YES"/>
+    </entity>
     <entity name="LoginToken" representedClassName="LoginToken" syncable="YES">
         <attribute name="auth_token" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="phoneNo" optional="YES" attributeType="String" syncable="YES"/>
@@ -13,6 +22,7 @@
         <attribute name="screen_name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="user_id" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="connectWith" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Providers" inverseName="user" inverseEntity="Providers" syncable="YES"/>
+        <relationship name="detailInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DetailInfo" inverseName="who" inverseEntity="DetailInfo" syncable="YES"/>
         <relationship name="logined" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CurrentToken" inverseName="who" inverseEntity="CurrentToken" syncable="YES"/>
     </entity>
     <entity name="Providers" representedClassName="Providers" syncable="YES">
@@ -26,10 +36,20 @@
         <attribute name="phoneNo" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="reg_token" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="UserKids" representedClassName="UserKids" syncable="YES">
+        <attribute name="age" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="dob" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="gender" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="horoscope" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="school" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DetailInfo" inverseName="kids" inverseEntity="DetailInfo" syncable="YES"/>
+    </entity>
     <elements>
         <element name="CurrentToken" positionX="-470" positionY="-49" width="128" height="88"/>
-        <element name="LoginToken" positionX="-173" positionY="-324" width="128" height="163"/>
-        <element name="Providers" positionX="-423" positionY="-252" width="128" height="120"/>
-        <element name="RegTmpToken" positionX="-63" positionY="0" width="128" height="73"/>
+        <element name="LoginToken" positionX="-261" positionY="-522" width="128" height="178"/>
+        <element name="Providers" positionX="-486" positionY="-585" width="128" height="120"/>
+        <element name="RegTmpToken" positionX="-596" positionY="-306" width="128" height="73"/>
+        <element name="DetailInfo" positionX="34" positionY="-513" width="128" height="148"/>
+        <element name="UserKids" positionX="313" positionY="-513" width="128" height="133"/>
     </elements>
 </model>

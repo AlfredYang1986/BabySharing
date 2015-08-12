@@ -75,4 +75,8 @@ typedef NS_ENUM(NSInteger, LoginModelConnectSNResult) {
 
 #pragma mark -- query mutiple user simple profiles
 - (NSArray*)querMultipleProlfiles:(NSArray*)user_ids;
+
+#pragma mark -- current user detail info
+- (BOOL)isCurrentHasDetailInfoLocal;
+- (BOOL)isCurrentHasDetailInfo;
 @end

@@ -527,4 +527,14 @@
         
     }
 }
+
+#pragma mark -- current user detail info
+- (BOOL)isCurrentHasDetailInfoLocal {
+    return [CurrentToken isCurrentHasDetailInfoInContext:_doc.managedObjectContext];
+}
+
+- (BOOL)isCurrentHasDetailInfo {
+    // TODO: query server
+    return [CurrentToken isCurrentHasDetailInfoInContext:_doc.managedObjectContext];
+}
 @end

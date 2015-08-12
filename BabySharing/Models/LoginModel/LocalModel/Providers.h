@@ -1,9 +1,9 @@
 //
 //  Providers.h
-//  YYBabyAndMother
+//  
 //
-//  Created by Alfred Yang on 9/01/2015.
-//  Copyright (c) 2015 YY. All rights reserved.
+//  Created by Alfred Yang on 12/08/2015.
+//
 //
 
 #import <Foundation/Foundation.h>

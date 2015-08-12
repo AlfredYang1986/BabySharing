@@ -169,6 +169,8 @@
     NSLog(@"My token is: %@", _apns_token);
 
     [self registerDeviceTokenWithCurrentUser];
+    NSString* certName = @"DongDaDeveloper";
+    [GotyeOCAPI registerAPNS:_apns_token certName:certName];
 }
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error {

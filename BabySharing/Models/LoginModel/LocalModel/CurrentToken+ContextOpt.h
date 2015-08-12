@@ -23,4 +23,7 @@
 + (BOOL)offlineCurrentLoginUserInContext:(NSManagedObjectContext*)context;
 + (BOOL)onlineCurrentLoginUserInContext:(NSManagedObjectContext*)context;
 + (BOOL)isCurrentOfflineInContext:(NSManagedObjectContext*)context;
+
+#pragma mark -- local detail info
++ (BOOL)isCurrentHasDetailInfoInContext:(NSManagedObjectContext*)context;
 @end
