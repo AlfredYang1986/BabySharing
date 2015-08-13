@@ -184,7 +184,7 @@
 - (void)dropDownMenu:(DropDownMenu *)menu didSelectMuneItemAtIndex:(NSInteger)index {
    
     if (_descriptionView.hidden == NO && index == 0) {
-        
+        [self performSegueWithIdentifier:@"addCycle" sender:nil];
     }
     
     [popoverController dismissPopoverAnimated:YES];
@@ -193,7 +193,7 @@
 
 #pragma mark -- segue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@""]) {
+    if ([segue.identifier isEqualToString:@"addCycle"]) {
     }
 }
 @end

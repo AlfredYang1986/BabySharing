@@ -1096,7 +1096,7 @@
                     <connections>
                         <outlet property="cycleTableView" destination="hsJ-IJ-ldk" id="kW7-zf-DRE"/>
                         <outlet property="descriptionView" destination="AOq-mE-hmC" id="2Jp-eg-Ykc"/>
-                        <segue destination="1Vy-iU-gPJ" kind="push" id="c9C-Bt-6q9"/>
+                        <segue destination="1Vy-iU-gPJ" kind="push" identifier="addCycle" id="c9C-Bt-6q9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nVW-Kp-aRz" userLabel="First Responder" sceneMemberID="firstResponder"/>
