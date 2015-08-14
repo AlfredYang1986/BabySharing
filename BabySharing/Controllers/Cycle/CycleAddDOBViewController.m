@@ -18,13 +18,21 @@
 @implementation CycleAddDOBViewController {
     NSArray* titles_cn;
     NSArray* titles;
+   
+    NSArray* str_horoscrope;
+    
+    UISwitch* sw;
 }
 
 @synthesize queryView = _queryView;
 @synthesize datePicker = _datePicker;
 
 @synthesize delegate = _delegate;
-@synthesize dic_description = _dic_description;
+//@synthesize dic_description = _dic_description;
+
+@synthesize dob = _dob;
+@synthesize age = _age;
+@synthesize horoscrope = _horoscrope;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -37,10 +45,17 @@
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(doneBtnSelected)];
     
-    _datePicker.hidden = YES;
+//    _datePicker.hidden = YES;
+    _datePicker.datePickerMode = UIDatePickerModeDate;
     
     titles_cn = @[@"年龄", @"星座", @"允许使用星座作为推荐条件"];
     titles = @[@"age", @"horoscrope", @""];
+    
+    str_horoscrope = @[@"Aries", @"Taurus", @"Gemini", @"Cancer", @"Leo", @"Virgo", @"Libra", @"Scorpio", @"Sagittarius", @"Capricorn", @"Aquarius", @"Pisces"];
+    
+    [_datePicker addTarget:self action:@selector(dateValueChanged) forControlEvents:UIControlEventValueChanged];
+    
+    sw = [[UISwitch alloc]init];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -49,7 +64,35 @@
 }
 
 - (void)doneBtnSelected {
+    [_delegate didChangeDOB:_datePicker.date andAge:_age andHoroscrope:_horoscrope];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)dateValueChanged {
+    // dob
+    NSDate* pick = _datePicker.date;
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSInteger unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay;
+    NSDateComponents *comps = [calendar components:unitFlags fromDate:pick];
     
+    // now
+    NSDate* now = [NSDate date];
+    NSDateComponents *comps_2 = [calendar components:unitFlags fromDate:now];
+
+    int tmp_age = [comps_2 year] - [comps year];
+    int tmp_horoscrope = [self horoscropeWithMonth:[comps month] andDay:[comps day]];
+    
+    if (tmp_age != _age || tmp_horoscrope != _horoscrope) {
+        [_queryView reloadData];
+    }
+    _age = tmp_age;
+    _horoscrope = tmp_horoscrope;
+}
+
+- (Horoscrope)horoscropeWithMonth:(NSInteger)month andDay:(NSInteger)day {
+    month = month < 3 ? 12 + month : month;
+    int rel = day >= 20 ?  month - 3 : month - 4;
+    return rel == -1 ? rel == 11 : rel;
 }
 
 /*
@@ -109,7 +152,15 @@
     }
     
     cell.titleLabel.text = [titles_cn objectAtIndex:indexPath.section * 2 + indexPath.row];
-    cell.descriptionLabel.text = [_dic_description objectForKeyedSubscript:[titles objectAtIndex:indexPath.section * 2 + indexPath.row]];
+    if (indexPath.section == 0 && indexPath.row == 0 && _age >= 0) {
+        cell.descriptionLabel.text = [NSString stringWithFormat:@"%d", _age];
+    } else if (indexPath.section == 0 && indexPath.row == 1 && (int)_horoscrope >= 0) {
+        cell.descriptionLabel.text = [str_horoscrope objectAtIndex:_horoscrope];
+    } else if (indexPath.section == 1) {
+        [sw removeFromSuperview];
+        [cell addSubview:sw];
+        sw.center = CGPointMake(cell.center.x + cell.frame.size.width / 2 - sw.frame.size.width / 2 - 20, cell.center.y);
+    }
     
     return cell;
 }

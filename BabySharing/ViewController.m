@@ -221,6 +221,7 @@ enum DisplaySide {
         else [self queryDataIsReady:nil];
 
         [delegate registerDeviceTokenWithCurrentUser];
+        [_lm onlineCurrentUser];
 //        [GotyeOCAPI login:_lm.current_user_id password:nil];
     }
 }

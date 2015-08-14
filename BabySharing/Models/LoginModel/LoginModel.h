@@ -82,6 +82,7 @@ typedef void(^descriptionFinishBlock)(BOOL, NSDictionary*);
 - (BOOL)isCurrentHasDetailInfoLocal;
 - (BOOL)isCurrentHasDetailInfo;
 
+- (void)updateDetailInfoWithData:(NSDictionary*)dic_attr;
 - (void)updateDetailInfoLocalWithData:(NSDictionary*)dic;
 
 - (void)currentDeltailInfoAsyncWithFinishBlock:(descriptionFinishBlock)block;

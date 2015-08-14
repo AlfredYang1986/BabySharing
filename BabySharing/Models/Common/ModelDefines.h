@@ -72,7 +72,7 @@ typedef NS_ENUM(NSInteger, UserPostOwnerConnections) {
 #define PROFILE_QUERY_MULTIPLE              @"multipleUserProfile"
 
 #define PROFILE_QUERY_DETAIL_DESCRIPTION    [PROFILE_HOST_DOMAIN stringByAppendingString:@"queryDetailDescription"]
-#define PROFILE_QUERY_UPDATE_DESCRIPTION    [PROFILE_HOST_DOMAIN stringByAppendingString:@"createAndUpdateDettailDescription"]
+#define PROFILE_QUERY_UPDATE_DESCRIPTION    [PROFILE_HOST_DOMAIN stringByAppendingString:@"createAndUpdataDetailDescription"]
 
 //#define PROFILE_HOST_DOMAIN_SENDBOX         [HOST_DOMAIN_SENDBOX stringByAppendingString:@"profile/"]
 

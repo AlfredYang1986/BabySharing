@@ -12,7 +12,9 @@
 #import "LoginModel.h"
 #import "SearchUserTagsController.h"
 
-@interface CycleAddDescriptionViewController () <UITableViewDataSource, UITableViewDelegate, SearchUserTagControllerDelegate>
+#import "CycleAddDOBViewController.h"
+
+@interface CycleAddDescriptionViewController () <UITableViewDataSource, UITableViewDelegate, SearchUserTagControllerDelegate, addDOBProtocol>
 @property (weak, nonatomic) IBOutlet UILabel *roleTagLabel;
 @property (weak, nonatomic) IBOutlet UIView *tagRowView;
 @property (weak, nonatomic) IBOutlet UITableView *descriptionDetailTableView;
@@ -22,7 +24,8 @@
 @implementation CycleAddDescriptionViewController {
     NSArray* titles;
     NSArray* titles_cn;
-    
+ 
+    NSMutableDictionary* dic_changed;
 }
 
 @synthesize roleTagLabel = _roleTagLabel;
@@ -50,8 +53,18 @@
 }
 
 - (void)saveDescriptionBtnSelected {
-    if (_isEditable) {
+    if (_isEditable && dic_changed) {
+        NSEnumerator* enumerator = dic_changed.keyEnumerator;
+        id iter = nil;
+        
+        while ((iter = [enumerator nextObject]) != nil) {
+            [_dic_description setObject:[dic_changed objectForKey:iter] forKey:iter];
+        }
+
+        [_lm updateDetailInfoWithData:_dic_description];
     }
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)changeRoleTagBtnSelected {
@@ -67,11 +80,42 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"addDOB"]) {
+  
+        int age = -1;
+        if (_dic_description && [_dic_description.allKeys containsObject:@"age"]) {
+            age = ((NSNumber*)[_dic_description objectForKey:@"age"]).intValue;
+        }
+        
+        int horoscrope = -1;
+        if (_dic_description && [_dic_description.allKeys containsObject:@"horoscrope"]) {
+            horoscrope = ((NSNumber*)[_dic_description objectForKey:@"horoscrope"]).intValue;
+        }
+       
+        NSDate* date = nil;
+        if (_dic_description && [_dic_description.allKeys containsObject:@"dob"]) {
+            date = [NSDate dateWithTimeIntervalSince1970:((NSNumber*)[_dic_description objectForKey:@"dob"]).longLongValue];
+        }
+        
+        ((CycleAddDOBViewController*)segue.destinationViewController).age = age;
+        ((CycleAddDOBViewController*)segue.destinationViewController).horoscrope = horoscrope;
+        ((CycleAddDOBViewController*)segue.destinationViewController).dob = date;
+        ((CycleAddDOBViewController*)segue.destinationViewController).delegate = self;
     }
 }
 
 - (void)detailInfoSynced:(BOOL)success {
     _isEditable = YES;
+}
+
+#pragma mark -- cycle add dob
+- (void)didChangeDOB:(NSDate*)dob andAge:(NSInteger)age andHoroscrope:(Horoscrope)horoscrope {
+    if (dic_changed == nil) {
+        dic_changed = [[NSMutableDictionary alloc]init];
+    }
+    
+    [dic_changed setObject:[NSNumber numberWithLongLong:[NSNumber numberWithDouble:dob.timeIntervalSince1970 * 1000].longLongValue] forKey:@"dob"];
+    [dic_changed setObject:[NSNumber numberWithInteger:age] forKey:@"age"];
+    [dic_changed setObject:[NSNumber numberWithInteger:horoscrope] forKey:@"horoscrope"];
 }
 
 #pragma mark -- table view delegate

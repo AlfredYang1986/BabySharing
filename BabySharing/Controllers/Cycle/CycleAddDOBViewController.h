@@ -23,6 +23,8 @@ typedef NS_ENUM(NSUInteger, Horoscrope) {
     Pisces
 };
 
+
+
 @protocol addDOBProtocol <NSObject>
 - (void)didChangeDOB:(NSDate*)dob andAge:(NSInteger)age andHoroscrope:(Horoscrope)horoscrope;
 @end
@@ -30,5 +32,9 @@ typedef NS_ENUM(NSUInteger, Horoscrope) {
 @interface CycleAddDOBViewController : UIViewController
 
 @property (nonatomic, weak) id<addDOBProtocol> delegate;
-@property (nonatomic, weak) NSMutableDictionary* dic_description;
+//@property (nonatomic, weak) NSMutableDictionary* dic_description;
+
+@property (nonatomic) NSInteger age;
+@property (nonatomic) Horoscrope horoscrope;
+@property (nonatomic, weak) NSDate* dob;
 @end
