@@ -19,13 +19,6 @@
 @property (strong, nonatomic) NSString *wbtoken;
 @property (strong, nonatomic) NSString *wbCurrentUserID;
 
-
-
-/**
- * for reachability
- */
-@property (strong, nonatomic) Reachability* reachability;
-
 @end
 
 @implementation AppDelegate

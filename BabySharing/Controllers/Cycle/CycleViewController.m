@@ -12,21 +12,35 @@
 #import "WEPopoverController.h"
 #import "MyCycleCellHeader.h"
 
+#import "AppDelegate.h"
+#import "CycleAddDescriptionViewController.h"
+
+#import "Reachability.h"
+
 @interface CycleViewController () <UITableViewDataSource, UITableViewDelegate, DropDownMenuProcotol, WEPopoverControllerDelegate, UIPopoverControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *descriptionView;
 @property (weak, nonatomic) IBOutlet UITableView *cycleTableView;
 
 @property (weak, nonatomic) LoginModel* lm;
+@property (weak, nonatomic) Reachability* ry;
+
+@property (weak, nonatomic) id<CycleSyncDataProtocol> notifyObject;
 @end
 
 @implementation CycleViewController {
 	WEPopoverController *popoverController;
+    
+    NSMutableDictionary* dic_description;
+    BOOL isSync;
 }
 
 @synthesize descriptionView = _descriptionView;
 @synthesize cycleTableView = _cycleTableView;
 
 @synthesize lm = _lm;
+@synthesize ry = _ry;
+
+@synthesize notifyObject = _notifyObject;
 
 - (void)viewDidLoad {
     _cycleTableView.dataSource = self;
@@ -72,6 +86,62 @@
     self.preferredContentSize = CGSizeMake(100, 100);
     
     [_cycleTableView registerClass:[MyCycleCellHeader class] forHeaderFooterViewReuseIdentifier:@"my cycle header"];
+    
+    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    _lm = app.lm;
+    _ry = app.reachability;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reachabilityChanged:)
+                                                 name:kReachabilityChangedNotification
+                                               object:nil];
+ 
+    isSync = NO;
+    dic_description = [[_lm currentDeltailInfoLocal] mutableCopy];
+    [self viewDidLayoutSubviews];
+   
+    if (_ry.isReachable) {
+        [self resetDataForViews];
+    }
+}
+
+- (void)reachabilityChanged:(Reachability*)sender {
+    
+    if (self.tabBarController.selectedIndex != 1) return;
+    
+    if ([sender isReachable]) {
+        [self resetDataForViews];
+
+    } else if (![sender isReachable]) {
+        isSync = NO;
+        [_notifyObject detailInfoSynced:isSync];
+    }
+}
+
+- (void)resetDataForViews {
+    [_lm currentDeltailInfoAsyncWithFinishBlock:^(BOOL success, NSDictionary * dic) {
+        if (success) {
+            dic_description = [dic mutableCopy];
+            [_lm updateDetailInfoLocalWithData:dic];
+            if (dic_description.count > 1) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self resetViews];
+                });
+            }
+            isSync = YES;
+            [_notifyObject detailInfoSynced:isSync];
+        }
+    }];
+}
+
+- (void)resetViews {
+    if (dic_description && dic_description.count > 1) {
+        _cycleTableView.hidden = NO;
+        _descriptionView.hidden = YES;
+    } else {
+        _cycleTableView.hidden = YES;
+        _descriptionView.hidden = NO;
+    }
 }
 
 - (void)viewDidLayoutSubviews {
@@ -82,11 +152,12 @@
     _descriptionView.frame = rc;
     _cycleTableView.frame = rc;
     
-    if (![self hasViewDescription]) {
-        _cycleTableView.hidden = YES;
-
-    } else {
+    if (dic_description && dic_description.count > 1) {
+        _cycleTableView.hidden = NO;
         _descriptionView.hidden = YES;
+    } else {
+        _cycleTableView.hidden = YES;
+        _descriptionView.hidden = NO;
     }
 }
 
@@ -164,6 +235,7 @@
         CGFloat width = [UIScreen mainScreen].bounds.size.width;
         DropDownMenu* menu = [[DropDownMenu alloc]init];
         [menu setMenuText:arr];
+        menu.dropdownDelegate = self;
         
         popoverController = [[WEPopoverController alloc] initWithContentViewController:menu];
         popoverController.delegate = self;
@@ -185,6 +257,8 @@
    
     if (_descriptionView.hidden == NO && index == 0) {
         [self performSegueWithIdentifier:@"addCycle" sender:nil];
+    } else if (_descriptionView.hidden == NO && index == 1) {
+        [self performSegueWithIdentifier:@"addDescription" sender:nil];
     }
     
     [popoverController dismissPopoverAnimated:YES];
@@ -194,6 +268,11 @@
 #pragma mark -- segue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"addCycle"]) {
+    } else if ([segue.identifier isEqualToString:@"addDescription"]) {
+        ((CycleAddDescriptionViewController*)segue.destinationViewController).lm = self.lm;
+        ((CycleAddDescriptionViewController*)segue.destinationViewController).dic_description = dic_description;
+        ((CycleAddDescriptionViewController*)segue.destinationViewController).isEditable = isSync;
+        _notifyObject = (CycleAddDescriptionViewController*)segue.destinationViewController;
     }
 }
 @end

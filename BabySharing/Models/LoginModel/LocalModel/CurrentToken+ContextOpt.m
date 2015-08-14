@@ -9,6 +9,7 @@
 #import "CurrentToken+ContextOpt.h"
 #import "LoginToken+ContextOpt.h"
 #import "DetailInfo.h"
+#import "UserKids.h"
 
 @implementation CurrentToken (ContextOpt)
 
@@ -158,5 +159,104 @@
 + (BOOL)isCurrentHasDetailInfoInContext:(NSManagedObjectContext*)context {
     LoginToken* current = [self enumCurrentLoginUserInContext:context].who;
     return current.detailInfo != nil;
+}
+
++ (NSDictionary*)currentDetailInfoInContext:(NSManagedObjectContext*)context {
+    LoginToken* current = [self enumCurrentLoginUserInContext:context].who;
+    NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
+    if (current.detailInfo != nil) {
+        [dic setObject:current.detailInfo.age forKey:@"age"];
+        [dic setObject:current.role_tag forKey:@"role_tag"];
+        [dic setObject:[NSNumber numberWithLongLong:[NSNumber numberWithDouble:current.detailInfo.dob.timeIntervalSince1970 * 1000].longLongValue] forKey:@"dob"];
+        [dic setObject:current.detailInfo.horoscope forKey:@"horoscope"];
+        [dic setObject:current.detailInfo.school forKey:@"school"];
+        [dic setObject:0 forKey:@"gender"];
+       
+        NSMutableArray* arr = [[NSMutableArray alloc]initWithCapacity:current.detailInfo.kids.count];
+        for (UserKids* uk in current.detailInfo.kids.allObjects) {
+            NSMutableDictionary* kid_dic = [[NSMutableDictionary alloc]init];
+            [kid_dic setObject:[NSNumber numberWithLongLong:[NSNumber numberWithDouble:uk.dob.timeIntervalSince1970 * 1000].longLongValue] forKey:@"dob"];
+            [kid_dic setObject:uk.school forKey:@"school"];
+            [kid_dic setObject:uk.horoscope forKey:@"horoscope"];
+            [kid_dic setObject:uk.gender forKey:@"gender"];
+            
+            [arr addObject:[kid_dic copy]];
+        }
+        [dic setObject:arr forKey:@"kids"];
+    }
+    return [dic copy];
+}
+
++ (void)clearAllKidsWithDetailInfo:(DetailInfo*)di inContext:(NSManagedObjectContext*)context {
+    while (di.kids.count != 0) {
+        UserKids* tmp = di.kids.anyObject;
+        tmp.parent = nil;
+        [di removeKidsObject:tmp];
+        [context deleteObject:tmp];
+    }
+}
+
++ (UserKids*)updateCurrentDetailKidsWithAttr:(NSDictionary*)dic forDeatailInfo:(DetailInfo*)info inContext:(NSManagedObjectContext*)context {
+    
+    UserKids* tmp = [NSEntityDescription insertNewObjectForEntityForName:@"UserKids" inManagedObjectContext:context];
+    NSEnumerator* enumerator = dic.keyEnumerator;
+    id iter = nil;
+    
+    while ((iter = [enumerator nextObject]) != nil) {
+        if ([iter isEqualToString:@"age"]) {
+            tmp.age = [dic objectForKey:iter];
+        } else if ([iter isEqualToString:@"dob"]) {
+            tmp.dob = [NSDate dateWithTimeIntervalSince1970:((NSNumber*)[dic objectForKey:iter]).longLongValue / 1000.0];
+        } else if ([iter isEqualToString:@"gender"]) {
+            tmp.gender = [dic objectForKey:iter];
+        } else if ([iter isEqualToString:@"school"]) {
+            tmp.school = [dic objectForKey:iter];
+        } else {
+            // user id, do nothing
+        }
+    }
+    
+    tmp.parent = info;
+    [info addKidsObject:tmp];
+    
+    return tmp;
+}
+
++ (void)updateCurrentDetailInfoWithAttr:(NSDictionary*)dic InContext:(NSManagedObjectContext*)context {
+    LoginToken* current = [self enumCurrentLoginUserInContext:context].who;
+    DetailInfo* tmp = current.detailInfo;
+    
+    if (tmp == nil) {
+        tmp = [NSEntityDescription insertNewObjectForEntityForName:@"DetailInfo" inManagedObjectContext:context];
+        tmp.who = current;
+        current.detailInfo = tmp;
+    }
+    
+    NSEnumerator* enumerator = dic.keyEnumerator;
+    id iter = nil;
+    
+    while ((iter = [enumerator nextObject]) != nil) {
+        if ([iter isEqualToString:@"age"]) {
+            tmp.age = [dic objectForKey:iter];
+        } else if ([iter isEqualToString:@"role_tag"]) {
+            current.role_tag = [dic objectForKey:iter];
+        } else if ([iter isEqualToString:@"dob"]) {
+            tmp.dob = [NSDate dateWithTimeIntervalSince1970:((NSNumber*)[dic objectForKey:iter]).longLongValue / 1000.0];
+        } else if ([iter isEqualToString:@"gender"]) {
+//            tmp.gender = [dic objectForKey:iter];
+        } else if ([iter isEqualToString:@"school"]) {
+            tmp.school = [dic objectForKey:iter];
+        } else if ([iter isEqualToString:@"kids"]) {
+  
+            [self clearAllKidsWithDetailInfo:tmp inContext:context];
+            NSArray* kids = [dic objectForKey:@"kids"];
+            for (NSDictionary* iter in kids) {
+                [self updateCurrentDetailKidsWithAttr:iter forDeatailInfo:tmp inContext:context];
+            }
+            
+        } else {
+            // user id, do nothing
+        }
+    }
 }
 @end

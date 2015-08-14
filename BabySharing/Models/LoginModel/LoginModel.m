@@ -537,4 +537,40 @@
     // TODO: query server
     return [CurrentToken isCurrentHasDetailInfoInContext:_doc.managedObjectContext];
 }
+
+- (void)currentDeltailInfoAsyncWithFinishBlock:(descriptionFinishBlock)block {
+    
+    dispatch_queue_t aq = dispatch_queue_create("detail description", nil);
+
+    dispatch_async(aq, ^{
+        NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
+        
+        [dic setObject:_current_user.who.user_id forKey:@"user_id"];
+        [dic setObject:_current_user.who.auth_token forKey:@"auth_token"];
+        
+        NSError * error = nil;
+        NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
+        
+        NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:PROFILE_QUERY_DETAIL_DESCRIPTION]];
+        
+        if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
+            
+            block(YES, [result objectForKey:@"result"]);
+        } else {
+//            NSDictionary* reError = [result objectForKey:@"error"];
+//            NSString* msg = [reError objectForKey:@"message"];
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:msg delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+//            [alert show];
+            block(NO, [result objectForKey:@"error"]);
+        }
+    });
+}
+
+- (NSDictionary*)currentDeltailInfoLocal {
+    return [CurrentToken currentDetailInfoInContext:_doc.managedObjectContext];
+}
+
+- (void)updateDetailInfoLocalWithData:(NSDictionary*)dic {
+    return [CurrentToken updateCurrentDetailInfoWithAttr:dic InContext:_doc.managedObjectContext];
+}
 @end

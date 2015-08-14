@@ -20,6 +20,8 @@
 
 #import "GotyeOCAPI.h"  // for IM
 
+@class Reachability;
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate, WeiboSDKDelegate, WXApiDelegate> {
     enum WXScene _scene;
 }
@@ -41,6 +43,11 @@
  * for notification 
  */
 @property (strong, nonatomic) NSString *apns_token;
+
+/**
+ * for reachability
+ */
+@property (strong, nonatomic) Reachability* reachability;
 
 - (void)createQueryModel;
 - (void)createMessageAndNotificationModel;

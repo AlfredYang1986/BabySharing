@@ -107,6 +107,12 @@
 		EE9676321B7C30C200445254 /* SGGridMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9675E11B7C30C200445254 /* SGGridMenu.m */; };
 		EE9676331B7C30C200445254 /* SGSheetMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9675E31B7C30C200445254 /* SGSheetMenu.m */; };
 		EE9676341B7C30C200445254 /* TagQueryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9675E61B7C30C200445254 /* TagQueryCell.m */; };
+		EE9676371B7C38E300445254 /* CycleAddDescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9676361B7C38E300445254 /* CycleAddDescriptionViewController.m */; };
+		EE96763F1B7C3D5C00445254 /* CycleDescriptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE96763E1B7C3D5C00445254 /* CycleDescriptionCell.m */; };
+		EE9676411B7C3D7700445254 /* CycleDescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE9676401B7C3D7700445254 /* CycleDescriptionCell.xib */; };
+		EE9676441B7C494000445254 /* CycleAddDOBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9676431B7C494000445254 /* CycleAddDOBViewController.m */; };
+		EE9676471B7C53F500445254 /* CycleAddKidsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9676461B7C53F500445254 /* CycleAddKidsViewController.m */; };
+		EE96764A1B7C5CD600445254 /* CycleAddSchoolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9676491B7C5CD600445254 /* CycleAddSchoolViewController.m */; };
 		EE97440E1B78699A00E81A70 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = EE97440D1B78699A00E81A70 /* Reachability.m */; };
 		EE9744171B78886300E81A70 /* MessageNotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9744151B78886300E81A70 /* MessageNotificationCell.m */; };
 		EE97441F1B78944600E81A70 /* MessageNotificationDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE97441D1B78944600E81A70 /* MessageNotificationDetailCell.xib */; };
@@ -331,6 +337,7 @@
 		EE7416291B5B9659002CA1BC /* AreaTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AreaTableCell.xib; sourceTree = "<group>"; };
 		EE74162C1B5BA6F7002CA1BC /* UserPrivacyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserPrivacyController.h; sourceTree = "<group>"; };
 		EE74162D1B5BA6F7002CA1BC /* UserPrivacyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserPrivacyController.m; sourceTree = "<group>"; };
+		EE750EFE1B7DB8EA002F2FBD /* CycleSyncDataProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CycleSyncDataProtocol.h; sourceTree = "<group>"; };
 		EE7537741B6B1AC400EC1616 /* CommentsHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentsHeader.h; sourceTree = "<group>"; };
 		EE7537751B6B1AC400EC1616 /* CommentsHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentsHeader.m; sourceTree = "<group>"; };
 		EE76A56C1B72021900036747 /* ConnectionLocalModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ConnectionLocalModel.xcdatamodel; sourceTree = "<group>"; };
@@ -487,6 +494,17 @@
 		EE9675E31B7C30C200445254 /* SGSheetMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGSheetMenu.m; sourceTree = "<group>"; };
 		EE9675E51B7C30C200445254 /* TagQueryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagQueryCell.h; sourceTree = "<group>"; };
 		EE9675E61B7C30C200445254 /* TagQueryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagQueryCell.m; sourceTree = "<group>"; };
+		EE9676351B7C38E300445254 /* CycleAddDescriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleAddDescriptionViewController.h; sourceTree = "<group>"; };
+		EE9676361B7C38E300445254 /* CycleAddDescriptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleAddDescriptionViewController.m; sourceTree = "<group>"; };
+		EE96763D1B7C3D5C00445254 /* CycleDescriptionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleDescriptionCell.h; sourceTree = "<group>"; };
+		EE96763E1B7C3D5C00445254 /* CycleDescriptionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleDescriptionCell.m; sourceTree = "<group>"; };
+		EE9676401B7C3D7700445254 /* CycleDescriptionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CycleDescriptionCell.xib; sourceTree = "<group>"; };
+		EE9676421B7C494000445254 /* CycleAddDOBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleAddDOBViewController.h; sourceTree = "<group>"; };
+		EE9676431B7C494000445254 /* CycleAddDOBViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleAddDOBViewController.m; sourceTree = "<group>"; };
+		EE9676451B7C53F500445254 /* CycleAddKidsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleAddKidsViewController.h; sourceTree = "<group>"; };
+		EE9676461B7C53F500445254 /* CycleAddKidsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleAddKidsViewController.m; sourceTree = "<group>"; };
+		EE9676481B7C5CD600445254 /* CycleAddSchoolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleAddSchoolViewController.h; sourceTree = "<group>"; };
+		EE9676491B7C5CD600445254 /* CycleAddSchoolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleAddSchoolViewController.m; sourceTree = "<group>"; };
 		EE97440C1B78699A00E81A70 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		EE97440D1B78699A00E81A70 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		EE9744141B78886300E81A70 /* MessageNotificationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageNotificationCell.h; sourceTree = "<group>"; };
@@ -1416,6 +1434,16 @@
 			path = TagsQuery;
 			sourceTree = "<group>";
 		};
+		EE96763C1B7C3D3400445254 /* CycleDescription */ = {
+			isa = PBXGroup;
+			children = (
+				EE96763D1B7C3D5C00445254 /* CycleDescriptionCell.h */,
+				EE96763E1B7C3D5C00445254 /* CycleDescriptionCell.m */,
+				EE9676401B7C3D7700445254 /* CycleDescriptionCell.xib */,
+			);
+			path = CycleDescription;
+			sourceTree = "<group>";
+		};
 		EE97440B1B78699A00E81A70 /* Reachability */ = {
 			isa = PBXGroup;
 			children = (
@@ -2269,6 +2297,15 @@
 				EEB8122B1B7AECF800BC0774 /* CycleViewController.m */,
 				EE6D6DE01B7B404E004D29C8 /* CycleDetailController.h */,
 				EE6D6DE11B7B404E004D29C8 /* CycleDetailController.m */,
+				EE9676351B7C38E300445254 /* CycleAddDescriptionViewController.h */,
+				EE9676361B7C38E300445254 /* CycleAddDescriptionViewController.m */,
+				EE9676421B7C494000445254 /* CycleAddDOBViewController.h */,
+				EE9676431B7C494000445254 /* CycleAddDOBViewController.m */,
+				EE9676451B7C53F500445254 /* CycleAddKidsViewController.h */,
+				EE9676461B7C53F500445254 /* CycleAddKidsViewController.m */,
+				EE9676481B7C5CD600445254 /* CycleAddSchoolViewController.h */,
+				EE9676491B7C5CD600445254 /* CycleAddSchoolViewController.m */,
+				EE750EFE1B7DB8EA002F2FBD /* CycleSyncDataProtocol.h */,
 			);
 			path = Cycle;
 			sourceTree = "<group>";
@@ -2361,6 +2398,7 @@
 		EEEEA0C41B7B4512001D949D /* Cycle */ = {
 			isa = PBXGroup;
 			children = (
+				EE96763C1B7C3D3400445254 /* CycleDescription */,
 				EEEEA0C81B7B456C001D949D /* CycleView */,
 			);
 			path = Cycle;
@@ -2514,6 +2552,7 @@
 				EE2D4B791B525E0A00B58A1F /* PostPreView.storyboard in Resources */,
 				EE9676031B7C30C200445254 /* QueryOwnerCell.xib in Resources */,
 				EEAACCB41B44E90400D05C0B /* SecretNib.storyboard in Resources */,
+				EE9676411B7C3D7700445254 /* CycleDescriptionCell.xib in Resources */,
 				EE9676261B7C30C200445254 /* ProfileDetailPostCell.xib in Resources */,
 				EE9675FE1B7C30C200445254 /* QueryCommentsCell.xib in Resources */,
 				EE9675EC1B7C30C200445254 /* ChatViewOtherCell.xib in Resources */,
@@ -2573,6 +2612,7 @@
 				EE96762D1B7C30C200445254 /* ProfileUserHeaderCell.m in Sources */,
 				EE9676321B7C30C200445254 /* SGGridMenu.m in Sources */,
 				EEAACCD51B44E90400D05C0B /* CurrentToken.m in Sources */,
+				EE9676371B7C38E300445254 /* CycleAddDescriptionViewController.m in Sources */,
 				EE5D68751B75A9FD0067A2DF /* Targets.m in Sources */,
 				EE6D6DB61B7B28A6004D29C8 /* WEPopoverController.m in Sources */,
 				EEAACCE81B44E90400D05C0B /* QueryTimeSpan.m in Sources */,
@@ -2583,6 +2623,7 @@
 				EEAACCDA1B44E90400D05C0B /* Providers.m in Sources */,
 				EEB8122C1B7AECF800BC0774 /* CycleViewController.m in Sources */,
 				EE9676041B7C30C200445254 /* QueryDescriptionCell.m in Sources */,
+				EE9676441B7C494000445254 /* CycleAddDOBViewController.m in Sources */,
 				EEAACCD71B44E90400D05C0B /* LoginToken+ContextOpt.m in Sources */,
 				EEE94E251B74BE3B0011321A /* NewMessageSettingController.m in Sources */,
 				EEAACCBE1B44E90400D05C0B /* HomeViewController.m in Sources */,
@@ -2607,6 +2648,7 @@
 				EE9676161B7C30C200445254 /* MessageViewCell.m in Sources */,
 				EE7537761B6B1AC400EC1616 /* CommentsHeader.m in Sources */,
 				EE97440E1B78699A00E81A70 /* Reachability.m in Sources */,
+				EE96763F1B7C3D5C00445254 /* CycleDescriptionCell.m in Sources */,
 				EE6D6DE21B7B404E004D29C8 /* CycleDetailController.m in Sources */,
 				EEE94E371B74C0810011321A /* ProfileOthersOverView.m in Sources */,
 				EEAACD001B44E90400D05C0B /* QueryDetailImageCell.m in Sources */,
@@ -2621,6 +2663,7 @@
 				EE9675F81B7C30C200445254 /* WETouchableView.m in Sources */,
 				EEE94E261B74BE3B0011321A /* PersonalSettingController.mm in Sources */,
 				EEAACCA41B44E90400D05C0B /* CVViewController2.m in Sources */,
+				EE9676471B7C53F500445254 /* CycleAddKidsViewController.m in Sources */,
 				EE9675F51B7C30C200445254 /* WEBlockingGestureRecognizer.m in Sources */,
 				EEA991481B775B4F001F6CC6 /* DDNNotificationViewController.m in Sources */,
 				EEAACD021B44E90400D05C0B /* QueryOwnerCell.m in Sources */,
@@ -2632,6 +2675,7 @@
 				EEE94E2B1B74BE910011321A /* PersonalCentreOthersDelegate.m in Sources */,
 				EE9675E91B7C30C200445254 /* UIBadgeView.m in Sources */,
 				EEAACCD91B44E90400D05C0B /* Providers+ContextOpt.m in Sources */,
+				EE96764A1B7C5CD600445254 /* CycleAddSchoolViewController.m in Sources */,
 				EEAACCA81B44E90400D05C0B /* LoginViewController.m in Sources */,
 				EE9676111B7C30C200445254 /* SloganView.m in Sources */,
 				EEAAC8FE1B44E81A00D05C0B /* main.m in Sources */,

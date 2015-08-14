@@ -22,6 +22,8 @@ typedef NS_ENUM(NSInteger, LoginModelConnectSNResult) {
     LoginModelConnectSNResultError,
 };
 
+typedef void(^descriptionFinishBlock)(BOOL, NSDictionary*);
+
 @interface LoginModel : NSObject {
     NSArray* authorised_users;
 }
@@ -79,4 +81,9 @@ typedef NS_ENUM(NSInteger, LoginModelConnectSNResult) {
 #pragma mark -- current user detail info
 - (BOOL)isCurrentHasDetailInfoLocal;
 - (BOOL)isCurrentHasDetailInfo;
+
+- (void)updateDetailInfoLocalWithData:(NSDictionary*)dic;
+
+- (void)currentDeltailInfoAsyncWithFinishBlock:(descriptionFinishBlock)block;
+- (NSDictionary*)currentDeltailInfoLocal;
 @end

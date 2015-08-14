@@ -26,4 +26,6 @@
 
 #pragma mark -- local detail info
 + (BOOL)isCurrentHasDetailInfoInContext:(NSManagedObjectContext*)context;
++ (NSDictionary*)currentDetailInfoInContext:(NSManagedObjectContext*)context;
++ (void)updateCurrentDetailInfoWithAttr:(NSDictionary*)dic InContext:(NSManagedObjectContext*)context;
 @end
