@@ -229,6 +229,10 @@
 		EEB8122C1B7AECF800BC0774 /* CycleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB8122B1B7AECF800BC0774 /* CycleViewController.m */; };
 		EEB812311B7AF2ED00BC0774 /* DetailInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB8122E1B7AF2ED00BC0774 /* DetailInfo.m */; };
 		EEB812321B7AF2ED00BC0774 /* UserKids.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB812301B7AF2ED00BC0774 /* UserKids.m */; };
+		EED64D451B8184AE008CB134 /* CycleAddKidsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EED64D441B8184AE008CB134 /* CycleAddKidsCell.m */; };
+		EED64D471B8184C1008CB134 /* CycleAddKidsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EED64D461B8184C1008CB134 /* CycleAddKidsCell.xib */; };
+		EED64D4A1B818995008CB134 /* CycleAddKidsFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = EED64D491B818995008CB134 /* CycleAddKidsFooter.m */; };
+		EED64D4C1B8189C6008CB134 /* CycleAddKidsFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = EED64D4B1B8189C6008CB134 /* CycleAddKidsFooter.xib */; };
 		EEE94E0A1B74A8C20011321A /* FriendsTableDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE94E041B74A8C20011321A /* FriendsTableDelegate.m */; };
 		EEE94E0B1B74A8C20011321A /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE94E061B74A8C20011321A /* MessageViewController.m */; };
 		EEE94E0C1B74A8C20011321A /* MesssageTableDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE94E081B74A8C20011321A /* MesssageTableDelegate.m */; };
@@ -787,6 +791,13 @@
 		EEB8122E1B7AF2ED00BC0774 /* DetailInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailInfo.m; sourceTree = "<group>"; };
 		EEB8122F1B7AF2ED00BC0774 /* UserKids.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserKids.h; sourceTree = "<group>"; };
 		EEB812301B7AF2ED00BC0774 /* UserKids.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserKids.m; sourceTree = "<group>"; };
+		EED64D431B8184AE008CB134 /* CycleAddKidsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleAddKidsCell.h; sourceTree = "<group>"; };
+		EED64D441B8184AE008CB134 /* CycleAddKidsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleAddKidsCell.m; sourceTree = "<group>"; };
+		EED64D461B8184C1008CB134 /* CycleAddKidsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CycleAddKidsCell.xib; sourceTree = "<group>"; };
+		EED64D481B818995008CB134 /* CycleAddKidsFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleAddKidsFooter.h; sourceTree = "<group>"; };
+		EED64D491B818995008CB134 /* CycleAddKidsFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleAddKidsFooter.m; sourceTree = "<group>"; };
+		EED64D4B1B8189C6008CB134 /* CycleAddKidsFooter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CycleAddKidsFooter.xib; sourceTree = "<group>"; };
+		EED64D4D1B819544008CB134 /* CycleDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CycleDefines.h; sourceTree = "<group>"; };
 		EEE94E031B74A8C20011321A /* FriendsTableDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsTableDelegate.h; sourceTree = "<group>"; };
 		EEE94E041B74A8C20011321A /* FriendsTableDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsTableDelegate.m; sourceTree = "<group>"; };
 		EEE94E051B74A8C20011321A /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
@@ -2306,8 +2317,22 @@
 				EE9676481B7C5CD600445254 /* CycleAddSchoolViewController.h */,
 				EE9676491B7C5CD600445254 /* CycleAddSchoolViewController.m */,
 				EE750EFE1B7DB8EA002F2FBD /* CycleSyncDataProtocol.h */,
+				EED64D4D1B819544008CB134 /* CycleDefines.h */,
 			);
 			path = Cycle;
+			sourceTree = "<group>";
+		};
+		EED64D421B81844A008CB134 /* CycleKids */ = {
+			isa = PBXGroup;
+			children = (
+				EED64D431B8184AE008CB134 /* CycleAddKidsCell.h */,
+				EED64D441B8184AE008CB134 /* CycleAddKidsCell.m */,
+				EED64D461B8184C1008CB134 /* CycleAddKidsCell.xib */,
+				EED64D481B818995008CB134 /* CycleAddKidsFooter.h */,
+				EED64D491B818995008CB134 /* CycleAddKidsFooter.m */,
+				EED64D4B1B8189C6008CB134 /* CycleAddKidsFooter.xib */,
+			);
+			path = CycleKids;
 			sourceTree = "<group>";
 		};
 		EEE94E001B74A8C20011321A /* MessageView */ = {
@@ -2398,6 +2423,7 @@
 		EEEEA0C41B7B4512001D949D /* Cycle */ = {
 			isa = PBXGroup;
 			children = (
+				EED64D421B81844A008CB134 /* CycleKids */,
 				EE96763C1B7C3D3400445254 /* CycleDescription */,
 				EEEEA0C81B7B456C001D949D /* CycleView */,
 			);
@@ -2530,6 +2556,7 @@
 				EE7415C81B5B7097002CA1BC /* LaunchScreen.xib in Resources */,
 				EE96761E1B7C30C200445254 /* ProfileOthersOverView.xib in Resources */,
 				EEE94E191B74BDDD0011321A /* ProfileDetailNib.storyboard in Resources */,
+				EED64D4C1B8189C6008CB134 /* CycleAddKidsFooter.xib in Resources */,
 				EE7415D71B5B7740002CA1BC /* icon.png in Resources */,
 				EEAACD5B1B44E91A00D05C0B /* YYBoundle.bundle in Resources */,
 				EEAACD2B1B44E90400D05C0B /* ChatViewOwnerCell.xib in Resources */,
@@ -2547,6 +2574,7 @@
 				EEAACD071B44E90400D05C0B /* FoundPCGCell.xib in Resources */,
 				EE7415D21B5B7215002CA1BC /* Localizable.strings in Resources */,
 				EE9675FA1B7C30C200445254 /* CommentsHeaderAndFooterCell.xib in Resources */,
+				EED64D471B8184C1008CB134 /* CycleAddKidsCell.xib in Resources */,
 				EE9676071B7C30C200445254 /* FoundPCGCell.xib in Resources */,
 				EE74162B1B5B9659002CA1BC /* AreaTableCell.xib in Resources */,
 				EE2D4B791B525E0A00B58A1F /* PostPreView.storyboard in Resources */,
@@ -2665,6 +2693,7 @@
 				EEAACCA41B44E90400D05C0B /* CVViewController2.m in Sources */,
 				EE9676471B7C53F500445254 /* CycleAddKidsViewController.m in Sources */,
 				EE9675F51B7C30C200445254 /* WEBlockingGestureRecognizer.m in Sources */,
+				EED64D451B8184AE008CB134 /* CycleAddKidsCell.m in Sources */,
 				EEA991481B775B4F001F6CC6 /* DDNNotificationViewController.m in Sources */,
 				EEAACD021B44E90400D05C0B /* QueryOwnerCell.m in Sources */,
 				EEAACCDD1B44E90400D05C0B /* LoginModel.m in Sources */,
@@ -2709,6 +2738,7 @@
 				EE20BED41B6F430D00DE8455 /* OwnerQueryModel.m in Sources */,
 				EEAACCE41B44E90400D05C0B /* QueryContentItem.m in Sources */,
 				EE9676291B7C30C200445254 /* ProfileDetailTagsCell.m in Sources */,
+				EED64D4A1B818995008CB134 /* CycleAddKidsFooter.m in Sources */,
 				EEAACCDF1B44E90400D05C0B /* MessageModel.m in Sources */,
 				EEAACCE91B44E90400D05C0B /* QueryModel.m in Sources */,
 				EE76A5741B72056800036747 /* Following.m in Sources */,

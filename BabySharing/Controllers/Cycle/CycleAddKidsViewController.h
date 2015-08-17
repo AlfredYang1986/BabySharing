@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#include "CycleDefines.h"
+
+@protocol addKidsProtocol <NSObject>
+- (void)changeKidsInfo:(NSArray*)kids;
+@end
 
 @interface CycleAddKidsViewController : UIViewController
 
+@property (weak, nonatomic) id<addKidsProtocol> delegate;
+@property (strong, nonatomic) NSMutableArray* kids;
 @end

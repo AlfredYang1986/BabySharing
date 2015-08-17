@@ -1536,19 +1536,58 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="xnw-KL-LTv">
-                                <rect key="frame" x="0.0" y="-8" width="600" height="608"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="371"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="350" id="sXW-ye-jKv"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="dataSource" destination="aON-5l-rbo" id="TZg-R7-NfZ"/>
+                                    <outlet property="delegate" destination="aON-5l-rbo" id="pmt-Ve-Y3o"/>
+                                </connections>
                             </tableView>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="zHm-2r-gZr">
+                                <rect key="frame" x="0.0" y="420" width="600" height="180"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="180" id="DYm-Kd-1M3"/>
+                                </constraints>
+                                <date key="date" timeIntervalSinceReferenceDate="461471835.17474198">
+                                    <!--2015-08-17 02:37:15 +0000-->
+                                </date>
+                            </datePicker>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="xnw-KL-LTv" firstAttribute="top" secondItem="KIW-ld-vIX" secondAttribute="topMargin" id="76G-Rq-UxV"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="xnw-KL-LTv" secondAttribute="trailing" constant="-16" id="Jvf-4R-c4h"/>
                             <constraint firstItem="xnw-KL-LTv" firstAttribute="leading" secondItem="KIW-ld-vIX" secondAttribute="leadingMargin" constant="-16" id="KJn-uF-1yH"/>
                             <constraint firstAttribute="trailingMargin" secondItem="xnw-KL-LTv" secondAttribute="trailing" constant="-16" id="OI2-c2-Rda"/>
                             <constraint firstItem="xnw-KL-LTv" firstAttribute="bottom" secondItem="KIW-ld-vIX" secondAttribute="bottomMargin" id="Rap-si-ioI"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="zHm-2r-gZr" secondAttribute="trailing" constant="-16" id="Xge-XF-i72"/>
+                            <constraint firstItem="xnw-KL-LTv" firstAttribute="top" secondItem="Ys4-QK-bmE" secondAttribute="bottom" constant="-64" id="hDc-QX-ZiO"/>
+                            <constraint firstItem="MSm-t9-DzS" firstAttribute="top" secondItem="xnw-KL-LTv" secondAttribute="bottom" constant="180" id="oVc-Iq-QTP"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="zHm-2r-gZr" secondAttribute="bottom" id="pzP-qB-dAE"/>
+                            <constraint firstItem="xnw-KL-LTv" firstAttribute="top" secondItem="Ys4-QK-bmE" secondAttribute="bottom" id="wJd-F0-UYS"/>
+                            <constraint firstItem="xnw-KL-LTv" firstAttribute="leading" secondItem="KIW-ld-vIX" secondAttribute="leadingMargin" constant="-16" id="x93-qW-563"/>
+                            <constraint firstItem="zHm-2r-gZr" firstAttribute="leading" secondItem="KIW-ld-vIX" secondAttribute="leadingMargin" constant="-16" id="yfh-mz-u1k"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="76G-Rq-UxV"/>
+                                <exclude reference="KJn-uF-1yH"/>
+                                <exclude reference="OI2-c2-Rda"/>
+                                <exclude reference="Rap-si-ioI"/>
+                                <exclude reference="wJd-F0-UYS"/>
+                                <exclude reference="oVc-Iq-QTP"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="孩子" id="5TY-Mp-58J"/>
+                    <connections>
+                        <outlet property="datePicker" destination="zHm-2r-gZr" id="nmS-ny-Dqs"/>
+                        <outlet property="queryView" destination="xnw-KL-LTv" id="nXO-Ua-UuO"/>
+                        <segue destination="Bbw-MK-wnd" kind="push" identifier="addKidsSchool" id="2RH-j5-6Bc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="08a-fY-i9A" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1805,7 +1844,8 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="qbd-0n-vJA"/>
-        <segue reference="4Ao-yR-LGJ"/>
         <segue reference="Xl7-6t-OQ8"/>
+        <segue reference="2RH-j5-6Bc"/>
+        <segue reference="4Ao-yR-LGJ"/>
     </inferredMetricsTieBreakers>
 </document>

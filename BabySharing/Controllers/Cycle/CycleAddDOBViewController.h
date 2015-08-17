@@ -7,23 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-typedef NS_ENUM(NSUInteger, Horoscrope) {
-    Aries,
-    Taurus,
-    Gemini,
-    Cancer,
-    Leo,
-    Virgo,
-    Libra,
-    Scorpio,
-    Sagittarius,
-    Capricorn,
-    Aquarius,
-    Pisces
-};
-
-
+#include "CycleDefines.h"
 
 @protocol addDOBProtocol <NSObject>
 - (void)didChangeDOB:(NSDate*)dob andAge:(NSInteger)age andHoroscrope:(Horoscrope)horoscrope;
@@ -36,5 +20,5 @@ typedef NS_ENUM(NSUInteger, Horoscrope) {
 
 @property (nonatomic) NSInteger age;
 @property (nonatomic) Horoscrope horoscrope;
-@property (nonatomic, weak) NSDate* dob;
+@property (nonatomic, strong) NSDate* dob;
 @end

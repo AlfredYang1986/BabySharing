@@ -13,8 +13,9 @@
 #import "SearchUserTagsController.h"
 
 #import "CycleAddDOBViewController.h"
+#import "CycleAddKidsViewController.h"
 
-@interface CycleAddDescriptionViewController () <UITableViewDataSource, UITableViewDelegate, SearchUserTagControllerDelegate, addDOBProtocol>
+@interface CycleAddDescriptionViewController () <UITableViewDataSource, UITableViewDelegate, SearchUserTagControllerDelegate, addDOBProtocol, addKidsProtocol>
 @property (weak, nonatomic) IBOutlet UILabel *roleTagLabel;
 @property (weak, nonatomic) IBOutlet UIView *tagRowView;
 @property (weak, nonatomic) IBOutlet UITableView *descriptionDetailTableView;
@@ -50,6 +51,8 @@
     titles_cn = @[@"年龄", @"孩子", @"家乡", @"学校"];
 
     _roleTagLabel.text = [_dic_description objectForKey:@"role_tag"];
+    
+    dic_changed = [_dic_description mutableCopy];
 }
 
 - (void)saveDescriptionBtnSelected {
@@ -93,13 +96,18 @@
        
         NSDate* date = nil;
         if (_dic_description && [_dic_description.allKeys containsObject:@"dob"]) {
-            date = [NSDate dateWithTimeIntervalSince1970:((NSNumber*)[_dic_description objectForKey:@"dob"]).longLongValue];
+            date = [NSDate dateWithTimeIntervalSince1970:((NSNumber*)[_dic_description objectForKey:@"dob"]).longLongValue / 1000];
         }
         
         ((CycleAddDOBViewController*)segue.destinationViewController).age = age;
         ((CycleAddDOBViewController*)segue.destinationViewController).horoscrope = horoscrope;
         ((CycleAddDOBViewController*)segue.destinationViewController).dob = date;
         ((CycleAddDOBViewController*)segue.destinationViewController).delegate = self;
+    
+    } else if ([segue.identifier isEqualToString:@"addKids"]) {
+        
+        ((CycleAddKidsViewController*)segue.destinationViewController).kids = [[_dic_description objectForKey:@"kids"] mutableCopy];
+        ((CycleAddKidsViewController*)segue.destinationViewController).delegate = self;
     }
 }
 
@@ -116,6 +124,20 @@
     [dic_changed setObject:[NSNumber numberWithLongLong:[NSNumber numberWithDouble:dob.timeIntervalSince1970 * 1000].longLongValue] forKey:@"dob"];
     [dic_changed setObject:[NSNumber numberWithInteger:age] forKey:@"age"];
     [dic_changed setObject:[NSNumber numberWithInteger:horoscrope] forKey:@"horoscrope"];
+    
+    [_descriptionDetailTableView reloadData];
+}
+
+#pragma mark -- cycle add kids
+- (void)changeKidsInfo:(NSArray*)kids {
+    if (dic_changed == nil) {
+        dic_changed = [[NSMutableDictionary alloc]init];
+    }
+   
+    if (kids != nil) {
+        [dic_changed setObject:kids forKey:@"kids"];
+        [_descriptionDetailTableView reloadData];
+    }
 }
 
 #pragma mark -- table view delegate
@@ -126,7 +148,16 @@
         UIAlertView* view = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"can edit because sync is not ready" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
         [view show];
     } else {
-        [self performSegueWithIdentifier:@"addDOB" sender:nil];
+        switch (indexPath.row) {
+            case 0:
+                [self performSegueWithIdentifier:@"addDOB" sender:nil];
+                break;
+            case 1:
+                [self performSegueWithIdentifier:@"addKids" sender:nil];
+                break;
+            default:
+                break;
+        }
     }
 }
 
@@ -147,7 +178,17 @@
     }
     
     cell.titleLabel.text = [titles_cn objectAtIndex:indexPath.row];
-    cell.descriptionLabel.text = [_dic_description objectForKey:[titles objectAtIndex:indexPath.row]];
+  
+    NSString* title = [titles objectAtIndex:indexPath.row];
+    NSObject* tmp = [dic_changed objectForKey:title];
+    if ([tmp isKindOfClass:[NSString class]]) {
+        cell.descriptionLabel.text = (NSString*)tmp;
+    } else if ([tmp isKindOfClass:[NSNumber class]]) {
+        cell.descriptionLabel.text = [NSString stringWithFormat:@"%ld", ((NSNumber*)tmp).longValue];
+    } else if ([tmp isKindOfClass:[NSArray class]]){
+        cell.descriptionLabel.text = [NSString stringWithFormat:@"%d个孩子", ((NSArray*)tmp).count];
+    }
+    
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     return cell;

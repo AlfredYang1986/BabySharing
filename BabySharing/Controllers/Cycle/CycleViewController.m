@@ -135,13 +135,13 @@
 }
 
 - (void)resetViews {
-    if (dic_description && dic_description.count > 1) {
-        _cycleTableView.hidden = NO;
-        _descriptionView.hidden = YES;
-    } else {
+//    if (dic_description && dic_description.count > 1) {
+//        _cycleTableView.hidden = NO;
+//        _descriptionView.hidden = YES;
+//    } else {
         _cycleTableView.hidden = YES;
         _descriptionView.hidden = NO;
-    }
+//    }
 }
 
 - (void)viewDidLayoutSubviews {
@@ -152,13 +152,7 @@
     _descriptionView.frame = rc;
     _cycleTableView.frame = rc;
     
-    if (dic_description && dic_description.count > 1) {
-        _cycleTableView.hidden = NO;
-        _descriptionView.hidden = YES;
-    } else {
-        _cycleTableView.hidden = YES;
-        _descriptionView.hidden = NO;
-    }
+    [self resetViews];
 }
 
 - (BOOL)hasViewDescription {
@@ -229,7 +223,7 @@
         if (_descriptionView.hidden == NO) {
             arr = @[@"创建圈子", @"编辑描述", @"取消"];
         } else {
-            arr = @[@"更多推荐", @"关闭圈子推荐", @"取消"];
+            arr = @[@"编辑描述", @"更多推荐", @"关闭圈子推荐", @"取消"];
         }
         
         CGFloat width = [UIScreen mainScreen].bounds.size.width;
@@ -257,6 +251,8 @@
    
     if (_descriptionView.hidden == NO && index == 0) {
         [self performSegueWithIdentifier:@"addCycle" sender:nil];
+    } else if (_descriptionView.hidden == YES && index == 0) {
+        [self performSegueWithIdentifier:@"addDescription" sender:nil];
     } else if (_descriptionView.hidden == NO && index == 1) {
         [self performSegueWithIdentifier:@"addDescription" sender:nil];
     }
@@ -267,6 +263,9 @@
 
 #pragma mark -- segue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    ((UIViewController*)segue.destinationViewController).hidesBottomBarWhenPushed = YES;
+    
     if ([segue.identifier isEqualToString:@"addCycle"]) {
     } else if ([segue.identifier isEqualToString:@"addDescription"]) {
         ((CycleAddDescriptionViewController*)segue.destinationViewController).lm = self.lm;

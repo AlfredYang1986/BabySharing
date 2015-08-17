@@ -165,20 +165,20 @@
     LoginToken* current = [self enumCurrentLoginUserInContext:context].who;
     NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
     if (current.detailInfo != nil) {
-        [dic setObject:current.detailInfo.age forKey:@"age"];
-        [dic setObject:current.role_tag forKey:@"role_tag"];
-        [dic setObject:[NSNumber numberWithLongLong:[NSNumber numberWithDouble:current.detailInfo.dob.timeIntervalSince1970 * 1000].longLongValue] forKey:@"dob"];
-        [dic setObject:current.detailInfo.horoscope forKey:@"horoscope"];
-        [dic setObject:current.detailInfo.school forKey:@"school"];
-        [dic setObject:0 forKey:@"gender"];
+        if (current.detailInfo.age) [dic setObject:current.detailInfo.age forKey:@"age"];
+        if (current.role_tag) [dic setObject:current.role_tag forKey:@"role_tag"];
+        if (current.detailInfo.dob) [dic setObject:[NSNumber numberWithLongLong:[NSNumber numberWithDouble:current.detailInfo.dob.timeIntervalSince1970 * 1000].longLongValue] forKey:@"dob"];
+        if (current.detailInfo.horoscope) [dic setObject:current.detailInfo.horoscope forKey:@"horoscope"];
+        if (current.detailInfo.school) [dic setObject:current.detailInfo.school forKey:@"school"];
+        [dic setObject:[NSNumber numberWithInt:0] forKey:@"gender"];
        
         NSMutableArray* arr = [[NSMutableArray alloc]initWithCapacity:current.detailInfo.kids.count];
         for (UserKids* uk in current.detailInfo.kids.allObjects) {
             NSMutableDictionary* kid_dic = [[NSMutableDictionary alloc]init];
-            [kid_dic setObject:[NSNumber numberWithLongLong:[NSNumber numberWithDouble:uk.dob.timeIntervalSince1970 * 1000].longLongValue] forKey:@"dob"];
-            [kid_dic setObject:uk.school forKey:@"school"];
-            [kid_dic setObject:uk.horoscope forKey:@"horoscope"];
-            [kid_dic setObject:uk.gender forKey:@"gender"];
+            if (uk.dob) [kid_dic setObject:[NSNumber numberWithLongLong:[NSNumber numberWithDouble:uk.dob.timeIntervalSince1970 * 1000].longLongValue] forKey:@"dob"];
+            if (uk.school) [kid_dic setObject:uk.school forKey:@"school"];
+            if (uk.horoscope) [kid_dic setObject:uk.horoscope forKey:@"horoscope"];
+            if (uk.gender) [kid_dic setObject:uk.gender forKey:@"gender"];
             
             [arr addObject:[kid_dic copy]];
         }

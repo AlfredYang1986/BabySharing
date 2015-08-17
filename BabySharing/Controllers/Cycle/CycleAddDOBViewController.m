@@ -54,6 +54,7 @@
     str_horoscrope = @[@"Aries", @"Taurus", @"Gemini", @"Cancer", @"Leo", @"Virgo", @"Libra", @"Scorpio", @"Sagittarius", @"Capricorn", @"Aquarius", @"Pisces"];
     
     [_datePicker addTarget:self action:@selector(dateValueChanged) forControlEvents:UIControlEventValueChanged];
+    if (_dob) _datePicker.date = _dob;
     
     sw = [[UISwitch alloc]init];
 }
