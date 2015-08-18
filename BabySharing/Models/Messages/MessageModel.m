@@ -215,7 +215,30 @@
     return [NotificationOwner enumAllTargetForOwner:_delegate.lm.current_user_id andType:MessageReceiverTypeChatGroup inContext:_doc.managedObjectContext];
 }
 
-- (NSArray*)enumMyChatGroup {
-    return nil;
+- (void)enumMyChatGroupWithFinishBlock:(chatGroupOptFinishBlock)block {
+
+    AppDelegate* delegate = (AppDelegate*)([UIApplication sharedApplication].delegate);
+    NSString* auth_token = delegate.lm.current_auth_token;
+    NSString* user_id = delegate.lm.current_user_id;
+    
+    NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
+    [dic setValue:auth_token forKey:@"auth_token"];
+    [dic setValue:user_id forKey:@"user_id"];
+    
+    NSError * error = nil;
+    NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
+    
+    NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:CHAT_GROUP_QUERY]];
+    
+    if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
+  
+        NSArray* reVal = [result objectForKey:@"result"];
+        [NotificationOwner updateMultipleChatGroupWithOwnerID:_delegate.lm.current_user_id chatGroups:reVal inContext:_doc.managedObjectContext];
+        block(YES, reVal);
+    } else {
+
+        NSDictionary* error = [result objectForKey:@"error"];
+        block(NO, error);
+    }
 }
 @end

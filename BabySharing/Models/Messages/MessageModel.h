@@ -18,7 +18,7 @@
 @class GotyeOCChatTarget;
 
 typedef void(^receiveNotification)(void);
-typedef void(^chatGroupOptFinishBlock)(BOOL success, NSDictionary* result);
+typedef void(^chatGroupOptFinishBlock)(BOOL success, id result);
 
 @interface MessageModel : NSObject
 
@@ -67,5 +67,5 @@ typedef void(^chatGroupOptFinishBlock)(BOOL success, NSDictionary* result);
 - (void)addChatGroupWithGroupAttr:(NSDictionary*)attr;
 - (NSInteger)myChatGroupCount;
 - (NSArray*)enumMyChatGroupLocal;
-- (NSArray*)enumMyChatGroup;
+- (void)enumMyChatGroupWithFinishBlock:(chatGroupOptFinishBlock)block;
 @end

@@ -135,6 +135,11 @@
         if (success) {
             dic_description = [dic mutableCopy];
             [_lm updateDetailInfoLocalWithData:dic];
+            [_mm enumMyChatGroupWithFinishBlock:^(BOOL success, NSArray* result) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [_cycleTableView reloadData];
+                });
+            }];
             if (dic_description.count > 1) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self resetViews];

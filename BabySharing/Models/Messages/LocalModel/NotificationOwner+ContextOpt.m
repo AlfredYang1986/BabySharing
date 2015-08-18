@@ -197,4 +197,24 @@
 + (NSInteger)chatGroupCountWithOwnerID:(NSString*)owner_id inContext:(NSManagedObjectContext*)context {
     return [self enumAllTargetForOwner:owner_id andType:MessageReceiverTypeChatGroup inContext:context].count;
 }
+
++ (NSArray*)updateMultipleChatGroupWithOwnerID:(NSString*)owner_id chatGroups:(NSArray*)tar inContext:(NSManagedObjectContext*)context {
+    NotificationOwner* owner = [self enumNotificationOwnerWithID:owner_id inContext:context];
+
+    NSMutableArray* tmp = [[self enumAllTargetForOwner:owner_id andType:MessageReceiverTypeChatGroup inContext:context] mutableCopy];
+    
+    while (tmp.count != 0) {
+        Targets* iter = [tmp firstObject];
+        [owner removeChatWithObject:iter];
+        [context deleteObject:iter];
+        [tmp removeObject:iter];
+    }
+
+    NSMutableArray* reVal = [[NSMutableArray alloc]init];
+    for (NSDictionary* dic in tar) {
+        [reVal addObject:[self addChatGroupWithOwnerID:owner_id chatGroup:dic inContext:context]];
+    }
+   
+    return reVal;
+}
 @end
