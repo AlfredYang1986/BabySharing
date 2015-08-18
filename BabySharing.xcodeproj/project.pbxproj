@@ -51,6 +51,8 @@
 		EE76A5791B7205CF00036747 /* ConnectionOwner+ContextOpt.m in Sources */ = {isa = PBXBuildFile; fileRef = EE76A5781B7205CF00036747 /* ConnectionOwner+ContextOpt.m */; };
 		EE76A57C1B72181300036747 /* ConnectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EE76A57B1B72181300036747 /* ConnectionModel.m */; };
 		EE7951971B45065200CC28A2 /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EE7951961B45065200CC28A2 /* libGPUImage.a */; };
+		EE7C68711B82D2D20003C593 /* CycleOverCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7C68701B82D2D20003C593 /* CycleOverCell.m */; };
+		EE7C68731B82D31F0003C593 /* CycleOverCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE7C68721B82D31F0003C593 /* CycleOverCell.xib */; };
 		EE817F491B79A78E00988734 /* UserChatController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE817F481B79A78E00988734 /* UserChatController.m */; };
 		EE86D1B21B537469001C4650 /* PostEffectAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = EE86D1B11B537469001C4650 /* PostEffectAdapter.mm */; };
 		EE9675E71B7C30C200445254 /* AlbumGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9675421B7C30C200445254 /* AlbumGridCell.m */; };
@@ -354,6 +356,9 @@
 		EE76A57A1B72181300036747 /* ConnectionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionModel.h; sourceTree = "<group>"; };
 		EE76A57B1B72181300036747 /* ConnectionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionModel.m; sourceTree = "<group>"; };
 		EE7951961B45065200CC28A2 /* libGPUImage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGPUImage.a; path = GPUImage.framework/libGPUImage.a; sourceTree = "<group>"; };
+		EE7C686F1B82D2D20003C593 /* CycleOverCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleOverCell.h; sourceTree = "<group>"; };
+		EE7C68701B82D2D20003C593 /* CycleOverCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleOverCell.m; sourceTree = "<group>"; };
+		EE7C68721B82D31F0003C593 /* CycleOverCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CycleOverCell.xib; sourceTree = "<group>"; };
 		EE7EB54D1B4630C0003281F7 /* MessageViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewCell.h; sourceTree = "<group>"; };
 		EE7EB54E1B4630C0003281F7 /* MessageViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewCell.m; sourceTree = "<group>"; };
 		EE7EB54F1B4630C0003281F7 /* MessageViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageViewCell.xib; sourceTree = "<group>"; };
@@ -1032,6 +1037,16 @@
 				EE76A5781B7205CF00036747 /* ConnectionOwner+ContextOpt.m */,
 			);
 			path = LocalModel;
+			sourceTree = "<group>";
+		};
+		EE7C686E1B82D2A60003C593 /* CycleChatView */ = {
+			isa = PBXGroup;
+			children = (
+				EE7C686F1B82D2D20003C593 /* CycleOverCell.h */,
+				EE7C68701B82D2D20003C593 /* CycleOverCell.m */,
+				EE7C68721B82D31F0003C593 /* CycleOverCell.xib */,
+			);
+			path = CycleChatView;
 			sourceTree = "<group>";
 		};
 		EE7EB54C1B46309D003281F7 /* Message */ = {
@@ -2423,6 +2438,7 @@
 		EEEEA0C41B7B4512001D949D /* Cycle */ = {
 			isa = PBXGroup;
 			children = (
+				EE7C686E1B82D2A60003C593 /* CycleChatView */,
 				EED64D421B81844A008CB134 /* CycleKids */,
 				EE96763C1B7C3D3400445254 /* CycleDescription */,
 				EEEEA0C81B7B456C001D949D /* CycleView */,
@@ -2548,6 +2564,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE7C68731B82D31F0003C593 /* CycleOverCell.xib in Resources */,
 				EE9676011B7C30C200445254 /* QueryDetailImageCell.xib in Resources */,
 				EEAACD741B44EA2D00D05C0B /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				EE7416261B5B8CDF002CA1BC /* AreaCodeJson.txt in Resources */,
@@ -2614,6 +2631,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE7C68711B82D2D20003C593 /* CycleOverCell.m in Sources */,
 				EEAACCBF1B44E90400D05C0B /* HomeViewFoundDelegateAndDatasource.m in Sources */,
 				EE9676271B7C30C200445254 /* ProfileDetailSNCell.m in Sources */,
 				EE9676141B7C30C200445254 /* MessageNotificationDetailCell.m in Sources */,

@@ -30,4 +30,9 @@
 + (Targets*)addTargetWith:(NSString*)owner_id targetDic:(NSDictionary*)tar inContext:(NSManagedObjectContext*)context;
 + (NSArray*)enumAllTargetForOwner:(NSString*)owner_id inContext:(NSManagedObjectContext*)context;
 + (NSArray*)enumAllMessagesForTarget:(Targets*)target inContext:(NSManagedObjectContext*)context;
+
+#pragma mark -- chat group
++ (Targets*)addChatGroupWithOwnerID:(NSString*)owner_id chatGroup:(NSDictionary*)tar inContext:(NSManagedObjectContext*)context;
++ (NSInteger)chatGroupCountWithOwnerID:(NSString*)owner_id inContext:(NSManagedObjectContext*)context;
++ (NSArray*)enumAllTargetForOwner:(NSString*)owner_id andType:(NSInteger)type inContext:(NSManagedObjectContext*)context;
 @end

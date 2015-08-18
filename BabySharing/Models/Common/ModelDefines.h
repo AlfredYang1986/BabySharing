@@ -83,6 +83,13 @@ typedef NS_ENUM(NSInteger, UserPostOwnerConnections) {
 #define QUERY_GROUP                         @"queryGroups"
 #define CREATE_SUB_GROUP                    @"createSubGroup"
 
+#define CHAT_GROUP_CREATE                   [GROUP_HOST_DOMAIN stringByAppendingString:@"createChatGroup"]
+#define CHAT_GROUP_UPDATE                   [GROUP_HOST_DOMAIN stringByAppendingString:@"updateChatGroup"]
+#define CHAT_GROUP_JOIN                     [GROUP_HOST_DOMAIN stringByAppendingString:@"joinChatGroup"]
+#define CHAT_GROUP_LEAVE                    [GROUP_HOST_DOMAIN stringByAppendingString:@"leaveChatGroup"]
+#define CHAT_GROUP_DISMISS                  [GROUP_HOST_DOMAIN stringByAppendingString:@"dismissChatGroup"]
+#define CHAT_GROUP_QUERY                    [GROUP_HOST_DOMAIN stringByAppendingString:@"queryChatGroup"]
+
 #pragma mark -- MESSAGES
 #define MESSAGES_HOST_DOMAIN                [HOST_DOMAIN stringByAppendingString:@"messages/"]
 //#define MESSAGE_WEB_SOCKET                  @"ws://www.altlys.com:9000/registerDevice/"

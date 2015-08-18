@@ -7,6 +7,7 @@
 //
 
 #import "CycleDetailController.h"
+#import "AppDelegate.h"
 
 @interface CycleDetailController ()
 
@@ -36,7 +37,11 @@
 }
 
 - (void)createCycleDetailBtnSelected {
-    
+    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    [app.mm createChatGroupWithGroupThemeName:@"Alfred Test" andFinishBlock:^(BOOL success, NSDictionary *result) {
+        [_delegate createUpdateChatGroup:success];
+    }];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

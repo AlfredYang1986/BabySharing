@@ -133,6 +133,19 @@
     else return result.firstObject;
 }
 
++ (Targets*)enumTargetWith:(NotificationOwner*)owner andGroupID:(NSNumber*)group_id {
+    NSPredicate* pred = [NSPredicate predicateWithFormat:@"group_id=%@ AND taarget_type=%d", group_id, 1];
+    NSArray* result = [owner.chatWith.allObjects filteredArrayUsingPredicate:pred];
+    if (result.count != 1) return nil;
+    else return result.firstObject;
+}
+
++ (NSArray*)enumAllTargetForOwner:(NSString*)owner_id andType:(NSInteger)type inContext:(NSManagedObjectContext*)context {
+    NotificationOwner* owner = [self enumNotificationOwnerWithID:owner_id inContext:context];
+    NSPredicate* pred = [NSPredicate predicateWithFormat:@"target_type=%d", type];
+    return [owner.chatWith.allObjects filteredArrayUsingPredicate:pred];
+}
+
 + (NSArray*)enumAllTargetForOwner:(NSString*)owner_id inContext:(NSManagedObjectContext*)context {
     
     NotificationOwner* owner = [self enumNotificationOwnerWithID:owner_id inContext:context];
@@ -161,5 +174,27 @@
     }
     
     return target;
+}
+
++ (Targets*)addChatGroupWithOwnerID:(NSString*)owner_id chatGroup:(NSDictionary*)tar inContext:(NSManagedObjectContext*)context {
+    NotificationOwner* owner = [self enumNotificationOwnerWithID:owner_id inContext:context];
+    
+    MessageReceiverType receiver_type = MessageReceiverTypeChatGroup;
+    NSNumber* group_id = [tar objectForKey:@"group_id"];
+    
+    Targets* target = [self enumTargetWith:owner andGroupID:group_id];
+    if (target == nil) {
+        target = [NSEntityDescription insertNewObjectForEntityForName:@"Targets" inManagedObjectContext:context];
+        target.target_type = [NSNumber numberWithInt:receiver_type];
+        target.target_name = [tar objectForKey:@"group_name"];
+        target.chatFrom = owner;
+        [owner addChatWithObject:target];
+    }
+    
+    return target;
+}
+
++ (NSInteger)chatGroupCountWithOwnerID:(NSString*)owner_id inContext:(NSManagedObjectContext*)context {
+    return [self enumAllTargetForOwner:owner_id andType:MessageReceiverTypeChatGroup inContext:context].count;
 }
 @end

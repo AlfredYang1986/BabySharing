@@ -2,7 +2,7 @@
 //  Targets.h
 //  
 //
-//  Created by Alfred Yang on 10/08/2015.
+//  Created by Alfred Yang on 18/08/2015.
 //
 //
 
@@ -15,9 +15,10 @@
 
 @property (nonatomic, retain) NSDate * last_time;
 @property (nonatomic, retain) NSString * target_id;
-@property (nonatomic, retain) NSNumber * target_type;
-@property (nonatomic, retain) NSString * target_photo;
 @property (nonatomic, retain) NSString * target_name;
+@property (nonatomic, retain) NSString * target_photo;
+@property (nonatomic, retain) NSNumber * target_type;
+@property (nonatomic, retain) NSNumber * group_id;
 @property (nonatomic, retain) NotificationOwner *chatFrom;
 @property (nonatomic, retain) NSSet *messages;
 @end

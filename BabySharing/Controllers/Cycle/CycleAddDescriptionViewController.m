@@ -186,7 +186,7 @@
     } else if ([tmp isKindOfClass:[NSNumber class]]) {
         cell.descriptionLabel.text = [NSString stringWithFormat:@"%ld", ((NSNumber*)tmp).longValue];
     } else if ([tmp isKindOfClass:[NSArray class]]){
-        cell.descriptionLabel.text = [NSString stringWithFormat:@"%d个孩子", ((NSArray*)tmp).count];
+        cell.descriptionLabel.text = [NSString stringWithFormat:@"%lu个孩子", (unsigned long)((NSArray*)tmp).count];
     }
     
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;

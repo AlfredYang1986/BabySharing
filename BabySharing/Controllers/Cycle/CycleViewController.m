@@ -7,21 +7,26 @@
 //
 
 #import "CycleViewController.h"
+#import "AppDelegate.h"
 #import "LoginModel.h"
+#import "MessageModel.h"
 #import "DropDownMenu.h"
 #import "WEPopoverController.h"
 #import "MyCycleCellHeader.h"
 
-#import "AppDelegate.h"
 #import "CycleAddDescriptionViewController.h"
+#import "CycleDetailController.h"
 
 #import "Reachability.h"
+#import "CycleOverCell.h"
+#import "Targets.h"
 
-@interface CycleViewController () <UITableViewDataSource, UITableViewDelegate, DropDownMenuProcotol, WEPopoverControllerDelegate, UIPopoverControllerDelegate>
+@interface CycleViewController () <UITableViewDataSource, UITableViewDelegate, DropDownMenuProcotol, WEPopoverControllerDelegate, UIPopoverControllerDelegate, createUpdateDetailProtocol>
 @property (weak, nonatomic) IBOutlet UIView *descriptionView;
 @property (weak, nonatomic) IBOutlet UITableView *cycleTableView;
 
 @property (weak, nonatomic) LoginModel* lm;
+@property (weak, nonatomic) MessageModel* mm;
 @property (weak, nonatomic) Reachability* ry;
 
 @property (weak, nonatomic) id<CycleSyncDataProtocol> notifyObject;
@@ -32,12 +37,15 @@
     
     NSMutableDictionary* dic_description;
     BOOL isSync;
+    
+    BOOL isRecommmend;
 }
 
 @synthesize descriptionView = _descriptionView;
 @synthesize cycleTableView = _cycleTableView;
 
 @synthesize lm = _lm;
+@synthesize mm = _mm;
 @synthesize ry = _ry;
 
 @synthesize notifyObject = _notifyObject;
@@ -45,6 +53,8 @@
 - (void)viewDidLoad {
     _cycleTableView.dataSource = self;
     _cycleTableView.delegate = self;
+    [_cycleTableView registerNib:[UINib nibWithNibName:@"CycleOverCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"cycle over cell"];
+    [_cycleTableView registerClass:[MyCycleCellHeader class] forHeaderFooterViewReuseIdentifier:@"my cycle header"];
 
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     CGFloat height = [UIScreen mainScreen].bounds.size.height;
@@ -69,6 +79,7 @@
     [btn setFont:[UIFont systemFontOfSize:14.f]];
     btn.center = CGPointMake(label.center.x, label.center.y + 25);
     [_descriptionView addSubview:btn];
+    [btn addTarget:self action:@selector(addDescriptionBtnSelected) forControlEvents:UIControlEventTouchDown];
     
     UILabel* label_2 = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, width, size.height + 10)];
     label_2.textAlignment = NSTextAlignmentCenter;
@@ -85,17 +96,18 @@
     
     self.preferredContentSize = CGSizeMake(100, 100);
     
-    [_cycleTableView registerClass:[MyCycleCellHeader class] forHeaderFooterViewReuseIdentifier:@"my cycle header"];
     
     AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
     _lm = app.lm;
+    _mm = app.mm;
     _ry = app.reachability;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reachabilityChanged:)
                                                  name:kReachabilityChangedNotification
                                                object:nil];
- 
+
+    isRecommmend = YES;
     isSync = NO;
     dic_description = [[_lm currentDeltailInfoLocal] mutableCopy];
     [self viewDidLayoutSubviews];
@@ -135,13 +147,13 @@
 }
 
 - (void)resetViews {
-//    if (dic_description && dic_description.count > 1) {
-//        _cycleTableView.hidden = NO;
-//        _descriptionView.hidden = YES;
-//    } else {
+    if (dic_description && dic_description.count > 1) {
+        _cycleTableView.hidden = NO;
+        _descriptionView.hidden = YES;
+    } else {
         _cycleTableView.hidden = YES;
         _descriptionView.hidden = NO;
-//    }
+    }
 }
 
 - (void)viewDidLayoutSubviews {
@@ -160,9 +172,23 @@
 //    return YES;
 }
 
-#pragma mark -- table view datasource
+- (void)addDescriptionBtnSelected {
+    [self performSegueWithIdentifier:@"addDescription" sender:nil];
+}
+
+#pragma mark -- table view delegate
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    // TODO: segue to user chat
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    if (isRecommmend) return 2;
+    else return 1;
 }
 
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -177,16 +203,14 @@
         return header;
         
     } else if (section == 1) {
+        return nil;
         
     } else {
         return nil;
     }
-    return nil;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
-}
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (section == 0) {
@@ -202,15 +226,27 @@
     } return nil;
 }
 
+#pragma mark -- table view datasource
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return [CycleOverCell preferredHeight];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [_mm myChatGroupCount];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-   
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"default"];
+  
+    CycleOverCell* cell = [tableView dequeueReusableCellWithIdentifier:@"cycle over cell"];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"default"];
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"CycleOverCell" owner:self options:nil];
+        cell = [nib objectAtIndex:0];
     }
-    
-    cell.textLabel.text = @"alfred";
+ 
+    Targets* tmp = [[_mm enumMyChatGroupLocal] objectAtIndex:indexPath.row];
+    cell.numLabel.text = @"7";
+    cell.themeLabel.text = tmp.target_name;
     
     return cell;
 }
@@ -220,13 +256,14 @@
     if (!popoverController) {
      
         NSArray* arr = nil;
-        if (_descriptionView.hidden == NO) {
-            arr = @[@"创建圈子", @"编辑描述", @"取消"];
-        } else {
-            arr = @[@"编辑描述", @"更多推荐", @"关闭圈子推荐", @"取消"];
-        }
+//        if (_descriptionView.hidden == NO) {
+            arr = @[@"创建圈子", @"编辑描述", @"更多推荐", @"取消"];
+//        } else {
+//            if (isRecommmend) arr = @[@"编辑描述", @"更多推荐", @"关闭圈子推荐", @"取消"];
+//            else arr = @[@"编辑描述", @"更多推荐", @"开启圈子推荐", @"取消"];
+//        }
         
-        CGFloat width = [UIScreen mainScreen].bounds.size.width;
+//        CGFloat width = [UIScreen mainScreen].bounds.size.width;
         DropDownMenu* menu = [[DropDownMenu alloc]init];
         [menu setMenuText:arr];
         menu.dropdownDelegate = self;
@@ -249,11 +286,17 @@
 #pragma mark -- drop down menu
 - (void)dropDownMenu:(DropDownMenu *)menu didSelectMuneItemAtIndex:(NSInteger)index {
    
-    if (_descriptionView.hidden == NO && index == 0) {
+//    if (_descriptionView.hidden == NO && index == 0) {
+//        [self performSegueWithIdentifier:@"addCycle" sender:nil];
+//    } else if (_descriptionView.hidden == YES && index == 0) {
+//        [self performSegueWithIdentifier:@"addDescription" sender:nil];
+//    } else if (_descriptionView.hidden == NO && index == 1) {
+//        [self performSegueWithIdentifier:@"addDescription" sender:nil];
+//    }
+    
+    if (index == 0) {
         [self performSegueWithIdentifier:@"addCycle" sender:nil];
-    } else if (_descriptionView.hidden == YES && index == 0) {
-        [self performSegueWithIdentifier:@"addDescription" sender:nil];
-    } else if (_descriptionView.hidden == NO && index == 1) {
+    } else if (index == 1) {
         [self performSegueWithIdentifier:@"addDescription" sender:nil];
     }
     
@@ -272,6 +315,13 @@
         ((CycleAddDescriptionViewController*)segue.destinationViewController).dic_description = dic_description;
         ((CycleAddDescriptionViewController*)segue.destinationViewController).isEditable = isSync;
         _notifyObject = (CycleAddDescriptionViewController*)segue.destinationViewController;
+    }
+}
+
+#pragma mark -- create update detail chat group
+- (void)createUpdateChatGroup:(BOOL)success {
+    if (success) {
+        [_cycleTableView reloadData];
     }
 }
 @end

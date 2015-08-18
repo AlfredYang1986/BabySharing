@@ -9,7 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+@protocol createUpdateDetailProtocol <NSObject>
+
+- (void)createUpdateChatGroup:(BOOL)success;
+@end
+
 @interface CycleDetailController : UIViewController
 
+@property (nonatomic, weak) id<createUpdateDetailProtocol> delegate;
 @property (nonatomic, strong) NSDictionary* cycleDetails;
 @end

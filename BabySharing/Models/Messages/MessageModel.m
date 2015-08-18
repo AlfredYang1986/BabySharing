@@ -174,4 +174,48 @@
 - (NSInteger)getAllUnreadMessageCount {
     return [GotyeOCAPI getUnreadMessageCountOfTypes:@[@0]];
 }
+
+#pragma mark -- chat group
+- (void)createChatGroupWithGroupThemeName:(NSString*)theme_name andFinishBlock:(chatGroupOptFinishBlock)block {
+    
+    AppDelegate* delegate = (AppDelegate*)([UIApplication sharedApplication].delegate);
+    NSString* auth_token = delegate.lm.current_auth_token;
+    NSString* user_id = delegate.lm.current_user_id;
+    
+    NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
+    [dic setValue:auth_token forKey:@"auth_token"];
+    [dic setValue:user_id forKey:@"user_id"];
+    [dic setValue:theme_name forKey:@"group_name"];
+    
+    NSError * error = nil;
+    NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
+    
+    NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:CHAT_GROUP_CREATE]];
+    
+    if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
+  
+        NSDictionary* reVal = [result objectForKey:@"result"];
+        [self addChatGroupWithGroupAttr:reVal];
+        block(YES, reVal);
+    } else {
+
+        block(NO, [result objectForKey:@"error"]);
+    }
+}
+
+- (void)addChatGroupWithGroupAttr:(NSDictionary*)attr {
+    [NotificationOwner addChatGroupWithOwnerID:_delegate.lm.current_user_id chatGroup:attr inContext:_doc.managedObjectContext];
+}
+
+- (NSInteger)myChatGroupCount {
+    return [NotificationOwner chatGroupCountWithOwnerID:_delegate.lm.current_user_id inContext:_doc.managedObjectContext];
+}
+
+- (NSArray*)enumMyChatGroupLocal {
+    return [NotificationOwner enumAllTargetForOwner:_delegate.lm.current_user_id andType:MessageReceiverTypeChatGroup inContext:_doc.managedObjectContext];
+}
+
+- (NSArray*)enumMyChatGroup {
+    return nil;
+}
 @end

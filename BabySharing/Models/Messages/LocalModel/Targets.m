@@ -2,7 +2,7 @@
 //  Targets.m
 //  
 //
-//  Created by Alfred Yang on 10/08/2015.
+//  Created by Alfred Yang on 18/08/2015.
 //
 //
 
@@ -15,9 +15,10 @@
 
 @dynamic last_time;
 @dynamic target_id;
-@dynamic target_type;
-@dynamic target_photo;
 @dynamic target_name;
+@dynamic target_photo;
+@dynamic target_type;
+@dynamic group_id;
 @dynamic chatFrom;
 @dynamic messages;
 
