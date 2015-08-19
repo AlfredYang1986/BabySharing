@@ -232,9 +232,9 @@
     }
     
     cell.userBackgroudView.image = backgroudImg;
-    cell.friendNumLabel.text = [NSString stringWithFormat:@"%d", _followerings_count];
-    cell.pushNumLabel.text = [NSString stringWithFormat:@"%d", _posts_count];
-    cell.thumsupNumLabel.text = [NSString stringWithFormat:@"%d", _followers_count];
+    cell.friendNumLabel.text = [NSString stringWithFormat:@"%ld", (long)_followerings_count];
+    cell.pushNumLabel.text = [NSString stringWithFormat:@"%ld", (long)_posts_count];
+    cell.thumsupNumLabel.text = [NSString stringWithFormat:@"%ld", (long)_followers_count];
    
     return cell;
 }

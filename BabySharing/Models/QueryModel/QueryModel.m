@@ -122,7 +122,7 @@
     NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
     [dic setValue:token forKey:@"auth_token"];
     [dic setValue:user_id forKey:@"user_id"];
-    [dic setValue:[NSNumber numberWithInt:skip] forKey:@"skip"];
+    [dic setValue:[NSNumber numberWithInteger:skip] forKey:@"skip"];
  
     NSNumber* time = [QueryContent enumContentTimeSpanInContext:_doc.managedObjectContext];
     [dic setValue:time forKey:@"date"];
@@ -194,7 +194,7 @@
     
     QueryContent* content = [QueryContent enumQueryContentByPostID:post_id inContext:_doc.managedObjectContext];
     [dic setValue:content.comment_time_span forKey:@"date"];
-    [dic setValue:[NSNumber numberWithInt:content.comments.count] forKey:@"skip"];
+    [dic setValue:[NSNumber numberWithUnsignedInteger:content.comments.count] forKey:@"skip"];
     
     NSError * error = nil;
     NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];

@@ -240,7 +240,7 @@
         } else {
             NSString *title = @"weibo auth error";
 
-            NSString *message = [NSString stringWithFormat: @"some thing wrong, and error code is %d", response.statusCode];
+            NSString *message = [NSString stringWithFormat: @"some thing wrong, and error code is %ld", (long)response.statusCode];
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
                                                             message:message
                                                            delegate:nil

@@ -103,7 +103,7 @@
     }
 }
 
-- (void)badgetViewTaped:(UITapGestureRecognizer*)gesture {
+- (void)badgeViewTaped:(UITapGestureRecognizer*)gesture {
     
 }
 @end

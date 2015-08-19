@@ -87,7 +87,7 @@
       
         NSInteger unread_count = [_mm unReadNotificationCount];
         if (unread_count > 0) {
-            [cell setBadgeValue:[NSString stringWithFormat:@"%ld", unread_count]];
+            [cell setBadgeValue:[NSString stringWithFormat:@"%ld", (long)unread_count]];
         }
         
         return cell;

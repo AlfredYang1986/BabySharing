@@ -253,7 +253,7 @@
     } else {
         NSInteger unReadCount = [_mm unReadNotificationCount] + [_mm getAllUnreadMessageCount];
         if (unReadCount != 0) {
-            ((UITabBarItem*)[self.tabBar.items objectAtIndex:3]).badgeValue = [NSString stringWithFormat:@"%ld", unReadCount];
+            ((UITabBarItem*)[self.tabBar.items objectAtIndex:3]).badgeValue = [NSString stringWithFormat:@"%ld", (long)unReadCount];
         } else {
             ((UITabBarItem*)[self.tabBar.items objectAtIndex:3]).badgeValue = nil;
         }

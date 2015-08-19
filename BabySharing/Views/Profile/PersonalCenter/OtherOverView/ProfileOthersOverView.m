@@ -103,17 +103,17 @@
 }
 
 - (void)setShareCount:(NSInteger)count {
-    NSString* tmp = [NSString stringWithFormat:@"%d", count];
+    NSString* tmp = [NSString stringWithFormat:@"%ld", (long)count];
     _shareCountLabel.text = tmp;
 }
 
 - (void)setCycleCount:(NSInteger)count {
-    NSString* tmp = [NSString stringWithFormat:@"%d", count];
+    NSString* tmp = [NSString stringWithFormat:@"%ld", (long)count];
     _cycleCountLabel.text = tmp;
 }
 
 - (void)setFriendsCount:(NSInteger)count {
-    NSString* tmp = [NSString stringWithFormat:@"%d", count];
+    NSString* tmp = [NSString stringWithFormat:@"%ld", (long)count];
     _friendsCountLabel.text = tmp;
 }
 
