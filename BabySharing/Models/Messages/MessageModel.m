@@ -196,9 +196,36 @@
   
         NSDictionary* reVal = [result objectForKey:@"result"];
         [self addChatGroupWithGroupAttr:reVal];
+        GotyeOCRoom* room = [GotyeOCRoom roomWithId:((NSNumber*)[reVal objectForKey:@"group_id"]).longLongValue];
+        [GotyeOCAPI enterRoom:room];
         block(YES, reVal);
     } else {
 
+        block(NO, [result objectForKey:@"error"]);
+    }
+}
+
+- (void)updateChatGroupWithGroup:(NSDictionary*)dic_group andFinishBlock:(chatGroupOptFinishBlock)block {
+    AppDelegate* delegate = (AppDelegate*)([UIApplication sharedApplication].delegate);
+    NSString* auth_token = delegate.lm.current_auth_token;
+    NSString* user_id = delegate.lm.current_user_id;
+    
+    NSMutableDictionary* dic = [dic_group mutableCopy];
+    [dic setValue:auth_token forKey:@"auth_token"];
+    [dic setValue:user_id forKey:@"user_id"];
+    
+    NSError * error = nil;
+    NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
+    
+    NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:CHAT_GROUP_UPDATE]];
+    
+    if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
+        
+        NSDictionary* reVal = [result objectForKey:@"result"];
+        [self addChatGroupWithGroupAttr:reVal];
+        block(YES, reVal);
+    } else {
+        
         block(NO, [result objectForKey:@"error"]);
     }
 }

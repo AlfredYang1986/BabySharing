@@ -185,11 +185,12 @@
     Targets* target = [self enumTargetWith:owner andGroupID:group_id];
     if (target == nil) {
         target = [NSEntityDescription insertNewObjectForEntityForName:@"Targets" inManagedObjectContext:context];
-        target.target_type = [NSNumber numberWithInt:receiver_type];
-        target.target_name = [tar objectForKey:@"group_name"];
         target.chatFrom = owner;
         [owner addChatWithObject:target];
     }
+   
+    target.target_type = [NSNumber numberWithInt:receiver_type];
+    target.target_name = [tar objectForKey:@"group_name"];
     
     return target;
 }

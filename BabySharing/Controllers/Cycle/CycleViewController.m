@@ -39,6 +39,8 @@
     BOOL isSync;
     
     BOOL isRecommmend;
+    
+    NSArray* chatGroupArray;
 }
 
 @synthesize descriptionView = _descriptionView;
@@ -110,6 +112,7 @@
     isRecommmend = YES;
     isSync = NO;
     dic_description = [[_lm currentDeltailInfoLocal] mutableCopy];
+    chatGroupArray = [_mm enumMyChatGroupLocal];
     [self viewDidLayoutSubviews];
    
     if (_ry.isReachable) {
@@ -137,6 +140,7 @@
             [_lm updateDetailInfoLocalWithData:dic];
             [_mm enumMyChatGroupWithFinishBlock:^(BOOL success, NSArray* result) {
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    chatGroupArray = [_mm enumMyChatGroupLocal];
                     [_cycleTableView reloadData];
                 });
             }];
@@ -189,6 +193,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     // TODO: segue to user chat
+    [self performSegueWithIdentifier:@"enterChatGroup" sender:nil];
+    
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -237,7 +243,8 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [_mm myChatGroupCount];
+//    return [_mm myChatGroupCount];
+    return chatGroupArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -249,7 +256,7 @@
         cell = [nib objectAtIndex:0];
     }
  
-    Targets* tmp = [[_mm enumMyChatGroupLocal] objectAtIndex:indexPath.row];
+    Targets* tmp = [chatGroupArray objectAtIndex:indexPath.row];
     cell.numLabel.text = @"7";
     cell.themeLabel.text = tmp.target_name;
     
@@ -320,12 +327,15 @@
         ((CycleAddDescriptionViewController*)segue.destinationViewController).dic_description = dic_description;
         ((CycleAddDescriptionViewController*)segue.destinationViewController).isEditable = isSync;
         _notifyObject = (CycleAddDescriptionViewController*)segue.destinationViewController;
+    } else if ([segue.identifier isEqualToString:@"enterChatGroup"]) {
+        
     }
 }
 
 #pragma mark -- create update detail chat group
 - (void)createUpdateChatGroup:(BOOL)success {
     if (success) {
+        chatGroupArray = [_mm enumMyChatGroupLocal];
         [_cycleTableView reloadData];
     }
 }

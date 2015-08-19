@@ -84,6 +84,8 @@
 		EE79105D1B842158005E455B /* QueryOwnerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEAACBE51B44E90300D05C0B /* QueryOwnerCell.xib */; };
 		EE79105E1B842187005E455B /* QueryDetailImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEAACBE11B44E90300D05C0B /* QueryDetailImageCell.xib */; };
 		EE79105F1B8421AE005E455B /* QueryLikesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEAACBD91B44E90300D05C0B /* QueryLikesCell.xib */; };
+		EE7910601B845818005E455B /* UIBarButtonItem+WEPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6D6DA91B7B28A6004D29C8 /* UIBarButtonItem+WEPopover.m */; };
+		EE7910631B847DBA005E455B /* ChatGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7910621B847DBA005E455B /* ChatGroupController.m */; };
 		EE7951971B45065200CC28A2 /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EE7951961B45065200CC28A2 /* libGPUImage.a */; };
 		EE7C68711B82D2D20003C593 /* CycleOverCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7C68701B82D2D20003C593 /* CycleOverCell.m */; };
 		EE7C68731B82D31F0003C593 /* CycleOverCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE7C68721B82D31F0003C593 /* CycleOverCell.xib */; };
@@ -335,6 +337,8 @@
 		EE76A5781B7205CF00036747 /* ConnectionOwner+ContextOpt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ConnectionOwner+ContextOpt.m"; sourceTree = "<group>"; };
 		EE76A57A1B72181300036747 /* ConnectionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionModel.h; sourceTree = "<group>"; };
 		EE76A57B1B72181300036747 /* ConnectionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionModel.m; sourceTree = "<group>"; };
+		EE7910611B847DBA005E455B /* ChatGroupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatGroupController.h; sourceTree = "<group>"; };
+		EE7910621B847DBA005E455B /* ChatGroupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatGroupController.m; sourceTree = "<group>"; };
 		EE7951961B45065200CC28A2 /* libGPUImage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGPUImage.a; path = GPUImage.framework/libGPUImage.a; sourceTree = "<group>"; };
 		EE7C686F1B82D2D20003C593 /* CycleOverCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleOverCell.h; sourceTree = "<group>"; };
 		EE7C68701B82D2D20003C593 /* CycleOverCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleOverCell.m; sourceTree = "<group>"; };
@@ -909,6 +913,8 @@
 			children = (
 				EE817F471B79A78E00988734 /* UserChatController.h */,
 				EE817F481B79A78E00988734 /* UserChatController.m */,
+				EE7910611B847DBA005E455B /* ChatGroupController.h */,
+				EE7910621B847DBA005E455B /* ChatGroupController.m */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -2074,6 +2080,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE7910601B845818005E455B /* UIBarButtonItem+WEPopover.m in Sources */,
 				EE7910591B841D14005E455B /* WEBlockingGestureRecognizer.m in Sources */,
 				EE7910581B841CE0005E455B /* PhotoTagRoundPointLayer.m in Sources */,
 				EE7910571B841CBE005E455B /* FoundPCGCell.m in Sources */,
@@ -2096,6 +2103,7 @@
 				EE7910431B841AA0005E455B /* AlbumTableCell.m in Sources */,
 				EE7910421B841A92005E455B /* DropDownView.m in Sources */,
 				EE7910411B841A7B005E455B /* TagQueryCell.m in Sources */,
+				EE7910631B847DBA005E455B /* ChatGroupController.m in Sources */,
 				EE7910401B841A33005E455B /* DropDownItem.m in Sources */,
 				EE79103E1B841A00005E455B /* QueryCommentsCell.m in Sources */,
 				EE7C68711B82D2D20003C593 /* CycleOverCell.m in Sources */,

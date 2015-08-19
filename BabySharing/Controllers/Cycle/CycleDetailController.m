@@ -33,7 +33,13 @@
 }
 
 - (void)updateCycleDetailBtnSelected {
-    
+    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    NSMutableDictionary* dic = [_cycleDetails mutableCopy];
+    [dic setObject:@"Alfred Test" forKey:@"group_name"];
+    [app.mm updateChatGroupWithGroup:[dic copy] andFinishBlock:^(BOOL success, NSDictionary *result) {
+        [_delegate createUpdateChatGroup:success];
+    }];
+    [self.navigationController popViewControllerAnimated:YES];   
 }
 
 - (void)createCycleDetailBtnSelected {
