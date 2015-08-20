@@ -23,7 +23,10 @@
     </entity>
     <entity name="Targets" representedClassName="Targets" syncable="YES">
         <attribute name="group_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="in_the_group" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="last_time" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="number_count" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="owner_id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="target_id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="target_name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="target_photo" optional="YES" attributeType="String" syncable="YES"/>
@@ -35,6 +38,6 @@
         <element name="Messages" positionX="-9011" positionY="-1458" width="128" height="118"/>
         <element name="NotificationOwner" positionX="-8739" positionY="-1809" width="128" height="88"/>
         <element name="Notifications" positionX="-8489" positionY="-1953" width="128" height="148"/>
-        <element name="Targets" positionX="-9000" positionY="-1710" width="128" height="163"/>
+        <element name="Targets" positionX="-9000" positionY="-1710" width="128" height="208"/>
     </elements>
 </model>

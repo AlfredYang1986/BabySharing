@@ -432,6 +432,11 @@ enum DisplaySide {
  * @param downloadMediaIfNeed: 是否自动下载
  */
 -(void) onReceiveMessage:(GotyeOCMessage*)message downloadMediaIfNeed:(bool*)downloadMediaIfNeed {
+    
+    if ([message.sender isMemberOfClass:[GotyeOCGroup class]]) {
+        return;
+    }
+    
     if ([message.sender.name isEqualToString:@"alfred_test"]) {
         NSLog(@"this is a system notification");
         

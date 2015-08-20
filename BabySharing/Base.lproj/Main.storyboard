@@ -1117,19 +1117,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Snx-PU-A6j">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="501"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Snx-PU-A6j">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="lUX-aE-qZw" id="vVF-wB-k2v"/>
+                                    <outlet property="delegate" destination="lUX-aE-qZw" id="Taw-BK-g2Z"/>
+                                </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PBm-De-CrX">
-                                <rect key="frame" x="0.0" y="502" width="600" height="49"/>
+                                <rect key="frame" x="0.0" y="551" width="600" height="49"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KxI-Wm-Pcz">
                                         <rect key="frame" x="8" y="10" width="508" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
-                                            <outlet property="delegate" destination="vu1-ps-3xT" id="9n8-ZW-ufJ"/>
+                                            <outlet property="delegate" destination="lUX-aE-qZw" id="Wam-vB-sMg"/>
                                         </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qBP-9w-Gmo">
@@ -1171,6 +1175,7 @@
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
+                                        <exclude reference="Jr8-Xh-hpA"/>
                                         <exclude reference="TYJ-hJ-Nh3"/>
                                         <exclude reference="AaY-t2-FHz"/>
                                         <exclude reference="I6W-zC-5GV"/>
@@ -1188,19 +1193,26 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="PBm-De-CrX" firstAttribute="top" secondItem="Snx-PU-A6j" secondAttribute="bottom" id="CcI-ja-9MM"/>
-                            <constraint firstItem="71x-7F-O97" firstAttribute="top" secondItem="PBm-De-CrX" secondAttribute="bottom" id="MMC-4K-ckK"/>
+                            <constraint firstItem="71x-7F-O97" firstAttribute="top" secondItem="PBm-De-CrX" secondAttribute="bottom" constant="-49" id="MMC-4K-ckK"/>
                             <constraint firstItem="PBm-De-CrX" firstAttribute="leading" secondItem="e73-Pv-2Hg" secondAttribute="leadingMargin" constant="-16" id="OvV-MW-B2l"/>
+                            <constraint firstItem="71x-7F-O97" firstAttribute="top" secondItem="Snx-PU-A6j" secondAttribute="bottom" id="PoR-dE-PLU"/>
                             <constraint firstAttribute="trailingMargin" secondItem="PBm-De-CrX" secondAttribute="trailing" constant="-16" id="UlE-4D-GtB"/>
                             <constraint firstItem="Snx-PU-A6j" firstAttribute="leading" secondItem="e73-Pv-2Hg" secondAttribute="leadingMargin" constant="-16" id="bZP-Ct-aHQ"/>
                             <constraint firstItem="Snx-PU-A6j" firstAttribute="top" secondItem="e73-Pv-2Hg" secondAttribute="topMargin" id="dLV-it-Fdg"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Snx-PU-A6j" secondAttribute="trailing" constant="-16" id="jR6-7P-z41"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="CcI-ja-9MM"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="ChatGroup" id="IhA-HB-d3D"/>
                     <connections>
                         <outlet property="faceBtn" destination="RN0-54-cXr" id="Wph-2d-nDE"/>
                         <outlet property="funcBtn" destination="qBP-9w-Gmo" id="eb6-bI-KA8"/>
-                        <outlet property="inputField" destination="KxI-Wm-Pcz" id="yuJ-R2-Vz5"/>
+                        <outlet property="inputContainer" destination="PBm-De-CrX" id="hDM-bs-dOr"/>
+                        <outlet property="inputField" destination="KxI-Wm-Pcz" id="taj-Xp-8Zh"/>
                         <outlet property="queryView" destination="Snx-PU-A6j" id="LbE-tJ-7fK"/>
                     </connections>
                 </viewController>

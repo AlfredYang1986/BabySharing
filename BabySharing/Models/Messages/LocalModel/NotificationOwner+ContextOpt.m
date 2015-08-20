@@ -134,7 +134,7 @@
 }
 
 + (Targets*)enumTargetWith:(NotificationOwner*)owner andGroupID:(NSNumber*)group_id {
-    NSPredicate* pred = [NSPredicate predicateWithFormat:@"group_id=%@ AND taarget_type=%d", group_id, 1];
+    NSPredicate* pred = [NSPredicate predicateWithFormat:@"group_id=%@ AND target_type=%d", group_id, 1];
     NSArray* result = [owner.chatWith.allObjects filteredArrayUsingPredicate:pred];
     if (result.count != 1) return nil;
     else return result.firstObject;
@@ -169,6 +169,9 @@
         target.target_type = [NSNumber numberWithInt:receiver_type];
         target.target_name = [tar objectForKey:@"screen_name"];
         target.target_photo = [tar objectForKey:@"screen_photo"];
+        target.in_the_group = 0;
+        target.owner_id = target_id;
+        target.number_count = [NSNumber numberWithInt:1];
         target.chatFrom = owner;
         [owner addChatWithObject:target];
     }
@@ -185,14 +188,39 @@
     Targets* target = [self enumTargetWith:owner andGroupID:group_id];
     if (target == nil) {
         target = [NSEntityDescription insertNewObjectForEntityForName:@"Targets" inManagedObjectContext:context];
+        target.group_id = group_id;
         target.chatFrom = owner;
         [owner addChatWithObject:target];
     }
    
     target.target_type = [NSNumber numberWithInt:receiver_type];
-    target.target_name = [tar objectForKey:@"group_name"];
+  
+    NSEnumerator* enumerator = tar.keyEnumerator;
+    id iter = nil;
     
+    while ((iter = [enumerator nextObject]) != nil) {
+        if ([iter isEqualToString:@"group_name"]) {
+            target.target_name = [tar objectForKey:@"group_name"];
+        } else if ([iter isEqualToString:@"in_the_group"]) {
+            target.in_the_group = [tar objectForKey:@"in_the_group"];
+        } else if ([iter isEqualToString:@"owner_id"]) {
+            target.owner_id = [tar objectForKey:@"owner_id"];
+        } else if ([iter isEqualToString:@"joiners_count"]) {
+            target.number_count = [tar objectForKey:@"joiners_count"];
+        } else {
+            // user id, do nothing
+        }
+    }
     return target;
+}
+
++ (NSInteger)chatGroupCountWithOwnerID:(NSString *)owner_id andPred:(NSPredicate*)pred inContext:(NSManagedObjectContext *)context {
+    return [self enumTargetForOwner:owner_id andPred:pred inContext:context].count;
+}
+
++ (NSArray*)enumTargetForOwner:(NSString*)owner_id andPred:(NSPredicate*)pred inContext:(NSManagedObjectContext*)context {
+    NotificationOwner* owner = [self enumNotificationOwnerWithID:owner_id inContext:context];
+    return [owner.chatWith.allObjects filteredArrayUsingPredicate:pred];
 }
 
 + (NSInteger)chatGroupCountWithOwnerID:(NSString*)owner_id inContext:(NSManagedObjectContext*)context {

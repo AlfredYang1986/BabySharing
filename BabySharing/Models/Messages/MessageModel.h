@@ -67,6 +67,9 @@ typedef void(^chatGroupOptFinishBlock)(BOOL success, id result);
 - (void)updateChatGroupWithGroup:(NSDictionary*)dic andFinishBlock:(chatGroupOptFinishBlock)block;
 - (void)addChatGroupWithGroupAttr:(NSDictionary*)attr;
 - (NSInteger)myChatGroupCount;
+- (NSInteger)recommendChatGroupCount;
 - (NSArray*)enumMyChatGroupLocal;
-- (void)enumMyChatGroupWithFinishBlock:(chatGroupOptFinishBlock)block;
+- (NSArray*)enumRecommendChatGroupLocal;
+- (void)enumChatGroupWithFinishBlock:(chatGroupOptFinishBlock)block;
+- (void)joinChatGroup:(NSNumber*)group_id andFinishBlock:(chatGroupOptFinishBlock)block;
 @end

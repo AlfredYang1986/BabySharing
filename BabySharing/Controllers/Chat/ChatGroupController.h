@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ChatGroupController : UIViewController
+@class LoginModel;
+@class MessageModel;
 
+@interface ChatGroupController : UIViewController
+@property (strong, nonatomic) NSString* founder_id;
+@property (strong, nonatomic) NSString* group_name;
+@property (strong, nonatomic) NSNumber* group_id;
+@property (strong, nonatomic) NSNumber* joiner_count;
+@property (weak, nonatomic, readonly) LoginModel* lm;
+@property (weak, nonatomic, readonly) MessageModel* mm;
 @end

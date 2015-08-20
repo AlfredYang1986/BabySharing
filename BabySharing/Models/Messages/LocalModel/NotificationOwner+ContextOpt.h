@@ -36,4 +36,6 @@
 + (NSArray*)updateMultipleChatGroupWithOwnerID:(NSString*)owner_id chatGroups:(NSArray*)tar inContext:(NSManagedObjectContext*)context;
 + (NSInteger)chatGroupCountWithOwnerID:(NSString*)owner_id inContext:(NSManagedObjectContext*)context;
 + (NSArray*)enumAllTargetForOwner:(NSString*)owner_id andType:(NSInteger)type inContext:(NSManagedObjectContext*)context;
++ (NSInteger)chatGroupCountWithOwnerID:(NSString *)owner_id andPred:(NSPredicate*)pred inContext:(NSManagedObjectContext *)context;
++ (NSArray*)enumTargetForOwner:(NSString*)owner_id andPred:(NSPredicate*)pred inContext:(NSManagedObjectContext*)context;
 @end

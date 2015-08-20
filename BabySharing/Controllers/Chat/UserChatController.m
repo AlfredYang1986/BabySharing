@@ -170,7 +170,8 @@
 - (void)moveView:(float)move {
     static const CGFloat kAnimationDuration = 0.30; // in seconds
     CGRect rc_start = _queryView.frame;
-    CGRect rc_end = CGRectMake(rc_start.origin.x, rc_start.origin.y + move, rc_start.size.width, rc_start.size.height);
+//    CGRect rc_end = CGRectMake(rc_start.origin.x, rc_start.origin.y + move, rc_start.size.width, rc_start.size.height);
+    CGRect rc_end = CGRectMake(rc_start.origin.x, rc_start.origin.y, rc_start.size.width, rc_start.size.height - move);
 
     CGRect input_start = _inputContainer.frame;
     CGRect input_end = CGRectMake(input_start.origin.x, input_start.origin.y + move, input_start.size.width, input_start.size.height);

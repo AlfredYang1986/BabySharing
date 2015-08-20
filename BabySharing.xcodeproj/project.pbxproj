@@ -101,6 +101,8 @@
 		EE9744171B78886300E81A70 /* MessageNotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9744151B78886300E81A70 /* MessageNotificationCell.m */; };
 		EE97441F1B78944600E81A70 /* MessageNotificationDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE97441D1B78944600E81A70 /* MessageNotificationDetailCell.xib */; };
 		EE981F861B5A10400029723A /* LoginToken.m in Sources */ = {isa = PBXBuildFile; fileRef = EE981F851B5A10400029723A /* LoginToken.m */; };
+		EE9F736D1B8576B100F800DC /* MessageChatGroupHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9F736C1B8576B100F800DC /* MessageChatGroupHeader.m */; };
+		EE9F736F1B8576C400F800DC /* MessageChatGroupHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE9F736E1B8576C400F800DC /* MessageChatGroupHeader.xib */; };
 		EEA2017C1B744E59006B81E4 /* ConnectionOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = EEA201791B744E59006B81E4 /* ConnectionOwner.m */; };
 		EEA2017D1B744E59006B81E4 /* Friends.m in Sources */ = {isa = PBXBuildFile; fileRef = EEA2017B1B744E59006B81E4 /* Friends.m */; };
 		EEA991481B775B4F001F6CC6 /* DDNNotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEA991471B775B4F001F6CC6 /* DDNNotificationViewController.m */; };
@@ -374,6 +376,9 @@
 		EE981F851B5A10400029723A /* LoginToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginToken.m; sourceTree = "<group>"; };
 		EE98D14A1B69AF9B004D88DF /* QueryHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryHeader.h; sourceTree = "<group>"; };
 		EE98D14B1B69AF9B004D88DF /* QueryHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryHeader.m; sourceTree = "<group>"; };
+		EE9F736B1B8576B100F800DC /* MessageChatGroupHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageChatGroupHeader.h; sourceTree = "<group>"; };
+		EE9F736C1B8576B100F800DC /* MessageChatGroupHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageChatGroupHeader.m; sourceTree = "<group>"; };
+		EE9F736E1B8576C400F800DC /* MessageChatGroupHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageChatGroupHeader.xib; sourceTree = "<group>"; };
 		EEA201781B744E59006B81E4 /* ConnectionOwner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionOwner.h; sourceTree = "<group>"; };
 		EEA201791B744E59006B81E4 /* ConnectionOwner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionOwner.m; sourceTree = "<group>"; };
 		EEA2017A1B744E59006B81E4 /* Friends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Friends.h; sourceTree = "<group>"; };
@@ -900,6 +905,7 @@
 		EE7EB54C1B46309D003281F7 /* Message */ = {
 			isa = PBXGroup;
 			children = (
+				EE9F736A1B85763200F800DC /* MessageChatGroupHeader */,
 				EE9744131B78884E00E81A70 /* MessageNotificationCell */,
 				EE7EB54D1B4630C0003281F7 /* MessageViewCell.h */,
 				EE7EB54E1B4630C0003281F7 /* MessageViewCell.m */,
@@ -949,6 +955,16 @@
 				EE97441D1B78944600E81A70 /* MessageNotificationDetailCell.xib */,
 			);
 			path = MessageNotificationCell;
+			sourceTree = "<group>";
+		};
+		EE9F736A1B85763200F800DC /* MessageChatGroupHeader */ = {
+			isa = PBXGroup;
+			children = (
+				EE9F736B1B8576B100F800DC /* MessageChatGroupHeader.h */,
+				EE9F736C1B8576B100F800DC /* MessageChatGroupHeader.m */,
+				EE9F736E1B8576C400F800DC /* MessageChatGroupHeader.xib */,
+			);
+			path = MessageChatGroupHeader;
 			sourceTree = "<group>";
 		};
 		EEA991411B773F1B001F6CC6 /* BadgeView */ = {
@@ -2034,6 +2050,7 @@
 				EE79103F1B841A14005E455B /* QueryCommentsCell.xib in Resources */,
 				EE7C68731B82D31F0003C593 /* CycleOverCell.xib in Resources */,
 				EEAACD741B44EA2D00D05C0B /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
+				EE9F736F1B8576C400F800DC /* MessageChatGroupHeader.xib in Resources */,
 				EE7416261B5B8CDF002CA1BC /* AreaCodeJson.txt in Resources */,
 				EE7415CC1B5B70D5002CA1BC /* InfoPlist.strings in Resources */,
 				EEAACD051B44E90400D05C0B /* QueryDescriptionCell.xib in Resources */,
@@ -2153,6 +2170,7 @@
 				EE664E9A1B73145000ACD57E /* QueryContent.m in Sources */,
 				EEAACCB51B44E90400D05C0B /* SecretViewController.m in Sources */,
 				EE76A57C1B72181300036747 /* ConnectionModel.m in Sources */,
+				EE9F736D1B8576B100F800DC /* MessageChatGroupHeader.m in Sources */,
 				EE7537761B6B1AC400EC1616 /* CommentsHeader.m in Sources */,
 				EE97440E1B78699A00E81A70 /* Reachability.m in Sources */,
 				EE96763F1B7C3D5C00445254 /* CycleDescriptionCell.m in Sources */,

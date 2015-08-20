@@ -21,6 +21,8 @@
 #import "CycleOverCell.h"
 #import "Targets.h"
 
+#import "ChatGroupController.h"
+
 @interface CycleViewController () <UITableViewDataSource, UITableViewDelegate, DropDownMenuProcotol, WEPopoverControllerDelegate, UIPopoverControllerDelegate, createUpdateDetailProtocol>
 @property (weak, nonatomic) IBOutlet UIView *descriptionView;
 @property (weak, nonatomic) IBOutlet UITableView *cycleTableView;
@@ -40,7 +42,8 @@
     
     BOOL isRecommmend;
     
-    NSArray* chatGroupArray;
+    NSArray* chatGroupArray_mine;
+    NSArray* chatGroupArray_recommend;
 }
 
 @synthesize descriptionView = _descriptionView;
@@ -111,13 +114,18 @@
 
     isRecommmend = YES;
     isSync = NO;
-    dic_description = [[_lm currentDeltailInfoLocal] mutableCopy];
-    chatGroupArray = [_mm enumMyChatGroupLocal];
-    [self viewDidLayoutSubviews];
-   
+  
     if (_ry.isReachable) {
         [self resetDataForViews];
     }
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    dic_description = [[_lm currentDeltailInfoLocal] mutableCopy];
+    chatGroupArray_mine = [_mm enumMyChatGroupLocal];
+    chatGroupArray_recommend = [_mm enumRecommendChatGroupLocal];
+    [self viewDidLayoutSubviews];
+    
 }
 
 - (void)reachabilityChanged:(Reachability*)sender {
@@ -138,9 +146,10 @@
         if (success) {
             dic_description = [dic mutableCopy];
             [_lm updateDetailInfoLocalWithData:dic];
-            [_mm enumMyChatGroupWithFinishBlock:^(BOOL success, NSArray* result) {
+            [_mm enumChatGroupWithFinishBlock:^(BOOL success, NSArray* result) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    chatGroupArray = [_mm enumMyChatGroupLocal];
+                    chatGroupArray_mine = [_mm enumMyChatGroupLocal];
+                    chatGroupArray_recommend = [_mm enumRecommendChatGroupLocal];
                     [_cycleTableView reloadData];
                 });
             }];
@@ -193,7 +202,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     // TODO: segue to user chat
-    [self performSegueWithIdentifier:@"enterChatGroup" sender:nil];
+    [self performSegueWithIdentifier:@"enterChatGroup" sender:indexPath];
     
 }
 
@@ -243,8 +252,8 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//    return [_mm myChatGroupCount];
-    return chatGroupArray.count;
+    if (section == 0) return chatGroupArray_mine.count;
+    else return chatGroupArray_recommend.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -255,8 +264,14 @@
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"CycleOverCell" owner:self options:nil];
         cell = [nib objectAtIndex:0];
     }
- 
-    Targets* tmp = [chatGroupArray objectAtIndex:indexPath.row];
+
+    Targets* tmp = nil;
+    if (indexPath.section == 0) {
+        tmp = [chatGroupArray_mine objectAtIndex:indexPath.row];
+    } else {
+        tmp = [chatGroupArray_recommend objectAtIndex:indexPath.row];
+    }
+    
     cell.numLabel.text = @"7";
     cell.themeLabel.text = tmp.target_name;
     
@@ -329,13 +344,25 @@
         _notifyObject = (CycleAddDescriptionViewController*)segue.destinationViewController;
     } else if ([segue.identifier isEqualToString:@"enterChatGroup"]) {
         
+        NSIndexPath* path = (NSIndexPath*)sender;
+        Targets* tmp = nil;
+        if (path.section == 0) {
+            tmp = [chatGroupArray_mine objectAtIndex:path.row];
+        } else {
+            tmp = [chatGroupArray_recommend objectAtIndex:path.row];
+        }
+        ((ChatGroupController*)segue.destinationViewController).group_id = tmp.group_id;
+        ((ChatGroupController*)segue.destinationViewController).joiner_count = tmp.number_count;
+        ((ChatGroupController*)segue.destinationViewController).group_name = tmp.target_name;
+        ((ChatGroupController*)segue.destinationViewController).founder_id = tmp.owner_id;
     }
 }
 
 #pragma mark -- create update detail chat group
 - (void)createUpdateChatGroup:(BOOL)success {
     if (success) {
-        chatGroupArray = [_mm enumMyChatGroupLocal];
+        chatGroupArray_mine = [_mm enumMyChatGroupLocal];
+        chatGroupArray_recommend = [_mm enumRecommendChatGroupLocal];
         [_cycleTableView reloadData];
     }
 }

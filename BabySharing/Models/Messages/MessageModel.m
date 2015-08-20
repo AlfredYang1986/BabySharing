@@ -42,6 +42,7 @@
     /**
      * get authorised user array in the local database
      */
+    _delegate = app;
     NSString* docs=[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     NSURL* url =[NSURL fileURLWithPath:[docs stringByAppendingPathComponent:LOCALDB_MESSAGEG_NOTIFICATION]];
     _doc = (UIManagedDocument*)[[UIManagedDocument alloc]initWithFileURL:url];
@@ -235,14 +236,26 @@
 }
 
 - (NSInteger)myChatGroupCount {
-    return [NotificationOwner chatGroupCountWithOwnerID:_delegate.lm.current_user_id inContext:_doc.managedObjectContext];
+    NSPredicate* pred = [NSPredicate predicateWithFormat:@"in_the_group=1 AND target_type=1"];
+    return [NotificationOwner chatGroupCountWithOwnerID:_delegate.lm.current_user_id andPred:pred inContext:_doc.managedObjectContext];
 }
 
 - (NSArray*)enumMyChatGroupLocal {
-    return [NotificationOwner enumAllTargetForOwner:_delegate.lm.current_user_id andType:MessageReceiverTypeChatGroup inContext:_doc.managedObjectContext];
+    NSPredicate* pred = [NSPredicate predicateWithFormat:@"in_the_group=1 AND target_type=1"];
+    return [NotificationOwner enumTargetForOwner:_delegate.lm.current_user_id andPred:pred inContext:_doc.managedObjectContext];
 }
 
-- (void)enumMyChatGroupWithFinishBlock:(chatGroupOptFinishBlock)block {
+- (NSInteger)recommendChatGroupCount {
+    NSPredicate* pred = [NSPredicate predicateWithFormat:@"in_the_group=0 AND target_type=1"];
+    return [NotificationOwner chatGroupCountWithOwnerID:_delegate.lm.current_user_id andPred:pred inContext:_doc.managedObjectContext];
+}
+
+- (NSArray*)enumRecommendChatGroupLocal {
+    NSPredicate* pred = [NSPredicate predicateWithFormat:@"in_the_group=0 AND target_type=1"];
+    return [NotificationOwner enumTargetForOwner:_delegate.lm.current_user_id andPred:pred inContext:_doc.managedObjectContext];
+}
+
+- (void)enumChatGroupWithFinishBlock:(chatGroupOptFinishBlock)block {
 
     AppDelegate* delegate = (AppDelegate*)([UIApplication sharedApplication].delegate);
     NSString* auth_token = delegate.lm.current_auth_token;
@@ -266,6 +279,34 @@
 
         NSDictionary* error = [result objectForKey:@"error"];
         block(NO, error);
+    }
+}
+
+- (void)joinChatGroup:(NSNumber*)group_id andFinishBlock:(chatGroupOptFinishBlock)block {
+    
+    NSString* auth_token = _delegate.lm.current_auth_token;
+    NSString* user_id = _delegate.lm.current_user_id;
+    
+    NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
+    [dic setValue:auth_token forKey:@"auth_token"];
+    [dic setValue:user_id forKey:@"user_id"];
+    [dic setValue:group_id forKey:@"group_id"];
+        
+    NSError * error = nil;
+    NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
+        
+    NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:CHAT_GROUP_JOIN]];
+        
+    if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
+      
+        [NotificationOwner addChatGroupWithOwnerID:_delegate.lm.current_user_id chatGroup:[result objectForKey:@"result"] inContext:_doc.managedObjectContext];
+        block(YES, nil);
+    } else {
+        NSDictionary* reError = [result objectForKey:@"error"];
+        NSString* msg = [reError objectForKey:@"message"];
+            
+        NSLog(@"query user profile failed");
+        NSLog(@"%@", msg);
     }
 }
 @end
