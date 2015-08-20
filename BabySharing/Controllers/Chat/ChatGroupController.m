@@ -223,11 +223,7 @@
  * @param downloadMediaIfNeed: 是否自动下载
  */
 -(void) onReceiveMessage:(GotyeOCMessage*)message downloadMediaIfNeed:(bool*)downloadMediaIfNeed {
-    
-    if (![message.sender isMemberOfClass:[GotyeOCGroup class]]) {
-        return;
-    }
-    
+  
     [current_message addObject:message];
     dispatch_async(dispatch_get_main_queue(), ^{
         [_queryView reloadData];

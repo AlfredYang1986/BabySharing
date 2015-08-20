@@ -144,7 +144,7 @@
 }
 
 - (void)setCHatGroupJoinerNumber:(NSNumber*)number {
-    _online_count_label.text = [NSString stringWithFormat:@"%d 人", number.integerValue];
+    _online_count_label.text = [NSString stringWithFormat:@"%ld 人", (long)number.integerValue];
 }
 
 - (void)setChatGroupUserList:(NSArray*)user_lst {
@@ -155,9 +155,10 @@
         }
         
         CGFloat offset = 8;
+        CGFloat offset_y = 8;
         for (int index = 0; index < MIN(user_lst.count, 6); ++index) {
             NSDictionary* user_dic = [user_lst objectAtIndex:index];
-            UIButton* tmp = [[UIButton alloc]initWithFrame:CGRectMake(offset, offset / 2, 30, 30)];
+            UIButton* tmp = [[UIButton alloc]initWithFrame:CGRectMake(offset, offset_y / 2, 30, 30)];
             tmp.layer.cornerRadius = 15.f;
             tmp.clipsToBounds = YES;
            

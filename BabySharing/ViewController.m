@@ -432,8 +432,7 @@ enum DisplaySide {
  * @param downloadMediaIfNeed: 是否自动下载
  */
 -(void) onReceiveMessage:(GotyeOCMessage*)message downloadMediaIfNeed:(bool*)downloadMediaIfNeed {
-    
-    if ([message.sender isMemberOfClass:[GotyeOCGroup class]]) {
+    if (message.sender.type == GotyeChatTargetTypeRoom) {
         return;
     }
     
