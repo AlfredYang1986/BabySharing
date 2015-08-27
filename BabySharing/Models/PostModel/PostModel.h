@@ -10,6 +10,8 @@
 
 @class QueryContent;
 
+typedef void(^likeFinishBlock)(BOOL success, QueryContent* content);
+
 @interface PostModel : NSObject
 
 - (BOOL)postJsonContentWithFileName:(NSString *)path withMessage:(NSString *)message;
@@ -19,4 +21,5 @@
 - (QueryContent*)postCommentToServiceWithPostID:(NSString*)post_id andCommentContent:(NSString*)comment_content;
 
 - (QueryContent*)postLikeToServiceWithPostID:(NSString*)post_id;
+- (void)postLikeToServiceWithPostID:(NSString*)post_id withFinishBlock:(likeFinishBlock)block;
 @end

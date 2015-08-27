@@ -570,11 +570,11 @@
 
 #pragma mark -- QueryCellActionProtocol
 - (void)didSelectLikeBtn:(id)content {
-    QueryContent* cur = (QueryContent*)content;
-    NSLog(@"like post id: %@", cur.content_post_id);
-    
-    AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    [delegate.pm postLikeToServiceWithPostID:cur.content_post_id];
+//    QueryContent* cur = (QueryContent*)content;
+//    NSLog(@"like post id: %@", cur.content_post_id);
+//    
+//    AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//    [delegate.pm postLikeToServiceWithPostID:cur.content_post_id];
 }
 
 - (void)didSelectShareBtn:(id)content {
@@ -593,7 +593,19 @@
 }
 
 - (void)didSelectCollectionBtn:(id)content {
-    
+    NSLog(@"collect for this user");
+    QueryContent* cur = (QueryContent*)content;
+    NSLog(@"like post id: %@", cur.content_post_id);
+
+    AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    [delegate.pm postLikeToServiceWithPostID:cur.content_post_id withFinishBlock:^(BOOL success, QueryContent *content) {
+        if (success) {
+            NSLog(@"like post success");
+            NSString* msg = @"like post success";
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success" message:msg delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+            [alert show];
+        }
+    }];
 }
 
 - (void)didSelectNotLikeBtn:(id)content {

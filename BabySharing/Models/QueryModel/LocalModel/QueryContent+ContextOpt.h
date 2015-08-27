@@ -44,7 +44,7 @@
  * if post success, add to local database
  */
 + (PostLikesError)checkPostLikeValidataWithPostID:(NSString*)post_id withAttr:(NSDictionary*)comment_attr inContext:(NSManagedObjectContext*)context;
-+ (void)likePostWithID:(NSString*)post_id withAttr:(NSDictionary*)like_attr inContext:(NSManagedObjectContext*)context;
++ (QueryContent*)refreshLikesToPostWithID:(NSString*)post_id withArr:(NSArray*)like_array andLikesCount:(NSNumber*)like_count inContext:(NSManagedObjectContext*)context;
 
 #pragma mark -- query content time span
 + (void)changeTimeSpan:(long long)time inContext:(NSManagedObjectContext*)context;

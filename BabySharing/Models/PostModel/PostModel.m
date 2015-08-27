@@ -232,6 +232,7 @@
     }
 }
 
+
 - (QueryContent*)postLikeToServiceWithPostID:(NSString*)post_id {
     
     AppDelegate* delegate = (AppDelegate*)([UIApplication sharedApplication].delegate);
@@ -251,10 +252,8 @@
     if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
         NSLog(@"post like success");
         NSArray* like_array =  [[result objectForKey:@"result"] objectForKey:@"likes"];
-        NSLog(@"%@", like_array);
-//        return [QueryContent refreshCommentToPostWithID:post_id withAttrs:like_array inContext:delegate.qm.doc.managedObjectContext];
-        return nil;
-        
+        NSNumber* like_count =  [[result objectForKey:@"result"] objectForKey:@"likes_count"];
+        return [QueryContent refreshLikesToPostWithID:post_id withArr:like_array andLikesCount:like_count inContext:delegate.qm.doc.managedObjectContext];
     } else {
         NSLog(@"post like failed");
         NSDictionary* reError = [result objectForKey:@"error"];
@@ -262,6 +261,37 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:msg delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
         [alert show];
         return nil;
+    }
+}
+
+- (void)postLikeToServiceWithPostID:(NSString*)post_id withFinishBlock:(likeFinishBlock)block {
+        AppDelegate* delegate = (AppDelegate*)([UIApplication sharedApplication].delegate);
+    NSString* auth_token = delegate.lm.current_auth_token;
+    NSString* user_id = delegate.lm.current_user_id;
+    
+    NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
+    [dic setValue:post_id forKey:@"post_id"];
+    [dic setValue:auth_token forKey:@"auth_token"];
+    [dic setValue:user_id forKey:@"user_id"];
+    
+    NSError * error = nil;
+    NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
+    
+    NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:[POST_HOST_DOMAIN stringByAppendingString:POST_LIKE]]];
+    
+    if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
+        NSLog(@"post like success");
+        NSArray* like_array =  [[result objectForKey:@"result"] objectForKey:@"likes"];
+        NSNumber* like_count =  [[result objectForKey:@"result"] objectForKey:@"likes_count"];
+        block(YES, [QueryContent refreshLikesToPostWithID:post_id withArr:like_array andLikesCount:like_count inContext:delegate.qm.doc.managedObjectContext]);
+    } else {
+        NSLog(@"post like failed");
+//        NSDictionary* reError = [result objectForKey:@"error"];
+//        NSString* msg = [reError objectForKey:@"message"];
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:msg delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+//        [alert show];
+//        return nil;
+        block(NO, nil);
     }
 }
 @end

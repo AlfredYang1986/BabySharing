@@ -809,6 +809,9 @@
 #pragma mark -- button actions
 - (IBAction)collectionBtnSelected {
     NSLog(@"collect for this user");
+     AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    _current_content = [delegate.pm postLikeToServiceWithPostID:_current_content.content_post_id];
+    [_queryView reloadData];
 }
 
 - (IBAction)commentsBtnSelected {

@@ -255,8 +255,16 @@
     }
 }
 
-+ (void)likePostWithID:(NSString*)post_id withAttr:(NSDictionary*)like_attr inContext:(NSManagedObjectContext*)context {
-
++ (QueryContent*)refreshLikesToPostWithID:(NSString*)post_id withArr:(NSArray*)like_array andLikesCount:(NSNumber*)like_count inContext:(NSManagedObjectContext*)context {
+    QueryContent* tmp = [self enumQueryContentByPostID:post_id inContext:context];
+    
+    [self removeAllLikesForContent:tmp inContext:context];
+    for (NSDictionary* iter in like_array) {
+        [self addOneLikeToContent:tmp withAttr:iter inContext:context];
+    }
+    
+    tmp.likes_count = like_count;
+    return tmp;
 }
 
 #pragma mark -- private op tags
@@ -280,7 +288,7 @@
     }
 }
 
-#pragma martk -- private op comment
+#pragma mark -- private op comment
 + (void)addOneCommentToContent:(QueryContent*)content withAttr:(NSDictionary*)comment_attr inContext:(NSManagedObjectContext*)context {
 
     QueryComments* tmp_comment = [NSEntityDescription insertNewObjectForEntityForName:@"QueryComments" inManagedObjectContext:context];

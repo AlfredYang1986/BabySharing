@@ -46,7 +46,7 @@
             return NSOrderedAscending;
     }];
     
-    NSLog(@"likes array: %@", likes_arr);
+//    NSLog(@"likes array: %@", likes_arr);
    
     NSUInteger count = 0;
     if (likes_arr.count > 6) {
