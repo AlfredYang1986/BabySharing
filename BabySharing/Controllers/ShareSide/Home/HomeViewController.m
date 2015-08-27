@@ -22,6 +22,7 @@
 #import "QueryCell.h"
 #import "QueryHeader.h"
 #import "INTUAnimationEngine.h"
+#import "BWStatusBarOverlay.h"
 
 #define VIEW_BOUNTDS        CGFloat screen_width = [UIScreen mainScreen].bounds.size.width; \
                             CGFloat screen_height = [UIScreen mainScreen].bounds.size.height; \
@@ -35,6 +36,8 @@
 #define FOUND_BOUNDS        CGRect rc1 = _foundView.bounds;
 #define FOUND_VIEW_START    CGRectMake(rc.size.width, 19, rc.size.width, rc1.size.height)
 #define FOUND_VIEW_END      CGRectMake(0, 19, rc.size.width, rc1.size.height)
+
+#define BACK_TO_TOP_TIME    3.0
 
 @interface HomeViewController () <UITableViewDelegate, UITableViewDataSource, QueryCellActionProtocol>
     
@@ -55,6 +58,9 @@
     HomeViewFoundDelegateAndDatasource* found_datasource;
     
     UIView* bkView;
+    UITapGestureRecognizer* tap;
+    BOOL showBack2Top;
+    CGFloat offset_y;
 }
 
 @synthesize queryView = _queryView;
@@ -109,6 +115,13 @@
 
     [self layoutTableViews];
     
+    BWStatusBarOverlay* tmp = [BWStatusBarOverlay shared];
+    [tmp setBackgroundColor:[UIColor redColor]];
+    [tmp.textLabel setTextColor:[UIColor whiteColor]];
+    showBack2Top = YES;
+    
+    tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(back2TopHandler:)];
+    [tmp addGestureRecognizer:tap];
 }
 
 - (void)layoutTableViews {
@@ -179,6 +192,10 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     _isHandleScrolling = NO;
+}
+
+- (void)back2TopHandler:(UITapGestureRecognizer*)gesture {
+    [_queryView setContentOffset:CGPointZero animated:YES];
 }
 
 /*
@@ -437,6 +454,8 @@
 #pragma mark -- scroll refresh
 - (void)dealloc {
     ((UIScrollView*)_queryView).delegate = nil;
+    BWStatusBarOverlay* tmp = [BWStatusBarOverlay shared];
+    [tmp removeGestureRecognizer:tap];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -455,11 +474,28 @@
         VIEW_BOUNTDS
         if (scrollView.contentOffset.y > [QueryCell preferredHeightWithDescription:@""] * 0.4) {
             [self.navigationController setNavigationBarHidden:YES animated:YES];
+            
+            if (offset_y != 0 && offset_y - scrollView.contentOffset.y > 30) {
+                showBack2Top = YES;
+            }
+            
+            BWStatusBarOverlay* tmp = [BWStatusBarOverlay shared];
+            if (tmp.isHidden && showBack2Top) {
+                [[BWStatusBarOverlay shared] showSuccessWithMessage:@"back to top" duration:BACK_TO_TOP_TIME animated:YES];
+                showBack2Top = NO;
+            }
             _queryView.frame = QUERY_VIEW_SCROLL;
         } else {
             [self.navigationController setNavigationBarHidden:NO animated:YES];
+            showBack2Top = YES;
+            BWStatusBarOverlay* tmp = [BWStatusBarOverlay shared];
+            if (!tmp.isHidden) {
+                [BWStatusBarOverlay dismissAnimated:YES];
+            }
             _queryView.frame = QUERY_VIEW_START;
         }
+       
+        offset_y = scrollView.contentOffset.y;
         
         if ((height - scrollView.contentSize.height + scrollView.contentOffset.y) / height > 0.2) { // 调用上拉刷新方
             CGRect rc = _queryView.frame;

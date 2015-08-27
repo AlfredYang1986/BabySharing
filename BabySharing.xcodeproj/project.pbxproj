@@ -215,6 +215,13 @@
 		EEB8122C1B7AECF800BC0774 /* CycleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB8122B1B7AECF800BC0774 /* CycleViewController.m */; };
 		EEB812311B7AF2ED00BC0774 /* DetailInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB8122E1B7AF2ED00BC0774 /* DetailInfo.m */; };
 		EEB812321B7AF2ED00BC0774 /* UserKids.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB812301B7AF2ED00BC0774 /* UserKids.m */; };
+		EEC980B01B8EB9EA0087E5A7 /* BWStatusBarOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC980A91B8EB9EA0087E5A7 /* BWStatusBarOverlay.m */; };
+		EEC980B11B8EB9EA0087E5A7 /* status-bar-pattern-black.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EEC980AA1B8EB9EA0087E5A7 /* status-bar-pattern-black.jpg */; };
+		EEC980B21B8EB9EA0087E5A7 /* status-bar-pattern-black@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EEC980AB1B8EB9EA0087E5A7 /* status-bar-pattern-black@2x.jpg */; };
+		EEC980B31B8EB9EA0087E5A7 /* status-bar-pattern-default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EEC980AC1B8EB9EA0087E5A7 /* status-bar-pattern-default.jpg */; };
+		EEC980B41B8EB9EA0087E5A7 /* status-bar-pattern-default@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EEC980AD1B8EB9EA0087E5A7 /* status-bar-pattern-default@2x.jpg */; };
+		EEC980B51B8EB9EA0087E5A7 /* status-bar-progress.png in Resources */ = {isa = PBXBuildFile; fileRef = EEC980AE1B8EB9EA0087E5A7 /* status-bar-progress.png */; };
+		EEC980B61B8EB9EA0087E5A7 /* status-bar-progress@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EEC980AF1B8EB9EA0087E5A7 /* status-bar-progress@2x.png */; };
 		EED64D451B8184AE008CB134 /* CycleAddKidsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EED64D441B8184AE008CB134 /* CycleAddKidsCell.m */; };
 		EED64D471B8184C1008CB134 /* CycleAddKidsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EED64D461B8184C1008CB134 /* CycleAddKidsCell.xib */; };
 		EED64D4A1B818995008CB134 /* CycleAddKidsFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = EED64D491B818995008CB134 /* CycleAddKidsFooter.m */; };
@@ -649,6 +656,14 @@
 		EEB8122E1B7AF2ED00BC0774 /* DetailInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailInfo.m; sourceTree = "<group>"; };
 		EEB8122F1B7AF2ED00BC0774 /* UserKids.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserKids.h; sourceTree = "<group>"; };
 		EEB812301B7AF2ED00BC0774 /* UserKids.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserKids.m; sourceTree = "<group>"; };
+		EEC980A81B8EB9EA0087E5A7 /* BWStatusBarOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWStatusBarOverlay.h; sourceTree = "<group>"; };
+		EEC980A91B8EB9EA0087E5A7 /* BWStatusBarOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWStatusBarOverlay.m; sourceTree = "<group>"; };
+		EEC980AA1B8EB9EA0087E5A7 /* status-bar-pattern-black.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "status-bar-pattern-black.jpg"; sourceTree = "<group>"; };
+		EEC980AB1B8EB9EA0087E5A7 /* status-bar-pattern-black@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "status-bar-pattern-black@2x.jpg"; sourceTree = "<group>"; };
+		EEC980AC1B8EB9EA0087E5A7 /* status-bar-pattern-default.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "status-bar-pattern-default.jpg"; sourceTree = "<group>"; };
+		EEC980AD1B8EB9EA0087E5A7 /* status-bar-pattern-default@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "status-bar-pattern-default@2x.jpg"; sourceTree = "<group>"; };
+		EEC980AE1B8EB9EA0087E5A7 /* status-bar-progress.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "status-bar-progress.png"; sourceTree = "<group>"; };
+		EEC980AF1B8EB9EA0087E5A7 /* status-bar-progress@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "status-bar-progress@2x.png"; sourceTree = "<group>"; };
 		EED64D431B8184AE008CB134 /* CycleAddKidsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleAddKidsCell.h; sourceTree = "<group>"; };
 		EED64D441B8184AE008CB134 /* CycleAddKidsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleAddKidsCell.m; sourceTree = "<group>"; };
 		EED64D461B8184C1008CB134 /* CycleAddKidsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CycleAddKidsCell.xib; sourceTree = "<group>"; };
@@ -1422,6 +1437,7 @@
 		EEAACBBB1B44E90300D05C0B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				EEC980A71B8EB9EA0087E5A7 /* BWStatusBarOverlay */,
 				EEAACC1D1B44E90400D05C0B /* SGActionView */,
 				EEAACC301B44E90400D05C0B /* ChatRoom */,
 				EEAACC2B1B44E90400D05C0B /* Album */,
@@ -1811,6 +1827,21 @@
 			path = Cycle;
 			sourceTree = "<group>";
 		};
+		EEC980A71B8EB9EA0087E5A7 /* BWStatusBarOverlay */ = {
+			isa = PBXGroup;
+			children = (
+				EEC980A81B8EB9EA0087E5A7 /* BWStatusBarOverlay.h */,
+				EEC980A91B8EB9EA0087E5A7 /* BWStatusBarOverlay.m */,
+				EEC980AA1B8EB9EA0087E5A7 /* status-bar-pattern-black.jpg */,
+				EEC980AB1B8EB9EA0087E5A7 /* status-bar-pattern-black@2x.jpg */,
+				EEC980AC1B8EB9EA0087E5A7 /* status-bar-pattern-default.jpg */,
+				EEC980AD1B8EB9EA0087E5A7 /* status-bar-pattern-default@2x.jpg */,
+				EEC980AE1B8EB9EA0087E5A7 /* status-bar-progress.png */,
+				EEC980AF1B8EB9EA0087E5A7 /* status-bar-progress@2x.png */,
+			);
+			path = BWStatusBarOverlay;
+			sourceTree = "<group>";
+		};
 		EED64D421B81844A008CB134 /* CycleKids */ = {
 			isa = PBXGroup;
 			children = (
@@ -2042,10 +2073,13 @@
 				EE79105E1B842187005E455B /* QueryDetailImageCell.xib in Resources */,
 				EE79105D1B842158005E455B /* QueryOwnerCell.xib in Resources */,
 				EE79105C1B84212A005E455B /* ProfileOthersOverView.xib in Resources */,
+				EEC980B31B8EB9EA0087E5A7 /* status-bar-pattern-default.jpg in Resources */,
 				EE79105B1B842105005E455B /* ProfileOverView.xib in Resources */,
 				EE79105A1B842085005E455B /* QueryCell.xib in Resources */,
+				EEC980B51B8EB9EA0087E5A7 /* status-bar-progress.png in Resources */,
 				EE79104E1B841B79005E455B /* ProfileDetailChatGroupCell.xib in Resources */,
 				EE79104C1B841B49005E455B /* MessageNotificationCell.xib in Resources */,
+				EEC980B41B8EB9EA0087E5A7 /* status-bar-pattern-default@2x.jpg in Resources */,
 				EE7910461B841AC8005E455B /* MessageViewCell.xib in Resources */,
 				EE79103F1B841A14005E455B /* QueryCommentsCell.xib in Resources */,
 				EE7C68731B82D31F0003C593 /* CycleOverCell.xib in Resources */,
@@ -2065,6 +2099,8 @@
 				EEAACC9F1B44E90400D05C0B /* CameraNib.storyboard in Resources */,
 				EEAACD1A1B44E90400D05C0B /* ProfileDetailTagsCell.xib in Resources */,
 				EEAACCC61B44E90400D05C0B /* webNab.storyboard in Resources */,
+				EEC980B11B8EB9EA0087E5A7 /* status-bar-pattern-black.jpg in Resources */,
+				EEC980B61B8EB9EA0087E5A7 /* status-bar-progress@2x.png in Resources */,
 				EEAACD071B44E90400D05C0B /* FoundPCGCell.xib in Resources */,
 				EE7415D21B5B7215002CA1BC /* Localizable.strings in Resources */,
 				EED64D471B8184C1008CB134 /* CycleAddKidsCell.xib in Resources */,
@@ -2076,6 +2112,7 @@
 				EEAACCC81B44E90400D05C0B /* Images.xcassets in Resources */,
 				EEAACCA01B44E90400D05C0B /* CameraNib2.storyboard in Resources */,
 				EEAACD781B44EA2D00D05C0B /* WeiboSDK.bundle in Resources */,
+				EEC980B21B8EB9EA0087E5A7 /* status-bar-pattern-black@2x.jpg in Resources */,
 				EE97441F1B78944600E81A70 /* MessageNotificationDetailCell.xib in Resources */,
 				EEAACC9D1B44E90400D05C0B /* AlbumNib.storyboard in Resources */,
 				EE2D4B7C1B525E0A00B58A1F /* PhotoPreView.storyboard in Resources */,
@@ -2248,6 +2285,7 @@
 				EE59A7751B5936170014F9C3 /* SearchUserTagsController.m in Sources */,
 				EEAACCDB1B44E90400D05C0B /* RegTmpToken+ContextOpt.m in Sources */,
 				EEAACCBB1B44E90400D05C0B /* HomeDetailViewController.m in Sources */,
+				EEC980B01B8EB9EA0087E5A7 /* BWStatusBarOverlay.m in Sources */,
 				EEAACCC41B44E90400D05C0B /* TabBarController.m in Sources */,
 				EEAACCE71B44E90400D05C0B /* QueryLocalModel.xcdatamodeld in Sources */,
 				EEAACCA31B44E90400D05C0B /* CVViewController.m in Sources */,
