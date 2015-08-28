@@ -1592,18 +1592,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="学校名称" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aPW-2j-Rc8">
-                                <rect key="frame" x="16" y="72" width="68" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HBt-Nj-0Nh">
-                                <rect key="frame" x="92" y="72" width="492" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="入学时间" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mqB-tQ-iPs">
                                 <rect key="frame" x="16" y="101" width="68" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1616,25 +1604,45 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2FG-i3-96E">
+                                <rect key="frame" x="92" y="68" width="492" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Bbw-MK-wnd" id="iSb-pw-xd8"/>
+                                </connections>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="学校名称" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aPW-2j-Rc8">
+                                <rect key="frame" x="16" y="72" width="68" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="aPW-2j-Rc8" firstAttribute="leading" secondItem="s0E-UX-tmk" secondAttribute="leadingMargin" id="03i-ia-uct"/>
                             <constraint firstItem="ehT-6f-r8c" firstAttribute="leading" secondItem="mqB-tQ-iPs" secondAttribute="trailing" constant="8" id="0aZ-3t-2e6"/>
-                            <constraint firstItem="HBt-Nj-0Nh" firstAttribute="leading" secondItem="aPW-2j-Rc8" secondAttribute="trailing" constant="8" id="9SL-Pw-zUt"/>
+                            <constraint firstItem="2FG-i3-96E" firstAttribute="leading" secondItem="aPW-2j-Rc8" secondAttribute="trailing" constant="8" id="3kj-3b-EbW"/>
+                            <constraint firstItem="2FG-i3-96E" firstAttribute="trailing" secondItem="s0E-UX-tmk" secondAttribute="trailingMargin" id="5YP-ND-Z1O"/>
+                            <constraint firstItem="mqB-tQ-iPs" firstAttribute="leading" secondItem="s0E-UX-tmk" secondAttribute="leadingMargin" id="Bp8-us-5hk"/>
                             <constraint firstItem="aPW-2j-Rc8" firstAttribute="leading" secondItem="s0E-UX-tmk" secondAttribute="leadingMargin" id="D1s-oc-BfB"/>
-                            <constraint firstItem="ehT-6f-r8c" firstAttribute="top" secondItem="HBt-Nj-0Nh" secondAttribute="bottom" constant="8" id="Uya-mu-uFl"/>
+                            <constraint firstItem="2FG-i3-96E" firstAttribute="leading" secondItem="aPW-2j-Rc8" secondAttribute="trailing" constant="8" id="IVf-fq-4wH"/>
+                            <constraint firstItem="aPW-2j-Rc8" firstAttribute="top" secondItem="CbS-M3-bNA" secondAttribute="bottom" constant="8" id="KjM-su-p2o"/>
                             <constraint firstItem="mqB-tQ-iPs" firstAttribute="leading" secondItem="s0E-UX-tmk" secondAttribute="leadingMargin" id="ZO5-18-ZO5"/>
                             <constraint firstItem="ehT-6f-r8c" firstAttribute="trailing" secondItem="s0E-UX-tmk" secondAttribute="trailingMargin" id="ZOL-On-7Yk"/>
                             <constraint firstItem="mqB-tQ-iPs" firstAttribute="top" secondItem="aPW-2j-Rc8" secondAttribute="bottom" constant="8" id="dd9-f0-oZg"/>
                             <constraint firstItem="mqB-tQ-iPs" firstAttribute="top" secondItem="aPW-2j-Rc8" secondAttribute="bottom" constant="8" id="hER-uH-xTq"/>
-                            <constraint firstItem="HBt-Nj-0Nh" firstAttribute="top" secondItem="CbS-M3-bNA" secondAttribute="bottom" constant="8" id="om0-zb-QGG"/>
+                            <constraint firstItem="2FG-i3-96E" firstAttribute="top" secondItem="CbS-M3-bNA" secondAttribute="bottom" constant="4" id="nCQ-uu-Rdw"/>
+                            <constraint firstItem="mqB-tQ-iPs" firstAttribute="top" secondItem="aPW-2j-Rc8" secondAttribute="bottom" constant="8" id="oEV-TM-D4W"/>
                             <constraint firstItem="ehT-6f-r8c" firstAttribute="leading" secondItem="mqB-tQ-iPs" secondAttribute="trailing" constant="8" id="rvt-Ie-iZ6"/>
-                            <constraint firstItem="HBt-Nj-0Nh" firstAttribute="trailing" secondItem="s0E-UX-tmk" secondAttribute="trailingMargin" id="uYD-uS-VVu"/>
                             <constraint firstItem="aPW-2j-Rc8" firstAttribute="top" secondItem="CbS-M3-bNA" secondAttribute="bottom" constant="8" id="xE8-C4-TKj"/>
-                            <constraint firstItem="HBt-Nj-0Nh" firstAttribute="leading" secondItem="aPW-2j-Rc8" secondAttribute="trailing" constant="8" id="yxq-zY-Frn"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="学校" id="Hu6-tm-LUq"/>
+                    <connections>
+                        <outlet property="schoolNameTF" destination="2FG-i3-96E" id="YVB-5r-oDd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Nw-lx-8RM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

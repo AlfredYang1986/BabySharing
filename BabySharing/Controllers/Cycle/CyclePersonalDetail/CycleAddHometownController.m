@@ -8,7 +8,7 @@
 
 #import "CycleAddHometownController.h"
 
-@interface CycleAddHometownController ()
+@interface CycleAddHometownController () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *hometownTF;
 
 @end
@@ -16,12 +16,16 @@
 @implementation CycleAddHometownController
 
 @synthesize hometownTF = _hometownTF;
+@synthesize delegate = _delegate;
+@synthesize ori_hometown = _ori_hometown;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(doneHomeDownEditing)];
+    
+    _hometownTF.text = _ori_hometown;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -30,7 +34,8 @@
 }
 
 - (void)doneHomeDownEditing {
-    
+    [_delegate addHometown:_hometownTF.text];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 /*
@@ -42,5 +47,11 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark -- text field delegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
 
 @end

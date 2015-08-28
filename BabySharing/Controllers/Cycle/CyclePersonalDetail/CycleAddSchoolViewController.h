@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol addSchoolProtocol <NSObject>
+
+- (void)addSchool:(NSString*)school_name;
+@end
+
 @interface CycleAddSchoolViewController : UIViewController
 
+@property (nonatomic, weak) id<addSchoolProtocol> delegate;
+@property (nonatomic, weak) NSString* ori_school_name;
 @end

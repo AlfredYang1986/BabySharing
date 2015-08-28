@@ -14,8 +14,10 @@
 
 #import "CycleAddDOBViewController.h"
 #import "CycleAddKidsViewController.h"
+#import "CycleAddHometownController.h"
+#import "CycleAddSchoolViewController.h"
 
-@interface CycleAddDescriptionViewController () <UITableViewDataSource, UITableViewDelegate, SearchUserTagControllerDelegate, addDOBProtocol, addKidsProtocol>
+@interface CycleAddDescriptionViewController () <UITableViewDataSource, UITableViewDelegate, SearchUserTagControllerDelegate, addDOBProtocol, addKidsProtocol, addHometownProtocol, addSchoolProtocol>
 @property (weak, nonatomic) IBOutlet UILabel *roleTagLabel;
 @property (weak, nonatomic) IBOutlet UIView *tagRowView;
 @property (weak, nonatomic) IBOutlet UITableView *descriptionDetailTableView;
@@ -85,18 +87,18 @@
     if ([segue.identifier isEqualToString:@"addDOB"]) {
   
         int age = -1;
-        if (_dic_description && [_dic_description.allKeys containsObject:@"age"]) {
-            age = ((NSNumber*)[_dic_description objectForKey:@"age"]).intValue;
+        if (dic_changed && [dic_changed.allKeys containsObject:@"age"]) {
+            age = ((NSNumber*)[dic_changed objectForKey:@"age"]).intValue;
         }
         
         int horoscrope = -1;
-        if (_dic_description && [_dic_description.allKeys containsObject:@"horoscrope"]) {
-            horoscrope = ((NSNumber*)[_dic_description objectForKey:@"horoscrope"]).intValue;
+        if (dic_changed && [dic_changed.allKeys containsObject:@"horoscrope"]) {
+            horoscrope = ((NSNumber*)[dic_changed objectForKey:@"horoscrope"]).intValue;
         }
        
         NSDate* date = nil;
-        if (_dic_description && [_dic_description.allKeys containsObject:@"dob"]) {
-            date = [NSDate dateWithTimeIntervalSince1970:((NSNumber*)[_dic_description objectForKey:@"dob"]).longLongValue / 1000];
+        if (dic_changed && [dic_changed.allKeys containsObject:@"dob"]) {
+            date = [NSDate dateWithTimeIntervalSince1970:((NSNumber*)[dic_changed objectForKey:@"dob"]).longLongValue / 1000];
         }
         
         ((CycleAddDOBViewController*)segue.destinationViewController).age = age;
@@ -106,8 +108,14 @@
     
     } else if ([segue.identifier isEqualToString:@"addKids"]) {
         
-        ((CycleAddKidsViewController*)segue.destinationViewController).kids = [[_dic_description objectForKey:@"kids"] mutableCopy];
+        ((CycleAddKidsViewController*)segue.destinationViewController).kids = [[dic_changed objectForKey:@"kids"] mutableCopy];
         ((CycleAddKidsViewController*)segue.destinationViewController).delegate = self;
+    } else if ([segue.identifier isEqualToString:@"addHometown"]) {
+        ((CycleAddHometownController*)segue.destinationViewController).delegate = self;
+        ((CycleAddHometownController*)segue.destinationViewController).ori_hometown = [dic_changed objectForKey:@"hometown"];
+    } else if ([segue.identifier isEqualToString:@"addSchool"]) {
+        ((CycleAddSchoolViewController*)segue.destinationViewController).delegate = self;
+        ((CycleAddSchoolViewController*)segue.destinationViewController).ori_school_name = [dic_changed objectForKey:@"school"];
     }
 }
 
@@ -140,6 +148,25 @@
     }
 }
 
+#pragma mark -- cycle add hometown
+- (void)addHometown:(NSString *)hometown {
+    if (dic_changed == nil) {
+        dic_changed = [[NSMutableDictionary alloc]init];
+    }
+    
+    [dic_changed setObject:hometown forKey:@"hometown"];
+    [_descriptionDetailTableView reloadData];
+}
+
+- (void)addSchool:(NSString *)school_name {
+    if (dic_changed == nil) {
+        dic_changed = [[NSMutableDictionary alloc]init];
+    }
+    
+    [dic_changed setObject:school_name forKey:@"school"];
+    [_descriptionDetailTableView reloadData];   
+}
+
 #pragma mark -- table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -154,6 +181,12 @@
                 break;
             case 1:
                 [self performSegueWithIdentifier:@"addKids" sender:nil];
+                break;
+            case 2:
+                [self performSegueWithIdentifier:@"addHometown" sender:nil];
+                break;
+            case 3:
+                [self performSegueWithIdentifier:@"addSchool" sender:nil];
                 break;
             default:
                 break;

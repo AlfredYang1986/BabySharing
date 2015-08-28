@@ -170,6 +170,7 @@
         if (current.detailInfo.dob) [dic setObject:[NSNumber numberWithLongLong:[NSNumber numberWithDouble:current.detailInfo.dob.timeIntervalSince1970 * 1000].longLongValue] forKey:@"dob"];
         if (current.detailInfo.horoscope) [dic setObject:current.detailInfo.horoscope forKey:@"horoscope"];
         if (current.detailInfo.school) [dic setObject:current.detailInfo.school forKey:@"school"];
+        if (current.detailInfo.home) [dic setObject:current.detailInfo.home forKey:@"hometown"];
         [dic setObject:[NSNumber numberWithInt:0] forKey:@"gender"];
        
         NSMutableArray* arr = [[NSMutableArray alloc]initWithCapacity:current.detailInfo.kids.count];
@@ -254,6 +255,8 @@
                 [self updateCurrentDetailKidsWithAttr:iter forDeatailInfo:tmp inContext:context];
             }
             
+        } else if ([iter isEqualToString:@"hometown"]) {
+            tmp.home = [dic objectForKey:iter];
         } else {
             // user id, do nothing
         }
