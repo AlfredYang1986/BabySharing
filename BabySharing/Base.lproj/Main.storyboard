@@ -1573,6 +1573,7 @@
                         <segue destination="TUa-pU-aQf" kind="push" identifier="addDOB" id="bRw-FN-Ssr"/>
                         <segue destination="aON-5l-rbo" kind="push" identifier="addKids" id="dhu-4x-zh3"/>
                         <segue destination="Bbw-MK-wnd" kind="push" identifier="addSchool" id="cmB-f3-oUD"/>
+                        <segue destination="82T-SR-g2N" kind="push" identifier="addHometown" id="e6H-Gp-ggc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IIC-d5-A6w" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1776,6 +1777,43 @@
             </objects>
             <point key="canvasLocation" x="4133" y="1637"/>
         </scene>
+        <!--家乡-->
+        <scene sceneID="PhU-eQ-LAI">
+            <objects>
+                <viewController id="82T-SR-g2N" customClass="CycleAddHometownController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ejl-gh-bqX"/>
+                        <viewControllerLayoutGuide type="bottom" id="cnO-Jv-GAt"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="C7R-J1-Z5q">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bvp-9C-73E">
+                                <rect key="frame" x="16" y="72" width="568" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="82T-SR-g2N" id="GcA-2G-rrg"/>
+                                </connections>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="bvp-9C-73E" firstAttribute="top" secondItem="Ejl-gh-bqX" secondAttribute="bottom" constant="8" id="GiP-dr-W3J"/>
+                            <constraint firstItem="bvp-9C-73E" firstAttribute="leading" secondItem="C7R-J1-Z5q" secondAttribute="leadingMargin" id="HNY-cm-U11"/>
+                            <constraint firstItem="bvp-9C-73E" firstAttribute="trailing" secondItem="C7R-J1-Z5q" secondAttribute="trailingMargin" id="WX7-hN-CA2"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="家乡" id="ZvZ-5K-c17"/>
+                    <connections>
+                        <outlet property="hometownTF" destination="bvp-9C-73E" id="Rp0-ob-ZSj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KnU-b6-79d" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4869" y="1402"/>
+        </scene>
         <!--添加好友-->
         <scene sceneID="3yB-0q-i35">
             <objects>
@@ -1960,8 +1998,8 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="qbd-0n-vJA"/>
-        <segue reference="Xl7-6t-OQ8"/>
-        <segue reference="2RH-j5-6Bc"/>
         <segue reference="4Ao-yR-LGJ"/>
+        <segue reference="cmB-f3-oUD"/>
+        <segue reference="Xl7-6t-OQ8"/>
     </inferredMetricsTieBreakers>
 </document>

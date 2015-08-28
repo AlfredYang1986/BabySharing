@@ -91,15 +91,16 @@
 		EE7C68731B82D31F0003C593 /* CycleOverCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE7C68721B82D31F0003C593 /* CycleOverCell.xib */; };
 		EE817F491B79A78E00988734 /* UserChatController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE817F481B79A78E00988734 /* UserChatController.m */; };
 		EE86D1B21B537469001C4650 /* PostEffectAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = EE86D1B11B537469001C4650 /* PostEffectAdapter.mm */; };
-		EE9676371B7C38E300445254 /* CycleAddDescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9676361B7C38E300445254 /* CycleAddDescriptionViewController.m */; };
 		EE96763F1B7C3D5C00445254 /* CycleDescriptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE96763E1B7C3D5C00445254 /* CycleDescriptionCell.m */; };
 		EE9676411B7C3D7700445254 /* CycleDescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE9676401B7C3D7700445254 /* CycleDescriptionCell.xib */; };
-		EE9676441B7C494000445254 /* CycleAddDOBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9676431B7C494000445254 /* CycleAddDOBViewController.m */; };
-		EE9676471B7C53F500445254 /* CycleAddKidsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9676461B7C53F500445254 /* CycleAddKidsViewController.m */; };
-		EE96764A1B7C5CD600445254 /* CycleAddSchoolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9676491B7C5CD600445254 /* CycleAddSchoolViewController.m */; };
 		EE97440E1B78699A00E81A70 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = EE97440D1B78699A00E81A70 /* Reachability.m */; };
 		EE9744171B78886300E81A70 /* MessageNotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9744151B78886300E81A70 /* MessageNotificationCell.m */; };
 		EE97441F1B78944600E81A70 /* MessageNotificationDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE97441D1B78944600E81A70 /* MessageNotificationDetailCell.xib */; };
+		EE9785AD1B9004CD00C454C5 /* CycleAddDescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9785A41B9004CD00C454C5 /* CycleAddDescriptionViewController.m */; };
+		EE9785AE1B9004CD00C454C5 /* CycleAddDOBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9785A61B9004CD00C454C5 /* CycleAddDOBViewController.m */; };
+		EE9785B01B9004CD00C454C5 /* CycleAddKidsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9785AA1B9004CD00C454C5 /* CycleAddKidsViewController.m */; };
+		EE9785B11B9004CD00C454C5 /* CycleAddSchoolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9785AC1B9004CD00C454C5 /* CycleAddSchoolViewController.m */; };
+		EE9785B41B90060B00C454C5 /* CycleAddHometownController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9785B31B90060B00C454C5 /* CycleAddHometownController.m */; };
 		EE981F861B5A10400029723A /* LoginToken.m in Sources */ = {isa = PBXBuildFile; fileRef = EE981F851B5A10400029723A /* LoginToken.m */; };
 		EE9F736D1B8576B100F800DC /* MessageChatGroupHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9F736C1B8576B100F800DC /* MessageChatGroupHeader.m */; };
 		EE9F736F1B8576C400F800DC /* MessageChatGroupHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE9F736E1B8576C400F800DC /* MessageChatGroupHeader.xib */; };
@@ -360,17 +361,9 @@
 		EE817F4A1B79B1E600988734 /* ProfileViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewDelegate.h; sourceTree = "<group>"; };
 		EE86D1B01B537469001C4650 /* PostEffectAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostEffectAdapter.h; sourceTree = "<group>"; };
 		EE86D1B11B537469001C4650 /* PostEffectAdapter.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = PostEffectAdapter.mm; sourceTree = "<group>"; };
-		EE9676351B7C38E300445254 /* CycleAddDescriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleAddDescriptionViewController.h; sourceTree = "<group>"; };
-		EE9676361B7C38E300445254 /* CycleAddDescriptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleAddDescriptionViewController.m; sourceTree = "<group>"; };
 		EE96763D1B7C3D5C00445254 /* CycleDescriptionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleDescriptionCell.h; sourceTree = "<group>"; };
 		EE96763E1B7C3D5C00445254 /* CycleDescriptionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleDescriptionCell.m; sourceTree = "<group>"; };
 		EE9676401B7C3D7700445254 /* CycleDescriptionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CycleDescriptionCell.xib; sourceTree = "<group>"; };
-		EE9676421B7C494000445254 /* CycleAddDOBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleAddDOBViewController.h; sourceTree = "<group>"; };
-		EE9676431B7C494000445254 /* CycleAddDOBViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleAddDOBViewController.m; sourceTree = "<group>"; };
-		EE9676451B7C53F500445254 /* CycleAddKidsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleAddKidsViewController.h; sourceTree = "<group>"; };
-		EE9676461B7C53F500445254 /* CycleAddKidsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleAddKidsViewController.m; sourceTree = "<group>"; };
-		EE9676481B7C5CD600445254 /* CycleAddSchoolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleAddSchoolViewController.h; sourceTree = "<group>"; };
-		EE9676491B7C5CD600445254 /* CycleAddSchoolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleAddSchoolViewController.m; sourceTree = "<group>"; };
 		EE97440C1B78699A00E81A70 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		EE97440D1B78699A00E81A70 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		EE9744141B78886300E81A70 /* MessageNotificationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageNotificationCell.h; sourceTree = "<group>"; };
@@ -379,6 +372,16 @@
 		EE97441B1B78944600E81A70 /* MessageNotificationDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageNotificationDetailCell.h; sourceTree = "<group>"; };
 		EE97441C1B78944600E81A70 /* MessageNotificationDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageNotificationDetailCell.m; sourceTree = "<group>"; };
 		EE97441D1B78944600E81A70 /* MessageNotificationDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageNotificationDetailCell.xib; sourceTree = "<group>"; };
+		EE9785A31B9004CD00C454C5 /* CycleAddDescriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleAddDescriptionViewController.h; sourceTree = "<group>"; };
+		EE9785A41B9004CD00C454C5 /* CycleAddDescriptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleAddDescriptionViewController.m; sourceTree = "<group>"; };
+		EE9785A51B9004CD00C454C5 /* CycleAddDOBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleAddDOBViewController.h; sourceTree = "<group>"; };
+		EE9785A61B9004CD00C454C5 /* CycleAddDOBViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleAddDOBViewController.m; sourceTree = "<group>"; };
+		EE9785A91B9004CD00C454C5 /* CycleAddKidsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleAddKidsViewController.h; sourceTree = "<group>"; };
+		EE9785AA1B9004CD00C454C5 /* CycleAddKidsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleAddKidsViewController.m; sourceTree = "<group>"; };
+		EE9785AB1B9004CD00C454C5 /* CycleAddSchoolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleAddSchoolViewController.h; sourceTree = "<group>"; };
+		EE9785AC1B9004CD00C454C5 /* CycleAddSchoolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleAddSchoolViewController.m; sourceTree = "<group>"; };
+		EE9785B21B90060B00C454C5 /* CycleAddHometownController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleAddHometownController.h; sourceTree = "<group>"; };
+		EE9785B31B90060B00C454C5 /* CycleAddHometownController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleAddHometownController.m; sourceTree = "<group>"; };
 		EE981F841B5A10400029723A /* LoginToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginToken.h; sourceTree = "<group>"; };
 		EE981F851B5A10400029723A /* LoginToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginToken.m; sourceTree = "<group>"; };
 		EE98D14A1B69AF9B004D88DF /* QueryHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryHeader.h; sourceTree = "<group>"; };
@@ -970,6 +973,23 @@
 				EE97441D1B78944600E81A70 /* MessageNotificationDetailCell.xib */,
 			);
 			path = MessageNotificationCell;
+			sourceTree = "<group>";
+		};
+		EE9785A21B9004CD00C454C5 /* CyclePersonalDetail */ = {
+			isa = PBXGroup;
+			children = (
+				EE9785A31B9004CD00C454C5 /* CycleAddDescriptionViewController.h */,
+				EE9785A41B9004CD00C454C5 /* CycleAddDescriptionViewController.m */,
+				EE9785A51B9004CD00C454C5 /* CycleAddDOBViewController.h */,
+				EE9785A61B9004CD00C454C5 /* CycleAddDOBViewController.m */,
+				EE9785A91B9004CD00C454C5 /* CycleAddKidsViewController.h */,
+				EE9785AA1B9004CD00C454C5 /* CycleAddKidsViewController.m */,
+				EE9785AB1B9004CD00C454C5 /* CycleAddSchoolViewController.h */,
+				EE9785AC1B9004CD00C454C5 /* CycleAddSchoolViewController.m */,
+				EE9785B21B90060B00C454C5 /* CycleAddHometownController.h */,
+				EE9785B31B90060B00C454C5 /* CycleAddHometownController.m */,
+			);
+			path = CyclePersonalDetail;
 			sourceTree = "<group>";
 		};
 		EE9F736A1B85763200F800DC /* MessageChatGroupHeader */ = {
@@ -1809,18 +1829,11 @@
 		EEB812291B7AECD500BC0774 /* Cycle */ = {
 			isa = PBXGroup;
 			children = (
+				EE9785A21B9004CD00C454C5 /* CyclePersonalDetail */,
 				EEB8122A1B7AECF800BC0774 /* CycleViewController.h */,
 				EEB8122B1B7AECF800BC0774 /* CycleViewController.m */,
 				EE6D6DE01B7B404E004D29C8 /* CycleDetailController.h */,
 				EE6D6DE11B7B404E004D29C8 /* CycleDetailController.m */,
-				EE9676351B7C38E300445254 /* CycleAddDescriptionViewController.h */,
-				EE9676361B7C38E300445254 /* CycleAddDescriptionViewController.m */,
-				EE9676421B7C494000445254 /* CycleAddDOBViewController.h */,
-				EE9676431B7C494000445254 /* CycleAddDOBViewController.m */,
-				EE9676451B7C53F500445254 /* CycleAddKidsViewController.h */,
-				EE9676461B7C53F500445254 /* CycleAddKidsViewController.m */,
-				EE9676481B7C5CD600445254 /* CycleAddSchoolViewController.h */,
-				EE9676491B7C5CD600445254 /* CycleAddSchoolViewController.m */,
 				EE750EFE1B7DB8EA002F2FBD /* CycleSyncDataProtocol.h */,
 				EED64D4D1B819544008CB134 /* CycleDefines.h */,
 			);
@@ -2139,6 +2152,7 @@
 				EE7910581B841CE0005E455B /* PhotoTagRoundPointLayer.m in Sources */,
 				EE7910571B841CBE005E455B /* FoundPCGCell.m in Sources */,
 				EE7910561B841CAB005E455B /* WETouchableView.m in Sources */,
+				EE9785AE1B9004CD00C454C5 /* CycleAddDOBViewController.m in Sources */,
 				EE7910551B841C8F005E455B /* PhotoTagTariangleLayer.m in Sources */,
 				EE7910541B841C77005E455B /* AlbumGridCell.m in Sources */,
 				EE7910531B841C5B005E455B /* AreaTableCell.m in Sources */,
@@ -2179,7 +2193,6 @@
 				EE2D4B7D1B525E0A00B58A1F /* PhotoPreViewController.m in Sources */,
 				EEAACD131B44E90400D05C0B /* ProfileDetailLocationCell.m in Sources */,
 				EEAACCD51B44E90400D05C0B /* CurrentToken.m in Sources */,
-				EE9676371B7C38E300445254 /* CycleAddDescriptionViewController.m in Sources */,
 				EE5D68751B75A9FD0067A2DF /* Targets.m in Sources */,
 				EE6D6DB61B7B28A6004D29C8 /* WEPopoverController.m in Sources */,
 				EEAACCE81B44E90400D05C0B /* QueryTimeSpan.m in Sources */,
@@ -2189,13 +2202,13 @@
 				EEAACD271B44E90400D05C0B /* ChatViewCell.m in Sources */,
 				EEAACCDA1B44E90400D05C0B /* Providers.m in Sources */,
 				EEB8122C1B7AECF800BC0774 /* CycleViewController.m in Sources */,
-				EE9676441B7C494000445254 /* CycleAddDOBViewController.m in Sources */,
 				EEAACCD71B44E90400D05C0B /* LoginToken+ContextOpt.m in Sources */,
 				EEE94E251B74BE3B0011321A /* NewMessageSettingController.m in Sources */,
 				EEAACCBE1B44E90400D05C0B /* HomeViewController.m in Sources */,
 				EEFA44FE1B58F7D4007DF294 /* NickNameInputView.m in Sources */,
 				EE2D4B7A1B525E0A00B58A1F /* PostPreViewController.m in Sources */,
 				EEAACCAA1B44E90400D05C0B /* PhoneInputViewController.m in Sources */,
+				EE9785B41B90060B00C454C5 /* CycleAddHometownController.m in Sources */,
 				EEAACCEB1B44E90400D05C0B /* TmpFileStorageModel.m in Sources */,
 				EEAAA9771B77177C00BEDA6D /* Notifications.m in Sources */,
 				EE5D687B1B75B12B0067A2DF /* NotificationOwner+ContextOpt.m in Sources */,
@@ -2219,11 +2232,11 @@
 				EE76A5761B72056800036747 /* Followed.m in Sources */,
 				EE2D4B801B525E0A00B58A1F /* PhotoTagsController.m in Sources */,
 				EEAACD1F1B44E90400D05C0B /* SGActionView.m in Sources */,
+				EE9785B11B9004CD00C454C5 /* CycleAddSchoolViewController.m in Sources */,
 				EEE94E181B74BDDD0011321A /* ProfileDetailController.m in Sources */,
 				EEAACCA91B44E90400D05C0B /* NicknameInputViewController.m in Sources */,
 				EEE94E261B74BE3B0011321A /* PersonalSettingController.mm in Sources */,
 				EEAACCA41B44E90400D05C0B /* CVViewController2.m in Sources */,
-				EE9676471B7C53F500445254 /* CycleAddKidsViewController.m in Sources */,
 				EED64D451B8184AE008CB134 /* CycleAddKidsCell.m in Sources */,
 				EEA991481B775B4F001F6CC6 /* DDNNotificationViewController.m in Sources */,
 				EEAACD021B44E90400D05C0B /* QueryOwnerCell.m in Sources */,
@@ -2231,7 +2244,6 @@
 				EEA2017D1B744E59006B81E4 /* Friends.m in Sources */,
 				EEE94E2B1B74BE910011321A /* PersonalCentreOthersDelegate.m in Sources */,
 				EEAACCD91B44E90400D05C0B /* Providers+ContextOpt.m in Sources */,
-				EE96764A1B7C5CD600445254 /* CycleAddSchoolViewController.m in Sources */,
 				EEAACCA81B44E90400D05C0B /* LoginViewController.m in Sources */,
 				EEAAC8FE1B44E81A00D05C0B /* main.m in Sources */,
 				EEAACCC71B44E90400D05C0B /* WebSearchController.m in Sources */,
@@ -2248,6 +2260,7 @@
 				EEE94E0A1B74A8C20011321A /* FriendsTableDelegate.m in Sources */,
 				EE5D686F1B75A9FC0067A2DF /* NotificationOwner.m in Sources */,
 				EE86D1B21B537469001C4650 /* PostEffectAdapter.mm in Sources */,
+				EE9785B01B9004CD00C454C5 /* CycleAddKidsViewController.m in Sources */,
 				EEE94E131B74AB6B0011321A /* AddressBookDelegate.m in Sources */,
 				EEAACCE01B44E90400D05C0B /* PostModel.m in Sources */,
 				EEAACCE11B44E90400D05C0B /* QueryComments.m in Sources */,
@@ -2289,6 +2302,7 @@
 				EEAACCC41B44E90400D05C0B /* TabBarController.m in Sources */,
 				EEAACCE71B44E90400D05C0B /* QueryLocalModel.xcdatamodeld in Sources */,
 				EEAACCA31B44E90400D05C0B /* CVViewController.m in Sources */,
+				EE9785AD1B9004CD00C454C5 /* CycleAddDescriptionViewController.m in Sources */,
 				EEAACCBD1B44E90400D05C0B /* HomeTagsController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
