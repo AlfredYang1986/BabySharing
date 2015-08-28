@@ -296,7 +296,7 @@
         [header setUserName:tmp.owner_name];
         [header setLocation:@"中国 北京"];
         [header setRoleTag:@"role tag"];
-        [header setTimes:@"1000"];
+        [header setTimes:[NSString stringWithFormat:@"%d", tmp.likes_count.intValue]];
         
         return header;
     }
