@@ -23,6 +23,8 @@
 @synthesize queryView = _queryView;
 @synthesize current_auth_token = _current_auth_token;
 @synthesize current_user_id = _current_user_id;
+@synthesize dic_profile_details = _dic_profile_details;
+@synthesize delegate = _delegate;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -121,6 +123,8 @@
     if ([segue.identifier isEqualToString:@"PersonalSetting"]) {
         ((PersonalSettingController*)segue.destinationViewController).current_user_id = self.current_user_id;
         ((PersonalSettingController*)segue.destinationViewController).current_auth_token = self.current_auth_token;
+        ((PersonalSettingController*)segue.destinationViewController).dic_profile_details = self.dic_profile_details;
+        ((PersonalSettingController*)segue.destinationViewController).delegate = self.delegate;
     }
 }
 

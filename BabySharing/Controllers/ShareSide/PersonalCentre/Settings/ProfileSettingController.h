@@ -7,8 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PersonalCenterDefines.h"
 
 @interface ProfileSettingController : UIViewController
 @property (weak, nonatomic) NSString* current_user_id;
 @property (weak, nonatomic) NSString* current_auth_token;
+
+@property (weak, nonatomic) NSDictionary* dic_profile_details;
+
+@property (weak, nonatomic) id<personalDetailChanged> delegate;
 @end

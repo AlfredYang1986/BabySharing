@@ -216,6 +216,9 @@
 		EEB8122C1B7AECF800BC0774 /* CycleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB8122B1B7AECF800BC0774 /* CycleViewController.m */; };
 		EEB812311B7AF2ED00BC0774 /* DetailInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB8122E1B7AF2ED00BC0774 /* DetailInfo.m */; };
 		EEB812321B7AF2ED00BC0774 /* UserKids.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB812301B7AF2ED00BC0774 /* UserKids.m */; };
+		EEBFFC1D1B916A0F005AAE36 /* PersonalSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EEBFFC1B1B916A0F005AAE36 /* PersonalSettingCell.m */; };
+		EEBFFC1E1B916A0F005AAE36 /* PersonalSettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEBFFC1C1B916A0F005AAE36 /* PersonalSettingCell.xib */; };
+		EEBFFC211B9177D5005AAE36 /* PersonalChangeScreenNameController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEBFFC201B9177D5005AAE36 /* PersonalChangeScreenNameController.m */; };
 		EEC980B01B8EB9EA0087E5A7 /* BWStatusBarOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC980A91B8EB9EA0087E5A7 /* BWStatusBarOverlay.m */; };
 		EEC980B11B8EB9EA0087E5A7 /* status-bar-pattern-black.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EEC980AA1B8EB9EA0087E5A7 /* status-bar-pattern-black.jpg */; };
 		EEC980B21B8EB9EA0087E5A7 /* status-bar-pattern-black@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EEC980AB1B8EB9EA0087E5A7 /* status-bar-pattern-black@2x.jpg */; };
@@ -660,6 +663,11 @@
 		EEB8122F1B7AF2ED00BC0774 /* UserKids.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserKids.h; sourceTree = "<group>"; };
 		EEB812301B7AF2ED00BC0774 /* UserKids.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserKids.m; sourceTree = "<group>"; };
 		EEBFFC181B915293005AAE36 /* PersonalCenterDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonalCenterDefines.h; sourceTree = "<group>"; };
+		EEBFFC1A1B916A0F005AAE36 /* PersonalSettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalSettingCell.h; sourceTree = "<group>"; };
+		EEBFFC1B1B916A0F005AAE36 /* PersonalSettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalSettingCell.m; sourceTree = "<group>"; };
+		EEBFFC1C1B916A0F005AAE36 /* PersonalSettingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonalSettingCell.xib; sourceTree = "<group>"; };
+		EEBFFC1F1B9177D5005AAE36 /* PersonalChangeScreenNameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalChangeScreenNameController.h; sourceTree = "<group>"; };
+		EEBFFC201B9177D5005AAE36 /* PersonalChangeScreenNameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalChangeScreenNameController.m; sourceTree = "<group>"; };
 		EEC980A81B8EB9EA0087E5A7 /* BWStatusBarOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWStatusBarOverlay.h; sourceTree = "<group>"; };
 		EEC980A91B8EB9EA0087E5A7 /* BWStatusBarOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWStatusBarOverlay.m; sourceTree = "<group>"; };
 		EEC980AA1B8EB9EA0087E5A7 /* status-bar-pattern-black.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "status-bar-pattern-black.jpg"; sourceTree = "<group>"; };
@@ -858,6 +866,7 @@
 		EE6C741E1B6C452400EDE0AA /* PersonalCenter */ = {
 			isa = PBXGroup;
 			children = (
+				EEBFFC191B9169CD005AAE36 /* PersonalSetting */,
 				EEE94E2C1B74BF870011321A /* OtherOverView */,
 				EEE94E2D1B74BF870011321A /* OwnerOverView */,
 				EE817F4A1B79B1E600988734 /* ProfileViewDelegate.h */,
@@ -1842,6 +1851,17 @@
 			path = Cycle;
 			sourceTree = "<group>";
 		};
+		EEBFFC191B9169CD005AAE36 /* PersonalSetting */ = {
+			isa = PBXGroup;
+			children = (
+				EEBFFC1A1B916A0F005AAE36 /* PersonalSettingCell.h */,
+				EEBFFC1B1B916A0F005AAE36 /* PersonalSettingCell.m */,
+				EEBFFC1C1B916A0F005AAE36 /* PersonalSettingCell.xib */,
+			);
+			name = PersonalSetting;
+			path = BabySharing/Views/Profile/PersonalSetting;
+			sourceTree = SOURCE_ROOT;
+		};
 		EEC980A71B8EB9EA0087E5A7 /* BWStatusBarOverlay */ = {
 			isa = PBXGroup;
 			children = (
@@ -1922,6 +1942,8 @@
 				EEE94E221B74BE3B0011321A /* PersonalSettingController.mm */,
 				EEE94E231B74BE3B0011321A /* ProfileSettingController.h */,
 				EEE94E241B74BE3B0011321A /* ProfileSettingController.mm */,
+				EEBFFC1F1B9177D5005AAE36 /* PersonalChangeScreenNameController.h */,
+				EEBFFC201B9177D5005AAE36 /* PersonalChangeScreenNameController.m */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -2117,6 +2139,7 @@
 				EEC980B11B8EB9EA0087E5A7 /* status-bar-pattern-black.jpg in Resources */,
 				EEC980B61B8EB9EA0087E5A7 /* status-bar-progress@2x.png in Resources */,
 				EEAACD071B44E90400D05C0B /* FoundPCGCell.xib in Resources */,
+				EEBFFC1E1B916A0F005AAE36 /* PersonalSettingCell.xib in Resources */,
 				EE7415D21B5B7215002CA1BC /* Localizable.strings in Resources */,
 				EED64D471B8184C1008CB134 /* CycleAddKidsCell.xib in Resources */,
 				EE74162B1B5B9659002CA1BC /* AreaTableCell.xib in Resources */,
@@ -2156,6 +2179,7 @@
 				EE7910561B841CAB005E455B /* WETouchableView.m in Sources */,
 				EE9785AE1B9004CD00C454C5 /* CycleAddDOBViewController.m in Sources */,
 				EE7910551B841C8F005E455B /* PhotoTagTariangleLayer.m in Sources */,
+				EEBFFC211B9177D5005AAE36 /* PersonalChangeScreenNameController.m in Sources */,
 				EE7910541B841C77005E455B /* AlbumGridCell.m in Sources */,
 				EE7910531B841C5B005E455B /* AreaTableCell.m in Sources */,
 				EE7910521B841C4E005E455B /* QueryHeader.m in Sources */,
@@ -2201,6 +2225,7 @@
 				EEAACD151B44E90400D05C0B /* ProfileDetailPostCell.m in Sources */,
 				EE6D6DB51B7B28A6004D29C8 /* WEPopoverContainerView.m in Sources */,
 				EEAACCD41B44E90400D05C0B /* CurrentToken+ContextOpt.m in Sources */,
+				EEBFFC1D1B916A0F005AAE36 /* PersonalSettingCell.m in Sources */,
 				EEAACD271B44E90400D05C0B /* ChatViewCell.m in Sources */,
 				EEAACCDA1B44E90400D05C0B /* Providers.m in Sources */,
 				EEB8122C1B7AECF800BC0774 /* CycleViewController.m in Sources */,

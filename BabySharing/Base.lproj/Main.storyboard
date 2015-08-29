@@ -472,6 +472,43 @@
             </objects>
             <point key="canvasLocation" x="2342" y="3938"/>
         </scene>
+        <!--昵称-->
+        <scene sceneID="hQh-zQ-qnx">
+            <objects>
+                <viewController id="ydZ-5V-8Oa" customClass="PersonalChangeScreenNameController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="anD-h4-GRc"/>
+                        <viewControllerLayoutGuide type="bottom" id="1TE-Tm-z8Z"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ZLg-Fc-a5Y">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YS8-J3-HPd">
+                                <rect key="frame" x="16" y="72" width="568" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="ydZ-5V-8Oa" id="sLy-jR-h5I"/>
+                                </connections>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="YS8-J3-HPd" firstAttribute="leading" secondItem="ZLg-Fc-a5Y" secondAttribute="leadingMargin" id="YtY-BP-440"/>
+                            <constraint firstItem="YS8-J3-HPd" firstAttribute="top" secondItem="anD-h4-GRc" secondAttribute="bottom" constant="8" id="gct-Jr-hXE"/>
+                            <constraint firstItem="YS8-J3-HPd" firstAttribute="trailing" secondItem="ZLg-Fc-a5Y" secondAttribute="trailingMargin" id="tYG-cP-hkP"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="昵称" id="E2U-mw-gzL"/>
+                    <connections>
+                        <outlet property="screen_name_tf" destination="YS8-J3-HPd" id="PCk-jI-l58"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TFt-YV-Akm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2342" y="5474"/>
+        </scene>
         <!--个人信息-->
         <scene sceneID="9Zr-gx-T8d">
             <objects>
@@ -484,7 +521,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="oix-Er-DQz">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="oix-Er-DQz">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -494,10 +531,17 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="oix-Er-DQz" firstAttribute="bottom" secondItem="SS1-Uf-N33" secondAttribute="bottomMargin" id="42R-Kz-gdt"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="oix-Er-DQz" secondAttribute="trailing" constant="-16" id="6cV-mL-rxB"/>
+                            <constraint firstItem="oix-Er-DQz" firstAttribute="top" secondItem="SS1-Uf-N33" secondAttribute="topMargin" id="8uc-Mz-cPG"/>
+                            <constraint firstItem="oix-Er-DQz" firstAttribute="leading" secondItem="SS1-Uf-N33" secondAttribute="leadingMargin" constant="-16" id="RKN-hF-660"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="个人信息" id="gzV-kX-Ww8"/>
                     <connections>
                         <outlet property="queryView" destination="oix-Er-DQz" id="wRt-Iq-Yvr"/>
+                        <segue destination="ydZ-5V-8Oa" kind="push" identifier="addScreenName" id="ZM9-kh-H5L"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="10N-V8-JSP" userLabel="First Responder" sceneMemberID="firstResponder"/>

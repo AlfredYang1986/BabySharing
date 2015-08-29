@@ -11,4 +11,7 @@
 
 #define PHOTO_PER_LINE 3
 
+@protocol personalDetailChanged <NSObject>
+- (void)personalDetailChanged:(NSDictionary*)dic;
+@end
 #endif

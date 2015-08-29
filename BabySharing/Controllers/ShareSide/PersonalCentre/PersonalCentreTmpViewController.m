@@ -26,7 +26,7 @@
 #import "UserChatController.h"
 #import "HomeDetailViewController.h"
 
-@interface PersonalCentreTmpViewController () <PersonalCenterProtocol, ProfileViewDelegate, AlbumTableCellDelegate>
+@interface PersonalCentreTmpViewController () <PersonalCenterProtocol, ProfileViewDelegate, AlbumTableCellDelegate, personalDetailChanged>
 @property (weak, nonatomic, readonly) NSString* current_user_id;
 @property (weak, nonatomic, readonly) NSString* current_auth_token;
 @property (weak, nonatomic) IBOutlet UITableView *queryView;
@@ -123,6 +123,8 @@
     if ([segue.identifier isEqualToString:@"MoreSetting"]) {
         ((ProfileSettingController*)segue.destinationViewController).current_user_id = self.current_user_id;
         ((ProfileSettingController*)segue.destinationViewController).current_auth_token = self.current_auth_token;
+        ((ProfileSettingController*)segue.destinationViewController).dic_profile_details = dic_profile_details;
+        ((ProfileSettingController*)segue.destinationViewController).delegate = self;
     }
 }
 
@@ -320,5 +322,12 @@
     detail.current_auth_token = _current_auth_token;
     
     [self.navigationController pushViewController:detail animated:YES];
+}
+
+#pragma mark -- change date
+- (void)personalDetailChanged:(NSDictionary *)dic {
+    for (NSString* key in dic.allKeys) {
+        [dic_profile_details setValue:[dic objectForKey:key] forKey:key];
+    }
 }
 @end
