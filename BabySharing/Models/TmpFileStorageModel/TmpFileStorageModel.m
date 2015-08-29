@@ -160,4 +160,36 @@
     }
     return reVal;
 }
+
+#pragma mark -- get file stroage size
++ (long long)fileSizeAtPath:(NSString*) filePath{
+    NSFileManager* manager = [NSFileManager defaultManager];
+    if ([manager fileExistsAtPath:filePath]){
+        return [[manager attributesOfItemAtPath:filePath error:nil] fileSize];
+    }
+    return 0;
+}
+
++ (CGFloat)tmpFileStorageSize {
+    
+    NSFileManager* manager = [NSFileManager defaultManager];
+    
+    if (![manager fileExistsAtPath:[self BMTmpDir]]) return 0;
+    
+    NSEnumerator *childFilesEnumerator = [[manager subpathsAtPath:[self BMTmpDir]] objectEnumerator];
+    
+    NSString* fileName;
+    
+    long long folderSize = 0;
+    
+    while ((fileName = [childFilesEnumerator nextObject]) != nil){
+        
+        NSString* fileAbsolutePath = [[self BMTmpDir] stringByAppendingPathComponent:fileName];
+        
+        folderSize += [self fileSizeAtPath:fileAbsolutePath];
+        
+    }
+    
+    return folderSize/(1024.0*1024.0);
+}
 @end

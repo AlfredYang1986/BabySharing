@@ -110,6 +110,8 @@
         cell.accessoryType = UITableViewCellAccessoryNone;
     } else if ([cell.textLabel.text isEqualToString:@""]) {
         cell.accessoryType = UITableViewCellAccessoryNone;
+    } else if ([cell.textLabel.text isEqualToString:@"清除缓存"]) {
+        cell.textLabel.text = [cell.textLabel.text stringByAppendingString:[NSString stringWithFormat:@"(%.2fM)", [TmpFileStorageModel tmpFileStorageSize]]];
     }
     
     return cell;
@@ -152,6 +154,9 @@
 }
 
 - (void)clearTmpStorageSelectd {
-    
+    NSLog(@"clear tmp storage selected");
+    [TmpFileStorageModel deleteBMTmpImageDir];
+    [TmpFileStorageModel deleteBMTmpMovieDir];
+    [_queryView reloadData];
 }
 @end

@@ -32,4 +32,7 @@ typedef void(^fileDidDownloadBlock)(BOOL success, NSURL* img);
 + (void)saveAsToAlbumWithMovieName:(NSString *)name;
 + (void)deleteOneMovieFileWithName:(NSString*)name;
 + (void)deleteOneMovieFileWithUrl:(NSURL*)path;
+
+#pragma mark -- get file stroage size
++ (CGFloat)tmpFileStorageSize;
 @end
