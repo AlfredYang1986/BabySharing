@@ -14,21 +14,25 @@
 
 #import "PersonalCenterOwnerDelegate.h"
 #import "ProfileUserHeaderCell.h"
+#import "PersonalCenterDefines.h"
 
 #import "RemoteInstance.h"
 #import "ModelDefines.h"
 
 #import "ProfileSettingController.h"
 #import "OwnerQueryModel.h"
+#import "ConnectionModel.h"
 
 #import "UserChatController.h"
+#import "HomeDetailViewController.h"
 
-@interface PersonalCentreTmpViewController () <PersonalCenterProtocol, ProfileViewDelegate>
+@interface PersonalCentreTmpViewController () <PersonalCenterProtocol, ProfileViewDelegate, AlbumTableCellDelegate>
 @property (weak, nonatomic, readonly) NSString* current_user_id;
 @property (weak, nonatomic, readonly) NSString* current_auth_token;
 @property (weak, nonatomic) IBOutlet UITableView *queryView;
 
 @property (weak, nonatomic, readonly) OwnerQueryModel* om;
+@property (weak, nonatomic, readonly) ConnectionModel* cm;
 @end
 
 #define TITLE 0
@@ -46,6 +50,7 @@
 @synthesize queryView = _queryView;
 
 @synthesize om = _om;
+@synthesize cm = _cm;
 
 @synthesize current_delegate = _current_delegate;
 @synthesize owner_id = _owner_id;
@@ -59,6 +64,7 @@
     _current_auth_token = delegate.lm.current_auth_token;
  
     _om = delegate.om;
+    _cm = delegate.cm;
     /**
      * Profile Header Cell
      */
@@ -235,5 +241,84 @@
     chat.chat_user_photo = [self getPhotoName];
     
     [self.navigationController pushViewController:chat animated:YES];
+}
+
+- (void)followBtnSelected {
+    NSLog(@"follow button selected");
+    
+    NSString* follow_user_id = _owner_id;
+    NSNumber* relations = [dic_profile_details objectForKey:@"relations"];
+ 
+    switch (relations.integerValue) {
+        case UserPostOwnerConnectionsSamePerson:
+            // my own post, do nothing
+            break;
+        case UserPostOwnerConnectionsNone:
+        case UserPostOwnerConnectionsFollowed: {
+            [_cm followOneUser:follow_user_id withFinishBlock:^(BOOL success, NSString *message) {
+                if (success) {
+                    NSLog(@"follow success");
+                    if (relations.integerValue == UserPostOwnerConnectionsNone) {
+                        [dic_profile_details setValue:[NSNumber numberWithInteger:UserPostOwnerConnectionsFollowing] forKey:@"relations"];
+                    } else {
+                        [dic_profile_details setValue:[NSNumber numberWithInteger:UserPostOwnerConnectionsFriends] forKey:@"relations"];
+                    }
+                    [_queryView reloadData];
+            
+                } else {
+                    NSLog(@"follow error, %@", message);
+                }
+            }];}
+            break;
+        case UserPostOwnerConnectionsFollowing:
+        case UserPostOwnerConnectionsFriends: {
+            [_cm unfollowOneUser:follow_user_id withFinishBlock:^(BOOL success, NSString *message) {
+                if (success) {
+                    NSLog(@"unfollow success");
+                    if (relations.integerValue == UserPostOwnerConnectionsFollowing) {
+                        [dic_profile_details setValue:[NSNumber numberWithInteger:UserPostOwnerConnectionsNone] forKey:@"relations"];
+                    } else {
+                        [dic_profile_details setValue:[NSNumber numberWithInteger:UserPostOwnerConnectionsFollowed] forKey:@"relations"];
+                    }
+                    [_queryView reloadData];
+                    
+                } else {
+                    NSLog(@"follow error, %@", message);
+                }
+            }];}
+            break;
+        default:
+            break;
+    }
+}
+
+#pragma mark -- album cell delegate
+- (NSInteger)getViewsCount {
+    return PHOTO_PER_LINE;
+}
+
+- (NSInteger)indexByRow:(NSInteger)row andCol:(NSInteger)col {
+    return row * PHOTO_PER_LINE + col;
+}
+
+- (BOOL)isSelectedAtIndex:(NSInteger)index {
+    return false;
+}
+
+- (void)didSelectOneImageAtIndex:(NSInteger)index {
+    NSLog(@"personal center select one post with index: %d", index);
+    OwnerQueryModel* om = [self getOM];
+    QueryContent* tmp = [om.querydata objectAtIndex:index];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    HomeDetailViewController* detail = [storyboard instantiateViewControllerWithIdentifier:@"DetailContent"];
+    detail.hidesBottomBarWhenPushed = YES;
+    
+    AppDelegate * app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    detail.qm = app.qm;
+    detail.current_content = tmp;
+    detail.current_user_id = _current_user_id;
+    detail.current_auth_token = _current_auth_token;
+    
+    [self.navigationController pushViewController:detail animated:YES];
 }
 @end

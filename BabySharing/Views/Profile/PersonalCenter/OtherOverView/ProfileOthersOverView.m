@@ -68,6 +68,8 @@
     _followBtn.layer.cornerRadius = 8.f;
     _followBtn.clipsToBounds = YES;
     
+    [_followBtn addTarget:_deleagate action:@selector(followBtnSelected) forControlEvents:UIControlEventTouchDown];
+    
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
     _seg.backgroundColor = [UIColor whiteColor];

@@ -760,7 +760,7 @@
         <!--Detail-->
         <scene sceneID="LEa-He-PDn">
             <objects>
-                <viewController id="xUO-Ek-g05" customClass="HomeDetailViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailContent" id="xUO-Ek-g05" customClass="HomeDetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rqK-yN-DbQ"/>
                         <viewControllerLayoutGuide type="bottom" id="Mnx-9N-dSO"/>

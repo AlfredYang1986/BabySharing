@@ -11,6 +11,7 @@
 #import "OwnerQueryModel.h"
 #import "QueryContent+ContextOpt.h"
 #import "QueryContentItem.h"
+#import "PersonalCenterDefines.h"
 
 @interface PersonalCenterOwnerDelegate ()
 
@@ -61,7 +62,6 @@
     return width / 3;
 }
 
-#define PHOTO_PER_LINE 3
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     OwnerQueryModel* om = [_delegate getOM];
     return ((om.querydata.count) / PHOTO_PER_LINE) + 1;
@@ -75,7 +75,7 @@
         cell = [[AlbumTableCell alloc]init];
     }
     
-    cell.delegate = self;
+    cell.delegate = _delegate;
     OwnerQueryModel* om = [_delegate getOM];
     NSInteger row = indexPath.row;
     @try {
@@ -98,21 +98,10 @@
     return cell;
 }
 
-#pragma mark -- album cell delegate
-- (NSInteger)getViewsCount {
-    return PHOTO_PER_LINE;
-}
 
-- (NSInteger)indexByRow:(NSInteger)row andCol:(NSInteger)col {
-    return row * PHOTO_PER_LINE + col;
-}
-
-- (BOOL)isSelectedAtIndex:(NSInteger)index {
-    return false;
-}
 
 #pragma mark -- Personal Center Callback
-- (void)setDelegate:(id<PersonalCenterProtocol, ProfileViewDelegate>)delegate {
+- (void)setDelegate:(id<PersonalCenterProtocol, ProfileViewDelegate, AlbumTableCellDelegate>)delegate {
     _delegate = delegate;
 }
 @end
