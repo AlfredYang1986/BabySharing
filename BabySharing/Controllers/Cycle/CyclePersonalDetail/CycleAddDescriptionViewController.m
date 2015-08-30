@@ -54,19 +54,35 @@
 
     _roleTagLabel.text = [_dic_description objectForKey:@"role_tag"];
     
-    dic_changed = [_dic_description mutableCopy];
+    if (_dic_description == nil) {
+        [_lm currentDeltailInfoAsyncWithFinishBlock:^(BOOL success, NSDictionary * dic) {
+            if (success) {
+                dic_changed = [dic mutableCopy];
+                [_lm updateDetailInfoLocalWithData:dic];
+                if (dic_changed.count > 1) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self detailInfoSynced:YES];
+                        [_descriptionDetailTableView reloadData];
+                    });
+                }
+            }
+        }];
+    } else {
+        dic_changed = [_dic_description mutableCopy];
+    }
 }
 
 - (void)saveDescriptionBtnSelected {
     if (_isEditable && dic_changed) {
-        NSEnumerator* enumerator = dic_changed.keyEnumerator;
-        id iter = nil;
-        
-        while ((iter = [enumerator nextObject]) != nil) {
-            [_dic_description setObject:[dic_changed objectForKey:iter] forKey:iter];
-        }
-
-        [_lm updateDetailInfoWithData:_dic_description];
+//        NSEnumerator* enumerator = dic_changed.keyEnumerator;
+//        id iter = nil;
+//        
+//        while ((iter = [enumerator nextObject]) != nil) {
+//            [_dic_description setObject:[dic_changed objectForKey:iter] forKey:iter];
+//        }
+//
+//        [_lm updateDetailInfoWithData:_dic_description];
+        [_lm updateDetailInfoWithData:dic_changed];
     }
     
     [self.navigationController popViewControllerAnimated:YES];

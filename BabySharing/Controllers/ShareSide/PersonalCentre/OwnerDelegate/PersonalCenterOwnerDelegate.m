@@ -39,6 +39,8 @@
         [header setCycleCount:[_delegate getCycleCount]];
         [header setPersonalSign:[_delegate getSign]];
         
+        header.deleagate = _delegate;
+
         return header;
         
     } else return nil;

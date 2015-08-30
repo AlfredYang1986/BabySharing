@@ -542,6 +542,7 @@
                     <connections>
                         <outlet property="queryView" destination="oix-Er-DQz" id="wRt-Iq-Yvr"/>
                         <segue destination="ydZ-5V-8Oa" kind="push" identifier="addScreenName" id="ZM9-kh-H5L"/>
+                        <segue destination="asR-ZM-Bna" kind="push" identifier="signature" id="crO-Id-Xke"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="10N-V8-JSP" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -578,6 +579,45 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cbe-3i-9Jb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3088" y="4743"/>
+        </scene>
+        <!--个性签名-->
+        <scene sceneID="SxI-wz-oiA">
+            <objects>
+                <viewController id="asR-ZM-Bna" customClass="PersonalCenterSignaturesController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="50h-le-YMp"/>
+                        <viewControllerLayoutGuide type="bottom" id="V24-E5-0VK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="OE2-ca-Kb2">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S5e-el-mHY">
+                                <rect key="frame" x="16" y="72" width="568" height="150"/>
+                                <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="Yte-WR-Zy2"/>
+                                </constraints>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="S5e-el-mHY" firstAttribute="trailing" secondItem="OE2-ca-Kb2" secondAttribute="trailingMargin" id="44M-vA-uBr"/>
+                            <constraint firstItem="S5e-el-mHY" firstAttribute="leading" secondItem="OE2-ca-Kb2" secondAttribute="leadingMargin" id="Elo-x8-JA5"/>
+                            <constraint firstItem="S5e-el-mHY" firstAttribute="top" secondItem="50h-le-YMp" secondAttribute="bottom" constant="8" id="Tuq-Q1-95Q"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="个性签名" id="qhD-yw-5WK"/>
+                    <connections>
+                        <outlet property="signatureTextView" destination="S5e-el-mHY" id="hPC-ye-Iqu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yoL-VL-BLr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3088" y="5474"/>
         </scene>
         <!--Post-->
         <scene sceneID="jvQ-8w-rOn">
@@ -1540,7 +1580,7 @@
         <!--描述-->
         <scene sceneID="ojQ-th-uKA">
             <objects>
-                <viewController id="NDW-bl-o9I" customClass="CycleAddDescriptionViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DescriptionController" id="NDW-bl-o9I" customClass="CycleAddDescriptionViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="KhW-ZD-7uJ"/>
                         <viewControllerLayoutGuide type="bottom" id="zRu-dg-pI1"/>
@@ -2050,8 +2090,8 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="qbd-0n-vJA"/>
-        <segue reference="4Ao-yR-LGJ"/>
-        <segue reference="mYA-47-s6C"/>
+        <segue reference="Xl7-6t-OQ8"/>
         <segue reference="cmB-f3-oUD"/>
+        <segue reference="4Ao-yR-LGJ"/>
     </inferredMetricsTieBreakers>
 </document>

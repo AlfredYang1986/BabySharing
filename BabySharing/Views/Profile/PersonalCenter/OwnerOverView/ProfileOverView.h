@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ProfileViewDelegate.h"
 
 @interface ProfileOverView : UITableViewHeaderFooterView
 
@@ -19,4 +20,6 @@
 - (void)setRoleTag:(NSString*)role_tag;
 
 + (CGFloat)preferredHeight;
+
+@property (nonatomic, weak) id<ProfileViewDelegate> deleagate;
 @end

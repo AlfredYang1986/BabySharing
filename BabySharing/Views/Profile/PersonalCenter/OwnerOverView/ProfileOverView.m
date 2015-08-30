@@ -127,4 +127,8 @@
 + (CGFloat)preferredHeight {
     return 270;
 }
+
+- (IBAction)editBtnSelected {
+    [_deleagate editBtnSelected];
+}
 @end

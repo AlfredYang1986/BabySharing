@@ -25,6 +25,7 @@
 
 #import "UserChatController.h"
 #import "HomeDetailViewController.h"
+#import "PersonalSettingController.h"
 
 @interface PersonalCentreTmpViewController () <PersonalCenterProtocol, ProfileViewDelegate, AlbumTableCellDelegate, personalDetailChanged>
 @property (weak, nonatomic, readonly) NSString* current_user_id;
@@ -125,6 +126,11 @@
         ((ProfileSettingController*)segue.destinationViewController).current_auth_token = self.current_auth_token;
         ((ProfileSettingController*)segue.destinationViewController).dic_profile_details = dic_profile_details;
         ((ProfileSettingController*)segue.destinationViewController).delegate = self;
+    } else if ([segue.identifier isEqualToString:@"PersonalSetting"]) {
+        ((PersonalSettingController*)segue.destinationViewController).current_user_id = self.current_user_id;
+        ((PersonalSettingController*)segue.destinationViewController).current_auth_token = self.current_auth_token;
+        ((PersonalSettingController*)segue.destinationViewController).dic_profile_details = dic_profile_details;
+        ((PersonalSettingController*)segue.destinationViewController).delegate = self;
     }
 }
 
@@ -234,6 +240,10 @@
 }
 
 #pragma mark -- profile view delegate
+- (void)editBtnSelected {
+    [self performSegueWithIdentifier:@"PersonalSetting" sender:nil];
+}
+
 - (void)chatBtnSelected {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UserChatController* chat = [storyboard instantiateViewControllerWithIdentifier:@"userChatController"];

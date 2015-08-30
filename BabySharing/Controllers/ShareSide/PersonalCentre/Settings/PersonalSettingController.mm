@@ -10,8 +10,12 @@
 #include <vector>
 #import "PersonalSettingCell.h"
 #import "PersonalChangeScreenNameController.h"
+#import "SearchUserTagsController.h"
+#import "AppDelegate.h"
+#import "CycleAddDescriptionViewController.h"
+#import "PersonalCenterSignaturesController.h"
 
-@interface PersonalSettingController () <UITableViewDataSource, UITableViewDelegate, chanageScreenNameProtocol>
+@interface PersonalSettingController () <UITableViewDataSource, UITableViewDelegate, chanageScreenNameProtocol, SearchUserTagControllerDelegate, PersonalSignatureProtocol>
 @property (weak, nonatomic) IBOutlet UITableView *queryView;
 @end
 
@@ -52,6 +56,10 @@
     [_queryView registerNib:[UINib nibWithNibName:@"PersonalSettingCell" bundle:[NSBundle mainBundle]] forHeaderFooterViewReuseIdentifier:@"personal setting cell"];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [self.navigationController setNavigationBarHidden:NO];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -67,6 +75,8 @@
     if ([segue.identifier isEqualToString:@"addScreenName"]) {
         ((PersonalChangeScreenNameController*)segue.destinationViewController).delegate = self;
         ((PersonalChangeScreenNameController*)segue.destinationViewController).ori_screen_name = [self.dic_profile_details objectForKey:@"screen_name"];
+    } else if ([segue.identifier isEqualToString:@"signature"]) {
+        
     }
 }
 
@@ -127,6 +137,35 @@
     [_queryView reloadData];
 }
 
+#pragma mark -- change signature
+- (void)signatureDidChanged:(NSString *)signature {
+     NSMutableDictionary* dic = [[NSMutableDictionary alloc]initWithCapacity:1];
+    [dic setObject:signature forKey:@"siganiture"];
+    [_delegate personalDetailChanged:[dic copy]];
+//    [_queryView reloadData];
+}
+
+#pragma mark -- change role tag
+- (void)didSelectTag:(NSString*)tags {
+    
+    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    
+    NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
+    
+    [dic setObject:tags forKey:@"role_tag"];
+
+    [dic setValue:app.lm.current_auth_token forKey:@"auth_token"];
+    [dic setValue:app.lm.current_user_id forKey:@"user_id"];
+    
+    if ([app.lm updateUserProfile:[dic copy]]) {
+        
+        [_delegate personalDetailChanged:[dic copy]];
+        [_queryView reloadData];
+    } else {
+        NSLog(@"change role tag error");
+    }
+}
+
 #pragma mark -- functions 
 - (void)phoneSelected {
     
@@ -134,19 +173,27 @@
 
 - (void)screenNameSelected {
     [self performSegueWithIdentifier:@"addScreenName" sender:nil];
-    
 }
 
 - (void)roleTagSelected {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    SearchUserTagsController* sut = [storyboard instantiateViewControllerWithIdentifier:@"SearchPickRoleTags"];
+    sut.delegate = self;
     
+    [self.navigationController pushViewController:sut animated:YES];
 }
 
 - (void)personalSignSelected {
-    
+    [self performSegueWithIdentifier:@"signature" sender:nil];
 }
 
 - (void)personalDescriptionSelected {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    CycleAddDescriptionViewController* cad = [storyboard instantiateViewControllerWithIdentifier:@"DescriptionController"];
+    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    cad.lm = app.lm;
     
+    [self.navigationController pushViewController:cad animated:YES];
 }
 
 - (void)accountBoundSelected {

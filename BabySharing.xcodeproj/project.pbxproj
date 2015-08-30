@@ -91,6 +91,7 @@
 		EE7C68731B82D31F0003C593 /* CycleOverCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE7C68721B82D31F0003C593 /* CycleOverCell.xib */; };
 		EE817F491B79A78E00988734 /* UserChatController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE817F481B79A78E00988734 /* UserChatController.m */; };
 		EE86D1B21B537469001C4650 /* PostEffectAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = EE86D1B11B537469001C4650 /* PostEffectAdapter.mm */; };
+		EE9633C91B92A4CF00DB4EA5 /* PersonalCenterSignaturesController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9633C81B92A4CF00DB4EA5 /* PersonalCenterSignaturesController.m */; };
 		EE96763F1B7C3D5C00445254 /* CycleDescriptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE96763E1B7C3D5C00445254 /* CycleDescriptionCell.m */; };
 		EE9676411B7C3D7700445254 /* CycleDescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE9676401B7C3D7700445254 /* CycleDescriptionCell.xib */; };
 		EE97440E1B78699A00E81A70 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = EE97440D1B78699A00E81A70 /* Reachability.m */; };
@@ -364,6 +365,8 @@
 		EE817F4A1B79B1E600988734 /* ProfileViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewDelegate.h; sourceTree = "<group>"; };
 		EE86D1B01B537469001C4650 /* PostEffectAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostEffectAdapter.h; sourceTree = "<group>"; };
 		EE86D1B11B537469001C4650 /* PostEffectAdapter.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = PostEffectAdapter.mm; sourceTree = "<group>"; };
+		EE9633C71B92A4CF00DB4EA5 /* PersonalCenterSignaturesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalCenterSignaturesController.h; sourceTree = "<group>"; };
+		EE9633C81B92A4CF00DB4EA5 /* PersonalCenterSignaturesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalCenterSignaturesController.m; sourceTree = "<group>"; };
 		EE96763D1B7C3D5C00445254 /* CycleDescriptionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleDescriptionCell.h; sourceTree = "<group>"; };
 		EE96763E1B7C3D5C00445254 /* CycleDescriptionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleDescriptionCell.m; sourceTree = "<group>"; };
 		EE9676401B7C3D7700445254 /* CycleDescriptionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CycleDescriptionCell.xib; sourceTree = "<group>"; };
@@ -1944,6 +1947,8 @@
 				EEE94E241B74BE3B0011321A /* ProfileSettingController.mm */,
 				EEBFFC1F1B9177D5005AAE36 /* PersonalChangeScreenNameController.h */,
 				EEBFFC201B9177D5005AAE36 /* PersonalChangeScreenNameController.m */,
+				EE9633C71B92A4CF00DB4EA5 /* PersonalCenterSignaturesController.h */,
+				EE9633C81B92A4CF00DB4EA5 /* PersonalCenterSignaturesController.m */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -2233,6 +2238,7 @@
 				EEE94E251B74BE3B0011321A /* NewMessageSettingController.m in Sources */,
 				EEAACCBE1B44E90400D05C0B /* HomeViewController.m in Sources */,
 				EEFA44FE1B58F7D4007DF294 /* NickNameInputView.m in Sources */,
+				EE9633C91B92A4CF00DB4EA5 /* PersonalCenterSignaturesController.m in Sources */,
 				EE2D4B7A1B525E0A00B58A1F /* PostPreViewController.m in Sources */,
 				EEAACCAA1B44E90400D05C0B /* PhoneInputViewController.m in Sources */,
 				EE9785B41B90060B00C454C5 /* CycleAddHometownController.m in Sources */,

@@ -12,5 +12,6 @@
 @protocol ProfileViewDelegate
 - (void)chatBtnSelected;
 - (void)followBtnSelected;
+- (void)editBtnSelected;
 @end
 #endif
