@@ -125,6 +125,10 @@
         ((PersonalSettingController*)segue.destinationViewController).current_auth_token = self.current_auth_token;
         ((PersonalSettingController*)segue.destinationViewController).dic_profile_details = self.dic_profile_details;
         ((PersonalSettingController*)segue.destinationViewController).delegate = self.delegate;
+    } else if ([segue.identifier isEqualToString:@"about"]) {
+        
+    } else if ([segue.identifier isEqualToString:@"newMessageSetting"]) {
+        
     }
 }
 
@@ -134,7 +138,7 @@
 }
 
 - (void)newMessageSettingSelected {
-    
+    [self performSegueWithIdentifier:@"newMessageSetting" sender:nil];
 }
 
 - (void)privateSettingSelected {
@@ -150,7 +154,7 @@
 }
 
 - (void)aboutUsSelected {
-    
+    [self performSegueWithIdentifier:@"about" sender:nil];
 }
 
 - (void)signOutSelected {
