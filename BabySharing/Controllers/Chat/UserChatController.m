@@ -19,14 +19,22 @@
 #import "TmpFileStorageModel.h"
 #import "LoginToken.h"
 
-@interface UserChatController () <UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate>
+#import "ChatEmojiView.h"
+
+@interface UserChatController () <UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, ChatEmoji>
 @property (weak, nonatomic) IBOutlet UIButton *funcBtn;
 @property (weak, nonatomic) IBOutlet UIButton *emojiBtn;
 @property (weak, nonatomic) IBOutlet UIView *inputContainer;
+@property (weak, nonatomic) IBOutlet UITextField *inputField;
 
 @end
 
-@implementation UserChatController
+@implementation UserChatController {
+    UIView* keyboardView;
+    ChatEmojiView* emoji;
+    CGRect keyBoardFrame;
+    BOOL isEmoji;
+}
 
 @synthesize chat_user_id = _chat_user_id;
 @synthesize chat_user_name = _chat_user_name;
@@ -39,6 +47,7 @@
 @synthesize emojiBtn = _emojiBtn;
 @synthesize queryView = _queryView;
 @synthesize inputContainer = _inputContainer;
+@synthesize inputField =_inputField;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -89,6 +98,10 @@
             }
         });
     }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+    emoji = [[ChatEmojiView alloc]init];
+    emoji.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -104,6 +117,21 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [_mm endActiveForTarget:_chat_user_id];
+    [emoji removeFromSuperview];
+}
+
+- (void)viewDidLayoutSubviews {
+    if ([_inputField isFirstResponder]) {
+        CGFloat move = 250;
+        CGRect rc_start = _queryView.frame;
+        CGRect rc_end = CGRectMake(rc_start.origin.x, rc_start.origin.y, rc_start.size.width, rc_start.size.height - move);
+
+        CGRect input_start = _inputContainer.frame;
+        CGRect input_end = CGRectMake(input_start.origin.x, input_start.origin.y - move, input_start.size.width, input_start.size.height);
+        
+        _queryView.frame = rc_end;
+        _inputContainer.frame = input_end;
+    }
 }
 
 /*
@@ -171,7 +199,7 @@
     static const CGFloat kAnimationDuration = 0.30; // in seconds
     CGRect rc_start = _queryView.frame;
 //    CGRect rc_end = CGRectMake(rc_start.origin.x, rc_start.origin.y + move, rc_start.size.width, rc_start.size.height);
-    CGRect rc_end = CGRectMake(rc_start.origin.x, rc_start.origin.y, rc_start.size.width, rc_start.size.height - move);
+    CGRect rc_end = CGRectMake(rc_start.origin.x, rc_start.origin.y, rc_start.size.width, rc_start.size.height + move);
 
     CGRect input_start = _inputContainer.frame;
     CGRect input_end = CGRectMake(input_start.origin.x, input_start.origin.y + move, input_start.size.width, input_start.size.height);
@@ -201,8 +229,65 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [self moveView:+250];
     [textField resignFirstResponder];
+    keyboardView = nil;
     [_mm sendMessageToUser:_chat_user_id messageType:MessageTypeTextMessage messageContent:textField.text];
     [_queryView reloadData];
     return YES;
+}
+
+#pragma mark -- emoji
+- (void)keyboardDidShow:(NSNotification*)notification {
+    UIView *result = nil;
+    NSArray *windowsArray = [UIApplication sharedApplication].windows;
+    for (UIView *tmpWindow in windowsArray) {
+        NSArray *viewArray = [tmpWindow subviews];
+        for (UIView *tmpView  in viewArray) {
+            NSLog(@"%@", [NSString stringWithUTF8String:object_getClassName(tmpView)]);
+//            if ([[NSString stringWithUTF8String:object_getClassName(tmpView)] isEqualToString:@"UIPeripheralHostView"]) {
+            if ([[NSString stringWithUTF8String:object_getClassName(tmpView)] isEqualToString:@"UIInputSetContainerView"]) {
+                result = tmpView;
+                break;
+            }
+        }
+        
+        if (result != nil) {
+            break;
+        }
+    }
+    
+    keyboardView = result;
+    NSDictionary *userInfo = [notification userInfo];
+    NSValue *value = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    keyBoardFrame = value.CGRectValue;
+    
+    if (isEmoji) {
+        [emoji removeFromSuperview];
+        emoji.frame = keyBoardFrame;
+        [keyboardView addSubview:emoji];
+        [keyboardView bringSubviewToFront:emoji];
+    }
+}
+
+- (IBAction)emojiBtnSelected {
+    
+    if (isEmoji == NO) {
+        [_inputField becomeFirstResponder];
+        isEmoji = YES;
+        
+        if (keyboardView) {
+            [emoji removeFromSuperview];
+            emoji.frame = keyBoardFrame;
+            [keyboardView addSubview:emoji];
+            [keyboardView bringSubviewToFront:emoji];
+        }
+    } else {
+        [emoji removeFromSuperview];
+        isEmoji = NO;
+    }
+}
+
+- (void)ChatEmojiSelected:(NSString*)emoji_str {
+    _inputField.text = [_inputField.text stringByAppendingString:emoji_str];
+    NSLog(@"text now is: %@", _inputField.text);
 }
 @end

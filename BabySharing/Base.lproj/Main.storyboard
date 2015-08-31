@@ -468,6 +468,7 @@
                         <segue destination="0YU-fx-DrR" kind="push" id="ll8-h3-DFQ"/>
                         <segue destination="7KU-Rx-O53" kind="push" identifier="about" id="Xjy-Ew-GPi"/>
                         <segue destination="gHc-ZJ-M1b" kind="push" identifier="newMessageSetting" id="2Bo-Ng-Sz4"/>
+                        <segue destination="vcM-2a-9Ob" kind="push" identifier="privacy" id="9YP-oZ-Vhp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="amd-Sd-Rk9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1235,6 +1236,9 @@
                                         <state key="normal">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="emojiBtnSelected" destination="lUX-aE-qZw" eventType="touchUpInside" id="lSW-CY-SYV"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.1575035102" green="1" blue="0.2256678731" alpha="1" colorSpace="calibratedRGB"/>
@@ -1497,6 +1501,9 @@
                                         <state key="normal">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="emojiBtnSelected" destination="vu1-ps-3xT" eventType="touchUpInside" id="ofp-8Q-O3T"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.1575035102" green="1" blue="0.2256678731" alpha="1" colorSpace="calibratedRGB"/>
@@ -1572,6 +1579,7 @@
                         <outlet property="emojiBtn" destination="GcU-ws-Syn" id="lam-S8-7cJ"/>
                         <outlet property="funcBtn" destination="UIS-CA-VOa" id="Jhs-Cq-d8Q"/>
                         <outlet property="inputContainer" destination="qL5-xw-zCu" id="foD-sd-ChP"/>
+                        <outlet property="inputField" destination="kPy-2V-QRa" id="oFV-y1-Ctr"/>
                         <outlet property="queryView" destination="4my-ro-iMe" id="2al-11-Uia"/>
                     </connections>
                 </viewController>
@@ -2083,6 +2091,40 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uBM-ep-gBE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3996" y="3938"/>
+        </scene>
+        <!--隐私&偏好-->
+        <scene sceneID="fq1-d0-e1X">
+            <objects>
+                <viewController id="vcM-2a-9Ob" customClass="PrivacySettingController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1lH-Xr-92i"/>
+                        <viewControllerLayoutGuide type="bottom" id="GHv-QO-2xm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="cc6-3E-FJN">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="UH5-n4-ggL">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="UH5-n4-ggL" firstAttribute="top" secondItem="cc6-3E-FJN" secondAttribute="topMargin" id="Chc-0l-1NP"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="UH5-n4-ggL" secondAttribute="trailing" constant="-16" id="Js6-vk-RdV"/>
+                            <constraint firstItem="UH5-n4-ggL" firstAttribute="leading" secondItem="cc6-3E-FJN" secondAttribute="leadingMargin" constant="-16" id="XA8-9V-h7y"/>
+                            <constraint firstItem="UH5-n4-ggL" firstAttribute="bottom" secondItem="cc6-3E-FJN" secondAttribute="bottomMargin" id="eFh-rB-XbE"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="隐私&amp;偏好" id="4Xf-oj-6jk"/>
+                    <connections>
+                        <outlet property="queryView" destination="UH5-n4-ggL" id="KDB-vY-sLm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rQY-Fa-WM6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3996" y="4743"/>
         </scene>
         <!--Home-->
         <scene sceneID="xpf-RK-Rv1">

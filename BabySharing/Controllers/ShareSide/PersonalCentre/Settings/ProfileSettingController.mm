@@ -129,6 +129,8 @@
         
     } else if ([segue.identifier isEqualToString:@"newMessageSetting"]) {
         
+    } else if ([segue.identifier isEqualToString:@"privacy"]) {
+        
     }
 }
 
@@ -142,7 +144,7 @@
 }
 
 - (void)privateSettingSelected {
-    
+    [self performSegueWithIdentifier:@"privacy" sender:nil];
 }
 
 - (void)votedSelected {

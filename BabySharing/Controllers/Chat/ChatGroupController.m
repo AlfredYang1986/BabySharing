@@ -20,7 +20,9 @@
 #import "TmpFileStorageModel.h"
 #import "RemoteInstance.h"
 
-@interface ChatGroupController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, GotyeOCDelegate>
+#import "chatEmojiView.h"
+
+@interface ChatGroupController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, GotyeOCDelegate, ChatEmoji>
 @property (weak, nonatomic) IBOutlet UITableView *queryView;
 @property (weak, nonatomic) IBOutlet UITextField *inputField;
 @property (weak, nonatomic) IBOutlet UIButton *faceBtn;
@@ -38,6 +40,14 @@
     NSMutableArray* current_message;
     
     NSMutableArray* current_talk_users;
+    
+    /**
+     * for emoji
+     */
+    UIView* keyboardView;
+    ChatEmojiView* emoji;
+    CGRect keyBoardFrame;
+    BOOL isEmoji;
 }
 
 @synthesize queryView = _queryView;
@@ -151,6 +161,13 @@
     /**
      * get local messages for chat group
      */
+    
+    /**
+     * get emoji
+     */
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+    emoji = [[ChatEmojiView alloc]init];
+    emoji.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -170,6 +187,20 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     self.navigationController.navigationBarHidden = NO;
+}
+
+- (void)viewDidLayoutSubviews {
+    if ([_inputField isFirstResponder]) {
+        CGFloat move = 299;
+        CGRect rc_start = _queryView.frame;
+        CGRect rc_end = CGRectMake(rc_start.origin.x, rc_start.origin.y, rc_start.size.width, rc_start.size.height - move);
+
+        CGRect input_start = _inputContainer.frame;
+        CGRect input_end = CGRectMake(input_start.origin.x, input_start.origin.y - move, input_start.size.width, input_start.size.height);
+        
+        _queryView.frame = rc_end;
+        _inputContainer.frame = input_end;
+    }
 }
 
 #pragma mark -- gotye delegate
@@ -343,7 +374,7 @@
     static const CGFloat kAnimationDuration = 0.30; // in seconds
     move = move > 0 ? move + 49 : move - 49;
     CGRect rc_start = _queryView.frame;
-    CGRect rc_end = CGRectMake(rc_start.origin.x, rc_start.origin.y, rc_start.size.width, rc_start.size.height - move);
+    CGRect rc_end = CGRectMake(rc_start.origin.x, rc_start.origin.y, rc_start.size.width, rc_start.size.height + move);
     
     CGRect input_start = _inputContainer.frame;
     CGRect input_end = CGRectMake(input_start.origin.x, input_start.origin.y + move, input_start.size.width, input_start.size.height);
@@ -379,4 +410,61 @@
     [GotyeOCAPI sendMessage:m];
     return YES;
 }
+
+#pragma mark -- emoji
+- (void)keyboardDidShow:(NSNotification*)notification {
+    UIView *result = nil;
+    NSArray *windowsArray = [UIApplication sharedApplication].windows;
+    for (UIView *tmpWindow in windowsArray) {
+        NSArray *viewArray = [tmpWindow subviews];
+        for (UIView *tmpView  in viewArray) {
+            NSLog(@"%@", [NSString stringWithUTF8String:object_getClassName(tmpView)]);
+//            if ([[NSString stringWithUTF8String:object_getClassName(tmpView)] isEqualToString:@"UIPeripheralHostView"]) {
+            if ([[NSString stringWithUTF8String:object_getClassName(tmpView)] isEqualToString:@"UIInputSetContainerView"]) {
+                result = tmpView;
+                break;
+            }
+        }
+        
+        if (result != nil) {
+            break;
+        }
+    }
+    
+    keyboardView = result;
+    NSDictionary *userInfo = [notification userInfo];
+    NSValue *value = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    keyBoardFrame = value.CGRectValue;
+    
+    if (isEmoji) {
+        [emoji removeFromSuperview];
+        emoji.frame = keyBoardFrame;
+        [keyboardView addSubview:emoji];
+        [keyboardView bringSubviewToFront:emoji];
+    }
+}
+
+- (IBAction)emojiBtnSelected {
+    
+    if (isEmoji == NO) {
+        [_inputField becomeFirstResponder];
+        isEmoji = YES;
+        
+        if (keyboardView) {
+            [emoji removeFromSuperview];
+            emoji.frame = keyBoardFrame;
+            [keyboardView addSubview:emoji];
+            [keyboardView bringSubviewToFront:emoji];
+        }
+    } else {
+        [emoji removeFromSuperview];
+        isEmoji = NO;
+    }
+}
+
+- (void)ChatEmojiSelected:(NSString*)emoji_str {
+    _inputField.text = [_inputField.text stringByAppendingString:emoji_str];
+    NSLog(@"text now is: %@", _inputField.text);
+}
+
 @end

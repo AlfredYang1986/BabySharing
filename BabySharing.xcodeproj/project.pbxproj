@@ -94,6 +94,7 @@
 		EE9633C91B92A4CF00DB4EA5 /* PersonalCenterSignaturesController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9633C81B92A4CF00DB4EA5 /* PersonalCenterSignaturesController.m */; };
 		EE9633CD1B92BB0F00DB4EA5 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9633CC1B92BB0F00DB4EA5 /* AboutViewController.m */; };
 		EE9633D01B92CA8200DB4EA5 /* NewMessageSettingController.mm in Sources */ = {isa = PBXBuildFile; fileRef = EE9633CF1B92CA8200DB4EA5 /* NewMessageSettingController.mm */; };
+		EE9633D31B92EBE000DB4EA5 /* PrivacySettingController.mm in Sources */ = {isa = PBXBuildFile; fileRef = EE9633D21B92EBE000DB4EA5 /* PrivacySettingController.mm */; };
 		EE96763F1B7C3D5C00445254 /* CycleDescriptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE96763E1B7C3D5C00445254 /* CycleDescriptionCell.m */; };
 		EE9676411B7C3D7700445254 /* CycleDescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE9676401B7C3D7700445254 /* CycleDescriptionCell.xib */; };
 		EE97440E1B78699A00E81A70 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = EE97440D1B78699A00E81A70 /* Reachability.m */; };
@@ -229,6 +230,7 @@
 		EEC980B41B8EB9EA0087E5A7 /* status-bar-pattern-default@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EEC980AD1B8EB9EA0087E5A7 /* status-bar-pattern-default@2x.jpg */; };
 		EEC980B51B8EB9EA0087E5A7 /* status-bar-progress.png in Resources */ = {isa = PBXBuildFile; fileRef = EEC980AE1B8EB9EA0087E5A7 /* status-bar-progress.png */; };
 		EEC980B61B8EB9EA0087E5A7 /* status-bar-progress@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EEC980AF1B8EB9EA0087E5A7 /* status-bar-progress@2x.png */; };
+		EED50A131B94078D00A7F0E4 /* ChatEmojiView.m in Sources */ = {isa = PBXBuildFile; fileRef = EED50A121B94078D00A7F0E4 /* ChatEmojiView.m */; };
 		EED64D451B8184AE008CB134 /* CycleAddKidsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EED64D441B8184AE008CB134 /* CycleAddKidsCell.m */; };
 		EED64D471B8184C1008CB134 /* CycleAddKidsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EED64D461B8184C1008CB134 /* CycleAddKidsCell.xib */; };
 		EED64D4A1B818995008CB134 /* CycleAddKidsFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = EED64D491B818995008CB134 /* CycleAddKidsFooter.m */; };
@@ -372,6 +374,8 @@
 		EE9633CC1B92BB0F00DB4EA5 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		EE9633CE1B92CA8200DB4EA5 /* NewMessageSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMessageSettingController.h; sourceTree = "<group>"; };
 		EE9633CF1B92CA8200DB4EA5 /* NewMessageSettingController.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = NewMessageSettingController.mm; sourceTree = "<group>"; };
+		EE9633D11B92EBE000DB4EA5 /* PrivacySettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivacySettingController.h; sourceTree = "<group>"; };
+		EE9633D21B92EBE000DB4EA5 /* PrivacySettingController.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = PrivacySettingController.mm; sourceTree = "<group>"; };
 		EE96763D1B7C3D5C00445254 /* CycleDescriptionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleDescriptionCell.h; sourceTree = "<group>"; };
 		EE96763E1B7C3D5C00445254 /* CycleDescriptionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleDescriptionCell.m; sourceTree = "<group>"; };
 		EE9676401B7C3D7700445254 /* CycleDescriptionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CycleDescriptionCell.xib; sourceTree = "<group>"; };
@@ -684,6 +688,8 @@
 		EEC980AD1B8EB9EA0087E5A7 /* status-bar-pattern-default@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "status-bar-pattern-default@2x.jpg"; sourceTree = "<group>"; };
 		EEC980AE1B8EB9EA0087E5A7 /* status-bar-progress.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "status-bar-progress.png"; sourceTree = "<group>"; };
 		EEC980AF1B8EB9EA0087E5A7 /* status-bar-progress@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "status-bar-progress@2x.png"; sourceTree = "<group>"; };
+		EED50A111B94078D00A7F0E4 /* ChatEmojiView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatEmojiView.h; sourceTree = "<group>"; };
+		EED50A121B94078D00A7F0E4 /* ChatEmojiView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatEmojiView.m; sourceTree = "<group>"; };
 		EED64D431B8184AE008CB134 /* CycleAddKidsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleAddKidsCell.h; sourceTree = "<group>"; };
 		EED64D441B8184AE008CB134 /* CycleAddKidsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleAddKidsCell.m; sourceTree = "<group>"; };
 		EED64D461B8184C1008CB134 /* CycleAddKidsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CycleAddKidsCell.xib; sourceTree = "<group>"; };
@@ -966,6 +972,8 @@
 				EE9633CF1B92CA8200DB4EA5 /* NewMessageSettingController.mm */,
 				EE9633CB1B92BB0F00DB4EA5 /* AboutViewController.h */,
 				EE9633CC1B92BB0F00DB4EA5 /* AboutViewController.m */,
+				EE9633D11B92EBE000DB4EA5 /* PrivacySettingController.h */,
+				EE9633D21B92EBE000DB4EA5 /* PrivacySettingController.mm */,
 			);
 			path = SystemSetting;
 			sourceTree = "<group>";
@@ -1486,6 +1494,7 @@
 		EEAACBBB1B44E90300D05C0B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				EED50A101B94077600A7F0E4 /* ChatEmoji */,
 				EEC980A71B8EB9EA0087E5A7 /* BWStatusBarOverlay */,
 				EEAACC1D1B44E90400D05C0B /* SGActionView */,
 				EEAACC301B44E90400D05C0B /* ChatRoom */,
@@ -1895,6 +1904,15 @@
 			path = BWStatusBarOverlay;
 			sourceTree = "<group>";
 		};
+		EED50A101B94077600A7F0E4 /* ChatEmoji */ = {
+			isa = PBXGroup;
+			children = (
+				EED50A111B94078D00A7F0E4 /* ChatEmojiView.h */,
+				EED50A121B94078D00A7F0E4 /* ChatEmojiView.m */,
+			);
+			path = ChatEmoji;
+			sourceTree = "<group>";
+		};
 		EED64D421B81844A008CB134 /* CycleKids */ = {
 			isa = PBXGroup;
 			children = (
@@ -2261,6 +2279,7 @@
 				EE5D68781B75A9FD0067A2DF /* Messages.m in Sources */,
 				EEAACCEF1B44E90400D05C0B /* ViewController.m in Sources */,
 				EE76A56D1B72021900036747 /* ConnectionLocalModel.xcdatamodeld in Sources */,
+				EED50A131B94078D00A7F0E4 /* ChatEmojiView.m in Sources */,
 				EEAACD201B44E90400D05C0B /* SGAlertMenu.m in Sources */,
 				EEAACCCA1B44E90400D05C0B /* INTUEasingFunctions.m in Sources */,
 				EE664E9A1B73145000ACD57E /* QueryContent.m in Sources */,
@@ -2277,6 +2296,7 @@
 				EEAACCA61B44E90400D05C0B /* AlreadLogedViewController.m in Sources */,
 				EE76A5761B72056800036747 /* Followed.m in Sources */,
 				EE2D4B801B525E0A00B58A1F /* PhotoTagsController.m in Sources */,
+				EE9633D31B92EBE000DB4EA5 /* PrivacySettingController.mm in Sources */,
 				EEAACD1F1B44E90400D05C0B /* SGActionView.m in Sources */,
 				EE9785B11B9004CD00C454C5 /* CycleAddSchoolViewController.m in Sources */,
 				EEE94E181B74BDDD0011321A /* ProfileDetailController.m in Sources */,
