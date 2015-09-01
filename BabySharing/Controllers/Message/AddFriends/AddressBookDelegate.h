@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "AddingFriendsProtocol.h"
 
-@interface AddressBookDelegate : NSObject <UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate>
+@interface AddressBookDelegate : NSObject <UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate, AddingFriendsProtocol>
 
 - (BOOL)isAddressDelegateReady;
 @end

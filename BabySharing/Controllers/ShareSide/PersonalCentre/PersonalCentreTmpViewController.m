@@ -22,10 +22,13 @@
 #import "ProfileSettingController.h"
 #import "OwnerQueryModel.h"
 #import "ConnectionModel.h"
+#import "CollectionQueryModel.h"
 
 #import "UserChatController.h"
 #import "HomeDetailViewController.h"
 #import "PersonalSettingController.h"
+
+#import "ProfileOverView.h"
 
 @interface PersonalCentreTmpViewController () <PersonalCenterProtocol, ProfileViewDelegate, AlbumTableCellDelegate, personalDetailChanged>
 @property (weak, nonatomic, readonly) NSString* current_user_id;
@@ -34,6 +37,7 @@
 
 @property (weak, nonatomic, readonly) OwnerQueryModel* om;
 @property (weak, nonatomic, readonly) ConnectionModel* cm;
+@property (weak, nonatomic, readonly) CollectionQueryModel* cqm;
 @end
 
 #define TITLE 0
@@ -44,6 +48,8 @@
     UIImage* next_indicator;
     
     NSDictionary* dic_profile_details;
+    
+    NSInteger current_seg_index;
 }
 
 @synthesize current_auth_token = _current_auth_token;
@@ -52,6 +58,7 @@
 
 @synthesize om = _om;
 @synthesize cm = _cm;
+@synthesize cqm = _cqm;
 
 @synthesize current_delegate = _current_delegate;
 @synthesize owner_id = _owner_id;
@@ -66,6 +73,7 @@
  
     _om = delegate.om;
     _cm = delegate.cm;
+    _cqm = delegate.cqm;
     /**
      * Profile Header Cell
      */
@@ -102,6 +110,8 @@
     _queryView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
 
     self.navigationItem.rightBarButtonItem =[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Setting" ofType:@"png"]] style:UIBarButtonItemStylePlain target:self action:@selector(didSelectSettingBtn)];
+    
+    current_seg_index = 0;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -114,6 +124,17 @@
     [_om queryContentsByUser:_current_user_id withToken:_current_auth_token andOwner:_owner_id withStartIndex:0 finishedBlock:^(BOOL success) {
         [_queryView reloadData];
     }];
+    
+    dispatch_queue_t cq = dispatch_queue_create("query collections", nil);
+    dispatch_async(cq, ^{
+        [_cqm queryCollectionContentsByUser:_current_user_id withToken:_current_user_id andOwner:_owner_id withStartIndex:0 finishedBlock:^(BOOL success) {
+            if (((ProfileOverView*)[_queryView headerViewForSection:0]).seg.selectedSegmentIndex == 3) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [_queryView reloadData];
+                });
+            }
+        }];
+    });
 }
 
 #pragma mark - Navigation
@@ -239,6 +260,14 @@
     return _om;
 }
 
+- (CollectionQueryModel*)getCQM {
+    return _cqm;
+}
+
+- (NSInteger)getCurrentSegIndex {
+    return current_seg_index;
+}
+
 #pragma mark -- profile view delegate
 - (void)editBtnSelected {
     [self performSegueWithIdentifier:@"PersonalSetting" sender:nil];
@@ -304,6 +333,11 @@
     }
 }
 
+- (void)segControlValueChangedWithSelectedIndex:(NSInteger)index {
+    current_seg_index = index;
+    [_queryView reloadData];
+}
+
 #pragma mark -- album cell delegate
 - (NSInteger)getViewsCount {
     return PHOTO_PER_LINE;
@@ -318,7 +352,6 @@
 }
 
 - (void)didSelectOneImageAtIndex:(NSInteger)index {
-    NSLog(@"personal center select one post with index: %d", index);
     OwnerQueryModel* om = [self getOM];
     QueryContent* tmp = [om.querydata objectAtIndex:index];
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];

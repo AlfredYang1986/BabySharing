@@ -13,5 +13,6 @@
 - (void)chatBtnSelected;
 - (void)followBtnSelected;
 - (void)editBtnSelected;
+- (void)segControlValueChangedWithSelectedIndex:(NSInteger)index;
 @end
 #endif

@@ -8,12 +8,14 @@
 
 #import "AddingFriendsController.h"
 #import "AddressBookDelegate.h"
+#import "AddingFriendsProtocol.h"
 
-@interface AddingFriendsController ()
+@interface AddingFriendsController () <UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *queryView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *seg;
 
+@property (weak, nonatomic, setter=setCurrentDelegate:) id<UITableViewDataSource, UITableViewDelegate, AddingFriendsProtocol> current_delegate;
 @end
 
 @implementation AddingFriendsController {
@@ -24,16 +26,19 @@
 @synthesize searchBar = _searchBar;
 @synthesize seg = _seg;
 
+@synthesize current_delegate = _current_delegate;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     _seg.selectedSegmentIndex = 0;
     [_seg addTarget:self action:@selector(segValueChanged) forControlEvents:UIControlEventValueChanged];
+   
+    _searchBar.delegate = self;
     
     ab = [[AddressBookDelegate alloc]init];
     if ([ab isAddressDelegateReady]) {
-        _queryView.delegate = ab;
-        _queryView.dataSource = ab;
+        self.current_delegate = ab;
     }
 }
 
@@ -52,7 +57,28 @@
 }
 */
 
+- (void)setCurrentDelegate:(id<UITableViewDataSource,UITableViewDelegate,AddingFriendsProtocol>)current_delegate {
+    _current_delegate = current_delegate;
+    _queryView.delegate = _current_delegate;
+    _queryView.dataSource = _current_delegate;
+}
+
+#pragma mark -- segement controll
 - (void)segValueChanged {
-    
+    if (_seg.selectedSegmentIndex == 0) {
+        if ([ab isAddressDelegateReady]) {
+            self.current_delegate = ab;
+            [_queryView reloadData];
+        }
+    } else {
+        self.current_delegate = nil;
+        [_queryView reloadData];
+    }
+}
+
+#pragma mark -- search bar delegate
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    [_current_delegate filterFriendsWithString:searchText];
+    [_queryView reloadData];
 }
 @end

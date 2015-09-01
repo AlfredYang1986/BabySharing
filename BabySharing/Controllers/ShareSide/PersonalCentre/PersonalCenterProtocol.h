@@ -12,6 +12,7 @@
 #import "ProfileViewDelegate.h"
 
 @class OwnerQueryModel;
+@class CollectionQueryModel;
 
 @protocol PersonalCenterProtocol <NSObject>
 - (NSString*)getPhotoName;
@@ -24,6 +25,9 @@
 - (NSString*)getRelations;
 
 - (OwnerQueryModel*)getOM;
+- (CollectionQueryModel*)getCQM;
+
+- (NSInteger)getCurrentSegIndex;
 @end
 
 @protocol PersonalCenterCallBack <NSObject>

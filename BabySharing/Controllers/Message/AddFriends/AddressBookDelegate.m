@@ -18,7 +18,8 @@
 
 @implementation AddressBookDelegate {
     ABAddressBookRef tmpAddressBook;
-    NSArray* people;
+    NSArray* people_all;
+    NSMutableArray* people;
 }
 
 - (id)init {
@@ -38,13 +39,55 @@
     }
     
     if (tmpAddressBook) {
-        people = CFBridgingRelease(ABAddressBookCopyArrayOfAllPeople(tmpAddressBook));
+        people_all = CFBridgingRelease(ABAddressBookCopyArrayOfAllPeople(tmpAddressBook));
+        people = [people_all mutableCopy];
     }
     return self;
 }
 
 - (BOOL)isAddressDelegateReady {
     return tmpAddressBook != nil;
+}
+
+- (void)filterFriendsWithString:(NSString*)searchText {
+
+    [people removeAllObjects];
+    for (id tmpPerson in people_all) {
+        NSString* tmpFirstName = CFBridgingRelease(ABRecordCopyValue(CFBridgingRetain(tmpPerson), kABPersonFirstNameProperty));
+        NSString* tmpLastName = CFBridgingRelease(ABRecordCopyValue(CFBridgingRetain(tmpPerson), kABPersonLastNameProperty));
+      
+        NSString* filter = nil;
+        if (tmpLastName && tmpFirstName) {
+            filter = [tmpFirstName stringByAppendingString:tmpLastName];
+        } else if (tmpFirstName) {
+            filter = tmpFirstName;
+        } else if (tmpLastName) {
+            filter = tmpLastName;
+        } else {
+            
+        }
+       
+        NSString* regex = @"[^x00-xff]+";
+        NSPredicate* p = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+        
+        if ([p evaluateWithObject:searchText]) {
+
+            NSString *regex2 = [NSString stringWithFormat:@"^[%@]\\w*", searchText];
+            NSPredicate* p2 = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex2];
+           
+            if ([p2 evaluateWithObject:filter]) {
+                [people addObject:tmpPerson];
+            }
+        } else {
+            
+            NSString *regex2 = [NSString stringWithFormat:@"^%@\\w*", [searchText lowercaseString]];
+            NSPredicate* p2 = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex2];
+           
+            if ([p2 evaluateWithObject:[filter lowercaseString]]) {
+                [people addObject:tmpPerson];
+            }
+        }
+    }
 }
 
 #pragma mark -- alert view delegate
@@ -68,7 +111,6 @@
         
         if (count > 0) {
             NSString* phoneNo = CFBridgingRelease(ABMultiValueCopyValueAtIndex(phoneNos, 0));
-            NSLog(@"target phoneNo is: %@", phoneNo);
             [dic setObject:phoneNo forKey:@"phoneNo"];
             NSError * error = nil;
             NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];

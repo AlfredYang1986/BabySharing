@@ -43,6 +43,7 @@ typedef NS_ENUM(NSInteger, UserPostOwnerConnections) {
 #define QUERY_HOST_DOMAIN                   [HOST_DOMAIN stringByAppendingString:@"query/"]
 #define QUERY_REFRESH_HOME                  @"queryHomeContent"
 #define QUERY_COMMENTS                      @"queryComments"
+#define QUERY_COLLECTIONS                   [QUERY_HOST_DOMAIN stringByAppendingString:@"queryCollections"]
 
 #pragma mark -- AUTH
 #define AUTH_HOST_DOMAIN                    [HOST_DOMAIN stringByAppendingString:@"login/"]
@@ -133,6 +134,8 @@ typedef NS_ENUM(NSInteger, UserPostOwnerConnections) {
 #define LOCALDB_QUERY                       @"quertData.sqlite"
 #define LOCALDB_MESSAGEG_NOTIFICATION       @"notifyData.sqlite"
 #define LOCALDB_TAG_QUERY                   @"tagQuery.sqlite"
+#define LOCALDB_OWNER_QUERY                 @"ownerQuery.sqlite"
+#define LOCALDB_COLLECTION_QUERY            @"collectionQuery.sqlite"
 #define LOCALDB_RELATIONSHIP                @"Relationship.sqlite"
 //#define LOCALDB_CHAT                      @"chatData.sqlite"
 //#define LOCALDB_GROUP                     @"groupData.sqlite"

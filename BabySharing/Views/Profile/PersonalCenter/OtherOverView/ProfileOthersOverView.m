@@ -78,6 +78,8 @@
     [_seg setImage:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Location"] ofType:@"png"]] forSegmentAtIndex:2];
     
     [_chatBtn addTarget:_deleagate action:@selector(chatBtnSelected) forControlEvents:UIControlEventTouchDown];
+
+    [_seg addTarget:_deleagate action:@selector(segControlValueChangedWithSelectedIndex:) forControlEvents:UIControlEventValueChanged];
 }
 
 - (void)setOwnerPhoto:(NSString*)photo_name {

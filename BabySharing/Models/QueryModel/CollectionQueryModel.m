@@ -1,18 +1,19 @@
 //
-//  OwnerQueryModel.m
+//  CollectionQueryModel.m
 //  BabySharing
 //
-//  Created by Alfred Yang on 3/08/2015.
+//  Created by Alfred Yang on 1/09/2015.
 //  Copyright (c) 2015 BM. All rights reserved.
 //
 
-#import "OwnerQueryModel.h"
+#import "CollectionQueryModel.h"
+
 #import <CoreData/CoreData.h>
 #import "QueryContent+ContextOpt.h"
 #import "ModelDefines.h"
 #import "RemoteInstance.h"
 
-@implementation OwnerQueryModel
+@implementation CollectionQueryModel
 
 @synthesize querydata = _querydata;
 @synthesize delegate = _delegate;
@@ -66,21 +67,18 @@
 }
 
 #pragma mark -- query content with tags
-- (NSArray*)queryContentsByUser:(NSString*)user_id withToken:(NSString*)token andOwner:(NSString*)owner_id withStartIndex:(NSInteger)startIndex finishedBlock:(queryFinishedBlock)block {
+- (NSArray*)queryCollectionContentsByUser:(NSString*)user_id withToken:(NSString*)token andOwner:(NSString*)owner_id withStartIndex:(NSInteger)startIndex finishedBlock:(queryFinishedBlock)block {
 
-    NSMutableDictionary* dic_conditions = [[NSMutableDictionary alloc]init];
-    [dic_conditions setObject:owner_id forKey:@"owner_id"];
-    
     NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
+    [dic setObject:owner_id forKey:@"owner_id"];
     [dic setValue:token forKey:@"auth_token"];
     [dic setValue:user_id forKey:@"user_id"];
-    [dic setValue:[dic_conditions copy] forKey:@"conditions"];
     [dic setValue:[NSNumber numberWithInteger:startIndex] forKey:@"skip"];
     
     NSError * error = nil;
     NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
     
-    NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:[QUERY_HOST_DOMAIN stringByAppendingString:QUERY_REFRESH_HOME]]];
+    NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:QUERY_COLLECTIONS]];
     
     if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
         NSArray* reVal = [result objectForKey:@"result"];
@@ -98,15 +96,12 @@
     return nil;
 }
 
-- (NSArray*)appendContentsByUser:(NSString*)user_id withToken:(NSString*)token andOwner:(NSString*)owner_id withStartIndex:(NSInteger)startIndex finishedBlock:(queryFinishedBlock)block {
-    
-    NSMutableDictionary* dic_conditions = [[NSMutableDictionary alloc]init];
-    [dic_conditions setObject:owner_id forKey:@"owner_id"];
-    
+- (NSArray*)appendCollectionContentsByUser:(NSString*)user_id withToken:(NSString*)token andOwner:(NSString*)owner_id withStartIndex:(NSInteger)startIndex finishedBlock:(queryFinishedBlock)block {
+
     NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
+    [dic setObject:owner_id forKey:@"owner_id"];
     [dic setValue:token forKey:@"auth_token"];
     [dic setValue:user_id forKey:@"user_id"];
-    [dic setValue:[dic_conditions copy] forKey:@"conditions"];
     [dic setValue:[NSNumber numberWithInteger:startIndex] forKey:@"skip"];
     
     NSNumber* time = [QueryContent enumContentTimeSpanInContext:_doc.managedObjectContext];
@@ -115,7 +110,7 @@
     NSError * error = nil;
     NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
     
-    NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:[QUERY_HOST_DOMAIN stringByAppendingString:QUERY_REFRESH_HOME]]];
+    NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:QUERY_COLLECTIONS]];
     
     if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
         NSArray* reVal = [result objectForKey:@"result"];

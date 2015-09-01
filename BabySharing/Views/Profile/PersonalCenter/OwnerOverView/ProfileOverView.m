@@ -26,7 +26,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 @property (weak, nonatomic) IBOutlet UILabel *personalSignLabel;
 
-@property (weak, nonatomic) IBOutlet UISegmentedControl *seg;
 @end
 
 @implementation ProfileOverView
@@ -71,6 +70,8 @@
     [_seg setImage:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Tag"] ofType:@"png"]] forSegmentAtIndex:1];
     [_seg setImage:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Location"] ofType:@"png"]] forSegmentAtIndex:2];
     [_seg setImage:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Star"] ofType:@"png"]] forSegmentAtIndex:3];
+
+    [_seg addTarget:self action:@selector(segControlValueChanged) forControlEvents:UIControlEventValueChanged];
 }
 
 - (void)setOwnerPhoto:(NSString*)photo_name {
@@ -130,5 +131,9 @@
 
 - (IBAction)editBtnSelected {
     [_deleagate editBtnSelected];
+}
+
+- (void)segControlValueChanged {
+    [_deleagate segControlValueChangedWithSelectedIndex:_seg.selectedSegmentIndex];
 }
 @end

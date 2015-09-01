@@ -45,6 +45,8 @@
 		EE74162B1B5B9659002CA1BC /* AreaTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE7416291B5B9659002CA1BC /* AreaTableCell.xib */; };
 		EE74162E1B5BA6F7002CA1BC /* UserPrivacyController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE74162D1B5BA6F7002CA1BC /* UserPrivacyController.m */; };
 		EE7537761B6B1AC400EC1616 /* CommentsHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7537751B6B1AC400EC1616 /* CommentsHeader.m */; };
+		EE76398A1B956CFB0025A56D /* CellConstructParameters.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7639891B956CFB0025A56D /* CellConstructParameters.m */; };
+		EE76398D1B95805F0025A56D /* CollectionQueryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EE76398C1B95805F0025A56D /* CollectionQueryModel.m */; };
 		EE76A56D1B72021900036747 /* ConnectionLocalModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EE76A56B1B72021800036747 /* ConnectionLocalModel.xcdatamodeld */; };
 		EE76A5741B72056800036747 /* Following.m in Sources */ = {isa = PBXBuildFile; fileRef = EE76A56F1B72056800036747 /* Following.m */; };
 		EE76A5761B72056800036747 /* Followed.m in Sources */ = {isa = PBXBuildFile; fileRef = EE76A5731B72056800036747 /* Followed.m */; };
@@ -242,7 +244,7 @@
 		EEE94E131B74AB6B0011321A /* AddressBookDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE94E121B74AB6B0011321A /* AddressBookDelegate.m */; };
 		EEE94E181B74BDDD0011321A /* ProfileDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE94E161B74BDDD0011321A /* ProfileDetailController.m */; };
 		EEE94E191B74BDDD0011321A /* ProfileDetailNib.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEE94E171B74BDDD0011321A /* ProfileDetailNib.storyboard */; };
-		EEE94E1D1B74BE090011321A /* PersonalCenterOwnerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE94E1C1B74BE090011321A /* PersonalCenterOwnerDelegate.m */; };
+		EEE94E1D1B74BE090011321A /* PersonalCenterOwnerDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = EEE94E1C1B74BE090011321A /* PersonalCenterOwnerDelegate.mm */; };
 		EEE94E261B74BE3B0011321A /* PersonalSettingController.mm in Sources */ = {isa = PBXBuildFile; fileRef = EEE94E221B74BE3B0011321A /* PersonalSettingController.mm */; };
 		EEE94E271B74BE3B0011321A /* ProfileSettingController.mm in Sources */ = {isa = PBXBuildFile; fileRef = EEE94E241B74BE3B0011321A /* ProfileSettingController.mm */; };
 		EEE94E2B1B74BE910011321A /* PersonalCentreOthersDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE94E2A1B74BE910011321A /* PersonalCentreOthersDelegate.m */; };
@@ -345,6 +347,10 @@
 		EE750EFE1B7DB8EA002F2FBD /* CycleSyncDataProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CycleSyncDataProtocol.h; sourceTree = "<group>"; };
 		EE7537741B6B1AC400EC1616 /* CommentsHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentsHeader.h; sourceTree = "<group>"; };
 		EE7537751B6B1AC400EC1616 /* CommentsHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentsHeader.m; sourceTree = "<group>"; };
+		EE7639881B956CFB0025A56D /* CellConstructParameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellConstructParameters.h; sourceTree = "<group>"; };
+		EE7639891B956CFB0025A56D /* CellConstructParameters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellConstructParameters.m; sourceTree = "<group>"; };
+		EE76398B1B95805F0025A56D /* CollectionQueryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionQueryModel.h; sourceTree = "<group>"; };
+		EE76398C1B95805F0025A56D /* CollectionQueryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionQueryModel.m; sourceTree = "<group>"; };
 		EE76A56C1B72021900036747 /* ConnectionLocalModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ConnectionLocalModel.xcdatamodel; sourceTree = "<group>"; };
 		EE76A56E1B72056800036747 /* Following.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Following.h; sourceTree = "<group>"; };
 		EE76A56F1B72056800036747 /* Following.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Following.m; sourceTree = "<group>"; };
@@ -408,6 +414,7 @@
 		EEA201791B744E59006B81E4 /* ConnectionOwner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionOwner.m; sourceTree = "<group>"; };
 		EEA2017A1B744E59006B81E4 /* Friends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Friends.h; sourceTree = "<group>"; };
 		EEA2017B1B744E59006B81E4 /* Friends.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Friends.m; sourceTree = "<group>"; };
+		EEA72A471B955AB9000BEC2E /* AddingFriendsProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddingFriendsProtocol.h; sourceTree = "<group>"; };
 		EEA991421B773F1B001F6CC6 /* UIBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBadgeView.h; sourceTree = "<group>"; };
 		EEA991431B773F1B001F6CC6 /* UIBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBadgeView.m; sourceTree = "<group>"; };
 		EEA991461B775B4F001F6CC6 /* DDNNotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDNNotificationViewController.h; sourceTree = "<group>"; };
@@ -711,7 +718,7 @@
 		EEE94E161B74BDDD0011321A /* ProfileDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileDetailController.m; sourceTree = "<group>"; };
 		EEE94E171B74BDDD0011321A /* ProfileDetailNib.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ProfileDetailNib.storyboard; sourceTree = "<group>"; };
 		EEE94E1B1B74BE090011321A /* PersonalCenterOwnerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalCenterOwnerDelegate.h; sourceTree = "<group>"; };
-		EEE94E1C1B74BE090011321A /* PersonalCenterOwnerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalCenterOwnerDelegate.m; sourceTree = "<group>"; };
+		EEE94E1C1B74BE090011321A /* PersonalCenterOwnerDelegate.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = PersonalCenterOwnerDelegate.mm; sourceTree = "<group>"; };
 		EEE94E211B74BE3B0011321A /* PersonalSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalSettingController.h; sourceTree = "<group>"; };
 		EEE94E221B74BE3B0011321A /* PersonalSettingController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PersonalSettingController.mm; sourceTree = "<group>"; };
 		EEE94E231B74BE3B0011321A /* ProfileSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileSettingController.h; sourceTree = "<group>"; };
@@ -902,6 +909,15 @@
 				EE6D6DB21B7B28A6004D29C8 /* WETouchableView.m */,
 			);
 			path = Popover;
+			sourceTree = "<group>";
+		};
+		EE7639871B956CCC0025A56D /* CommonHelper */ = {
+			isa = PBXGroup;
+			children = (
+				EE7639881B956CFB0025A56D /* CellConstructParameters.h */,
+				EE7639891B956CFB0025A56D /* CellConstructParameters.m */,
+			);
+			path = CommonHelper;
 			sourceTree = "<group>";
 		};
 		EE76A5691B72019D00036747 /* ConnectionModel */ = {
@@ -1263,6 +1279,7 @@
 		EEAACB441B44E90300D05C0B /* PersonalCentre */ = {
 			isa = PBXGroup;
 			children = (
+				EE7639871B956CCC0025A56D /* CommonHelper */,
 				EEE94E281B74BE5F0011321A /* OtherUserDelegate */,
 				EEE94E1E1B74BE3B0011321A /* Settings */,
 				EEE94E1A1B74BE090011321A /* OwnerDelegate */,
@@ -1428,6 +1445,8 @@
 				EEAACBAB1B44E90300D05C0B /* TagQueryModel.m */,
 				EE20BED21B6F430D00DE8455 /* OwnerQueryModel.h */,
 				EE20BED31B6F430D00DE8455 /* OwnerQueryModel.m */,
+				EE76398B1B95805F0025A56D /* CollectionQueryModel.h */,
+				EE76398C1B95805F0025A56D /* CollectionQueryModel.m */,
 			);
 			path = QueryModel;
 			sourceTree = "<group>";
@@ -1946,6 +1965,7 @@
 				EEE94E0F1B74A9320011321A /* AddingFriendsController.m */,
 				EEE94E111B74AB6B0011321A /* AddressBookDelegate.h */,
 				EEE94E121B74AB6B0011321A /* AddressBookDelegate.m */,
+				EEA72A471B955AB9000BEC2E /* AddingFriendsProtocol.h */,
 			);
 			path = AddFriends;
 			sourceTree = "<group>";
@@ -1964,7 +1984,7 @@
 			isa = PBXGroup;
 			children = (
 				EEE94E1B1B74BE090011321A /* PersonalCenterOwnerDelegate.h */,
-				EEE94E1C1B74BE090011321A /* PersonalCenterOwnerDelegate.m */,
+				EEE94E1C1B74BE090011321A /* PersonalCenterOwnerDelegate.mm */,
 			);
 			path = OwnerDelegate;
 			sourceTree = "<group>";
@@ -2233,6 +2253,7 @@
 				EE7910431B841AA0005E455B /* AlbumTableCell.m in Sources */,
 				EE7910421B841A92005E455B /* DropDownView.m in Sources */,
 				EE7910411B841A7B005E455B /* TagQueryCell.m in Sources */,
+				EE76398D1B95805F0025A56D /* CollectionQueryModel.m in Sources */,
 				EE7910631B847DBA005E455B /* ChatGroupController.m in Sources */,
 				EE7910401B841A33005E455B /* DropDownItem.m in Sources */,
 				EE79103E1B841A00005E455B /* QueryCommentsCell.m in Sources */,
@@ -2253,6 +2274,7 @@
 				EEAACCFC1B44E90400D05C0B /* QueryLikesCell.m in Sources */,
 				EEAACCCC1B44E90400D05C0B /* INTUSpringSolver.c in Sources */,
 				EE2D4B7D1B525E0A00B58A1F /* PhotoPreViewController.m in Sources */,
+				EE76398A1B956CFB0025A56D /* CellConstructParameters.m in Sources */,
 				EE9633CD1B92BB0F00DB4EA5 /* AboutViewController.m in Sources */,
 				EEAACD131B44E90400D05C0B /* ProfileDetailLocationCell.m in Sources */,
 				EEAACCD51B44E90400D05C0B /* CurrentToken.m in Sources */,
@@ -2361,7 +2383,7 @@
 				EEE94E271B74BE3B0011321A /* ProfileSettingController.mm in Sources */,
 				EEAACCC01B44E90400D05C0B /* PersonalCentreTmpViewController.m in Sources */,
 				EEAACCBC1B44E90400D05C0B /* HomeSearchController.m in Sources */,
-				EEE94E1D1B74BE090011321A /* PersonalCenterOwnerDelegate.m in Sources */,
+				EEE94E1D1B74BE090011321A /* PersonalCenterOwnerDelegate.mm in Sources */,
 				EE59A7751B5936170014F9C3 /* SearchUserTagsController.m in Sources */,
 				EEAACCDB1B44E90400D05C0B /* RegTmpToken+ContextOpt.m in Sources */,
 				EEAACCBB1B44E90400D05C0B /* HomeDetailViewController.m in Sources */,
