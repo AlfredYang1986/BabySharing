@@ -1712,6 +1712,10 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="lse-hW-g1H">
+                                <rect key="frame" x="0.0" y="130" width="600" height="470"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -1719,14 +1723,18 @@
                             <constraint firstItem="ehT-6f-r8c" firstAttribute="leading" secondItem="mqB-tQ-iPs" secondAttribute="trailing" constant="8" id="0aZ-3t-2e6"/>
                             <constraint firstItem="2FG-i3-96E" firstAttribute="leading" secondItem="aPW-2j-Rc8" secondAttribute="trailing" constant="8" id="3kj-3b-EbW"/>
                             <constraint firstItem="2FG-i3-96E" firstAttribute="trailing" secondItem="s0E-UX-tmk" secondAttribute="trailingMargin" id="5YP-ND-Z1O"/>
+                            <constraint firstItem="lse-hW-g1H" firstAttribute="leading" secondItem="s0E-UX-tmk" secondAttribute="leadingMargin" constant="-16" id="BTL-87-qVO"/>
                             <constraint firstItem="mqB-tQ-iPs" firstAttribute="leading" secondItem="s0E-UX-tmk" secondAttribute="leadingMargin" id="Bp8-us-5hk"/>
                             <constraint firstItem="aPW-2j-Rc8" firstAttribute="leading" secondItem="s0E-UX-tmk" secondAttribute="leadingMargin" id="D1s-oc-BfB"/>
                             <constraint firstItem="2FG-i3-96E" firstAttribute="leading" secondItem="aPW-2j-Rc8" secondAttribute="trailing" constant="8" id="IVf-fq-4wH"/>
                             <constraint firstItem="aPW-2j-Rc8" firstAttribute="top" secondItem="CbS-M3-bNA" secondAttribute="bottom" constant="8" id="KjM-su-p2o"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="lse-hW-g1H" secondAttribute="trailing" constant="-16" id="ViX-Rk-nMK"/>
+                            <constraint firstItem="lse-hW-g1H" firstAttribute="top" secondItem="ehT-6f-r8c" secondAttribute="bottom" constant="8" id="YWW-Xn-i2h"/>
                             <constraint firstItem="mqB-tQ-iPs" firstAttribute="leading" secondItem="s0E-UX-tmk" secondAttribute="leadingMargin" id="ZO5-18-ZO5"/>
                             <constraint firstItem="ehT-6f-r8c" firstAttribute="trailing" secondItem="s0E-UX-tmk" secondAttribute="trailingMargin" id="ZOL-On-7Yk"/>
                             <constraint firstItem="mqB-tQ-iPs" firstAttribute="top" secondItem="aPW-2j-Rc8" secondAttribute="bottom" constant="8" id="dd9-f0-oZg"/>
                             <constraint firstItem="mqB-tQ-iPs" firstAttribute="top" secondItem="aPW-2j-Rc8" secondAttribute="bottom" constant="8" id="hER-uH-xTq"/>
+                            <constraint firstItem="lse-hW-g1H" firstAttribute="bottom" secondItem="s0E-UX-tmk" secondAttribute="bottomMargin" id="hnE-e7-af4"/>
                             <constraint firstItem="2FG-i3-96E" firstAttribute="top" secondItem="CbS-M3-bNA" secondAttribute="bottom" constant="4" id="nCQ-uu-Rdw"/>
                             <constraint firstItem="mqB-tQ-iPs" firstAttribute="top" secondItem="aPW-2j-Rc8" secondAttribute="bottom" constant="8" id="oEV-TM-D4W"/>
                             <constraint firstItem="ehT-6f-r8c" firstAttribute="leading" secondItem="mqB-tQ-iPs" secondAttribute="trailing" constant="8" id="rvt-Ie-iZ6"/>

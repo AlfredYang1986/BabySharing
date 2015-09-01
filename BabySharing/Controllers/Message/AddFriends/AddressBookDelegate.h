@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@interface AddressBookDelegate : NSObject <UITableViewDelegate, UITableViewDataSource>
+@interface AddressBookDelegate : NSObject <UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate>
 
 - (BOOL)isAddressDelegateReady;
 @end

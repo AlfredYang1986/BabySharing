@@ -33,7 +33,7 @@ typedef NS_ENUM(NSInteger, UserPostOwnerConnections) {
 
 #pragma mark -- HOST DOMAIN
 //#define HOST_DOMAIN                     @"http://www.altlys.com:9000/"
-#define HOST_DOMAIN                     @"http://192.168.1.105:9000/"
+#define HOST_DOMAIN                     @"http://192.168.1.102:9000/"
 //#define HOST_DOMAIN_SENDBOX             @"http://192.168.1.105:9000/"
 
 #pragma mark -- DOWNLOAD
@@ -126,6 +126,7 @@ typedef NS_ENUM(NSInteger, UserPostOwnerConnections) {
 #define RELATIONSHIP_QUERY_FOLLOWING        [RELATIONSHIP_DOMAIN stringByAppendingString:@"queryFollowingUsers"]
 #define RELATIONSHIP_QUERY_FOLLOWED         [RELATIONSHIP_DOMAIN stringByAppendingString:@"queryFollowedUsers"]
 #define RELATIONSHIP_QUERY_FRIENDS          [RELATIONSHIP_DOMAIN stringByAppendingString:@"queryMutureFollowingUsers"]
+#define RELATIONSHIP_SMS_INVITATION         [RELATIONSHIP_DOMAIN stringByAppendingString:@"sentSMSInvitation"]
 
 #pragma mark -- database
 #define LOCALDB_LOGIN                       @"loginData.sqlite"
