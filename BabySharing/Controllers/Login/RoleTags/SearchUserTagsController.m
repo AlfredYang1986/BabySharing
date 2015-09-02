@@ -9,16 +9,28 @@
 #import "SearchUserTagsController.h"
 #import "INTUAnimationEngine.h"
 
-@interface SearchUserTagsController () <UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource>
+#import "AppDelegate.h"
+#import "RemoteInstance.h"
+
+#import "UserAddNewTagDelegate.h"
+
+typedef void(^queryRoleTagFinishBlock)(BOOL success, NSString* msg, NSArray* result);
+
+@interface SearchUserTagsController () <UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource, addNewTagProtocol>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *queryView;
 
+@property (strong, nonatomic, setter=setCurrentDelegate:) id<UITableViewDataSource, UITableViewDelegate> current_delegate;
 @end
 
 @implementation SearchUserTagsController {
     NSArray* test_tag_arr;
     
     NSArray* final_tag_arr;
+    
+    BOOL isSync;
+    
+    UserAddNewTagDelegate* add_delegate;
 }
 
 @synthesize delegate = _delegate;
@@ -39,11 +51,33 @@
             break;
         }
     }
+  
+    add_delegate = [[UserAddNewTagDelegate alloc]init];
+    add_delegate.delegate = self;
     
-    _queryView.delegate = self;
-    _queryView.dataSource = self;
+    self.current_delegate = self;
+//    _queryView.delegate = self;
+//    _queryView.dataSource = self;
+    isSync = NO;
+   
+    dispatch_queue_t qt = dispatch_queue_create("tag_query", nil);
+    dispatch_async(qt, ^{
+        [self queryRoleTagsWithStartIndex:0 andLenth:20 withFinishBlock:^(BOOL success, NSString *msg, NSArray *result) {
+            if (success) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    test_tag_arr = result;
+                    _searchBar.text = @"";
+                    [_searchBar resignFirstResponder];
+                    final_tag_arr = test_tag_arr;
+                    [_queryView reloadData];
+                    isSync = YES;
+                });
+            }
+        }];
+    });
     
-    test_tag_arr = @[@"a_tag1", @"b_tag2", @"c_tag3", @"d_tag4", @"e_tag5"];
+    
+    test_tag_arr = @[];//@[@"a_tag1", @"b_tag2", @"c_tag3", @"d_tag4", @"e_tag5"];
     final_tag_arr = test_tag_arr;
 }
 
@@ -62,6 +96,39 @@
     [self.navigationController setNavigationBarHidden:YES];
 }
 
+- (void)setCurrentDelegate:(id<UITableViewDataSource,UITableViewDelegate>)current_delegate {
+    _current_delegate = current_delegate;
+    _queryView.dataSource = _current_delegate;
+    _queryView.delegate = _current_delegate;
+}
+
+- (void)queryRoleTagsWithStartIndex:(NSInteger)skip andLenth:(NSInteger)take withFinishBlock:(queryRoleTagFinishBlock)block {
+    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    
+    NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
+    [dic setValue:app.lm.current_user_id forKey:@"user_id"];
+    [dic setValue:app.lm.current_auth_token forKey:@"auth_token"];
+
+    [dic setValue:[NSNumber numberWithInteger:skip] forKey:@"skit"];
+    [dic setValue:[NSNumber numberWithInteger:take] forKey:@"take"];
+   
+    NSError * error = nil;
+    NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
+    
+    NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:ROLETAGS_QUERY_ROLETAGS]];
+    
+    if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
+        block(YES, nil, [result objectForKey:@"result"]);
+        
+    } else {
+        NSDictionary* reError = [result objectForKey:@"error"];
+        NSString* msg = [reError objectForKey:@"message"];
+   
+        NSLog(@"query role tags error : %@", msg);
+        block(NO, msg, nil);
+    }
+}
+
 /*
 #pragma mark - Navigation
 
@@ -73,11 +140,22 @@
 */
 
 #pragma mark -- Search Bar Delegate
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
+    if (!isSync) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"cannot edit until sync" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+        [alert show];
+    }
+    
+    return isSync;
+}
+
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     NSLog(@"Search text change");
     
     if ([searchText isEqualToString:@""]) {
         final_tag_arr = test_tag_arr;
+        self.current_delegate = self;
+        
     } else {
         NSString *regex = [NSString stringWithFormat:@"^[%@]\\w*", searchText];
         NSPredicate* p = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
@@ -89,6 +167,9 @@
             }
         }
         final_tag_arr = [tmp copy];
+        
+        if (final_tag_arr.count == 0) self.current_delegate = add_delegate;
+        else self.current_delegate = self;
     }
     
     [_queryView reloadData];
@@ -165,5 +246,44 @@
                                       NSLog(@"%@", finished ? @"Animation Completed" : @"Animation Canceled");
                                       //                                                         self.animationID = NSNotFound;
                                   }];
+}
+
+#pragma mark -- add new role tag
+- (NSString*)getInputTagName {
+    return _searchBar.text;
+}
+
+- (void)addNewTag:(NSString*)tag_name {
+    NSLog(@"add new tag : %@", tag_name);
+    
+    dispatch_queue_t aq = dispatch_queue_create("add tag", nil);
+    dispatch_async(aq, ^{
+
+        AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+        
+        NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
+        [dic setValue:app.lm.current_user_id forKey:@"user_id"];
+        [dic setValue:app.lm.current_auth_token forKey:@"auth_token"];
+        [dic setValue:tag_name forKey:@"tag_name"];
+        
+        NSError * error = nil;
+        NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
+        
+        NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:ROLETAGS_ADD_ROLETAGE]];
+        
+        if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
+            NSString* msg = [result objectForKeyedSubscript:@"result"];
+            NSLog(@"query role tags : %@", msg);
+            
+        } else {
+            NSDictionary* reError = [result objectForKey:@"error"];
+            NSString* msg = [reError objectForKey:@"message"];
+       
+            NSLog(@"query role tags error : %@", msg);
+        }
+    });
+    
+    [_delegate didSelectTag:tag_name];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 @end

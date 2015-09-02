@@ -72,6 +72,11 @@
     }
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO];
+}
+
 - (void)saveDescriptionBtnSelected {
     if (_isEditable && dic_changed) {
 //        NSEnumerator* enumerator = dic_changed.keyEnumerator;
@@ -97,6 +102,7 @@
 
 - (void)didSelectTag:(NSString*)tags {
     _roleTagLabel.text = tags;
+    [dic_changed setValue:tags forKey:@"role_tag"];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

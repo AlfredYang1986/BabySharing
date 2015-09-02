@@ -129,6 +129,11 @@ typedef NS_ENUM(NSInteger, UserPostOwnerConnections) {
 #define RELATIONSHIP_QUERY_FRIENDS          [RELATIONSHIP_DOMAIN stringByAppendingString:@"queryMutureFollowingUsers"]
 #define RELATIONSHIP_SMS_INVITATION         [RELATIONSHIP_DOMAIN stringByAppendingString:@"sentSMSInvitation"]
 
+#pragma mark -- ROLETAGS
+#define ROLETAGS_DOMAIN                     [HOST_DOMAIN stringByAppendingString:@"roletags/"]
+#define ROLETAGS_QUERY_ROLETAGS             [ROLETAGS_DOMAIN stringByAppendingString:@"queryAllRoleTags"]
+#define ROLETAGS_ADD_ROLETAGE               [ROLETAGS_DOMAIN stringByAppendingString:@"addRoleTag"]
+
 #pragma mark -- database
 #define LOCALDB_LOGIN                       @"loginData.sqlite"
 #define LOCALDB_QUERY                       @"quertData.sqlite"
