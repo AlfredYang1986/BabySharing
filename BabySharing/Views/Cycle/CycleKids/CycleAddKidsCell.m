@@ -31,7 +31,7 @@
 @synthesize delegate = _delegate;
 
 + (CGFloat)preferredHeight {
-    return 220;
+    return 44 * 4;
 }
 
 - (void)awakeFromNib {
@@ -89,7 +89,7 @@
 
 #pragma mark -- data source
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    return 4;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -162,22 +162,22 @@
         }
     }
     @catch (NSException *exception) {
-        cell.titleLabel.text = @"";
-        
-        if (addBtn == nil) {
-            addBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
-            [addBtn setImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Plus" ofType:@"png"]] forState:UIControlStateNormal];
-            [addBtn addTarget:self action:@selector(addKidsBtnSelected) forControlEvents:UIControlEventTouchDown];
-            
-            addBtn.layer.borderWidth = 1.f;
-            addBtn.layer.borderColor = [UIColor blueColor].CGColor;
-            addBtn.layer.cornerRadius = 15.f;
-            addBtn.clipsToBounds = YES;
-        }
-        
-        [addBtn removeFromSuperview];
-        [cell addSubview:addBtn];
-        addBtn.center = CGPointMake(30, cell.center.y);
+//        cell.titleLabel.text = @"";
+//        
+//        if (addBtn == nil) {
+//            addBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
+//            [addBtn setImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Plus" ofType:@"png"]] forState:UIControlStateNormal];
+//            [addBtn addTarget:self action:@selector(addKidsBtnSelected) forControlEvents:UIControlEventTouchDown];
+//            
+//            addBtn.layer.borderWidth = 1.f;
+//            addBtn.layer.borderColor = [UIColor blueColor].CGColor;
+//            addBtn.layer.cornerRadius = 15.f;
+//            addBtn.clipsToBounds = YES;
+//        }
+//        
+//        [addBtn removeFromSuperview];
+//        [cell addSubview:addBtn];
+//        addBtn.center = CGPointMake(30, cell.center.y);
     }
     return cell;
 }

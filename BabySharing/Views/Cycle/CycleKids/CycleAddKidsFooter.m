@@ -10,6 +10,8 @@
 
 @implementation CycleAddKidsFooter
 
+@synthesize containerView = _containerView;
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
@@ -18,4 +20,7 @@
 }
 */
 
++ (CGFloat)preferredHeight {
+    return 105;
+}
 @end

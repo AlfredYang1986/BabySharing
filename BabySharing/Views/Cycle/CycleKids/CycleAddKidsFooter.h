@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface CycleAddKidsFooter : UITableViewHeaderFooterView
+@property (weak, nonatomic) IBOutlet UIView *containerView;
 
++ (CGFloat)preferredHeight;
 @end

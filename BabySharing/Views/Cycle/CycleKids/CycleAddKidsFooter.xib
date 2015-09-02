@@ -10,31 +10,31 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Bi-PU-e7B">
-                    <rect key="frame" x="-8" y="0.0" width="616" height="600"/>
+                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Bi-PU-e7B">
+                    <rect key="frame" x="0.0" y="-15" width="616" height="600"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您孩子的信息将不会被公开" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jCR-QB-1Ez">
-                    <rect key="frame" x="8" y="8" width="204" height="21"/>
+                    <rect key="frame" x="8" y="52" width="204" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="允许以孩子的信息作为推荐条件" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1dK-e5-n5e">
-                    <rect key="frame" x="8" y="37" width="238" height="21"/>
+                    <rect key="frame" x="8" y="81" width="238" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3aw-wR-fgK">
-                    <rect key="frame" x="543" y="32" width="51" height="31"/>
+                    <rect key="frame" x="543" y="76" width="51" height="31"/>
                 </switch>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="3aw-wR-fgK" secondAttribute="trailing" constant="8" id="05y-jf-it6"/>
                 <constraint firstItem="1dK-e5-n5e" firstAttribute="top" secondItem="jCR-QB-1Ez" secondAttribute="bottom" constant="8" id="8Qe-Vj-Alx"/>
-                <constraint firstItem="jCR-QB-1Ez" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="9qX-vc-A4x"/>
+                <constraint firstItem="jCR-QB-1Ez" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="52" id="9qX-vc-A4x"/>
                 <constraint firstItem="jCR-QB-1Ez" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="HUH-Ho-Cfa"/>
                 <constraint firstItem="1dK-e5-n5e" firstAttribute="top" secondItem="jCR-QB-1Ez" secondAttribute="bottom" constant="8" id="WnE-NB-01e"/>
                 <constraint firstAttribute="bottom" secondItem="2Bi-PU-e7B" secondAttribute="bottom" id="bwB-Dk-OWN"/>
@@ -44,6 +44,14 @@
                 <constraint firstItem="2Bi-PU-e7B" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="-8" id="nV5-nF-Wjz"/>
                 <constraint firstItem="2Bi-PU-e7B" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="vb2-Of-DHa"/>
             </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="WnE-NB-01e"/>
+                </mask>
+            </variation>
+            <connections>
+                <outlet property="containerView" destination="2Bi-PU-e7B" id="qcr-C0-UZI"/>
+            </connections>
         </view>
     </objects>
 </document>

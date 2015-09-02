@@ -21,6 +21,11 @@
     NSInteger current_index;
     
     NSMutableArray* kids_changed;
+    
+    UIButton* addBtn;
+    UIButton* nextBtn;
+    UIButton* prevBtn;
+    UIButton* delectBtn;
 }
 
 @synthesize queryView = _queryView;
@@ -44,7 +49,13 @@
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(doneBtnSelected)];
     
-    kids_changed = [_kids copy];
+    kids_changed = [_kids mutableCopy];
+    
+    if (kids_changed.count == 0) {
+        NSMutableDictionary* dic_new = [[NSMutableDictionary alloc]init];
+        [kids_changed addObject:dic_new];
+    }
+    
     [self changeCurrentIndex:0];
 }
 
@@ -57,7 +68,31 @@
         }
     }
     @catch (NSException *exception) {
+    
     }
+    
+    [self resetFuncBtns];
+}
+
+- (NSInteger)vidateKidsCount {
+    NSInteger result = 0;
+    for (NSDictionary* dic in kids_changed) {
+        if ([dic.allKeys containsObject:@"age"])
+            ++result;
+    }
+    return result;
+}
+
+- (void)resetFuncBtns {
+    
+    if (current_index == kids_changed.count - 1) nextBtn.enabled = NO;
+    else nextBtn.enabled = YES;
+    
+    if (current_index == 0) prevBtn.enabled = NO;
+    else prevBtn.enabled = YES;
+    
+    if ([self vidateKidsCount] > 0) delectBtn.enabled = YES;
+    else delectBtn.enabled = NO;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -118,8 +153,31 @@
 }
 
 - (void)addKidsBtnSelected {
+    NSMutableDictionary * dic_new = [[NSMutableDictionary alloc]initWithCapacity:5];
+    [kids_changed addObject:dic_new];
     
+    [_queryView reloadData];
+    [self changeCurrentIndex:kids_changed.count -1];
+    [_queryView setContentOffset:CGPointMake(0, MAX(current_index * [CycleAddKidsCell preferredHeight], 0) - 64) animated:YES];
 }
+
+- (void)deleteKidsBtnSelected {
+    [kids_changed removeObjectAtIndex:current_index];
+    [_queryView reloadData];
+    [self changeCurrentIndex:MIN(current_index + 1, kids_changed.count - 1)];
+    [_queryView setContentOffset:CGPointMake(0, MAX(current_index * [CycleAddKidsCell preferredHeight], 0) - 64) animated:YES];
+}
+
+- (void)nextKidsBtnSelected {
+    [self changeCurrentIndex:current_index + 1];
+    [_queryView setContentOffset:CGPointMake(0, MAX(current_index * [CycleAddKidsCell preferredHeight], 0) - 64) animated:YES];
+}
+
+- (void)prevKidsBtnSelected {
+    [self changeCurrentIndex:current_index - 1];
+    [_queryView setContentOffset:CGPointMake(0, MAX(current_index * [CycleAddKidsCell preferredHeight], 0) - 64) animated:YES];
+}
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -132,11 +190,11 @@
 
 #pragma mark -- table view delegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 44 * 5;
+    return [CycleAddKidsCell preferredHeight];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 66;
+    return [CycleAddKidsFooter preferredHeight];
 }
 
 - (UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
@@ -146,13 +204,86 @@
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"CycleAddKidsFooter" owner:self options:nil];
         footer = [nib objectAtIndex:0];
     }
+   
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+
+    if (addBtn == nil) {
+        addBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
+        [addBtn setImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Plus" ofType:@"png"]] forState:UIControlStateNormal];
+        [addBtn addTarget:self action:@selector(addKidsBtnSelected) forControlEvents:UIControlEventTouchDown];
+        
+        addBtn.layer.borderWidth = 1.f;
+        addBtn.layer.borderColor = [UIColor blueColor].CGColor;
+        addBtn.layer.cornerRadius = 15.f;
+        addBtn.clipsToBounds = YES;
+    } else {
+        [addBtn removeFromSuperview];
+    }
+    
+    if (delectBtn == nil) {
+        delectBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
+        [delectBtn setImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Cancel_blue" ofType:@"png"]] forState:UIControlStateNormal];
+        [delectBtn addTarget:self action:@selector(deleteKidsBtnSelected) forControlEvents:UIControlEventTouchDown];
+        
+        delectBtn.layer.borderWidth = 1.f;
+        delectBtn.layer.borderColor = [UIColor blueColor].CGColor;
+        delectBtn.layer.cornerRadius = 15.f;
+        delectBtn.clipsToBounds = YES;
+    } else {
+        [delectBtn removeFromSuperview];
+    }
+    
+    if (nextBtn == nil) {
+        nextBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
+        [nextBtn setImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Next_blue" ofType:@"png"]] forState:UIControlStateNormal];
+        [nextBtn addTarget:self action:@selector(nextKidsBtnSelected) forControlEvents:UIControlEventTouchDown];
+        
+        nextBtn.layer.borderWidth = 1.f;
+        nextBtn.layer.borderColor = [UIColor blueColor].CGColor;
+        nextBtn.layer.cornerRadius = 15.f;
+        nextBtn.clipsToBounds = YES;
+    } else {
+        [nextBtn removeFromSuperview];
+    }
+    
+    if (prevBtn == nil) {
+        prevBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
+        [prevBtn setImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Previous_blue" ofType:@"png"]] forState:UIControlStateNormal];
+        [prevBtn addTarget:self action:@selector(prevKidsBtnSelected) forControlEvents:UIControlEventTouchDown];
+        
+        prevBtn.layer.borderWidth = 1.f;
+        prevBtn.layer.borderColor = [UIColor blueColor].CGColor;
+        prevBtn.layer.cornerRadius = 15.f;
+        prevBtn.clipsToBounds = YES;
+    } else {
+        [prevBtn removeFromSuperview];
+    }
+    
+    [footer.containerView addSubview:addBtn];
+    addBtn.center = CGPointMake(50, 22);
+
+    [footer.containerView addSubview:delectBtn];
+    delectBtn.center = CGPointMake(90, 22);
+    
+    [footer.containerView addSubview:nextBtn];
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+//    nextBtn.center = CGPointMake(footer.frame.size.width - 40, 22);
+    nextBtn.center = CGPointMake(width - 40, 22);
+    
+    [footer.containerView addSubview:prevBtn];
+//    prevBtn.center = CGPointMake(footer.frame.size.width - 80, 22);
+    prevBtn.center = CGPointMake(width - 80, 22);
+
+    [self resetFuncBtns];
     
     return footer;
 }
 
 #pragma mark -- data soucr
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return kids_changed.count + 1;
+    return kids_changed.count;
+//  return kids_changed.count == 0 ? 1 : kids_changed.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -170,7 +301,6 @@
     }
     @catch (NSException *exception) {
         
-    
     }
     
     cell.delegate = self;

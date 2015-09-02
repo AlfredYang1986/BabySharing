@@ -1766,8 +1766,14 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="371"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" constant="350" id="K7O-iL-tLV"/>
                                     <constraint firstAttribute="height" constant="350" id="sXW-ye-jKv"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="sXW-ye-jKv"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="aON-5l-rbo" id="TZg-R7-NfZ"/>
                                     <outlet property="delegate" destination="aON-5l-rbo" id="pmt-Ve-Y3o"/>
@@ -1786,9 +1792,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="xnw-KL-LTv" firstAttribute="top" secondItem="KIW-ld-vIX" secondAttribute="topMargin" id="76G-Rq-UxV"/>
+                            <constraint firstItem="xnw-KL-LTv" firstAttribute="top" secondItem="KIW-ld-vIX" secondAttribute="topMargin" id="9H0-cK-57p"/>
                             <constraint firstAttribute="trailingMargin" secondItem="xnw-KL-LTv" secondAttribute="trailing" constant="-16" id="Jvf-4R-c4h"/>
                             <constraint firstItem="xnw-KL-LTv" firstAttribute="leading" secondItem="KIW-ld-vIX" secondAttribute="leadingMargin" constant="-16" id="KJn-uF-1yH"/>
                             <constraint firstAttribute="trailingMargin" secondItem="xnw-KL-LTv" secondAttribute="trailing" constant="-16" id="OI2-c2-Rda"/>
+                            <constraint firstItem="xnw-KL-LTv" firstAttribute="leading" secondItem="KIW-ld-vIX" secondAttribute="leadingMargin" constant="-16" id="QDn-Hn-4eI"/>
                             <constraint firstItem="xnw-KL-LTv" firstAttribute="bottom" secondItem="KIW-ld-vIX" secondAttribute="bottomMargin" id="Rap-si-ioI"/>
                             <constraint firstAttribute="trailingMargin" secondItem="zHm-2r-gZr" secondAttribute="trailing" constant="-16" id="Xge-XF-i72"/>
                             <constraint firstItem="xnw-KL-LTv" firstAttribute="top" secondItem="Ys4-QK-bmE" secondAttribute="bottom" constant="-64" id="hDc-QX-ZiO"/>
@@ -1797,14 +1805,18 @@
                             <constraint firstItem="xnw-KL-LTv" firstAttribute="top" secondItem="Ys4-QK-bmE" secondAttribute="bottom" id="wJd-F0-UYS"/>
                             <constraint firstItem="xnw-KL-LTv" firstAttribute="leading" secondItem="KIW-ld-vIX" secondAttribute="leadingMargin" constant="-16" id="x93-qW-563"/>
                             <constraint firstItem="zHm-2r-gZr" firstAttribute="leading" secondItem="KIW-ld-vIX" secondAttribute="leadingMargin" constant="-16" id="yfh-mz-u1k"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="xnw-KL-LTv" secondAttribute="trailing" constant="-16" id="zgm-YG-MWL"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="76G-Rq-UxV"/>
+                                <exclude reference="Jvf-4R-c4h"/>
                                 <exclude reference="KJn-uF-1yH"/>
                                 <exclude reference="OI2-c2-Rda"/>
                                 <exclude reference="Rap-si-ioI"/>
+                                <exclude reference="hDc-QX-ZiO"/>
                                 <exclude reference="wJd-F0-UYS"/>
+                                <exclude reference="x93-qW-563"/>
                                 <exclude reference="oVc-Iq-QTP"/>
                             </mask>
                         </variation>
@@ -2231,8 +2243,8 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="qbd-0n-vJA"/>
-        <segue reference="mYA-47-s6C"/>
-        <segue reference="cmB-f3-oUD"/>
         <segue reference="4Ao-yR-LGJ"/>
+        <segue reference="2RH-j5-6Bc"/>
+        <segue reference="mYA-47-s6C"/>
     </inferredMetricsTieBreakers>
 </document>
