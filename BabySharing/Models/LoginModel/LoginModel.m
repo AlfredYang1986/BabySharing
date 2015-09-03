@@ -17,6 +17,8 @@
 #import "ModelDefines.h"
 #import "TmpFileStorageModel.h"
 #import "Reachability.h"
+#import "WBHttpRequest+WeiboUser.h"
+#import "WBHttpRequest+WeiboShare.h"
 
 @interface LoginModel ()
 @property (strong, nonatomic) CurrentToken* current_user;
@@ -287,6 +289,104 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:msg delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
         [alert show];
         return nil;
+    }
+}
+
+- (void)loadWeiboUsersWithCurrentUserWithFinishBlock:(weiboUsersFinishBlock)block {
+    
+    /**
+     * 1. get weibo user id and weibo token
+     *    if not success, tell user to connect weibo first
+     */
+    Providers* cur = [Providers enumProvideInContext:_doc.managedObjectContext ByName:@"weibo" andCurrentUserID:self.current_user_id];
+    
+    if (cur == nil) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"请先绑定微博或用微博登录" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+        [alert show];
+    } else {
+        /**
+         * 2. send request to weibo
+         */
+        dispatch_queue_t wb_query_queue = dispatch_queue_create("wb query queus", nil);
+        dispatch_async(wb_query_queue, ^{
+//            NSMutableDictionary* dic = [[NSMutableDictionary alloc]initWithCapacity:2];
+//            [dic setObject:cur.provider_user_id forKey:@"uid"];
+//            [dic setObject:cur.provider_token forKey:@"access_token"];
+//            [dic setObject:@"2" forKey:@"page"];
+//            [dic setObject:@"100" forKey:@"count"];
+            [WBHttpRequest requestForBilateralFriendsListOfUser:cur.provider_user_id withAccessToken:cur.provider_token andOtherProperties:nil queue:[NSOperationQueue currentQueue] withCompletionHandler:^(WBHttpRequest *httpRequest, id result, NSError *error) {
+    
+                NSArray* friends = [result objectForKey:@"users"];
+                if (friends.count > 0) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        block(YES, friends);
+                    });
+                }
+            }];
+        });
+    }
+}
+
+- (void)inviteFriendWithWeibo:(WeiboUser*)weibo_friend {
+    
+    /**
+     * 1. get weibo user id and weibo token
+     *    if not success, tell user to connect weibo first
+     */
+    Providers* cur = [Providers enumProvideInContext:_doc.managedObjectContext ByName:@"weibo" andCurrentUserID:self.current_user_id];
+    
+    if (cur == nil) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"请先绑定微博或用微博登录" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+        [alert show];
+    } else {
+        /**
+         * 2. send request to weibo
+         */
+        NSLog(@"SDK Version: %@", [WeiboSDK getSDKVersion]);
+        if (weibo_friend == nil) {
+            WBSDKAppRecommendRequest* request = [WBSDKAppRecommendRequest requestWithUIDs:nil access_token:cur.provider_token];
+            [WeiboSDK sendRequest:request];
+        } else {
+            WBSDKAppRecommendRequest* request = [WBSDKAppRecommendRequest requestWithUIDs:@[weibo_friend.userID] access_token:cur.provider_token];
+            [WeiboSDK sendRequest:request];
+        }
+       
+//        [WeiboSDK inviteFriend:@"快来加入咚嗒" withUid:weibo_friend.userID withToken:cur.provider_token delegate:self withTag:nil];
+        
+//          NSMutableDictionary* dic = [[NSMutableDictionary alloc]initWithCapacity:2];
+//          [dic setObject:cur.provider_token forKey:@"access_token"];
+//          [dic setObject:@"text" forKey:@"type"];
+//          [dic setObject:@"快来加入咚嗒" forKey:@"data"];
+//          [dic setObject:weibo_friend.userID forKey:@"receiver_id"];
+//          [WBHttpRequest requestWithURL:@"https://m.api.weibo.com/2/messages/reply.json" httpMethod:@"POST" params:[dic copy] queue:[NSOperationQueue mainQueue] withCompletionHandler:^(WBHttpRequest *httpRequest, id result, NSError *error) {
+//            
+//              NSLog(@"result is %@", result);
+//              NSLog(@"error is %@", error.domain);
+//          }];
+    }
+}
+
+- (void)postContentOnWeiboWithText:(NSString*)text andImage:(UIImage*)img {
+    
+    /**
+     * 1. get weibo user id and weibo token
+     *    if not success, tell user to connect weibo first
+     */
+    Providers* cur = [Providers enumProvideInContext:_doc.managedObjectContext ByName:@"weibo" andCurrentUserID:self.current_user_id];
+    
+    if (cur == nil) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"请先绑定微博或用微博登录" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+        [alert show];
+    } else {
+        dispatch_queue_t wb_query_queue = dispatch_queue_create("wb share queus", nil);
+        dispatch_async(wb_query_queue, ^{
+            WBImageObject* img_obj = [WBImageObject object];
+            img_obj.imageData = UIImagePNGRepresentation(img);
+            [WBHttpRequest requestForShareAStatus:text contatinsAPicture:img_obj orPictureUrl:nil withAccessToken:cur.provider_token andOtherProperties:nil queue:[NSOperationQueue currentQueue] withCompletionHandler:^(WBHttpRequest *httpRequest, id result, NSError *error) {
+                NSLog(@"result is %@", result);
+                NSLog(@"error is %@", error.domain);
+            }];
+        });
     }
 }
 

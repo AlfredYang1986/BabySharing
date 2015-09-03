@@ -12,5 +12,5 @@
 
 @interface AddressBookDelegate : NSObject <UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate, AddingFriendsProtocol>
 
-- (BOOL)isAddressDelegateReady;
+@property (nonatomic, weak) id<AsyncDelegateProtocol> delegate;
 @end

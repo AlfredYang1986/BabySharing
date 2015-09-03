@@ -11,6 +11,8 @@
 #import "CurrentToken.h"
 #import <UIKit/UIKit.h>
 
+@class WeiboUser;
+
 typedef NS_ENUM(NSInteger, LoginModelConfirmResult) {
     LoginModelResultSuccess,
     LoginModelResultError,
@@ -23,6 +25,7 @@ typedef NS_ENUM(NSInteger, LoginModelConnectSNResult) {
 };
 
 typedef void(^descriptionFinishBlock)(BOOL, NSDictionary*);
+typedef void(^weiboUsersFinishBlock)(BOOL success, NSArray* friends);
 
 @interface LoginModel : NSObject {
     NSArray* authorised_users;
@@ -45,6 +48,9 @@ typedef void(^descriptionFinishBlock)(BOOL, NSDictionary*);
 - (void)loginWithPhoneNo:(NSString*)phoneNo andPassword:(NSString*)password;
 #pragma mark -- weibo login
 - (void)loginWithWeibo;
+- (void)loadWeiboUsersWithCurrentUserWithFinishBlock:(weiboUsersFinishBlock)block;
+- (void)inviteFriendWithWeibo:(WeiboUser*)weibo_friend;
+- (void)postContentOnWeiboWithText:(NSString*)text andImage:(UIImage*)img;
 
 #pragma mark -- face book login
 - (void)loginWithFacebook;

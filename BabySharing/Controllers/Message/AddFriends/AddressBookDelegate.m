@@ -22,6 +22,8 @@
     NSMutableArray* people;
 }
 
+@synthesize delegate = _delegate;
+
 - (id)init {
     self = [super init];
     if (self) {
@@ -45,7 +47,7 @@
     return self;
 }
 
-- (BOOL)isAddressDelegateReady {
+- (BOOL)isDelegateReady {
     return tmpAddressBook != nil;
 }
 
@@ -96,7 +98,6 @@
         
         AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
         CurrentToken* tmp = [app.lm getCurrentUser];
-        
         
         NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
         [dic setObject:tmp.who.user_id forKey:@"user_id"];

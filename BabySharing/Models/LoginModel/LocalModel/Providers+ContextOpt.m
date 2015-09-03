@@ -7,6 +7,7 @@
 //
 
 #import "Providers+ContextOpt.h"
+#import "LoginToken+ContextOpt.h"
 
 @implementation Providers (ContextOpt)
 
@@ -41,5 +42,17 @@
 //        [context save:nil];
         return tmp;
     }
+}
+
++ (Providers*)enumProvideInContext:(NSManagedObjectContext*)context ByName:(NSString*)provider_name andCurrentUserID:(NSString*)user_id {
+    Providers* result = nil;
+    LoginToken* cur = [LoginToken enumLoginUserInContext:context withUserID:user_id];
+    for (Providers* p in cur.connectWith.allObjects) {
+        if ([p.provider_name isEqualToString:provider_name]) {
+            result = p;
+            break;
+        }
+    }
+    return result;
 }
 @end

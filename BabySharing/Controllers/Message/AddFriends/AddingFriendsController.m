@@ -9,8 +9,9 @@
 #import "AddingFriendsController.h"
 #import "AddressBookDelegate.h"
 #import "AddingFriendsProtocol.h"
+#import "WeiboFriendsDelegate.h"
 
-@interface AddingFriendsController () <UISearchBarDelegate>
+@interface AddingFriendsController () <UISearchBarDelegate, AsyncDelegateProtocol>
 @property (weak, nonatomic) IBOutlet UITableView *queryView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *seg;
@@ -20,6 +21,7 @@
 
 @implementation AddingFriendsController {
     AddressBookDelegate* ab;
+    WeiboFriendsDelegate* wb;
 }
 
 @synthesize queryView = _queryView;
@@ -37,9 +39,11 @@
     _searchBar.delegate = self;
     
     ab = [[AddressBookDelegate alloc]init];
-    if ([ab isAddressDelegateReady]) {
+//    if ([ab isDelegateReady]) {
         self.current_delegate = ab;
-    }
+//    }
+    
+    wb = [[WeiboFriendsDelegate alloc]init];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -63,15 +67,26 @@
     _queryView.dataSource = _current_delegate;
 }
 
+- (void)asyncDelegateIsReady:(id<UITableViewDataSource, UITableViewDelegate, AddingFriendsProtocol>)delegate {
+    if (_current_delegate == delegate) {
+        [_queryView reloadData];
+    }
+}
+
 #pragma mark -- segement controll
 - (void)segValueChanged {
     if (_seg.selectedSegmentIndex == 0) {
-        if ([ab isAddressDelegateReady]) {
+//        if ([ab isDelegateReady]) {
             self.current_delegate = ab;
             [_queryView reloadData];
-        }
+//        }
+    } else if (_seg.selectedSegmentIndex == 2) {
+        self.current_delegate = wb;
     } else {
         self.current_delegate = nil;
+    }
+
+    if ([self.current_delegate isDelegateReady]) {
         [_queryView reloadData];
     }
 }

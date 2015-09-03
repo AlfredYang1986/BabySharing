@@ -93,7 +93,9 @@
 		EE817F491B79A78E00988734 /* UserChatController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE817F481B79A78E00988734 /* UserChatController.m */; };
 		EE83F4031B96E0B100D51FDF /* SearchUserTagsController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE83F4021B96E0B100D51FDF /* SearchUserTagsController.m */; };
 		EE83F4061B96E0DA00D51FDF /* UserAddNewTagDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EE83F4051B96E0DA00D51FDF /* UserAddNewTagDelegate.m */; };
+		EE83F40A1B96EDDF00D51FDF /* CycleAddSchoolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE83F4091B96EDDF00D51FDF /* CycleAddSchoolViewController.m */; };
 		EE86D1B21B537469001C4650 /* PostEffectAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = EE86D1B11B537469001C4650 /* PostEffectAdapter.mm */; };
+		EE87315E1B97E131004A25D8 /* WeiboFriendsDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EE87315D1B97E131004A25D8 /* WeiboFriendsDelegate.m */; };
 		EE9633C91B92A4CF00DB4EA5 /* PersonalCenterSignaturesController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9633C81B92A4CF00DB4EA5 /* PersonalCenterSignaturesController.m */; };
 		EE9633CD1B92BB0F00DB4EA5 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9633CC1B92BB0F00DB4EA5 /* AboutViewController.m */; };
 		EE9633D01B92CA8200DB4EA5 /* NewMessageSettingController.mm in Sources */ = {isa = PBXBuildFile; fileRef = EE9633CF1B92CA8200DB4EA5 /* NewMessageSettingController.mm */; };
@@ -106,7 +108,6 @@
 		EE9785AD1B9004CD00C454C5 /* CycleAddDescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9785A41B9004CD00C454C5 /* CycleAddDescriptionViewController.m */; };
 		EE9785AE1B9004CD00C454C5 /* CycleAddDOBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9785A61B9004CD00C454C5 /* CycleAddDOBViewController.m */; };
 		EE9785B01B9004CD00C454C5 /* CycleAddKidsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9785AA1B9004CD00C454C5 /* CycleAddKidsViewController.m */; };
-		EE9785B11B9004CD00C454C5 /* CycleAddSchoolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9785AC1B9004CD00C454C5 /* CycleAddSchoolViewController.m */; };
 		EE9785B41B90060B00C454C5 /* CycleAddHometownController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9785B31B90060B00C454C5 /* CycleAddHometownController.m */; };
 		EE981F861B5A10400029723A /* LoginToken.m in Sources */ = {isa = PBXBuildFile; fileRef = EE981F851B5A10400029723A /* LoginToken.m */; };
 		EE9F736D1B8576B100F800DC /* MessageChatGroupHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9F736C1B8576B100F800DC /* MessageChatGroupHeader.m */; };
@@ -375,8 +376,12 @@
 		EE83F4021B96E0B100D51FDF /* SearchUserTagsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchUserTagsController.m; sourceTree = "<group>"; };
 		EE83F4041B96E0DA00D51FDF /* UserAddNewTagDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAddNewTagDelegate.h; sourceTree = "<group>"; };
 		EE83F4051B96E0DA00D51FDF /* UserAddNewTagDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAddNewTagDelegate.m; sourceTree = "<group>"; };
+		EE83F4081B96EDDF00D51FDF /* CycleAddSchoolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleAddSchoolViewController.h; sourceTree = "<group>"; };
+		EE83F4091B96EDDF00D51FDF /* CycleAddSchoolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleAddSchoolViewController.m; sourceTree = "<group>"; };
 		EE86D1B01B537469001C4650 /* PostEffectAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostEffectAdapter.h; sourceTree = "<group>"; };
 		EE86D1B11B537469001C4650 /* PostEffectAdapter.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = PostEffectAdapter.mm; sourceTree = "<group>"; };
+		EE87315C1B97E131004A25D8 /* WeiboFriendsDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboFriendsDelegate.h; sourceTree = "<group>"; };
+		EE87315D1B97E131004A25D8 /* WeiboFriendsDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboFriendsDelegate.m; sourceTree = "<group>"; };
 		EE9633C71B92A4CF00DB4EA5 /* PersonalCenterSignaturesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalCenterSignaturesController.h; sourceTree = "<group>"; };
 		EE9633C81B92A4CF00DB4EA5 /* PersonalCenterSignaturesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalCenterSignaturesController.m; sourceTree = "<group>"; };
 		EE9633CB1B92BB0F00DB4EA5 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
@@ -402,8 +407,6 @@
 		EE9785A61B9004CD00C454C5 /* CycleAddDOBViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleAddDOBViewController.m; sourceTree = "<group>"; };
 		EE9785A91B9004CD00C454C5 /* CycleAddKidsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleAddKidsViewController.h; sourceTree = "<group>"; };
 		EE9785AA1B9004CD00C454C5 /* CycleAddKidsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleAddKidsViewController.m; sourceTree = "<group>"; };
-		EE9785AB1B9004CD00C454C5 /* CycleAddSchoolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleAddSchoolViewController.h; sourceTree = "<group>"; };
-		EE9785AC1B9004CD00C454C5 /* CycleAddSchoolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleAddSchoolViewController.m; sourceTree = "<group>"; };
 		EE9785B21B90060B00C454C5 /* CycleAddHometownController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleAddHometownController.h; sourceTree = "<group>"; };
 		EE9785B31B90060B00C454C5 /* CycleAddHometownController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleAddHometownController.m; sourceTree = "<group>"; };
 		EE981F841B5A10400029723A /* LoginToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginToken.h; sourceTree = "<group>"; };
@@ -995,6 +998,15 @@
 			path = RoleTags;
 			sourceTree = "<group>";
 		};
+		EE83F4071B96EDDF00D51FDF /* CycleAddSchool */ = {
+			isa = PBXGroup;
+			children = (
+				EE83F4081B96EDDF00D51FDF /* CycleAddSchoolViewController.h */,
+				EE83F4091B96EDDF00D51FDF /* CycleAddSchoolViewController.m */,
+			);
+			path = CycleAddSchool;
+			sourceTree = "<group>";
+		};
 		EE9633CA1B92BAFB00DB4EA5 /* SystemSetting */ = {
 			isa = PBXGroup;
 			children = (
@@ -1043,14 +1055,13 @@
 		EE9785A21B9004CD00C454C5 /* CyclePersonalDetail */ = {
 			isa = PBXGroup;
 			children = (
+				EE83F4071B96EDDF00D51FDF /* CycleAddSchool */,
 				EE9785A31B9004CD00C454C5 /* CycleAddDescriptionViewController.h */,
 				EE9785A41B9004CD00C454C5 /* CycleAddDescriptionViewController.m */,
 				EE9785A51B9004CD00C454C5 /* CycleAddDOBViewController.h */,
 				EE9785A61B9004CD00C454C5 /* CycleAddDOBViewController.m */,
 				EE9785A91B9004CD00C454C5 /* CycleAddKidsViewController.h */,
 				EE9785AA1B9004CD00C454C5 /* CycleAddKidsViewController.m */,
-				EE9785AB1B9004CD00C454C5 /* CycleAddSchoolViewController.h */,
-				EE9785AC1B9004CD00C454C5 /* CycleAddSchoolViewController.m */,
 				EE9785B21B90060B00C454C5 /* CycleAddHometownController.h */,
 				EE9785B31B90060B00C454C5 /* CycleAddHometownController.m */,
 			);
@@ -1979,6 +1990,8 @@
 				EEE94E111B74AB6B0011321A /* AddressBookDelegate.h */,
 				EEE94E121B74AB6B0011321A /* AddressBookDelegate.m */,
 				EEA72A471B955AB9000BEC2E /* AddingFriendsProtocol.h */,
+				EE87315C1B97E131004A25D8 /* WeiboFriendsDelegate.h */,
+				EE87315D1B97E131004A25D8 /* WeiboFriendsDelegate.m */,
 			);
 			path = AddFriends;
 			sourceTree = "<group>";
@@ -2281,6 +2294,7 @@
 				EE981F861B5A10400029723A /* LoginToken.m in Sources */,
 				EEAACC9A1B44E90400D05C0B /* AppDelegate.m in Sources */,
 				EEAACCE21B44E90400D05C0B /* QueryContent+ContextOpt.m in Sources */,
+				EE87315E1B97E131004A25D8 /* WeiboFriendsDelegate.m in Sources */,
 				EEAACCA71B44E90400D05C0B /* ChooseAreaViewController.m in Sources */,
 				EEAACD081B44E90400D05C0B /* QueryCell.m in Sources */,
 				EEAACCBA1B44E90400D05C0B /* HomeCommentsController.m in Sources */,
@@ -2333,7 +2347,6 @@
 				EE2D4B801B525E0A00B58A1F /* PhotoTagsController.m in Sources */,
 				EE9633D31B92EBE000DB4EA5 /* PrivacySettingController.mm in Sources */,
 				EEAACD1F1B44E90400D05C0B /* SGActionView.m in Sources */,
-				EE9785B11B9004CD00C454C5 /* CycleAddSchoolViewController.m in Sources */,
 				EE83F4061B96E0DA00D51FDF /* UserAddNewTagDelegate.m in Sources */,
 				EEE94E181B74BDDD0011321A /* ProfileDetailController.m in Sources */,
 				EEAACCA91B44E90400D05C0B /* NicknameInputViewController.m in Sources */,
@@ -2366,6 +2379,7 @@
 				EE9785B01B9004CD00C454C5 /* CycleAddKidsViewController.m in Sources */,
 				EEE94E131B74AB6B0011321A /* AddressBookDelegate.m in Sources */,
 				EEAACCE01B44E90400D05C0B /* PostModel.m in Sources */,
+				EE83F40A1B96EDDF00D51FDF /* CycleAddSchoolViewController.m in Sources */,
 				EEAACCE11B44E90400D05C0B /* QueryComments.m in Sources */,
 				EE5C7E4F1B511CC000104CAB /* AlbumViewController2.m in Sources */,
 				EE2D4B781B525E0A00B58A1F /* PostInputViewController.m in Sources */,

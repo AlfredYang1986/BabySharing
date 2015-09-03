@@ -12,4 +12,6 @@
 @interface Providers (ContextOpt)
 
 + (Providers*)createProviderInContext:(NSManagedObjectContext*)context ByName:(NSString*)provider_name andProviderUserId:(NSString*)provider_user_id andProviderToken:(NSString*)provider_token andProviderScreenName:(NSString*)provider_screen_name;
+
++ (Providers*)enumProvideInContext:(NSManagedObjectContext*)context ByName:(NSString*)provider_name andCurrentUserID:(NSString*)user_id;
 @end

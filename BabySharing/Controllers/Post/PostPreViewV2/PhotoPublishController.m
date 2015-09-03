@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UITextView *descriptionView;
 @property (weak, nonatomic) IBOutlet UILabel *tagLabel;
 
+@property (weak, nonatomic) IBOutlet UISwitch *weiboSwitch;
 @end
 
 @implementation PhotoPublishController
@@ -35,6 +36,8 @@
 
 @synthesize movie_url = _movie_url;
 @synthesize type = _type;
+
+@synthesize weiboSwitch = _weiboSwitch;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -105,8 +108,12 @@
 
 - (void)didSelectPostBtn:(id)sender {
     NSLog(@"Post Content");
-    
+   
     AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    if (_weiboSwitch.on == YES) {
+        [delegate.lm postContentOnWeiboWithText:_descriptionView.text andImage:_preViewImg];
+    }
+    
     PostModel* pm = delegate.pm;
 
     if (_type == PostPreViewPhote) {

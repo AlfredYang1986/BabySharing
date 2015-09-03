@@ -262,6 +262,16 @@
                                               otherButtonTitles:nil];
         [alert show];
     }
+    else if ([response isKindOfClass:WBSDKAppRecommendResponse.class]) {
+
+        NSString *title = @"推荐结果";
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                        message:[NSString stringWithFormat:@"response %@", ((WBSDKAppRecommendResponse*)response)]
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@"确定", nil)
+                                              otherButtonTitles:nil];
+        [alert show];       
+    }
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation

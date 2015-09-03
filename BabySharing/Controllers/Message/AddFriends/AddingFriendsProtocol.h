@@ -10,7 +10,11 @@
 #define BabySharing_AddingFriendsProtocol_h
 
 @protocol AddingFriendsProtocol <NSObject>
-
+- (BOOL)isDelegateReady;
 - (void)filterFriendsWithString:(NSString*)searchText;
+@end
+
+@protocol AsyncDelegateProtocol <NSObject>
+- (void)asyncDelegateIsReady:(id<UITableViewDataSource, UITableViewDelegate, AddingFriendsProtocol>)delegate;
 @end
 #endif
