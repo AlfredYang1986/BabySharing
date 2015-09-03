@@ -10,6 +10,8 @@
 #import "AppDelegate.h"
 #import "LoginModel.h"
 #import "WeiboUser.h"
+#import "RemoteInstance.h"
+#import "TmpFileStorageModel.h"
 
 @interface WeiboFriendsDelegate () <UIAlertViewDelegate>
 @end
@@ -93,13 +95,26 @@
     @try {
         WeiboUser* tmp = [people objectAtIndex:indexPath.row];
         cell.textLabel.text = tmp.screenName;
+
+        NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+        NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+        NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"User"] ofType:@"png"];
+       
+        [cell.imageView setImage:[UIImage imageNamed:filePath]];
+        
+        dispatch_queue_t wb_img_q = dispatch_queue_create("wb image queue", nil);
+        dispatch_async(wb_img_q, ^{
+            NSData* data = [RemoteInstance remoteDownDataFromUrl:[NSURL URLWithString:tmp.profileImageUrl]];
+            UIImage* img = [UIImage imageWithData:data];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [cell.imageView setImage:img];
+            });
+        });
     }
     @catch (NSException *exception) {
         cell.textLabel.text = @"more friends";
     }
   
-//  NSData* data = [RemoteInstance remoteDownDataFromUrl:[NSURL URLWithString:user.profileImageUrl]];
-//  UIImage* img = [UIImage imageWithData:data];
     
     cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
     
