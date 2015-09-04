@@ -308,7 +308,7 @@ enum DisplaySide {
 
 #pragma mark -- LoinInputView Delegate
 - (void)didSelectQQBtn {
-    
+    [_lm loginWithQQ];
 }
 
 - (void)didSelectWeiboBtn {

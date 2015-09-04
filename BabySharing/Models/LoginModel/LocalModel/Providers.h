@@ -2,7 +2,7 @@
 //  Providers.h
 //  
 //
-//  Created by Alfred Yang on 12/08/2015.
+//  Created by Alfred Yang on 4/09/2015.
 //
 //
 
@@ -17,6 +17,7 @@
 @property (nonatomic, retain) NSString * provider_screen_name;
 @property (nonatomic, retain) NSString * provider_token;
 @property (nonatomic, retain) NSString * provider_user_id;
+@property (nonatomic, retain) NSString * provider_open_id;
 @property (nonatomic, retain) LoginToken *user;
 
 @end

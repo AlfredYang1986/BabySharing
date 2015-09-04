@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "WeiboSDK.h"
-#import "WXApi.h"
+
+// Models
 #import "LoginModel.h"
 #import "PostModel.h"
 #import "QueryModel.h"
@@ -19,12 +19,13 @@
 #import "ConnectionModel.h"
 #import "CollectionQueryModel.h"
 
+// IM Model
 #import "GotyeOCAPI.h"  // for IM
 
 @class Reachability;
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, WeiboSDKDelegate, WXApiDelegate> {
-    enum WXScene _scene;
+@interface AppDelegate : UIResponder <UIApplicationDelegate> {
+//    enum WXScene _scene;
 }
 
 @property (strong, nonatomic) UIWindow *window;

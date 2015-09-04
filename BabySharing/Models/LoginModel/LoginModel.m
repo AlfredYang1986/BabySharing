@@ -17,19 +17,39 @@
 #import "ModelDefines.h"
 #import "TmpFileStorageModel.h"
 #import "Reachability.h"
+
+// weibo sdk
 #import "WBHttpRequest+WeiboUser.h"
 #import "WBHttpRequest+WeiboShare.h"
 
+// qq sdk
+#import "TencentOAuth.h"
+
 @interface LoginModel ()
 @property (strong, nonatomic) CurrentToken* current_user;
+
+/**
+ * for weibo login
+ */
+@property (strong, nonatomic) NSString *wbtoken;
+@property (strong, nonatomic) NSString *wbCurrentUserID;
 @end
 
-@implementation LoginModel
+@implementation LoginModel {
+    /**
+     * for qq
+     */
+    TencentOAuth* qq_oauth;
+    NSArray* permissions;
+}
 
 @synthesize doc = _doc;
 @synthesize current_user = _current_user;
 
 @synthesize apns_token = _apns_token;
+
+@synthesize wbtoken = _wbtoken;
+@synthesize wbCurrentUserID = _wbCurrentUserID;
 
 - (void)reloadDataFromLocalDB {
     authorised_users = [LoginToken enumAllLoginUsersWithContext:_doc.managedObjectContext];
@@ -43,6 +63,16 @@
             [document.managedObjectContext performBlock:^(void){
                 authorised_users = [LoginToken enumAllLoginUsersWithContext:_doc.managedObjectContext];
                 _current_user = [self getCurrentUser];
+                
+                // Weibo sdk init
+                [WeiboSDK enableDebugMode:YES];
+                [WeiboSDK registerApp:@"1584832986"];
+
+                // Tencent sdk init
+                qq_oauth = [[TencentOAuth alloc]initWithAppId:@"QQ41DA62FE" andDelegate:self];
+                qq_oauth.redirectURI = nil;
+                permissions =  [NSArray arrayWithObjects:@"get_user_info", @"get_simple_userinfo", @"add_t", nil];
+                
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"app ready" object:nil];
             }];
         });
@@ -240,7 +270,7 @@
 
 #pragma mark - qq login and call back
 - (void)loginWithQQ {
-    
+    [qq_oauth authorize:permissions inSafari:YES];
 }
 
 #pragma mark - weibo login call back
@@ -466,6 +496,10 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:@"SNS login success" object:nil];
         }
     }];
+}
+
+- (BOOL)isCurrentUserConnectWithWeibo {
+    return [Providers enumProvideInContext:_doc.managedObjectContext ByName:@"weibo" andCurrentUserID:self.current_user_id] != nil;
 }
 
 #pragma mark -- current token
@@ -696,5 +730,111 @@
 
 - (void)updateDetailInfoLocalWithData:(NSDictionary*)dic {
     return [CurrentToken updateCurrentDetailInfoWithAttr:dic InContext:_doc.managedObjectContext];
+}
+
+#pragma mark -- weibo delegate
+
+- (void)didReceiveWeiboRequest:(WBBaseRequest *)request {
+    
+}
+
+- (void)didReceiveWeiboResponse:(WBBaseResponse *)response
+{
+    if ([response isKindOfClass:WBSendMessageToWeiboResponse.class])
+    {
+        NSString *title = NSLocalizedString(@"发送结果", nil);
+        NSString *message = [NSString stringWithFormat:@"%@: %d\n%@: %@\n%@: %@", NSLocalizedString(@"响应状态", nil), (int)response.statusCode, NSLocalizedString(@"响应UserInfo数据", nil), response.userInfo, NSLocalizedString(@"原请求UserInfo数据", nil),response.requestUserInfo];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                        message:message
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@"确定", nil)
+                                              otherButtonTitles:nil];
+        WBSendMessageToWeiboResponse* sendMessageToWeiboResponse = (WBSendMessageToWeiboResponse*)response;
+        NSString* accessToken = [sendMessageToWeiboResponse.authResponse accessToken];
+        if (accessToken)
+        {
+            self.wbtoken = accessToken;
+        }
+        NSString* userID = [sendMessageToWeiboResponse.authResponse userID];
+        if (userID) {
+            self.wbCurrentUserID = userID;
+        }
+        [alert show];
+    }
+    else if ([response isKindOfClass:WBAuthorizeResponse.class])
+    {
+        /**
+         * auth response
+         * if success throw the user id and the token to the login model
+         * otherwise show error message
+         */
+        if (response.statusCode == 0) { // success
+            [self loginSuccessWithWeiboAsUser:[(WBAuthorizeResponse *)response userID] withToken:[(WBAuthorizeResponse *)response accessToken]];
+        } else {
+            NSString *title = @"weibo auth error";
+            
+            NSString *message = [NSString stringWithFormat: @"some thing wrong, and error code is %ld", (long)response.statusCode];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                            message:message
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"cancel"
+                                                  otherButtonTitles:nil];
+            [alert show];
+        }
+    }
+    else if ([response isKindOfClass:WBPaymentResponse.class])
+    {
+        NSString *title = NSLocalizedString(@"支付结果", nil);
+        NSString *message = [NSString stringWithFormat:@"%@: %d\nresponse.payStatusCode: %@\nresponse.payStatusMessage: %@\n%@: %@\n%@: %@", NSLocalizedString(@"响应状态", nil), (int)response.statusCode,[(WBPaymentResponse *)response payStatusCode], [(WBPaymentResponse *)response payStatusMessage], NSLocalizedString(@"响应UserInfo数据", nil),response.userInfo, NSLocalizedString(@"原请求UserInfo数据", nil), response.requestUserInfo];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                        message:message
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@"确定", nil)
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
+    else if ([response isKindOfClass:WBSDKAppRecommendResponse.class]) {
+        
+        NSString *title = @"推荐结果";
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                        message:[NSString stringWithFormat:@"response %@", ((WBSDKAppRecommendResponse*)response)]
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@"确定", nil)
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
+}
+
+#pragma mark -- tencent delegate
+/**
+ * 登录成功后的回调
+ */
+- (void)tencentDidLogin {
+    NSLog(@"login succss with token : %@", qq_oauth.accessToken);
+    if (qq_oauth.accessToken && 0 != [qq_oauth.accessToken length]) {
+        //  记录登录用户的OpenID、Token以及过期时间
+        NSLog(@"login succss with token : %@", qq_oauth.accessToken);
+    } else {
+        NSLog(@"login error");
+    }
+}
+
+/**
+ * 登录失败后的回调
+ * \param cancelled 代表用户是否主动退出登录
+ */
+- (void)tencentDidNotLogin:(BOOL)cancelled {
+    if (cancelled) {
+        NSLog(@"login user cancel");
+    } else {
+        NSLog(@"login failed");
+    }
+}
+
+/**
+ * 登录时网络有问题的回调
+ */
+-(void)tencentDidNotNetWork {
+    NSLog(@"login with no network");
 }
 @end

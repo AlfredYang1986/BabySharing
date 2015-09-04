@@ -27,6 +27,7 @@
     </entity>
     <entity name="Providers" representedClassName="Providers" syncable="YES">
         <attribute name="provider_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="provider_open_id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="provider_screen_name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="provider_token" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="provider_user_id" optional="YES" attributeType="String" syncable="YES"/>
@@ -46,10 +47,10 @@
     </entity>
     <elements>
         <element name="CurrentToken" positionX="-470" positionY="-49" width="128" height="88"/>
-        <element name="LoginToken" positionX="-261" positionY="-522" width="128" height="178"/>
-        <element name="Providers" positionX="-486" positionY="-585" width="128" height="120"/>
-        <element name="RegTmpToken" positionX="-596" positionY="-306" width="128" height="73"/>
         <element name="DetailInfo" positionX="34" positionY="-513" width="128" height="148"/>
+        <element name="LoginToken" positionX="-261" positionY="-522" width="128" height="178"/>
+        <element name="Providers" positionX="-486" positionY="-585" width="128" height="133"/>
+        <element name="RegTmpToken" positionX="-596" positionY="-306" width="128" height="73"/>
         <element name="UserKids" positionX="313" positionY="-513" width="128" height="133"/>
     </elements>
 </model>

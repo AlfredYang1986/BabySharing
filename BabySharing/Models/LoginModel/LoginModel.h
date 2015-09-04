@@ -10,6 +10,10 @@
 #import "Providers.h"
 #import "CurrentToken.h"
 #import <UIKit/UIKit.h>
+// SDKs
+#import "WeiboSDK.h"
+#import "WXApi.h"
+#import "TencentOAuth.h"
 
 @class WeiboUser;
 
@@ -27,7 +31,7 @@ typedef NS_ENUM(NSInteger, LoginModelConnectSNResult) {
 typedef void(^descriptionFinishBlock)(BOOL, NSDictionary*);
 typedef void(^weiboUsersFinishBlock)(BOOL success, NSArray* friends);
 
-@interface LoginModel : NSObject {
+@interface LoginModel : NSObject <WeiboSDKDelegate, WXApiDelegate, TencentSessionDelegate> {
     NSArray* authorised_users;
 }
 
@@ -51,6 +55,7 @@ typedef void(^weiboUsersFinishBlock)(BOOL success, NSArray* friends);
 - (void)loadWeiboUsersWithCurrentUserWithFinishBlock:(weiboUsersFinishBlock)block;
 - (void)inviteFriendWithWeibo:(WeiboUser*)weibo_friend;
 - (void)postContentOnWeiboWithText:(NSString*)text andImage:(UIImage*)img;
+- (BOOL)isCurrentUserConnectWithWeibo;
 
 #pragma mark -- face book login
 - (void)loginWithFacebook;

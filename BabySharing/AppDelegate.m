@@ -11,13 +11,8 @@
 #import "ModelDefines.h"
 #import "Reachability.h"
 
-@interface AppDelegate ()
 
-/**
- * for weibo login
- */
-@property (strong, nonatomic) NSString *wbtoken;
-@property (strong, nonatomic) NSString *wbCurrentUserID;
+@interface AppDelegate ()
 
 @end
 
@@ -34,9 +29,6 @@
 @synthesize cqm = _cqm;
 
 @synthesize cm = _cm;
-
-@synthesize wbtoken = _wbtoken;
-@synthesize wbCurrentUserID = _wbCurrentUserID;
 
 @synthesize apns_token = _apns_token;
 
@@ -59,8 +51,7 @@
     // Override point for customization after application launch.
     _lm  = [[LoginModel alloc] init];
     _pm  = [[PostModel alloc] init];
-    [WeiboSDK enableDebugMode:YES];
-    [WeiboSDK registerApp:@"1584832986"];
+
     
     /**
      * Notification
@@ -201,87 +192,20 @@
     }
 }
 
-#pragma mark -- weibo delegate
 
-- (void)didReceiveWeiboRequest:(WBBaseRequest *)request {
-    
-}
 
-- (void)didReceiveWeiboResponse:(WBBaseResponse *)response
-{
-    if ([response isKindOfClass:WBSendMessageToWeiboResponse.class])
-    {
-        NSString *title = NSLocalizedString(@"发送结果", nil);
-        NSString *message = [NSString stringWithFormat:@"%@: %d\n%@: %@\n%@: %@", NSLocalizedString(@"响应状态", nil), (int)response.statusCode, NSLocalizedString(@"响应UserInfo数据", nil), response.userInfo, NSLocalizedString(@"原请求UserInfo数据", nil),response.requestUserInfo];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
-                                                        message:message
-                                                       delegate:nil
-                                              cancelButtonTitle:NSLocalizedString(@"确定", nil)
-                                              otherButtonTitles:nil];
-        WBSendMessageToWeiboResponse* sendMessageToWeiboResponse = (WBSendMessageToWeiboResponse*)response;
-        NSString* accessToken = [sendMessageToWeiboResponse.authResponse accessToken];
-        if (accessToken)
-        {
-            self.wbtoken = accessToken;
-        }
-        NSString* userID = [sendMessageToWeiboResponse.authResponse userID];
-        if (userID) {
-            self.wbCurrentUserID = userID;
-        }
-        [alert show];
-    }
-    else if ([response isKindOfClass:WBAuthorizeResponse.class])
-    {
-        /**
-         * auth response
-         * if success throw the user id and the token to the login model
-         * otherwise show error message
-         */
-        if (response.statusCode == 0) { // success
-            [_lm loginSuccessWithWeiboAsUser:[(WBAuthorizeResponse *)response userID] withToken:[(WBAuthorizeResponse *)response accessToken]];
-        } else {
-            NSString *title = @"weibo auth error";
-
-            NSString *message = [NSString stringWithFormat: @"some thing wrong, and error code is %ld", (long)response.statusCode];
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
-                                                            message:message
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"cancel"
-                                                  otherButtonTitles:nil];
-            [alert show];
-        }
-    }
-    else if ([response isKindOfClass:WBPaymentResponse.class])
-    {
-        NSString *title = NSLocalizedString(@"支付结果", nil);
-        NSString *message = [NSString stringWithFormat:@"%@: %d\nresponse.payStatusCode: %@\nresponse.payStatusMessage: %@\n%@: %@\n%@: %@", NSLocalizedString(@"响应状态", nil), (int)response.statusCode,[(WBPaymentResponse *)response payStatusCode], [(WBPaymentResponse *)response payStatusMessage], NSLocalizedString(@"响应UserInfo数据", nil),response.userInfo, NSLocalizedString(@"原请求UserInfo数据", nil), response.requestUserInfo];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
-                                                        message:message
-                                                       delegate:nil
-                                              cancelButtonTitle:NSLocalizedString(@"确定", nil)
-                                              otherButtonTitles:nil];
-        [alert show];
-    }
-    else if ([response isKindOfClass:WBSDKAppRecommendResponse.class]) {
-
-        NSString *title = @"推荐结果";
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
-                                                        message:[NSString stringWithFormat:@"response %@", ((WBSDKAppRecommendResponse*)response)]
-                                                       delegate:nil
-                                              cancelButtonTitle:NSLocalizedString(@"确定", nil)
-                                              otherButtonTitles:nil];
-        [alert show];       
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    NSLog(@"url is : %@", url);
+    NSLog(@"source Application : %@", sourceApplication);
+    if ([sourceApplication isEqualToString:@"com.sina.weibo"]) {
+        return [WeiboSDK handleOpenURL:url delegate:_lm];
+    } else {
+        return [TencentOAuth HandleOpenURL:url];
     }
 }
 
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
-{
-    return [WeiboSDK handleOpenURL:url delegate:self];
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    if ([_lm isCurrentUserConnectWithWeibo]) return [WeiboSDK handleOpenURL:url delegate:_lm];
+    else return [TencentOAuth HandleOpenURL:url];
 }
-
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
-{
-    return [WeiboSDK handleOpenURL:url delegate:self ];
-}
-
 @end

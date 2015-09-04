@@ -96,6 +96,7 @@
 		EE83F40A1B96EDDF00D51FDF /* CycleAddSchoolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE83F4091B96EDDF00D51FDF /* CycleAddSchoolViewController.m */; };
 		EE86D1B21B537469001C4650 /* PostEffectAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = EE86D1B11B537469001C4650 /* PostEffectAdapter.mm */; };
 		EE87315E1B97E131004A25D8 /* WeiboFriendsDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EE87315D1B97E131004A25D8 /* WeiboFriendsDelegate.m */; };
+		EE933CA51B99438000DA15DC /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEAACD5F1B44EA2D00D05C0B /* TencentOpenAPI.framework */; };
 		EE9633C91B92A4CF00DB4EA5 /* PersonalCenterSignaturesController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9633C81B92A4CF00DB4EA5 /* PersonalCenterSignaturesController.m */; };
 		EE9633CD1B92BB0F00DB4EA5 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9633CC1B92BB0F00DB4EA5 /* AboutViewController.m */; };
 		EE9633D01B92CA8200DB4EA5 /* NewMessageSettingController.mm in Sources */ = {isa = PBXBuildFile; fileRef = EE9633CF1B92CA8200DB4EA5 /* NewMessageSettingController.mm */; };
@@ -194,7 +195,6 @@
 		EEAACD2B1B44E90400D05C0B /* ChatViewOwnerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEAACC381B44E90400D05C0B /* ChatViewOwnerCell.xib */; };
 		EEAACD411B44E90400D05C0B /* PhotoPreViewEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACC6A1B44E90400D05C0B /* PhotoPreViewEditView.m */; };
 		EEAACD5B1B44E91A00D05C0B /* YYBoundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EEAACD5A1B44E91A00D05C0B /* YYBoundle.bundle */; };
-		EEAACD731B44EA2D00D05C0B /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEAACD5F1B44EA2D00D05C0B /* TencentOpenAPI.framework */; };
 		EEAACD741B44EA2D00D05C0B /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EEAACD601B44EA2D00D05C0B /* TencentOpenApi_IOS_Bundle.bundle */; };
 		EEAACD751B44EA2D00D05C0B /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EEAACD621B44EA2D00D05C0B /* libWeChatSDK.a */; };
 		EEAACD761B44EA2D00D05C0B /* read_me.txt in Resources */ = {isa = PBXBuildFile; fileRef = EEAACD631B44EA2D00D05C0B /* read_me.txt */; };
@@ -781,8 +781,8 @@
 				EEAACD921B44ECDD00D05C0B /* Foundation.framework in Frameworks */,
 				EEAACD931B44ECDD00D05C0B /* AVFoundation.framework in Frameworks */,
 				EEAACD801B44EBDE00D05C0B /* MediaPlayer.framework in Frameworks */,
+				EE933CA51B99438000DA15DC /* TencentOpenAPI.framework in Frameworks */,
 				EEAACD811B44EBDE00D05C0B /* libicucore.dylib in Frameworks */,
-				EEAACD731B44EA2D00D05C0B /* TencentOpenAPI.framework in Frameworks */,
 				EEAACD751B44EA2D00D05C0B /* libWeChatSDK.a in Frameworks */,
 				EEAACD771B44EA2D00D05C0B /* libWeiboSDK.a in Frameworks */,
 			);
@@ -2579,6 +2579,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/Users/yangyuan/Desktop/BabySharing/libQQSDK/TencentOpenAPI.framework/Headers,
 				);
 				INFOPLIST_FILE = BabySharing/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2589,7 +2590,10 @@
 					"$(PROJECT_DIR)/libGPUImage/GPUImage.framework",
 					"$(PROJECT_DIR)/gotyeapi/libs",
 				);
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-fobjc-arc",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -2610,6 +2614,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/Users/yangyuan/Desktop/BabySharing/libQQSDK/TencentOpenAPI.framework/Headers,
 				);
 				INFOPLIST_FILE = BabySharing/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2620,7 +2625,10 @@
 					"$(PROJECT_DIR)/libGPUImage/GPUImage.framework",
 					"$(PROJECT_DIR)/gotyeapi/libs",
 				);
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-fobjc-arc",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
