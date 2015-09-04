@@ -10,12 +10,14 @@
 
 @interface UserPrivacyController ()
 @property (weak, nonatomic) IBOutlet UILabel *bottomLabel;
+@property (weak, nonatomic) IBOutlet UITextView *privacyView;
 
 @end
 
 @implementation UserPrivacyController
 
 @synthesize bottomLabel = _bottomLabel;
+@synthesize privacyView = _privacyView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -25,6 +27,7 @@
     _bottomLabel.layer.borderWidth = 1.f;
     _bottomLabel.layer.cornerRadius = 8.f;
     _bottomLabel.clipsToBounds = YES;
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -40,6 +43,10 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewDidLayoutSubviews {
+    [_privacyView setContentOffset:CGPointZero];
 }
 
 /*

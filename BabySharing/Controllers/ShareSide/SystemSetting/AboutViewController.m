@@ -7,6 +7,7 @@
 //
 
 #import "AboutViewController.h"
+#import "UserPrivacyController.h"
 
 @interface AboutViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *logoImg;
@@ -29,6 +30,9 @@
     titles = @[@"用户协议", @"隐私政策", @"版本更新介绍"];
    
     _logoImg.image = [UIImage imageNamed:@"icon.png"];
+    _logoImg.layer.cornerRadius = 8.f;
+    _logoImg.clipsToBounds = YES;
+    
     _settingView.scrollEnabled = NO;
     _settingView.delegate = self;
     _settingView.dataSource = self;
@@ -39,15 +43,19 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO];
+}
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
+#pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"VersionChanges"]) {
+        
+    }
 }
-*/
 
 #pragma mark -- table delegate
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -56,6 +64,20 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"selet row");
+    if (indexPath.row == 0) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        UserPrivacyController* pri = [storyboard instantiateViewControllerWithIdentifier:@"UserPrivacy"];
+        [self.navigationController pushViewController:pri animated:YES];
+
+    } else if (indexPath.row == 1) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        UserPrivacyController* pri = [storyboard instantiateViewControllerWithIdentifier:@"UserPrivacy"];
+        [self.navigationController pushViewController:pri animated:YES];
+        
+    } else {
+        [self performSegueWithIdentifier:@"VersionChanges" sender:nil];
+    }
+    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 

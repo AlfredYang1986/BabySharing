@@ -13,6 +13,7 @@
 
 typedef void(^followFinishBlock)(BOOL success, NSString* message);
 typedef void(^queryFinishBlock)(BOOL success);
+typedef void(^queryRelationShip)(NSInteger relations);
 
 @interface ConnectionModel : NSObject
 
@@ -36,4 +37,6 @@ typedef void(^queryFinishBlock)(BOOL success);
 - (NSArray*)queryLocalFollowingWithUser:(NSString*)owner_id;
 - (NSArray*)queryLocalFollowedWithUser:(NSString*)owner_id;
 - (NSArray*)queryLocalFriendsWithUser:(NSString*)owner_id;
+
+
 @end

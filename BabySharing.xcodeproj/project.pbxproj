@@ -97,6 +97,7 @@
 		EE86D1B21B537469001C4650 /* PostEffectAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = EE86D1B11B537469001C4650 /* PostEffectAdapter.mm */; };
 		EE87315E1B97E131004A25D8 /* WeiboFriendsDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EE87315D1B97E131004A25D8 /* WeiboFriendsDelegate.m */; };
 		EE933CA51B99438000DA15DC /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEAACD5F1B44EA2D00D05C0B /* TencentOpenAPI.framework */; };
+		EE933CA81B997DAD00DA15DC /* VersionChangesController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE933CA71B997DAD00DA15DC /* VersionChangesController.m */; };
 		EE9633C91B92A4CF00DB4EA5 /* PersonalCenterSignaturesController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9633C81B92A4CF00DB4EA5 /* PersonalCenterSignaturesController.m */; };
 		EE9633CD1B92BB0F00DB4EA5 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9633CC1B92BB0F00DB4EA5 /* AboutViewController.m */; };
 		EE9633D01B92CA8200DB4EA5 /* NewMessageSettingController.mm in Sources */ = {isa = PBXBuildFile; fileRef = EE9633CF1B92CA8200DB4EA5 /* NewMessageSettingController.mm */; };
@@ -382,6 +383,8 @@
 		EE86D1B11B537469001C4650 /* PostEffectAdapter.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = PostEffectAdapter.mm; sourceTree = "<group>"; };
 		EE87315C1B97E131004A25D8 /* WeiboFriendsDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboFriendsDelegate.h; sourceTree = "<group>"; };
 		EE87315D1B97E131004A25D8 /* WeiboFriendsDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboFriendsDelegate.m; sourceTree = "<group>"; };
+		EE933CA61B997DAD00DA15DC /* VersionChangesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VersionChangesController.h; sourceTree = "<group>"; };
+		EE933CA71B997DAD00DA15DC /* VersionChangesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VersionChangesController.m; sourceTree = "<group>"; };
 		EE9633C71B92A4CF00DB4EA5 /* PersonalCenterSignaturesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalCenterSignaturesController.h; sourceTree = "<group>"; };
 		EE9633C81B92A4CF00DB4EA5 /* PersonalCenterSignaturesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalCenterSignaturesController.m; sourceTree = "<group>"; };
 		EE9633CB1B92BB0F00DB4EA5 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
@@ -1016,6 +1019,8 @@
 				EE9633CC1B92BB0F00DB4EA5 /* AboutViewController.m */,
 				EE9633D11B92EBE000DB4EA5 /* PrivacySettingController.h */,
 				EE9633D21B92EBE000DB4EA5 /* PrivacySettingController.mm */,
+				EE933CA61B997DAD00DA15DC /* VersionChangesController.h */,
+				EE933CA71B997DAD00DA15DC /* VersionChangesController.m */,
 			);
 			path = SystemSetting;
 			sourceTree = "<group>";
@@ -2326,6 +2331,7 @@
 				EEAAA9771B77177C00BEDA6D /* Notifications.m in Sources */,
 				EE5D687B1B75B12B0067A2DF /* NotificationOwner+ContextOpt.m in Sources */,
 				EE5D68781B75A9FD0067A2DF /* Messages.m in Sources */,
+				EE933CA81B997DAD00DA15DC /* VersionChangesController.m in Sources */,
 				EEAACCEF1B44E90400D05C0B /* ViewController.m in Sources */,
 				EE76A56D1B72021900036747 /* ConnectionLocalModel.xcdatamodeld in Sources */,
 				EED50A131B94078D00A7F0E4 /* ChatEmojiView.m in Sources */,

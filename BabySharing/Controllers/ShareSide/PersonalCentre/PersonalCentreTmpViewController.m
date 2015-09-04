@@ -303,6 +303,7 @@
                         [dic_profile_details setValue:[NSNumber numberWithInteger:UserPostOwnerConnectionsFollowing] forKey:@"relations"];
                     } else {
                         [dic_profile_details setValue:[NSNumber numberWithInteger:UserPostOwnerConnectionsFriends] forKey:@"relations"];
+                        [dic_profile_details setValue:[NSNumber numberWithInteger:[self getFriendsCount] + 1] forKey:@"friends_count"];
                     }
                     [_queryView reloadData];
             
@@ -320,6 +321,7 @@
                         [dic_profile_details setValue:[NSNumber numberWithInteger:UserPostOwnerConnectionsNone] forKey:@"relations"];
                     } else {
                         [dic_profile_details setValue:[NSNumber numberWithInteger:UserPostOwnerConnectionsFollowed] forKey:@"relations"];
+                        [dic_profile_details setValue:[NSNumber numberWithInteger:[self getFriendsCount] - 1] forKey:@"friends_count"];
                     }
                     [_queryView reloadData];
                     

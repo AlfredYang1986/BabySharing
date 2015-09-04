@@ -220,4 +220,5 @@
 - (NSArray*)queryLocalFriendsWithUser:(NSString*)owner_id {
     return [ConnectionOwner queryMutureFriendsWithOwner:owner_id inContext:_doc.managedObjectContext];
 }
+
 @end
