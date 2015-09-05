@@ -157,7 +157,8 @@ typedef void(^queryRoleTagFinishBlock)(BOOL success, NSString* msg, NSArray* res
         self.current_delegate = self;
         
     } else {
-        NSString *regex = [NSString stringWithFormat:@"^[%@]\\w*", searchText];
+//        NSString *regex = [NSString stringWithFormat:@"^[%@]\\w*", searchText];
+        NSString *regex = [NSString stringWithFormat:@"^%@\\w*", searchText];
         NSPredicate* p = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
        
         NSMutableArray* tmp = [[NSMutableArray alloc]initWithCapacity:test_tag_arr.count];

@@ -55,7 +55,8 @@
         
         if ([p evaluateWithObject:searchText]) {
 
-            NSString *regex2 = [NSString stringWithFormat:@"^[%@]\\w*", searchText];
+//            NSString *regex2 = [NSString stringWithFormat:@"^[%@]\\w*", searchText];
+            NSString *regex2 = [NSString stringWithFormat:@"^%@\\w*", searchText];
             NSPredicate* p2 = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex2];
            
             if ([p2 evaluateWithObject:filter]) {

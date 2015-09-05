@@ -27,9 +27,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="19h-Xu-hfB">
-                                <rect key="frame" x="16" y="72" width="568" height="10021"/>
+                                <rect key="frame" x="16" y="72" width="568" height="10000"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <mutableString key="text">HIGO开放平台服务协议
+                                <string key="text">HIGO开放平台服务协议
 HIGO开放平台服务协议（以下简称“本协议”）由以下双方于201   年      月      日签订：
  
 甲方：美丽说（北京）网络科技有限公司（以下简称“美丽说”或HIGO）
@@ -364,7 +364,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
 •入驻、品牌或授权等相关资质造假；
 •严重违规，如骗取他人财物、发布违禁信息等，详见《HIGO平台规则》；
 •绩效长久或多次未能达标，如：您在开店后的半年内，退货率持续高于10%；
-•您连续超过30天或累计60天不维护HIGO账户/店铺、群圈。</mutableString>
+•您连续超过30天或累计60天不维护HIGO账户/店铺、群圈。</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>

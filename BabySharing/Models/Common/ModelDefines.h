@@ -134,6 +134,10 @@ typedef NS_ENUM(NSInteger, UserPostOwnerConnections) {
 #define ROLETAGS_QUERY_ROLETAGS             [ROLETAGS_DOMAIN stringByAppendingString:@"queryAllRoleTags"]
 #define ROLETAGS_ADD_ROLETAGE               [ROLETAGS_DOMAIN stringByAppendingString:@"addRoleTag"]
 
+#pragma mark -- EMAIL PRIVACY
+#define EMAIL_DOMAIN                        [HOST_DOMAIN stringByAppendingString:@"email/"]
+#define EMAIL_SENDPRIVACY                   [EMAIL_DOMAIN stringByAppendingString:@"sendPrivacy"]
+
 #pragma mark -- database
 #define LOCALDB_LOGIN                       @"loginData.sqlite"
 #define LOCALDB_QUERY                       @"quertData.sqlite"
