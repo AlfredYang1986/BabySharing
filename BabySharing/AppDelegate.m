@@ -29,6 +29,7 @@
 @synthesize cqm = _cqm;
 
 @synthesize cm = _cm;
+@synthesize sm = _sm;
 
 @synthesize apns_token = _apns_token;
 
@@ -40,6 +41,7 @@
     if (!_om) _om = [[OwnerQueryModel alloc]initWithDelegate:self];
     if (!_cm) _cm = [[ConnectionModel alloc]initWithDelegate:self];
     if (!_cqm) _cqm = [[CollectionQueryModel alloc]initWithDelegate:self];
+    if (!_sm) _sm = [[SystemSettingModel alloc]initWithDelegate:self];
 }
 
 - (void)createMessageAndNotificationModel {

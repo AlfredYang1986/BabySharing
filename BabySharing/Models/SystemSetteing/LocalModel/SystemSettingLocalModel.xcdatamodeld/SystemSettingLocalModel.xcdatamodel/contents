@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14E46" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="MessageSetting" representedClassName="MessageSetting" syncable="YES">
+        <attribute name="mode_silence" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="mode_viber" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="mode_voice" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="notify_cycle" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="notify_dongda" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="notify_notification" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="notify_p2p" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <relationship name="who" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserSetting" inverseName="messageSetting" inverseEntity="UserSetting" syncable="YES"/>
+    </entity>
+    <entity name="PrivacySetting" representedClassName="PrivacySetting" syncable="YES">
+        <relationship name="who" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserSetting" inverseName="privacySetting" inverseEntity="UserSetting" syncable="YES"/>
+    </entity>
+    <entity name="UserSetting" representedClassName="UserSetting" syncable="YES">
+        <attribute name="user_id" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="messageSetting" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MessageSetting" inverseName="who" inverseEntity="MessageSetting" syncable="YES"/>
+        <relationship name="privacySetting" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PrivacySetting" inverseName="who" inverseEntity="PrivacySetting" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="UserSetting" positionX="-171" positionY="-90" width="128" height="88"/>
+        <element name="MessageSetting" positionX="-405" positionY="-126" width="128" height="163"/>
+        <element name="PrivacySetting" positionX="-137" positionY="92" width="128" height="58"/>
+    </elements>
+</model>

@@ -18,6 +18,7 @@
 #import "OwnerQueryModel.h"
 #import "ConnectionModel.h"
 #import "CollectionQueryModel.h"
+#import "SystemSettingModel.h"
 
 // IM Model
 #import "GotyeOCAPI.h"  // for IM
@@ -39,6 +40,7 @@
 @property (strong, nonatomic, readonly) OwnerQueryModel* om;
 @property (strong, nonatomic, readonly) CollectionQueryModel* cqm;
 @property (strong, nonatomic, readonly) ConnectionModel* cm;
+@property (strong, nonatomic, readonly) SystemSettingModel* sm;
 
 @property (strong, nonatomic) GotyeOCUser* im_user;
 

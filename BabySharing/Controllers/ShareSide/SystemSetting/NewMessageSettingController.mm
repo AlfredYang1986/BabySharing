@@ -8,23 +8,38 @@
 
 #import "NewMessageSettingController.h"
 #include <vector>
+#import "AppDelegate.h"
+#import "SystemSettingModel.h"
+
+@interface value_helper : NSObject 
+@property (nonatomic, strong) NSNumber* val;
+@end
+
+@implementation value_helper
+@synthesize val = _val;
+@end
 
 @interface NewMessageSettingController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *queryView;
-
+@property (weak, nonatomic) SystemSettingModel* sm;
 @end
 
 @implementation NewMessageSettingController {
     NSArray* titles;
     NSArray* titles_cn;
     std::vector<SEL> titles_func;
+    
+    std::vector<SEL> titles_value;
 }
 
 @synthesize queryView = _queryView;
+@synthesize sm = _sm;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    _sm = app.sm;
     
     _queryView.delegate = self;
     _queryView.dataSource = self;
@@ -39,6 +54,14 @@
     titles_func.push_back(@selector(notify_p2p:));
     titles_func.push_back(@selector(notify_notification:));
     titles_func.push_back(@selector(notify_dongda:));
+    
+    titles_value.push_back(@selector(get_mode_science:));
+    titles_value.push_back(@selector(get_mode_voice:));
+    titles_value.push_back(@selector(get_mode_viber:));
+    titles_value.push_back(@selector(get_notify_cycle:));
+    titles_value.push_back(@selector(get_notify_p2p:));
+    titles_value.push_back(@selector(get_notify_notification:));
+    titles_value.push_back(@selector(get_notify_dongda:));
 }
 
 - (void)didReceiveMemoryWarning {
@@ -46,33 +69,62 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark -- getting gunc
+- (void)get_mode_science:(value_helper*)val {
+    val.val = [NSNumber numberWithBool:[_sm isModeSilenceOn]];
+}
+
+- (void)get_mode_voice:(value_helper*)val {
+    val.val = [NSNumber numberWithBool:[_sm isModeVoiceOn]];
+}
+
+- (void)get_mode_viber:(value_helper*)val {
+    val.val = [NSNumber numberWithBool:[_sm isModeViberOn]];
+}
+
+- (void)get_notify_cycle:(value_helper*)val {
+    val.val = [NSNumber numberWithBool:[_sm isNotifyCycleOn]];
+}
+
+- (void)get_notify_p2p:(value_helper*)val {
+    val.val = [NSNumber numberWithBool:[_sm isNotifyP2POn]];
+}
+
+- (void)get_notify_notification:(value_helper*)val {
+    val.val = [NSNumber numberWithBool:[_sm isNotifyNotificationOn]];
+}
+
+- (void)get_notify_dongda:(value_helper*)val {
+    val.val = [NSNumber numberWithBool:[_sm isNotifyDongDaOn]];
+}
+
 #pragma mark -- setting func
 - (void)mode_science:(NSNumber*)b {
-    NSLog(@"science %@", b);
+    [_sm resetModeSilence:b.boolValue];
 }
 
 - (void)mode_voice:(NSNumber*)b {
-    NSLog(@"voice %@", b);
+    [_sm resetModeVoice:b.boolValue];
 }
 
 - (void)mode_viber:(NSNumber*)b {
-    NSLog(@"viber %@", b);
+    [_sm resetModeViber:b.boolValue];
 }
 
 - (void)notify_cycle:(NSNumber*)b {
-    NSLog(@"cycle %@", b);
+    [_sm resetNotifyCycle:b.boolValue];
 }
 
 - (void)notify_p2p:(NSNumber*)b {
-    NSLog(@"p2p %@", b);
+    [_sm resetNotifyP2P:b.boolValue];
 }
 
 - (void)notify_notification:(NSNumber*)b {
-    NSLog(@"notification %@", b);
+    [_sm resetNotifyNotification:b.boolValue];
 }
 
 - (void)notify_dongda:(NSNumber*)b {
-    NSLog(@"dongda %@", b);
+    [_sm resetNotifyDongDa:b.boolValue];
 }
 
 - (void)switchValueChanged:(UISwitch*)sw {
@@ -112,7 +164,6 @@
     else return  4;
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"default"];
     
@@ -134,9 +185,24 @@
    
     UISwitch* sw = [[UISwitch alloc]initWithFrame:CGRectMake(width - 51 - 16, 6, 51, 31)];
     sw.tag = index;
+    [sw setOn:[self getCurrentSettingAtIndex:indexPath]];
     [cell addSubview:sw];
     [sw addTarget:self action:@selector(switchValueChanged:) forControlEvents:UIControlEventValueChanged];
 
     return cell;
+}
+
+- (BOOL)getCurrentSettingAtIndex:(NSIndexPath*)indexPath {
+    
+    NSInteger index = 0;
+    if (indexPath.section == 0) {
+        index = indexPath.row;
+    } else {
+        index = 3 + indexPath.row;
+    }
+  
+    value_helper* result = [[value_helper alloc]init];
+    [self performSelector:titles_value[index] withObject:result];
+    return result.val.boolValue;
 }
 @end

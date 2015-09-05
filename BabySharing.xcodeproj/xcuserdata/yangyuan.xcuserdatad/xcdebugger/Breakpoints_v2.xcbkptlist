@@ -170,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BabySharing/Controllers/ShareSide/SystemSetting/NewMessageSettingController.mm"
-            timestampString = "462607942.307017"
+            timestampString = "463130594.747517"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
+            startingLineNumber = "131"
+            endingLineNumber = "131"
             landmarkName = "-switchValueChanged:"
             landmarkType = "5">
          </BreakpointContent>
@@ -634,11 +634,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BabySharing/AppDelegate.m"
-            timestampString = "463037453.361613"
+            timestampString = "463130594.747517"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "208"
-            endingLineNumber = "208"
+            startingLineNumber = "210"
+            endingLineNumber = "210"
             landmarkName = "-application:handleOpenURL:"
             landmarkType = "5">
          </BreakpointContent>

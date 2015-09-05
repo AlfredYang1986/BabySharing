@@ -8,6 +8,8 @@
 
 #import "AboutViewController.h"
 #import "UserPrivacyController.h"
+#import "AppDelegate.h"
+#import "SystemSettingModel.h"
 
 @interface AboutViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *logoImg;
@@ -36,6 +38,9 @@
     _settingView.scrollEnabled = NO;
     _settingView.delegate = self;
     _settingView.dataSource = self;
+   
+    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    _versionLabel.text = [app.sm getCurrentVersion];
 }
 
 - (void)didReceiveMemoryWarning {

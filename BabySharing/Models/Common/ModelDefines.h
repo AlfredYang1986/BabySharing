@@ -146,5 +146,6 @@ typedef NS_ENUM(NSInteger, UserPostOwnerConnections) {
 #define LOCALDB_OWNER_QUERY                 @"ownerQuery.sqlite"
 #define LOCALDB_COLLECTION_QUERY            @"collectionQuery.sqlite"
 #define LOCALDB_RELATIONSHIP                @"Relationship.sqlite"
+#define LOCALDB_USERSETTING                 @"systemSetting.sqlite"
 //#define LOCALDB_CHAT                      @"chatData.sqlite"
 //#define LOCALDB_GROUP                     @"groupData.sqlite"
