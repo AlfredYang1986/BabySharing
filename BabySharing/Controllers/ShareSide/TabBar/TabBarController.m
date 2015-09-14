@@ -23,6 +23,8 @@
 #import "UserChatController.h"
 #import "MessageViewController.h"
 
+#import "DongDaTabBar.h"
+
 //#define MOVING_DISTANCE     90
 //#define MOVING_BASE         20
 //#define MOVING_ANGLE        0.6
@@ -37,6 +39,8 @@
 //    MovingButton* compareBtn;
     
     UIView* backView;
+    
+    DongDaTabBar* dongda_tabbar;
 }
 
 @synthesize lm = _lm;
@@ -48,26 +52,19 @@
   
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-    UITabBarItem* item0 = [self.tabBar.items objectAtIndex:0];
-    item0.image =[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Home"] ofType:@"png"]];
-
-    UITabBarItem* item1 = [self.tabBar.items objectAtIndex:1];
-    item1.image =[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Chat"] ofType:@"png"]];
-
-    UITabBarItem* item2 = [self.tabBar.items objectAtIndex:2];
-    item2.image =[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Plus"] ofType:@"png"]];
-
-    UITabBarItem* item3 = [self.tabBar.items objectAtIndex:3];
-    item3.image =[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Message"] ofType:@"png"]];
-
-    UITabBarItem* item4 = [self.tabBar.items objectAtIndex:4];
-    item4.image =[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Personal_Center"] ofType:@"png"]];
 
     [self setUpMovingButtonsWithBoundle:resourceBundle];
 
     [self unReadMessageCountChanged:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unReadMessageCountChanged:) name:@"unRead Message Changed" object:nil];
+    
+    dongda_tabbar = [[DongDaTabBar alloc]initWithBar:self];
+    [dongda_tabbar addItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Home"] ofType:@"png"]] andSelectedImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"HomeSelected"] ofType:@"png"]]];
+    [dongda_tabbar addItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Chat"] ofType:@"png"]] andSelectedImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"ChatSelected"] ofType:@"png"]]];
+    [dongda_tabbar addItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"DongDa_Plus"] ofType:@"png"]] andSelectedImg:nil];
+    [dongda_tabbar addItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Message"] ofType:@"png"]] andSelectedImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"MessageSelected"] ofType:@"png"]]];
+    [dongda_tabbar addItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Personal_Center"] ofType:@"png"]] andSelectedImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Personal_CenterSelected"] ofType:@"png"]]];
 }
 
 - (void)setUpMovingButtonsWithBoundle:(NSBundle*)bundle {

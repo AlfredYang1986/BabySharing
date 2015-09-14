@@ -11,7 +11,6 @@
 #import "ModelDefines.h"
 #import "Reachability.h"
 
-
 @interface AppDelegate ()
 
 @end
@@ -54,7 +53,6 @@
     _lm  = [[LoginModel alloc] init];
     _pm  = [[PostModel alloc] init];
 
-    
     /**
      * Notification
      */

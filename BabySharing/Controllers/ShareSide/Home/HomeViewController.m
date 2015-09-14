@@ -23,6 +23,7 @@
 #import "QueryHeader.h"
 #import "INTUAnimationEngine.h"
 #import "BWStatusBarOverlay.h"
+#import "HomeSegControl.h"
 
 #define VIEW_BOUNTDS        CGFloat screen_width = [UIScreen mainScreen].bounds.size.width; \
                             CGFloat screen_height = [UIScreen mainScreen].bounds.size.height; \
@@ -39,7 +40,7 @@
 
 #define BACK_TO_TOP_TIME    3.0
 
-@interface HomeViewController () <UITableViewDelegate, UITableViewDataSource, QueryCellActionProtocol>
+@interface HomeViewController () <UITableViewDelegate, UITableViewDataSource, QueryCellActionProtocol, HomeSegControlDelegate>
     
 @property (weak, nonatomic) IBOutlet UITableView *queryView;
 @property (weak, nonatomic, readonly) NSString* current_user_id;
@@ -52,7 +53,8 @@
 @end
 
 @implementation HomeViewController {
-    UISegmentedControl* sg;
+//    UISegmentedControl* sg;
+    HomeSegControl* sg;
     MoviePlayTrait* trait;
     
     HomeViewFoundDelegateAndDatasource* found_datasource;
@@ -75,6 +77,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f]];
 
     UINib* nib = [UINib nibWithNibName:@"QueryCell" bundle:[NSBundle mainBundle]];
     [_queryView registerNib:nib forCellReuseIdentifier:@"query cell"];
@@ -90,22 +93,29 @@
     _isLoading = NO;
     
     /**
-     * set drop down list view
+     * set title view
      */
-    sg = [[UISegmentedControl alloc]initWithItems:@[@"推荐", @"发现"]];
-    sg.backgroundColor = [UIColor greenColor];
-    [sg addTarget:self action:@selector(segmentCanged:) forControlEvents:UIControlEventValueChanged];
-    sg.selectedSegmentIndex = 0;
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+    NSString * filePathMS = [resourceBundle pathForResource:[NSString stringWithFormat:@"Muti-Star"] ofType:@"png"];
+    sg = [[HomeSegControl alloc]initWithFrame:CGRectMake(0, 0, 200, 30)];
+    [sg addItem:@"推荐" andImage:[UIImage imageNamed:filePathMS]];
+    [sg addItem:@"发现" andImage:nil];
+    sg.delegate = self;
     self.navigationItem.titleView = sg;
     
     /**
      * search controller
      */
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
-    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
     NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"Explore"] ofType:@"png"];
     UIImage *image = [UIImage imageNamed:filePath];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(didSelectSearchBtn:)];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(didSelectSearchBtn:)];
+
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame =CGRectMake(0, 0, 25, 25);
+    [btn setBackgroundImage:image forState:UIControlStateNormal];
+    [btn addTarget: self action: @selector(didSelectSearchBtn:) forControlEvents: UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:btn];
     
     trait = [[MoviePlayTrait alloc]init];
    
@@ -128,7 +138,8 @@
     NSLog(@"layout the tableviews");
     VIEW_BOUNTDS
     FOUND_BOUNDS
-    if (sg.selectedSegmentIndex == 0) {
+//    if (sg.selectedSegmentIndex == 0) {
+    if (sg.selectIndex == 0) {
         _queryView.frame = QUERY_VIEW_START;
         _foundView.frame = FOUND_VIEW_START;
     } else {
@@ -151,7 +162,8 @@
                                       easing:INTUEaseInOutQuadratic
                                      options:INTUAnimationOptionNone
                                   animations:^(CGFloat progress) {
-                                      if (sg.selectedSegmentIndex == 0) {
+//                                      if (sg.selectedSegmentIndex == 0) {
+                                      if (sg.selectIndex == 0) {
                                           _queryView.frame = INTUInterpolateCGRect(QUERY_VIEW_END, QUERY_VIEW_START, progress);
                                           _foundView.frame = INTUInterpolateCGRect(FOUND_VIEW_END, FOUND_VIEW_START, progress);
                                       } else {
@@ -615,5 +627,14 @@
 #pragma mark -- search controller
 - (void)didSelectSearchBtn:(id)content {
     [self performSegueWithIdentifier:@"search" sender:nil];
+}
+
+#pragma mark -- home seg control delegate
+- (void)valueHasChanged:(HomeSegControl *)seg {
+    
+    if ((seg.selectIndex == 0 && _queryView.frame.origin.x < 0) ||
+        (seg.selectIndex == 1 && _queryView.frame.origin.x >= 0)) {
+        [self changeViews];
+    }
 }
 @end

@@ -240,6 +240,8 @@
 		EED64D471B8184C1008CB134 /* CycleAddKidsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EED64D461B8184C1008CB134 /* CycleAddKidsCell.xib */; };
 		EED64D4A1B818995008CB134 /* CycleAddKidsFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = EED64D491B818995008CB134 /* CycleAddKidsFooter.m */; };
 		EED64D4C1B8189C6008CB134 /* CycleAddKidsFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = EED64D4B1B8189C6008CB134 /* CycleAddKidsFooter.xib */; };
+		EEDAF4681BA674630035CC31 /* HomeSegControl.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDAF4671BA674630035CC31 /* HomeSegControl.m */; };
+		EEDAF46F1BA6964C0035CC31 /* DongDaTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDAF46E1BA6964C0035CC31 /* DongDaTabBar.m */; };
 		EEDCF6881B9AB42B005F4F4D /* SystemSettingLocalModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EEDCF6861B9AB42B005F4F4D /* SystemSettingLocalModel.xcdatamodeld */; };
 		EEDCF69A1B9AB674005F4F4D /* MessageSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDCF6931B9AB674005F4F4D /* MessageSetting.m */; };
 		EEDCF69B1B9AB674005F4F4D /* PrivacySetting.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDCF6951B9AB674005F4F4D /* PrivacySetting.m */; };
@@ -719,6 +721,10 @@
 		EED64D491B818995008CB134 /* CycleAddKidsFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleAddKidsFooter.m; sourceTree = "<group>"; };
 		EED64D4B1B8189C6008CB134 /* CycleAddKidsFooter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CycleAddKidsFooter.xib; sourceTree = "<group>"; };
 		EED64D4D1B819544008CB134 /* CycleDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CycleDefines.h; sourceTree = "<group>"; };
+		EEDAF4661BA674630035CC31 /* HomeSegControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeSegControl.h; sourceTree = "<group>"; };
+		EEDAF4671BA674630035CC31 /* HomeSegControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeSegControl.m; sourceTree = "<group>"; };
+		EEDAF46D1BA6964C0035CC31 /* DongDaTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DongDaTabBar.h; sourceTree = "<group>"; };
+		EEDAF46E1BA6964C0035CC31 /* DongDaTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DongDaTabBar.m; sourceTree = "<group>"; };
 		EEDCF6871B9AB42B005F4F4D /* SystemSettingLocalModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SystemSettingLocalModel.xcdatamodel; sourceTree = "<group>"; };
 		EEDCF6921B9AB674005F4F4D /* MessageSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageSetting.h; sourceTree = "<group>"; };
 		EEDCF6931B9AB674005F4F4D /* MessageSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageSetting.m; sourceTree = "<group>"; };
@@ -1560,6 +1566,7 @@
 		EEAACBBB1B44E90300D05C0B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				EEDAF4651BA674300035CC31 /* Common */,
 				EED50A101B94077600A7F0E4 /* ChatEmoji */,
 				EEC980A71B8EB9EA0087E5A7 /* BWStatusBarOverlay */,
 				EEAACC1D1B44E90400D05C0B /* SGActionView */,
@@ -1992,6 +1999,17 @@
 			path = CycleKids;
 			sourceTree = "<group>";
 		};
+		EEDAF4651BA674300035CC31 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				EEDAF4661BA674630035CC31 /* HomeSegControl.h */,
+				EEDAF4671BA674630035CC31 /* HomeSegControl.m */,
+				EEDAF46D1BA6964C0035CC31 /* DongDaTabBar.h */,
+				EEDAF46E1BA6964C0035CC31 /* DongDaTabBar.m */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		EEDCF6841B9AB3C6005F4F4D /* SystemSetteing */ = {
 			isa = PBXGroup;
 			children = (
@@ -2381,6 +2399,7 @@
 				EE5D687B1B75B12B0067A2DF /* NotificationOwner+ContextOpt.m in Sources */,
 				EE5D68781B75A9FD0067A2DF /* Messages.m in Sources */,
 				EE933CA81B997DAD00DA15DC /* VersionChangesController.m in Sources */,
+				EEDAF4681BA674630035CC31 /* HomeSegControl.m in Sources */,
 				EEAACCEF1B44E90400D05C0B /* ViewController.m in Sources */,
 				EE76A56D1B72021900036747 /* ConnectionLocalModel.xcdatamodeld in Sources */,
 				EED50A131B94078D00A7F0E4 /* ChatEmojiView.m in Sources */,
@@ -2448,6 +2467,7 @@
 				EEAACCEC1B44E90400D05C0B /* MoviePlayTrait.m in Sources */,
 				EEAACCDC1B44E90400D05C0B /* RegTmpToken.m in Sources */,
 				EE9744171B78886300E81A70 /* MessageNotificationCell.m in Sources */,
+				EEDAF46F1BA6964C0035CC31 /* DongDaTabBar.m in Sources */,
 				EE2D4B7E1B525E0A00B58A1F /* PhotoPreViewEffectController.m in Sources */,
 				EEAACC9E1B44E90400D05C0B /* AlbumViewController.m in Sources */,
 				EEAACCD61B44E90400D05C0B /* LoginLocalModel.xcdatamodeld in Sources */,
@@ -2635,7 +2655,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					/Users/yangyuan/Desktop/BabySharing/libQQSDK/TencentOpenAPI.framework/Headers,
+					/Users/yangyuan/Desktop/DongDa/BabySharing/libQQSDK/TencentOpenAPI.framework/Headers,
 				);
 				INFOPLIST_FILE = BabySharing/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2670,7 +2690,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					/Users/yangyuan/Desktop/BabySharing/libQQSDK/TencentOpenAPI.framework/Headers,
+					/Users/yangyuan/Desktop/DongDa/BabySharing/libQQSDK/TencentOpenAPI.framework/Headers,
 				);
 				INFOPLIST_FILE = BabySharing/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

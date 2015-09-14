@@ -2384,7 +2384,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="版本号" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oHH-2f-5PM">
                                 <rect key="frame" x="279" y="289" width="51" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Nfl-Ep-dEe">
@@ -2556,11 +2556,11 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
             </objects>
             <point key="canvasLocation" x="-689" y="240"/>
         </scene>
-        <!--Cycle-->
+        <!--Chat-->
         <scene sceneID="PRE-TO-2NP">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZGp-mM-lve" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Cycle" id="7V4-c0-skT"/>
+                    <tabBarItem key="tabBarItem" title="Chat" id="7V4-c0-skT"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Q5N-wP-Jj5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -2616,7 +2616,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="qbd-0n-vJA"/>
-        <segue reference="4Ao-yR-LGJ"/>
+        <segue reference="81I-ET-d5W"/>
         <segue reference="2RH-j5-6Bc"/>
         <segue reference="mYA-47-s6C"/>
     </inferredMetricsTieBreakers>
