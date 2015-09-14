@@ -16,13 +16,13 @@
 @property (nonatomic, strong) UILabel* pushTimesLabel;
 @property (nonatomic, strong) UIButton* pushBtn;
 
-@property (nonatomic, strong) UILabel* locationLabel;
+@property (nonatomic, strong) UILabel* tagLabel;
 
 - (void)setUpSubviews;
 
 - (void)setUserPhoto:(NSString*)photo_name;
 - (void)setUserName:(NSString*)name;
-- (void)setLocation:(NSString*)location;
+- (void)setTagText:(NSString*)location;
 - (void)setRoleTag:(NSString*)role_tag;
 - (void)setTimes:(NSString*)times;
 @end

@@ -148,7 +148,7 @@
     }
 //    [self changeViews];
     bkView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, screen_width, 20)];
-    bkView.backgroundColor = [UIColor whiteColor];
+    bkView.backgroundColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
     [self.view addSubview:bkView];
     [self.view bringSubviewToFront:bkView];
 }
@@ -306,7 +306,7 @@
         QueryContent* tmp = [self.qm.querydata objectAtIndex:section - 1];
         [header setUserPhoto:tmp.owner_photo];
         [header setUserName:tmp.owner_name];
-        [header setLocation:@"中国 北京"];
+        [header setTagText:@"金融/旅行/90后"];
         [header setRoleTag:@"role tag"];
         [header setTimes:[NSString stringWithFormat:@"%d", tmp.likes_count.intValue]];
         

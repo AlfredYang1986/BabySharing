@@ -37,7 +37,7 @@
 @synthesize userNameLabel = _userNameLabel;
 @synthesize pushTimesLabel = _pushTimesLabel;
 @synthesize pushBtn = _pushBtn;
-@synthesize locationLabel = _locationLabel;
+@synthesize tagLabel = _tagLabel;
 
 - (void)setUpSubviews {
     if (!_userImg) {
@@ -46,8 +46,8 @@
     }
    
     if (!_userRoleTagBtn) {
-        _userRoleTagBtn = [[UIButton alloc]init];
-        [self addSubview:_userRoleTagBtn];
+//        _userRoleTagBtn = [[UIButton alloc]init];
+//        [self addSubview:_userRoleTagBtn];
     }
    
     if (!_userNameLabel) {
@@ -55,9 +55,11 @@
         [self addSubview:_userNameLabel];
     }
     
-    if (!_locationLabel) {
-        _locationLabel = [[UILabel alloc]init];
-        [self addSubview:_locationLabel];
+    if (!_tagLabel) {
+//        _locationLabel = [[UILabel alloc]init];
+//        [self addSubview:_locationLabel];
+        _tagLabel = [[UILabel alloc]init];
+        [self addSubview:_tagLabel];
     }
 
     if (!_pushTimesLabel) {
@@ -71,11 +73,12 @@
     }
     
     if (!pushLabel) {
-        pushLabel = [[UILabel alloc]init];
-        [self addSubview:pushLabel];
+//        pushLabel = [[UILabel alloc]init];
+//        [self addSubview:pushLabel];
     }
    
-    self.backgroundView.backgroundColor = [UIColor colorWithWhite:0.4 alpha:0.3];
+//    self.backgroundView.backgroundColor = [UIColor colorWithWhite:0.4 alpha:0.3];
+    self.backgroundView.backgroundColor = [UIColor colorWithRed:0.9098 green:0.9059 blue:0.9059 alpha:0.3];
 }
 
 - (void)layoutSubviews {
@@ -94,9 +97,9 @@
     _userNameLabel.frame = CGRectMake(offset, _userImg.frame.origin.y - MARGIN / 2, user_name_size.width, user_name_size.height);
    
     font = [UIFont systemFontOfSize:11.f];
-    _locationLabel.font = font;
+    _tagLabel.font = font;
     CGSize location_size = [@"杨杨杨杨杨杨杨杨杨杨杨" sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
-    _locationLabel.frame = CGRectMake(offset, _userNameLabel.frame.origin.y + user_name_size.height + MARGIN / 2, location_size.width, location_size.height);
+    _tagLabel.frame = CGRectMake(offset, _userNameLabel.frame.origin.y + user_name_size.height + MARGIN / 2, location_size.width, location_size.height);
     
    
     offset += user_name_size.width + MARGIN;
@@ -121,7 +124,8 @@
     font = [UIFont systemFontOfSize:14.f];
     _pushTimesLabel.font = font;
     CGSize times_size = [@"123456789" sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
-    _pushTimesLabel.frame = CGRectMake(width - MARGIN - _pushBtn.frame.size.width - times_size.width, _userImg.frame.origin.y, times_size.width, times_size.height);
+//    _pushTimesLabel.frame = CGRectMake(width - MARGIN - _pushBtn.frame.size.width - times_size.width, _userImg.frame.origin.y, times_size.width, times_size.height);
+    _pushTimesLabel.frame = CGRectMake(width - MARGIN - _pushBtn.frame.size.width - times_size.width - MARGIN, HEADER_HEIGHT / 2 - times_size.height / 2, times_size.width, times_size.height);
     _pushTimesLabel.textAlignment = NSTextAlignmentRight;
     
     font = [UIFont systemFontOfSize:11.f];
@@ -162,9 +166,9 @@
     [_userNameLabel sizeToFit];
 }
 
-- (void)setLocation:(NSString*)location {
-    _locationLabel.text = location;
-    [_locationLabel sizeToFit];
+- (void)setTagText:(NSString*)location {
+    _tagLabel.text = location;
+    [_tagLabel sizeToFit];
 }
 
 - (void)setRoleTag:(NSString *)role_tag {
