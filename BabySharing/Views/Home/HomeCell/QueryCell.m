@@ -44,17 +44,25 @@
 + (CGFloat)preferredHeightWithDescription:(NSString*)description {
    
     if ([description isEqualToString:@""]) {
-        return 340;
+//        return 340;
+        return 292;
     }
     
-    return 340 + HER_MARGIN + [self getSizeBaseOnDescription:description].height;
+    return 292 + HER_MARGIN + [self getSizeBaseOnDescription:description].height;
 }
 
 + (CGSize)getSizeBaseOnDescription:(NSString*)description {
     UIFont* font = [UIFont systemFontOfSize:14.f];
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
-    
-    return [description sizeWithFont:font constrainedToSize:CGSizeMake(width - HER_MARGIN * 2, FLT_MAX)];
+   
+    /**
+     * show all the description
+     */
+//    return [description sizeWithFont:font constrainedToSize:CGSizeMake(width - HER_MARGIN * 2, FLT_MAX)];
+
+    CGSize size = [description sizeWithFont:font constrainedToSize:CGSizeMake(width - HER_MARGIN * 2 - 134, FLT_MAX)];
+    CGSize s = [@"我靠" sizeWithFont:font constrainedToSize:CGSizeMake(width - HER_MARGIN * 2 - 134, FLT_MAX)];
+    return CGSizeMake(size.width, s.height);
 }
 
 - (void)awakeFromNib {
@@ -64,6 +72,11 @@
     _imgView.userInteractionEnabled = YES;
     UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didClickImage:)];
     [_imgView addGestureRecognizer:tap];
+    
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+    NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"FuncViewImg"] ofType:@"png"];
+    [_funcBtn setImage:[UIImage imageNamed:filePath] forState:UIControlStateNormal];
 }
 
 - (void)movieContentWithURL:(NSURL*)url withTriat:(MoviePlayTrait*)trait {
@@ -184,9 +197,27 @@
         descriptionView.scrollEnabled = NO;
     }
    
-    CGSize size = [QueryCell getSizeBaseOnDescription:description];
-    descriptionView.frame = CGRectMake(HER_MARGIN, HER_MARGIN, [UIScreen mainScreen].bounds.size.width - HER_MARGIN * 2, size.height);
-    descriptionView.text = description;
+    /**
+     * show all text
+     */
+//    CGSize size = [QueryCell getSizeBaseOnDescription:description];
+//    descriptionView.frame = CGRectMake(HER_MARGIN, HER_MARGIN, [UIScreen mainScreen].bounds.size.width - HER_MARGIN * 2, size.height);
+//    descriptionView.text = description;
+  
+    /**
+     * only show first line
+     */
+    UIFont* font = [UIFont systemFontOfSize:14.f];
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    CGSize size = [description sizeWithFont:font constrainedToSize:CGSizeMake(width - HER_MARGIN * 2 - 134, FLT_MAX)];
+    CGSize s = [@"我靠" sizeWithFont:font constrainedToSize:CGSizeMake(width - HER_MARGIN * 2 - 134, FLT_MAX)];
+    
+    descriptionView.frame = CGRectMake(HER_MARGIN, HER_MARGIN, [UIScreen mainScreen].bounds.size.width - HER_MARGIN * 2 - 134, s.height);
+    if (s.height == size.height) {
+        descriptionView.text = description;
+    } else {
+        descriptionView.text = [[description substringToIndex:10] stringByAppendingString:@"..."];
+    }
     [descriptionView sizeToFit];
 }
 
@@ -211,7 +242,9 @@
         [funcView addSubview:collectBtn];
         [funcView addSubview:commentsBtn];
         
-        [self addSubview:funcView];
+//        [self addSubview:funcView];
+        [_bkgView addSubview:funcView];
+//        funcView.frame = CGRectMake(_funcBtn.frame.origin.x - 32 * 3, _funcBtn.frame.origin.y + 8, 32 * 3, 32);
         funcView.frame = CGRectMake(_funcBtn.frame.origin.x - 32 * 3, _funcBtn.frame.origin.y, 32 * 3, 32);
         
         funcView.layer.borderColor = [UIColor blueColor].CGColor;
@@ -220,7 +253,8 @@
         funcView.clipsToBounds = YES;
         
         funcView.hidden = YES;
-        [self bringSubviewToFront:funcView];
+//        [self bringSubviewToFront:funcView];
+        [_bkgView bringSubviewToFront:funcView];
     }
     
     if ([funcView isHidden]) {
@@ -240,5 +274,9 @@
 
 - (void)commentsBtnSelected {
     [_delegate didSelectCommentsBtn:self];
+}
+
+- (void)disappearFuncView {
+    funcView.hidden = YES;
 }
 @end

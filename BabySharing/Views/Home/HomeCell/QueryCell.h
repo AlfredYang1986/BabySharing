@@ -50,4 +50,7 @@
 - (void)setTime:(NSDate*)date;
 - (void)setTags:(NSString*)tags;
 - (void)setDescription:(NSString*)description;
+
+#pragma mark -- call when cell dispear
+- (void)disappearFuncView;
 @end

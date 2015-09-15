@@ -126,12 +126,14 @@
     [self layoutTableViews];
     
     BWStatusBarOverlay* tmp = [BWStatusBarOverlay shared];
-    [tmp setBackgroundColor:[UIColor redColor]];
+    [tmp setBackgroundColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f]];
     [tmp.textLabel setTextColor:[UIColor whiteColor]];
     showBack2Top = YES;
     
     tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(back2TopHandler:)];
     [tmp addGestureRecognizer:tap];
+    
+//    _queryView.backgroundColor = [UIColor colorWithRed:0.0157 green:0.6235 blue:0.5373 alpha:1.f];
 }
 
 - (void)layoutTableViews {
@@ -250,8 +252,16 @@
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
     if ([view isKindOfClass:[UITableViewHeaderFooterView class]]) {
         NSInteger total = [self numberOfSectionsInTableView:tableView];
-        if (section == 0 || section == total - 1) return;
-        else ((UITableViewHeaderFooterView *)view).backgroundView.backgroundColor = [UIColor colorWithWhite:0.4 alpha:0.6];
+        if (section == 0 || section == total - 1) {
+            CAGradientLayer *layer = [CAGradientLayer layer];
+            layer.frame = view.bounds;
+            layer.colors = [NSArray arrayWithObjects:(id)[UIColor colorWithRed:0.0157 green:0.6235 blue:0.5373 alpha:1.f].CGColor
+                            , (id)[UIColor colorWithRed:0.0353 green:0.5020 blue:0.3961 alpha:1.f].CGColor, nil];
+            layer.startPoint = CGPointMake(0, 0);
+            layer.endPoint = CGPointMake(1, 1);
+            [((UITableViewHeaderFooterView*)view).backgroundView.layer addSublayer:layer];
+            
+        } else ((UITableViewHeaderFooterView *)view).backgroundView.backgroundColor = [UIColor colorWithWhite:0.4 alpha:0.6];
     }
 }
 
@@ -272,7 +282,8 @@
         [qc stopMovie];
 //        [trait AvailableForPlayer:qc.player];
 //        qc.player = nil;
-        // TODO: remove the player layer
+       
+        [qc disappearFuncView];
     }
 }
 
@@ -282,16 +293,42 @@
 
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     NSInteger total = [self numberOfSectionsInTableView:tableView];
-    if (section == 0 || section == total - 1) {
+    if (section == 0) {
         
-        UITableViewHeaderFooterView* view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"default header"];
+        UITableViewHeaderFooterView* view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"default header first"];
         
         if (view == nil) {
-            view = [[UITableViewHeaderFooterView alloc]initWithReuseIdentifier:@"default header"];
+            view = [[UITableViewHeaderFooterView alloc]initWithReuseIdentifier:@"default header first"];
+        }
+
+       
+        if ([view viewWithTag:-99] == nil) {
+            NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+            NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+            NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"Refresh2"] ofType:@"png"];
+            
+            UIImageView* iv = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 90, 36)];
+            iv.contentMode = UIViewContentModeScaleToFill;
+            iv.image = [UIImage imageNamed:filePath];
+            CGFloat width = [UIScreen mainScreen].bounds.size.width;
+            CGFloat height = 44;
+            iv.center = CGPointMake(width / 2, height / 2);
+            iv.tag = -99;
+            [view addSubview:iv];
         }
         
-        view.textLabel.text = @"alfred...";
+        return view;
         
+    } else if (section == total - 1) {
+        
+        UITableViewHeaderFooterView* view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"default header last"];
+        
+        if (view == nil) {
+            view = [[UITableViewHeaderFooterView alloc]initWithReuseIdentifier:@"default header last"];
+        }
+        
+        view.textLabel.text = @"there is no more content";
+
         return view;
         
     } else {
