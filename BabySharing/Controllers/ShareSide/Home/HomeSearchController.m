@@ -9,36 +9,53 @@
 #import "HomeSearchController.h"
 #import "INTUAnimationEngine.h"
 
-@interface HomeSearchController () <UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource>
-@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentControl;
-@property (weak, nonatomic) IBOutlet UITableView *queryView;
+#import "DongDaSearchBar.h"
+#import "SearchSegView.h"
+
+@interface HomeSearchController () <DongDaSearchBarDelegate, SearchSegViewDelegate>
 
 @end
 
-@implementation HomeSearchController
-
-@synthesize searchBar = _searchBar;
-@synthesize segmentControl = _segmentControl;
-@synthesize queryView = _queryView;
+@implementation HomeSearchController {
+    DongDaSearchBar* searchBar;
+    SearchSegView* seg;
+    
+    UIImageView* contents;// for further user
+    
+    NSArray* contents_BKG;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    _searchBar.delegate = self;
-    _searchBar.showsCancelButton = YES;
-    for (UIView* v in _searchBar.subviews)
-    {
-        if ( [v isKindOfClass: [UITextField class]] )
-        {
-            UITextField *tf = (UITextField *)v;
-            tf.clearButtonMode = UITextFieldViewModeWhileEditing;
-            break;
-        }
-    }
+  
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    CGFloat height = 44;
+    searchBar = [[DongDaSearchBar alloc]initWithFrame:CGRectMake(0, 20, width, height)];
+    searchBar.delegate = self;
+    [self.view addSubview:searchBar];
     
-    _queryView.delegate = self;
-    _queryView.dataSource = self;
+    CGFloat offset_y = 20 + 44 + 8;
+    seg = [[SearchSegView alloc]initWithFrame:CGRectMake(0, offset_y, width, [SearchSegView preferredHeight])];
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+   
+    [seg addItemWithTitle:@"标签" andImg:[UIImage imageNamed:[resourceBundle pathForResource:@"TagSearchUnselected" ofType:@"png"]] andSelectedImg:[UIImage imageNamed:[resourceBundle pathForResource:@"TagSearchSelected" ofType:@"png"]]];
+    [seg addItemWithTitle:@"地点" andImg:[UIImage imageNamed:[resourceBundle pathForResource:@"LocationSearchUnselected" ofType:@"png"]] andSelectedImg:[UIImage imageNamed:[resourceBundle pathForResource:@"LocationSearchSelected" ofType:@"png"]]];
+    [seg addItemWithTitle:@"用户" andImg:[UIImage imageNamed:[resourceBundle pathForResource:@"UserSearchUnselected" ofType:@"png"]] andSelectedImg:[UIImage imageNamed:[resourceBundle pathForResource:@"UserSearchSelected" ofType:@"png"]]];
+   
+    seg.delegate = self;
+    [self.view addSubview:seg];
+   
+    contents_BKG = @[[UIImage imageNamed:[resourceBundle pathForResource:@"SearchTagBKG" ofType:@"png"]],
+                     [UIImage imageNamed:[resourceBundle pathForResource:@"SearchLocationBKG" ofType:@"png"]],
+                     [UIImage imageNamed:[resourceBundle pathForResource:@"SearchUserBKG" ofType:@"png"]]];
+    
+    offset_y += [SearchSegView preferredHeight];
+    contents = [[UIImageView alloc]initWithFrame:CGRectMake(0, offset_y, width, [UIScreen mainScreen].bounds.size.height - offset_y)];
+    contents.contentMode = UIViewContentModeCenter;
+    contents.image = [contents_BKG firstObject];
+    [self.view addSubview:contents];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -47,12 +64,12 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-//    [self.navigationController setNavigationBarHidden:YES animated:NO];
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
     
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-//    [self.navigationController setNavigationBarHidden:NO animated:NO];
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 
 /*
@@ -94,36 +111,20 @@
                                   }];
 }
 
-#pragma mark -- table view data source
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"default"];
-    
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"default"];
-    }
-    
-    cell.textLabel.text = @"alfred ...";
-    
-    return cell;
-}
-
-
-#pragma mark -- table view delegate
-
 #pragma mark -- search bar delegate
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    NSLog(@"Start search");
-}
-
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-    _searchBar.text = @"";
-    [_searchBar resignFirstResponder];
+- (void)cancelBtnSelected {
+    searchBar.text = @"";
+    [searchBar resignFirstResponder];
     
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)searchTextChanged:(NSString*)searchText {
+    
+}
+
+#pragma mark -- seg delegate
+- (void)segValueChanged:(SearchSegView *)seg {
+    contents.image = [contents_BKG objectAtIndex:seg.selectedIndex];
 }
 @end

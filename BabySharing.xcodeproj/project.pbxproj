@@ -18,6 +18,8 @@
 		EE2D4B7E1B525E0A00B58A1F /* PhotoPreViewEffectController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2D4B731B525E0A00B58A1F /* PhotoPreViewEffectController.m */; };
 		EE2D4B7F1B525E0A00B58A1F /* PhotoPublishController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2D4B751B525E0A00B58A1F /* PhotoPublishController.m */; };
 		EE2D4B801B525E0A00B58A1F /* PhotoTagsController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2D4B771B525E0A00B58A1F /* PhotoTagsController.m */; };
+		EE3D5C241BA7EB4D007A4AA2 /* DongDaSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3D5C231BA7EB4D007A4AA2 /* DongDaSearchBar.m */; };
+		EE3D5C271BA81348007A4AA2 /* SearchSegView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3D5C261BA81348007A4AA2 /* SearchSegView.m */; };
 		EE40825D1B70C0CE0094A88B /* libgotyeapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EE40825B1B70C0CE0094A88B /* libgotyeapi.a */; };
 		EE4082601B70C11A0094A88B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE40825F1B70C11A0094A88B /* CoreLocation.framework */; };
 		EE4082621B70C1240094A88B /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE4082611B70C1240094A88B /* AddressBook.framework */; };
@@ -296,6 +298,10 @@
 		EE2D4B751B525E0A00B58A1F /* PhotoPublishController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoPublishController.m; sourceTree = "<group>"; };
 		EE2D4B761B525E0A00B58A1F /* PhotoTagsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoTagsController.h; sourceTree = "<group>"; };
 		EE2D4B771B525E0A00B58A1F /* PhotoTagsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoTagsController.m; sourceTree = "<group>"; };
+		EE3D5C221BA7EB4D007A4AA2 /* DongDaSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DongDaSearchBar.h; sourceTree = "<group>"; };
+		EE3D5C231BA7EB4D007A4AA2 /* DongDaSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DongDaSearchBar.m; sourceTree = "<group>"; };
+		EE3D5C251BA81347007A4AA2 /* SearchSegView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSegView.h; sourceTree = "<group>"; };
+		EE3D5C261BA81348007A4AA2 /* SearchSegView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSegView.m; sourceTree = "<group>"; };
 		EE4082521B70C0CE0094A88B /* GotyeOCAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GotyeOCAPI.h; sourceTree = "<group>"; };
 		EE4082531B70C0CE0094A88B /* GotyeOCChatTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GotyeOCChatTarget.h; sourceTree = "<group>"; };
 		EE4082541B70C0CE0094A88B /* GotyeOCDeleget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GotyeOCDeleget.h; sourceTree = "<group>"; };
@@ -2006,6 +2012,10 @@
 				EEDAF4671BA674630035CC31 /* HomeSegControl.m */,
 				EEDAF46D1BA6964C0035CC31 /* DongDaTabBar.h */,
 				EEDAF46E1BA6964C0035CC31 /* DongDaTabBar.m */,
+				EE3D5C221BA7EB4D007A4AA2 /* DongDaSearchBar.h */,
+				EE3D5C231BA7EB4D007A4AA2 /* DongDaSearchBar.m */,
+				EE3D5C251BA81347007A4AA2 /* SearchSegView.h */,
+				EE3D5C261BA81348007A4AA2 /* SearchSegView.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -2364,6 +2374,7 @@
 				EEAACCE21B44E90400D05C0B /* QueryContent+ContextOpt.m in Sources */,
 				EE87315E1B97E131004A25D8 /* WeiboFriendsDelegate.m in Sources */,
 				EEAACCA71B44E90400D05C0B /* ChooseAreaViewController.m in Sources */,
+				EE3D5C271BA81348007A4AA2 /* SearchSegView.m in Sources */,
 				EEAACD081B44E90400D05C0B /* QueryCell.m in Sources */,
 				EEAACCBA1B44E90400D05C0B /* HomeCommentsController.m in Sources */,
 				EEAACCFC1B44E90400D05C0B /* QueryLikesCell.m in Sources */,
@@ -2473,6 +2484,7 @@
 				EEAACCD61B44E90400D05C0B /* LoginLocalModel.xcdatamodeld in Sources */,
 				EEAACCE51B44E90400D05C0B /* QueryContentTag.m in Sources */,
 				EEAACCEE1B44E90400D05C0B /* SRWebSocket.m in Sources */,
+				EE3D5C241BA7EB4D007A4AA2 /* DongDaSearchBar.m in Sources */,
 				EEDCF69A1B9AB674005F4F4D /* MessageSetting.m in Sources */,
 				EEA2017C1B744E59006B81E4 /* ConnectionOwner.m in Sources */,
 				EEB812321B7AF2ED00BC0774 /* UserKids.m in Sources */,

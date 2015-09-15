@@ -1051,7 +1051,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <outlet property="queryView" destination="0cz-in-2vG" id="Cnt-lR-kFb"/>
                         <segue destination="bqO-Lu-4o6" kind="push" identifier="Home2ProfileSegue" id="81I-ET-d5W"/>
                         <segue destination="xUO-Ek-g05" kind="push" identifier="HomeDetailSegue" id="Xtg-xA-TvV"/>
-                        <segue destination="cou-sa-Bod" kind="modal" identifier="search" modalTransitionStyle="crossDissolve" id="Gc2-hk-FGC"/>
+                        <segue destination="cou-sa-Bod" kind="push" identifier="search" id="Gc2-hk-FGC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gik-1Z-yKA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1069,44 +1069,9 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                     <view key="view" contentMode="scaleToFill" id="3Uz-fe-Nnr">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="tr8-0k-K6X">
-                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="68C-pN-Ym4">
-                                <rect key="frame" x="239" y="72" width="123" height="29"/>
-                                <segments>
-                                    <segment title="标签"/>
-                                    <segment title="地点"/>
-                                    <segment title="用户"/>
-                                </segments>
-                            </segmentedControl>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="JX0-h2-etd">
-                                <rect key="frame" x="0.0" y="102" width="600" height="498"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="JX0-h2-etd" firstAttribute="top" secondItem="68C-pN-Ym4" secondAttribute="bottom" constant="8" id="7IA-sI-Ggy"/>
-                            <constraint firstItem="68C-pN-Ym4" firstAttribute="leading" secondItem="3Uz-fe-Nnr" secondAttribute="leadingMargin" constant="-16" id="OJL-pW-e5o"/>
-                            <constraint firstItem="tr8-0k-K6X" firstAttribute="leading" secondItem="3Uz-fe-Nnr" secondAttribute="leadingMargin" constant="-16" id="WXF-GO-V3z"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="JX0-h2-etd" secondAttribute="trailing" constant="-16" id="byu-2q-oVM"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="tr8-0k-K6X" secondAttribute="trailing" constant="-16" id="d7e-SA-f0I"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="68C-pN-Ym4" secondAttribute="trailing" constant="-16" id="hAo-1q-NDw"/>
-                            <constraint firstItem="JX0-h2-etd" firstAttribute="leading" secondItem="3Uz-fe-Nnr" secondAttribute="leadingMargin" constant="-16" id="kYa-0y-qlT"/>
-                            <constraint firstItem="tr8-0k-K6X" firstAttribute="top" secondItem="cis-E1-EFY" secondAttribute="bottom" constant="8" id="p4N-EU-HRn"/>
-                            <constraint firstItem="68C-pN-Ym4" firstAttribute="top" secondItem="tr8-0k-K6X" secondAttribute="bottom" constant="8" id="pgO-JA-3ez"/>
-                            <constraint firstItem="myk-uE-6wP" firstAttribute="top" secondItem="JX0-h2-etd" secondAttribute="bottom" id="veQ-t6-NCB"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="search" id="qUR-Kn-0DC"/>
-                    <connections>
-                        <outlet property="queryView" destination="JX0-h2-etd" id="TKo-wK-W0a"/>
-                        <outlet property="searchBar" destination="tr8-0k-K6X" id="L8y-wq-Zta"/>
-                        <outlet property="segmentControl" destination="68C-pN-Ym4" id="OMd-F4-zh2"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SfQ-cg-9fR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
