@@ -82,6 +82,7 @@
     UINib* nib = [UINib nibWithNibName:@"QueryCell" bundle:[NSBundle mainBundle]];
     [_queryView registerNib:nib forCellReuseIdentifier:@"query cell"];
     [_queryView registerClass:[QueryHeader class] forHeaderFooterViewReuseIdentifier:@"query header"];
+    _queryView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     _current_user_id = delegate.lm.current_user_id;
@@ -97,9 +98,10 @@
      */
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-    NSString * filePathMS = [resourceBundle pathForResource:[NSString stringWithFormat:@"Muti-Star"] ofType:@"png"];
+//    NSString * filePathMS = [resourceBundle pathForResource:[NSString stringWithFormat:@"Muti-Star"] ofType:@"png"];
     sg = [[HomeSegControl alloc]initWithFrame:CGRectMake(0, 0, 200, 30)];
-    [sg addItem:@"推荐" andImage:[UIImage imageNamed:filePathMS]];
+//    [sg addItem:@"推荐" andImage:[UIImage imageNamed:filePathMS]];
+    [sg addItem:@"推荐" andImage:nil];
     [sg addItem:@"发现" andImage:nil];
     sg.delegate = self;
     self.navigationItem.titleView = sg;
@@ -480,7 +482,7 @@
         [cell setDescription:tmp.content_description];
         
         [cell setTime:tmp.content_post_date];
-        [cell setTags:@"tags"];
+        [cell setTags:@"安全，海淘"];
         
         return cell;
     }

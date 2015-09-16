@@ -10,6 +10,8 @@
 
 @implementation HomeSegControl {
 //    NSMutableArray* btns;
+    
+    CALayer* layer;
 }
 
 /*
@@ -29,6 +31,9 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.tag = -99;
+        layer = [CALayer layer];
+        layer.borderColor = [UIColor colorWithRed:0.f green:0.4118 blue:0.3569 alpha:1.f].CGColor;
+        layer.borderWidth = 1.f;
     }
     return self;
 }
@@ -37,6 +42,9 @@
     self = [super init];
     if (self) {
         self.tag = -99;
+        layer = [CALayer layer];
+        layer.borderColor = [UIColor colorWithRed:0.f green:0.4118 blue:0.3569 alpha:1.f].CGColor;
+        layer.borderWidth = 1.f;
     }
     return self;   
 }
@@ -49,15 +57,25 @@
     btn.tag = self.count;
     
     [btn setTitleColor:[UIColor colorWithRed:0.f green:0.4118 blue:0.3569 alpha:1.f] forState:UIControlStateNormal];
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
-    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-    NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"Select-BKG"] ofType:@"png"];
-    [btn setBackgroundImage:[UIImage imageNamed:filePath] forState:UIControlStateSelected];
+//    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+//    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+//    NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"Select-BKG"] ofType:@"png"];
+//    [btn setBackgroundImage:[UIImage imageNamed:filePath] forState:UIControlStateSelected];
     if (btn.tag == 0) {
         [btn setSelected:YES];
     }
     
     [self addSubview:btn];
+}
+
+- (void)addLayerToButton:(UIButton*)current {
+    [layer removeFromSuperlayer];
+   
+    UIFont* font = [UIFont systemFontOfSize:14.f];
+    CGSize s = [@"我靠" sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
+    layer.frame = CGRectMake(0, 0, s.width + 10, 2);
+    layer.position = CGPointMake(current.frame.size.width / 2, current.frame.size.height - 1);
+    [current.layer addSublayer:layer];
 }
 
 - (void)removeItemAtIndex:(NSInteger)index {
@@ -73,6 +91,9 @@
     for (int index = 0; index < self.count; ++index) {
         UIView* tmp = [self.subviews objectAtIndex:index];
         tmp.frame = CGRectMake(index * step, 0, step, height);
+        if (index == 0) {
+            [self addLayerToButton:(UIButton*)tmp];
+        }
     }
 }
 
@@ -93,6 +114,7 @@
     
     UIButton* tmp = (UIButton*)[self viewWithTag:_selectIndex];
     [tmp setSelected:YES];
+    [self addLayerToButton:tmp];
     
     [_delegate valueHasChanged:self];
 }

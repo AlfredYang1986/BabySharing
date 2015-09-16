@@ -25,11 +25,11 @@
     
 }
 
-@property (weak, nonatomic) IBOutlet UIImageView *imgView;
-@property (weak, nonatomic) IBOutlet UILabel *tagsLabelView;
-@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
-@property (weak, nonatomic) IBOutlet UIView *bkgView;
-@property (weak, nonatomic) IBOutlet UIButton *funcBtn;
+@property (strong, nonatomic) IBOutlet UIImageView *imgView;
+@property (strong, nonatomic) IBOutlet UILabel *tagsLabelView;
+@property (strong, nonatomic) IBOutlet UILabel *timeLabel;
+@property (strong, nonatomic) IBOutlet UIView *bkgView;
+@property (strong, nonatomic) IBOutlet UIButton *funcBtn;
 
 @property (nonatomic) PostPreViewType type;
 @property (nonatomic, strong) NSURL* movieURL;

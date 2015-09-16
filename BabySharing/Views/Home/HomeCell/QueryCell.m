@@ -16,6 +16,8 @@
 
 #define IMG_HEIGHT  226
 
+#define IMG_OFFSET  100
+
 @implementation QueryCell {
 //    MPMoviePlayerController* movie;
     AVPlayerLayer *avPlayerLayer;
@@ -42,13 +44,25 @@
 
 #pragma mark -- layout
 + (CGFloat)preferredHeightWithDescription:(NSString*)description {
-   
-    if ([description isEqualToString:@""]) {
-//        return 340;
-        return 292;
+  
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    CGFloat img_height = [UIScreen mainScreen].bounds.size.height - width / 2 - IMG_OFFSET;
+//    if ([description isEqualToString:@""]) {
+////        return 340;
+//        return img_height + 60
+//    }
+ 
+    /**
+     * there need to read device model
+     */
+    CGFloat tmp = 0;
+    if (width > 350) {
+        tmp = 100;
+    } else {
+        tmp = 80;
     }
     
-    return 292 + HER_MARGIN + [self getSizeBaseOnDescription:description].height;
+    return img_height + tmp + HER_MARGIN + [self getSizeBaseOnDescription:description].height;
 }
 
 + (CGSize)getSizeBaseOnDescription:(NSString*)description {
@@ -67,16 +81,50 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    CGFloat img_height = [UIScreen mainScreen].bounds.size.height - width / 2 - IMG_OFFSET;
+    _imgView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, width, img_height)];
     _imgView.contentMode = UIViewContentModeScaleToFill;
+    [self addSubview:_imgView];
     
     _imgView.userInteractionEnabled = YES;
     UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didClickImage:)];
     [_imgView addGestureRecognizer:tap];
+
+    _bkgView = [[UIView alloc]initWithFrame:CGRectMake(0, img_height, width, self.frame.size.height - img_height)];
+    [self addSubview:_bkgView];
     
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
     NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"FuncViewImg"] ofType:@"png"];
+    
+    _funcBtn = [[UIButton alloc]initWithFrame:CGRectMake(width - 38, 8, 30, 30)];
+    [_funcBtn addTarget:self action:@selector(didSelectFuncBtn) forControlEvents:UIControlEventTouchUpInside];
+    [_bkgView addSubview:_funcBtn];
     [_funcBtn setImage:[UIImage imageNamed:filePath] forState:UIControlStateNormal];
+    
+    _timeLabel= [[UILabel alloc]initWithFrame:CGRectMake(16, 30, width, 30)];
+    _timeLabel.font = [UIFont systemFontOfSize:11.f];
+    [_bkgView addSubview:_timeLabel];
+   
+    UIImageView* tagIcon = [[UIImageView alloc]initWithFrame:CGRectMake(16, 39 + 30, 30, 30)];
+    tagIcon.contentMode = UIViewContentModeCenter;
+    NSString * filePathIcon = [resourceBundle pathForResource:[NSString stringWithFormat:@"TagSearchSelected"] ofType:@"png"];
+    tagIcon.image = [UIImage imageNamed:filePathIcon];
+    [_bkgView addSubview:tagIcon];
+    
+    _tagsLabelView = [[UILabel alloc]initWithFrame:CGRectMake(16 + 30 + 8, 34 + 30, width, 30)];
+    _tagsLabelView.font = [UIFont systemFontOfSize:13.f];
+    [_bkgView addSubview:_tagsLabelView];
+}
+
+- (void)layoutSubviews {
+//    [super layoutSubviews];
+    
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    CGFloat img_height = [UIScreen mainScreen].bounds.size.height - width / 2 - IMG_OFFSET;
+    _imgView.frame = CGRectMake(0, 0, width, img_height);
+    _bkgView.frame = CGRectMake(0, img_height, width, self.frame.size.height - img_height);
 }
 
 - (void)movieContentWithURL:(NSURL*)url withTriat:(MoviePlayTrait*)trait {
@@ -158,6 +206,8 @@
         [_player seekToTime:kCMTimeZero completionHandler:^(BOOL finished) {
             [_player play];
         }];
+    } else {
+        [self commentsBtnSelected];
     }
 }
 
@@ -207,11 +257,12 @@
     /**
      * only show first line
      */
-    UIFont* font = [UIFont systemFontOfSize:14.f];
+    UIFont* font = [UIFont boldSystemFontOfSize:14.f];
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     CGSize size = [description sizeWithFont:font constrainedToSize:CGSizeMake(width - HER_MARGIN * 2 - 134, FLT_MAX)];
     CGSize s = [@"我靠" sizeWithFont:font constrainedToSize:CGSizeMake(width - HER_MARGIN * 2 - 134, FLT_MAX)];
     
+    descriptionView.font = font;
     descriptionView.frame = CGRectMake(HER_MARGIN, HER_MARGIN, [UIScreen mainScreen].bounds.size.width - HER_MARGIN * 2 - 134, s.height);
     if (s.height == size.height) {
         descriptionView.text = description;
@@ -245,12 +296,12 @@
 //        [self addSubview:funcView];
         [_bkgView addSubview:funcView];
 //        funcView.frame = CGRectMake(_funcBtn.frame.origin.x - 32 * 3, _funcBtn.frame.origin.y + 8, 32 * 3, 32);
-        funcView.frame = CGRectMake(_funcBtn.frame.origin.x - 32 * 3, _funcBtn.frame.origin.y, 32 * 3, 32);
+        funcView.frame = CGRectMake(_funcBtn.frame.origin.x - 32 * 3 - 8, _funcBtn.frame.origin.y, 32 * 3, 32);
         
-        funcView.layer.borderColor = [UIColor blueColor].CGColor;
-        funcView.layer.borderWidth = 1.f;
-        funcView.layer.cornerRadius = 4.f;
-        funcView.clipsToBounds = YES;
+//        funcView.layer.borderColor = [UIColor blueColor].CGColor;
+//        funcView.layer.borderWidth = 1.f;
+//        funcView.layer.cornerRadius = 4.f;
+//        funcView.clipsToBounds = YES;
         
         funcView.hidden = YES;
 //        [self bringSubviewToFront:funcView];
