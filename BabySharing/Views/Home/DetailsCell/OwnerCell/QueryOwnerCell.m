@@ -8,16 +8,21 @@
 
 #import "QueryOwnerCell.h"
 #import "TmpFileStorageModel.h"
+#import "DongDaFollowBtn.h"
 
 #define HEADER_HEIGHT       44
 
 #define MARGIN              8
 
-#define USER_IMG_WIDTH      32
+#define USER_IMG_WIDTH      40
 #define USER_IMG_HEIGHT     USER_IMG_WIDTH
 
 #define ROLE_TAG_WIDTH      80
 #define ROLE_TAG_HEIGHT     25
+
+@interface QueryOwnerCell () <DongDaFollowBtnDelegate>
+
+@end
 
 @implementation QueryOwnerCell
 
@@ -25,7 +30,7 @@
 @synthesize userRoleTagBtn = _userRoleTagBtn;
 @synthesize userNameLabel = _userNameLabel;
 @synthesize followBtn = _followBtn;
-@synthesize locationLabel = _locationLabel;
+@synthesize tagLabel = _tagLabel;
 
 @synthesize owner_id = _owner_id;
 @synthesize delegate = _delegate;
@@ -37,8 +42,8 @@
     }
     
     if (!_userRoleTagBtn) {
-        _userRoleTagBtn = [[UIButton alloc]init];
-        [self addSubview:_userRoleTagBtn];
+//        _userRoleTagBtn = [[UIButton alloc]init];
+//        [self addSubview:_userRoleTagBtn];
     }
     
     if (!_userNameLabel) {
@@ -46,15 +51,18 @@
         [self addSubview:_userNameLabel];
     }
     
-    if (!_locationLabel) {
-        _locationLabel = [[UILabel alloc]init];
-        [self addSubview:_locationLabel];
+    if (!_tagLabel) {
+        _tagLabel = [[UILabel alloc]init];
+        [self addSubview:_tagLabel];
     }
     
     if (!_followBtn) {
-        _followBtn = [[UIButton alloc]init];
+//        _followBtn = [[UIButton alloc]init];
+        _followBtn = [[DongDaFollowBtn alloc]init];
         [self addSubview:_followBtn];
     }
+    
+    self.backgroundColor = [UIColor colorWithRed:0.4 green:0.7686 blue:0.7294 alpha:1.f];
 }
 
 - (void)awakeFromNib {
@@ -63,21 +71,24 @@
     CGFloat offset = MARGIN * 2;
     
     _userImg.bounds = CGRectMake(0, 0, USER_IMG_WIDTH, USER_IMG_HEIGHT);
-    _userImg.center = CGPointMake(offset + USER_IMG_WIDTH / 2, HEADER_HEIGHT / 2);
+    _userImg.center = CGPointMake([UIScreen mainScreen].bounds.size.width / 2, 44);
     _userImg.layer.cornerRadius = USER_IMG_WIDTH / 2;
+    _userImg.layer.borderColor = [UIColor redColor].CGColor;
+    _userImg.layer.borderWidth = 2.f;
     _userImg.clipsToBounds = YES;
-    
-    offset += USER_IMG_WIDTH + MARGIN;
+//
+//    offset += USER_IMG_WIDTH + MARGIN;
     
     UIFont* font = [UIFont systemFontOfSize:14.f];
     _userNameLabel.font = font;
     CGSize user_name_size = [@"渊渊渊渊渊渊" sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
-    _userNameLabel.frame = CGRectMake(offset, _userImg.frame.origin.y - MARGIN / 2, user_name_size.width, user_name_size.height);
+//    _userNameLabel.frame = CGRectMake(offset, _userImg.frame.origin.y - MARGIN / 2, user_name_size.width, user_name_size.height);
+    _userNameLabel.frame = CGRectMake(offset, 8, user_name_size.width, user_name_size.height);
     
     font = [UIFont systemFontOfSize:11.f];
-    _locationLabel.font = font;
+    _tagLabel.font = font;
     CGSize location_size = [@"杨杨杨杨杨杨杨杨杨杨杨" sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
-    _locationLabel.frame = CGRectMake(offset, _userNameLabel.frame.origin.y + user_name_size.height + MARGIN / 2, location_size.width, location_size.height);
+    _tagLabel.frame = CGRectMake(offset, _userNameLabel.frame.origin.y + user_name_size.height + MARGIN / 2, location_size.width, location_size.height);
     
     
     offset += user_name_size.width + MARGIN;
@@ -90,19 +101,20 @@
     _userRoleTagBtn.backgroundColor = [UIColor whiteColor];
     [_userRoleTagBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     
-    _followBtn.bounds = CGRectMake(0, 0, 50, 25);
+//    _followBtn.bounds = CGRectMake(0, 0, 60, 60);
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
-    font = [UIFont systemFontOfSize:13.f];
-    _followBtn.font = font;
-    CGSize follow_size = [@"杨杨杨杨杨" sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
-    _followBtn.bounds = CGRectMake(0, 0, follow_size.width, follow_size.height);
-    _followBtn.center = CGPointMake(width - MARGIN * 2 - 25, HEADER_HEIGHT / 2);
-    [_followBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-    _followBtn.layer.borderColor = [UIColor blueColor].CGColor;
-    _followBtn.layer.borderWidth = 1.f;
-    _followBtn.layer.cornerRadius = 4.f;
-    _followBtn.clipsToBounds = YES;
-    [_followBtn addTarget:self action:@selector(followBtnSelected) forControlEvents:UIControlEventTouchDown];
+//    font = [UIFont systemFontOfSize:13.f];
+//    _followBtn.font = font;
+//    CGSize follow_size = [@"杨杨杨杨杨" sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
+//    _followBtn.bounds = CGRectMake(0, 0, follow_size.width, follow_size.height);
+    _followBtn.center = CGPointMake(width - MARGIN * 4, HEADER_HEIGHT / 2);
+    _followBtn.delegate = self;
+//    [_followBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+//    _followBtn.layer.borderColor = [UIColor blueColor].CGColor;
+//    _followBtn.layer.borderWidth = 1.f;
+//    _followBtn.layer.cornerRadius = 4.f;
+//    _followBtn.clipsToBounds = YES;
+//    [_followBtn addTarget:self action:@selector(followBtnSelected) forControlEvents:UIControlEventTouchDown];
 }
 
 + (CGFloat)preferHeight {
@@ -149,9 +161,9 @@
     [_userNameLabel sizeToFit];
 }
 
-- (void)setLocation:(NSString*)location {
-    _locationLabel.text = location;
-    [_locationLabel sizeToFit];
+- (void)setTagText:(NSString*)location {
+    _tagLabel.text = location;
+    [_tagLabel sizeToFit];
 }
 
 - (void)setRoleTag:(NSString *)role_tag {
@@ -163,21 +175,26 @@
 }
 
 - (void)setConnections:(UserPostOwnerConnections)relations {
-    switch (relations) {
-        case UserPostOwnerConnectionsSamePerson:
-            [_followBtn setTitle:@"我发的" forState:UIControlStateNormal];
-            break;
-        case UserPostOwnerConnectionsNone:
-        case UserPostOwnerConnectionsFollowed:
-            [_followBtn setTitle:@"+关注" forState:UIControlStateNormal];
-            break;
-        case UserPostOwnerConnectionsFollowing:
-        case UserPostOwnerConnectionsFriends:
-            [_followBtn setTitle:@"取消关注" forState:UIControlStateNormal];
-            break;
-        default:
-            break;
-    }
-//    [_followBtn sizeToFit];
+//    switch (relations) {
+//        case UserPostOwnerConnectionsSamePerson:
+////            [_followBtn setTitle:@"我发的" forState:UIControlStateNormal];
+//            break;
+//        case UserPostOwnerConnectionsNone:
+//        case UserPostOwnerConnectionsFollowed:
+////            [_followBtn setTitle:@"+关注" forState:UIControlStateNormal];
+//            break;
+//        case UserPostOwnerConnectionsFollowing:
+//        case UserPostOwnerConnectionsFriends:
+////            [_followBtn setTitle:@"取消关注" forState:UIControlStateNormal];
+//            break;
+//        default:
+//            break;
+//    }
+////    [_followBtn sizeToFit];
+    _followBtn.relations = relations;
+}
+
+- (void)btnSelected {
+    [_delegate didSelectDetialFollowOwner:self];
 }
 @end

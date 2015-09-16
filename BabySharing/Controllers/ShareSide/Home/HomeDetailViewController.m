@@ -32,18 +32,13 @@
 #import "HomeTagsController.h"
 
 #pragma mark -- secter numbers
-//#define REFERSH_HEADER                  0
-#define OWNER_NAME_SECTOR               0
-#define ITEM_SECTOR                     1
-#define OWNER_DESCRIPTION_SECTOR        2
-#define LIKES_SECTOR                    3
-//#define HOT_COMMENTS_TITLE_SECTOR       4
-//#define HOT_COMMENTS_SECTOR             5
-//#define RESENT_COMMENTS_TITLE_SECTOR    6
-//#define RESENT_COMMENTS_SECTOR          7
-//#define APPEND_FOOTER                   8
+#define DONGDA_TITLE_HEADER             0
+#define OWNER_NAME_SECTOR               1
+#define ITEM_SECTOR                     2
+#define OWNER_DESCRIPTION_SECTOR        3
+#define LIKES_SECTOR                    4
 
-#define TOTAL_SECTORS                   4
+#define TOTAL_SECTORS                   5
 
 #define CHECK_SECTOR(lhs, rhs)        \
     if (lhs == rhs) break;
@@ -69,6 +64,10 @@
     
     UIView* inputContainer;
     UITextField* input;
+
+    UIView* bkView;
+    
+    UIImageView* userImg;
 }
 
 @synthesize queryView = _queryView;
@@ -138,7 +137,9 @@
     [_queryView registerClass:[CommentsHeader class] forHeaderFooterViewReuseIdentifier:@"Comments Header"];
 //    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(didFinishDownloadImage:) name:@"download finish" object:nil];
   
-    _queryView.frame = CGRectMake(0, 20, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
+//    _queryView.frame = CGRectMake(0, 20, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
+    _queryView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
+    _queryView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     _inputView.delegate = self;
     isLoading = NO;
@@ -168,6 +169,49 @@
     _backBtn.layer.borderColor = [UIColor blueColor].CGColor;
     _backBtn.layer.cornerRadius = 15.f;
     _backBtn.clipsToBounds = YES;
+   
+    
+    bkView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 20)];
+    bkView.backgroundColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
+    [self.view addSubview:bkView];
+    [self.view bringSubviewToFront:bkView];
+   
+#define USER_IMG_WIDTH      44
+#define USER_IMG_HEIGHT     USER_IMG_WIDTH
+    userImg = [[UIImageView alloc]init];
+    userImg.bounds = CGRectMake(0, 0, USER_IMG_WIDTH, USER_IMG_HEIGHT);
+    userImg.center = CGPointMake([UIScreen mainScreen].bounds.size.width / 2, 82);
+    userImg.layer.cornerRadius = USER_IMG_WIDTH / 2;
+    userImg.layer.borderColor = [UIColor redColor].CGColor;
+    userImg.layer.borderWidth = 2.f;
+    userImg.clipsToBounds = YES;
+    [_queryView addSubview:userImg];
+    [_queryView bringSubviewToFront:userImg];
+}
+
+- (void)setUserPhoto:(NSString*)photo_name {
+    
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+    NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"User"] ofType:@"png"];
+    
+    UIImage* img = [TmpFileStorageModel enumImageWithName:photo_name withDownLoadFinishBolck:^(BOOL success, UIImage *user_img) {
+        if (success) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (self) {
+                    userImg.image = user_img;
+                    NSLog(@"owner img download success");
+                }
+            });
+        } else {
+            NSLog(@"down load owner image %@ failed", photo_name);
+        }
+    }];
+    
+    if (img == nil) {
+        img = [UIImage imageNamed:filePath];
+    }
+    [userImg setImage:img];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -211,9 +255,9 @@
     if (indexPath.section == 0) {
         NSInteger range = [self checkRangeNameWithIndex:indexPath.row];
         switch (range) {
-    //        case REFERSH_HEADER:
-    //        case APPEND_FOOTER:
-    //            return 44;
+            
+            case DONGDA_TITLE_HEADER:
+                return 38;
                 
             case OWNER_NAME_SECTOR:
                 return 46;
@@ -226,16 +270,6 @@
                 
             case LIKES_SECTOR:
                 return 44;
-                
-    //        case HOT_COMMENTS_TITLE_SECTOR:
-    //            return 36;
-    //            
-    //        case RESENT_COMMENTS_TITLE_SECTOR:
-    //            return 36;
-    //            
-    //        case HOT_COMMENTS_SECTOR:
-    //        case RESENT_COMMENTS_SECTOR:
-    //            return 101;
                 
             default:
                 NSLog(@"wrong with ranges");
@@ -288,10 +322,9 @@
         NSInteger range = [self checkRangeNameWithIndex:indexPath.row];
         
         switch (range) {
-                //        case REFERSH_HEADER:
-                //            return [self queryDefaultCellInitWithTableView:tableView withTitle:@"refreshing ..."];
-//            case APPEND_FOOTER:
-//                return [self queryDefaultCellInitWithTableView:tableView withTitle:@"more comments ..."];
+              
+            case DONGDA_TITLE_HEADER:
+                return [self queryDongDaHeaderCellWithTableView:tableView];
                 
             case OWNER_NAME_SECTOR:
                 return [self queryOwnerCellInitWithTableView:tableView];
@@ -307,24 +340,6 @@
                 
             case LIKES_SECTOR:
                 return [self queryLikesCellInitWithTableView:tableView];
-                
-//            case HOT_COMMENTS_TITLE_SECTOR:
-//                return [self queryCommentsTitleWithTableView:tableView andTitle:@"Hot Comments"];
-//                
-//            case HOT_COMMENTS_SECTOR: {
-//                NSRange r = [self rangeOfSector:range];
-//                NSInteger comment_index = indexPath.row - r.location;
-//                return [self queryCommentsCellWithTableView:tableView andIndex:comment_index];
-//            }
-//                
-//            case RESENT_COMMENTS_TITLE_SECTOR:
-//                return [self queryCommentsTitleWithTableView:tableView andTitle:@"Resent Comments"];
-//                
-//            case RESENT_COMMENTS_SECTOR: {
-//                NSRange r = [self rangeOfSector:range];
-//                NSInteger comment_index = indexPath.row - r.location;
-//                return [self queryCommentsCellWithTableView:tableView andIndex:comment_index];
-//            }
                 
             default:
                 NSLog(@"wrong with ranges");
@@ -351,21 +366,16 @@
     NSRange result;
     
     switch (secter) {
-//        case REFERSH_HEADER:
+        case DONGDA_TITLE_HEADER:
         case OWNER_NAME_SECTOR:
         case ITEM_SECTOR:
         case OWNER_DESCRIPTION_SECTOR:
         case LIKES_SECTOR:
-//        case HOT_COMMENTS_TITLE_SECTOR:
-//        case HOT_COMMENTS_SECTOR:
-//        case RESENT_COMMENTS_TITLE_SECTOR:
-//        case RESENT_COMMENTS_SECTOR:
-//        case APPEND_FOOTER:
             result.location = 0;
-//            result.length = 1;
-//            CHECK_SECTOR(secter,REFERSH_HEADER);
-//            
-//            result.location += result.length;
+            result.length = 1;
+            CHECK_SECTOR(secter,DONGDA_TITLE_HEADER);
+            
+            result.location += result.length;
             result.length = [self enumOwnerNameCount];
             CHECK_SECTOR(secter, OWNER_NAME_SECTOR);
             
@@ -380,26 +390,6 @@
             result.location += result.length;
             result.length = [self enumLikeColCount];
             CHECK_SECTOR(secter, LIKES_SECTOR);
-           
-//            result.location += result.length;
-//            result.length = [self enumMostPopularTitleCount];
-//            CHECK_SECTOR(secter, HOT_COMMENTS_TITLE_SECTOR);
-//            
-//            result.location += result.length;
-//            result.length = [self enumMostPopularCommentsCount];
-//            CHECK_SECTOR(secter, HOT_COMMENTS_SECTOR);
-//           
-//            result.location += result.length;
-//            result.length = [self enumResentsCommentsTitleCount];
-//            CHECK_SECTOR(secter, RESENT_COMMENTS_TITLE_SECTOR);
-//           
-//            result.location += result.length;
-//            result.length = [self enumResentsCommentsCount];
-//            CHECK_SECTOR(secter, RESENT_COMMENTS_SECTOR);
-//
-//            result.location += result.length;
-//            result.length = 1;
-//            CHECK_SECTOR(secter, APPEND_FOOTER);
       
         default:
             NSLog(@"wrong with ranges");
@@ -422,17 +412,12 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
  
     if (section == 0) {
-        return //1 +        // refresh header
+        return 1 +        // dongda title header
            [self enumOwnerNameCount] // Owner name Sector
          + [self enumItemCount] // item (photo or movie)
          + [self enumOwnerDescriptionCount] // owner description input
          + [self enumLikeColCount];      // like coloum
-//         + [self enumMostPopularTitleCount]     // title says hot comments
-//         + [self enumMostPopularCommentsCount]  // hot comment
-//         + [self enumResentsCommentsTitleCount] // resent comments title
-//         + [self enumResentsCommentsCount] + 1;      // all comments goes here
     } else {
-//        return [self enumResentsCommentsCount] + 1;
         return [self enumResentsCommentsCount];
     }
 }
@@ -555,6 +540,31 @@
     return cell;
 }
 
+- (UITableViewCell*)queryDongDaHeaderCellWithTableView:(UITableView*)tableView {
+    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"dongda header cell"];
+    
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"dongda header cell"];
+    }
+
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+   
+    if ([cell viewWithTag:-1] == nil) {
+        UIImageView* im = [[UIImageView alloc]init];
+        UIImage* img = [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"DongDaHeaderLogo"] ofType:@"png"]];
+        im.frame = CGRectMake(0, 0, img.size.width, img.size.height);
+        im.image = img;
+        im.center = cell.center;
+        im.tag = -1;
+        im.contentMode = UIViewContentModeScaleToFill;
+        [cell addSubview:im];
+        cell.backgroundColor = [UIColor colorWithRed:0.3176 green:0.7529 blue:0.6941 alpha:1.f];
+    }
+
+    return cell;
+}
+
 - (QueryOwnerCell*)queryOwnerCellInitWithTableView:(UITableView*)tableView {
     QueryOwnerCell* cell = [tableView dequeueReusableCellWithIdentifier:@"owner cell"];
     
@@ -564,9 +574,10 @@
     }
 
     [cell setUserName:_current_content.owner_name];
-    [cell setUserPhoto:_current_content.owner_photo];
-    [cell setLocation:@"中国 北京"];
-    [cell setRoleTag:@"role tag"];
+//    [cell setUserPhoto:_current_content.owner_photo];
+    [self setUserPhoto:_current_content.owner_photo];
+    [cell setTagText:@"摄影/旁轴控/钓鱼"];
+//    [cell setRoleTag:@"role tag"];
     UserPostOwnerConnections con = _current_content.relations.integerValue;
     [cell setConnections:con];
    

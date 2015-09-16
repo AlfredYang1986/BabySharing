@@ -31,6 +31,12 @@ typedef NS_ENUM(NSInteger, UserPostOwnerConnections) {
     UserPostOwnerConnectionsFriends
 };
 
+static const NSString* kUserPostOwnerConnectionsNone = @"kUserPostOwnerConnectionsNone";
+static const NSString* kUserPostOwnerConnectionsSamePerson = @"kUserPostOwnerConnectionsSamePerson";
+static const NSString* kUserPostOwnerConnectionsFollowing = @"kUserPostOwnerConnectionsFollowing";
+static const NSString* kUserPostOwnerConnectionsFollowed = @"kUserPostOwnerConnectionsFollowed";
+static const NSString* kUserPostOwnerConnectionsFriends = @"kUserPostOwnerConnectionsFriends";
+
 #pragma mark -- HOST DOMAIN
 #define HOST_DOMAIN                     @"http://www.altlys.com:9000/"
 //#define HOST_DOMAIN                     @"http://192.168.1.107:9000/"
