@@ -34,9 +34,13 @@
 #define QUERY_VIEW_SCROLL   CGRectMake(0, 0, rc.size.width, rc.size.height)
 #define QUERY_VIEW_END      CGRectMake(-rc.size.width, -44, rc.size.width, rc.size.height)
 
-#define FOUND_BOUNDS        CGRect rc1 = _foundView.bounds;
-#define FOUND_VIEW_START    CGRectMake(rc.size.width, 19, rc.size.width, rc1.size.height)
-#define FOUND_VIEW_END      CGRectMake(0, 19, rc.size.width, rc1.size.height)
+//#define FOUND_BOUNDS        CGRect rc1 = _foundView.bounds;
+#define FOUND_BOUNDS        CGFloat found_width = [UIScreen mainScreen].bounds.size.width; \
+                            CGFloat found_height = [UIScreen mainScreen].bounds.size.height; \
+                            CGRect rc1 = CGRectMake(0, 0, found_width, found_height - 49 - 20);
+
+#define FOUND_VIEW_START    CGRectMake(rc.size.width, 20, rc.size.width, rc1.size.height)
+#define FOUND_VIEW_END      CGRectMake(0, 20, rc.size.width, rc1.size.height)
 
 #define BACK_TO_TOP_TIME    3.0
 

@@ -15,8 +15,13 @@
 #import "QueryModel.h"
 
 #import "TmpFileStorageModel.h"
+#import "AlbumTableCell.h"
 
-@interface HomeViewFoundDelegateAndDatasource ()
+#import "HomeDetailViewController.h"
+#import "QueryContentItem.h"
+#import "QueryContent.h"
+
+@interface HomeViewFoundDelegateAndDatasource () <AlbumTableCellDelegate>
 
 @end
 
@@ -82,10 +87,12 @@
     } else if (index == 3) {
         return 44;
     } else {
-        return [TagsRowCell preferdHeight];
+        CGFloat width = [UIScreen mainScreen].bounds.size.width;
+        return width / 3;
     }
 }
 
+#define PHOTO_PER_LINE  3
 #pragma mark -- table view datasource
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
@@ -102,12 +109,13 @@
     } else if (index == 3) {
         return [self queryDefaultCellWithTableView:tableView withTitle:[titles objectAtIndex:1]];
     } else {
-        return [self queryTagsRowCellWithTableView:tableView];
+        return [self queryTagsRowCellWithTableView:tableView atIndex:indexPath];
     }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1 /*2*/ + 1 + 3 + 3;
+    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    return 4 + app.qm.querydata.count / PHOTO_PER_LINE;
 }
 
 #pragma mark -- query cell
@@ -139,11 +147,32 @@
     return cell;
 }
 
-- (TagsRowCell*)queryTagsRowCellWithTableView:(UITableView*)tableView {
-    TagsRowCell* cell = [tableView dequeueReusableCellWithIdentifier:@"Tags Row Cell"];
+- (AlbumTableCell*)queryTagsRowCellWithTableView:(UITableView*)tableView atIndex:(NSIndexPath*)indexPath {
+    
+    AlbumTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AlbumTableViewCell"];
     
     if (cell == nil) {
-        cell = [[TagsRowCell alloc]init];
+        cell = [[AlbumTableCell alloc]init];
+    }
+    
+    cell.delegate = self;
+    NSInteger row = indexPath.row - 4;
+    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    @try {
+        NSArray* arr_tmp = [app.qm.querydata objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(row * PHOTO_PER_LINE, PHOTO_PER_LINE)]];
+        NSMutableArray* arr_content = [[NSMutableArray alloc]initWithCapacity:PHOTO_PER_LINE];
+        for (QueryContent* item in arr_tmp) {
+            [arr_content addObject:((QueryContentItem*)item.items.allObjects.firstObject).item_name];
+        }
+        [cell setUpContentViewWithImageNames:arr_content atLine:row andType:AlbumControllerTypePhoto];
+    }
+    @catch (NSException *exception) {
+        NSArray* arr_tmp = [app.qm.querydata objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(row * PHOTO_PER_LINE, app.qm.querydata.count - row * PHOTO_PER_LINE)]];
+        NSMutableArray* arr_content = [[NSMutableArray alloc]initWithCapacity:PHOTO_PER_LINE];
+        for (QueryContent* item in arr_tmp) {
+            [arr_content addObject:((QueryContentItem*)item.items.allObjects.firstObject).item_name];
+        }
+        [cell setUpContentViewWithImageNames:arr_content atLine:row andType:AlbumControllerTypePhoto];
     }
     
     return cell;
@@ -247,5 +276,34 @@
 
 - (void)queryPostDataAsync {
     [_tableView reloadData];
+}
+
+#pragma mark -- album cell delegate
+- (NSInteger)getViewsCount {
+    return PHOTO_PER_LINE;
+}
+
+- (NSInteger)indexByRow:(NSInteger)row andCol:(NSInteger)col {
+    return row * PHOTO_PER_LINE + col;
+}
+
+- (BOOL)isSelectedAtIndex:(NSInteger)index {
+    return false;
+}
+
+- (void)didSelectOneImageAtIndex:(NSInteger)index {
+//    OwnerQueryModel* om = [self getOM];
+//    QueryContent* tmp = [om.querydata objectAtIndex:index];
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    HomeDetailViewController* detail = [storyboard instantiateViewControllerWithIdentifier:@"DetailContent"];
+//    detail.hidesBottomBarWhenPushed = YES;
+//    
+//    AppDelegate * app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//    detail.qm = app.qm;
+//    detail.current_content = tmp;
+//    detail.current_user_id = _current_user_id;
+//    detail.current_auth_token = _current_auth_token;
+//    
+//    [self.navigationController pushViewController:detail animated:YES];
 }
 @end
