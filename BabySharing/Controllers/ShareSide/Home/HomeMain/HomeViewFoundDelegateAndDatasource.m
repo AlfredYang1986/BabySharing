@@ -118,6 +118,8 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"default"];
     }
    
+    cell.textLabel.textAlignment = NSTextAlignmentCenter;
+    cell.backgroundColor = [UIColor colorWithRed:0.9019 green:0.9019 blue:0.9019 alpha:1.f];
     cell.textLabel.text = title;
     return cell;
 }
@@ -189,9 +191,6 @@
         [cell addSubview:tmp];
     }
  
-//    cell.textLabel.text = @"alfred...";
-//    CGFloat width = [UIScreen mainScreen].bounds.size.width;
-//    cell.frame = CGRectMake(0, 0, width, width / 5);
     return cell;
 }
 
