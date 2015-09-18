@@ -28,6 +28,11 @@
     _imgView.image = [UIImage imageNamed:filePath];
 }
 
+- (void)layoutSubviews {
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    _imgView.frame = CGRectMake(0, 0, width, [FoundPCGCell preferdHeight]);
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
@@ -35,7 +40,7 @@
 }
 
 + (CGFloat)preferdHeight {
-    return 144;
+    return 100;
 }
 
 @end

@@ -218,11 +218,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BabySharing/Views/Home/HomeCell/FoundPGCView/FoundPCGCell.m"
-            timestampString = "464256098.138894"
+            timestampString = "464271982.689986"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42">
+            startingLineNumber = "47"
+            endingLineNumber = "47">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -244,15 +244,111 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BabySharing/Controllers/ShareSide/Home/HomeMain/HomeViewFoundDelegateAndDatasource.m"
-            timestampString = "464270630.30201"
+            timestampString = "464275043.917932"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "191"
-            endingLineNumber = "191"
+            startingLineNumber = "243"
+            endingLineNumber = "243"
+            landmarkName = "-queryUserDataAsync"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BabySharing/Controllers/ShareSide/Home/HomeMain/HomeViewFoundDelegateAndDatasource.m"
+            timestampString = "464275043.917932"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
+            landmarkName = "-initWithTableView:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BabySharing/Models/LoginModel/LoginModel.m"
+            timestampString = "464272066.192013"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "655"
+            endingLineNumber = "655"
+            landmarkName = "-querRecommendUserProlfilesWithFinishBlock:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BabySharing/Controllers/ShareSide/Home/HomeMain/HomeViewFoundDelegateAndDatasource.m"
+            timestampString = "464275043.917932"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "240"
+            endingLineNumber = "240"
+            landmarkName = "-queryUserDataAsync"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__56-[HomeViewFoundDelegateAndDatasource queryUserDataAsync]_block_invoke"
+                  moduleName = "BabySharing"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yangyuan/Desktop/DongDa/BabySharing/BabySharing/Controllers/ShareSide/Home/HomeMain/HomeViewFoundDelegateAndDatasource.m"
+                  timestampString = "464272207.82446"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "188"
+                  endingLineNumber = "188"
+                  offsetFromSymbolStart = "144">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__56-[HomeViewFoundDelegateAndDatasource queryUserDataAsync]_block_invoke_2"
+                  moduleName = "BabySharing"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yangyuan/Desktop/DongDa/BabySharing/BabySharing/Controllers/ShareSide/Home/HomeMain/HomeViewFoundDelegateAndDatasource.m"
+                  timestampString = "464272207.824765"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "188"
+                  endingLineNumber = "188"
+                  offsetFromSymbolStart = "46">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BabySharing/Controllers/ShareSide/Home/HomeMain/HomeViewFoundDelegateAndDatasource.m"
+            timestampString = "464275043.917932"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "237"
+            endingLineNumber = "237"
             landmarkName = "-queryUserDataAsync"
             landmarkType = "5">
          </BreakpointContent>

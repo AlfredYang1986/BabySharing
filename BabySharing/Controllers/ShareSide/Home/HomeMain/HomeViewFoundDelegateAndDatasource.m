@@ -14,6 +14,8 @@
 #import "LoginModel.h"
 #import "QueryModel.h"
 
+#import "TmpFileStorageModel.h"
+
 @interface HomeViewFoundDelegateAndDatasource ()
 
 @end
@@ -42,7 +44,10 @@
         /**
          * get recommend user
          */
-        [self queryPostDataAsync];
+        [self queryUserDataAsync];
+        
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        
     }
     return self;
 }
@@ -59,7 +64,7 @@
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-    return NO;
+    return YES;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -67,38 +72,38 @@
     NSInteger index = indexPath.row;
 //    NSInteger total = [self tableView:tableView numberOfRowsInSection:0];
    
-    if (index == 0) {// || index == total - 1) {
-        return 44;
-    } else if (index % 2 == 0) {
+    if (index == 0) {
         return 44;
     } else if (index == 1) {
         return [FoundPCGCell preferdHeight];
-    } else
+    }else if (index == 2) {
+        CGFloat width = [UIScreen mainScreen].bounds.size.width - 32;
+        return width / 5;
+    } else if (index == 3) {
+        return 44;
+    } else {
         return [TagsRowCell preferdHeight];
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-}
-
-- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-
+    }
 }
 
 #pragma mark -- table view datasource
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     NSInteger index = indexPath.row;
-    NSArray* titles = @[@"refresh...", @"first comming", @"hottest sharing", @"hottest tags"];
+    NSArray* titles = @[@"refresh...", @"精彩内容", @"hottest sharing", @"hottest tags"];
 //    NSInteger total = [self tableView:tableView numberOfRowsInSection:0];
     
-    if (index % 2 == 0) {
-        return [self queryDefaultCellWithTableView:tableView withTitle:[titles objectAtIndex:index / 2]];
+    if (index == 0) {
+        return [self queryDefaultCellWithTableView:tableView withTitle:[titles objectAtIndex:0]];
     } else if (index == 1) {
         return [self queryPGCCellWithTableView:tableView];
-    } else
+    }else if (index == 2) {
+        return [self queryRecommendUserCellWithTableView:tableView];
+    } else if (index == 3) {
+        return [self queryDefaultCellWithTableView:tableView withTitle:[titles objectAtIndex:1]];
+    } else {
         return [self queryTagsRowCellWithTableView:tableView];
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -112,7 +117,7 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"default"];
     }
-    
+   
     cell.textLabel.text = title;
     return cell;
 }
@@ -139,6 +144,54 @@
         cell = [[TagsRowCell alloc]init];
     }
     
+    return cell;
+}
+
+- (UITableViewCell*)queryRecommendUserCellWithTableView:(UITableView*)tableView {
+    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Recommend Users"];
+    
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Recommend Users"];
+    }
+    
+    for (int index = 0; index < recommend_users.count; ++index) {
+        NSDictionary* iter = [recommend_users objectAtIndex:index];
+        
+        CGFloat offset = 16;
+        CGFloat width = [UIScreen mainScreen].bounds.size.width - 32;
+        CGFloat step = width / 5;
+        
+        UIImageView* tmp = [[UIImageView alloc]initWithFrame:CGRectMake(index * step + offset + 4, 4, step - 8, step - 8)];
+        
+        NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+        NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+        NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"User"] ofType:@"png"];
+        
+        NSString* photo_name = [iter objectForKey:@"screen_photo"];
+        
+        UIImage* userImg = [TmpFileStorageModel enumImageWithName:photo_name withDownLoadFinishBolck:^(BOOL success, UIImage *user_img) {
+            if (success) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (self) {
+                        tmp.image = user_img;
+                        NSLog(@"owner img download success");
+                    }
+                });
+            } else {
+                NSLog(@"down load owner image %@ failed", photo_name);
+            }
+        }];
+
+        if (userImg == nil) {
+            userImg = [UIImage imageNamed:filePath];
+        }
+        [tmp setImage:userImg];
+        [cell addSubview:tmp];
+    }
+ 
+//    cell.textLabel.text = @"alfred...";
+//    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+//    cell.frame = CGRectMake(0, 0, width, width / 5);
     return cell;
 }
 
@@ -181,7 +234,6 @@
 }
 
 - (void)queryUserDataAsync {
-  
     dispatch_queue_t aq = dispatch_queue_create("query new user", nil);
     dispatch_async(aq, ^{
         AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
@@ -195,7 +247,6 @@
 }
 
 - (void)queryPostDataAsync {
-  
     [_tableView reloadData];
 }
 @end

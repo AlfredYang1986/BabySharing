@@ -121,7 +121,7 @@
     
     trait = [[MoviePlayTrait alloc]init];
    
-    found_datasource = [[HomeViewFoundDelegateAndDatasource alloc]init];
+    found_datasource = [[HomeViewFoundDelegateAndDatasource alloc]initWithTableView:_foundView];
     _foundView.delegate = found_datasource;
     _foundView.dataSource = found_datasource;
 
