@@ -52,15 +52,12 @@
 //        return img_height + 60
 //    }
  
-    /**
-     * there need to read device model
-     */
-    CGFloat tmp = 0;
-    if (width > 350) {
-        tmp = 100;
-    } else {
-        tmp = 80;
-    }
+    CGFloat tmp = width / 3.75;
+//    if (width > 350) {
+//        tmp = 100;
+//    } else {
+//        tmp = 80;
+//    }
     
     return img_height + tmp + HER_MARGIN + [self getSizeBaseOnDescription:description].height;
 }

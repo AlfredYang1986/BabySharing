@@ -38,8 +38,8 @@ static const NSString* kUserPostOwnerConnectionsFollowed = @"kUserPostOwnerConne
 static const NSString* kUserPostOwnerConnectionsFriends = @"kUserPostOwnerConnectionsFriends";
 
 #pragma mark -- HOST DOMAIN
-#define HOST_DOMAIN                     @"http://www.altlys.com:9000/"
-//#define HOST_DOMAIN                     @"http://192.168.1.104:9000/"
+//#define HOST_DOMAIN                     @"http://www.altlys.com:9000/"
+#define HOST_DOMAIN                     @"http://192.168.1.100:9000/"
 //#define HOST_DOMAIN_SENDBOX             @"http://192.168.1.105:9000/"
 
 #pragma mark -- DOWNLOAD
@@ -77,6 +77,7 @@ static const NSString* kUserPostOwnerConnectionsFriends = @"kUserPostOwnerConnec
 #define PROFILE_UPDATE_DETAILS              @"updateProfile"
 #define PROFILE_QUERY_DETAILS               @"userProfile"
 #define PROFILE_QUERY_MULTIPLE              @"multipleUserProfile"
+#define PROFILE_QUERY_RECOMMEND             [PROFILE_HOST_DOMAIN stringByAppendingString:@"recommendUserProfile"]
 
 #define PROFILE_QUERY_DETAIL_DESCRIPTION    [PROFILE_HOST_DOMAIN stringByAppendingString:@"queryDetailDescription"]
 #define PROFILE_QUERY_UPDATE_DESCRIPTION    [PROFILE_HOST_DOMAIN stringByAppendingString:@"createAndUpdataDetailDescription"]

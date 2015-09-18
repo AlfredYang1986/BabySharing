@@ -11,9 +11,10 @@
 
 typedef enum
 {
-    GotyeChatTargetTypeUser,    ///< 用户
-    GotyeChatTargetTypeRoom,    ///< 聊天室
-    GotyeChatTargetTypeGroup,   ///< 群组
+    GotyeChatTargetTypeUser,    		///< 用户
+    GotyeChatTargetTypeRoom,    		///< 聊天室
+    GotyeChatTargetTypeGroup,   		///< 群组
+    GotyeChatTargetTypeCustomerService	///< 客服
 }GotyeChatTargetType;   ///< 聊天对象类型枚举
 
 typedef enum
@@ -114,6 +115,23 @@ typedef enum {
  */
 
 +(instancetype)groupWithId:(long long)groupid;  
+
+@end
+
+/**
+ *  客服对象
+ */
+@interface GotyeOCCustomerService : GotyeOCChatTarget
+
+
+/**
+ *  通过id生成客服对象
+ *
+ *  @param groupId 客服对应的组的id
+ *
+ *  @return 客服对象
+ */
++(instancetype)customerServiceWithGroupId:(int)groupId;
 
 @end
 

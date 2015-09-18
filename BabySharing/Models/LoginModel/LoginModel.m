@@ -643,6 +643,33 @@
     }
 }
 
+- (void)querRecommendUserProlfilesWithFinishBlock:(queryRecommendUserFinishBlock)block {
+    NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
+    
+    [dic setObject:_current_user.who.user_id forKey:@"user_id"];
+    [dic setObject:_current_user.who.auth_token forKey:@"auth_token"];
+    
+    NSError * error = nil;
+    NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
+    
+    NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:PROFILE_QUERY_RECOMMEND]];
+    
+    if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
+       
+        NSArray* reVal = [result objectForKey:@"result"];
+        NSLog(@"user profile is %@", reVal);
+        block(YES, reVal);
+        
+    } else {
+//        NSDictionary* reError = [result objectForKey:@"error"];
+//        NSString* msg = [reError objectForKey:@"message"];
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:msg delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+//        [alert show];
+//        return nil;
+        block(NO, nil);
+    }
+}
+
 #pragma mark -- reachability change
 - (void)reachabilityChanged:(NSNotification*)notify {
     Reachability * reach = [notify object];

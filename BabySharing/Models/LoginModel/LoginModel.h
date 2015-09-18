@@ -30,6 +30,7 @@ typedef NS_ENUM(NSInteger, LoginModelConnectSNResult) {
 
 typedef void(^descriptionFinishBlock)(BOOL, NSDictionary*);
 typedef void(^weiboUsersFinishBlock)(BOOL success, NSArray* friends);
+typedef void(^queryRecommendUserFinishBlock)(BOOL success, NSArray* lst);
 
 @interface LoginModel : NSObject <WeiboSDKDelegate, WXApiDelegate, TencentSessionDelegate> {
     NSArray* authorised_users;
@@ -88,6 +89,7 @@ typedef void(^weiboUsersFinishBlock)(BOOL success, NSArray* friends);
 
 #pragma mark -- query mutiple user simple profiles
 - (NSArray*)querMultipleProlfiles:(NSArray*)user_ids;
+- (void)querRecommendUserProlfilesWithFinishBlock:(queryRecommendUserFinishBlock)block;
 
 #pragma mark -- current user detail info
 - (BOOL)isCurrentHasDetailInfoLocal;

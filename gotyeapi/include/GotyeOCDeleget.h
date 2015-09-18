@@ -50,6 +50,13 @@
  * @param user: 当前登录用户
  */
 -(void) onGetProfile:(GotyeStatusCode)code user:(GotyeOCUser*)user;
+
+-(void) onStartAPNS:(GotyeStatusCode)code;
+
+-(void) onStopAPNS:(GotyeStatusCode)code;
+
+-(void) onUpdateUnreadMessageCount:(GotyeStatusCode)code;
+
 /**
  * @brief  获得用户详细信息回调
  * @param code: 状态id
@@ -280,7 +287,11 @@
  * @param msglist: 消息列表
  * @param downloadMediaIfNeed: 是否需要下载
  */
--(void) onGetMessageList:(GotyeStatusCode)code totalCount:(unsigned)totalCount downloadMediaIfNeed:(bool*)downloadMediaIfNeed;
+-(void) onGetMessageList:(GotyeStatusCode)code msglist:(NSArray *)msgList downloadMediaIfNeed:(bool*)downloadMediaIfNeed;
+
+-(void) onGetOfflineMessageList:(GotyeStatusCode)code msglist:(NSArray *)msgList downloadMediaIfNeed:(bool*)downloadMediaIfNeed;
+
+-(void) onGetHistoryMessageList:(GotyeStatusCode)code msglist:(NSArray *)msgList downloadMediaIfNeed:(bool*)downloadMediaIfNeed;
 
 /**
  * @brief 举报回调
@@ -333,7 +344,22 @@
  */
 -(void) onPlayStop;
 
+/**
+ *  设置群消息提醒设置的回调
+ *
+ *  @param code   设置的状态码
+ *  @param group  设置的群组
+ *  @param config 设置的群消息提醒设置
+ */
 -(void) onSetGroupMsgConfig:(GotyeStatusCode)code group:(GotyeOCGroup *)group config:(GotyeGroupMsgConfig)config;
+
+/**
+ *  获取群消息提醒设置的回调
+ *
+ *  @param code   获取的状态码
+ *  @param group  获取的群组
+ *  @param config 获取到的群消息提醒设置
+ */
 -(void) onGetGroupMsgConfig:(GotyeStatusCode)code group:(GotyeOCGroup *)group config:(GotyeGroupMsgConfig)config;
 
 @end

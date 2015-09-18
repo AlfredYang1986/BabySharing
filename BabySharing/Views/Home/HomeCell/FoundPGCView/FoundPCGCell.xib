@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -15,17 +15,20 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="06D-9y-VxT">
-                        <rect key="frame" x="0.0" y="0.0" width="467" height="144"/>
+                        <rect key="frame" x="-8" y="0.0" width="483" height="144"/>
                         <color key="backgroundColor" red="0.1575035102" green="1" blue="0.2256678731" alpha="1" colorSpace="calibratedRGB"/>
                     </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailingMargin" secondItem="06D-9y-VxT" secondAttribute="trailing" constant="-8" id="8Zk-uS-dtF"/>
-                    <constraint firstItem="06D-9y-VxT" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-8" id="VEH-eb-tNO"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="06D-9y-VxT" secondAttribute="trailing" constant="-16" id="8Zk-uS-dtF"/>
+                    <constraint firstItem="06D-9y-VxT" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-16" id="VEH-eb-tNO"/>
                     <constraint firstAttribute="bottomMargin" secondItem="06D-9y-VxT" secondAttribute="bottom" constant="-8" id="WiU-tD-QNG"/>
                     <constraint firstItem="06D-9y-VxT" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-8" id="X1s-t7-GdL"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="imgView" destination="06D-9y-VxT" id="pOW-7A-c7S"/>
+            </connections>
             <point key="canvasLocation" x="510.5" y="286.5"/>
         </tableViewCell>
     </objects>

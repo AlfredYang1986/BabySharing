@@ -31,9 +31,7 @@
 +(status)init:(NSString*)appKey packageName:(NSString*)packageName;
 
 /**
- * @brief 使用百度apiKey和secretKey初始化百度语音识别API
- * @param apiKey: 您在百度管理系统注册获得的apiKey
- * @param secretKey: 您在百度管理系统注册获得的secretKey
+ * @brief 初始化讯飞语音识别API
  */
 +(void)initIflySpeechRecognition;
 
@@ -316,7 +314,24 @@
  */
 +(GotyeOCGroup*)getGroupDetail:(GotyeOCChatTarget*)target forceRequest:(bool)forceRequest;
 
+/**
+ *  @brief 获取群组消息提醒设置
+ *
+ *  @param target       群组对象
+ *  @param forceRequest 该参数为true时先返回本地设置，并从服务器获取最新数据通过回调返回；若为false，则直接返回本地的设置
+ *
+ *  @return 群组的消息提醒设置
+ */
 +(int)getChatTargetMsgConfig:(GotyeOCChatTarget *)target forceRequest:(bool)forceRequest;
+
+/**
+ *  设置群组消息提醒设置
+ *
+ *  @param target 群组对象
+ *  @param config 群组消息提醒设置。具体的值请参照GotyeGroupMsgConfig
+ *  @see GotyeGroupMsgConfig
+ *  @return 是否成功
+ */
 +(status)setChatTarget:(GotyeOCChatTarget *)target msgConfig:(int)config;
 
 /**
@@ -530,6 +545,11 @@
  * @brief 开始接收离线消息
  */
 +(void)beginReceiveOfflineMessage;
+
+/**
+ *  开始接收客服离线消息
+ */
++ (void)beginReceiveCSOfflineMessage;
 
 /**
  * @brief 获取和指定聊天对象的本地消息列表(针对聊天室会向服务器请求历史消息)
