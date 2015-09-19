@@ -16,8 +16,10 @@
 #import "DDNNotificationViewController.h"
 #import "UserChatController.h"
 #import "Targets.h"
+#import "HomeSegControl.h"
 
-@interface MessageViewController () <UISearchBarDelegate>
+
+@interface MessageViewController () <UISearchBarDelegate, HomeSegControlDelegate>
 @property (strong, nonatomic) UITableView *friendsQueryView;
 @property (strong, nonatomic) UISegmentedControl *friendSeg;
 @property (strong, nonatomic) UISearchBar *friendsSearchBar;
@@ -31,7 +33,8 @@
     MesssageTableDelegate* md;
     FriendsTableDelegate* fd;
     
-    UISegmentedControl* title_seg;
+//    UISegmentedControl* title_seg;
+    HomeSegControl* sg;
 }
 
 @synthesize queryView = _queryView;     // message
@@ -48,6 +51,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f]];
     [_queryView registerNib:[UINib nibWithNibName:@"MessageViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"Message View Cell"];
     [_queryView registerNib:[UINib nibWithNibName:@"MessageNotificationCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"Notificaton View Cell"];
     
@@ -87,10 +91,16 @@
     
     [self layoutSubviews];
     
-    title_seg = [[UISegmentedControl alloc]initWithItems:@[@"消息", @"好友"]];
-    title_seg.selectedSegmentIndex = 0;
-    self.navigationItem.titleView = title_seg;
-    [title_seg addTarget:self action:@selector(titleSegValueChanged:) forControlEvents:UIControlEventValueChanged];
+//    title_seg = [[UISegmentedControl alloc]initWithItems:@[@"消息", @"好友"]];
+//    title_seg.selectedSegmentIndex = 0;
+//    self.navigationItem.titleView = title_seg;
+//    [title_seg addTarget:self action:@selector(titleSegValueChanged:) forControlEvents:UIControlEventValueChanged];
+
+    sg = [[HomeSegControl alloc]initWithFrame:CGRectMake(0, 0, 150, 30)];
+    [sg addItem:@"推荐" andImage:nil];
+    [sg addItem:@"发现" andImage:nil];
+    sg.delegate = self;
+    self.navigationItem.titleView = sg;
    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"添加好友" style:UIBarButtonItemStylePlain target:self action:@selector(friendsAddingBtnSelected)];
     
@@ -117,13 +127,13 @@
     CGFloat height = [UIScreen mainScreen].bounds.size.height;
    
     CGFloat offset_x = 0;
-    CGFloat offset_y = 0;
+    CGFloat offset_y = 20 + 44;
    
     _queryView.frame = CGRectMake(offset_x, offset_y, width, height);
     offset_x += width;
 
 #define SEARCH_BAR_HEIGHT   44
-    offset_y += 64;
+//    offset_y += 64;
     _friendsSearchBar.frame = CGRectMake(offset_x, offset_y, width, SEARCH_BAR_HEIGHT);
     offset_y += SEARCH_BAR_HEIGHT;
 
@@ -161,15 +171,6 @@
         }
         
         con.hidesBottomBarWhenPushed = YES;
-    }
-}
-
-- (void)titleSegValueChanged:(id)sender {
-    CGFloat width = [UIScreen mainScreen].bounds.size.width;
-    if (title_seg.selectedSegmentIndex == 0 && _queryView.frame.origin.x < 0) {
-        [self moveContentView:width];
-    } else if (title_seg.selectedSegmentIndex == 1 && _queryView.frame.origin.x >= 0) {
-        [self moveContentView:-width];
     }
 }
 
@@ -230,9 +231,19 @@
                                       // NOTE: When passing INTUAnimationOptionRepeat, this completion block is NOT executed at the end of each cycle. It will only run if the animation is canceled.
                                       NSLog(@"%@", finished ? @"Animation Completed" : @"Animation Canceled");
                                       //                                                         self.animationID = NSNotFound;
-                                      if (title_seg.selectedSegmentIndex == 1) {
+                                      if (sg.selectIndex == 1) {
                                           [self friendSegValueChanged:nil];
                                       }
                                   }];
+}
+
+#pragma mark -- Home Seg Control delegate
+- (void)valueHasChanged:(HomeSegControl *)seg {
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    if (sg.selectIndex == 0 && _queryView.frame.origin.x < 0) {
+        [self moveContentView:width];
+    } else if (sg.selectIndex == 1 && _queryView.frame.origin.x >= 0) {
+        [self moveContentView:-width];
+    }
 }
 @end

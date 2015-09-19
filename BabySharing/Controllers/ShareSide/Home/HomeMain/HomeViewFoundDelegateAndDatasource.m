@@ -30,11 +30,13 @@
 }
 
 @synthesize tableView = _tableView;
+@synthesize container = _container;
 
-- (id)initWithTableView:(UITableView *)tableView {
+- (id)initWithTableView:(UITableView*)tableView andContainer:(UIViewController*)container {
     self = [super init];
     if (self) {
         _tableView = tableView;
+        _container = container;
         
         /**
          * regisiter pcg view
@@ -294,16 +296,18 @@
 - (void)didSelectOneImageAtIndex:(NSInteger)index {
 //    OwnerQueryModel* om = [self getOM];
 //    QueryContent* tmp = [om.querydata objectAtIndex:index];
-//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    HomeDetailViewController* detail = [storyboard instantiateViewControllerWithIdentifier:@"DetailContent"];
-//    detail.hidesBottomBarWhenPushed = YES;
-//    
-//    AppDelegate * app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-//    detail.qm = app.qm;
-//    detail.current_content = tmp;
-//    detail.current_user_id = _current_user_id;
-//    detail.current_auth_token = _current_auth_token;
-//    
-//    [self.navigationController pushViewController:detail animated:YES];
+    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    QueryContent* tmp = [app.qm.querydata objectAtIndex:index];
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    HomeDetailViewController* detail = [storyboard instantiateViewControllerWithIdentifier:@"DetailContent"];
+    detail.hidesBottomBarWhenPushed = YES;
+    
+    detail.qm = app.qm;
+    detail.current_content = tmp;
+    detail.current_user_id = [app.lm getCurrentUserID];
+    detail.current_auth_token = [app.lm getCurrentAuthToken];
+    
+    [_container.navigationController pushViewController:detail animated:YES];
 }
 @end

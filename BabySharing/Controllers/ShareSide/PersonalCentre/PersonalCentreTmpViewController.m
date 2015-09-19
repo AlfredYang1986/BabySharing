@@ -66,6 +66,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f]];
     
     AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     _current_user_id = delegate.lm.current_user_id;

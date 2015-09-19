@@ -56,6 +56,8 @@
 @synthesize notifyObject = _notifyObject;
 
 - (void)viewDidLoad {
+    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f]];
+
     _cycleTableView.dataSource = self;
     _cycleTableView.delegate = self;
     [_cycleTableView registerNib:[UINib nibWithNibName:@"CycleOverCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"cycle over cell"];
