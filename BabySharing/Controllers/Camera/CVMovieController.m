@@ -63,6 +63,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];  // for < ios 7.0
 
     trait = [[MoviePlayTrait alloc]init];
     trait.delegate = self;
@@ -101,22 +102,30 @@
      */
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     UIView * bar = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, 49)];
-    bar.backgroundColor = [UIColor colorWithWhite:0.f alpha:0.3];
+//    bar.backgroundColor = [UIColor colorWithWhite:0.f alpha:0.3];
+    bar.backgroundColor = [UIColor colorWithRed:0.1373 green:0.1216 blue:0.1255 alpha:1.f];
     [self.view addSubview:bar];
     [self.view bringSubviewToFront:bar];
     
-    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 15, 25, 25)];
+    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
+    barBtn.center = CGPointMake(width / 2, 49 / 2);
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-    NSString* filepath = [resourceBundle pathForResource:@"Cancel_blue" ofType:@"png"];
+    NSString* filepath = [resourceBundle pathForResource:@"Cancel_Large" ofType:@"png"];
+//    NSString* filepath = [resourceBundle pathForResource:@"Cancel_blue" ofType:@"png"];
     [barBtn setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
     [barBtn addTarget:self action:@selector(dismissCVViewController) forControlEvents:UIControlEventTouchDown];
     [bar addSubview:barBtn];
     
-    UIButton* bar_right_btn = [[UIButton alloc]initWithFrame:CGRectMake(width - 13 - 25, 15, 25, 25)];
-    NSString* filepath_right = [resourceBundle pathForResource:@"Next_blue" ofType:@"png"];
-    [bar_right_btn setBackgroundImage:[UIImage imageNamed:filepath_right] forState:UIControlStateNormal];
+//    UIButton* bar_right_btn = [[UIButton alloc]initWithFrame:CGRectMake(width - 13 - 25, 15, 25, 25)];
+//    NSString* filepath_right = [resourceBundle pathForResource:@"Next_blue" ofType:@"png"];
+//    [bar_right_btn setBackgroundImage:[UIImage imageNamed:filepath_right] forState:UIControlStateNormal];
+    UIButton* bar_right_btn = [[UIButton alloc]init];
+    [bar_right_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [bar_right_btn setTitle:@"继续" forState:UIControlStateNormal];
     [bar_right_btn addTarget:self action:@selector(didSelectMergeBtn) forControlEvents:UIControlEventTouchDown];
+    [bar_right_btn sizeToFit];
+    bar_right_btn.center = CGPointMake(width - bar_right_btn.bounds.size.width, 49 / 2);
     [bar addSubview:bar_right_btn];
     
     /**
@@ -129,7 +138,7 @@
     [self.view bringSubviewToFront:f_bar];
     
     UIButton* f_btn_1 = [[UIButton alloc]initWithFrame:CGRectMake(8, 8, 25, 25)];
-    [f_btn_1 setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Refresh" ofType:@"png"]] forState:UIControlStateNormal];
+    [f_btn_1 setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"CameraRefresh" ofType:@"png"]] forState:UIControlStateNormal];
     [f_btn_1 addTarget:self action:@selector(didChangeCameraBtn) forControlEvents:UIControlEventTouchDown];
     [f_bar addSubview:f_btn_1];
     f_btn_1.center = CGPointMake(width / 2, 22);
@@ -176,7 +185,8 @@
     [movie_btn addTarget:self action:@selector(didSelectCameraBtn) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:movie_btn];
     movie_btn.center = CGPointMake(width / 2 - width / 3, height + 44 + last_height / 2);
-    NSString* movie_img_file = [resourceBundle pathForResource:@"Camera_blue" ofType:@"png"];
+//    NSString* movie_img_file = [resourceBundle pathForResource:@"Camera_blue" ofType:@"png"];
+    NSString* movie_img_file = [resourceBundle pathForResource:@"Camera_change" ofType:@"png"];
     [movie_btn setBackgroundImage:[UIImage imageNamed:movie_img_file] forState:UIControlStateNormal];
     
     /**
@@ -242,6 +252,16 @@
     [super viewWillDisappear:animated];
     
     [videoCamera stopCameraCapture];
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+    //UIStatusBarStyleDefault = 0 黑色文字，浅色背景时使用
+    //UIStatusBarStyleLightContent = 1 白色文字，深色背景时使用
+}
+
+- (BOOL)prefersStatusBarHidden {
+    return YES; //返回NO表示要显示，返回YES将hiden
 }
 
 /*

@@ -43,6 +43,7 @@
 #pragma mark - View lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];  // for < ios 7.0
     
     self.view.backgroundColor = UIColor.blackColor;
    
@@ -77,14 +78,17 @@
      */
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     UIView * bar = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, 49)];
-    bar.backgroundColor = [UIColor colorWithWhite:0.f alpha:0.3];
+//    bar.backgroundColor = [UIColor colorWithWhite:0.f alpha:0.3];
+    bar.backgroundColor = [UIColor colorWithRed:0.1373 green:0.1216 blue:0.1255 alpha:1.f];
     [self.view addSubview:bar];
     [self.view bringSubviewToFront:bar];
     
-    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 15, 25, 25)];
+    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
+    barBtn.center = CGPointMake(width / 2, 49 / 2);
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-    NSString* filepath = [resourceBundle pathForResource:@"Cancel_blue" ofType:@"png"];
+    NSString* filepath = [resourceBundle pathForResource:@"Cancel_Large" ofType:@"png"];
+//    NSString* filepath = [resourceBundle pathForResource:@"Cancel_blue" ofType:@"png"];
     [barBtn setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
     [barBtn addTarget:self action:@selector(dismissCVViewController) forControlEvents:UIControlEventTouchDown];
     [bar addSubview:barBtn];
@@ -94,7 +98,19 @@
      */
     CGFloat height = width * aspectRatio;
     UIView* f_bar = [[UIView alloc]initWithFrame:CGRectMake(0, height, width, 44)];
-    f_bar.backgroundColor = [UIColor colorWithWhite:0.4 alpha:0.6];
+//    f_bar.backgroundColor = [UIColor colorWithWhite:0.4 alpha:0.6];
+    f_bar.backgroundColor = [UIColor clearColor];
+    
+    CAGradientLayer* bl = [CAGradientLayer layer];
+    [bl setStartPoint:CGPointMake(0.0, 0.0)];
+    [bl setEndPoint:CGPointMake(0.0, 1.0)];
+    bl.colors = [NSArray arrayWithObjects:
+                    (id)[UIColor colorWithRed:0.2549 green:0.2510 blue:0.2588 alpha:1.f].CGColor,
+                    (id)[UIColor blackColor].CGColor, nil];
+    
+    bl.frame = CGRectMake(0, 0, width, 44);
+    [f_bar.layer addSublayer:bl];
+    
     [self.view addSubview:f_bar];
     [self.view bringSubviewToFront:f_bar];
     
@@ -107,13 +123,14 @@
     layout_help_layers = [[NSMutableArray alloc]initWithCapacity:4];
 
     UIButton* f_btn_1 = [[UIButton alloc]initWithFrame:CGRectMake(8, 8, 25, 25)];
-    [f_btn_1 setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Refresh" ofType:@"png"]] forState:UIControlStateNormal];
+//    [f_btn_1 setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Refresh" ofType:@"png"]] forState:UIControlStateNormal];
+    [f_btn_1 setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"CameraRefresh" ofType:@"png"]] forState:UIControlStateNormal];
     [f_btn_1 addTarget:self action:@selector(didChangeCameraBtn) forControlEvents:UIControlEventTouchDown];
     [f_bar addSubview:f_btn_1];
     f_btn_1.center = CGPointMake(width / 2, 22);
 
     f_btn_2 = [[UIButton alloc]initWithFrame:CGRectMake(8, 8, 25, 25)];
-    [f_btn_2 setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Lightning_off" ofType:@"png"]] forState:UIControlStateNormal];
+    [f_btn_2 setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Lighting_off" ofType:@"png"]] forState:UIControlStateNormal];
     [f_btn_2 addTarget:self action:@selector(didChangeFreshLight) forControlEvents:UIControlEventTouchDown];
     [f_bar addSubview:f_btn_2];
     f_btn_2.center = CGPointMake(width / 2 + width / 3, 22);
@@ -185,6 +202,16 @@
     [stillCamera stopCameraCapture];
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+    //UIStatusBarStyleDefault = 0 黑色文字，浅色背景时使用
+    //UIStatusBarStyleLightContent = 1 白色文字，深色背景时使用
+}
+
+- (BOOL)prefersStatusBarHidden {
+    return YES; //返回NO表示要显示，返回YES将hiden
+}
+
 #pragma mark -- button action
 - (void)didLayoutHelpSelected {
     if (isLayoutHelp) {
@@ -245,7 +272,7 @@
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
     if (isFlash) {
         [device setFlashMode:AVCaptureFlashModeOff];
-        [f_btn_2 setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Lightning_off" ofType:@"png"]] forState:UIControlStateNormal];
+        [f_btn_2 setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Lighting_off" ofType:@"png"]] forState:UIControlStateNormal];
         isFlash = NO;
     } else {
         [device setFlashMode:AVCaptureFlashModeOn];
