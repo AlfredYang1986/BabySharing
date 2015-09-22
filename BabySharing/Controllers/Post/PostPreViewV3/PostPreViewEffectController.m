@@ -80,21 +80,34 @@
      * fake navigation bar
      */
     UIView* bar = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, 49)];
-    bar.backgroundColor = [UIColor colorWithWhite:0.f alpha:0.3];
+//    bar.backgroundColor = [UIColor colorWithWhite:0.f alpha:0.3];
+    bar.backgroundColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
     [self.view addSubview:bar];
     [self.view bringSubviewToFront:bar];
     
-    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 15, 25, 25)];
+//    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 22, 13, 20)];
+    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 22, 30, 25)];
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-    NSString* filepath = [resourceBundle pathForResource:@"Previous_blue" ofType:@"png"];
-    [barBtn setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
+//    NSString* filepath = [resourceBundle pathForResource:@"Previous_blue" ofType:@"png"];
+    NSString* filepath = [resourceBundle pathForResource:@"Previous_simple" ofType:@"png"];
+    CALayer * layer = [CALayer layer];
+    layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
+    layer.frame = CGRectMake(0, 0, 13, 20);
+    layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
+    [barBtn.layer addSublayer:layer];
+//    [barBtn setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
+//    [barBtn setImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
     [barBtn addTarget:self action:@selector(didPopControllerSelected) forControlEvents:UIControlEventTouchDown];
     [bar addSubview:barBtn];
     
-    UIButton* bar_right_btn = [[UIButton alloc]initWithFrame:CGRectMake(width - 13 - 25, 15, 25, 25)];
-    NSString* filepath_right = [resourceBundle pathForResource:@"Next_blue" ofType:@"png"];
-    [bar_right_btn setBackgroundImage:[UIImage imageNamed:filepath_right] forState:UIControlStateNormal];
+    UIButton* bar_right_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 15, 25, 25)];
+//    NSString* filepath_right = [resourceBundle pathForResource:@"Next_blue" ofType:@"png"];
+//    [bar_right_btn setBackgroundImage:[UIImage imageNamed:filepath_right] forState:UIControlStateNormal];
+    [bar_right_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [bar_right_btn setTitle:@"继续" forState:UIControlStateNormal];
+    [bar_right_btn sizeToFit];
+    bar_right_btn.center = CGPointMake(width - bar_right_btn.bounds.size.width, 15 + bar_right_btn.bounds.size.height / 2);
     [bar_right_btn addTarget:self action:@selector(didNextBtnSelected) forControlEvents:UIControlEventTouchDown];
     [bar addSubview:bar_right_btn];
     /***************************************************************************************/
@@ -104,22 +117,24 @@
      * funciton bar
      */
     CGFloat height = width * aspectRatio;
-    UIView* f_bar = [[UIView alloc]initWithFrame:CGRectMake(0, height, width, 44)];
-    f_bar.backgroundColor = [UIColor colorWithWhite:0.4 alpha:0.6];
+//    UIView* f_bar = [[UIView alloc]initWithFrame:CGRectMake(0, height, width, 44)];
+    UIView* f_bar = [[UIView alloc]initWithFrame:CGRectMake(0, height, width, 60)];
+//    f_bar.backgroundColor = [UIColor colorWithWhite:0.4 alpha:0.6];
+    f_bar.backgroundColor = [UIColor colorWithWhite:1.f alpha:1.f];
     [self.view addSubview:f_bar];
     [self.view bringSubviewToFront:f_bar];
     
     /**
      * gradient layer for gradient background,
      */
-    CAGradientLayer* gl = [CAGradientLayer layer];
-    gl.frame = CGRectMake(0, 0, f_bar.frame.size.width, f_bar.frame.size.height);
-    gl.colors = [NSArray arrayWithObjects:
-                 (id)[[UIColor clearColor] CGColor],
-                 (id)[[UIColor darkGrayColor] CGColor], nil];
-    gl.startPoint = CGPointMake(0.5, 0.5);
-    gl.endPoint = CGPointMake(0.5, 1.0);
-    [f_bar.layer addSublayer:gl];
+//    CAGradientLayer* gl = [CAGradientLayer layer];
+//    gl.frame = CGRectMake(0, 0, f_bar.frame.size.width, f_bar.frame.size.height);
+//    gl.colors = [NSArray arrayWithObjects:
+//                 (id)[[UIColor clearColor] CGColor],
+//                 (id)[[UIColor darkGrayColor] CGColor], nil];
+//    gl.startPoint = CGPointMake(0.5, 0.5);
+//    gl.endPoint = CGPointMake(0.5, 1.0);
+//    [f_bar.layer addSublayer:gl];
    
     /**
      * function bar button
@@ -127,19 +142,20 @@
     if (_type == PostPreViewPhote) {
      
         NSInteger button_count = 4;
-        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"滤镜" andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 1 / (2*button_count),f_bar.frame.size.height / 2)]];
-        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"标签" andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 3 / (2*button_count),f_bar.frame.size.height / 2)]];
-        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"贴图" andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 5 / (2*button_count),f_bar.frame.size.height / 2)]];
-        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"工具" andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 7 / (2*button_count),f_bar.frame.size.height / 2)]];
+        
+        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"滤镜" andImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Effect" ofType:@"png"]] andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 1 / (2*button_count),f_bar.frame.size.height / 2)]];
+        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"标签" andImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Tag" ofType:@"png"]] andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 3 / (2*button_count),f_bar.frame.size.height / 2)]];
+        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"贴图" andImage:[UIImage imageNamed:[resourceBundle pathForResource:@"PasteEffect" ofType:@"png"]] andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 5 / (2*button_count),f_bar.frame.size.height / 2)]];
+        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"工具" andImage:[UIImage imageNamed:[resourceBundle pathForResource:@"ToolEffect" ofType:@"png"]] andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 7 / (2*button_count),f_bar.frame.size.height / 2)]];
         
     } else if (_type == PostPreViewMovie) {
 
         NSInteger button_count = 5;
-        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"滤镜" andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 1 / (2*button_count), f_bar.frame.size.height / 2)]];
-        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"剪切" andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 3 / (2*button_count), f_bar.frame.size.height / 2)]];
-        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"变速" andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 5 / (2*button_count), f_bar.frame.size.height / 2)]];
-        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"封面" andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 7 / (2*button_count), f_bar.frame.size.height / 2)]];
-        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"声音" andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 9 / (2*button_count), f_bar.frame.size.height / 2)]];
+        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"滤镜" andImage:nil andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 1 / (2*button_count), f_bar.frame.size.height / 2)]];
+        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"剪切" andImage:nil andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 3 / (2*button_count), f_bar.frame.size.height / 2)]];
+        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"变速" andImage:nil andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 5 / (2*button_count), f_bar.frame.size.height / 2)]];
+        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"封面" andImage:nil andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 7 / (2*button_count), f_bar.frame.size.height / 2)]];
+        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"声音" andImage:nil andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 9 / (2*button_count), f_bar.frame.size.height / 2)]];
     } else {
         // error
     }   
@@ -151,10 +167,12 @@
      */
     adapter = [[PostEffectAdapter alloc]init];
     adapter.delegate = self;
-    CGFloat prefered_height = [UIScreen mainScreen].bounds.size.height - height - 44;
+//    CGFloat prefered_height = [UIScreen mainScreen].bounds.size.height - height - 44;
+    CGFloat prefered_height = [UIScreen mainScreen].bounds.size.height - height - 60;
    
     UIView* tmp = [adapter getFunctionViewByTitle:@"滤镜" andType:_type andPreferedHeight:prefered_height];
-    tmp.frame = CGRectMake(0, height + 44, tmp.frame.size.width, tmp.frame.size.height);
+//    tmp.frame = CGRectMake(0, height + 44, tmp.frame.size.width, tmp.frame.size.height);
+    tmp.frame = CGRectMake(0, height + 60, tmp.frame.size.width, tmp.frame.size.height);
     
     function_dic = [[NSMutableDictionary alloc]init];
     [function_dic setValue:tmp forKey:@"滤镜"];
@@ -228,9 +246,37 @@
     }];
 }
 
-- (UIButton*)addFunctionBarBtnWithTitle:(NSString*)title andCallBack:(SEL)callBack andRect:(CGRect)bounds andCenter:(CGPoint)center {
+//- (UIButton*)addFunctionBarBtnWithTitle:(NSString*)title andCallBack:(SEL)callBack andRect:(CGRect)bounds andCenter:(CGPoint)center {
+- (UIButton*)addFunctionBarBtnWithTitle:(NSString*)title andImage:(UIImage*)img andCallBack:(SEL)callBack andRect:(CGRect)bounds andCenter:(CGPoint)center {
     UIButton* f_btn = [[UIButton alloc]initWithFrame:bounds];
-    [f_btn setTitle:title forState:UIControlStateNormal];
+    
+    if (img == nil) {
+        [f_btn setTitle:title forState:UIControlStateNormal];
+        [f_btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    } else {
+//        f_btn.backgroundColor = [UIColor redColor];
+        CALayer* il = [CALayer layer];
+//        il.frame = CGRectMake(0, 0, bounds.size.width / 3 * 2, bounds.size.height/ 3 * 2);
+        il.frame = CGRectMake(0, 0, 25, 25);
+//        il.position = CGPointMake(bounds.size.width / 2, il.frame.size.height / 2);
+        il.position = CGPointMake(bounds.size.width / 2, bounds.size.height / 3);
+    
+        il.contents = (id)img.CGImage;
+        [f_btn.layer addSublayer:il];
+        
+        CATextLayer* tl = [CATextLayer layer];
+        tl.frame = CGRectMake(0, 0, bounds.size.width, bounds.size.height / 3);
+        tl.position = CGPointMake(bounds.size.width / 2, bounds.size.height / 4 * 3);
+        tl.string = title;
+        tl.foregroundColor = [UIColor blackColor].CGColor;
+        tl.fontSize = 13.f;
+        tl.alignmentMode = @"center";
+        [f_btn.layer addSublayer:tl];
+
+        [f_btn setTitle:title forState:UIControlStateNormal];
+        [f_btn setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
+    }
+
     [f_btn addTarget:self action:callBack forControlEvents:UIControlEventTouchDown];
     f_btn.center = center;
     return f_btn;
@@ -276,6 +322,15 @@
     }
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+    //UIStatusBarStyleDefault = 0 黑色文字，浅色背景时使用
+    //UIStatusBarStyleLightContent = 1 白色文字，深色背景时使用
+}
+
+- (BOOL)prefersStatusBarHidden {
+    return NO; //返回NO表示要显示，返回YES将hiden
+}
 /*
 #pragma mark - Navigation
 
@@ -368,9 +423,11 @@
     if (!tmp) {
         CGFloat width = [UIScreen mainScreen].bounds.size.width;
         CGFloat height = width * aspectRatio;
-        CGFloat prefered_height = [UIScreen mainScreen].bounds.size.height - height - 44;
+//        CGFloat prefered_height = [UIScreen mainScreen].bounds.size.height - height - 44;
+        CGFloat prefered_height = [UIScreen mainScreen].bounds.size.height - height - 60;
         tmp = [adapter getFunctionViewByTitle:title andType:_type andPreferedHeight:prefered_height];
-        tmp.frame = CGRectMake(0, height + 44, tmp.frame.size.width, tmp.frame.size.height);
+//        tmp.frame = CGRectMake(0, height + 44, tmp.frame.size.width, tmp.frame.size.height);
+        tmp.frame = CGRectMake(0, height + 60, tmp.frame.size.width, tmp.frame.size.height);
     }
     [self.view addSubview:tmp];
     

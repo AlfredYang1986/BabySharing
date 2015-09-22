@@ -105,7 +105,7 @@ UIView* effectFilterForPhoto(PostEffectAdapter* adapter, CGFloat height) {
     CGFloat button_height = height / 2;
 
     UIView* reVal = [[UIView alloc]initWithFrame:CGRectMake(0, 0, MAX(width, 4 * (margin + button_height)), height)];
-    reVal.backgroundColor = [UIColor grayColor];
+    reVal.backgroundColor = [UIColor colorWithRed:0.9050 green:0.9050 blue:0.9050 alpha:1.f];
   
     [reVal addSubview:addPhotoEffectBtn(@"Tilt", CGRectMake(0, 0, button_height, button_height), CGPointMake(margin + button_height / 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:))];
     [reVal addSubview:addPhotoEffectBtn(@"Sketch", CGRectMake(0, 0, button_height, button_height), CGPointMake(2 * margin + button_height * 3/ 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:))];
