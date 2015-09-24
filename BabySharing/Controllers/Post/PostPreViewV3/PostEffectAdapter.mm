@@ -41,7 +41,7 @@ UIView* thisViewIsNotImplemented(CGFloat height) {
     CGFloat button_height = height / 2;
 
     UIView* reVal = [[UIView alloc]initWithFrame:CGRectMake(0, 0, MAX(width, 4 * (margin + button_height)), height)];
-    reVal.backgroundColor = [UIColor grayColor];
+    reVal.backgroundColor = [UIColor colorWithRed:0.9050 green:0.9050 blue:0.9050 alpha:1.f];
     
     UILabel* label = [[UILabel alloc]init];
     label.text = @"This View is not implemented";
@@ -107,9 +107,8 @@ UIButton* addTagBtn(NSString* title, CGRect bounds, CGPoint center, NSObject* ca
     [btn setImage:img forState:UIControlStateNormal];
     [btn addTarget:callBackObj action:callBack forControlEvents:UIControlEventTouchDown];
     [btn setTitle:title forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
-//    btn.layer.borderWidth = 1.f;
-//    btn.layer.borderColor = [UIColor blueColor].CGColor;
     return btn;
 }
 
@@ -156,7 +155,7 @@ UIView* tagForPhoto(PostEffectAdapter* adapter, CGFloat height) {
     CGFloat button_height = height / 3;
 
     UIView* reVal = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, height)];
-    reVal.backgroundColor = [UIColor grayColor];
+    reVal.backgroundColor = [UIColor colorWithRed:0.9050 green:0.9050 blue:0.9050 alpha:1.f];
     
     [reVal addSubview:addTagBtn(@"地点", CGRectMake(0, 0, 3 * button_height, button_height), CGPointMake(reVal.frame.size.width / 2 - 10 - 3 * button_height, reVal.frame.size.height / 2), adapter, @selector(didSelectTagForPhoto:), [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Location"] ofType:@"png"]])];
     [reVal addSubview:addTagBtn(@"时间", CGRectMake(0, 0, 3 * button_height, button_height), CGPointMake(reVal.frame.size.width / 2, reVal.frame.size.height / 2), adapter, @selector(didSelectTagForPhoto:), [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Time"] ofType:@"png"]])];
@@ -173,7 +172,7 @@ UIView* pasteForPhoto(PostEffectAdapter* adapter, CGFloat height) {
     CGFloat button_height = height / 2;
     
     UIView* reVal = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, height)];
-    reVal.backgroundColor = [UIColor grayColor];
+    reVal.backgroundColor = [UIColor colorWithRed:0.9050 green:0.9050 blue:0.9050 alpha:1.f];
     
     [reVal addSubview:addPasteBtn(CGRectMake(0, 0, button_height, button_height), CGPointMake(reVal.frame.size.width / 2 - 10 - 2 * button_height, reVal.frame.size.height / 2), adapter, @selector(didSelectPasteForPhoto:), [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Dice1"] ofType:@"png"]])];
     [reVal addSubview:addPasteBtn(CGRectMake(0, 0, button_height, button_height), CGPointMake(reVal.frame.size.width / 2, reVal.frame.size.height / 2), adapter, @selector(didSelectPasteForPhoto:), [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Dice2"] ofType:@"png"]])];

@@ -34,6 +34,7 @@
 		EE5D68781B75A9FD0067A2DF /* Messages.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5D68771B75A9FD0067A2DF /* Messages.m */; };
 		EE5D687B1B75B12B0067A2DF /* NotificationOwner+ContextOpt.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5D687A1B75B12B0067A2DF /* NotificationOwner+ContextOpt.m */; };
 		EE664E9A1B73145000ACD57E /* QueryContent.m in Sources */ = {isa = PBXBuildFile; fileRef = EE664E991B73145000ACD57E /* QueryContent.m */; };
+		EE66B47D1BB3EEC600812F5F /* HomeNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE66B47C1BB3EEC600812F5F /* HomeNavigationController.m */; settings = {ASSET_TAGS = (); }; };
 		EE6D6DB51B7B28A6004D29C8 /* WEPopoverContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6D6DAD1B7B28A6004D29C8 /* WEPopoverContainerView.m */; };
 		EE6D6DB61B7B28A6004D29C8 /* WEPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6D6DAF1B7B28A6004D29C8 /* WEPopoverController.m */; };
 		EE6D6DE21B7B404E004D29C8 /* CycleDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6D6DE11B7B404E004D29C8 /* CycleDetailController.m */; };
@@ -124,11 +125,8 @@
 		EEAACC9A1B44E90400D05C0B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACAF11B44E90300D05C0B /* AppDelegate.m */; };
 		EEAACC9D1B44E90400D05C0B /* AlbumNib.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEAACAF91B44E90300D05C0B /* AlbumNib.storyboard */; };
 		EEAACC9E1B44E90400D05C0B /* AlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACAFB1B44E90300D05C0B /* AlbumViewController.m */; };
-		EEAACC9F1B44E90400D05C0B /* CameraNib.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEAACAFE1B44E90300D05C0B /* CameraNib.storyboard */; };
 		EEAACCA01B44E90400D05C0B /* CameraNib2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEAACAFF1B44E90300D05C0B /* CameraNib2.storyboard */; };
 		EEAACCA11B44E90400D05C0B /* CVMovieController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB011B44E90300D05C0B /* CVMovieController.m */; };
-		EEAACCA21B44E90400D05C0B /* CVViewController+ImageOpt.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB031B44E90300D05C0B /* CVViewController+ImageOpt.m */; };
-		EEAACCA31B44E90400D05C0B /* CVViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB051B44E90300D05C0B /* CVViewController.m */; };
 		EEAACCA41B44E90400D05C0B /* CVViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB071B44E90300D05C0B /* CVViewController2.m */; };
 		EEAACCA51B44E90400D05C0B /* MovieNib.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEAACB081B44E90300D05C0B /* MovieNib.storyboard */; };
 		EEAACCA61B44E90400D05C0B /* AlreadLogedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB0B1B44E90300D05C0B /* AlreadLogedViewController.m */; };
@@ -331,6 +329,8 @@
 		EE5D687A1B75B12B0067A2DF /* NotificationOwner+ContextOpt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NotificationOwner+ContextOpt.m"; sourceTree = "<group>"; };
 		EE664E981B73145000ACD57E /* QueryContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryContent.h; sourceTree = "<group>"; };
 		EE664E991B73145000ACD57E /* QueryContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryContent.m; sourceTree = "<group>"; };
+		EE66B47B1BB3EEC600812F5F /* HomeNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeNavigationController.h; sourceTree = "<group>"; };
+		EE66B47C1BB3EEC600812F5F /* HomeNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeNavigationController.m; sourceTree = "<group>"; };
 		EE6D6DA81B7B28A6004D29C8 /* UIBarButtonItem+WEPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+WEPopover.h"; sourceTree = "<group>"; };
 		EE6D6DA91B7B28A6004D29C8 /* UIBarButtonItem+WEPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+WEPopover.m"; sourceTree = "<group>"; };
 		EE6D6DAA1B7B28A6004D29C8 /* WEBlockingGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WEBlockingGestureRecognizer.h; sourceTree = "<group>"; };
@@ -454,14 +454,9 @@
 		EEAACAFA1B44E90300D05C0B /* AlbumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumViewController.h; sourceTree = "<group>"; };
 		EEAACAFB1B44E90300D05C0B /* AlbumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumViewController.m; sourceTree = "<group>"; };
 		EEAACAFD1B44E90300D05C0B /* CameraActionProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraActionProtocol.h; sourceTree = "<group>"; };
-		EEAACAFE1B44E90300D05C0B /* CameraNib.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CameraNib.storyboard; sourceTree = "<group>"; };
 		EEAACAFF1B44E90300D05C0B /* CameraNib2.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CameraNib2.storyboard; sourceTree = "<group>"; };
 		EEAACB001B44E90300D05C0B /* CVMovieController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVMovieController.h; sourceTree = "<group>"; };
 		EEAACB011B44E90300D05C0B /* CVMovieController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CVMovieController.m; sourceTree = "<group>"; };
-		EEAACB021B44E90300D05C0B /* CVViewController+ImageOpt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CVViewController+ImageOpt.h"; sourceTree = "<group>"; };
-		EEAACB031B44E90300D05C0B /* CVViewController+ImageOpt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CVViewController+ImageOpt.m"; sourceTree = "<group>"; };
-		EEAACB041B44E90300D05C0B /* CVViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVViewController.h; sourceTree = "<group>"; };
-		EEAACB051B44E90300D05C0B /* CVViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CVViewController.m; sourceTree = "<group>"; };
 		EEAACB061B44E90300D05C0B /* CVViewController2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVViewController2.h; sourceTree = "<group>"; };
 		EEAACB071B44E90300D05C0B /* CVViewController2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CVViewController2.m; sourceTree = "<group>"; };
 		EEAACB081B44E90300D05C0B /* MovieNib.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MovieNib.storyboard; sourceTree = "<group>"; };
@@ -1232,14 +1227,9 @@
 			isa = PBXGroup;
 			children = (
 				EEAACAFD1B44E90300D05C0B /* CameraActionProtocol.h */,
-				EEAACAFE1B44E90300D05C0B /* CameraNib.storyboard */,
 				EEAACAFF1B44E90300D05C0B /* CameraNib2.storyboard */,
 				EEAACB001B44E90300D05C0B /* CVMovieController.h */,
 				EEAACB011B44E90300D05C0B /* CVMovieController.m */,
-				EEAACB021B44E90300D05C0B /* CVViewController+ImageOpt.h */,
-				EEAACB031B44E90300D05C0B /* CVViewController+ImageOpt.m */,
-				EEAACB041B44E90300D05C0B /* CVViewController.h */,
-				EEAACB051B44E90300D05C0B /* CVViewController.m */,
 				EEAACB061B44E90300D05C0B /* CVViewController2.h */,
 				EEAACB071B44E90300D05C0B /* CVViewController2.m */,
 				EEAACB081B44E90300D05C0B /* MovieNib.storyboard */,
@@ -2007,6 +1997,8 @@
 				EED774C71BABF86D001C9B57 /* HomeViewController.m */,
 				EED774C81BABF86D001C9B57 /* HomeViewFoundDelegateAndDatasource.h */,
 				EED774C91BABF86D001C9B57 /* HomeViewFoundDelegateAndDatasource.m */,
+				EE66B47B1BB3EEC600812F5F /* HomeNavigationController.h */,
+				EE66B47C1BB3EEC600812F5F /* HomeNavigationController.m */,
 			);
 			path = HomeMain;
 			sourceTree = "<group>";
@@ -2318,7 +2310,6 @@
 				EEAACD2B1B44E90400D05C0B /* ChatViewOwnerCell.xib in Resources */,
 				EE7415C91B5B7097002CA1BC /* Main.storyboard in Resources */,
 				EEAACCA51B44E90400D05C0B /* MovieNib.storyboard in Resources */,
-				EEAACC9F1B44E90400D05C0B /* CameraNib.storyboard in Resources */,
 				EEAACD1A1B44E90400D05C0B /* ProfileDetailTagsCell.xib in Resources */,
 				EEAACCC61B44E90400D05C0B /* webNab.storyboard in Resources */,
 				EEC980B11B8EB9EA0087E5A7 /* status-bar-pattern-black.jpg in Resources */,
@@ -2419,6 +2410,7 @@
 				EE6D6DB51B7B28A6004D29C8 /* WEPopoverContainerView.m in Sources */,
 				EEAACCD41B44E90400D05C0B /* CurrentToken+ContextOpt.m in Sources */,
 				EEBFFC1D1B916A0F005AAE36 /* PersonalSettingCell.m in Sources */,
+				EE66B47D1BB3EEC600812F5F /* HomeNavigationController.m in Sources */,
 				EEAACD271B44E90400D05C0B /* ChatViewCell.m in Sources */,
 				EEAACCDA1B44E90400D05C0B /* Providers.m in Sources */,
 				EEB8122C1B7AECF800BC0774 /* CycleViewController.m in Sources */,
@@ -2478,7 +2470,6 @@
 				EEAACCEA1B44E90400D05C0B /* TagQueryModel.m in Sources */,
 				EEAACD2A1B44E90400D05C0B /* ChatViewOwnerCell.m in Sources */,
 				EE9633D01B92CA8200DB4EA5 /* NewMessageSettingController.mm in Sources */,
-				EEAACCA21B44E90400D05C0B /* CVViewController+ImageOpt.m in Sources */,
 				EEAACCE61B44E90400D05C0B /* QueryLikes.m in Sources */,
 				EE2D4B7F1B525E0A00B58A1F /* PhotoPublishController.m in Sources */,
 				EEE94E0C1B74A8C20011321A /* MesssageTableDelegate.m in Sources */,
@@ -2533,7 +2524,6 @@
 				EEC980B01B8EB9EA0087E5A7 /* BWStatusBarOverlay.m in Sources */,
 				EEAACCC41B44E90400D05C0B /* TabBarController.m in Sources */,
 				EEAACCE71B44E90400D05C0B /* QueryLocalModel.xcdatamodeld in Sources */,
-				EEAACCA31B44E90400D05C0B /* CVViewController.m in Sources */,
 				EE9785AD1B9004CD00C454C5 /* CycleAddDescriptionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

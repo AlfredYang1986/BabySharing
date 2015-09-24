@@ -43,6 +43,11 @@
     AVPlayer* player;
     AVPlayerLayer *avPlayerLayer;
     /***********************************************************************/
+    
+    /***********************************************************************/
+    // fake bar
+    UIView* bar;
+    /***********************************************************************/
 }
 
 @synthesize type = _type;
@@ -79,14 +84,15 @@
     /**
      * fake navigation bar
      */
-    UIView* bar = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, 49)];
+//    UIView* bar = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, 64)];
+    bar = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, 64)];
 //    bar.backgroundColor = [UIColor colorWithWhite:0.f alpha:0.3];
     bar.backgroundColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
     [self.view addSubview:bar];
     [self.view bringSubviewToFront:bar];
     
 //    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 22, 13, 20)];
-    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 22, 30, 25)];
+    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
 //    NSString* filepath = [resourceBundle pathForResource:@"Previous_blue" ofType:@"png"];
@@ -107,9 +113,18 @@
     [bar_right_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [bar_right_btn setTitle:@"继续" forState:UIControlStateNormal];
     [bar_right_btn sizeToFit];
-    bar_right_btn.center = CGPointMake(width - bar_right_btn.bounds.size.width, 15 + bar_right_btn.bounds.size.height / 2);
+    bar_right_btn.center = CGPointMake(width - bar_right_btn.bounds.size.width, 25 + bar_right_btn.bounds.size.height / 2);
     [bar_right_btn addTarget:self action:@selector(didNextBtnSelected) forControlEvents:UIControlEventTouchDown];
     [bar addSubview:bar_right_btn];
+    
+    UILabel* titleLabel = [[UILabel alloc]init];
+    titleLabel.textColor = [UIColor whiteColor];
+    titleLabel.tag = -1;
+    titleLabel.text = @"选择滤镜";
+    [titleLabel sizeToFit];
+    titleLabel.center = CGPointMake(width / 2, 20 + (64 - 20) / 2);
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    [bar addSubview:titleLabel];
     /***************************************************************************************/
     
     /***************************************************************************************/
@@ -418,6 +433,10 @@
     for (UIView* iter in function_dic.allValues) {
         [iter removeFromSuperview];
     }
+    
+    UILabel* label = (UILabel*)[bar viewWithTag:-1];
+    label.text = [@"选择" stringByAppendingString:title];
+    [label sizeToFit];
     
     UIView* tmp = [function_dic objectForKey:title];
     if (!tmp) {

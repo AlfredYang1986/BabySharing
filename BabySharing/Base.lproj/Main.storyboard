@@ -2488,7 +2488,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
         <!--Home-->
         <scene sceneID="xpf-RK-Rv1">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="aoW-yh-ycw" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="aoW-yh-ycw" customClass="HomeNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Home" id="xS7-d9-dWJ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="x8q-Gk-P1T">
@@ -2525,7 +2525,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
         <!--Chat-->
         <scene sceneID="PRE-TO-2NP">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZGp-mM-lve" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZGp-mM-lve" customClass="HomeNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Chat" id="7V4-c0-skT"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Q5N-wP-Jj5">
@@ -2544,7 +2544,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
         <!--Personal Center-->
         <scene sceneID="5Qu-FH-07n">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Uzu-dA-Pf3" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Uzu-dA-Pf3" customClass="HomeNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Personal Center" id="Ta3-I3-abj"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="nkh-62-JKK">
@@ -2563,7 +2563,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
         <!--Message-->
         <scene sceneID="mgT-Dh-7cN">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7hx-ud-h3I" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7hx-ud-h3I" customClass="HomeNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Message" id="GJY-jY-Mlv"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="7fi-er-UA7">
@@ -2582,8 +2582,8 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="qbd-0n-vJA"/>
-        <segue reference="2RH-j5-6Bc"/>
+        <segue reference="81I-ET-d5W"/>
         <segue reference="mYA-47-s6C"/>
-        <segue reference="4Ao-yR-LGJ"/>
+        <segue reference="2RH-j5-6Bc"/>
     </inferredMetricsTieBreakers>
 </document>

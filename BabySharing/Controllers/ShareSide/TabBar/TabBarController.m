@@ -25,6 +25,8 @@
 
 #import "DongDaTabBar.h"
 
+#import "HomeNavigationController.h"
+
 //#define MOVING_DISTANCE     90
 //#define MOVING_BASE         20
 //#define MOVING_ANGLE        0.6
@@ -113,7 +115,8 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"CameraNib2" bundle:nil];
     CVViewController2* cameraNav = [storyboard instantiateViewControllerWithIdentifier:@"cameraNav"];
     cameraNav.delegate = self;
-    UINavigationController* nav = [[UINavigationController alloc]initWithRootViewController:cameraNav];
+//    UINavigationController* nav = [[UINavigationController alloc]initWithRootViewController:cameraNav];
+    HomeNavigationController * nav = [[HomeNavigationController alloc]initWithRootViewController:cameraNav];
 //    [parent presentViewController:cameraNav animated:YES completion: ^(void){
     [nav setNavigationBarHidden:YES];
     [parent presentViewController:nav animated:YES completion: ^(void){
@@ -125,7 +128,8 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MovieNib" bundle:nil];
     CVMovieController* cameraNav = [storyboard instantiateViewControllerWithIdentifier:@"MovieNib"];
     cameraNav.delegate = self;
-    UINavigationController* nav = [[UINavigationController alloc]initWithRootViewController:cameraNav];
+//    UINavigationController* nav = [[UINavigationController alloc]initWithRootViewController:cameraNav];
+    HomeNavigationController * nav = [[HomeNavigationController alloc]initWithRootViewController:cameraNav];
     [nav setNavigationBarHidden:YES];
 //    [parent presentViewController:cameraNav animated:YES completion: ^(void){
     [parent presentViewController:nav animated:YES completion: ^(void){
@@ -136,7 +140,8 @@
 - (void)showNetControllerOnController:(UIViewController*)parent {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"webNab" bundle:nil];
     WebSearchController* cameraNav = [storyboard instantiateViewControllerWithIdentifier:@"webNab"];
-    UINavigationController* nav = [[UINavigationController alloc]initWithRootViewController:cameraNav];
+//    UINavigationController* nav = [[UINavigationController alloc]initWithRootViewController:cameraNav];
+    HomeNavigationController * nav = [[HomeNavigationController alloc]initWithRootViewController:cameraNav];
     [nav setNavigationBarHidden:YES];
     //    [parent presentViewController:cameraNav animated:YES completion: ^(void){
     [parent presentViewController:nav animated:YES completion: ^(void){

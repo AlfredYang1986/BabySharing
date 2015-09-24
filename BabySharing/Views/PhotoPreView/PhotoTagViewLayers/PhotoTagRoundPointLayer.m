@@ -28,7 +28,8 @@
     CGContextSaveGState(ctx);
     
     CGContextAddEllipseInRect(ctx, rect);
-    CGContextSetRGBFillColor(ctx, 0, 0, 0, 0.6);  // 白色画一个圆圈
+//    CGContextSetRGBFillColor(ctx, 0, 0, 0, 0.6);  // 白色画一个圆圈
+    CGContextSetRGBFillColor(ctx, 0.3176, 0.7529, 0.6941, 1.0);
     CGContextFillPath(ctx);
    
     CGFloat step = 1.f / sqrt(2.0);

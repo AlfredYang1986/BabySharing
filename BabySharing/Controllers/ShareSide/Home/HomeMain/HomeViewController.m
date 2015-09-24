@@ -132,13 +132,14 @@
     [self layoutTableViews];
     
     BWStatusBarOverlay* tmp = [BWStatusBarOverlay shared];
+    [tmp setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
     [tmp setBackgroundColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f]];
     [tmp.textLabel setTextColor:[UIColor whiteColor]];
     showBack2Top = YES;
     
     tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(back2TopHandler:)];
     [tmp addGestureRecognizer:tap];
-    
+ 
 //    _queryView.backgroundColor = [UIColor colorWithRed:0.0157 green:0.6235 blue:0.5373 alpha:1.f];
 }
 
@@ -202,6 +203,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = NO;
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    [self setNeedsStatusBarAppearanceUpdate];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -216,6 +219,16 @@
 
 - (void)back2TopHandler:(UITapGestureRecognizer*)gesture {
     [_queryView setContentOffset:CGPointZero animated:YES];
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+    //UIStatusBarStyleDefault = 0 黑色文字，浅色背景时使用
+    //UIStatusBarStyleLightContent = 1 白色文字，深色背景时使用
+}
+
+- (BOOL)prefersStatusBarHidden {
+    return NO; //返回NO表示要显示，返回YES将hiden
 }
 
 /*

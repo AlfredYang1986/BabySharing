@@ -125,7 +125,8 @@
     contentLayer = [CATextLayer layer];
     contentLayer.fontSize = [font pointSize];
     contentLayer.bounds = CGRectMake(0, 0, content_size.width + HER_MARGIN, content_size.height + VER_MARGIN);
-    contentLayer.backgroundColor = [UIColor colorWithWhite:0.f alpha:0.6].CGColor;
+//    contentLayer.backgroundColor = [UIColor colorWithWhite:0.f alpha:0.6].CGColor;
+    contentLayer.backgroundColor = [UIColor colorWithRed:0.3167 green:0.7529 blue:0.6941 alpha:1.f].CGColor;
     contentLayer.foregroundColor = [UIColor whiteColor].CGColor;
     contentLayer.string= _content;
     

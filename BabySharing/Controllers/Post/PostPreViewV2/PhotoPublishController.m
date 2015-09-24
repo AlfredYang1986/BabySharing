@@ -24,6 +24,14 @@
 @property (weak, nonatomic) IBOutlet UILabel *tagLabel;
 
 @property (weak, nonatomic) IBOutlet UISwitch *weiboSwitch;
+@property (weak, nonatomic) IBOutlet UILabel *weiboLabel;
+
+@property (weak, nonatomic) IBOutlet UIView *inputContainer;
+
+
+@property (weak, nonatomic) IBOutlet UIButton *locBtn;
+@property (weak, nonatomic) IBOutlet UIButton *timeBtn;
+@property (weak, nonatomic) IBOutlet UIButton *tagBtn;
 @end
 
 @implementation PhotoPublishController
@@ -38,6 +46,13 @@
 @synthesize type = _type;
 
 @synthesize weiboSwitch = _weiboSwitch;
+@synthesize weiboLabel = _weiboLabel;
+
+@synthesize inputContainer = _inputContainer;
+
+@synthesize locBtn = _locBtn;
+@synthesize timeBtn = _timeBtn;
+@synthesize tagBtn = _tagBtn;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -45,11 +60,25 @@
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
     
-    NSString* filepath = [resourceBundle pathForResource:@"Previous" ofType:@"png"];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:filepath] style:UIBarButtonItemStylePlain target:self action:@selector(didSelectBackBtn:)];
+    NSString* filepath = [resourceBundle pathForResource:@"Previous_simple" ofType:@"png"];
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:filepath] style:UIBarButtonItemStylePlain target:self action:@selector(didSelectBackBtn:)];
+    
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame =CGRectMake(0, 0, 15, 25);
+    [btn setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
+    [btn addTarget: self action: @selector(didSelectBackBtn:) forControlEvents: UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:btn];
 
-    NSString* postpath = [resourceBundle pathForResource:@"Post" ofType:@"png"];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:postpath] style:UIBarButtonItemStylePlain target:self action:@selector(didSelectPostBtn:)];
+//    NSString* postpath = [resourceBundle pathForResource:@"Post" ofType:@"png"];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:postpath] style:UIBarButtonItemStylePlain target:self action:@selector(didSelectPostBtn:)];
+    
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"发布" style:UIBarButtonItemStylePlain target:self action:@selector(didSelectPostBtn:)];
+    UIButton *btn2 = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btn2 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btn2 setTitle:@"发布" forState:UIControlStateNormal];
+    [btn2 sizeToFit];
+    [btn2 addTarget: self action: @selector(didSelectPostBtn:) forControlEvents: UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:btn2];
     
     _imgView.image = _preViewImg;
    
@@ -58,6 +87,14 @@
     }
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismissPostViewController) name:@"post success" object:nil];
+    
+    _weiboSwitch.on = NO;
+    _inputContainer.backgroundColor = [UIColor colorWithRed:0.9020 green:0.9059 blue:0.9098 alpha:1.f];
+    _descriptionView.backgroundColor = [UIColor clearColor];
+    
+    [_locBtn setImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Location_Publish" ofType:@"png"]] forState:UIControlStateNormal];
+    [_timeBtn setImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Time_Publish" ofType:@"png"]] forState:UIControlStateNormal];
+    [_tagBtn setImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Tag_Publish" ofType:@"png"]] forState:UIControlStateNormal];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -77,7 +114,11 @@
         }
         view.center = CGPointMake(offset_x + view.bounds.size.width / 2, offset_y + view.bounds.size.height / 2);
         offset_x += view.bounds.size.width + 8;
+        // TODO: Layout tag view
+        view.hidden = YES;
     }
+    
+    _weiboSwitch.frame = CGRectMake(_weiboSwitch.frame.origin.x, _weiboSwitch.frame.origin.y, 25, 15);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -89,6 +130,16 @@
     [self dismissViewControllerAnimated:YES completion:^{
         NSLog(@"Post Success");
     }];
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+    //UIStatusBarStyleDefault = 0 黑色文字，浅色背景时使用
+    //UIStatusBarStyleLightContent = 1 白色文字，深色背景时使用
+}
+
+- (BOOL)prefersStatusBarHidden {
+    return NO; //返回NO表示要显示，返回YES将hiden
 }
 
 /*

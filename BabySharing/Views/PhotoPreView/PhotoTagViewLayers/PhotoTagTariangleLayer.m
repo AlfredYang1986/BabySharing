@@ -32,7 +32,8 @@
     CGContextAddLineToPoint(ctx, rect.origin.x + rect.size.width, rect.origin.y);
     CGContextAddLineToPoint(ctx, rect.origin.x + rect.size.width, rect.origin.y + rect.size.height);
    
-    CGContextSetRGBFillColor(ctx, 0, 0, 0, 0.6);
+//    CGContextSetRGBFillColor(ctx, 0, 0, 0, 0.6);
+    CGContextSetRGBFillColor(ctx, 0.3176, 0.7529, 0.6941, 1.0);
     CGContextFillPath(ctx);
     
     CGContextRestoreGState(ctx);
