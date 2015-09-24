@@ -123,8 +123,6 @@
 		EEAAC8FE1B44E81A00D05C0B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAAC8FD1B44E81A00D05C0B /* main.m */; };
 		EEAAC91B1B44E81A00D05C0B /* BabySharingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAAC91A1B44E81A00D05C0B /* BabySharingTests.m */; };
 		EEAACC9A1B44E90400D05C0B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACAF11B44E90300D05C0B /* AppDelegate.m */; };
-		EEAACC9D1B44E90400D05C0B /* AlbumNib.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEAACAF91B44E90300D05C0B /* AlbumNib.storyboard */; };
-		EEAACC9E1B44E90400D05C0B /* AlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACAFB1B44E90300D05C0B /* AlbumViewController.m */; };
 		EEAACCA01B44E90400D05C0B /* CameraNib2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEAACAFF1B44E90300D05C0B /* CameraNib2.storyboard */; };
 		EEAACCA11B44E90400D05C0B /* CVMovieController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB011B44E90300D05C0B /* CVMovieController.m */; };
 		EEAACCA41B44E90400D05C0B /* CVViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB071B44E90300D05C0B /* CVViewController2.m */; };
@@ -450,9 +448,6 @@
 		EEAAC91A1B44E81A00D05C0B /* BabySharingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BabySharingTests.m; sourceTree = "<group>"; };
 		EEAACAF01B44E90300D05C0B /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		EEAACAF11B44E90300D05C0B /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		EEAACAF91B44E90300D05C0B /* AlbumNib.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AlbumNib.storyboard; sourceTree = "<group>"; };
-		EEAACAFA1B44E90300D05C0B /* AlbumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumViewController.h; sourceTree = "<group>"; };
-		EEAACAFB1B44E90300D05C0B /* AlbumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumViewController.m; sourceTree = "<group>"; };
 		EEAACAFD1B44E90300D05C0B /* CameraActionProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraActionProtocol.h; sourceTree = "<group>"; };
 		EEAACAFF1B44E90300D05C0B /* CameraNib2.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CameraNib2.storyboard; sourceTree = "<group>"; };
 		EEAACB001B44E90300D05C0B /* CVMovieController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVMovieController.h; sourceTree = "<group>"; };
@@ -1214,9 +1209,6 @@
 		EEAACAF81B44E90300D05C0B /* Ablum */ = {
 			isa = PBXGroup;
 			children = (
-				EEAACAF91B44E90300D05C0B /* AlbumNib.storyboard */,
-				EEAACAFA1B44E90300D05C0B /* AlbumViewController.h */,
-				EEAACAFB1B44E90300D05C0B /* AlbumViewController.m */,
 				EE5C7E4D1B511CC000104CAB /* AlbumViewController2.h */,
 				EE5C7E4E1B511CC000104CAB /* AlbumViewController2.m */,
 			);
@@ -2328,7 +2320,6 @@
 				EEAACD781B44EA2D00D05C0B /* WeiboSDK.bundle in Resources */,
 				EEC980B21B8EB9EA0087E5A7 /* status-bar-pattern-black@2x.jpg in Resources */,
 				EE97441F1B78944600E81A70 /* MessageNotificationDetailCell.xib in Resources */,
-				EEAACC9D1B44E90400D05C0B /* AlbumNib.storyboard in Resources */,
 				EE2D4B7C1B525E0A00B58A1F /* PhotoPreView.storyboard in Resources */,
 				EEAACD7A1B44EA8800D05C0B /* BabySharing.mobileprovision in Resources */,
 			);
@@ -2499,7 +2490,6 @@
 				EE9744171B78886300E81A70 /* MessageNotificationCell.m in Sources */,
 				EEDAF46F1BA6964C0035CC31 /* DongDaTabBar.m in Sources */,
 				EE2D4B7E1B525E0A00B58A1F /* PhotoPreViewEffectController.m in Sources */,
-				EEAACC9E1B44E90400D05C0B /* AlbumViewController.m in Sources */,
 				EEAACCD61B44E90400D05C0B /* LoginLocalModel.xcdatamodeld in Sources */,
 				EEAACCE51B44E90400D05C0B /* QueryContentTag.m in Sources */,
 				EEAACCEE1B44E90400D05C0B /* SRWebSocket.m in Sources */,

@@ -15,7 +15,7 @@
 #import "ShareSideBaseController.h"
 //#import "MovingButton.h"
 
-#import "AlbumViewController.h"
+//#import "AlbumViewController.h"
 #import "CVMovieController.h"
 #import "CVViewController2.h"
 #import "WebSearchController.h"
@@ -150,14 +150,14 @@
 }
 
 - (void)showAblumCameraController:(UIViewController*)parent andType:(AlbumControllerType)type {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"AlbumNib" bundle:nil];
-    UIViewController* postNav = [storyboard instantiateViewControllerWithIdentifier:@"AlbumNav"];
-    [parent presentViewController:postNav animated:YES completion: ^(void){
-        NSLog(@"Post controller running ...");
-        AlbumViewController* pv = [[postNav childViewControllers] firstObject];
-        pv.delegate = self;
-        pv.actionType = type;
-    }];
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"AlbumNib" bundle:nil];
+//    UIViewController* postNav = [storyboard instantiateViewControllerWithIdentifier:@"AlbumNav"];
+//    [parent presentViewController:postNav animated:YES completion: ^(void){
+//        NSLog(@"Post controller running ...");
+//        AlbumViewController* pv = [[postNav childViewControllers] firstObject];
+//        pv.delegate = self;
+//        pv.actionType = type;
+//    }];
 }
 
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item {

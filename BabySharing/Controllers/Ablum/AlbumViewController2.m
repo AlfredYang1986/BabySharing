@@ -15,6 +15,7 @@
 #import "PostPreViewEffectController.h"
 
 #define PHOTO_PER_LINE  3
+#define FAKE_NAVIGATION_BAR_HEIGHT  64
 
 @interface AlbumViewController2 () 
 
@@ -81,24 +82,36 @@
     /**
      * fake navigation bar
      */
-    bar = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, 49)];
-    bar.backgroundColor = [UIColor colorWithWhite:0.f alpha:0.3];
+    bar = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, FAKE_NAVIGATION_BAR_HEIGHT)];
+//    bar.backgroundColor = [UIColor colorWithWhite:0.f alpha:0.3];
+    bar.backgroundColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
     [self.view addSubview:bar];
     [self.view bringSubviewToFront:bar];
     
-    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 15, 25, 25)];
+    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 25, 15, 25)];
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-    NSString* filepath = [resourceBundle pathForResource:@"Previous_blue" ofType:@"png"];
+    NSString* filepath = [resourceBundle pathForResource:@"Previous_simple" ofType:@"png"];
     [barBtn setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
     [barBtn addTarget:self action:@selector(didPopControllerSelected) forControlEvents:UIControlEventTouchDown];
     [bar addSubview:barBtn];
 
-    UIButton* bar_right_btn = [[UIButton alloc]initWithFrame:CGRectMake(width - 13 - 25, 15, 25, 25)];
-    NSString* filepath_right = [resourceBundle pathForResource:@"Next_blue" ofType:@"png"];
-    [bar_right_btn setBackgroundImage:[UIImage imageNamed:filepath_right] forState:UIControlStateNormal];
+    UIButton* bar_right_btn = [[UIButton alloc]initWithFrame:CGRectMake(width - 13 - 41, 25, 25, 25)];
+//    NSString* filepath_right = [resourceBundle pathForResource:@"Next_blue" ofType:@"png"];
+//    [bar_right_btn setBackgroundImage:[UIImage imageNamed:filepath_right] forState:UIControlStateNormal];
+    [bar_right_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [bar_right_btn setTitle:@"继续" forState:UIControlStateNormal];
+    [bar_right_btn sizeToFit];
     [bar_right_btn addTarget:self action:@selector(didNextBtnSelected) forControlEvents:UIControlEventTouchDown];
     [bar addSubview:bar_right_btn];
+    
+    UILabel* titleLabel = [[UILabel alloc]init];
+    titleLabel.textColor = [UIColor whiteColor];
+    titleLabel.text = @"选择照片";
+    [titleLabel sizeToFit];
+    titleLabel.center = CGPointMake(width / 2, 20 + (64 - 20) / 2);
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    [bar addSubview:titleLabel];
     /***************************************************************************************/
     
     /***************************************************************************************/
@@ -157,7 +170,8 @@
      * bottom function area
      */
     UIView* tab_bar = [[UIView alloc]initWithFrame:CGRectMake(0, tab_bar_height_offset, width, 44)];
-    tab_bar.backgroundColor = [UIColor colorWithWhite:0.4 alpha:0.6];
+//    tab_bar.backgroundColor = [UIColor colorWithWhite:0.4 alpha:0.6];
+    tab_bar.backgroundColor = [UIColor colorWithRed:0.3176 green:0.7529 blue:0.6941 alpha:1.f];
     [self.view addSubview:tab_bar];
    
     if (_type == AlbumControllerTypePhoto) {
@@ -193,6 +207,16 @@
 //- (void)dealloc {
 //    [player.currentItem removeObserver:self forKeyPath:@"status"];
 //}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+    //UIStatusBarStyleDefault = 0 黑色文字，浅色背景时使用
+    //UIStatusBarStyleLightContent = 1 白色文字，深色背景时使用
+}
+
+- (BOOL)prefersStatusBarHidden {
+    return NO; //返回NO表示要显示，返回YES将hiden
+}
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -233,6 +257,7 @@
     btn.layer.cornerRadius = 4.f;
     btn.clipsToBounds = YES;
     [btn setTitle:title forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(didSelectTabBtn:) forControlEvents:UIControlEventTouchDown];
     [tab_bar addSubview:btn];   
 }
