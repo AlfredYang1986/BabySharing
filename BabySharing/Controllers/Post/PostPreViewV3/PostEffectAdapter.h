@@ -58,7 +58,7 @@
 @property (nonatomic, strong, readonly) GPUImageSmoothToonFilter* smoothToonFilter;
 
 - (UIView*)getFunctionViewByTitle:(NSString*)title andType:(PostPreViewType)type andPreferedHeight:(CGFloat)height;
-- (void)didSelectEffectFilterForPhoto:(UIButton*)sender;
+- (UIImage*)didSelectEffectFilterForPhoto:(UIButton*)sender;
 - (void)didSelectTagForPhoto:(UIButton*)sender;
 - (void)didSelectPasteForPhoto:(UIButton*)sender;
 @end

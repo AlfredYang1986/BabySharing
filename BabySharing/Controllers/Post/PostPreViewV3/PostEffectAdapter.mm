@@ -59,13 +59,44 @@ UIView* thisViewIsNotImplemented(CGFloat height) {
  * for photos
  */
 UIButton* addPhotoEffectBtn(NSString* title, CGRect bounds, CGPoint center, NSObject* callBackObj, SEL callBack) {
+   
+    /**
+     * it is magic, don't touch
+     */
     UIButton* btn = [[UIButton alloc]initWithFrame:bounds];
     btn.center = center;
-    [btn addTarget:callBackObj action:callBack forControlEvents:UIControlEventTouchDown];
     [btn setTitle:title forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
+    [btn addTarget:callBackObj action:callBack forControlEvents:UIControlEventTouchDown];
+  
+    /**
+     * title text
+     */
+    CATextLayer* tl = [CATextLayer layer];
+    tl.string = title;
+    tl.foregroundColor = [UIColor colorWithRed:0.1373 green:0.1255 blue:0.1216 alpha:1.f].CGColor;
+    tl.backgroundColor = [UIColor clearColor].CGColor;
+    tl.fontSize = 11.f;
     
-    btn.layer.borderWidth = 1.f;
-    btn.layer.borderColor = [UIColor blueColor].CGColor;
+    CGSize s = [title sizeWithFont:[UIFont systemFontOfSize:11.f] constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
+    tl.frame = CGRectMake(0, bounds.size.height - s.height, bounds.size.width, s.height);
+    tl.alignmentMode = @"center";
+    [btn.layer addSublayer:tl];
+
+    /**
+     * image preview
+     */
+    UIImage* img = [callBackObj performSelector:callBack withObject:btn];
+    CALayer * il = [CALayer layer];
+    CGFloat mar = 0;
+    CGFloat len = MIN(bounds.size.height - s.height - mar, bounds.size.width);
+    il.frame = CGRectMake((bounds.size.width - len) / 2, (bounds.size.height - s.height - mar - len) / 2, len, len);
+    il.contents = (id)img.CGImage;
+    il.cornerRadius = len / 2;
+    il.masksToBounds = YES;
+    [btn.layer addSublayer:il];
+    
+    btn.tag = -1;
     return btn;
 }
 
@@ -101,8 +132,8 @@ UIView* effectFilterForPhoto(PostEffectAdapter* adapter, CGFloat height) {
      * 4 filter effect
      */
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
-    CGFloat margin = height / 4;
-    CGFloat button_height = height / 2;
+    CGFloat margin = 10;
+    CGFloat button_height = height - 2 * margin;
 
     UIView* reVal = [[UIView alloc]initWithFrame:CGRectMake(0, 0, MAX(width, 4 * (margin + button_height)), height)];
     reVal.backgroundColor = [UIColor colorWithRed:0.9050 green:0.9050 blue:0.9050 alpha:1.f];
@@ -324,7 +355,7 @@ void otherTagView(PostEffectAdapter* obj, UIImage* tag_img) {
     return result;
 }
 
-- (void)didSelectEffectFilterForPhoto:(UIButton*)sender {
+- (UIImage*)didSelectEffectFilterForPhoto:(UIButton*)sender {
     static const vector<effectNode> vec = {
         effectNode{"Tilt", &tilShiftEffect},
         effectNode{"Sketch", &sketchEffect},
@@ -339,9 +370,10 @@ void otherTagView(PostEffectAdapter* obj, UIImage* tag_img) {
             break;
         }
     }
-    if (result) {
+    if (result && sender.tag < 0) {
         [_delegate imageWithEffect:result];
     }
+    return result;
 }
 
 - (void)didSelectTagForPhoto:(UIButton*)sender {
