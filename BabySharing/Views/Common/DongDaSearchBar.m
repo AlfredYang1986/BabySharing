@@ -26,9 +26,9 @@
 @synthesize delegate = _delegate;
 
 - (id)init {
-    self = [super init];
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    self = [super initWithFrame:CGRectMake(0, 0, width, DONGDASEARCHBAR_HEIGHT)];
     if (self) {
-        CGFloat width = [UIScreen mainScreen].bounds.size.width;
         [self setUpSubviewsWithFrame:CGRectMake(0, 0, width, DONGDASEARCHBAR_HEIGHT)];
     }
     return self;

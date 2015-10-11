@@ -14,4 +14,5 @@
 @property (nonatomic, weak) UIViewController* current;
 
 - (void)refreshShowingListWithUserList:(NSArray*)user_lst;
+- (void)filterDataWithPredicate:(NSPredicate*)pred;
 @end

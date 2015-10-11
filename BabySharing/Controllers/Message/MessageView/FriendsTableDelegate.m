@@ -22,7 +22,8 @@
 @implementation FriendsTableDelegate {
     BOOL isLoading;
     
-    NSArray* data_arr;
+    NSMutableArray* data_arr;
+    NSArray* data_origin;
 }
 
 @synthesize queryView = _queryView;
@@ -169,7 +170,25 @@
     for (NSManagedObject* iter in user_lst) {
         [ma addObject:[iter valueForKey:@"user_id"]];
     }
-    data_arr = [_lm querMultipleProlfiles:[ma copy]];
+    data_origin = [_lm querMultipleProlfiles:[ma copy]];
+    data_arr = [data_origin mutableCopy];
+    NSLog(@"%@", data_arr);
+    [_queryView reloadData];
+}
+
+- (void)filterDataWithPredicate:(NSPredicate*)pred {
+  
+    if (data_arr == nil) {
+        data_arr = [[NSMutableArray alloc]initWithCapacity:data_origin.count];
+    }
+    
+    [data_arr removeAllObjects];
+ 
+    for (NSDictionary* tmp in data_origin) {
+        if ([pred evaluateWithObject:[tmp objectForKey:@"screen_name"]]) {
+            [data_arr addObject:tmp];
+        }
+    }
     NSLog(@"%@", data_arr);
     [_queryView reloadData];
 }

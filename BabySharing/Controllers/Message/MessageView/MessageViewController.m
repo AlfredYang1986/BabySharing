@@ -17,12 +17,15 @@
 #import "UserChatController.h"
 #import "Targets.h"
 #import "HomeSegControl.h"
+#import "DongDaSearchBar.h"
+#import "SearchSegView.h"
 
-
-@interface MessageViewController () <UISearchBarDelegate, HomeSegControlDelegate>
+@interface MessageViewController () <UISearchBarDelegate, HomeSegControlDelegate, DongDaSearchBarDelegate, SearchSegViewDelegate>
 @property (strong, nonatomic) UITableView *friendsQueryView;
-@property (strong, nonatomic) UISegmentedControl *friendSeg;
-@property (strong, nonatomic) UISearchBar *friendsSearchBar;
+//@property (strong, nonatomic) UISegmentedControl *friendSeg;
+@property (strong, nonatomic) SearchSegView *friendSeg;
+//@property (strong, nonatomic) UISearchBar *friendsSearchBar;
+@property (strong, nonatomic) DongDaSearchBar *friendsSearchBar;
 
 @property (weak, nonatomic, readonly) ConnectionModel *cm;
 @property (weak, nonatomic, readonly) MessageModel *mm;
@@ -71,22 +74,35 @@
     fd.queryView = _friendsQueryView;
     fd.current = self;
     
-    _friendSeg = [[UISegmentedControl alloc]initWithItems:@[@"好友", @"关注", @"粉丝"]];
-    [_friendSeg addTarget:self action:@selector(friendSegValueChanged:) forControlEvents:UIControlEventValueChanged];
-    _friendSeg.selectedSegmentIndex = 0;
+//    _friendSeg = [[UISegmentedControl alloc]initWithItems:@[@"好友", @"关注", @"粉丝"]];
+//    [_friendSeg addTarget:self action:@selector(friendSegValueChanged:) forControlEvents:UIControlEventValueChanged];
+//    _friendSeg.selectedSegmentIndex = 0;
+//    [self.view addSubview:_friendSeg];
+    
+   
+    _friendSeg = [[SearchSegView alloc]init];
+   
+    [_friendSeg addItemWithTitle:@"好友" andImg:nil andSelectedImg:nil];
+    [_friendSeg addItemWithTitle:@"关注" andImg:nil andSelectedImg:nil];
+    [_friendSeg addItemWithTitle:@"粉丝" andImg:nil andSelectedImg:nil];
+   
+    _friendSeg.delegate = self;
     [self.view addSubview:_friendSeg];
     
-    _friendsSearchBar = [[UISearchBar alloc]init];
+    
+    
+//    _friendsSearchBar = [[UISearchBar alloc]init];
+    _friendsSearchBar = [[DongDaSearchBar alloc]init];
     _friendsSearchBar.delegate = self;
-    for (UIView* v in _friendsSearchBar.subviews)
-    {
-        if ( [v isKindOfClass: [UITextField class]] )
-        {
-            UITextField *tf = (UITextField *)v;
-            tf.clearButtonMode = UITextFieldViewModeWhileEditing;
-            break;
-        }
-    }
+//    for (UIView* v in _friendsSearchBar.subviews)
+//    {
+//        if ( [v isKindOfClass: [UITextField class]] )
+//        {
+//            UITextField *tf = (UITextField *)v;
+//            tf.clearButtonMode = UITextFieldViewModeWhileEditing;
+//            break;
+//        }
+//    }
     [self.view addSubview:_friendsSearchBar];
     
     [self layoutSubviews];
@@ -96,13 +112,13 @@
 //    self.navigationItem.titleView = title_seg;
 //    [title_seg addTarget:self action:@selector(titleSegValueChanged:) forControlEvents:UIControlEventValueChanged];
 
-    sg = [[HomeSegControl alloc]initWithFrame:CGRectMake(0, 0, 150, 30)];
-    [sg addItem:@"推荐" andImage:nil];
-    [sg addItem:@"发现" andImage:nil];
+    sg = [[HomeSegControl alloc]initWithFrame:CGRectMake(0, 0, 200, 30)];
+    [sg addItem:@"消息" andImage:nil];
+    [sg addItem:@"好友" andImage:nil];
     sg.delegate = self;
     self.navigationItem.titleView = sg;
    
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"添加好友" style:UIBarButtonItemStylePlain target:self action:@selector(friendsAddingBtnSelected)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"添加" style:UIBarButtonItemStylePlain target:self action:@selector(friendsAddingBtnSelected)];
     
     AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
     _cm = app.cm;
@@ -133,9 +149,13 @@
     offset_x += width;
 
 #define SEARCH_BAR_HEIGHT   44
-//    offset_y += 64;
+#define SEARCH_BAR_MARGIN_TOP 10
+#define SEARCH_BAR_MARGIN_BOT 10
+
+    offset_y += SEARCH_BAR_MARGIN_TOP;
     _friendsSearchBar.frame = CGRectMake(offset_x, offset_y, width, SEARCH_BAR_HEIGHT);
     offset_y += SEARCH_BAR_HEIGHT;
+    offset_y += SEARCH_BAR_MARGIN_BOT;
 
 #define SEGAMENT_HEGHT      29
     _friendSeg.frame = CGRectMake(offset_x, offset_y, width, SEGAMENT_HEGHT);
@@ -175,8 +195,8 @@
 }
 
 - (void)friendSegValueChanged:(id)sender {
-    
-    switch (_friendSeg.selectedSegmentIndex) {
+   
+    switch (_friendSeg.selectedIndex) {
         case 0: {
             [_cm queryFriendsWithUser:_lm.current_user_id andFinishBlock:^(BOOL success) {
                 [fd refreshShowingListWithUserList:[_cm queryLocalFriendsWithUser:_lm.current_user_id]];
@@ -245,5 +265,22 @@
     } else if (sg.selectIndex == 1 && _queryView.frame.origin.x >= 0) {
         [self moveContentView:-width];
     }
+}
+
+#pragma mark -- dong da search bar
+- (void)cancelBtnSelected {
+    [_friendsSearchBar resignFirstResponder];
+}
+
+- (void)searchTextChanged:(NSString*)searchText {
+    NSString *regex2 = [NSString stringWithFormat:@"^%@\\w*", [searchText lowercaseString]];
+    NSPredicate* p2 = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex2];
+    
+    [fd filterDataWithPredicate:p2];
+}
+
+#pragma mark == segValueDelegate
+- (void)segValueChanged:(SearchSegView*)seg {
+    [self friendSegValueChanged:nil];
 }
 @end

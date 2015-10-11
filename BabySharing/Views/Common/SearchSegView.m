@@ -108,9 +108,9 @@
     im.tag = -2;
     im.contentMode = UIViewContentModeCenter;
     [tmp addSubview:im];
-    
-    [selected_img addObject:img];
-    [unselected_img addObject:unimg];
+   
+    if (img) [selected_img addObject:img];
+    if (unimg) [unselected_img addObject:unimg];
     
     UIView* line = [[UIView alloc]init];
     line.layer.borderColor = unselected_line.CGColor;
@@ -142,8 +142,14 @@
             l.textColor = selected_red;
             
             UIImageView* im = (UIImageView*)[iter viewWithTag:-2];
-            im.image = [selected_img objectAtIndex:index];
-
+            
+            @try {
+                im.image = [selected_img objectAtIndex:index];
+            }
+            @catch (NSException *exception) {
+            
+            }
+            
             UIView* line = [iter viewWithTag:-3];
             line.layer.borderColor = selected_line.CGColor;
             
@@ -154,7 +160,13 @@
             l.textColor = unselected_green;
 
             UIImageView* im = (UIImageView*)[iter viewWithTag:-2];
-            im.image = [unselected_img objectAtIndex:index];
+           
+            @try {
+                im.image = [unselected_img objectAtIndex:index];
+            }
+            @catch (NSException *exception) {
+            
+            }
            
             UIView* line = [iter viewWithTag:-3];
             line.layer.borderColor = unselected_line.CGColor;
