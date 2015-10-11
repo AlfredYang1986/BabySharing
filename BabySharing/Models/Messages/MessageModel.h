@@ -55,6 +55,7 @@ typedef void(^chatGroupOptFinishBlock)(BOOL success, id result);
 - (id)getTargetByIndex:(NSInteger)index WithTargetType:(MessageReceiverType*)type;
 
 - (NSString*)getLastestMessageWith:(GotyeOCChatTarget*)target;
+- (NSString*)getLastestMessageDateWith:(GotyeOCChatTarget *)target;
 - (NSInteger)getUnreadMessageCount:(GotyeOCChatTarget*)target;
 - (NSInteger)getAllUnreadMessageCount;
 

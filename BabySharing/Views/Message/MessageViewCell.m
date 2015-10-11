@@ -77,6 +77,16 @@
     
     UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(badgeViewTaped:)];
     [badgeView addGestureRecognizer:tap];
+    
+    _imgView.layer.cornerRadius = 25;
+    _imgView.clipsToBounds = YES;
+    
+    UIFont* nn_font = [UIFont boldSystemFontOfSize:15.f];
+    _nickNameLabel.font = nn_font;
+    
+    UIFont* msg_font = [UIFont systemFontOfSize:12.f];
+    _messageLabel.font = msg_font;
+    _messageLabel.textColor = [UIColor grayColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

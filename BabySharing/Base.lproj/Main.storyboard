@@ -2253,43 +2253,52 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9JL-e0-pcS">
-                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XAI-YK-qoZ" customClass="DongDaSearchBar">
+                                <rect key="frame" x="0.0" y="64" width="600" height="36"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="qzH-Xf-hLM"/>
+                                </constraints>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="ooZ-Cq-P0Q">
-                                <rect key="frame" x="0.0" y="144" width="600" height="407"/>
+                                <rect key="frame" x="0.0" y="192" width="600" height="359"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="DZY-46-T37">
-                                <rect key="frame" x="0.0" y="108" width="600" height="29"/>
-                                <segments>
-                                    <segment title="通讯录"/>
-                                    <segment title="微信"/>
-                                    <segment title="微博"/>
-                                    <segment title="QQ"/>
-                                </segments>
-                            </segmentedControl>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bAi-0o-xBR" customClass="SearchSegView">
+                                <rect key="frame" x="0.0" y="108" width="600" height="37"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="a20-6f-v5V"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="9JL-e0-pcS" firstAttribute="top" secondItem="qfA-9O-jco" secondAttribute="bottom" id="3MH-UQ-si5"/>
-                            <constraint firstItem="ooZ-Cq-P0Q" firstAttribute="top" secondItem="DZY-46-T37" secondAttribute="bottom" id="3lS-63-Jkm"/>
+                            <constraint firstItem="bAi-0o-xBR" firstAttribute="leading" secondItem="t0m-Wo-yvt" secondAttribute="leadingMargin" constant="-20" id="0OR-Hs-exZ"/>
+                            <constraint firstItem="ooZ-Cq-P0Q" firstAttribute="top" secondItem="bAi-0o-xBR" secondAttribute="bottom" id="7vg-Fb-k9s"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="bAi-0o-xBR" secondAttribute="trailing" constant="-20" id="I35-1A-qGW"/>
                             <constraint firstItem="lz4-14-1BE" firstAttribute="top" secondItem="ooZ-Cq-P0Q" secondAttribute="bottom" id="MFr-g3-WAE"/>
-                            <constraint firstItem="9JL-e0-pcS" firstAttribute="leading" secondItem="t0m-Wo-yvt" secondAttribute="leadingMargin" constant="-16" id="VRG-nM-rij"/>
-                            <constraint firstItem="DZY-46-T37" firstAttribute="leading" secondItem="t0m-Wo-yvt" secondAttribute="leadingMargin" constant="-16" id="YtX-77-5Bn"/>
+                            <constraint firstItem="ooZ-Cq-P0Q" firstAttribute="top" secondItem="bAi-0o-xBR" secondAttribute="bottom" constant="8" id="Yab-VX-vBu"/>
+                            <constraint firstItem="bAi-0o-xBR" firstAttribute="top" secondItem="XAI-YK-qoZ" secondAttribute="bottom" constant="8" id="hCG-AM-OgT"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ooZ-Cq-P0Q" secondAttribute="trailing" constant="-16" id="jgP-zI-bdj"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="DZY-46-T37" secondAttribute="trailing" constant="-16" id="lVG-W4-c7b"/>
-                            <constraint firstItem="DZY-46-T37" firstAttribute="top" secondItem="9JL-e0-pcS" secondAttribute="bottom" id="mqm-XI-P3o"/>
+                            <constraint firstItem="XAI-YK-qoZ" firstAttribute="top" secondItem="qfA-9O-jco" secondAttribute="bottom" constant="8" id="lAl-Om-9YQ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="XAI-YK-qoZ" secondAttribute="trailing" constant="-20" id="nVV-Xx-qt2"/>
+                            <constraint firstItem="XAI-YK-qoZ" firstAttribute="leading" secondItem="t0m-Wo-yvt" secondAttribute="leadingMargin" constant="-20" id="olM-Nj-blE"/>
                             <constraint firstItem="ooZ-Cq-P0Q" firstAttribute="leading" secondItem="t0m-Wo-yvt" secondAttribute="leadingMargin" constant="-16" id="svr-oz-0KF"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="9JL-e0-pcS" secondAttribute="trailing" constant="-16" id="xwQ-gV-v8k"/>
+                            <constraint firstItem="ooZ-Cq-P0Q" firstAttribute="top" secondItem="XAI-YK-qoZ" secondAttribute="bottom" id="ub9-vb-OLH"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="7vg-Fb-k9s"/>
+                                <exclude reference="ub9-vb-OLH"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="添加好友" id="xGd-WH-lHw"/>
                     <connections>
                         <outlet property="queryView" destination="ooZ-Cq-P0Q" id="i17-oS-cNf"/>
-                        <outlet property="searchBar" destination="9JL-e0-pcS" id="EJd-YT-tEq"/>
-                        <outlet property="seg" destination="DZY-46-T37" id="V9U-nI-xnZ"/>
+                        <outlet property="searchBar" destination="XAI-YK-qoZ" id="sf3-ZM-aBe"/>
+                        <outlet property="seg" destination="bAi-0o-xBR" id="3ck-DU-iBi"/>
                         <segue destination="ACV-6I-bvh" kind="push" id="tQd-di-kh2"/>
                     </connections>
                 </viewController>

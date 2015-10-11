@@ -49,6 +49,15 @@
     return self;
 }
 
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        self.tag = -99;
+        [self setUpValues];
+    }
+    return self;
+}
+
 - (void)setUpValues {
     selected_red = [UIColor colorWithRed:0.9294 green:0.1882 blue:0.1412 alpha:1.f];
     unselected_green = [UIColor colorWithRed:0.f green:0.4118 blue:0.3569 alpha:1.f];

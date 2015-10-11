@@ -144,6 +144,23 @@
     return [GotyeOCAPI getLastMessage:target].text;
 }
 
+- (NSString*)getLastestMessageDateWith:(GotyeOCChatTarget *)target {
+    GotyeOCMessage* msg = [GotyeOCAPI getLastMessage:target];
+    NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    
+    NSTimeInterval now_time = [NSDate date].timeIntervalSince1970;
+    if (now_time - msg.date > 24 * 60 * 60) {
+        [formatter setDateFormat:@"MM-dd"];
+    } else {
+        [formatter setDateFormat:@"mm:ss"];
+    }
+    
+    NSDate* date = [NSDate dateWithTimeIntervalSince1970:msg.date];
+    return [formatter stringFromDate:date];
+}
+
 - (NSInteger)getUnreadMessageCount:(GotyeOCChatTarget*)target {
     return [GotyeOCAPI getUnreadMessageCount:target];
 }

@@ -331,8 +331,9 @@
     Providers* cur = [Providers enumProvideInContext:_doc.managedObjectContext ByName:@"weibo" andCurrentUserID:self.current_user_id];
     
     if (cur == nil) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"请先绑定微博或用微博登录" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-        [alert show];
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"请先绑定微博或用微博登录" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+//        [alert show];
+        NSLog(@"请先绑定微博或用微博登录");
     } else {
         /**
          * 2. send request to weibo

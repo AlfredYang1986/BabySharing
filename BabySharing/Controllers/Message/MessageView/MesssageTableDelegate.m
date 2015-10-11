@@ -61,9 +61,22 @@
 }
 
 /*改变删除按钮的title*/
--(NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return @"删除";
+//-(NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    return @"删除";
+//}
+
+- (nullable NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(8_0) {
+
+    NSMutableArray* arr = [[NSMutableArray alloc]init];
+    UITableViewRowAction * act = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"删除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+        [tableView.dataSource tableView:tableView commitEditingStyle:UITableViewCellEditingStyleDelete forRowAtIndexPath:indexPath];
+    }];
+    act.backgroundColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
+    [arr addObject:act];
+    
+    return [arr copy];
 }
+
 
 /*删除用到的函数*/
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -106,6 +119,7 @@
             [cell setUserImage:tmp.target_photo];
             cell.nickNameLabel.text = tmp.target_name;
             cell.messageLabel.text = [_mm getLastestMessageWith:gotTarget];
+            cell.dateLabel.text = [_mm getLastestMessageDateWith:gotTarget];
         } else {
             dispatch_queue_t up = dispatch_queue_create("Get Profile Details", nil);
             dispatch_async(up, ^{
@@ -128,6 +142,7 @@
                         [cell setUserImage:t.target_photo];
                         cell.nickNameLabel.text = t.target_name;
                         cell.messageLabel.text = [_mm getLastestMessageWith:gotTarget];
+                        cell.dateLabel.text = [_mm getLastestMessageDateWith:gotTarget];
                     });
                     
                 } else {
