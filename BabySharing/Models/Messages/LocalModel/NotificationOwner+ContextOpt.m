@@ -50,6 +50,8 @@
 
     tmp.beNotified = owner;
     [owner addNotificationsObject:tmp];
+    
+    [context save:nil];
    
     return tmp;
 }

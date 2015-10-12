@@ -11,6 +11,7 @@
 
 @interface MessageNotificationDetailCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *detailView;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 
 + (CGFloat)preferedHeight;
 

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -11,7 +12,7 @@
             <rect key="frame" x="0.0" y="0.0" width="653" height="66"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <rect key="frame" x="0.0" y="0.0" width="653" height="65"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PVe-Mp-JS3">
@@ -21,22 +22,41 @@
                             <constraint firstAttribute="width" constant="50" id="LHb-Yn-YJh"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="互动消息" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yij-70-dLF">
-                        <rect key="frame" x="66" y="8" width="579" height="49"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="评论消息" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yij-70-dLF">
+                        <rect key="frame" x="66" y="8" width="579" height="50"/>
                         <constraints>
+                            <constraint firstAttribute="height" constant="50" id="QSu-hm-rqh"/>
                             <constraint firstAttribute="height" constant="50" id="fCX-f5-VqN"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="QSu-hm-rqh"/>
+                                <exclude reference="fCX-f5-VqN"/>
+                            </mask>
+                        </variation>
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="yij-70-dLF" firstAttribute="top" secondItem="PVe-Mp-JS3" secondAttribute="top" id="7Tw-j5-3zo"/>
+                    <constraint firstItem="yij-70-dLF" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="929-9T-BKM"/>
+                    <constraint firstItem="yij-70-dLF" firstAttribute="top" secondItem="PVe-Mp-JS3" secondAttribute="top" id="Ihz-u0-ykj"/>
+                    <constraint firstItem="yij-70-dLF" firstAttribute="leading" secondItem="PVe-Mp-JS3" secondAttribute="trailing" constant="8" id="R0a-AA-LSn"/>
+                    <constraint firstItem="yij-70-dLF" firstAttribute="bottom" secondItem="PVe-Mp-JS3" secondAttribute="bottom" id="Ut3-og-AG9"/>
                     <constraint firstItem="PVe-Mp-JS3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="iCZ-E0-Qbl"/>
                     <constraint firstItem="yij-70-dLF" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="of3-L9-V0y"/>
                     <constraint firstItem="yij-70-dLF" firstAttribute="leading" secondItem="PVe-Mp-JS3" secondAttribute="trailing" constant="8" id="pMc-Kr-GvO"/>
                     <constraint firstItem="PVe-Mp-JS3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="scd-99-1ih"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="Ihz-u0-ykj"/>
+                        <exclude reference="of3-L9-V0y"/>
+                        <exclude reference="pMc-Kr-GvO"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="imgView" destination="PVe-Mp-JS3" id="pzA-Mm-7yH"/>

@@ -105,7 +105,8 @@
     Notifications* tmp = [queryData objectAtIndex:indexPath.row];
     
     [cell setUserImage:tmp.sender_screen_photo];
-    cell.detailView.text = [NSString stringWithFormat:[cell getActtionTmplate:tmp.type.integerValue], tmp.sender_screen_name];
+    cell.detailView.text = [cell getActtionTmplate:tmp.type.integerValue];//, tmp.sender_screen_name];
+    cell.nameLabel.text = tmp.sender_screen_name;
    
     return cell;
 }

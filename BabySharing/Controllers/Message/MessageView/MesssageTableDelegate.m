@@ -20,6 +20,8 @@
 #import "RemoteInstance.h"
 #import "ModelDefines.h"
 
+#import "GotyeOCAPI.h"
+
 @implementation MesssageTableDelegate {
     BOOL isLoading;
 }
@@ -68,7 +70,7 @@
 - (nullable NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(8_0) {
 
     NSMutableArray* arr = [[NSMutableArray alloc]init];
-    UITableViewRowAction * act = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"删除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+    UITableViewRowAction * act = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"清除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
         [tableView.dataSource tableView:tableView commitEditingStyle:UITableViewCellEditingStyleDelete forRowAtIndexPath:indexPath];
     }];
     act.backgroundColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
@@ -80,8 +82,11 @@
 
 /*删除用到的函数*/
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
+    if (editingStyle == UITableViewCellEditingStyleDelete && indexPath.row > 0) {
         NSLog(@"delete one row");
+        GotyeOCChatTarget* gotTarget = [_mm getTargetByIndex:indexPath.row - 1];
+        [GotyeOCAPI deleteSession:gotTarget alsoRemoveMessages:YES];
+        [tableView reloadData];
     }
 }
 

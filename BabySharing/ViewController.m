@@ -456,6 +456,9 @@ enum DisplaySide {
         }];
         
         [GotyeOCAPI markOneMessageAsRead:message isRead:YES];
+//        GotyeOCUser* u = [GotyeOCUser userWithName:@"alfred_test"];
+//        [GotyeOCAPI deleteMessage:u msg:message];
+//        [GotyeOCAPI deleteSession:u alsoRemoveMessages:YES];
         
     } else {
         NSLog(@"this is a chat message");
@@ -490,6 +493,8 @@ enum DisplaySide {
             [GotyeOCAPI markOneMessageAsRead:m isRead:YES];
         }
     }
+//    [GotyeOCAPI deleteMessages:u msglist:arr];
+//    [GotyeOCAPI deleteSession:u alsoRemoveMessages:YES];
     
     /**
      * for messages

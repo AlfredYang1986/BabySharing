@@ -63,7 +63,9 @@
 
 #pragma mark -- save notifications
 - (void)save {
-    [_doc.managedObjectContext save:nil];
+    NSError* error = nil;
+    [_doc.managedObjectContext save:&error];
+    NSLog(@"%@", error);
 }
 
 #pragma mark -- notification functions
@@ -123,11 +125,13 @@
 
 #pragma mark -- p2p chat message and group chat message use GotyeOCAPI
 - (NSInteger)getMesssageSessionCount {
-    return [GotyeOCAPI getSessionList].count;
+//    return [GotyeOCAPI getSessionList].count;
+    NSPredicate* pred = [NSPredicate predicateWithFormat:@"name!=%@", @"alfred_test"];
+    return [[GotyeOCAPI getSessionList] filteredArrayUsingPredicate:pred].count;
 }
 
 - (NSInteger)getMesssageSessionCountWithTargetType:(MessageReceiverType*)type {
-    NSPredicate* pred = [NSPredicate predicateWithFormat:@"type=%%d", type];
+    NSPredicate* pred = [NSPredicate predicateWithFormat:@"type=%d", type];
     return [[GotyeOCAPI getSessionList] filteredArrayUsingPredicate:pred].count;
 }
 
@@ -136,7 +140,7 @@
 }
 
 - (id)getTargetByIndex:(NSInteger)index WithTargetType:(MessageReceiverType*)type {
-    NSPredicate* pred = [NSPredicate predicateWithFormat:@"type=%%d", type];
+    NSPredicate* pred = [NSPredicate predicateWithFormat:@"type=%d", type];
     return [[[GotyeOCAPI getSessionList] filteredArrayUsingPredicate:pred] objectAtIndex:index];
 }
 
@@ -154,7 +158,7 @@
     if (now_time - msg.date > 24 * 60 * 60) {
         [formatter setDateFormat:@"MM-dd"];
     } else {
-        [formatter setDateFormat:@"mm:ss"];
+        [formatter setDateFormat:@"hh:mm"];
     }
     
     NSDate* date = [NSDate dateWithTimeIntervalSince1970:msg.date];

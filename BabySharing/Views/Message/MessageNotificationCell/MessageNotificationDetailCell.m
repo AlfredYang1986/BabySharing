@@ -22,6 +22,8 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    _imgView.layer.cornerRadius = 25.f;
+    _imgView.clipsToBounds = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -35,7 +37,8 @@
     NSString* reVal = @"not implemented";
     switch (type) {
         case NotificationActionTypeFollow:
-            reVal = @"%@ is now following you";
+//            reVal = @"%@ is now following you";
+            reVal = @"is now following you";
             break;
         case NotificationActionTypeUnFollow:
         case NotificationActionTypeLike:
