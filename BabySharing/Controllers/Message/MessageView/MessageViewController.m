@@ -117,8 +117,15 @@
     [sg addItem:@"好友" andImage:nil];
     sg.delegate = self;
     self.navigationItem.titleView = sg;
-   
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"添加" style:UIBarButtonItemStylePlain target:self action:@selector(friendsAddingBtnSelected)];
+  
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btn setTitle:@"添加" forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btn addTarget: self action: @selector(friendsAddingBtnSelected) forControlEvents: UIControlEventTouchUpInside];
+    [btn sizeToFit];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:btn];
+    
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"添加" style:UIBarButtonItemStylePlain target:self action:@selector(friendsAddingBtnSelected)];
     
     AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
     _cm = app.cm;

@@ -182,9 +182,6 @@
 		EEAACD1B1B44E90400D05C0B /* ProfileDetailUserHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACC171B44E90400D05C0B /* ProfileDetailUserHeaderCell.m */; };
 		EEAACD1F1B44E90400D05C0B /* SGActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACC1F1B44E90400D05C0B /* SGActionView.m */; };
 		EEAACD201B44E90400D05C0B /* SGAlertMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACC211B44E90400D05C0B /* SGAlertMenu.m */; };
-		EEAACD271B44E90400D05C0B /* ChatViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACC321B44E90400D05C0B /* ChatViewCell.m */; };
-		EEAACD2A1B44E90400D05C0B /* ChatViewOwnerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACC371B44E90400D05C0B /* ChatViewOwnerCell.m */; };
-		EEAACD2B1B44E90400D05C0B /* ChatViewOwnerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEAACC381B44E90400D05C0B /* ChatViewOwnerCell.xib */; };
 		EEAACD411B44E90400D05C0B /* PhotoPreViewEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACC6A1B44E90400D05C0B /* PhotoPreViewEditView.m */; };
 		EEAACD5B1B44E91A00D05C0B /* YYBoundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EEAACD5A1B44E91A00D05C0B /* YYBoundle.bundle */; };
 		EEAACD741B44EA2D00D05C0B /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EEAACD601B44EA2D00D05C0B /* TencentOpenApi_IOS_Bundle.bundle */; };
@@ -227,7 +224,6 @@
 		EEC980B41B8EB9EA0087E5A7 /* status-bar-pattern-default@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EEC980AD1B8EB9EA0087E5A7 /* status-bar-pattern-default@2x.jpg */; };
 		EEC980B51B8EB9EA0087E5A7 /* status-bar-progress.png in Resources */ = {isa = PBXBuildFile; fileRef = EEC980AE1B8EB9EA0087E5A7 /* status-bar-progress.png */; };
 		EEC980B61B8EB9EA0087E5A7 /* status-bar-progress@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EEC980AF1B8EB9EA0087E5A7 /* status-bar-progress@2x.png */; };
-		EED50A131B94078D00A7F0E4 /* ChatEmojiView.m in Sources */ = {isa = PBXBuildFile; fileRef = EED50A121B94078D00A7F0E4 /* ChatEmojiView.m */; };
 		EED64D451B8184AE008CB134 /* CycleAddKidsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EED64D441B8184AE008CB134 /* CycleAddKidsCell.m */; };
 		EED64D471B8184C1008CB134 /* CycleAddKidsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EED64D461B8184C1008CB134 /* CycleAddKidsCell.xib */; };
 		EED64D4A1B818995008CB134 /* CycleAddKidsFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = EED64D491B818995008CB134 /* CycleAddKidsFooter.m */; };
@@ -261,6 +257,8 @@
 		EEE94E371B74C0810011321A /* ProfileOthersOverView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE94E361B74C0810011321A /* ProfileOthersOverView.m */; };
 		EEF538F51B525F7F009C8CB9 /* PostPreViewEffectController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEF538F41B525F7F009C8CB9 /* PostPreViewEffectController.m */; };
 		EEFA44FE1B58F7D4007DF294 /* NickNameInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEFA44FD1B58F7D4007DF294 /* NickNameInputView.m */; };
+		EEFCDEDF1BCB936500A53CAB /* ChatEmojiView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEFCDED01BCB936500A53CAB /* ChatEmojiView.m */; settings = {ASSET_TAGS = (); }; };
+		EEFCDEED1BCB93A400A53CAB /* ChatMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EEFCDEEA1BCB93A400A53CAB /* ChatMessageCell.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -693,8 +691,6 @@
 		EEC980AD1B8EB9EA0087E5A7 /* status-bar-pattern-default@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "status-bar-pattern-default@2x.jpg"; sourceTree = "<group>"; };
 		EEC980AE1B8EB9EA0087E5A7 /* status-bar-progress.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "status-bar-progress.png"; sourceTree = "<group>"; };
 		EEC980AF1B8EB9EA0087E5A7 /* status-bar-progress@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "status-bar-progress@2x.png"; sourceTree = "<group>"; };
-		EED50A111B94078D00A7F0E4 /* ChatEmojiView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatEmojiView.h; sourceTree = "<group>"; };
-		EED50A121B94078D00A7F0E4 /* ChatEmojiView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatEmojiView.m; sourceTree = "<group>"; };
 		EED64D431B8184AE008CB134 /* CycleAddKidsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleAddKidsCell.h; sourceTree = "<group>"; };
 		EED64D441B8184AE008CB134 /* CycleAddKidsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleAddKidsCell.m; sourceTree = "<group>"; };
 		EED64D461B8184C1008CB134 /* CycleAddKidsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CycleAddKidsCell.xib; sourceTree = "<group>"; };
@@ -763,6 +759,13 @@
 		EEF538F41B525F7F009C8CB9 /* PostPreViewEffectController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostPreViewEffectController.m; sourceTree = "<group>"; };
 		EEFA44FC1B58F7D4007DF294 /* NickNameInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NickNameInputView.h; sourceTree = "<group>"; };
 		EEFA44FD1B58F7D4007DF294 /* NickNameInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NickNameInputView.m; sourceTree = "<group>"; };
+		EEFCDECF1BCB936500A53CAB /* ChatEmojiView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatEmojiView.h; sourceTree = "<group>"; };
+		EEFCDED01BCB936500A53CAB /* ChatEmojiView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatEmojiView.m; sourceTree = "<group>"; };
+		EEFCDED11BCB936500A53CAB /* ChatViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewCell.h; sourceTree = "<group>"; };
+		EEFCDED21BCB936500A53CAB /* ChatViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewCell.m; sourceTree = "<group>"; };
+		EEFCDED31BCB936500A53CAB /* ChatViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatViewCell.xib; sourceTree = "<group>"; };
+		EEFCDEE91BCB93A400A53CAB /* ChatMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatMessageCell.h; sourceTree = "<group>"; };
+		EEFCDEEA1BCB93A400A53CAB /* ChatMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatMessageCell.m; sourceTree = "<group>"; };
 		EEFD6F4D1B4E44C1008AC4F5 /* LoginInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginInputView.h; sourceTree = "<group>"; };
 		EEFD6F4E1B4E44C1008AC4F5 /* LoginInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginInputView.m; sourceTree = "<group>"; };
 		EEFD6F501B4E452D008AC4F5 /* SloganView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SloganView.h; sourceTree = "<group>"; };
@@ -1543,8 +1546,8 @@
 		EEAACBBB1B44E90300D05C0B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				EEFCDECC1BCB936500A53CAB /* Chat */,
 				EEDAF4651BA674300035CC31 /* Common */,
-				EED50A101B94077600A7F0E4 /* ChatEmoji */,
 				EEC980A71B8EB9EA0087E5A7 /* BWStatusBarOverlay */,
 				EEAACC1D1B44E90400D05C0B /* SGActionView */,
 				EEAACC301B44E90400D05C0B /* ChatRoom */,
@@ -1951,15 +1954,6 @@
 			path = BWStatusBarOverlay;
 			sourceTree = "<group>";
 		};
-		EED50A101B94077600A7F0E4 /* ChatEmoji */ = {
-			isa = PBXGroup;
-			children = (
-				EED50A111B94078D00A7F0E4 /* ChatEmojiView.h */,
-				EED50A121B94078D00A7F0E4 /* ChatEmojiView.m */,
-			);
-			path = ChatEmoji;
-			sourceTree = "<group>";
-		};
 		EED64D421B81844A008CB134 /* CycleKids */ = {
 			isa = PBXGroup;
 			children = (
@@ -2177,6 +2171,44 @@
 			path = PostPreViewV3;
 			sourceTree = "<group>";
 		};
+		EEFCDECC1BCB936500A53CAB /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				EEFCDECD1BCB936500A53CAB /* ChatCell */,
+				EEFCDECE1BCB936500A53CAB /* ChatEmoji */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		EEFCDECD1BCB936500A53CAB /* ChatCell */ = {
+			isa = PBXGroup;
+			children = (
+				EEFCDEE81BCB93A400A53CAB /* ChatOtherCell */,
+			);
+			path = ChatCell;
+			sourceTree = "<group>";
+		};
+		EEFCDECE1BCB936500A53CAB /* ChatEmoji */ = {
+			isa = PBXGroup;
+			children = (
+				EEFCDECF1BCB936500A53CAB /* ChatEmojiView.h */,
+				EEFCDED01BCB936500A53CAB /* ChatEmojiView.m */,
+				EEFCDED11BCB936500A53CAB /* ChatViewCell.h */,
+				EEFCDED21BCB936500A53CAB /* ChatViewCell.m */,
+				EEFCDED31BCB936500A53CAB /* ChatViewCell.xib */,
+			);
+			path = ChatEmoji;
+			sourceTree = "<group>";
+		};
+		EEFCDEE81BCB93A400A53CAB /* ChatOtherCell */ = {
+			isa = PBXGroup;
+			children = (
+				EEFCDEE91BCB93A400A53CAB /* ChatMessageCell.h */,
+				EEFCDEEA1BCB93A400A53CAB /* ChatMessageCell.m */,
+			);
+			path = ChatOtherCell;
+			sourceTree = "<group>";
+		};
 		EEFD6F4C1B4E4443008AC4F5 /* Landing */ = {
 			isa = PBXGroup;
 			children = (
@@ -2299,7 +2331,6 @@
 				EED64D4C1B8189C6008CB134 /* CycleAddKidsFooter.xib in Resources */,
 				EE7415D71B5B7740002CA1BC /* icon.png in Resources */,
 				EEAACD5B1B44E91A00D05C0B /* YYBoundle.bundle in Resources */,
-				EEAACD2B1B44E90400D05C0B /* ChatViewOwnerCell.xib in Resources */,
 				EE7415C91B5B7097002CA1BC /* Main.storyboard in Resources */,
 				EEAACCA51B44E90400D05C0B /* MovieNib.storyboard in Resources */,
 				EEAACD1A1B44E90400D05C0B /* ProfileDetailTagsCell.xib in Resources */,
@@ -2367,6 +2398,7 @@
 				EE7910411B841A7B005E455B /* TagQueryCell.m in Sources */,
 				EE76398D1B95805F0025A56D /* CollectionQueryModel.m in Sources */,
 				EE7910631B847DBA005E455B /* ChatGroupController.m in Sources */,
+				EEFCDEED1BCB93A400A53CAB /* ChatMessageCell.m in Sources */,
 				EE7910401B841A33005E455B /* DropDownItem.m in Sources */,
 				EE79103E1B841A00005E455B /* QueryCommentsCell.m in Sources */,
 				EE7C68711B82D2D20003C593 /* CycleOverCell.m in Sources */,
@@ -2402,7 +2434,6 @@
 				EEAACCD41B44E90400D05C0B /* CurrentToken+ContextOpt.m in Sources */,
 				EEBFFC1D1B916A0F005AAE36 /* PersonalSettingCell.m in Sources */,
 				EE66B47D1BB3EEC600812F5F /* HomeNavigationController.m in Sources */,
-				EEAACD271B44E90400D05C0B /* ChatViewCell.m in Sources */,
 				EEAACCDA1B44E90400D05C0B /* Providers.m in Sources */,
 				EEB8122C1B7AECF800BC0774 /* CycleViewController.m in Sources */,
 				EED774BF1BABAFAD001C9B57 /* CommentsHeader.m in Sources */,
@@ -2423,7 +2454,6 @@
 				EEDAF4681BA674630035CC31 /* HomeSegControl.m in Sources */,
 				EEAACCEF1B44E90400D05C0B /* ViewController.m in Sources */,
 				EE76A56D1B72021900036747 /* ConnectionLocalModel.xcdatamodeld in Sources */,
-				EED50A131B94078D00A7F0E4 /* ChatEmojiView.m in Sources */,
 				EEAACD201B44E90400D05C0B /* SGAlertMenu.m in Sources */,
 				EEAACCCA1B44E90400D05C0B /* INTUEasingFunctions.m in Sources */,
 				EE664E9A1B73145000ACD57E /* QueryContent.m in Sources */,
@@ -2459,7 +2489,6 @@
 				EEAACCC71B44E90400D05C0B /* WebSearchController.m in Sources */,
 				EEAACCC51B44E90400D05C0B /* UserProfileViewController.m in Sources */,
 				EEAACCEA1B44E90400D05C0B /* TagQueryModel.m in Sources */,
-				EEAACD2A1B44E90400D05C0B /* ChatViewOwnerCell.m in Sources */,
 				EE9633D01B92CA8200DB4EA5 /* NewMessageSettingController.mm in Sources */,
 				EEAACCE61B44E90400D05C0B /* QueryLikes.m in Sources */,
 				EE2D4B7F1B525E0A00B58A1F /* PhotoPublishController.m in Sources */,
@@ -2509,6 +2538,7 @@
 				EEE94E271B74BE3B0011321A /* ProfileSettingController.mm in Sources */,
 				EE83F4031B96E0B100D51FDF /* SearchUserTagsController.m in Sources */,
 				EEAACCC01B44E90400D05C0B /* PersonalCentreTmpViewController.m in Sources */,
+				EEFCDEDF1BCB936500A53CAB /* ChatEmojiView.m in Sources */,
 				EEE94E1D1B74BE090011321A /* PersonalCenterOwnerDelegate.mm in Sources */,
 				EEAACCDB1B44E90400D05C0B /* RegTmpToken+ContextOpt.m in Sources */,
 				EEC980B01B8EB9EA0087E5A7 /* BWStatusBarOverlay.m in Sources */,

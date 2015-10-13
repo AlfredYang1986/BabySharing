@@ -13,7 +13,7 @@
 - (void)changeContent:(NSString*)content;
 @end
 
-@interface ChatViewCell : UITableViewCell
+@interface ChatMessageCell : UITableViewCell
 
 @property (nonatomic, strong, setter=setUser:) NSString* user_id;
 @property (nonatomic, strong, setter=setPhotoFile:) NSString* user_photo;

@@ -6,13 +6,13 @@
 //  Copyright (c) 2015 YY. All rights reserved.
 //
 
-#import "ChatViewCell.h"
+#import "ChatMessageCell.h"
 #import "TmpFileStorageModel.h"
 #import "AppDelegate.h"
 #import "RemoteInstance.h"
 #import "ModelDefines.h"
 
-@implementation ChatViewCell
+@implementation ChatMessageCell
 
 @synthesize user_id = _user_id;
 @synthesize user_photo = _user_photo;

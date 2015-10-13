@@ -20,6 +20,7 @@
 #import "LoginToken.h"
 
 #import "ChatEmojiView.h"
+#import "ChatMessageCell.h"
 
 @interface UserChatController () <UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, ChatEmoji>
 @property (weak, nonatomic) IBOutlet UIButton *funcBtn;
@@ -102,6 +103,34 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
     emoji = [[ChatEmojiView alloc]init];
     emoji.delegate = self;
+    
+    [_queryView registerClass:[ChatMessageCell class] forCellReuseIdentifier:@"message cell"];
+    
+    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+//    NSString* filepath = [resourceBundle pathForResource:@"Previous_blue" ofType:@"png"];
+    NSString* filepath = [resourceBundle pathForResource:@"Previous_simple" ofType:@"png"];
+    CALayer * layer = [CALayer layer];
+    layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
+    layer.frame = CGRectMake(0, 0, 13, 20);
+    layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
+    [barBtn.layer addSublayer:layer];
+//    [barBtn setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
+//    [barBtn setImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
+    [barBtn addTarget:self action:@selector(didPopControllerSelected) forControlEvents:UIControlEventTouchDown];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn];
+
+    UILabel* label = [[UILabel alloc]init];
+    label.text = _chat_user_name;
+    label.textColor = [UIColor whiteColor];
+    [label sizeToFit];
+    self.navigationItem.titleView = label;
+}
+
+- (void)didPopControllerSelected {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -149,47 +178,58 @@
     return [_mm getAllMessagesWithTarget:_chat_user_id andTargetType:MessageReceiverTypeUser].count;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    GotyeOCMessage* m = [[_mm getAllMessagesWithTarget:_chat_user_id andTargetType:MessageReceiverTypeUser] objectAtIndex:indexPath.row];
+    return [ChatMessageCell preferredHeightWithInputText:m.text];
+}
+
 // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
 // Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"default"];
+//    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"default"];
+    ChatMessageCell* cell = [tableView dequeueReusableCellWithIdentifier:@"message cell"];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"default"];
+//        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"default"];
+//        cell = [[ChatMessageCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"message cell"];
+        cell = [[ChatMessageCell alloc]init];
     }
    
     GotyeOCMessage* m = [[_mm getAllMessagesWithTarget:_chat_user_id andTargetType:MessageReceiverTypeUser] objectAtIndex:indexPath.row];
-    cell.textLabel.text = m.text;
- 
-    NSString* photo_name = nil;
-    if ([m.sender.name isEqualToString:_chat_user_id]) {
-        photo_name = _chat_user_photo;
-    } else {
-        photo_name = _lm.getCurrentUser.who.screen_image;
-    }
     
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
-    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-    NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"User"] ofType:@"png"];
+    cell.message = m;
     
-    UIImage* userImg = [TmpFileStorageModel enumImageWithName:photo_name withDownLoadFinishBolck:^(BOOL success, UIImage *user_img) {
-        if (success) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (self) {
-                    cell.imageView.image = user_img;
-                    NSLog(@"owner img download success");
-                }
-            });
-        } else {
-            NSLog(@"down load owner image %@ failed", photo_name);
-        }
-    }];
-    
-    if (userImg == nil) {
-        userImg = [UIImage imageNamed:filePath];
-    }
-    [cell.imageView setImage:userImg];
+//    cell.textLabel.text = m.text;
+// 
+//    NSString* photo_name = nil;
+//    if ([m.sender.name isEqualToString:_chat_user_id]) {
+//        photo_name = _chat_user_photo;
+//    } else {
+//        photo_name = _lm.getCurrentUser.who.screen_image;
+//    }
+//    
+//    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+//    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+//    NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"User"] ofType:@"png"];
+//    
+//    UIImage* userImg = [TmpFileStorageModel enumImageWithName:photo_name withDownLoadFinishBolck:^(BOOL success, UIImage *user_img) {
+//        if (success) {
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                if (self) {
+//                    cell.imageView.image = user_img;
+//                    NSLog(@"owner img download success");
+//                }
+//            });
+//        } else {
+//            NSLog(@"down load owner image %@ failed", photo_name);
+//        }
+//    }];
+//    
+//    if (userImg == nil) {
+//        userImg = [UIImage imageNamed:filePath];
+//    }
+//    [cell.imageView setImage:userImg];
     
     return cell;
 }
