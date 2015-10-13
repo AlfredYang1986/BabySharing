@@ -30,7 +30,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
    
-    data = @[@"个人信息", @"", @"新消息通知", @"隐私偏好", @"", @"去评分", @"对话咚哒团队",@"关于咚哒", @"", @"清除缓存", @"退出登录"];
+    data = @[@"个人信息", @"", @"新消息通知", @"隐私&偏好", @"", @"去评分", @"对话咚哒团队",@"关于咚哒", @"", @"清除缓存", @"退出登录"];
     functions.push_back(@selector(personalSelected));
     functions.push_back(nil);
     functions.push_back(@selector(newMessageSettingSelected));
@@ -45,6 +45,32 @@
     
     _queryView.scrollEnabled = NO;
     [_queryView setSeparatorColor:[UIColor clearColor]];
+    
+    UILabel* label = [[UILabel alloc]init];
+    label.text = @"设置";
+    label.textColor = [UIColor whiteColor];
+    [label sizeToFit];
+    self.navigationItem.titleView = label;
+   
+    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+//    NSString* filepath = [resourceBundle pathForResource:@"Previous_blue" ofType:@"png"];
+    NSString* filepath = [resourceBundle pathForResource:@"Previous_simple" ofType:@"png"];
+    CALayer * layer = [CALayer layer];
+    layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
+    layer.frame = CGRectMake(0, 0, 13, 20);
+    layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
+    [barBtn.layer addSublayer:layer];
+//    [barBtn setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
+//    [barBtn setImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
+    [barBtn addTarget:self action:@selector(didPopControllerSelected) forControlEvents:UIControlEventTouchDown];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn];
+}
+
+- (void)didPopControllerSelected {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -99,6 +125,7 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"default"];
     }
     
+    cell.textLabel.textColor = [UIColor grayColor];
     cell.textLabel.text = [data objectAtIndex:indexPath.row];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
@@ -114,6 +141,7 @@
         cell.accessoryType = UITableViewCellAccessoryNone;
     } else if ([cell.textLabel.text isEqualToString:@"清除缓存"]) {
         cell.textLabel.text = [cell.textLabel.text stringByAppendingString:[NSString stringWithFormat:@"(%.2fM)", [TmpFileStorageModel tmpFileStorageSize]]];
+        cell.textLabel.textColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
     }
     
     return cell;
