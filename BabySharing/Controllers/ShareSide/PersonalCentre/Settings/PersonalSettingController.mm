@@ -36,7 +36,7 @@
     // Do any additional setup after loading the view.
     
     data = @[@"头像", @"", @"昵称", @"", @"角色", @"", @"个性签名", @"", @"自己的描述", @"", @"账号绑定"];
-    title = @[@"screen_photo", @"", @"screen_name", @"", @"role_tag", @"", @"个性签名", @"", @"自己的描述", @"", @"账号绑定"];
+    title = @[@"screen_photo", @"", @"screen_name", @"", @"role_tag", @"", @"signature", @"", @"自己的描述", @"", @"账号绑定"];
     
     functions.push_back(@selector(phoneSelected));
     functions.push_back(nil);
@@ -54,6 +54,32 @@
     [_queryView setSeparatorColor:[UIColor clearColor]];
     
     [_queryView registerNib:[UINib nibWithNibName:@"PersonalSettingCell" bundle:[NSBundle mainBundle]] forHeaderFooterViewReuseIdentifier:@"personal setting cell"];
+    
+    UILabel* label = [[UILabel alloc]init];
+    label.text = @"个人信息";
+    label.textColor = [UIColor whiteColor];
+    [label sizeToFit];
+    self.navigationItem.titleView = label;
+   
+    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+//    NSString* filepath = [resourceBundle pathForResource:@"Previous_blue" ofType:@"png"];
+    NSString* filepath = [resourceBundle pathForResource:@"Previous_simple" ofType:@"png"];
+    CALayer * layer = [CALayer layer];
+    layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
+    layer.frame = CGRectMake(0, 0, 13, 20);
+    layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
+    [barBtn.layer addSublayer:layer];
+//    [barBtn setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
+//    [barBtn setImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
+    [barBtn addTarget:self action:@selector(didPopControllerSelected) forControlEvents:UIControlEventTouchDown];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn];
+}
+
+- (void)didPopControllerSelected {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -76,7 +102,7 @@
         ((PersonalChangeScreenNameController*)segue.destinationViewController).delegate = self;
         ((PersonalChangeScreenNameController*)segue.destinationViewController).ori_screen_name = [self.dic_profile_details objectForKey:@"screen_name"];
     } else if ([segue.identifier isEqualToString:@"signature"]) {
-        
+        ((PersonalCenterSignaturesController*)segue.destinationViewController).ori_signature = [self.dic_profile_details objectForKey:@"signature"];
     }
 }
 

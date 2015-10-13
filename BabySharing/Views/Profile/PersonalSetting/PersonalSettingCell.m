@@ -26,6 +26,9 @@
     _contentImage.hidden = YES;
     _contentImage.layer.cornerRadius = 25.f;
     _contentImage.clipsToBounds = YES;
+    
+    _titleLabel.textColor = [UIColor grayColor];
+    _contentLabel.textColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

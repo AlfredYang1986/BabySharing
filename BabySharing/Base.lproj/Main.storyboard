@@ -805,7 +805,6 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                     <connections>
                         <outlet property="queryView" destination="a9i-Ha-SaP" id="QmQ-P4-420"/>
                         <segue destination="Qni-nN-2Jw" kind="push" identifier="PersonalSetting" id="mYA-47-s6C"/>
-                        <segue destination="0YU-fx-DrR" kind="push" id="ll8-h3-DFQ"/>
                         <segue destination="7KU-Rx-O53" kind="push" identifier="about" id="Xjy-Ew-GPi"/>
                         <segue destination="gHc-ZJ-M1b" kind="push" identifier="newMessageSetting" id="2Bo-Ng-Sz4"/>
                         <segue destination="vcM-2a-9Ob" kind="push" identifier="privacy" id="9YP-oZ-Vhp"/>
@@ -892,37 +891,6 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
             </objects>
             <point key="canvasLocation" x="2342" y="4743"/>
         </scene>
-        <!--新消息通知-->
-        <scene sceneID="htI-HU-0b1">
-            <objects>
-                <viewController id="0YU-fx-DrR" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ctt-p5-qj7"/>
-                        <viewControllerLayoutGuide type="bottom" id="cSD-4u-tfO"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="gxn-TW-o6F">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="iOV-U9-kwk">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="iOV-U9-kwk" firstAttribute="bottom" secondItem="gxn-TW-o6F" secondAttribute="bottomMargin" id="DDa-Kl-b94"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="iOV-U9-kwk" secondAttribute="trailing" constant="-16" id="J7l-SR-bmg"/>
-                            <constraint firstItem="iOV-U9-kwk" firstAttribute="top" secondItem="gxn-TW-o6F" secondAttribute="topMargin" id="VKH-5U-Nzm"/>
-                            <constraint firstItem="iOV-U9-kwk" firstAttribute="leading" secondItem="gxn-TW-o6F" secondAttribute="leadingMargin" constant="-16" id="n7O-bI-KbD"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="新消息通知" id="qxi-tG-iPX"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Cbe-3i-9Jb" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3088" y="4743"/>
-        </scene>
         <!--个性签名-->
         <scene sceneID="SxI-wz-oiA">
             <objects>
@@ -937,7 +905,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S5e-el-mHY">
                                 <rect key="frame" x="16" y="72" width="568" height="150"/>
-                                <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.9864395789" blue="0.99014781760000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="Yte-WR-Zy2"/>
                                 </constraints>

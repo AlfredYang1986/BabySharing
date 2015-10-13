@@ -28,10 +28,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    _signatureTextView.layer.borderColor = [UIColor blackColor].CGColor;
-    _signatureTextView.layer.borderWidth = 1.f;
+//    _signatureTextView.layer.borderColor = [UIColor blackColor].CGColor;
+//    _signatureTextView.layer.borderWidth = 1.f;
     _signatureTextView.layer.cornerRadius = 8.f;
     _signatureTextView.clipsToBounds = YES;
+    _signatureTextView.backgroundColor = [UIColor whiteColor];
 
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
@@ -55,14 +56,52 @@
     UIFont* font = [UIFont systemFontOfSize:14.f];
     size = [@"88 字" sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
     wordCountLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, size.width, size.height)];
-    wordCountLabel.backgroundColor = [UIColor redColor];
+//    wordCountLabel.backgroundColor = [UIColor redColor];
+    wordCountLabel.textColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
     wordCountLabel.font = font;
     wordCountLabel.text = @"30 字";
     [_signatureTextView addSubview:wordCountLabel];
     
     _signatureTextView.delegate = self;
+    _signatureTextView.textColor = [UIColor grayColor];
+   
+    UIButton* barBtn2 = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
+    [barBtn2 addTarget:self action:@selector(doneChangedSignature) forControlEvents:UIControlEventTouchDown];
+    [barBtn2 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [barBtn2 setTitle:@"完成" forState:UIControlStateNormal];
+    [barBtn2 sizeToFit];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn2];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(doneChangedSignature)];
+    UILabel* label = [[UILabel alloc]init];
+    label.text = @"隐私&偏好";
+    label.textColor = [UIColor whiteColor];
+    [label sizeToFit];
+    self.navigationItem.titleView = label;
+   
+    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
+//    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+//    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+//    NSString* filepath = [resourceBundle pathForResource:@"Previous_blue" ofType:@"png"];
+    NSString* filepath2 = [resourceBundle pathForResource:@"Previous_simple" ofType:@"png"];
+    CALayer * layer = [CALayer layer];
+    layer.contents = (id)[UIImage imageNamed:filepath2].CGImage;
+    layer.frame = CGRectMake(0, 0, 13, 20);
+    layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
+    [barBtn.layer addSublayer:layer];
+//    [barBtn setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
+//    [barBtn setImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
+    [barBtn addTarget:self action:@selector(didPopControllerSelected) forControlEvents:UIControlEventTouchDown];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn];
+    
+    self.view.backgroundColor = [UIColor lightGrayColor];
+    
+    _signatureTextView.text = _ori_signature;
+    [self textViewDidChange:_signatureTextView];
+}
+
+- (void)didPopControllerSelected {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
