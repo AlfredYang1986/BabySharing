@@ -23,6 +23,7 @@
 - (NSString*)getSign;
 - (NSString*)getRoleTag;
 - (NSString*)getRelations;
+- (NSString*)getNickName;
 
 - (OwnerQueryModel*)getOM;
 - (CollectionQueryModel*)getCQM;

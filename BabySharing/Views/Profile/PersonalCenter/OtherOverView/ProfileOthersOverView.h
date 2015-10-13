@@ -18,6 +18,7 @@
 - (void)setLoation:(NSString*)location;
 - (void)setPersonalSign:(NSString*)sign_content;
 - (void)setRoleTag:(NSString*)role_tag;
+- (void)setPersonalNickName:(NSString*)nickName;
 
 - (void)setRelations:(NSString*)relations;
 

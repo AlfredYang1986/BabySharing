@@ -37,6 +37,7 @@
         [header setShareCount:[_delegate getSharedCount]];
         [header setCycleCount:[_delegate getCycleCount]];
         [header setPersonalSign:[_delegate getSign]];
+        [header setPersonalNickName:[_delegate getNickName]];
         
         [header setRelations:[_delegate getRelations]];
         

@@ -13,19 +13,20 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *imgView;
 
-@property (weak, nonatomic) IBOutlet UIView *countContainer;
+//@property (weak, nonatomic) IBOutlet UIView *countContainer;
 @property (weak, nonatomic) IBOutlet UILabel *shareCountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *cycleCountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *friendsCountLabel;
 
 @property (weak, nonatomic) IBOutlet UIButton *followBtn;
-@property (weak, nonatomic) IBOutlet UIButton *roleTagBtn;
+//@property (weak, nonatomic) IBOutlet UIButton *roleTagBtn;
 @property (weak, nonatomic) IBOutlet UIButton *chatBtn;
 
 
-@property (weak, nonatomic) IBOutlet UIView *buttomContainer;
+//@property (weak, nonatomic) IBOutlet UIView *buttomContainer;
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
-@property (weak, nonatomic) IBOutlet UILabel *personalSignLabel;
+//@property (weak, nonatomic) IBOutlet UILabel *personalSignLabel;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *seg;
 @end
@@ -34,18 +35,19 @@
 
 @synthesize imgView = _imgView;
 
-@synthesize countContainer = _countContainer;
+//@synthesize countContainer = _countContainer;
 @synthesize shareCountLabel = _shareCountLabel;
 @synthesize cycleCountLabel = _cycleCountLabel;
 @synthesize friendsCountLabel = _friendsCountLabel;
 
 @synthesize followBtn = _followBtn;
-@synthesize roleTagBtn = _roleTagBtn;
+//@synthesize roleTagBtn = _roleTagBtn;
 @synthesize chatBtn = _chatBtn;
 
-@synthesize buttomContainer = _buttomContainer;
+//@synthesize buttomContainer = _buttomContainer;
 @synthesize locationLabel = _locationLabel;
-@synthesize personalSignLabel = _personalSignLabel;
+//@synthesize personalSignLabel = _personalSignLabel;
+@synthesize nameLabel = _nameLabel;
 
 @synthesize seg = _seg;
 
@@ -59,14 +61,16 @@
 */
 
 - (void)awakeFromNib {
-    _roleTagBtn.layer.borderColor = [UIColor blueColor].CGColor;
-    _roleTagBtn.layer.borderWidth = 1.f;
-    _roleTagBtn.layer.cornerRadius = 8.f;
-    _roleTagBtn.clipsToBounds = YES;
+//    _roleTagBtn.layer.borderColor = [UIColor blueColor].CGColor;
+//    _roleTagBtn.layer.borderWidth = 1.f;
+//    _roleTagBtn.layer.cornerRadius = 8.f;
+//    _roleTagBtn.clipsToBounds = YES;
 
-    _followBtn.layer.borderWidth = 1.f;
-    _followBtn.layer.cornerRadius = 8.f;
+//    _followBtn.layer.borderWidth = 1.f;
+    _followBtn.layer.cornerRadius = 25.f;
     _followBtn.clipsToBounds = YES;
+    [_followBtn setBackgroundColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f]];
+    [_followBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
     [_followBtn addTarget:_deleagate action:@selector(followBtnSelected) forControlEvents:UIControlEventTouchDown];
     
@@ -77,9 +81,16 @@
     [_seg setImage:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Tag"] ofType:@"png"]] forSegmentAtIndex:1];
     [_seg setImage:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Location"] ofType:@"png"]] forSegmentAtIndex:2];
     
+    _chatBtn.layer.cornerRadius = 25.f;
+    _chatBtn.clipsToBounds = YES;
+    [_chatBtn setBackgroundColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f]];
+    [_chatBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_chatBtn addTarget:_deleagate action:@selector(chatBtnSelected) forControlEvents:UIControlEventTouchDown];
 
     [_seg addTarget:_deleagate action:@selector(segControlValueChangedWithSelectedIndex:) forControlEvents:UIControlEventValueChanged];
+    
+    _imgView.layer.cornerRadius = 50.f;
+    _imgView.clipsToBounds = YES;
 }
 
 - (void)setOwnerPhoto:(NSString*)photo_name {
@@ -126,7 +137,7 @@
 }
 
 - (void)setPersonalSign:(NSString*)sign_content {
-    _personalSignLabel.text = sign_content;
+//    _personalSignLabel.text = sign_content;
 }
 
 - (void)setRelations:(NSString*)relations {
@@ -134,10 +145,15 @@
 }
 
 - (void)setRoleTag:(NSString*)role_tag {
-    [_roleTagBtn setTitle:role_tag forState:UIControlStateNormal];
+//    [_roleTagBtn setTitle:role_tag forState:UIControlStateNormal];
+}
+
+- (void)setPersonalNickName:(NSString*)nickName {
+    _nameLabel.text = nickName;
+    [_nameLabel sizeToFit];
 }
 
 + (CGFloat)preferredHeight {
-    return 270;
+    return 225;
 }
 @end

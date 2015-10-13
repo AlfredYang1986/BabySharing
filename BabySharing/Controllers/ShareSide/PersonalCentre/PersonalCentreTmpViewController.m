@@ -110,9 +110,56 @@
     
     _queryView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
 
-    self.navigationItem.rightBarButtonItem =[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Setting" ofType:@"png"]] style:UIBarButtonItemStylePlain target:self action:@selector(didSelectSettingBtn)];
+    if ([_owner_id isEqualToString:_current_user_id]) {
+        UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
+        NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+        NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+    //    NSString* filepath = [resourceBundle pathForResource:@"Previous_blue" ofType:@"png"];
+        NSString* filepath = [resourceBundle pathForResource:@"DongDa_Plus" ofType:@"png"];
+        CALayer * layer = [CALayer layer];
+        layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
+        layer.frame = CGRectMake(0, 0, 25, 25);
+        layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
+        [barBtn.layer addSublayer:layer];
+    //    [barBtn setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
+    //    [barBtn setImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
+        [barBtn addTarget:self action:@selector(didSelectSettingBtn) forControlEvents:UIControlEventTouchDown];
+        
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn];
+        
+//        self.navigationItem.rightBarButtonItem =[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Setting" ofType:@"png"]] style:UIBarButtonItemStylePlain target:self action:@selector(didSelectSettingBtn)];
+    }
     
     current_seg_index = 0;
+    
+    UILabel* label = [[UILabel alloc]init];
+    label.textColor = [UIColor whiteColor];
+    label.text = @"用户信息";
+    [label sizeToFit];
+    self.navigationItem.titleView = label;
+    
+    if (self.navigationController.viewControllers.count > 1) {
+        UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
+        NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+        NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+    //    NSString* filepath = [resourceBundle pathForResource:@"Previous_blue" ofType:@"png"];
+        NSString* filepath = [resourceBundle pathForResource:@"Previous_simple" ofType:@"png"];
+        CALayer * layer = [CALayer layer];
+        layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
+        layer.frame = CGRectMake(0, 0, 13, 20);
+        layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
+        [barBtn.layer addSublayer:layer];
+    //    [barBtn setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
+    //    [barBtn setImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
+        [barBtn addTarget:self action:@selector(didPopControllerSelected) forControlEvents:UIControlEventTouchDown];
+        
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn];
+    }
+}
+
+- (void)didPopControllerSelected {
+    [self.navigationController popViewControllerAnimated:YES];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -183,7 +230,7 @@
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 [_queryView reloadData];
-                self.navigationItem.title = [dic_profile_details objectForKey:@"screen_name"];
+//                self.navigationItem.title = [dic_profile_details objectForKey:@"screen_name"];
             });
             
         } else {
@@ -227,7 +274,12 @@
 }
 
 - (NSString*)getLocation {
-    return @"Not Implemented";
+//    return @"Not Implemented";
+    return @"北京 东城区";
+}
+
+- (NSString*)getNickName {
+    return [dic_profile_details objectForKey:@"screen_name"];
 }
 
 - (NSString*)getSign {
@@ -251,7 +303,8 @@
                 return @"+关注";
             case UserPostOwnerConnectionsFollowing:
             case UserPostOwnerConnectionsFriends:
-                return @"取消关注";
+//                return @"取消关注";
+                return @"-取关";
             default:
                 return nil;
     }} else return nil;

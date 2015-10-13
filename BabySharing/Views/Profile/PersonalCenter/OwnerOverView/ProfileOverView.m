@@ -13,18 +13,19 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *imgView;
 
-@property (weak, nonatomic) IBOutlet UIView *countContainer;
+//@property (weak, nonatomic) IBOutlet UIView *countContainer;
 @property (weak, nonatomic) IBOutlet UILabel *shareCountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *cycleCountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *friendsCountLabel;
 
-@property (weak, nonatomic) IBOutlet UIButton *editBtn;
-@property (weak, nonatomic) IBOutlet UIButton *roleTagBtn;
+//@property (weak, nonatomic) IBOutlet UIButton *editBtn;
+//@property (weak, nonatomic) IBOutlet UIButton *roleTagBtn;
 
 
-@property (weak, nonatomic) IBOutlet UIView *buttomContainer;
+//@property (weak, nonatomic) IBOutlet UIView *buttomContainer;
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
-@property (weak, nonatomic) IBOutlet UILabel *personalSignLabel;
+//@property (weak, nonatomic) IBOutlet UILabel *personalSignLabel;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 
 @end
 
@@ -32,17 +33,18 @@
 
 @synthesize imgView = _imgView;
 
-@synthesize countContainer = _countContainer;
+//@synthesize countContainer = _countContainer;
 @synthesize shareCountLabel = _shareCountLabel;
 @synthesize cycleCountLabel = _cycleCountLabel;
 @synthesize friendsCountLabel = _friendsCountLabel;
 
-@synthesize editBtn = _editBtn;
-@synthesize roleTagBtn = _roleTagBtn;
+//@synthesize editBtn = _editBtn;
+//@synthesize roleTagBtn = _roleTagBtn;
 
-@synthesize buttomContainer = _buttomContainer;
+//@synthesize buttomContainer = _buttomContainer;
 @synthesize locationLabel = _locationLabel;
-@synthesize personalSignLabel = _personalSignLabel;
+//@synthesize personalSignLabel = _personalSignLabel;
+@synthesize nameLabel = _nameLabel;
 
 @synthesize seg = _seg;
 /*
@@ -54,14 +56,14 @@
 */
 
 - (void)awakeFromNib {
-    _roleTagBtn.layer.borderColor = [UIColor blueColor].CGColor;
-    _roleTagBtn.layer.borderWidth = 1.f;
-    _roleTagBtn.layer.cornerRadius = 8.f;
-    _roleTagBtn.clipsToBounds = YES;
-
-    _editBtn.layer.borderWidth = 1.f;
-    _editBtn.layer.cornerRadius = 8.f;
-    _editBtn.clipsToBounds = YES;
+//    _roleTagBtn.layer.borderColor = [UIColor blueColor].CGColor;
+//    _roleTagBtn.layer.borderWidth = 1.f;
+//    _roleTagBtn.layer.cornerRadius = 8.f;
+//    _roleTagBtn.clipsToBounds = YES;
+//
+//    _editBtn.layer.borderWidth = 1.f;
+//    _editBtn.layer.cornerRadius = 8.f;
+//    _editBtn.clipsToBounds = YES;
     
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
@@ -118,15 +120,19 @@
 }
 
 - (void)setPersonalSign:(NSString*)sign_content {
-    _personalSignLabel.text = sign_content;
+//    _personalSignLabel.text = sign_content;
 }
 
 - (void)setRoleTag:(NSString*)role_tag {
-    [_roleTagBtn setTitle:role_tag forState:UIControlStateNormal];
+//    [_roleTagBtn setTitle:role_tag forState:UIControlStateNormal];
+}
+
+- (void)setNickName:(NSString*)nickName {
+    _nameLabel.text = nickName;
 }
 
 + (CGFloat)preferredHeight {
-    return 270;
+    return 225;
 }
 
 - (IBAction)editBtnSelected {

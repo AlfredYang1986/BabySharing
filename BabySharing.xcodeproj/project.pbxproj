@@ -132,8 +132,6 @@
 		EEAACCA81B44E90400D05C0B /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB0F1B44E90300D05C0B /* LoginViewController.m */; };
 		EEAACCA91B44E90400D05C0B /* NicknameInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB111B44E90300D05C0B /* NicknameInputViewController.m */; };
 		EEAACCAA1B44E90400D05C0B /* PhoneInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB131B44E90300D05C0B /* PhoneInputViewController.m */; };
-		EEAACCB41B44E90400D05C0B /* SecretNib.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEAACB2A1B44E90300D05C0B /* SecretNib.storyboard */; };
-		EEAACCB51B44E90400D05C0B /* SecretViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB2C1B44E90300D05C0B /* SecretViewController.m */; };
 		EEAACCC01B44E90400D05C0B /* PersonalCentreTmpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB461B44E90300D05C0B /* PersonalCentreTmpViewController.m */; };
 		EEAACCC31B44E90400D05C0B /* ShareSideBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB4C1B44E90300D05C0B /* ShareSideBaseController.m */; };
 		EEAACCC41B44E90400D05C0B /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB4F1B44E90300D05C0B /* TabBarController.m */; };
@@ -465,9 +463,6 @@
 		EEAACB131B44E90300D05C0B /* PhoneInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneInputViewController.m; sourceTree = "<group>"; };
 		EEAACB161B44E90300D05C0B /* AlbumActionProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumActionProtocol.h; sourceTree = "<group>"; };
 		EEAACB231B44E90300D05C0B /* PostDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostDefine.h; sourceTree = "<group>"; };
-		EEAACB2A1B44E90300D05C0B /* SecretNib.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SecretNib.storyboard; sourceTree = "<group>"; };
-		EEAACB2B1B44E90300D05C0B /* SecretViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecretViewController.h; sourceTree = "<group>"; };
-		EEAACB2C1B44E90300D05C0B /* SecretViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecretViewController.m; sourceTree = "<group>"; };
 		EEAACB451B44E90300D05C0B /* PersonalCentreTmpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalCentreTmpViewController.h; sourceTree = "<group>"; };
 		EEAACB461B44E90300D05C0B /* PersonalCentreTmpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalCentreTmpViewController.m; sourceTree = "<group>"; };
 		EEAACB4B1B44E90300D05C0B /* ShareSideBaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareSideBaseController.h; sourceTree = "<group>"; };
@@ -1202,7 +1197,6 @@
 				EEAACB091B44E90300D05C0B /* Login */,
 				EEAACB141B44E90300D05C0B /* Message */,
 				EEAACB151B44E90300D05C0B /* Post */,
-				EEAACB291B44E90300D05C0B /* Secret */,
 				EEAACB2D1B44E90300D05C0B /* ShareSide */,
 				EEAACB531B44E90300D05C0B /* WebSearch */,
 			);
@@ -1272,16 +1266,6 @@
 				EEAACB231B44E90300D05C0B /* PostDefine.h */,
 			);
 			path = Post;
-			sourceTree = "<group>";
-		};
-		EEAACB291B44E90300D05C0B /* Secret */ = {
-			isa = PBXGroup;
-			children = (
-				EEAACB2A1B44E90300D05C0B /* SecretNib.storyboard */,
-				EEAACB2B1B44E90300D05C0B /* SecretViewController.h */,
-				EEAACB2C1B44E90300D05C0B /* SecretViewController.m */,
-			);
-			path = Secret;
 			sourceTree = "<group>";
 		};
 		EEAACB2D1B44E90300D05C0B /* ShareSide */ = {
@@ -2343,7 +2327,6 @@
 				EED64D471B8184C1008CB134 /* CycleAddKidsCell.xib in Resources */,
 				EE74162B1B5B9659002CA1BC /* AreaTableCell.xib in Resources */,
 				EE2D4B791B525E0A00B58A1F /* PostPreView.storyboard in Resources */,
-				EEAACCB41B44E90400D05C0B /* SecretNib.storyboard in Resources */,
 				EE9676411B7C3D7700445254 /* CycleDescriptionCell.xib in Resources */,
 				EEAACD761B44EA2D00D05C0B /* read_me.txt in Resources */,
 				EEAACCC81B44E90400D05C0B /* Images.xcassets in Resources */,
@@ -2457,7 +2440,6 @@
 				EEAACD201B44E90400D05C0B /* SGAlertMenu.m in Sources */,
 				EEAACCCA1B44E90400D05C0B /* INTUEasingFunctions.m in Sources */,
 				EE664E9A1B73145000ACD57E /* QueryContent.m in Sources */,
-				EEAACCB51B44E90400D05C0B /* SecretViewController.m in Sources */,
 				EE76A57C1B72181300036747 /* ConnectionModel.m in Sources */,
 				EE9F736D1B8576B100F800DC /* MessageChatGroupHeader.m in Sources */,
 				EE97440E1B78699A00E81A70 /* Reachability.m in Sources */,
