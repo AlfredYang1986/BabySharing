@@ -69,37 +69,72 @@
     NSString* str = @"丰富自己的描述，找到属于自己的圈子";
     UIFont* font = [UIFont systemFontOfSize:17.f];
     CGSize size = [str sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
-    UILabel* label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, width, size.height + 10)];
+//    UILabel* label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, width, size.height + 10)];
+    UILabel* label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, width, 66)];
     label.textAlignment = NSTextAlignmentCenter;
     label.text = str;
-    label.center = CGPointMake(width / 2, height / 2 - 100);
+//    label.center = CGPointMake(width / 2, height / 2 - 100);
+    label.backgroundColor = [UIColor lightGrayColor];
+    label.textColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
     [_descriptionView addSubview:label];
     
-    UIButton* btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, width * 0.6, 30)];
-    btn.layer.borderWidth = 1.f;
-    btn.layer.borderColor = [UIColor blueColor].CGColor;
-    btn.layer.cornerRadius = 8.f;
+//    UIButton* btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, width * 0.6, 30)];
+    UIButton* btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 100, 100)];
+//    btn.layer.borderWidth = 1.f;
+//    btn.layer.borderColor = [UIColor blueColor].CGColor;
+    btn.layer.cornerRadius = 50.f;
     btn.clipsToBounds = YES;
+   
+    CALayer* outer_layer = [CALayer layer];
+    outer_layer.backgroundColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:0.3].CGColor;
+    outer_layer.bounds = CGRectMake(0, 0, 100, 100);
+    outer_layer.position = CGPointMake(btn.frame.size.width / 2, btn.frame.size.height / 2);
+    [btn.layer addSublayer:outer_layer];
     
-    [btn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    CALayer* mid_layer = [CALayer layer];
+    mid_layer.backgroundColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.8941 alpha:1.f].CGColor;
+    mid_layer.bounds = CGRectMake(0, 0, 80, 80);
+    mid_layer.cornerRadius = mid_layer.bounds.size.width / 2;
+    mid_layer.masksToBounds = YES;
+    mid_layer.position = CGPointMake(btn.frame.size.width / 2, btn.frame.size.height / 2);
+    [btn.layer addSublayer:mid_layer];
+
+    CALayer* inner_layer = [CALayer layer];
+    inner_layer.backgroundColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f].CGColor;
+    inner_layer.bounds = CGRectMake(0, 0, 60, 60);
+    inner_layer.cornerRadius = inner_layer.bounds.size.width / 2;
+    inner_layer.masksToBounds = YES;
+    inner_layer.position = CGPointMake(btn.frame.size.width / 2, btn.frame.size.height / 2);
+    [btn.layer addSublayer:inner_layer];
+    
+    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btn setTitle:@"描述" forState:UIControlStateNormal];
     [btn setFont:[UIFont systemFontOfSize:14.f]];
-    btn.center = CGPointMake(label.center.x, label.center.y + 25);
+//    btn.center = CGPointMake(label.center.x, label.center.y + 25);
+    btn.center = CGPointMake(width / 2, height / 2 - 100);
     [_descriptionView addSubview:btn];
     [btn addTarget:self action:@selector(addDescriptionBtnSelected) forControlEvents:UIControlEventTouchDown];
     
     UILabel* label_2 = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, width, size.height + 10)];
     label_2.textAlignment = NSTextAlignmentCenter;
     label_2.text = @"了解更多";
-    label_2.center = CGPointMake(label.center.x, label.center.y + 100);
+    label_2.textColor = [UIColor redColor];
+    label_2.center = CGPointMake(btn.center.x, btn.center.y + 100);
     [_descriptionView addSubview:label_2];
+    
+    UILabel* label_3 = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, width, size.width + 10)];
+    label_3.textAlignment = NSTextAlignmentCenter;
+    label_3.text = @"... ...";
+    label_3.textColor = [UIColor redColor];
+    label_3.center = CGPointMake(btn.center.x, btn.center.y + 100 + size.height + 20);
+    [_descriptionView addSubview:label_3];
    
     _descriptionView.backgroundColor = [UIColor whiteColor];
    
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
     NSString* filepath = [resourceBundle pathForResource:@"Plus2" ofType:@"png"];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:filepath] style:UIBarButtonItemStylePlain target:self action:@selector(plusBtnSelected:)];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:filepath] style:UIBarButtonItemStylePlain target:self action:@selector(plusBtnSelected:)];
     
     self.preferredContentSize = CGSizeMake(100, 100);
     
@@ -120,6 +155,28 @@
     if (_ry.isReachable) {
         [self resetDataForViews];
     }
+    
+    UILabel* label_t = [[UILabel alloc]init];
+    label_t.text = @"圈子";
+    label_t.textColor = [UIColor whiteColor];
+    [label_t sizeToFit];
+    self.navigationItem.titleView = label_t;
+   
+    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
+//    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+//    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+//    NSString* filepath = [resourceBundle pathForResource:@"Previous_blue" ofType:@"png"];
+//    NSString* filepath = [resourceBundle pathForResource:@"Previous_simple" ofType:@"png"];
+    CALayer * layer = [CALayer layer];
+    layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
+    layer.frame = CGRectMake(0, 0, 25, 25);
+    layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
+    [barBtn.layer addSublayer:layer];
+//    [barBtn setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
+//    [barBtn setImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
+    [barBtn addTarget:self action:@selector(plusBtnSelected:) forControlEvents:UIControlEventTouchDown];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -166,8 +223,13 @@
     }];
 }
 
+- (BOOL)isDescriptionValidate {
+    return dic_description && dic_description.count > 1 && ((NSNumber*)[dic_description objectForKey:@"age"]).integerValue > 0 && ((NSArray*)[dic_description objectForKey:@"kids"]).count > 0;
+}
+
 - (void)resetViews {
-    if (dic_description && dic_description.count > 1) {
+//    if (dic_description && dic_description.count > 1) {
+    if ([self isDescriptionValidate]) {
         _cycleTableView.hidden = NO;
         _descriptionView.hidden = YES;
     } else {
@@ -301,7 +363,8 @@
         popoverController.delegate = self;
         popoverController.passthroughViews = [NSArray arrayWithObject:self.navigationController.navigationBar];
         
-        [popoverController presentPopoverFromBarButtonItem:sender
+//        [popoverController presentPopoverFromBarButtonItem:sender
+        [popoverController presentPopoverFromBarButtonItem:self.navigationItem.rightBarButtonItem
                                   permittedArrowDirections:(UIPopoverArrowDirectionUp)
                                                   animated:YES];
         
