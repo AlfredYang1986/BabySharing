@@ -2047,7 +2047,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="371"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="350" id="K7O-iL-tLV"/>
+                                    <constraint firstAttribute="height" constant="364" id="K7O-iL-tLV"/>
                                     <constraint firstAttribute="height" constant="350" id="sXW-ye-jKv"/>
                                 </constraints>
                                 <variation key="default">
@@ -2069,6 +2069,12 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                                     <!--2015-08-17 02:37:15 +0000-->
                                 </date>
                             </datePicker>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="孩子的信息将不会被公开" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cWF-S8-bOE">
+                                <rect key="frame" x="20" y="379" width="187" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -2076,6 +2082,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                             <constraint firstItem="xnw-KL-LTv" firstAttribute="top" secondItem="KIW-ld-vIX" secondAttribute="topMargin" id="9H0-cK-57p"/>
                             <constraint firstAttribute="trailingMargin" secondItem="xnw-KL-LTv" secondAttribute="trailing" constant="-16" id="Jvf-4R-c4h"/>
                             <constraint firstItem="xnw-KL-LTv" firstAttribute="leading" secondItem="KIW-ld-vIX" secondAttribute="leadingMargin" constant="-16" id="KJn-uF-1yH"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="cWF-S8-bOE" secondAttribute="trailing" id="KK6-Ca-VEQ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="xnw-KL-LTv" secondAttribute="trailing" constant="-16" id="OI2-c2-Rda"/>
                             <constraint firstItem="xnw-KL-LTv" firstAttribute="leading" secondItem="KIW-ld-vIX" secondAttribute="leadingMargin" constant="-16" id="QDn-Hn-4eI"/>
                             <constraint firstItem="xnw-KL-LTv" firstAttribute="bottom" secondItem="KIW-ld-vIX" secondAttribute="bottomMargin" id="Rap-si-ioI"/>
@@ -2083,8 +2090,10 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                             <constraint firstItem="xnw-KL-LTv" firstAttribute="top" secondItem="Ys4-QK-bmE" secondAttribute="bottom" constant="-64" id="hDc-QX-ZiO"/>
                             <constraint firstItem="MSm-t9-DzS" firstAttribute="top" secondItem="xnw-KL-LTv" secondAttribute="bottom" constant="180" id="oVc-Iq-QTP"/>
                             <constraint firstAttribute="bottomMargin" secondItem="zHm-2r-gZr" secondAttribute="bottom" id="pzP-qB-dAE"/>
+                            <constraint firstItem="cWF-S8-bOE" firstAttribute="top" secondItem="xnw-KL-LTv" secondAttribute="bottom" constant="8" id="rWc-qs-7jA"/>
                             <constraint firstItem="xnw-KL-LTv" firstAttribute="top" secondItem="Ys4-QK-bmE" secondAttribute="bottom" id="wJd-F0-UYS"/>
                             <constraint firstItem="xnw-KL-LTv" firstAttribute="leading" secondItem="KIW-ld-vIX" secondAttribute="leadingMargin" constant="-16" id="x93-qW-563"/>
+                            <constraint firstItem="cWF-S8-bOE" firstAttribute="leading" secondItem="KIW-ld-vIX" secondAttribute="leadingMargin" id="yPO-px-cyI"/>
                             <constraint firstItem="zHm-2r-gZr" firstAttribute="leading" secondItem="KIW-ld-vIX" secondAttribute="leadingMargin" constant="-16" id="yfh-mz-u1k"/>
                             <constraint firstAttribute="trailingMargin" secondItem="xnw-KL-LTv" secondAttribute="trailing" constant="-16" id="zgm-YG-MWL"/>
                         </constraints>
@@ -2106,6 +2115,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                     <connections>
                         <outlet property="datePicker" destination="zHm-2r-gZr" id="nmS-ny-Dqs"/>
                         <outlet property="queryView" destination="xnw-KL-LTv" id="nXO-Ua-UuO"/>
+                        <outlet property="reminderLabel" destination="cWF-S8-bOE" id="gHc-3p-Ptx"/>
                         <segue destination="Bbw-MK-wnd" kind="push" identifier="addKidsSchool" id="2RH-j5-6Bc"/>
                     </connections>
                 </viewController>
@@ -2577,8 +2587,8 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="qbd-0n-vJA"/>
-        <segue reference="mYA-47-s6C"/>
-        <segue reference="cmB-f3-oUD"/>
         <segue reference="81I-ET-d5W"/>
+        <segue reference="2RH-j5-6Bc"/>
+        <segue reference="mYA-47-s6C"/>
     </inferredMetricsTieBreakers>
 </document>

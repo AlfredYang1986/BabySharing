@@ -8,6 +8,7 @@
 
 #import "CycleAddKidsCell.h"
 #import "cycleDescriptionCell.h"
+#import "CycleAddConditionCell.h"
 
 @interface CycleAddKidsCell () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *queryView;
@@ -31,7 +32,7 @@
 @synthesize delegate = _delegate;
 
 + (CGFloat)preferredHeight {
-    return 44 * 4;
+    return 44 * 5;
 }
 
 - (void)awakeFromNib {
@@ -39,11 +40,13 @@
     _queryView.delegate = self;
     _queryView.dataSource = self;
     _queryView.scrollEnabled = NO;
+    _queryView.separatorStyle =UITableViewCellSeparatorStyleNone;
 
     titles = @[@"age", @"horoscrope", @"gender", @"school"];
     titles_cn = @[@"年龄", @"星座", @"性别", @"学校"];
     
     [_queryView registerNib:[UINib nibWithNibName:@"CycleDescriptionCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"cycle description cell"];
+    [_queryView registerNib:[UINib nibWithNibName:@"CycleAddConditionCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"cycle add condition cell"];
     kid_changed = [_kid mutableCopy];
     if (kid_changed == nil) {
         kid_changed = [[NSMutableDictionary alloc]init];
@@ -87,99 +90,135 @@
     } else return NO;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row < 2) {
+        return 66;
+    } else {
+        return 44;
+    }
+}
+
 #pragma mark -- data source
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 4;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CycleDescriptionCell* cell = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"cycle description cell"];
-    if (cell == nil) {
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"CycleDescriptionCell" owner:self options:nil];
-        cell = [nib objectAtIndex:0];
-    }
-   
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
-    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
     
-    @try {
+    if (indexPath.row < 2) {
         
-        cell.titleLabel.text = [titles_cn objectAtIndex:indexPath.row];
-      
+        CycleAddConditionCell* cell = (CycleAddConditionCell*)[tableView dequeueReusableHeaderFooterViewWithIdentifier:@"cycle description cell"];
+        if (cell == nil) {
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"CycleAddConditionCell" owner:self options:nil];
+            cell = [nib objectAtIndex:0];
+        }
+        
+        [cell setTitle:[titles_cn objectAtIndex:indexPath.row]];
+          
         NSString* title = [titles objectAtIndex:indexPath.row];
-        
-        if ([title isEqualToString:@"gender"]) {
-            if (maleBtn == nil) {
-                maleBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
-                [maleBtn setImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Male" ofType:@"png"]] forState:UIControlStateNormal];
-                [maleBtn addTarget:self action:@selector(maleBtnSelected) forControlEvents:UIControlEventTouchDown];
-                
-                maleBtn.layer.borderColor = [UIColor grayColor].CGColor;
-                maleBtn.layer.cornerRadius = 4.f;
-                maleBtn.clipsToBounds = YES;
-            }
-            
-            if (femaleBtn == nil) {
-                femaleBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
-                [femaleBtn setImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Female" ofType:@"png"]] forState:UIControlStateNormal];
-                [femaleBtn addTarget:self action:@selector(femaleBtnSelected) forControlEvents:UIControlEventTouchDown];
-
-                femaleBtn.layer.borderColor = [UIColor grayColor].CGColor;
-                femaleBtn.layer.cornerRadius = 4.f;
-                femaleBtn.clipsToBounds = YES;
-            }
-            
-            [maleBtn removeFromSuperview];
-            [femaleBtn removeFromSuperview];
-            
-            [cell addSubview:maleBtn];
-            maleBtn.center = CGPointMake(cell.center.x + 40, cell.center.y);
-            
-            [cell addSubview:femaleBtn];
-            femaleBtn.center = CGPointMake(cell.center.x - 40, cell.center.y);
-        }
-        
-        if ([title isEqualToString:@"school"]) {
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        }
-        
         NSObject* val = [kid_changed objectForKey:title];
         if ([val isKindOfClass:[NSString class]]) {
-            cell.descriptionLabel.text = (NSString*)val;
+            [cell setContent:(NSString *)val];
         } else if ([val isKindOfClass:[NSNumber class]]) {
             if ([title isEqualToString:@"horoscrope"]) {
-                cell.descriptionLabel.text = [str_horoscrope objectAtIndex:((NSNumber*)val).intValue];
-            } else if ([title isEqualToString:@"gender"]) {
-                if (((NSNumber*)val).intValue == 0) {
-                    [self femaleBtnSelected];
-                } else {
-                    [self maleBtnSelected];
-                }
-                
+                [cell setContent:[str_horoscrope objectAtIndex:((NSNumber*)val).intValue]];
             } else {
-                cell.descriptionLabel.text = [NSString stringWithFormat:@"%d", ((NSNumber*)val).intValue];
+                [cell setContent:[NSString stringWithFormat:@"%d", ((NSNumber*)val).intValue]];
             }
         }
+        
+        return cell;
+    
+    } else {
+        
+        CycleDescriptionCell* cell = (CycleDescriptionCell*)[tableView dequeueReusableHeaderFooterViewWithIdentifier:@"cycle description cell"];
+        if (cell == nil) {
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"CycleDescriptionCell" owner:self options:nil];
+            cell = [nib objectAtIndex:0];
+        }
+       
+        NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+        NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+        
+        @try {
+            
+            cell.titleLabel.text = [titles_cn objectAtIndex:indexPath.row];
+          
+            NSString* title = [titles objectAtIndex:indexPath.row];
+            
+            if ([title isEqualToString:@"gender"]) {
+                if (maleBtn == nil) {
+                    maleBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
+                    [maleBtn setImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Male" ofType:@"png"]] forState:UIControlStateNormal];
+                    [maleBtn addTarget:self action:@selector(maleBtnSelected) forControlEvents:UIControlEventTouchDown];
+                    
+                    maleBtn.layer.borderColor = [UIColor grayColor].CGColor;
+                    maleBtn.layer.cornerRadius = 4.f;
+                    maleBtn.clipsToBounds = YES;
+                }
+                
+                if (femaleBtn == nil) {
+                    femaleBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
+                    [femaleBtn setImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Female" ofType:@"png"]] forState:UIControlStateNormal];
+                    [femaleBtn addTarget:self action:@selector(femaleBtnSelected) forControlEvents:UIControlEventTouchDown];
+
+                    femaleBtn.layer.borderColor = [UIColor grayColor].CGColor;
+                    femaleBtn.layer.cornerRadius = 4.f;
+                    femaleBtn.clipsToBounds = YES;
+                }
+                
+                [maleBtn removeFromSuperview];
+                [femaleBtn removeFromSuperview];
+                
+                [cell addSubview:maleBtn];
+                maleBtn.center = CGPointMake(cell.center.x + 40, cell.center.y);
+                
+                [cell addSubview:femaleBtn];
+                femaleBtn.center = CGPointMake(cell.center.x - 40, cell.center.y);
+            }
+            
+            if ([title isEqualToString:@"school"]) {
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            }
+            
+            NSObject* val = [kid_changed objectForKey:title];
+            if ([val isKindOfClass:[NSString class]]) {
+                cell.descriptionLabel.text = (NSString*)val;
+            } else if ([val isKindOfClass:[NSNumber class]]) {
+                if ([title isEqualToString:@"horoscrope"]) {
+                    cell.descriptionLabel.text = [str_horoscrope objectAtIndex:((NSNumber*)val).intValue];
+                } else if ([title isEqualToString:@"gender"]) {
+                    if (((NSNumber*)val).intValue == 0) {
+                        [self femaleBtnSelected];
+                    } else {
+                        [self maleBtnSelected];
+                    }
+                    
+                } else {
+                    cell.descriptionLabel.text = [NSString stringWithFormat:@"%d", ((NSNumber*)val).intValue];
+                }
+            }
+        }
+        @catch (NSException *exception) {
+    //        cell.titleLabel.text = @"";
+    //        
+    //        if (addBtn == nil) {
+    //            addBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
+    //            [addBtn setImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Plus" ofType:@"png"]] forState:UIControlStateNormal];
+    //            [addBtn addTarget:self action:@selector(addKidsBtnSelected) forControlEvents:UIControlEventTouchDown];
+    //            
+    //            addBtn.layer.borderWidth = 1.f;
+    //            addBtn.layer.borderColor = [UIColor blueColor].CGColor;
+    //            addBtn.layer.cornerRadius = 15.f;
+    //            addBtn.clipsToBounds = YES;
+    //        }
+    //        
+    //        [addBtn removeFromSuperview];
+    //        [cell addSubview:addBtn];
+    //        addBtn.center = CGPointMake(30, cell.center.y);
+        }
+        return cell;
     }
-    @catch (NSException *exception) {
-//        cell.titleLabel.text = @"";
-//        
-//        if (addBtn == nil) {
-//            addBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
-//            [addBtn setImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Plus" ofType:@"png"]] forState:UIControlStateNormal];
-//            [addBtn addTarget:self action:@selector(addKidsBtnSelected) forControlEvents:UIControlEventTouchDown];
-//            
-//            addBtn.layer.borderWidth = 1.f;
-//            addBtn.layer.borderColor = [UIColor blueColor].CGColor;
-//            addBtn.layer.cornerRadius = 15.f;
-//            addBtn.clipsToBounds = YES;
-//        }
-//        
-//        [addBtn removeFromSuperview];
-//        [cell addSubview:addBtn];
-//        addBtn.center = CGPointMake(30, cell.center.y);
-    }
-    return cell;
 }
 
 - (void)maleBtnSelected {

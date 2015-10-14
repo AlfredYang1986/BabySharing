@@ -61,7 +61,7 @@
     sw = [[UISwitch alloc]init];
     
     UILabel* label = [[UILabel alloc]init];
-    label.text = @"您出生日期";
+    label.text = @"您的出生日期";
     label.textColor = [UIColor whiteColor];
     [label sizeToFit];
     self.navigationItem.titleView = label;
