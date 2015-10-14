@@ -98,6 +98,8 @@
 		EE83F40A1B96EDDF00D51FDF /* CycleAddSchoolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE83F4091B96EDDF00D51FDF /* CycleAddSchoolViewController.m */; };
 		EE86D1B21B537469001C4650 /* PostEffectAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = EE86D1B11B537469001C4650 /* PostEffectAdapter.mm */; };
 		EE87315E1B97E131004A25D8 /* WeiboFriendsDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EE87315D1B97E131004A25D8 /* WeiboFriendsDelegate.m */; };
+		EE92AE341BCE3627008DA020 /* CycleAddConditionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE92AE321BCE3626008DA020 /* CycleAddConditionCell.m */; settings = {ASSET_TAGS = (); }; };
+		EE92AE351BCE3627008DA020 /* CycleAddConditionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE92AE331BCE3626008DA020 /* CycleAddConditionCell.xib */; settings = {ASSET_TAGS = (); }; };
 		EE933CA51B99438000DA15DC /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEAACD5F1B44EA2D00D05C0B /* TencentOpenAPI.framework */; };
 		EE933CA81B997DAD00DA15DC /* VersionChangesController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE933CA71B997DAD00DA15DC /* VersionChangesController.m */; };
 		EE9633C91B92A4CF00DB4EA5 /* PersonalCenterSignaturesController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9633C81B92A4CF00DB4EA5 /* PersonalCenterSignaturesController.m */; };
@@ -389,6 +391,9 @@
 		EE86D1B11B537469001C4650 /* PostEffectAdapter.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = PostEffectAdapter.mm; sourceTree = "<group>"; };
 		EE87315C1B97E131004A25D8 /* WeiboFriendsDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboFriendsDelegate.h; sourceTree = "<group>"; };
 		EE87315D1B97E131004A25D8 /* WeiboFriendsDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboFriendsDelegate.m; sourceTree = "<group>"; };
+		EE92AE311BCE3626008DA020 /* CycleAddConditionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleAddConditionCell.h; sourceTree = "<group>"; };
+		EE92AE321BCE3626008DA020 /* CycleAddConditionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleAddConditionCell.m; sourceTree = "<group>"; };
+		EE92AE331BCE3626008DA020 /* CycleAddConditionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CycleAddConditionCell.xib; sourceTree = "<group>"; };
 		EE933CA61B997DAD00DA15DC /* VersionChangesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VersionChangesController.h; sourceTree = "<group>"; };
 		EE933CA71B997DAD00DA15DC /* VersionChangesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VersionChangesController.m; sourceTree = "<group>"; };
 		EE9633C71B92A4CF00DB4EA5 /* PersonalCenterSignaturesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalCenterSignaturesController.h; sourceTree = "<group>"; };
@@ -1022,6 +1027,16 @@
 				EE83F4091B96EDDF00D51FDF /* CycleAddSchoolViewController.m */,
 			);
 			path = CycleAddSchool;
+			sourceTree = "<group>";
+		};
+		EE92AE301BCE3334008DA020 /* CycleTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				EE92AE311BCE3626008DA020 /* CycleAddConditionCell.h */,
+				EE92AE321BCE3626008DA020 /* CycleAddConditionCell.m */,
+				EE92AE331BCE3626008DA020 /* CycleAddConditionCell.xib */,
+			);
+			path = CycleTableViewCell;
 			sourceTree = "<group>";
 		};
 		EE9633CA1B92BAFB00DB4EA5 /* SystemSetting */ = {
@@ -2127,6 +2142,7 @@
 		EEEEA0C41B7B4512001D949D /* Cycle */ = {
 			isa = PBXGroup;
 			children = (
+				EE92AE301BCE3334008DA020 /* CycleTableViewCell */,
 				EE7C686E1B82D2A60003C593 /* CycleChatView */,
 				EED64D421B81844A008CB134 /* CycleKids */,
 				EE96763C1B7C3D3400445254 /* CycleDescription */,
@@ -2293,6 +2309,7 @@
 			files = (
 				EE79105F1B8421AE005E455B /* QueryLikesCell.xib in Resources */,
 				EE79105E1B842187005E455B /* QueryDetailImageCell.xib in Resources */,
+				EE92AE351BCE3627008DA020 /* CycleAddConditionCell.xib in Resources */,
 				EE79105D1B842158005E455B /* QueryOwnerCell.xib in Resources */,
 				EE79105C1B84212A005E455B /* ProfileOthersOverView.xib in Resources */,
 				EEC980B31B8EB9EA0087E5A7 /* status-bar-pattern-default.jpg in Resources */,
@@ -2461,6 +2478,7 @@
 				EEAACCA41B44E90400D05C0B /* CVViewController2.m in Sources */,
 				EED64D451B8184AE008CB134 /* CycleAddKidsCell.m in Sources */,
 				EEA991481B775B4F001F6CC6 /* DDNNotificationViewController.m in Sources */,
+				EE92AE341BCE3627008DA020 /* CycleAddConditionCell.m in Sources */,
 				EEAACD021B44E90400D05C0B /* QueryOwnerCell.m in Sources */,
 				EEAACCDD1B44E90400D05C0B /* LoginModel.m in Sources */,
 				EEA2017D1B744E59006B81E4 /* Friends.m in Sources */,

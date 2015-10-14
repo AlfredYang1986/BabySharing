@@ -8,10 +8,12 @@
 
 #import "CycleAddDOBViewController.h"
 #import "CycleDescriptionCell.h"
+#import "CycleAddConditionCell.h"
 
 @interface CycleAddDOBViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *queryView;
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
+@property (weak, nonatomic) IBOutlet UILabel *reminderLabel;
 
 @end
 
@@ -22,10 +24,13 @@
     NSArray* str_horoscrope;
     
     UISwitch* sw;
+    
+    CALayer* layer0;
 }
 
 @synthesize queryView = _queryView;
 @synthesize datePicker = _datePicker;
+@synthesize reminderLabel = _reminderLabel;
 
 @synthesize delegate = _delegate;
 //@synthesize dic_description = _dic_description;
@@ -42,9 +47,6 @@
     _queryView.scrollEnabled = NO;
     [_queryView registerNib:[UINib nibWithNibName:@"CycleDescriptionCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"cycle description cell"];
     
-    
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(doneBtnSelected)];
-    
 //    _datePicker.hidden = YES;
     _datePicker.datePickerMode = UIDatePickerModeDate;
     
@@ -57,6 +59,57 @@
     if (_dob) _datePicker.date = _dob;
     
     sw = [[UISwitch alloc]init];
+    
+    UILabel* label = [[UILabel alloc]init];
+    label.text = @"您出生日期";
+    label.textColor = [UIColor whiteColor];
+    [label sizeToFit];
+    self.navigationItem.titleView = label;
+   
+    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+    NSString* filepath2 = [resourceBundle pathForResource:@"Previous_simple" ofType:@"png"];
+    CALayer * layer = [CALayer layer];
+    layer.contents = (id)[UIImage imageNamed:filepath2].CGImage;
+    layer.frame = CGRectMake(0, 0, 13, 20);
+    layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
+    [barBtn.layer addSublayer:layer];
+//    [barBtn setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
+//    [barBtn setImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
+    [barBtn addTarget:self action:@selector(didPopControllerSelected) forControlEvents:UIControlEventTouchDown];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn];
+    
+    UIButton* barBtn2 = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
+    [barBtn2 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [barBtn2 setTitle:@"完成" forState:UIControlStateNormal];
+    [barBtn2 sizeToFit];
+    [barBtn2 addTarget:self action:@selector(doneBtnSelected) forControlEvents:UIControlEventTouchDown];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn2];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(doneBtnSelected)];
+    
+    [_queryView registerNib:[UINib nibWithNibName:@"CycleAddConditionCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"cycle add condition cell"];
+    _queryView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    layer0 = [CALayer layer];
+    layer0.borderWidth = 1.f;
+    layer0.borderColor = [UIColor grayColor].CGColor;
+    [self.view.layer addSublayer:layer0];
+    
+    _reminderLabel.textAlignment = NSTextAlignmentLeft;
+    _reminderLabel.font = [UIFont systemFontOfSize:15.f];
+    _reminderLabel.textColor = [UIColor grayColor];
+}
+
+- (void)viewDidLayoutSubviews {
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    layer0.frame = CGRectMake(16, _reminderLabel.frame.origin.y - 10, width - 32, 1);
+}
+
+- (void)didPopControllerSelected {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -119,19 +172,19 @@
     } else return NO;
 }
 
-- (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if (section == 1) {
-        return @"你的生日将不会被公开";
-    } else {
-        return @"";
-    }
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (section == 1) {
-        return 22;
-    } else return 0;
-}
+//- (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+//    if (section == 1) {
+//        return @"你的生日将不会被公开";
+//    } else {
+//        return @"";
+//    }
+//}
+//
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+//    if (section == 1) {
+//        return 22;
+//    } else return 0;
+//}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 2;
@@ -145,24 +198,49 @@
     }
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        return [CycleAddConditionCell prefferredHeight];
+    } else {
+        return 44;
+    }
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CycleDescriptionCell* cell = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"cycle description cell"];
-    if (cell == nil) {
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"CycleDescriptionCell" owner:self options:nil];
-        cell = [nib objectAtIndex:0];
-    }
     
-    cell.titleLabel.text = [titles_cn objectAtIndex:indexPath.section * 2 + indexPath.row];
-    if (indexPath.section == 0 && indexPath.row == 0 && _age >= 0) {
-        cell.descriptionLabel.text = [NSString stringWithFormat:@"%d", _age];
-    } else if (indexPath.section == 0 && indexPath.row == 1 && (int)_horoscrope >= 0) {
-        cell.descriptionLabel.text = [str_horoscrope objectAtIndex:_horoscrope];
-    } else if (indexPath.section == 1) {
-        [sw removeFromSuperview];
-        [cell addSubview:sw];
-        sw.center = CGPointMake(cell.center.x + cell.frame.size.width / 2 - sw.frame.size.width / 2 - 20, cell.center.y);
+    if (indexPath.section == 0) {
+        CycleAddConditionCell* cell = (CycleAddConditionCell*)[tableView dequeueReusableHeaderFooterViewWithIdentifier:@"cycle add condition cell"];
+        
+        if (cell == nil) {
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"CycleAddConditionCell" owner:self options:nil];
+            cell = [nib objectAtIndex:0];
+        }
+       
+        [cell setTitle:[titles_cn objectAtIndex:indexPath.section * 2 + indexPath.row]];
+        if (indexPath.section == 0 && indexPath.row == 0 && _age >= 0) {
+            [cell setContent:[NSString stringWithFormat:@"%d", _age]];
+        } else if (indexPath.section == 0 && indexPath.row == 1 && (int)_horoscrope >= 0) {
+            [cell setContent:[str_horoscrope objectAtIndex:_horoscrope]];
+        }
+        
+        return cell;   
+        
+    } else {
+        CycleDescriptionCell* cell = (CycleDescriptionCell*)[tableView dequeueReusableHeaderFooterViewWithIdentifier:@"cycle description cell"];
+        if (cell == nil) {
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"CycleDescriptionCell" owner:self options:nil];
+            cell = [nib objectAtIndex:0];
+        }
+        
+        cell.titleLabel.text = [titles_cn objectAtIndex:indexPath.section * 2 + indexPath.row];
+        cell.textLabel.textColor = [UIColor grayColor];
+        if (indexPath.section == 1) {
+            [sw removeFromSuperview];
+            [cell addSubview:sw];
+            sw.center = CGPointMake(cell.center.x + cell.frame.size.width / 2 - sw.frame.size.width / 2 - 20, cell.center.y);
+        }
+        
+        return cell;      
     }
-    
-    return cell;
 }
 @end

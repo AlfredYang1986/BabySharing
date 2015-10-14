@@ -47,8 +47,6 @@
     _descriptionDetailTableView.scrollEnabled = NO;
     [_descriptionDetailTableView registerNib:[UINib nibWithNibName:@"CycleDescriptionCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"cycle description cell"];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(saveDescriptionBtnSelected)];
-    
     titles = @[@"age", @"kids", @"hometown", @"school"];
     titles_cn = @[@"年龄", @"孩子", @"家乡", @"学校"];
 
@@ -70,6 +68,41 @@
     } else {
         dic_changed = [_dic_description mutableCopy];
     }
+    
+    UILabel* label = [[UILabel alloc]init];
+    label.text = @"描述";
+    label.textColor = [UIColor whiteColor];
+    [label sizeToFit];
+    self.navigationItem.titleView = label;
+   
+    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+//    NSString* filepath = [resourceBundle pathForResource:@"Previous_blue" ofType:@"png"];
+    NSString* filepath = [resourceBundle pathForResource:@"Previous_simple" ofType:@"png"];
+    CALayer * layer = [CALayer layer];
+    layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
+    layer.frame = CGRectMake(0, 0, 13, 20);
+    layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
+    [barBtn.layer addSublayer:layer];
+//    [barBtn setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
+//    [barBtn setImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
+    [barBtn addTarget:self action:@selector(didPopControllerSelected) forControlEvents:UIControlEventTouchDown];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn];
+
+    UIButton* barBtn2 = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
+    [barBtn2 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [barBtn2 setTitle:@"保存" forState:UIControlStateNormal];
+    [barBtn2 sizeToFit];
+    [barBtn2 addTarget:self action:@selector(saveDescriptionBtnSelected) forControlEvents:UIControlEventTouchDown];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn2];
+    
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(saveDescriptionBtnSelected)];
+}
+
+- (void)didPopControllerSelected {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -226,13 +259,15 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CycleDescriptionCell* cell = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"cycle description cell"];
+    CycleDescriptionCell* cell = (CycleDescriptionCell*)[tableView dequeueReusableHeaderFooterViewWithIdentifier:@"cycle description cell"];
     if (cell == nil) {
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"CycleDescriptionCell" owner:self options:nil];
         cell = [nib objectAtIndex:0];
     }
     
+    cell.titleLabel.textColor = [UIColor grayColor];
     cell.titleLabel.text = [titles_cn objectAtIndex:indexPath.row];
+    cell.descriptionLabel.textColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
   
     NSString* title = [titles objectAtIndex:indexPath.row];
     NSObject* tmp = [dic_changed objectForKey:title];

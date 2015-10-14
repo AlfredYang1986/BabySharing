@@ -88,7 +88,7 @@ typedef void(^queryRoleTagFinishBlock)(BOOL success, NSString* msg, NSArray* res
 //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn2];
     
     UILabel* label = [[UILabel alloc]init];
-    label.text = @"隐私&偏好";
+    label.text = @"角色标签";
     label.textColor = [UIColor whiteColor];
     [label sizeToFit];
     self.navigationItem.titleView = label;

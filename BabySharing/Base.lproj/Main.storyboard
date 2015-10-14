@@ -1875,27 +1875,17 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="角色" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x6j-ey-bfp">
                                 <rect key="frame" x="16" y="72" width="34" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FmT-Qg-x8t">
-                                <rect key="frame" x="265" y="68" width="60" height="30"/>
-                                <state key="normal" title="点击更改">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="changeRoleTagBtnSelected" destination="NDW-bl-o9I" eventType="touchUpInside" id="2VJ-wy-ntR"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="兴趣标签" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hFh-sx-CEm">
                                 <rect key="frame" x="16" y="126" width="68" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YND-ID-gAF">
                                 <rect key="frame" x="0.0" y="154" width="600" height="44"/>
-                                <color key="backgroundColor" red="0.1575035102" green="1" blue="0.2256678731" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="Z9x-gj-d5V"/>
                                 </constraints>
@@ -1907,10 +1897,20 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                                     <constraint firstAttribute="height" constant="176" id="8rY-eu-5SG"/>
                                 </constraints>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FmT-Qg-x8t">
+                                <rect key="frame" x="265" y="68" width="60" height="30"/>
+                                <state key="normal" title="点击更改">
+                                    <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="changeRoleTagBtnSelected" destination="NDW-bl-o9I" eventType="touchUpInside" id="2VJ-wy-ntR"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="已有角色" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uyp-PL-f9n">
                                 <rect key="frame" x="120" y="72" width="68" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -1920,17 +1920,25 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                             <constraint firstItem="Uyp-PL-f9n" firstAttribute="top" secondItem="KhW-ZD-7uJ" secondAttribute="bottom" constant="8" id="1kJ-Cd-kcT"/>
                             <constraint firstItem="Uyp-PL-f9n" firstAttribute="leading" secondItem="x6j-ey-bfp" secondAttribute="trailing" constant="70" id="6kM-Ez-n9z"/>
                             <constraint firstAttribute="trailingMargin" secondItem="YND-ID-gAF" secondAttribute="trailing" constant="-16" id="BYb-7v-mdH"/>
-                            <constraint firstItem="FmT-Qg-x8t" firstAttribute="leading" secondItem="Uyp-PL-f9n" secondAttribute="trailing" constant="8" id="MRw-JS-ayd"/>
-                            <constraint firstItem="x6j-ey-bfp" firstAttribute="top" secondItem="KhW-ZD-7uJ" secondAttribute="bottom" constant="8" id="NJS-3s-2Bl"/>
+                            <constraint firstItem="FmT-Qg-x8t" firstAttribute="top" secondItem="Uyp-PL-f9n" secondAttribute="top" id="E1N-re-9U9"/>
+                            <constraint firstItem="FmT-Qg-x8t" firstAttribute="leading" secondItem="Uyp-PL-f9n" secondAttribute="trailing" constant="16" id="MRw-JS-ayd"/>
+                            <constraint firstItem="x6j-ey-bfp" firstAttribute="top" secondItem="KhW-ZD-7uJ" secondAttribute="bottom" constant="20" id="NJS-3s-2Bl"/>
                             <constraint firstItem="YND-ID-gAF" firstAttribute="leading" secondItem="6Fd-xk-gAP" secondAttribute="leadingMargin" constant="-16" id="Rb5-3a-Glt"/>
                             <constraint firstItem="FmT-Qg-x8t" firstAttribute="top" secondItem="KhW-ZD-7uJ" secondAttribute="bottom" constant="8" id="Rgc-OO-wff"/>
                             <constraint firstItem="bfS-pH-cn5" firstAttribute="leading" secondItem="6Fd-xk-gAP" secondAttribute="leadingMargin" constant="-16" id="SBp-IV-5Xk"/>
+                            <constraint firstItem="Uyp-PL-f9n" firstAttribute="top" secondItem="x6j-ey-bfp" secondAttribute="top" id="SNU-DG-fNV"/>
                             <constraint firstAttribute="trailingMargin" secondItem="bfS-pH-cn5" secondAttribute="trailing" constant="-16" id="VB9-yP-Bqp"/>
                             <constraint firstItem="bfS-pH-cn5" firstAttribute="top" secondItem="YND-ID-gAF" secondAttribute="bottom" constant="44" id="YMt-Q5-rO0"/>
                             <constraint firstItem="x6j-ey-bfp" firstAttribute="leading" secondItem="6Fd-xk-gAP" secondAttribute="leadingMargin" id="Ydx-QJ-6bh"/>
                             <constraint firstItem="hFh-sx-CEm" firstAttribute="leading" secondItem="6Fd-xk-gAP" secondAttribute="leadingMargin" id="l85-cG-D9s"/>
                             <constraint firstItem="hFh-sx-CEm" firstAttribute="top" secondItem="x6j-ey-bfp" secondAttribute="bottom" constant="44" id="s5L-N2-YIj"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="1kJ-Cd-kcT"/>
+                                <exclude reference="Rgc-OO-wff"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="描述" id="qqX-bv-Qpp"/>
                     <connections>
@@ -2131,7 +2139,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="154" id="KcO-NA-WJI"/>
-                                    <constraint firstAttribute="height" constant="154" id="koD-Ly-rya"/>
+                                    <constraint firstAttribute="height" constant="176" id="koD-Ly-rya"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -2139,9 +2147,17 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                                     </mask>
                                 </variation>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="您的生日和年龄均不会被公开" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rAP-wE-nhc">
+                                <rect key="frame" x="20" y="202" width="221" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="rAP-wE-nhc" firstAttribute="leading" secondItem="eIX-iE-wyX" secondAttribute="leadingMargin" id="1Iq-t1-HtY"/>
+                            <constraint firstItem="rAP-wE-nhc" firstAttribute="top" secondItem="jJq-Lb-Y0m" secondAttribute="bottom" constant="8" id="2Xq-MD-Zbn"/>
                             <constraint firstAttribute="trailingMargin" secondItem="jJq-Lb-Y0m" secondAttribute="trailing" constant="-16" id="3pu-d5-bpj"/>
                             <constraint firstAttribute="trailingMargin" secondItem="jJq-Lb-Y0m" secondAttribute="trailing" constant="-16" id="41J-Nv-U2E"/>
                             <constraint firstItem="iyg-j6-AsZ" firstAttribute="leading" secondItem="eIX-iE-wyX" secondAttribute="leadingMargin" constant="-16" id="56k-KG-s5R"/>
@@ -2149,6 +2165,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                             <constraint firstItem="jJq-Lb-Y0m" firstAttribute="top" secondItem="VAv-Ro-okz" secondAttribute="bottom" id="9uA-nC-Q1A"/>
                             <constraint firstItem="jJq-Lb-Y0m" firstAttribute="leading" secondItem="eIX-iE-wyX" secondAttribute="leadingMargin" constant="-16" id="Awm-8H-G3B"/>
                             <constraint firstItem="jJq-Lb-Y0m" firstAttribute="top" secondItem="VAv-Ro-okz" secondAttribute="bottom" id="Ftd-nQ-3dm"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="rAP-wE-nhc" secondAttribute="trailing" id="GMN-J4-AJt"/>
                             <constraint firstAttribute="trailingMargin" secondItem="iyg-j6-AsZ" secondAttribute="trailing" constant="-16" id="U2a-s9-5x8"/>
                             <constraint firstItem="jJq-Lb-Y0m" firstAttribute="top" secondItem="VAv-Ro-okz" secondAttribute="bottom" id="piq-16-zJP"/>
                             <constraint firstItem="jJq-Lb-Y0m" firstAttribute="leading" secondItem="eIX-iE-wyX" secondAttribute="leadingMargin" constant="-16" id="wta-ys-LX3"/>
@@ -2166,6 +2183,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                     <connections>
                         <outlet property="datePicker" destination="iyg-j6-AsZ" id="VWU-qL-wtH"/>
                         <outlet property="queryView" destination="jJq-Lb-Y0m" id="IRC-ln-NIw"/>
+                        <outlet property="reminderLabel" destination="rAP-wE-nhc" id="abH-MQ-QnU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sLw-Rb-0Cv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2559,8 +2577,8 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="qbd-0n-vJA"/>
-        <segue reference="81I-ET-d5W"/>
-        <segue reference="2RH-j5-6Bc"/>
         <segue reference="mYA-47-s6C"/>
+        <segue reference="cmB-f3-oUD"/>
+        <segue reference="81I-ET-d5W"/>
     </inferredMetricsTieBreakers>
 </document>
