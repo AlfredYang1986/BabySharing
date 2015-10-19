@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BabySharing/Controllers/Login/RoleTags/SearchUserTagsController.m"
-            timestampString = "466925814.54813"
+            timestampString = "466934428.158089"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "280"
-            endingLineNumber = "280"
+            startingLineNumber = "288"
+            endingLineNumber = "288"
             landmarkName = "-searchTextChanged:"
             landmarkType = "5">
          </BreakpointContent>

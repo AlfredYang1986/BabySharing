@@ -113,6 +113,12 @@ typedef void(^queryRoleTagFinishBlock)(BOOL success, NSString* msg, NSArray* res
     _searchBar.delegate = self;
 }
 
+- (void)viewDidLayoutSubviews {
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    CGFloat height = [UIScreen mainScreen].bounds.size.height;
+    _queryView.frame = CGRectMake(0, 60, width, height - 124);
+}
+
 - (void)didPopControllerSelected {
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -201,13 +207,15 @@ typedef void(^queryRoleTagFinishBlock)(BOOL success, NSString* msg, NSArray* res
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"default"];
     }
   
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
-    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-    UIImage* img_0 = [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Tags"] ofType:@"png"]];
-    
-    cell.imageView.image = img_0;
+//    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+//    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+//    UIImage* img_0 = [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Tags"] ofType:@"png"]];
+//    
+//    cell.imageView.image = img_0;
     NSInteger index = indexPath.row;
     cell.textLabel.text = [final_tag_arr objectAtIndex:index];
+    cell.textLabel.font = [UIFont boldSystemFontOfSize:17.f];
+    cell.textLabel.textColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
     return cell;
 }
 

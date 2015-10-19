@@ -142,6 +142,8 @@
         UIFont* content_font = [UIFont systemFontOfSize:CONTENT_FONT_SIZE];
         CGSize content_size = [content.text sizeWithFont:content_font constrainedToSize:CGSizeMake(content_width, FLT_MAX)];
         content.frame = CGRectMake(offset_x, offset_y, content_width, MAX(content_size.height + 2 * MARGIN, IMG_HEIGHT));
+
+        content.backgroundColor = [UIColor whiteColor];
         
         offset_x += content_width + MARGIN;
        

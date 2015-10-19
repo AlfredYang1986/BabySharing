@@ -18,11 +18,14 @@
 @property (weak, nonatomic) IBOutlet UILabel *online_count_label;
 @property (weak, nonatomic) IBOutlet UIButton *relations;
 @property (weak, nonatomic) IBOutlet UILabel *group_name_label;
-@property (weak, nonatomic) IBOutlet UIButton *timeTagBtn;
-@property (weak, nonatomic) IBOutlet UIButton *locationTagBtn;
-@property (weak, nonatomic) IBOutlet UIButton *tagsBtn;
+//@property (weak, nonatomic) IBOutlet UIButton *timeTagBtn;
+//@property (weak, nonatomic) IBOutlet UIButton *locationTagBtn;
+//@property (weak, nonatomic) IBOutlet UIButton *tagsBtn;
 @property (weak, nonatomic) IBOutlet UIView *user_list_view;
 
+@property (weak, nonatomic) IBOutlet UIView *owner_container;
+@property (weak, nonatomic) IBOutlet UIView *theme_container;
+@property (weak, nonatomic) IBOutlet UIImageView *rightTmpImg;
 @end
 
 @implementation MessageChatGroupHeader
@@ -33,6 +36,9 @@
 @synthesize founder_role_tag_btn = _founder_role_tag_btn;
 @synthesize relations = _relations;
 
+@synthesize owner_container = _owner_container;
+@synthesize theme_container = _theme_container;
+
 // online number
 @synthesize online_count_label = _online_count_label;
 
@@ -41,39 +47,54 @@
 
 // group
 @synthesize group_name_label = _group_name_label;
-@synthesize locationTagBtn = _locationTagBtn;
-@synthesize timeTagBtn = _timeTagBtn;
-@synthesize tagsBtn = _tagsBtn;
+//@synthesize locationTagBtn = _locationTagBtn;
+//@synthesize timeTagBtn = _timeTagBtn;
+//@synthesize tagsBtn = _tagsBtn;
+
+@synthesize rightTmpImg = _rightTmpImg;
 
 + (CGFloat)preferredHeight {
     return 164;
 }
 
 - (void)awakeFromNib {
+   
+    _owner_container.layer.cornerRadius = 8.f;
+    _owner_container.clipsToBounds = YES;
+    _owner_container.backgroundColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
+    
+    _theme_container.layer.cornerRadius = 8.f;
+    _theme_container.clipsToBounds = YES;
+    _theme_container.backgroundColor = [UIColor grayColor];
     
     // round image
     _imgView.layer.cornerRadius = 25;
     _imgView.clipsToBounds = YES;
     
     // relationship btn
-    _relations.layer.borderColor = [UIColor blueColor].CGColor;
-    _relations.layer.borderWidth = 1.f;
-    _relations.layer.cornerRadius = 8.f;
+//    _relations.layer.borderColor = [UIColor blueColor].CGColor;
+    _relations.backgroundColor = [UIColor yellowColor];
+//    _relations.layer.borderWidth = 1.f;
+    _relations.layer.cornerRadius = 12.5;
     _relations.clipsToBounds = YES;
     
     // theme btn
-    _group_name_label.layer.borderColor = [UIColor blueColor].CGColor;
-    _group_name_label.layer.borderWidth = 1.f;
-    _group_name_label.layer.cornerRadius = 8.f;
-    _group_name_label.clipsToBounds = YES;
+//    _group_name_label.layer.borderColor = [UIColor blueColor].CGColor;
+//    _group_name_label.layer.borderWidth = 1.f;
+//    _group_name_label.layer.cornerRadius = 8.f;
+//    _group_name_label.clipsToBounds = YES;
    
     // tags btn
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-    
-    [_timeTagBtn setImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Time" ofType:@"png"]] forState:UIControlStateNormal];
-    [_locationTagBtn setImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Location" ofType:@"png"]] forState:UIControlStateNormal];
-    [_tagsBtn setImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Tag" ofType:@"png"]] forState:UIControlStateNormal];
+    _rightTmpImg.image = [UIImage imageNamed:[resourceBundle pathForResource:@"GroupImg" ofType:@"png"]];
+    _rightTmpImg.layer.cornerRadius = 8.f;
+    _rightTmpImg.clipsToBounds = YES;
+    _rightTmpImg.backgroundColor = [UIColor yellowColor];
+//
+//    [_timeTagBtn setImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Time" ofType:@"png"]] forState:UIControlStateNormal];
+//    [_locationTagBtn setImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Location" ofType:@"png"]] forState:UIControlStateNormal];
+//    [_tagsBtn setImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Tag" ofType:@"png"]] forState:UIControlStateNormal];
 }
 
 /*

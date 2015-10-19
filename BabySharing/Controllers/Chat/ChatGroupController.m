@@ -21,6 +21,7 @@
 #import "RemoteInstance.h"
 
 #import "chatEmojiView.h"
+#import "ChatMessageCell.h"
 
 @interface ChatGroupController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, GotyeOCDelegate, ChatEmoji>
 @property (weak, nonatomic) IBOutlet UITableView *queryView;
@@ -324,49 +325,60 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"default"];
+    ChatMessageCell* cell = [tableView dequeueReusableCellWithIdentifier:@"message cell"];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"default"];
+        cell = [[ChatMessageCell alloc]init];
     }
    
     GotyeOCMessage* m = [current_message objectAtIndex:indexPath.row];
-    cell.textLabel.text = m.text;
- 
-    NSString* photo_name = nil;
-    NSPredicate* pred = [NSPredicate predicateWithFormat:@"user_id=%@", m.sender.name];
-    NSArray* talker = [current_talk_users filteredArrayUsingPredicate:pred];
-    if (talker.count != 0) {
-        photo_name = [talker.firstObject objectForKey:@"screen_photo"];
-    } else {
-        NSDictionary* one_user = [_lm querMultipleProlfiles:@[m.sender.name]].firstObject;
-        [current_talk_users addObject:one_user];
-        photo_name = [one_user objectForKey:@"screen_photo"];
-    }
-    
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
-    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-    NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"User"] ofType:@"png"];
-    
-    UIImage* userImg = [TmpFileStorageModel enumImageWithName:photo_name withDownLoadFinishBolck:^(BOOL success, UIImage *user_img) {
-        if (success) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (self) {
-                    cell.imageView.image = user_img;
-                    NSLog(@"owner img download success");
-                }
-            });
-        } else {
-            NSLog(@"down load owner image %@ failed", photo_name);
-        }
-    }];
-    
-    if (userImg == nil) {
-        userImg = [UIImage imageNamed:filePath];
-    }
-    [cell.imageView setImage:userImg];
+    cell.message = m;
     
     return cell;
+    
+//    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"default"];
+//    
+//    if (cell == nil) {
+//        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"default"];
+//    }
+//   
+//    GotyeOCMessage* m = [current_message objectAtIndex:indexPath.row];
+//    cell.textLabel.text = m.text;
+// 
+//    NSString* photo_name = nil;
+//    NSPredicate* pred = [NSPredicate predicateWithFormat:@"user_id=%@", m.sender.name];
+//    NSArray* talker = [current_talk_users filteredArrayUsingPredicate:pred];
+//    if (talker.count != 0) {
+//        photo_name = [talker.firstObject objectForKey:@"screen_photo"];
+//    } else {
+//        NSDictionary* one_user = [_lm querMultipleProlfiles:@[m.sender.name]].firstObject;
+//        [current_talk_users addObject:one_user];
+//        photo_name = [one_user objectForKey:@"screen_photo"];
+//    }
+//    
+//    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+//    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+//    NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"User"] ofType:@"png"];
+//    
+//    UIImage* userImg = [TmpFileStorageModel enumImageWithName:photo_name withDownLoadFinishBolck:^(BOOL success, UIImage *user_img) {
+//        if (success) {
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                if (self) {
+//                    cell.imageView.image = user_img;
+//                    NSLog(@"owner img download success");
+//                }
+//            });
+//        } else {
+//            NSLog(@"down load owner image %@ failed", photo_name);
+//        }
+//    }];
+//    
+//    if (userImg == nil) {
+//        userImg = [UIImage imageNamed:filePath];
+//    }
+//    [cell.imageView setImage:userImg];
+//    
+//    return cell;
 }
 
 #pragma mark -- move view when chat

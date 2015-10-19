@@ -512,6 +512,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                             <constraint firstItem="dPO-7D-dfh" firstAttribute="top" secondItem="ZLr-K2-aed" secondAttribute="bottom" constant="102" id="FjU-Il-L05"/>
                             <constraint firstItem="ZLr-K2-aed" firstAttribute="leading" secondItem="dXw-06-EIO" secondAttribute="leadingMargin" constant="-20" id="Quq-Aw-TeJ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="dPO-7D-dfh" secondAttribute="trailing" constant="-16" id="RTT-ms-oKL"/>
+                            <constraint firstItem="dPO-7D-dfh" firstAttribute="top" secondItem="ZLr-K2-aed" secondAttribute="bottom" id="Yzj-wD-lRH"/>
                             <constraint firstItem="ZLr-K2-aed" firstAttribute="top" secondItem="9iT-Oy-MJ9" secondAttribute="bottom" constant="8" id="eL6-Kr-1xG"/>
                             <constraint firstItem="dPO-7D-dfh" firstAttribute="leading" secondItem="dXw-06-EIO" secondAttribute="leadingMargin" constant="-16" id="l7l-6P-bG8"/>
                             <constraint firstItem="dPO-7D-dfh" firstAttribute="top" secondItem="ZLr-K2-aed" secondAttribute="bottom" constant="8" id="n5k-Ob-Uyk"/>
@@ -519,6 +520,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="FjU-Il-L05"/>
+                                <exclude reference="n5k-Ob-Uyk"/>
                             </mask>
                         </variation>
                     </view>
