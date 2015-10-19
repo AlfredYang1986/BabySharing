@@ -13,12 +13,14 @@
 #import "RemoteInstance.h"
 
 #import "UserAddNewTagDelegate.h"
+#import "DongDaSearchBar.h"
 
 typedef void(^queryRoleTagFinishBlock)(BOOL success, NSString* msg, NSArray* result);
 
-@interface SearchUserTagsController () <UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource, addNewTagProtocol>
-@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@interface SearchUserTagsController () </*UISearchBarDelegate,*/ UITableViewDelegate, UITableViewDataSource, addNewTagProtocol, DongDaSearchBarDelegate>
+//@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *queryView;
+@property (weak, nonatomic) IBOutlet DongDaSearchBar *searchBar;
 
 @property (strong, nonatomic, setter=setCurrentDelegate:) id<UITableViewDataSource, UITableViewDelegate> current_delegate;
 @end
@@ -40,17 +42,16 @@ typedef void(^queryRoleTagFinishBlock)(BOOL success, NSString* msg, NSArray* res
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    _searchBar.delegate = self;
-    _searchBar.showsCancelButton = YES;
-    for (UIView* v in _searchBar.subviews)
-    {
-        if ( [v isKindOfClass: [UITextField class]] )
-        {
-            UITextField *tf = (UITextField *)v;
-            tf.clearButtonMode = UITextFieldViewModeWhileEditing;
-            break;
-        }
-    }
+//    _searchBar.showsCancelButton = YES;
+//    for (UIView* v in _searchBar.subviews)
+//    {
+//        if ( [v isKindOfClass: [UITextField class]] )
+//        {
+//            UITextField *tf = (UITextField *)v;
+//            tf.clearButtonMode = UITextFieldViewModeWhileEditing;
+//            break;
+//        }
+//    }
   
     add_delegate = [[UserAddNewTagDelegate alloc]init];
     add_delegate.delegate = self;
@@ -88,7 +89,7 @@ typedef void(^queryRoleTagFinishBlock)(BOOL success, NSString* msg, NSArray* res
 //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn2];
     
     UILabel* label = [[UILabel alloc]init];
-    label.text = @"角色标签";
+    label.text = @"添加你的角色";
     label.textColor = [UIColor whiteColor];
     [label sizeToFit];
     self.navigationItem.titleView = label;
@@ -107,6 +108,9 @@ typedef void(^queryRoleTagFinishBlock)(BOOL success, NSString* msg, NSArray* res
     [barBtn addTarget:self action:@selector(didPopControllerSelected) forControlEvents:UIControlEventTouchDown];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn];
+    
+    _searchBar.hide_cancel_btn = YES;
+    _searchBar.delegate = self;
 }
 
 - (void)didPopControllerSelected {
@@ -171,57 +175,7 @@ typedef void(^queryRoleTagFinishBlock)(BOOL success, NSString* msg, NSArray* res
 }
 */
 
-#pragma mark -- Search Bar Delegate
-- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
-    if (!isSync) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"cannot edit until sync" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-        [alert show];
-    }
-    
-    return isSync;
-}
 
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    NSLog(@"Search text change");
-    
-    if ([searchText isEqualToString:@""]) {
-        final_tag_arr = test_tag_arr;
-        self.current_delegate = self;
-        
-    } else {
-//        NSString *regex = [NSString stringWithFormat:@"^[%@]\\w*", searchText];
-        NSString *regex = [NSString stringWithFormat:@"^%@\\w*", searchText];
-        NSPredicate* p = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
-       
-        NSMutableArray* tmp = [[NSMutableArray alloc]initWithCapacity:test_tag_arr.count];
-        for (NSString* iter in test_tag_arr) {
-            if ([p evaluateWithObject:iter]) {
-                [tmp addObject:iter];
-            }
-        }
-        final_tag_arr = [tmp copy];
-        
-        if (final_tag_arr.count == 0) self.current_delegate = add_delegate;
-        else self.current_delegate = self;
-    }
-    
-    [_queryView reloadData];
-}
-
-- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-}
-
-- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
-}
-
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-    searchBar.text = @"";
-    [searchBar resignFirstResponder];
-    final_tag_arr = test_tag_arr;
-    [_queryView reloadData];
-}
 
 #pragma mark -- table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -255,10 +209,6 @@ typedef void(^queryRoleTagFinishBlock)(BOOL success, NSString* msg, NSArray* res
     NSInteger index = indexPath.row;
     cell.textLabel.text = [final_tag_arr objectAtIndex:index];
     return cell;
-}
-
-- (IBAction)cancelBtnSelected {
-    [_searchBar resignFirstResponder];
 }
 
 - (void)moveView:(float)move {
@@ -318,5 +268,44 @@ typedef void(^queryRoleTagFinishBlock)(BOOL success, NSString* msg, NSArray* res
     
     [_delegate didSelectTag:tag_name];
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark -- Dongda Search Bar
+- (void)cancelBtnSelected {
+    
+}
+
+- (void)searchTextChanged:(NSString*)searchText {
+
+    if (!isSync) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"cannot edit until sync" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
+    if ([searchText isEqualToString:@""]) {
+        final_tag_arr = test_tag_arr;
+        self.current_delegate = self;
+        [_searchBar resignFirstResponder];
+        
+    } else {
+//        NSString *regex = [NSString stringWithFormat:@"^[%@]\\w*", searchText];
+        NSString *regex = [NSString stringWithFormat:@"^%@\\w*", searchText];
+        NSPredicate* p = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+       
+        NSMutableArray* tmp = [[NSMutableArray alloc]initWithCapacity:test_tag_arr.count];
+        for (NSString* iter in test_tag_arr) {
+            if ([p evaluateWithObject:iter]) {
+                [tmp addObject:iter];
+            }
+        }
+        final_tag_arr = [tmp copy];
+        
+        if (final_tag_arr.count == 0) self.current_delegate = add_delegate;
+        else self.current_delegate = self;
+    }
+    
+    [_queryView reloadData];
+
 }
 @end

@@ -24,6 +24,7 @@
 }
 
 @synthesize delegate = _delegate;
+@synthesize hide_cancel_btn = _hide_cancel_btn;
 
 - (id)init {
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
@@ -71,7 +72,8 @@
         if (textField == nil) {
             textField = [[UITextField alloc]init];
             textField.layer.borderWidth = 0.f;
-            [textField addTarget:self action:@selector(textChanged) forControlEvents:UIControlEventValueChanged];
+//            [textField addTarget:self action:@selector(textChanged) forControlEvents:UIControlEventValueChanged];
+            [textField addTarget:self action:@selector(textChanged) forControlEvents:UIControlEventEditingChanged];
             [inputContainer addSubview:textField];
         }
         
@@ -94,7 +96,13 @@
         [cancelBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
         [cancelBtn addTarget:self action:@selector(cancelBtnSelected) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:cancelBtn];
+        _hide_cancel_btn = NO;
     }
+}
+
+- (void)setCancelBtnHidden:(BOOL)h {
+    _hide_cancel_btn = h;
+    [self setNeedsLayout];
 }
 
 - (void)textChanged {
@@ -112,22 +120,38 @@
 - (void)layoutSubviews {
     CGFloat width = self.frame.size.width;
     CGFloat height = self.frame.size.height;
-   
-    CGSize size = CGSizeMake(80, height);
-    
-    inputContainer.frame = CGRectMake(8, 0, width - size.width, height);
-    
-    CGFloat offset_x = 8;
-    icon.frame = CGRectMake(offset_x, (height - 30) / 2, 30, 30);
   
-    offset_x += 30;
-    textField.frame = CGRectMake(offset_x, 0, width - size.width - 30 * 2, height);
-    
-    offset_x = width - size.width - 30 - 8;
-    clearBtn.frame = CGRectMake(offset_x, (height - 30) / 2, 30, 30);
-    
-    offset_x = width - size.width;
-    cancelBtn.frame = CGRectMake(offset_x, 0, size.width, size.height);
+    if (_hide_cancel_btn) {
+        CGSize size = CGSizeMake(80, height);
+        inputContainer.frame = CGRectMake(8, 0, width - 16, height);
+        
+        CGFloat offset_x = 8;
+        icon.frame = CGRectMake(offset_x, (height - 30) / 2, 30, 30);
+      
+        offset_x += 30;
+        textField.frame = CGRectMake(offset_x, 0, width - size.width - 30 * 2, height);
+        
+        offset_x = width - 30 - 32;
+        clearBtn.frame = CGRectMake(offset_x, (height - 30) / 2, 30, 30);
+        
+    } else {
+        
+        CGSize size = CGSizeMake(80, height);
+        
+        inputContainer.frame = CGRectMake(8, 0, width - size.width, height);
+        
+        CGFloat offset_x = 8;
+        icon.frame = CGRectMake(offset_x, (height - 30) / 2, 30, 30);
+      
+        offset_x += 30;
+        textField.frame = CGRectMake(offset_x, 0, width - size.width - 30 * 2, height);
+        
+        offset_x = width - size.width - 30 - 8;
+        clearBtn.frame = CGRectMake(offset_x, (height - 30) / 2, 30, 30);
+        
+        offset_x = width - size.width;
+        cancelBtn.frame = CGRectMake(offset_x, 0, size.width, size.height);
+    }
 }
 
 /*

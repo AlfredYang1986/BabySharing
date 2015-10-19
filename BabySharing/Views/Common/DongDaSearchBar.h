@@ -18,6 +18,7 @@
 
 @property (nonatomic, setter=setSearchText:, getter=getSearchText) NSString* text;
 @property (nonatomic, weak) id<DongDaSearchBarDelegate> delegate;
+@property (nonatomic, setter=setCancelBtnHidden:) BOOL hide_cancel_btn;
 
 - (void)resignFirstResponder;
 @end

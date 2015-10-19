@@ -276,22 +276,46 @@
 }
 
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+    UIView* reVal = [[UIView alloc]init];
+    reVal.backgroundColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
+    
+    UILabel* label = [[UILabel alloc]init];
+    
     if (section == 0) {
-        MyCycleCellHeader* header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"my cycle header"];
-        if (header == nil) {
-            header = [[MyCycleCellHeader alloc]init];
-        }
-       
-        header.role_tag = @"tags";
-        [header viewLayoutSubviews];
-        return header;
-        
-    } else if (section == 1) {
-        return nil;
-        
+        label.text = @"我的圈子";
     } else {
-        return nil;
+        label.text = @"猜你喜欢";
     }
+   
+    label.textColor = [UIColor whiteColor];
+    label.textAlignment = NSTextAlignmentCenter;
+    [label sizeToFit];
+    [reVal addSubview:label];
+   
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    CGFloat height = 44;
+    
+    label.center = CGPointMake(width / 2 , height / 2);
+    
+    return reVal;
+    
+//    if (section == 0) {
+//        MyCycleCellHeader* header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"my cycle header"];
+//        if (header == nil) {
+//            header = [[MyCycleCellHeader alloc]init];
+//        }
+//       
+//        header.role_tag = @"tags";
+//        [header viewLayoutSubviews];
+//        return header;
+//        
+//    } else if (section == 1) {
+//        return nil;
+//        
+//    } else {
+//        return nil;
+//    }
 }
 
 
@@ -304,11 +328,11 @@
     }
 }
 
-- (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if (section == 1) {
-        return @"推荐";
-    } return nil;
-}
+//- (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+//    if (section == 1) {
+//        return @"推荐";
+//    } return nil;
+//}
 
 #pragma mark -- table view datasource
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
