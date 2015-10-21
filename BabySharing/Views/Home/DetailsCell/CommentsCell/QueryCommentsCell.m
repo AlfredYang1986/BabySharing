@@ -35,6 +35,8 @@
 - (void)awakeFromNib {
     _imgView.layer.cornerRadius = _imgView.frame.size.width / 2;
     _imgView.clipsToBounds = YES;
+    
+    _roleTagBtn.hidden = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -48,23 +50,39 @@
         return 54;
     }
     
-    return 54 + MARGIN + [self getSizeBaseOnDescription:comment].height;
+//    return 21 + MARGIN + [self getSizeBaseOnDescription:comment].height;
+    return MAX(54, 21 + MARGIN + [self getSizeBaseOnDescription:comment].height);
 }
 
 + (CGSize)getSizeBaseOnDescription:(NSString*)comment {
     UIFont* font = [UIFont systemFontOfSize:14.f];
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     
-    return [comment sizeWithFont:font constrainedToSize:CGSizeMake(width - MARGIN * 2, FLT_MAX)];
+//    return [comment sizeWithFont:font constrainedToSize:CGSizeMake(width - MARGIN * 2, FLT_MAX)];
+    return [comment sizeWithFont:font constrainedToSize:CGSizeMake(width - MARGIN * 3 - 36, FLT_MAX)];
 }
 
 - (void)setTime:(NSDate*)date {
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    formatter.formatterBehavior = NSDateFormatterBehavior10_4;
-    formatter.dateStyle = NSDateFormatterShortStyle;
-    formatter.timeStyle = NSDateFormatterShortStyle;
-    NSString *result = [formatter stringForObjectValue:date];
-    _dateLabel.text = result;
+//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//    formatter.formatterBehavior = NSDateFormatterBehavior10_4;
+//    formatter.dateStyle = NSDateFormatterShortStyle;
+//    formatter.timeStyle = NSDateFormatterShortStyle;
+//    NSString *result = [formatter stringForObjectValue:date];
+//    _dateLabel.text = result;
+    
+    NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    
+    NSTimeInterval now_time = [NSDate date].timeIntervalSince1970;
+    if (now_time - date.timeIntervalSince1970 > 24 * 60 * 60) {
+        [formatter setDateFormat:@"MM-dd"];
+    } else {
+        [formatter setDateFormat:@"hh:mm"];
+    }
+    
+//    NSDate* date = [NSDate dateWithTimeIntervalSince1970:_message.date];
+    _dateLabel.text = [formatter stringFromDate:date];
 }
 
 - (void)setTags:(NSString*)tags {
@@ -80,7 +98,8 @@
     }
     
     CGSize size = [QueryCommentsCell getSizeBaseOnDescription:comment];
-    commentView.frame = CGRectMake(MARGIN, _imgView.frame.origin.y + _imgView.frame.size.height + MARGIN, [UIScreen mainScreen].bounds.size.width - MARGIN * 2, size.height);
+//    commentView.frame = CGRectMake(MARGIN, _imgView.frame.origin.y + _imgView.frame.size.height + MARGIN, [UIScreen mainScreen].bounds.size.width - MARGIN * 2, size.height);
+    commentView.frame = CGRectMake(MARGIN + 36 + MARGIN, _nameLabel.frame.origin.y + _nameLabel.frame.size.height /*+ MARGIN*/, [UIScreen mainScreen].bounds.size.width - MARGIN * 2, size.height);
     commentView.text = comment;
     [commentView sizeToFit];
 }
