@@ -9,6 +9,7 @@
 #import "PhotoTagView.h"
 #import "PhotoTagRoundPointLayer.h"
 #import "PhotoTagTariangleLayer.h"
+#import "PhotoTagTariangleLayer2.h"
 
 #define VER_MARGIN      10
 #define HER_MARGIN      10
@@ -19,7 +20,8 @@
 
 @implementation PhotoTagView {
     PhotoTagRoundPointLayer* pointLayer;
-    PhotoTagTariangleLayer* triLayer;
+//    PhotoTagTariangleLayer* triLayer;
+    PhotoTagTariangleLayer2* triLayer2;
     CATextLayer * contentLayer;
     CALayer* imgLayer;
     UIFont* font;
@@ -37,7 +39,7 @@
 - (id)init {
     self = [super init];
     if (self) {
-        [self setUpTagView];
+        [self setUpTagView2];
     }
     
     return self;
@@ -47,7 +49,7 @@
     self = [super init];
     if (self) {
         self.content = name;
-        [self setUpTagView];
+        [self setUpTagView2];
     }
     
     return self;
@@ -58,7 +60,7 @@
     if (self) {
         self.content = name;
         self.type = type;
-        [self setUpTagView];
+        [self setUpTagView2];
     }
     
     return self;
@@ -72,9 +74,12 @@
         rect.origin.x += imgLayer.bounds.size.width;
         CGRect point_bounds = [pointLayer getPreferRect];
         pointLayer.position = CGPointMake(rect.origin.x + point_bounds.size.width / 2, rect.origin.y + rect.size.height / 2);
-        CGRect tri_bounds = [triLayer getPreferRect:content_size.height];
-        triLayer.position = CGPointMake(rect.origin.x + tri_bounds.size.width / 2 + point_bounds.size.width / 2, rect.origin.y + rect.size.height / 2);
-        contentLayer.position = CGPointMake(rect.size.width - contentLayer.bounds.size.width / 2, rect.origin.y + rect.size.height / 2);
+//        CGRect tri_bounds = [triLayer getPreferRect:content_size.height];
+//        triLayer.position = CGPointMake(rect.origin.x + tri_bounds.size.width / 2 + point_bounds.size.width / 2, rect.origin.y + rect.size.height / 2);
+        CGRect tri_bounds = [triLayer2 getPreferRect:content_size.height];
+//        triLayer2.position = CGPointMake(rect.origin.x + tri_bounds.size.width / 2 + point_bounds.size.width / 2, rect.origin.y + rect.size.height / 2);
+        triLayer2.position = CGPointMake(rect.origin.x + tri_bounds.size.width / 2, rect.origin.y + rect.size.height / 2);
+        contentLayer.position = CGPointMake(rect.size.width - contentLayer.bounds.size.width / 2 - 6, rect.origin.y + rect.size.height / 2);
     }
 }
 
@@ -111,37 +116,79 @@
     return _typeImg;
 }
 
-- (void)setUpTagView {
-   
+//- (void)setUpTagView {
+//   
+//    self.backgroundColor = [UIColor clearColor];
+//    
+//    pointLayer = [PhotoTagRoundPointLayer layer];
+//    pointLayer.bounds = [pointLayer getPreferRect];
+//    
+//    triLayer = [PhotoTagTariangleLayer layer];
+//    triLayer.bounds = [triLayer getPreferRect:content_size.height + VER_MARGIN];
+//    
+//    
+//    contentLayer = [CATextLayer layer];
+//    contentLayer.fontSize = [font pointSize];
+//    contentLayer.bounds = CGRectMake(0, 0, content_size.width + HER_MARGIN, content_size.height + VER_MARGIN);
+////    contentLayer.backgroundColor = [UIColor colorWithWhite:0.f alpha:0.6].CGColor;
+//    contentLayer.backgroundColor = [UIColor colorWithRed:0.3167 green:0.7529 blue:0.6941 alpha:1.f].CGColor;
+//    contentLayer.foregroundColor = [UIColor whiteColor].CGColor;
+//    contentLayer.string= _content;
+//    
+//    imgLayer = [CALayer layer];
+//    imgLayer.bounds = CGRectMake(0, 0, content_size.height, content_size.height);
+//    
+//    [imgLayer setNeedsDisplay];
+//    [pointLayer setNeedsDisplay];
+//    [triLayer setNeedsDisplay];
+//    [contentLayer setNeedsDisplay];
+//   
+//    [self.layer addSublayer:imgLayer];
+//    [self.layer addSublayer:contentLayer];
+//    [self.layer addSublayer:triLayer];
+//    [self.layer addSublayer:pointLayer];
+//
+//    // need to put it after setNeedsDisplay
+//    imgLayer.contents = (id)self.typeImg.CGImage;
+//    
+//    self.bounds = [self getTagViewPreferBounds];
+//}
+
+- (void)setUpTagView2 {
+    
     self.backgroundColor = [UIColor clearColor];
     
-    pointLayer = [PhotoTagRoundPointLayer layer];
-    pointLayer.bounds = [pointLayer getPreferRect];
+//    pointLayer = [PhotoTagRoundPointLayer layer];
+//    pointLayer.bounds = [pointLayer getPreferRect];
     
-    triLayer = [PhotoTagTariangleLayer layer];
-    triLayer.bounds = [triLayer getPreferRect:content_size.height + VER_MARGIN];
+    triLayer2 = [PhotoTagTariangleLayer2 layer];
+//    triLayer2.bounds = [triLayer2 getPreferRect:content_size.height + VER_MARGIN];
+    triLayer2.bounds = [triLayer2 getPreferRect:content_size.height];
     
     
     contentLayer = [CATextLayer layer];
     contentLayer.fontSize = [font pointSize];
-    contentLayer.bounds = CGRectMake(0, 0, content_size.width + HER_MARGIN, content_size.height + VER_MARGIN);
+    contentLayer.bounds = CGRectMake(0, 0, content_size.width + HER_MARGIN, content_size.height);
+//    contentLayer.bounds = CGRectMake(0, 0, content_size.width + HER_MARGIN, content_size.height + VER_MARGIN);
 //    contentLayer.backgroundColor = [UIColor colorWithWhite:0.f alpha:0.6].CGColor;
-    contentLayer.backgroundColor = [UIColor colorWithRed:0.3167 green:0.7529 blue:0.6941 alpha:1.f].CGColor;
+//    contentLayer.backgroundColor = [UIColor colorWithRed:0.3167 green:0.7529 blue:0.6941 alpha:1.f].CGColor;
+    contentLayer.backgroundColor = [UIColor colorWithRed:0.9137 green:0.5882 blue:0.4784 alpha:0.6].CGColor;
     contentLayer.foregroundColor = [UIColor whiteColor].CGColor;
     contentLayer.string= _content;
+    contentLayer.font = CFBridgingRetain([UIFont boldSystemFontOfSize:17.f]);
     
     imgLayer = [CALayer layer];
     imgLayer.bounds = CGRectMake(0, 0, content_size.height, content_size.height);
     
     [imgLayer setNeedsDisplay];
     [pointLayer setNeedsDisplay];
-    [triLayer setNeedsDisplay];
+    [triLayer2 setNeedsDisplay];
     [contentLayer setNeedsDisplay];
    
     [self.layer addSublayer:imgLayer];
     [self.layer addSublayer:contentLayer];
-    [self.layer addSublayer:triLayer];
-    [self.layer addSublayer:pointLayer];
+    [self.layer addSublayer:triLayer2];
+//    [self.layer addSublayer:pointLayer];
 
     // need to put it after setNeedsDisplay
     imgLayer.contents = (id)self.typeImg.CGImage;
@@ -154,7 +201,8 @@
     CGRect pointLayerRect = [pointLayer getPreferRect];
     
     // size of trangle layer
-    CGRect triLayerRect = [triLayer getPreferRect:content_size.height];
+//    CGRect triLayerRect = [triLayer getPreferRect:content_size.height];
+    CGRect triLayerRect = [triLayer2 getPreferRect:content_size.height];
     
     CGFloat width = imgLayer.bounds.size.width + pointLayerRect.size.width / 2 + triLayerRect.size.width + contentLayer.bounds.size.width + 5;
     CGFloat height = content_size.height + VER_MARGIN;

@@ -76,10 +76,8 @@
 		EE7910521B841C4E005E455B /* QueryHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = EE98D14B1B69AF9B004D88DF /* QueryHeader.m */; };
 		EE7910531B841C5B005E455B /* AreaTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7416281B5B9659002CA1BC /* AreaTableCell.m */; };
 		EE7910541B841C77005E455B /* AlbumGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACC2D1B44E90400D05C0B /* AlbumGridCell.m */; };
-		EE7910551B841C8F005E455B /* PhotoTagTariangleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACC711B44E90400D05C0B /* PhotoTagTariangleLayer.m */; };
 		EE7910561B841CAB005E455B /* WETouchableView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6D6DB21B7B28A6004D29C8 /* WETouchableView.m */; };
 		EE7910571B841CBE005E455B /* FoundPCGCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACBEE1B44E90300D05C0B /* FoundPCGCell.m */; };
-		EE7910581B841CE0005E455B /* PhotoTagRoundPointLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACC6F1B44E90400D05C0B /* PhotoTagRoundPointLayer.m */; };
 		EE7910591B841D14005E455B /* WEBlockingGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6D6DAB1B7B28A6004D29C8 /* WEBlockingGestureRecognizer.m */; };
 		EE79105A1B842085005E455B /* QueryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEAACBF21B44E90300D05C0B /* QueryCell.xib */; };
 		EE79105B1B842105005E455B /* ProfileOverView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEE94E301B74BF870011321A /* ProfileOverView.xib */; };
@@ -224,6 +222,9 @@
 		EEC980B41B8EB9EA0087E5A7 /* status-bar-pattern-default@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EEC980AD1B8EB9EA0087E5A7 /* status-bar-pattern-default@2x.jpg */; };
 		EEC980B51B8EB9EA0087E5A7 /* status-bar-progress.png in Resources */ = {isa = PBXBuildFile; fileRef = EEC980AE1B8EB9EA0087E5A7 /* status-bar-progress.png */; };
 		EEC980B61B8EB9EA0087E5A7 /* status-bar-progress@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EEC980AF1B8EB9EA0087E5A7 /* status-bar-progress@2x.png */; };
+		EED5EABA1BD73710000AFF36 /* PhotoTagRoundPointLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EED5EAB71BD73710000AFF36 /* PhotoTagRoundPointLayer.m */; settings = {ASSET_TAGS = (); }; };
+		EED5EABB1BD73710000AFF36 /* PhotoTagTariangleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EED5EAB91BD73710000AFF36 /* PhotoTagTariangleLayer.m */; settings = {ASSET_TAGS = (); }; };
+		EED5EABE1BD7375E000AFF36 /* PhotoTagTariangleLayer2.m in Sources */ = {isa = PBXBuildFile; fileRef = EED5EABD1BD7375E000AFF36 /* PhotoTagTariangleLayer2.m */; settings = {ASSET_TAGS = (); }; };
 		EED64D451B8184AE008CB134 /* CycleAddKidsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EED64D441B8184AE008CB134 /* CycleAddKidsCell.m */; };
 		EED64D471B8184C1008CB134 /* CycleAddKidsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EED64D461B8184C1008CB134 /* CycleAddKidsCell.xib */; };
 		EED64D4A1B818995008CB134 /* CycleAddKidsFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = EED64D491B818995008CB134 /* CycleAddKidsFooter.m */; };
@@ -622,10 +623,6 @@
 		EEAACC6A1B44E90400D05C0B /* PhotoPreViewEditView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoPreViewEditView.m; sourceTree = "<group>"; };
 		EEAACC6B1B44E90400D05C0B /* PhotoTagControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoTagControlView.h; sourceTree = "<group>"; };
 		EEAACC6C1B44E90400D05C0B /* PhotoTagControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoTagControlView.m; sourceTree = "<group>"; };
-		EEAACC6E1B44E90400D05C0B /* PhotoTagRoundPointLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoTagRoundPointLayer.h; sourceTree = "<group>"; };
-		EEAACC6F1B44E90400D05C0B /* PhotoTagRoundPointLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoTagRoundPointLayer.m; sourceTree = "<group>"; };
-		EEAACC701B44E90400D05C0B /* PhotoTagTariangleLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoTagTariangleLayer.h; sourceTree = "<group>"; };
-		EEAACC711B44E90400D05C0B /* PhotoTagTariangleLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoTagTariangleLayer.m; sourceTree = "<group>"; };
 		EEAACC721B44E90400D05C0B /* PhotoTagView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoTagView.h; sourceTree = "<group>"; };
 		EEAACC731B44E90400D05C0B /* PhotoTagView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoTagView.m; sourceTree = "<group>"; };
 		EEAACD5A1B44E91A00D05C0B /* YYBoundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = YYBoundle.bundle; sourceTree = "<group>"; };
@@ -691,6 +688,12 @@
 		EEC980AD1B8EB9EA0087E5A7 /* status-bar-pattern-default@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "status-bar-pattern-default@2x.jpg"; sourceTree = "<group>"; };
 		EEC980AE1B8EB9EA0087E5A7 /* status-bar-progress.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "status-bar-progress.png"; sourceTree = "<group>"; };
 		EEC980AF1B8EB9EA0087E5A7 /* status-bar-progress@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "status-bar-progress@2x.png"; sourceTree = "<group>"; };
+		EED5EAB61BD73710000AFF36 /* PhotoTagRoundPointLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoTagRoundPointLayer.h; sourceTree = "<group>"; };
+		EED5EAB71BD73710000AFF36 /* PhotoTagRoundPointLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoTagRoundPointLayer.m; sourceTree = "<group>"; };
+		EED5EAB81BD73710000AFF36 /* PhotoTagTariangleLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoTagTariangleLayer.h; sourceTree = "<group>"; };
+		EED5EAB91BD73710000AFF36 /* PhotoTagTariangleLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoTagTariangleLayer.m; sourceTree = "<group>"; };
+		EED5EABC1BD7375E000AFF36 /* PhotoTagTariangleLayer2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoTagTariangleLayer2.h; sourceTree = "<group>"; };
+		EED5EABD1BD7375E000AFF36 /* PhotoTagTariangleLayer2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoTagTariangleLayer2.m; sourceTree = "<group>"; };
 		EED64D431B8184AE008CB134 /* CycleAddKidsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleAddKidsCell.h; sourceTree = "<group>"; };
 		EED64D441B8184AE008CB134 /* CycleAddKidsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleAddKidsCell.m; sourceTree = "<group>"; };
 		EED64D461B8184C1008CB134 /* CycleAddKidsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CycleAddKidsCell.xib; sourceTree = "<group>"; };
@@ -1809,10 +1812,8 @@
 		EEAACC6D1B44E90400D05C0B /* PhotoTagViewLayers */ = {
 			isa = PBXGroup;
 			children = (
-				EEAACC6E1B44E90400D05C0B /* PhotoTagRoundPointLayer.h */,
-				EEAACC6F1B44E90400D05C0B /* PhotoTagRoundPointLayer.m */,
-				EEAACC701B44E90400D05C0B /* PhotoTagTariangleLayer.h */,
-				EEAACC711B44E90400D05C0B /* PhotoTagTariangleLayer.m */,
+				EED5EAB41BD73710000AFF36 /* NewTag */,
+				EED5EAB51BD73710000AFF36 /* RoundTag */,
 				EEAACC721B44E90400D05C0B /* PhotoTagView.h */,
 				EEAACC731B44E90400D05C0B /* PhotoTagView.m */,
 			);
@@ -1951,6 +1952,26 @@
 				EEC980AF1B8EB9EA0087E5A7 /* status-bar-progress@2x.png */,
 			);
 			path = BWStatusBarOverlay;
+			sourceTree = "<group>";
+		};
+		EED5EAB41BD73710000AFF36 /* NewTag */ = {
+			isa = PBXGroup;
+			children = (
+				EED5EABC1BD7375E000AFF36 /* PhotoTagTariangleLayer2.h */,
+				EED5EABD1BD7375E000AFF36 /* PhotoTagTariangleLayer2.m */,
+			);
+			path = NewTag;
+			sourceTree = "<group>";
+		};
+		EED5EAB51BD73710000AFF36 /* RoundTag */ = {
+			isa = PBXGroup;
+			children = (
+				EED5EAB61BD73710000AFF36 /* PhotoTagRoundPointLayer.h */,
+				EED5EAB71BD73710000AFF36 /* PhotoTagRoundPointLayer.m */,
+				EED5EAB81BD73710000AFF36 /* PhotoTagTariangleLayer.h */,
+				EED5EAB91BD73710000AFF36 /* PhotoTagTariangleLayer.m */,
+			);
+			path = RoundTag;
 			sourceTree = "<group>";
 		};
 		EED64D421B81844A008CB134 /* CycleKids */ = {
@@ -2372,12 +2393,10 @@
 			files = (
 				EE7910601B845818005E455B /* UIBarButtonItem+WEPopover.m in Sources */,
 				EE7910591B841D14005E455B /* WEBlockingGestureRecognizer.m in Sources */,
-				EE7910581B841CE0005E455B /* PhotoTagRoundPointLayer.m in Sources */,
 				EE7910571B841CBE005E455B /* FoundPCGCell.m in Sources */,
 				EE7910561B841CAB005E455B /* WETouchableView.m in Sources */,
 				EEDCF69D1B9AB674005F4F4D /* UserSetting.m in Sources */,
 				EE9785AE1B9004CD00C454C5 /* CycleAddDOBViewController.m in Sources */,
-				EE7910551B841C8F005E455B /* PhotoTagTariangleLayer.m in Sources */,
 				EEBFFC211B9177D5005AAE36 /* PersonalChangeScreenNameController.m in Sources */,
 				EE7910541B841C77005E455B /* AlbumGridCell.m in Sources */,
 				EE7910531B841C5B005E455B /* AreaTableCell.m in Sources */,
@@ -2500,6 +2519,7 @@
 				EE5D686F1B75A9FC0067A2DF /* NotificationOwner.m in Sources */,
 				EE86D1B21B537469001C4650 /* PostEffectAdapter.mm in Sources */,
 				EE9785B01B9004CD00C454C5 /* CycleAddKidsViewController.m in Sources */,
+				EED5EABE1BD7375E000AFF36 /* PhotoTagTariangleLayer2.m in Sources */,
 				EEE94E131B74AB6B0011321A /* AddressBookDelegate.m in Sources */,
 				EEAACCE01B44E90400D05C0B /* PostModel.m in Sources */,
 				EE83F40A1B96EDDF00D51FDF /* CycleAddSchoolViewController.m in Sources */,
@@ -2517,8 +2537,10 @@
 				EEAACCDC1B44E90400D05C0B /* RegTmpToken.m in Sources */,
 				EED774D31BABF86D001C9B57 /* HomeDetailViewController.m in Sources */,
 				EE9744171B78886300E81A70 /* MessageNotificationCell.m in Sources */,
+				EED5EABA1BD73710000AFF36 /* PhotoTagRoundPointLayer.m in Sources */,
 				EEDAF46F1BA6964C0035CC31 /* DongDaTabBar.m in Sources */,
 				EE2D4B7E1B525E0A00B58A1F /* PhotoPreViewEffectController.m in Sources */,
+				EED5EABB1BD73710000AFF36 /* PhotoTagTariangleLayer.m in Sources */,
 				EEAACCD61B44E90400D05C0B /* LoginLocalModel.xcdatamodeld in Sources */,
 				EEAACCE51B44E90400D05C0B /* QueryContentTag.m in Sources */,
 				EEAACCEE1B44E90400D05C0B /* SRWebSocket.m in Sources */,
