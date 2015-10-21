@@ -75,6 +75,32 @@
      * comments header and footer
      */
     [_queryView registerClass:[TagQueryCell class] forCellReuseIdentifier:@"tag cell"];
+    
+    UILabel* label_t = [[UILabel alloc]init];
+    label_t.text = @"tags";
+    label_t.textColor = [UIColor whiteColor];
+    [label_t sizeToFit];
+    self.navigationItem.titleView = label_t;
+   
+    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
+//    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+//    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+//    NSString* filepath = [resourceBundle pathForResource:@"Previous_blue" ofType:@"png"];
+    NSString* filepath = [resourceBundle pathForResource:@"Previous_simple" ofType:@"png"];
+    CALayer * layer = [CALayer layer];
+    layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
+    layer.frame = CGRectMake(0, 0, 25, 25);
+    layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
+    [barBtn.layer addSublayer:layer];
+//    [barBtn setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
+//    [barBtn setImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
+    [barBtn addTarget:self action:@selector(didPopControllerBtnSelected) forControlEvents:UIControlEventTouchDown];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn];
+}
+
+- (void)didPopControllerBtnSelected {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
