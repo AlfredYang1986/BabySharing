@@ -55,7 +55,7 @@
 }
 
 + (CGSize)getSizeBaseOnDescription:(NSString*)comment {
-    UIFont* font = [UIFont systemFontOfSize:14.f];
+    UIFont* font = [UIFont systemFontOfSize:16.f];
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     
 //    return [comment sizeWithFont:font constrainedToSize:CGSizeMake(width - MARGIN * 2, FLT_MAX)];
@@ -99,8 +99,9 @@
     
     CGSize size = [QueryCommentsCell getSizeBaseOnDescription:comment];
 //    commentView.frame = CGRectMake(MARGIN, _imgView.frame.origin.y + _imgView.frame.size.height + MARGIN, [UIScreen mainScreen].bounds.size.width - MARGIN * 2, size.height);
-    commentView.frame = CGRectMake(MARGIN + 36 + MARGIN, _nameLabel.frame.origin.y + _nameLabel.frame.size.height /*+ MARGIN*/, [UIScreen mainScreen].bounds.size.width - MARGIN * 2, size.height);
+    commentView.frame = CGRectMake(MARGIN + 36 + MARGIN / 2, _nameLabel.frame.origin.y + _nameLabel.frame.size.height /*+ MARGIN*/, [UIScreen mainScreen].bounds.size.width - MARGIN * 2, size.height);
     commentView.text = comment;
+    commentView.font = [UIFont systemFontOfSize:16.f];
     [commentView sizeToFit];
 }
 
