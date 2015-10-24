@@ -54,6 +54,27 @@
         _loginImgBtn.backgroundColor = [UIColor clearColor];
         _loginImgBtn.layer.cornerRadius = _loginImgBtn.frame.size.width / 2;
     }
+    
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+    UIImageView* title_img = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 75, 25)];
+    title_img.image = [UIImage imageNamed:[resourceBundle pathForResource:@"DongDaHeaderLogo" ofType:@"png"]];
+    self.navigationItem.titleView = title_img;
+   
+    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
+    NSString* filepath = [resourceBundle pathForResource:@"Previous_simple" ofType:@"png"];
+    CALayer * layer = [CALayer layer];
+    layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
+    layer.frame = CGRectMake(0, 0, 13, 20);
+    layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
+    [barBtn.layer addSublayer:layer];
+    [barBtn addTarget:self action:@selector(didPopViewController) forControlEvents:UIControlEventTouchDown];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn];
+}
+
+- (void)didPopViewController {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

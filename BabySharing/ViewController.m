@@ -57,7 +57,8 @@ enum DisplaySide {
     NSInteger seconds;
    
     /**********************************************/
-    UILabel * title;                // title
+//    UILabel * title;                // title
+    UIImageView* title;                // title
     
     LoginInputView* inputView;
     BOOL isSNSLogin;
@@ -77,6 +78,7 @@ enum DisplaySide {
     // Do any additional setup after loading the view, typically from a nib.
     [self.navigationController setNavigationBarHidden:YES animated:NO];
     [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f]];
+    [self.view setBackgroundColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f]];
 //    [self.navigationController.navigationBar setBackgroundColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f]];
     
     AppDelegate * del =(AppDelegate*)[[UIApplication sharedApplication] delegate];
@@ -129,11 +131,15 @@ enum DisplaySide {
     
     [self.view addSubview:inputView];
    
-    title = [[UILabel alloc]init];
-    title.font = [UIFont systemFontOfSize:30.f];
-    title.text = @"咚哒";
+//    title = [[UILabel alloc]init];
+//    title.font = [UIFont systemFontOfSize:30.f];
+//    title.text = @"咚哒";
 //    CGSize title_size = [title.text sizeWithFont:title.font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
-    [title sizeToFit];
+//    [title sizeToFit];
+    title = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 150, 50)];
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+    title.image = [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"DongDaHeaderLogo"] ofType:@"png"]];
     title.center = CGPointMake(width / 2, 0.15 * height);
     
     [self.view addSubview:title];

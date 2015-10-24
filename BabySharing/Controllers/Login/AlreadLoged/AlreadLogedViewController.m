@@ -49,41 +49,91 @@
      * add under line for nick name label
      */
     NSString* name = [_login_attr objectForKey:@"screen_name"];
-    if ([name isEqualToString:@""]) {
+    if (!name || [name isEqualToString:@""]) {
         name = [_login_attr objectForKey:@"phoneNo"];
     }
-    NSMutableAttributedString *content = [[NSMutableAttributedString alloc] initWithString:name];
-    NSRange contentRange = {0, [content length]};
-    [content addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:contentRange];
     
-    _nickNameLabel.text = @"";
-    _nickNameLabel.attributedText = content;
+//    NSMutableAttributedString *content = [[NSMutableAttributedString alloc] initWithString:name];
+//    NSRange contentRange = {0, [content length]};
+//    [content addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:contentRange];
+    
+//    _nickNameLabel.text = @"";
+//    _nickNameLabel.attributedText = content;
+    _nickNameLabel.text = name;
    
     /**
      * border for role tags
      */
     NSString* tag =[_login_attr objectForKey:@"role_tag"];
-    if ([tag isEqualToString:@""]) {
+    if (!tag || [tag isEqualToString:@""]) {
         tag = @"请添加一个标签";
     }
     _currentTagLabel.text = tag;
-    _currentTagLabel.layer.borderWidth = 1.f;
-    _currentTagLabel.layer.borderColor = [UIColor blueColor].CGColor;
-    _currentTagLabel.layer.cornerRadius = 4.f;
+    _currentTagLabel.textColor = [UIColor whiteColor];
+    _currentTagLabel.backgroundColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
+//    _currentTagLabel.layer.borderWidth = 1.f;
+//    _currentTagLabel.layer.borderColor = [UIColor blueColor].CGColor;
+//    _currentTagLabel.font = [UIFont systemFontOfSize:24.f];
+    [_currentTagLabel sizeToFit];
+    _currentTagLabel.font = [UIFont systemFontOfSize:15.f];
+    _currentTagLabel.textAlignment = NSTextAlignmentCenter;
+//    _currentTagLabel.layer.cornerRadius = 10.5;
     _currentTagLabel.clipsToBounds = YES;
     
     /**
      * border for yes btn and no btn
      */
-    _yesBtn.layer.borderWidth = 1.f;
-    _yesBtn.layer.borderColor = [UIColor blueColor].CGColor;
-    _yesBtn.layer.cornerRadius = 4.f;
+//    _yesBtn.layer.borderWidth = 1.f;
+//    _yesBtn.layer.borderColor = [UIColor blueColor].CGColor;
+    _yesBtn.layer.cornerRadius = 25.f;
     _yesBtn.clipsToBounds = YES;
+    _yesBtn.backgroundColor = [UIColor colorWithRed:0.3126 green:0.8529 blue:0.7941 alpha:1.f];
+    [_yesBtn setTitleColor:[UIColor colorWithWhite:1.f alpha:0.8] forState:UIControlStateNormal];
 
-    _noBtn.layer.borderWidth = 1.f;
-    _noBtn.layer.borderColor = [UIColor blueColor].CGColor;
-    _noBtn.layer.cornerRadius = 4.f;
+//    _noBtn.layer.borderWidth = 1.f;
+//    _noBtn.layer.borderColor = [UIColor blueColor].CGColor;
+    _noBtn.layer.cornerRadius = 25.f;
     _noBtn.clipsToBounds = YES;
+    _noBtn.backgroundColor = [UIColor colorWithRed:0.3126 green:0.8529 blue:0.7941 alpha:1.f];
+    [_noBtn setTitleColor:[UIColor colorWithWhite:1.f alpha:0.8] forState:UIControlStateNormal];
+   
+//    UILabel* label_t = [[UILabel alloc]init];
+//    label_t.text = @"圈子";
+//    label_t.textColor = [UIColor whiteColor];
+//    [label_t sizeToFit];
+    UIImageView* title_img = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 75, 25)];
+    title_img.image = [UIImage imageNamed:[resourceBundle pathForResource:@"DongDaHeaderLogo" ofType:@"png"]];
+    self.navigationItem.titleView = title_img;
+   
+    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
+    NSString* filepath = [resourceBundle pathForResource:@"Previous_simple" ofType:@"png"];
+    CALayer * layer = [CALayer layer];
+    layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
+    layer.frame = CGRectMake(0, 0, 13, 20);
+    layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
+    [barBtn.layer addSublayer:layer];
+    [barBtn addTarget:self action:@selector(didPopViewController) forControlEvents:UIControlEventTouchDown];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn];
+}
+
+- (void)didPopViewController {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)viewDidLayoutSubviews {
+    CGPoint ori = _currentTagLabel.center;
+    
+    _currentTagLabel.bounds = CGRectMake(0, 0, _currentTagLabel.bounds.size.width + 16, _currentTagLabel.bounds.size.height + 8);
+    _currentTagLabel.center = ori;
+    
+    _currentTagLabel.layer.cornerRadius = _currentTagLabel.bounds.size.height / 2;
+    
+//    CGFloat offset_y = _yesBtn.center.y;
+//    CGFloat offset_x = [UIScreen mainScreen].bounds.size.width / 2;
+//    
+//    _yesBtn.center = CGPointMake(offset_x , offset_y);
+//    _noBtn.center = CGPointMake(offset_x - 100, offset_y);
 }
 
 - (void)didReceiveMemoryWarning {

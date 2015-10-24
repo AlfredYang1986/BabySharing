@@ -65,8 +65,8 @@
 #pragma mark - segue
 
 - (IBAction)didSelectNextButton {
-//    NSString* phoneNo = self.phoneNoFiled.text;
-    NSString* phoneNo = @"13720200856";
+    NSString* phoneNo = self.phoneNoFiled.text;
+//    NSString* phoneNo = @"13720200856";
    
     if ([self isValidPhoneNumber:phoneNo inArea:_areaCodeSelected]) {
         [self.lm sendLoginRequestToPhone: phoneNo];
