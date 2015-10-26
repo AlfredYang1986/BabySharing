@@ -168,6 +168,10 @@
             [RegTmpToken removeTokenInContext:_doc.managedObjectContext WithToken:reg_token];
             *reVal = reError;
             return LoginModelResultOthersLogin;
+        } else if ([msg isEqualToString:@"new user"]) {
+            [RegTmpToken removeTokenInContext:_doc.managedObjectContext WithToken:reg_token];
+            *reVal = reError;
+            return LoginModelResultSuccess;
         } else {
          
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:msg delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
