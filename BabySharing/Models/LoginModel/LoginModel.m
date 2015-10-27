@@ -160,6 +160,7 @@
     if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
         *reVal = [result objectForKey:@"result"];
         [RegTmpToken removeTokenInContext:_doc.managedObjectContext WithToken:reg_token];
+        [LoginToken createTokenInContext:_doc.managedObjectContext withUserID:[*reVal objectForKey:@"user_id"] andAttrs:*reVal];
         return LoginModelResultSuccess;
     } else {
         NSDictionary* reError = [result objectForKey:@"error"];
@@ -167,10 +168,12 @@
         if ([msg isEqualToString:@"already login"]) {
             [RegTmpToken removeTokenInContext:_doc.managedObjectContext WithToken:reg_token];
             *reVal = reError;
+            [LoginToken createTokenInContext:_doc.managedObjectContext withUserID:[*reVal objectForKey:@"user_id"] andAttrs:*reVal];
             return LoginModelResultOthersLogin;
         } else if ([msg isEqualToString:@"new user"]) {
             [RegTmpToken removeTokenInContext:_doc.managedObjectContext WithToken:reg_token];
             *reVal = reError;
+            [LoginToken createTokenInContext:_doc.managedObjectContext withUserID:[*reVal objectForKey:@"user_id"] andAttrs:*reVal];
             return LoginModelResultSuccess;
         } else {
          
@@ -220,7 +223,7 @@
 }
 
 - (BOOL)updateUserProfile:(NSDictionary*)attrs {
-    
+   
     NSError * error = nil;
     NSData* jsonData =[NSJSONSerialization dataWithJSONObject:attrs options:NSJSONWritingPrettyPrinted error:&error];
     
@@ -229,7 +232,8 @@
     if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
         NSDictionary* reVal = [result objectForKey:@"result"];
         NSString* user_id = (NSString*)[reVal objectForKey:@"user_id"];
-        [LoginToken updataLoginUserInContext:_doc.managedObjectContext withUserID:user_id andAttrs:reVal];
+//        [LoginToken updataLoginUserInContext:_doc.managedObjectContext withUserID:user_id andAttrs:reVal];
+        [LoginToken createTokenInContext:_doc.managedObjectContext withUserID:user_id andAttrs:reVal];
         return YES;
     } else {
         NSDictionary* reError = [result objectForKey:@"error"];
@@ -592,7 +596,7 @@
 
 - (BOOL)onlineCurrentUser {
     
-    if (self.current_user == nil)
+    if (self.current_user == nil || _current_user.who.user_id == nil)
         return NO;
     
     NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];

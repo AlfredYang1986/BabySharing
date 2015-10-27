@@ -115,6 +115,7 @@
     [barBtn addTarget:self action:@selector(didPopViewController) forControlEvents:UIControlEventTouchDown];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn];
+    
 }
 
 - (void)didPopViewController {

@@ -108,7 +108,6 @@
 
 - (IBAction)didConfirm {
 
-    
     NSString* auth_token = [_login_attr objectForKey:@"auth_token"];
     NSString* user_id = [_login_attr objectForKey:@"user_id"];
     

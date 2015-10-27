@@ -9,45 +9,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BabySharing/Models/LoginModel/LoginModel.m"
-            timestampString = "467524155.129887"
+            filePath = "BabySharing/Models/LoginModel/LocalModel/LoginToken+ContextOpt.m"
+            timestampString = "467611123.230008"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "172"
-            endingLineNumber = "172"
-            landmarkName = "-sendConfirrmCode:ToPhone:withToken:toResult:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BabySharing/Models/LoginModel/LoginModel.m"
-            timestampString = "467524169.111614"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "174"
-            endingLineNumber = "174"
-            landmarkName = "-sendConfirrmCode:ToPhone:withToken:toResult:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BabySharing/Models/LoginModel/LoginModel.m"
-            timestampString = "467524188.958631"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "167"
-            endingLineNumber = "167"
-            landmarkName = "-sendConfirrmCode:ToPhone:withToken:toResult:"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
+            landmarkName = "+handlerAttrInLoginToken:withAttrs:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
