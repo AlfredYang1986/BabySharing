@@ -74,6 +74,9 @@
     [_seg setImage:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Star"] ofType:@"png"]] forSegmentAtIndex:3];
 
     [_seg addTarget:self action:@selector(segControlValueChanged) forControlEvents:UIControlEventValueChanged];
+
+    _imgView.layer.cornerRadius = 50.f;
+    _imgView.clipsToBounds = YES;
 }
 
 - (void)setOwnerPhoto:(NSString*)photo_name {

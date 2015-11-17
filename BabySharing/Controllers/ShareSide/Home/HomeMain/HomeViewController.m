@@ -17,13 +17,13 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 #import "MoviePlayTrait.h"
-#import "HomeViewFoundDelegateAndDatasource.h"
+//#import "HomeViewFoundDelegateAndDatasource.h"
 #import "INTUAnimationEngine.h"
 #import "QueryCell.h"
 #import "QueryHeader.h"
 #import "INTUAnimationEngine.h"
 #import "BWStatusBarOverlay.h"
-#import "HomeSegControl.h"
+//#import "HomeSegControl.h"
 
 #define VIEW_BOUNTDS        CGFloat screen_width = [UIScreen mainScreen].bounds.size.width; \
                             CGFloat screen_height = [UIScreen mainScreen].bounds.size.height; \
@@ -44,7 +44,7 @@
 
 #define BACK_TO_TOP_TIME    3.0
 
-@interface HomeViewController () <UITableViewDelegate, UITableViewDataSource, QueryCellActionProtocol, HomeSegControlDelegate>
+@interface HomeViewController () <UITableViewDelegate, UITableViewDataSource, QueryCellActionProtocol> //, HomeSegControlDelegate>
     
 @property (weak, nonatomic) IBOutlet UITableView *queryView;
 @property (weak, nonatomic, readonly) NSString* current_user_id;
@@ -58,10 +58,10 @@
 
 @implementation HomeViewController {
 //    UISegmentedControl* sg;
-    HomeSegControl* sg;
+//    HomeSegControl* sg;
     MoviePlayTrait* trait;
     
-    HomeViewFoundDelegateAndDatasource* found_datasource;
+//    HomeViewFoundDelegateAndDatasource* found_datasource;
     
     UIView* bkView;
     UITapGestureRecognizer* tap;
@@ -76,7 +76,7 @@
 @synthesize isLoading = _isLoading;
 @synthesize isHandleScrolling = _isHandleScrolling;
 
-@synthesize foundView = _foundView;
+//@synthesize foundView = _foundView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -103,31 +103,37 @@
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
 //    NSString * filePathMS = [resourceBundle pathForResource:[NSString stringWithFormat:@"Muti-Star"] ofType:@"png"];
-    sg = [[HomeSegControl alloc]initWithFrame:CGRectMake(0, 0, 200, 30)];
+//    sg = [[HomeSegControl alloc]initWithFrame:CGRectMake(0, 0, 200, 30)];
 //    [sg addItem:@"推荐" andImage:[UIImage imageNamed:filePathMS]];
-    [sg addItem:@"推荐" andImage:nil];
-    [sg addItem:@"发现" andImage:nil];
-    sg.delegate = self;
-    self.navigationItem.titleView = sg;
+//    [sg addItem:@"推荐" andImage:nil];
+//    [sg addItem:@"发现" andImage:nil];
+//    sg.delegate = self;
+//    self.navigationItem.titleView = sg;
+    UILabel* title = [[UILabel alloc]init];
+    title.textColor = [UIColor whiteColor];
+    title.text = @"咚嗒";
+    [title sizeToFit];
+    self.navigationItem.titleView = title;
     
     /**
      * search controller
      */
-    NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"Explore"] ofType:@"png"];
+    NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"Cycle"] ofType:@"png"];
     UIImage *image = [UIImage imageNamed:filePath];
 //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(didSelectSearchBtn:)];
 
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame =CGRectMake(0, 0, 25, 25);
     [btn setBackgroundImage:image forState:UIControlStateNormal];
-    [btn addTarget: self action: @selector(didSelectSearchBtn:) forControlEvents: UIControlEventTouchUpInside];
+//    [btn addTarget: self action: @selector(didSelectSearchBtn:) forControlEvents: UIControlEventTouchUpInside];
+    [btn addTarget: self action: @selector(didSelectChatGroupBtn) forControlEvents: UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:btn];
     
     trait = [[MoviePlayTrait alloc]init];
-   
-    found_datasource = [[HomeViewFoundDelegateAndDatasource alloc]initWithTableView:_foundView andContainer:self];
-    _foundView.delegate = found_datasource;
-    _foundView.dataSource = found_datasource;
+
+//    found_datasource = [[HomeViewFoundDelegateAndDatasource alloc]initWithTableView:_foundView andContainer:self];
+//    _foundView.delegate = found_datasource;
+//    _foundView.dataSource = found_datasource;
 
     [self layoutTableViews];
     
@@ -146,15 +152,15 @@
 - (void)layoutTableViews {
     NSLog(@"layout the tableviews");
     VIEW_BOUNTDS
-    FOUND_BOUNDS
+//    FOUND_BOUNDS
 //    if (sg.selectedSegmentIndex == 0) {
-    if (sg.selectIndex == 0) {
+//    if (sg.selectIndex == 0) {
         _queryView.frame = QUERY_VIEW_START;
-        _foundView.frame = FOUND_VIEW_START;
-    } else {
-        _queryView.frame = QUERY_VIEW_END;
-        _foundView.frame = FOUND_VIEW_END;
-    }
+//        _foundView.frame = FOUND_VIEW_START;
+//    } else {
+//        _queryView.frame = QUERY_VIEW_END;
+//        _foundView.frame = FOUND_VIEW_END;
+//    }
 //    [self changeViews];
     bkView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, screen_width, 20)];
     bkView.backgroundColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
@@ -162,38 +168,38 @@
     [self.view bringSubviewToFront:bkView];
 }
 
-- (void)changeViews {
-    static const CGFloat kAnimationDuration = 0.80; // in seconds
-    VIEW_BOUNTDS
-    FOUND_BOUNDS
-    [INTUAnimationEngine animateWithDuration:kAnimationDuration
-                                       delay:0.0
-                                      easing:INTUEaseInOutQuadratic
-                                     options:INTUAnimationOptionNone
-                                  animations:^(CGFloat progress) {
-//                                      if (sg.selectedSegmentIndex == 0) {
-                                      if (sg.selectIndex == 0) {
-                                          _queryView.frame = INTUInterpolateCGRect(QUERY_VIEW_END, QUERY_VIEW_START, progress);
-                                          _foundView.frame = INTUInterpolateCGRect(FOUND_VIEW_END, FOUND_VIEW_START, progress);
-                                      } else {
-                                          _queryView.frame = INTUInterpolateCGRect(QUERY_VIEW_START, QUERY_VIEW_END, progress);
-                                          _foundView.frame = INTUInterpolateCGRect(FOUND_VIEW_START, FOUND_VIEW_END, progress);
-                                      }
-                                      
-                                      // NSLog(@"Progress: %.2f", progress);
-                                  }
-                                  completion:^(BOOL finished) {
-                                      // NOTE: When passing INTUAnimationOptionRepeat, this completion block is NOT executed at the end of each cycle. It will only run if the animation is canceled.
-                                      NSLog(@"%@", finished ? @"Animation Completed" : @"Animation Canceled");
-                                      //                                                         self.animationID = NSNotFound;
-                                  }];
-}
+//- (void)changeViews {
+//    static const CGFloat kAnimationDuration = 0.80; // in seconds
+//    VIEW_BOUNTDS
+//    FOUND_BOUNDS
+//    [INTUAnimationEngine animateWithDuration:kAnimationDuration
+//                                       delay:0.0
+//                                      easing:INTUEaseInOutQuadratic
+//                                     options:INTUAnimationOptionNone
+//                                  animations:^(CGFloat progress) {
+////                                      if (sg.selectedSegmentIndex == 0) {
+//                                      if (sg.selectIndex == 0) {
+//                                          _queryView.frame = INTUInterpolateCGRect(QUERY_VIEW_END, QUERY_VIEW_START, progress);
+//                                          _foundView.frame = INTUInterpolateCGRect(FOUND_VIEW_END, FOUND_VIEW_START, progress);
+//                                      } else {
+//                                          _queryView.frame = INTUInterpolateCGRect(QUERY_VIEW_START, QUERY_VIEW_END, progress);
+//                                          _foundView.frame = INTUInterpolateCGRect(FOUND_VIEW_START, FOUND_VIEW_END, progress);
+//                                      }
+//                                      
+//                                      // NSLog(@"Progress: %.2f", progress);
+//                                  }
+//                                  completion:^(BOOL finished) {
+//                                      // NOTE: When passing INTUAnimationOptionRepeat, this completion block is NOT executed at the end of each cycle. It will only run if the animation is canceled.
+//                                      NSLog(@"%@", finished ? @"Animation Completed" : @"Animation Canceled");
+//                                      //                                                         self.animationID = NSNotFound;
+//                                  }];
+//}
 
-- (void)segmentCanged:(id)sender {
-    NSLog(@"segment changed");
-//    [self viewDidLayoutSubviews];
-    [self changeViews];
-}
+//- (void)segmentCanged:(id)sender {
+//    NSLog(@"segment changed");
+////    [self viewDidLayoutSubviews];
+//    [self changeViews];
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -685,12 +691,17 @@
     [self performSegueWithIdentifier:@"search" sender:nil];
 }
 
-#pragma mark -- home seg control delegate
-- (void)valueHasChanged:(HomeSegControl *)seg {
+#pragma mark -- chat group controller
+- (void)didSelectChatGroupBtn {
     
-    if ((seg.selectIndex == 0 && _queryView.frame.origin.x < 0) ||
-        (seg.selectIndex == 1 && _queryView.frame.origin.x >= 0)) {
-        [self changeViews];
-    }
 }
+
+#pragma mark -- home seg control delegate
+//- (void)valueHasChanged:(HomeSegControl *)seg {
+//    
+//    if ((seg.selectIndex == 0 && _queryView.frame.origin.x < 0) ||
+//        (seg.selectIndex == 1 && _queryView.frame.origin.x >= 0)) {
+//        [self changeViews];
+//    }
+//}
 @end

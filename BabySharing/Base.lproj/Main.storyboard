@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="cMB-n2-C0T">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="cMB-n2-C0T">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -960,7 +960,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OJA-oB-6XQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="754" y="2496"/>
+            <point key="canvasLocation" x="1566" y="2496"/>
         </scene>
         <!--Home-->
         <scene sceneID="uKw-Qr-Yhw">
@@ -982,22 +982,12 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                                     <outlet property="delegate" destination="F2b-Q4-GUQ" id="vAg-8L-Q6T"/>
                                 </connections>
                             </tableView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="MrX-YE-Vzr">
-                                <rect key="frame" x="459" y="117" width="116" height="357"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="MrX-YE-Vzr" firstAttribute="top" secondItem="gdd-Kj-LAg" secondAttribute="bottom" constant="-108" id="0xg-KG-2PE"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="MrX-YE-Vzr" secondAttribute="trailing" constant="-16" id="133-oK-qfx"/>
                             <constraint firstAttribute="trailingMargin" secondItem="0cz-in-2vG" secondAttribute="trailing" constant="-16" id="1Pc-Yy-45k"/>
                             <constraint firstItem="0cz-in-2vG" firstAttribute="leading" secondItem="VkB-2S-8Kt" secondAttribute="leadingMargin" constant="-16" id="48T-8d-61g"/>
-                            <constraint firstItem="MrX-YE-Vzr" firstAttribute="trailing" secondItem="VkB-2S-8Kt" secondAttribute="trailingMargin" constant="-16" id="B8X-ul-oms"/>
-                            <constraint firstItem="UcI-2t-RVT" firstAttribute="top" secondItem="MrX-YE-Vzr" secondAttribute="bottom" constant="-93" id="Iqk-nC-lmW"/>
-                            <constraint firstItem="MrX-YE-Vzr" firstAttribute="leading" secondItem="VkB-2S-8Kt" secondAttribute="leadingMargin" constant="-16" id="LEZ-eT-KvA"/>
                             <constraint firstItem="0cz-in-2vG" firstAttribute="top" secondItem="gdd-Kj-LAg" secondAttribute="bottom" id="bL6-jE-ixG"/>
-                            <constraint firstItem="UcI-2t-RVT" firstAttribute="top" secondItem="MrX-YE-Vzr" secondAttribute="bottom" constant="-93" id="gOm-rR-Lna"/>
                             <constraint firstAttribute="bottomMargin" secondItem="0cz-in-2vG" secondAttribute="bottom" constant="-44" id="j5u-6u-wHx"/>
                             <constraint firstItem="0cz-in-2vG" firstAttribute="top" secondItem="VkB-2S-8Kt" secondAttribute="topMargin" constant="-44" id="krd-a8-dwv"/>
                             <constraint firstItem="UcI-2t-RVT" firstAttribute="top" secondItem="0cz-in-2vG" secondAttribute="bottom" id="lk2-Ao-pqu"/>
@@ -1009,19 +999,12 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                                 <exclude reference="bL6-jE-ixG"/>
                                 <exclude reference="j5u-6u-wHx"/>
                                 <exclude reference="krd-a8-dwv"/>
-                                <exclude reference="0xg-KG-2PE"/>
-                                <exclude reference="133-oK-qfx"/>
-                                <exclude reference="B8X-ul-oms"/>
-                                <exclude reference="LEZ-eT-KvA"/>
-                                <exclude reference="Iqk-nC-lmW"/>
-                                <exclude reference="gOm-rR-Lna"/>
                                 <exclude reference="lk2-Ao-pqu"/>
                             </mask>
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="GSb-1t-IAY"/>
                     <connections>
-                        <outlet property="foundView" destination="MrX-YE-Vzr" id="L5d-9D-PVJ"/>
                         <outlet property="queryView" destination="0cz-in-2vG" id="Cnt-lR-kFb"/>
                         <segue destination="bqO-Lu-4o6" kind="push" identifier="Home2ProfileSegue" id="81I-ET-d5W"/>
                         <segue destination="xUO-Ek-g05" kind="push" identifier="HomeDetailSegue" id="Xtg-xA-TvV"/>
@@ -1412,6 +1395,48 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
             </objects>
             <point key="canvasLocation" x="3292" y="1055"/>
         </scene>
+        <!--Found View Controller-->
+        <scene sceneID="bc8-cb-MU8">
+            <objects>
+                <viewController id="HaM-A3-6vV" customClass="FoundViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="99z-vN-zQQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="hvY-JV-hEP"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9mh-10-naU">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2nh-GQ-hM4">
+                                <rect key="frame" x="46" y="143" width="427" height="324"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="2nh-GQ-hM4" firstAttribute="top" secondItem="99z-vN-zQQ" secondAttribute="bottom" id="OCh-N0-e4N"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="2nh-GQ-hM4" secondAttribute="trailing" constant="-20" id="Wol-ba-xZE"/>
+                            <constraint firstItem="hvY-JV-hEP" firstAttribute="top" secondItem="2nh-GQ-hM4" secondAttribute="bottom" id="ZJv-bc-oNu"/>
+                            <constraint firstItem="2nh-GQ-hM4" firstAttribute="leading" secondItem="9mh-10-naU" secondAttribute="leadingMargin" constant="-20" id="p9n-y3-JH8"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="OCh-N0-e4N"/>
+                                <exclude reference="Wol-ba-xZE"/>
+                                <exclude reference="p9n-y3-JH8"/>
+                                <exclude reference="ZJv-bc-oNu"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" id="Jew-R0-GAN"/>
+                    <connections>
+                        <outlet property="queryView" destination="2nh-GQ-hM4" id="myG-aS-zc2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tq6-OA-zCC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="141" y="1964"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="FbJ-dg-jQJ">
             <objects>
@@ -1424,7 +1449,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                     </tabBar>
                     <connections>
                         <segue destination="aoW-yh-ycw" kind="relationship" relationship="viewControllers" id="b3V-ve-ohF"/>
-                        <segue destination="ZGp-mM-lve" kind="relationship" relationship="viewControllers" id="hxb-eX-qdj"/>
+                        <segue destination="Pa5-r2-UE1" kind="relationship" relationship="viewControllers" id="nga-LO-C6v"/>
                         <segue destination="Ln8-uz-udQ" kind="relationship" relationship="viewControllers" id="LVm-u9-WAH"/>
                         <segue destination="7hx-ud-h3I" kind="relationship" relationship="viewControllers" id="Vw4-0g-cEB"/>
                         <segue destination="Uzu-dA-Pf3" kind="relationship" relationship="viewControllers" id="LYV-nE-yzE"/>
@@ -1432,7 +1457,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GZB-Sn-QOH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="9" y="2496"/>
+            <point key="canvasLocation" x="821" y="2496"/>
         </scene>
         <!--Cycle-->
         <scene sceneID="txH-Pe-lPu">
@@ -1468,7 +1493,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nVW-Kp-aRz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1495" y="1742"/>
+            <point key="canvasLocation" x="2307" y="1742"/>
         </scene>
         <!--ChatGroup-->
         <scene sceneID="cQr-Si-4Sy">
@@ -1586,7 +1611,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GgD-qW-uAW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2218" y="1835"/>
+            <point key="canvasLocation" x="3030" y="1835"/>
         </scene>
         <!--Cycle Detail-->
         <scene sceneID="pUq-4f-Bak">
@@ -1638,7 +1663,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Adv-bE-NBA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2572" y="1649"/>
+            <point key="canvasLocation" x="3384" y="1649"/>
         </scene>
         <!--Notifications-->
         <scene sceneID="dfA-GK-KH0">
@@ -1676,7 +1701,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EyX-Ck-RRk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3226" y="2496"/>
+            <point key="canvasLocation" x="4038" y="2496"/>
         </scene>
         <!--Messages-->
         <scene sceneID="81g-Nk-e9J">
@@ -1830,7 +1855,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H4V-N8-IQx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1490" y="2496"/>
+            <point key="canvasLocation" x="2302" y="2496"/>
         </scene>
         <!--描述-->
         <scene sceneID="ojQ-th-uKA">
@@ -1925,7 +1950,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IIC-d5-A6w" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3292" y="1742"/>
+            <point key="canvasLocation" x="4104" y="1742"/>
         </scene>
         <!--学校-->
         <scene sceneID="ceL-u5-KeK">
@@ -2001,7 +2026,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Nw-lx-8RM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4133" y="2496"/>
+            <point key="canvasLocation" x="4945" y="2496"/>
         </scene>
         <!--孩子-->
         <scene sceneID="G85-yr-9uF">
@@ -2093,7 +2118,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="08a-fY-i9A" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4869" y="2087"/>
+            <point key="canvasLocation" x="5681" y="2087"/>
         </scene>
         <!--出生日期-->
         <scene sceneID="Mr9-71-lJj">
@@ -2170,7 +2195,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sLw-Rb-0Cv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4133" y="1637"/>
+            <point key="canvasLocation" x="4945" y="1637"/>
         </scene>
         <!--家乡-->
         <scene sceneID="PhU-eQ-LAI">
@@ -2207,7 +2232,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KnU-b6-79d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4869" y="1402"/>
+            <point key="canvasLocation" x="5681" y="1402"/>
         </scene>
         <!--添加好友-->
         <scene sceneID="3yB-0q-i35">
@@ -2516,7 +2541,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SWR-V8-rCo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="754" y="1742"/>
+            <point key="canvasLocation" x="1566" y="1742"/>
         </scene>
         <!--Personal Center-->
         <scene sceneID="5Qu-FH-07n">
@@ -2556,11 +2581,30 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
             </objects>
             <point key="canvasLocation" x="754" y="3252"/>
         </scene>
+        <!--Found-->
+        <scene sceneID="tGE-Uq-2Ve">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Pa5-r2-UE1" customClass="HomeNavigationController" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Found" id="7L6-5r-vv9"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="muW-SZ-U0Y">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="HaM-A3-6vV" kind="relationship" relationship="rootViewController" id="H7y-t4-jFr"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KNd-Ve-yTI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-671" y="1964"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="qbd-0n-vJA"/>
-        <segue reference="4Ao-yR-LGJ"/>
         <segue reference="2RH-j5-6Bc"/>
         <segue reference="mYA-47-s6C"/>
+        <segue reference="81I-ET-d5W"/>
     </inferredMetricsTieBreakers>
 </document>

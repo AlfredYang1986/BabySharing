@@ -21,6 +21,11 @@
 #import "QueryContentItem.h"
 #import "QueryContent.h"
 
+#define FOUND_REF_INDEX             -1
+#define FOUND_IMG_INDEX             0
+#define FOUND_MARGIN_INDEX          1
+#define FOUND_MARGIN_INDEX_2        2
+
 @interface HomeViewFoundDelegateAndDatasource () <AlbumTableCellDelegate>
 
 @end
@@ -78,15 +83,17 @@
     
     NSInteger index = indexPath.row;
 //    NSInteger total = [self tableView:tableView numberOfRowsInSection:0];
-   
-    if (index == 0) {
+ 
+
+    
+    if (index == FOUND_REF_INDEX) {
         return 44;
-    } else if (index == 1) {
+    } else if (index == FOUND_IMG_INDEX) {
         return [FoundPCGCell preferdHeight];
-    }else if (index == 2) {
+    }else if (index == FOUND_MARGIN_INDEX) {
         CGFloat width = [UIScreen mainScreen].bounds.size.width - 32;
         return width / 5;
-    } else if (index == 3) {
+    } else if (index == FOUND_MARGIN_INDEX_2) {
         return 44;
     } else {
         CGFloat width = [UIScreen mainScreen].bounds.size.width;
@@ -102,13 +109,13 @@
     NSArray* titles = @[@"refresh...", @"精彩内容", @"hottest sharing", @"hottest tags"];
 //    NSInteger total = [self tableView:tableView numberOfRowsInSection:0];
     
-    if (index == 0) {
+    if (index == FOUND_REF_INDEX) {
         return [self queryDefaultCellWithTableView:tableView withTitle:[titles objectAtIndex:0]];
-    } else if (index == 1) {
+    } else if (index == FOUND_IMG_INDEX) {
         return [self queryPGCCellWithTableView:tableView];
-    }else if (index == 2) {
+    }else if (index == FOUND_MARGIN_INDEX) {
         return [self queryRecommendUserCellWithTableView:tableView];
-    } else if (index == 3) {
+    } else if (index == FOUND_MARGIN_INDEX_2) {
         return [self queryDefaultCellWithTableView:tableView withTitle:[titles objectAtIndex:1]];
     } else {
         return [self queryTagsRowCellWithTableView:tableView atIndex:indexPath];
@@ -117,7 +124,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    return 4 + app.qm.querydata.count / PHOTO_PER_LINE;
+    return 4 + app.qm.querydata.count / PHOTO_PER_LINE + FOUND_REF_INDEX;
 }
 
 #pragma mark -- query cell
@@ -158,7 +165,7 @@
     }
     
     cell.delegate = self;
-    NSInteger row = indexPath.row - 4;
+    NSInteger row = indexPath.row - (4 + FOUND_REF_INDEX);
     AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
     @try {
         NSArray* arr_tmp = [app.qm.querydata objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(row * PHOTO_PER_LINE, PHOTO_PER_LINE)]];
