@@ -204,7 +204,7 @@
             [_player play];
         }];
     } else {
-        [self commentsBtnSelected];
+//        [self commentsBtnSelected];
     }
 }
 
@@ -321,7 +321,7 @@
 }
 
 - (void)commentsBtnSelected {
-    [_delegate didSelectCommentsBtn:self];
+//    [_delegate didSelectCommentsBtn:self];
 }
 
 - (void)disappearFuncView {

@@ -137,7 +137,6 @@
 		EEAACCC01B44E90400D05C0B /* PersonalCentreTmpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB461B44E90300D05C0B /* PersonalCentreTmpViewController.m */; };
 		EEAACCC31B44E90400D05C0B /* ShareSideBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB4C1B44E90300D05C0B /* ShareSideBaseController.m */; };
 		EEAACCC41B44E90400D05C0B /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB4F1B44E90300D05C0B /* TabBarController.m */; };
-		EEAACCC51B44E90400D05C0B /* UserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB521B44E90300D05C0B /* UserProfileViewController.m */; };
 		EEAACCC61B44E90400D05C0B /* webNab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEAACB541B44E90300D05C0B /* webNab.storyboard */; };
 		EEAACCC71B44E90400D05C0B /* WebSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACB561B44E90300D05C0B /* WebSearchController.m */; };
 		EEAACCC81B44E90400D05C0B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEAACB581B44E90300D05C0B /* Images.xcassets */; };
@@ -480,8 +479,6 @@
 		EEAACB4C1B44E90300D05C0B /* ShareSideBaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareSideBaseController.m; sourceTree = "<group>"; };
 		EEAACB4E1B44E90300D05C0B /* TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
 		EEAACB4F1B44E90300D05C0B /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
-		EEAACB511B44E90300D05C0B /* UserProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileViewController.h; sourceTree = "<group>"; };
-		EEAACB521B44E90300D05C0B /* UserProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfileViewController.m; sourceTree = "<group>"; };
 		EEAACB541B44E90300D05C0B /* webNab.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = webNab.storyboard; sourceTree = "<group>"; };
 		EEAACB551B44E90300D05C0B /* WebSearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebSearchController.h; sourceTree = "<group>"; };
 		EEAACB561B44E90300D05C0B /* WebSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebSearchController.m; sourceTree = "<group>"; };
@@ -1349,7 +1346,6 @@
 				EEAACB441B44E90300D05C0B /* PersonalCentre */,
 				EEAACB4A1B44E90300D05C0B /* ShareSideBase */,
 				EEAACB4D1B44E90300D05C0B /* TabBar */,
-				EEAACB501B44E90300D05C0B /* UserProfile */,
 			);
 			path = ShareSide;
 			sourceTree = "<group>";
@@ -1397,15 +1393,6 @@
 				EEAACB4F1B44E90300D05C0B /* TabBarController.m */,
 			);
 			path = TabBar;
-			sourceTree = "<group>";
-		};
-		EEAACB501B44E90300D05C0B /* UserProfile */ = {
-			isa = PBXGroup;
-			children = (
-				EEAACB511B44E90300D05C0B /* UserProfileViewController.h */,
-				EEAACB521B44E90300D05C0B /* UserProfileViewController.m */,
-			);
-			path = UserProfile;
 			sourceTree = "<group>";
 		};
 		EEAACB531B44E90300D05C0B /* WebSearch */ = {
@@ -2558,7 +2545,6 @@
 				EEAACCD91B44E90400D05C0B /* Providers+ContextOpt.m in Sources */,
 				EEAAC8FE1B44E81A00D05C0B /* main.m in Sources */,
 				EEAACCC71B44E90400D05C0B /* WebSearchController.m in Sources */,
-				EEAACCC51B44E90400D05C0B /* UserProfileViewController.m in Sources */,
 				EEAACCEA1B44E90400D05C0B /* TagQueryModel.m in Sources */,
 				EE9633D01B92CA8200DB4EA5 /* NewMessageSettingController.mm in Sources */,
 				EEAACCE61B44E90400D05C0B /* QueryLikes.m in Sources */,
