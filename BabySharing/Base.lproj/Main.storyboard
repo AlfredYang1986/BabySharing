@@ -894,7 +894,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="10N-V8-JSP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2342" y="4743"/>
+            <point key="canvasLocation" x="2342" y="4692"/>
         </scene>
         <!--个性签名-->
         <scene sceneID="SxI-wz-oiA">
@@ -965,7 +965,6 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
         <!--Home-->
         <scene sceneID="uKw-Qr-Yhw">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gik-1Z-yKA" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="F2b-Q4-GUQ" customClass="HomeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gdd-Kj-LAg"/>
@@ -1012,6 +1011,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <segue destination="OyS-hf-ms2" kind="push" identifier="ChatGroupSegue" id="LnD-Mz-TOI"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gik-1Z-yKA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1508" y="982"/>
         </scene>

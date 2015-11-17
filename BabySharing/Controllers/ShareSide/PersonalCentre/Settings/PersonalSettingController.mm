@@ -14,8 +14,12 @@
 #import "AppDelegate.h"
 #import "CycleAddDescriptionViewController.h"
 #import "PersonalCenterSignaturesController.h"
+#import "SGActionView.h"
+#import "TmpFileStorageModel.h"
+#import "RemoteInstance.h"
+#import "LoginModel.h"
 
-@interface PersonalSettingController () <UITableViewDataSource, UITableViewDelegate, chanageScreenNameProtocol, SearchUserTagControllerDelegate, PersonalSignatureProtocol>
+@interface PersonalSettingController () <UITableViewDataSource, UITableViewDelegate, chanageScreenNameProtocol, SearchUserTagControllerDelegate, PersonalSignatureProtocol, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *queryView;
 @end
 
@@ -38,7 +42,7 @@
     data = @[@"头像", @"", @"昵称", @"", @"角色", @"", @"个性签名", @"", @"自己的描述", @"", @"账号绑定"];
     title = @[@"screen_photo", @"", @"screen_name", @"", @"role_tag", @"", @"signature", @"", @"自己的描述", @"", @"账号绑定"];
     
-    functions.push_back(@selector(phoneSelected));
+    functions.push_back(@selector(screenPhotoSelected));
     functions.push_back(nil);
     functions.push_back(@selector(screenNameSelected));
     functions.push_back(nil);
@@ -193,8 +197,100 @@
 }
 
 #pragma mark -- functions 
-- (void)phoneSelected {
+- (void)screenPhotoSelected {
+    [SGActionView showSheetWithTitle:@"" itemTitles:@[@"打开照相机", @"从相册中选择", @"取消"] selectedIndex:-1 selectedHandle:^(NSInteger index) {
+        switch (index) {
+            case 0:
+                [self openAppCamera];
+                break;
+            case 1:
+                [self openCameraRoll];
+                break;
+            default:
+                break;
+        }
+    }];
+}
+
+- (void)openCameraRoll {
+    UIImagePickerController *pickerImage = [[UIImagePickerController alloc] init];
+    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+        pickerImage.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        //pickerImage.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+        pickerImage.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:pickerImage.sourceType];
+        
+    }
+    pickerImage.delegate = self;
+    pickerImage.allowsEditing = NO;
+    [self presentModalViewController:pickerImage animated:YES];
+}
+
+- (void)openAppCamera {
+    //先设定sourceType为相机，然后判断相机是否可用（ipod）没相机，不可用将sourceType设定为相片库
+    UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
+    //    if (![UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]) {
+    //        sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    //    }
+    //sourceType = UIImagePickerControllerSourceTypeCamera; //照相机
+    //sourceType = UIImagePickerControllerSourceTypePhotoLibrary; //图片库
+    //sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum; //保存的相片
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];//初始化
+    picker.delegate = self;
+    picker.allowsEditing = YES;//设置可编辑
+    picker.sourceType = sourceType;
+    [self presentModalViewController:picker animated:YES];//进入照相界面
+}
+
+#pragma mark -- UIImagePickerControllerDelegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(nullable NSDictionary<NSString *,id> *)editingInfo {
     
+    dispatch_queue_t aq = dispatch_queue_create("weibo profile img queue", nil);
+    dispatch_async(aq, ^{
+        /**
+         * 1. save the img to local
+         */
+        UIImage* img = image;
+        if (img) {
+            NSString* img_name = [TmpFileStorageModel generateFileName];
+            [TmpFileStorageModel saveToTmpDirWithImage:img withName:img_name];
+            
+            /**
+             * 2. change img_name in the server
+             */
+            AppDelegate* app = [UIApplication sharedApplication].delegate;
+            LoginModel* lm = app.lm;
+            
+            NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
+            [dic setValue:[lm getCurrentAuthToken] forKey:@"auth_token"];
+            [dic setValue:[lm getCurrentUserID] forKey:@"user_id"];
+            [dic setValue:img_name forKey:@"screen_photo"];
+//            [lm updateUserProfile:[dic copy]];
+            if ([lm updateUserProfile:[dic copy]]) {
+                /**
+                 * 4. refresh UI
+                 */
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    [_delegate personalDetailChanged:[dic copy]];
+                    [_queryView reloadData];
+                });
+            }
+           
+            /**
+             * 3. updata picture
+             */
+            dispatch_queue_t post_queue = dispatch_queue_create("post queue", nil);
+            dispatch_async(post_queue, ^(void){
+                [RemoteInstance uploadPicture:img withName:img_name toUrl:[NSURL URLWithString:[POST_HOST_DOMAIN stringByAppendingString:POST_UPLOAD]] callBack:^(BOOL successs, NSString *message) {
+                    if (successs) {
+                        NSLog(@"post image success");
+                    } else {
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                        [alert show];
+                    }
+                }];
+            });
+        }
+    });
 }
 
 - (void)screenNameSelected {
@@ -223,6 +319,6 @@
 }
 
 - (void)accountBoundSelected {
-    
+
 }
 @end

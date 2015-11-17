@@ -25,7 +25,7 @@
 #import "CollectionQueryModel.h"
 
 #import "UserChatController.h"
-#import "HomeDetailViewController.h"
+//#import "HomeDetailViewController.h"
 #import "PersonalSettingController.h"
 
 #import "ProfileOverView.h"
@@ -408,19 +408,19 @@
 }
 
 - (void)didSelectOneImageAtIndex:(NSInteger)index {
-    OwnerQueryModel* om = [self getOM];
-    QueryContent* tmp = [om.querydata objectAtIndex:index];
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    HomeDetailViewController* detail = [storyboard instantiateViewControllerWithIdentifier:@"DetailContent"];
-    detail.hidesBottomBarWhenPushed = YES;
-    
-    AppDelegate * app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    detail.qm = app.qm;
-    detail.current_content = tmp;
-    detail.current_user_id = _current_user_id;
-    detail.current_auth_token = _current_auth_token;
-    
-    [self.navigationController pushViewController:detail animated:YES];
+//    OwnerQueryModel* om = [self getOM];
+//    QueryContent* tmp = [om.querydata objectAtIndex:index];
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    HomeDetailViewController* detail = [storyboard instantiateViewControllerWithIdentifier:@"DetailContent"];
+//    detail.hidesBottomBarWhenPushed = YES;
+//    
+//    AppDelegate * app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//    detail.qm = app.qm;
+//    detail.current_content = tmp;
+//    detail.current_user_id = _current_user_id;
+//    detail.current_auth_token = _current_auth_token;
+//    
+//    [self.navigationController pushViewController:detail animated:YES];
 }
 
 #pragma mark -- change date
