@@ -13,7 +13,7 @@
 #import "QueryContent+ContextOpt.h"
 #import "QueryContentItem.h"
 #import "TmpFileStorageModel.h"
-#import "HomeDetailViewController.h"
+//#import "HomeDetailViewController.h"
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 #import "MoviePlayTrait.h"
@@ -625,17 +625,17 @@
 #pragma mark -- segue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"HomeDetailSegue"]) {
-        QueryCell* cell = (QueryCell*)sender;
-        
-        ((HomeDetailViewController*)(segue.destinationViewController)).qm = self.qm;
-        ((HomeDetailViewController*)(segue.destinationViewController)).current_content = cell.content;
-        ((HomeDetailViewController*)(segue.destinationViewController)).current_user_id = _current_user_id;
-        ((HomeDetailViewController*)(segue.destinationViewController)).current_auth_token = _current_auth_token;
-
-        if (cell && cell.type == PostPreViewMovie) {
-            ((HomeDetailViewController*)(segue.destinationViewController)).player = cell.player;
-            ((HomeDetailViewController*)(segue.destinationViewController)).current_image = cell.imgView.image;
-        }
+//        QueryCell* cell = (QueryCell*)sender;
+//        
+//        ((HomeDetailViewController*)(segue.destinationViewController)).qm = self.qm;
+//        ((HomeDetailViewController*)(segue.destinationViewController)).current_content = cell.content;
+//        ((HomeDetailViewController*)(segue.destinationViewController)).current_user_id = _current_user_id;
+//        ((HomeDetailViewController*)(segue.destinationViewController)).current_auth_token = _current_auth_token;
+//
+//        if (cell && cell.type == PostPreViewMovie) {
+//            ((HomeDetailViewController*)(segue.destinationViewController)).player = cell.player;
+//            ((HomeDetailViewController*)(segue.destinationViewController)).current_image = cell.imgView.image;
+//        }
         self.tabBarController.tabBar.hidden = YES;
     } else if ([segue.identifier isEqualToString:@"search"]) {
         
