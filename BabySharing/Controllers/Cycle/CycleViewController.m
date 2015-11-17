@@ -94,17 +94,15 @@
     NSString* filepath = [resourceBundle pathForResource:@"Previous_simple" ofType:@"png"];
     CALayer * layer = [CALayer layer];
     layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
-    layer.frame = CGRectMake(0, 0, 25, 25);
+    layer.frame = CGRectMake(0, 0, 13, 20);
     layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
     [barBtn.layer addSublayer:layer];
-//    [barBtn setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
-    [barBtn setImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
-    [barBtn addTarget:self action:@selector(didSelectPopContrllerBtn) forControlEvents:UIControlEventTouchUpInside];
+    [barBtn addTarget:self action:@selector(didPopViewController) forControlEvents:UIControlEventTouchDown];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn];
 }
 
-- (void)didSelectPopContrllerBtn {
+- (void)didPopViewController {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -235,7 +233,7 @@
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     CGFloat height = [UIScreen mainScreen].bounds.size.height;
    
-    CGRect rc = CGRectMake(0, 20 + 44, width, height - 44 - 49);
+    CGRect rc = CGRectMake(0, 0, width, height);
 //    _descriptionView.frame = rc;
     _cycleTableView.frame = rc;
     

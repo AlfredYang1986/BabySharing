@@ -29,13 +29,6 @@
 @synthesize queryView = _queryView;
 
 - (void)viewDidLoad {
-//    _themeField.text = @"";
-   
-//    if (_cycleDetails) {
-//        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"修改" style:UIBarButtonItemStylePlain target:self action:@selector(updateCycleDetailBtnSelected)];
-//    } else {
-//        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(createCycleDetailBtnSelected)];
-//    }
     
     UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(endTextViewEdit:)];
     [self.view addGestureRecognizer:tap];
