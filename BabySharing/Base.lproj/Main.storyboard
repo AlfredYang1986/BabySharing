@@ -965,6 +965,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
         <!--Home-->
         <scene sceneID="uKw-Qr-Yhw">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gik-1Z-yKA" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="F2b-Q4-GUQ" customClass="HomeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gdd-Kj-LAg"/>
@@ -1009,9 +1010,9 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <segue destination="bqO-Lu-4o6" kind="push" identifier="Home2ProfileSegue" id="81I-ET-d5W"/>
                         <segue destination="xUO-Ek-g05" kind="push" identifier="HomeDetailSegue" id="Xtg-xA-TvV"/>
                         <segue destination="cou-sa-Bod" kind="push" identifier="search" id="Gc2-hk-FGC"/>
+                        <segue destination="OyS-hf-ms2" kind="push" identifier="ChatGroupSegue" id="LnD-Mz-TOI"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gik-1Z-yKA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1508" y="982"/>
         </scene>
@@ -1471,10 +1472,6 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AOq-mE-hmC">
-                                <rect key="frame" x="16" y="113" width="186" height="388"/>
-                                <color key="backgroundColor" red="0.1575035102" green="1" blue="0.2256678731" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="hsJ-IJ-ldk">
                                 <rect key="frame" x="261" y="150" width="300" height="300"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1485,7 +1482,6 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                     <navigationItem key="navigationItem" title="Cycle" id="Jm6-ee-E2N"/>
                     <connections>
                         <outlet property="cycleTableView" destination="hsJ-IJ-ldk" id="kW7-zf-DRE"/>
-                        <outlet property="descriptionView" destination="AOq-mE-hmC" id="2Jp-eg-Ykc"/>
                         <segue destination="1Vy-iU-gPJ" kind="push" identifier="addCycle" id="c9C-Bt-6q9"/>
                         <segue destination="NDW-bl-o9I" kind="push" identifier="addDescription" id="uWd-ef-vMj"/>
                         <segue destination="lUX-aE-qZw" kind="push" identifier="enterChatGroup" id="f2T-JX-diK"/>
@@ -1493,7 +1489,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nVW-Kp-aRz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2307" y="1742"/>
+            <point key="canvasLocation" x="2251" y="1765"/>
         </scene>
         <!--ChatGroup-->
         <scene sceneID="cQr-Si-4Sy">
@@ -2524,25 +2520,6 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
             </objects>
             <point key="canvasLocation" x="-689" y="240"/>
         </scene>
-        <!--Chat-->
-        <scene sceneID="PRE-TO-2NP">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZGp-mM-lve" customClass="HomeNavigationController" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Chat" id="7V4-c0-skT"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Q5N-wP-Jj5">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="OyS-hf-ms2" kind="relationship" relationship="rootViewController" id="bDS-B7-4H4"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SWR-V8-rCo" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1566" y="1742"/>
-        </scene>
         <!--Personal Center-->
         <scene sceneID="5Qu-FH-07n">
             <objects>
@@ -2602,9 +2579,9 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="qbd-0n-vJA"/>
         <segue reference="2RH-j5-6Bc"/>
-        <segue reference="mYA-47-s6C"/>
+        <segue reference="qbd-0n-vJA"/>
         <segue reference="81I-ET-d5W"/>
+        <segue reference="mYA-47-s6C"/>
     </inferredMetricsTieBreakers>
 </document>

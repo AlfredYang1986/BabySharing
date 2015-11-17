@@ -23,8 +23,8 @@
 
 #define FOUND_REF_INDEX             -1
 #define FOUND_IMG_INDEX             0
-#define FOUND_MARGIN_INDEX          1
-#define FOUND_MARGIN_INDEX_2        2
+#define FOUND_USER_PHOTO_INDEX      1
+#define FOUND_TITLE_INDEX           2
 
 @interface HomeViewFoundDelegateAndDatasource () <AlbumTableCellDelegate>
 
@@ -90,10 +90,10 @@
         return 44;
     } else if (index == FOUND_IMG_INDEX) {
         return [FoundPCGCell preferdHeight];
-    }else if (index == FOUND_MARGIN_INDEX) {
+    }else if (index == FOUND_USER_PHOTO_INDEX) {
         CGFloat width = [UIScreen mainScreen].bounds.size.width - 32;
         return width / 5;
-    } else if (index == FOUND_MARGIN_INDEX_2) {
+    } else if (index == FOUND_TITLE_INDEX) {
         return 44;
     } else {
         CGFloat width = [UIScreen mainScreen].bounds.size.width;
@@ -113,9 +113,9 @@
         return [self queryDefaultCellWithTableView:tableView withTitle:[titles objectAtIndex:0]];
     } else if (index == FOUND_IMG_INDEX) {
         return [self queryPGCCellWithTableView:tableView];
-    }else if (index == FOUND_MARGIN_INDEX) {
+    }else if (index == FOUND_USER_PHOTO_INDEX) {
         return [self queryRecommendUserCellWithTableView:tableView];
-    } else if (index == FOUND_MARGIN_INDEX_2) {
+    } else if (index == FOUND_TITLE_INDEX) {
         return [self queryDefaultCellWithTableView:tableView withTitle:[titles objectAtIndex:1]];
     } else {
         return [self queryTagsRowCellWithTableView:tableView atIndex:indexPath];

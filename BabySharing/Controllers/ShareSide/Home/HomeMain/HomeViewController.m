@@ -693,7 +693,7 @@
 
 #pragma mark -- chat group controller
 - (void)didSelectChatGroupBtn {
-    
+    [self performSegueWithIdentifier:@"ChatGroupSegue" sender:nil];
 }
 
 #pragma mark -- home seg control delegate
