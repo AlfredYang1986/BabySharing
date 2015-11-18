@@ -95,6 +95,7 @@
 		EE83F40A1B96EDDF00D51FDF /* CycleAddSchoolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE83F4091B96EDDF00D51FDF /* CycleAddSchoolViewController.m */; };
 		EE86D1B21B537469001C4650 /* PostEffectAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = EE86D1B11B537469001C4650 /* PostEffectAdapter.mm */; };
 		EE87315E1B97E131004A25D8 /* WeiboFriendsDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EE87315D1B97E131004A25D8 /* WeiboFriendsDelegate.m */; };
+		EE90C9871BFC1C68002D5D1D /* MainHomeViewDataDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EE90C9861BFC1C68002D5D1D /* MainHomeViewDataDelegate.m */; };
 		EE92AE341BCE3627008DA020 /* CycleAddConditionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE92AE321BCE3626008DA020 /* CycleAddConditionCell.m */; };
 		EE92AE351BCE3627008DA020 /* CycleAddConditionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE92AE331BCE3626008DA020 /* CycleAddConditionCell.xib */; };
 		EE933CA51B99438000DA15DC /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEAACD5F1B44EA2D00D05C0B /* TencentOpenAPI.framework */; };
@@ -390,6 +391,9 @@
 		EE86D1B11B537469001C4650 /* PostEffectAdapter.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = PostEffectAdapter.mm; sourceTree = "<group>"; };
 		EE87315C1B97E131004A25D8 /* WeiboFriendsDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboFriendsDelegate.h; sourceTree = "<group>"; };
 		EE87315D1B97E131004A25D8 /* WeiboFriendsDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboFriendsDelegate.m; sourceTree = "<group>"; };
+		EE90C9841BFC1652002D5D1D /* HomeDataDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeDataDelegate.h; sourceTree = "<group>"; };
+		EE90C9851BFC1C68002D5D1D /* MainHomeViewDataDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainHomeViewDataDelegate.h; sourceTree = "<group>"; };
+		EE90C9861BFC1C68002D5D1D /* MainHomeViewDataDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainHomeViewDataDelegate.m; sourceTree = "<group>"; };
 		EE92AE311BCE3626008DA020 /* CycleAddConditionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleAddConditionCell.h; sourceTree = "<group>"; };
 		EE92AE321BCE3626008DA020 /* CycleAddConditionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleAddConditionCell.m; sourceTree = "<group>"; };
 		EE92AE331BCE3626008DA020 /* CycleAddConditionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CycleAddConditionCell.xib; sourceTree = "<group>"; };
@@ -1045,6 +1049,16 @@
 			path = CycleAddSchool;
 			sourceTree = "<group>";
 		};
+		EE90C9821BFC14EC002D5D1D /* HomeDataDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				EE90C9841BFC1652002D5D1D /* HomeDataDelegate.h */,
+				EE90C9851BFC1C68002D5D1D /* MainHomeViewDataDelegate.h */,
+				EE90C9861BFC1C68002D5D1D /* MainHomeViewDataDelegate.m */,
+			);
+			path = HomeDataDelegate;
+			sourceTree = "<group>";
+		};
 		EE92AE301BCE3334008DA020 /* CycleTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1321,6 +1335,7 @@
 		EEAACB371B44E90300D05C0B /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				EE90C9821BFC14EC002D5D1D /* HomeDataDelegate */,
 				EED774C51BABF86D001C9B57 /* HomeMain */,
 				EED774CA1BABF86D001C9B57 /* HomeSearch */,
 				EED774CD1BABF86D001C9B57 /* HomeTag */,
@@ -2389,6 +2404,7 @@
 				EEDCF6A01B9AB8DA005F4F4D /* UserSetting+ContextOpt.m in Sources */,
 				EE9785B41B90060B00C454C5 /* CycleAddHometownController.m in Sources */,
 				EEAACCEB1B44E90400D05C0B /* TmpFileStorageModel.m in Sources */,
+				EE90C9871BFC1C68002D5D1D /* MainHomeViewDataDelegate.m in Sources */,
 				EEAAA9771B77177C00BEDA6D /* Notifications.m in Sources */,
 				EE5D687B1B75B12B0067A2DF /* NotificationOwner+ContextOpt.m in Sources */,
 				EE5D68781B75A9FD0067A2DF /* Messages.m in Sources */,

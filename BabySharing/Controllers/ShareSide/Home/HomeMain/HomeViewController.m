@@ -24,6 +24,8 @@
 #import "INTUAnimationEngine.h"
 #import "BWStatusBarOverlay.h"
 //#import "HomeSegControl.h"
+#import "HomeDataDelegate.h"
+#import "MainHomeViewDataDelegate.h"
 
 #define VIEW_BOUNTDS        CGFloat screen_width = [UIScreen mainScreen].bounds.size.width; \
                             CGFloat screen_height = [UIScreen mainScreen].bounds.size.height; \
@@ -54,6 +56,8 @@
 @property (nonatomic) BOOL isHandleScrolling;
 
 @property (weak, nonatomic) IBOutlet UITableView *foundView;
+
+@property (strong, nonatomic) id<HomeViewControllerDataDelegate> delegate;
 @end
 
 @implementation HomeViewController {
@@ -75,6 +79,7 @@
 @synthesize qm = _qm;
 @synthesize isLoading = _isLoading;
 @synthesize isHandleScrolling = _isHandleScrolling;
+@synthesize delegate = _delegate;
 
 //@synthesize foundView = _foundView;
 
@@ -211,6 +216,10 @@
     self.tabBarController.tabBar.hidden = NO;
 //    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 //    [self setNeedsStatusBarAppearanceUpdate];
+    
+    if (_delegate == nil) {
+        _delegate = [[MainHomeViewDataDelegate alloc]init];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -268,8 +277,9 @@
     NSInteger total = [self numberOfSectionsInTableView:tableView];
     if (indexPath.section == 0 || indexPath.section == total - 1) return 44;
     else {
-        
-        QueryContent* tmp = [self.qm.querydata objectAtIndex:indexPath.section - 1];
+       
+        QueryContent* tmp = [_delegate queryItemAtIndex:indexPath.section - 1];
+//        QueryContent* tmp = [self.qm.querydata objectAtIndex:indexPath.section - 1];
         return [QueryCell preferredHeightWithDescription:tmp.content_description];
     }
 }
@@ -365,7 +375,8 @@
         }
 
         [header setUpSubviews];
-        QueryContent* tmp = [self.qm.querydata objectAtIndex:section - 1];
+//        QueryContent* tmp = [self.qm.querydata objectAtIndex:section - 1];
+        QueryContent* tmp = [_delegate queryItemAtIndex:section - 1];
         [header setUserPhoto:tmp.owner_photo];
         [header setUserName:tmp.owner_name];
         [header setTagText:@"金融/旅行/90后"];
@@ -411,8 +422,8 @@
             cell = [nib objectAtIndex:0];
         }
      
-//        QueryContent* tmp = [self.qm.querydata objectAtIndex:indexPath.row - 1];
-        QueryContent* tmp = [self.qm.querydata objectAtIndex:indexPath.section - 1];
+//        QueryContent* tmp = [self.qm.querydata objectAtIndex:indexPath.section - 1];
+        QueryContent* tmp = [_delegate queryItemAtIndex:indexPath.section - 1];
         QueryContentItem* tmp_item = [tmp.items.objectEnumerator nextObject];
         if (tmp_item.item_type.unsignedIntegerValue == PostPreViewPhote) {
             NSLog(@"photo field");
@@ -512,7 +523,8 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {     // Default is 1 if not implemented
-    return 2 + self.qm.querydata.count;
+//    return 2 + self.qm.querydata.count;
+    return 2 + [_delegate count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -575,7 +587,9 @@
             CGRect rc = _queryView.frame;
             rc.origin.y = rc.origin.y - 44;
             [_queryView setFrame:rc];
-            [_qm appendQueryDataByUser:_current_user_id withToken:_current_auth_token andBeginIndex:_qm.querydata.count];
+//            [_qm appendQueryDataByUser:_current_user_id withToken:_current_auth_token andBeginIndex:_qm.querydata.count];
+//            [_qm appendQueryDataByUser:_current_user_id withToken:_current_auth_token andBeginIndex:_qm.querydata.count];
+            [_delegate appendData:nil];
             rc.origin.y = rc.origin.y + 44;
             [_queryView setFrame:rc];
             [_queryView reloadData];
@@ -586,7 +600,8 @@
             __block CGRect rc = _queryView.frame;
             rc.origin.y = rc.origin.y + 44;
             [_queryView setFrame:rc];
-            [_qm refreshQueryDataByUser:_current_user_id withToken:_current_auth_token withFinishBlock:^{
+//            [_qm refreshQueryDataByUser:_current_user_id withToken:_current_auth_token withFinishBlock:^{
+            [_delegate collectData:^(NSArray *data) {
                 CGRect tmp = rc;
                 rc.origin.y = rc.origin.y - 44;
 //                [_queryView setFrame:rc];

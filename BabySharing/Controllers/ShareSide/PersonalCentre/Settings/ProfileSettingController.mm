@@ -30,15 +30,19 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
    
-    data = @[@"个人信息", @"", @"新消息通知", @"隐私&偏好", @"", @"去评分", @"对话咚哒团队",@"关于咚哒", @"", @"清除缓存", @"退出登录"];
+//    data = @[@"个人信息", @"", @"新消息通知", @"隐私&偏好", @"", @"去评分", @"对话咚哒团队",@"关于咚哒", @"", @"清除缓存", @"退出登录"];
+    data = @[@"个人信息", @"",  @"去评分", @"对话咚哒团队",@"关于咚哒", @"", @"", @"", @"", @"清除缓存", @"退出登录"];
     functions.push_back(@selector(personalSelected));
     functions.push_back(nil);
-    functions.push_back(@selector(newMessageSettingSelected));
-    functions.push_back(@selector(privateSettingSelected));
-    functions.push_back(nil);
+//    functions.push_back(@selector(newMessageSettingSelected));
+//    functions.push_back(@selector(privateSettingSelected));
+//    functions.push_back(nil);
     functions.push_back(@selector(votedSelected));
     functions.push_back(@selector(contactUsSelected));
     functions.push_back(@selector(aboutUsSelected));
+    functions.push_back(nil);
+    functions.push_back(nil);
+    functions.push_back(nil);
     functions.push_back(nil);
     functions.push_back(@selector(clearTmpStorageSelectd));
     functions.push_back(@selector(signOutSelected));
