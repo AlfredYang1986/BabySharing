@@ -430,6 +430,7 @@
     hv.delegate = [[UserHomeViewDataDelegate alloc]init];
     [hv.delegate pushExistingData:[self getOM].querydata];
     [hv.delegate setSelectIndex:index];
+    hv.nav_title = [self getNickName];
     [self.navigationController pushViewController:hv animated:YES];
 }
 

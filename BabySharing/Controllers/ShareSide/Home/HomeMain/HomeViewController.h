@@ -13,6 +13,7 @@
 
 @interface HomeViewController : ShareSideBaseController
 
+@property (weak, nonatomic) NSString* nav_title;
 @property (nonatomic) BOOL isPushed;
 @property (strong, nonatomic) id<HomeViewControllerDataDelegate> delegate;
 @end

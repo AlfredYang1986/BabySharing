@@ -323,8 +323,9 @@
     HomeViewController* hv = [storyboard instantiateViewControllerWithIdentifier:@"HomeView"];
     hv.isPushed = YES;
     hv.delegate = [[UserHomeViewDataDelegate alloc]init];
-    [hv.delegate pushExistingData:[self getOM].querydata];
+    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    [hv.delegate pushExistingData:app.qm.querydata];
     [hv.delegate setSelectIndex:index];
-    [self.navigationController pushViewController:hv animated:YES];
+    [_container.navigationController pushViewController:hv animated:YES];
 }
 @end

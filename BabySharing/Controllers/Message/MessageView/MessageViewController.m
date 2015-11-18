@@ -150,10 +150,12 @@
     CGFloat height = [UIScreen mainScreen].bounds.size.height;
    
     CGFloat offset_x = 0;
-    CGFloat offset_y = 20 + 44;
+    CGFloat offset_y = 0;
    
     _queryView.frame = CGRectMake(offset_x, offset_y, width, height);
     offset_x += width;
+
+    offset_y = 20 + 44;
 
 #define SEARCH_BAR_HEIGHT   44
 #define SEARCH_BAR_MARGIN_TOP 10

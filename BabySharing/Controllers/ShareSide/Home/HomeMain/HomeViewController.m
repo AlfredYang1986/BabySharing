@@ -81,6 +81,7 @@
 //@synthesize foundView = _foundView;
 
 @synthesize isPushed = _isPushed;
+@synthesize nav_title = _nav_title;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -115,23 +116,12 @@
 //    self.navigationItem.titleView = sg;
     UILabel* title = [[UILabel alloc]init];
     title.textColor = [UIColor whiteColor];
-    title.text = @"咚嗒";
+    if (_nav_title == nil || [_nav_title isEqualToString:@""]) {
+        _nav_title = @"咚嗒";
+    }
+    title.text = _nav_title;
     [title sizeToFit];
     self.navigationItem.titleView = title;
-    
-    /**
-     * search controller
-     */
-    NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"Cycle"] ofType:@"png"];
-    UIImage *image = [UIImage imageNamed:filePath];
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(didSelectSearchBtn:)];
-
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame =CGRectMake(0, 0, 25, 25);
-    [btn setBackgroundImage:image forState:UIControlStateNormal];
-//    [btn addTarget: self action: @selector(didSelectSearchBtn:) forControlEvents: UIControlEventTouchUpInside];
-    [btn addTarget: self action: @selector(didSelectChatGroupBtn) forControlEvents: UIControlEventTouchUpInside];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:btn];
     
     trait = [[MoviePlayTrait alloc]init];
 
@@ -162,11 +152,23 @@
         layer.frame = CGRectMake(0, 0, 25, 25);
         layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
         [barBtn.layer addSublayer:layer];
-        [barBtn setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
-    //    [barBtn setImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
+//        [barBtn setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
+//        [barBtn setImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
         [barBtn addTarget:self action:@selector(didPopViewControllerBtn) forControlEvents:UIControlEventTouchDown];
         
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn];
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn];
+    
+    } else {
+        NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"Cycle"] ofType:@"png"];
+        UIImage *image = [UIImage imageNamed:filePath];
+    //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(didSelectSearchBtn:)];
+
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        btn.frame =CGRectMake(0, 0, 25, 25);
+        [btn setBackgroundImage:image forState:UIControlStateNormal];
+    //    [btn addTarget: self action: @selector(didSelectSearchBtn:) forControlEvents: UIControlEventTouchUpInside];
+        [btn addTarget: self action: @selector(didSelectChatGroupBtn) forControlEvents: UIControlEventTouchUpInside];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:btn];
     }
 }
 
