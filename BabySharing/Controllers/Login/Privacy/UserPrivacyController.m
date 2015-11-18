@@ -9,6 +9,7 @@
 #import "UserPrivacyController.h"
 #import "ModelDefines.h"
 #import "RemoteInstance.h"
+#import "SGActionView.h"
 
 @interface UserPrivacyController () <UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *bottomLabel;
@@ -30,11 +31,18 @@
     _bottomLabel.layer.cornerRadius = 8.f;
     _bottomLabel.clipsToBounds = YES;
  
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+    
+    NSString* filepath2 = [resourceBundle pathForResource:@"More" ofType:@"png"];
     UIButton* barBtn2 = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
     [barBtn2 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [barBtn2 setTitle:@"发送邮件" forState:UIControlStateNormal];
-    [barBtn2 sizeToFit];
-    [barBtn2 addTarget:self action:@selector(sendEmailBtnSelected) forControlEvents:UIControlEventTouchDown];
+    CALayer * layer2 = [CALayer layer];
+    layer2.contents = (id)[UIImage imageNamed:filepath2].CGImage;
+    layer2.frame = CGRectMake(0, 0, 13, 20);
+    layer2.position = CGPointMake(10, barBtn2.frame.size.height / 2);
+    [barBtn2.layer addSublayer:layer2];
+    [barBtn2 addTarget:self action:@selector(menuBtnSelected) forControlEvents:UIControlEventTouchDown];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn2];
 //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"发送邮件" style:UIBarButtonItemStylePlain target:self action:@selector(sendEmailBtnSelected)];
     
@@ -45,8 +53,6 @@
     self.navigationItem.titleView = label;
    
     UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
-    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
 //    NSString* filepath = [resourceBundle pathForResource:@"Previous_blue" ofType:@"png"];
     NSString* filepath = [resourceBundle pathForResource:@"Previous_simple" ofType:@"png"];
     CALayer * layer = [CALayer layer];
@@ -82,6 +88,22 @@
 
 - (void)viewDidLayoutSubviews {
     [_privacyView setContentOffset:CGPointZero];
+}
+
+- (void)menuBtnSelected {
+    [SGActionView showSheetWithTitle:@"" itemTitles:@[@"发送协议", @"以邮件的形式发送", @"复制全文", @"取消"] selectedIndex:-1 selectedHandle:^(NSInteger index) {
+        switch (index) {
+            case 0:
+                break;
+            case 1:
+                [self sendEmailBtnSelected];
+                break;
+            case 2:
+                break;
+            default:
+                break;
+        }
+    }];
 }
 
 - (void)sendEmailBtnSelected {

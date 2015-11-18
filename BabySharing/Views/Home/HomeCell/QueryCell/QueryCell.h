@@ -8,15 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "PostDefine.h"
-
-@protocol QueryCellActionProtocol <NSObject>
-- (void)didSelectLikeBtn:(id)content;
-- (void)didSelectShareBtn:(id)content;
-- (void)didSelectCommentsBtn:(id)content;
-
-- (void)didSelectCollectionBtn:(id)content;
-- (void)didSelectNotLikeBtn:(id)content;
-@end
+#import "QueryCellDelegate.h"
 
 @class AVPlayer;
 @class MoviePlayTrait;

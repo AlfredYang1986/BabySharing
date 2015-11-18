@@ -25,6 +25,8 @@
 #import "BWStatusBarOverlay.h"
 //#import "HomeSegControl.h"
 #import "HomeDataDelegate.h"
+#import "PersonalCentreTmpViewController.h"
+#import "PersonalCentreOthersDelegate.h"
 
 #define VIEW_BOUNTDS        CGFloat screen_width = [UIScreen mainScreen].bounds.size.width; \
                             CGFloat screen_height = [UIScreen mainScreen].bounds.size.height; \
@@ -250,6 +252,7 @@
         [_delegate currentSelectIndexWithBlock:^(NSInteger index) {
             [_queryView setContentOffset:CGPointMake(0, index * (44 + [QueryCell preferredHeightWithDescription:@"Any Words"]))];
         }];
+        self.navigationController.navigationBar.hidden = NO;
     }
 }
 
@@ -409,6 +412,9 @@
         [header setRoleTag:@"role tag"];
         [header setTimes:[NSString stringWithFormat:@"%d", tmp.likes_count.intValue]];
         
+        header.delegate = self;
+        header.content = tmp;
+        
         return header;
     }
 }
@@ -537,7 +543,7 @@
         }
      
         cell.delegate = self;
-        cell.content = [_qm.querydata objectAtIndex:indexPath.section - 1];
+        cell.content = tmp; //[_qm.querydata objectAtIndex:indexPath.section - 1];
 //        cell.content = [_qm.querydata objectAtIndex:indexPath.row - 1];
         [cell setDescription:tmp.content_description];
         
@@ -725,6 +731,15 @@
 
 - (void)didSelectNotLikeBtn:(id)content {
     
+}
+
+- (void)didSelectScreenImg:(id)content {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    PersonalCentreTmpViewController* pc = [storyboard instantiateViewControllerWithIdentifier:@"PersonalCenter"];
+    PersonalCentreOthersDelegate* delegate = [[PersonalCentreOthersDelegate alloc]init];
+    pc.current_delegate = delegate;
+    pc.owner_id = ((QueryContent*)content).owner_id;
+    [self.navigationController pushViewController:pc animated:YES];
 }
 
 #pragma mark -- search controller

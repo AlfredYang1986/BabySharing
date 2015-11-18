@@ -39,6 +39,9 @@
 @synthesize pushBtn = _pushBtn;
 @synthesize tagLabel = _tagLabel;
 
+@synthesize content = _content;
+@synthesize delegate = _delegate;
+
 - (void)setUpSubviews {
     if (!_userImg) {
         _userImg = [[UIImageView alloc]init];
@@ -88,6 +91,10 @@
     _userImg.center = CGPointMake(offset + USER_IMG_WIDTH / 2, HEADER_HEIGHT / 2);
     _userImg.layer.cornerRadius = USER_IMG_WIDTH / 2;
     _userImg.clipsToBounds = YES;
+    _userImg.userInteractionEnabled = YES;
+    
+    UITapGestureRecognizer* img_tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didScreenImgSelected)];
+    [_userImg addGestureRecognizer:img_tap];
   
     offset += USER_IMG_WIDTH + MARGIN;
     
@@ -178,5 +185,9 @@
 - (void)setTimes:(NSString*)times {
     _pushTimesLabel.text = times;
     [_pushTimesLabel sizeToFit];
+}
+
+- (void)didScreenImgSelected {
+    [_delegate didSelectScreenImg:_content];
 }
 @end

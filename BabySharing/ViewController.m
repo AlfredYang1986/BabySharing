@@ -8,22 +8,17 @@
 
 #import "ViewController.h"
 #import "LoginModel.h"
-
 #import "LoginViewController.h"
 #import "TabBarController.h"
-
 #import "AppDelegate.h"
 #import "INTUAnimationEngine.h"
 #import "RegTmpToken+ContextOpt.h"
 #import "NicknameInputViewController.h"
 #import "AlreadLogedViewController.h"
-
 #import "LoginInputView.h"
 #import "ChooseAreaViewController.h"
-
 #import "GotyeOCAPI.h"
 #import "GotyeOCDeleget.h"
-
 #import "RemoteInstance.h"
 
 @interface ViewController () <LoginInputViewDelegate, AreaViewControllerDelegate, GotyeOCDelegate>

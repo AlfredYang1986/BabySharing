@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QueryCellDelegate.h"
 
 @interface QueryHeader : UITableViewHeaderFooterView
 
@@ -17,6 +18,9 @@
 @property (nonatomic, strong) UIButton* pushBtn;
 
 @property (nonatomic, strong) UILabel* tagLabel;
+
+@property (weak, nonatomic) id<QueryCellActionProtocol> delegate;
+@property (weak, nonatomic) id content;
 
 - (void)setUpSubviews;
 

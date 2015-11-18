@@ -108,7 +108,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     NSInteger index = indexPath.row;
-    NSArray* titles = @[@"refresh...", @"精彩内容", @"hottest sharing", @"hottest tags"];
+    NSArray* titles = @[@"refresh...", @"Mother's Choice", @"hottest sharing", @"hottest tags"];
 //    NSInteger total = [self tableView:tableView numberOfRowsInSection:0];
     
     if (index == FOUND_REF_INDEX) {
@@ -137,7 +137,7 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"default"];
     }
    
-    cell.textLabel.textAlignment = NSTextAlignmentCenter;
+//    cell.textLabel.textAlignment = NSTextAlignmentCenter;
     cell.backgroundColor = [UIColor colorWithRed:0.9019 green:0.9019 blue:0.9019 alpha:1.f];
     cell.textLabel.text = title;
     return cell;
@@ -326,6 +326,11 @@
     AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
     [hv.delegate pushExistingData:app.qm.querydata];
     [hv.delegate setSelectIndex:index];
+    hv.nav_title = @"Mother's Choice";
     [_container.navigationController pushViewController:hv animated:YES];
+}
+
+- (void)didUnSelectOneImageAtIndex:(NSInteger)index {
+    // do nothing
 }
 @end
