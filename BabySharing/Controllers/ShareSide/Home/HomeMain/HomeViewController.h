@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 
 #import "ShareSideBaseController.h"
+#import "MainHomeViewDataDelegate.h"
 
 @interface HomeViewController : ShareSideBaseController
 
+@property (nonatomic) BOOL isPushed;
+@property (strong, nonatomic) id<HomeViewControllerDataDelegate> delegate;
 @end

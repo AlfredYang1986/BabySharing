@@ -200,6 +200,7 @@
 		EEAACDAD1B44EEDD00D05C0B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEAACDA21B44EEAA00D05C0B /* Security.framework */; };
 		EEAACDAE1B44EEDD00D05C0B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEAACDA01B44EE9D00D05C0B /* CFNetwork.framework */; };
 		EEB3DDD01B7B0505003750A2 /* DropDownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB3DDCF1B7B0505003750A2 /* DropDownMenu.m */; };
+		EEB4C8B31BFC334B0023E2AD /* UserHomeViewDataDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB4C8B21BFC334B0023E2AD /* UserHomeViewDataDelegate.m */; };
 		EEB79BCD1BA923880096587C /* DongDaFollowBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB79BCC1BA923880096587C /* DongDaFollowBtn.m */; };
 		EEB8122C1B7AECF800BC0774 /* CycleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB8122B1B7AECF800BC0774 /* CycleViewController.m */; };
 		EEB812311B7AF2ED00BC0774 /* DetailInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB8122E1B7AF2ED00BC0774 /* DetailInfo.m */; };
@@ -644,6 +645,8 @@
 		EEAACDBA1B44FAA300D05C0B /* GPUImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GPUImage.framework; sourceTree = "<group>"; };
 		EEB3DDCE1B7B0505003750A2 /* DropDownMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropDownMenu.h; sourceTree = "<group>"; };
 		EEB3DDCF1B7B0505003750A2 /* DropDownMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropDownMenu.m; sourceTree = "<group>"; };
+		EEB4C8B11BFC334B0023E2AD /* UserHomeViewDataDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserHomeViewDataDelegate.h; sourceTree = "<group>"; };
+		EEB4C8B21BFC334B0023E2AD /* UserHomeViewDataDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserHomeViewDataDelegate.m; sourceTree = "<group>"; };
 		EEB79BCB1BA923880096587C /* DongDaFollowBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DongDaFollowBtn.h; sourceTree = "<group>"; };
 		EEB79BCC1BA923880096587C /* DongDaFollowBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DongDaFollowBtn.m; sourceTree = "<group>"; };
 		EEB8122A1B7AECF800BC0774 /* CycleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleViewController.h; sourceTree = "<group>"; };
@@ -1055,6 +1058,8 @@
 				EE90C9841BFC1652002D5D1D /* HomeDataDelegate.h */,
 				EE90C9851BFC1C68002D5D1D /* MainHomeViewDataDelegate.h */,
 				EE90C9861BFC1C68002D5D1D /* MainHomeViewDataDelegate.m */,
+				EEB4C8B11BFC334B0023E2AD /* UserHomeViewDataDelegate.h */,
+				EEB4C8B21BFC334B0023E2AD /* UserHomeViewDataDelegate.m */,
 			);
 			path = HomeDataDelegate;
 			sourceTree = "<group>";
@@ -2353,6 +2358,7 @@
 				EE7910471B841AD5005E455B /* PhotoTagView.m in Sources */,
 				EE7910451B841ABC005E455B /* MessageViewCell.m in Sources */,
 				EE7910441B841AAC005E455B /* SGGridMenu.m in Sources */,
+				EEB4C8B31BFC334B0023E2AD /* UserHomeViewDataDelegate.m in Sources */,
 				EE0CEC541BDB13070016B6F4 /* AlreadLogedViewController.m in Sources */,
 				EE7910431B841AA0005E455B /* AlbumTableCell.m in Sources */,
 				EE7910421B841A92005E455B /* DropDownView.m in Sources */,

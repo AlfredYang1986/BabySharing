@@ -18,6 +18,8 @@
 #import "AlbumTableCell.h"
 
 //#import "HomeDetailViewController.h"
+#import "HomeViewController.h"
+#import "UserHomeViewDataDelegate.h"
 #import "QueryContentItem.h"
 #import "QueryContent.h"
 
@@ -316,5 +318,13 @@
 //    detail.current_auth_token = [app.lm getCurrentAuthToken];
 //    
 //    [_container.navigationController pushViewController:detail animated:YES];
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    HomeViewController* hv = [storyboard instantiateViewControllerWithIdentifier:@"HomeView"];
+    hv.isPushed = YES;
+    hv.delegate = [[UserHomeViewDataDelegate alloc]init];
+    [hv.delegate pushExistingData:[self getOM].querydata];
+    [hv.delegate setSelectIndex:index];
+    [self.navigationController pushViewController:hv animated:YES];
 }
 @end

@@ -16,8 +16,11 @@
 
 typedef void(^AsyncDataCallBack)(NSArray* data);
 typedef void(^SyncDataCallBack)(NSArray* data);
+typedef void(^currentIndexBlock)(NSInteger index);
 
 @protocol HomeViewControllerDataDelegate <NSObject>
+
+@required
 - (void)rigisterViewController:(UIViewController*)parent;
 - (BOOL)collectData:(SyncDataCallBack)block;
 - (BOOL)appendData:(SyncDataCallBack)block;
@@ -26,6 +29,11 @@ typedef void(^SyncDataCallBack)(NSArray* data);
 - (NSInteger)count;
 - (QueryContent*)queryItemAtIndex:(NSInteger)index;
 - (NSArray*)data; // TODO: need to delete
+
+@optional
+- (void)pushExistingData:(NSArray*)ed;
+- (void)setSelectIndex:(NSInteger)index;
+- (void)currentSelectIndexWithBlock:(currentIndexBlock)block;
 @end
 
 #endif /* HomeDataDelegate_h */

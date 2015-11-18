@@ -26,6 +26,8 @@
 
 #import "UserChatController.h"
 //#import "HomeDetailViewController.h"
+#import "HomeViewController.h"
+#import "UserHomeViewDataDelegate.h"
 #import "PersonalSettingController.h"
 
 #import "ProfileOverView.h"
@@ -421,6 +423,14 @@
 //    detail.current_auth_token = _current_auth_token;
 //    
 //    [self.navigationController pushViewController:detail animated:YES];
+
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    HomeViewController* hv = [storyboard instantiateViewControllerWithIdentifier:@"HomeView"];
+    hv.isPushed = YES;
+    hv.delegate = [[UserHomeViewDataDelegate alloc]init];
+    [hv.delegate pushExistingData:[self getOM].querydata];
+    [hv.delegate setSelectIndex:index];
+    [self.navigationController pushViewController:hv animated:YES];
 }
 
 #pragma mark -- change date

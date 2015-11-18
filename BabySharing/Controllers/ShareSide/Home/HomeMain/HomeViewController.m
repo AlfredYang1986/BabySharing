@@ -25,7 +25,6 @@
 #import "BWStatusBarOverlay.h"
 //#import "HomeSegControl.h"
 #import "HomeDataDelegate.h"
-#import "MainHomeViewDataDelegate.h"
 
 #define VIEW_BOUNTDS        CGFloat screen_width = [UIScreen mainScreen].bounds.size.width; \
                             CGFloat screen_height = [UIScreen mainScreen].bounds.size.height; \
@@ -56,8 +55,6 @@
 @property (nonatomic) BOOL isHandleScrolling;
 
 @property (weak, nonatomic) IBOutlet UITableView *foundView;
-
-@property (strong, nonatomic) id<HomeViewControllerDataDelegate> delegate;
 @end
 
 @implementation HomeViewController {
@@ -82,6 +79,8 @@
 @synthesize delegate = _delegate;
 
 //@synthesize foundView = _foundView;
+
+@synthesize isPushed = _isPushed;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -152,6 +151,27 @@
     [tmp addGestureRecognizer:tap];
  
 //    _queryView.backgroundColor = [UIColor colorWithRed:0.0157 green:0.6235 blue:0.5373 alpha:1.f];
+    
+    if (_isPushed) {
+        UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
+        NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+        NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+        NSString* filepath = [resourceBundle pathForResource:@"Previous_simple" ofType:@"png"];
+        CALayer * layer = [CALayer layer];
+        layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
+        layer.frame = CGRectMake(0, 0, 25, 25);
+        layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
+        [barBtn.layer addSublayer:layer];
+        [barBtn setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
+    //    [barBtn setImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
+        [barBtn addTarget:self action:@selector(didPopViewControllerBtn) forControlEvents:UIControlEventTouchDown];
+        
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn];
+    }
+}
+
+- (void)didPopViewControllerBtn {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)layoutTableViews {
@@ -220,11 +240,15 @@
     if (_delegate == nil) {
         _delegate = [[MainHomeViewDataDelegate alloc]init];
     }
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    _isHandleScrolling = YES;
+    
+    if ([_delegate isKindOfClass:[MainHomeViewDataDelegate class]]) {
+        _isHandleScrolling = YES;
+        
+    } else {
+        [_delegate currentSelectIndexWithBlock:^(NSInteger index) {
+            [_queryView setContentOffset:CGPointMake(0, index * (44 + [QueryCell preferredHeightWithDescription:@"Any Words"]))];
+        }];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
