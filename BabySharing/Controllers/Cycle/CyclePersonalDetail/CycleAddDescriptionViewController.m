@@ -10,14 +10,14 @@
 #import "CycleDescriptionCell.h"
 
 #import "LoginModel.h"
-#import "SearchUserTagsController.h"
+//#import "SearchUserTagsController.h"
 
 #import "CycleAddDOBViewController.h"
 #import "CycleAddKidsViewController.h"
 #import "CycleAddHometownController.h"
 #import "CycleAddSchoolViewController.h"
 
-@interface CycleAddDescriptionViewController () <UITableViewDataSource, UITableViewDelegate, SearchUserTagControllerDelegate, addDOBProtocol, addKidsProtocol, addHometownProtocol, addSchoolProtocol>
+@interface CycleAddDescriptionViewController () <UITableViewDataSource, UITableViewDelegate, /*SearchUserTagControllerDelegate,*/ addDOBProtocol, addKidsProtocol, addHometownProtocol, addSchoolProtocol>
 @property (weak, nonatomic) IBOutlet UILabel *roleTagLabel;
 @property (weak, nonatomic) IBOutlet UIView *tagRowView;
 @property (weak, nonatomic) IBOutlet UITableView *descriptionDetailTableView;
@@ -127,10 +127,10 @@
 }
 
 - (IBAction)changeRoleTagBtnSelected {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    SearchUserTagsController* sp = [storyboard instantiateViewControllerWithIdentifier:@"SearchPickRoleTags"];
-    sp.delegate = self;
-    [self.navigationController pushViewController:sp animated:YES];
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    SearchUserTagsController* sp = [storyboard instantiateViewControllerWithIdentifier:@"SearchPickRoleTags"];
+//    sp.delegate = self;
+//    [self.navigationController pushViewController:sp animated:YES];
 }
 
 - (void)didSelectTag:(NSString*)tags {

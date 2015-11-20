@@ -10,7 +10,9 @@
 #include <vector>
 #import "PersonalSettingCell.h"
 #import "PersonalChangeScreenNameController.h"
-#import "SearchUserTagsController.h"
+//#import "SearchUserTagsController.h"
+#import "SearchViewController.h"
+#import "SearchRoleTagDelegate.h"
 #import "AppDelegate.h"
 #import "CycleAddDescriptionViewController.h"
 #import "PersonalCenterSignaturesController.h"
@@ -19,7 +21,7 @@
 #import "RemoteInstance.h"
 #import "LoginModel.h"
 
-@interface PersonalSettingController () <UITableViewDataSource, UITableViewDelegate, chanageScreenNameProtocol, SearchUserTagControllerDelegate, PersonalSignatureProtocol, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface PersonalSettingController () <UITableViewDataSource, UITableViewDelegate, chanageScreenNameProtocol, /*SearchUserTagControllerDelegate,*/ PersonalSignatureProtocol, UINavigationControllerDelegate, UIImagePickerControllerDelegate, SearchActionsProtocol>
 @property (weak, nonatomic) IBOutlet UITableView *queryView;
 @end
 
@@ -298,11 +300,19 @@
 }
 
 - (void)roleTagSelected {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    SearchUserTagsController* sut = [storyboard instantiateViewControllerWithIdentifier:@"SearchPickRoleTags"];
-    sut.delegate = self;
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    SearchUserTagsController* sut = [storyboard instantiateViewControllerWithIdentifier:@"SearchPickRoleTags"];
+//    sut.delegate = self;
+//    
+//    [self.navigationController pushViewController:sut animated:YES];
     
-    [self.navigationController pushViewController:sut animated:YES];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SearchViewController" bundle:nil];
+    SearchViewController* svc = [storyboard instantiateViewControllerWithIdentifier:@"Search"];
+    SearchRoleTagDelegate* sd = [[SearchRoleTagDelegate alloc]init];
+    sd.delegate = svc;
+    sd.actions = self;
+    [self.navigationController pushViewController:svc animated:YES];
+    svc.delegate = sd;
 }
 
 - (void)personalSignSelected {
@@ -320,5 +330,19 @@
 
 - (void)accountBoundSelected {
 
+}
+
+#pragma mark -- search actions
+- (void)didSelectItem:(NSString*)item {
+    [self didSelectTag:item];
+    [self.navigationController popToViewController:self animated:YES];
+}
+
+- (void)addNewItem:(NSString*)item {
+    
+}
+
+- (NSString*)getControllerTitle {
+    return @"添加你的角色";
 }
 @end

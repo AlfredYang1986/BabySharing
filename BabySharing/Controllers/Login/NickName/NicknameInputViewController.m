@@ -9,14 +9,16 @@
 #import "NicknameInputViewController.h"
 #import "LoginToken+ContextOpt.h"
 #import "INTUAnimationEngine.h"
-#import "SearchUserTagsController.h"
+//#import "SearchUserTagsController.h"
+#import "SearchViewController.h"
+#import "SearchRoleTagDelegate.h"
 #import "NickNameInputView.h"
 #import "SGActionView.h"
 #import "TmpFileStorageModel.h"
 #import "RemoteInstance.h"
 #import "ModelDefines.h"
 
-@interface NicknameInputViewController () <SearchUserTagControllerDelegate, NickNameInputViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface NicknameInputViewController () </*SearchUserTagControllerDelegate,*/ NickNameInputViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, SearchActionsProtocol>
 @property (weak, nonatomic) IBOutlet UIButton *loginImgBtn;
 @property (weak, nonatomic) IBOutlet UIButton *nextBtn;
 @end
@@ -162,21 +164,18 @@
 - (void)didStartInputTags {
     NSLog(@"Start input tags");
     [inputView endInputName];
-    [self performSegueWithIdentifier:@"SeachRoleTags" sender:nil];
-}
-
-#pragma mark -- segue
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"SeachRoleTags"]) {
-        ((SearchUserTagsController*)segue.destinationViewController).delegate = self;
-    }
+//    [self performSegueWithIdentifier:@"SeachRoleTags" sender:nil];
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SearchViewController" bundle:nil];
+    SearchViewController* svc = [storyboard instantiateViewControllerWithIdentifier:@"Search"];
+    SearchRoleTagDelegate* sd = [[SearchRoleTagDelegate alloc]init];
+    sd.delegate = svc;
+    sd.actions = self;
+    [self.navigationController pushViewController:svc animated:YES];
+    svc.delegate = sd;
 }
 
 #pragma mark -- Search tags delegate
-- (void)didSelectTag:(NSString*)tags {
-    [inputView resetTags:tags];
-}
-
 - (void)moveView:(float)move {
     static const CGFloat kAnimationDuration = 0.30; // in seconds
     CGRect rc_start = self.view.frame;
@@ -290,5 +289,19 @@
             });
         }
     });
+}
+
+#pragma mark -- controler protocol
+- (void)didSelectItem:(NSString*)item {
+    [inputView resetTags:item];
+    [self.navigationController popToViewController:self animated:YES];
+}
+
+- (void)addNewItem:(NSString*)item {
+    
+}
+
+- (NSString*)getControllerTitle {
+    return @"添加你的角色";
 }
 @end

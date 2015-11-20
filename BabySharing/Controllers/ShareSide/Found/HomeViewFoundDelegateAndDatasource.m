@@ -23,12 +23,15 @@
 #import "QueryContentItem.h"
 #import "QueryContent.h"
 
-#define FOUND_REF_INDEX             -1
-#define FOUND_IMG_INDEX             0
+#import "SearchViewController.h"
+
+#define FOUND_REF_INDEX             -2
+#define FOUND_IMG_INDEX             -1
+#define FOUND_SEARCH_INDEX          0
 #define FOUND_USER_PHOTO_INDEX      1
 #define FOUND_TITLE_INDEX           2
 
-@interface HomeViewFoundDelegateAndDatasource () <AlbumTableCellDelegate>
+@interface HomeViewFoundDelegateAndDatasource () <AlbumTableCellDelegate, UISearchBarDelegate>
 
 @end
 
@@ -92,6 +95,8 @@
         return 44;
     } else if (index == FOUND_IMG_INDEX) {
         return [FoundPCGCell preferdHeight];
+    } else if (index == FOUND_SEARCH_INDEX) {
+        return 44;
     }else if (index == FOUND_USER_PHOTO_INDEX) {
         CGFloat width = [UIScreen mainScreen].bounds.size.width - 32;
         return width / 5;
@@ -115,6 +120,9 @@
         return [self queryDefaultCellWithTableView:tableView withTitle:[titles objectAtIndex:0]];
     } else if (index == FOUND_IMG_INDEX) {
         return [self queryPGCCellWithTableView:tableView];
+        
+    } else if (index == FOUND_SEARCH_INDEX) {
+        return [self querySearchCellWithTabelView:tableView];
     }else if (index == FOUND_USER_PHOTO_INDEX) {
         return [self queryRecommendUserCellWithTableView:tableView];
     } else if (index == FOUND_TITLE_INDEX) {
@@ -140,6 +148,28 @@
 //    cell.textLabel.textAlignment = NSTextAlignmentCenter;
     cell.backgroundColor = [UIColor colorWithRed:0.9019 green:0.9019 blue:0.9019 alpha:1.f];
     cell.textLabel.text = title;
+    return cell;
+}
+
+- (UITableViewCell*)querySearchCellWithTabelView:(UITableView*)tableView {
+    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@""];
+    
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"search cell"];
+    }
+    
+    UIView* tmp = [cell viewWithTag:-1];
+    if (tmp == nil) {
+        UISearchBar* bar = [[UISearchBar alloc]init];
+        bar.delegate = self;
+        bar.tag = -1;
+        [cell addSubview:bar];
+        
+        CGFloat width = [UIScreen mainScreen].bounds.size.width;
+        CGFloat height = 44;
+        bar.frame = CGRectMake(0, 0, width, height);
+    }
+    
     return cell;
 }
 
@@ -332,5 +362,16 @@
 
 - (void)didUnSelectOneImageAtIndex:(NSInteger)index {
     // do nothing
+}
+
+#pragma mark -- searh bar delegate
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SearchViewController" bundle:nil];
+    SearchViewController* svc = [storyboard instantiateViewControllerWithIdentifier:@"Search"];
+//    [_container.navigationController pushViewController:hv animated:YES];
+    [_container presentViewController:svc animated:YES completion: ^(void) {
+        NSLog(@"movie running ...");
+    }];
+    return NO;
 }
 @end

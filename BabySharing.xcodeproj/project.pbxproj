@@ -88,8 +88,6 @@
 		EE7C68711B82D2D20003C593 /* CycleOverCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7C68701B82D2D20003C593 /* CycleOverCell.m */; };
 		EE7C68731B82D31F0003C593 /* CycleOverCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE7C68721B82D31F0003C593 /* CycleOverCell.xib */; };
 		EE817F491B79A78E00988734 /* UserChatController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE817F481B79A78E00988734 /* UserChatController.m */; };
-		EE83F4031B96E0B100D51FDF /* SearchUserTagsController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE83F4021B96E0B100D51FDF /* SearchUserTagsController.m */; };
-		EE83F4061B96E0DA00D51FDF /* UserAddNewTagDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EE83F4051B96E0DA00D51FDF /* UserAddNewTagDelegate.m */; };
 		EE83F40A1B96EDDF00D51FDF /* CycleAddSchoolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE83F4091B96EDDF00D51FDF /* CycleAddSchoolViewController.m */; };
 		EE86D1B21B537469001C4650 /* PostEffectAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = EE86D1B11B537469001C4650 /* PostEffectAdapter.mm */; };
 		EE87315E1B97E131004A25D8 /* WeiboFriendsDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EE87315D1B97E131004A25D8 /* WeiboFriendsDelegate.m */; };
@@ -112,6 +110,7 @@
 		EE9785B01B9004CD00C454C5 /* CycleAddKidsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9785AA1B9004CD00C454C5 /* CycleAddKidsViewController.m */; };
 		EE9785B41B90060B00C454C5 /* CycleAddHometownController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9785B31B90060B00C454C5 /* CycleAddHometownController.m */; };
 		EE981F861B5A10400029723A /* LoginToken.m in Sources */ = {isa = PBXBuildFile; fileRef = EE981F851B5A10400029723A /* LoginToken.m */; };
+		EE9C85A71BFF310000610F95 /* SearchAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9C85A61BFF310000610F95 /* SearchAddViewController.m */; };
 		EE9F736D1B8576B100F800DC /* MessageChatGroupHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9F736C1B8576B100F800DC /* MessageChatGroupHeader.m */; };
 		EE9F736F1B8576C400F800DC /* MessageChatGroupHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE9F736E1B8576C400F800DC /* MessageChatGroupHeader.xib */; };
 		EEA2017C1B744E59006B81E4 /* ConnectionOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = EEA201791B744E59006B81E4 /* ConnectionOwner.m */; };
@@ -208,6 +207,10 @@
 		EEBFFC1D1B916A0F005AAE36 /* PersonalSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EEBFFC1B1B916A0F005AAE36 /* PersonalSettingCell.m */; };
 		EEBFFC1E1B916A0F005AAE36 /* PersonalSettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEBFFC1C1B916A0F005AAE36 /* PersonalSettingCell.xib */; };
 		EEBFFC211B9177D5005AAE36 /* PersonalChangeScreenNameController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEBFFC201B9177D5005AAE36 /* PersonalChangeScreenNameController.m */; };
+		EEC884831BFEC6BB006A237D /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC884811BFEC6BB006A237D /* SearchViewController.m */; };
+		EEC884861BFEC6DF006A237D /* SearchViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEC884851BFEC6DF006A237D /* SearchViewController.storyboard */; };
+		EEC8848A1BFED6B7006A237D /* SearchRoleTagDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC884891BFED6B7006A237D /* SearchRoleTagDelegate.m */; };
+		EEC8848F1BFEF4EB006A237D /* SearchAddDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC8848E1BFEF4EB006A237D /* SearchAddDelegate.m */; };
 		EEC980B01B8EB9EA0087E5A7 /* BWStatusBarOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC980A91B8EB9EA0087E5A7 /* BWStatusBarOverlay.m */; };
 		EEC980B11B8EB9EA0087E5A7 /* status-bar-pattern-black.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EEC980AA1B8EB9EA0087E5A7 /* status-bar-pattern-black.jpg */; };
 		EEC980B21B8EB9EA0087E5A7 /* status-bar-pattern-black@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EEC980AB1B8EB9EA0087E5A7 /* status-bar-pattern-black@2x.jpg */; };
@@ -382,10 +385,6 @@
 		EE817F471B79A78E00988734 /* UserChatController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserChatController.h; sourceTree = "<group>"; };
 		EE817F481B79A78E00988734 /* UserChatController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserChatController.m; sourceTree = "<group>"; };
 		EE817F4A1B79B1E600988734 /* ProfileViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewDelegate.h; sourceTree = "<group>"; };
-		EE83F4011B96E0B100D51FDF /* SearchUserTagsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchUserTagsController.h; sourceTree = "<group>"; };
-		EE83F4021B96E0B100D51FDF /* SearchUserTagsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchUserTagsController.m; sourceTree = "<group>"; };
-		EE83F4041B96E0DA00D51FDF /* UserAddNewTagDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAddNewTagDelegate.h; sourceTree = "<group>"; };
-		EE83F4051B96E0DA00D51FDF /* UserAddNewTagDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAddNewTagDelegate.m; sourceTree = "<group>"; };
 		EE83F4081B96EDDF00D51FDF /* CycleAddSchoolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleAddSchoolViewController.h; sourceTree = "<group>"; };
 		EE83F4091B96EDDF00D51FDF /* CycleAddSchoolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleAddSchoolViewController.m; sourceTree = "<group>"; };
 		EE86D1B01B537469001C4650 /* PostEffectAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostEffectAdapter.h; sourceTree = "<group>"; };
@@ -429,6 +428,8 @@
 		EE9785B31B90060B00C454C5 /* CycleAddHometownController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleAddHometownController.m; sourceTree = "<group>"; };
 		EE981F841B5A10400029723A /* LoginToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginToken.h; sourceTree = "<group>"; };
 		EE981F851B5A10400029723A /* LoginToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginToken.m; sourceTree = "<group>"; };
+		EE9C85A51BFF310000610F95 /* SearchAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchAddViewController.h; sourceTree = "<group>"; };
+		EE9C85A61BFF310000610F95 /* SearchAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchAddViewController.m; sourceTree = "<group>"; };
 		EE9F736B1B8576B100F800DC /* MessageChatGroupHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageChatGroupHeader.h; sourceTree = "<group>"; };
 		EE9F736C1B8576B100F800DC /* MessageChatGroupHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageChatGroupHeader.m; sourceTree = "<group>"; };
 		EE9F736E1B8576C400F800DC /* MessageChatGroupHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageChatGroupHeader.xib; sourceTree = "<group>"; };
@@ -662,6 +663,14 @@
 		EEBFFC1C1B916A0F005AAE36 /* PersonalSettingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonalSettingCell.xib; sourceTree = "<group>"; };
 		EEBFFC1F1B9177D5005AAE36 /* PersonalChangeScreenNameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalChangeScreenNameController.h; sourceTree = "<group>"; };
 		EEBFFC201B9177D5005AAE36 /* PersonalChangeScreenNameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalChangeScreenNameController.m; sourceTree = "<group>"; };
+		EEC884801BFEC6BB006A237D /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		EEC884811BFEC6BB006A237D /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		EEC884851BFEC6DF006A237D /* SearchViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SearchViewController.storyboard; sourceTree = "<group>"; };
+		EEC884881BFED6B7006A237D /* SearchRoleTagDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchRoleTagDelegate.h; sourceTree = "<group>"; };
+		EEC884891BFED6B7006A237D /* SearchRoleTagDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchRoleTagDelegate.m; sourceTree = "<group>"; };
+		EEC8848B1BFEDCA8006A237D /* SearhViewControllerActionsDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearhViewControllerActionsDelegate.h; sourceTree = "<group>"; };
+		EEC8848D1BFEF4EB006A237D /* SearchAddDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchAddDelegate.h; sourceTree = "<group>"; };
+		EEC8848E1BFEF4EB006A237D /* SearchAddDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchAddDelegate.m; sourceTree = "<group>"; };
 		EEC980A81B8EB9EA0087E5A7 /* BWStatusBarOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWStatusBarOverlay.h; sourceTree = "<group>"; };
 		EEC980A91B8EB9EA0087E5A7 /* BWStatusBarOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWStatusBarOverlay.m; sourceTree = "<group>"; };
 		EEC980AA1B8EB9EA0087E5A7 /* status-bar-pattern-black.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "status-bar-pattern-black.jpg"; sourceTree = "<group>"; };
@@ -1033,17 +1042,6 @@
 			path = Chat;
 			sourceTree = "<group>";
 		};
-		EE83F4001B96E0B100D51FDF /* RoleTags */ = {
-			isa = PBXGroup;
-			children = (
-				EE83F4011B96E0B100D51FDF /* SearchUserTagsController.h */,
-				EE83F4021B96E0B100D51FDF /* SearchUserTagsController.m */,
-				EE83F4041B96E0DA00D51FDF /* UserAddNewTagDelegate.h */,
-				EE83F4051B96E0DA00D51FDF /* UserAddNewTagDelegate.m */,
-			);
-			path = RoleTags;
-			sourceTree = "<group>";
-		};
 		EE83F4071B96EDDF00D51FDF /* CycleAddSchool */ = {
 			isa = PBXGroup;
 			children = (
@@ -1252,6 +1250,7 @@
 		EEAACAF71B44E90300D05C0B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				EEC8847F1BFEC5DB006A237D /* Search */,
 				EEB812291B7AECD500BC0774 /* Cycle */,
 				EE817F461B79A76E00988734 /* Chat */,
 				EEAACAF81B44E90300D05C0B /* Ablum */,
@@ -1298,7 +1297,6 @@
 				EE0CEC461BDB13070016B6F4 /* NickName */,
 				EE0CEC491BDB13070016B6F4 /* PhoneInput */,
 				EE0CEC4C1BDB13070016B6F4 /* Privacy */,
-				EE83F4001B96E0B100D51FDF /* RoleTags */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -1912,6 +1910,39 @@
 			path = BabySharing/Views/Profile/PersonalSetting;
 			sourceTree = SOURCE_ROOT;
 		};
+		EEC8847F1BFEC5DB006A237D /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				EEC8848C1BFEF4CA006A237D /* SearchAdd */,
+				EEC884871BFED69E006A237D /* SearchRoleTags */,
+				EEC884801BFEC6BB006A237D /* SearchViewController.h */,
+				EEC884811BFEC6BB006A237D /* SearchViewController.m */,
+				EEC884851BFEC6DF006A237D /* SearchViewController.storyboard */,
+				EEC8848B1BFEDCA8006A237D /* SearhViewControllerActionsDelegate.h */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		EEC884871BFED69E006A237D /* SearchRoleTags */ = {
+			isa = PBXGroup;
+			children = (
+				EEC884881BFED6B7006A237D /* SearchRoleTagDelegate.h */,
+				EEC884891BFED6B7006A237D /* SearchRoleTagDelegate.m */,
+			);
+			path = SearchRoleTags;
+			sourceTree = "<group>";
+		};
+		EEC8848C1BFEF4CA006A237D /* SearchAdd */ = {
+			isa = PBXGroup;
+			children = (
+				EEC8848D1BFEF4EB006A237D /* SearchAddDelegate.h */,
+				EEC8848E1BFEF4EB006A237D /* SearchAddDelegate.m */,
+				EE9C85A51BFF310000610F95 /* SearchAddViewController.h */,
+				EE9C85A61BFF310000610F95 /* SearchAddViewController.m */,
+			);
+			path = SearchAdd;
+			sourceTree = "<group>";
+		};
 		EEC980A71B8EB9EA0087E5A7 /* BWStatusBarOverlay */ = {
 			isa = PBXGroup;
 			children = (
@@ -2307,6 +2338,7 @@
 				EE7415CC1B5B70D5002CA1BC /* InfoPlist.strings in Resources */,
 				EE7415C81B5B7097002CA1BC /* LaunchScreen.xib in Resources */,
 				EEE94E191B74BDDD0011321A /* ProfileDetailNib.storyboard in Resources */,
+				EEC884861BFEC6DF006A237D /* SearchViewController.storyboard in Resources */,
 				EED64D4C1B8189C6008CB134 /* CycleAddKidsFooter.xib in Resources */,
 				EE7415D71B5B7740002CA1BC /* icon.png in Resources */,
 				EEAACD5B1B44E91A00D05C0B /* YYBoundle.bundle in Resources */,
@@ -2435,6 +2467,7 @@
 				EE76A57C1B72181300036747 /* ConnectionModel.m in Sources */,
 				EE9F736D1B8576B100F800DC /* MessageChatGroupHeader.m in Sources */,
 				EE97440E1B78699A00E81A70 /* Reachability.m in Sources */,
+				EEC8848A1BFED6B7006A237D /* SearchRoleTagDelegate.m in Sources */,
 				EE96763F1B7C3D5C00445254 /* CycleDescriptionCell.m in Sources */,
 				EE6D6DE21B7B404E004D29C8 /* CycleDetailController.m in Sources */,
 				EEE94E371B74C0810011321A /* ProfileOthersOverView.m in Sources */,
@@ -2443,12 +2476,13 @@
 				EE2D4B801B525E0A00B58A1F /* PhotoTagsController.m in Sources */,
 				EE9633D31B92EBE000DB4EA5 /* PrivacySettingController.mm in Sources */,
 				EEAACD1F1B44E90400D05C0B /* SGActionView.m in Sources */,
-				EE83F4061B96E0DA00D51FDF /* UserAddNewTagDelegate.m in Sources */,
 				EEE94E181B74BDDD0011321A /* ProfileDetailController.m in Sources */,
 				EEE94E261B74BE3B0011321A /* PersonalSettingController.mm in Sources */,
 				EED774D41BABF86D001C9B57 /* HomeViewController.m in Sources */,
 				EEAACCA41B44E90400D05C0B /* CVViewController2.m in Sources */,
 				EED64D451B8184AE008CB134 /* CycleAddKidsCell.m in Sources */,
+				EEC8848F1BFEF4EB006A237D /* SearchAddDelegate.m in Sources */,
+				EE9C85A71BFF310000610F95 /* SearchAddViewController.m in Sources */,
 				EEA991481B775B4F001F6CC6 /* DDNNotificationViewController.m in Sources */,
 				EE92AE341BCE3627008DA020 /* CycleAddConditionCell.m in Sources */,
 				EEAACCDD1B44E90400D05C0B /* LoginModel.m in Sources */,
@@ -2506,11 +2540,11 @@
 				EEAACCED1B44E90400D05C0B /* RemoteInstance.m in Sources */,
 				EEF538F51B525F7F009C8CB9 /* PostPreViewEffectController.m in Sources */,
 				EEE94E101B74A9320011321A /* AddingFriendsController.m in Sources */,
+				EEC884831BFEC6BB006A237D /* SearchViewController.m in Sources */,
 				EE03E9831B4FABFB00F21EF5 /* AlbumModule.m in Sources */,
 				EE817F491B79A78E00988734 /* UserChatController.m in Sources */,
 				EE76A5791B7205CF00036747 /* ConnectionOwner+ContextOpt.m in Sources */,
 				EEE94E271B74BE3B0011321A /* ProfileSettingController.mm in Sources */,
-				EE83F4031B96E0B100D51FDF /* SearchUserTagsController.m in Sources */,
 				EEAACCC01B44E90400D05C0B /* PersonalCentreTmpViewController.m in Sources */,
 				EEFCDEDF1BCB936500A53CAB /* ChatEmojiView.m in Sources */,
 				EEE94E1D1B74BE090011321A /* PersonalCenterOwnerDelegate.mm in Sources */,
