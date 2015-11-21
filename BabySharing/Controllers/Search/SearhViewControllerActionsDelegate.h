@@ -19,8 +19,10 @@ typedef void(^SearchCallback)(BOOL success, NSArray* data);
 @optional
 - (NSString*)getControllerTitle;
 - (void)collectData;
+- (void)pushExistingData:(NSArray*)data;
 //- (void)dataWithCallBack:(SearchCallback)block;
 - (NSArray*)enumedData;
+- (NSArray*)enumedDataWithPredicate:(NSPredicate*)pred;
 - (NSString*)enumedDataAtIndex:(NSInteger)index;
 @end
 
@@ -36,6 +38,7 @@ typedef void(^SearchCallback)(BOOL success, NSArray* data);
 - (void)didSelectItem:(NSString*)item;
 - (void)addNewItem:(NSString*)item;
 - (NSString*)getControllerTitle;
+- (UINavigationController*)getViewController;
 @end
 
 #endif /* SearhViewControllerActionsDelegate_h */

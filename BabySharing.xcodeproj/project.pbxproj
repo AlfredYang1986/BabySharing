@@ -110,7 +110,6 @@
 		EE9785B01B9004CD00C454C5 /* CycleAddKidsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9785AA1B9004CD00C454C5 /* CycleAddKidsViewController.m */; };
 		EE9785B41B90060B00C454C5 /* CycleAddHometownController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9785B31B90060B00C454C5 /* CycleAddHometownController.m */; };
 		EE981F861B5A10400029723A /* LoginToken.m in Sources */ = {isa = PBXBuildFile; fileRef = EE981F851B5A10400029723A /* LoginToken.m */; };
-		EE9C85A71BFF310000610F95 /* SearchAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9C85A61BFF310000610F95 /* SearchAddViewController.m */; };
 		EE9F736D1B8576B100F800DC /* MessageChatGroupHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9F736C1B8576B100F800DC /* MessageChatGroupHeader.m */; };
 		EE9F736F1B8576C400F800DC /* MessageChatGroupHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE9F736E1B8576C400F800DC /* MessageChatGroupHeader.xib */; };
 		EEA2017C1B744E59006B81E4 /* ConnectionOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = EEA201791B744E59006B81E4 /* ConnectionOwner.m */; };
@@ -204,13 +203,14 @@
 		EEB8122C1B7AECF800BC0774 /* CycleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB8122B1B7AECF800BC0774 /* CycleViewController.m */; };
 		EEB812311B7AF2ED00BC0774 /* DetailInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB8122E1B7AF2ED00BC0774 /* DetailInfo.m */; };
 		EEB812321B7AF2ED00BC0774 /* UserKids.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB812301B7AF2ED00BC0774 /* UserKids.m */; };
+		EEBD11231C0031540065BAE4 /* SearchAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEBD11221C0031540065BAE4 /* SearchAddViewController.m */; };
+		EEBD11261C00317F0065BAE4 /* SearchAddRoleTagDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EEBD11251C00317F0065BAE4 /* SearchAddRoleTagDelegate.m */; };
 		EEBFFC1D1B916A0F005AAE36 /* PersonalSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EEBFFC1B1B916A0F005AAE36 /* PersonalSettingCell.m */; };
 		EEBFFC1E1B916A0F005AAE36 /* PersonalSettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEBFFC1C1B916A0F005AAE36 /* PersonalSettingCell.xib */; };
 		EEBFFC211B9177D5005AAE36 /* PersonalChangeScreenNameController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEBFFC201B9177D5005AAE36 /* PersonalChangeScreenNameController.m */; };
 		EEC884831BFEC6BB006A237D /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC884811BFEC6BB006A237D /* SearchViewController.m */; };
 		EEC884861BFEC6DF006A237D /* SearchViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEC884851BFEC6DF006A237D /* SearchViewController.storyboard */; };
 		EEC8848A1BFED6B7006A237D /* SearchRoleTagDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC884891BFED6B7006A237D /* SearchRoleTagDelegate.m */; };
-		EEC8848F1BFEF4EB006A237D /* SearchAddDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC8848E1BFEF4EB006A237D /* SearchAddDelegate.m */; };
 		EEC980B01B8EB9EA0087E5A7 /* BWStatusBarOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC980A91B8EB9EA0087E5A7 /* BWStatusBarOverlay.m */; };
 		EEC980B11B8EB9EA0087E5A7 /* status-bar-pattern-black.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EEC980AA1B8EB9EA0087E5A7 /* status-bar-pattern-black.jpg */; };
 		EEC980B21B8EB9EA0087E5A7 /* status-bar-pattern-black@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EEC980AB1B8EB9EA0087E5A7 /* status-bar-pattern-black@2x.jpg */; };
@@ -428,8 +428,6 @@
 		EE9785B31B90060B00C454C5 /* CycleAddHometownController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleAddHometownController.m; sourceTree = "<group>"; };
 		EE981F841B5A10400029723A /* LoginToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginToken.h; sourceTree = "<group>"; };
 		EE981F851B5A10400029723A /* LoginToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginToken.m; sourceTree = "<group>"; };
-		EE9C85A51BFF310000610F95 /* SearchAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchAddViewController.h; sourceTree = "<group>"; };
-		EE9C85A61BFF310000610F95 /* SearchAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchAddViewController.m; sourceTree = "<group>"; };
 		EE9F736B1B8576B100F800DC /* MessageChatGroupHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageChatGroupHeader.h; sourceTree = "<group>"; };
 		EE9F736C1B8576B100F800DC /* MessageChatGroupHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageChatGroupHeader.m; sourceTree = "<group>"; };
 		EE9F736E1B8576C400F800DC /* MessageChatGroupHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageChatGroupHeader.xib; sourceTree = "<group>"; };
@@ -657,6 +655,10 @@
 		EEB8122E1B7AF2ED00BC0774 /* DetailInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailInfo.m; sourceTree = "<group>"; };
 		EEB8122F1B7AF2ED00BC0774 /* UserKids.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserKids.h; sourceTree = "<group>"; };
 		EEB812301B7AF2ED00BC0774 /* UserKids.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserKids.m; sourceTree = "<group>"; };
+		EEBD11211C0031540065BAE4 /* SearchAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchAddViewController.h; sourceTree = "<group>"; };
+		EEBD11221C0031540065BAE4 /* SearchAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchAddViewController.m; sourceTree = "<group>"; };
+		EEBD11241C00317F0065BAE4 /* SearchAddRoleTagDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchAddRoleTagDelegate.h; sourceTree = "<group>"; };
+		EEBD11251C00317F0065BAE4 /* SearchAddRoleTagDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchAddRoleTagDelegate.m; sourceTree = "<group>"; };
 		EEBFFC181B915293005AAE36 /* PersonalCenterDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonalCenterDefines.h; sourceTree = "<group>"; };
 		EEBFFC1A1B916A0F005AAE36 /* PersonalSettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalSettingCell.h; sourceTree = "<group>"; };
 		EEBFFC1B1B916A0F005AAE36 /* PersonalSettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalSettingCell.m; sourceTree = "<group>"; };
@@ -669,8 +671,6 @@
 		EEC884881BFED6B7006A237D /* SearchRoleTagDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchRoleTagDelegate.h; sourceTree = "<group>"; };
 		EEC884891BFED6B7006A237D /* SearchRoleTagDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchRoleTagDelegate.m; sourceTree = "<group>"; };
 		EEC8848B1BFEDCA8006A237D /* SearhViewControllerActionsDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearhViewControllerActionsDelegate.h; sourceTree = "<group>"; };
-		EEC8848D1BFEF4EB006A237D /* SearchAddDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchAddDelegate.h; sourceTree = "<group>"; };
-		EEC8848E1BFEF4EB006A237D /* SearchAddDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchAddDelegate.m; sourceTree = "<group>"; };
 		EEC980A81B8EB9EA0087E5A7 /* BWStatusBarOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWStatusBarOverlay.h; sourceTree = "<group>"; };
 		EEC980A91B8EB9EA0087E5A7 /* BWStatusBarOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWStatusBarOverlay.m; sourceTree = "<group>"; };
 		EEC980AA1B8EB9EA0087E5A7 /* status-bar-pattern-black.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "status-bar-pattern-black.jpg"; sourceTree = "<group>"; };
@@ -1913,12 +1913,13 @@
 		EEC8847F1BFEC5DB006A237D /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				EEC8848C1BFEF4CA006A237D /* SearchAdd */,
 				EEC884871BFED69E006A237D /* SearchRoleTags */,
 				EEC884801BFEC6BB006A237D /* SearchViewController.h */,
 				EEC884811BFEC6BB006A237D /* SearchViewController.m */,
-				EEC884851BFEC6DF006A237D /* SearchViewController.storyboard */,
+				EEBD11211C0031540065BAE4 /* SearchAddViewController.h */,
+				EEBD11221C0031540065BAE4 /* SearchAddViewController.m */,
 				EEC8848B1BFEDCA8006A237D /* SearhViewControllerActionsDelegate.h */,
+				EEC884851BFEC6DF006A237D /* SearchViewController.storyboard */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -1926,21 +1927,12 @@
 		EEC884871BFED69E006A237D /* SearchRoleTags */ = {
 			isa = PBXGroup;
 			children = (
+				EEBD11241C00317F0065BAE4 /* SearchAddRoleTagDelegate.h */,
+				EEBD11251C00317F0065BAE4 /* SearchAddRoleTagDelegate.m */,
 				EEC884881BFED6B7006A237D /* SearchRoleTagDelegate.h */,
 				EEC884891BFED6B7006A237D /* SearchRoleTagDelegate.m */,
 			);
 			path = SearchRoleTags;
-			sourceTree = "<group>";
-		};
-		EEC8848C1BFEF4CA006A237D /* SearchAdd */ = {
-			isa = PBXGroup;
-			children = (
-				EEC8848D1BFEF4EB006A237D /* SearchAddDelegate.h */,
-				EEC8848E1BFEF4EB006A237D /* SearchAddDelegate.m */,
-				EE9C85A51BFF310000610F95 /* SearchAddViewController.h */,
-				EE9C85A61BFF310000610F95 /* SearchAddViewController.m */,
-			);
-			path = SearchAdd;
 			sourceTree = "<group>";
 		};
 		EEC980A71B8EB9EA0087E5A7 /* BWStatusBarOverlay */ = {
@@ -2380,6 +2372,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EEBD11261C00317F0065BAE4 /* SearchAddRoleTagDelegate.m in Sources */,
 				EE7910601B845818005E455B /* UIBarButtonItem+WEPopover.m in Sources */,
 				EE7910591B841D14005E455B /* WEBlockingGestureRecognizer.m in Sources */,
 				EE7910571B841CBE005E455B /* FoundPCGCell.m in Sources */,
@@ -2481,8 +2474,7 @@
 				EED774D41BABF86D001C9B57 /* HomeViewController.m in Sources */,
 				EEAACCA41B44E90400D05C0B /* CVViewController2.m in Sources */,
 				EED64D451B8184AE008CB134 /* CycleAddKidsCell.m in Sources */,
-				EEC8848F1BFEF4EB006A237D /* SearchAddDelegate.m in Sources */,
-				EE9C85A71BFF310000610F95 /* SearchAddViewController.m in Sources */,
+				EEBD11231C0031540065BAE4 /* SearchAddViewController.m in Sources */,
 				EEA991481B775B4F001F6CC6 /* DDNNotificationViewController.m in Sources */,
 				EE92AE341BCE3627008DA020 /* CycleAddConditionCell.m in Sources */,
 				EEAACCDD1B44E90400D05C0B /* LoginModel.m in Sources */,

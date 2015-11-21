@@ -304,4 +304,8 @@
 - (NSString*)getControllerTitle {
     return @"添加你的角色";
 }
+
+- (UINavigationController*)getViewController {
+    return self.navigationController;
+}
 @end

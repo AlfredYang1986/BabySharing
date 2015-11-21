@@ -10,7 +10,8 @@
 #import "AppDelegate.h"
 #import "RemoteInstance.h"
 #import "ModelDefines.h"
-#import "SearchAddDelegate.h"
+#import "SearchAddRoleTagDelegate.h"
+#import "SearchAddViewController.h"
 
 typedef void(^queryRoleTagFinishBlock)(BOOL success, NSString* msg, NSArray* result);
 
@@ -21,7 +22,7 @@ typedef void(^queryRoleTagFinishBlock)(BOOL success, NSString* msg, NSArray* res
    
     BOOL isSync;
     
-    SearchAddDelegate* add_delegate;
+    SearchAddRoleTagDelegate* add_delegate;
 }
 
 @synthesize delegate = _delegate;
@@ -161,5 +162,19 @@ typedef void(^queryRoleTagFinishBlock)(BOOL success, NSString* msg, NSArray* res
     cell.textLabel.font = [UIFont boldSystemFontOfSize:17.f];
     cell.textLabel.textColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
     return cell;
+}
+
+#pragma mark -- search bar delegate
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SearchViewController" bundle:nil];
+    SearchAddViewController* svc = [storyboard instantiateViewControllerWithIdentifier:@"SearchAdd"];
+    SearchAddRoleTagDelegate* sd = [[SearchAddRoleTagDelegate alloc]init];
+    sd.delegate = svc;
+//    sd.actions = self;
+    [[_actions getViewController] pushViewController:svc animated:NO];
+    svc.delegate = sd;
+    [sd pushExistingData:test_tag_arr];
+    return NO;
 }
 @end

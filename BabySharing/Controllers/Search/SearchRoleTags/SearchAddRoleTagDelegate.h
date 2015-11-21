@@ -11,7 +11,8 @@
 
 #import "SearhViewControllerActionsDelegate.h"
 
-@interface SearchAddDelegate : NSObject <SearchDataCollectionProtocol>
+@interface SearchAddRoleTagDelegate : NSObject <SearchDataCollectionProtocol>
 
 @property (weak, nonatomic) id<SearchViewControllerProtocol> delegate;
+@property (weak, nonatomic) id<SearchActionsProtocol> actions;
 @end
