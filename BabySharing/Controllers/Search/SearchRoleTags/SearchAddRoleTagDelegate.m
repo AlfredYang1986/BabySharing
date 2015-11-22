@@ -55,6 +55,10 @@
     [_delegate needToReloadData];
 }
 
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    [[_actions getViewController] popViewControllerAnimated:NO];
+}
+
 #pragma mark -- table view delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -80,6 +84,12 @@
 - (void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 //    [_delegate addNewTag:[_delegate getUserInputString]];
+    
+    if (showing_data.count == 0) {
+        [_actions addNewItem:[_delegate getUserInputString]];
+    } else {
+        [_actions didSelectItem:[showing_data objectAtIndex:indexPath.row]];
+    }
 }
 
 #pragma mark -- table view datasource
@@ -99,6 +109,9 @@
     } else {
         cell.textLabel.text = [showing_data objectAtIndex:indexPath.row];
     }
+    
+    cell.textLabel.font = [UIFont boldSystemFontOfSize:17.f];
+    cell.textLabel.textColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
     return cell;
 }
 @end

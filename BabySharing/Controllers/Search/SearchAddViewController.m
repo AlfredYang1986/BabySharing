@@ -60,7 +60,22 @@
     _queryView.delegate = _delegate;
 }
 
+#pragma mark -- status bar color
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+    //UIStatusBarStyleDefault = 0 黑色文字，浅色背景时使用
+    //UIStatusBarStyleLightContent = 1 白色文字，深色背景时使用
+}
+
+- (BOOL)prefersStatusBarHidden {
+    return NO; //返回NO表示要显示，返回YES将hiden
+}
+
 - (void)needToReloadData {
     [_queryView reloadData];
+}
+
+- (NSString*)getUserInputString {
+    return _searchBar.text;
 }
 @end

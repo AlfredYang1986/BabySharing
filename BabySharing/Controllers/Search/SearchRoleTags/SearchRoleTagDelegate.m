@@ -171,10 +171,36 @@ typedef void(^queryRoleTagFinishBlock)(BOOL success, NSString* msg, NSArray* res
     SearchAddViewController* svc = [storyboard instantiateViewControllerWithIdentifier:@"SearchAdd"];
     SearchAddRoleTagDelegate* sd = [[SearchAddRoleTagDelegate alloc]init];
     sd.delegate = svc;
-//    sd.actions = self;
+    sd.actions = self;
     [[_actions getViewController] pushViewController:svc animated:NO];
     svc.delegate = sd;
     [sd pushExistingData:test_tag_arr];
     return NO;
+}
+
+#pragma mark -- actions delegate
+- (UINavigationController*)getViewController {
+    return [_actions getViewController];
+}
+
+- (void)needToReloadData {
+    [_delegate needToReloadData];
+}
+
+- (NSString*)getUserInputString {
+    return [_delegate getUserInputString];
+}
+
+- (NSString*)getAddSectionTitle {
+    return [_delegate getAddSectionTitle];
+}
+
+- (void)didSelectItem:(NSString *)item {
+    [_actions didSelectItem:item];
+}
+
+- (void)addNewItem:(NSString*)item {
+    // TODO: something, then call actions
+    [_actions addNewItem:item];
 }
 @end

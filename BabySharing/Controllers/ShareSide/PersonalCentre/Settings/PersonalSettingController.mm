@@ -339,7 +339,35 @@
 }
 
 - (void)addNewItem:(NSString*)item {
+    dispatch_queue_t aq = dispatch_queue_create("add tag", nil);
+    dispatch_async(aq, ^{
+        
+        AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+        
+        NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
+        [dic setValue:app.lm.current_user_id forKey:@"user_id"];
+        [dic setValue:app.lm.current_auth_token forKey:@"auth_token"];
+        [dic setValue:item forKey:@"tag_name"];
+        
+        NSError * error = nil;
+        NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
+        
+        NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:ROLETAGS_ADD_ROLETAGE]];
+        
+        if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
+            NSString* msg = [result objectForKeyedSubscript:@"result"];
+            NSLog(@"query role tags : %@", msg);
+            
+        } else {
+            NSDictionary* reError = [result objectForKey:@"error"];
+            NSString* msg = [reError objectForKey:@"message"];
+            
+            NSLog(@"query role tags error : %@", msg);
+        }
+    });
     
+    [self didSelectTag:item];
+    [self.navigationController popToViewController:self animated:YES];
 }
 
 - (NSString*)getControllerTitle {
