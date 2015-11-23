@@ -10,11 +10,10 @@
 
 #import "ShareSideBaseController.h"
 #import "MainHomeViewDataDelegate.h"
-#import "QueryCellDelegate.h"
 
-@interface HomeViewController : ShareSideBaseController <QueryCellActionProtocol> 
+@interface HomeViewController : ShareSideBaseController
 
 @property (weak, nonatomic) NSString* nav_title;
 @property (nonatomic) BOOL isPushed;
-@property (strong, nonatomic, setter=setDataelegate:) id<HomeViewControllerDataDelegate> delegate;
+@property (strong, nonatomic) id<HomeViewControllerDataDelegate> delegate;
 @end

@@ -16,9 +16,10 @@
 #define USER_IMG_WIDTH      32
 #define USER_IMG_HEIGHT     USER_IMG_WIDTH
 
-#define ROLE_TAG_WIDTH      80
-#define ROLE_TAG_HEIGHT     25
+#define ROLE_TAG_WIDTH      40
+#define ROLE_TAG_HEIGHT     15
 
+#define HEADER_MARGIN_TO_SCREEN 0
 
 @implementation QueryHeader {
     UILabel* pushLabel;
@@ -37,7 +38,7 @@
 @synthesize userNameLabel = _userNameLabel;
 @synthesize pushTimesLabel = _pushTimesLabel;
 @synthesize pushBtn = _pushBtn;
-@synthesize tagLabel = _tagLabel;
+@synthesize timeLabel = _timeLabel;
 
 @synthesize content = _content;
 @synthesize delegate = _delegate;
@@ -49,8 +50,8 @@
     }
    
     if (!_userRoleTagBtn) {
-//        _userRoleTagBtn = [[UIButton alloc]init];
-//        [self addSubview:_userRoleTagBtn];
+        _userRoleTagBtn = [[UIButton alloc]init];
+        [self addSubview:_userRoleTagBtn];
     }
    
     if (!_userNameLabel) {
@@ -58,11 +59,11 @@
         [self addSubview:_userNameLabel];
     }
     
-    if (!_tagLabel) {
+    if (!_timeLabel) {
 //        _locationLabel = [[UILabel alloc]init];
 //        [self addSubview:_locationLabel];
-        _tagLabel = [[UILabel alloc]init];
-        [self addSubview:_tagLabel];
+        _timeLabel = [[UILabel alloc]init];
+        [self addSubview:_timeLabel];
     }
 
     if (!_pushTimesLabel) {
@@ -100,31 +101,37 @@
     
     UIFont* font = [UIFont systemFontOfSize:14.f];
     _userNameLabel.font = font;
-    CGSize user_name_size = [@"渊渊渊渊渊渊" sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
+//    CGSize user_name_size = [@"渊渊渊渊渊渊" sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
+    CGSize user_name_size = [_userNameLabel.text sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
     _userNameLabel.frame = CGRectMake(offset, _userImg.frame.origin.y - MARGIN / 2, user_name_size.width, user_name_size.height);
    
     font = [UIFont systemFontOfSize:11.f];
-    _tagLabel.font = font;
+    _timeLabel.font = font;
     CGSize location_size = [@"杨杨杨杨杨杨杨杨杨杨杨" sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
-    _tagLabel.frame = CGRectMake(offset, _userNameLabel.frame.origin.y + user_name_size.height + MARGIN / 2, location_size.width, location_size.height);
+    _timeLabel.frame = CGRectMake(offset + 16, _userNameLabel.frame.origin.y + user_name_size.height + MARGIN / 2, location_size.width, location_size.height);
     
-   
-    offset += user_name_size.width + MARGIN;
-    _userRoleTagBtn.font = font;
-    _userRoleTagBtn.frame = CGRectMake(offset, _userNameLabel.frame.origin.y, ROLE_TAG_WIDTH, ROLE_TAG_HEIGHT);
-    _userRoleTagBtn.layer.borderColor = [UIColor whiteColor].CGColor;
-    _userRoleTagBtn.layer.borderWidth = 1.f;
-    _userRoleTagBtn.layer.cornerRadius = MARGIN;
-    _userRoleTagBtn.clipsToBounds = YES;
-    _userRoleTagBtn.backgroundColor = [UIColor whiteColor];
-    [_userRoleTagBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    
-    _pushBtn.bounds = CGRectMake(0, 0, 25, 25);
-    CGFloat width = [UIScreen mainScreen].bounds.size.width;
-    _pushBtn.center = CGPointMake(width - MARGIN - 13, HEADER_HEIGHT / 2);
-    _pushBtn.backgroundColor = [UIColor clearColor];
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+    NSString * filePath_time_icon = [resourceBundle pathForResource:[NSString stringWithFormat:@"Time"] ofType:@"png"];
+    CALayer* time_icon = [CALayer layer];
+    time_icon.frame = CGRectMake(-16, 0, 16, 16);
+    time_icon.contents = (id)[UIImage imageNamed:filePath_time_icon].CGImage;
+    [_timeLabel.layer addSublayer:time_icon];
+   
+    offset += user_name_size.width + MARGIN * 2;
+    _userRoleTagBtn.font = [UIFont systemFontOfSize:11.f];
+    _userRoleTagBtn.frame = CGRectMake(offset, _userNameLabel.frame.origin.y + 3, ROLE_TAG_WIDTH, ROLE_TAG_HEIGHT);
+//    _userRoleTagBtn.layer.borderColor = [UIColor whiteColor].CGColor;
+//    _userRoleTagBtn.layer.borderWidth = 1.f;
+//    _userRoleTagBtn.layer.cornerRadius = MARGIN;
+    _userRoleTagBtn.clipsToBounds = YES;
+    _userRoleTagBtn.backgroundColor = [UIColor orangeColor];
+    [_userRoleTagBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    _pushBtn.bounds = CGRectMake(0, 0, 25, 25);
+    CGFloat width = [UIScreen mainScreen].bounds.size.width - 2 * HEADER_MARGIN_TO_SCREEN;
+    _pushBtn.center = CGPointMake(width - MARGIN - 13, HEADER_HEIGHT / 2);
+    _pushBtn.backgroundColor = [UIColor clearColor];
     NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"Push"] ofType:@"png"];
     [_pushBtn setBackgroundImage:[UIImage imageNamed:filePath] forState:UIControlStateNormal];
     
@@ -173,16 +180,27 @@
     [_userNameLabel sizeToFit];
 }
 
-- (void)setTagText:(NSString*)location {
-    _tagLabel.text = location;
-    [_tagLabel sizeToFit];
+- (void)setTimeText:(NSString*)time {
+    _timeLabel.text = time;
+    [_timeLabel sizeToFit];
+}
+
+- (void)setTime:(NSDate*)date {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.formatterBehavior = NSDateFormatterBehavior10_4;
+    formatter.dateStyle = NSDateFormatterShortStyle;
+    formatter.timeStyle = NSDateFormatterShortStyle;
+    NSString *result = [formatter stringForObjectValue:date];
+    _timeLabel.text = result;
+    [_timeLabel sizeToFit];
 }
 
 - (void)setRoleTag:(NSString *)role_tag {
     [_userRoleTagBtn setTitle:role_tag forState:UIControlStateNormal];
+    [_userRoleTagBtn sizeToFit];
 }
 
-- (void)setTimes:(NSString*)times {
+- (void)setPushTimes:(NSString*)times {
     _pushTimesLabel.text = times;
     [_pushTimesLabel sizeToFit];
 }

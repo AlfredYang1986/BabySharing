@@ -17,7 +17,7 @@
 @property (nonatomic, strong) UILabel* pushTimesLabel;
 @property (nonatomic, strong) UIButton* pushBtn;
 
-@property (nonatomic, strong) UILabel* tagLabel;
+@property (nonatomic, strong) UILabel* timeLabel;
 
 @property (weak, nonatomic) id<QueryCellActionProtocol> delegate;
 @property (weak, nonatomic) id content;
@@ -26,7 +26,8 @@
 
 - (void)setUserPhoto:(NSString*)photo_name;
 - (void)setUserName:(NSString*)name;
-- (void)setTagText:(NSString*)location;
+- (void)setTimeText:(NSString*)time;
+- (void)setTime:(NSDate*)date;
 - (void)setRoleTag:(NSString*)role_tag;
-- (void)setTimes:(NSString*)times;
+- (void)setPushTimes:(NSString*)times;
 @end
