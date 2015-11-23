@@ -43,6 +43,10 @@
 @synthesize content = _content;
 @synthesize delegate = _delegate;
 
++ (CGFloat)preferredHeight {
+    return 44;
+}
+
 - (void)setUpSubviews {
     if (!_userImg) {
         _userImg = [[UIImageView alloc]init];

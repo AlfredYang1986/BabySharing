@@ -973,39 +973,10 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                     <view key="view" contentMode="scaleToFill" id="VkB-2S-8Kt">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="0cz-in-2vG">
-                                <rect key="frame" x="30" y="158" width="160" height="316"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="F2b-Q4-GUQ" id="dqM-u3-zIu"/>
-                                    <outlet property="delegate" destination="F2b-Q4-GUQ" id="vAg-8L-Q6T"/>
-                                </connections>
-                            </tableView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="0cz-in-2vG" secondAttribute="trailing" constant="-16" id="1Pc-Yy-45k"/>
-                            <constraint firstItem="0cz-in-2vG" firstAttribute="leading" secondItem="VkB-2S-8Kt" secondAttribute="leadingMargin" constant="-16" id="48T-8d-61g"/>
-                            <constraint firstItem="0cz-in-2vG" firstAttribute="top" secondItem="gdd-Kj-LAg" secondAttribute="bottom" id="bL6-jE-ixG"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="0cz-in-2vG" secondAttribute="bottom" constant="-44" id="j5u-6u-wHx"/>
-                            <constraint firstItem="0cz-in-2vG" firstAttribute="top" secondItem="VkB-2S-8Kt" secondAttribute="topMargin" constant="-44" id="krd-a8-dwv"/>
-                            <constraint firstItem="UcI-2t-RVT" firstAttribute="top" secondItem="0cz-in-2vG" secondAttribute="bottom" id="lk2-Ao-pqu"/>
-                        </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="1Pc-Yy-45k"/>
-                                <exclude reference="48T-8d-61g"/>
-                                <exclude reference="bL6-jE-ixG"/>
-                                <exclude reference="j5u-6u-wHx"/>
-                                <exclude reference="krd-a8-dwv"/>
-                                <exclude reference="lk2-Ao-pqu"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="GSb-1t-IAY"/>
                     <connections>
-                        <outlet property="queryView" destination="0cz-in-2vG" id="Cnt-lR-kFb"/>
                         <segue destination="xUO-Ek-g05" kind="push" identifier="HomeDetailSegue" id="Xtg-xA-TvV"/>
                         <segue destination="cou-sa-Bod" kind="push" identifier="search" id="Gc2-hk-FGC"/>
                         <segue destination="OyS-hf-ms2" kind="push" identifier="ChatGroupSegue" id="LnD-Mz-TOI"/>

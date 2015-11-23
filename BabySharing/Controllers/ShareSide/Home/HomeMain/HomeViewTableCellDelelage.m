@@ -39,31 +39,33 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     //    NSInteger total = [self tableView:tableView numberOfRowsInSection:indexPath.section];
-    NSInteger total = [self numberOfSectionsInTableView:tableView];
-    if (indexPath.section == 0 || indexPath.section == total - 1) return 44;
-    else {
-        
-        QueryContent* tmp = [_delegate queryItemAtIndex:indexPath.section - 1];
+//    NSInteger total = [self numberOfSectionsInTableView:tableView];
+//    if (indexPath.section == 0 || indexPath.section == total - 1) return 44;
+//    else {
+    
+//        QueryContent* tmp = [_delegate queryItemAtIndex:indexPath.section - 1];
+        QueryContent* tmp = [_delegate queryItemAtIndex:indexPath.section];
         //        QueryContent* tmp = [self.qm.querydata objectAtIndex:indexPath.section - 1];
         return [QueryCell preferredHeightWithDescription:tmp.content_description];
-    }
+//    }
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
-    if ([view isKindOfClass:[UITableViewHeaderFooterView class]]) {
-        NSInteger total = [self numberOfSectionsInTableView:tableView];
-        if (section == 0 || section == total - 1) {
-            CAGradientLayer *layer = [CAGradientLayer layer];
-            layer.frame = view.bounds;
-            layer.colors = [NSArray arrayWithObjects:(id)[UIColor colorWithRed:0.0157 green:0.6235 blue:0.5373 alpha:1.f].CGColor
-                            , (id)[UIColor colorWithRed:0.0353 green:0.5020 blue:0.3961 alpha:1.f].CGColor, nil];
-            layer.startPoint = CGPointMake(0, 0);
-            layer.endPoint = CGPointMake(1, 1);
-            [((UITableViewHeaderFooterView*)view).backgroundView.layer addSublayer:layer];
-            
-            //        } else ((UITableViewHeaderFooterView *)view).backgroundView.backgroundColor = [UIColor colorWithWhite:0.4 alpha:0.6];
-        } else ((UITableViewHeaderFooterView *)view).backgroundView.backgroundColor = [UIColor whiteColor];
-    }
+//    if ([view isKindOfClass:[UITableViewHeaderFooterView class]]) {
+//        NSInteger total = [self numberOfSectionsInTableView:tableView];
+//        if (section == 0 || section == total - 1) {
+//            CAGradientLayer *layer = [CAGradientLayer layer];
+//            layer.frame = view.bounds;
+//            layer.colors = [NSArray arrayWithObjects:(id)[UIColor colorWithRed:0.0157 green:0.6235 blue:0.5373 alpha:1.f].CGColor
+//                            , (id)[UIColor colorWithRed:0.0353 green:0.5020 blue:0.3961 alpha:1.f].CGColor, nil];
+//            layer.startPoint = CGPointMake(0, 0);
+//            layer.endPoint = CGPointMake(1, 1);
+//            [((UITableViewHeaderFooterView*)view).backgroundView.layer addSublayer:layer];
+//            
+//            //        } else ((UITableViewHeaderFooterView *)view).backgroundView.backgroundColor = [UIColor colorWithWhite:0.4 alpha:0.6];
+//        } else
+            ((UITableViewHeaderFooterView *)view).backgroundView.backgroundColor = [UIColor whiteColor];
+//    }
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -93,47 +95,47 @@
 }
 
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    NSInteger total = [self numberOfSectionsInTableView:tableView];
-    if (section == 0) {
-        
-        UITableViewHeaderFooterView* view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"default header first"];
-        
-        if (view == nil) {
-            view = [[UITableViewHeaderFooterView alloc]initWithReuseIdentifier:@"default header first"];
-        }
-        
-        
-        if ([view viewWithTag:-99] == nil) {
-            NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
-            NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-            NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"Refresh2"] ofType:@"png"];
-            
-            UIImageView* iv = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 90, 36)];
-            iv.contentMode = UIViewContentModeScaleToFill;
-            iv.image = [UIImage imageNamed:filePath];
-            CGFloat width = [UIScreen mainScreen].bounds.size.width;
-            CGFloat height = 44;
-            iv.center = CGPointMake(width / 2, height / 2);
-            iv.tag = -99;
-            [view addSubview:iv];
-        }
-        
-        return view;
-        
-    } else if (section == total - 1) {
-        
-        UITableViewHeaderFooterView* view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"default header last"];
-        
-        if (view == nil) {
-            view = [[UITableViewHeaderFooterView alloc]initWithReuseIdentifier:@"default header last"];
-        }
-        
-        view.textLabel.text = @"there is no more content";
-        
-        return view;
-        
-    } else {
-        
+//    NSInteger total = [self numberOfSectionsInTableView:tableView];
+//    if (section == 0) {
+//        
+//        UITableViewHeaderFooterView* view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"default header first"];
+//        
+//        if (view == nil) {
+//            view = [[UITableViewHeaderFooterView alloc]initWithReuseIdentifier:@"default header first"];
+//        }
+//        
+//        
+//        if ([view viewWithTag:-99] == nil) {
+//            NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+//            NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+//            NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"Refresh2"] ofType:@"png"];
+//            
+//            UIImageView* iv = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 90, 36)];
+//            iv.contentMode = UIViewContentModeScaleToFill;
+//            iv.image = [UIImage imageNamed:filePath];
+//            CGFloat width = [UIScreen mainScreen].bounds.size.width;
+//            CGFloat height = 44;
+//            iv.center = CGPointMake(width / 2, height / 2);
+//            iv.tag = -99;
+//            [view addSubview:iv];
+//        }
+//        
+//        return view;
+//        
+//    } else if (section == total - 1) {
+//        
+//        UITableViewHeaderFooterView* view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"default header last"];
+//        
+//        if (view == nil) {
+//            view = [[UITableViewHeaderFooterView alloc]initWithReuseIdentifier:@"default header last"];
+//        }
+//        
+//        view.textLabel.text = @"there is no more content";
+//        
+//        return view;
+//        
+//    } else {
+    
         QueryHeader* header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"query header"];
         
         if (header == nil) {
@@ -142,7 +144,8 @@
         
         [header setUpSubviews];
         //        QueryContent* tmp = [self.qm.querydata objectAtIndex:section - 1];
-        QueryContent* tmp = [_delegate queryItemAtIndex:section - 1];
+//        QueryContent* tmp = [_delegate queryItemAtIndex:section - 1];
+        QueryContent* tmp = [_delegate queryItemAtIndex:section];
         [header setUserPhoto:tmp.owner_photo];
         [header setUserName:tmp.owner_name];
         //        [header setTimeText:@"金融/旅行/90后"];
@@ -154,36 +157,36 @@
         header.content = tmp;
         
         return header;
-    }
+//    }
 }
 
 #pragma mark -- table view datasource
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     //    NSInteger total = [self tableView:tableView numberOfRowsInSection:indexPath.section];
-    NSInteger total = [self numberOfSectionsInTableView:tableView];
-    //    if (indexPath.row == 0) {
-    if (indexPath.section == 0) {
-        UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"default"];
-        
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"default"];
-        }
-        
-        cell.textLabel.text = @"refreshing...";
-        return cell;
-        
-        //    } else if (indexPath.row == total - 1){
-    } else if (indexPath.section == total - 1){
-        UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"default"];
-        
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"default"];
-        }
-        
-        cell.textLabel.text = @"athena";
-        return cell;
-    } else {
+//    NSInteger total = [self numberOfSectionsInTableView:tableView];
+//    //    if (indexPath.row == 0) {
+//    if (indexPath.section == 0) {
+//        UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"default"];
+//        
+//        if (cell == nil) {
+//            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"default"];
+//        }
+//        
+//        cell.textLabel.text = @"refreshing...";
+//        return cell;
+//        
+//        //    } else if (indexPath.row == total - 1){
+//    } else if (indexPath.section == total - 1){
+//        UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"default"];
+//        
+//        if (cell == nil) {
+//            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"default"];
+//        }
+//        
+//        cell.textLabel.text = @"athena";
+//        return cell;
+//    } else {
         QueryCell *cell = [tableView dequeueReusableCellWithIdentifier:@"query cell"];
         
         if (cell == nil) {
@@ -192,7 +195,8 @@
         }
         
         //        QueryContent* tmp = [self.qm.querydata objectAtIndex:indexPath.section - 1];
-        QueryContent* tmp = [_delegate queryItemAtIndex:indexPath.section - 1];
+//        QueryContent* tmp = [_delegate queryItemAtIndex:indexPath.section - 1];
+        QueryContent* tmp = [_delegate queryItemAtIndex:indexPath.section];
         QueryContentItem* tmp_item = [tmp.items.objectEnumerator nextObject];
         if (tmp_item.item_type.unsignedIntegerValue == PostPreViewPhote) {
             NSLog(@"photo field");
@@ -288,21 +292,23 @@
         [cell setTags:@"安全，海淘"];
         
         return cell;
-    }
+//    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {     // Default is 1 if not implemented
     //    return 2 + self.qm.querydata.count;
-    return 2 + [_delegate count];
+//    return 2 + [_delegate count];
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSInteger total = [self numberOfSectionsInTableView:tableView];
-    if (section == 0 || section == total - 1) {
-        return 0;
-    } else {
-        return 1;
-    }
-    //    return 2 + self.qm.querydata.count;
+//    NSInteger total = [self numberOfSectionsInTableView:tableView];
+//    if (section == 0 || section == total - 1) {
+//        return 0;
+//    } else {
+//        return 1;
+//    }
+//    return 2 + self.qm.querydata.count;
+    return 1;
 }
 @end

@@ -30,4 +30,6 @@
 - (void)setTime:(NSDate*)date;
 - (void)setRoleTag:(NSString*)role_tag;
 - (void)setPushTimes:(NSString*)times;
+
++ (CGFloat)preferredHeight;
 @end

@@ -103,7 +103,7 @@
     _timeLabel= [[UILabel alloc]initWithFrame:CGRectMake(16, 30, width, 30)];
     _timeLabel.font = [UIFont systemFontOfSize:11.f];
     [_bkgView addSubview:_timeLabel];
-   
+    
     UIImageView* tagIcon = [[UIImageView alloc]initWithFrame:CGRectMake(16, 39 + 30, 30, 30)];
     tagIcon.contentMode = UIViewContentModeCenter;
     NSString * filePathIcon = [resourceBundle pathForResource:[NSString stringWithFormat:@"TagSearchSelected"] ofType:@"png"];
