@@ -15,7 +15,7 @@
 		EE0CEC581BDB13070016B6F4 /* UserPrivacyController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0CEC4E1BDB13070016B6F4 /* UserPrivacyController.m */; };
 		EE0CEC5D1BDB15790016B6F4 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0CEC5C1BDB15790016B6F4 /* LoginViewController.m */; };
 		EE20BED41B6F430D00DE8455 /* OwnerQueryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EE20BED31B6F430D00DE8455 /* OwnerQueryModel.m */; };
-		EE2A26DB1C02F7950080FB1B /* HomeViewTableCellDelelage.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2A26DA1C02F7950080FB1B /* HomeViewTableCellDelelage.m */; };
+		EE2A26DB1C02F7950080FB1B /* HomeViewTableCellDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2A26DA1C02F7950080FB1B /* HomeViewTableCellDelegate.m */; };
 		EE2D4B781B525E0A00B58A1F /* PostInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2D4B681B525E0A00B58A1F /* PostInputViewController.m */; };
 		EE2D4B791B525E0A00B58A1F /* PostPreView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE2D4B691B525E0A00B58A1F /* PostPreView.storyboard */; };
 		EE2D4B7A1B525E0A00B58A1F /* PostPreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2D4B6B1B525E0A00B58A1F /* PostPreViewController.m */; };
@@ -283,8 +283,8 @@
 		EE0CEC5C1BDB15790016B6F4 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		EE20BED21B6F430D00DE8455 /* OwnerQueryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OwnerQueryModel.h; sourceTree = "<group>"; };
 		EE20BED31B6F430D00DE8455 /* OwnerQueryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OwnerQueryModel.m; sourceTree = "<group>"; };
-		EE2A26D91C02F7950080FB1B /* HomeViewTableCellDelelage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewTableCellDelelage.h; sourceTree = "<group>"; };
-		EE2A26DA1C02F7950080FB1B /* HomeViewTableCellDelelage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewTableCellDelelage.m; sourceTree = "<group>"; };
+		EE2A26D91C02F7950080FB1B /* HomeViewTableCellDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewTableCellDelegate.h; sourceTree = "<group>"; };
+		EE2A26DA1C02F7950080FB1B /* HomeViewTableCellDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewTableCellDelegate.m; sourceTree = "<group>"; };
 		EE2D4B671B525E0A00B58A1F /* PostInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostInputViewController.h; sourceTree = "<group>"; };
 		EE2D4B681B525E0A00B58A1F /* PostInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostInputViewController.m; sourceTree = "<group>"; };
 		EE2D4B691B525E0A00B58A1F /* PostPreView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PostPreView.storyboard; sourceTree = "<group>"; };
@@ -1993,8 +1993,8 @@
 				EED774C71BABF86D001C9B57 /* HomeViewController.m */,
 				EE66B47B1BB3EEC600812F5F /* HomeNavigationController.h */,
 				EE66B47C1BB3EEC600812F5F /* HomeNavigationController.m */,
-				EE2A26D91C02F7950080FB1B /* HomeViewTableCellDelelage.h */,
-				EE2A26DA1C02F7950080FB1B /* HomeViewTableCellDelelage.m */,
+				EE2A26D91C02F7950080FB1B /* HomeViewTableCellDelegate.h */,
+				EE2A26DA1C02F7950080FB1B /* HomeViewTableCellDelegate.m */,
 			);
 			path = HomeMain;
 			sourceTree = "<group>";
@@ -2434,7 +2434,7 @@
 				EEAACCE81B44E90400D05C0B /* QueryTimeSpan.m in Sources */,
 				EEAACD151B44E90400D05C0B /* ProfileDetailPostCell.m in Sources */,
 				EEDCF6881B9AB42B005F4F4D /* SystemSettingLocalModel.xcdatamodeld in Sources */,
-				EE2A26DB1C02F7950080FB1B /* HomeViewTableCellDelelage.m in Sources */,
+				EE2A26DB1C02F7950080FB1B /* HomeViewTableCellDelegate.m in Sources */,
 				EE6D6DB51B7B28A6004D29C8 /* WEPopoverContainerView.m in Sources */,
 				EEAACCD41B44E90400D05C0B /* CurrentToken+ContextOpt.m in Sources */,
 				EEBFFC1D1B916A0F005AAE36 /* PersonalSettingCell.m in Sources */,

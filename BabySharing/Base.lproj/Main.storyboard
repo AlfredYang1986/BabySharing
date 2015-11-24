@@ -1888,7 +1888,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
         <!--Home-->
         <scene sceneID="xpf-RK-Rv1">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="aoW-yh-ycw" customClass="HomeNavigationController" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="aoW-yh-ycw" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Home" id="xS7-d9-dWJ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="x8q-Gk-P1T">

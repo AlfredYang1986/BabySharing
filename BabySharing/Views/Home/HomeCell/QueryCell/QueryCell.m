@@ -18,6 +18,8 @@
 
 #define IMG_OFFSET  100
 
+#define HEADER_MARGIN_TO_SCREEN 8
+
 @implementation QueryCell {
 //    MPMoviePlayerController* movie;
     AVPlayerLayer *avPlayerLayer;
@@ -52,14 +54,18 @@
 //        return img_height + 60
 //    }
  
-    CGFloat tmp = width / 3.75;
+    CGFloat tmp = width / 7.5;
+//    CGFloat tmp = width / 3.75;
 //    if (width > 350) {
 //        tmp = 100;
 //    } else {
 //        tmp = 80;
 //    }
     
-    return img_height + tmp + HER_MARGIN + [self getSizeBaseOnDescription:description].height;
+    return img_height
+         + tmp
+         + HER_MARGIN
+         + [self getSizeBaseOnDescription:description].height;
 }
 
 + (CGSize)getSizeBaseOnDescription:(NSString*)description {
@@ -100,19 +106,19 @@
     [_bkgView addSubview:_funcBtn];
     [_funcBtn setImage:[UIImage imageNamed:filePath] forState:UIControlStateNormal];
     
-    _timeLabel= [[UILabel alloc]initWithFrame:CGRectMake(16, 30, width, 30)];
-    _timeLabel.font = [UIFont systemFontOfSize:11.f];
-    [_bkgView addSubview:_timeLabel];
-    
-    UIImageView* tagIcon = [[UIImageView alloc]initWithFrame:CGRectMake(16, 39 + 30, 30, 30)];
-    tagIcon.contentMode = UIViewContentModeCenter;
-    NSString * filePathIcon = [resourceBundle pathForResource:[NSString stringWithFormat:@"TagSearchSelected"] ofType:@"png"];
-    tagIcon.image = [UIImage imageNamed:filePathIcon];
-    [_bkgView addSubview:tagIcon];
-    
-    _tagsLabelView = [[UILabel alloc]initWithFrame:CGRectMake(16 + 30 + 8, 34 + 30, width, 30)];
-    _tagsLabelView.font = [UIFont systemFontOfSize:13.f];
-    [_bkgView addSubview:_tagsLabelView];
+//    _timeLabel= [[UILabel alloc]initWithFrame:CGRectMake(16, 30, width, 30)];
+//    _timeLabel.font = [UIFont systemFontOfSize:11.f];
+//    [_bkgView addSubview:_timeLabel];
+//    
+//    UIImageView* tagIcon = [[UIImageView alloc]initWithFrame:CGRectMake(16, 39 + 30, 30, 30)];
+//    tagIcon.contentMode = UIViewContentModeCenter;
+//    NSString * filePathIcon = [resourceBundle pathForResource:[NSString stringWithFormat:@"TagSearchSelected"] ofType:@"png"];
+//    tagIcon.image = [UIImage imageNamed:filePathIcon];
+//    [_bkgView addSubview:tagIcon];
+//    
+//    _tagsLabelView = [[UILabel alloc]initWithFrame:CGRectMake(16 + 30 + 8, 34 + 30, width, 30)];
+//    _tagsLabelView.font = [UIFont systemFontOfSize:13.f];
+//    [_bkgView addSubview:_tagsLabelView];
 }
 
 - (void)layoutSubviews {
@@ -122,6 +128,7 @@
     CGFloat img_height = [UIScreen mainScreen].bounds.size.height - width / 2 - IMG_OFFSET;
     _imgView.frame = CGRectMake(0, 0, width, img_height);
     _bkgView.frame = CGRectMake(0, img_height, width, self.frame.size.height - img_height);
+    _funcBtn.frame = CGRectMake(width - 38, 8, 30, 30);
 }
 
 - (void)movieContentWithURL:(NSURL*)url withTriat:(MoviePlayTrait*)trait {

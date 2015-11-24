@@ -17,4 +17,8 @@
 @property (weak, nonatomic) NSString* nav_title;
 @property (nonatomic) BOOL isPushed;
 @property (strong, nonatomic, setter=setDataelegate:) id<HomeViewControllerDataDelegate> delegate;
+
+@property (nonatomic, setter=setCurrentContentIndex:) NSInteger current_index;
+
+- (NSInteger)getShowingIndex:(UITableView*)tableView;
 @end

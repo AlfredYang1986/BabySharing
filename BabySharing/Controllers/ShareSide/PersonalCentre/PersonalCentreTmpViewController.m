@@ -431,6 +431,7 @@
     [hv.delegate pushExistingData:[self getOM].querydata];
     [hv.delegate setSelectIndex:index];
     hv.nav_title = [self getNickName];
+    hv.current_index = index;
     [self.navigationController pushViewController:hv animated:YES];
 }
 

@@ -24,7 +24,7 @@
 #import "HomeDataDelegate.h"
 #import "PersonalCentreTmpViewController.h"
 #import "PersonalCentreOthersDelegate.h"
-#import "HomeViewTableCellDelelage.h"
+#import "HomeViewTableCellDelegate.h"
 
 #define HEADER_MARGIN_TO_SCREEN 8
 
@@ -60,7 +60,7 @@
     BOOL showBack2Top;
     CGFloat offset_y;
     
-    HomeViewTableCellDelelage* datasource;
+    HomeViewTableCellDelegate* datasource;
     
     NSMutableArray* queryViewLst;
 }
@@ -77,6 +77,8 @@
 
 @synthesize isPushed = _isPushed;
 @synthesize nav_title = _nav_title;
+
+@synthesize current_index = _current_index;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -149,21 +151,36 @@
     
     self.view.backgroundColor = [UIColor grayColor];
     
-    datasource = [[HomeViewTableCellDelelage alloc]init];
+    datasource = [[HomeViewTableCellDelegate alloc]init];
     datasource.trait = trait;
     datasource.controller = self;
     datasource.delegate = _delegate;
+    datasource.current_index = _current_index;
 //    _queryView.dataSource = datasource;
 //    _queryView.delegate = datasource;
     
     [self.navigationController setNavigationBarHidden:YES];
     [self createContentCardView];
     self.view.backgroundColor = [UIColor lightGrayColor];
+    
+    for (int index = 0; index < queryViewLst.count; ++index) {
+        UIView* tmp = [queryViewLst objectAtIndex:index];
+        tmp.tag = index + _current_index;
+    }
 }
 
 - (void)setDataelegate:(id<HomeViewControllerDataDelegate>)delegate {
     _delegate = delegate;
     datasource.delegate = delegate;
+}
+
+- (void)setCurrentContentIndex:(NSInteger)current_index {
+    _current_index = current_index;
+    
+    for (int index = 0; index < queryViewLst.count; ++index) {
+        UIView* tmp = [queryViewLst objectAtIndex:index];
+        tmp.tag = index + current_index;
+    }
 }
 
 #pragma mark -- table view for card content
@@ -173,11 +190,11 @@
         queryViewLst = [[NSMutableArray alloc]initWithCapacity:3];
     }
     
-//    for (int index = 0; index < 3; ++index) {
+    for (int index = 0; index < 2; ++index) {
         UITableView* tmp = [[UITableView alloc]init];
         CGFloat width = [UIScreen mainScreen].bounds.size.width - 2 * HEADER_MARGIN_TO_SCREEN;
         CGSize size = CGSizeMake(width, [QueryHeader preferredHeight] + [QueryCell preferredHeightWithDescription:@"Any Word"]);
-        tmp.frame = CGRectMake(8, 44, size.width, size.height);
+        tmp.frame = CGRectMake(8 + index * 4, 36 + index * (size.height + 8), size.width - index * 8, size.height);
         [self.view addSubview:tmp];
         [queryViewLst addObject:tmp];
     
@@ -185,16 +202,20 @@
         [tmp registerNib:nib forCellReuseIdentifier:@"query cell"];
         [tmp registerClass:[QueryHeader class] forHeaderFooterViewReuseIdentifier:@"query header"];
         tmp.separatorStyle = UITableViewCellSeparatorStyleNone;
-    tmp.scrollEnabled = NO;
+        tmp.scrollEnabled = NO;
     
-    tmp.delegate = datasource;
-    tmp.dataSource = datasource;
+        tmp.delegate = datasource;
+        tmp.dataSource = datasource;
     
-    tmp.layer.cornerRadius = 8.f;
-    tmp.clipsToBounds = YES;
-//    }
+        tmp.layer.cornerRadius = 8.f;
+        tmp.clipsToBounds = YES;
+    }
     
     return queryViewLst;
+}
+
+- (NSInteger)getShowingIndex:(UITableView*)tableView {
+    return _current_index;
 }
 
 - (void)didPopViewControllerBtn {
@@ -206,7 +227,8 @@
     VIEW_BOUNTDS
 //    _queryView.frame = QUERY_VIEW_START;
     bkView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, screen_width, 20)];
-    bkView.backgroundColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
+//    bkView.backgroundColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
+    bkView.backgroundColor = [UIColor lightGrayColor];
     [self.view addSubview:bkView];
     [self.view bringSubviewToFront:bkView];
 }
@@ -243,15 +265,6 @@
 - (void)back2TopHandler:(UITapGestureRecognizer*)gesture {
 //    [_queryView setContentOffset:CGPointZero animated:YES];
 }
-
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
-}
-
-- (BOOL)prefersStatusBarHidden {
-    return NO; //返回NO表示要显示，返回YES将hiden
-}
-
 #pragma mark -- scroll refresh
 - (void)dealloc {
 //    ((UIScrollView*)_queryView).delegate = nil;

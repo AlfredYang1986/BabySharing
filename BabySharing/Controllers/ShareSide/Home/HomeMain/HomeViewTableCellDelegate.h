@@ -13,9 +13,11 @@
 @class MoviePlayTrait;
 @class HomeViewController;
 
-@interface HomeViewTableCellDelelage : NSObject <UITableViewDataSource, UITableViewDelegate>
+@interface HomeViewTableCellDelegate : NSObject <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) id<HomeViewControllerDataDelegate> delegate;
 @property (weak, nonatomic) MoviePlayTrait* trait;
 @property (weak, nonatomic) HomeViewController* controller;
+
+@property (nonatomic) NSInteger current_index;
 @end

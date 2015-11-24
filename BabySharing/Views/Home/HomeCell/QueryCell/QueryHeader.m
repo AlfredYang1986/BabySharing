@@ -19,7 +19,7 @@
 #define ROLE_TAG_WIDTH      40
 #define ROLE_TAG_HEIGHT     15
 
-#define HEADER_MARGIN_TO_SCREEN 0
+#define HEADER_MARGIN_TO_SCREEN 8
 
 @implementation QueryHeader {
     UILabel* pushLabel;
@@ -133,7 +133,8 @@
     [_userRoleTagBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
     _pushBtn.bounds = CGRectMake(0, 0, 25, 25);
-    CGFloat width = [UIScreen mainScreen].bounds.size.width - 2 * HEADER_MARGIN_TO_SCREEN;
+//    CGFloat width = [UIScreen mainScreen].bounds.size.width - 2 * HEADER_MARGIN_TO_SCREEN;
+    CGFloat width = self.bounds.size.width;
     _pushBtn.center = CGPointMake(width - MARGIN - 13, HEADER_HEIGHT / 2);
     _pushBtn.backgroundColor = [UIColor clearColor];
     NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"Push"] ofType:@"png"];
