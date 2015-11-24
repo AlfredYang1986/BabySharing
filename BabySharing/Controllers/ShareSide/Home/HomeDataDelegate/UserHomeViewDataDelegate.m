@@ -48,7 +48,14 @@
 }
 
 - (QueryContent*)queryItemAtIndex:(NSInteger)index {
-    return [data objectAtIndex:index];
+    QueryContent* reVal = nil;
+    @try {
+        reVal = [data objectAtIndex:index];
+    }
+    @catch (NSException *exception) {
+   
+    }
+    return reVal;
 }
 
 - (NSArray*)data {

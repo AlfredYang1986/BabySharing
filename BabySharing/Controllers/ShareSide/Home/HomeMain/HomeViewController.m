@@ -27,6 +27,7 @@
 #import "HomeViewTableCellDelegate.h"
 
 #define HEADER_MARGIN_TO_SCREEN 8
+#define CONTENT_START_POINT     28
 
 #define VIEW_BOUNTDS        CGFloat screen_width = [UIScreen mainScreen].bounds.size.width; \
                             CGFloat screen_height = [UIScreen mainScreen].bounds.size.height; \
@@ -63,6 +64,9 @@
     HomeViewTableCellDelegate* datasource;
     
     NSMutableArray* queryViewLst;
+    
+    CGPoint point;
+    BOOL isAnimation;
 }
 
 //@synthesize queryView = _queryView;
@@ -167,6 +171,8 @@
         UIView* tmp = [queryViewLst objectAtIndex:index];
         tmp.tag = index + _current_index;
     }
+    
+    isAnimation = NO;
 }
 
 - (void)setDataelegate:(id<HomeViewControllerDataDelegate>)delegate {
@@ -190,11 +196,11 @@
         queryViewLst = [[NSMutableArray alloc]initWithCapacity:3];
     }
     
-    for (int index = 0; index < 2; ++index) {
+    for (int index = 0; index < 3; ++index) {
         UITableView* tmp = [[UITableView alloc]init];
         CGFloat width = [UIScreen mainScreen].bounds.size.width - 2 * HEADER_MARGIN_TO_SCREEN;
         CGSize size = CGSizeMake(width, [QueryHeader preferredHeight] + [QueryCell preferredHeightWithDescription:@"Any Word"]);
-        tmp.frame = CGRectMake(8 + index * 4, 36 + index * (size.height + 8), size.width - index * 8, size.height);
+        tmp.frame = CGRectMake(8 + index * 4, CONTENT_START_POINT + index * (size.height + 8), size.width - index * 8, size.height);
         [self.view addSubview:tmp];
         [queryViewLst addObject:tmp];
     
@@ -209,9 +215,125 @@
     
         tmp.layer.cornerRadius = 8.f;
         tmp.clipsToBounds = YES;
+        
+        UIPanGestureRecognizer* pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(handlePan:)];
+        [tmp addGestureRecognizer:pan];
     }
     
     return queryViewLst;
+}
+
+- (void)nextCard {
+  
+    if ([_delegate count] == _current_index + 1) {
+        UIAlertView* view = [[UIAlertView alloc]initWithTitle:@"Last Card" message:@"This is the last card of content" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [view show];
+        return;
+    }
+    
+    UITableView* tmp = [queryViewLst lastObject];
+    
+    CGFloat width = [UIScreen mainScreen].bounds.size.width - 2 * HEADER_MARGIN_TO_SCREEN;
+    CGSize size = CGSizeMake(width, [QueryHeader preferredHeight] + [QueryCell preferredHeightWithDescription:@"Any Word"]);
+    tmp.frame = CGRectMake(8 + 2 * 4, CONTENT_START_POINT + 2 * (size.height + 8), size.width - 2 * 8, size.height);
+    tmp.tag = 2 + _current_index;
+    
+    if (tmp.tag == [_delegate count]) {
+        tmp.hidden = YES;
+    } else {
+        [tmp reloadData];
+        tmp.hidden = NO;
+    }
+
+    isAnimation = YES;
+    static const CGFloat kAnimationDuration = 0.80f; // in seconds
+    [INTUAnimationEngine animateWithDuration:kAnimationDuration
+                                       delay:0.0
+                                      easing:INTUEaseInOutQuadratic
+                                     options:INTUAnimationOptionNone
+                                  animations:^(CGFloat progress) {
+                                      for (int index = -1; index < 2; ++index) {
+                                          ((UIView*)[queryViewLst objectAtIndex:index + 1]).frame = INTUInterpolateCGRect(((UIView*)[queryViewLst objectAtIndex:index + 1]).frame, CGRectMake(8 + abs(index) * 4, CONTENT_START_POINT + index * (size.height + 8) - (index == -1 ? 28 : 0), size.width - abs(index) * 8, size.height), progress);
+                                      }
+                                  }
+                                  completion:^(BOOL finished) {
+                                      // NOTE: When passing INTUAnimationOptionRepeat, this completion block is NOT executed at the end of each cycle. It will only run if the animation is canceled.
+                                      NSLog(@"%@", finished ? @"Animation Completed" : @"Animation Canceled");
+                                      // self.animationID = NSNotFound;
+                                      _isLoading = NO;
+
+                                      UIView* head = [queryViewLst firstObject];
+                                      [queryViewLst removeObject:head];
+                                      [queryViewLst addObject:head];
+                                      _current_index += 1;
+                                      head.hidden = YES;
+                                      isAnimation = NO;
+                                  }];
+    
+}
+
+- (void)previousCard {
+    if (_current_index == 0) {
+        UIAlertView* view = [[UIAlertView alloc]initWithTitle:@"First Card" message:@"This is the first card of content" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [view show];
+        return;
+    }
+    
+    UITableView* tmp = [queryViewLst lastObject];
+    
+    CGFloat width = [UIScreen mainScreen].bounds.size.width - 2 * HEADER_MARGIN_TO_SCREEN;
+    CGSize size = CGSizeMake(width, [QueryHeader preferredHeight] + [QueryCell preferredHeightWithDescription:@"Any Word"]);
+    tmp.frame = CGRectMake(8 + 2 * 4, CONTENT_START_POINT + -1 * (size.height + 8), size.width - 2 * 8, size.height);
+    tmp.tag = -1 + _current_index;
+    [tmp reloadData];
+    tmp.hidden = NO;
+
+    isAnimation = YES;
+    [queryViewLst removeObject:tmp];
+    [queryViewLst insertObject:tmp atIndex:0];
+    
+    static const CGFloat kAnimationDuration = 0.80f; // in seconds
+    [INTUAnimationEngine animateWithDuration:kAnimationDuration
+                                       delay:0.0
+                                      easing:INTUEaseInOutQuadratic
+                                     options:INTUAnimationOptionNone
+                                  animations:^(CGFloat progress) {
+                                      for (int index = 0; index < 3; ++index) {
+                                          ((UIView*)[queryViewLst objectAtIndex:index]).frame = INTUInterpolateCGRect(((UIView*)[queryViewLst objectAtIndex:index]).frame, CGRectMake(8 + abs(index) * 4, CONTENT_START_POINT + index * (size.height + 8), size.width - abs(index) * 8, size.height), progress);
+                                      }
+                                  }
+                                  completion:^(BOOL finished) {
+                                      // NOTE: When passing INTUAnimationOptionRepeat, this completion block is NOT executed at the end of each cycle. It will only run if the animation is canceled.
+                                      NSLog(@"%@", finished ? @"Animation Completed" : @"Animation Canceled");
+                                      // self.animationID = NSNotFound;
+                                      _isLoading = NO;
+                                      
+                                      _current_index -= 1;
+                                      UIView* tmp = [queryViewLst lastObject];
+                                      tmp.hidden = YES;
+                                      isAnimation = NO;
+                                  }];
+}
+
+- (void)handlePan:(UIPanGestureRecognizer*)gesture {
+    if (gesture.state == UIGestureRecognizerStateBegan) {
+        point = [gesture translationInView:self.view];
+        
+    } else if (gesture.state == UIGestureRecognizerStateEnded) {
+        CGPoint newPoint = [gesture translationInView:self.view];
+    
+        if (!isAnimation) {
+            if (newPoint.y - point.y > 100) {
+                [self previousCard];
+            } else if (point.y - newPoint.y > 100) {
+                [self nextCard];
+            }
+        }
+        
+        point = CGPointMake(-1, -1);
+        
+    } else if (gesture.state == UIGestureRecognizerStateChanged) {
+    }
 }
 
 - (NSInteger)getShowingIndex:(UITableView*)tableView {

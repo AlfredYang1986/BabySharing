@@ -73,7 +73,14 @@
 }
 
 - (QueryContent*)queryItemAtIndex:(NSInteger)index {
-    return [self.data objectAtIndex:index];
+    QueryContent* reVal = nil;
+    @try {
+        reVal = [self.data objectAtIndex:index];
+    }
+    @catch (NSException *exception) {
+    
+    }
+    return reVal;
 }
 
 - (NSArray*)data {// TODO: need to delete

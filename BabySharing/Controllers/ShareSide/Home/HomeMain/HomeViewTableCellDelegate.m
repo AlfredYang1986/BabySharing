@@ -34,6 +34,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     QueryContent* tmp = [_delegate queryItemAtIndex:tableView.tag];
+    if (tmp == nil) {
+        tableView.hidden = YES;
+    }
     return [QueryCell preferredHeightWithDescription:tmp.content_description];
 }
 
