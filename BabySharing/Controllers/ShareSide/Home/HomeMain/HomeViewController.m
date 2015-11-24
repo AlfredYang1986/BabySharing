@@ -345,11 +345,8 @@
 }
 
 - (void)layoutTableViews {
-    NSLog(@"layout the tableviews");
-    VIEW_BOUNTDS
-//    _queryView.frame = QUERY_VIEW_START;
+    CGFloat screen_width = [UIScreen mainScreen].bounds.size.width;
     bkView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, screen_width, 20)];
-//    bkView.backgroundColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
     bkView.backgroundColor = [UIColor lightGrayColor];
     [self.view addSubview:bkView];
     [self.view bringSubviewToFront:bkView];
@@ -467,26 +464,6 @@
 //
 //}
 
-- (void)moveViewFromRect:(CGRect)begin toRect:(CGRect)end {
-    static const CGFloat kAnimationDuration = 0.30; // in seconds
-    [INTUAnimationEngine animateWithDuration:kAnimationDuration
-                                       delay:0.0
-                                      easing:INTUEaseInOutQuadratic
-                                     options:INTUAnimationOptionNone
-                                  animations:^(CGFloat progress) {
-//                                      _queryView.frame = INTUInterpolateCGRect(begin, end, progress);
-                                      
-                                      // NSLog(@"Progress: %.2f", progress);
-                                  }
-                                  completion:^(BOOL finished) {
-                                      // NOTE: When passing INTUAnimationOptionRepeat, this completion block is NOT executed at the end of each cycle. It will only run if the animation is canceled.
-                                      NSLog(@"%@", finished ? @"Animation Completed" : @"Animation Canceled");
-                                      //                                                         self.animationID = NSNotFound;
-                                      _isLoading = NO;
-                                  }];
-}
-
-
 #pragma mark -- segue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"HomeDetailSegue"]) {
@@ -499,15 +476,10 @@
 
 #pragma mark -- QueryCellActionProtocol
 - (void)didSelectLikeBtn:(id)content {
-//    QueryContent* cur = (QueryContent*)content;
-//    NSLog(@"like post id: %@", cur.content_post_id);
-//    
-//    AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-//    [delegate.pm postLikeToServiceWithPostID:cur.content_post_id];
+
 }
 
 - (void)didSelectShareBtn:(id)content {
-//    QueryContent* cur = (QueryContent*)content;
     
 }
 
