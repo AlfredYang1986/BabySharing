@@ -220,6 +220,8 @@
 		EEC980B41B8EB9EA0087E5A7 /* status-bar-pattern-default@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EEC980AD1B8EB9EA0087E5A7 /* status-bar-pattern-default@2x.jpg */; };
 		EEC980B51B8EB9EA0087E5A7 /* status-bar-progress.png in Resources */ = {isa = PBXBuildFile; fileRef = EEC980AE1B8EB9EA0087E5A7 /* status-bar-progress.png */; };
 		EEC980B61B8EB9EA0087E5A7 /* status-bar-progress@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EEC980AF1B8EB9EA0087E5A7 /* status-bar-progress@2x.png */; };
+		EECB445B1C059343008F05B8 /* OBShapedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EECB44571C059343008F05B8 /* OBShapedButton.m */; };
+		EECB445C1C059343008F05B8 /* UIImage+ColorAtPixel.m in Sources */ = {isa = PBXBuildFile; fileRef = EECB445A1C059343008F05B8 /* UIImage+ColorAtPixel.m */; };
 		EED5EABA1BD73710000AFF36 /* PhotoTagRoundPointLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EED5EAB71BD73710000AFF36 /* PhotoTagRoundPointLayer.m */; };
 		EED5EABB1BD73710000AFF36 /* PhotoTagTariangleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EED5EAB91BD73710000AFF36 /* PhotoTagTariangleLayer.m */; };
 		EED5EABE1BD7375E000AFF36 /* PhotoTagTariangleLayer2.m in Sources */ = {isa = PBXBuildFile; fileRef = EED5EABD1BD7375E000AFF36 /* PhotoTagTariangleLayer2.m */; };
@@ -685,6 +687,10 @@
 		EEC980AD1B8EB9EA0087E5A7 /* status-bar-pattern-default@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "status-bar-pattern-default@2x.jpg"; sourceTree = "<group>"; };
 		EEC980AE1B8EB9EA0087E5A7 /* status-bar-progress.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "status-bar-progress.png"; sourceTree = "<group>"; };
 		EEC980AF1B8EB9EA0087E5A7 /* status-bar-progress@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "status-bar-progress@2x.png"; sourceTree = "<group>"; };
+		EECB44561C059343008F05B8 /* OBShapedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBShapedButton.h; sourceTree = "<group>"; };
+		EECB44571C059343008F05B8 /* OBShapedButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBShapedButton.m; sourceTree = "<group>"; };
+		EECB44591C059343008F05B8 /* UIImage+ColorAtPixel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ColorAtPixel.h"; sourceTree = "<group>"; };
+		EECB445A1C059343008F05B8 /* UIImage+ColorAtPixel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ColorAtPixel.m"; sourceTree = "<group>"; };
 		EED5EAB61BD73710000AFF36 /* PhotoTagRoundPointLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoTagRoundPointLayer.h; sourceTree = "<group>"; };
 		EED5EAB71BD73710000AFF36 /* PhotoTagRoundPointLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoTagRoundPointLayer.m; sourceTree = "<group>"; };
 		EED5EAB81BD73710000AFF36 /* PhotoTagTariangleLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoTagTariangleLayer.h; sourceTree = "<group>"; };
@@ -1592,6 +1598,7 @@
 		EEAACBBB1B44E90300D05C0B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				EECB44541C059343008F05B8 /* ShapedButton */,
 				EEFCDECC1BCB936500A53CAB /* Chat */,
 				EEDAF4651BA674300035CC31 /* Common */,
 				EEC980A71B8EB9EA0087E5A7 /* BWStatusBarOverlay */,
@@ -1964,6 +1971,33 @@
 				EEC980AF1B8EB9EA0087E5A7 /* status-bar-progress@2x.png */,
 			);
 			path = BWStatusBarOverlay;
+			sourceTree = "<group>";
+		};
+		EECB44541C059343008F05B8 /* ShapedButton */ = {
+			isa = PBXGroup;
+			children = (
+				EECB44551C059343008F05B8 /* OBShapedButton */,
+				EECB44581C059343008F05B8 /* UIImage+ColorAtPixel */,
+			);
+			path = ShapedButton;
+			sourceTree = "<group>";
+		};
+		EECB44551C059343008F05B8 /* OBShapedButton */ = {
+			isa = PBXGroup;
+			children = (
+				EECB44561C059343008F05B8 /* OBShapedButton.h */,
+				EECB44571C059343008F05B8 /* OBShapedButton.m */,
+			);
+			path = OBShapedButton;
+			sourceTree = "<group>";
+		};
+		EECB44581C059343008F05B8 /* UIImage+ColorAtPixel */ = {
+			isa = PBXGroup;
+			children = (
+				EECB44591C059343008F05B8 /* UIImage+ColorAtPixel.h */,
+				EECB445A1C059343008F05B8 /* UIImage+ColorAtPixel.m */,
+			);
+			path = "UIImage+ColorAtPixel";
 			sourceTree = "<group>";
 		};
 		EED5EAB41BD73710000AFF36 /* NewTag */ = {
@@ -2483,7 +2517,9 @@
 				EEC8848A1BFED6B7006A237D /* SearchRoleTagDelegate.m in Sources */,
 				EE96763F1B7C3D5C00445254 /* CycleDescriptionCell.m in Sources */,
 				EE6D6DE21B7B404E004D29C8 /* CycleDetailController.m in Sources */,
+				EECB445B1C059343008F05B8 /* OBShapedButton.m in Sources */,
 				EEE94E371B74C0810011321A /* ProfileOthersOverView.m in Sources */,
+				EECB445C1C059343008F05B8 /* UIImage+ColorAtPixel.m in Sources */,
 				EE5D686C1B75A55A0067A2DF /* MessageAndNotificationModel.xcdatamodeld in Sources */,
 				EE76A5761B72056800036747 /* Followed.m in Sources */,
 				EE2D4B801B525E0A00B58A1F /* PhotoTagsController.m in Sources */,

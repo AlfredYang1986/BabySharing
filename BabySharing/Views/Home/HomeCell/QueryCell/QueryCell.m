@@ -10,6 +10,8 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import "MoviePlayTrait.h"
 #import <AVFoundation/AVFoundation.h>
+#import "INTUAnimationEngine.h"
+#import "OBShapedButton.h"
 
 #define HER_MARGIN  8
 #define VER_MARGIN  1
@@ -99,7 +101,7 @@
     
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-    NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"FuncViewImg"] ofType:@"png"];
+    NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"Plus"] ofType:@"png"];
     
     _funcBtn = [[UIButton alloc]initWithFrame:CGRectMake(width - 38, 8, 30, 30)];
     [_funcBtn addTarget:self action:@selector(didSelectFuncBtn) forControlEvents:UIControlEventTouchUpInside];
@@ -278,7 +280,37 @@
 }
 
 - (IBAction)didSelectFuncBtn {
+    
+    static const CGFloat kAnimationDuration = 0.5; // in seconds
+    
     if (funcView == nil) {
+        funcView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 50, 100)];
+
+        /**
+         * option:1 shaped Btn
+         */
+//        OBShapedButton* btn = [[OBShapedButton alloc]initWithFrame:CGRectMake(5, 0, 60, 50)];
+//        
+//        NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+//        NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+//        [btn setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Funcleaf"] ofType:@"png"]] forState:UIControlStateNormal];
+//        [btn setImage:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Cycle"] ofType:@"png"]] forState:UIControlStateNormal];
+//       
+//        btn.transform = CGAffineTransformMakeRotation(M_PI + M_PI_4 / 2);
+//        [funcView addSubview:btn];
+//        
+//        OBShapedButton* btn2 = [[OBShapedButton alloc]initWithFrame:CGRectMake(20, -20, 60, 50)];
+//        
+//        [btn2 setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Funcleaf"] ofType:@"png"]] forState:UIControlStateNormal];
+//        [btn2 setImage:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Push"] ofType:@"png"]] forState:UIControlStateNormal];
+//        
+//        btn2.transform = CGAffineTransformMakeRotation(M_PI + M_PI_4 / 2 * 3);
+//        [funcView addSubview:btn2];
+
+
+        /**
+         * option:2 paneal
+         */
         funcView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 32 * 3, 32)];
 
         NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
@@ -297,26 +329,42 @@
         [funcView addSubview:didnotlikeBtn];
         [funcView addSubview:collectBtn];
         [funcView addSubview:commentsBtn];
-        
-//        [self addSubview:funcView];
+//
         [_bkgView addSubview:funcView];
-//        funcView.frame = CGRectMake(_funcBtn.frame.origin.x - 32 * 3, _funcBtn.frame.origin.y + 8, 32 * 3, 32);
         funcView.frame = CGRectMake(_funcBtn.frame.origin.x - 32 * 3 - 8, _funcBtn.frame.origin.y, 32 * 3, 32);
-        
-//        funcView.layer.borderColor = [UIColor blueColor].CGColor;
-//        funcView.layer.borderWidth = 1.f;
-//        funcView.layer.cornerRadius = 4.f;
-//        funcView.clipsToBounds = YES;
-        
+//        funcView.frame = CGRectMake(_funcBtn.frame.origin.x - 45, _funcBtn.frame.origin.y - 20, 60, 50);
+//
         funcView.hidden = YES;
-//        [self bringSubviewToFront:funcView];
         [_bkgView bringSubviewToFront:funcView];
+        [_bkgView bringSubviewToFront:_funcBtn];
     }
     
     if ([funcView isHidden]) {
         funcView.hidden = NO;
+        [INTUAnimationEngine animateWithDuration:kAnimationDuration
+                                           delay:0.0
+                                          easing:INTUEaseInOutQuadratic
+                                         options:INTUAnimationOptionNone
+                                      animations:^(CGFloat progress) {
+                                          CGFloat rotationAngle = INTUInterpolateCGFloat(0, M_PI_4, progress);
+                                          _funcBtn.transform = CGAffineTransformMakeRotation(rotationAngle);
+                                      }
+                                      completion:^(BOOL finished) {
+                                          NSLog(@"%@", finished ? @"Animation Completed" : @"Animation Canceled");
+                                      }];
     } else {
         funcView.hidden = YES;
+        [INTUAnimationEngine animateWithDuration:kAnimationDuration
+                                           delay:0.0
+                                          easing:INTUEaseInOutQuadratic
+                                         options:INTUAnimationOptionNone
+                                      animations:^(CGFloat progress) {
+                                          CGFloat rotationAngle = INTUInterpolateCGFloat(M_PI_4, 0, progress);
+                                          _funcBtn.transform = CGAffineTransformMakeRotation(rotationAngle);
+                                      }
+                                      completion:^(BOOL finished) {
+                                          NSLog(@"%@", finished ? @"Animation Completed" : @"Animation Canceled");
+                                      }];
     }
 }
 
@@ -334,5 +382,8 @@
 
 - (void)disappearFuncView {
     funcView.hidden = YES;
+//    CGFloat rotationAngle = INTUInterpolateCGFloat(M_PI_4, 0, progress);
+    _funcBtn.transform = CGAffineTransformMakeRotation(0);
+    _funcBtn.hidden = NO;
 }
 @end
