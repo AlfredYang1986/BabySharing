@@ -25,14 +25,16 @@
 #import "PersonalCentreTmpViewController.h"
 #import "PersonalCentreOthersDelegate.h"
 #import "HomeViewTableCellDelegate.h"
+#import "ChatGroupController.h"
+#import "Targets.h"
 
 #define HEADER_MARGIN_TO_SCREEN 8
 #define CONTENT_START_POINT     28
+#define PAN_HANDLE_CHECK_POINT  50
 
 #define VIEW_BOUNTDS        CGFloat screen_width = [UIScreen mainScreen].bounds.size.width; \
                             CGFloat screen_height = [UIScreen mainScreen].bounds.size.height; \
                             CGRect rc = CGRectMake(0, 0, screen_width, screen_height);
-
 
 #define QUERY_VIEW_START    CGRectMake(HEADER_MARGIN_TO_SCREEN, -44, rc.size.width - 2 * HEADER_MARGIN_TO_SCREEN, rc.size.height)
 #define QUERY_VIEW_SCROLL   CGRectMake(HEADER_MARGIN_TO_SCREEN, 0, rc.size.width - 2 * HEADER_MARGIN_TO_SCREEN, rc.size.height)
@@ -48,7 +50,6 @@
 @property (weak, nonatomic, readonly) NSString* current_auth_token;
 @property (weak, nonatomic, readonly) QueryModel* qm;
 @property (nonatomic) BOOL isLoading;
-@property (nonatomic) BOOL isHandleScrolling;
 
 @property (weak, nonatomic) IBOutlet UITableView *foundView;
 @end
@@ -74,7 +75,6 @@
 @synthesize current_user_id = _current_user_id;
 @synthesize qm = _qm;
 @synthesize isLoading = _isLoading;
-@synthesize isHandleScrolling = _isHandleScrolling;
 @synthesize delegate = _delegate;
 
 //@synthesize foundView = _foundView;
@@ -127,7 +127,7 @@
     
     tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(back2TopHandler:)];
     [tmp addGestureRecognizer:tap];
- 
+    
     if (_isPushed) {
         UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
         NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
@@ -153,7 +153,8 @@
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:btn];
     }
     
-    self.view.backgroundColor = [UIColor grayColor];
+//    self.view.backgroundColor = [UIColor grayColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     
     datasource = [[HomeViewTableCellDelegate alloc]init];
     datasource.trait = trait;
@@ -165,7 +166,6 @@
     
     [self.navigationController setNavigationBarHidden:YES];
     [self createContentCardView];
-    self.view.backgroundColor = [UIColor lightGrayColor];
     
     for (int index = 0; index < queryViewLst.count; ++index) {
         UIView* tmp = [queryViewLst objectAtIndex:index];
@@ -173,6 +173,8 @@
     }
     
     isAnimation = NO;
+    
+    [self createNavActionView];
 }
 
 - (void)setDataelegate:(id<HomeViewControllerDataDelegate>)delegate {
@@ -187,6 +189,45 @@
         UIView* tmp = [queryViewLst objectAtIndex:index];
         tmp.tag = index + current_index;
     }
+}
+
+#pragma mark -- create navigation action view
+- (UIView*)createNavActionView {
+    
+    UIView* actionView = [[UIView alloc]initWithFrame:CGRectMake(0, 20, 50, 32)];
+    actionView.backgroundColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
+    [self.view addSubview:actionView];
+    
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:actionView.bounds byRoundingCorners:UIRectCornerTopRight | UIRectCornerBottomRight cornerRadii:CGSizeMake(16, 16)];
+    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+    maskLayer.frame = actionView.bounds;
+    maskLayer.path = maskPath.CGPath;
+    actionView.layer.mask = maskLayer;
+    
+    CALayer* layer = [CALayer layer];
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+    NSString* filepath = nil;// [resourceBundle pathForResource:@"Previous_simple" ofType:@"png"];
+    if (_isPushed) {
+        filepath = [resourceBundle pathForResource:@"Previous_simple" ofType:@"png"];
+        layer.frame = CGRectMake(0, 0, 13, 20);
+        UITapGestureRecognizer* tapAction = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didPopViewControllerBtn)];
+        [actionView addGestureRecognizer:tapAction];
+        
+    } else {
+        filepath = [resourceBundle pathForResource:@"Cycle" ofType:@"png"];
+        layer.frame = CGRectMake(0, 0, 25, 25);
+        UITapGestureRecognizer* tapAction = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didSelectChatGroupBtn)];
+        [actionView addGestureRecognizer:tapAction];
+    }
+    layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
+    layer.position = CGPointMake(actionView.frame.size.width / 2, actionView.frame.size.height / 2);
+    [actionView.layer addSublayer:layer];
+    
+    actionView.tag = -99;
+    [self.view bringSubviewToFront:actionView];
+    
+    return actionView;
 }
 
 #pragma mark -- table view for card content
@@ -212,9 +253,23 @@
     
         tmp.delegate = datasource;
         tmp.dataSource = datasource;
-    
+   
+        tmp.layer.borderColor = [UIColor lightGrayColor].CGColor;
+        tmp.layer.borderWidth = 2.f;
         tmp.layer.cornerRadius = 8.f;
         tmp.clipsToBounds = YES;
+        
+//        tmp.layer.shadowColor = [UIColor greenColor].CGColor;//阴影颜色
+//        tmp.layer.shadowOffset = CGSizeMake(3, 3);//偏移距离
+//        tmp.layer.shadowOpacity = 0.8;//不透明度
+//        tmp.layer.shadowRadius = 10.f;//半径
+        
+        tmp.layer.shadowOffset = CGSizeMake(3, 3);
+        tmp.layer.shadowOpacity = 0.5;
+        tmp.layer.shouldRasterize = YES;
+//
+        UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:tmp.bounds cornerRadius:4.f];
+        tmp.layer.shadowPath = path.CGPath;
         
         UIPanGestureRecognizer* pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(handlePan:)];
         [tmp addGestureRecognizer:pan];
@@ -323,9 +378,9 @@
         CGPoint newPoint = [gesture translationInView:self.view];
     
         if (!isAnimation) {
-            if (newPoint.y - point.y > 100) {
+            if (newPoint.y - point.y > PAN_HANDLE_CHECK_POINT) {
                 [self previousCard];
-            } else if (point.y - newPoint.y > 100) {
+            } else if (point.y - newPoint.y > PAN_HANDLE_CHECK_POINT) {
                 [self nextCard];
             }
         }
@@ -341,13 +396,15 @@
 }
 
 - (void)didPopViewControllerBtn {
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)layoutTableViews {
     CGFloat screen_width = [UIScreen mainScreen].bounds.size.width;
     bkView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, screen_width, 20)];
-    bkView.backgroundColor = [UIColor lightGrayColor];
+//    bkView.backgroundColor = [UIColor lightGrayColor];
+    bkView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:bkView];
     [self.view bringSubviewToFront:bkView];
 }
@@ -366,7 +423,6 @@
     }
     
     if ([_delegate isKindOfClass:[MainHomeViewDataDelegate class]]) {
-        _isHandleScrolling = YES;
         
     } else {
         [_delegate currentSelectIndexWithBlock:^(NSInteger index) {
@@ -376,14 +432,10 @@
     }
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    _isHandleScrolling = NO;
-}
-
 - (void)back2TopHandler:(UITapGestureRecognizer*)gesture {
 //    [_queryView setContentOffset:CGPointZero animated:YES];
 }
+
 #pragma mark -- scroll refresh
 - (void)dealloc {
 //    ((UIScrollView*)_queryView).delegate = nil;
@@ -471,6 +523,12 @@
         self.tabBarController.tabBar.hidden = YES;
     } else if ([segue.identifier isEqualToString:@"search"]) {
         
+    } else if ([segue.identifier isEqualToString:@"ChatSegue"]) {
+        Targets* tmp = (Targets*)sender;
+        ((ChatGroupController*)segue.destinationViewController).group_id = tmp.group_id;
+        ((ChatGroupController*)segue.destinationViewController).joiner_count = tmp.number_count;
+        ((ChatGroupController*)segue.destinationViewController).group_name = tmp.target_name;
+        ((ChatGroupController*)segue.destinationViewController).founder_id = tmp.owner_id;
     }
 }
 
@@ -513,6 +571,7 @@
     PersonalCentreOthersDelegate* delegate = [[PersonalCentreOthersDelegate alloc]init];
     pc.current_delegate = delegate;
     pc.owner_id = ((QueryContent*)content).owner_id;
+    [self.navigationController setNavigationBarHidden:NO];
     [self.navigationController pushViewController:pc animated:YES];
 }
 
@@ -524,5 +583,10 @@
 #pragma mark -- chat group controller
 - (void)didSelectChatGroupBtn {
     [self performSegueWithIdentifier:@"ChatGroupSegue" sender:nil];
+}
+
+#pragma mark -- enter chat group
+- (void)pushControllerWithTarget:(Targets*)target {
+    [self performSegueWithIdentifier:@"ChatSegue" sender:target];
 }
 @end

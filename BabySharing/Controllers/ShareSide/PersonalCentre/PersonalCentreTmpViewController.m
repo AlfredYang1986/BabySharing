@@ -65,6 +65,8 @@
 @synthesize current_delegate = _current_delegate;
 @synthesize owner_id = _owner_id;
 
+@synthesize isPushed = _isPushed;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -112,25 +114,20 @@
     
     _queryView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
 
-    if ([_owner_id isEqualToString:_current_user_id]) {
-        UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
-        NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
-        NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-    //    NSString* filepath = [resourceBundle pathForResource:@"Previous_blue" ofType:@"png"];
-        NSString* filepath = [resourceBundle pathForResource:@"DongDa_Plus" ofType:@"png"];
-        CALayer * layer = [CALayer layer];
-        layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
-        layer.frame = CGRectMake(0, 0, 25, 25);
-        layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
-        [barBtn.layer addSublayer:layer];
-    //    [barBtn setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
-    //    [barBtn setImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
-        [barBtn addTarget:self action:@selector(didSelectSettingBtn) forControlEvents:UIControlEventTouchDown];
-        
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn];
-        
-//        self.navigationItem.rightBarButtonItem =[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Setting" ofType:@"png"]] style:UIBarButtonItemStylePlain target:self action:@selector(didSelectSettingBtn)];
-    }
+//    if ([_owner_id isEqualToString:_current_user_id]) {
+//        UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
+//        NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+//        NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+//        NSString* filepath = [resourceBundle pathForResource:@"DongDa_Plus" ofType:@"png"];
+//        CALayer * layer = [CALayer layer];
+//        layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
+//        layer.frame = CGRectMake(0, 0, 25, 25);
+//        layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
+//        [barBtn.layer addSublayer:layer];
+//        [barBtn addTarget:self action:@selector(didSelectSettingBtn) forControlEvents:UIControlEventTouchDown];
+//        
+//        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn];
+//    }
     
     current_seg_index = 0;
     
@@ -156,10 +153,24 @@
         [barBtn addTarget:self action:@selector(didPopControllerSelected) forControlEvents:UIControlEventTouchDown];
         
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn];
+    } else {
+        UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
+        NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+        NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+        NSString* filepath = [resourceBundle pathForResource:@"DongDa_Plus" ofType:@"png"];
+        CALayer * layer = [CALayer layer];
+        layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
+        layer.frame = CGRectMake(0, 0, 25, 25);
+        layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
+        [barBtn.layer addSublayer:layer];
+        [barBtn addTarget:self action:@selector(didSelectSettingBtn) forControlEvents:UIControlEventTouchDown];
+        
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn];
     }
 }
 
 - (void)didPopControllerSelected {
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
     [self.navigationController popViewControllerAnimated:YES];
     
 }

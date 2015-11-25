@@ -965,6 +965,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
         <!--Home-->
         <scene sceneID="uKw-Qr-Yhw">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gik-1Z-yKA" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="HomeView" id="F2b-Q4-GUQ" customClass="HomeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gdd-Kj-LAg"/>
@@ -979,10 +980,10 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                     <connections>
                         <segue destination="xUO-Ek-g05" kind="push" identifier="HomeDetailSegue" id="Xtg-xA-TvV"/>
                         <segue destination="cou-sa-Bod" kind="push" identifier="search" id="Gc2-hk-FGC"/>
-                        <segue destination="OyS-hf-ms2" kind="push" identifier="ChatGroupSegue" id="LnD-Mz-TOI"/>
+                        <segue destination="OyS-hf-ms2" kind="custom" identifier="ChatGroupSegue" customClass="HomeCycleSegue" id="LnD-Mz-TOI"/>
+                        <segue destination="lUX-aE-qZw" kind="push" identifier="ChatSegue" id="L9f-w0-i4X"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gik-1Z-yKA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1508" y="982"/>
         </scene>
@@ -1315,7 +1316,6 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                     <navigationItem key="navigationItem" title="Cycle" id="Jm6-ee-E2N"/>
                     <connections>
                         <outlet property="cycleTableView" destination="hsJ-IJ-ldk" id="kW7-zf-DRE"/>
-                        <segue destination="lUX-aE-qZw" kind="push" identifier="enterChatGroup" id="f2T-JX-diK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nVW-Kp-aRz" userLabel="First Responder" sceneMemberID="firstResponder"/>

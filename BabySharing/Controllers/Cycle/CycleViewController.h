@@ -8,5 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class HomeViewController;
+
 @interface CycleViewController : UIViewController
+
+- (void)blockTouchEventForOtherViews;
+
+@property (weak, nonatomic) HomeViewController* baseController;
 @end

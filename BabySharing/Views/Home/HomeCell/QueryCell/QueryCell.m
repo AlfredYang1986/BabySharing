@@ -124,7 +124,8 @@
 - (void)layoutSubviews {
 //    [super layoutSubviews];
     
-    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+//    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    CGFloat width = self.bounds.size.width;
     CGFloat img_height = [UIScreen mainScreen].bounds.size.height - width / 2 - IMG_OFFSET;
     _imgView.frame = CGRectMake(0, 0, width, img_height);
     _bkgView.frame = CGRectMake(0, img_height, width, self.frame.size.height - img_height);

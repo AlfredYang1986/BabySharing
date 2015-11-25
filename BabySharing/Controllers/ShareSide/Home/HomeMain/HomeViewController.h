@@ -12,6 +12,8 @@
 #import "MainHomeViewDataDelegate.h"
 #import "QueryCellDelegate.h"
 
+@class Targets;
+
 @interface HomeViewController : ShareSideBaseController <QueryCellActionProtocol> 
 
 @property (weak, nonatomic) NSString* nav_title;
@@ -21,4 +23,5 @@
 @property (nonatomic, setter=setCurrentContentIndex:) NSInteger current_index;
 
 - (NSInteger)getShowingIndex:(UITableView*)tableView;
+- (void)pushControllerWithTarget:(Targets*)target;
 @end

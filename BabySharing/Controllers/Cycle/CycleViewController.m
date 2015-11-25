@@ -22,6 +22,8 @@
 #import "Targets.h"
 
 #import "ChatGroupController.h"
+#import "INTUAnimationEngine.h"
+#import "HomeViewController.h"
 
 @interface CycleViewController () <UITableViewDataSource, UITableViewDelegate, DropDownMenuProcotol, WEPopoverControllerDelegate, UIPopoverControllerDelegate, createUpdateDetailProtocol>
 //@property (weak, nonatomic) IBOutlet UIView *descriptionView;
@@ -54,6 +56,8 @@
 @synthesize ry = _ry;
 
 @synthesize notifyObject = _notifyObject;
+
+@synthesize baseController = _baseController;
 
 - (void)viewDidLoad {
     [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f]];
@@ -257,8 +261,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     // TODO: segue to user chat
-    [self performSegueWithIdentifier:@"enterChatGroup" sender:indexPath];
+//    [self performSegueWithIdentifier:@"enterChatGroup" sender:indexPath];
     
+    Targets* tmp = nil;
+    if (indexPath.section == 0) {
+        tmp = [chatGroupArray_mine objectAtIndex:indexPath.row];
+    } else {
+        tmp = [chatGroupArray_recommend objectAtIndex:indexPath.row];
+    }
+    [self backToHomeThenPushChatGroup:tmp];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -424,17 +435,17 @@
         _notifyObject = (CycleAddDescriptionViewController*)segue.destinationViewController;
     } else if ([segue.identifier isEqualToString:@"enterChatGroup"]) {
         
-        NSIndexPath* path = (NSIndexPath*)sender;
-        Targets* tmp = nil;
-        if (path.section == 0) {
-            tmp = [chatGroupArray_mine objectAtIndex:path.row];
-        } else {
-            tmp = [chatGroupArray_recommend objectAtIndex:path.row];
-        }
-        ((ChatGroupController*)segue.destinationViewController).group_id = tmp.group_id;
-        ((ChatGroupController*)segue.destinationViewController).joiner_count = tmp.number_count;
-        ((ChatGroupController*)segue.destinationViewController).group_name = tmp.target_name;
-        ((ChatGroupController*)segue.destinationViewController).founder_id = tmp.owner_id;
+//        NSIndexPath* path = (NSIndexPath*)sender;
+//        Targets* tmp = nil;
+//        if (path.section == 0) {
+//            tmp = [chatGroupArray_mine objectAtIndex:path.row];
+//        } else {
+//            tmp = [chatGroupArray_recommend objectAtIndex:path.row];
+//        }
+//        ((ChatGroupController*)segue.destinationViewController).group_id = tmp.group_id;
+//        ((ChatGroupController*)segue.destinationViewController).joiner_count = tmp.number_count;
+//        ((ChatGroupController*)segue.destinationViewController).group_name = tmp.target_name;
+//        ((ChatGroupController*)segue.destinationViewController).founder_id = tmp.owner_id;
     }
 }
 
@@ -445,5 +456,68 @@
         chatGroupArray_recommend = [_mm enumRecommendChatGroupLocal];
         [_cycleTableView reloadData];
     }
+}
+
+#pragma mark --
+- (void)blockTouchEventForOtherViews {
+    UIView* block_target = [self.view viewWithTag:-99];
+    UIView* block_view = [[UIView alloc]initWithFrame:block_target.bounds];
+    block_view.tag = -119;
+    block_view.backgroundColor = [UIColor clearColor];
+    [block_target addSubview:block_view];
+    
+    UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(backToHome:)];
+    [block_view addGestureRecognizer:tap];
+}
+
+- (void)backToHome:(UITapGestureRecognizer*)gesture {
+   
+    static const CGFloat kAnimationDuration = 0.5; // in seconds
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    CGFloat height = [UIScreen mainScreen].bounds.size.height;
+   
+    UIView* target = [gesture.view superview];
+    [gesture.view removeFromSuperview];
+    CGRect rc_1 = CGRectMake(0, 0, width, height);
+    CGRect rc_2 = CGRectMake(width - 100, 0, width, height);
+
+    [INTUAnimationEngine animateWithDuration:kAnimationDuration
+                                       delay:0.0
+                                      easing:INTUEaseInOutQuadratic
+                                     options:INTUAnimationOptionNone
+                                  animations:^(CGFloat progress) {
+                                      target.frame = INTUInterpolateCGRect(rc_2, rc_1, progress);
+                                  }
+                                  completion:^(BOOL finished) {
+                                      NSLog(@"%@", finished ? @"Animation Completed" : @"Animation Canceled");
+                                      [target removeFromSuperview];
+                                      [self.navigationController popViewControllerAnimated:NO];
+                                  }];
+}
+
+- (void)backToHomeThenPushChatGroup:(Targets*)tmp {
+    static const CGFloat kAnimationDuration = 0.5; // in seconds
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    CGFloat height = [UIScreen mainScreen].bounds.size.height;
+    
+    UIView* target = [self.view viewWithTag:-99];
+    UIView* block_view = [target viewWithTag:-119];
+    [block_view removeFromSuperview];
+    CGRect rc_1 = CGRectMake(0, 0, width, height);
+    CGRect rc_2 = CGRectMake(width - 100, 0, width, height);
+    
+    [INTUAnimationEngine animateWithDuration:kAnimationDuration
+                                       delay:0.0
+                                      easing:INTUEaseInOutQuadratic
+                                     options:INTUAnimationOptionNone
+                                  animations:^(CGFloat progress) {
+                                      target.frame = INTUInterpolateCGRect(rc_2, rc_1, progress);
+                                  }
+                                  completion:^(BOOL finished) {
+                                      NSLog(@"%@", finished ? @"Animation Completed" : @"Animation Canceled");
+                                      [target removeFromSuperview];
+                                      [self.navigationController popViewControllerAnimated:NO];
+                                      [_baseController pushControllerWithTarget:tmp];
+                                  }];
 }
 @end

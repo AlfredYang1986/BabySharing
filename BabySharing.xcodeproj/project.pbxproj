@@ -27,6 +27,7 @@
 		EE2D4B801B525E0A00B58A1F /* PhotoTagsController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2D4B771B525E0A00B58A1F /* PhotoTagsController.m */; };
 		EE3D5C241BA7EB4D007A4AA2 /* DongDaSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3D5C231BA7EB4D007A4AA2 /* DongDaSearchBar.m */; };
 		EE3D5C271BA81348007A4AA2 /* SearchSegView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3D5C261BA81348007A4AA2 /* SearchSegView.m */; };
+		EE3F62151C05483D004507B0 /* HomeCycleSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3F62141C05483D004507B0 /* HomeCycleSegue.m */; };
 		EE40825D1B70C0CE0094A88B /* libgotyeapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EE40825B1B70C0CE0094A88B /* libgotyeapi.a */; };
 		EE4082601B70C11A0094A88B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE40825F1B70C11A0094A88B /* CoreLocation.framework */; };
 		EE4082621B70C1240094A88B /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE4082611B70C1240094A88B /* AddressBook.framework */; };
@@ -305,6 +306,8 @@
 		EE3D5C231BA7EB4D007A4AA2 /* DongDaSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DongDaSearchBar.m; sourceTree = "<group>"; };
 		EE3D5C251BA81347007A4AA2 /* SearchSegView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSegView.h; sourceTree = "<group>"; };
 		EE3D5C261BA81348007A4AA2 /* SearchSegView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSegView.m; sourceTree = "<group>"; };
+		EE3F62131C05483D004507B0 /* HomeCycleSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCycleSegue.h; sourceTree = "<group>"; };
+		EE3F62141C05483D004507B0 /* HomeCycleSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCycleSegue.m; sourceTree = "<group>"; };
 		EE4082521B70C0CE0094A88B /* GotyeOCAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GotyeOCAPI.h; sourceTree = "<group>"; };
 		EE4082531B70C0CE0094A88B /* GotyeOCChatTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GotyeOCChatTarget.h; sourceTree = "<group>"; };
 		EE4082541B70C0CE0094A88B /* GotyeOCDeleget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GotyeOCDeleget.h; sourceTree = "<group>"; };
@@ -895,6 +898,15 @@
 			path = PostPreViewV2;
 			sourceTree = "<group>";
 		};
+		EE3F62121C054727004507B0 /* Segue */ = {
+			isa = PBXGroup;
+			children = (
+				EE3F62131C05483D004507B0 /* HomeCycleSegue.h */,
+				EE3F62141C05483D004507B0 /* HomeCycleSegue.m */,
+			);
+			path = Segue;
+			sourceTree = "<group>";
+		};
 		EE4082501B70C0CE0094A88B /* gotyeapi */ = {
 			isa = PBXGroup;
 			children = (
@@ -1253,6 +1265,7 @@
 		EEAACAF71B44E90300D05C0B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				EE3F62121C054727004507B0 /* Segue */,
 				EEC8847F1BFEC5DB006A237D /* Search */,
 				EEB812291B7AECD500BC0774 /* Cycle */,
 				EE817F461B79A76E00988734 /* Chat */,
@@ -2458,6 +2471,7 @@
 				EEDAF4681BA674630035CC31 /* HomeSegControl.m in Sources */,
 				EEAACCEF1B44E90400D05C0B /* ViewController.m in Sources */,
 				EE76A56D1B72021900036747 /* ConnectionLocalModel.xcdatamodeld in Sources */,
+				EE3F62151C05483D004507B0 /* HomeCycleSegue.m in Sources */,
 				EE0CEC581BDB13070016B6F4 /* UserPrivacyController.m in Sources */,
 				EEAACD201B44E90400D05C0B /* SGAlertMenu.m in Sources */,
 				EEAACCCA1B44E90400D05C0B /* INTUEasingFunctions.m in Sources */,

@@ -109,6 +109,7 @@
 }
 
 - (void)didPopControllerSelected {
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
