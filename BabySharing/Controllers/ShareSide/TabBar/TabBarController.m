@@ -62,11 +62,16 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unReadMessageCountChanged:) name:@"unRead Message Changed" object:nil];
     
     dongda_tabbar = [[DongDaTabBar alloc]initWithBar:self];
-    [dongda_tabbar addItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Home"] ofType:@"png"]] andSelectedImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"HomeSelected"] ofType:@"png"]]];
-    [dongda_tabbar addItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Chat"] ofType:@"png"]] andSelectedImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"ChatSelected"] ofType:@"png"]]];
-    [dongda_tabbar addItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"DongDa_Plus"] ofType:@"png"]] andSelectedImg:nil];
-    [dongda_tabbar addItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Message"] ofType:@"png"]] andSelectedImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"MessageSelected"] ofType:@"png"]]];
-    [dongda_tabbar addItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Personal_Center"] ofType:@"png"]] andSelectedImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Personal_CenterSelected"] ofType:@"png"]]];
+//    [dongda_tabbar addItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Home"] ofType:@"png"]] andSelectedImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"HomeSelected"] ofType:@"png"]]];
+    [dongda_tabbar addItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"tabbar-btn-logo"] ofType:@"png"]] andSelectedImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"tabbar-btn-logo-select"] ofType:@"png"]]];
+//    [dongda_tabbar addItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Chat"] ofType:@"png"]] andSelectedImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"ChatSelected"] ofType:@"png"]]];
+    [dongda_tabbar addItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"tabbar-btn-found"] ofType:@"png"]] andSelectedImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"tabbar-btn-found-select"] ofType:@"png"]]];
+    [dongda_tabbar addMidItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"tabbar-btn-post"] ofType:@"png"]]];
+//    [dongda_tabbar addItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"DongDa_Plus"] ofType:@"png"]] andSelectedImg:nil];
+//    [dongda_tabbar addItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Message"] ofType:@"png"]] andSelectedImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"MessageSelected"] ofType:@"png"]]];
+    [dongda_tabbar addItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"tabbar-btn-friend"] ofType:@"png"]] andSelectedImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"tabbar-btn-friend-select"] ofType:@"png"]]];
+//    [dongda_tabbar addItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Personal_Center"] ofType:@"png"]] andSelectedImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Personal_CenterSelected"] ofType:@"png"]]];
+    [dongda_tabbar addItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"tabbar-btn-mine"] ofType:@"png"]] andSelectedImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"tabbar-btn-mine-select"] ofType:@"png"]]];
 }
 
 - (void)setUpMovingButtonsWithBoundle:(NSBundle*)bundle {

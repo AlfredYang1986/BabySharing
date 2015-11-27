@@ -17,5 +17,6 @@
 
 
 - (id)initWithBar:(UITabBarController*)bar;
+- (void)addMidItemWithImg:(UIImage*)image;
 - (void)addItemWithImg:(UIImage*)image andSelectedImg:(UIImage*)selectedImg;
 @end

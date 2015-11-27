@@ -14,6 +14,7 @@
 		EE0CEC571BDB13070016B6F4 /* PhoneInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0CEC4B1BDB13070016B6F4 /* PhoneInputViewController.m */; };
 		EE0CEC581BDB13070016B6F4 /* UserPrivacyController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0CEC4E1BDB13070016B6F4 /* UserPrivacyController.m */; };
 		EE0CEC5D1BDB15790016B6F4 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0CEC5C1BDB15790016B6F4 /* LoginViewController.m */; };
+		EE0DCE761C08077E00B5386B /* DongDaTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0DCE751C08077E00B5386B /* DongDaTabBarItem.m */; };
 		EE20BED41B6F430D00DE8455 /* OwnerQueryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EE20BED31B6F430D00DE8455 /* OwnerQueryModel.m */; };
 		EE2A26DB1C02F7950080FB1B /* HomeViewTableCellDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2A26DA1C02F7950080FB1B /* HomeViewTableCellDelegate.m */; };
 		EE2D4B781B525E0A00B58A1F /* PostInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2D4B681B525E0A00B58A1F /* PostInputViewController.m */; };
@@ -284,6 +285,8 @@
 		EE0CEC4E1BDB13070016B6F4 /* UserPrivacyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserPrivacyController.m; sourceTree = "<group>"; };
 		EE0CEC5B1BDB15790016B6F4 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		EE0CEC5C1BDB15790016B6F4 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		EE0DCE741C08077E00B5386B /* DongDaTabBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DongDaTabBarItem.h; sourceTree = "<group>"; };
+		EE0DCE751C08077E00B5386B /* DongDaTabBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DongDaTabBarItem.m; sourceTree = "<group>"; };
 		EE20BED21B6F430D00DE8455 /* OwnerQueryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OwnerQueryModel.h; sourceTree = "<group>"; };
 		EE20BED31B6F430D00DE8455 /* OwnerQueryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OwnerQueryModel.m; sourceTree = "<group>"; };
 		EE2A26D91C02F7950080FB1B /* HomeViewTableCellDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewTableCellDelegate.h; sourceTree = "<group>"; };
@@ -2077,6 +2080,8 @@
 				EE3D5C261BA81348007A4AA2 /* SearchSegView.m */,
 				EEB79BCB1BA923880096587C /* DongDaFollowBtn.h */,
 				EEB79BCC1BA923880096587C /* DongDaFollowBtn.m */,
+				EE0DCE741C08077E00B5386B /* DongDaTabBarItem.h */,
+				EE0DCE751C08077E00B5386B /* DongDaTabBarItem.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -2515,6 +2520,7 @@
 				EE9F736D1B8576B100F800DC /* MessageChatGroupHeader.m in Sources */,
 				EE97440E1B78699A00E81A70 /* Reachability.m in Sources */,
 				EEC8848A1BFED6B7006A237D /* SearchRoleTagDelegate.m in Sources */,
+				EE0DCE761C08077E00B5386B /* DongDaTabBarItem.m in Sources */,
 				EE96763F1B7C3D5C00445254 /* CycleDescriptionCell.m in Sources */,
 				EE6D6DE21B7B404E004D29C8 /* CycleDetailController.m in Sources */,
 				EECB445B1C059343008F05B8 /* OBShapedButton.m in Sources */,
