@@ -63,6 +63,8 @@ using std::iterator;
                                       // [dst.view removeFromSuperview];
                                       for (vector<std::pair<UIView*, CGPoint>>::iterator iter = src_views->begin(); iter != src_views->end(); ++iter) {
                                           [(*iter).first removeFromSuperview];
+                                          (*iter).first.center = (*iter).second;
+                                          [src.view addSubview:(*iter).first];
                                       }
                                   }];
 }

@@ -403,7 +403,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" tag="-1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchImage" translatesAutoresizingMaskIntoConstraints="NO" id="guW-kh-Ink">
+                            <imageView userInteractionEnabled="NO" tag="-1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BackgroundImage" translatesAutoresizingMaskIntoConstraints="NO" id="guW-kh-Ink">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
                         </subviews>
@@ -1877,11 +1877,17 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" tag="-1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="LaunchImage" translatesAutoresizingMaskIntoConstraints="NO" id="UzT-fh-YsN">
+                            <imageView userInteractionEnabled="NO" tag="-1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BackgroundImage" translatesAutoresizingMaskIntoConstraints="NO" id="UzT-fh-YsN">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="xAf-nk-aEA" firstAttribute="top" secondItem="UzT-fh-YsN" secondAttribute="bottom" id="B62-9E-AAz"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="UzT-fh-YsN" secondAttribute="trailing" constant="-20" id="MCG-d7-Htl"/>
+                            <constraint firstItem="UzT-fh-YsN" firstAttribute="leading" secondItem="KQp-d7-gcs" secondAttribute="leadingMargin" constant="-20" id="oOt-Gp-cvp"/>
+                            <constraint firstItem="UzT-fh-YsN" firstAttribute="top" secondItem="KQp-d7-gcs" secondAttribute="topMargin" id="qE0-T8-3cI"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Qyu-0h-HGO"/>
                     <connections>
@@ -1894,10 +1900,10 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
         </scene>
     </scenes>
     <resources>
-        <image name="LaunchImage" width="375" height="667"/>
+        <image name="BackgroundImage" width="375" height="667"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="2PU-iO-cFw"/>
+        <segue reference="qbd-0n-vJA"/>
         <segue reference="mYA-47-s6C"/>
     </inferredMetricsTieBreakers>
 </document>
