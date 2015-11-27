@@ -402,7 +402,30 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                     <view key="view" contentMode="scaleToFill" id="DQM-GH-85M">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchImage" translatesAutoresizingMaskIntoConstraints="NO" id="guW-kh-Ink">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="guW-kh-Ink" firstAttribute="leading" secondItem="DQM-GH-85M" secondAttribute="leadingMargin" id="028-ZT-2FG"/>
+                            <constraint firstItem="jhr-zt-DSk" firstAttribute="top" secondItem="guW-kh-Ink" secondAttribute="bottom" id="FVJ-Oi-Sya"/>
+                            <constraint firstItem="guW-kh-Ink" firstAttribute="top" secondItem="KdM-g7-ePs" secondAttribute="bottom" id="JKB-39-W8h"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="guW-kh-Ink" secondAttribute="trailing" constant="-20" id="SCX-iq-eDJ"/>
+                            <constraint firstItem="guW-kh-Ink" firstAttribute="leading" secondItem="DQM-GH-85M" secondAttribute="leadingMargin" constant="-20" id="gFR-3h-1p4"/>
+                            <constraint firstItem="guW-kh-Ink" firstAttribute="top" secondItem="DQM-GH-85M" secondAttribute="topMargin" id="l4Q-vH-PBZ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="guW-kh-Ink" secondAttribute="trailing" id="stj-tJ-bLM"/>
+                            <constraint firstItem="jhr-zt-DSk" firstAttribute="top" secondItem="guW-kh-Ink" secondAttribute="bottom" id="wP6-GM-XJY"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="028-ZT-2FG"/>
+                                <exclude reference="JKB-39-W8h"/>
+                                <exclude reference="stj-tJ-bLM"/>
+                                <exclude reference="FVJ-Oi-Sya"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="WtH-4A-pBP"/>
                     <connections>
@@ -965,7 +988,6 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
         <!--Home-->
         <scene sceneID="uKw-Qr-Yhw">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gik-1Z-yKA" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="HomeView" id="F2b-Q4-GUQ" customClass="HomeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gdd-Kj-LAg"/>
@@ -984,6 +1006,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <segue destination="lUX-aE-qZw" kind="push" identifier="ChatSegue" id="L9f-w0-i4X"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gik-1Z-yKA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1508" y="982"/>
         </scene>
@@ -1980,6 +2003,9 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
             <point key="canvasLocation" x="754" y="1787"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="LaunchImage" width="375" height="667"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="qbd-0n-vJA"/>
         <segue reference="mYA-47-s6C"/>

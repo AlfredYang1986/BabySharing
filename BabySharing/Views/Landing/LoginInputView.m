@@ -7,6 +7,8 @@
 //
 
 #import "LoginInputView.h"
+#import "OBShapedButton.h"
+
 #define BASICMARGIN         8
 
 #define SNS_BUTTON_WIDTH    40
@@ -18,6 +20,8 @@
 
 #define SNS_COUNT           3
 
+#define SNS_TOP_MARGIN          130
+
 @implementation LoginInputView {
     UIButton * area_code_btn;
     UITextField * phone_area;
@@ -25,7 +29,8 @@
     UIButton * next_btn;
     UIButton * confirm_btn;
     
-    UILabel * split_label;
+//    UILabel * split_img;
+    UIImageView* split_img;
     UIButton * user_private_btn;
     NSArray* sns_btns;
     
@@ -58,7 +63,7 @@
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
 
-    UIFont* font = [UIFont systemFontOfSize:19.f];
+    UIFont* font = [UIFont systemFontOfSize:14.f];
     phone_area_size = [@"888 888 88888" sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
     area_code_size = [@"+8888" sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
     confirm_btn_size = [@"发送验证码" sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
@@ -72,36 +77,52 @@
     
     CGFloat first_line_start_margin = (width - first_line_width) / 2;
     area_code_btn = [[UIButton alloc]initWithFrame:CGRectMake(first_line_start_margin, BASICMARGIN, area_code_size.width, area_code_size.height)];
-    area_code_btn.titleLabel.font = [UIFont systemFontOfSize:17.f];
-    [area_code_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [area_code_btn setTitle:@"+86" forState:UIControlStateNormal];
-    [area_code_btn addTarget:self action:@selector(areaCodeBtnSelected:) forControlEvents:UIControlEventTouchDown];
-  
+    
+    UILabel* area_code_label = [[UILabel alloc]init];
+    area_code_label.text = @"+86";
+    area_code_label.font = font;
+    area_code_label.textColor = [UIColor whiteColor];
+    [area_code_label sizeToFit];
+    area_code_label.frame = CGRectMake(0, 0, area_code_label.bounds.size.width, area_code_label.bounds.size.height);
+    area_code_label.tag = -1;
+    [area_code_btn addSubview:area_code_label];
+    
+    CALayer* t_layer = [CALayer layer];
+    NSString * t_file = [resourceBundle pathForResource:[NSString stringWithFormat:@"triangle"] ofType:@"png"];
+    t_layer.contents = (id)[UIImage imageNamed:t_file].CGImage;
+    t_layer.frame = CGRectMake(0, 0, 9, 8);
+    t_layer.position = CGPointMake(area_code_btn.frame.size.width - 8, area_code_btn.frame.size.height / 2);
+    [area_code_btn.layer addSublayer:t_layer];
+    
+    CALayer* ver_layer = [CALayer layer];
+    ver_layer.borderColor = [UIColor whiteColor].CGColor;
+    ver_layer.borderWidth = 1.f;
+    ver_layer.frame = CGRectMake(area_code_btn.frame.size.width - 1, 0, 1, area_code_btn.frame.size.height);
+    [area_code_btn.layer addSublayer:ver_layer];
+    
     first_line_start_margin += BASICMARGIN + area_code_size.width;
     phone_area = [[UITextField alloc]initWithFrame:CGRectMake(first_line_start_margin, BASICMARGIN, phone_area_size.width + BASICMARGIN + confirm_btn_size.width, phone_area_size.height)];
-    phone_area.font = [UIFont systemFontOfSize:17.f];
-//    CALayer* line_layer = [CALayer layer];
+    phone_area.font = font;
     line_layer = [CALayer layer];
-    line_layer.frame = CGRectMake(0, phone_area_size.height - 1, phone_area.frame.size.width, 1);
+    line_layer.frame = CGRectMake(area_code_btn.frame.origin.x, phone_area.frame.origin.y + phone_area.frame.size.height + 5, area_code_size.width + BASICMARGIN +  phone_area_size.width + BASICMARGIN + confirm_btn_size.width, 1);
     line_layer.borderWidth = 1.f;
     line_layer.borderColor = [UIColor whiteColor].CGColor;
-    [phone_area.layer addSublayer:line_layer];
+    [self.layer addSublayer:line_layer];
+    
     phone_area.placeholder = @"输入您的手机号";
+    [phone_area setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
     phone_area.textColor = [UIColor whiteColor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(phoneTextFieldChanged:) name:UITextFieldTextDidChangeNotification object:nil];
     phone_area.delegate = self;
     phone_area.keyboardType = UIKeyboardTypeNumberPad;
 
     first_line_start_margin += BASICMARGIN + phone_area_size.width;
-    confirm_btn = [[UIButton alloc]initWithFrame:CGRectMake(first_line_start_margin, BASICMARGIN - 4, confirm_btn_size.width, confirm_btn_size.height + 8)];
-    confirm_btn.titleLabel.font = [UIFont systemFontOfSize:15.f];
-    [confirm_btn setTitleColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f] forState:UIControlStateNormal];
-//    confirm_btn.backgroundColor = [UIColor redColor];//[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:0.4];
-    confirm_btn.backgroundColor = [UIColor colorWithWhite:1.f alpha:0.6];
-    confirm_btn.layer.borderWidth = 1.f;
-    confirm_btn.layer.borderColor = [UIColor clearColor].CGColor;
-    confirm_btn.layer.cornerRadius = confirm_btn.frame.size.height / 2;
+    confirm_btn = [[OBShapedButton alloc]initWithFrame:CGRectMake(first_line_start_margin, BASICMARGIN - 4, confirm_btn_size.width, confirm_btn_size.height + 8)];
+    confirm_btn.titleLabel.font = [UIFont systemFontOfSize:12.f];
+    [confirm_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     confirm_btn.clipsToBounds = YES;
+    [confirm_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"next-btn-bg" ofType:@"png"]] forState:UIControlStateNormal];
+    
     [confirm_btn setTitle:@"发送验证码" forState:UIControlStateNormal];
     [confirm_btn addTarget:self action:@selector(confirmBtnSelected:) forControlEvents:UIControlEventTouchDown];
     confirm_btn.hidden = YES;
@@ -114,55 +135,50 @@
     CGFloat second_line_ver_margin = BASICMARGIN + phone_area_size.height + 2 * BASICMARGIN;
     
     confirm_area = [[UITextField alloc]initWithFrame:CGRectMake(second_line_start_margin, second_line_ver_margin, area_code_size.width + BASICMARGIN +  phone_area_size.width + BASICMARGIN + confirm_btn_size.width, phone_area_size.height)];
-    confirm_area.font = [UIFont systemFontOfSize:17.f];
-//    CALayer* line_layer_2 = [CALayer layer];
+    confirm_area.font = font;
     line_layer_2 = [CALayer layer];
-    line_layer_2.frame = CGRectMake(0, phone_area_size.height - 1, confirm_area.frame.size.width, 1);
+    line_layer_2.frame = CGRectMake(area_code_btn.frame.origin.x, confirm_area.frame.origin.y + confirm_area.frame.size.height + 5, area_code_size.width + BASICMARGIN +  phone_area_size.width + BASICMARGIN + confirm_btn_size.width, 1);
     line_layer_2.borderWidth = 1.f;
     line_layer_2.borderColor = [UIColor whiteColor].CGColor;
-    [confirm_area.layer addSublayer:line_layer_2];
+    [self.layer addSublayer:line_layer_2];
+    
     confirm_area.placeholder = @"请输入短信验证码";
+    confirm_area.textAlignment = NSTextAlignmentCenter;
+    [confirm_area setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
     confirm_area.textColor = [UIColor whiteColor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(confirmCodeTextFieldChanged:) name:UITextFieldTextDidChangeNotification object:nil];
     confirm_area.delegate = self;
     confirm_area.keyboardType = UIKeyboardTypeNumberPad;
     
     second_line_start_margin += BASICMARGIN + area_code_size.width + BASICMARGIN +  phone_area_size.width;
-    next_btn = [[UIButton alloc]initWithFrame:CGRectMake(second_line_start_margin, second_line_ver_margin - 4, confirm_btn_size.width, confirm_btn_size.height + 8)];
+    next_btn = [[OBShapedButton alloc]initWithFrame:CGRectMake(second_line_start_margin, second_line_ver_margin - 4, confirm_btn_size.width, confirm_btn_size.height + 8)];
     [next_btn addTarget:self action:@selector(nextBtnSelected:) forControlEvents:UIControlEventTouchDown];
-    next_btn.titleLabel.font = [UIFont systemFontOfSize:17.f];
+    next_btn.titleLabel.font = [UIFont systemFontOfSize:12.f];
     [next_btn setTitle:@"下一步" forState:UIControlStateNormal];
-    [next_btn setTitleColor:[UIColor colorWithWhite:1.f alpha:0.6] forState:UIControlStateNormal];
-    next_btn.backgroundColor = [UIColor colorWithRed:0.3126 green:0.9529 blue:0.7941 alpha:0.4];
-    next_btn.layer.cornerRadius = next_btn.frame.size.height / 2;
+    [next_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     next_btn.clipsToBounds = YES;
-//    NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"Next2"] ofType:@"png"];
-//    UIImage *image = [UIImage imageNamed:filePath];
-//    CALayer* imgLayer = [CALayer layer];
-//    imgLayer.contents = (id)image.CGImage;
-//    imgLayer.frame = CGRectMake(confirm_btn_size.width - 20, 3,  20, 15);
-//    [next_btn.layer addSublayer:imgLayer];
+    [next_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"next-btn-bg" ofType:@"png"]] forState:UIControlStateNormal];
     next_btn.hidden = YES;
 
     [self addSubview:confirm_area];
     [self addSubview:next_btn];
     
     CGFloat third_line_start_margin = (width - first_line_width) / 2;
-    CGFloat third_line_ver_margin = second_line_ver_margin + phone_area_size.height + 2 * BASICMARGIN;
+    CGFloat third_line_ver_margin = second_line_ver_margin + phone_area_size.height + 2 * BASICMARGIN + SNS_TOP_MARGIN;
     
-    split_label = [[UILabel alloc]initWithFrame:CGRectMake(third_line_start_margin, third_line_ver_margin, width, phone_area_size.height)];
-    split_label.font = [UIFont systemFontOfSize:17.f];
-    split_label.text = @"社交账户登录";
-    split_label.textColor = [UIColor colorWithWhite:1.f alpha:0.6];
+    CGFloat screen_width = [UIScreen mainScreen].bounds.size.width;
+    split_img = [[UIImageView alloc]initWithFrame:CGRectMake(0, third_line_ver_margin, screen_width, phone_area_size.height)];
+    NSString * split_file = [resourceBundle pathForResource:[NSString stringWithFormat:@"split-file"] ofType:@"png"];
+    split_img.image = [UIImage imageNamed:split_file];
     
-    [self addSubview:split_label];
+    [self addSubview:split_img];
     
     UIButton* qq_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, SNS_BUTTON_WIDTH, SNS_BUTTON_HEIGHT)];
     NSString * qq_file = [resourceBundle pathForResource:[NSString stringWithFormat:@"qq"] ofType:@"png"];
     UIImage * qq_image = [UIImage imageNamed:qq_file];
     [qq_btn setBackgroundImage:qq_image forState:UIControlStateNormal];
     [qq_btn addTarget:self action:@selector(qqBtnSelected:) forControlEvents:UIControlEventTouchDown];
-    qq_btn.backgroundColor = [UIColor whiteColor];
+    qq_btn.backgroundColor = [UIColor clearColor];
     qq_btn.layer.cornerRadius = SNS_BUTTON_WIDTH / 2;
     qq_btn.clipsToBounds = YES;
     qq_btn.contentMode = UIViewContentModeCenter;
@@ -173,7 +189,7 @@
     UIImage * weibo_image = [UIImage imageNamed:weibo_file];
     [weibo_btn setBackgroundImage:weibo_image forState:UIControlStateNormal];
     [weibo_btn addTarget:self action:@selector(weiboBtnSelected:) forControlEvents:UIControlEventTouchDown];
-    weibo_btn.backgroundColor = [UIColor whiteColor];
+    weibo_btn.backgroundColor = [UIColor clearColor];
     weibo_btn.layer.cornerRadius = SNS_BUTTON_WIDTH / 2;
     weibo_btn.clipsToBounds = YES;
     weibo_btn.contentMode = UIViewContentModeCenter;
@@ -184,7 +200,7 @@
     UIImage * wechat_image = [UIImage imageNamed:wechat_file];
     [wechat_btn setBackgroundImage:wechat_image forState:UIControlStateNormal];
     [wechat_btn addTarget:self action:@selector(wechatBtnSelected:) forControlEvents:UIControlEventTouchDown];
-    wechat_btn.backgroundColor = [UIColor whiteColor];
+    wechat_btn.backgroundColor = [UIColor clearColor];
     wechat_btn.clipsToBounds = YES;
     wechat_btn.layer.cornerRadius = SNS_BUTTON_WIDTH / 2;
     wechat_btn.contentMode = UIViewContentModeCenter;
@@ -196,9 +212,8 @@
     wechat_btn.center = CGPointMake(width / 2 + 2 * SNS_BUTTON_WIDTH, forth_line_ver_line);
    
     CGFloat fifth_line_ver_line = forth_line_ver_line + SNS_BUTTON_HEIGHT / 2 + 2 * BASICMARGIN;
-//    user_private_btn = [[UIButton alloc]initWithFrame:CGRectMake(width - user_private_btn_size.width, fifth_line_ver_line, user_private_btn_size.width, user_private_btn_size.height)];
     user_private_btn = [[UIButton alloc]initWithFrame:CGRectMake((width - user_private_btn_size.width) / 2, fifth_line_ver_line, user_private_btn_size.width, user_private_btn_size.height)];
-    user_private_btn.titleLabel.font = [UIFont systemFontOfSize:15.f];
+    user_private_btn.titleLabel.font = [UIFont systemFontOfSize:12.f];
     [user_private_btn setTitleColor:[UIColor colorWithWhite:1.f alpha:0.6] forState:UIControlStateNormal];
     [user_private_btn setTitle:@"用户协议&隐私政策" forState:UIControlStateNormal];
     [user_private_btn addTarget:self action:@selector(userPrivacyBtnSelected) forControlEvents:UIControlEventTouchDown];
@@ -223,21 +238,25 @@
 - (void)phoneTextFieldChanged:(UITextField*)tf {
     if ([phone_area.text isEqualToString:@""]) {
         confirm_btn.hidden = YES;
-        line_layer.frame = CGRectMake(0, phone_area_size.height - 1, phone_area.frame.size.width, 1);
+//        line_layer.frame = CGRectMake(0, phone_area_size.height - 1, phone_area.frame.size.width, 1);
+        line_layer.frame = CGRectMake(area_code_btn.frame.origin.x, phone_area.frame.origin.y + phone_area.frame.size.height + 5, area_code_size.width + BASICMARGIN +  phone_area_size.width + BASICMARGIN + confirm_btn_size.width, 1);
         
     } else {
         confirm_btn.hidden = NO;
-        line_layer.frame = CGRectMake(0, phone_area_size.height - 1, phone_area.frame.size.width - confirm_btn_size.width - 8, 1);
+//        line_layer.frame = CGRectMake(0, phone_area_size.height - 1, phone_area.frame.size.width - confirm_btn_size.width - 8, 1);
+        line_layer.frame = CGRectMake(area_code_btn.frame.origin.x, phone_area.frame.origin.y + phone_area.frame.size.height + 5, area_code_size.width + BASICMARGIN +  phone_area_size.width + BASICMARGIN + confirm_btn_size.width, 1);
     }
 }
 
 - (void)confirmCodeTextFieldChanged:(UITextField*)tf {
     if ([confirm_area.text isEqualToString:@""]) {
         next_btn.hidden = YES;
-        line_layer_2.frame = CGRectMake(0, phone_area_size.height - 1, confirm_area.frame.size.width, 1);
+//        line_layer_2.frame = CGRectMake(0, phone_area_size.height - 1, confirm_area.frame.size.width, 1);
+        line_layer_2.frame = CGRectMake(area_code_btn.frame.origin.x, confirm_area.frame.origin.y + confirm_area.frame.size.height + 5, area_code_size.width + BASICMARGIN +  phone_area_size.width + BASICMARGIN + confirm_btn_size.width, 1);
     } else {
         next_btn.hidden = NO;
-        line_layer_2.frame = CGRectMake(0, phone_area_size.height - 1, confirm_area.frame.size.width - confirm_btn_size.width - 8, 1);
+//        line_layer_2.frame = CGRectMake(0, phone_area_size.height - 1, confirm_area.frame.size.width - confirm_btn_size.width - 8, 1);
+        line_layer_2.frame = CGRectMake(area_code_btn.frame.origin.x, confirm_area.frame.origin.y + confirm_area.frame.size.height + 5, area_code_size.width + BASICMARGIN +  phone_area_size.width + BASICMARGIN + confirm_btn_size.width, 1);
     }
 }
 

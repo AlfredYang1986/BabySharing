@@ -73,7 +73,7 @@ enum DisplaySide {
     // Do any additional setup after loading the view, typically from a nib.
     [self.navigationController setNavigationBarHidden:YES animated:NO];
     [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f]];
-    [self.view setBackgroundColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f]];
+//    [self.view setBackgroundColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f]];
 //    [self.navigationController.navigationBar setBackgroundColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f]];
     
     AppDelegate * del =(AppDelegate*)[[UIApplication sharedApplication] delegate];
@@ -92,8 +92,9 @@ enum DisplaySide {
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changingSide:) name:@"changing side" object:nil];
    
-    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-    [self.view addGestureRecognizer:pan];
+//    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+    [self.view addGestureRecognizer:tap];
     
     isSNSLogin = NO;
 
@@ -114,7 +115,10 @@ enum DisplaySide {
 }
 
 - (void)createSubviews {
-   
+
+    /**
+     * 1. input view
+     */
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     CGFloat height = [UIScreen mainScreen].bounds.size.height;
     
@@ -123,21 +127,35 @@ enum DisplaySide {
     
     CGFloat last_height = inputView.bounds.size.height;
     inputView.frame = CGRectMake(0, height - last_height, width, last_height);
-    
+//    inputView.backgroundColor = [UIColor redColor];
     [self.view addSubview:inputView];
+    [self.view bringSubviewToFront:inputView];
    
-//    title = [[UILabel alloc]init];
-//    title.font = [UIFont systemFontOfSize:30.f];
-//    title.text = @"咚哒";
-//    CGSize title_size = [title.text sizeWithFont:title.font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
-//    [title sizeToFit];
+    /**
+     * 2. logo view
+     */
     title = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 150, 50)];
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
     title.image = [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"DongDaHeaderLogo"] ofType:@"png"]];
-    title.center = CGPointMake(width / 2, 0.15 * height);
+    title.center = CGPointMake(width / 2, 97 + title.frame.size.height / 2);
     
     [self.view addSubview:title];
+    [self.view bringSubviewToFront:title];
+    
+    /**
+     * 3. slogen view
+     */
+    UILabel* slg = [[UILabel alloc]init];
+    slg.textAlignment = NSTextAlignmentCenter;
+    slg.textColor = [UIColor whiteColor];
+    slg.font = [UIFont systemFontOfSize:20.f];
+    slg.text = @"新生命 新体验 新主张";
+    [slg sizeToFit];
+    slg.center = CGPointMake(title.center.x, title.center.y + 68);
+
+    [self.view addSubview:slg];
+    [self.view bringSubviewToFront:slg];
 }
 
 - (void)dealloc {
@@ -281,42 +299,43 @@ enum DisplaySide {
 }
 
 - (void)moveView:(float)move {
-    static const CGFloat kAnimationDuration = 0.30; // in seconds
-    CGPoint p_start = inputView.center;
-    CGPoint p_end = CGPointMake(p_start.x, p_start.y + move);
-    [INTUAnimationEngine animateWithDuration:kAnimationDuration
-                                                          delay:0.0
-                                                         easing:INTUEaseInOutQuadratic
-                                                        options:INTUAnimationOptionNone
-                                                     animations:^(CGFloat progress) {
-                                                         inputView.center = INTUInterpolateCGPoint(p_start, p_end, progress);
-                                                         
-                                                         // NSLog(@"Progress: %.2f", progress);
-                                                     }
-                                                     completion:^(BOOL finished) {
-                                                         // NOTE: When passing INTUAnimationOptionRepeat, this completion block is NOT executed at the end of each cycle. It will only run if the animation is canceled.
-                                                         NSLog(@"%@", finished ? @"Animation Completed" : @"Animation Canceled");
-//                                                         self.animationID = NSNotFound;
-                                                     }];
+//    static const CGFloat kAnimationDuration = 0.30; // in seconds
+//    CGPoint p_start = inputView.center;
+//    CGPoint p_end = CGPointMake(p_start.x, p_start.y + move);
+//    [INTUAnimationEngine animateWithDuration:kAnimationDuration
+//                                                          delay:0.0
+//                                                         easing:INTUEaseInOutQuadratic
+//                                                        options:INTUAnimationOptionNone
+//                                                     animations:^(CGFloat progress) {
+//                                                         inputView.center = INTUInterpolateCGPoint(p_start, p_end, progress);
+//                                                     }
+//                                                     completion:^(BOOL finished) {
+//                                                         // NOTE: When passing INTUAnimationOptionRepeat, this completion block is NOT executed at the end of each cycle. It will only run if the animation is canceled.
+//                                                         NSLog(@"%@", finished ? @"Animation Completed" : @"Animation Canceled");
+//                                                     }];
 }
 
 #pragma mark -- pan gusture
 - (void)handlePan:(UIPanGestureRecognizer*)gesture {
-    NSLog(@"pan gesture");
-    if (inputView.frame.origin.y + inputView.frame.size.height != [UIScreen mainScreen].bounds.size.height) {
-        if (gesture.state == UIGestureRecognizerStateBegan) {
-            point = [gesture translationInView:self.view];
-            
-        } else if (gesture.state == UIGestureRecognizerStateEnded) {
-            CGPoint newPos = [gesture translationInView:self.view];
-            
-            if (newPos.y - point.y) {
-                NSLog(@"down gesture");
-                [inputView endEditing];
-            }
-            [self moveView:210];
-        }
-    }
+//    NSLog(@"pan gesture");
+//    if (inputView.frame.origin.y + inputView.frame.size.height != [UIScreen mainScreen].bounds.size.height) {
+//        if (gesture.state == UIGestureRecognizerStateBegan) {
+//            point = [gesture translationInView:self.view];
+//            
+//        } else if (gesture.state == UIGestureRecognizerStateEnded) {
+//            CGPoint newPos = [gesture translationInView:self.view];
+//            
+//            if (newPos.y - point.y) {
+//                NSLog(@"down gesture");
+//                [inputView endEditing];
+//            }
+//            [self moveView:210];
+//        }
+//    }
+}
+
+- (void)handleTap:(UITapGestureRecognizer*)gesture {
+    [inputView endEditing];
 }
 
 #pragma mark -- LoinInputView Delegate

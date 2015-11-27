@@ -15,6 +15,7 @@
 		EE0CEC581BDB13070016B6F4 /* UserPrivacyController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0CEC4E1BDB13070016B6F4 /* UserPrivacyController.m */; };
 		EE0CEC5D1BDB15790016B6F4 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0CEC5C1BDB15790016B6F4 /* LoginViewController.m */; };
 		EE0DCE761C08077E00B5386B /* DongDaTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0DCE751C08077E00B5386B /* DongDaTabBarItem.m */; };
+		EE0DCE7E1C081FD400B5386B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE0DCE7D1C081FD400B5386B /* LaunchScreen.xib */; };
 		EE20BED41B6F430D00DE8455 /* OwnerQueryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EE20BED31B6F430D00DE8455 /* OwnerQueryModel.m */; };
 		EE2A26DB1C02F7950080FB1B /* HomeViewTableCellDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2A26DA1C02F7950080FB1B /* HomeViewTableCellDelegate.m */; };
 		EE2D4B781B525E0A00B58A1F /* PostInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2D4B681B525E0A00B58A1F /* PostInputViewController.m */; };
@@ -47,7 +48,6 @@
 		EE6D6DB51B7B28A6004D29C8 /* WEPopoverContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6D6DAD1B7B28A6004D29C8 /* WEPopoverContainerView.m */; };
 		EE6D6DB61B7B28A6004D29C8 /* WEPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6D6DAF1B7B28A6004D29C8 /* WEPopoverController.m */; };
 		EE6D6DE21B7B404E004D29C8 /* CycleDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6D6DE11B7B404E004D29C8 /* CycleDetailController.m */; };
-		EE7415C81B5B7097002CA1BC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE7415C41B5B7097002CA1BC /* LaunchScreen.xib */; };
 		EE7415C91B5B7097002CA1BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE7415C61B5B7097002CA1BC /* Main.storyboard */; };
 		EE7415CC1B5B70D5002CA1BC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EE7415CE1B5B70D5002CA1BC /* InfoPlist.strings */; };
 		EE7415D21B5B7215002CA1BC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EE7415D41B5B7215002CA1BC /* Localizable.strings */; };
@@ -287,6 +287,7 @@
 		EE0CEC5C1BDB15790016B6F4 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		EE0DCE741C08077E00B5386B /* DongDaTabBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DongDaTabBarItem.h; sourceTree = "<group>"; };
 		EE0DCE751C08077E00B5386B /* DongDaTabBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DongDaTabBarItem.m; sourceTree = "<group>"; };
+		EE0DCE7D1C081FD400B5386B /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		EE20BED21B6F430D00DE8455 /* OwnerQueryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OwnerQueryModel.h; sourceTree = "<group>"; };
 		EE20BED31B6F430D00DE8455 /* OwnerQueryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OwnerQueryModel.m; sourceTree = "<group>"; };
 		EE2A26D91C02F7950080FB1B /* HomeViewTableCellDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewTableCellDelegate.h; sourceTree = "<group>"; };
@@ -357,9 +358,7 @@
 		EE6D6DB21B7B28A6004D29C8 /* WETouchableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WETouchableView.m; sourceTree = "<group>"; };
 		EE6D6DE01B7B404E004D29C8 /* CycleDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleDetailController.h; sourceTree = "<group>"; };
 		EE6D6DE11B7B404E004D29C8 /* CycleDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleDetailController.m; sourceTree = "<group>"; };
-		EE7415C51B5B7097002CA1BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		EE7415C71B5B7097002CA1BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		EE7415CA1B5B70C7002CA1BC /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		EE7415CB1B5B70C7002CA1BC /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		EE7415CD1B5B70D5002CA1BC /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		EE7415CF1B5B70D9002CA1BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -1877,7 +1876,7 @@
 		EEAACDB51B44F61700D05C0B /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				EE7415C41B5B7097002CA1BC /* LaunchScreen.xib */,
+				EE0DCE7D1C081FD400B5386B /* LaunchScreen.xib */,
 				EE7415C61B5B7097002CA1BC /* Main.storyboard */,
 				EEAACAF01B44E90300D05C0B /* AppDelegate.h */,
 				EEAACAF11B44E90300D05C0B /* AppDelegate.m */,
@@ -2380,12 +2379,12 @@
 				EEC980B41B8EB9EA0087E5A7 /* status-bar-pattern-default@2x.jpg in Resources */,
 				EEB4C8BF1BFC823C0023E2AD /* QueryCell.xib in Resources */,
 				EE7910461B841AC8005E455B /* MessageViewCell.xib in Resources */,
+				EE0DCE7E1C081FD400B5386B /* LaunchScreen.xib in Resources */,
 				EE7C68731B82D31F0003C593 /* CycleOverCell.xib in Resources */,
 				EEAACD741B44EA2D00D05C0B /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				EE9F736F1B8576C400F800DC /* MessageChatGroupHeader.xib in Resources */,
 				EE7416261B5B8CDF002CA1BC /* AreaCodeJson.txt in Resources */,
 				EE7415CC1B5B70D5002CA1BC /* InfoPlist.strings in Resources */,
-				EE7415C81B5B7097002CA1BC /* LaunchScreen.xib in Resources */,
 				EEE94E191B74BDDD0011321A /* ProfileDetailNib.storyboard in Resources */,
 				EEC884861BFEC6DF006A237D /* SearchViewController.storyboard in Resources */,
 				EED64D4C1B8189C6008CB134 /* CycleAddKidsFooter.xib in Resources */,
@@ -2629,15 +2628,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		EE7415C41B5B7097002CA1BC /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				EE7415C51B5B7097002CA1BC /* Base */,
-				EE7415CA1B5B70C7002CA1BC /* zh-Hans */,
-			);
-			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
 		EE7415C61B5B7097002CA1BC /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
