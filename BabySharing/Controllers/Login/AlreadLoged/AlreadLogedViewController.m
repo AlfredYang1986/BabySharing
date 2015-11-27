@@ -11,11 +11,11 @@
 #import "loginToken+ContextOpt.h"
 
 @interface AlreadLogedViewController ()
-@property (weak, nonatomic) IBOutlet UIButton *loginImgBtn;
-@property (weak, nonatomic) IBOutlet UILabel *nickNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *currentTagLabel;
-@property (weak, nonatomic) IBOutlet UIButton *yesBtn;
-@property (weak, nonatomic) IBOutlet UIButton *noBtn;
+@property (strong, nonatomic) IBOutlet UIButton *loginImgBtn;
+@property (strong, nonatomic) IBOutlet UILabel *nickNameLabel;
+@property (strong, nonatomic) IBOutlet UILabel *currentTagLabel;
+@property (strong, nonatomic) IBOutlet UIButton *yesBtn;
+@property (strong, nonatomic) IBOutlet UIButton *noBtn;
 @end
 
 @implementation AlreadLogedViewController
@@ -32,19 +32,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self.navigationController setNavigationBarHidden:NO animated:NO];
+//    [self.navigationController setNavigationBarHidden:NO animated:NO];
     
     /**
      * round img button
      */
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
     UIImage* img = [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"User_Big"] ofType:@"png"]];
+    _loginImgBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 100, 100)];
     [_loginImgBtn setBackgroundImage:img forState:UIControlStateNormal];
     _loginImgBtn.layer.cornerRadius = _loginImgBtn.frame.size.width / 2;
     _loginImgBtn.clipsToBounds = YES;
     _loginImgBtn.backgroundColor = [UIColor clearColor];
-
+    _loginImgBtn.center = CGPointMake(width / 2, 97 + _loginImgBtn.frame.size.height / 2);
+    [self.view addSubview:_loginImgBtn];
+    [self.view bringSubviewToFront:_loginImgBtn];
+    
     /**
      * add under line for nick name label
      */
@@ -53,13 +58,21 @@
         name = [_login_attr objectForKey:@"phoneNo"];
     }
     
-//    NSMutableAttributedString *content = [[NSMutableAttributedString alloc] initWithString:name];
-//    NSRange contentRange = {0, [content length]};
-//    [content addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:contentRange];
+    //    NSMutableAttributedString *content = [[NSMutableAttributedString alloc] initWithString:name];
+    //    NSRange contentRange = {0, [content length]};
+    //    [content addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:contentRange];
     
-//    _nickNameLabel.text = @"";
-//    _nickNameLabel.attributedText = content;
+    //    _nickNameLabel.text = @"";
+    //    _nickNameLabel.attributedText = content;
+    _nickNameLabel = [[UILabel alloc]init];
     _nickNameLabel.text = name;
+    [_nickNameLabel sizeToFit];
+    _nickNameLabel.textColor = [UIColor whiteColor];
+    _nickNameLabel.font = [UIFont systemFontOfSize:17.f];
+    _nickNameLabel.center = CGPointMake(width / 2, _loginImgBtn.center.y + _loginImgBtn.frame.size.height / 2 + 50);
+    [self.view addSubview:_nickNameLabel];
+    [self.view bringSubviewToFront:_nickNameLabel];
+    
    
     /**
      * border for role tags
@@ -68,54 +81,74 @@
     if (!tag || [tag isEqualToString:@""]) {
         tag = @"请添加一个标签";
     }
+    
+    _currentTagLabel = [[UILabel alloc]init];
     _currentTagLabel.text = tag;
-    _currentTagLabel.textColor = [UIColor whiteColor];
-    _currentTagLabel.backgroundColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
-//    _currentTagLabel.layer.borderWidth = 1.f;
-//    _currentTagLabel.layer.borderColor = [UIColor blueColor].CGColor;
-//    _currentTagLabel.font = [UIFont systemFontOfSize:24.f];
+    _currentTagLabel.textColor = [UIColor yellowColor];
+//    _currentTagLabel.backgroundColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
+    _currentTagLabel.backgroundColor = [UIColor clearColor];
     [_currentTagLabel sizeToFit];
     _currentTagLabel.font = [UIFont systemFontOfSize:15.f];
     _currentTagLabel.textAlignment = NSTextAlignmentCenter;
-//    _currentTagLabel.layer.cornerRadius = 10.5;
-    _currentTagLabel.clipsToBounds = YES;
+    _currentTagLabel.center = CGPointMake(width / 2, _nickNameLabel.center.y + _nickNameLabel.frame.size.height / 2 + 20);
+    [self.view addSubview:_currentTagLabel];
+    [self.view bringSubviewToFront:_currentTagLabel];
+   
+    /**
+     * Is that you? label
+     */
+    UILabel* qa = [[UILabel alloc]init];
+    qa.text = @"这是你吗?";
+    qa.font = [UIFont boldSystemFontOfSize:20.f];
+    [qa sizeToFit];
+    qa.textColor = [UIColor whiteColor];
+    qa.center = CGPointMake(width / 2, _currentTagLabel.center.y + _currentTagLabel.frame.size.height / 2 + 100);
+    [self.view addSubview:qa];
+    [self.view bringSubviewToFront:qa];
     
     /**
      * border for yes btn and no btn
      */
-//    _yesBtn.layer.borderWidth = 1.f;
-//    _yesBtn.layer.borderColor = [UIColor blueColor].CGColor;
-    _yesBtn.layer.cornerRadius = 25.f;
+    _yesBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 80, 30)];
+    _yesBtn.layer.borderColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f].CGColor;
+    _yesBtn.layer.borderWidth = 1.f;
+    _yesBtn.layer.cornerRadius = 15.f;
     _yesBtn.clipsToBounds = YES;
-    _yesBtn.backgroundColor = [UIColor colorWithRed:0.3126 green:0.8529 blue:0.7941 alpha:1.f];
-    [_yesBtn setTitleColor:[UIColor colorWithWhite:1.f alpha:0.8] forState:UIControlStateNormal];
+    _yesBtn.backgroundColor = [UIColor clearColor];
+    [_yesBtn setTitleColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f] forState:UIControlStateNormal];
+    [_yesBtn setTitle:@"是" forState:UIControlStateNormal];
+    _yesBtn.center = CGPointMake(width / 2 + 60, qa.center.y + qa.frame.size.height / 2 + 50);
+    [self.view addSubview:_yesBtn];
+    [self.view bringSubviewToFront:_yesBtn];
+    [_yesBtn addTarget:self action:@selector(didSelectMeButton) forControlEvents:UIControlEventTouchUpInside];
 
-//    _noBtn.layer.borderWidth = 1.f;
-//    _noBtn.layer.borderColor = [UIColor blueColor].CGColor;
-    _noBtn.layer.cornerRadius = 25.f;
+    _noBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 80, 30)];
+    _noBtn.layer.cornerRadius = 15.f;
+    _noBtn.layer.borderColor = [UIColor whiteColor].CGColor;
+    _noBtn.layer.borderWidth = 1.f;
     _noBtn.clipsToBounds = YES;
-    _noBtn.backgroundColor = [UIColor colorWithRed:0.3126 green:0.8529 blue:0.7941 alpha:1.f];
-    [_noBtn setTitleColor:[UIColor colorWithWhite:1.f alpha:0.8] forState:UIControlStateNormal];
+    _noBtn.backgroundColor = [UIColor clearColor];
+    [_noBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [_noBtn setTitle:@"否" forState:UIControlStateNormal];
+    _noBtn.center = CGPointMake(width / 2 - 60, qa.center.y + qa.frame.size.height / 2 + 50);
+    [self.view addSubview:_noBtn];
+    [self.view bringSubviewToFront:_noBtn];
+    [_noBtn addTarget:self action:@selector(didSelectCreateNewAccount) forControlEvents:UIControlEventTouchUpInside];
    
-//    UILabel* label_t = [[UILabel alloc]init];
-//    label_t.text = @"圈子";
-//    label_t.textColor = [UIColor whiteColor];
-//    [label_t sizeToFit];
-    UIImageView* title_img = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 75, 25)];
-    title_img.image = [UIImage imageNamed:[resourceBundle pathForResource:@"DongDaHeaderLogo" ofType:@"png"]];
-    self.navigationItem.titleView = title_img;
-   
-    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
-    NSString* filepath = [resourceBundle pathForResource:@"Previous_simple" ofType:@"png"];
-    CALayer * layer = [CALayer layer];
-    layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
-    layer.frame = CGRectMake(0, 0, 13, 20);
-    layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
-    [barBtn.layer addSublayer:layer];
-    [barBtn addTarget:self action:@selector(didPopViewController) forControlEvents:UIControlEventTouchDown];
-    
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn];
-    
+//    UIImageView* title_img = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 75, 25)];
+//    title_img.image = [UIImage imageNamed:[resourceBundle pathForResource:@"DongDaHeaderLogo" ofType:@"png"]];
+//    self.navigationItem.titleView = title_img;
+//   
+//    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
+//    NSString* filepath = [resourceBundle pathForResource:@"Previous_simple" ofType:@"png"];
+//    CALayer * layer = [CALayer layer];
+//    layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
+//    layer.frame = CGRectMake(0, 0, 13, 20);
+//    layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
+//    [barBtn.layer addSublayer:layer];
+//    [barBtn addTarget:self action:@selector(didPopViewController) forControlEvents:UIControlEventTouchDown];
+//    
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn];
 }
 
 - (void)didPopViewController {
@@ -144,20 +177,10 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:NO];
+//    [self.navigationController setNavigationBarHidden:YES animated:NO];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-#pragma mark -- 
+#pragma mark --
 - (IBAction)didSelectMeButton {
 
     NSString* user_id = (NSString*)[_login_attr objectForKey:@"user_id"];

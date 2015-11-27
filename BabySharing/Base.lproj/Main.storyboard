@@ -403,7 +403,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchImage" translatesAutoresizingMaskIntoConstraints="NO" id="guW-kh-Ink">
+                            <imageView userInteractionEnabled="NO" tag="-1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchImage" translatesAutoresizingMaskIntoConstraints="NO" id="guW-kh-Ink">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
                         </subviews>
@@ -432,8 +432,8 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <segue destination="VBe-2x-igG" kind="presentation" identifier="contentSegue" id="xp0-sv-3qd"/>
                         <segue destination="xdg-vF-3pg" kind="push" identifier="areaCode" id="aA6-l7-gCY"/>
                         <segue destination="SUX-v2-GUS" kind="push" identifier="loginSuccessSegue" id="qbd-0n-vJA"/>
-                        <segue destination="KmQ-gC-z8C" kind="push" identifier="alreadyLogSegue" id="Lz7-Vk-yls"/>
                         <segue destination="abe-ov-l8U" kind="push" identifier="UserPrivacy" id="364-Ag-SdU"/>
+                        <segue destination="zja-7A-2Mn" kind="custom" identifier="alreadyLogSegue" customClass="LandingNextSegue" id="p7c-UN-FtH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sUo-nq-Dex" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -556,143 +556,6 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y78-G3-e8L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2572" y="-598"/>
-        </scene>
-        <!--Alread Loged View Controller-->
-        <scene sceneID="rTe-Bj-35M">
-            <objects>
-                <viewController id="KmQ-gC-z8C" customClass="AlreadLogedViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="yCM-0Q-9nC"/>
-                        <viewControllerLayoutGuide type="bottom" id="0BM-qs-HsG"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="nsI-wf-3Je">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="咚哒" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bEJ-S7-iSF">
-                                <rect key="frame" x="283" y="72" width="34" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hHO-hT-hW9">
-                                <rect key="frame" x="250" y="174" width="100" height="100"/>
-                                <color key="backgroundColor" red="0.1575035102" green="1" blue="0.2256678731" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="0VN-e2-BVN"/>
-                                    <constraint firstAttribute="width" constant="100" id="1UD-t7-6lP"/>
-                                </constraints>
-                                <state key="normal">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="didSelectAddPicBtn" destination="SUX-v2-GUS" eventType="touchUpInside" id="RQg-xe-0Ht"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j3B-hA-H7n">
-                                <rect key="frame" x="277" y="289" width="46" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Role Tag" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DgJ-6x-cRU">
-                                <rect key="frame" x="279" y="341" width="67" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zzc-Fj-vgj">
-                                <rect key="frame" x="192" y="386" width="229" height="87"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="这是你么？" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D20-VR-gid">
-                                        <rect key="frame" x="87" y="8" width="85" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4zD-eH-WTN">
-                                        <rect key="frame" x="126" y="37" width="60" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="iaI-EQ-T0m"/>
-                                            <constraint firstAttribute="width" constant="50" id="yxq-lR-00y"/>
-                                        </constraints>
-                                        <state key="normal" title="是">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="didSelectMeButton" destination="KmQ-gC-z8C" eventType="touchUpInside" id="SZJ-kc-aB9"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nMg-Lr-GNw">
-                                        <rect key="frame" x="42" y="37" width="60" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="DkU-X3-IPC"/>
-                                            <constraint firstAttribute="width" constant="50" id="gEm-d9-IHu"/>
-                                        </constraints>
-                                        <state key="normal" title="否">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="didSelectCreateNewAccount" destination="KmQ-gC-z8C" eventType="touchUpInside" id="jf1-a7-ael"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="nMg-Lr-GNw" firstAttribute="top" secondItem="D20-VR-gid" secondAttribute="bottom" constant="8" id="EE9-9L-5Eb"/>
-                                    <constraint firstAttribute="centerX" secondItem="4zD-eH-WTN" secondAttribute="centerX" constant="-40" id="TXY-pi-2XG"/>
-                                    <constraint firstAttribute="centerX" secondItem="nMg-Lr-GNw" secondAttribute="centerX" constant="40" id="Wwk-V1-bBp"/>
-                                    <constraint firstAttribute="width" constant="229" id="eMq-SY-irD"/>
-                                    <constraint firstAttribute="centerX" secondItem="D20-VR-gid" secondAttribute="centerX" id="hgS-aP-ryJ"/>
-                                    <constraint firstItem="4zD-eH-WTN" firstAttribute="top" secondItem="D20-VR-gid" secondAttribute="bottom" constant="8" id="mhL-ov-piz"/>
-                                    <constraint firstAttribute="height" constant="87" id="mwW-4j-wXg"/>
-                                    <constraint firstItem="D20-VR-gid" firstAttribute="top" secondItem="zzc-Fj-vgj" secondAttribute="top" constant="8" id="zwy-QB-IKd"/>
-                                </constraints>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4W6-zR-qQQ">
-                                <rect key="frame" x="271" y="562" width="120" height="30"/>
-                                <state key="normal" title="关联我的社交账户">
-                                    <color key="titleColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="zzc-Fj-vgj" firstAttribute="top" secondItem="DgJ-6x-cRU" secondAttribute="bottom" constant="30" id="1ak-Eg-0K1"/>
-                            <constraint firstItem="j3B-hA-H7n" firstAttribute="top" secondItem="hHO-hT-hW9" secondAttribute="bottom" constant="15" id="5An-Tg-RLQ"/>
-                            <constraint firstAttribute="centerX" secondItem="j3B-hA-H7n" secondAttribute="centerX" id="9rI-AM-ESF"/>
-                            <constraint firstAttribute="centerY" secondItem="hHO-hT-hW9" secondAttribute="centerY" constant="80" id="GXN-Zl-DwX"/>
-                            <constraint firstAttribute="centerX" secondItem="hHO-hT-hW9" secondAttribute="centerX" id="JmL-ig-ybQ"/>
-                            <constraint firstItem="0BM-qs-HsG" firstAttribute="top" secondItem="4W6-zR-qQQ" secondAttribute="bottom" constant="8" id="MiC-Qa-GXd"/>
-                            <constraint firstAttribute="centerX" secondItem="bEJ-S7-iSF" secondAttribute="centerX" id="PIR-oZ-rSc"/>
-                            <constraint firstItem="bEJ-S7-iSF" firstAttribute="top" secondItem="yCM-0Q-9nC" secondAttribute="bottom" constant="8" id="PuU-jS-M6V"/>
-                            <constraint firstAttribute="centerX" secondItem="zzc-Fj-vgj" secondAttribute="centerX" id="RDn-li-8Iq"/>
-                            <constraint firstAttribute="centerX" secondItem="4W6-zR-qQQ" secondAttribute="centerX" id="WUG-6K-ies"/>
-                            <constraint firstItem="zzc-Fj-vgj" firstAttribute="top" secondItem="DgJ-6x-cRU" secondAttribute="bottom" constant="25" id="X3N-KJ-HnR"/>
-                            <constraint firstItem="DgJ-6x-cRU" firstAttribute="top" secondItem="j3B-hA-H7n" secondAttribute="bottom" constant="25" id="X8x-Y8-HTa"/>
-                            <constraint firstAttribute="centerX" secondItem="zzc-Fj-vgj" secondAttribute="centerX" id="cee-CX-gqa"/>
-                            <constraint firstAttribute="centerX" secondItem="DgJ-6x-cRU" secondAttribute="centerX" id="dnA-AY-n9z"/>
-                        </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="X3N-KJ-HnR"/>
-                                <exclude reference="cee-CX-gqa"/>
-                            </mask>
-                        </variation>
-                    </view>
-                    <navigationItem key="navigationItem" id="koN-do-jYH"/>
-                    <connections>
-                        <outlet property="currentTagLabel" destination="DgJ-6x-cRU" id="JcF-rT-Chd"/>
-                        <outlet property="loginImgBtn" destination="hHO-hT-hW9" id="Mrh-gF-jTR"/>
-                        <outlet property="nickNameLabel" destination="j3B-hA-H7n" id="Swz-o2-dpr"/>
-                        <outlet property="noBtn" destination="nMg-Lr-GNw" id="2a1-ta-Qic"/>
-                        <outlet property="yesBtn" destination="4zD-eH-WTN" id="7P4-MC-isy"/>
-                        <segue destination="SUX-v2-GUS" kind="push" identifier="bindNewAccountSegue" id="apk-Zn-mrL"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="f1L-e6-vcK" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1508" y="-598"/>
         </scene>
         <!--Choose Contry or Area-->
         <scene sceneID="js4-2n-umP">
@@ -2002,12 +1865,39 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
             </objects>
             <point key="canvasLocation" x="754" y="1787"/>
         </scene>
+        <!--Alread Loged View Controller-->
+        <scene sceneID="I8u-FB-54S">
+            <objects>
+                <viewController id="zja-7A-2Mn" customClass="AlreadLogedViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="w5i-RD-8Cs"/>
+                        <viewControllerLayoutGuide type="bottom" id="xAf-nk-aEA"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="KQp-d7-gcs">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" tag="-1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="LaunchImage" translatesAutoresizingMaskIntoConstraints="NO" id="UzT-fh-YsN">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Qyu-0h-HGO"/>
+                    <connections>
+                        <segue destination="SUX-v2-GUS" kind="push" identifier="bindNewAccountSegue" id="2PU-iO-cFw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="A4R-kz-8Jx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1508" y="-539"/>
+        </scene>
     </scenes>
     <resources>
         <image name="LaunchImage" width="375" height="667"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="qbd-0n-vJA"/>
+        <segue reference="2PU-iO-cFw"/>
         <segue reference="mYA-47-s6C"/>
     </inferredMetricsTieBreakers>
 </document>

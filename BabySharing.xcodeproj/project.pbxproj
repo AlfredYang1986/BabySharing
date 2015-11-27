@@ -27,6 +27,7 @@
 		EE2D4B7E1B525E0A00B58A1F /* PhotoPreViewEffectController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2D4B731B525E0A00B58A1F /* PhotoPreViewEffectController.m */; };
 		EE2D4B7F1B525E0A00B58A1F /* PhotoPublishController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2D4B751B525E0A00B58A1F /* PhotoPublishController.m */; };
 		EE2D4B801B525E0A00B58A1F /* PhotoTagsController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2D4B771B525E0A00B58A1F /* PhotoTagsController.m */; };
+		EE386FB31C08771A007AB94B /* FixBkgHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = EE386FB21C08771A007AB94B /* FixBkgHelper.m */; };
 		EE3D5C241BA7EB4D007A4AA2 /* DongDaSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3D5C231BA7EB4D007A4AA2 /* DongDaSearchBar.m */; };
 		EE3D5C271BA81348007A4AA2 /* SearchSegView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3D5C261BA81348007A4AA2 /* SearchSegView.m */; };
 		EE3F62151C05483D004507B0 /* HomeCycleSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3F62141C05483D004507B0 /* HomeCycleSegue.m */; };
@@ -94,6 +95,8 @@
 		EE83F40A1B96EDDF00D51FDF /* CycleAddSchoolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE83F4091B96EDDF00D51FDF /* CycleAddSchoolViewController.m */; };
 		EE86D1B21B537469001C4650 /* PostEffectAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = EE86D1B11B537469001C4650 /* PostEffectAdapter.mm */; };
 		EE87315E1B97E131004A25D8 /* WeiboFriendsDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EE87315D1B97E131004A25D8 /* WeiboFriendsDelegate.m */; };
+		EE8B1D8C1C08499A00056AC8 /* LandingNextSegue.mm in Sources */ = {isa = PBXBuildFile; fileRef = EE8B1D8B1C08499A00056AC8 /* LandingNextSegue.mm */; };
+		EE8B1D8F1C084B8400056AC8 /* FixBackGroundSegueController.mm in Sources */ = {isa = PBXBuildFile; fileRef = EE8B1D8E1C084B8400056AC8 /* FixBackGroundSegueController.mm */; };
 		EE90C9871BFC1C68002D5D1D /* MainHomeViewDataDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EE90C9861BFC1C68002D5D1D /* MainHomeViewDataDelegate.m */; };
 		EE92AE341BCE3627008DA020 /* CycleAddConditionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE92AE321BCE3626008DA020 /* CycleAddConditionCell.m */; };
 		EE92AE351BCE3627008DA020 /* CycleAddConditionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE92AE331BCE3626008DA020 /* CycleAddConditionCell.xib */; };
@@ -308,6 +311,8 @@
 		EE2D4B751B525E0A00B58A1F /* PhotoPublishController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoPublishController.m; sourceTree = "<group>"; };
 		EE2D4B761B525E0A00B58A1F /* PhotoTagsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoTagsController.h; sourceTree = "<group>"; };
 		EE2D4B771B525E0A00B58A1F /* PhotoTagsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoTagsController.m; sourceTree = "<group>"; };
+		EE386FB11C08771A007AB94B /* FixBkgHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixBkgHelper.h; sourceTree = "<group>"; };
+		EE386FB21C08771A007AB94B /* FixBkgHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixBkgHelper.m; sourceTree = "<group>"; };
 		EE3D5C221BA7EB4D007A4AA2 /* DongDaSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DongDaSearchBar.h; sourceTree = "<group>"; };
 		EE3D5C231BA7EB4D007A4AA2 /* DongDaSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DongDaSearchBar.m; sourceTree = "<group>"; };
 		EE3D5C251BA81347007A4AA2 /* SearchSegView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSegView.h; sourceTree = "<group>"; };
@@ -401,6 +406,10 @@
 		EE86D1B11B537469001C4650 /* PostEffectAdapter.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = PostEffectAdapter.mm; sourceTree = "<group>"; };
 		EE87315C1B97E131004A25D8 /* WeiboFriendsDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboFriendsDelegate.h; sourceTree = "<group>"; };
 		EE87315D1B97E131004A25D8 /* WeiboFriendsDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboFriendsDelegate.m; sourceTree = "<group>"; };
+		EE8B1D8A1C08499A00056AC8 /* LandingNextSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LandingNextSegue.h; sourceTree = "<group>"; };
+		EE8B1D8B1C08499A00056AC8 /* LandingNextSegue.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = LandingNextSegue.mm; sourceTree = "<group>"; };
+		EE8B1D8D1C084B8400056AC8 /* FixBackGroundSegueController.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = FixBackGroundSegueController.h; sourceTree = "<group>"; };
+		EE8B1D8E1C084B8400056AC8 /* FixBackGroundSegueController.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = FixBackGroundSegueController.mm; sourceTree = "<group>"; };
 		EE90C9841BFC1652002D5D1D /* HomeDataDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeDataDelegate.h; sourceTree = "<group>"; };
 		EE90C9851BFC1C68002D5D1D /* MainHomeViewDataDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainHomeViewDataDelegate.h; sourceTree = "<group>"; };
 		EE90C9861BFC1C68002D5D1D /* MainHomeViewDataDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainHomeViewDataDelegate.m; sourceTree = "<group>"; };
@@ -911,6 +920,12 @@
 			children = (
 				EE3F62131C05483D004507B0 /* HomeCycleSegue.h */,
 				EE3F62141C05483D004507B0 /* HomeCycleSegue.m */,
+				EE8B1D8A1C08499A00056AC8 /* LandingNextSegue.h */,
+				EE8B1D8B1C08499A00056AC8 /* LandingNextSegue.mm */,
+				EE8B1D8D1C084B8400056AC8 /* FixBackGroundSegueController.h */,
+				EE8B1D8E1C084B8400056AC8 /* FixBackGroundSegueController.mm */,
+				EE386FB11C08771A007AB94B /* FixBkgHelper.h */,
+				EE386FB21C08771A007AB94B /* FixBkgHelper.m */,
 			);
 			path = Segue;
 			sourceTree = "<group>";
@@ -2477,6 +2492,8 @@
 				EEB4C8C01BFC823C0023E2AD /* QueryHeader.m in Sources */,
 				EE2D4B7D1B525E0A00B58A1F /* PhotoPreViewController.m in Sources */,
 				EE76398A1B956CFB0025A56D /* CellConstructParameters.m in Sources */,
+				EE8B1D8F1C084B8400056AC8 /* FixBackGroundSegueController.mm in Sources */,
+				EE386FB31C08771A007AB94B /* FixBkgHelper.m in Sources */,
 				EE9633CD1B92BB0F00DB4EA5 /* AboutViewController.m in Sources */,
 				EEAACD131B44E90400D05C0B /* ProfileDetailLocationCell.m in Sources */,
 				EEAACCD51B44E90400D05C0B /* CurrentToken.m in Sources */,
@@ -2553,6 +2570,7 @@
 				EEE94E311B74BF870011321A /* ProfileOverView.m in Sources */,
 				EE2D4B7B1B525E0A00B58A1F /* PhotoAddTagController.m in Sources */,
 				EEE94E0A1B74A8C20011321A /* FriendsTableDelegate.m in Sources */,
+				EE8B1D8C1C08499A00056AC8 /* LandingNextSegue.mm in Sources */,
 				EE5D686F1B75A9FC0067A2DF /* NotificationOwner.m in Sources */,
 				EE86D1B21B537469001C4650 /* PostEffectAdapter.mm in Sources */,
 				EE9785B01B9004CD00C454C5 /* CycleAddKidsViewController.m in Sources */,
