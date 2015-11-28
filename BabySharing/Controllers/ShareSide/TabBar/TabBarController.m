@@ -72,6 +72,11 @@
     [dongda_tabbar addItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"tabbar-btn-friend"] ofType:@"png"]] andSelectedImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"tabbar-btn-friend-select"] ofType:@"png"]]];
 //    [dongda_tabbar addItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Personal_Center"] ofType:@"png"]] andSelectedImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Personal_CenterSelected"] ofType:@"png"]]];
     [dongda_tabbar addItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"tabbar-btn-mine"] ofType:@"png"]] andSelectedImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"tabbar-btn-mine-select"] ofType:@"png"]]];
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 6) {
+        [[UITabBar appearance] setShadowImage:[UIImage new]];
+        [[UITabBar appearance] setBackgroundImage:[[UIImage alloc]init]];
+    }
 }
 
 - (void)setUpMovingButtonsWithBoundle:(NSBundle*)bundle {

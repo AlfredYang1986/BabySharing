@@ -74,6 +74,7 @@
     } else {
         name_text_field = [[UITextField alloc]init];
         name_text_field.delegate = self;
+        name_text_field.textColor = [UIColor whiteColor];
         
         [self addSubview:[self inputLineWithImage:img_0 andPlaceHolder:@"为你的咚哒起个名字" andInjectView:name_text_field inRect:CGRectMake(0, 0, width, MARGIN + IMG_HEIGHT) isNeedUnderLine:YES]];
        

@@ -93,6 +93,7 @@
     t_layer.frame = CGRectMake(0, 0, 9, 8);
     t_layer.position = CGPointMake(area_code_btn.frame.size.width - 8, area_code_btn.frame.size.height / 2);
     [area_code_btn.layer addSublayer:t_layer];
+    [area_code_btn addTarget:self action:@selector(areaCodeBtnSelected:) forControlEvents:UIControlEventTouchUpInside];
     
     CALayer* ver_layer = [CALayer layer];
     ver_layer.borderColor = [UIColor whiteColor].CGColor;
@@ -330,6 +331,9 @@
 }
 
 - (void)setAreaCode:(NSString*)code {
-    [area_code_btn setTitle:[@"+" stringByAppendingString:code] forState:UIControlStateNormal];
+    UILabel* tmp = (UILabel*)[area_code_btn viewWithTag:-1];
+    tmp.text = [@"+" stringByAppendingString:code];
+    [tmp sizeToFit];
+//    [area_code_btn setTitle:[@"+" stringByAppendingString:code] forState:UIControlStateNormal];
 }
 @end

@@ -14,8 +14,5 @@
 
 @interface ChooseAreaViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet UISearchBar *areaSearchBar;
-@property (weak, nonatomic) IBOutlet UITableView *areaTableView;
-
 @property (nonatomic, weak) id<AreaViewControllerDelegate> delegate;
 @end

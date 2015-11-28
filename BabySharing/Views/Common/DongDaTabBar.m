@@ -44,9 +44,15 @@
 //        selected_layer.contents = (id)[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Selected"] ofType:@"png"]].CGImage;
 //        selected_layer.frame = CGRectMake(0, 0, 15, 10);
 //        [self.layer addSublayer:selected_layer];
-       
+    
         [bar.tabBar addSubview:self];
         [bar.tabBar bringSubviewToFront:self];
+        
+        CALayer* shadow = [CALayer layer];
+        shadow.borderColor = [UIColor lightGrayColor].CGColor;
+        shadow.borderWidth = 0.5;
+        shadow.frame = CGRectMake(0, 0, width, 1);
+        [self.layer addSublayer:shadow];
     }
     return self;
 }
@@ -96,7 +102,7 @@
    
     for (int index = 0; index < self.count; ++index) {
         UIButton* tmp = (UIButton*)[self viewWithTag:index];
-        tmp.frame = CGRectMake(index * step, 0, step, height);
+        tmp.frame = CGRectMake(index * step, index == 2 ? -8 : 0 , step, height);
         if ([tmp isSelected]) {
             selected_layer.position = CGPointMake(tmp.center.x, 5);
         }
