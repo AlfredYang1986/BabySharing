@@ -21,9 +21,11 @@
 #import "ModelDefines.h"
 #import "RemoteInstance.h"
 
+#define NEXT_BTN_MARGIN_BOTTOM  50
+
 @interface NicknameInputViewController () </*SearchUserTagControllerDelegate,*/ NickNameInputViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, SearchActionsProtocol>
-@property (weak, nonatomic) IBOutlet UIButton *loginImgBtn;
-@property (weak, nonatomic) IBOutlet UIButton *nextBtn;
+@property (strong, nonatomic) IBOutlet UIButton *loginImgBtn;
+@property (strong, nonatomic) IBOutlet UIButton *nextBtn;
 @end
 
 @implementation NicknameInputViewController {
@@ -42,15 +44,31 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self.navigationController setNavigationBarHidden:NO animated:NO];
+//    [self.navigationController setNavigationBarHidden:NO animated:NO];
     
     inputView = [[NickNameInputView alloc]initWithSNSLogin:_isSNSLogIn];
     CGSize s = [inputView getPreferredBounds];
     inputView.bounds = CGRectMake(0, 0, s.width, s.height);
     inputView.delegate = self;
+    /**
+     * layout subview then layout input view
+     */
+    CGFloat input_width = [UIScreen mainScreen].bounds.size.width / 2;
+//    CGFloat input_height = [UIScreen mainScreen].bounds.size.height / 2 + inputView.bounds.size.height / 2;
+    CGFloat input_height = [UIScreen mainScreen].bounds.size.height / 2;
+    inputView.center = CGPointMake(input_width, input_height);
     
     [self.view addSubview:inputView];
    
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    _loginImgBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 100, 100)];
+    _loginImgBtn.layer.cornerRadius = _loginImgBtn.frame.size.width / 2;
+    _loginImgBtn.clipsToBounds = YES;
+    _loginImgBtn.backgroundColor = [UIColor clearColor];
+    _loginImgBtn.center = CGPointMake(width / 2, 97 + _loginImgBtn.frame.size.height / 2);
+    [self.view addSubview:_loginImgBtn];
+    [self.view bringSubviewToFront:_loginImgBtn];
+    
     if (_isSNSLogIn) {
         _loginImgBtn.hidden = YES;
     } else {
@@ -60,28 +78,37 @@
         NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
         UIImage* img = [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Plus_Big"] ofType:@"png"]];
         [_loginImgBtn setBackgroundImage:img forState:UIControlStateNormal];
-        _loginImgBtn.backgroundColor = [UIColor clearColor];
-        _loginImgBtn.layer.cornerRadius = _loginImgBtn.frame.size.width / 2;
         
         [_loginImgBtn addTarget:self action:@selector(didSelectImgBtn) forControlEvents:UIControlEventTouchUpInside];
     }
     
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
-    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-    UIImageView* title_img = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 75, 25)];
-    title_img.image = [UIImage imageNamed:[resourceBundle pathForResource:@"DongDaHeaderLogo" ofType:@"png"]];
-    self.navigationItem.titleView = title_img;
-   
-    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
-    NSString* filepath = [resourceBundle pathForResource:@"Previous_simple" ofType:@"png"];
-    CALayer * layer = [CALayer layer];
-    layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
-    layer.frame = CGRectMake(0, 0, 13, 20);
-    layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
-    [barBtn.layer addSublayer:layer];
-    [barBtn addTarget:self action:@selector(didPopViewController) forControlEvents:UIControlEventTouchDown];
+    _nextBtn = [[UIButton alloc]init];
+    _nextBtn.titleLabel.font = [UIFont boldSystemFontOfSize:20.f];
+    [_nextBtn setTitle:@"开启我的旅程" forState:UIControlStateNormal];
+    [_nextBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [_nextBtn sizeToFit];
+    CGFloat height = [UIScreen mainScreen].bounds.size.height;
+    _nextBtn.center = CGPointMake(width / 2, height - NEXT_BTN_MARGIN_BOTTOM);
+    [self.view addSubview:_nextBtn];
+    [self.view bringSubviewToFront:_nextBtn];
+    [_nextBtn addTarget:self action:@selector(didConfirm) forControlEvents:UIControlEventTouchUpInside];
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn];
+//    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+//    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+//    UIImageView* title_img = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 75, 25)];
+//    title_img.image = [UIImage imageNamed:[resourceBundle pathForResource:@"DongDaHeaderLogo" ofType:@"png"]];
+//    self.navigationItem.titleView = title_img;
+//   
+//    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
+//    NSString* filepath = [resourceBundle pathForResource:@"Previous_simple" ofType:@"png"];
+//    CALayer * layer = [CALayer layer];
+//    layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
+//    layer.frame = CGRectMake(0, 0, 13, 20);
+//    layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
+//    [barBtn.layer addSublayer:layer];
+//    [barBtn addTarget:self action:@selector(didPopViewController) forControlEvents:UIControlEventTouchDown];
+//    
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn];
 }
 
 - (void)didPopViewController {
@@ -98,24 +125,14 @@
     [self.navigationController setNavigationBarHidden:YES animated:NO];
 }
 
-- (void)viewDidLayoutSubviews {
-    /**
-     * layout subview then layout input view
-     */
-    CGFloat width = [UIScreen mainScreen].bounds.size.width / 2;
-    CGFloat height = [UIScreen mainScreen].bounds.size.height / 2 + inputView.bounds.size.height / 2;
-    inputView.center = CGPointMake(width, height);
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+//- (void)viewDidLayoutSubviews {
+//    /**
+//     * layout subview then layout input view
+//     */
+//    CGFloat width = [UIScreen mainScreen].bounds.size.width / 2;
+//    CGFloat height = [UIScreen mainScreen].bounds.size.height / 2 + inputView.bounds.size.height / 2;
+//    inputView.center = CGPointMake(width, height);
+//}
 
 - (IBAction)didConfirm {
 
