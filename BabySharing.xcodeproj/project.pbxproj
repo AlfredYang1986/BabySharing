@@ -209,6 +209,8 @@
 		EEB8122C1B7AECF800BC0774 /* CycleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB8122B1B7AECF800BC0774 /* CycleViewController.m */; };
 		EEB812311B7AF2ED00BC0774 /* DetailInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB8122E1B7AF2ED00BC0774 /* DetailInfo.m */; };
 		EEB812321B7AF2ED00BC0774 /* UserKids.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB812301B7AF2ED00BC0774 /* UserKids.m */; };
+		EEBBCF171C09B9AA000B2987 /* ContentCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEBBCF161C09B9AA000B2987 /* ContentCardView.xib */; };
+		EEBBCF1A1C09BB0F000B2987 /* ContentCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEBBCF191C09BB0F000B2987 /* ContentCardView.m */; };
 		EEBD11231C0031540065BAE4 /* SearchAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEBD11221C0031540065BAE4 /* SearchAddViewController.m */; };
 		EEBD11261C00317F0065BAE4 /* SearchAddRoleTagDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EEBD11251C00317F0065BAE4 /* SearchAddRoleTagDelegate.m */; };
 		EEBFFC1D1B916A0F005AAE36 /* PersonalSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EEBFFC1B1B916A0F005AAE36 /* PersonalSettingCell.m */; };
@@ -674,6 +676,9 @@
 		EEB8122E1B7AF2ED00BC0774 /* DetailInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailInfo.m; sourceTree = "<group>"; };
 		EEB8122F1B7AF2ED00BC0774 /* UserKids.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserKids.h; sourceTree = "<group>"; };
 		EEB812301B7AF2ED00BC0774 /* UserKids.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserKids.m; sourceTree = "<group>"; };
+		EEBBCF161C09B9AA000B2987 /* ContentCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContentCardView.xib; sourceTree = "<group>"; };
+		EEBBCF181C09BB0F000B2987 /* ContentCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentCardView.h; sourceTree = "<group>"; };
+		EEBBCF191C09BB0F000B2987 /* ContentCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentCardView.m; sourceTree = "<group>"; };
 		EEBD11211C0031540065BAE4 /* SearchAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchAddViewController.h; sourceTree = "<group>"; };
 		EEBD11221C0031540065BAE4 /* SearchAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchAddViewController.m; sourceTree = "<group>"; };
 		EEBD11241C00317F0065BAE4 /* SearchAddRoleTagDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchAddRoleTagDelegate.h; sourceTree = "<group>"; };
@@ -2059,6 +2064,9 @@
 				EE66B47C1BB3EEC600812F5F /* HomeNavigationController.m */,
 				EE2A26D91C02F7950080FB1B /* HomeViewTableCellDelegate.h */,
 				EE2A26DA1C02F7950080FB1B /* HomeViewTableCellDelegate.m */,
+				EEBBCF161C09B9AA000B2987 /* ContentCardView.xib */,
+				EEBBCF181C09BB0F000B2987 /* ContentCardView.h */,
+				EEBBCF191C09BB0F000B2987 /* ContentCardView.m */,
 			);
 			path = HomeMain;
 			sourceTree = "<group>";
@@ -2407,6 +2415,7 @@
 				EEAACD5B1B44E91A00D05C0B /* YYBoundle.bundle in Resources */,
 				EE7415C91B5B7097002CA1BC /* Main.storyboard in Resources */,
 				EEAACCA51B44E90400D05C0B /* MovieNib.storyboard in Resources */,
+				EEBBCF171C09B9AA000B2987 /* ContentCardView.xib in Resources */,
 				EEAACD1A1B44E90400D05C0B /* ProfileDetailTagsCell.xib in Resources */,
 				EEAACCC61B44E90400D05C0B /* webNab.storyboard in Resources */,
 				EEC980B11B8EB9EA0087E5A7 /* status-bar-pattern-black.jpg in Resources */,
@@ -2563,6 +2572,7 @@
 				EEAAC8FE1B44E81A00D05C0B /* main.m in Sources */,
 				EEAACCC71B44E90400D05C0B /* WebSearchController.m in Sources */,
 				EEAACCEA1B44E90400D05C0B /* TagQueryModel.m in Sources */,
+				EEBBCF1A1C09BB0F000B2987 /* ContentCardView.m in Sources */,
 				EE9633D01B92CA8200DB4EA5 /* NewMessageSettingController.mm in Sources */,
 				EEAACCE61B44E90400D05C0B /* QueryLikes.m in Sources */,
 				EE2D4B7F1B525E0A00B58A1F /* PhotoPublishController.m in Sources */,

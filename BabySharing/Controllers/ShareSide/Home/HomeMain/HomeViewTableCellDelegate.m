@@ -41,7 +41,8 @@
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
-    ((UITableViewHeaderFooterView *)view).backgroundView.backgroundColor = [UIColor whiteColor];
+//    ((UITableViewHeaderFooterView *)view).backgroundView.backgroundColor = [UIColor whiteColor];
+    ((UITableViewHeaderFooterView *)view).backgroundView.backgroundColor = [UIColor clearColor];
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -193,6 +194,8 @@
     
     [cell setTime:tmp.content_post_date];
     [cell setTags:@"安全，海淘"];
+   
+    cell.backgroundColor = [UIColor clearColor];
     
     return cell;
 }

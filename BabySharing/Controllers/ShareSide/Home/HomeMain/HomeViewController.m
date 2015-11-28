@@ -28,8 +28,11 @@
 #import "ChatGroupController.h"
 #import "Targets.h"
 
+#import "OBShapedButton.h"
+#import "ContentCardView.h"
+
 #define HEADER_MARGIN_TO_SCREEN 8
-#define CONTENT_START_POINT     28
+#define CONTENT_START_POINT     74
 #define PAN_HANDLE_CHECK_POINT  50
 
 #define VIEW_BOUNTDS        CGFloat screen_width = [UIScreen mainScreen].bounds.size.width; \
@@ -41,6 +44,7 @@
 #define QUERY_VIEW_END      CGRectMake(-rc.size.width, -44, rc.size.width, rc.size.height)
 
 #define BACK_TO_TOP_TIME    3.0
+#define SHADOW_WIDTH 4
 
 //@interface HomeViewController () <UITableViewDelegate, UITableViewDataSource, QueryCellActionProtocol> //, HomeSegControlDelegate>
 @interface HomeViewController () 
@@ -87,7 +91,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f]];
 
 //    UINib* nib = [UINib nibWithNibName:@"QueryCell" bundle:[NSBundle mainBundle]];
 //    [_queryView registerNib:nib forCellReuseIdentifier:@"query cell"];
@@ -104,16 +107,16 @@
     /**
      * set title view
      */
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
-    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-    UILabel* title = [[UILabel alloc]init];
-    title.textColor = [UIColor whiteColor];
-    if (_nav_title == nil || [_nav_title isEqualToString:@""]) {
-        _nav_title = @"咚嗒";
-    }
-    title.text = _nav_title;
-    [title sizeToFit];
-    self.navigationItem.titleView = title;
+//    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+//    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+//    UILabel* title = [[UILabel alloc]init];
+//    title.textColor = [UIColor whiteColor];
+//    if (_nav_title == nil || [_nav_title isEqualToString:@""]) {
+//        _nav_title = @"咚嗒";
+//    }
+//    title.text = _nav_title;
+//    [title sizeToFit];
+//    self.navigationItem.titleView = title;
     
     trait = [[MoviePlayTrait alloc]init];
 
@@ -128,30 +131,30 @@
     tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(back2TopHandler:)];
     [tmp addGestureRecognizer:tap];
     
-    if (_isPushed) {
-        UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
-        NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
-        NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-        NSString* filepath = [resourceBundle pathForResource:@"Previous_simple" ofType:@"png"];
-        CALayer * layer = [CALayer layer];
-        layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
-        layer.frame = CGRectMake(0, 0, 25, 25);
-        layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
-        [barBtn.layer addSublayer:layer];
-        [barBtn addTarget:self action:@selector(didPopViewControllerBtn) forControlEvents:UIControlEventTouchDown];
-        
-        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn];
-    
-    } else {
-        NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"Cycle"] ofType:@"png"];
-        UIImage *image = [UIImage imageNamed:filePath];
-
-        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        btn.frame =CGRectMake(0, 0, 25, 25);
-        [btn setBackgroundImage:image forState:UIControlStateNormal];
-        [btn addTarget: self action: @selector(didSelectChatGroupBtn) forControlEvents: UIControlEventTouchUpInside];
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:btn];
-    }
+//    if (_isPushed) {
+//        UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
+//        NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+//        NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+//        NSString* filepath = [resourceBundle pathForResource:@"Previous_simple" ofType:@"png"];
+//        CALayer * layer = [CALayer layer];
+//        layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
+//        layer.frame = CGRectMake(0, 0, 25, 25);
+//        layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
+//        [barBtn.layer addSublayer:layer];
+//        [barBtn addTarget:self action:@selector(didPopViewControllerBtn) forControlEvents:UIControlEventTouchDown];
+//        
+//        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn];
+//    
+//    } else {
+//        NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"Cycle"] ofType:@"png"];
+//        UIImage *image = [UIImage imageNamed:filePath];
+//
+//        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+//        btn.frame =CGRectMake(0, 0, 25, 25);
+//        [btn setBackgroundImage:image forState:UIControlStateNormal];
+//        [btn addTarget: self action: @selector(didSelectChatGroupBtn) forControlEvents: UIControlEventTouchUpInside];
+//        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:btn];
+//    }
     
 //    self.view.backgroundColor = [UIColor grayColor];
     self.view.backgroundColor = [UIColor whiteColor];
@@ -168,13 +171,16 @@
     [self createContentCardView];
     
     for (int index = 0; index < queryViewLst.count; ++index) {
-        UIView* tmp = [queryViewLst objectAtIndex:index];
-        tmp.tag = index + _current_index;
+        ContentCardView* tmp = [queryViewLst objectAtIndex:index];
+        tmp.queryView.tag = index + _current_index;
     }
     
     isAnimation = NO;
     
     [self createNavActionView];
+    [self createHomeContentLogo];
+    
+    [self.view bringSubviewToFront:bkView];
 }
 
 - (void)setDataelegate:(id<HomeViewControllerDataDelegate>)delegate {
@@ -186,93 +192,99 @@
     _current_index = current_index;
     
     for (int index = 0; index < queryViewLst.count; ++index) {
-        UIView* tmp = [queryViewLst objectAtIndex:index];
-        tmp.tag = index + current_index;
+        ContentCardView* tmp = [queryViewLst objectAtIndex:index];
+        tmp.queryView.tag = index + current_index;
     }
 }
 
 #pragma mark -- create navigation action view
 - (UIView*)createNavActionView {
     
-    UIView* actionView = [[UIView alloc]initWithFrame:CGRectMake(0, 20, 50, 32)];
-    actionView.backgroundColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
-    [self.view addSubview:actionView];
+//    UIView* actionView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 50, 32)];
+//    actionView.backgroundColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
+//    
+//    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:actionView.bounds byRoundingCorners:UIRectCornerTopRight | UIRectCornerBottomRight cornerRadii:CGSizeMake(16, 16)];
+//    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+//    maskLayer.frame = actionView.bounds;
+//    maskLayer.path = maskPath.CGPath;
+//    actionView.layer.mask = maskLayer;
+//    
+//    CALayer* layer = [CALayer layer];
+//    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+//    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+//    NSString* filepath = nil;// [resourceBundle pathForResource:@"Previous_simple" ofType:@"png"];
+//    if (_isPushed) {
+//        filepath = [resourceBundle pathForResource:@"Previous_simple" ofType:@"png"];
+//        layer.frame = CGRectMake(0, 0, 13, 20);
+//        UITapGestureRecognizer* tapAction = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didPopViewControllerBtn)];
+//        [actionView addGestureRecognizer:tapAction];
+//        
+//    } else {
+//        filepath = [resourceBundle pathForResource:@"Cycle" ofType:@"png"];
+//        layer.frame = CGRectMake(0, 0, 25, 25);
+//        UITapGestureRecognizer* tapAction = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didSelectChatGroupBtn)];
+//        [actionView addGestureRecognizer:tapAction];
+//    }
+//    layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
+//    layer.position = CGPointMake(actionView.frame.size.width / 2, actionView.frame.size.height / 2);
+//    [actionView.layer addSublayer:layer];
     
-    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:actionView.bounds byRoundingCorners:UIRectCornerTopRight | UIRectCornerBottomRight cornerRadii:CGSizeMake(16, 16)];
-    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
-    maskLayer.frame = actionView.bounds;
-    maskLayer.path = maskPath.CGPath;
-    actionView.layer.mask = maskLayer;
+        OBShapedButton* actionView = [[OBShapedButton alloc]init];
+        NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+        NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+        NSString* filepath = [resourceBundle pathForResource:@"Cycle-home-btn" ofType:@"png"];
+        [actionView setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
+        [actionView addTarget:self action:@selector(didSelectChatGroupBtn) forControlEvents:UIControlEventTouchUpInside];
+        actionView.tag = -99;
+        actionView.frame = CGRectMake(0, 0, 59, 44);
+        CGFloat width = [UIScreen mainScreen].bounds.size.width;
+        actionView.center = CGPointMake(width - actionView.frame.size.width / 2 + 5, 23.5 + actionView.frame.size.height / 2);
+    //    [self.view bringSubviewToFront:actionView];
+//        [self.navigationController.navigationBar addSubview:actionView];
+//        [self.navigationController.navigationBar bringSubviewToFront:actionView];
+        [bkView addSubview:actionView];
     
-    CALayer* layer = [CALayer layer];
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
-    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-    NSString* filepath = nil;// [resourceBundle pathForResource:@"Previous_simple" ofType:@"png"];
-    if (_isPushed) {
-        filepath = [resourceBundle pathForResource:@"Previous_simple" ofType:@"png"];
-        layer.frame = CGRectMake(0, 0, 13, 20);
-        UITapGestureRecognizer* tapAction = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didPopViewControllerBtn)];
-        [actionView addGestureRecognizer:tapAction];
-        
-    } else {
-        filepath = [resourceBundle pathForResource:@"Cycle" ofType:@"png"];
-        layer.frame = CGRectMake(0, 0, 25, 25);
-        UITapGestureRecognizer* tapAction = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didSelectChatGroupBtn)];
-        [actionView addGestureRecognizer:tapAction];
-    }
-    layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
-    layer.position = CGPointMake(actionView.frame.size.width / 2, actionView.frame.size.height / 2);
-    [actionView.layer addSublayer:layer];
-    
-    actionView.tag = -99;
-    [self.view bringSubviewToFront:actionView];
-    
-    return actionView;
+        return actionView;
+}
+
+#pragma mark -- dong da home content logo
+- (void)createHomeContentLogo {
+        UIImageView* imgView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 85, 70)];
+        NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+        NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+        NSString* filepath = [resourceBundle pathForResource:@"Dongda-home-logo" ofType:@"png"];
+        imgView.image = [UIImage imageNamed:filepath];
+        imgView.center = CGPointMake([UIScreen mainScreen].bounds.size.width / 2, 20 + 64 / 2);
+        imgView.tag = -98;
+        [bkView addSubview:imgView];
 }
 
 #pragma mark -- table view for card content
 - (NSArray*)createContentCardView {
   
+    self.automaticallyAdjustsScrollViewInsets = NO;
     if (queryViewLst == nil) {
         queryViewLst = [[NSMutableArray alloc]initWithCapacity:3];
     }
-    
+   
     for (int index = 0; index < 3; ++index) {
-        UITableView* tmp = [[UITableView alloc]init];
+
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ContentCardView" owner:self options:nil];
+        ContentCardView* tmp = [nib objectAtIndex:0];
+        
+        tmp.queryView.delegate = datasource;
+        tmp.queryView.dataSource = datasource;
         CGFloat width = [UIScreen mainScreen].bounds.size.width - 2 * HEADER_MARGIN_TO_SCREEN;
         CGSize size = CGSizeMake(width, [QueryHeader preferredHeight] + [QueryCell preferredHeightWithDescription:@"Any Word"]);
         tmp.frame = CGRectMake(8 + index * 4, CONTENT_START_POINT + index * (size.height + 8), size.width - index * 8, size.height);
-        [self.view addSubview:tmp];
-        [queryViewLst addObject:tmp];
-    
-        UINib* nib = [UINib nibWithNibName:@"QueryCell" bundle:[NSBundle mainBundle]];
-        [tmp registerNib:nib forCellReuseIdentifier:@"query cell"];
-        [tmp registerClass:[QueryHeader class] forHeaderFooterViewReuseIdentifier:@"query header"];
-        tmp.separatorStyle = UITableViewCellSeparatorStyleNone;
-        tmp.scrollEnabled = NO;
-    
-        tmp.delegate = datasource;
-        tmp.dataSource = datasource;
-   
-        tmp.layer.borderColor = [UIColor lightGrayColor].CGColor;
-        tmp.layer.borderWidth = 2.f;
-        tmp.layer.cornerRadius = 8.f;
-        tmp.clipsToBounds = YES;
-        
-//        tmp.layer.shadowColor = [UIColor greenColor].CGColor;//阴影颜色
-//        tmp.layer.shadowOffset = CGSizeMake(3, 3);//偏移距离
-//        tmp.layer.shadowOpacity = 0.8;//不透明度
-//        tmp.layer.shadowRadius = 10.f;//半径
-        
-        tmp.layer.shadowOffset = CGSizeMake(3, 3);
-        tmp.layer.shadowOpacity = 0.5;
-        tmp.layer.shouldRasterize = YES;
-//
-        UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:tmp.bounds cornerRadius:4.f];
-        tmp.layer.shadowPath = path.CGPath;
         
         UIPanGestureRecognizer* pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(handlePan:)];
         [tmp addGestureRecognizer:pan];
+       
+        [self.view addSubview:tmp];
+        [queryViewLst addObject:tmp];
+        
+        [tmp layoutSubviews];
     }
     
     return queryViewLst;
@@ -285,18 +297,19 @@
         [view show];
         return;
     }
-    
-    UITableView* tmp = [queryViewLst lastObject];
+  
+    ContentCardView* tmp = [queryViewLst lastObject];
     
     CGFloat width = [UIScreen mainScreen].bounds.size.width - 2 * HEADER_MARGIN_TO_SCREEN;
     CGSize size = CGSizeMake(width, [QueryHeader preferredHeight] + [QueryCell preferredHeightWithDescription:@"Any Word"]);
     tmp.frame = CGRectMake(8 + 2 * 4, CONTENT_START_POINT + 2 * (size.height + 8), size.width - 2 * 8, size.height);
-    tmp.tag = 2 + _current_index;
+    tmp.queryView.tag = 2 + _current_index;
     
     if (tmp.tag == [_delegate count]) {
         tmp.hidden = YES;
     } else {
-        [tmp reloadData];
+        [tmp layoutSubviews];
+        [tmp.queryView reloadData];
         tmp.hidden = NO;
     }
 
@@ -309,6 +322,10 @@
                                   animations:^(CGFloat progress) {
                                       for (int index = -1; index < 2; ++index) {
                                           ((UIView*)[queryViewLst objectAtIndex:index + 1]).frame = INTUInterpolateCGRect(((UIView*)[queryViewLst objectAtIndex:index + 1]).frame, CGRectMake(8 + abs(index) * 4, CONTENT_START_POINT + index * (size.height + 8) - (index == -1 ? 28 : 0), size.width - abs(index) * 8, size.height), progress);
+                                          [(UIView*)[queryViewLst objectAtIndex:index + 1] layoutSubviews];
+//                                          UIView* qv = ((ContentCardView*)[queryViewLst objectAtIndex:index + 1]).queryView;
+//                                          CALayer* shadow = ((ContentCardView*)[queryViewLst objectAtIndex:index + 1]).shadow;
+//                                          shadow.frame = INTUInterpolateCGRect(shadow.frame, CGRectMake(-4, -4, qv.frame.size.width + 8, qv.frame.size.height + 8), progress);
                                       }
                                   }
                                   completion:^(BOOL finished) {
@@ -334,13 +351,14 @@
         return;
     }
     
-    UITableView* tmp = [queryViewLst lastObject];
+    ContentCardView* tmp = [queryViewLst lastObject];
     
     CGFloat width = [UIScreen mainScreen].bounds.size.width - 2 * HEADER_MARGIN_TO_SCREEN;
     CGSize size = CGSizeMake(width, [QueryHeader preferredHeight] + [QueryCell preferredHeightWithDescription:@"Any Word"]);
     tmp.frame = CGRectMake(8 + 2 * 4, CONTENT_START_POINT + -1 * (size.height + 8), size.width - 2 * 8, size.height);
-    tmp.tag = -1 + _current_index;
-    [tmp reloadData];
+    tmp.queryView.tag = -1 + _current_index;
+    [tmp layoutSubviews];
+    [tmp.queryView reloadData];
     tmp.hidden = NO;
 
     isAnimation = YES;
@@ -355,6 +373,7 @@
                                   animations:^(CGFloat progress) {
                                       for (int index = 0; index < 3; ++index) {
                                           ((UIView*)[queryViewLst objectAtIndex:index]).frame = INTUInterpolateCGRect(((UIView*)[queryViewLst objectAtIndex:index]).frame, CGRectMake(8 + abs(index) * 4, CONTENT_START_POINT + index * (size.height + 8), size.width - abs(index) * 8, size.height), progress);
+                                          [(UIView*)[queryViewLst objectAtIndex:index] layoutSubviews];
                                       }
                                   }
                                   completion:^(BOOL finished) {
@@ -402,7 +421,8 @@
 
 - (void)layoutTableViews {
     CGFloat screen_width = [UIScreen mainScreen].bounds.size.width;
-    bkView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, screen_width, 20)];
+//    bkView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, screen_width, 20)];
+    bkView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, screen_width, 64)];
 //    bkView.backgroundColor = [UIColor lightGrayColor];
     bkView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:bkView];
