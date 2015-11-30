@@ -13,7 +13,7 @@
 #import "INTUAnimationEngine.h"
 #import "OBShapedButton.h"
 
-#define HER_MARGIN  8
+#define HER_MARGIN  10
 #define VER_MARGIN  1
 
 #define IMG_HEIGHT  226
@@ -21,6 +21,12 @@
 #define IMG_OFFSET  100
 
 #define HEADER_MARGIN_TO_SCREEN 8
+
+#define FUNC_BTN_WIDTH  30
+#define FUNC_BTN_TOP_MARGIN 8
+
+#define DESCRIPTION_LEFT_MARGIN 13
+#define DESCRIPTION_TOP_MARGIN 5
 
 @implementation QueryCell {
 //    MPMoviePlayerController* movie;
@@ -50,19 +56,9 @@
 + (CGFloat)preferredHeightWithDescription:(NSString*)description {
   
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
-    CGFloat img_height = [UIScreen mainScreen].bounds.size.height - width / 2 - IMG_OFFSET;
-//    if ([description isEqualToString:@""]) {
-////        return 340;
-//        return img_height + 60
-//    }
- 
+    CGFloat img_height = width - 2 * HER_MARGIN;
+//    CGFloat img_height = IMG_HEIGHT;
     CGFloat tmp = width / 7.5;
-//    CGFloat tmp = width / 3.75;
-//    if (width > 350) {
-//        tmp = 100;
-//    } else {
-//        tmp = 80;
-//    }
     
     return img_height
          + tmp
@@ -86,9 +82,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    CGFloat width = [UIScreen mainScreen].bounds.size.width;
-    CGFloat img_height = [UIScreen mainScreen].bounds.size.height - width / 2 - IMG_OFFSET;
-    _imgView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, width, img_height)];
+    _imgView = [[UIImageView alloc]init];
     _imgView.contentMode = UIViewContentModeScaleToFill;
     [self addSubview:_imgView];
     
@@ -96,42 +90,26 @@
     UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didClickImage:)];
     [_imgView addGestureRecognizer:tap];
 
-    _bkgView = [[UIView alloc]initWithFrame:CGRectMake(0, img_height, width, self.frame.size.height - img_height)];
+    _bkgView = [[UIView alloc]init];
     [self addSubview:_bkgView];
     
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-    NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"Plus"] ofType:@"png"];
-    
-    _funcBtn = [[UIButton alloc]initWithFrame:CGRectMake(width - 38, 8, 30, 30)];
+    NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"home-func-btn"] ofType:@"png"];
+
+    _funcBtn = [[UIButton alloc]init];
     [_funcBtn addTarget:self action:@selector(didSelectFuncBtn) forControlEvents:UIControlEventTouchUpInside];
     [_bkgView addSubview:_funcBtn];
     [_funcBtn setImage:[UIImage imageNamed:filePath] forState:UIControlStateNormal];
-    
-//    _timeLabel= [[UILabel alloc]initWithFrame:CGRectMake(16, 30, width, 30)];
-//    _timeLabel.font = [UIFont systemFontOfSize:11.f];
-//    [_bkgView addSubview:_timeLabel];
-//    
-//    UIImageView* tagIcon = [[UIImageView alloc]initWithFrame:CGRectMake(16, 39 + 30, 30, 30)];
-//    tagIcon.contentMode = UIViewContentModeCenter;
-//    NSString * filePathIcon = [resourceBundle pathForResource:[NSString stringWithFormat:@"TagSearchSelected"] ofType:@"png"];
-//    tagIcon.image = [UIImage imageNamed:filePathIcon];
-//    [_bkgView addSubview:tagIcon];
-//    
-//    _tagsLabelView = [[UILabel alloc]initWithFrame:CGRectMake(16 + 30 + 8, 34 + 30, width, 30)];
-//    _tagsLabelView.font = [UIFont systemFontOfSize:13.f];
-//    [_bkgView addSubview:_tagsLabelView];
 }
 
 - (void)layoutSubviews {
-//    [super layoutSubviews];
-    
-//    CGFloat width = [UIScreen mainScreen].bounds.size.width;
     CGFloat width = self.bounds.size.width;
-    CGFloat img_height = [UIScreen mainScreen].bounds.size.height - width / 2 - IMG_OFFSET;
+    CGFloat img_height = width;
+    
     _imgView.frame = CGRectMake(0, 0, width, img_height);
     _bkgView.frame = CGRectMake(0, img_height, width, self.frame.size.height - img_height);
-    _funcBtn.frame = CGRectMake(width - 38, 8, 30, 30);
+    _funcBtn.frame = CGRectMake(width - FUNC_BTN_WIDTH - HER_MARGIN, FUNC_BTN_TOP_MARGIN, FUNC_BTN_WIDTH, FUNC_BTN_WIDTH);
 }
 
 - (void)movieContentWithURL:(NSURL*)url withTriat:(MoviePlayTrait*)trait {
@@ -203,7 +181,7 @@
        
         if (![self.layer.sublayers containsObject:avPlayerLayer]) {
             CGFloat width = [UIScreen mainScreen].bounds.size.width - HER_MARGIN * 2;
-            CGFloat height = IMG_HEIGHT;
+            CGFloat height = width;
             avPlayerLayer.bounds = CGRectMake(0, 0, width, height);
             avPlayerLayer.frame = CGRectMake(_imgView.frame.origin.x, _imgView.frame.origin.y, width, height);
             avPlayerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
@@ -266,11 +244,12 @@
      */
     UIFont* font = [UIFont boldSystemFontOfSize:14.f];
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
-    CGSize size = [description sizeWithFont:font constrainedToSize:CGSizeMake(width - HER_MARGIN * 2 - 134, FLT_MAX)];
-    CGSize s = [@"我靠" sizeWithFont:font constrainedToSize:CGSizeMake(width - HER_MARGIN * 2 - 134, FLT_MAX)];
+    CGSize size = [description sizeWithFont:font constrainedToSize:CGSizeMake(width - DESCRIPTION_LEFT_MARGIN * 2 - 134, FLT_MAX)];
+    CGSize s = [@"我靠" sizeWithFont:font constrainedToSize:CGSizeMake(width - DESCRIPTION_LEFT_MARGIN * 2 - 134, FLT_MAX)];
+   
     
     descriptionView.font = font;
-    descriptionView.frame = CGRectMake(HER_MARGIN, HER_MARGIN, [UIScreen mainScreen].bounds.size.width - HER_MARGIN * 2 - 134, s.height);
+    descriptionView.frame = CGRectMake(DESCRIPTION_LEFT_MARGIN, DESCRIPTION_TOP_MARGIN, [UIScreen mainScreen].bounds.size.width - DESCRIPTION_LEFT_MARGIN * 2 - 134, s.height);
     if (s.height == size.height) {
         descriptionView.text = description;
     } else {
