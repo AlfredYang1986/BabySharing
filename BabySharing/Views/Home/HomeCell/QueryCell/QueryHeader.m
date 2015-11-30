@@ -8,12 +8,14 @@
 
 #import "QueryHeader.h"
 #import "TmpFileStorageModel.h"
+#import "OBShapedButton.h"
 
-#define HEADER_HEIGHT       44
+#define HEADER_HEIGHT       64
 
 #define MARGIN              8
 
-#define USER_IMG_WIDTH      32
+#define USER_IMG_MARGIN     4
+#define USER_IMG_WIDTH      56
 #define USER_IMG_HEIGHT     USER_IMG_WIDTH
 
 #define ROLE_TAG_WIDTH      40
@@ -21,30 +23,26 @@
 
 #define HEADER_MARGIN_TO_SCREEN 8
 
-@implementation QueryHeader {
-    UILabel* pushLabel;
-}
+#define ICE_HOT_ICON_WIDTH    25
+#define HOT_RIGHT_MARGIN       8
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+@implementation QueryHeader {
+//    UILabel* pushLabel;
 }
-*/
 
 @synthesize userImg = _userImg;
 @synthesize userRoleTagBtn = _userRoleTagBtn;
 @synthesize userNameLabel = _userNameLabel;
-@synthesize pushTimesLabel = _pushTimesLabel;
-@synthesize pushBtn = _pushBtn;
+//@synthesize pushTimesLabel = _pushTimesLabel;
+//@synthesize pushBtn = _pushBtn;
 @synthesize timeLabel = _timeLabel;
+@synthesize hotCountView = _hotCountView;
 
 @synthesize content = _content;
 @synthesize delegate = _delegate;
 
 + (CGFloat)preferredHeight {
-    return 44;
+    return HEADER_HEIGHT;
 }
 
 - (void)setUpSubviews {
@@ -54,7 +52,11 @@
     }
    
     if (!_userRoleTagBtn) {
-        _userRoleTagBtn = [[UIButton alloc]init];
+        _userRoleTagBtn = [[OBShapedButton alloc]init];
+        NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+        NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+        NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"home-tag"] ofType:@"png"];
+        [_userRoleTagBtn setBackgroundImage:[UIImage imageNamed:filePath] forState:UIControlStateNormal];
         [self addSubview:_userRoleTagBtn];
     }
    
@@ -64,95 +66,58 @@
     }
     
     if (!_timeLabel) {
-//        _locationLabel = [[UILabel alloc]init];
-//        [self addSubview:_locationLabel];
-        _timeLabel = [[UILabel alloc]init];
+        _timeLabel = [[UIView alloc]init];
         [self addSubview:_timeLabel];
     }
 
-    if (!_pushTimesLabel) {
-        _pushTimesLabel = [[UILabel alloc]init];
-        [self addSubview:_pushTimesLabel];
-    }
-
-    if (!_pushBtn) {
-        _pushBtn = [[UIButton alloc]init];
-        [self addSubview:_pushBtn];
+    if (!_hotCountView) {
+        _hotCountView = [[UIView alloc]init];
+        [self addSubview:_hotCountView];
     }
     
-    if (!pushLabel) {
+//    if (!_pushTimesLabel) {
+//        _pushTimesLabel = [[UILabel alloc]init];
+//        [self addSubview:_pushTimesLabel];
+//    }
+//
+//    if (!_pushBtn) {
+//        _pushBtn = [[UIButton alloc]init];
+//        [self addSubview:_pushBtn];
+//    }
+    
+//    if (!pushLabel) {
 //        pushLabel = [[UILabel alloc]init];
 //        [self addSubview:pushLabel];
-    }
-   
-//    self.backgroundView.backgroundColor = [UIColor colorWithWhite:0.4 alpha:0.3];
-    self.backgroundView.backgroundColor = [UIColor colorWithRed:0.9098 green:0.9059 blue:0.9059 alpha:0.3];
+//    }
 }
 
 - (void)layoutSubviews {
-    CGFloat offset = MARGIN * 2;
+//    CGFloat offset = USER_IMG_MARGIN;
 
     _userImg.bounds = CGRectMake(0, 0, USER_IMG_WIDTH, USER_IMG_HEIGHT);
-    _userImg.center = CGPointMake(offset + USER_IMG_WIDTH / 2, HEADER_HEIGHT / 2);
+    _userImg.center = CGPointMake(USER_IMG_MARGIN + USER_IMG_WIDTH / 2, HEADER_HEIGHT / 2);
     _userImg.layer.cornerRadius = USER_IMG_WIDTH / 2;
     _userImg.clipsToBounds = YES;
     _userImg.userInteractionEnabled = YES;
+    _userImg.layer.borderColor = [UIColor colorWithRed:0.6078 green:0.6078 blue:0.6078 alpha:1.f].CGColor;
+    _userImg.layer.borderWidth = 2.f;
     
     UITapGestureRecognizer* img_tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didScreenImgSelected)];
     [_userImg addGestureRecognizer:img_tap];
   
-    offset += USER_IMG_WIDTH + MARGIN;
-    
     UIFont* font = [UIFont systemFontOfSize:14.f];
     _userNameLabel.font = font;
-//    CGSize user_name_size = [@"渊渊渊渊渊渊" sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
-    CGSize user_name_size = [_userNameLabel.text sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
-    _userNameLabel.frame = CGRectMake(offset, _userImg.frame.origin.y - MARGIN / 2, user_name_size.width, user_name_size.height);
+    _userNameLabel.textColor = [UIColor colorWithRed:0.6078 green:0.6078 blue:0.6078 alpha:1.f];
    
     font = [UIFont systemFontOfSize:11.f];
-    _timeLabel.font = font;
-    CGSize location_size = [@"杨杨杨杨杨杨杨杨杨杨杨" sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
-    _timeLabel.frame = CGRectMake(offset + 16, _userNameLabel.frame.origin.y + user_name_size.height + MARGIN / 2, location_size.width, location_size.height);
-    
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
-    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-    NSString * filePath_time_icon = [resourceBundle pathForResource:[NSString stringWithFormat:@"Time"] ofType:@"png"];
-    CALayer* time_icon = [CALayer layer];
-    time_icon.frame = CGRectMake(-16, 0, 16, 16);
-    time_icon.contents = (id)[UIImage imageNamed:filePath_time_icon].CGImage;
-    [_timeLabel.layer addSublayer:time_icon];
    
-    offset += user_name_size.width + MARGIN * 2;
-    _userRoleTagBtn.font = [UIFont systemFontOfSize:11.f];
-    _userRoleTagBtn.frame = CGRectMake(offset, _userNameLabel.frame.origin.y + 3, ROLE_TAG_WIDTH, ROLE_TAG_HEIGHT);
-//    _userRoleTagBtn.layer.borderColor = [UIColor whiteColor].CGColor;
-//    _userRoleTagBtn.layer.borderWidth = 1.f;
-//    _userRoleTagBtn.layer.cornerRadius = MARGIN;
     _userRoleTagBtn.clipsToBounds = YES;
-    _userRoleTagBtn.backgroundColor = [UIColor orangeColor];
-    [_userRoleTagBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    
-    _pushBtn.bounds = CGRectMake(0, 0, 25, 25);
-//    CGFloat width = [UIScreen mainScreen].bounds.size.width - 2 * HEADER_MARGIN_TO_SCREEN;
-    CGFloat width = self.bounds.size.width;
-    _pushBtn.center = CGPointMake(width - MARGIN - 13, HEADER_HEIGHT / 2);
-    _pushBtn.backgroundColor = [UIColor clearColor];
-    NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"Push"] ofType:@"png"];
-    [_pushBtn setBackgroundImage:[UIImage imageNamed:filePath] forState:UIControlStateNormal];
-    
-    font = [UIFont systemFontOfSize:14.f];
-    _pushTimesLabel.font = font;
-    CGSize times_size = [@"123456789" sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
-//    _pushTimesLabel.frame = CGRectMake(width - MARGIN - _pushBtn.frame.size.width - times_size.width, _userImg.frame.origin.y, times_size.width, times_size.height);
-    _pushTimesLabel.frame = CGRectMake(width - MARGIN - _pushBtn.frame.size.width - times_size.width - MARGIN, HEADER_HEIGHT / 2 - times_size.height / 2, times_size.width, times_size.height);
-    _pushTimesLabel.textAlignment = NSTextAlignmentRight;
-    
-    font = [UIFont systemFontOfSize:11.f];
-    pushLabel.font = font;
-    CGSize push_size = [@"推荐" sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
-    pushLabel.frame = CGRectMake(width - MARGIN - _pushBtn.frame.size.width - push_size.width, _userNameLabel.frame.origin.y + user_name_size.height + MARGIN / 2, push_size.width, push_size.height);
-    pushLabel.text = @"推荐";
-    pushLabel.textAlignment = NSTextAlignmentRight;
+   
+    CGSize sz = [@"1234" sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
+    CGFloat width = self.frame.size.width;
+    CGFloat view_width = ICE_HOT_ICON_WIDTH + sz.width;
+    _hotCountView.frame = CGRectMake(0, 0, view_width, sz.height);
+    _hotCountView.center = CGPointMake(width - view_width / 2 - HOT_RIGHT_MARGIN, 16);
 }
 
 - (void)setUserPhoto:(NSString*)photo_name {
@@ -183,31 +148,127 @@
 - (void)setUserName:(NSString*)name {
     _userNameLabel.text = name;
     [_userNameLabel sizeToFit];
+   
+#define TAG_2_NAME_MARGIN   10
+#define USER_NAME_TOP_MARGIN    8
+    _userNameLabel.center = CGPointMake(_userRoleTagBtn.center.x + _userRoleTagBtn.frame.size.width / 2 + TAG_2_NAME_MARGIN + _userNameLabel.frame.size.width / 2, USER_NAME_TOP_MARGIN + _userNameLabel.frame.size.height / 2);
 }
 
+#define TIME_ICON_WIDTH 16
 - (void)setTimeText:(NSString*)time {
-    _timeLabel.text = time;
-    [_timeLabel sizeToFit];
+    UIImageView* img = [_timeLabel viewWithTag:-1];
+    if (img == nil) {
+        img = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, TIME_ICON_WIDTH, TIME_ICON_WIDTH)];
+        NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+        NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+        NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"home-time-icon"] ofType:@"png"];
+        img.image = [UIImage imageNamed:filePath];
+        img.tag = -1;
+        [_timeLabel addSubview:img];
+    }
+    
+    UIFont* font = [UIFont systemFontOfSize:10.f];
+    UILabel* label = [_timeLabel viewWithTag:-2];
+    if (label == nil) {
+        label = [[UILabel alloc]init];
+        label.textColor = [UIColor colorWithRed:0.6078 green:0.6078 blue:0.6078 alpha:1.f];
+        label.font = font;
+        label.tag = -2;
+        [_timeLabel addSubview:label];
+    }
+    
+    label.text = time;
+    CGSize sz = [label.text sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
+    label.frame = CGRectMake(TIME_ICON_WIDTH, 0, sz.width, MAX(TIME_ICON_WIDTH, sz.height));
+    
+    _timeLabel.frame = CGRectMake(68, 38, TIME_ICON_WIDTH + label.frame.size.width, label.frame.size.height);
 }
 
 - (void)setTime:(NSDate*)date {
+    
+    UIImageView* img = [_timeLabel viewWithTag:-1];
+    if (img == nil) {
+        img = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, TIME_ICON_WIDTH, TIME_ICON_WIDTH)];
+        NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+        NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+        NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"home-time-icon"] ofType:@"png"];
+        img.image = [UIImage imageNamed:filePath];
+        img.tag = -1;
+        [_timeLabel addSubview:img];
+    }
+    
+    UIFont* font = [UIFont systemFontOfSize:10.f];
+    UILabel* label = [_timeLabel viewWithTag:-2];
+    if (label == nil) {
+        label = [[UILabel alloc]init];
+        label.textColor = [UIColor colorWithRed:0.6078 green:0.6078 blue:0.6078 alpha:1.f];
+        label.font = font;
+        label.tag = -2;
+        [_timeLabel addSubview:label];
+    }
+    
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.formatterBehavior = NSDateFormatterBehavior10_4;
     formatter.dateStyle = NSDateFormatterShortStyle;
     formatter.timeStyle = NSDateFormatterShortStyle;
-    NSString *result = [formatter stringForObjectValue:date];
-    _timeLabel.text = result;
-    [_timeLabel sizeToFit];
+
+    label.text = [formatter stringForObjectValue:date];
+    CGSize sz = [label.text sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
+    label.frame = CGRectMake(TIME_ICON_WIDTH, 0, sz.width, MAX(TIME_ICON_WIDTH, sz.height));
+    
+    _timeLabel.frame = CGRectMake(68, 38, TIME_ICON_WIDTH + label.frame.size.width, label.frame.size.height);
 }
 
 - (void)setRoleTag:(NSString *)role_tag {
-    [_userRoleTagBtn setTitle:role_tag forState:UIControlStateNormal];
-    [_userRoleTagBtn sizeToFit];
+    UILabel* label = [_userRoleTagBtn viewWithTag:-1];
+    if (label == nil) {
+        label = [[UILabel alloc]init];
+        label.font = [UIFont systemFontOfSize:14.f];
+        label.textColor = [UIColor whiteColor];
+        label.tag = -1;
+        [_userRoleTagBtn addSubview:label];
+    }
+    
+#define ROLE_TAG_MARGIN 2
+    
+    label.text = role_tag;
+    [label sizeToFit];
+    label.center = CGPointMake(10 + label.frame.size.width / 2, ROLE_TAG_MARGIN + label.frame.size.height / 2);
+    
+    _userRoleTagBtn.frame = CGRectMake(44, 8, label.frame.size.width + 10 + ROLE_TAG_MARGIN, label.frame.size.height + 2 * ROLE_TAG_MARGIN);
 }
 
 - (void)setPushTimes:(NSString*)times {
-    _pushTimesLabel.text = times;
-    [_pushTimesLabel sizeToFit];
+
+    UIImageView* img = [_hotCountView viewWithTag:-1];
+    if (img == nil) {
+        img = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, ICE_HOT_ICON_WIDTH, ICE_HOT_ICON_WIDTH)];
+        NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+        NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+        NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"home-time-icon"] ofType:@"png"];
+        img.image = [UIImage imageNamed:filePath];
+        img.tag = -1;
+        [_hotCountView addSubview:img];
+    }
+   
+    UIFont* font = [UIFont systemFontOfSize:14.f];
+    UILabel* label = [_hotCountView viewWithTag:-2];
+    if (label == nil) {
+        label = [[UILabel alloc]init];
+        label.textColor = [UIColor colorWithRed:0.6078 green:0.6078 blue:0.6078 alpha:1.f];
+        label.font = font;
+        label.tag = -2;
+        [_hotCountView addSubview:label];
+    }
+  
+    label.text = times;
+    CGSize sz = [label.text sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
+    label.frame = CGRectMake(ICE_HOT_ICON_WIDTH, 0, sz.width, MAX(ICE_HOT_ICON_WIDTH, sz.height));
+  
+    CGFloat width = self.frame.size.width;
+    CGFloat view_width = ICE_HOT_ICON_WIDTH + label.frame.size.width;
+    _hotCountView.frame = CGRectMake(0, 0, view_width, label.frame.size.height);
+    _hotCountView.center = CGPointMake(width - view_width / 2 - HOT_RIGHT_MARGIN, 16);
 }
 
 - (void)didScreenImgSelected {

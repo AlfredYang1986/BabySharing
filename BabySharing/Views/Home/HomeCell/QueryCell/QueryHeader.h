@@ -9,15 +9,20 @@
 #import <UIKit/UIKit.h>
 #import "QueryCellDelegate.h"
 
+@class OBShapedButton;
+
 @interface QueryHeader : UITableViewHeaderFooterView
 
 @property (nonatomic, strong) UIImageView* userImg;
-@property (nonatomic, strong) UIButton* userRoleTagBtn;
+@property (nonatomic, strong) OBShapedButton* userRoleTagBtn;
 @property (nonatomic, strong) UILabel* userNameLabel;
-@property (nonatomic, strong) UILabel* pushTimesLabel;
-@property (nonatomic, strong) UIButton* pushBtn;
 
-@property (nonatomic, strong) UILabel* timeLabel;
+//@property (nonatomic, strong) UILabel* pushTimesLabel;
+//@property (nonatomic, strong) UIButton* pushBtn;
+
+@property (nonatomic, strong) UIView* timeLabel;
+
+@property (nonatomic, strong) UIView* hotCountView;
 
 @property (weak, nonatomic) id<QueryCellActionProtocol> delegate;
 @property (weak, nonatomic) id content;

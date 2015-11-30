@@ -79,10 +79,10 @@
     [header setUpSubviews];
     QueryContent* tmp = [_delegate queryItemAtIndex:tableView.tag];
     [header setUserPhoto:tmp.owner_photo];
-    [header setUserName:tmp.owner_name];
     //        [header setTimeText:@"金融/旅行/90后"];
     [header setTime:tmp.content_post_date];
-    [header setRoleTag:@"role tag"];
+    [header setRoleTag:@"创业少妇"];
+    [header setUserName:tmp.owner_name];
     [header setPushTimes:[NSString stringWithFormat:@"%d", tmp.likes_count.intValue]];
     
     header.delegate = _controller;
