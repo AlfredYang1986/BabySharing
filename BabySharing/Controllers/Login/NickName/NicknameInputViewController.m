@@ -21,7 +21,7 @@
 #import "ModelDefines.h"
 #import "RemoteInstance.h"
 
-#define NEXT_BTN_MARGIN_BOTTOM  50
+#define NEXT_BTN_MARGIN_BOTTOM  80
 
 @interface NicknameInputViewController () </*SearchUserTagControllerDelegate,*/ NickNameInputViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, SearchActionsProtocol>
 @property (strong, nonatomic) IBOutlet UIButton *loginImgBtn;
@@ -65,21 +65,24 @@
     _loginImgBtn.layer.cornerRadius = _loginImgBtn.frame.size.width / 2;
     _loginImgBtn.clipsToBounds = YES;
     _loginImgBtn.backgroundColor = [UIColor clearColor];
-    _loginImgBtn.center = CGPointMake(width / 2, 97 + _loginImgBtn.frame.size.height / 2);
+    _loginImgBtn.center = CGPointMake(width / 2, 60 + _loginImgBtn.frame.size.height / 2);
     [self.view addSubview:_loginImgBtn];
     [self.view bringSubviewToFront:_loginImgBtn];
     
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+   
     if (_isSNSLogIn) {
         _loginImgBtn.hidden = YES;
     } else {
          _loginImgBtn.clipsToBounds = YES;
         
-        NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
-        NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-        UIImage* img = [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Plus_Big"] ofType:@"png"]];
+        UIImage* img = [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"login-add-screen-photo"] ofType:@"png"]];
         [_loginImgBtn setBackgroundImage:img forState:UIControlStateNormal];
         
         [_loginImgBtn addTarget:self action:@selector(didSelectImgBtn) forControlEvents:UIControlEventTouchUpInside];
+
+        inputView.center = CGPointMake(input_width, 50 + inputView.frame.size.height / 2 + _loginImgBtn.frame.size.height / 2 + _loginImgBtn.center.y);
     }
     
     _nextBtn = [[UIButton alloc]init];
@@ -92,6 +95,13 @@
     [self.view addSubview:_nextBtn];
     [self.view bringSubviewToFront:_nextBtn];
     [_nextBtn addTarget:self action:@selector(didConfirm) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIImageView* imagelogo = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 67, 25)];
+    imagelogo.image = [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"login-next-start-icon"] ofType:@"png"]];
+    imagelogo.center = CGPointMake(width / 2, _nextBtn.center.y + _nextBtn.frame.size.height / 2 + 28);
+    [self.view addSubview:imagelogo];
+    [self.view bringSubviewToFront:imagelogo];
+    
     
 //    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
 //    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];

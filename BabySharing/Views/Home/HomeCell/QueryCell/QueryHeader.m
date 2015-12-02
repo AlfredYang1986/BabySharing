@@ -23,7 +23,8 @@
 
 #define HEADER_MARGIN_TO_SCREEN 8
 
-#define ICE_HOT_ICON_WIDTH    25
+#define ICE_HOT_ICON_WIDTH    15
+#define ICE_HOT_ICON_HEIGHT   25
 #define HOT_RIGHT_MARGIN       8
 
 @implementation QueryHeader {
@@ -74,21 +75,6 @@
         _hotCountView = [[UIView alloc]init];
         [self addSubview:_hotCountView];
     }
-    
-//    if (!_pushTimesLabel) {
-//        _pushTimesLabel = [[UILabel alloc]init];
-//        [self addSubview:_pushTimesLabel];
-//    }
-//
-//    if (!_pushBtn) {
-//        _pushBtn = [[UIButton alloc]init];
-//        [self addSubview:_pushBtn];
-//    }
-    
-//    if (!pushLabel) {
-//        pushLabel = [[UILabel alloc]init];
-//        [self addSubview:pushLabel];
-//    }
 }
 
 - (void)layoutSubviews {
@@ -117,6 +103,7 @@
     CGFloat width = self.frame.size.width;
     CGFloat view_width = ICE_HOT_ICON_WIDTH + sz.width;
     _hotCountView.frame = CGRectMake(0, 0, view_width, sz.height);
+//    _hotCountView.center = CGPointMake(width - view_width / 2 - HOT_RIGHT_MARGIN, HEADER_HEIGHT / 2);
     _hotCountView.center = CGPointMake(width - view_width / 2 - HOT_RIGHT_MARGIN, 16);
 }
 
@@ -242,10 +229,10 @@
 
     UIImageView* img = [_hotCountView viewWithTag:-1];
     if (img == nil) {
-        img = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, ICE_HOT_ICON_WIDTH, ICE_HOT_ICON_WIDTH)];
+        img = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, ICE_HOT_ICON_WIDTH, ICE_HOT_ICON_HEIGHT)];
         NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
         NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-        NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"home-time-icon"] ofType:@"png"];
+        NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"home-hot-icon"] ofType:@"png"];
         img.image = [UIImage imageNamed:filePath];
         img.tag = -1;
         [_hotCountView addSubview:img];
@@ -258,16 +245,18 @@
         label.textColor = [UIColor colorWithRed:0.6078 green:0.6078 blue:0.6078 alpha:1.f];
         label.font = font;
         label.tag = -2;
+        label.textAlignment = NSTextAlignmentCenter;
         [_hotCountView addSubview:label];
     }
   
     label.text = times;
     CGSize sz = [label.text sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
-    label.frame = CGRectMake(ICE_HOT_ICON_WIDTH, 0, sz.width, MAX(ICE_HOT_ICON_WIDTH, sz.height));
+    label.frame = CGRectMake(ICE_HOT_ICON_WIDTH, 0, sz.width, MAX(ICE_HOT_ICON_HEIGHT, sz.height));
   
     CGFloat width = self.frame.size.width;
     CGFloat view_width = ICE_HOT_ICON_WIDTH + label.frame.size.width;
     _hotCountView.frame = CGRectMake(0, 0, view_width, label.frame.size.height);
+//    _hotCountView.center = CGPointMake(width - view_width / 2 - HOT_RIGHT_MARGIN, HEADER_HEIGHT / 2);
     _hotCountView.center = CGPointMake(width - view_width / 2 - HOT_RIGHT_MARGIN, 16);
 }
 

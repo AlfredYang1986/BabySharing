@@ -13,7 +13,8 @@
 @interface AlreadLogedViewController ()
 @property (strong, nonatomic) IBOutlet UIButton *loginImgBtn;
 @property (strong, nonatomic) IBOutlet UILabel *nickNameLabel;
-@property (strong, nonatomic) IBOutlet UILabel *currentTagLabel;
+//@property (strong, nonatomic) IBOutlet UILabel *currentTagLabel;
+@property (strong, nonatomic) IBOutlet UIView *currentTagLabel;
 @property (strong, nonatomic) IBOutlet UIButton *yesBtn;
 @property (strong, nonatomic) IBOutlet UIButton *noBtn;
 @end
@@ -40,13 +41,13 @@
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-    UIImage* img = [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"User_Big"] ofType:@"png"]];
+    UIImage* img = [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"login-add-screen-photo"] ofType:@"png"]];
     _loginImgBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 100, 100)];
     [_loginImgBtn setBackgroundImage:img forState:UIControlStateNormal];
     _loginImgBtn.layer.cornerRadius = _loginImgBtn.frame.size.width / 2;
     _loginImgBtn.clipsToBounds = YES;
     _loginImgBtn.backgroundColor = [UIColor clearColor];
-    _loginImgBtn.center = CGPointMake(width / 2, 97 + _loginImgBtn.frame.size.height / 2);
+    _loginImgBtn.center = CGPointMake(width / 2, 109 + _loginImgBtn.frame.size.height / 2);
     [self.view addSubview:_loginImgBtn];
     [self.view bringSubviewToFront:_loginImgBtn];
     
@@ -69,7 +70,8 @@
     [_nickNameLabel sizeToFit];
     _nickNameLabel.textColor = [UIColor whiteColor];
     _nickNameLabel.font = [UIFont systemFontOfSize:17.f];
-    _nickNameLabel.center = CGPointMake(width / 2, _loginImgBtn.center.y + _loginImgBtn.frame.size.height / 2 + 50);
+//    _nickNameLabel.center = CGPointMake(width / 2, _loginImgBtn.center.y + _loginImgBtn.frame.size.height / 2 + 50);
+    _nickNameLabel.center = CGPointMake(width / 2, _loginImgBtn.center.y + _loginImgBtn.frame.size.height / 2 + 30);
     [self.view addSubview:_nickNameLabel];
     [self.view bringSubviewToFront:_nickNameLabel];
     
@@ -81,16 +83,26 @@
     if (!tag || [tag isEqualToString:@""]) {
         tag = @"请添加一个标签";
     }
-    
-    _currentTagLabel = [[UILabel alloc]init];
-    _currentTagLabel.text = tag;
-    _currentTagLabel.textColor = [UIColor yellowColor];
+   
+    UIImageView* icon = [[UIImageView alloc]initWithFrame:CGRectMake(0, -3, 25, 25)];
+    icon.image = [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"login-role-tag-icon"] ofType:@"png"]];
+   
+    UILabel* role_dis = [[UILabel alloc]init];
+    role_dis.text = tag;
+    role_dis.textColor = [UIColor yellowColor];
+    role_dis.backgroundColor = [UIColor clearColor];
+    role_dis.font = [UIFont systemFontOfSize:15.f];
+    [role_dis sizeToFit];
+    role_dis.frame = CGRectMake(25, 0, role_dis.frame.size.width, role_dis.frame.size.height);
+//    role_dis.textAlignment = NSTextAlignmentCenter;
+
+    _currentTagLabel = [[UIView alloc]init];
 //    _currentTagLabel.backgroundColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
-    _currentTagLabel.backgroundColor = [UIColor clearColor];
-    [_currentTagLabel sizeToFit];
-    _currentTagLabel.font = [UIFont systemFontOfSize:15.f];
-    _currentTagLabel.textAlignment = NSTextAlignmentCenter;
+    _currentTagLabel.frame = CGRectMake(0, 0, role_dis.frame.size.width + 25, role_dis.frame.size.height);
+    [_currentTagLabel addSubview:icon];
+    [_currentTagLabel addSubview:role_dis];
     _currentTagLabel.center = CGPointMake(width / 2, _nickNameLabel.center.y + _nickNameLabel.frame.size.height / 2 + 20);
+    
     [self.view addSubview:_currentTagLabel];
     [self.view bringSubviewToFront:_currentTagLabel];
    
@@ -102,7 +114,7 @@
     qa.font = [UIFont boldSystemFontOfSize:20.f];
     [qa sizeToFit];
     qa.textColor = [UIColor whiteColor];
-    qa.center = CGPointMake(width / 2, _currentTagLabel.center.y + _currentTagLabel.frame.size.height / 2 + 100);
+    qa.center = CGPointMake(width / 2, _currentTagLabel.center.y + _currentTagLabel.frame.size.height / 2 + 62);
     [self.view addSubview:qa];
     [self.view bringSubviewToFront:qa];
     
@@ -117,7 +129,7 @@
     _yesBtn.backgroundColor = [UIColor clearColor];
     [_yesBtn setTitleColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f] forState:UIControlStateNormal];
     [_yesBtn setTitle:@"是" forState:UIControlStateNormal];
-    _yesBtn.center = CGPointMake(width / 2 + 60, qa.center.y + qa.frame.size.height / 2 + 50);
+    _yesBtn.center = CGPointMake(width / 2 + 60, qa.center.y + qa.frame.size.height / 2 + 32);
     [self.view addSubview:_yesBtn];
     [self.view bringSubviewToFront:_yesBtn];
     [_yesBtn addTarget:self action:@selector(didSelectMeButton) forControlEvents:UIControlEventTouchUpInside];
@@ -130,7 +142,7 @@
     _noBtn.backgroundColor = [UIColor clearColor];
     [_noBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_noBtn setTitle:@"否" forState:UIControlStateNormal];
-    _noBtn.center = CGPointMake(width / 2 - 60, qa.center.y + qa.frame.size.height / 2 + 50);
+    _noBtn.center = CGPointMake(width / 2 - 60, qa.center.y + qa.frame.size.height / 2 + 32);
     [self.view addSubview:_noBtn];
     [self.view bringSubviewToFront:_noBtn];
     [_noBtn addTarget:self action:@selector(didSelectCreateNewAccount) forControlEvents:UIControlEventTouchUpInside];
@@ -156,12 +168,12 @@
 }
 
 - (void)viewDidLayoutSubviews {
-    CGPoint ori = _currentTagLabel.center;
+//    CGPoint ori = _currentTagLabel.center;
     
-    _currentTagLabel.bounds = CGRectMake(0, 0, _currentTagLabel.bounds.size.width + 16, _currentTagLabel.bounds.size.height + 8);
-    _currentTagLabel.center = ori;
+//    _currentTagLabel.bounds = CGRectMake(0, 0, _currentTagLabel.bounds.size.width + 16, _currentTagLabel.bounds.size.height + 8);
+//    _currentTagLabel.center = ori;
     
-    _currentTagLabel.layer.cornerRadius = _currentTagLabel.bounds.size.height / 2;
+//    _currentTagLabel.layer.cornerRadius = _currentTagLabel.bounds.size.height / 2;
     
 //    CGFloat offset_y = _yesBtn.center.y;
 //    CGFloat offset_x = [UIScreen mainScreen].bounds.size.width / 2;

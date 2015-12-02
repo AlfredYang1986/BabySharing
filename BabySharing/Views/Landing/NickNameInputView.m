@@ -54,8 +54,8 @@
 - (void)setUpViews {
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-    UIImage* img_0 = [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"nickname-icon"] ofType:@"png"]];
-    UIImage* img_1 = [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"role-tag-face"] ofType:@"png"]];
+    UIImage* img_0 = [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"login-nickname-icon"] ofType:@"png"]];
+    UIImage* img_1 = [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"login-role-tag-icon"] ofType:@"png"]];
     UIImage* img_2 = [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"gender-mom"] ofType:@"png"]];
     UIImage* img_3 = [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"gender-dad"] ofType:@"png"]];
    
@@ -87,7 +87,7 @@
         dad.center = CGPointMake(sz.width / 4 * 3, sz.height / 2);
         [self addSubview:dad];
         
-        CGRect rc = CGRectMake(0, 0, sz.width, 44);
+        CGRect rc = CGRectMake(0, 0, sz.width, 32);
         UIView* role_tag = [self inputBorderLineWithTitle:@"添加你的角色描述" andImage:img_1 inRect:rc];
         role_tag.center = CGPointMake(sz.width / 2, mom.center.y + mom.frame.size.height / 2 + MARGIN + role_tag.frame.size.height / 2);
         [self addSubview:role_tag];
@@ -142,7 +142,7 @@
     [tag_text_btn setTitle:title forState:UIControlStateNormal];
     [tag_text_btn setImage:icon forState:UIControlStateNormal];
     [tag_text_btn addTarget:self action:@selector(didSelectRoleTagBtn) forControlEvents:UIControlEventTouchUpInside];
-    tag_text_btn.titleLabel.font = [UIFont systemFontOfSize:14.f];
+    tag_text_btn.titleLabel.font = [UIFont systemFontOfSize:12.f];
     
     return tag_text_btn;
 }

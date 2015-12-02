@@ -60,7 +60,8 @@
     CALayer * layer = [CALayer layer];
     layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
     layer.frame = CGRectMake(0, 0, 13, 20);
-    layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
+//    layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
+    layer.position = CGPointMake(0, barBtn.frame.size.height / 2);
     [barBtn.layer addSublayer:layer];
     [barBtn addTarget:self action:@selector(didPopViewController) forControlEvents:UIControlEventTouchDown];
     

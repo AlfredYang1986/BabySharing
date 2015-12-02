@@ -33,7 +33,7 @@
 
 #define HEADER_MARGIN_TO_SCREEN 8
 #define CONTENT_START_POINT     74
-#define PAN_HANDLE_CHECK_POINT  50
+#define PAN_HANDLE_CHECK_POINT  10
 
 #define VIEW_BOUNTDS        CGFloat screen_width = [UIScreen mainScreen].bounds.size.width; \
                             CGFloat screen_height = [UIScreen mainScreen].bounds.size.height; \
@@ -92,31 +92,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
-//    UINib* nib = [UINib nibWithNibName:@"QueryCell" bundle:[NSBundle mainBundle]];
-//    [_queryView registerNib:nib forCellReuseIdentifier:@"query cell"];
-//    [_queryView registerClass:[QueryHeader class] forHeaderFooterViewReuseIdentifier:@"query header"];
-//    _queryView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
     AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     _current_user_id = delegate.lm.current_user_id;
     _current_auth_token = delegate.lm.current_auth_token;
     _qm = delegate.qm;
     
     _isLoading = NO;
-    
-    /**
-     * set title view
-     */
-//    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
-//    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-//    UILabel* title = [[UILabel alloc]init];
-//    title.textColor = [UIColor whiteColor];
-//    if (_nav_title == nil || [_nav_title isEqualToString:@""]) {
-//        _nav_title = @"咚嗒";
-//    }
-//    title.text = _nav_title;
-//    [title sizeToFit];
-//    self.navigationItem.titleView = title;
     
     trait = [[MoviePlayTrait alloc]init];
 
@@ -131,32 +112,6 @@
     tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(back2TopHandler:)];
     [tmp addGestureRecognizer:tap];
     
-//    if (_isPushed) {
-//        UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
-//        NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
-//        NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-//        NSString* filepath = [resourceBundle pathForResource:@"Previous_simple" ofType:@"png"];
-//        CALayer * layer = [CALayer layer];
-//        layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
-//        layer.frame = CGRectMake(0, 0, 25, 25);
-//        layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
-//        [barBtn.layer addSublayer:layer];
-//        [barBtn addTarget:self action:@selector(didPopViewControllerBtn) forControlEvents:UIControlEventTouchDown];
-//        
-//        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn];
-//    
-//    } else {
-//        NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"Cycle"] ofType:@"png"];
-//        UIImage *image = [UIImage imageNamed:filePath];
-//
-//        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-//        btn.frame =CGRectMake(0, 0, 25, 25);
-//        [btn setBackgroundImage:image forState:UIControlStateNormal];
-//        [btn addTarget: self action: @selector(didSelectChatGroupBtn) forControlEvents: UIControlEventTouchUpInside];
-//        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:btn];
-//    }
-    
-//    self.view.backgroundColor = [UIColor grayColor];
     self.view.backgroundColor = [UIColor whiteColor];
     
     datasource = [[HomeViewTableCellDelegate alloc]init];
@@ -164,8 +119,6 @@
     datasource.controller = self;
     datasource.delegate = _delegate;
     datasource.current_index = _current_index;
-//    _queryView.dataSource = datasource;
-//    _queryView.delegate = datasource;
     
     [self.navigationController setNavigationBarHidden:YES];
     [self createContentCardView];
@@ -200,63 +153,31 @@
 #pragma mark -- create navigation action view
 - (UIView*)createNavActionView {
     
-//    UIView* actionView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 50, 32)];
-//    actionView.backgroundColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
-//    
-//    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:actionView.bounds byRoundingCorners:UIRectCornerTopRight | UIRectCornerBottomRight cornerRadii:CGSizeMake(16, 16)];
-//    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
-//    maskLayer.frame = actionView.bounds;
-//    maskLayer.path = maskPath.CGPath;
-//    actionView.layer.mask = maskLayer;
-//    
-//    CALayer* layer = [CALayer layer];
-//    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
-//    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-//    NSString* filepath = nil;// [resourceBundle pathForResource:@"Previous_simple" ofType:@"png"];
-//    if (_isPushed) {
-//        filepath = [resourceBundle pathForResource:@"Previous_simple" ofType:@"png"];
-//        layer.frame = CGRectMake(0, 0, 13, 20);
-//        UITapGestureRecognizer* tapAction = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didPopViewControllerBtn)];
-//        [actionView addGestureRecognizer:tapAction];
-//        
-//    } else {
-//        filepath = [resourceBundle pathForResource:@"Cycle" ofType:@"png"];
-//        layer.frame = CGRectMake(0, 0, 25, 25);
-//        UITapGestureRecognizer* tapAction = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didSelectChatGroupBtn)];
-//        [actionView addGestureRecognizer:tapAction];
-//    }
-//    layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
-//    layer.position = CGPointMake(actionView.frame.size.width / 2, actionView.frame.size.height / 2);
-//    [actionView.layer addSublayer:layer];
-    
-        OBShapedButton* actionView = [[OBShapedButton alloc]init];
-        NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
-        NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-        NSString* filepath = [resourceBundle pathForResource:@"Cycle-home-btn" ofType:@"png"];
-        [actionView setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
-        [actionView addTarget:self action:@selector(didSelectChatGroupBtn) forControlEvents:UIControlEventTouchUpInside];
-        actionView.tag = -99;
-        actionView.frame = CGRectMake(0, 0, 59, 44);
-        CGFloat width = [UIScreen mainScreen].bounds.size.width;
-        actionView.center = CGPointMake(width - actionView.frame.size.width / 2 + 5, 23.5 + actionView.frame.size.height / 2);
-    //    [self.view bringSubviewToFront:actionView];
-//        [self.navigationController.navigationBar addSubview:actionView];
-//        [self.navigationController.navigationBar bringSubviewToFront:actionView];
-        [bkView addSubview:actionView];
-    
-        return actionView;
+    OBShapedButton* actionView = [[OBShapedButton alloc]init];
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+    NSString* filepath = [resourceBundle pathForResource:@"Cycle-home-btn" ofType:@"png"];
+    [actionView setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
+    [actionView addTarget:self action:@selector(didSelectChatGroupBtn) forControlEvents:UIControlEventTouchUpInside];
+    actionView.tag = -99;
+    actionView.frame = CGRectMake(0, 0, 59, 44);
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    actionView.center = CGPointMake(width - actionView.frame.size.width / 2 + 5, 23.5 + actionView.frame.size.height / 2);
+    [bkView addSubview:actionView];
+
+    return actionView;
 }
 
 #pragma mark -- dong da home content logo
 - (void)createHomeContentLogo {
-        UIImageView* imgView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 85, 70)];
-        NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
-        NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-        NSString* filepath = [resourceBundle pathForResource:@"Dongda-home-logo" ofType:@"png"];
-        imgView.image = [UIImage imageNamed:filepath];
-        imgView.center = CGPointMake([UIScreen mainScreen].bounds.size.width / 2, 20 + 64 / 2);
-        imgView.tag = -98;
-        [bkView addSubview:imgView];
+    UIImageView* imgView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 85, 70)];
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+    NSString* filepath = [resourceBundle pathForResource:@"Dongda-home-logo" ofType:@"png"];
+    imgView.image = [UIImage imageNamed:filepath];
+    imgView.center = CGPointMake([UIScreen mainScreen].bounds.size.width / 2, 20 + 64 / 2);
+    imgView.tag = -98;
+    [bkView addSubview:imgView];
 }
 
 #pragma mark -- table view for card content
@@ -306,15 +227,15 @@
     tmp.queryView.tag = 2 + _current_index;
     
     if (tmp.tag == [_delegate count]) {
-        tmp.hidden = YES;
+//        tmp.hidden = YES;
     } else {
         [tmp layoutSubviews];
         [tmp.queryView reloadData];
-        tmp.hidden = NO;
+//        tmp.hidden = NO;
     }
 
     isAnimation = YES;
-    static const CGFloat kAnimationDuration = 0.80f; // in seconds
+    static const CGFloat kAnimationDuration = 0.50f; // in seconds
     [INTUAnimationEngine animateWithDuration:kAnimationDuration
                                        delay:0.0
                                       easing:INTUEaseInOutQuadratic
@@ -338,7 +259,7 @@
                                       [queryViewLst removeObject:head];
                                       [queryViewLst addObject:head];
                                       _current_index += 1;
-                                      head.hidden = YES;
+//                                      head.hidden = YES;
                                       isAnimation = NO;
                                   }];
     
@@ -359,13 +280,13 @@
     tmp.queryView.tag = -1 + _current_index;
     [tmp layoutSubviews];
     [tmp.queryView reloadData];
-    tmp.hidden = NO;
+//    tmp.hidden = NO;
 
     isAnimation = YES;
     [queryViewLst removeObject:tmp];
     [queryViewLst insertObject:tmp atIndex:0];
     
-    static const CGFloat kAnimationDuration = 0.80f; // in seconds
+    static const CGFloat kAnimationDuration = 0.50f; // in seconds
     [INTUAnimationEngine animateWithDuration:kAnimationDuration
                                        delay:0.0
                                       easing:INTUEaseInOutQuadratic
@@ -384,7 +305,7 @@
                                       
                                       _current_index -= 1;
                                       UIView* tmp = [queryViewLst lastObject];
-                                      tmp.hidden = YES;
+//                                      tmp.hidden = YES;
                                       isAnimation = NO;
                                   }];
 }
