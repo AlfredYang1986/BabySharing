@@ -209,8 +209,6 @@
 		EEB8122C1B7AECF800BC0774 /* CycleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB8122B1B7AECF800BC0774 /* CycleViewController.m */; };
 		EEB812311B7AF2ED00BC0774 /* DetailInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB8122E1B7AF2ED00BC0774 /* DetailInfo.m */; };
 		EEB812321B7AF2ED00BC0774 /* UserKids.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB812301B7AF2ED00BC0774 /* UserKids.m */; };
-		EEBBCF171C09B9AA000B2987 /* ContentCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEBBCF161C09B9AA000B2987 /* ContentCardView.xib */; };
-		EEBBCF1A1C09BB0F000B2987 /* ContentCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEBBCF191C09BB0F000B2987 /* ContentCardView.m */; };
 		EEBD11231C0031540065BAE4 /* SearchAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEBD11221C0031540065BAE4 /* SearchAddViewController.m */; };
 		EEBD11261C00317F0065BAE4 /* SearchAddRoleTagDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EEBD11251C00317F0065BAE4 /* SearchAddRoleTagDelegate.m */; };
 		EEBFFC1D1B916A0F005AAE36 /* PersonalSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EEBFFC1B1B916A0F005AAE36 /* PersonalSettingCell.m */; };
@@ -259,6 +257,8 @@
 		EEE94E2B1B74BE910011321A /* PersonalCentreOthersDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE94E2A1B74BE910011321A /* PersonalCentreOthersDelegate.m */; };
 		EEE94E311B74BF870011321A /* ProfileOverView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE94E2F1B74BF870011321A /* ProfileOverView.m */; };
 		EEE94E371B74C0810011321A /* ProfileOthersOverView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE94E361B74C0810011321A /* ProfileOthersOverView.m */; };
+		EEF29BC31C0ED2C2004B9511 /* ContentCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEF29BC11C0ED2C2004B9511 /* ContentCardView.m */; };
+		EEF29BC41C0ED2C2004B9511 /* ContentCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEF29BC21C0ED2C2004B9511 /* ContentCardView.xib */; };
 		EEF538F51B525F7F009C8CB9 /* PostPreViewEffectController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEF538F41B525F7F009C8CB9 /* PostPreViewEffectController.m */; };
 		EEFA44FE1B58F7D4007DF294 /* NickNameInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEFA44FD1B58F7D4007DF294 /* NickNameInputView.m */; };
 		EEFCDEDF1BCB936500A53CAB /* ChatEmojiView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEFCDED01BCB936500A53CAB /* ChatEmojiView.m */; };
@@ -676,9 +676,6 @@
 		EEB8122E1B7AF2ED00BC0774 /* DetailInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailInfo.m; sourceTree = "<group>"; };
 		EEB8122F1B7AF2ED00BC0774 /* UserKids.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserKids.h; sourceTree = "<group>"; };
 		EEB812301B7AF2ED00BC0774 /* UserKids.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserKids.m; sourceTree = "<group>"; };
-		EEBBCF161C09B9AA000B2987 /* ContentCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContentCardView.xib; sourceTree = "<group>"; };
-		EEBBCF181C09BB0F000B2987 /* ContentCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentCardView.h; sourceTree = "<group>"; };
-		EEBBCF191C09BB0F000B2987 /* ContentCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentCardView.m; sourceTree = "<group>"; };
 		EEBD11211C0031540065BAE4 /* SearchAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchAddViewController.h; sourceTree = "<group>"; };
 		EEBD11221C0031540065BAE4 /* SearchAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchAddViewController.m; sourceTree = "<group>"; };
 		EEBD11241C00317F0065BAE4 /* SearchAddRoleTagDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchAddRoleTagDelegate.h; sourceTree = "<group>"; };
@@ -771,6 +768,9 @@
 		EEE94E381B74C3840011321A /* PersonalCenterProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonalCenterProtocol.h; sourceTree = "<group>"; };
 		EEEEA0C91B7B456C001D949D /* MyCycleCellHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCycleCellHeader.h; sourceTree = "<group>"; };
 		EEEEA0CA1B7B456C001D949D /* MyCycleCellHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCycleCellHeader.m; sourceTree = "<group>"; };
+		EEF29BC01C0ED2C2004B9511 /* ContentCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentCardView.h; sourceTree = "<group>"; };
+		EEF29BC11C0ED2C2004B9511 /* ContentCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentCardView.m; sourceTree = "<group>"; };
+		EEF29BC21C0ED2C2004B9511 /* ContentCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContentCardView.xib; sourceTree = "<group>"; };
 		EEF538F31B525F7F009C8CB9 /* PostPreViewEffectController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostPreViewEffectController.h; sourceTree = "<group>"; };
 		EEF538F41B525F7F009C8CB9 /* PostPreViewEffectController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostPreViewEffectController.m; sourceTree = "<group>"; };
 		EEFA44FC1B58F7D4007DF294 /* NickNameInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NickNameInputView.h; sourceTree = "<group>"; };
@@ -1652,6 +1652,7 @@
 		EEAACBEB1B44E90300D05C0B /* HomeCell */ = {
 			isa = PBXGroup;
 			children = (
+				EEF29BBF1C0ED2C2004B9511 /* ContentCard */,
 				EEB4C8B71BFC823C0023E2AD /* QueryCell */,
 				EEAACBEC1B44E90300D05C0B /* FoundPGCView */,
 				EEAACBF31B44E90300D05C0B /* TagsRowCell */,
@@ -2064,9 +2065,6 @@
 				EE66B47C1BB3EEC600812F5F /* HomeNavigationController.m */,
 				EE2A26D91C02F7950080FB1B /* HomeViewTableCellDelegate.h */,
 				EE2A26DA1C02F7950080FB1B /* HomeViewTableCellDelegate.m */,
-				EEBBCF161C09B9AA000B2987 /* ContentCardView.xib */,
-				EEBBCF181C09BB0F000B2987 /* ContentCardView.h */,
-				EEBBCF191C09BB0F000B2987 /* ContentCardView.m */,
 			);
 			path = HomeMain;
 			sourceTree = "<group>";
@@ -2245,6 +2243,17 @@
 			path = CycleView;
 			sourceTree = "<group>";
 		};
+		EEF29BBF1C0ED2C2004B9511 /* ContentCard */ = {
+			isa = PBXGroup;
+			children = (
+				EEF29BC01C0ED2C2004B9511 /* ContentCardView.h */,
+				EEF29BC11C0ED2C2004B9511 /* ContentCardView.m */,
+				EEF29BC21C0ED2C2004B9511 /* ContentCardView.xib */,
+			);
+			name = ContentCard;
+			path = BabySharing/Views/Home/ContentCard;
+			sourceTree = SOURCE_ROOT;
+		};
 		EEF538F21B525EC3009C8CB9 /* PostPreViewV3 */ = {
 			isa = PBXGroup;
 			children = (
@@ -2415,7 +2424,7 @@
 				EEAACD5B1B44E91A00D05C0B /* YYBoundle.bundle in Resources */,
 				EE7415C91B5B7097002CA1BC /* Main.storyboard in Resources */,
 				EEAACCA51B44E90400D05C0B /* MovieNib.storyboard in Resources */,
-				EEBBCF171C09B9AA000B2987 /* ContentCardView.xib in Resources */,
+				EEF29BC41C0ED2C2004B9511 /* ContentCardView.xib in Resources */,
 				EEAACD1A1B44E90400D05C0B /* ProfileDetailTagsCell.xib in Resources */,
 				EEAACCC61B44E90400D05C0B /* webNab.storyboard in Resources */,
 				EEC980B11B8EB9EA0087E5A7 /* status-bar-pattern-black.jpg in Resources */,
@@ -2572,7 +2581,7 @@
 				EEAAC8FE1B44E81A00D05C0B /* main.m in Sources */,
 				EEAACCC71B44E90400D05C0B /* WebSearchController.m in Sources */,
 				EEAACCEA1B44E90400D05C0B /* TagQueryModel.m in Sources */,
-				EEBBCF1A1C09BB0F000B2987 /* ContentCardView.m in Sources */,
+				EEF29BC31C0ED2C2004B9511 /* ContentCardView.m in Sources */,
 				EE9633D01B92CA8200DB4EA5 /* NewMessageSettingController.mm in Sources */,
 				EEAACCE61B44E90400D05C0B /* QueryLikes.m in Sources */,
 				EE2D4B7F1B525E0A00B58A1F /* PhotoPublishController.m in Sources */,

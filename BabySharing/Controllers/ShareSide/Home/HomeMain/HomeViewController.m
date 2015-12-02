@@ -208,6 +208,8 @@
         [tmp layoutSubviews];
     }
     
+    [self.view bringSubviewToFront:queryViewLst.firstObject];
+    
     return queryViewLst;
 }
 
@@ -261,6 +263,8 @@
                                       _current_index += 1;
 //                                      head.hidden = YES;
                                       isAnimation = NO;
+
+                                      [self.view bringSubviewToFront:queryViewLst.firstObject];
                                   }];
     
 }
@@ -307,6 +311,8 @@
                                       UIView* tmp = [queryViewLst lastObject];
 //                                      tmp.hidden = YES;
                                       isAnimation = NO;
+
+                                      [self.view bringSubviewToFront:queryViewLst.firstObject];
                                   }];
 }
 
