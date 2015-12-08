@@ -49,7 +49,8 @@
         [bar.tabBar bringSubviewToFront:self];
         
         CALayer* shadow = [CALayer layer];
-        shadow.borderColor = [UIColor lightGrayColor].CGColor;
+        shadow.borderColor = [UIColor colorWithWhite:0.667 alpha:0.6].CGColor;
+//        shadow.borderColor = [UIColor lightGrayColor].CGColor;
         shadow.borderWidth = 0.5;
         shadow.frame = CGRectMake(0, 0, width, 1);
         [self.layer addSublayer:shadow];

@@ -7,13 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@class SearchSegView;
-
-@protocol SearchSegViewDelegate <NSObject>
-
-- (void)segValueChanged:(SearchSegView*)seg;
-@end
+#import "SearchSegDelegate.h"
 
 @interface SearchSegView : UIView
 

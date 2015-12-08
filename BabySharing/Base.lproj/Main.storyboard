@@ -1869,7 +1869,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
         <!--Found-->
         <scene sceneID="tGE-Uq-2Ve">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Pa5-r2-UE1" customClass="HomeNavigationController" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Pa5-r2-UE1" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Found" id="7L6-5r-vv9"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="muW-SZ-U0Y">

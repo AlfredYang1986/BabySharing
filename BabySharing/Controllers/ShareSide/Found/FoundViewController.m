@@ -36,6 +36,7 @@
     found_datasource = [[HomeViewFoundDelegateAndDatasource alloc]initWithTableView:_queryView andContainer:self];
     _queryView.delegate = found_datasource;
     _queryView.dataSource = found_datasource;
+    _queryView.backgroundColor = [UIColor lightGrayColor];
     
     [self layoutTableViews];
 }
@@ -61,19 +62,10 @@
     _queryView.frame = FOUND_VIEW_START;
     
     bkView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, found_width, 20)];
-    bkView.backgroundColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
+//    bkView.backgroundColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
+    bkView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:bkView];
     [self.view bringSubviewToFront:bkView];
-}
-
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
-    //UIStatusBarStyleDefault = 0 黑色文字，浅色背景时使用
-    //UIStatusBarStyleLightContent = 1 白色文字，深色背景时使用
-}
-
-- (BOOL)prefersStatusBarHidden {
-    return NO; //返回NO表示要显示，返回YES将hiden
 }
 
 /*

@@ -25,11 +25,20 @@
 
 #import "SearchViewController.h"
 
-#define FOUND_REF_INDEX             -2
-#define FOUND_IMG_INDEX             -1
+#import "FoundMoreFriendCell.h"
+#import "FoundMotherChoiceCell.h"
+#import "FoundSearchController.h"
+
+//#define FOUND_REF_INDEX             -2
+//#define FOUND_IMG_INDEX             -1
 #define FOUND_SEARCH_INDEX          0
 #define FOUND_USER_PHOTO_INDEX      1
 #define FOUND_TITLE_INDEX           2
+#define FOUND_CONTENT_INDEX         3
+
+#define FOUND_SECTION_COUNT         4
+
+#define PHOTO_PER_LINE  3
 
 @interface HomeViewFoundDelegateAndDatasource () <AlbumTableCellDelegate, UISearchBarDelegate>
 
@@ -59,6 +68,16 @@
         [tableView registerClass:[TagsRowCell class] forCellReuseIdentifier:@"Tags Row Cell"];
         
         /**
+         * found more friends cell
+         */
+        [tableView registerNib:[UINib nibWithNibName:@"FoundMoreFriendCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"Recommend Users"];
+        
+        /**
+         * mother choice
+         */
+        [tableView registerNib:[UINib nibWithNibName:@"FoundMotherChoiceCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"Mother Choice"];
+        
+        /**
          * get recommend user
          */
         [self queryUserDataAsync];
@@ -74,10 +93,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"selet row");
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    //    [self performSegueWithIdentifier:@"HomeDetailSegue" sender:indexPath];
-    
-    //    QueryContent* cur = [_qm.querydata objectAtIndex:indexPath.row - 1];
-    //    [self performSegueWithIdentifier:@"HomeDetailSegue" sender:cur];
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -86,58 +101,100 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSInteger index = indexPath.row;
+//    NSInteger index = indexPath.row;
+    NSInteger index = indexPath.section;
 //    NSInteger total = [self tableView:tableView numberOfRowsInSection:0];
- 
-
     
-    if (index == FOUND_REF_INDEX) {
-        return 44;
-    } else if (index == FOUND_IMG_INDEX) {
-        return [FoundPCGCell preferdHeight];
-    } else if (index == FOUND_SEARCH_INDEX) {
+//    if (index == FOUND_REF_INDEX) {
+//        return 44;
+//    } else if (index == FOUND_IMG_INDEX) {
+//        return [FoundPCGCell preferdHeight];
+//    } else
+    if (index == FOUND_SEARCH_INDEX) {
         return 44;
     }else if (index == FOUND_USER_PHOTO_INDEX) {
-        CGFloat width = [UIScreen mainScreen].bounds.size.width - 32;
-        return width / 5;
+//        CGFloat width = [UIScreen mainScreen].bounds.size.width - 32;
+//        return width / 5;
+        return [FoundMoreFriendCell preferredHeight];
     } else if (index == FOUND_TITLE_INDEX) {
-        return 44;
+        return [FoundMotherChoiceCell preferredHeight];
     } else {
         CGFloat width = [UIScreen mainScreen].bounds.size.width;
         return width / 3;
     }
 }
 
-#define PHOTO_PER_LINE  3
 #pragma mark -- table view datasource
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    NSInteger index = indexPath.row;
-    NSArray* titles = @[@"refresh...", @"Mother's Choice", @"hottest sharing", @"hottest tags"];
+//    NSInteger index = indexPath.row;
+    NSInteger index = indexPath.section;
+//    NSArray* titles = @[@"refresh...", @"Mother's Choice", @"hottest sharing", @"hottest tags"];
 //    NSInteger total = [self tableView:tableView numberOfRowsInSection:0];
     
-    if (index == FOUND_REF_INDEX) {
-        return [self queryDefaultCellWithTableView:tableView withTitle:[titles objectAtIndex:0]];
-    } else if (index == FOUND_IMG_INDEX) {
-        return [self queryPGCCellWithTableView:tableView];
-        
-    } else if (index == FOUND_SEARCH_INDEX) {
+//    if (index == FOUND_REF_INDEX) {
+//        return [self queryDefaultCellWithTableView:tableView withTitle:[titles objectAtIndex:0]];
+//    } else if (index == FOUND_IMG_INDEX) {
+//        return [self queryPGCCellWithTableView:tableView];
+    
+//    } else
+    if (index == FOUND_SEARCH_INDEX) {
         return [self querySearchCellWithTabelView:tableView];
     }else if (index == FOUND_USER_PHOTO_INDEX) {
         return [self queryRecommendUserCellWithTableView:tableView];
     } else if (index == FOUND_TITLE_INDEX) {
-        return [self queryDefaultCellWithTableView:tableView withTitle:[titles objectAtIndex:1]];
+//        return [self queryDefaultCellWithTableView:tableView withTitle:[titles objectAtIndex:1]];
+        return [self queryMotherChoiceCellWithTableView:tableView];
     } else {
         return [self queryTagsRowCellWithTableView:tableView atIndex:indexPath];
     }
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return FOUND_SECTION_COUNT;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    if (section == FOUND_SEARCH_INDEX) {
+        return 5;
+    }else if (section == FOUND_USER_PHOTO_INDEX) {
+        return 5;
+    } else if (section == FOUND_TITLE_INDEX) {
+        return 0;
+    } else {
+        return 0;
+    }
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    return 4 + app.qm.querydata.count / PHOTO_PER_LINE + FOUND_REF_INDEX;
+//    return 4 + app.qm.querydata.count / PHOTO_PER_LINE + FOUND_REF_INDEX;
+//    return 2 + app.qm.querydata.count / PHOTO_PER_LINE;
+    
+    if (section == FOUND_SEARCH_INDEX) {
+        return 1;
+    }else if (section == FOUND_USER_PHOTO_INDEX) {
+        return 1;
+    } else if (section == FOUND_TITLE_INDEX) {
+        return 1;
+    } else {
+        return app.qm.querydata.count / PHOTO_PER_LINE;
+    }
 }
 
 #pragma mark -- query cell
+- (UITableViewCell*)queryMotherChoiceCellWithTableView:(UITableView*)tableView {
+    FoundMotherChoiceCell* cell = [tableView dequeueReusableCellWithIdentifier:@"Mother Choice"];
+    
+    if (cell == nil) {
+        NSArray* nib = [[NSBundle mainBundle] loadNibNamed:@"FoundMotherChooiceCell" owner:self options:nil];
+        cell = [nib firstObject];
+    }
+    
+    return cell;
+}
+
+
 - (UITableViewCell*)queryDefaultCellWithTableView:(UITableView*)tableView withTitle:(NSString*)title {
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"default"];
     
@@ -152,7 +209,7 @@
 }
 
 - (UITableViewCell*)querySearchCellWithTabelView:(UITableView*)tableView {
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@""];
+    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"search cell"];
     
     if (cell == nil) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"search cell"];
@@ -164,6 +221,7 @@
         bar.delegate = self;
         bar.tag = -1;
         [cell addSubview:bar];
+        bar.placeholder = @"搜索标签和角色";
         
         CGFloat width = [UIScreen mainScreen].bounds.size.width;
         CGFloat height = 44;
@@ -197,7 +255,9 @@
     }
     
     cell.delegate = self;
-    NSInteger row = indexPath.row - (4 + FOUND_REF_INDEX);
+//    NSInteger row = indexPath.row - (4 + FOUND_REF_INDEX);
+//    NSInteger row = indexPath.row - 2;
+    NSInteger row = indexPath.row;
     AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
     @try {
         NSArray* arr_tmp = [app.qm.querydata objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(row * PHOTO_PER_LINE, PHOTO_PER_LINE)]];
@@ -220,53 +280,21 @@
 }
 
 - (UITableViewCell*)queryRecommendUserCellWithTableView:(UITableView*)tableView {
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Recommend Users"];
+    
+    FoundMoreFriendCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Recommend Users"];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Recommend Users"];
+        NSArray* nib = [[NSBundle mainBundle] loadNibNamed:@"FoundMoreFriendCell" owner:self options:nil];
+        cell = [nib firstObject];
     }
-    
-    for (int index = 0; index < recommend_users.count; ++index) {
-        NSDictionary* iter = [recommend_users objectAtIndex:index];
-        
-        CGFloat offset = 16;
-        CGFloat width = [UIScreen mainScreen].bounds.size.width - 32;
-        CGFloat step = width / 5;
-        
-        UIImageView* tmp = [[UIImageView alloc]initWithFrame:CGRectMake(index * step + offset + 4, 4, step - 8, step - 8)];
-        
-        NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
-        NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-        NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"User"] ofType:@"png"];
-        
-        NSString* photo_name = [iter objectForKey:@"screen_photo"];
-        
-        UIImage* userImg = [TmpFileStorageModel enumImageWithName:photo_name withDownLoadFinishBolck:^(BOOL success, UIImage *user_img) {
-            if (success) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    if (self) {
-                        tmp.image = user_img;
-                        NSLog(@"owner img download success");
-                    }
-                });
-            } else {
-                NSLog(@"down load owner image %@ failed", photo_name);
-            }
-        }];
-
-        if (userImg == nil) {
-            userImg = [UIImage imageNamed:filePath];
-        }
-        [tmp setImage:userImg];
-        [cell addSubview:tmp];
-    }
- 
+   
+    [cell setUserImages:recommend_users];
     return cell;
 }
 
 #pragma mark -- scroll view delegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    NSLog(@"scrolling ... ");
+//    NSLog(@"scrolling ... ");
     // 假设偏移表格高度的20%进行刷新
 //    if (!_isLoading) { // 判断是否处于刷新状态，刷新中就不执行
 //        // 取内容的高度：
@@ -366,12 +394,9 @@
 
 #pragma mark -- searh bar delegate
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SearchViewController" bundle:nil];
-    SearchViewController* svc = [storyboard instantiateViewControllerWithIdentifier:@"Search"];
-//    [_container.navigationController pushViewController:hv animated:YES];
-    [_container presentViewController:svc animated:YES completion: ^(void) {
-        NSLog(@"movie running ...");
-    }];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"FoundSearch" bundle:nil];
+    FoundSearchController* svc = [storyboard instantiateViewControllerWithIdentifier:@"FoundSearch"];
+    [_container.navigationController pushViewController:svc animated:NO];
     return NO;
 }
 @end

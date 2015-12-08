@@ -209,6 +209,7 @@
     }
     
     [self.view bringSubviewToFront:queryViewLst.firstObject];
+    [self.view bringSubviewToFront:bkView];
     
     return queryViewLst;
 }
@@ -265,6 +266,7 @@
                                       isAnimation = NO;
 
                                       [self.view bringSubviewToFront:queryViewLst.firstObject];
+                                      [self.view bringSubviewToFront:bkView];
                                   }];
     
 }
@@ -313,6 +315,7 @@
                                       isAnimation = NO;
 
                                       [self.view bringSubviewToFront:queryViewLst.firstObject];
+                                      [self.view bringSubviewToFront:bkView];
                                   }];
 }
 
