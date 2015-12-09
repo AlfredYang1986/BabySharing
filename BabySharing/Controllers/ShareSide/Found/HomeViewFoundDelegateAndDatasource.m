@@ -28,6 +28,7 @@
 #import "FoundMoreFriendCell.h"
 #import "FoundMotherChoiceCell.h"
 #import "FoundSearchController.h"
+#import "UserSearchController.h"
 
 //#define FOUND_REF_INDEX             -2
 //#define FOUND_IMG_INDEX             -1
@@ -93,6 +94,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"selet row");
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.section == 1 && indexPath.row == 0) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"UserSearch" bundle:nil];
+        UserSearchController* svc = [storyboard instantiateViewControllerWithIdentifier:@"UserSearch"];
+        [_container.navigationController pushViewController:svc animated:YES];
+    }
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -127,23 +134,12 @@
 #pragma mark -- table view datasource
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-//    NSInteger index = indexPath.row;
     NSInteger index = indexPath.section;
-//    NSArray* titles = @[@"refresh...", @"Mother's Choice", @"hottest sharing", @"hottest tags"];
-//    NSInteger total = [self tableView:tableView numberOfRowsInSection:0];
-    
-//    if (index == FOUND_REF_INDEX) {
-//        return [self queryDefaultCellWithTableView:tableView withTitle:[titles objectAtIndex:0]];
-//    } else if (index == FOUND_IMG_INDEX) {
-//        return [self queryPGCCellWithTableView:tableView];
-    
-//    } else
     if (index == FOUND_SEARCH_INDEX) {
         return [self querySearchCellWithTabelView:tableView];
     }else if (index == FOUND_USER_PHOTO_INDEX) {
         return [self queryRecommendUserCellWithTableView:tableView];
     } else if (index == FOUND_TITLE_INDEX) {
-//        return [self queryDefaultCellWithTableView:tableView withTitle:[titles objectAtIndex:1]];
         return [self queryMotherChoiceCellWithTableView:tableView];
     } else {
         return [self queryTagsRowCellWithTableView:tableView atIndex:indexPath];
@@ -168,9 +164,6 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-//    return 4 + app.qm.querydata.count / PHOTO_PER_LINE + FOUND_REF_INDEX;
-//    return 2 + app.qm.querydata.count / PHOTO_PER_LINE;
-    
     if (section == FOUND_SEARCH_INDEX) {
         return 1;
     }else if (section == FOUND_USER_PHOTO_INDEX) {
@@ -255,8 +248,6 @@
     }
     
     cell.delegate = self;
-//    NSInteger row = indexPath.row - (4 + FOUND_REF_INDEX);
-//    NSInteger row = indexPath.row - 2;
     NSInteger row = indexPath.row;
     AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
     @try {
@@ -361,22 +352,6 @@
 }
 
 - (void)didSelectOneImageAtIndex:(NSInteger)index {
-//    OwnerQueryModel* om = [self getOM];
-//    QueryContent* tmp = [om.querydata objectAtIndex:index];
-//    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-//    QueryContent* tmp = [app.qm.querydata objectAtIndex:index];
-//    
-//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    HomeDetailViewController* detail = [storyboard instantiateViewControllerWithIdentifier:@"DetailContent"];
-//    detail.hidesBottomBarWhenPushed = YES;
-//    
-//    detail.qm = app.qm;
-//    detail.current_content = tmp;
-//    detail.current_user_id = [app.lm getCurrentUserID];
-//    detail.current_auth_token = [app.lm getCurrentAuthToken];
-//    
-//    [_container.navigationController pushViewController:detail animated:YES];
-    
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     HomeViewController* hv = [storyboard instantiateViewControllerWithIdentifier:@"HomeView"];
     hv.isPushed = YES;

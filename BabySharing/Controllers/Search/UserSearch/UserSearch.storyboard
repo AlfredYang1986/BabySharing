@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--认识更多的朋友-->
+        <scene sceneID="CB3-Xe-s4V">
+            <objects>
+                <viewController storyboardIdentifier="UserSearch" id="bUp-GG-spM" customClass="UserSearchController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="LWr-lG-khV"/>
+                        <viewControllerLayoutGuide type="bottom" id="aJu-4L-z4e"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="paH-0O-Q4l">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gIU-uQ-U7x">
+                                <rect key="frame" x="0.0" y="44" width="600" height="556"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="gIU-uQ-U7x" secondAttribute="trailing" constant="-20" id="5de-5B-VhH"/>
+                            <constraint firstItem="gIU-uQ-U7x" firstAttribute="top" secondItem="LWr-lG-khV" secondAttribute="bottom" constant="-20" id="JI4-oA-eB1"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="gIU-uQ-U7x" secondAttribute="trailing" constant="-20" id="KPg-9k-frU"/>
+                            <constraint firstItem="gIU-uQ-U7x" firstAttribute="leading" secondItem="paH-0O-Q4l" secondAttribute="leadingMargin" constant="-20" id="O0y-mN-Vfh"/>
+                            <constraint firstItem="aJu-4L-z4e" firstAttribute="top" secondItem="gIU-uQ-U7x" secondAttribute="bottom" id="UU2-MG-JMi"/>
+                            <constraint firstItem="gIU-uQ-U7x" firstAttribute="top" secondItem="paH-0O-Q4l" secondAttribute="topMargin" id="edq-Iz-N9j"/>
+                            <constraint firstItem="gIU-uQ-U7x" firstAttribute="top" secondItem="paH-0O-Q4l" secondAttribute="topMargin" id="evz-E5-gpV"/>
+                            <constraint firstItem="gIU-uQ-U7x" firstAttribute="top" secondItem="LWr-lG-khV" secondAttribute="bottom" id="fvN-iJ-bVF"/>
+                            <constraint firstItem="aJu-4L-z4e" firstAttribute="top" secondItem="gIU-uQ-U7x" secondAttribute="bottom" id="pyh-mT-OWg"/>
+                            <constraint firstItem="gIU-uQ-U7x" firstAttribute="leading" secondItem="paH-0O-Q4l" secondAttribute="leadingMargin" constant="-20" id="yG3-Qg-4QU"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="KPg-9k-frU"/>
+                                <exclude reference="O0y-mN-Vfh"/>
+                                <exclude reference="edq-Iz-N9j"/>
+                                <exclude reference="evz-E5-gpV"/>
+                                <exclude reference="fvN-iJ-bVF"/>
+                                <exclude reference="UU2-MG-JMi"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" title="认识更多的朋友" id="IzU-Jj-S2V"/>
+                    <connections>
+                        <outlet property="queryView" destination="gIU-uQ-U7x" id="GJF-hp-vgG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CUU-NL-RhL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="947" y="443"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="yG8-EH-fPJ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="aRg-yC-5vE" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="O4z-eg-WR7">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="bUp-GG-spM" kind="relationship" relationship="rootViewController" id="9Aq-ho-L34"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vMN-f7-XLT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="241" y="443"/>
+        </scene>
+    </scenes>
+</document>
