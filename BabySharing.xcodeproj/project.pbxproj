@@ -16,6 +16,7 @@
 		EE0CEC5D1BDB15790016B6F4 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0CEC5C1BDB15790016B6F4 /* LoginViewController.m */; };
 		EE0DCE7E1C081FD400B5386B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE0DCE7D1C081FD400B5386B /* LaunchScreen.xib */; };
 		EE20BED41B6F430D00DE8455 /* OwnerQueryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EE20BED31B6F430D00DE8455 /* OwnerQueryModel.m */; };
+		EE262C991C1958F8008DCC4E /* DONNotificationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EE262C981C1958F8008DCC4E /* DONNotificationDelegate.m */; };
 		EE2A26DB1C02F7950080FB1B /* HomeViewTableCellDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2A26DA1C02F7950080FB1B /* HomeViewTableCellDelegate.m */; };
 		EE2D4B781B525E0A00B58A1F /* PostInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2D4B681B525E0A00B58A1F /* PostInputViewController.m */; };
 		EE2D4B791B525E0A00B58A1F /* PostPreView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE2D4B691B525E0A00B58A1F /* PostPreView.storyboard */; };
@@ -310,6 +311,8 @@
 		EE0DCE7D1C081FD400B5386B /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		EE20BED21B6F430D00DE8455 /* OwnerQueryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OwnerQueryModel.h; sourceTree = "<group>"; };
 		EE20BED31B6F430D00DE8455 /* OwnerQueryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OwnerQueryModel.m; sourceTree = "<group>"; };
+		EE262C971C1958F8008DCC4E /* DONNotificationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DONNotificationDelegate.h; path = BabySharing/Controllers/Message/NotificationsView/DONNotificationDelegate.h; sourceTree = SOURCE_ROOT; };
+		EE262C981C1958F8008DCC4E /* DONNotificationDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DONNotificationDelegate.m; path = BabySharing/Controllers/Message/NotificationsView/DONNotificationDelegate.m; sourceTree = SOURCE_ROOT; };
 		EE2A26D91C02F7950080FB1B /* HomeViewTableCellDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewTableCellDelegate.h; sourceTree = "<group>"; };
 		EE2A26DA1C02F7950080FB1B /* HomeViewTableCellDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewTableCellDelegate.m; sourceTree = "<group>"; };
 		EE2D4B671B525E0A00B58A1F /* PostInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostInputViewController.h; sourceTree = "<group>"; };
@@ -1290,6 +1293,8 @@
 		EEA991451B775B35001F6CC6 /* NotificationsView */ = {
 			isa = PBXGroup;
 			children = (
+				EE262C971C1958F8008DCC4E /* DONNotificationDelegate.h */,
+				EE262C981C1958F8008DCC4E /* DONNotificationDelegate.m */,
 				EEA991461B775B4F001F6CC6 /* DDNNotificationViewController.h */,
 				EEA991471B775B4F001F6CC6 /* DDNNotificationViewController.m */,
 			);
@@ -2669,6 +2674,7 @@
 				EEB3DDD01B7B0505003750A2 /* DropDownMenu.m in Sources */,
 				EE981F861B5A10400029723A /* LoginToken.m in Sources */,
 				EEAACC9A1B44E90400D05C0B /* AppDelegate.m in Sources */,
+				EE262C991C1958F8008DCC4E /* DONNotificationDelegate.m in Sources */,
 				EEAACCE21B44E90400D05C0B /* QueryContent+ContextOpt.m in Sources */,
 				EE87315E1B97E131004A25D8 /* WeiboFriendsDelegate.m in Sources */,
 				EEAACCCC1B44E90400D05C0B /* INTUSpringSolver.c in Sources */,

@@ -90,6 +90,10 @@
     return [NotificationOwner unReadNotificationCountForOwner:_delegate.lm.current_user_id inContext:_doc.managedObjectContext];
 }
 
+- (NSInteger)allNotificationInDeviceCount {
+    return [NotificationOwner allNotificationCountInDeviceForOwner:_delegate.lm.current_user_id inContext:_doc.managedObjectContext];
+}
+
 - (void)markAllNotificationsAsReaded {
     [NotificationOwner markAllNotificationAsReadedForOwner:_delegate.lm.current_user_id inContext:_doc.managedObjectContext];
 }

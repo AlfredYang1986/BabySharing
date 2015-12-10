@@ -1384,7 +1384,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
             </objects>
             <point key="canvasLocation" x="3294" y="2478"/>
         </scene>
-        <!--Messages-->
+        <!--Message View Controller-->
         <scene sceneID="81g-Nk-e9J">
             <objects>
                 <viewController id="yaZ-zx-97W" customClass="MessageViewController" sceneMemberID="viewController">
@@ -1397,7 +1397,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Messages" id="B4D-UT-ROc"/>
+                    <navigationItem key="navigationItem" id="B4D-UT-ROc"/>
                     <connections>
                         <segue destination="fav-i3-Xga" kind="push" identifier="addFriends" id="Z8a-iE-MvE"/>
                         <segue destination="vu1-ps-3xT" kind="push" identifier="startChat" id="2Bs-UG-c18"/>
@@ -1850,7 +1850,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
         <!--Message-->
         <scene sceneID="mgT-Dh-7cN">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7hx-ud-h3I" customClass="HomeNavigationController" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7hx-ud-h3I" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Message" id="GJY-jY-Mlv"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="7fi-er-UA7">

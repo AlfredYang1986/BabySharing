@@ -49,8 +49,6 @@
     _seg.frame = CGRectMake(0, 0, width, SEG_BAR_HEIGHT);
     _seg.backgroundColor = [UIColor whiteColor];
     
-    [self.navigationController setNavigationBarHidden:YES animated:NO];
-   
     _inputView.backgroundColor = [UIColor whiteColor];
     
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
@@ -102,6 +100,16 @@
 
 - (void)cancelSearchSelected {
     [self.navigationController popViewControllerAnimated:NO];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 #pragma mark -- table view

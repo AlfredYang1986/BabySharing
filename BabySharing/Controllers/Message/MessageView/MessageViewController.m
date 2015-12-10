@@ -16,15 +16,15 @@
 #import "DDNNotificationViewController.h"
 #import "UserChatController.h"
 #import "Targets.h"
-#import "HomeSegControl.h"
+//#import "HomeSegControl.h"
 #import "DongDaSearchBar.h"
 #import "SearchSegView.h"
+#import "SearchSegView2.h"
+#import "DONNotificationDelegate.h"
 
-@interface MessageViewController () <UISearchBarDelegate, HomeSegControlDelegate, DongDaSearchBarDelegate, SearchSegViewDelegate>
+@interface MessageViewController () <UISearchBarDelegate, /*HomeSegControlDelegate,*/ DongDaSearchBarDelegate, SearchSegViewDelegate>
 @property (strong, nonatomic) UITableView *friendsQueryView;
-//@property (strong, nonatomic) UISegmentedControl *friendSeg;
-@property (strong, nonatomic) SearchSegView *friendSeg;
-//@property (strong, nonatomic) UISearchBar *friendsSearchBar;
+@property (strong, nonatomic) SearchSegView2 *friendSeg;
 @property (strong, nonatomic) DongDaSearchBar *friendsSearchBar;
 
 @property (weak, nonatomic, readonly) ConnectionModel *cm;
@@ -33,11 +33,10 @@
 @end
 
 @implementation MessageViewController {
-    MesssageTableDelegate* md;
+//    MesssageTableDelegate* md;
     FriendsTableDelegate* fd;
-    
-//    UISegmentedControl* title_seg;
-    HomeSegControl* sg;
+    SearchSegView2* sg;
+    DONNotificationDelegate* del;
 }
 
 @synthesize queryView = _queryView;     // message
@@ -54,17 +53,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f]];
     [_queryView registerNib:[UINib nibWithNibName:@"MessageViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"Message View Cell"];
     [_queryView registerNib:[UINib nibWithNibName:@"MessageNotificationCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"Notificaton View Cell"];
     
     _queryView = [[UITableView alloc]init];
     [self.view addSubview:_queryView];
-    md = [[MesssageTableDelegate alloc]init];
-    _queryView.delegate = md;
-    _queryView.dataSource = md;
-    md.queryView = _queryView;
-    md.current = self;
+//    md = [[MesssageTableDelegate alloc]init];
+//    _queryView.delegate = md;
+//    _queryView.dataSource = md;
+//    md.queryView = _queryView;
+//    md.current = self;
+    del = [[DONNotificationDelegate alloc]init];
+    _queryView.delegate = del;
+    _queryView.dataSource = del;
     
     _friendsQueryView = [[UITableView alloc]init];
     [self.view addSubview:_friendsQueryView];
@@ -74,65 +75,48 @@
     fd.queryView = _friendsQueryView;
     fd.current = self;
     
-//    _friendSeg = [[UISegmentedControl alloc]initWithItems:@[@"好友", @"关注", @"粉丝"]];
-//    [_friendSeg addTarget:self action:@selector(friendSegValueChanged:) forControlEvents:UIControlEventValueChanged];
-//    _friendSeg.selectedSegmentIndex = 0;
-//    [self.view addSubview:_friendSeg];
-    
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    _friendSeg = [[SearchSegView2 alloc]initWithFrame:CGRectMake(0, 0, width, 44)];
    
-    _friendSeg = [[SearchSegView alloc]init];
-   
-    [_friendSeg addItemWithTitle:@"好友" andImg:nil andSelectedImg:nil];
-    [_friendSeg addItemWithTitle:@"关注" andImg:nil andSelectedImg:nil];
-    [_friendSeg addItemWithTitle:@"粉丝" andImg:nil andSelectedImg:nil];
+    [_friendSeg addItemWithTitle:@"好友"];
+    [_friendSeg addItemWithTitle:@"关注"];
+    [_friendSeg addItemWithTitle:@"粉丝"];
    
     _friendSeg.delegate = self;
     [self.view addSubview:_friendSeg];
     
-    
-    
-//    _friendsSearchBar = [[UISearchBar alloc]init];
     _friendsSearchBar = [[DongDaSearchBar alloc]init];
     _friendsSearchBar.delegate = self;
-//    for (UIView* v in _friendsSearchBar.subviews)
-//    {
-//        if ( [v isKindOfClass: [UITextField class]] )
-//        {
-//            UITextField *tf = (UITextField *)v;
-//            tf.clearButtonMode = UITextFieldViewModeWhileEditing;
-//            break;
-//        }
-//    }
     [self.view addSubview:_friendsSearchBar];
     
     [self layoutSubviews];
     
-//    title_seg = [[UISegmentedControl alloc]initWithItems:@[@"消息", @"好友"]];
-//    title_seg.selectedSegmentIndex = 0;
-//    self.navigationItem.titleView = title_seg;
-//    [title_seg addTarget:self action:@selector(titleSegValueChanged:) forControlEvents:UIControlEventValueChanged];
-
-    sg = [[HomeSegControl alloc]initWithFrame:CGRectMake(0, 0, 200, 30)];
-    [sg addItem:@"消息" andImage:nil];
-    [sg addItem:@"好友" andImage:nil];
+    sg = [[SearchSegView2 alloc]initWithFrame:CGRectMake(0, 0, width, 44)];
+    [sg addItemWithTitle:@"动态"];
+    [sg addItemWithTitle:@"好友"];
+    sg.selectedIndex = 0;
     sg.delegate = self;
-    self.navigationItem.titleView = sg;
-  
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btn setTitle:@"添加" forState:UIControlStateNormal];
-    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    sg.margin_between_items = 30;
+    [self.navigationController.navigationBar addSubview:sg];
+ 
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+    NSString* filepath = [resourceBundle pathForResource:@"message-add-friends" ofType:@"png"];
+    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 25, 25)];
+    [btn setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
     [btn addTarget: self action: @selector(friendsAddingBtnSelected) forControlEvents: UIControlEventTouchUpInside];
-    [btn sizeToFit];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:btn];
-    
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"添加" style:UIBarButtonItemStylePlain target:self action:@selector(friendsAddingBtnSelected)];
     
     AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
     _cm = app.cm;
     _lm = app.lm;
     _mm = app.mm;
-    md.mm = _mm;
-    md.lm = _lm;
+//    md.mm = _mm;
+//    md.lm = _lm;
+    
+    self.view.backgroundColor = [UIColor lightGrayColor];
+    _queryView.backgroundColor = [UIColor whiteColor];
+    _friendsQueryView.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -142,6 +126,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [del reloadData];
     [_queryView reloadData];
 }
 
@@ -152,7 +137,7 @@
     CGFloat offset_x = 0;
     CGFloat offset_y = 0;
    
-    _queryView.frame = CGRectMake(offset_x, offset_y, width, height);
+    _queryView.frame = CGRectMake(offset_x, offset_y + 8, width, height);
     offset_x += width;
 
     offset_y = 20 + 44;
@@ -260,19 +245,26 @@
                                       // NOTE: When passing INTUAnimationOptionRepeat, this completion block is NOT executed at the end of each cycle. It will only run if the animation is canceled.
                                       NSLog(@"%@", finished ? @"Animation Completed" : @"Animation Canceled");
                                       //                                                         self.animationID = NSNotFound;
-                                      if (sg.selectIndex == 1) {
+                                      if (sg.selectedIndex == 1) {
                                           [self friendSegValueChanged:nil];
                                       }
                                   }];
 }
 
 #pragma mark -- Home Seg Control delegate
-- (void)valueHasChanged:(HomeSegControl *)seg {
+- (void)valueHasChanged:(SearchSegView2*)seg {
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
-    if (sg.selectIndex == 0 && _queryView.frame.origin.x < 0) {
+    if (sg.selectedIndex == 0 && _queryView.frame.origin.x < 0) {
         [self moveContentView:width];
-    } else if (sg.selectIndex == 1 && _queryView.frame.origin.x >= 0) {
+    } else if (sg.selectedIndex == 1 && _queryView.frame.origin.x >= 0) {
         [self moveContentView:-width];
+    }
+}
+
+- (void)segValueChanged2:(SearchSegView2*)seg {
+    NSLog(@"seg changes");
+    if (seg == sg) {
+        [self valueHasChanged:seg];
     }
 }
 

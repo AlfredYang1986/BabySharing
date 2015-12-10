@@ -23,6 +23,7 @@
 + (void)removeOneNotification:(Notifications*)notification ForOwner:(NSString*)user_id inContext:(NSManagedObjectContext*)context;
 
 + (NSInteger)unReadNotificationCountForOwner:(NSString*)user_id inContext:(NSManagedObjectContext*)context;
++ (NSInteger)allNotificationCountInDeviceForOwner:(NSString*)user_id inContext:(NSManagedObjectContext*)context;
 + (void)markAllNotificationAsReadedForOwner:(NSString*)user_id inContext:(NSManagedObjectContext*)context;
 
 #pragma mark -- p2p and user Group

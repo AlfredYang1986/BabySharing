@@ -120,7 +120,6 @@
     datasource.delegate = _delegate;
     datasource.current_index = _current_index;
     
-    [self.navigationController setNavigationBarHidden:YES];
     [self createContentCardView];
     
     for (int index = 0; index < queryViewLst.count; ++index) {
@@ -135,6 +134,7 @@
     
     [self.view bringSubviewToFront:bkView];
 }
+
 
 - (void)setDataelegate:(id<HomeViewControllerDataDelegate>)delegate {
     _delegate = delegate;
@@ -367,6 +367,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = NO;
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
     
     if (_delegate == nil) {
         self.delegate = [[MainHomeViewDataDelegate alloc]init];

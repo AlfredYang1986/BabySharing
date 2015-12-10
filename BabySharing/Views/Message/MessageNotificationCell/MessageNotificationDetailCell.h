@@ -17,4 +17,7 @@
 
 - (void)setUserImage:(NSString*)photo_name;
 - (NSString*)getActtionTmplate:(NotificationActionType)type;
+
+- (void)setDetailTarget:(NSString*)screen_name andActionType:(NotificationActionType)type andConnectContent:(NSString*)Post_id;
+- (void)setTimeLabel:(NSDate*)time_label;
 @end

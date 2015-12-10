@@ -88,6 +88,13 @@
     return [notify_arr filteredArrayUsingPredicate:pred].count;
 }
 
++ (NSInteger)allNotificationCountInDeviceForOwner:(NSString*)user_id inContext:(NSManagedObjectContext*)context {
+    NotificationOwner* owner = [self enumNotificationOwnerWithID:user_id inContext:context];
+
+    NSArray* notify_arr = owner.notifications.allObjects;
+    return notify_arr.count;
+}
+
 + (void)markAllNotificationAsReadedForOwner:(NSString*)user_id inContext:(NSManagedObjectContext*)context {
     
     NotificationOwner* owner = [self enumNotificationOwnerWithID:user_id inContext:context];

@@ -99,6 +99,27 @@
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"UserSearch" bundle:nil];
         UserSearchController* svc = [storyboard instantiateViewControllerWithIdentifier:@"UserSearch"];
         [_container.navigationController pushViewController:svc animated:YES];
+//        [_container.navigationController pushViewController:svc animated:NO];
+        
+//        [UIView  beginAnimations:nil context:NULL];
+//        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+//        [UIView setAnimationDuration:0.75];
+//        [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:_container.navigationController.view cache:NO];
+//        [UIView commitAnimations];
+        
+//        CATransition* transition = [CATransition animation];
+//        transition.duration = 0.5;
+//        transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+//        transition.type = kCATransitionPush; //kCATransitionMoveIn; //, kCATransitionPush, kCATransitionReveal, kCATransitionFade
+//        transition.subtype = kCATransitionFromRight; //kCATransitionFromLeft, kCATransitionFromRight, kCATransitionFromTop, kCATransitionFromBottom
+//        [svc.view.layer addAnimation:transition forKey:nil];
+        
+//        CATransition *transition = [CATransition animation];
+//        transition.duration = 0.5f;
+//        transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+//        transition.type = kCATransitionMoveIn;
+//        transition.subtype = kCATransitionFromRight;
+//        [svc.view.layer addAnimation:transition forKey:nil];
     }
 }
 
