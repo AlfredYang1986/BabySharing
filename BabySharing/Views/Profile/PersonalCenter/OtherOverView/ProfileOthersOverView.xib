@@ -41,6 +41,7 @@
                 <constraint firstItem="84z-8P-SsP" firstAttribute="top" secondItem="Wdh-fk-WMn" secondAttribute="bottom" id="waR-l1-YpA"/>
             </constraints>
             <connections>
+                <outlet property="imgView" destination="eaD-Yd-WHe" id="1fi-Tr-DFZ"/>
                 <outlet property="locationLabel" destination="84z-8P-SsP" id="Sb1-QO-rqw"/>
                 <outlet property="nameLabel" destination="Wdh-fk-WMn" id="sWz-Eq-OkV"/>
             </connections>

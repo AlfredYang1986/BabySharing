@@ -32,7 +32,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *friendsCountLabel;
 
 //@property (weak, nonatomic) IBOutlet UIButton *editBtn;
-//@property (weak, nonatomic) IBOutlet UIButton *roleTagBtn;
+@property (strong, nonatomic) IBOutlet OBShapedButton* userRoleTagBtn;
 //@property (weak, nonatomic) IBOutlet UIView *buttomContainer;
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 //@property (weak, nonatomic) IBOutlet UILabel *personalSignLabel;
@@ -62,6 +62,7 @@
 @synthesize nameLabel = _nameLabel;
 
 @synthesize seg = _seg;
+@synthesize userRoleTagBtn = _userRoleTagBtn;
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
@@ -130,6 +131,14 @@
     search_seg.selectedIndex = 0;
     search_seg.margin_between_items = 30;
     [bkView addSubview:search_seg];
+    
+    if (_userRoleTagBtn == nil) {
+        _userRoleTagBtn = [[OBShapedButton alloc]init];
+        NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+        NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+        [_userRoleTagBtn setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"home-tag" ofType:@"png"]] forState:UIControlStateNormal];
+        [self addSubview:_userRoleTagBtn];
+    }
 }
 
 - (void)setOwnerPhoto:(NSString*)photo_name {
@@ -213,6 +222,29 @@
 
 - (void)setRoleTag:(NSString*)role_tag {
 //    [_roleTagBtn setTitle:role_tag forState:UIControlStateNormal];
+    _userRoleTagBtn.hidden = NO;
+    UILabel* label = [_userRoleTagBtn viewWithTag:-1];
+    if (label == nil) {
+        label = [[UILabel alloc]init];
+        label.font = [UIFont systemFontOfSize:14.f];
+        label.textColor = [UIColor whiteColor];
+        label.tag = -1;
+        [_userRoleTagBtn addSubview:label];
+    }
+    
+#define ROLE_TAG_MARGIN 2
+    
+    label.text = role_tag;
+    [label sizeToFit];
+    label.center = CGPointMake(10 + label.frame.size.width / 2, ROLE_TAG_MARGIN + label.frame.size.height / 2);
+   
+//    CGFloat width = self.frame.size.width;
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    _userRoleTagBtn.frame = CGRectMake(width / 2 + 10, 8, label.frame.size.width + 10 + ROLE_TAG_MARGIN, label.frame.size.height + 2 * ROLE_TAG_MARGIN);
+    
+    if ([@"" isEqualToString:role_tag]) {
+        _userRoleTagBtn.hidden = YES;
+    }
 }
 
 - (void)setNickName:(NSString*)nickName {
