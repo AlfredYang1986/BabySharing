@@ -7,7 +7,7 @@
 //
 
 #import "SearchSegView2.h"
-
+#import "SearchSegImgItem.h"
 #import "SearchSegItem.h"
 
 @implementation SearchSegView2
@@ -113,10 +113,39 @@
     [self addSubview:item];
 }
 
+- (void)addItemWithImg:(UIImage*)normal_img andSelectImage:(UIImage*)selected_img {
+    CGSize sz = [SearchSegImgItem preferredSize];
+    SearchSegImgItem* item = [[SearchSegImgItem alloc]initWithFrame:CGRectMake(0, 0, sz.width, sz.height)];
+
+//    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+//    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+//    UIImage* img = [UIImage imageNamed:[resourceBundle pathForResource:@"found-tab-layer" ofType:@"png"]];
+    
+    item.tag = [self getSegItemsCount] + 1;
+    item.normal_img = normal_img;
+    item.selected_img = selected_img;
+    item.status = 0;
+    
+    UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(segImgSelected:)];
+    [item addGestureRecognizer:tap];
+    
+    [self addSubview:item];
+}
+
 - (void)segSelected:(UITapGestureRecognizer*)gesture {
     UIView* tmp = gesture.view;
     
     for (SearchSegItem* iter in [self getSegItems]) {
+        iter.status = iter == tmp ? 1 : 0;
+    }
+    
+    [_delegate segValueChanged2:self];
+}
+
+- (void)segImgSelected:(UITapGestureRecognizer*)gesture {
+    UIView* tmp = gesture.view;
+    
+    for (SearchSegImgItem* iter in [self getSegItems]) {
         iter.status = iter == tmp ? 1 : 0;
     }
     

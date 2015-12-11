@@ -108,6 +108,7 @@
 		EE9676411B7C3D7700445254 /* CycleDescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE9676401B7C3D7700445254 /* CycleDescriptionCell.xib */; };
 		EE968D071C1AB0700063362E /* MessageFriendsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE968D051C1AB0700063362E /* MessageFriendsCell.m */; };
 		EE968D081C1AB0700063362E /* MessageFriendsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE968D061C1AB0700063362E /* MessageFriendsCell.xib */; };
+		EE968D131C1B1DB00063362E /* SearchSegImgItem.m in Sources */ = {isa = PBXBuildFile; fileRef = EE968D121C1B1DB00063362E /* SearchSegImgItem.m */; };
 		EE97440E1B78699A00E81A70 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = EE97440D1B78699A00E81A70 /* Reachability.m */; };
 		EE9744171B78886300E81A70 /* MessageNotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9744151B78886300E81A70 /* MessageNotificationCell.m */; };
 		EE97441F1B78944600E81A70 /* MessageNotificationDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE97441D1B78944600E81A70 /* MessageNotificationDetailCell.xib */; };
@@ -450,6 +451,8 @@
 		EE968D041C1AB0700063362E /* MessageFriendsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageFriendsCell.h; sourceTree = "<group>"; };
 		EE968D051C1AB0700063362E /* MessageFriendsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageFriendsCell.m; sourceTree = "<group>"; };
 		EE968D061C1AB0700063362E /* MessageFriendsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageFriendsCell.xib; sourceTree = "<group>"; };
+		EE968D111C1B1DB00063362E /* SearchSegImgItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSegImgItem.h; sourceTree = "<group>"; };
+		EE968D121C1B1DB00063362E /* SearchSegImgItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSegImgItem.m; sourceTree = "<group>"; };
 		EE97440C1B78699A00E81A70 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		EE97440D1B78699A00E81A70 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		EE9744141B78886300E81A70 /* MessageNotificationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageNotificationCell.h; sourceTree = "<group>"; };
@@ -2075,6 +2078,8 @@
 				EEBE1B611C17CA9400EAA9D2 /* SearchSegView.m */,
 				EEBE1B621C17CA9400EAA9D2 /* SearchSegView2.h */,
 				EEBE1B631C17CA9400EAA9D2 /* SearchSegView2.m */,
+				EE968D111C1B1DB00063362E /* SearchSegImgItem.h */,
+				EE968D121C1B1DB00063362E /* SearchSegImgItem.m */,
 			);
 			path = SegmentControl;
 			sourceTree = "<group>";
@@ -2791,6 +2796,7 @@
 				EE5D686F1B75A9FC0067A2DF /* NotificationOwner.m in Sources */,
 				EE86D1B21B537469001C4650 /* PostEffectAdapter.mm in Sources */,
 				EE9785B01B9004CD00C454C5 /* CycleAddKidsViewController.m in Sources */,
+				EE968D131C1B1DB00063362E /* SearchSegImgItem.m in Sources */,
 				EEBE1B6D1C17CA9400EAA9D2 /* SearchSegView.m in Sources */,
 				EEBE1B6A1C17CA9400EAA9D2 /* DongDaSearchBar.m in Sources */,
 				EED5EABE1BD7375E000AFF36 /* PhotoTagTariangleLayer2.m in Sources */,

@@ -1831,7 +1831,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
         <!--Personal Center-->
         <scene sceneID="5Qu-FH-07n">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Uzu-dA-Pf3" customClass="HomeNavigationController" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Uzu-dA-Pf3" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Personal Center" id="Ta3-I3-abj"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="nkh-62-JKK">
@@ -1924,6 +1924,6 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="qbd-0n-vJA"/>
-        <segue reference="mYA-47-s6C"/>
+        <segue reference="Xl7-6t-OQ8"/>
     </inferredMetricsTieBreakers>
 </document>

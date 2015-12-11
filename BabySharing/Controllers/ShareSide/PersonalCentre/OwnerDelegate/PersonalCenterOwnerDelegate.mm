@@ -247,6 +247,7 @@
         
         header.seg.selectedSegmentIndex = [_delegate getCurrentSegIndex];
         
+        [header setRelations:UserPostOwnerConnectionsSamePerson];
         header.deleagate = _delegate;
         
         return header;

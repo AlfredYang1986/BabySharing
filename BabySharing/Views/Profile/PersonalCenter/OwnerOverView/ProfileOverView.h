@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ProfileViewDelegate.h"
+#import "ModelDefines.h"
 
 @interface ProfileOverView : UITableViewHeaderFooterView
 
@@ -19,6 +20,7 @@
 - (void)setPersonalSign:(NSString*)sign_content;
 - (void)setRoleTag:(NSString*)role_tag;
 - (void)setNickName:(NSString*)nickName;
+- (void)setRelations:(UserPostOwnerConnections)relations;
 
 + (CGFloat)preferredHeight;
 

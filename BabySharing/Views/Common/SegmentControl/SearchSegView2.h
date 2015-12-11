@@ -24,5 +24,7 @@
 - (void)addItemWithTitle:(NSString *)title;
 - (void)removeItemAtIndex:(NSInteger)index;
 
+- (void)addItemWithImg:(UIImage*)normal_img andSelectImage:(UIImage*)selected_img;
+
 + (CGFloat)preferredHeight;
 @end
