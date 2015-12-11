@@ -20,6 +20,7 @@
 
 @synthesize title = _title;
 @synthesize status = _status;
+@synthesize isLayerHidden = _isLayerHidden;
 
 - (id)init {
     self = [super init];
@@ -73,6 +74,10 @@
     
     layer.hidden = _status == 0;
     label.textColor = _status == 0 ? [UIColor grayColor] : [UIColor colorWithRed:0.f green:0.4118 blue:0.3569 alpha:1.f];
+    
+    if (_isLayerHidden) {
+        layer.hidden = YES;
+    }
 }
 
 - (void)changeStatus:(NSInteger)s {
@@ -80,6 +85,10 @@
     layer.hidden = _status == 0;
     UILabel* label = [self viewWithTag:-1];
     label.textColor = _status == 0 ? [UIColor grayColor] : [UIColor colorWithRed:0.f green:0.4118 blue:0.3569 alpha:1.f];
+    
+    if (_isLayerHidden) {
+        layer.hidden = YES;
+    }
 }
 
 + (CGSize)preferredSize {

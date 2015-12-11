@@ -14,6 +14,7 @@
 
 #import "PersonalCentreTmpViewController.h"
 #import "PersonalCentreOthersDelegate.h"
+#import "MessageFriendsCell.h"
 
 @interface FriendsTableDelegate ()
 @property (nonatomic, weak, readonly) LoginModel* lm;
@@ -84,40 +85,18 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"friends cell"];
+    MessageFriendsCell* cell = [tableView dequeueReusableCellWithIdentifier:@"friend cell"];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"friends cell"];
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MessageFriendsCell" owner:self options:nil];
+        cell = [nib objectAtIndex:0];
     }
     
-    cell.imageView.layer.cornerRadius = cell.imageView.bounds.size.width / 2;
-    cell.imageView.clipsToBounds = YES;
-   
     NSDictionary* tmp = [data_arr objectAtIndex:indexPath.row];
-    cell.textLabel.text = [tmp objectForKey:@"screen_name"];
-    cell.detailTextLabel.text = [tmp objectForKey:@"role_tag"];
-    
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
-    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-    NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"User"] ofType:@"png"];
-    
-    UIImage* userImg = [TmpFileStorageModel enumImageWithName:[tmp objectForKey:@"screen_photo"] withDownLoadFinishBolck:^(BOOL success, UIImage *user_img) {
-        if (success) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (cell) {
-                    cell.imageView.image = user_img;
-                    NSLog(@"owner img download success");
-                }
-            });
-        } else {
-            NSLog(@"down load owner image");
-        }
-    }];
-    
-    if (userImg == nil) {
-        userImg = [UIImage imageNamed:filePath];
-    }
-    [cell.imageView setImage:userImg];
+    [cell setUserScreenPhoto:[tmp objectForKey:@"screen_photo"]];
+    [cell setRelationship:2];
+    [cell setUserRoleTag:[tmp objectForKey:@"role_tag"]];
+    [cell setUserScreenName:[tmp objectForKey:@"screen_name"]];
     
     return cell;
 }

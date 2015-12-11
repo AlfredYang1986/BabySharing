@@ -26,6 +26,7 @@
 
 @synthesize margin_to_edge = _margin_to_edge;
 @synthesize margin_between_items = _margin_between_items;
+@synthesize isLayerHidden = _isLayerHidden;
 
 - (id)init {
     self = [super init];
@@ -91,12 +92,20 @@
     }
 }
 
+- (void)setItemLayerHidden:(BOOL)h {
+    _isLayerHidden = h;
+    for (SearchSegItem* iter in [self getSegItems]) {
+        iter.isLayerHidden = h;
+    }
+}
+
 - (void)addItemWithTitle:(NSString *)title {
     CGSize sz = [SearchSegItem preferredSize];
     SearchSegItem* item = [[SearchSegItem alloc]initWithFrame:CGRectMake(0, 0, sz.width, sz.height)];
     item.title = title;
     item.status = 0;
     item.tag = [self getSegItemsCount] + 1;
+    item.isLayerHidden = _isLayerHidden;
     
     UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(segSelected:)];
     [item addGestureRecognizer:tap];

@@ -12,6 +12,7 @@
 
 @property (strong, nonatomic, setter=changeItemTitle:) NSString* title;
 @property (nonatomic, setter=changeStatus:) NSInteger status;
+@property (nonatomic) BOOL isLayerHidden;
 
 + (CGSize)preferredSize;
 @end

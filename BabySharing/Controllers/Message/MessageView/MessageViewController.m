@@ -17,15 +17,16 @@
 #import "UserChatController.h"
 #import "Targets.h"
 //#import "HomeSegControl.h"
-#import "DongDaSearchBar.h"
+//#import "DongDaSearchBar.h"
 #import "SearchSegView.h"
 #import "SearchSegView2.h"
 #import "DONNotificationDelegate.h"
 
-@interface MessageViewController () <UISearchBarDelegate, /*HomeSegControlDelegate,*/ DongDaSearchBarDelegate, SearchSegViewDelegate>
+@interface MessageViewController () <UISearchBarDelegate, /*HomeSegControlDelegate, DongDaSearchBarDelegate,*/ SearchSegViewDelegate>
 @property (strong, nonatomic) UITableView *friendsQueryView;
 @property (strong, nonatomic) SearchSegView2 *friendSeg;
-@property (strong, nonatomic) DongDaSearchBar *friendsSearchBar;
+//@property (strong, nonatomic) DongDaSearchBar *friendsSearchBar;
+@property (strong, nonatomic) UISearchBar *friendsSearchBar;
 
 @property (weak, nonatomic, readonly) ConnectionModel *cm;
 @property (weak, nonatomic, readonly) MessageModel *mm;
@@ -78,14 +79,20 @@
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     _friendSeg = [[SearchSegView2 alloc]initWithFrame:CGRectMake(0, 0, width, 44)];
    
+    _friendSeg.isLayerHidden = YES;
     [_friendSeg addItemWithTitle:@"好友"];
     [_friendSeg addItemWithTitle:@"关注"];
     [_friendSeg addItemWithTitle:@"粉丝"];
    
     _friendSeg.delegate = self;
+    _friendSeg.selectedIndex = 0;
+    _friendSeg.margin_between_items = 20;
+    _friendSeg.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:_friendSeg];
     
-    _friendsSearchBar = [[DongDaSearchBar alloc]init];
+//    _friendsSearchBar = [[DongDaSearchBar alloc]init];
+    _friendsSearchBar = [[UISearchBar alloc]init];
+    _friendsSearchBar.backgroundColor = [UIColor whiteColor];
     _friendsSearchBar.delegate = self;
     [self.view addSubview:_friendsSearchBar];
     
@@ -143,17 +150,20 @@
     offset_y = 20 + 44;
 
 #define SEARCH_BAR_HEIGHT   44
-#define SEARCH_BAR_MARGIN_TOP 10
-#define SEARCH_BAR_MARGIN_BOT 10
+#define SEARCH_BAR_MARGIN_TOP 0
+#define SEARCH_BAR_MARGIN_BOT 0
 
     offset_y += SEARCH_BAR_MARGIN_TOP;
     _friendsSearchBar.frame = CGRectMake(offset_x, offset_y, width, SEARCH_BAR_HEIGHT);
     offset_y += SEARCH_BAR_HEIGHT;
     offset_y += SEARCH_BAR_MARGIN_BOT;
 
-#define SEGAMENT_HEGHT      29
+#define SEGAMENT_HEGHT      44
     _friendSeg.frame = CGRectMake(offset_x, offset_y, width, SEGAMENT_HEGHT);
     offset_y += SEGAMENT_HEGHT;
+    
+#define SEGAMENT_MARGIN_BOTTOM  8
+    offset_y += SEGAMENT_MARGIN_BOTTOM;
     
     CGFloat height_last = height - offset_y;
     _friendsQueryView.frame = CGRectMake(offset_x, offset_y, width, height_last);
@@ -265,6 +275,8 @@
     NSLog(@"seg changes");
     if (seg == sg) {
         [self valueHasChanged:seg];
+    } else if (seg == _friendSeg) {
+        [self friendSegValueChanged:nil];
     }
 }
 

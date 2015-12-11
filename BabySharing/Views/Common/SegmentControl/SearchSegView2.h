@@ -15,6 +15,7 @@
 @property (nonatomic, getter=getSegItemsCount, readonly) NSInteger count;
 @property (nonatomic, getter=getSegSelectedIndex, setter=setSegSelectedIndex:) NSInteger selectedIndex;
 @property (nonatomic, weak) id<SearchSegViewDelegate> delegate;
+@property (nonatomic, setter=setItemLayerHidden:) BOOL isLayerHidden;
 
 // view location property
 @property (nonatomic) CGFloat margin_to_edge;

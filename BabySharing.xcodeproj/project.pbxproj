@@ -106,6 +106,8 @@
 		EE9633D31B92EBE000DB4EA5 /* PrivacySettingController.mm in Sources */ = {isa = PBXBuildFile; fileRef = EE9633D21B92EBE000DB4EA5 /* PrivacySettingController.mm */; };
 		EE96763F1B7C3D5C00445254 /* CycleDescriptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE96763E1B7C3D5C00445254 /* CycleDescriptionCell.m */; };
 		EE9676411B7C3D7700445254 /* CycleDescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE9676401B7C3D7700445254 /* CycleDescriptionCell.xib */; };
+		EE968D071C1AB0700063362E /* MessageFriendsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE968D051C1AB0700063362E /* MessageFriendsCell.m */; };
+		EE968D081C1AB0700063362E /* MessageFriendsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE968D061C1AB0700063362E /* MessageFriendsCell.xib */; };
 		EE97440E1B78699A00E81A70 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = EE97440D1B78699A00E81A70 /* Reachability.m */; };
 		EE9744171B78886300E81A70 /* MessageNotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9744151B78886300E81A70 /* MessageNotificationCell.m */; };
 		EE97441F1B78944600E81A70 /* MessageNotificationDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE97441D1B78944600E81A70 /* MessageNotificationDetailCell.xib */; };
@@ -445,6 +447,9 @@
 		EE96763D1B7C3D5C00445254 /* CycleDescriptionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleDescriptionCell.h; sourceTree = "<group>"; };
 		EE96763E1B7C3D5C00445254 /* CycleDescriptionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleDescriptionCell.m; sourceTree = "<group>"; };
 		EE9676401B7C3D7700445254 /* CycleDescriptionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CycleDescriptionCell.xib; sourceTree = "<group>"; };
+		EE968D041C1AB0700063362E /* MessageFriendsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageFriendsCell.h; sourceTree = "<group>"; };
+		EE968D051C1AB0700063362E /* MessageFriendsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageFriendsCell.m; sourceTree = "<group>"; };
+		EE968D061C1AB0700063362E /* MessageFriendsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageFriendsCell.xib; sourceTree = "<group>"; };
 		EE97440C1B78699A00E81A70 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		EE97440D1B78699A00E81A70 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		EE9744141B78886300E81A70 /* MessageNotificationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageNotificationCell.h; sourceTree = "<group>"; };
@@ -1113,6 +1118,7 @@
 		EE7EB54C1B46309D003281F7 /* Message */ = {
 			isa = PBXGroup;
 			children = (
+				EE968D031C1AAFA90063362E /* MessageFriendsCell */,
 				EE9F736A1B85763200F800DC /* MessageChatGroupHeader */,
 				EE9744131B78884E00E81A70 /* MessageNotificationCell */,
 				EE7EB54D1B4630C0003281F7 /* MessageViewCell.h */,
@@ -1187,6 +1193,16 @@
 				EE9676401B7C3D7700445254 /* CycleDescriptionCell.xib */,
 			);
 			path = CycleDescription;
+			sourceTree = "<group>";
+		};
+		EE968D031C1AAFA90063362E /* MessageFriendsCell */ = {
+			isa = PBXGroup;
+			children = (
+				EE968D041C1AB0700063362E /* MessageFriendsCell.h */,
+				EE968D051C1AB0700063362E /* MessageFriendsCell.m */,
+				EE968D061C1AB0700063362E /* MessageFriendsCell.xib */,
+			);
+			path = MessageFriendsCell;
 			sourceTree = "<group>";
 		};
 		EE97440B1B78699A00E81A70 /* Reachability */ = {
@@ -2571,6 +2587,7 @@
 				EE79105C1B84212A005E455B /* ProfileOthersOverView.xib in Resources */,
 				EEC980B31B8EB9EA0087E5A7 /* status-bar-pattern-default.jpg in Resources */,
 				EE79105B1B842105005E455B /* ProfileOverView.xib in Resources */,
+				EE968D081C1AB0700063362E /* MessageFriendsCell.xib in Resources */,
 				EEBE1B901C17D2F400EAA9D2 /* UserSearch.storyboard in Resources */,
 				EEC980B51B8EB9EA0087E5A7 /* status-bar-progress.png in Resources */,
 				EEA1F5531C169106009B8724 /* FoundSearch.storyboard in Resources */,
@@ -2687,6 +2704,7 @@
 				EE76398A1B956CFB0025A56D /* CellConstructParameters.m in Sources */,
 				EE8B1D8F1C084B8400056AC8 /* FixBackGroundSegueController.mm in Sources */,
 				EE386FB31C08771A007AB94B /* FixBkgHelper.m in Sources */,
+				EE968D071C1AB0700063362E /* MessageFriendsCell.m in Sources */,
 				EE9633CD1B92BB0F00DB4EA5 /* AboutViewController.m in Sources */,
 				EEAACD131B44E90400D05C0B /* ProfileDetailLocationCell.m in Sources */,
 				EEAACCD51B44E90400D05C0B /* CurrentToken.m in Sources */,
