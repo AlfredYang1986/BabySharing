@@ -221,7 +221,11 @@
         [view show];
         return;
     }
-  
+ 
+    for (ContentCardView* iter in queryViewLst) {
+        iter.queryView.layer.hidden = NO;
+    }
+    
     ContentCardView* tmp = [queryViewLst lastObject];
     
     CGFloat width = [UIScreen mainScreen].bounds.size.width - 2 * HEADER_MARGIN_TO_SCREEN;
@@ -229,12 +233,12 @@
     tmp.frame = CGRectMake(8 + 2 * 4, CONTENT_START_POINT + 2 * (size.height + 8), size.width - 2 * 8, size.height);
     tmp.queryView.tag = 2 + _current_index;
     
-    if (tmp.tag == [_delegate count]) {
-//        tmp.hidden = YES;
+    if (tmp.queryView.tag == [_delegate count]) {
+        tmp.hidden = YES;
     } else {
         [tmp layoutSubviews];
         [tmp.queryView reloadData];
-//        tmp.hidden = NO;
+        tmp.hidden = NO;
     }
 
     isAnimation = YES;
@@ -262,7 +266,7 @@
                                       [queryViewLst removeObject:head];
                                       [queryViewLst addObject:head];
                                       _current_index += 1;
-//                                      head.hidden = YES;
+                                      head.hidden = YES;
                                       isAnimation = NO;
 
                                       [self.view bringSubviewToFront:queryViewLst.firstObject];
@@ -277,6 +281,10 @@
         [view show];
         return;
     }
+
+    for (ContentCardView* iter in queryViewLst) {
+        iter.queryView.layer.hidden = NO;
+    }
     
     ContentCardView* tmp = [queryViewLst lastObject];
     
@@ -286,7 +294,7 @@
     tmp.queryView.tag = -1 + _current_index;
     [tmp layoutSubviews];
     [tmp.queryView reloadData];
-//    tmp.hidden = NO;
+    tmp.hidden = NO;
 
     isAnimation = YES;
     [queryViewLst removeObject:tmp];
@@ -311,7 +319,7 @@
                                       
                                       _current_index -= 1;
                                       UIView* tmp = [queryViewLst lastObject];
-//                                      tmp.hidden = YES;
+                                      tmp.hidden = YES;
                                       isAnimation = NO;
 
                                       [self.view bringSubviewToFront:queryViewLst.firstObject];
