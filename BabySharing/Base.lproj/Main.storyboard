@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="cMB-n2-C0T">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="cMB-n2-C0T">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -1026,7 +1026,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
         <!--Tags-->
         <scene sceneID="nMh-5O-HfU">
             <objects>
-                <viewController id="7gh-NJ-uaY" customClass="HomeTagsController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TagSearch" id="7gh-NJ-uaY" customClass="HomeTagsController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bhM-nC-JsR"/>
                         <viewControllerLayoutGuide type="bottom" id="fwt-m1-AVh"/>

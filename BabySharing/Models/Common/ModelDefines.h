@@ -38,8 +38,8 @@ static const NSString* kUserPostOwnerConnectionsFollowed = @"kUserPostOwnerConne
 static const NSString* kUserPostOwnerConnectionsFriends = @"kUserPostOwnerConnectionsFriends";
 
 #pragma mark -- HOST DOMAIN
-#define HOST_DOMAIN                     @"http://www.altlys.com:9000/"
-//#define HOST_DOMAIN                     @"http://192.168.1.103:9000/"
+//#define HOST_DOMAIN                     @"http://www.altlys.com:9000/"
+#define HOST_DOMAIN                     @"http://192.168.1.102:9000/"
 //#define HOST_DOMAIN_SENDBOX             @"http://192.168.1.105:9000/"
 
 #pragma mark -- DOWNLOAD
@@ -111,6 +111,9 @@ static const NSString* kUserPostOwnerConnectionsFriends = @"kUserPostOwnerConnec
 #pragma mark -- TAGS QUERY
 #define TAG_HOST_DOMAIN                     [HOST_DOMAIN stringByAppendingString:@"tags/"]
 #define TAG_QUERY                           @"queryContentsWithTag"
+#define TAG_RECOMMAND_QUERY                 [TAG_HOST_DOMAIN stringByAppendingString:@"queryRecommandTags"]
+#define TAG_PREVIEW_QUERY                   [TAG_HOST_DOMAIN stringByAppendingString:@"queryTagPreViewWithTagName"]
+#define TAG_FOUND_SEARCH                    [TAG_HOST_DOMAIN stringByAppendingString:@"queryFoundSearchTagData"]
 
 #pragma mark -- MESSAGE SNEDBOX
 //#define MESSAGES_HOST_DOMAIN_SENDBOX        [HOST_DOMAIN_SENDBOX stringByAppendingString:@"messages/"]
@@ -154,5 +157,6 @@ static const NSString* kUserPostOwnerConnectionsFriends = @"kUserPostOwnerConnec
 #define LOCALDB_COLLECTION_QUERY            @"collectionQuery.sqlite"
 #define LOCALDB_RELATIONSHIP                @"Relationship.sqlite"
 #define LOCALDB_USERSETTING                 @"systemSetting.sqlite"
+#define LOCALDB_FOUND_SEARCH                @"foundSearch.sqlite"
 //#define LOCALDB_CHAT                      @"chatData.sqlite"
 //#define LOCALDB_GROUP                     @"groupData.sqlite"

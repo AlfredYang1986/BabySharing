@@ -12,6 +12,11 @@
 #import "FoundHotTagsCell.h"
 #import "FoundSearchResultCell.h"
 
+#import "AppDelegate.h"
+#import "FoundSearchModel.h"
+
+#import "HomeTagsController.h"
+
 #define SEARCH_BAR_HEIGHT   44
 #define SEG_BAR_HEIGHT      44
 #define MARGIN              8
@@ -19,10 +24,12 @@
 #define STATUS_BAR_HEIGHT   20
 #define TAB_BAR_HEIGHT      49
 
-@interface FoundSearchController () <UITableViewDelegate, UITableViewDataSource>
+@interface FoundSearchController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIView *inputView;
 @property (weak, nonatomic) IBOutlet UITableView *queryView;
 @property (strong, nonatomic) SearchSegView2* seg;
+@property (weak, nonatomic) FoundSearchModel* fm;
+@property (weak, nonatomic) IBOutlet UITextField *inputArea;
 @end
 
 @implementation FoundSearchController {
@@ -32,6 +39,8 @@
 @synthesize inputView = _inputView;
 @synthesize queryView = _queryView;
 @synthesize seg = _seg;
+@synthesize fm = _fm;
+@synthesize inputArea = _inputArea;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -78,6 +87,24 @@
     bkView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:bkView];
     [self.view bringSubviewToFront:bkView];
+
+    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    _fm = app.fm;
+    
+    [self asyncQueryFoundSearchData];
+    _inputArea.delegate = self;
+}
+
+- (void)asyncQueryFoundSearchData {
+    dispatch_queue_t ap = dispatch_queue_create("found search init", nil);
+    dispatch_async(ap, ^{
+        [_fm queryRecommandTagsWithFinishBlock:^(BOOL success, NSArray* arr) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [_queryView reloadData];
+            });
+
+        }];
+    });
 }
 
 - (void)didReceiveMemoryWarning {
@@ -117,7 +144,7 @@
     if (section == 0) {
         return 1;
     } else {
-        return 2;
+        return _fm.previewDic.count;
     }
 }
 
@@ -141,6 +168,17 @@
     if (indexPath.section == 0) {
         return NO;
     } else {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+      
+        FoundSearchResultCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+        
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        HomeTagsController* svc = [storyboard instantiateViewControllerWithIdentifier:@"TagSearch"];
+        svc.tag_name = cell.tag_name;
+        svc.tag_type = cell.tag_type.integerValue;
+        
+        [self.navigationController pushViewController:svc animated:YES];
+        
         return YES;
     }
 }
@@ -155,8 +193,8 @@
     if (cell == nil) {
         cell = [[FoundHotTagsCell alloc]init];
     }
-    
-    [cell setHotTags:nil];
+   
+    [cell setHotTags:_fm.recommandsdata];
     return cell;
 }
 
@@ -167,21 +205,16 @@
         NSArray* nib = [[NSBundle mainBundle] loadNibNamed:@"FoundSearchResultCell" owner:self options:nil];
         cell = [nib firstObject];
     }
-    
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
-    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-    
-    UIImage* image0 = [UIImage imageNamed:[resourceBundle pathForResource:@"tag-time" ofType:@"png"]];
-    
-    [cell setSearchResultCount:188];
-    [cell setSearchTag:@"BIRTHDAY" andImage:image0];
-    [cell setUserContentImages:@[@"", @"", @"", @""]];
+//    [cell setSearchResultCount:188];
+    NSDictionary* dic = [_fm.previewDic objectAtIndex:index];
+    [cell setSearchTag:[dic objectForKey:@"tag_name"] andType:[dic objectForKey:@"type"]];
+    [cell setUserContentImages:[dic objectForKey:@"content"]];
     
     return cell;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return _fm.previewDic.count == 0 ? 1 : 2;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -227,5 +260,16 @@
     UIGraphicsEndImageContext();
     
     return img;
+}
+
+#pragma mark -- text field delegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+    [_fm queryFoundTagSearchWithInput:textField.text andFinishBlock:^(BOOL success, NSDictionary *preview) {
+        [_queryView reloadData];
+    }];
+    
+    [textField resignFirstResponder];
+    return YES;
 }
 @end

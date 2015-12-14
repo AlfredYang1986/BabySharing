@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15C50" minimumToolsVersion="Xcode 7.0">
+    <entity name="PreviewContent" representedClassName="PreviewContent" syncable="YES">
+        <attribute name="post_id" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PreviewItem" inverseName="content" inverseEntity="PreviewItem" syncable="YES"/>
+        <relationship name="tag" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PreviewTag" inverseName="contents" inverseEntity="PreviewTag" syncable="YES"/>
+    </entity>
+    <entity name="PreviewItem" representedClassName="PreviewItem" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="content" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PreviewContent" inverseName="items" inverseEntity="PreviewContent" syncable="YES"/>
+    </entity>
+    <entity name="PreviewTag" representedClassName="PreviewTag" syncable="YES">
+        <attribute name="tag_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tag_type" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="contents" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PreviewContent" inverseName="tag" inverseEntity="PreviewContent" syncable="YES"/>
+    </entity>
+    <entity name="RecommandTag" representedClassName="RecommandTag" syncable="YES">
+        <attribute name="tag_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tag_type" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="RecommandTag" positionX="-4295" positionY="-4599" width="128" height="73"/>
+        <element name="PreviewTag" positionX="-4493" positionY="-4426" width="128" height="88"/>
+        <element name="PreviewContent" positionX="-4241" positionY="-4441" width="128" height="88"/>
+        <element name="PreviewItem" positionX="-3989" positionY="-4437" width="128" height="88"/>
+    </elements>
+</model>

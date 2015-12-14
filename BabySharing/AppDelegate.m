@@ -30,6 +30,8 @@
 @synthesize cm = _cm;
 @synthesize sm = _sm;
 
+@synthesize fm = _fm;
+
 @synthesize apns_token = _apns_token;
 
 @synthesize reachability = _reachability;
@@ -41,6 +43,12 @@
     if (!_cm) _cm = [[ConnectionModel alloc]initWithDelegate:self];
     if (!_cqm) _cqm = [[CollectionQueryModel alloc]initWithDelegate:self];
     if (!_sm) _sm = [[SystemSettingModel alloc]initWithDelegate:self];
+    
+    [self createSearchModel];
+}
+
+- (void)createSearchModel {
+    if (!_fm) _fm = [[FoundSearchModel alloc]initWithDelegate:self];
 }
 
 - (void)createMessageAndNotificationModel {

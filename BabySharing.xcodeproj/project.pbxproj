@@ -17,6 +17,17 @@
 		EE0DCE7E1C081FD400B5386B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE0DCE7D1C081FD400B5386B /* LaunchScreen.xib */; };
 		EE20BED41B6F430D00DE8455 /* OwnerQueryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EE20BED31B6F430D00DE8455 /* OwnerQueryModel.m */; };
 		EE262C991C1958F8008DCC4E /* DONNotificationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EE262C981C1958F8008DCC4E /* DONNotificationDelegate.m */; };
+		EE26D7621C1EB8AA00342E02 /* FoundSearchData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EE26D7601C1EB8AA00342E02 /* FoundSearchData.xcdatamodeld */; };
+		EE26D7731C1EBA2700342E02 /* PreviewItem+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = EE26D7641C1EBA2700342E02 /* PreviewItem+CoreDataProperties.m */; };
+		EE26D7741C1EBA2700342E02 /* PreviewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = EE26D7661C1EBA2700342E02 /* PreviewItem.m */; };
+		EE26D7751C1EBA2700342E02 /* RecommandTag+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = EE26D7681C1EBA2700342E02 /* RecommandTag+CoreDataProperties.m */; };
+		EE26D7761C1EBA2700342E02 /* RecommandTag.m in Sources */ = {isa = PBXBuildFile; fileRef = EE26D76A1C1EBA2700342E02 /* RecommandTag.m */; };
+		EE26D7771C1EBA2700342E02 /* PreviewTag+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = EE26D76C1C1EBA2700342E02 /* PreviewTag+CoreDataProperties.m */; };
+		EE26D7781C1EBA2700342E02 /* PreviewTag.m in Sources */ = {isa = PBXBuildFile; fileRef = EE26D76E1C1EBA2700342E02 /* PreviewTag.m */; };
+		EE26D7791C1EBA2700342E02 /* PreviewContent+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = EE26D7701C1EBA2700342E02 /* PreviewContent+CoreDataProperties.m */; };
+		EE26D77A1C1EBA2700342E02 /* PreviewContent.m in Sources */ = {isa = PBXBuildFile; fileRef = EE26D7721C1EBA2700342E02 /* PreviewContent.m */; };
+		EE26D77D1C1EBB5600342E02 /* RecommandTag+ContextOpt.m in Sources */ = {isa = PBXBuildFile; fileRef = EE26D77C1C1EBB5600342E02 /* RecommandTag+ContextOpt.m */; };
+		EE26D7801C1EC70F00342E02 /* FoundSearchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EE26D77F1C1EC70F00342E02 /* FoundSearchModel.m */; };
 		EE2A26DB1C02F7950080FB1B /* HomeViewTableCellDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2A26DA1C02F7950080FB1B /* HomeViewTableCellDelegate.m */; };
 		EE2D4B781B525E0A00B58A1F /* PostInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2D4B681B525E0A00B58A1F /* PostInputViewController.m */; };
 		EE2D4B791B525E0A00B58A1F /* PostPreView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE2D4B691B525E0A00B58A1F /* PostPreView.storyboard */; };
@@ -316,6 +327,27 @@
 		EE20BED31B6F430D00DE8455 /* OwnerQueryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OwnerQueryModel.m; sourceTree = "<group>"; };
 		EE262C971C1958F8008DCC4E /* DONNotificationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DONNotificationDelegate.h; path = BabySharing/Controllers/Message/NotificationsView/DONNotificationDelegate.h; sourceTree = SOURCE_ROOT; };
 		EE262C981C1958F8008DCC4E /* DONNotificationDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DONNotificationDelegate.m; path = BabySharing/Controllers/Message/NotificationsView/DONNotificationDelegate.m; sourceTree = SOURCE_ROOT; };
+		EE26D7611C1EB8AA00342E02 /* FoundSearchData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FoundSearchData.xcdatamodel; sourceTree = "<group>"; };
+		EE26D7631C1EBA2700342E02 /* PreviewItem+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PreviewItem+CoreDataProperties.h"; sourceTree = "<group>"; };
+		EE26D7641C1EBA2700342E02 /* PreviewItem+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PreviewItem+CoreDataProperties.m"; sourceTree = "<group>"; };
+		EE26D7651C1EBA2700342E02 /* PreviewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewItem.h; sourceTree = "<group>"; };
+		EE26D7661C1EBA2700342E02 /* PreviewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewItem.m; sourceTree = "<group>"; };
+		EE26D7671C1EBA2700342E02 /* RecommandTag+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RecommandTag+CoreDataProperties.h"; sourceTree = "<group>"; };
+		EE26D7681C1EBA2700342E02 /* RecommandTag+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RecommandTag+CoreDataProperties.m"; sourceTree = "<group>"; };
+		EE26D7691C1EBA2700342E02 /* RecommandTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommandTag.h; sourceTree = "<group>"; };
+		EE26D76A1C1EBA2700342E02 /* RecommandTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommandTag.m; sourceTree = "<group>"; };
+		EE26D76B1C1EBA2700342E02 /* PreviewTag+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PreviewTag+CoreDataProperties.h"; sourceTree = "<group>"; };
+		EE26D76C1C1EBA2700342E02 /* PreviewTag+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PreviewTag+CoreDataProperties.m"; sourceTree = "<group>"; };
+		EE26D76D1C1EBA2700342E02 /* PreviewTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewTag.h; sourceTree = "<group>"; };
+		EE26D76E1C1EBA2700342E02 /* PreviewTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewTag.m; sourceTree = "<group>"; };
+		EE26D76F1C1EBA2700342E02 /* PreviewContent+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PreviewContent+CoreDataProperties.h"; sourceTree = "<group>"; };
+		EE26D7701C1EBA2700342E02 /* PreviewContent+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PreviewContent+CoreDataProperties.m"; sourceTree = "<group>"; };
+		EE26D7711C1EBA2700342E02 /* PreviewContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewContent.h; sourceTree = "<group>"; };
+		EE26D7721C1EBA2700342E02 /* PreviewContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewContent.m; sourceTree = "<group>"; };
+		EE26D77B1C1EBB5600342E02 /* RecommandTag+ContextOpt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RecommandTag+ContextOpt.h"; sourceTree = "<group>"; };
+		EE26D77C1C1EBB5600342E02 /* RecommandTag+ContextOpt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RecommandTag+ContextOpt.m"; sourceTree = "<group>"; };
+		EE26D77E1C1EC70F00342E02 /* FoundSearchModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoundSearchModel.h; sourceTree = "<group>"; };
+		EE26D77F1C1EC70F00342E02 /* FoundSearchModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoundSearchModel.m; sourceTree = "<group>"; };
 		EE2A26D91C02F7950080FB1B /* HomeViewTableCellDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewTableCellDelegate.h; sourceTree = "<group>"; };
 		EE2A26DA1C02F7950080FB1B /* HomeViewTableCellDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewTableCellDelegate.m; sourceTree = "<group>"; };
 		EE2D4B671B525E0A00B58A1F /* PostInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostInputViewController.h; sourceTree = "<group>"; };
@@ -946,6 +978,42 @@
 			path = Privacy;
 			sourceTree = "<group>";
 		};
+		EE26D75E1C1EB82200342E02 /* FoundSearch */ = {
+			isa = PBXGroup;
+			children = (
+				EE26D75F1C1EB88E00342E02 /* LocalModel */,
+				EE26D77E1C1EC70F00342E02 /* FoundSearchModel.h */,
+				EE26D77F1C1EC70F00342E02 /* FoundSearchModel.m */,
+			);
+			path = FoundSearch;
+			sourceTree = "<group>";
+		};
+		EE26D75F1C1EB88E00342E02 /* LocalModel */ = {
+			isa = PBXGroup;
+			children = (
+				EE26D7631C1EBA2700342E02 /* PreviewItem+CoreDataProperties.h */,
+				EE26D7641C1EBA2700342E02 /* PreviewItem+CoreDataProperties.m */,
+				EE26D7651C1EBA2700342E02 /* PreviewItem.h */,
+				EE26D7661C1EBA2700342E02 /* PreviewItem.m */,
+				EE26D7671C1EBA2700342E02 /* RecommandTag+CoreDataProperties.h */,
+				EE26D7681C1EBA2700342E02 /* RecommandTag+CoreDataProperties.m */,
+				EE26D7691C1EBA2700342E02 /* RecommandTag.h */,
+				EE26D76A1C1EBA2700342E02 /* RecommandTag.m */,
+				EE26D76B1C1EBA2700342E02 /* PreviewTag+CoreDataProperties.h */,
+				EE26D76C1C1EBA2700342E02 /* PreviewTag+CoreDataProperties.m */,
+				EE26D76D1C1EBA2700342E02 /* PreviewTag.h */,
+				EE26D76E1C1EBA2700342E02 /* PreviewTag.m */,
+				EE26D76F1C1EBA2700342E02 /* PreviewContent+CoreDataProperties.h */,
+				EE26D7701C1EBA2700342E02 /* PreviewContent+CoreDataProperties.m */,
+				EE26D7711C1EBA2700342E02 /* PreviewContent.h */,
+				EE26D7721C1EBA2700342E02 /* PreviewContent.m */,
+				EE26D7601C1EB8AA00342E02 /* FoundSearchData.xcdatamodeld */,
+				EE26D77B1C1EBB5600342E02 /* RecommandTag+ContextOpt.h */,
+				EE26D77C1C1EBB5600342E02 /* RecommandTag+ContextOpt.m */,
+			);
+			path = LocalModel;
+			sourceTree = "<group>";
+		};
 		EE2D4B661B525E0A00B58A1F /* PostPreViewV1 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1564,6 +1632,7 @@
 		EEAACB641B44E90300D05C0B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				EE26D75E1C1EB82200342E02 /* FoundSearch */,
 				EEDCF6841B9AB3C6005F4F4D /* SystemSetteing */,
 				EE97440B1B78699A00E81A70 /* Reachability */,
 				EE76A5691B72019D00036747 /* ConnectionModel */,
@@ -2680,6 +2749,7 @@
 				EEB4C8B31BFC334B0023E2AD /* UserHomeViewDataDelegate.m in Sources */,
 				EE0CEC541BDB13070016B6F4 /* AlreadLogedViewController.m in Sources */,
 				EE7910431B841AA0005E455B /* AlbumTableCell.m in Sources */,
+				EE26D77A1C1EBA2700342E02 /* PreviewContent.m in Sources */,
 				EE7910421B841A92005E455B /* DropDownView.m in Sources */,
 				EE7910411B841A7B005E455B /* TagQueryCell.m in Sources */,
 				EE76398D1B95805F0025A56D /* CollectionQueryModel.m in Sources */,
@@ -2700,6 +2770,7 @@
 				EEAACCE21B44E90400D05C0B /* QueryContent+ContextOpt.m in Sources */,
 				EE87315E1B97E131004A25D8 /* WeiboFriendsDelegate.m in Sources */,
 				EEAACCCC1B44E90400D05C0B /* INTUSpringSolver.c in Sources */,
+				EE26D7801C1EC70F00342E02 /* FoundSearchModel.m in Sources */,
 				EE0CEC551BDB13070016B6F4 /* ChooseAreaViewController.m in Sources */,
 				EEDCF6A31B9ABE07005F4F4D /* SystemSettingModel.m in Sources */,
 				EEBE1B8E1C17D2E500EAA9D2 /* UserSearchController.m in Sources */,
@@ -2720,6 +2791,8 @@
 				EEBE1B6E1C17CA9400EAA9D2 /* SearchSegView2.m in Sources */,
 				EEDCF6881B9AB42B005F4F4D /* SystemSettingLocalModel.xcdatamodeld in Sources */,
 				EE2A26DB1C02F7950080FB1B /* HomeViewTableCellDelegate.m in Sources */,
+				EE26D7791C1EBA2700342E02 /* PreviewContent+CoreDataProperties.m in Sources */,
+				EE26D7771C1EBA2700342E02 /* PreviewTag+CoreDataProperties.m in Sources */,
 				EE6D6DB51B7B28A6004D29C8 /* WEPopoverContainerView.m in Sources */,
 				EEAACCD41B44E90400D05C0B /* CurrentToken+ContextOpt.m in Sources */,
 				EEBFFC1D1B916A0F005AAE36 /* PersonalSettingCell.m in Sources */,
@@ -2744,6 +2817,7 @@
 				EEAAA9771B77177C00BEDA6D /* Notifications.m in Sources */,
 				EE5D687B1B75B12B0067A2DF /* NotificationOwner+ContextOpt.m in Sources */,
 				EE5D68781B75A9FD0067A2DF /* Messages.m in Sources */,
+				EE26D7621C1EB8AA00342E02 /* FoundSearchData.xcdatamodeld in Sources */,
 				EE933CA81B997DAD00DA15DC /* VersionChangesController.m in Sources */,
 				EEAACCEF1B44E90400D05C0B /* ViewController.m in Sources */,
 				EEA1F5511C1690D1009B8724 /* FoundSearchController.m in Sources */,
@@ -2779,6 +2853,7 @@
 				EEAACCDD1B44E90400D05C0B /* LoginModel.m in Sources */,
 				EEA2017D1B744E59006B81E4 /* Friends.m in Sources */,
 				EEA8A60F1BFAC1F800130293 /* HomeViewFoundDelegateAndDatasource.m in Sources */,
+				EE26D7781C1EBA2700342E02 /* PreviewTag.m in Sources */,
 				EEE94E2B1B74BE910011321A /* PersonalCentreOthersDelegate.m in Sources */,
 				EEAACCD91B44E90400D05C0B /* Providers+ContextOpt.m in Sources */,
 				EEAAC8FE1B44E81A00D05C0B /* main.m in Sources */,
@@ -2788,6 +2863,7 @@
 				EE9633D01B92CA8200DB4EA5 /* NewMessageSettingController.mm in Sources */,
 				EEAACCE61B44E90400D05C0B /* QueryLikes.m in Sources */,
 				EE2D4B7F1B525E0A00B58A1F /* PhotoPublishController.m in Sources */,
+				EE26D7741C1EBA2700342E02 /* PreviewItem.m in Sources */,
 				EEE94E0C1B74A8C20011321A /* MesssageTableDelegate.m in Sources */,
 				EEE94E311B74BF870011321A /* ProfileOverView.m in Sources */,
 				EE2D4B7B1B525E0A00B58A1F /* PhotoAddTagController.m in Sources */,
@@ -2817,6 +2893,7 @@
 				EE76A5741B72056800036747 /* Following.m in Sources */,
 				EEAACCEC1B44E90400D05C0B /* MoviePlayTrait.m in Sources */,
 				EEAACCDC1B44E90400D05C0B /* RegTmpToken.m in Sources */,
+				EE26D7761C1EBA2700342E02 /* RecommandTag.m in Sources */,
 				EE9744171B78886300E81A70 /* MessageNotificationCell.m in Sources */,
 				EED5EABA1BD73710000AFF36 /* PhotoTagRoundPointLayer.m in Sources */,
 				EE2D4B7E1B525E0A00B58A1F /* PhotoPreViewEffectController.m in Sources */,
@@ -2832,6 +2909,7 @@
 				EEB812321B7AF2ED00BC0774 /* UserKids.m in Sources */,
 				EEBE1B871C17CB4E00EAA9D2 /* FoundHotTagsCell.m in Sources */,
 				EED774D71BABF86D001C9B57 /* HomeTagsController.m in Sources */,
+				EE26D7731C1EBA2700342E02 /* PreviewItem+CoreDataProperties.m in Sources */,
 				EEA1F54C1C169049009B8724 /* SearchViewController.m in Sources */,
 				EEAACCA11B44E90400D05C0B /* CVMovieController.m in Sources */,
 				EEB812311B7AF2ED00BC0774 /* DetailInfo.m in Sources */,
@@ -2839,6 +2917,7 @@
 				EEF538F51B525F7F009C8CB9 /* PostPreViewEffectController.m in Sources */,
 				EEE94E101B74A9320011321A /* AddingFriendsController.m in Sources */,
 				EE03E9831B4FABFB00F21EF5 /* AlbumModule.m in Sources */,
+				EE26D77D1C1EBB5600342E02 /* RecommandTag+ContextOpt.m in Sources */,
 				EEBE1B701C17CA9400EAA9D2 /* DongDaTabBarItem.m in Sources */,
 				EE817F491B79A78E00988734 /* UserChatController.m in Sources */,
 				EE76A5791B7205CF00036747 /* ConnectionOwner+ContextOpt.m in Sources */,
@@ -2848,6 +2927,7 @@
 				EEE94E1D1B74BE090011321A /* PersonalCenterOwnerDelegate.mm in Sources */,
 				EEAACCDB1B44E90400D05C0B /* RegTmpToken+ContextOpt.m in Sources */,
 				EEC980B01B8EB9EA0087E5A7 /* BWStatusBarOverlay.m in Sources */,
+				EE26D7751C1EBA2700342E02 /* RecommandTag+CoreDataProperties.m in Sources */,
 				EEAACCC41B44E90400D05C0B /* TabBarController.m in Sources */,
 				EEAACCE71B44E90400D05C0B /* QueryLocalModel.xcdatamodeld in Sources */,
 				EE9785AD1B9004CD00C454C5 /* CycleAddDescriptionViewController.m in Sources */,
@@ -3124,6 +3204,16 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
+		EE26D7601C1EB8AA00342E02 /* FoundSearchData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				EE26D7611C1EB8AA00342E02 /* FoundSearchData.xcdatamodel */,
+			);
+			currentVersion = EE26D7611C1EB8AA00342E02 /* FoundSearchData.xcdatamodel */;
+			path = FoundSearchData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
 		EE5D686A1B75A55A0067A2DF /* MessageAndNotificationModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (

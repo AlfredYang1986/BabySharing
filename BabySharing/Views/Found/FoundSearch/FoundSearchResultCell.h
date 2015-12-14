@@ -10,8 +10,12 @@
 
 @interface FoundSearchResultCell : UITableViewCell
 
+@property (strong, nonatomic) NSString* tag_name;
+@property (strong, nonatomic) NSNumber* tag_type;
+
 + (CGFloat)preferredHeight;
 - (void)setUserContentImages:(NSArray*)img_arr;
-- (void)setSearchTag:(NSString*)title andImage:(UIImage*)img;
+//- (void)setSearchTag:(NSString*)title andImage:(UIImage*)img;
+- (void)setSearchTag:(NSString*)title andType:(NSNumber*)type;
 - (void)setSearchResultCount:(NSInteger)count;
 @end

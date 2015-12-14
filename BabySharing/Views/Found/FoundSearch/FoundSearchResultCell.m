@@ -54,13 +54,14 @@
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
     for (int index = 0; index < MIN(RECOMMEND_COUNT, img_arr.count); ++index) {
 //        NSDictionary* iter = [img_arr objectAtIndex:index];
-        NSString* iter = [img_arr objectAtIndex:index];
+        NSDictionary* iter = [img_arr objectAtIndex:index];
+        NSArray* items = [iter objectForKey:@"items"];
+        NSDictionary* item = items.firstObject;
         
         UIImageView* tmp = (UIImageView*)[self viewWithTag:-1 - index];
         
         NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"User"] ofType:@"png"];
-//        NSString* photo_name = [iter objectForKey:@"screen_photo"];
-        NSString* photo_name = iter; // only for mock data
+        NSString* photo_name = [item objectForKey:@"name"];
         UIImage* userImg = [TmpFileStorageModel enumImageWithName:photo_name withDownLoadFinishBolck:^(BOOL success, UIImage *user_img) {
             if (success) {
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -81,15 +82,29 @@
     }
 }
 
-- (void)setSearchTag:(NSString*)title andImage:(UIImage*)icon {
+- (void)setSearchTag:(NSString*)title andType:(NSNumber*)type {
+    
+    _tag_name = title;
+    _tag_type = type;
+    
     UIFont* font = [UIFont systemFontOfSize:11.f];
     CGSize sz_font = [title sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
     CGSize sz = CGSizeMake(TAG_MARGIN + ICON_WIDTH + sz_font.width + TAG_MARGIN, TAG_HEIGHT);
     
     UIView* btn = [[UIView alloc]initWithFrame:CGRectMake(0, 0, sz.width, sz.height)];
+   
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+    
+    UIImage* image0 = [UIImage imageNamed:[resourceBundle pathForResource:@"tag-time" ofType:@"png"]];
+    UIImage* image1 = [UIImage imageNamed:[resourceBundle pathForResource:@"tag-location" ofType:@"png"]];
     
     UIImageView* img = [[UIImageView alloc]initWithFrame:CGRectMake(TAG_MARGIN / 2, TAG_MARGIN / 4, ICON_WIDTH, ICON_HEIGHT)];
-    img.image = icon;
+    if (type.integerValue == 0) {
+        img.image = image0;
+    } else {
+        img.image = image1;
+    }
     [btn addSubview:img];
     
     UILabel* label = [[UILabel alloc]init];
