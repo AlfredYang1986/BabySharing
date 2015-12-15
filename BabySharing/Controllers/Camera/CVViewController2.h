@@ -9,12 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "CameraActionProtocol.h"
 
-@protocol CapturePhotos <NSObject>
-
-- (void)didCapturePhotoInPath:(NSString*)path;
-- (void)didCapturePhoto:(UIImage*)img;
-
-@end
+//@protocol CapturePhotos <NSObject>
+//
+//- (void)didCapturePhotoInPath:(NSString*)path;
+//- (void)didCapturePhoto:(UIImage*)img;
+//
+//@end
 
 @interface CVViewController2 : UIViewController
 @property (weak, nonatomic) id<CameraActionProtocol> delegate;
