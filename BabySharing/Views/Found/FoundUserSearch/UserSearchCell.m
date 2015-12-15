@@ -92,12 +92,13 @@
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
     for (int index = 0; index < MIN(PREVIEW_IMG_COUNT, arr.count); ++index) {
         NSDictionary* iter = [arr objectAtIndex:index];
+        NSArray* items = [iter objectForKey:@"items"];
+        NSDictionary* item = items.firstObject;
         
         UIImageView* tmp = (UIImageView*)[self viewWithTag:-1 - index];
         
         NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"User"] ofType:@"png"];
-//        NSString* photo_name = [iter objectForKey:@"screen_photo"];
-        NSString* photo_name = @"test";//[iter objectForKey:@"screen_photo"]; // mock data for test
+        NSString* photo_name = [item objectForKey:@"name"];
         UIImage* userImg = [TmpFileStorageModel enumImageWithName:photo_name withDownLoadFinishBolck:^(BOOL success, UIImage *user_img) {
             if (success) {
                 dispatch_async(dispatch_get_main_queue(), ^{

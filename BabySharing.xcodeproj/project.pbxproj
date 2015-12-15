@@ -276,6 +276,7 @@
 		EEDCF69D1B9AB674005F4F4D /* UserSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDCF6991B9AB674005F4F4D /* UserSetting.m */; };
 		EEDCF6A01B9AB8DA005F4F4D /* UserSetting+ContextOpt.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDCF69F1B9AB8DA005F4F4D /* UserSetting+ContextOpt.m */; };
 		EEDCF6A31B9ABE07005F4F4D /* SystemSettingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDCF6A21B9ABE07005F4F4D /* SystemSettingModel.m */; };
+		EEE031141C1FBA9300F4D40A /* UserSearchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE031131C1FBA9300F4D40A /* UserSearchModel.m */; };
 		EEE94E0A1B74A8C20011321A /* FriendsTableDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE94E041B74A8C20011321A /* FriendsTableDelegate.m */; };
 		EEE94E0B1B74A8C20011321A /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE94E061B74A8C20011321A /* MessageViewController.m */; };
 		EEE94E0C1B74A8C20011321A /* MesssageTableDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE94E081B74A8C20011321A /* MesssageTableDelegate.m */; };
@@ -567,7 +568,6 @@
 		EEAACB611B44E90300D05C0B /* INTUSpringSolver.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = INTUSpringSolver.c; sourceTree = "<group>"; };
 		EEAACB621B44E90300D05C0B /* INTUSpringSolver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INTUSpringSolver.h; sourceTree = "<group>"; };
 		EEAACB631B44E90300D05C0B /* INTUVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INTUVector.h; sourceTree = "<group>"; };
-		EEAACB661B44E90300D05C0B /* ModelDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelDefines.h; sourceTree = "<group>"; };
 		EEAACB791B44E90300D05C0B /* CurrentToken+ContextOpt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CurrentToken+ContextOpt.h"; sourceTree = "<group>"; };
 		EEAACB7A1B44E90300D05C0B /* CurrentToken+ContextOpt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CurrentToken+ContextOpt.m"; sourceTree = "<group>"; };
 		EEAACB7B1B44E90300D05C0B /* CurrentToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentToken.h; sourceTree = "<group>"; };
@@ -826,6 +826,9 @@
 		EEDCF69F1B9AB8DA005F4F4D /* UserSetting+ContextOpt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UserSetting+ContextOpt.m"; sourceTree = "<group>"; };
 		EEDCF6A11B9ABE07005F4F4D /* SystemSettingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemSettingModel.h; sourceTree = "<group>"; };
 		EEDCF6A21B9ABE07005F4F4D /* SystemSettingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemSettingModel.m; sourceTree = "<group>"; };
+		EEE031121C1FBA9300F4D40A /* UserSearchModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSearchModel.h; sourceTree = "<group>"; };
+		EEE031131C1FBA9300F4D40A /* UserSearchModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSearchModel.m; sourceTree = "<group>"; };
+		EEE031151C1FD67C00F4D40A /* ModelDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelDefines.h; sourceTree = "<group>"; };
 		EEE94E031B74A8C20011321A /* FriendsTableDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsTableDelegate.h; sourceTree = "<group>"; };
 		EEE94E041B74A8C20011321A /* FriendsTableDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsTableDelegate.m; sourceTree = "<group>"; };
 		EEE94E051B74A8C20011321A /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
@@ -1632,6 +1635,7 @@
 		EEAACB641B44E90300D05C0B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				EEE031111C1FBA8300F4D40A /* UserSearch */,
 				EE26D75E1C1EB82200342E02 /* FoundSearch */,
 				EEDCF6841B9AB3C6005F4F4D /* SystemSetteing */,
 				EE97440B1B78699A00E81A70 /* Reachability */,
@@ -1650,7 +1654,7 @@
 		EEAACB651B44E90300D05C0B /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				EEAACB661B44E90300D05C0B /* ModelDefines.h */,
+				EEE031151C1FD67C00F4D40A /* ModelDefines.h */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -2388,6 +2392,15 @@
 			path = LocalModel;
 			sourceTree = "<group>";
 		};
+		EEE031111C1FBA8300F4D40A /* UserSearch */ = {
+			isa = PBXGroup;
+			children = (
+				EEE031121C1FBA9300F4D40A /* UserSearchModel.h */,
+				EEE031131C1FBA9300F4D40A /* UserSearchModel.m */,
+			);
+			path = UserSearch;
+			sourceTree = "<group>";
+		};
 		EEE94E001B74A8C20011321A /* MessageView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2830,6 +2843,7 @@
 				EEB4C8BE1BFC823C0023E2AD /* QueryCell.m in Sources */,
 				EEBE1B951C17D42B00EAA9D2 /* UserSearchCell.m in Sources */,
 				EE76A57C1B72181300036747 /* ConnectionModel.m in Sources */,
+				EEE031141C1FBA9300F4D40A /* UserSearchModel.m in Sources */,
 				EE9F736D1B8576B100F800DC /* MessageChatGroupHeader.m in Sources */,
 				EE97440E1B78699A00E81A70 /* Reachability.m in Sources */,
 				EEC8848A1BFED6B7006A237D /* SearchRoleTagDelegate.m in Sources */,

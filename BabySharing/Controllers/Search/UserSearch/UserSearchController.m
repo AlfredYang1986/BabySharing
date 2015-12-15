@@ -8,6 +8,7 @@
 
 #import "UserSearchController.h"
 #import "UserSearchCell.h"
+#import "UserSearchModel.h"
 
 @interface UserSearchController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -15,6 +16,9 @@
 @end
 
 @implementation UserSearchController
+
+@synthesize um = _um;
+@synthesize user_search_type = _user_search_type;
 
 @synthesize queryView = _queryView;
 
@@ -27,11 +31,24 @@
     _queryView.delegate = self;
     _queryView.dataSource = self;
     _queryView.backgroundColor = [UIColor lightGrayColor];
+    
+    [self asyncQueryData];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)asyncQueryData {
+    dispatch_queue_t ap = dispatch_queue_create("user query queue", nil);
+    dispatch_async(ap, ^{
+        [_um queryUserSearchWithFinishBlock:^(BOOL success, NSArray *result) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [_queryView reloadData];
+            });
+        }];
+    });
 }
 
 /*
@@ -46,7 +63,7 @@
 
 #pragma mark -- table view
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
+    return _um.userSearchResult.count;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -56,11 +73,13 @@
         NSArray* nib = [[NSBundle mainBundle] loadNibNamed:@"UserSearchCell" owner:self options:nil];
         cell = [nib firstObject];
     }
-   
-    [cell setUserRoleTag:@"创业妈妈"];
-    [cell setUserScreenName:@"妮妮妮猫"];
-    [cell setUserScreenPhoto:@"test"];
-    [cell setUserContentImages:@[@"", @"", @"", @""]];
+  
+    NSDictionary* dic = [_um.userSearchResult objectAtIndex:indexPath.row];
+    
+    [cell setUserRoleTag:[dic objectForKey:@"role_tag"]];
+    [cell setUserScreenName:[dic objectForKey:@"screen_name"]];
+    [cell setUserScreenPhoto:[dic objectForKey:@"screen_photo"]];
+    [cell setUserContentImages:[dic objectForKey:@"preview"]];
     return cell;
 }
 

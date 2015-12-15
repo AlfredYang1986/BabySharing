@@ -31,6 +31,7 @@
 @synthesize sm = _sm;
 
 @synthesize fm = _fm;
+@synthesize um = _um;
 
 @synthesize apns_token = _apns_token;
 
@@ -49,6 +50,7 @@
 
 - (void)createSearchModel {
     if (!_fm) _fm = [[FoundSearchModel alloc]initWithDelegate:self];
+    if (!_um) _um = [[UserSearchModel alloc]initWithDelegate:self];
 }
 
 - (void)createMessageAndNotificationModel {

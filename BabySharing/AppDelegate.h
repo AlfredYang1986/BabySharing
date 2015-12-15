@@ -20,6 +20,7 @@
 #import "CollectionQueryModel.h"
 #import "SystemSettingModel.h"
 #import "FoundSearchModel.h"
+#import "UserSearchModel.h"
 
 // IM Model
 #import "GotyeOCAPI.h"  // for IM
@@ -43,6 +44,7 @@
 @property (strong, nonatomic, readonly) ConnectionModel* cm;
 @property (strong, nonatomic, readonly) SystemSettingModel* sm;
 @property (strong, nonatomic, readonly) FoundSearchModel* fm;
+@property (strong, nonatomic, readonly) UserSearchModel* um;
 
 @property (strong, nonatomic) GotyeOCUser* im_user;
 

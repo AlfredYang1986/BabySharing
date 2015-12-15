@@ -115,6 +115,11 @@ static const NSString* kUserPostOwnerConnectionsFriends = @"kUserPostOwnerConnec
 #define TAG_PREVIEW_QUERY                   [TAG_HOST_DOMAIN stringByAppendingString:@"queryTagPreViewWithTagName"]
 #define TAG_FOUND_SEARCH                    [TAG_HOST_DOMAIN stringByAppendingString:@"queryFoundSearchTagData"]
 
+#pragma mark -- USER SEARCH QUERY
+#define USER_SEARCH_HOST_DOMAIN             [HOST_DOMAIN stringByAppendingString:@"users/"]
+#define USER_SEARCH_RECOMMAND_USERS         [USER_SEARCH_HOST_DOMAIN stringByAppendingString:@"queryRecommandUsers"]
+#define USER_SEARCH_ROLE_TAG                [USER_SEARCH_HOST_DOMAIN stringByAppendingString:@"queryUsersWithRoleTag"]
+
 #pragma mark -- MESSAGE SNEDBOX
 //#define MESSAGES_HOST_DOMAIN_SENDBOX        [HOST_DOMAIN_SENDBOX stringByAppendingString:@"messages/"]
 #define MESSAGE_WEB_SOCKET_SENDBOX          @"ws://192.168.1.101:9000/messages/registerDevice/"

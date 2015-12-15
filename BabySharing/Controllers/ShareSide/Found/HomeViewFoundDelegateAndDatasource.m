@@ -98,6 +98,8 @@
     if (indexPath.section == 1 && indexPath.row == 0) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"UserSearch" bundle:nil];
         UserSearchController* svc = [storyboard instantiateViewControllerWithIdentifier:@"UserSearch"];
+        AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+        svc.um = app.um;
         [_container.navigationController pushViewController:svc animated:YES];
 //        [_container.navigationController pushViewController:svc animated:NO];
         

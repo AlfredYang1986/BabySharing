@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum : NSUInteger {
+    UserSearchTypeMoreFriends,
+    UserSearchTypeRoleTag,
+} UserSearchType;
+
+@class UserSearchModel;
+
 @interface UserSearchController : UIViewController
 
+@property (nonatomic) UserSearchType user_search_type;
+@property (weak, nonatomic) UserSearchModel* um;
 @end
