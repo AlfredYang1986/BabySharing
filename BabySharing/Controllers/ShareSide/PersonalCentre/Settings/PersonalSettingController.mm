@@ -63,7 +63,8 @@
     
     UILabel* label = [[UILabel alloc]init];
     label.text = @"个人信息";
-    label.textColor = [UIColor whiteColor];
+//    label.textColor = [UIColor whiteColor];
+    label.textColor = [UIColor lightGrayColor];
     [label sizeToFit];
     self.navigationItem.titleView = label;
    
@@ -129,7 +130,8 @@
 
 #pragma mark -- uitableview datasource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return data.count;
+//    return data.count;
+    return 5;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
