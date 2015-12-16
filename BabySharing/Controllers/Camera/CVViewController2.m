@@ -19,6 +19,8 @@
 #import "OBShapedButton.h"
 #import "SearchSegView2.h"
 
+#define FAKE_NAVIGATION_BAR_HEIGHT 49
+
 @interface CVViewController2 () <SearchSegViewDelegate> {
     GPUImageOutput<GPUImageInput> *filter;
     GPUImageView* filterView;
@@ -96,6 +98,14 @@
     [titleView sizeToFit];
     titleView.center = CGPointMake(width / 2, 49 / 2);
     [bar addSubview:titleView];
+    
+//    UIButton* bar_right_btn = [[UIButton alloc]initWithFrame:CGRectMake(width - 13 - 41, 25, 25, 25)];
+//    [bar_right_btn setTitleColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f] forState:UIControlStateNormal];
+//    [bar_right_btn setTitle:@"下一步" forState:UIControlStateNormal];
+//    [bar_right_btn sizeToFit];
+//    [bar_right_btn addTarget:self action:@selector(didNextBtnSelected) forControlEvents:UIControlEventTouchDown];
+//    bar_right_btn.center = CGPointMake(width - 8 - bar_right_btn.frame.size.width / 2, FAKE_NAVIGATION_BAR_HEIGHT / 2);
+//    [bar addSubview:bar_right_btn];
     
     /**
      * funciton bar
@@ -237,10 +247,10 @@
 #pragma mark -- seg delegate
 - (void)segValueChanged2:(SearchSegView2*)s {
     if (seg.selectedIndex == 0) {
-        [self didSelectAlbumBtn];
+        [_delegate didSelectAlbumBtn:self andCurrentType:AlbumControllerTypePhoto];
         
     } else if (seg.selectedIndex == 2) {
-        [self didSelectMovieBtn];
+        [_delegate didSelectMovieBtn2:self];
         
     } else {
         
