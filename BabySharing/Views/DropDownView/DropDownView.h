@@ -13,6 +13,7 @@
 @protocol DropDownDatasource <NSObject>
 - (NSInteger)itemCount;
 - (UITableViewCell*)cellForRow:(NSInteger)row inTableView:(UITableView*)tableview;
+- (NSString*)titleForCellAtRow:(NSInteger)row inTableView:(UITableView*)tableview;
 @end
 
 @protocol DropDownDelegate <NSObject>

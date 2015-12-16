@@ -26,6 +26,7 @@
 #import "DongDaTabBar.h"
 
 #import "HomeNavigationController.h"
+#import "AlbumViewController2.h"
 
 //#define MOVING_DISTANCE     90
 //#define MOVING_BASE         20
@@ -163,6 +164,12 @@
 //        pv.delegate = self;
 //        pv.actionType = type;
 //    }];
+    AlbumViewController2* distination = [[AlbumViewController2 alloc]init];
+    distination.delegate = self;
+    [parent presentViewController:distination animated:YES completion: ^(void){
+        NSLog(@"Ablum controller running ...");
+    }];
+//    [self.navigationController pushViewController:distination animated:YES];
 }
 
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item {

@@ -24,6 +24,10 @@
 
 - (void)clickHandler:(id)sender {
     NSLog(@"show list");
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    NSInteger count = [self tableView:items numberOfRowsInSection:0];
+    items.bounds = CGRectMake(0, 0, width, 44 * count);
+    
     [_delegate showContentsTableView:items];
 }
 
@@ -33,6 +37,7 @@
     items = [[UITableView alloc]init];
     items.delegate = self;
     items.dataSource = self;
+    items.scrollEnabled = NO;
     [items registerClass:[DropDownItem class] forCellReuseIdentifier:@"drop item"];
 }
 
@@ -64,6 +69,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"selet row");
+    [self setTitle:[_datasource titleForCellAtRow:indexPath.row inTableView:tableView] forState:UIControlStateNormal];
     [_delegate didSelectCell:[tableView cellForRowAtIndexPath:indexPath]];
 }
 
@@ -72,7 +78,6 @@
 }
 
 #pragma mark -- table view datasource
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     return [_datasource cellForRow:indexPath.row inTableView:tableView];

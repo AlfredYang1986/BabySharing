@@ -266,4 +266,9 @@
         ck.viewSelected = YES;
     }
 }
+
+- (void)selectedAtIndex:(NSInteger)index {
+    [_delegate didSelectOneImageAtIndex:index];
+    ((AlbumGridCell*)[image_view objectAtIndex:index]).viewSelected = YES;
+}
 @end

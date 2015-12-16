@@ -25,7 +25,7 @@
 }
 */
 
-- (void)setCellViewSelected:(BOOL)select {
+- (void)setCellViewSelected2:(BOOL)select {
     if (select == NO) {
         [selectLayer removeFromSuperlayer];
     } else {
@@ -42,6 +42,19 @@
             selectLayer.contents = (id)[UIImage imageNamed:filepath].CGImage;
         }
         [self.layer addSublayer:selectLayer];
+    }
+    _viewSelected = select;
+}
+
+- (void)setCellViewSelected:(BOOL)select {
+    if (select == NO) {
+        self.layer.borderColor = [UIColor clearColor].CGColor;
+        self.layer.borderWidth = 0.f;
+        
+    } else {
+        self.layer.borderColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f].CGColor;
+        self.layer.borderWidth = 4.f;
+        
     }
     _viewSelected = select;
 }

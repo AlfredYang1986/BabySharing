@@ -321,8 +321,9 @@
 
 - (void)didSelectAlbumBtn {
 //    [_delegate didSelectAlbumBtn:self andCurrentType:AlbumControllerTypePhoto];
-    AlbumViewController2* distination = [[AlbumViewController2 alloc]init];
-    [self.navigationController pushViewController:distination animated:YES];
+//    AlbumViewController2* distination = [[AlbumViewController2 alloc]init];
+//    [self.navigationController pushViewController:distination animated:YES];
+    [_delegate didSelectAlbumBtn:self andCurrentType:AlbumControllerTypePhoto];
 }
 
 - (void)didSelectMovieBtn {

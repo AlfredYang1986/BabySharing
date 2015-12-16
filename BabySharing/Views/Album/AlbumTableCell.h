@@ -46,6 +46,7 @@
 - (void)setUpContentViewWithImageURLs:(NSArray*)image_arr atLine:(NSInteger)row andType:(AlbumControllerType)type;
 
 - (void)didSelectCameraBtn;
-
 - (AlbumGridCell*)queryGridCellByIndex:(NSInteger)index;
+
+- (void)selectedAtIndex:(NSInteger)index;
 @end

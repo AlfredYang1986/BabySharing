@@ -13,11 +13,15 @@
 #import "INTUAnimationEngine.h"
 #import "AlbumGridCell.h"
 #import "PostPreViewEffectController.h"
+#import "SearchSegView2.h"
+#import "DropDownView.h"
+#import "DropDownItem.h"
 
 #define PHOTO_PER_LINE  3
-#define FAKE_NAVIGATION_BAR_HEIGHT  64
+#define FAKE_NAVIGATION_BAR_HEIGHT  49
+#define FUNCTION_BAR_HEIGHT 30
 
-@interface AlbumViewController2 () 
+@interface AlbumViewController2 () <SearchSegViewDelegate, DropDownDatasource, DropDownDelegate>
 
 @end
 
@@ -46,9 +50,13 @@
     CGFloat last_scale;
     UIImage* img;
     NSURL* cur_movie_url;
+    
+    SearchSegView2* seg;
+    DropDownView* dp;
 }
 
 @synthesize type = _type;
+@synthesize delegate = _delegate;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -83,35 +91,54 @@
      * fake navigation bar
      */
     bar = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, FAKE_NAVIGATION_BAR_HEIGHT)];
-//    bar.backgroundColor = [UIColor colorWithWhite:0.f alpha:0.3];
-    bar.backgroundColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
+    bar.backgroundColor = [UIColor blackColor];
+//    bar.backgroundColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
     [self.view addSubview:bar];
     [self.view bringSubviewToFront:bar];
     
-    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 25, 15, 25)];
+    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
+    barBtn.center = CGPointMake(30 / 2 + 16, FAKE_NAVIGATION_BAR_HEIGHT / 2);
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-    NSString* filepath = [resourceBundle pathForResource:@"Previous_simple" ofType:@"png"];
-    [barBtn setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
-    [barBtn addTarget:self action:@selector(didPopControllerSelected) forControlEvents:UIControlEventTouchDown];
+    NSString* filepath = [resourceBundle pathForResource:@"camera-cancel" ofType:@"png"];
+    //    [barBtn setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
+    CALayer* cancel_layer = [CALayer layer];
+    cancel_layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
+    cancel_layer.frame = CGRectMake(0, 0, 22, 21);
+    cancel_layer.position = CGPointMake(30 / 2, 30 / 2);
+    [barBtn.layer addSublayer:cancel_layer];
+    [barBtn addTarget:self action:@selector(dismissCVViewController) forControlEvents:UIControlEventTouchDown];
     [bar addSubview:barBtn];
 
     UIButton* bar_right_btn = [[UIButton alloc]initWithFrame:CGRectMake(width - 13 - 41, 25, 25, 25)];
 //    NSString* filepath_right = [resourceBundle pathForResource:@"Next_blue" ofType:@"png"];
 //    [bar_right_btn setBackgroundImage:[UIImage imageNamed:filepath_right] forState:UIControlStateNormal];
-    [bar_right_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [bar_right_btn setTitle:@"继续" forState:UIControlStateNormal];
+    [bar_right_btn setTitleColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f] forState:UIControlStateNormal];
+    [bar_right_btn setTitle:@"下一步" forState:UIControlStateNormal];
     [bar_right_btn sizeToFit];
     [bar_right_btn addTarget:self action:@selector(didNextBtnSelected) forControlEvents:UIControlEventTouchDown];
+    bar_right_btn.center = CGPointMake(width - 8 - bar_right_btn.frame.size.width / 2, FAKE_NAVIGATION_BAR_HEIGHT / 2);
     [bar addSubview:bar_right_btn];
     
-    UILabel* titleLabel = [[UILabel alloc]init];
-    titleLabel.textColor = [UIColor whiteColor];
-    titleLabel.text = @"选择照片";
-    [titleLabel sizeToFit];
-    titleLabel.center = CGPointMake(width / 2, 20 + (64 - 20) / 2);
-    titleLabel.textAlignment = NSTextAlignmentCenter;
-    [bar addSubview:titleLabel];
+    /**
+     * set drop down list view
+     */
+    dp = [[DropDownView alloc]initWithFrame:CGRectMake(0, 0, 100, 44)];
+    [dp setTitle:@"相机胶卷" forState:UIControlStateNormal];
+    dp.center = CGPointMake(width / 2, FAKE_NAVIGATION_BAR_HEIGHT / 2);
+    
+    dp.datasource = self;
+    dp.delegate = self;
+    
+    [bar addSubview:dp];
+    
+//    UILabel* titleLabel = [[UILabel alloc]init];
+//    titleLabel.textColor = [UIColor whiteColor];
+//    titleLabel.text = @"选择照片";
+//    [titleLabel sizeToFit];
+//    titleLabel.center = CGPointMake(width / 2, FAKE_NAVIGATION_BAR_HEIGHT / 2);
+//    titleLabel.textAlignment = NSTextAlignmentCenter;
+//    [bar addSubview:titleLabel];
     /***************************************************************************************/
     
     /***************************************************************************************/
@@ -119,7 +146,8 @@
      * funciton bar
      */
     CGFloat height = width * aspectRatio;
-    f_bar = [[UIView alloc]initWithFrame:CGRectMake(0, height - 44, width, 44)];
+//    f_bar = [[UIView alloc]initWithFrame:CGRectMake(0, height - 44, width, 44)];
+    f_bar = [[UIView alloc]initWithFrame:CGRectMake(0, height - FUNCTION_BAR_HEIGHT, width, FUNCTION_BAR_HEIGHT)];
     f_bar.backgroundColor = [UIColor colorWithWhite:0.4 alpha:0.6];
     [self.view addSubview:f_bar];
     [self.view bringSubviewToFront:f_bar];
@@ -127,26 +155,27 @@
     /**
      * gradient layer for gradient background,
      */
-    CAGradientLayer* gl = [CAGradientLayer layer];
-    gl.frame = CGRectMake(0, 0, f_bar.frame.size.width, f_bar.frame.size.height);
-    gl.colors = [NSArray arrayWithObjects:
-                             (id)[[UIColor clearColor] CGColor],
-                             (id)[[UIColor darkGrayColor] CGColor], nil];
-    gl.startPoint = CGPointMake(0.5, 0.5);
-    gl.endPoint = CGPointMake(0.5, 1.0);
-    [f_bar.layer addSublayer:gl];
+//    CAGradientLayer* gl = [CAGradientLayer layer];
+//    gl.frame = CGRectMake(0, 0, f_bar.frame.size.width, f_bar.frame.size.height);
+//    gl.colors = [NSArray arrayWithObjects:
+//                             (id)[[UIColor clearColor] CGColor],
+//                             (id)[[UIColor darkGrayColor] CGColor], nil];
+//    gl.startPoint = CGPointMake(0.5, 0.5);
+//    gl.endPoint = CGPointMake(0.5, 1.0);
+//    [f_bar.layer addSublayer:gl];
     
     /**
      * button layer for function bar
      */
     CALayer* round_bottom = [CALayer layer];
-    round_bottom.frame = CGRectMake(0, 0, width * 0.1, 6);
-    round_bottom.cornerRadius = 3.f;
-    round_bottom.masksToBounds = YES;
-    round_bottom.borderWidth = 1.f;
-    round_bottom.borderColor = [UIColor blackColor].CGColor;
-    round_bottom.backgroundColor = [UIColor blackColor].CGColor;
-    round_bottom.position = CGPointMake(f_bar.frame.size.width / 2, f_bar.frame.size.height * 3 / 4);
+    round_bottom.frame = CGRectMake(0, 0, 27, 15);
+    round_bottom.contents = (id)[UIImage imageNamed:[resourceBundle pathForResource:@"album-more" ofType:@"png"]].CGImage;
+//    round_bottom.cornerRadius = 3.f;
+//    round_bottom.masksToBounds = YES;
+//    round_bottom.borderWidth = 1.f;
+//    round_bottom.borderColor = [UIColor blackColor].CGColor;
+//    round_bottom.backgroundColor = [UIColor blackColor].CGColor;
+    round_bottom.position = CGPointMake(f_bar.frame.size.width / 2, f_bar.frame.size.height / 2);
     [f_bar.layer addSublayer:round_bottom];
     
     UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapFunctionBar:)];
@@ -169,23 +198,36 @@
     /**
      * bottom function area
      */
-    UIView* tab_bar = [[UIView alloc]initWithFrame:CGRectMake(0, tab_bar_height_offset, width, 44)];
-//    tab_bar.backgroundColor = [UIColor colorWithWhite:0.4 alpha:0.6];
-    tab_bar.backgroundColor = [UIColor colorWithRed:0.3176 green:0.7529 blue:0.6941 alpha:1.f];
-    [self.view addSubview:tab_bar];
-   
-    if (_type == AlbumControllerTypePhoto) {
-        [self createButtonsForView:tab_bar inRect:CGRectMake(0, 0, width / 3, 44) andTitle:@"相机胶卷"];
-        [self createButtonsForView:tab_bar inRect:CGRectMake(width / 3, 0, width / 3, 44) andTitle:@"面孔"];
-        [self createButtonsForView:tab_bar inRect:CGRectMake(width * 2 / 3, 0, width / 3, 44) andTitle:@"地点"];
-    } else {
-        [self createButtonsForView:tab_bar inRect:CGRectMake(0, 0, width, 44) andTitle:@"视频"];
-        
-        if (player == nil) {
-            player = [[AVPlayer alloc]init];
-            avPlayerLayer = [AVPlayerLayer playerLayerWithPlayer:player];
-        }
-    }
+//    UIView* tab_bar = [[UIView alloc]initWithFrame:CGRectMake(0, tab_bar_height_offset, width, 44)];
+//    tab_bar.backgroundColor = [UIColor colorWithRed:0.3176 green:0.7529 blue:0.6941 alpha:1.f];
+//    [self.view addSubview:tab_bar];
+//   
+//    if (_type == AlbumControllerTypePhoto) {
+//        [self createButtonsForView:tab_bar inRect:CGRectMake(0, 0, width / 3, 44) andTitle:@"相机胶卷"];
+//        [self createButtonsForView:tab_bar inRect:CGRectMake(width / 3, 0, width / 3, 44) andTitle:@"面孔"];
+//        [self createButtonsForView:tab_bar inRect:CGRectMake(width * 2 / 3, 0, width / 3, 44) andTitle:@"地点"];
+//    } else {
+//        [self createButtonsForView:tab_bar inRect:CGRectMake(0, 0, width, 44) andTitle:@"视频"];
+//        
+//        if (player == nil) {
+//            player = [[AVPlayer alloc]init];
+//            avPlayerLayer = [AVPlayerLayer playerLayerWithPlayer:player];
+//        }
+//    }
+    
+    CGFloat screen_height = [UIScreen mainScreen].bounds.size.height;
+    seg = [[SearchSegView2 alloc]initWithFrame:CGRectMake(0, screen_height - 44, width, 44)];
+    seg.backgroundColor = [UIColor blackColor];
+    
+    [seg addItemWithTitle:@"相册"];
+    [seg addItemWithTitle:@"拍照"];
+    [seg addItemWithTitle:@"视频"];
+    
+    seg.selectedIndex = 0;
+    seg.delegate = self;
+    seg.margin_between_items = 30;
+    
+    [self.view addSubview:seg];
     /***************************************************************************************/
     
     am = [[AlbumModule alloc]init];
@@ -196,12 +238,26 @@
     } else {
         // error
     }
+    [self enumPhoteAlumName];
+//    album_name_arr = [[NSMutableArray alloc]init];
+    
     [albumView registerClass:[AlbumTableCell class] forCellReuseIdentifier:@"AlbumTableViewCell"];
     
     isMainContentViewShown = YES;
     isAllowMutiSelection = NO;
     images_select_arr = [[NSMutableArray alloc]init];
     last_scale = 1.f;
+}
+
+- (void)dismissCVViewController {
+//    
+//    for (NSURL* iter in movie_list) {
+//        [TmpFileStorageModel deleteOneMovieFileWithUrl:iter];
+//    }
+//    
+    [self dismissViewControllerAnimated:YES completion:^(void){
+        NSLog(@"dismiss ablum controller");
+    }];
 }
 
 //- (void)dealloc {
@@ -215,7 +271,7 @@
 }
 
 - (BOOL)prefersStatusBarHidden {
-    return NO; //返回NO表示要显示，返回YES将hiden
+    return YES; //返回NO表示要显示，返回YES将hiden
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -390,12 +446,12 @@
     static const CGFloat kAnimationDuration = 0.15; // in seconds
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     CGFloat height = width * aspectRatio;
-    CGRect f_bar_start = CGRectMake(0, height - 44, width, 44);
-    CGRect f_bar_end = CGRectMake(0, 5, width, 44);
+    CGRect f_bar_start = CGRectMake(0, height - FUNCTION_BAR_HEIGHT, width, FUNCTION_BAR_HEIGHT);
+    CGRect f_bar_end = CGRectMake(0, 5, width, FUNCTION_BAR_HEIGHT);
 
     CGFloat tab_bar_height_offset = [UIScreen mainScreen].bounds.size.height - 44;
     CGRect table_view_start = CGRectMake(0, height, width, tab_bar_height_offset - height);
-    CGRect table_view_end = CGRectMake(0, 49, width, tab_bar_height_offset - 49);
+    CGRect table_view_end = CGRectMake(0, FUNCTION_BAR_HEIGHT + 5, width, tab_bar_height_offset - 49);
     
     if (isMainContentViewShown) {
 
@@ -482,11 +538,13 @@
         [cell setUpContentViewWithImageURLs2:arr_content atLine:row andType:_type];
     }
     
+    row == 0 ? [cell selectedAtIndex:0] : nil;
+    
     return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (bLoadData) return ((images_arr.count) / PHOTO_PER_LINE) + 1;
+    if (bLoadData) return ((images_arr.count) / PHOTO_PER_LINE) + ((images_arr.count) % PHOTO_PER_LINE == 0 ? 0 : 1);
     else return 0;
 }
 
@@ -496,9 +554,27 @@
     [am enumAllAssetWithProprty:type finishBlock:^(NSArray *result) {
         bLoadData = YES;
         images_arr = result;
+        [images_select_arr removeAllObjects];
         [albumView reloadData];
         
         [self changeMainContentWithAsset:images_arr.firstObject];
+    }];
+}
+
+- (void)enumPhoteAlumName {
+    [am enumPhoteAlumNameWithBlock:^(NSArray *result) {
+        album_name_arr = result;
+    }];
+    // [self enumAllAssetWithProprty:ALAssetTypePhoto];
+}
+
+- (void)enumPhotoAblumByAlbumName:(ALAssetsGroup*)group {
+    bLoadData = NO;
+    [am enumPhotoAblumByAlbumName:group finishBlock:^(NSArray *result) {
+        bLoadData = YES;
+        images_arr = result;
+        [images_select_arr removeAllObjects];
+        [albumView reloadData];
     }];
 }
 
@@ -692,5 +768,63 @@
     //    UIGraphicsEndImageContext();
     
     return smallImage;
+}
+
+#pragma mark -- seg delegate
+- (void)segValueChanged2:(SearchSegView2*)s {
+    if (seg.selectedIndex == 1) {
+        [_delegate didSelectCameraBtn2:self];
+        
+    } else if (seg.selectedIndex == 2) {
+        [_delegate didSelectMovieBtn2:self];
+        
+    } else {
+        
+    }
+
+}
+
+#pragma mark -- DropDownDatasource
+- (NSInteger)itemCount {
+    return album_name_arr.count + 1;
+}
+
+- (UITableViewCell*)cellForRow:(NSInteger)row inTableView:(UITableView*)tableview {
+    DropDownItem* cell = [tableview dequeueReusableCellWithIdentifier:@"drop item"];
+    
+    if (cell == nil) {
+        cell = [[DropDownItem alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"drop item"];
+    }
+    
+    if (row != 0) {
+        ALAssetsGroup* group = [album_name_arr objectAtIndex:row - 1];
+        NSString* album_name = [group valueForProperty:ALAssetsGroupPropertyName];
+        cell.textLabel.text = album_name;
+        cell.group = group;
+    }
+    
+    return cell;
+}
+
+#pragma mark -- DropDownDelegate
+- (void)didSelectCell:(UITableViewCell*)cell {
+    DropDownItem* tmp = (DropDownItem*)cell;
+    [self enumPhotoAblumByAlbumName:tmp.group];
+    
+    [dp removeTableView];
+}
+
+- (void)showContentsTableView:(UITableView*)tableview {
+//    NSInteger width = self.view.frame.size.width;
+//    NSInteger height = self.view.frame.size.height / 2;
+    tableview.frame = CGRectMake(0, 0, tableview.bounds.size.width, tableview.bounds.size.height);
+    
+    [self.view addSubview:tableview];
+    [self.view bringSubviewToFront:bar];
+}
+
+- (NSString*)titleForCellAtRow:(NSInteger)row inTableView:(UITableView*)tableview {
+    ALAssetsGroup* group = [album_name_arr objectAtIndex:row - 1];
+    return [group valueForProperty:ALAssetsGroupPropertyName];
 }
 @end

@@ -10,9 +10,12 @@
 #import "AlbumActionProtocol.h"
 #import "AlbumTableCell.h"
 
+#import "CameraActionProtocol.h"
+
 @class ALAsset;
 
 @interface AlbumViewController2 : UIViewController <UITableViewDelegate, UITableViewDataSource, AlbumTableCellDelegate>
 
 @property (nonatomic) AlbumControllerType type;
+@property (nonatomic, weak) id<CameraActionProtocol> delegate;
 @end
