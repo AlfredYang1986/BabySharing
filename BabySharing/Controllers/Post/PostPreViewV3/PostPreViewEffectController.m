@@ -13,6 +13,7 @@
 #import "PhotoPublishController.h"
 #import <AVFoundation/AVFoundation.h>
 #import "SearchSegView2.h"
+#import "PostPublichViewController.h"
 
 #define FAKE_NAVIGATION_BAR_HEIGHT      49
 #define FUNC_BAR_HEIGHT                 44
@@ -52,6 +53,7 @@
     // fake bar
     UIView* bar;
     /***********************************************************************/
+
 }
 
 @synthesize type = _type;
@@ -363,14 +365,16 @@
 
 - (void)didNextBtnSelected {
 
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"PhotoPreView" bundle:nil];
-    PhotoPublishController* publishController = [storyboard instantiateViewControllerWithIdentifier:@"publishController"];
+    PostPublichViewController* pub = [[PostPublichViewController alloc]init];
+
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"PhotoPreView" bundle:nil];
+//    PhotoPublishController* publishController = [storyboard instantiateViewControllerWithIdentifier:@"publishController"];
 
     if (_type == PostPreViewPhote) {
     
         UIImage* final_img = [self mergePasteAndEffect:result_img];
        
-        publishController.preViewImg = final_img;
+        pub.preViewImg = final_img;
        
         NSMutableArray* arr = [[NSMutableArray alloc]initWithCapacity:tags.count];
         for (int index = 0; index < tags.allValues.count; ++index) {
@@ -382,15 +386,15 @@
                 [arr addObject:tmp];
             }
         }
-        publishController.already_taged = [arr copy];
+        pub.already_taged = [arr copy];
         
     } else if (_type == PostPreViewMovie) {
        
-        publishController.movie_url = _editing_movie;
+        pub.movie_url = _editing_movie;
     }
 
-    publishController.type = _type;
-    [self.navigationController pushViewController:publishController animated:YES];
+    pub.type = _type;
+    [self.navigationController pushViewController:pub animated:YES];
 }
 
 - (UIImage*)mergePasteAndEffect:(UIImage*)baseImg {
