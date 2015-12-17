@@ -21,6 +21,7 @@
 @property (nonatomic) CGFloat margin_to_edge;
 @property (nonatomic) CGFloat margin_between_items;
 
+- (NSString*)queryItemTitleAtIndex:(NSInteger)index;
 - (void)addItemWithTitle:(NSString *)title;
 - (void)removeItemAtIndex:(NSInteger)index;
 

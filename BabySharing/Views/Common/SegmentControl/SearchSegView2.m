@@ -99,6 +99,11 @@
     }
 }
 
+- (NSString*)queryItemTitleAtIndex:(NSInteger)i {
+    SearchSegItem* tmp = [self viewWithTag:i + 1];
+    return tmp.title;
+}
+
 - (void)addItemWithTitle:(NSString *)title {
     CGSize sz = [SearchSegItem preferredSize];
     SearchSegItem* item = [[SearchSegItem alloc]initWithFrame:CGRectMake(0, 0, sz.width, sz.height)];
@@ -133,13 +138,14 @@
 }
 
 - (void)segSelected:(UITapGestureRecognizer*)gesture {
-    UIView* tmp = gesture.view;
-    
-    for (SearchSegItem* iter in [self getSegItems]) {
-        iter.status = iter == tmp ? 1 : 0;
+    SearchSegItem* tmp = (SearchSegItem*)gesture.view;
+    if (tmp.status != 1) {
+        for (SearchSegItem* iter in [self getSegItems]) {
+            iter.status = iter == tmp ? 1 : 0;
+        }
+        
+        [_delegate segValueChanged2:self];
     }
-    
-    [_delegate segValueChanged2:self];
 }
 
 - (void)segImgSelected:(UITapGestureRecognizer*)gesture {

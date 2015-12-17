@@ -12,8 +12,12 @@
 #import "INTUAnimationEngine.h"
 #import "PhotoPublishController.h"
 #import <AVFoundation/AVFoundation.h>
+#import "SearchSegView2.h"
 
-@interface PostPreViewEffectController () <PostEffectAdapterProtocol, addingTagsProtocol, UIAlertViewDelegate>
+#define FAKE_NAVIGATION_BAR_HEIGHT      49
+#define FUNC_BAR_HEIGHT                 44
+
+@interface PostPreViewEffectController () <PostEffectAdapterProtocol, addingTagsProtocol, UIAlertViewDelegate, SearchSegViewDelegate>
 
 @end
 
@@ -57,9 +61,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f]];
+//    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f]];
     
-    self.view.backgroundColor = UIColor.blackColor;
+    self.view.backgroundColor = [UIColor darkGrayColor];
     
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     aspectRatio = 4.0 / 3.0;
@@ -74,7 +78,6 @@
     mainContentView.backgroundColor = [UIColor clearColor];
     mainContentView.userInteractionEnabled = YES;
     [self.view addSubview:mainContentView];
-//    mainContentView.backgroundColor = [UIColor redColor];
     img_layer = [CALayer layer];
     img_layer.frame = mainContentView.bounds;
     img_layer.contents = (id)_cutted_img.CGImage;
@@ -84,47 +87,43 @@
     /**
      * fake navigation bar
      */
-//    UIView* bar = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, 64)];
-    bar = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, 64)];
-//    bar.backgroundColor = [UIColor colorWithWhite:0.f alpha:0.3];
-    bar.backgroundColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
+    bar = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, FAKE_NAVIGATION_BAR_HEIGHT)];
+    bar.backgroundColor = [UIColor colorWithRed:0.1373 green:0.1216 blue:0.1255 alpha:1.f];
     [self.view addSubview:bar];
     [self.view bringSubviewToFront:bar];
     
-//    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 22, 13, 20)];
-    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
+    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
+   
+    barBtn.center = CGPointMake(30 / 2 + 16, 49 / 2);
+    
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-//    NSString* filepath = [resourceBundle pathForResource:@"Previous_blue" ofType:@"png"];
     NSString* filepath = [resourceBundle pathForResource:@"Previous_simple" ofType:@"png"];
+    
     CALayer * layer = [CALayer layer];
     layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
-    layer.frame = CGRectMake(0, 0, 13, 20);
-    layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
+    layer.frame = CGRectMake(0, 0, 15, 21);
+    layer.position = CGPointMake(30 / 2, 30 / 2);
     [barBtn.layer addSublayer:layer];
-//    [barBtn setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
-//    [barBtn setImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
     [barBtn addTarget:self action:@selector(didPopControllerSelected) forControlEvents:UIControlEventTouchDown];
     [bar addSubview:barBtn];
     
-    UIButton* bar_right_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 15, 25, 25)];
-//    NSString* filepath_right = [resourceBundle pathForResource:@"Next_blue" ofType:@"png"];
-//    [bar_right_btn setBackgroundImage:[UIImage imageNamed:filepath_right] forState:UIControlStateNormal];
-    [bar_right_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [bar_right_btn setTitle:@"继续" forState:UIControlStateNormal];
-    [bar_right_btn sizeToFit];
-    bar_right_btn.center = CGPointMake(width - bar_right_btn.bounds.size.width, 25 + bar_right_btn.bounds.size.height / 2);
-    [bar_right_btn addTarget:self action:@selector(didNextBtnSelected) forControlEvents:UIControlEventTouchDown];
-    [bar addSubview:bar_right_btn];
+    UILabel* titleView = [[UILabel alloc]init];
+    titleView.tag = -1;
+    titleView.textAlignment = NSTextAlignmentCenter;
+    titleView.text = @"编辑图片";
+    titleView.textColor = [UIColor whiteColor];
+    [titleView sizeToFit];
+    titleView.center = CGPointMake(width / 2, 49 / 2);
+    [bar addSubview:titleView];
     
-    UILabel* titleLabel = [[UILabel alloc]init];
-    titleLabel.textColor = [UIColor whiteColor];
-    titleLabel.tag = -1;
-    titleLabel.text = @"选择滤镜";
-    [titleLabel sizeToFit];
-    titleLabel.center = CGPointMake(width / 2, 20 + (64 - 20) / 2);
-    titleLabel.textAlignment = NSTextAlignmentCenter;
-    [bar addSubview:titleLabel];
+    UIButton* bar_right_btn = [[UIButton alloc]initWithFrame:CGRectMake(width - 13 - 41, 25, 25, 25)];
+    [bar_right_btn setTitleColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f] forState:UIControlStateNormal];
+    [bar_right_btn setTitle:@"下一步" forState:UIControlStateNormal];
+    [bar_right_btn sizeToFit];
+    [bar_right_btn addTarget:self action:@selector(didNextBtnSelected) forControlEvents:UIControlEventTouchDown];
+    bar_right_btn.center = CGPointMake(width - 8 - bar_right_btn.frame.size.width / 2, FAKE_NAVIGATION_BAR_HEIGHT / 2);
+    [bar addSubview:bar_right_btn];
     /***************************************************************************************/
     
     /***************************************************************************************/
@@ -132,36 +131,29 @@
      * funciton bar
      */
     CGFloat height = width * aspectRatio;
-//    UIView* f_bar = [[UIView alloc]initWithFrame:CGRectMake(0, height, width, 44)];
-    UIView* f_bar = [[UIView alloc]initWithFrame:CGRectMake(0, height, width, 60)];
-//    f_bar.backgroundColor = [UIColor colorWithWhite:0.4 alpha:0.6];
-    f_bar.backgroundColor = [UIColor colorWithWhite:1.f alpha:1.f];
+//    UIView* f_bar = [[UIView alloc]initWithFrame:CGRectMake(0, height, width, FUNC_BAR_HEIGHT)];
+    SearchSegView2* f_bar = [[SearchSegView2 alloc]initWithFrame:CGRectMake(0, height, width, FUNC_BAR_HEIGHT)];
+    f_bar.backgroundColor = [UIColor blackColor];
+    f_bar.delegate = self;
     [self.view addSubview:f_bar];
     [self.view bringSubviewToFront:f_bar];
-    
-    /**
-     * gradient layer for gradient background,
-     */
-//    CAGradientLayer* gl = [CAGradientLayer layer];
-//    gl.frame = CGRectMake(0, 0, f_bar.frame.size.width, f_bar.frame.size.height);
-//    gl.colors = [NSArray arrayWithObjects:
-//                 (id)[[UIColor clearColor] CGColor],
-//                 (id)[[UIColor darkGrayColor] CGColor], nil];
-//    gl.startPoint = CGPointMake(0.5, 0.5);
-//    gl.endPoint = CGPointMake(0.5, 1.0);
-//    [f_bar.layer addSublayer:gl];
    
     /**
      * function bar button
      */
     if (_type == PostPreViewPhote) {
-     
-        NSInteger button_count = 4;
         
-        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"滤镜" andImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Effect" ofType:@"png"]] andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 1 / (2*button_count),f_bar.frame.size.height / 2)]];
-        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"标签" andImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Tag" ofType:@"png"]] andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 3 / (2*button_count),f_bar.frame.size.height / 2)]];
-        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"贴图" andImage:[UIImage imageNamed:[resourceBundle pathForResource:@"PasteEffect" ofType:@"png"]] andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 5 / (2*button_count),f_bar.frame.size.height / 2)]];
-        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"工具" andImage:[UIImage imageNamed:[resourceBundle pathForResource:@"ToolEffect" ofType:@"png"]] andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 7 / (2*button_count),f_bar.frame.size.height / 2)]];
+        [f_bar addItemWithTitle:@"标签"];
+        [f_bar addItemWithTitle:@"滤镜"];
+        f_bar.margin_between_items = 80;
+        f_bar.selectedIndex = 0;
+     
+//        NSInteger button_count = 4;
+        
+//        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"滤镜" andImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Effect" ofType:@"png"]] andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 1 / (2*button_count),f_bar.frame.size.height / 2)]];
+//        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"标签" andImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Tag" ofType:@"png"]] andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 3 / (2*button_count),f_bar.frame.size.height / 2)]];
+//        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"贴图" andImage:[UIImage imageNamed:[resourceBundle pathForResource:@"PasteEffect" ofType:@"png"]] andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 5 / (2*button_count),f_bar.frame.size.height / 2)]];
+//        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"工具" andImage:[UIImage imageNamed:[resourceBundle pathForResource:@"ToolEffect" ofType:@"png"]] andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 7 / (2*button_count),f_bar.frame.size.height / 2)]];
         
     } else if (_type == PostPreViewMovie) {
 
@@ -182,17 +174,23 @@
      */
     adapter = [[PostEffectAdapter alloc]init];
     adapter.delegate = self;
-//    CGFloat prefered_height = [UIScreen mainScreen].bounds.size.height - height - 44;
-    CGFloat prefered_height = [UIScreen mainScreen].bounds.size.height - height - 60;
-   
-    UIView* tmp = [adapter getFunctionViewByTitle:@"滤镜" andType:_type andPreferedHeight:prefered_height];
-//    tmp.frame = CGRectMake(0, height + 44, tmp.frame.size.width, tmp.frame.size.height);
-    tmp.frame = CGRectMake(0, height + 60, tmp.frame.size.width, tmp.frame.size.height);
-    
-    function_dic = [[NSMutableDictionary alloc]init];
-    [function_dic setValue:tmp forKey:@"滤镜"];
-    
-    [self.view addSubview:tmp];
+    CGFloat prefered_height = [UIScreen mainScreen].bounds.size.height - height - FUNC_BAR_HEIGHT;
+  
+    if (_type == PostPreViewPhote) {
+        [self segValueChanged2:f_bar];
+
+    } else if (_type == PostPreViewMovie) {
+       
+        UIView* tmp = [adapter getFunctionViewByTitle:@"滤镜" andType:_type andPreferedHeight:prefered_height];
+        tmp.frame = CGRectMake(0, height + FUNC_BAR_HEIGHT, tmp.frame.size.width, tmp.frame.size.height);
+        
+        function_dic = [[NSMutableDictionary alloc]init];
+        [function_dic setValue:tmp forKey:@"滤镜"];
+        
+        [self.view addSubview:tmp];
+    } else {
+        // error
+    }
     /***************************************************************************************/
    
     /***************************************************************************************/
@@ -344,7 +342,7 @@
 }
 
 - (BOOL)prefersStatusBarHidden {
-    return NO; //返回NO表示要显示，返回YES将hiden
+    return YES; //返回NO表示要显示，返回YES将hiden
 }
 /*
 #pragma mark - Navigation
@@ -442,11 +440,9 @@
     if (!tmp) {
         CGFloat width = [UIScreen mainScreen].bounds.size.width;
         CGFloat height = width * aspectRatio;
-//        CGFloat prefered_height = [UIScreen mainScreen].bounds.size.height - height - 44;
-        CGFloat prefered_height = [UIScreen mainScreen].bounds.size.height - height - 60;
+        CGFloat prefered_height = [UIScreen mainScreen].bounds.size.height - height - FUNC_BAR_HEIGHT;
         tmp = [adapter getFunctionViewByTitle:title andType:_type andPreferedHeight:prefered_height];
-//        tmp.frame = CGRectMake(0, height + 44, tmp.frame.size.width, tmp.frame.size.height);
-        tmp.frame = CGRectMake(0, height + 60, tmp.frame.size.width, tmp.frame.size.height);
+        tmp.frame = CGRectMake(0, height + FUNC_BAR_HEIGHT, tmp.frame.size.width, tmp.frame.size.height);
     }
     [self.view addSubview:tmp];
     
@@ -632,5 +628,18 @@
         [paste_img_arr removeObject:cur_long_press];
     }
     cur_long_press = nil;
+}
+
+#pragma mark -- search seg delegate
+- (void)segValueChanged2:(SearchSegView2*)s {
+   
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    CGFloat height = width * aspectRatio;
+    CGFloat prefered_height = [UIScreen mainScreen].bounds.size.height - height - FUNC_BAR_HEIGHT;
+    
+    UIView* tmp =[adapter getFunctionViewByTitle:[s queryItemTitleAtIndex:s.selectedIndex] andType:_type andPreferedHeight:prefered_height];
+    tmp.frame = CGRectMake(0, height + FUNC_BAR_HEIGHT, tmp.frame.size.width, tmp.frame.size.height);
+    
+    [self.view addSubview:tmp];
 }
 @end

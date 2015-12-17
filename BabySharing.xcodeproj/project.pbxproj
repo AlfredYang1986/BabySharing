@@ -16,6 +16,7 @@
 		EE0CEC5D1BDB15790016B6F4 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0CEC5C1BDB15790016B6F4 /* LoginViewController.m */; };
 		EE0DCE7E1C081FD400B5386B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE0DCE7D1C081FD400B5386B /* LaunchScreen.xib */; };
 		EE20BED41B6F430D00DE8455 /* OwnerQueryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EE20BED31B6F430D00DE8455 /* OwnerQueryModel.m */; };
+		EE223BE01C228F7C006C8C32 /* libgotyeapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EE223BDE1C228F7C006C8C32 /* libgotyeapi.a */; };
 		EE262C991C1958F8008DCC4E /* DONNotificationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EE262C981C1958F8008DCC4E /* DONNotificationDelegate.m */; };
 		EE26D7621C1EB8AA00342E02 /* FoundSearchData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EE26D7601C1EB8AA00342E02 /* FoundSearchData.xcdatamodeld */; };
 		EE26D7731C1EBA2700342E02 /* PreviewItem+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = EE26D7641C1EBA2700342E02 /* PreviewItem+CoreDataProperties.m */; };
@@ -40,7 +41,6 @@
 		EE2D4B801B525E0A00B58A1F /* PhotoTagsController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2D4B771B525E0A00B58A1F /* PhotoTagsController.m */; };
 		EE386FB31C08771A007AB94B /* FixBkgHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = EE386FB21C08771A007AB94B /* FixBkgHelper.m */; };
 		EE3F62151C05483D004507B0 /* HomeCycleSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3F62141C05483D004507B0 /* HomeCycleSegue.m */; };
-		EE40825D1B70C0CE0094A88B /* libgotyeapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EE40825B1B70C0CE0094A88B /* libgotyeapi.a */; };
 		EE4082601B70C11A0094A88B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE40825F1B70C11A0094A88B /* CoreLocation.framework */; };
 		EE4082621B70C1240094A88B /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE4082611B70C1240094A88B /* AddressBook.framework */; };
 		EE4082641B70C1330094A88B /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE4082631B70C1330094A88B /* CoreTelephony.framework */; };
@@ -326,6 +326,7 @@
 		EE0DCE7D1C081FD400B5386B /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		EE20BED21B6F430D00DE8455 /* OwnerQueryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OwnerQueryModel.h; sourceTree = "<group>"; };
 		EE20BED31B6F430D00DE8455 /* OwnerQueryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OwnerQueryModel.m; sourceTree = "<group>"; };
+		EE223BDE1C228F7C006C8C32 /* libgotyeapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libgotyeapi.a; sourceTree = "<group>"; };
 		EE262C971C1958F8008DCC4E /* DONNotificationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DONNotificationDelegate.h; path = BabySharing/Controllers/Message/NotificationsView/DONNotificationDelegate.h; sourceTree = SOURCE_ROOT; };
 		EE262C981C1958F8008DCC4E /* DONNotificationDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DONNotificationDelegate.m; path = BabySharing/Controllers/Message/NotificationsView/DONNotificationDelegate.m; sourceTree = SOURCE_ROOT; };
 		EE26D7611C1EB8AA00342E02 /* FoundSearchData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FoundSearchData.xcdatamodel; sourceTree = "<group>"; };
@@ -379,8 +380,6 @@
 		EE4082571B70C0CE0094A88B /* GotyeOCMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GotyeOCMessage.h; sourceTree = "<group>"; };
 		EE4082581B70C0CE0094A88B /* GotyeOCNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GotyeOCNotify.h; sourceTree = "<group>"; };
 		EE4082591B70C0CE0094A88B /* GotyeOCStatusCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GotyeOCStatusCode.h; sourceTree = "<group>"; };
-		EE40825B1B70C0CE0094A88B /* libgotyeapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libgotyeapi.a; sourceTree = "<group>"; };
-		EE40825C1B70C0CE0094A88B /* libgotyeapi_c++11.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libgotyeapi_c++11.a"; sourceTree = "<group>"; };
 		EE40825F1B70C11A0094A88B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		EE4082611B70C1240094A88B /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		EE4082631B70C1330094A88B /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
@@ -895,7 +894,6 @@
 				EEAACDAB1B44EEDD00D05C0B /* AssetsLibrary.framework in Frameworks */,
 				EEAACDAC1B44EEDD00D05C0B /* MobileCoreServices.framework in Frameworks */,
 				EEAACDAD1B44EEDD00D05C0B /* Security.framework in Frameworks */,
-				EE40825D1B70C0CE0094A88B /* libgotyeapi.a in Frameworks */,
 				EEAACDAE1B44EEDD00D05C0B /* CFNetwork.framework in Frameworks */,
 				EEAACD9F1B44EDFD00D05C0B /* CoreGraphics.framework in Frameworks */,
 				EEAACD9D1B44EDF400D05C0B /* ImageIO.framework in Frameworks */,
@@ -904,6 +902,7 @@
 				EEAACD971B44ED8600D05C0B /* SystemConfiguration.framework in Frameworks */,
 				EEAACD951B44ED7B00D05C0B /* libc++.dylib in Frameworks */,
 				EEAACD8E1B44ECDD00D05C0B /* CoreMedia.framework in Frameworks */,
+				EE223BE01C228F7C006C8C32 /* libgotyeapi.a in Frameworks */,
 				EEAACD8F1B44ECDD00D05C0B /* CoreVideo.framework in Frameworks */,
 				EEAACD901B44ECDD00D05C0B /* OpenGLES.framework in Frameworks */,
 				EEAACD911B44ECDD00D05C0B /* QuartzCore.framework in Frameworks */,
@@ -1089,8 +1088,7 @@
 		EE40825A1B70C0CE0094A88B /* libs */ = {
 			isa = PBXGroup;
 			children = (
-				EE40825B1B70C0CE0094A88B /* libgotyeapi.a */,
-				EE40825C1B70C0CE0094A88B /* libgotyeapi_c++11.a */,
+				EE223BDE1C228F7C006C8C32 /* libgotyeapi.a */,
 			);
 			path = libs;
 			sourceTree = "<group>";
@@ -3095,7 +3093,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					/Users/yangyuan/Desktop/DongDa/BabySharing/libQQSDK/TencentOpenAPI.framework/Headers,
+					"$(PROJECT_DIR)/libQQSDK/TencentOpenAPI.framework/Headers",
 				);
 				INFOPLIST_FILE = BabySharing/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -3131,7 +3129,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					/Users/yangyuan/Desktop/DongDa/BabySharing/libQQSDK/TencentOpenAPI.framework/Headers,
+					"$(PROJECT_DIR)/libQQSDK/TencentOpenAPI.framework/Headers",
 				);
 				INFOPLIST_FILE = BabySharing/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
