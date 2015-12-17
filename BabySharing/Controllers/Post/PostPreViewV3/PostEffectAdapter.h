@@ -11,6 +11,8 @@
 #import "PostDefine.h"
 #import "PhotoTagView.h"
 
+@protocol GPUImageInput;
+@class GPUImageOutput;
 @class GPUImagePicture;
 @class GPUImageTiltShiftFilter;
 @class GPUImageSketchFilter;
@@ -52,6 +54,7 @@
 @property (nonatomic, strong, readonly) GPUImagePicture* ip;
 
 // filters
+@property (nonatomic, strong, readonly) GPUImageOutput<GPUImageInput> * originFilter;
 @property (nonatomic, strong, readonly) GPUImageTiltShiftFilter* tiltShiftFilter;
 @property (nonatomic, strong, readonly) GPUImageSketchFilter* sketchFilter;
 @property (nonatomic, strong, readonly) GPUImageColorInvertFilter* colorInvertFilter;

@@ -228,6 +228,8 @@
     }
     
     /***************************************************************************************/
+    
+    function_dic = [[NSMutableDictionary alloc]init];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -636,10 +638,20 @@
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     CGFloat height = width * aspectRatio;
     CGFloat prefered_height = [UIScreen mainScreen].bounds.size.height - height - FUNC_BAR_HEIGHT;
+   
+    NSString* title = [s queryItemTitleAtIndex:s.selectedIndex];
+   
+    UIView* remove = [self.view viewWithTag:-2];
+    [remove removeFromSuperview];
     
-    UIView* tmp =[adapter getFunctionViewByTitle:[s queryItemTitleAtIndex:s.selectedIndex] andType:_type andPreferedHeight:prefered_height];
-    tmp.frame = CGRectMake(0, height + FUNC_BAR_HEIGHT, tmp.frame.size.width, tmp.frame.size.height);
-    
+    UIView* tmp = [function_dic objectForKey:title];
+    if (tmp == nil) {
+        tmp =[adapter getFunctionViewByTitle:title andType:_type andPreferedHeight:prefered_height];
+        tmp.frame = CGRectMake(0, height + FUNC_BAR_HEIGHT, tmp.frame.size.width, tmp.frame.size.height);
+        tmp.tag = -2;
+        [function_dic setObject:tmp forKey:title];
+    }
     [self.view addSubview:tmp];
+    [self.view bringSubviewToFront:tmp];
 }
 @end

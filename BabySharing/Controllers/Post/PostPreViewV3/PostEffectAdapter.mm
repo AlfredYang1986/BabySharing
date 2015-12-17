@@ -67,7 +67,7 @@ UIButton* addPhotoEffectBtn(NSString* title, CGRect bounds, CGPoint center, NSOb
     btn.center = center;
     [btn setTitle:title forState:UIControlStateNormal];
     [btn setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
-    [btn addTarget:callBackObj action:callBack forControlEvents:UIControlEventTouchDown];
+    [btn addTarget:callBackObj action:callBack forControlEvents:UIControlEventTouchUpInside];
   
     /**
      * title text
@@ -87,15 +87,25 @@ UIButton* addPhotoEffectBtn(NSString* title, CGRect bounds, CGPoint center, NSOb
      * image preview
      */
     UIImage* img = [callBackObj performSelector:callBack withObject:btn];
-    CALayer * il = [CALayer layer];
+//    CALayer * il = [CALayer layer];
+    UIImageView* il = [[UIImageView alloc]init];
     CGFloat mar = 0;
     CGFloat len = MIN(bounds.size.height - s.height - mar, bounds.size.width);
     il.frame = CGRectMake((bounds.size.width - len) / 2, (bounds.size.height - s.height - mar - len) / 2, len, len);
-    il.contents = (id)img.CGImage;
-    il.cornerRadius = len / 2;
-    il.masksToBounds = YES;
-    [btn.layer addSublayer:il];
-    
+//    il.contents = (id)img.CGImage;
+    il.image = img;
+//    il.cornerRadius = len / 2;
+    il.layer.cornerRadius = 4.f;
+    il.layer.borderColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f].CGColor;
+    if ([title isEqualToString:@"Origin"]) {
+        il.layer.borderWidth = 2.f;
+    } else {
+        il.layer.borderWidth = 0.f;
+    }
+    il.layer.masksToBounds = YES;
+//    [btn.layer addSublayer:il];
+    il.tag = -5;
+    [btn addSubview:il];
     btn.tag = -1;
     return btn;
 }
@@ -130,17 +140,22 @@ UIView* effectFilterForPhoto(PostEffectAdapter* adapter, CGFloat height) {
     /**
      * 4 filter effect
      */
+#define MAGIC_NUMBER    0.6f
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
-    CGFloat margin = 10;
-    CGFloat button_height = height - 2 * margin;
+    CGFloat margin = 0;
+    CGFloat button_height = (height - 2 * margin) * MAGIC_NUMBER;
 
-    UIView* reVal = [[UIView alloc]initWithFrame:CGRectMake(0, 0, MAX(width, 4 * (margin + button_height)), height)];
-    reVal.backgroundColor = [UIColor colorWithRed:0.9050 green:0.9050 blue:0.9050 alpha:1.f];
+    CGFloat preferred_width = MIN(width, 5 * (margin + button_height));
+    CGFloat edge_margin = ABS(width - preferred_width) / 2;
+    UIView* reVal = [[UIView alloc]initWithFrame:CGRectMake(0, 0, preferred_width, height)];
+    reVal.backgroundColor = [UIColor darkGrayColor];
+//    reVal.backgroundColor = [UIColor colorWithRed:0.9050 green:0.9050 blue:0.9050 alpha:1.f];
   
-    [reVal addSubview:addPhotoEffectBtn(@"Tilt", CGRectMake(0, 0, button_height, button_height), CGPointMake(margin + button_height / 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:))];
-    [reVal addSubview:addPhotoEffectBtn(@"Sketch", CGRectMake(0, 0, button_height, button_height), CGPointMake(2 * margin + button_height * 3/ 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:))];
-    [reVal addSubview:addPhotoEffectBtn(@"Color", CGRectMake(0, 0, button_height, button_height), CGPointMake(3 * margin + button_height * 5/ 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:))];
-    [reVal addSubview:addPhotoEffectBtn(@"Smooth", CGRectMake(0, 0, button_height, button_height), CGPointMake(4 * margin + button_height * 7/ 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:))];
+    [reVal addSubview:addPhotoEffectBtn(@"Tilt", CGRectMake(0, 0, button_height, button_height), CGPointMake(edge_margin + margin + button_height / 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:))];
+    [reVal addSubview:addPhotoEffectBtn(@"Sketch", CGRectMake(0, 0, button_height, button_height), CGPointMake(edge_margin + 2 * margin + button_height * 3/ 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:))];
+    [reVal addSubview:addPhotoEffectBtn(@"Origin", CGRectMake(0, 0, button_height, button_height), CGPointMake(edge_margin + 3 * margin + button_height * 5/ 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:))];
+    [reVal addSubview:addPhotoEffectBtn(@"Color", CGRectMake(0, 0, button_height, button_height), CGPointMake(edge_margin + 4 * margin + button_height * 7/ 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:))];
+    [reVal addSubview:addPhotoEffectBtn(@"Smooth", CGRectMake(0, 0, button_height, button_height), CGPointMake(edge_margin + 5 * margin + button_height * 9/ 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:))];
 
     return reVal;
 }
@@ -255,6 +270,14 @@ UIImage* smoothToonEffect(UIImage* source, PostEffectAdapter* obj) {
     [obj.ip processImage];
     return [obj.smoothToonFilter imageFromCurrentFramebuffer];
 }
+
+UIImage* originEffect(UIImage* source, PostEffectAdapter* obj) {
+    [obj.ip removeAllTargets];
+    [obj.ip addTarget:obj.originFilter];
+    [obj.originFilter useNextFrameForImageCapture];
+    [obj.ip processImage];
+    return [obj.originFilter imageFromCurrentFramebuffer];
+}
 /*******************************************************************/
 
 /*******************************************************************/
@@ -286,6 +309,7 @@ void otherTagView(PostEffectAdapter* obj, UIImage* tag_img) {
 
 @synthesize delegate = _delegate;
 @synthesize ip = _ip;
+@synthesize originFilter = _originFilter;
 @synthesize tiltShiftFilter = _tiltShiftFilter;
 @synthesize sketchFilter = _sketchFilter;
 @synthesize colorInvertFilter = _colorInvertFilter;
@@ -310,6 +334,10 @@ void otherTagView(PostEffectAdapter* obj, UIImage* tag_img) {
         
         if (_smoothToonFilter == nil) {
             _smoothToonFilter = [[GPUImageSmoothToonFilter alloc] init];
+        }
+        
+        if (_originFilter == nil) {
+            _originFilter = [[GPUImageFilter alloc]init];
         }
         
         if (_ip == nil) {
@@ -368,7 +396,16 @@ void otherTagView(PostEffectAdapter* obj, UIImage* tag_img) {
         effectNode{"Sketch", &sketchEffect},
         effectNode{"Color", &colorInvertEffect},
         effectNode{"Smooth", &smoothToonEffect},
+        effectNode{"Origin", &originEffect},
     };
+  
+    for (UIView* tmp in sender.superview.subviews) {
+        UIView* img = [tmp viewWithTag:-5];
+        img.layer.borderWidth = 0.f;
+    }
+   
+    UIView* img_c = [sender viewWithTag:-5];
+    img_c.layer.borderWidth = 2.f;
     
     UIImage* result = nil;
     for (int index = 0; index < vec.size(); ++index) {
