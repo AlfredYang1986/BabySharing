@@ -250,11 +250,11 @@
     
     descriptionView.font = font;
     descriptionView.frame = CGRectMake(DESCRIPTION_LEFT_MARGIN, DESCRIPTION_TOP_MARGIN, [UIScreen mainScreen].bounds.size.width - DESCRIPTION_LEFT_MARGIN * 2 - 134, s.height);
-    if (s.height == size.height) {
+//    if (s.height == size.height) {
         descriptionView.text = description;
-    } else {
-        descriptionView.text = [[description substringToIndex:10] stringByAppendingString:@"..."];
-    }
+//    } else {
+//        descriptionView.text = [[description substringToIndex:10] stringByAppendingString:@"..."];
+//    }
     [descriptionView sizeToFit];
 }
 
