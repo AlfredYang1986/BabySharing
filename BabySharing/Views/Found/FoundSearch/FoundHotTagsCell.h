@@ -10,6 +10,9 @@
 
 @interface FoundHotTagsCell : UITableViewCell
 
+@property (nonatomic) BOOL isDarkTheme;
+
 + (CGFloat)preferredHeight;
 - (void)setHotTags:(NSArray*)arr;
+- (void)setHotTagsTest:(NSArray*)arr;
 @end

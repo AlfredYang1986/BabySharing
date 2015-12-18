@@ -118,7 +118,7 @@ UIButton* addTagBtn(NSString* title, CGRect bounds, CGPoint center, NSObject* ca
     [btn addTarget:callBackObj action:callBack forControlEvents:UIControlEventTouchDown];
     [btn setTitle:title forState:UIControlStateNormal];
     [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    
+   
     return btn;
 }
 
@@ -163,26 +163,26 @@ UIView* effectFilterForPhoto(PostEffectAdapter* adapter, CGFloat height) {
 
 UIView* tagForPhoto(PostEffectAdapter* adapter, CGFloat height) {
     
-//    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
-//    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
 
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
-//    CGFloat button_height = height / 3;
+    CGFloat button_height = height / 3;
 
     UIView* reVal = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, height)];
 //    reVal.backgroundColor = [UIColor colorWithRed:0.9050 green:0.9050 blue:0.9050 alpha:1.f];
     reVal.backgroundColor = [UIColor darkGrayColor];
     
-//    [reVal addSubview:addTagBtn(@"地点", CGRectMake(0, 0, 3 * button_height, button_height), CGPointMake(reVal.frame.size.width / 2 - 10 - 3 * button_height, reVal.frame.size.height / 2), adapter, @selector(didSelectTagForPhoto:), [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Location"] ofType:@"png"]])];
-//    [reVal addSubview:addTagBtn(@"时间", CGRectMake(0, 0, 3 * button_height, button_height), CGPointMake(reVal.frame.size.width / 2, reVal.frame.size.height / 2), adapter, @selector(didSelectTagForPhoto:), [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Time"] ofType:@"png"]])];
-//    [reVal addSubview:addTagBtn(@"标签", CGRectMake(0, 0, 3 * button_height, button_height), CGPointMake(reVal.frame.size.width / 2 + 10 + 3 * button_height, reVal.frame.size.height / 2), adapter, @selector(didSelectTagForPhoto:), [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Tag"] ofType:@"png"]])];
+    [reVal addSubview:addTagBtn(@"时刻", CGRectMake(0, 0, 3 * button_height, button_height), CGPointMake(reVal.frame.size.width / 2 - 10 - 3 * button_height / 2, reVal.frame.size.height / 2), adapter, @selector(didSelectTagForPhoto:), [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Location"] ofType:@"png"]])];
+//    [reVal addSubview:addTagBtn(@"地点", CGRectMake(0, 0, 3 * button_height, button_height), CGPointMake(reVal.frame.size.width / 2, reVal.frame.size.height / 2), adapter, @selector(didSelectTagForPhoto:), [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Time"] ofType:@"png"]])];
+    [reVal addSubview:addTagBtn(@"地点", CGRectMake(0, 0, 3 * button_height, button_height), CGPointMake(reVal.frame.size.width / 2 + 10 + 3 * button_height / 2, reVal.frame.size.height / 2), adapter, @selector(didSelectTagForPhoto:), [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Tag"] ofType:@"png"]])];
     
-    UILabel* label = [[UILabel alloc]init];
-    label.text = @"标记这一时刻，这一地点";
-    label.textColor = [UIColor lightGrayColor];
-    [label sizeToFit];
-    [reVal addSubview:label];
-    label.center = CGPointMake(reVal.frame.size.width / 2, reVal.frame.size.height / 2);
+//    UILabel* label = [[UILabel alloc]init];
+//    label.text = @"标记这一时刻，这一地点";
+//    label.textColor = [UIColor lightGrayColor];
+//    [label sizeToFit];
+//    [reVal addSubview:label];
+//    label.center = CGPointMake(reVal.frame.size.width / 2, reVal.frame.size.height / 2);
     
     return reVal;
 }
@@ -423,7 +423,8 @@ void otherTagView(PostEffectAdapter* obj, UIImage* tag_img) {
 - (void)didSelectTagForPhoto:(UIButton*)sender {
     static const vector<tagNode> vec = {
         tagNode{"地点", TagTypeLocation, &locationTagView},
-        tagNode{"时间", TagTypeTime, &timeTagView},
+//        tagNode{"时间", TagTypeTime, &timeTagView},
+        tagNode{"时刻", TagTypeTime, &timeTagView},
         tagNode{"标签", TagTypeTags, &otherTagView},
     };
     

@@ -12,4 +12,8 @@
 
 @synthesize headLabell = _headLabell;
 @synthesize headImg = _headImg;
+
++ (CGFloat)prefferredHeight {
+    return 44;
+}
 @end

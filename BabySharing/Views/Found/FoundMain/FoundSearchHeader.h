@@ -12,4 +12,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *headLabell;
 @property (weak, nonatomic) IBOutlet UIImageView *headImg;
 
++ (CGFloat)prefferredHeight;
 @end

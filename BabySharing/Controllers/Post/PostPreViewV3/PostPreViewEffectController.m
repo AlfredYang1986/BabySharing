@@ -10,7 +10,6 @@
 #import "PostEffectAdapter.h"
 #import "PhotoAddTagController.h"
 #import "INTUAnimationEngine.h"
-#import "PhotoPublishController.h"
 #import <AVFoundation/AVFoundation.h>
 #import "SearchSegView2.h"
 #import "PostPublichViewController.h"
@@ -159,12 +158,17 @@
         
     } else if (_type == PostPreViewMovie) {
 
-        NSInteger button_count = 5;
-        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"滤镜" andImage:nil andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 1 / (2*button_count), f_bar.frame.size.height / 2)]];
-        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"剪切" andImage:nil andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 3 / (2*button_count), f_bar.frame.size.height / 2)]];
-        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"变速" andImage:nil andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 5 / (2*button_count), f_bar.frame.size.height / 2)]];
-        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"封面" andImage:nil andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 7 / (2*button_count), f_bar.frame.size.height / 2)]];
-        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"声音" andImage:nil andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 9 / (2*button_count), f_bar.frame.size.height / 2)]];
+        [f_bar addItemWithTitle:@"封面"];
+        [f_bar addItemWithTitle:@"滤镜"];
+        f_bar.margin_between_items = 80;
+        f_bar.selectedIndex = 0;
+        
+//        NSInteger button_count = 5;
+//        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"滤镜" andImage:nil andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 1 / (2*button_count), f_bar.frame.size.height / 2)]];
+//        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"剪切" andImage:nil andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 3 / (2*button_count), f_bar.frame.size.height / 2)]];
+//        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"变速" andImage:nil andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 5 / (2*button_count), f_bar.frame.size.height / 2)]];
+//        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"封面" andImage:nil andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 7 / (2*button_count), f_bar.frame.size.height / 2)]];
+//        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"声音" andImage:nil andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 9 / (2*button_count), f_bar.frame.size.height / 2)]];
     } else {
         // error
     }   
@@ -423,7 +427,6 @@
         CGContextDrawImage(context, smallBounds, subImgRef);
     }
     
-    
     CGImageRef newImageRef = CGBitmapContextCreateImage(context);
     UIImage* newImage = [UIImage imageWithCGImage:newImageRef];
     UIGraphicsEndImageContext();
@@ -522,7 +525,7 @@
 }
 
 - (void)queryTagContetnWithTagType:(TagType)tag_type andImg:(UIImage*)tag_img {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"PhotoPreView" bundle:nil];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"PostPreview" bundle:nil];
     PhotoAddTagController* addTagController = [storyboard instantiateViewControllerWithIdentifier:@"AddTags"];
     addTagController.tagImg = tag_img;
     addTagController.type = tag_type;

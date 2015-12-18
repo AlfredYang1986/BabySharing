@@ -228,6 +228,10 @@
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     FoundSearchHeader* header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"found header"];
    
+    if (header == nil) {
+        header = [[FoundSearchHeader alloc]initWithReuseIdentifier:@"found header"];
+    }
+    
     if (section == 0) {
         NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
         NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
