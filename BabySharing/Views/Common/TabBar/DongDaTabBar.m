@@ -103,7 +103,8 @@
    
     for (int index = 0; index < self.count; ++index) {
         UIButton* tmp = (UIButton*)[self viewWithTag:index];
-        tmp.frame = CGRectMake(index * step, index == 2 ? -8 : 0 , step, height);
+        tmp.frame = CGRectMake(index * step, 0, step, height);
+//        tmp.frame = CGRectMake(index * step, index == 2 ? -8 : 0 , step, height);
         if ([tmp isSelected]) {
             selected_layer.position = CGPointMake(tmp.center.x, 5);
         }

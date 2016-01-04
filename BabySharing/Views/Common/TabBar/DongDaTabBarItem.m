@@ -11,8 +11,10 @@
 #define LAYER_ICON_NORMAL_WIDTH  25
 #define LAYER_ICON_NORMAL_HEIGHT LAYER_ICON_NORMAL_WIDTH
 
-#define LAYER_ICON_MID_WIDHT    60
-#define LAYER_ICON_MID_HEIGHT   LAYER_ICON_MID_WIDHT
+#define LAYER_ICON_MID_WIDHT    65
+//#define LAYER_ICON_MID_WIDHT    60
+//#define LAYER_ICON_MID_HEIGHT   LAYER_ICON_MID_WIDHT
+#define LAYER_ICON_MID_HEIGHT   49
 
 @implementation DongDaTabBarItem {
     UIImage* img;
@@ -34,10 +36,19 @@
     if (self) {
         img = image;
         select_img = nil;
+
+        NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
+        NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+        UIImage* bg_img = [UIImage imageNamed:[resourceBundle pathForResource:@"tab_publish_bg" ofType:@"png"]];
+
+        CALayer* bg_layer = [CALayer layer];
+        bg_layer.contents = (id)bg_img.CGImage;
+        bg_layer.frame = CGRectMake(0, 0, LAYER_ICON_MID_WIDHT, LAYER_ICON_MID_HEIGHT);
+        [self.layer addSublayer:bg_layer];
         
         img_layer = [CALayer layer];
         img_layer.contents = (id)image.CGImage;
-        img_layer.frame = CGRectMake(0, 0, LAYER_ICON_MID_WIDHT, LAYER_ICON_MID_HEIGHT);
+        img_layer.frame = CGRectMake(0, 0, LAYER_ICON_NORMAL_WIDTH, LAYER_ICON_NORMAL_HEIGHT);
         [self.layer addSublayer:img_layer];
     }
     return self;
