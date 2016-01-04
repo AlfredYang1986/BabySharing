@@ -133,6 +133,8 @@
     [self createHomeContentLogo];
     
     [self.view bringSubviewToFront:bkView];
+    
+    self.view.backgroundColor = [UIColor lightGrayColor];
 }
 
 
@@ -162,7 +164,7 @@
     actionView.tag = -99;
     actionView.frame = CGRectMake(0, 0, 59, 44);
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
-    actionView.center = CGPointMake(width - actionView.frame.size.width / 2 + 5, 23.5 + actionView.frame.size.height / 2);
+    actionView.center = CGPointMake(width - actionView.frame.size.width / 2 + 5, 15 + actionView.frame.size.height / 2);
     [bkView addSubview:actionView];
 
     return actionView;
@@ -170,12 +172,12 @@
 
 #pragma mark -- dong da home content logo
 - (void)createHomeContentLogo {
-    UIImageView* imgView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 85, 70)];
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    UIImageView* imgView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 70, 22)];
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-    NSString* filepath = [resourceBundle pathForResource:@"Dongda-home-logo" ofType:@"png"];
+    NSString* filepath = [resourceBundle pathForResource:@"home_title_logo" ofType:@"png"];
     imgView.image = [UIImage imageNamed:filepath];
-    imgView.center = CGPointMake([UIScreen mainScreen].bounds.size.width / 2, 20 + 64 / 2);
+    imgView.center = CGPointMake([UIScreen mainScreen].bounds.size.width / 2 + 2, 15 + 64 / 2);
     imgView.tag = -98;
     [bkView addSubview:imgView];
 }

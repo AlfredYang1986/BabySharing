@@ -21,6 +21,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *tagsLabelView;
 @property (strong, nonatomic) IBOutlet UILabel *timeLabel;
 @property (strong, nonatomic) IBOutlet UIView *bkgView;
+@property (strong, nonatomic) IBOutlet UIView *funcActArea;
 @property (strong, nonatomic) IBOutlet UIButton *funcBtn;
 
 @property (nonatomic) PostPreViewType type;

@@ -28,6 +28,8 @@
 #define DESCRIPTION_LEFT_MARGIN 13
 #define DESCRIPTION_TOP_MARGIN 5
 
+#define FUNC_VIEW_HEIGHT    46
+
 @implementation QueryCell {
 //    MPMoviePlayerController* movie;
     AVPlayerLayer *avPlayerLayer;
@@ -43,6 +45,7 @@
 @synthesize timeLabel = _timeLabel;
 @synthesize bkgView = _bkgView;
 @synthesize funcBtn = _funcBtn;
+@synthesize funcActArea = _funcActArea;
 
 @synthesize delegate = _delegate;
 @synthesize content = _content;
@@ -61,10 +64,17 @@
 //    CGFloat img_height = IMG_HEIGHT;
     CGFloat tmp = width / 7.5;
     
-    return img_height
-         + tmp
-         + HER_MARGIN
-         + [self getSizeBaseOnDescription:description].height;
+    if (width == 320.f)
+        return img_height
+            + tmp
+            + HER_MARGIN
+            + [self getSizeBaseOnDescription:description].height;
+    else
+        return img_height
+            + FUNC_VIEW_HEIGHT
+            + tmp
+            + HER_MARGIN
+            + [self getSizeBaseOnDescription:description].height;
 }
 
 + (CGSize)getSizeBaseOnDescription:(NSString*)description {
@@ -94,22 +104,74 @@
     _bkgView = [[UIView alloc]init];
     [self addSubview:_bkgView];
     
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
-    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-    NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"home-func-btn"] ofType:@"png"];
+//    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+//    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+//    NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"home-func-btn"] ofType:@"png"];
 
-    _funcBtn = [[UIButton alloc]init];
-    [_funcBtn addTarget:self action:@selector(didSelectFuncBtn) forControlEvents:UIControlEventTouchUpInside];
-    [_bkgView addSubview:_funcBtn];
-    [_funcBtn setImage:[UIImage imageNamed:filePath] forState:UIControlStateNormal];
+//    _funcBtn = [[UIButton alloc]init];
+//    [_funcBtn addTarget:self action:@selector(didSelectFuncBtn) forControlEvents:UIControlEventTouchUpInside];
+//    [_bkgView addSubview:_funcBtn];
+//    [_funcBtn setImage:[UIImage imageNamed:filePath] forState:UIControlStateNormal];
+
+    _funcActArea = [[UIView alloc]init];
+    [self addSubview:_funcActArea];
+    
+    // split line
+    CALayer* line = [CALayer layer];
+    line.borderColor = [UIColor lightGrayColor].CGColor;
+    line.borderWidth = 1.f;
+    line.frame = CGRectMake(10.5f, FUNC_VIEW_HEIGHT - 1, [UIScreen mainScreen].bounds.size.width - 10.5f * 4, 1);
+    [_funcActArea.layer addSublayer:line];
+   
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+//    NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"home-func-btn"] ofType:@"png"];
+   
+#define FUNC_BTN_WIDTH_2        25
+#define FUNC_BTN_HEIGHT_2       FUNC_BTN_WIDTH_2
+#define FUNC_BTN_MARGIN_2       10.5f
+    // like btn
+    UIButton* like_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, FUNC_BTN_WIDTH_2, FUNC_BTN_HEIGHT_2)];
+    [like_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"home_like" ofType:@"png"]] forState:UIControlStateNormal];
+    like_btn.center = CGPointMake(FUNC_BTN_MARGIN_2 + FUNC_BTN_WIDTH_2 / 2, FUNC_VIEW_HEIGHT / 2);
+    [like_btn addTarget:self action:@selector(collectBtnSelected) forControlEvents:UIControlEventTouchUpInside];
+    [_funcActArea addSubview:like_btn];
+    
+    // repush btn
+    UIButton* repost_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, FUNC_BTN_WIDTH_2, FUNC_BTN_HEIGHT_2)];
+    [repost_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"home_repost" ofType:@"png"]] forState:UIControlStateNormal];
+    repost_btn.center = CGPointMake(FUNC_BTN_MARGIN_2 * 3 + FUNC_BTN_WIDTH_2, FUNC_VIEW_HEIGHT / 2);
+    [repost_btn addTarget:self action:@selector(collectBtnSelected) forControlEvents:UIControlEventTouchUpInside];
+    [_funcActArea addSubview:repost_btn];
+    
+    // chat btn
+    UIButton* chat_btn = [[UIButton alloc]init];
+//    [chat_btn setImage:[UIImage imageNamed:[resourceBundle pathForResource:@"home_chat" ofType:@"png"]] forState:UIControlStateNormal];
+    CALayer* chat_icon = [CALayer layer];
+    chat_icon.frame = CGRectMake(0, 0, FUNC_BTN_WIDTH_2, FUNC_BTN_HEIGHT_2);
+    chat_icon.contents = (id)[UIImage imageNamed:[resourceBundle pathForResource:@"home_chat" ofType:@"png"]].CGImage;
+    chat_icon.position = CGPointMake(-FUNC_BTN_WIDTH_2, FUNC_BTN_HEIGHT_2 / 2);
+    [chat_btn.layer addSublayer:chat_icon];
+    
+    [chat_btn setTitle:@"加入圈聊" forState:UIControlStateNormal];
+    [chat_btn setTitleColor:[UIColor colorWithRed:0.847 green:0.847 blue:0.847 alpha:1.f] forState:UIControlStateNormal];
+    chat_btn.titleLabel.font = [UIFont systemFontOfSize:11.f];
+    [chat_btn sizeToFit];
+    chat_btn.center = CGPointMake([UIScreen mainScreen].bounds.size.width - FUNC_BTN_MARGIN_2 * 4 - chat_btn.frame.size.width / 2, FUNC_VIEW_HEIGHT / 2);
+    [chat_btn addTarget:self action:@selector(collectBtnSelected) forControlEvents:UIControlEventTouchUpInside];
+    [_funcActArea addSubview:chat_btn];
 }
 
 - (void)layoutSubviews {
     CGFloat width = self.bounds.size.width;
     CGFloat img_height = width;
-    
-    _imgView.frame = CGRectMake(0, 0, width, img_height);
-    _bkgView.frame = CGRectMake(0, img_height, width, self.frame.size.height - img_height);
+  
+    CGFloat offset_y = 0;
+    _imgView.frame = CGRectMake(0, 0, width, img_height <= 320.f ? img_height - 44 : img_height);
+    offset_y += _imgView.frame.size.height;
+    _funcActArea.frame = CGRectMake(0, offset_y, width, FUNC_VIEW_HEIGHT);
+    offset_y += FUNC_VIEW_HEIGHT;
+    _bkgView.frame = CGRectMake(0, offset_y, width, self.frame.size.height - img_height);
     _funcBtn.frame = CGRectMake(width - FUNC_BTN_WIDTH - HER_MARGIN, FUNC_BTN_TOP_MARGIN, FUNC_BTN_WIDTH, FUNC_BTN_WIDTH);
 }
 
