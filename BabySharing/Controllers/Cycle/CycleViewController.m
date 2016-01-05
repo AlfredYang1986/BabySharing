@@ -60,7 +60,7 @@
 @synthesize baseController = _baseController;
 
 - (void)viewDidLoad {
-    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f]];
+//    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f]];
 
     _cycleTableView.dataSource = self;
     _cycleTableView.delegate = self;
@@ -79,7 +79,7 @@
                                                  name:kReachabilityChangedNotification
                                                object:nil];
 
-    isRecommmend = YES;
+    isRecommmend = NO;
     isSync = NO;
   
     if (_ry.isReachable) {
@@ -87,15 +87,16 @@
     }
     
     UILabel* label_t = [[UILabel alloc]init];
-    label_t.text = @"圈子";
-    label_t.textColor = [UIColor whiteColor];
+    label_t.text = @"圈聊";
+    label_t.textColor = [UIColor colorWithRed:0.608 green:0.608 blue:0.608 alpha:1.f];
+    label_t.font = [UIFont systemFontOfSize:18.f];
     [label_t sizeToFit];
     self.navigationItem.titleView = label_t;
    
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
     UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
-    NSString* filepath = [resourceBundle pathForResource:@"Previous_simple" ofType:@"png"];
+    NSString* filepath = [resourceBundle pathForResource:@"dongda_back" ofType:@"png"];
     CALayer * layer = [CALayer layer];
     layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
     layer.frame = CGRectMake(0, 0, 13, 20);
@@ -104,13 +105,17 @@
     [barBtn addTarget:self action:@selector(didPopViewController) forControlEvents:UIControlEventTouchDown];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn];
+    
+    self.view.backgroundColor = [UIColor lightGrayColor];
 }
 
 - (void)didPopViewController {
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
     dic_description = [[_lm currentDeltailInfoLocal] mutableCopy];
     chatGroupArray_mine = [_mm enumMyChatGroupLocal];
     chatGroupArray_recommend = [_mm enumRecommendChatGroupLocal];
@@ -236,8 +241,9 @@
 - (void)viewDidLayoutSubviews {
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     CGFloat height = [UIScreen mainScreen].bounds.size.height;
-   
-    CGRect rc = CGRectMake(0, 0, width, height);
+  
+#define TABLE_VIEW_TOP_MARGIN   69
+    CGRect rc = CGRectMake(0, TABLE_VIEW_TOP_MARGIN, width, height);
 //    _descriptionView.frame = rc;
     _cycleTableView.frame = rc;
     
@@ -254,6 +260,35 @@
 }
 
 #pragma mark -- table view delegate
+/*改变删除按钮的title*/
+- (nullable NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(8_0) {
+    
+    UITableViewRowAction * act = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"删除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+        [tableView.dataSource tableView:tableView commitEditingStyle:UITableViewCellEditingStyleDelete forRowAtIndexPath:indexPath];
+    }];
+    act.backgroundColor = [UIColor colorWithRed:0.2745 green:0.8588 blue:0.7922 alpha:1.f];
+
+    UITableViewRowAction * act2 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"取消" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+        [tableView endEditing:YES];
+        
+    }];
+    act2.backgroundColor = [UIColor colorWithRed:0.6078 green:0.6078 blue:0.6078 alpha:1.f];
+    
+    return @[act2, act];
+}
+
+
+/*删除用到的函数*/
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete && indexPath.row > 0) {
+        NSLog(@"delete one row");
+//        GotyeOCChatTarget* gotTarget = [_mm getTargetByIndex:indexPath.row - 1];
+//        [GotyeOCAPI deleteSession:gotTarget alsoRemoveMessages:YES];
+//        [tableView reloadData];
+    }
+}
+
+
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
 }
@@ -261,15 +296,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     // TODO: segue to user chat
-//    [self performSegueWithIdentifier:@"enterChatGroup" sender:indexPath];
+    [self performSegueWithIdentifier:@"enterChatGroup" sender:indexPath];
     
-    Targets* tmp = nil;
-    if (indexPath.section == 0) {
-        tmp = [chatGroupArray_mine objectAtIndex:indexPath.row];
-    } else {
-        tmp = [chatGroupArray_recommend objectAtIndex:indexPath.row];
-    }
-    [self backToHomeThenPushChatGroup:tmp];
+//    Targets* tmp = nil;
+//    if (indexPath.section == 0) {
+//        tmp = [chatGroupArray_mine objectAtIndex:indexPath.row];
+//    } else {
+//        tmp = [chatGroupArray_recommend objectAtIndex:indexPath.row];
+//    }
+//    [self backToHomeThenPushChatGroup:tmp];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -280,25 +315,31 @@
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
     UIView* reVal = [[UIView alloc]init];
-    reVal.backgroundColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
+    reVal.backgroundColor = [UIColor whiteColor];
+//    reVal.backgroundColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
     
-    UILabel* label = [[UILabel alloc]init];
+    UILabel* label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 0, 0)];
     
     if (section == 0) {
-        label.text = @"我的圈子";
+//        label.text = @"我的圈子";
+        label.text = @"最近关注的";
     } else {
         label.text = @"猜你喜欢";
     }
    
-    label.textColor = [UIColor whiteColor];
-    label.textAlignment = NSTextAlignmentCenter;
+    label.textColor = [UIColor colorWithRed:0.824 green:0.824 blue:0.824 alpha:1.f];
+    label.textAlignment = NSTextAlignmentLeft;
+    label.font = [UIFont boldSystemFontOfSize:14.f];
     [label sizeToFit];
     [reVal addSubview:label];
-   
-    CGFloat width = [UIScreen mainScreen].bounds.size.width;
-    CGFloat height = 44;
     
-    label.center = CGPointMake(width / 2 , height / 2);
+    label.center = CGPointMake(10.5f + label.frame.size.width / 2, 34 / 2);
+    
+    CALayer* line = [CALayer layer];
+    line.borderColor = [UIColor colorWithWhite:0.666 alpha:0.6].CGColor;
+    line.borderWidth = 1.f;
+    line.frame = CGRectMake(10.5, 34 - 1, [UIScreen mainScreen].bounds.size.width - 21, 1);
+    [reVal.layer addSublayer:line];
     
     return reVal;
     
@@ -323,11 +364,12 @@
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (section == 0) {
-        return [MyCycleCellHeader preferHeight];
-    } else {
-        return 44;
-    }
+//    if (section == 0) {
+//        return [MyCycleCellHeader preferHeight];
+//    } else {
+//        return 44;
+//    }
+    return 34;
 }
 
 //- (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -362,7 +404,7 @@
         tmp = [chatGroupArray_recommend objectAtIndex:indexPath.row];
     }
     
-    cell.numLabel.text = @"7";
+//    cell.numLabel.text = @"7";
     cell.themeLabel.text = tmp.target_name;
     
     return cell;
@@ -435,17 +477,17 @@
         _notifyObject = (CycleAddDescriptionViewController*)segue.destinationViewController;
     } else if ([segue.identifier isEqualToString:@"enterChatGroup"]) {
         
-//        NSIndexPath* path = (NSIndexPath*)sender;
-//        Targets* tmp = nil;
-//        if (path.section == 0) {
-//            tmp = [chatGroupArray_mine objectAtIndex:path.row];
-//        } else {
-//            tmp = [chatGroupArray_recommend objectAtIndex:path.row];
-//        }
-//        ((ChatGroupController*)segue.destinationViewController).group_id = tmp.group_id;
-//        ((ChatGroupController*)segue.destinationViewController).joiner_count = tmp.number_count;
-//        ((ChatGroupController*)segue.destinationViewController).group_name = tmp.target_name;
-//        ((ChatGroupController*)segue.destinationViewController).founder_id = tmp.owner_id;
+        NSIndexPath* path = (NSIndexPath*)sender;
+        Targets* tmp = nil;
+        if (path.section == 0) {
+            tmp = [chatGroupArray_mine objectAtIndex:path.row];
+        } else {
+            tmp = [chatGroupArray_recommend objectAtIndex:path.row];
+        }
+        ((ChatGroupController*)segue.destinationViewController).group_id = tmp.group_id;
+        ((ChatGroupController*)segue.destinationViewController).joiner_count = tmp.number_count;
+        ((ChatGroupController*)segue.destinationViewController).group_name = tmp.target_name;
+        ((ChatGroupController*)segue.destinationViewController).founder_id = tmp.owner_id;
     }
 }
 

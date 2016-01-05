@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface CycleOverCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UILabel *numLabel;
+//@property (weak, nonatomic) IBOutlet UILabel *numLabel;
 @property (weak, nonatomic) IBOutlet UILabel *themeLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *themeImg;
+@property (weak, nonatomic) IBOutlet UILabel *chatLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 
 + (CGFloat)preferredHeight;
 @end
