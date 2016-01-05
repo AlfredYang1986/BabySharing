@@ -31,8 +31,8 @@
 #import "OBShapedButton.h"
 #import "ContentCardView.h"
 
-#define HEADER_MARGIN_TO_SCREEN 8
-#define CONTENT_START_POINT     74
+#define HEADER_MARGIN_TO_SCREEN 10.5
+#define CONTENT_START_POINT     71
 #define PAN_HANDLE_CHECK_POINT  10
 
 #define VIEW_BOUNTDS        CGFloat screen_width = [UIScreen mainScreen].bounds.size.width; \
@@ -45,6 +45,7 @@
 
 #define BACK_TO_TOP_TIME    3.0
 #define SHADOW_WIDTH 4
+#define MARGIN_BETWEEN_CARD     3
 
 //@interface HomeViewController () <UITableViewDelegate, UITableViewDataSource, QueryCellActionProtocol> //, HomeSegControlDelegate>
 @interface HomeViewController () 
@@ -134,7 +135,7 @@
     
     [self.view bringSubviewToFront:bkView];
     
-    self.view.backgroundColor = [UIColor lightGrayColor];
+    self.view.backgroundColor = [UIColor colorWithRed:0.9529 green:0.9529 blue:0.9529 alpha:1.f];
 }
 
 
@@ -156,15 +157,15 @@
 - (UIView*)createNavActionView {
     
     OBShapedButton* actionView = [[OBShapedButton alloc]init];
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-    NSString* filepath = [resourceBundle pathForResource:@"Cycle-home-btn" ofType:@"png"];
+    NSString* filepath = [resourceBundle pathForResource:@"home_chatgroup_icon" ofType:@"png"];
     [actionView setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
     [actionView addTarget:self action:@selector(didSelectChatGroupBtn) forControlEvents:UIControlEventTouchUpInside];
     actionView.tag = -99;
-    actionView.frame = CGRectMake(0, 0, 59, 44);
+    actionView.frame = CGRectMake(0, 0, 69, 40);
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
-    actionView.center = CGPointMake(width - actionView.frame.size.width / 2 + 5, 15 + actionView.frame.size.height / 2);
+    actionView.center = CGPointMake(width - actionView.frame.size.width / 2 + 5, 21 + actionView.frame.size.height / 2);
     [bkView addSubview:actionView];
 
     return actionView;
@@ -194,12 +195,12 @@
 
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ContentCardView" owner:self options:nil];
         ContentCardView* tmp = [nib objectAtIndex:0];
-        
+       
         tmp.queryView.delegate = datasource;
         tmp.queryView.dataSource = datasource;
         CGFloat width = [UIScreen mainScreen].bounds.size.width - 2 * HEADER_MARGIN_TO_SCREEN;
         CGSize size = CGSizeMake(width, [QueryHeader preferredHeight] + [QueryCell preferredHeightWithDescription:@"Any Word"]);
-        tmp.frame = CGRectMake(8 + index * 4, CONTENT_START_POINT + index * (size.height + 8), size.width - index * 8, size.height);
+        tmp.frame = CGRectMake(HEADER_MARGIN_TO_SCREEN + index * 4, CONTENT_START_POINT + index * (size.height + MARGIN_BETWEEN_CARD), size.width - index * 8, size.height);
         
         UIPanGestureRecognizer* pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(handlePan:)];
         [tmp addGestureRecognizer:pan];
@@ -232,7 +233,7 @@
     
     CGFloat width = [UIScreen mainScreen].bounds.size.width - 2 * HEADER_MARGIN_TO_SCREEN;
     CGSize size = CGSizeMake(width, [QueryHeader preferredHeight] + [QueryCell preferredHeightWithDescription:@"Any Word"]);
-    tmp.frame = CGRectMake(8 + 2 * 4, CONTENT_START_POINT + 2 * (size.height + 8), size.width - 2 * 8, size.height);
+    tmp.frame = CGRectMake(HEADER_MARGIN_TO_SCREEN + 2 * 4, CONTENT_START_POINT + 2 * (size.height + MARGIN_BETWEEN_CARD), size.width - 2 * 8, size.height);
     tmp.queryView.tag = 2 + _current_index;
     
     if (tmp.queryView.tag == [_delegate count]) {
@@ -251,7 +252,7 @@
                                      options:INTUAnimationOptionNone
                                   animations:^(CGFloat progress) {
                                       for (int index = -1; index < 2; ++index) {
-                                          ((UIView*)[queryViewLst objectAtIndex:index + 1]).frame = INTUInterpolateCGRect(((UIView*)[queryViewLst objectAtIndex:index + 1]).frame, CGRectMake(8 + abs(index) * 4, CONTENT_START_POINT + index * (size.height + 8) - (index == -1 ? 28 : 0), size.width - abs(index) * 8, size.height), progress);
+                                          ((UIView*)[queryViewLst objectAtIndex:index + 1]).frame = INTUInterpolateCGRect(((UIView*)[queryViewLst objectAtIndex:index + 1]).frame, CGRectMake(HEADER_MARGIN_TO_SCREEN + abs(index) * 4, CONTENT_START_POINT + index * (size.height + MARGIN_BETWEEN_CARD) - (index == -1 ? 28 : 0), size.width - abs(index) * 8, size.height), progress);
                                           [(UIView*)[queryViewLst objectAtIndex:index + 1] layoutSubviews];
 //                                          UIView* qv = ((ContentCardView*)[queryViewLst objectAtIndex:index + 1]).queryView;
 //                                          CALayer* shadow = ((ContentCardView*)[queryViewLst objectAtIndex:index + 1]).shadow;
@@ -292,7 +293,7 @@
     
     CGFloat width = [UIScreen mainScreen].bounds.size.width - 2 * HEADER_MARGIN_TO_SCREEN;
     CGSize size = CGSizeMake(width, [QueryHeader preferredHeight] + [QueryCell preferredHeightWithDescription:@"Any Word"]);
-    tmp.frame = CGRectMake(8 + 2 * 4, CONTENT_START_POINT + -1 * (size.height + 8), size.width - 2 * 8, size.height);
+    tmp.frame = CGRectMake(HEADER_MARGIN_TO_SCREEN + 2 * 4, CONTENT_START_POINT + -1 * (size.height + MARGIN_BETWEEN_CARD), size.width - 2 * 8, size.height);
     tmp.queryView.tag = -1 + _current_index;
     [tmp layoutSubviews];
     [tmp.queryView reloadData];
@@ -309,7 +310,7 @@
                                      options:INTUAnimationOptionNone
                                   animations:^(CGFloat progress) {
                                       for (int index = 0; index < 3; ++index) {
-                                          ((UIView*)[queryViewLst objectAtIndex:index]).frame = INTUInterpolateCGRect(((UIView*)[queryViewLst objectAtIndex:index]).frame, CGRectMake(8 + abs(index) * 4, CONTENT_START_POINT + index * (size.height + 8), size.width - abs(index) * 8, size.height), progress);
+                                          ((UIView*)[queryViewLst objectAtIndex:index]).frame = INTUInterpolateCGRect(((UIView*)[queryViewLst objectAtIndex:index]).frame, CGRectMake(HEADER_MARGIN_TO_SCREEN + abs(index) * 4, CONTENT_START_POINT + index * (size.height + MARGIN_BETWEEN_CARD), size.width - abs(index) * 8, size.height), progress);
                                           [(UIView*)[queryViewLst objectAtIndex:index] layoutSubviews];
                                       }
                                   }
@@ -365,6 +366,13 @@
     bkView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, screen_width, 64)];
 //    bkView.backgroundColor = [UIColor lightGrayColor];
     bkView.backgroundColor = [UIColor whiteColor];
+    
+    CALayer* line = [CALayer layer];
+    line.borderWidth = 1.f;
+    line.borderColor = [UIColor colorWithRed:0.5922 green:0.5922 blue:0.5922 alpha:0.25].CGColor;
+    line.frame = CGRectMake(0, 64, screen_width, 1);
+    [bkView.layer addSublayer:line];
+    
     [self.view addSubview:bkView];
     [self.view bringSubviewToFront:bkView];
 }

@@ -25,10 +25,24 @@
 #define FUNC_BTN_WIDTH  30
 #define FUNC_BTN_TOP_MARGIN 8
 
-#define DESCRIPTION_LEFT_MARGIN 13
-#define DESCRIPTION_TOP_MARGIN 5
+#define DESCRIPTION_LEFT_MARGIN 6
+#define DESCRIPTION_TOP_MARGIN  -9
 
-#define FUNC_VIEW_HEIGHT    46
+#define FUNC_VIEW_HEIGHT            46
+#define CHATING_VIEW_HEIGHT         47
+#define DESCRIPTION_VIEW_HEIGHT     30
+
+#define FUNC_BTN_WIDTH_2        25
+#define FUNC_BTN_HEIGHT_2       FUNC_BTN_WIDTH_2
+#define FUNC_BTN_MARGIN_2       10.5f
+
+#define ITEMS_COUNT             3
+#define ITEM_LEFT_MARGIN        10.5
+#define ITEM_WIDTH              26
+#define ITEM_HEIGHT             ITEM_WIDTH
+#define ITEM_MARGIN_BETWEEN     -6
+
+#define FONT_COLOR              [UIColor colorWithRed:0.3059 green:0.3059 blue:0.3059 alpha:1.f]
 
 @implementation QueryCell {
 //    MPMoviePlayerController* movie;
@@ -37,6 +51,8 @@
     UITextView* descriptionView;
 //    UIView* funcView;
     OBShapedButton* funcView;
+    
+    OBShapedButton* tag_btn;
 }
 
 @synthesize imgView = _imgView;
@@ -44,6 +60,7 @@
 @synthesize tagsLabelView = _tagsLabelView;
 @synthesize timeLabel = _timeLabel;
 @synthesize bkgView = _bkgView;
+@synthesize chatingView = _chatingView;
 @synthesize funcBtn = _funcBtn;
 @synthesize funcActArea = _funcActArea;
 
@@ -62,19 +79,20 @@
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     CGFloat img_height = width - 2 * HER_MARGIN;
 //    CGFloat img_height = IMG_HEIGHT;
-    CGFloat tmp = width / 7.5;
+//    CGFloat tmp = 89;
+    CGFloat tmp = CHATING_VIEW_HEIGHT + DESCRIPTION_VIEW_HEIGHT;
     
     if (width == 320.f)
         return img_height
-            + tmp
-            + HER_MARGIN
-            + [self getSizeBaseOnDescription:description].height;
+            + tmp;
+//            + HER_MARGIN
+//            + [self getSizeBaseOnDescription:description].height;
     else
         return img_height
             + FUNC_VIEW_HEIGHT
-            + tmp
-            + HER_MARGIN
-            + [self getSizeBaseOnDescription:description].height;
+            + tmp;
+//            + HER_MARGIN
+//            + [self getSizeBaseOnDescription:description].height;
 }
 
 + (CGSize)getSizeBaseOnDescription:(NSString*)description {
@@ -101,9 +119,6 @@
     UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didClickImage:)];
     [_imgView addGestureRecognizer:tap];
 
-    _bkgView = [[UIView alloc]init];
-    [self addSubview:_bkgView];
-    
 //    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
 //    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
 //    NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"home-func-btn"] ofType:@"png"];
@@ -113,24 +128,23 @@
 //    [_bkgView addSubview:_funcBtn];
 //    [_funcBtn setImage:[UIImage imageNamed:filePath] forState:UIControlStateNormal];
 
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+//    NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"home-func-btn"] ofType:@"png"];
+  
+    /***********************************************************************************************/
+    // funcActArea
+    // like
     _funcActArea = [[UIView alloc]init];
     [self addSubview:_funcActArea];
     
     // split line
     CALayer* line = [CALayer layer];
-    line.borderColor = [UIColor lightGrayColor].CGColor;
+    line.borderColor = [UIColor colorWithRed:0.6078 green:0.6078 blue:0.6078 alpha:0.25].CGColor;
     line.borderWidth = 1.f;
-    line.frame = CGRectMake(10.5f, FUNC_VIEW_HEIGHT - 1, [UIScreen mainScreen].bounds.size.width - 10.5f * 4, 1);
+    line.frame = CGRectMake(10.5f, FUNC_VIEW_HEIGHT - 1, [UIScreen mainScreen].bounds.size.width - 10.5f * 4 - 8, 1);
     [_funcActArea.layer addSublayer:line];
-   
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
-    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-//    NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"home-func-btn"] ofType:@"png"];
-   
-#define FUNC_BTN_WIDTH_2        25
-#define FUNC_BTN_HEIGHT_2       FUNC_BTN_WIDTH_2
-#define FUNC_BTN_MARGIN_2       10.5f
-    // like btn
+    
     UIButton* like_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, FUNC_BTN_WIDTH_2, FUNC_BTN_HEIGHT_2)];
     [like_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"home_like" ofType:@"png"]] forState:UIControlStateNormal];
     like_btn.center = CGPointMake(FUNC_BTN_MARGIN_2 + FUNC_BTN_WIDTH_2 / 2, FUNC_VIEW_HEIGHT / 2);
@@ -140,7 +154,7 @@
     // repush btn
     UIButton* repost_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, FUNC_BTN_WIDTH_2, FUNC_BTN_HEIGHT_2)];
     [repost_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"home_repost" ofType:@"png"]] forState:UIControlStateNormal];
-    repost_btn.center = CGPointMake(FUNC_BTN_MARGIN_2 * 3 + FUNC_BTN_WIDTH_2, FUNC_VIEW_HEIGHT / 2);
+    repost_btn.center = CGPointMake(FUNC_BTN_MARGIN_2 * 3 + FUNC_BTN_WIDTH_2 + FUNC_BTN_WIDTH_2 / 2, FUNC_VIEW_HEIGHT / 2);
     [repost_btn addTarget:self action:@selector(collectBtnSelected) forControlEvents:UIControlEventTouchUpInside];
     [_funcActArea addSubview:repost_btn];
     
@@ -150,16 +164,45 @@
     CALayer* chat_icon = [CALayer layer];
     chat_icon.frame = CGRectMake(0, 0, FUNC_BTN_WIDTH_2, FUNC_BTN_HEIGHT_2);
     chat_icon.contents = (id)[UIImage imageNamed:[resourceBundle pathForResource:@"home_chat" ofType:@"png"]].CGImage;
-    chat_icon.position = CGPointMake(-FUNC_BTN_WIDTH_2, FUNC_BTN_HEIGHT_2 / 2);
+    chat_icon.position = CGPointMake(-FUNC_BTN_WIDTH_2 + 5, FUNC_BTN_HEIGHT_2 / 2 + 1);
     [chat_btn.layer addSublayer:chat_icon];
     
     [chat_btn setTitle:@"加入圈聊" forState:UIControlStateNormal];
-    [chat_btn setTitleColor:[UIColor colorWithRed:0.847 green:0.847 blue:0.847 alpha:1.f] forState:UIControlStateNormal];
-    chat_btn.titleLabel.font = [UIFont systemFontOfSize:11.f];
+    [chat_btn setTitleColor:FONT_COLOR forState:UIControlStateNormal];
+    chat_btn.titleLabel.font = [UIFont systemFontOfSize:12.f];
     [chat_btn sizeToFit];
     chat_btn.center = CGPointMake([UIScreen mainScreen].bounds.size.width - FUNC_BTN_MARGIN_2 * 4 - chat_btn.frame.size.width / 2, FUNC_VIEW_HEIGHT / 2);
     [chat_btn addTarget:self action:@selector(collectBtnSelected) forControlEvents:UIControlEventTouchUpInside];
     [_funcActArea addSubview:chat_btn];
+    /***********************************************************************************************/
+
+    /***********************************************************************************************/
+    // chating info view
+    _chatingView = [[UIView alloc]init];
+    [self addSubview:_chatingView];
+    
+    for (int index = 2; index >= 0; --index) {
+        UIImageView* tmp = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, ITEM_WIDTH, ITEM_HEIGHT)];
+        tmp.image = [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"tmp_face_%d", index] ofType:@"png"]];
+        tmp.center = CGPointMake(ITEM_LEFT_MARGIN + ITEM_WIDTH / 2 + (ITEM_WIDTH  + ITEM_MARGIN_BETWEEN) * index, CHATING_VIEW_HEIGHT / 2);
+        tmp.tag = index + 1;
+        [_chatingView addSubview:tmp];
+    }
+    
+    UILabel* label = [[UILabel alloc]init];
+    label.text = @"9个人在圈聊";
+    label.font = [UIFont systemFontOfSize:12.f];
+    label.textColor = FONT_COLOR;
+    [label sizeToFit];
+    label.center = CGPointMake(ITEM_LEFT_MARGIN + (ITEM_WIDTH  + ITEM_MARGIN_BETWEEN) * 3 + ITEM_LEFT_MARGIN - ITEM_MARGIN_BETWEEN + label.frame.size.width / 2, CHATING_VIEW_HEIGHT / 2);
+    [_chatingView addSubview:label];
+    /***********************************************************************************************/
+
+    /***********************************************************************************************/
+    // description area
+    _bkgView = [[UIView alloc]init];
+    [self addSubview:_bkgView];
+    /***********************************************************************************************/
 }
 
 - (void)layoutSubviews {
@@ -171,8 +214,10 @@
     offset_y += _imgView.frame.size.height;
     _funcActArea.frame = CGRectMake(0, offset_y, width, FUNC_VIEW_HEIGHT);
     offset_y += FUNC_VIEW_HEIGHT;
-    _bkgView.frame = CGRectMake(0, offset_y, width, self.frame.size.height - img_height);
-    _funcBtn.frame = CGRectMake(width - FUNC_BTN_WIDTH - HER_MARGIN, FUNC_BTN_TOP_MARGIN, FUNC_BTN_WIDTH, FUNC_BTN_WIDTH);
+    _chatingView.frame = CGRectMake(0, offset_y, width, CHATING_VIEW_HEIGHT);
+    offset_y += CHATING_VIEW_HEIGHT;
+    _bkgView.frame = CGRectMake(0, offset_y, width, DESCRIPTION_VIEW_HEIGHT);
+//    _funcBtn.frame = CGRectMake(width - FUNC_BTN_WIDTH - HER_MARGIN, FUNC_BTN_TOP_MARGIN, FUNC_BTN_WIDTH, FUNC_BTN_WIDTH);
 }
 
 - (void)movieContentWithURL:(NSURL*)url withTriat:(MoviePlayTrait*)trait {
@@ -293,6 +338,7 @@
         [_bkgView addSubview:descriptionView];
         descriptionView.editable = NO;
         descriptionView.scrollEnabled = NO;
+        descriptionView.textColor = [UIColor colorWithRed:0.3059 green:0.3059 blue:0.3059 alpha:1.f];
     }
    
     /**
@@ -305,13 +351,13 @@
     /**
      * only show first line
      */
-    UIFont* font = [UIFont boldSystemFontOfSize:14.f];
+    UIFont* font = [UIFont systemFontOfSize:13.f];
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
-    CGSize size = [description sizeWithFont:font constrainedToSize:CGSizeMake(width - DESCRIPTION_LEFT_MARGIN * 2 - 134, FLT_MAX)];
-    CGSize s = [@"我靠" sizeWithFont:font constrainedToSize:CGSizeMake(width - DESCRIPTION_LEFT_MARGIN * 2 - 134, FLT_MAX)];
+    CGSize size = [description sizeWithFont:font constrainedToSize:CGSizeMake(width - DESCRIPTION_LEFT_MARGIN * 2, FLT_MAX)];
+    CGSize s = [@"我靠" sizeWithFont:font constrainedToSize:CGSizeMake(width - DESCRIPTION_LEFT_MARGIN * 2, FLT_MAX)];
     
     descriptionView.font = font;
-    descriptionView.frame = CGRectMake(DESCRIPTION_LEFT_MARGIN, DESCRIPTION_TOP_MARGIN, [UIScreen mainScreen].bounds.size.width - DESCRIPTION_LEFT_MARGIN * 2 - 134, s.height);
+    descriptionView.frame = CGRectMake(DESCRIPTION_LEFT_MARGIN, DESCRIPTION_TOP_MARGIN, [UIScreen mainScreen].bounds.size.width - DESCRIPTION_LEFT_MARGIN * 2, s.height);
 //    if (s.height == size.height) {
         descriptionView.text = description;
 //    } else {

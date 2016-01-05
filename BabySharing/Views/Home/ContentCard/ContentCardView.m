@@ -38,9 +38,9 @@
     _queryView.layer.cornerRadius = 8.f;
     _queryView.clipsToBounds = NO;
    
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-    NSString* filepath = [resourceBundle pathForResource:@"home-card-bg" ofType:@"png"];
+    NSString* filepath = [resourceBundle pathForResource:@"home_card_bg" ofType:@"png"];
     UIImage* img = [UIImage imageNamed:filepath];
     
     _shadow = [CALayer layer];
@@ -56,7 +56,7 @@
     
     [UIView setAnimationsEnabled:NO];
     
-    self.backgroundColor = [UIColor lightGrayColor];
+    self.backgroundColor = [UIColor colorWithRed:0.9529 green:0.9529 blue:0.9529 alpha:1.f];
 }
 
 - (void)layoutSubviews {

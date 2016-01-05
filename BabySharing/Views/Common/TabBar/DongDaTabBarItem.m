@@ -11,7 +11,7 @@
 #define LAYER_ICON_NORMAL_WIDTH  25
 #define LAYER_ICON_NORMAL_HEIGHT LAYER_ICON_NORMAL_WIDTH
 
-#define LAYER_ICON_MID_WIDHT    65
+#define LAYER_ICON_MID_WIDHT    75
 //#define LAYER_ICON_MID_WIDHT    60
 //#define LAYER_ICON_MID_HEIGHT   LAYER_ICON_MID_WIDHT
 #define LAYER_ICON_MID_HEIGHT   49
@@ -43,7 +43,10 @@
 
         CALayer* bg_layer = [CALayer layer];
         bg_layer.contents = (id)bg_img.CGImage;
-        bg_layer.frame = CGRectMake(0, 0, LAYER_ICON_MID_WIDHT, LAYER_ICON_MID_HEIGHT);
+        
+        CGFloat mid_width = [UIScreen mainScreen].bounds.size.width / 5;
+        
+        bg_layer.frame = CGRectMake(0, 0, mid_width, LAYER_ICON_MID_HEIGHT);
         [self.layer addSublayer:bg_layer];
         
         img_layer = [CALayer layer];
