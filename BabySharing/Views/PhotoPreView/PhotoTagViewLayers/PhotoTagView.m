@@ -25,14 +25,7 @@
 
 @end
 
-@implementation PhotoTagView {
-//    PhotoTagRoundPointLayer* pointLayer;
-//    PhotoTagTariangleLayer2* triLayer2;
-//    CATextLayer * contentLayer;
-//    CALayer* imgLayer;
-//    UIFont* font;
-//    CGSize content_size;
-}
+@implementation PhotoTagView
 
 @synthesize status = _status;
 @synthesize content = _content;

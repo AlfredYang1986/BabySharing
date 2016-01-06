@@ -86,7 +86,7 @@
    
     _friendSeg.delegate = self;
     _friendSeg.selectedIndex = 0;
-    _friendSeg.margin_between_items = 20;
+    _friendSeg.margin_between_items = 0.05 * width;
     _friendSeg.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:_friendSeg];
     
@@ -94,6 +94,7 @@
     _friendsSearchBar = [[UISearchBar alloc]init];
     _friendsSearchBar.backgroundColor = [UIColor whiteColor];
     _friendsSearchBar.delegate = self;
+    _friendsSearchBar.placeholder = @"搜索好友";
     [self.view addSubview:_friendsSearchBar];
     
     [self layoutSubviews];
@@ -103,13 +104,13 @@
     [sg addItemWithTitle:@"好友"];
     sg.selectedIndex = 0;
     sg.delegate = self;
-    sg.margin_between_items = 30;
+    sg.margin_between_items = 0.2933 / 2 * width;
     [self.navigationController.navigationBar addSubview:sg];
  
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-    NSString* filepath = [resourceBundle pathForResource:@"message-add-friends" ofType:@"png"];
-    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 25, 25)];
+    NSString* filepath = [resourceBundle pathForResource:@"friend_add" ofType:@"png"];
+    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 20, 16)];
     [btn setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
     [btn addTarget: self action: @selector(friendsAddingBtnSelected) forControlEvents: UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:btn];
@@ -124,6 +125,9 @@
     self.view.backgroundColor = [UIColor lightGrayColor];
     _queryView.backgroundColor = [UIColor whiteColor];
     _friendsQueryView.backgroundColor = [UIColor whiteColor];
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    _queryView.rowHeight = 80;
+    _friendsQueryView.rowHeight = 80;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -144,7 +148,7 @@
     CGFloat offset_x = 0;
     CGFloat offset_y = 0;
    
-    _queryView.frame = CGRectMake(offset_x, offset_y + 8, width, height);
+    _queryView.frame = CGRectMake(offset_x, offset_y + 69, width, height);
     offset_x += width;
 
     offset_y = 20 + 44;

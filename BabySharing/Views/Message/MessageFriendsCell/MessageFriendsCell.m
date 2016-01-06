@@ -10,6 +10,13 @@
 #import "OBShapedButton.h"
 #import "TmpFileStorageModel.h"
 
+#define IMG_WIDTH       40
+#define IMG_HEIGHT      IMG_WIDTH
+
+#define PREFERRED_HEIGHT    80
+
+#define NAME_LEFT_MARGIN    10.5
+
 @interface MessageFriendsCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *user_screen_photo;
 @property (weak, nonatomic) IBOutlet UIView *relationContainer;
@@ -25,27 +32,27 @@
 @synthesize userNameLabel = _userNameLabel;
 
 + (CGFloat)preferredHeight {
-    return 80;
+    return PREFERRED_HEIGHT;
 }
 
 - (void)awakeFromNib {
     // Initialization code
     _user_screen_photo.layer.borderColor = [UIColor lightGrayColor].CGColor;
     _user_screen_photo.layer.borderWidth = 1.f;
-    _user_screen_photo.layer.cornerRadius = 25.f;
+    _user_screen_photo.layer.cornerRadius = IMG_WIDTH / 2;
     _user_screen_photo.clipsToBounds = YES;
    
     if (_userRoleTagBtn == nil) {
         _userRoleTagBtn = [[OBShapedButton alloc]init];
-        NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+        NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
         NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-        [_userRoleTagBtn setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"home-tag" ofType:@"png"]] forState:UIControlStateNormal];
+        [_userRoleTagBtn setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"home_role_tag" ofType:@"png"]] forState:UIControlStateNormal];
         [self addSubview:_userRoleTagBtn];
     }
 
     if (_userNameLabel == nil) {
         _userNameLabel = [[UILabel alloc]init];
-        _userNameLabel.textColor = [UIColor lightGrayColor];
+        _userNameLabel.textColor = [UIColor colorWithRed:0.8471 green:0.8471 blue:0.8471 alpha:1.f];
         _userNameLabel.font = [UIFont systemFontOfSize:14.f];
         [self addSubview:_userNameLabel];
     }
@@ -119,7 +126,7 @@
     
 #define TAG_2_NAME_MARGIN   10
 #define USER_NAME_TOP_MARGIN    8
-    _userNameLabel.center = CGPointMake(_userRoleTagBtn.center.x + _userRoleTagBtn.frame.size.width / 2 + TAG_2_NAME_MARGIN + _userNameLabel.frame.size.width / 2, USER_NAME_TOP_MARGIN + _userNameLabel.frame.size.height / 2);
+    _userNameLabel.center = CGPointMake(_user_screen_photo.center.x + _user_screen_photo.frame.size.width / 2 + NAME_LEFT_MARGIN + _userNameLabel.frame.size.width / 2, PREFERRED_HEIGHT / 2);
 }
 
 - (void)setUserRoleTag:(NSString*)role_tag {
@@ -127,7 +134,7 @@
     UILabel* label = [_userRoleTagBtn viewWithTag:-1];
     if (label == nil) {
         label = [[UILabel alloc]init];
-        label.font = [UIFont systemFontOfSize:14.f];
+        label.font = [UIFont systemFontOfSize:10.f];
         label.textColor = [UIColor whiteColor];
         label.tag = -1;
         [_userRoleTagBtn addSubview:label];
@@ -137,9 +144,10 @@
     
     label.text = role_tag;
     [label sizeToFit];
-    label.center = CGPointMake(10 + label.frame.size.width / 2, ROLE_TAG_MARGIN + label.frame.size.height / 2);
+    label.center = CGPointMake(5 + label.frame.size.width / 2, ROLE_TAG_MARGIN + label.frame.size.height / 2);
     
-    _userRoleTagBtn.frame = CGRectMake(44, 8, label.frame.size.width + 10 + ROLE_TAG_MARGIN, label.frame.size.height + 2 * ROLE_TAG_MARGIN);
+    _userRoleTagBtn.frame = CGRectMake(0, 0, label.frame.size.width + 10 + ROLE_TAG_MARGIN, label.frame.size.height + 2 * ROLE_TAG_MARGIN);
+    _userRoleTagBtn.center = CGPointMake(_user_screen_photo.center.x + _user_screen_photo.frame.size.width / 2 + NAME_LEFT_MARGIN + _userNameLabel.frame.size.width + TAG_2_NAME_MARGIN + _userRoleTagBtn.frame.size.width / 2, PREFERRED_HEIGHT / 2);
     
     if ([@"" isEqualToString:role_tag]) {
         _userRoleTagBtn.hidden = YES;

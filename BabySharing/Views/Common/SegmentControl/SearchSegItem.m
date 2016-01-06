@@ -64,16 +64,16 @@
     [self addSubview:label];
     
     layer = [CALayer layer];
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-    UIImage* img = [UIImage imageNamed:[resourceBundle pathForResource:@"found-tab-layer" ofType:@"png"]];
+    UIImage* img = [UIImage imageNamed:[resourceBundle pathForResource:@"dongda_seg_selected" ofType:@"png"]];
    
     layer.contents = (id)img.CGImage;
     layer.frame = CGRectMake(0, self.frame.size.height - ITME_LAYER_LINE_HEIGHT, ITEM_WIDTH, ITME_LAYER_LINE_HEIGHT);
     [self.layer addSublayer:layer];
     
     layer.hidden = _status == 0;
-    label.textColor = _status == 0 ? [UIColor grayColor] : [UIColor colorWithRed:0.f green:0.4118 blue:0.3569 alpha:1.f];
+    label.textColor = _status == 0 ? [UIColor grayColor] : [UIColor colorWithRed:0.2745f green:0.8588 blue:0.7922 alpha:1.f];
     
     if (_isLayerHidden) {
         layer.hidden = YES;
@@ -84,7 +84,7 @@
     _status = s;
     layer.hidden = _status == 0;
     UILabel* label = [self viewWithTag:-1];
-    label.textColor = _status == 0 ? [UIColor grayColor] : [UIColor colorWithRed:0.f green:0.4118 blue:0.3569 alpha:1.f];
+    label.textColor = _status == 0 ? [UIColor grayColor] : [UIColor colorWithRed:0.2745f green:0.8588 blue:0.7922 alpha:1.f];
     
     if (_isLayerHidden) {
         layer.hidden = YES;

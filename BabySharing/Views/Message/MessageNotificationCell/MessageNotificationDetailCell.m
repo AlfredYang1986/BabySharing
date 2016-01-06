@@ -21,7 +21,8 @@
 @synthesize connectContentView = _connectContentView;
 
 + (CGFloat)preferedHeight {
-    return 66;
+//    return 66;
+    return 80;
 }
 
 - (void)awakeFromNib {
