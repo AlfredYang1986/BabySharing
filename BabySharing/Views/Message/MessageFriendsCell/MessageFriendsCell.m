@@ -91,6 +91,7 @@
         tmp = [[OBShapedButton alloc]init];
         tmp.frame =  CGRectMake(0, 0, 90, 25);
         tmp.center = CGPointMake(45, 25);
+        tmp.tag = -1;
         [_relationContainer addSubview:tmp];
     }
    
@@ -131,12 +132,12 @@
 
 - (void)setUserRoleTag:(NSString*)role_tag {
     _userRoleTagBtn.hidden = NO;
-    UILabel* label = [_userRoleTagBtn viewWithTag:-1];
+    UILabel* label = [_userRoleTagBtn viewWithTag:-19];
     if (label == nil) {
         label = [[UILabel alloc]init];
         label.font = [UIFont systemFontOfSize:10.f];
         label.textColor = [UIColor whiteColor];
-        label.tag = -1;
+        label.tag = -19;
         [_userRoleTagBtn addSubview:label];
     }
     

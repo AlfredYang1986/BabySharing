@@ -1384,6 +1384,54 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
             </objects>
             <point key="canvasLocation" x="3294" y="2478"/>
         </scene>
+        <!--Search Friends Controller-->
+        <scene sceneID="8SY-p8-7B2">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="JDk-zp-R2U" customClass="SearchFriendsController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Swh-0w-RaJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="iuf-4r-WAH"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="nsd-NP-nm2">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="ZGk-C2-Sog">
+                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CAx-X4-hM4">
+                                <rect key="frame" x="0.0" y="108" width="600" height="443"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ZGk-C2-Sog" firstAttribute="top" secondItem="Swh-0w-RaJ" secondAttribute="bottom" id="Cy5-NN-8VP"/>
+                            <constraint firstItem="iuf-4r-WAH" firstAttribute="top" secondItem="CAx-X4-hM4" secondAttribute="bottom" id="Gno-iT-c9P"/>
+                            <constraint firstItem="iuf-4r-WAH" firstAttribute="top" secondItem="ZGk-C2-Sog" secondAttribute="bottom" constant="443" id="I5m-KS-2XU"/>
+                            <constraint firstItem="CAx-X4-hM4" firstAttribute="leading" secondItem="nsd-NP-nm2" secondAttribute="leadingMargin" constant="-20" id="TQD-YN-3jM"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="CAx-X4-hM4" secondAttribute="trailing" constant="-20" id="TuR-xN-ZbG"/>
+                            <constraint firstItem="ZGk-C2-Sog" firstAttribute="leading" secondItem="nsd-NP-nm2" secondAttribute="leadingMargin" constant="-20" id="d3i-nA-KTe"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ZGk-C2-Sog" secondAttribute="trailing" constant="-20" id="opR-32-AFd"/>
+                            <constraint firstItem="CAx-X4-hM4" firstAttribute="top" secondItem="ZGk-C2-Sog" secondAttribute="bottom" id="v9Q-SL-1Nt"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="I5m-KS-2XU"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" id="VCt-tB-zrF"/>
+                    <connections>
+                        <outlet property="queryView" destination="CAx-X4-hM4" id="0az-Mf-Epr"/>
+                        <outlet property="searchBar" destination="ZGk-C2-Sog" id="DqB-q8-VpP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cyf-BR-ZXP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1566" y="2515"/>
+        </scene>
         <!--Message View Controller-->
         <scene sceneID="81g-Nk-e9J">
             <objects>
@@ -1402,6 +1450,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <segue destination="fav-i3-Xga" kind="push" identifier="addFriends" id="Z8a-iE-MvE"/>
                         <segue destination="vu1-ps-3xT" kind="push" identifier="startChat" id="2Bs-UG-c18"/>
                         <segue destination="ox0-xj-qsG" kind="push" identifier="showNotifications" id="Uuv-9c-sfa"/>
+                        <segue destination="JDk-zp-R2U" kind="push" identifier="searchFriends" id="ub0-0F-OXc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qnc-mR-mVz" userLabel="First Responder" sceneMemberID="firstResponder"/>

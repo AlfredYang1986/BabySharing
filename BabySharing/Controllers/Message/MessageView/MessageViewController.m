@@ -69,6 +69,7 @@
     _queryView.dataSource = del;
     
     _friendsQueryView = [[UITableView alloc]init];
+    [_friendsQueryView registerNib:[UINib nibWithNibName:@"MessageFriendsCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"friend cell"];
     [self.view addSubview:_friendsQueryView];
     fd = [[FriendsTableDelegate alloc]init];
     _friendsQueryView.delegate = fd;
@@ -105,7 +106,6 @@
     sg.selectedIndex = 0;
     sg.delegate = self;
     sg.margin_between_items = 0.2933 / 2 * width;
-    [self.navigationController.navigationBar addSubview:sg];
  
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
@@ -139,6 +139,13 @@
     [super viewWillAppear:animated];
     [del reloadData];
     [_queryView reloadData];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self.navigationController.navigationBar addSubview:sg];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [sg removeFromSuperview];
 }
 
 - (void)layoutSubviews {
@@ -199,6 +206,8 @@
         }
         
         con.hidesBottomBarWhenPushed = YES;
+    } else if ([segue.identifier isEqualToString:@"searchFriends"]) {
+        
     }
 }
 
@@ -299,5 +308,11 @@
 #pragma mark == segValueDelegate
 - (void)segValueChanged:(SearchSegView*)seg {
     [self friendSegValueChanged:nil];
+}
+
+#pragma mark -- search bar 
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
+    [self performSegueWithIdentifier:@"searchFriends" sender:nil];
+    return NO;
 }
 @end
