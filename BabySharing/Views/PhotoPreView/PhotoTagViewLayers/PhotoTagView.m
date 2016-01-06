@@ -11,210 +11,99 @@
 #import "PhotoTagTariangleLayer.h"
 #import "PhotoTagTariangleLayer2.h"
 
-#define VER_MARGIN      10
-#define HER_MARGIN      10
+//#define VER_MARGIN      10
+//#define HER_MARGIN      10
+
+#define TEXT_LEFT_MARGIN        22
+#define TEXT_RIGHT_MARGIN       4
+#define TAG_HEIGHT              21
+#define TEXT_FONT_SIZE          12.f
+#define TEXT_FONT               [UIFont systemFontOfSize:TEXT_FONT_SIZE]
+#define TAG_CONSTRAINS_SIZE     CGSizeMake(FLT_MAX, FLT_MAX)
 
 @interface PhotoTagView ()
 
 @end
 
 @implementation PhotoTagView {
-    PhotoTagRoundPointLayer* pointLayer;
-//    PhotoTagTariangleLayer* triLayer;
-    PhotoTagTariangleLayer2* triLayer2;
-    CATextLayer * contentLayer;
-    CALayer* imgLayer;
-    UIFont* font;
-    CGSize content_size;
+//    PhotoTagRoundPointLayer* pointLayer;
+//    PhotoTagTariangleLayer2* triLayer2;
+//    CATextLayer * contentLayer;
+//    CALayer* imgLayer;
+//    UIFont* font;
+//    CGSize content_size;
 }
 
 @synthesize status = _status;
 @synthesize content = _content;
 @synthesize type = _type;
-@synthesize typeImg = _typeImg;
 
 @synthesize offset_x = _offset_x;
 @synthesize offset_y = _offset_y;
 
-- (id)init {
-    self = [super init];
-    if (self) {
-        [self setUpTagView2];
-    }
-    
-    return self;
-}
-
-- (id)initWithTagName:(NSString*)name {
-    self = [super init];
-    if (self) {
-        self.content = name;
-        [self setUpTagView2];
-    }
-    
-    return self;
-}
-
 - (id)initWithTagName:(NSString*)name andType:(TagType)type {
     self = [super init];
     if (self) {
-        self.content = name;
-        self.type = type;
-        [self setUpTagView2];
+        _content = name;
+        _type = type;
+        [self setUpTagView];
     }
     
     return self;
 }
 
-- (void)layoutSublayersOfLayer:(CALayer *)layer {
-    if (layer == self.layer) {
-        CGRect rect = [self getTagViewPreferBounds];
-        imgLayer.position = CGPointMake(rect.origin.x + imgLayer.bounds.size.width / 2, rect.origin.y + rect.size.height / 2);
-        
-        rect.origin.x += imgLayer.bounds.size.width;
-        CGRect point_bounds = [pointLayer getPreferRect];
-        pointLayer.position = CGPointMake(rect.origin.x + point_bounds.size.width / 2, rect.origin.y + rect.size.height / 2);
-//        CGRect tri_bounds = [triLayer getPreferRect:content_size.height];
-//        triLayer.position = CGPointMake(rect.origin.x + tri_bounds.size.width / 2 + point_bounds.size.width / 2, rect.origin.y + rect.size.height / 2);
-        CGRect tri_bounds = [triLayer2 getPreferRect:content_size.height];
-//        triLayer2.position = CGPointMake(rect.origin.x + tri_bounds.size.width / 2 + point_bounds.size.width / 2, rect.origin.y + rect.size.height / 2);
-        triLayer2.position = CGPointMake(rect.origin.x + tri_bounds.size.width / 2, rect.origin.y + rect.size.height / 2);
-        contentLayer.position = CGPointMake(rect.size.width - contentLayer.bounds.size.width / 2 - 6, rect.origin.y + rect.size.height / 2);
-    }
+- (CGSize)preferredSizeWithTagTitle:(NSString*)title {
+    CGSize sz = [title sizeWithFont:TEXT_FONT constrainedToSize:TAG_CONSTRAINS_SIZE];
+    return CGSizeMake(TEXT_LEFT_MARGIN + sz.width + TEXT_RIGHT_MARGIN, MAX(sz.height, TAG_HEIGHT));
 }
 
-- (void)setContentAndFontSize:(NSString*)str {
-    _content = str;
-    font = [UIFont systemFontOfSize:17.f];
-    content_size = [_content sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
+- (CGRect)preferredBoundsWithTagTitle:(NSString*)title {
+    CGSize sz = [self preferredSizeWithTagTitle:title];
+    return CGRectMake(0, 0, sz.width, sz.height);
 }
 
-- (void)setTypeImg:(UIImage *)typeImg {
-    _typeImg = typeImg;
-    imgLayer.contents = (id)_typeImg.CGImage;
+- (CGSize)getTitleSizeWithTagTitle:(NSString*)title {
+    return [title sizeWithFont:TEXT_FONT constrainedToSize:TAG_CONSTRAINS_SIZE];
 }
 
-- (UIImage*)getTypeImg {
-    if (_typeImg == nil) {
-        NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
-        NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-       
-        switch (_type) {
-            case TagTypeLocation:
-                _typeImg = [UIImage imageNamed:[resourceBundle pathForResource:@"Location" ofType:@"png"]];
-                break;
-            case TagTypeTime:
-                _typeImg = [UIImage imageNamed:[resourceBundle pathForResource:@"Time" ofType:@"png"]];
-                break;
-            case TagTypeTags:
-                _typeImg = [UIImage imageNamed:[resourceBundle pathForResource:@"Tag" ofType:@"png"]];
-                break;
-            default:
-                break;
-        }
-    }
-    return _typeImg;
+- (CGRect)getTitleBoundsWithTagTitle:(NSString*)title {
+    CGSize sz = [self getTitleSizeWithTagTitle:title];
+    return CGRectMake(0, 0, sz.width, sz.height);
 }
 
-//- (void)setUpTagView {
-//   
-//    self.backgroundColor = [UIColor clearColor];
-//    
-//    pointLayer = [PhotoTagRoundPointLayer layer];
-//    pointLayer.bounds = [pointLayer getPreferRect];
-//    
-//    triLayer = [PhotoTagTariangleLayer layer];
-//    triLayer.bounds = [triLayer getPreferRect:content_size.height + VER_MARGIN];
-//    
-//    
-//    contentLayer = [CATextLayer layer];
-//    contentLayer.fontSize = [font pointSize];
-//    contentLayer.bounds = CGRectMake(0, 0, content_size.width + HER_MARGIN, content_size.height + VER_MARGIN);
-////    contentLayer.backgroundColor = [UIColor colorWithWhite:0.f alpha:0.6].CGColor;
-//    contentLayer.backgroundColor = [UIColor colorWithRed:0.3167 green:0.7529 blue:0.6941 alpha:1.f].CGColor;
-//    contentLayer.foregroundColor = [UIColor whiteColor].CGColor;
-//    contentLayer.string= _content;
-//    
-//    imgLayer = [CALayer layer];
-//    imgLayer.bounds = CGRectMake(0, 0, content_size.height, content_size.height);
-//    
-//    [imgLayer setNeedsDisplay];
-//    [pointLayer setNeedsDisplay];
-//    [triLayer setNeedsDisplay];
-//    [contentLayer setNeedsDisplay];
-//   
-//    [self.layer addSublayer:imgLayer];
-//    [self.layer addSublayer:contentLayer];
-//    [self.layer addSublayer:triLayer];
-//    [self.layer addSublayer:pointLayer];
-//
-//    // need to put it after setNeedsDisplay
-//    imgLayer.contents = (id)self.typeImg.CGImage;
-//    
-//    self.bounds = [self getTagViewPreferBounds];
-//}
-
-- (void)setUpTagView2 {
-    
+- (void)setUpTagView {
+    self.bounds = [self preferredBoundsWithTagTitle:_content];
     self.backgroundColor = [UIColor clearColor];
+  
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
     
-//    pointLayer = [PhotoTagRoundPointLayer layer];
-//    pointLayer.bounds = [pointLayer getPreferRect];
+    CALayer* tri = [CALayer layer];
+    tri.frame = CGRectMake(0, 0, TEXT_LEFT_MARGIN, TAG_HEIGHT);
+    tri.contents = (id)[UIImage imageNamed:[resourceBundle pathForResource:@"tag_tri" ofType:@"png"]].CGImage;
+    [self.layer addSublayer:tri];
     
-    triLayer2 = [PhotoTagTariangleLayer2 layer];
-//    triLayer2.bounds = [triLayer2 getPreferRect:content_size.height + VER_MARGIN];
-    triLayer2.bounds = [triLayer2 getPreferRect:content_size.height];
+    CGRect text_bounds = [self getTitleBoundsWithTagTitle:_content];
+    CALayer* text_bg = [CATextLayer layer];
+    text_bg.frame = CGRectMake(TEXT_LEFT_MARGIN, 0, text_bounds.size.width, TAG_HEIGHT);
+//    text_bg.contents = (id)[UIImage imageNamed:[resourceBundle pathForResource:@"tag_text" ofType:@"png"]].CGImage;
+    text_bg.backgroundColor = [UIColor colorWithWhite:0.f alpha:0.6].CGColor;
+    [self.layer addSublayer:text_bg];
     
+    CATextLayer* text_content = [CATextLayer layer];
+    text_content.frame = CGRectMake(0, (TAG_HEIGHT - text_bounds.size.height) / 2, text_bounds.size.width, text_bounds.size.height);
+    text_content.string = _content;
+    text_content.font = CFBridgingRetain(TEXT_FONT);
+    text_content.fontSize = [TEXT_FONT pointSize];
+    text_content.foregroundColor = [UIColor whiteColor].CGColor;
+    text_content.backgroundColor = [UIColor clearColor].CGColor;
+    text_content.contentsScale = 2.f;
     
-    contentLayer = [CATextLayer layer];
-    contentLayer.fontSize = [font pointSize];
-    contentLayer.bounds = CGRectMake(0, 0, content_size.width + HER_MARGIN, content_size.height);
-//    contentLayer.bounds = CGRectMake(0, 0, content_size.width + HER_MARGIN, content_size.height + VER_MARGIN);
-//    contentLayer.backgroundColor = [UIColor colorWithWhite:0.f alpha:0.6].CGColor;
-//    contentLayer.backgroundColor = [UIColor colorWithRed:0.3167 green:0.7529 blue:0.6941 alpha:1.f].CGColor;
-    contentLayer.backgroundColor = [UIColor colorWithRed:0.9137 green:0.5882 blue:0.4784 alpha:0.6].CGColor;
-    contentLayer.foregroundColor = [UIColor whiteColor].CGColor;
-    contentLayer.string= _content;
-    contentLayer.font = CFBridgingRetain([UIFont boldSystemFontOfSize:17.f]);
+    [text_bg addSublayer:text_content];
     
-    imgLayer = [CALayer layer];
-    imgLayer.bounds = CGRectMake(0, 0, content_size.height, content_size.height);
-    
-    [imgLayer setNeedsDisplay];
-    [pointLayer setNeedsDisplay];
-    [triLayer2 setNeedsDisplay];
-    [contentLayer setNeedsDisplay];
-   
-    [self.layer addSublayer:imgLayer];
-    [self.layer addSublayer:contentLayer];
-    [self.layer addSublayer:triLayer2];
-//    [self.layer addSublayer:pointLayer];
-
-    // need to put it after setNeedsDisplay
-    imgLayer.contents = (id)self.typeImg.CGImage;
-    
-    self.bounds = [self getTagViewPreferBounds];
+    CALayer* tail = [CALayer layer];
+    tail.frame = CGRectMake(self.bounds.size.width - TEXT_RIGHT_MARGIN, 0, TEXT_RIGHT_MARGIN, TAG_HEIGHT);
+    tail.contents = (id)[UIImage imageNamed:[resourceBundle pathForResource:@"tag_tail" ofType:@"png"]].CGImage;
+    [self.layer addSublayer:tail];
 }
-
-- (CGRect)getTagViewPreferBounds {
-    // size of point layer
-    CGRect pointLayerRect = [pointLayer getPreferRect];
-    
-    // size of trangle layer
-//    CGRect triLayerRect = [triLayer getPreferRect:content_size.height];
-    CGRect triLayerRect = [triLayer2 getPreferRect:content_size.height];
-    
-    CGFloat width = imgLayer.bounds.size.width + pointLayerRect.size.width / 2 + triLayerRect.size.width + contentLayer.bounds.size.width + 5;
-    CGFloat height = content_size.height + VER_MARGIN;
-    return CGRectMake(0, 0, width, height);
-}
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
-
 @end

@@ -22,19 +22,17 @@ typedef enum : NSUInteger {
 @interface PhotoTagView : UIView
 
 @property (nonatomic) PhotoTagViewStatus status;
-@property (nonatomic, strong, setter=setContentAndFontSize:) NSString* content;
-@property (nonatomic) TagType type;
-@property (nonatomic, strong, setter=setTypeImg:, getter=getTypeImg) UIImage* typeImg;
+@property (nonatomic, strong, readonly) NSString* content;
+@property (nonatomic, readonly) TagType type;
+//@property (nonatomic, strong) UIImage* typeImg;
 
 @property (nonatomic) CGFloat offset_x;
 @property (nonatomic) CGFloat offset_y;
 
-- (id)init;
-- (id)initWithTagName:(NSString*)name;
 - (id)initWithTagName:(NSString*)name andType:(TagType)type;
 
-- (CGRect)getTagViewPreferBounds;
-- (void)setContentAndFontSize:(NSString*)str;
-- (void)setTypeImg:(UIImage *)typeImg;
-- (UIImage*)getTypeImg;
+//- (CGRect)getTagViewPreferBounds;
+//- (void)setContentAndFontSize:(NSString*)str;
+//- (void)setTypeImg:(UIImage *)typeImg;
+//- (UIImage*)getTypeImg;
 @end
