@@ -197,6 +197,7 @@
     [cell setTags:@"安全，海淘"];
    
     cell.backgroundColor = [UIColor clearColor];
+    [cell showTags];
     
     return cell;
 }

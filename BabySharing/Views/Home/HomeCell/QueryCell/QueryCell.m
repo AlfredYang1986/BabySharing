@@ -12,6 +12,9 @@
 #import <AVFoundation/AVFoundation.h>
 #import "INTUAnimationEngine.h"
 #import "OBShapedButton.h"
+#import "QueryContent.h"
+#import "QueryContentTag.h"
+#import "PhotoTagView.h"
 
 #define HER_MARGIN  10
 #define VER_MARGIN  1
@@ -53,6 +56,8 @@
     OBShapedButton* funcView;
     
     OBShapedButton* tag_btn;
+    
+    NSMutableArray* tag_arr;
 }
 
 @synthesize imgView = _imgView;
@@ -203,6 +208,8 @@
     _bkgView = [[UIView alloc]init];
     [self addSubview:_bkgView];
     /***********************************************************************************************/
+    
+    tag_arr = [[NSMutableArray alloc]init];
 }
 
 - (void)layoutSubviews {
@@ -218,6 +225,25 @@
     offset_y += CHATING_VIEW_HEIGHT;
     _bkgView.frame = CGRectMake(0, offset_y, width, DESCRIPTION_VIEW_HEIGHT);
 //    _funcBtn.frame = CGRectMake(width - FUNC_BTN_WIDTH - HER_MARGIN, FUNC_BTN_TOP_MARGIN, FUNC_BTN_WIDTH, FUNC_BTN_WIDTH);
+}
+
+- (void)createTagsWithContentData {
+#define SCALE_FACT     0.5
+    QueryContent* tmp = (QueryContent*)_content;
+    for (QueryContentTag* tag in tmp.tags) {
+        PhotoTagView* tmp = [[PhotoTagView alloc]initWithTagName:tag.tag_content andType:tag.tag_type.integerValue];
+        tmp.frame = CGRectMake(tag.tag_offset_x.floatValue * SCALE_FACT , tag.tag_offset_y.floatValue * SCALE_FACT, tmp.bounds.size.width, tmp.bounds.size.height);
+        [_imgView addSubview:tmp];
+        [tag_arr addObject:tmp];
+    }
+}
+
+- (void)showTags {
+    for (UIView* v in tag_arr) {
+        [v removeFromSuperview];
+    }
+    [tag_arr removeAllObjects];
+    [self createTagsWithContentData];
 }
 
 - (void)movieContentWithURL:(NSURL*)url withTriat:(MoviePlayTrait*)trait {

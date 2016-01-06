@@ -47,4 +47,7 @@
 
 #pragma mark -- call when cell dispear
 - (void)disappearFuncView;
+
+#pragma mark -- show tags
+- (void)showTags;
 @end
