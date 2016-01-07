@@ -32,7 +32,7 @@
     if (self) {
         [self setQueryData];
     }
-    
+   
     return self;
 }
 

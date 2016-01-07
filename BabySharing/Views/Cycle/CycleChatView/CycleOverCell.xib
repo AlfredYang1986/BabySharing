@@ -28,9 +28,9 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Chat label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ic-TK-kse">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="我考" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ic-TK-kse">
                         <rect key="frame" x="31" y="37" width="77" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -53,8 +53,8 @@
                     <constraint firstItem="TKO-Vp-Ezx" firstAttribute="trailing" secondItem="YAU-8v-xzm" secondAttribute="trailingMargin" constant="-10" id="cM6-WF-pef"/>
                     <constraint firstItem="wew-n8-2JF" firstAttribute="leading" secondItem="5ic-TK-kse" secondAttribute="leading" id="eVo-kK-ghn"/>
                     <constraint firstItem="wew-n8-2JF" firstAttribute="leading" secondItem="YAU-8v-xzm" secondAttribute="leadingMargin" constant="70" id="jKZ-b8-fai"/>
-                    <constraint firstItem="5ic-TK-kse" firstAttribute="top" secondItem="wew-n8-2JF" secondAttribute="bottom" constant="10" id="kdv-bH-96X"/>
-                    <constraint firstItem="6X0-8M-E7O" firstAttribute="leading" secondItem="YAU-8v-xzm" secondAttribute="leadingMargin" id="wio-lv-rqY"/>
+                    <constraint firstItem="5ic-TK-kse" firstAttribute="top" secondItem="wew-n8-2JF" secondAttribute="bottom" constant="9" id="kdv-bH-96X"/>
+                    <constraint firstItem="6X0-8M-E7O" firstAttribute="leading" secondItem="YAU-8v-xzm" secondAttribute="leadingMargin" constant="3" id="wio-lv-rqY"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">

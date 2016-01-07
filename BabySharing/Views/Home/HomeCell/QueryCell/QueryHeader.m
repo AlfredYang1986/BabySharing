@@ -66,7 +66,7 @@
         _userImg.clipsToBounds = YES;
         _userImg.userInteractionEnabled = YES;
         _userImg.layer.borderColor = [UIColor colorWithWhite:1.f alpha:0.25].CGColor;
-        _userImg.layer.borderWidth = 1.f;
+        _userImg.layer.borderWidth = 1.5f;
         
         UITapGestureRecognizer* img_tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didScreenImgSelected)];
         [_userImg addGestureRecognizer:img_tap];

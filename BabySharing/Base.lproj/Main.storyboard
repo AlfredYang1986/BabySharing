@@ -1397,7 +1397,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="ZGk-C2-Sog">
-                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                <rect key="frame" x="4" y="64" width="592" height="44"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CAx-X4-hM4">
@@ -1412,8 +1412,8 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                             <constraint firstItem="iuf-4r-WAH" firstAttribute="top" secondItem="ZGk-C2-Sog" secondAttribute="bottom" constant="443" id="I5m-KS-2XU"/>
                             <constraint firstItem="CAx-X4-hM4" firstAttribute="leading" secondItem="nsd-NP-nm2" secondAttribute="leadingMargin" constant="-20" id="TQD-YN-3jM"/>
                             <constraint firstAttribute="trailingMargin" secondItem="CAx-X4-hM4" secondAttribute="trailing" constant="-20" id="TuR-xN-ZbG"/>
-                            <constraint firstItem="ZGk-C2-Sog" firstAttribute="leading" secondItem="nsd-NP-nm2" secondAttribute="leadingMargin" constant="-20" id="d3i-nA-KTe"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="ZGk-C2-Sog" secondAttribute="trailing" constant="-20" id="opR-32-AFd"/>
+                            <constraint firstItem="ZGk-C2-Sog" firstAttribute="leading" secondItem="nsd-NP-nm2" secondAttribute="leadingMargin" constant="-16" id="d3i-nA-KTe"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ZGk-C2-Sog" secondAttribute="trailing" constant="-16" id="opR-32-AFd"/>
                             <constraint firstItem="CAx-X4-hM4" firstAttribute="top" secondItem="ZGk-C2-Sog" secondAttribute="bottom" id="v9Q-SL-1Nt"/>
                         </constraints>
                         <variation key="default">

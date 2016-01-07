@@ -178,7 +178,7 @@
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
     NSString* filepath = [resourceBundle pathForResource:@"home_title_logo" ofType:@"png"];
     imgView.image = [UIImage imageNamed:filepath];
-    imgView.center = CGPointMake([UIScreen mainScreen].bounds.size.width / 2 + 2, 15 + 64 / 2);
+    imgView.center = CGPointMake([UIScreen mainScreen].bounds.size.width / 2 + 2, 12 + 64 / 2);
     imgView.tag = -98;
     [bkView addSubview:imgView];
 }

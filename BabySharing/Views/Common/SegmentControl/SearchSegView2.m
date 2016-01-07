@@ -28,6 +28,9 @@
 @synthesize margin_between_items = _margin_between_items;
 @synthesize isLayerHidden = _isLayerHidden;
 
+@synthesize font_size = _font_size;
+@synthesize font_color = _font_color;
+
 - (id)init {
     self = [super init];
     if (self) {
@@ -96,6 +99,20 @@
     _isLayerHidden = h;
     for (SearchSegItem* iter in [self getSegItems]) {
         iter.isLayerHidden = h;
+    }
+}
+
+- (void)resetFontSize:(CGFloat)font_size {
+    _font_size = font_size;;
+    for (SearchSegItem* iter in [self getSegItems]) {
+        iter.font_size = _font_size;
+    }
+}
+
+- (void)resetFontColor:(UIColor *)font_color {
+    _font_color = font_color;
+    for (SearchSegItem* iter in [self getSegItems]) {
+        iter.font_color = _font_color;
     }
 }
 

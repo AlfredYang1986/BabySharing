@@ -22,6 +22,14 @@
 #import "SearchSegView2.h"
 #import "DONNotificationDelegate.h"
 
+#define SEARCH_BAR_HEIGHT   44
+#define SEGAMENT_HEGHT      46
+
+#define SEARCH_BAR_MARGIN_TOP 0
+#define SEARCH_BAR_MARGIN_BOT -2
+
+#define SEGAMENT_MARGIN_BOTTOM  10.5
+
 @interface MessageViewController () <UISearchBarDelegate, /*HomeSegControlDelegate, DongDaSearchBarDelegate,*/ SearchSegViewDelegate>
 @property (strong, nonatomic) UITableView *friendsQueryView;
 @property (strong, nonatomic) SearchSegView2 *friendSeg;
@@ -54,10 +62,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 6) {
+        CGFloat width = [UIScreen mainScreen].bounds.size.width;
+        [[UINavigationBar appearance] setShadowImage:[self imageWithColor:[UIColor colorWithWhite:0.5922 alpha:0.25] size:CGSizeMake(width, 1)]];
+        [[UINavigationBar appearance] setBackgroundImage:[self imageWithColor:[UIColor whiteColor] size:CGSizeMake(width, 64)] forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
+    }
+    
     [_queryView registerNib:[UINib nibWithNibName:@"MessageViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"Message View Cell"];
     [_queryView registerNib:[UINib nibWithNibName:@"MessageNotificationCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"Notificaton View Cell"];
     
     _queryView = [[UITableView alloc]init];
+    _queryView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    CALayer* line_notify = [CALayer layer];
+    line_notify.borderWidth = 1.f;
+    line_notify.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.10].CGColor;
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    line_notify.frame = CGRectMake(0, 73, width, 1);
+//    [_queryView.layer addSublayer:line_notify];
+    [self.view.layer addSublayer:line_notify];
+   
+    _queryView.clipsToBounds = YES;
     [self.view addSubview:_queryView];
 //    md = [[MesssageTableDelegate alloc]init];
 //    _queryView.delegate = md;
@@ -69,6 +94,7 @@
     _queryView.dataSource = del;
     
     _friendsQueryView = [[UITableView alloc]init];
+    _friendsQueryView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [_friendsQueryView registerNib:[UINib nibWithNibName:@"MessageFriendsCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"friend cell"];
     [self.view addSubview:_friendsQueryView];
     fd = [[FriendsTableDelegate alloc]init];
@@ -77,8 +103,14 @@
     fd.queryView = _friendsQueryView;
     fd.current = self;
     
-    CGFloat width = [UIScreen mainScreen].bounds.size.width;
-    _friendSeg = [[SearchSegView2 alloc]initWithFrame:CGRectMake(0, 0, width, 44)];
+    CALayer* line_friend_up = [CALayer layer];
+    line_friend_up.borderWidth = 1.f;
+    line_friend_up.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.18].CGColor;
+    line_friend_up.frame = CGRectMake(0, 74 + SEARCH_BAR_MARGIN_TOP + SEARCH_BAR_HEIGHT + SEARCH_BAR_MARGIN_BOT + SEGAMENT_HEGHT + SEGAMENT_MARGIN_BOTTOM, width, 1);
+    [self.view.layer addSublayer:line_friend_up];
+    
+//    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    _friendSeg = [[SearchSegView2 alloc]initWithFrame:CGRectMake(0, 0, width, SEGAMENT_HEGHT)];
    
     _friendSeg.isLayerHidden = YES;
     [_friendSeg addItemWithTitle:@"好友"];
@@ -88,15 +120,54 @@
     _friendSeg.delegate = self;
     _friendSeg.selectedIndex = 0;
     _friendSeg.margin_between_items = 0.05 * width;
+    _friendSeg.font_size = 14.f;
+    _friendSeg.font_color = [UIColor colorWithWhite:0.4667 alpha:1.f];
     _friendSeg.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:_friendSeg];
     
+    CALayer* line_seg = [CALayer layer];
+    line_seg.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.25].CGColor;
+    line_seg.borderWidth = 1.f;
+    line_seg.frame = CGRectMake(0, SEGAMENT_HEGHT - 1, width, 1);
+    [_friendSeg.layer addSublayer:line_seg];
+    
+    CALayer* line_seg_up = [CALayer layer];
+    line_seg_up.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.18].CGColor;
+    line_seg_up.borderWidth = 1.f;
+//    line_seg_up.frame = CGRectMake(0, 64 + SEARCH_BAR_HEIGHT - 1, width, 1);
+    line_seg_up.frame = CGRectMake(0, 0, width, 1);
+//    [self.view.layer addSublayer:line_seg_up];
+    [_friendSeg.layer addSublayer:line_seg_up];
+    
 //    _friendsSearchBar = [[DongDaSearchBar alloc]init];
     _friendsSearchBar = [[UISearchBar alloc]init];
-    _friendsSearchBar.backgroundColor = [UIColor whiteColor];
+//    _friendsSearchBar.backgroundColor = [UIColor whiteColor];
     _friendsSearchBar.delegate = self;
     _friendsSearchBar.placeholder = @"搜索好友";
     [self.view addSubview:_friendsSearchBar];
+    
+//    _friendsSearchBar.showsCancelButton = YES;
+//    _friendsSearchBar.placeholder = @"搜索好友";
+    _friendsSearchBar.backgroundColor = [UIColor clearColor];
+//    UIImageView* iv = [[UIImageView alloc] initWithImage:[self imageWithColor:[UIColor colorWithWhite:0.9490 alpha:1.f] size:CGSizeMake(width, SEARCH_BAR_HEIGHT)]];
+    UIImageView* iv = [[UIImageView alloc] initWithImage:[self imageWithColor:[UIColor whiteColor] size:CGSizeMake(width, SEARCH_BAR_HEIGHT)]];
+    [_friendsSearchBar insertSubview:iv atIndex:1];
+    for (UIView* v in _friendsSearchBar.subviews.firstObject.subviews) {
+        if ( [v isKindOfClass: [UITextField class]] ) {
+            UITextField *tf = (UITextField *)v;
+            tf.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
+            tf.borderStyle = UITextBorderStyleRoundedRect;
+            tf.clearButtonMode = UITextFieldViewModeWhileEditing;
+        } else if ([v isKindOfClass:[UIButton class]]) {
+//            UIButton* cancel_btn = (UIButton*)v;
+            //            [cancel_btn setTitle:@"test" forState:UIControlStateNormal];
+//            [cancel_btn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+//            [cancel_btn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
+        }
+        // else if ([v isKindOfClass:NSClassFromString(@"UISearchBarBackground")]) {
+        //      v.backgroundColor = [UIColor whiteColor];
+        // }
+    }
     
     [self layoutSubviews];
     
@@ -106,14 +177,23 @@
     sg.selectedIndex = 0;
     sg.delegate = self;
     sg.margin_between_items = 0.2933 / 2 * width;
+    sg.font_color = [UIColor colorWithWhite:0.4667 alpha:1.f];
  
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
     NSString* filepath = [resourceBundle pathForResource:@"friend_add" ofType:@"png"];
-    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 20, 16)];
-    [btn setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
+    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(width - 23 - 50, 0, 50, 50)];
+//    [btn setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
+    
+    CALayer* layer = [CALayer layer];
+    layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
+    layer.frame = CGRectMake(0, 0, 25, 25);
+    layer.position = CGPointMake(25, 25);
+    [btn.layer addSublayer:layer];
+    
     [btn addTarget: self action: @selector(friendsAddingBtnSelected) forControlEvents: UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:btn];
+//    [sg addSubview:btn];
     
     AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
     _cm = app.cm;
@@ -122,12 +202,29 @@
 //    md.mm = _mm;
 //    md.lm = _lm;
     
-    self.view.backgroundColor = [UIColor lightGrayColor];
+//    self.view.backgroundColor = [UIColor colorWithRed:0.9529 green:0.9529 blue:0.9529 alpha:1.f];
+    self.view.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
     _queryView.backgroundColor = [UIColor whiteColor];
     _friendsQueryView.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
     _queryView.rowHeight = 80;
     _friendsQueryView.rowHeight = 80;
+}
+
+//取消searchbar背景色
+- (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size
+{
+    CGRect rect = CGRectMake(0, 0, size.width, size.height);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -141,6 +238,12 @@
     [_queryView reloadData];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     [self.navigationController.navigationBar addSubview:sg];
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 6) {
+        CGFloat width = [UIScreen mainScreen].bounds.size.width;
+        [[UINavigationBar appearance] setShadowImage:[self imageWithColor:[UIColor colorWithWhite:0.5922 alpha:0.25] size:CGSizeMake(width, 1)]];
+        [[UINavigationBar appearance] setBackgroundImage:[self imageWithColor:[UIColor whiteColor] size:CGSizeMake(width, 64)] forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -155,25 +258,19 @@
     CGFloat offset_x = 0;
     CGFloat offset_y = 0;
    
-    _queryView.frame = CGRectMake(offset_x, offset_y + 69, width, height);
+    _queryView.frame = CGRectMake(offset_x, offset_y + 74, width, height);
     offset_x += width;
 
-    offset_y = 20 + 44;
-
-#define SEARCH_BAR_HEIGHT   44
-#define SEARCH_BAR_MARGIN_TOP 0
-#define SEARCH_BAR_MARGIN_BOT 0
+    offset_y = 20 + 44 + 10;
 
     offset_y += SEARCH_BAR_MARGIN_TOP;
     _friendsSearchBar.frame = CGRectMake(offset_x, offset_y, width, SEARCH_BAR_HEIGHT);
     offset_y += SEARCH_BAR_HEIGHT;
     offset_y += SEARCH_BAR_MARGIN_BOT;
 
-#define SEGAMENT_HEGHT      44
     _friendSeg.frame = CGRectMake(offset_x, offset_y, width, SEGAMENT_HEGHT);
     offset_y += SEGAMENT_HEGHT;
-    
-#define SEGAMENT_MARGIN_BOTTOM  8
+
     offset_y += SEGAMENT_MARGIN_BOTTOM;
     
     CGFloat height_last = height - offset_y;

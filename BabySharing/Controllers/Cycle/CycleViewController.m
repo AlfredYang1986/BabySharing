@@ -25,6 +25,8 @@
 #import "INTUAnimationEngine.h"
 #import "HomeViewController.h"
 
+#define TABLE_VIEW_TOP_MARGIN   74
+
 @interface CycleViewController () <UITableViewDataSource, UITableViewDelegate, DropDownMenuProcotol, WEPopoverControllerDelegate, UIPopoverControllerDelegate, createUpdateDetailProtocol>
 //@property (weak, nonatomic) IBOutlet UIView *descriptionView;
 @property (weak, nonatomic) IBOutlet UITableView *cycleTableView;
@@ -60,7 +62,19 @@
 @synthesize baseController = _baseController;
 
 - (void)viewDidLoad {
-//    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f]];
+//    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:0.949 green:0.949 blue:0.949 alpha:1.f]];
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 6) {
+        CGFloat width = [UIScreen mainScreen].bounds.size.width;
+        [[UINavigationBar appearance] setShadowImage:[self imageWithColor:[UIColor colorWithWhite:0.5922 alpha:0.25] size:CGSizeMake(width, 1)]];
+        [[UINavigationBar appearance] setBackgroundImage:[self imageWithColor:[UIColor whiteColor] size:CGSizeMake(width, 64)] forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
+    }
+    
+    CALayer* line_notify = [CALayer layer];
+    line_notify.borderWidth = 1.f;
+    line_notify.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.10].CGColor;
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    line_notify.frame = CGRectMake(0, 73, width, 1);
+    [self.view.layer addSublayer:line_notify];
 
     _cycleTableView.dataSource = self;
     _cycleTableView.delegate = self;
@@ -88,25 +102,42 @@
     
     UILabel* label_t = [[UILabel alloc]init];
     label_t.text = @"圈聊";
-    label_t.textColor = [UIColor colorWithRed:0.608 green:0.608 blue:0.608 alpha:1.f];
+    label_t.textColor = [UIColor colorWithRed:0.3059 green:0.3059 blue:0.3059 alpha:1.f];
     label_t.font = [UIFont systemFontOfSize:18.f];
     [label_t sizeToFit];
     self.navigationItem.titleView = label_t;
    
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
+    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 25, 25)];
     NSString* filepath = [resourceBundle pathForResource:@"dongda_back" ofType:@"png"];
     CALayer * layer = [CALayer layer];
     layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
-    layer.frame = CGRectMake(0, 0, 13, 20);
-    layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
+    layer.frame = CGRectMake(-12, 0, 25, 25);
+//    layer.position = CGPointMake(barBtn.frame.size.width / 2, barBtn.frame.size.height / 2);
     [barBtn.layer addSublayer:layer];
     [barBtn addTarget:self action:@selector(didPopViewController) forControlEvents:UIControlEventTouchDown];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn];
+    self.view.backgroundColor = [UIColor colorWithRed:0.9529 green:0.9529 blue:0.9529 alpha:1.f];
     
-    self.view.backgroundColor = [UIColor lightGrayColor];
+    _cycleTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+}
+
+//取消searchbar背景色
+- (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size
+{
+    CGRect rect = CGRectMake(0, 0, size.width, size.height);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
 }
 
 - (void)didPopViewController {
@@ -120,6 +151,8 @@
     chatGroupArray_mine = [_mm enumMyChatGroupLocal];
     chatGroupArray_recommend = [_mm enumRecommendChatGroupLocal];
     [self viewDidLayoutSubviews];
+    
+
 }
 
 //- (void)setUpDescriptionView {
@@ -242,7 +275,6 @@
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     CGFloat height = [UIScreen mainScreen].bounds.size.height;
   
-#define TABLE_VIEW_TOP_MARGIN   69
     CGRect rc = CGRectMake(0, TABLE_VIEW_TOP_MARGIN, width, height);
 //    _descriptionView.frame = rc;
     _cycleTableView.frame = rc;
@@ -263,12 +295,12 @@
 /*改变删除按钮的title*/
 - (nullable NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(8_0) {
     
-    UITableViewRowAction * act = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"删除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+    UITableViewRowAction * act = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"删 除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
         [tableView.dataSource tableView:tableView commitEditingStyle:UITableViewCellEditingStyleDelete forRowAtIndexPath:indexPath];
     }];
     act.backgroundColor = [UIColor colorWithRed:0.2745 green:0.8588 blue:0.7922 alpha:1.f];
 
-    UITableViewRowAction * act2 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"取消" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+    UITableViewRowAction * act2 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"取 消" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
         [tableView endEditing:YES];
         
     }];
@@ -327,18 +359,19 @@
         label.text = @"猜你喜欢";
     }
    
-    label.textColor = [UIColor colorWithRed:0.824 green:0.824 blue:0.824 alpha:1.f];
+    label.textColor = [UIColor colorWithWhite:0.3509 alpha:1.f];
     label.textAlignment = NSTextAlignmentLeft;
-    label.font = [UIFont boldSystemFontOfSize:14.f];
+    label.font = [UIFont boldSystemFontOfSize:12.f];
     [label sizeToFit];
     [reVal addSubview:label];
     
-    label.center = CGPointMake(10.5f + label.frame.size.width / 2, 34 / 2);
+//    label.center = CGPointMake(10.5f + label.frame.size.width / 2, 34 / 2);
+    label.center = CGPointMake(10.5f + label.frame.size.width / 2, 46 / 2);
     
     CALayer* line = [CALayer layer];
-    line.borderColor = [UIColor colorWithWhite:0.666 alpha:0.6].CGColor;
+    line.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.25].CGColor;
     line.borderWidth = 1.f;
-    line.frame = CGRectMake(10.5, 34 - 1, [UIScreen mainScreen].bounds.size.width - 21, 1);
+    line.frame = CGRectMake(10.5, 46 - 1, [UIScreen mainScreen].bounds.size.width - 10.5, 1);
     [reVal.layer addSublayer:line];
     
     return reVal;
@@ -369,7 +402,8 @@
 //    } else {
 //        return 44;
 //    }
-    return 34;
+//    return 34;
+    return 46;
 }
 
 //- (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -404,7 +438,6 @@
         tmp = [chatGroupArray_recommend objectAtIndex:indexPath.row];
     }
     
-//    cell.numLabel.text = @"7";
     cell.themeLabel.text = tmp.target_name;
     
     return cell;

@@ -13,6 +13,8 @@
 @property (strong, nonatomic, setter=changeItemTitle:) NSString* title;
 @property (nonatomic, setter=changeStatus:) NSInteger status;
 @property (nonatomic) BOOL isLayerHidden;
+@property (nonatomic, setter=resetFontSize:) CGFloat font_size;
+@property (nonatomic, weak, setter=resetFontColor:) UIColor* font_color;
 
 + (CGSize)preferredSize;
 @end

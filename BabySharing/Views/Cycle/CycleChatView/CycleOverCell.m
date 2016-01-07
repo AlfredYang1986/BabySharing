@@ -40,7 +40,7 @@
    
     _themeImg.image = [UIImage imageNamed:filepath];
     _themeImg.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    _themeImg.layer.borderWidth = 1.f;
+//    _themeImg.layer.borderWidth = 1.f;
     _themeImg.layer.cornerRadius = 8.f;
     _themeImg.clipsToBounds = YES;
     
@@ -51,14 +51,22 @@
 #define BRAGE_WIDTH     25
 #define BRAGE_HEIGHT    BRAGE_WIDTH
     brage.frame = CGRectMake(0, 0, BRAGE_WIDTH, BRAGE_HEIGHT);
-    brage.center = CGPointMake(48 + BRAGE_WIDTH / 2, 10.5 + BRAGE_HEIGHT / 2);
+    brage.center = CGPointMake(48 + BRAGE_WIDTH / 2, 5.5 + BRAGE_HEIGHT / 2);
     [brage setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [brage setTitle:@"10" forState:UIControlStateNormal];
+    brage.titleLabel.font = [UIFont systemFontOfSize:12.f];
     [self addSubview:brage];
     
-    _themeLabel.textColor = [UIColor colorWithRed:0.847 green:0.847 blue:0.847 alpha:1.f];
-    _chatLabel.textColor = [UIColor colorWithRed:0.847 green:0.847 blue:0.847 alpha:1.f];
-    _timeLabel.textColor = [UIColor colorWithRed:0.847 green:0.847 blue:0.847 alpha:1.f];
+    _themeLabel.textColor = [UIColor colorWithWhite:0.3059 alpha:1.f];
+    _themeLabel.font = [UIFont boldSystemFontOfSize:14.f];
+    _chatLabel.textColor = [UIColor colorWithWhite:0.6078 alpha:1.f];
+    _timeLabel.textColor = [UIColor colorWithWhite:0.6078 alpha:1.f];
+    
+    CALayer* line = [CALayer layer];
+    line.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.25].CGColor;
+    line.borderWidth = 1.f;
+    line.frame = CGRectMake(10.5, 79, [UIScreen mainScreen].bounds.size.width - 10.5, 1);
+    [self.layer addSublayer:line];
     
 //    [_timeBtn setImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Time_Publish" ofType:@"png"]] forState:UIControlStateNormal];
 //    [_timeBtn setTitle:@"一年" forState:UIControlStateNormal];

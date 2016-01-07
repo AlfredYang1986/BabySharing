@@ -21,6 +21,7 @@
 @synthesize title = _title;
 @synthesize status = _status;
 @synthesize isLayerHidden = _isLayerHidden;
+@synthesize font_size = _font_size;
 
 - (id)init {
     self = [super init];
@@ -58,8 +59,15 @@
 }
 
 - (void)setUpValues {
+    
+    if (_font_size == 0) {
+        _font_size = 16.f;
+    }
+    
+    _font_color = [UIColor grayColor];
+    
     UILabel* label = [[UILabel alloc]init];
-    label.font = [UIFont systemFontOfSize:16.f];
+    label.font = [UIFont systemFontOfSize:_font_size];
     label.tag = -1;
     [self addSubview:label];
     
@@ -73,10 +81,24 @@
     [self.layer addSublayer:layer];
     
     layer.hidden = _status == 0;
-    label.textColor = _status == 0 ? [UIColor grayColor] : [UIColor colorWithRed:0.2745f green:0.8588 blue:0.7922 alpha:1.f];
+    label.textColor = _status == 0 ? _font_color : [UIColor colorWithRed:0.2745f green:0.8588 blue:0.7922 alpha:1.f];
     
     if (_isLayerHidden) {
         layer.hidden = YES;
+    }
+}
+
+- (void)resetFontSize:(CGFloat)font_size {
+    _font_size = font_size;
+    UILabel* label = [self viewWithTag:-1];
+    label.font = [UIFont systemFontOfSize:_font_size];
+}
+
+- (void)resetFontColor:(UIColor *)font_color {
+    _font_color = font_color;
+    if (_status == 0) {
+        UILabel* label = [self viewWithTag:-1];
+        label.textColor = _font_color;
     }
 }
 
@@ -84,7 +106,7 @@
     _status = s;
     layer.hidden = _status == 0;
     UILabel* label = [self viewWithTag:-1];
-    label.textColor = _status == 0 ? [UIColor grayColor] : [UIColor colorWithRed:0.2745f green:0.8588 blue:0.7922 alpha:1.f];
+    label.textColor = _status == 0 ? _font_color : [UIColor colorWithRed:0.2745f green:0.8588 blue:0.7922 alpha:1.f];
     
     if (_isLayerHidden) {
         layer.hidden = YES;

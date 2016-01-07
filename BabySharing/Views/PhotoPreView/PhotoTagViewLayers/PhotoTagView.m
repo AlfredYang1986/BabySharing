@@ -74,13 +74,14 @@
     CALayer* tri = [CALayer layer];
     tri.frame = CGRectMake(0, 0, TEXT_LEFT_MARGIN, TAG_HEIGHT);
     tri.contents = (id)[UIImage imageNamed:[resourceBundle pathForResource:@"tag_tri" ofType:@"png"]].CGImage;
+    tri.masksToBounds = YES;
     [self.layer addSublayer:tri];
     
     CGRect text_bounds = [self getTitleBoundsWithTagTitle:_content];
-    CALayer* text_bg = [CATextLayer layer];
+//    CAGradientLayer* text_bg = [CAGradientLayer layer];
+    CALayer* text_bg = [CALayer layer];
     text_bg.frame = CGRectMake(TEXT_LEFT_MARGIN, 0, text_bounds.size.width, TAG_HEIGHT);
-//    text_bg.contents = (id)[UIImage imageNamed:[resourceBundle pathForResource:@"tag_text" ofType:@"png"]].CGImage;
-    text_bg.backgroundColor = [UIColor colorWithWhite:0.f alpha:0.6].CGColor;
+    text_bg.contents = (id)[UIImage imageNamed:[resourceBundle pathForResource:@"tag_text" ofType:@"png"]].CGImage;
     [self.layer addSublayer:text_bg];
     
     CATextLayer* text_content = [CATextLayer layer];
@@ -93,6 +94,7 @@
     text_content.contentsScale = 2.f;
     
     [text_bg addSublayer:text_content];
+    text_bg.masksToBounds = YES;
     
     CALayer* tail = [CALayer layer];
     tail.frame = CGRectMake(self.bounds.size.width - TEXT_RIGHT_MARGIN, 0, TEXT_RIGHT_MARGIN, TAG_HEIGHT);

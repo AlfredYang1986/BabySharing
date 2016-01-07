@@ -37,8 +37,8 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    _user_screen_photo.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    _user_screen_photo.layer.borderWidth = 1.f;
+    _user_screen_photo.layer.borderColor = [UIColor colorWithWhite:1.f alpha:0.25].CGColor;
+    _user_screen_photo.layer.borderWidth = 1.5f;
     _user_screen_photo.layer.cornerRadius = IMG_WIDTH / 2;
     _user_screen_photo.clipsToBounds = YES;
    
@@ -52,10 +52,16 @@
 
     if (_userNameLabel == nil) {
         _userNameLabel = [[UILabel alloc]init];
-        _userNameLabel.textColor = [UIColor colorWithRed:0.8471 green:0.8471 blue:0.8471 alpha:1.f];
+        _userNameLabel.textColor = [UIColor colorWithWhite:0.4667 alpha:1.f];
         _userNameLabel.font = [UIFont systemFontOfSize:14.f];
         [self addSubview:_userNameLabel];
     }
+    
+    CALayer* line = [CALayer layer];
+    line.borderWidth = 1.f;
+    line.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.25].CGColor;
+    line.frame = CGRectMake(0, PREFERRED_HEIGHT - 1, [UIScreen mainScreen].bounds.size.width + 10, 1);
+    [self.layer addSublayer:line];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -89,13 +95,13 @@
     OBShapedButton* tmp = [self viewWithTag:-1];
     if (tmp == Nil) {
         tmp = [[OBShapedButton alloc]init];
-        tmp.frame =  CGRectMake(0, 0, 90, 25);
-        tmp.center = CGPointMake(45, 25);
+        tmp.frame =  CGRectMake(0, 0, 69, 25);
+        tmp.center = CGPointMake(51, 25);
         tmp.tag = -1;
         [_relationContainer addSubview:tmp];
     }
    
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
     
     switch (connections) {
@@ -104,15 +110,15 @@
             break;
         case UserPostOwnerConnectionsNone:
         case UserPostOwnerConnectionsFollowed:
-            [tmp setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"relations-unfollowed"] ofType:@"png"]] forState:UIControlStateNormal];
+            [tmp setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"friend_relation_follow"] ofType:@"png"]] forState:UIControlStateNormal];
             
             break;
 //            return @"+关注";
         case UserPostOwnerConnectionsFollowing:
-            [tmp setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"relations-followed"] ofType:@"png"]] forState:UIControlStateNormal];
+            [tmp setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"friend_relation_following"] ofType:@"png"]] forState:UIControlStateNormal];
             break;
         case UserPostOwnerConnectionsFriends:
-            [tmp setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"relations-friends"] ofType:@"png"]] forState:UIControlStateNormal];
+            [tmp setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"friend_relation_muture_follow"] ofType:@"png"]] forState:UIControlStateNormal];
             //                return @"取消关注";
             break;
 //            return @"-取关";
@@ -135,7 +141,7 @@
     UILabel* label = [_userRoleTagBtn viewWithTag:-19];
     if (label == nil) {
         label = [[UILabel alloc]init];
-        label.font = [UIFont systemFontOfSize:10.f];
+        label.font = [UIFont systemFontOfSize:12.f];
         label.textColor = [UIColor whiteColor];
         label.tag = -19;
         [_userRoleTagBtn addSubview:label];

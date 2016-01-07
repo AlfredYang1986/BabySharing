@@ -27,13 +27,13 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imgView;
 
 //@property (weak, nonatomic) IBOutlet UIView *countContainer;
-@property (weak, nonatomic) IBOutlet UILabel *shareCountLabel;
-@property (weak, nonatomic) IBOutlet UILabel *cycleCountLabel;
-@property (weak, nonatomic) IBOutlet UILabel *friendsCountLabel;
+//@property (weak, nonatomic) IBOutlet UILabel *shareCountLabel;
+//@property (weak, nonatomic) IBOutlet UILabel *cycleCountLabel;
+//@property (weak, nonatomic) IBOutlet UILabel *friendsCountLabel;
 
-@property (weak, nonatomic) IBOutlet UIButton *followBtn;
+//@property (weak, nonatomic) IBOutlet UIButton *followBtn;
 @property (strong, nonatomic) IBOutlet OBShapedButton* userRoleTagBtn;
-@property (weak, nonatomic) IBOutlet UIButton *chatBtn;
+//@property (weak, nonatomic) IBOutlet UIButton *chatBtn;
 
 
 //@property (weak, nonatomic) IBOutlet UIView *buttomContainer;
@@ -53,13 +53,13 @@
 @synthesize imgView = _imgView;
 
 //@synthesize countContainer = _countContainer;
-@synthesize shareCountLabel = _shareCountLabel;
-@synthesize cycleCountLabel = _cycleCountLabel;
-@synthesize friendsCountLabel = _friendsCountLabel;
+//@synthesize shareCountLabel = _shareCountLabel;
+//@synthesize cycleCountLabel = _cycleCountLabel;
+//@synthesize friendsCountLabel = _friendsCountLabel;
 
-@synthesize followBtn = _followBtn;
+//@synthesize followBtn = _followBtn;
 //@synthesize roleTagBtn = _roleTagBtn;
-@synthesize chatBtn = _chatBtn;
+//@synthesize chatBtn = _chatBtn;
 
 //@synthesize buttomContainer = _buttomContainer;
 @synthesize locationLabel = _locationLabel;
@@ -85,12 +85,12 @@
 //    _roleTagBtn.clipsToBounds = YES;
 
 //    _followBtn.layer.borderWidth = 1.f;
-    _followBtn.layer.cornerRadius = 25.f;
-    _followBtn.clipsToBounds = YES;
-    [_followBtn setBackgroundColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f]];
-    [_followBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    
-    [_followBtn addTarget:_deleagate action:@selector(followBtnSelected) forControlEvents:UIControlEventTouchDown];
+//    _followBtn.layer.cornerRadius = 25.f;
+//    _followBtn.clipsToBounds = YES;
+//    [_followBtn setBackgroundColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f]];
+//    [_followBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//    
+//    [_followBtn addTarget:_deleagate action:@selector(followBtnSelected) forControlEvents:UIControlEventTouchDown];
     
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
@@ -99,11 +99,11 @@
     [_seg setImage:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Tag"] ofType:@"png"]] forSegmentAtIndex:1];
     [_seg setImage:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Location"] ofType:@"png"]] forSegmentAtIndex:2];
     
-    _chatBtn.layer.cornerRadius = 25.f;
-    _chatBtn.clipsToBounds = YES;
-    [_chatBtn setBackgroundColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f]];
-    [_chatBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [_chatBtn addTarget:_deleagate action:@selector(chatBtnSelected) forControlEvents:UIControlEventTouchDown];
+//    _chatBtn.layer.cornerRadius = 25.f;
+//    _chatBtn.clipsToBounds = YES;
+//    [_chatBtn setBackgroundColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f]];
+//    [_chatBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//    [_chatBtn addTarget:_deleagate action:@selector(chatBtnSelected) forControlEvents:UIControlEventTouchDown];
 
     [_seg addTarget:_deleagate action:@selector(segControlValueChangedWithSelectedIndex:) forControlEvents:UIControlEventValueChanged];
     
@@ -114,6 +114,7 @@
     [self addSubview:hotTagView];
     
     relations_btn = [[OBShapedButton alloc]initWithFrame:CGRectMake(0, 0, 90, 25)];
+    [relations_btn addTarget:_deleagate action:@selector(followBtnSelected) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:relations_btn];
     
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
@@ -214,12 +215,12 @@
 
 - (void)setCycleCount:(NSInteger)count {
     NSString* tmp = [NSString stringWithFormat:@"%ld", (long)count];
-    _cycleCountLabel.text = tmp;
+//    _cycleCountLabel.text = tmp;
 }
 
 - (void)setFriendsCount:(NSInteger)count {
     NSString* tmp = [NSString stringWithFormat:@"%ld", (long)count];
-    _friendsCountLabel.text = tmp;
+//    _friendsCountLabel.text = tmp;
 }
 
 - (void)setLoation:(NSString*)location {

@@ -36,24 +36,33 @@
     for (UIView* v in _searchBar.subviews.firstObject.subviews) {
         if ( [v isKindOfClass: [UITextField class]] ) {
             UITextField *tf = (UITextField *)v;
-            tf.backgroundColor = [UIColor lightGrayColor];
+            tf.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
             tf.borderStyle = UITextBorderStyleRoundedRect;
             tf.clearButtonMode = UITextFieldViewModeWhileEditing;
         } else if ([v isKindOfClass:[UIButton class]]) {
             UIButton* cancel_btn = (UIButton*)v;
 //            [cancel_btn setTitle:@"test" forState:UIControlStateNormal];
-            [cancel_btn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-            [cancel_btn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
+            [cancel_btn setTitleColor:[UIColor colorWithWhite:0.4667 alpha:1.f] forState:UIControlStateNormal];
+            [cancel_btn setTitleColor:[UIColor colorWithWhite:0.4667 alpha:1.f] forState:UIControlStateDisabled];
         }
 //        else if ([v isKindOfClass:NSClassFromString(@"UISearchBarBackground")]) {
 //            v.backgroundColor = [UIColor whiteColor];
 //        }
     }
     
+    CALayer* line = [CALayer layer];
+    line.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.25].CGColor;
+    line.borderWidth = 1.f;
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    line.frame = CGRectMake(0, 64, width, 1);
+    [self.view.layer addSublayer:line];
+    
     _searchBar.delegate = self;
     
     _queryView.delegate = self;
     _queryView.dataSource = self;
+    _queryView.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
+    _queryView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [_queryView registerNib:[UINib nibWithNibName:@"MessageFriendsCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"friend cell"];
     
     arr_section_title = @[@"好友", @"可能认识的人", @"相关用户"];
@@ -103,24 +112,30 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
    
     UIView* reVal = [[UIView alloc]init];
-    reVal.backgroundColor = [UIColor lightGrayColor];
+    reVal.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
    
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
-#define HEARDER_OFFSET      5
+#define HEARDER_OFFSET      10.5
 #define LEFT_MARGIN         10.5
 #define TOP_MARGIN          14
     UIView* content = [[UIView alloc]initWithFrame:CGRectMake(0, HEARDER_OFFSET, width, 44 - HEARDER_OFFSET)];
     content.backgroundColor = [UIColor whiteColor];
     
-    UILabel* label = [[UILabel alloc]initWithFrame:CGRectMake(LEFT_MARGIN, TOP_MARGIN, 1, 1)];
+    UILabel* label = [[UILabel alloc]initWithFrame:CGRectMake(LEFT_MARGIN + (section == 0 ? 5 : 0), TOP_MARGIN, 1, 1)];
     label.text = [arr_section_title objectAtIndex:section];
-    label.textColor = [UIColor colorWithRed:0.847 green:0.847 blue:0.847 alpha:1.f];
+    label.textColor = [UIColor colorWithWhite:0.4667 alpha:1.f];
     label.font = [UIFont systemFontOfSize:14.f];
     [label sizeToFit];
     [content addSubview:label];
     
     [reVal addSubview:content];
-   
+    
+    CALayer* line_up = [CALayer layer];
+    line_up.borderWidth = 1.f;
+    line_up.borderColor = [UIColor colorWithWhite:0.4667 alpha:0.10].CGColor;
+    line_up.frame = CGRectMake(0, HEARDER_OFFSET, width + 10, 1);
+    [reVal.layer addSublayer:line_up];
+    
     return reVal;
 }
 
@@ -133,7 +148,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return section == 2 ? 4 : 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
