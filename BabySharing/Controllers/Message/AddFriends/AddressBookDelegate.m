@@ -13,6 +13,7 @@
 #import "LoginModel.h"
 #import "CurrentToken.h"
 #import "LoginToken.h"
+#import "MessageFriendsCell.h"
 
 #import "RemoteInstance.h"
 
@@ -148,33 +149,39 @@
 #pragma mark -- tableview datasource
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"default"];
+    MessageFriendsCell* cell = [tableView dequeueReusableCellWithIdentifier:@"friend cell"];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"default"];
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MessageFriendsCell" owner:self options:nil];
+        cell = [nib objectAtIndex:0];
     }
-  
+    
+    [cell setUserScreenPhoto:@""];
+    [cell setRelationship:UserPostOwnerConnectionsNone];
+    
     id tmpPerson = [people objectAtIndex:indexPath.row];
     NSString* tmpFirstName = CFBridgingRelease(ABRecordCopyValue(CFBridgingRetain(tmpPerson), kABPersonFirstNameProperty));
     
     NSString* tmpLastName = CFBridgingRelease(ABRecordCopyValue(CFBridgingRetain(tmpPerson), kABPersonLastNameProperty));
-   
+    
     if (tmpLastName && tmpFirstName) {
-        cell.textLabel.text = [tmpFirstName stringByAppendingString:tmpLastName];
+        [cell setUserScreenName:[tmpFirstName stringByAppendingString:tmpLastName]];
     } else if (tmpFirstName) {
-        cell.textLabel.text = tmpFirstName;
+        [cell setUserScreenName:tmpFirstName];
     } else if (tmpLastName) {
-        cell.textLabel.text = tmpLastName;
+        [cell setUserScreenName:tmpLastName];
     } else {
         
     }
-    
-    cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
     
     return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return people.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return [MessageFriendsCell preferredHeight];
 }
 @end

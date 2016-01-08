@@ -1599,7 +1599,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XAI-YK-qoZ" customClass="DongDaSearchBar">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XAI-YK-qoZ" customClass="UISearchBar">
                                 <rect key="frame" x="0.0" y="64" width="600" height="36"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -1610,22 +1610,22 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                                 <rect key="frame" x="0.0" y="192" width="600" height="359"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bAi-0o-xBR" customClass="SearchSegView">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bAi-0o-xBR" customClass="SearchSegView2">
                                 <rect key="frame" x="0.0" y="108" width="600" height="37"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="a20-6f-v5V"/>
+                                    <constraint firstAttribute="height" constant="70" id="a20-6f-v5V"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="bAi-0o-xBR" firstAttribute="leading" secondItem="t0m-Wo-yvt" secondAttribute="leadingMargin" constant="-20" id="0OR-Hs-exZ"/>
+                            <constraint firstItem="bAi-0o-xBR" firstAttribute="leading" secondItem="t0m-Wo-yvt" secondAttribute="leadingMargin" constant="-16" id="0OR-Hs-exZ"/>
                             <constraint firstItem="ooZ-Cq-P0Q" firstAttribute="top" secondItem="bAi-0o-xBR" secondAttribute="bottom" id="7vg-Fb-k9s"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="bAi-0o-xBR" secondAttribute="trailing" constant="-20" id="I35-1A-qGW"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="bAi-0o-xBR" secondAttribute="trailing" constant="-16" id="I35-1A-qGW"/>
                             <constraint firstItem="lz4-14-1BE" firstAttribute="top" secondItem="ooZ-Cq-P0Q" secondAttribute="bottom" id="MFr-g3-WAE"/>
                             <constraint firstItem="ooZ-Cq-P0Q" firstAttribute="top" secondItem="bAi-0o-xBR" secondAttribute="bottom" constant="8" id="Yab-VX-vBu"/>
-                            <constraint firstItem="bAi-0o-xBR" firstAttribute="top" secondItem="XAI-YK-qoZ" secondAttribute="bottom" constant="8" id="hCG-AM-OgT"/>
+                            <constraint firstItem="bAi-0o-xBR" firstAttribute="top" secondItem="XAI-YK-qoZ" secondAttribute="bottom" id="hCG-AM-OgT"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ooZ-Cq-P0Q" secondAttribute="trailing" constant="-16" id="jgP-zI-bdj"/>
                             <constraint firstItem="XAI-YK-qoZ" firstAttribute="top" secondItem="qfA-9O-jco" secondAttribute="bottom" constant="8" id="lAl-Om-9YQ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="XAI-YK-qoZ" secondAttribute="trailing" constant="-20" id="nVV-Xx-qt2"/>

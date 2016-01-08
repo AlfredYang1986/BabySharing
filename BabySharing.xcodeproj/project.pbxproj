@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		70530B121C3F9D1E00505121 /* SearchSegImgItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 70530B0D1C3F9D1E00505121 /* SearchSegImgItem.m */; };
+		70530B131C3F9D1E00505121 /* SearchSegImgTextItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 70530B0F1C3F9D1E00505121 /* SearchSegImgTextItem.m */; };
+		70530B141C3F9D1E00505121 /* SearchSegItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 70530B111C3F9D1E00505121 /* SearchSegItem.m */; };
 		70A9BB711C3CF5F1000DFE53 /* SearchFriendsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70A9BB701C3CF5F1000DFE53 /* SearchFriendsController.m */; };
 		70D22C431C3A16F6008B8403 /* DongDaBoundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 70D22C421C3A16F6008B8403 /* DongDaBoundle.bundle */; };
 		70EF02D21C22CE7A00DABCFC /* PostPublichViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EF02D11C22CE7A00DABCFC /* PostPublichViewController.m */; };
@@ -115,7 +118,6 @@
 		EE9676411B7C3D7700445254 /* CycleDescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE9676401B7C3D7700445254 /* CycleDescriptionCell.xib */; };
 		EE968D071C1AB0700063362E /* MessageFriendsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE968D051C1AB0700063362E /* MessageFriendsCell.m */; };
 		EE968D081C1AB0700063362E /* MessageFriendsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE968D061C1AB0700063362E /* MessageFriendsCell.xib */; };
-		EE968D131C1B1DB00063362E /* SearchSegImgItem.m in Sources */ = {isa = PBXBuildFile; fileRef = EE968D121C1B1DB00063362E /* SearchSegImgItem.m */; };
 		EE97440E1B78699A00E81A70 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = EE97440D1B78699A00E81A70 /* Reachability.m */; };
 		EE9744171B78886300E81A70 /* MessageNotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9744151B78886300E81A70 /* MessageNotificationCell.m */; };
 		EE97441F1B78944600E81A70 /* MessageNotificationDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE97441D1B78944600E81A70 /* MessageNotificationDetailCell.xib */; };
@@ -225,7 +227,6 @@
 		EEBE1B691C17CA9400EAA9D2 /* DongDaFollowBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = EEBE1B561C17CA9400EAA9D2 /* DongDaFollowBtn.m */; };
 		EEBE1B6A1C17CA9400EAA9D2 /* DongDaSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = EEBE1B591C17CA9400EAA9D2 /* DongDaSearchBar.m */; };
 		EEBE1B6B1C17CA9400EAA9D2 /* HomeSegControl.m in Sources */ = {isa = PBXBuildFile; fileRef = EEBE1B5C1C17CA9400EAA9D2 /* HomeSegControl.m */; };
-		EEBE1B6C1C17CA9400EAA9D2 /* SearchSegItem.m in Sources */ = {isa = PBXBuildFile; fileRef = EEBE1B5F1C17CA9400EAA9D2 /* SearchSegItem.m */; };
 		EEBE1B6D1C17CA9400EAA9D2 /* SearchSegView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEBE1B611C17CA9400EAA9D2 /* SearchSegView.m */; };
 		EEBE1B6E1C17CA9400EAA9D2 /* SearchSegView2.m in Sources */ = {isa = PBXBuildFile; fileRef = EEBE1B631C17CA9400EAA9D2 /* SearchSegView2.m */; };
 		EEBE1B6F1C17CA9400EAA9D2 /* DongDaTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = EEBE1B661C17CA9400EAA9D2 /* DongDaTabBar.m */; };
@@ -305,6 +306,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		70530B0C1C3F9D1E00505121 /* SearchSegImgItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSegImgItem.h; sourceTree = "<group>"; };
+		70530B0D1C3F9D1E00505121 /* SearchSegImgItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSegImgItem.m; sourceTree = "<group>"; };
+		70530B0E1C3F9D1E00505121 /* SearchSegImgTextItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSegImgTextItem.h; sourceTree = "<group>"; };
+		70530B0F1C3F9D1E00505121 /* SearchSegImgTextItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSegImgTextItem.m; sourceTree = "<group>"; };
+		70530B101C3F9D1E00505121 /* SearchSegItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSegItem.h; sourceTree = "<group>"; };
+		70530B111C3F9D1E00505121 /* SearchSegItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSegItem.m; sourceTree = "<group>"; };
 		70A9BB6F1C3CF5F1000DFE53 /* SearchFriendsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchFriendsController.h; sourceTree = "<group>"; };
 		70A9BB701C3CF5F1000DFE53 /* SearchFriendsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchFriendsController.m; sourceTree = "<group>"; };
 		70D22C421C3A16F6008B8403 /* DongDaBoundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DongDaBoundle.bundle; sourceTree = "<group>"; };
@@ -471,8 +478,6 @@
 		EE968D041C1AB0700063362E /* MessageFriendsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageFriendsCell.h; sourceTree = "<group>"; };
 		EE968D051C1AB0700063362E /* MessageFriendsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageFriendsCell.m; sourceTree = "<group>"; };
 		EE968D061C1AB0700063362E /* MessageFriendsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageFriendsCell.xib; sourceTree = "<group>"; };
-		EE968D111C1B1DB00063362E /* SearchSegImgItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSegImgItem.h; sourceTree = "<group>"; };
-		EE968D121C1B1DB00063362E /* SearchSegImgItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSegImgItem.m; sourceTree = "<group>"; };
 		EE97440C1B78699A00E81A70 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		EE97440D1B78699A00E81A70 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		EE9744141B78886300E81A70 /* MessageNotificationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageNotificationCell.h; sourceTree = "<group>"; };
@@ -733,8 +738,6 @@
 		EEBE1B5B1C17CA9400EAA9D2 /* HomeSegControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeSegControl.h; sourceTree = "<group>"; };
 		EEBE1B5C1C17CA9400EAA9D2 /* HomeSegControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeSegControl.m; sourceTree = "<group>"; };
 		EEBE1B5D1C17CA9400EAA9D2 /* SearchSegDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSegDelegate.h; sourceTree = "<group>"; };
-		EEBE1B5E1C17CA9400EAA9D2 /* SearchSegItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSegItem.h; sourceTree = "<group>"; };
-		EEBE1B5F1C17CA9400EAA9D2 /* SearchSegItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSegItem.m; sourceTree = "<group>"; };
 		EEBE1B601C17CA9400EAA9D2 /* SearchSegView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSegView.h; sourceTree = "<group>"; };
 		EEBE1B611C17CA9400EAA9D2 /* SearchSegView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSegView.m; sourceTree = "<group>"; };
 		EEBE1B621C17CA9400EAA9D2 /* SearchSegView2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSegView2.h; sourceTree = "<group>"; };
@@ -914,6 +917,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		70530B0B1C3F9D1E00505121 /* SearchSegItem */ = {
+			isa = PBXGroup;
+			children = (
+				70530B0C1C3F9D1E00505121 /* SearchSegImgItem.h */,
+				70530B0D1C3F9D1E00505121 /* SearchSegImgItem.m */,
+				70530B0E1C3F9D1E00505121 /* SearchSegImgTextItem.h */,
+				70530B0F1C3F9D1E00505121 /* SearchSegImgTextItem.m */,
+				70530B101C3F9D1E00505121 /* SearchSegItem.h */,
+				70530B111C3F9D1E00505121 /* SearchSegItem.m */,
+			);
+			path = SearchSegItem;
+			sourceTree = "<group>";
+		};
 		EE03E9801B4FABDC00F21EF5 /* Album */ = {
 			isa = PBXGroup;
 			children = (
@@ -2099,17 +2115,14 @@
 		EEBE1B5A1C17CA9400EAA9D2 /* SegmentControl */ = {
 			isa = PBXGroup;
 			children = (
+				70530B0B1C3F9D1E00505121 /* SearchSegItem */,
 				EEBE1B5B1C17CA9400EAA9D2 /* HomeSegControl.h */,
 				EEBE1B5C1C17CA9400EAA9D2 /* HomeSegControl.m */,
 				EEBE1B5D1C17CA9400EAA9D2 /* SearchSegDelegate.h */,
-				EEBE1B5E1C17CA9400EAA9D2 /* SearchSegItem.h */,
-				EEBE1B5F1C17CA9400EAA9D2 /* SearchSegItem.m */,
 				EEBE1B601C17CA9400EAA9D2 /* SearchSegView.h */,
 				EEBE1B611C17CA9400EAA9D2 /* SearchSegView.m */,
 				EEBE1B621C17CA9400EAA9D2 /* SearchSegView2.h */,
 				EEBE1B631C17CA9400EAA9D2 /* SearchSegView2.m */,
-				EE968D111C1B1DB00063362E /* SearchSegImgItem.h */,
-				EE968D121C1B1DB00063362E /* SearchSegImgItem.m */,
 			);
 			path = SegmentControl;
 			sourceTree = "<group>";
@@ -2749,6 +2762,7 @@
 				EE0CEC551BDB13070016B6F4 /* ChooseAreaViewController.m in Sources */,
 				EEDCF6A31B9ABE07005F4F4D /* SystemSettingModel.m in Sources */,
 				EEBE1B8E1C17D2E500EAA9D2 /* UserSearchController.m in Sources */,
+				70530B131C3F9D1E00505121 /* SearchSegImgTextItem.m in Sources */,
 				EED774D61BABF86D001C9B57 /* HomeSearchController.m in Sources */,
 				EEB4C8C01BFC823C0023E2AD /* QueryHeader.m in Sources */,
 				EE76398A1B956CFB0025A56D /* CellConstructParameters.m in Sources */,
@@ -2779,7 +2793,6 @@
 				EEDCF69B1B9AB674005F4F4D /* PrivacySetting.m in Sources */,
 				EEBE1B6B1C17CA9400EAA9D2 /* HomeSegControl.m in Sources */,
 				EEAACCD71B44E90400D05C0B /* LoginToken+ContextOpt.m in Sources */,
-				EEBE1B6C1C17CA9400EAA9D2 /* SearchSegItem.m in Sources */,
 				EEFA44FE1B58F7D4007DF294 /* NickNameInputView.m in Sources */,
 				EE9633C91B92A4CF00DB4EA5 /* PersonalCenterSignaturesController.m in Sources */,
 				EEDCF6A01B9AB8DA005F4F4D /* UserSetting+ContextOpt.m in Sources */,
@@ -2841,11 +2854,11 @@
 				EEE94E311B74BF870011321A /* ProfileOverView.m in Sources */,
 				EEE94E0A1B74A8C20011321A /* FriendsTableDelegate.m in Sources */,
 				EE8B1D8C1C08499A00056AC8 /* LandingNextSegue.mm in Sources */,
+				70530B121C3F9D1E00505121 /* SearchSegImgItem.m in Sources */,
 				EE5D686F1B75A9FC0067A2DF /* NotificationOwner.m in Sources */,
 				70EF02D21C22CE7A00DABCFC /* PostPublichViewController.m in Sources */,
 				EE86D1B21B537469001C4650 /* PostEffectAdapter.mm in Sources */,
 				EE9785B01B9004CD00C454C5 /* CycleAddKidsViewController.m in Sources */,
-				EE968D131C1B1DB00063362E /* SearchSegImgItem.m in Sources */,
 				EEBE1B6D1C17CA9400EAA9D2 /* SearchSegView.m in Sources */,
 				EEBE1B6A1C17CA9400EAA9D2 /* DongDaSearchBar.m in Sources */,
 				EED5EABE1BD7375E000AFF36 /* PhotoTagTariangleLayer2.m in Sources */,
@@ -2890,6 +2903,7 @@
 				EE03E9831B4FABFB00F21EF5 /* AlbumModule.m in Sources */,
 				EE26D77D1C1EBB5600342E02 /* RecommandTag+ContextOpt.m in Sources */,
 				EEBE1B701C17CA9400EAA9D2 /* DongDaTabBarItem.m in Sources */,
+				70530B141C3F9D1E00505121 /* SearchSegItem.m in Sources */,
 				EE817F491B79A78E00988734 /* UserChatController.m in Sources */,
 				EE76A5791B7205CF00036747 /* ConnectionOwner+ContextOpt.m in Sources */,
 				70F501491C23ABC7007769F4 /* PhotoAddTagController.m in Sources */,

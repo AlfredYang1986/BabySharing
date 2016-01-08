@@ -24,10 +24,16 @@
 @property (nonatomic) CGFloat margin_between_items;
 
 - (NSString*)queryItemTitleAtIndex:(NSInteger)index;
+// title
 - (void)addItemWithTitle:(NSString *)title;
 - (void)removeItemAtIndex:(NSInteger)index;
 
+// img
 - (void)addItemWithImg:(UIImage*)normal_img andSelectImage:(UIImage*)selected_img;
 
+// title and img
+- (void)addItemWithImg:(UIImage *)normal_img andSelectImage:(UIImage *)selected_img andTitle:(NSString*)title;
+
 + (CGFloat)preferredHeight;
++ (CGFloat)preferredHeightWithImgAndText;
 @end

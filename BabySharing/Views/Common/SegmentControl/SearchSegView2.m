@@ -9,6 +9,7 @@
 #import "SearchSegView2.h"
 #import "SearchSegImgItem.h"
 #import "SearchSegItem.h"
+#import "SearchSegImgTextItem.h"
 
 @implementation SearchSegView2
 
@@ -154,6 +155,24 @@
     [self addSubview:item];
 }
 
+- (void)addItemWithImg:(UIImage *)normal_img andSelectImage:(UIImage *)selected_img andTitle:(NSString *)title {
+  
+    CGSize sz = [SearchSegImgTextItem preferredSize];
+    SearchSegImgTextItem* item = [[SearchSegImgTextItem alloc]initWithFrame:CGRectMake(0, 0, sz.width, sz.height)];
+    
+    item.tag = [self getSegItemsCount] + 1;
+    item.normal_img = normal_img;
+    item.selected_img = selected_img;
+    item.title = title;
+    item.isLayerHidden = _isLayerHidden;
+    item.status = 0;
+    
+    UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(segImgTextSelected:)];
+    [item addGestureRecognizer:tap];
+    
+    [self addSubview:item];
+}
+
 - (void)segSelected:(UITapGestureRecognizer*)gesture {
     SearchSegItem* tmp = (SearchSegItem*)gesture.view;
     if (tmp.status != 1) {
@@ -175,11 +194,25 @@
     [_delegate segValueChanged2:self];
 }
 
+- (void)segImgTextSelected:(UITapGestureRecognizer*)gesture {
+    UIView* tmp = gesture.view;
+    
+    for (SearchSegImgTextItem* iter in [self getSegItems]) {
+        iter.status = iter == tmp ? 1 : 0;
+    }
+    
+    [_delegate segValueChanged2:self];
+}
+
 - (void)removeItemAtIndex:(NSInteger)index {
     
 }
 
 + (CGFloat)preferredHeight {
     return 44;
+}
+
++ (CGFloat)preferredHeightWithImgAndText {
+    return 70;
 }
 @end

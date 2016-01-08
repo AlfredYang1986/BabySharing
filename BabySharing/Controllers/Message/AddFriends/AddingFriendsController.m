@@ -12,14 +12,15 @@
 #import "WeiboFriendsDelegate.h"
 
 #import "DongDaSearchBar.h"
-#import "SearchSegView.h"
+#import "SearchSegView2.h"
+#import "MessageFriendsCell.h"
 
 @interface AddingFriendsController () <UISearchBarDelegate, AsyncDelegateProtocol, SearchSegViewDelegate, DongDaSearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *queryView;
-//@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
-@property (weak, nonatomic) IBOutlet DongDaSearchBar* searchBar;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+//@property (weak, nonatomic) IBOutlet DongDaSearchBar* searchBar;
 //@property (weak, nonatomic) IBOutlet UISegmentedControl *seg;
-@property (weak, nonatomic) IBOutlet SearchSegView *seg;
+@property (weak, nonatomic) IBOutlet SearchSegView2 *seg;
 
 @property (weak, nonatomic, setter=setCurrentDelegate:) id<UITableViewDataSource, UITableViewDelegate, AddingFriendsProtocol> current_delegate;
 @end
@@ -39,12 +40,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [_seg addItemWithTitle:@"通讯录" andImg:nil andSelectedImg:nil];
-    [_seg addItemWithTitle:@"微博" andImg:nil andSelectedImg:nil];
-    [_seg addItemWithTitle:@"微信" andImg:nil andSelectedImg:nil];
-    [_seg addItemWithTitle:@"QQ" andImg:nil andSelectedImg:nil];
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
     
-//    _seg.selectedIndex = 0;
+    [_seg addItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:@"friend_address_book" ofType:@"png"]] andSelectImage:[UIImage imageNamed:[resourceBundle pathForResource:@"friend_address_book" ofType:@"png"]] andTitle:@"通讯录"];
+    [_seg addItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:@"friend_wechat" ofType:@"png"]] andSelectImage:[UIImage imageNamed:[resourceBundle pathForResource:@"friend_wechat" ofType:@"png"]] andTitle:@"微信"];
+    [_seg addItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:@"friend_qq" ofType:@"png"]] andSelectImage:[UIImage imageNamed:[resourceBundle pathForResource:@"friend_qq" ofType:@"png"]] andTitle:@"QQ"];
+    _seg.isLayerHidden = YES;
+    _seg.margin_between_items = 0.10 * [UIScreen mainScreen].bounds.size.width;
+    _seg.selectedIndex = 0;
+    _seg.delegate = self;
+    
 //    [_seg addTarget:self action:@selector(segValueChanged) forControlEvents:UIControlEventValueChanged];
     
     _searchBar.delegate = self;
@@ -56,15 +62,12 @@
     
     wb = [[WeiboFriendsDelegate alloc]init];
     
-    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
-    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-//    NSString* filepath = [resourceBundle pathForResource:@"Previous_blue" ofType:@"png"];
-    NSString* filepath = [resourceBundle pathForResource:@"Previous_simple" ofType:@"png"];
+    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(10.5, 32, 25, 25)];
+    NSString* filepath = [resourceBundle pathForResource:@"dongda_back" ofType:@"png"];
     CALayer * layer = [CALayer layer];
     layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
-    layer.frame = CGRectMake(0, 0, 13, 20);
-    layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
+    layer.frame = CGRectMake(-10, 0, 20, 20);
+//    layer.position = CGPointMake(barBtn.frame.size.width / 2, barBtn.frame.size.height / 2);
     [barBtn.layer addSublayer:layer];
 //    [barBtn setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
 //    [barBtn setImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
@@ -74,10 +77,58 @@
     
     UILabel* label = [[UILabel alloc]init];
     label.text = @"添加好友";
-    label.textColor = [UIColor whiteColor];
+    label.textColor = [UIColor lightGrayColor];
     [label sizeToFit];
     
     self.navigationItem.titleView = label;
+    
+    self.view.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
+    
+    _searchBar.placeholder = @"搜索好友";
+    _searchBar.backgroundColor = [UIColor clearColor];
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    UIImageView* iv = [[UIImageView alloc] initWithImage:[self imageWithColor:[UIColor whiteColor] size:CGSizeMake(width + 10, 44)]];
+    [_searchBar insertSubview:iv atIndex:1];
+    //    [_searchBar setSearchFieldBackgroundImage:[self imageWithColor:[UIColor whiteColor] size:_searchBar.bounds.size] forState:UIControlStateNormal];
+    for (UIView* v in _searchBar.subviews.firstObject.subviews) {
+        if ( [v isKindOfClass: [UITextField class]] ) {
+            UITextField *tf = (UITextField *)v;
+            tf.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
+            tf.borderStyle = UITextBorderStyleRoundedRect;
+            tf.clearButtonMode = UITextFieldViewModeWhileEditing;
+        } else if ([v isKindOfClass:[UIButton class]]) {
+            UIButton* cancel_btn = (UIButton*)v;
+            //            [cancel_btn setTitle:@"test" forState:UIControlStateNormal];
+            [cancel_btn setTitleColor:[UIColor colorWithWhite:0.4667 alpha:1.f] forState:UIControlStateNormal];
+            [cancel_btn setTitleColor:[UIColor colorWithWhite:0.4667 alpha:1.f] forState:UIControlStateDisabled];
+        }
+        //        else if ([v isKindOfClass:NSClassFromString(@"UISearchBarBackground")]) {
+        //            v.backgroundColor = [UIColor whiteColor];
+        //        }
+    }
+    
+    [_queryView registerNib:[UINib nibWithNibName:@"MessageFriendsCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"friend cell"];
+    _queryView.separatorStyle = UITableViewCellSeparatorStyleNone;
+}
+
+//取消searchbar背景色
+- (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size
+{
+    CGRect rect = CGRectMake(0, 0, size.width, size.height);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
 }
 
 - (void)didPopControllerSelected {
@@ -139,6 +190,10 @@
 #pragma mark -- seg delegate
 - (void)segValueChanged:(SearchSegView*)seg {
     [self segValueChanged];
+}
+
+- (void)segValueChanged2:(SearchSegView2 *)seg {
+    NSLog(@"value changed");
 }
 
 - (void)cancelBtnSelected {
