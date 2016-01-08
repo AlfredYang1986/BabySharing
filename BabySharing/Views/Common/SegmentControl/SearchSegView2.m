@@ -73,7 +73,7 @@
     CGFloat content_width = [self getSegItemsCount] * step + ([self getSegItemsCount] - 1) * _margin_between_items;
     _margin_to_edge = (width - content_width) / 2;
     
-    for (SearchSegItem* iter in [self getSegItems]) {
+    for (UIView* iter in [self getSegItems]) {
         NSInteger index = iter.tag - 1;
         iter.frame = CGRectMake(_margin_to_edge + step * index + _margin_between_items * index, 0, step, height);
     }

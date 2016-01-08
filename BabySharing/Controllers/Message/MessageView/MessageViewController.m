@@ -46,6 +46,8 @@
     FriendsTableDelegate* fd;
     SearchSegView2* sg;
     DONNotificationDelegate* del;
+    
+    UIButton* btn;
 }
 
 @synthesize queryView = _queryView;     // message
@@ -182,7 +184,7 @@
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
     NSString* filepath = [resourceBundle pathForResource:@"friend_add" ofType:@"png"];
-    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(width - 23 - 50, 0, 50, 50)];
+    btn = [[UIButton alloc]initWithFrame:CGRectMake(width - 23 - 25, 0, 50, 50)];
 //    [btn setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
     
     CALayer* layer = [CALayer layer];
@@ -192,8 +194,8 @@
     [btn.layer addSublayer:layer];
     
     [btn addTarget: self action: @selector(friendsAddingBtnSelected) forControlEvents: UIControlEventTouchUpInside];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:btn];
-//    [sg addSubview:btn];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:btn];
+//    [self.navigationController.navigationBar addSubview:btn];
     
     AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
     _cm = app.cm;
@@ -238,6 +240,7 @@
     [_queryView reloadData];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     [self.navigationController.navigationBar addSubview:sg];
+    [self.navigationController.navigationBar addSubview:btn];
     
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 6) {
         CGFloat width = [UIScreen mainScreen].bounds.size.width;
@@ -249,6 +252,7 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [sg removeFromSuperview];
+    [btn removeFromSuperview];
 }
 
 - (void)layoutSubviews {
