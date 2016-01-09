@@ -24,23 +24,21 @@
 #define STATUS_BAR_HEIGHT   20
 #define TAB_BAR_HEIGHT      49
 
-@interface FoundSearchController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
-@property (weak, nonatomic) IBOutlet UIView *inputView;
+@interface FoundSearchController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *queryView;
 @property (strong, nonatomic) SearchSegView2* seg;
 @property (weak, nonatomic) FoundSearchModel* fm;
-@property (weak, nonatomic) IBOutlet UITextField *inputArea;
 @end
 
 @implementation FoundSearchController {
     UIView* bkView;
 }
 
-@synthesize inputView = _inputView;
+@synthesize searchBar = _searchBar;
 @synthesize queryView = _queryView;
 @synthesize seg = _seg;
 @synthesize fm = _fm;
-@synthesize inputArea = _inputArea;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -52,27 +50,27 @@
     [_seg addItemWithTitle:@"标签"];
     [_seg addItemWithTitle:@"角色"];
     _seg.selectedIndex = 0;
-    _seg.margin_between_items = 30;
+    _seg.margin_between_items = 0.15 * [UIScreen mainScreen].bounds.size.width;
     [self.view addSubview:_seg];
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     _seg.frame = CGRectMake(0, 0, width, SEG_BAR_HEIGHT);
     _seg.backgroundColor = [UIColor whiteColor];
     
-    _inputView.backgroundColor = [UIColor whiteColor];
+//    _inputView.backgroundColor = [UIColor whiteColor];
     
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-    NSString* search_filepath = [resourceBundle pathForResource:@"found-search-explore" ofType:@"png"];
-    ((UIImageView*)[_inputView viewWithTag:-1]).image = [UIImage imageNamed:search_filepath];
+//    NSString* search_filepath = [resourceBundle pathForResource:@"found-search-explore" ofType:@"png"];
+//    ((UIImageView*)[_inputView viewWithTag:-1]).image = [UIImage imageNamed:search_filepath];
     
-    UIButton* tmp = (UIButton*)[_inputView viewWithTag:-2];
-    tmp.backgroundColor = [UIColor orangeColor];
-    [tmp setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [tmp setTitle:@"取消" forState:UIControlStateNormal];
-    tmp.layer.cornerRadius = 4.f;
-    tmp.clipsToBounds = YES;
-    
-    [tmp addTarget:self action:@selector(cancelSearchSelected) forControlEvents:UIControlEventTouchUpInside];
+//    UIButton* tmp = (UIButton*)[_inputView viewWithTag:-2];
+//    tmp.backgroundColor = [UIColor orangeColor];
+//    [tmp setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//    [tmp setTitle:@"取消" forState:UIControlStateNormal];
+//    tmp.layer.cornerRadius = 4.f;
+//    tmp.clipsToBounds = YES;
+//    
+//    [tmp addTarget:self action:@selector(cancelSearchSelected) forControlEvents:UIControlEventTouchUpInside];
     
     _queryView.scrollEnabled = NO;
     _queryView.backgroundColor = [UIColor lightGrayColor];
@@ -92,7 +90,49 @@
     _fm = app.fm;
     
     [self asyncQueryFoundSearchData];
-    _inputArea.delegate = self;
+//    _inputArea.delegate = self;
+    
+    _searchBar.delegate = self;
+    _searchBar.showsCancelButton = YES;
+    _searchBar.placeholder = @"搜索";
+    _searchBar.backgroundColor = [UIColor clearColor];
+    UIImageView* iv = [[UIImageView alloc] initWithImage:[self imageWithColor:[UIColor whiteColor] size:CGSizeMake(width, SEARCH_BAR_HEIGHT)]];
+    [_searchBar insertSubview:iv atIndex:1];
+    for (UIView* v in _searchBar.subviews.firstObject.subviews) {
+        if ( [v isKindOfClass: [UITextField class]] ) {
+            UITextField *tf = (UITextField *)v;
+            tf.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
+            tf.borderStyle = UITextBorderStyleRoundedRect;
+            tf.clearButtonMode = UITextFieldViewModeWhileEditing;
+        } else if ([v isKindOfClass:[UIButton class]]) {
+            UIButton* cancel_btn = (UIButton*)v;
+//            [cancel_btn setTitle:@"test" forState:UIControlStateNormal];
+            cancel_btn.backgroundColor = [UIColor orangeColor];
+            cancel_btn.layer.cornerRadius = 8.f;
+            cancel_btn.titleLabel.font = [UIFont systemFontOfSize:12.f];
+            [cancel_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [cancel_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
+        }
+        // else if ([v isKindOfClass:NSClassFromString(@"UISearchBarBackground")]) {
+        //      v.backgroundColor = [UIColor whiteColor];
+        // }
+    }
+}
+
+//取消searchbar背景色
+- (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size
+{
+    CGRect rect = CGRectMake(0, 0, size.width, size.height);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
 }
 
 - (void)asyncQueryFoundSearchData {
@@ -126,7 +166,7 @@
 }
 
 - (void)cancelSearchSelected {
-    [self.navigationController popViewControllerAnimated:NO];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -233,9 +273,9 @@
     }
     
     if (section == 0) {
-        NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+        NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
         NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-        NSString* filepath = [resourceBundle pathForResource:@"found-hot-tag" ofType:@"png"];
+        NSString* filepath = [resourceBundle pathForResource:@"found_hot_tag" ofType:@"png"];
         UIImage* img = [UIImage imageNamed:filepath];
         header.headImg.image = img;
         header.headImg.frame = CGRectMake(header.headImg.frame.origin.x, header.headImg.frame.origin.y, 25, 25);
@@ -275,5 +315,9 @@
     
     [textField resignFirstResponder];
     return YES;
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    [self cancelSearchSelected];
 }
 @end
