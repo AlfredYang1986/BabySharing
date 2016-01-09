@@ -159,10 +159,31 @@
     [self createHomeContentLogo];
     
     [self.view bringSubviewToFront:bkView];
-    
     self.view.backgroundColor = [UIColor colorWithRed:0.9529 green:0.9529 blue:0.9529 alpha:1.f];
+    
+    if (_isPushed) {
+        UILabel* label = [[UILabel alloc]init];
+        label.text = _nav_title;
+        label.textColor = [UIColor colorWithWhite:0.5059 alpha:1.f];
+        [label sizeToFit];
+        self.navigationItem.titleView = label;
+        
+        NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
+        NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+        UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 25, 25)];
+        NSString* filepath = [resourceBundle pathForResource:@"dongda_back" ofType:@"png"];
+        CALayer * layer = [CALayer layer];
+        layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
+        layer.frame = CGRectMake(-12, 0, 25, 25);
+    //    layer.position = CGPointMake(barBtn.frame.size.width / 2, barBtn.frame.size.height / 2);
+        [barBtn.layer addSublayer:layer];
+        [barBtn addTarget:self action:@selector(didPopViewControllerBtn) forControlEvents:UIControlEventTouchDown];
+        
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn];
+        
+        bkView.hidden = YES;
+    }
 }
-
 
 - (void)setDataelegate:(id<HomeViewControllerDataDelegate>)delegate {
     _delegate = delegate;
@@ -410,7 +431,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = NO;
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    [self.navigationController setNavigationBarHidden:!_isPushed animated:YES];
     
     if (_delegate == nil) {
         self.delegate = [[MainHomeViewDataDelegate alloc]init];

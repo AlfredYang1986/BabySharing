@@ -38,6 +38,7 @@
     NSInteger views_count;
 }
 
+@property (nonatomic) BOOL cannot_selected;
 @property (nonatomic, weak) id<AlbumTableCellDelegate> delegate;
 
 - (CGFloat)prefferCellHeight;

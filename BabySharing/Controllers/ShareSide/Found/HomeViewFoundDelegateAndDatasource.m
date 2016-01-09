@@ -314,6 +314,7 @@
             [arr_content addObject:((QueryContentItem*)item.items.allObjects.firstObject).item_name];
         }
         [cell setUpContentViewWithImageNames:arr_content atLine:row andType:AlbumControllerTypePhoto];
+        cell.cannot_selected = YES;
     }
     @catch (NSException *exception) {
         NSArray* arr_tmp = [app.qm.querydata objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(row * PHOTO_PER_LINE, app.qm.querydata.count - row * PHOTO_PER_LINE)]];
@@ -322,6 +323,7 @@
             [arr_content addObject:((QueryContentItem*)item.items.allObjects.firstObject).item_name];
         }
         [cell setUpContentViewWithImageNames:arr_content atLine:row andType:AlbumControllerTypePhoto];
+        cell.cannot_selected = YES;
     }
     
     return cell;
@@ -416,7 +418,8 @@
     AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
     [hv.delegate pushExistingData:app.qm.querydata];
     [hv.delegate setSelectIndex:index];
-    hv.nav_title = @"Mother's Choice";
+    hv.nav_title = @"辣妈的选择";
+//    hv.nav_title = @"Mother's Choice";
     [_container.navigationController pushViewController:hv animated:YES];
 }
 

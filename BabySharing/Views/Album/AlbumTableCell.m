@@ -13,6 +13,7 @@
 @implementation AlbumTableCell
 
 @synthesize delegate = _delegate;
+@synthesize cannot_selected = _cannot_selected;
 
 - (AlbumGridCell*)queryGridCellByIndex:(NSInteger)index {
     return (AlbumGridCell*)[image_view objectAtIndex:index % 3];
@@ -263,7 +264,9 @@
         ck.viewSelected = NO;
     } else {
         [_delegate didSelectOneImageAtIndex:index];
-        ck.viewSelected = YES;
+        if (_cannot_selected == NO) {
+            ck.viewSelected = YES;
+        }
     }
 }
 
