@@ -10,7 +10,7 @@
 #import "TmpFileStorageModel.h"
 #import "RemoteInstance.h"
 
-#define USER_PHOTO_WIDTH    40
+#define USER_PHOTO_WIDTH    30
 #define USER_PHOTO_HEIGHT   USER_PHOTO_WIDTH
 
 @interface FoundMoreFriendCell ()
@@ -25,28 +25,31 @@
 @synthesize nextIcon = _nextIcon;
 
 + (CGFloat)preferredHeight {
-    return 75;
+    return 46;
 }
 
 - (void)awakeFromNib {
     // Initialization code
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
     
-    _moreFriendIcon.image = [UIImage imageNamed:[resourceBundle pathForResource:@"found-more-friend" ofType:@"png"]];
-    _nextIcon.image = [UIImage imageNamed:[resourceBundle pathForResource:@"found-more-friend-arror" ofType:@"png"]];
+    _moreFriendIcon.image = [UIImage imageNamed:[resourceBundle pathForResource:@"found_more_friend" ofType:@"png"]];
+    _nextIcon.image = [UIImage imageNamed:[resourceBundle pathForResource:@"friend_more_friend_arrow" ofType:@"png"]];
     
     for (int index = -3; index < 0; ++index) {
         UIView* tmp = [self viewWithTag:index];
         if (tmp) {
             tmp.backgroundColor = [UIColor whiteColor];
-            tmp.layer.borderColor = [UIColor grayColor].CGColor;
+            tmp.layer.borderColor = [UIColor whiteColor].CGColor;
             tmp.layer.borderWidth = 1.f;
             tmp.layer.cornerRadius = USER_PHOTO_WIDTH / 2;
             tmp.clipsToBounds = YES;
             [self bringSubviewToFront:tmp];
         }
     }
+    
+    UILabel* label = (UILabel*)[self viewWithTag:1];
+    label.textColor = [UIColor colorWithWhite:0.5059 alpha:1.f];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

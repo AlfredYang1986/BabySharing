@@ -25,6 +25,15 @@
 }
 */
 
+- (id)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.layer.borderColor = [UIColor whiteColor].CGColor;
+        self.layer.borderWidth = 0.75f;
+    }
+    return self;
+}
+
 - (void)setCellViewSelected2:(BOOL)select {
     if (select == NO) {
         [selectLayer removeFromSuperlayer];

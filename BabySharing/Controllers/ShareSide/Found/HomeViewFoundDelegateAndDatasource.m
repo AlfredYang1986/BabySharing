@@ -241,10 +241,44 @@
         
         CGFloat width = [UIScreen mainScreen].bounds.size.width;
         CGFloat height = 44;
-        bar.frame = CGRectMake(0, 0, width, height);
+        bar.frame = CGRectMake(0, 0, width, height);//    _friendsSearchBar.showsCancelButton = YES;
+       
+#define SEARCH_BAR_HEIGHT   44
+        bar.backgroundColor = [UIColor clearColor];
+        UIImageView* iv = [[UIImageView alloc] initWithImage:[self imageWithColor:[UIColor whiteColor] size:CGSizeMake(width, SEARCH_BAR_HEIGHT)]];
+        [bar insertSubview:iv atIndex:1];
+        for (UIView* v in bar.subviews.firstObject.subviews) {
+            if ( [v isKindOfClass: [UITextField class]] ) {
+                UITextField *tf = (UITextField *)v;
+                tf.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
+                tf.borderStyle = UITextBorderStyleRoundedRect;
+                tf.clearButtonMode = UITextFieldViewModeWhileEditing;
+            } else if ([v isKindOfClass:[UIButton class]]) {
+                // UIButton* cancel_btn = (UIButton*)v;
+                // [cancel_btn setTitle:@"test" forState:UIControlStateNormal];
+                // [cancel_btn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+                // [cancel_btn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
+            }
+        }
     }
     
     return cell;
+}
+
+//取消searchbar背景色
+- (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size
+{
+    CGRect rect = CGRectMake(0, 0, size.width, size.height);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
 }
 
 - (FoundPCGCell*)queryPGCCellWithTableView:(UITableView*)tableView {

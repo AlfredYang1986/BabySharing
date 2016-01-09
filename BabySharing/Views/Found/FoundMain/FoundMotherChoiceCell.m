@@ -18,15 +18,18 @@
 @synthesize mcIcon = _mcIcon;
 
 + (CGFloat)preferredHeight {
-    return 51;
+    return 46;
 }
 
 - (void)awakeFromNib {
     // Initialization code
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
     
-    _mcIcon.image = [UIImage imageNamed:[resourceBundle pathForResource:@"found-mother-choice" ofType:@"png"]];
+    _mcIcon.image = [UIImage imageNamed:[resourceBundle pathForResource:@"found_mother_chooice" ofType:@"png"]];
+    
+    UILabel* label = (UILabel*)[self viewWithTag:1];
+    label.textColor = [UIColor colorWithWhite:0.5059 alpha:1.f];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -16,15 +16,15 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="78F-Ae-w9V">
-                        <rect key="frame" x="19" y="12" width="25" height="25"/>
+                        <rect key="frame" x="11" y="18" width="20" height="15"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="25" id="man-vg-963"/>
-                            <constraint firstAttribute="height" constant="25" id="zg6-SU-QYC"/>
+                            <constraint firstAttribute="width" constant="20" id="man-vg-963"/>
+                            <constraint firstAttribute="height" constant="15" id="zg6-SU-QYC"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="辣妈的选择" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oYP-5L-Wvp">
-                        <rect key="frame" x="47" y="14" width="85" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="辣妈的选择" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oYP-5L-Wvp">
+                        <rect key="frame" x="39" y="14" width="85" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -32,8 +32,8 @@
                 <constraints>
                     <constraint firstItem="oYP-5L-Wvp" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="51h-MG-Yz2"/>
                     <constraint firstItem="78F-Ae-w9V" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="QH6-8T-L1d"/>
-                    <constraint firstItem="oYP-5L-Wvp" firstAttribute="leading" secondItem="78F-Ae-w9V" secondAttribute="trailing" constant="3" id="Tjm-zW-mEK"/>
-                    <constraint firstItem="78F-Ae-w9V" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="11" id="djx-rb-2hq"/>
+                    <constraint firstItem="oYP-5L-Wvp" firstAttribute="leading" secondItem="78F-Ae-w9V" secondAttribute="trailing" constant="8" id="Tjm-zW-mEK"/>
+                    <constraint firstItem="78F-Ae-w9V" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="3" id="djx-rb-2hq"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

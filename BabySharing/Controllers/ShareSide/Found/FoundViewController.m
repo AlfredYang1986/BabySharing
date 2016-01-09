@@ -36,7 +36,7 @@
     found_datasource = [[HomeViewFoundDelegateAndDatasource alloc]initWithTableView:_queryView andContainer:self];
     _queryView.delegate = found_datasource;
     _queryView.dataSource = found_datasource;
-    _queryView.backgroundColor = [UIColor lightGrayColor];
+    _queryView.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
     
     [self layoutTableViews];
 }
