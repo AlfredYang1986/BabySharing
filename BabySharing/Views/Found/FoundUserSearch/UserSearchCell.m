@@ -43,7 +43,7 @@
         [self addSubview:tmp];
     }
     
-    _maginView.backgroundColor = [UIColor lightGrayColor];
+    _maginView.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
 }
 
 - (void)layoutSubviews {
