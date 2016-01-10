@@ -242,7 +242,6 @@
 		EEBE1B8E1C17D2E500EAA9D2 /* UserSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEBE1B8D1C17D2E500EAA9D2 /* UserSearchController.m */; };
 		EEBE1B901C17D2F400EAA9D2 /* UserSearch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEBE1B8F1C17D2F400EAA9D2 /* UserSearch.storyboard */; };
 		EEBE1B951C17D42B00EAA9D2 /* UserSearchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EEBE1B931C17D42B00EAA9D2 /* UserSearchCell.m */; };
-		EEBE1B961C17D42B00EAA9D2 /* UserSearchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEBE1B941C17D42B00EAA9D2 /* UserSearchCell.xib */; };
 		EEBFFC1D1B916A0F005AAE36 /* PersonalSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EEBFFC1B1B916A0F005AAE36 /* PersonalSettingCell.m */; };
 		EEBFFC1E1B916A0F005AAE36 /* PersonalSettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEBFFC1C1B916A0F005AAE36 /* PersonalSettingCell.xib */; };
 		EEBFFC211B9177D5005AAE36 /* PersonalChangeScreenNameController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEBFFC201B9177D5005AAE36 /* PersonalChangeScreenNameController.m */; };
@@ -762,7 +761,6 @@
 		EEBE1B8F1C17D2F400EAA9D2 /* UserSearch.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UserSearch.storyboard; sourceTree = "<group>"; };
 		EEBE1B921C17D42B00EAA9D2 /* UserSearchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSearchCell.h; sourceTree = "<group>"; };
 		EEBE1B931C17D42B00EAA9D2 /* UserSearchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSearchCell.m; sourceTree = "<group>"; };
-		EEBE1B941C17D42B00EAA9D2 /* UserSearchCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserSearchCell.xib; sourceTree = "<group>"; };
 		EEBFFC181B915293005AAE36 /* PersonalCenterDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonalCenterDefines.h; sourceTree = "<group>"; };
 		EEBFFC1A1B916A0F005AAE36 /* PersonalSettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalSettingCell.h; sourceTree = "<group>"; };
 		EEBFFC1B1B916A0F005AAE36 /* PersonalSettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalSettingCell.m; sourceTree = "<group>"; };
@@ -2168,7 +2166,6 @@
 			children = (
 				EEBE1B921C17D42B00EAA9D2 /* UserSearchCell.h */,
 				EEBE1B931C17D42B00EAA9D2 /* UserSearchCell.m */,
-				EEBE1B941C17D42B00EAA9D2 /* UserSearchCell.xib */,
 			);
 			path = FoundUserSearch;
 			sourceTree = "<group>";
@@ -2649,7 +2646,6 @@
 				EE0DCE7E1C081FD400B5386B /* LaunchScreen.xib in Resources */,
 				EE7C68731B82D31F0003C593 /* CycleOverCell.xib in Resources */,
 				EEAACD741B44EA2D00D05C0B /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
-				EEBE1B961C17D42B00EAA9D2 /* UserSearchCell.xib in Resources */,
 				EE9F736F1B8576C400F800DC /* MessageChatGroupHeader.xib in Resources */,
 				EE7416261B5B8CDF002CA1BC /* AreaCodeJson.txt in Resources */,
 				EE7415CC1B5B70D5002CA1BC /* InfoPlist.strings in Resources */,

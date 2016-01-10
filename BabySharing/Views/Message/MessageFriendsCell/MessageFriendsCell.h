@@ -11,6 +11,8 @@
 
 @interface MessageFriendsCell : UITableViewCell
 
+@property (nonatomic, setter=setHiddenLine:) BOOL isHiddenLine;
+
 + (CGFloat)preferredHeight;
 
 - (void)setUserScreenName:(NSString*)name;

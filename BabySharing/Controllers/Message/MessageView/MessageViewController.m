@@ -394,7 +394,7 @@
     [fd filterDataWithPredicate:p2];
 }
 
-#pragma mark == segValueDelegate
+#pragma mark -- segValueDelegate
 - (void)segValueChanged:(SearchSegView*)seg {
     [self friendSegValueChanged:nil];
 }

@@ -26,11 +26,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [_queryView registerNib:[UINib nibWithNibName:@"UserSearchCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"user search cell"];
+//    [_queryView registerNib:[UINib nibWithNibName:@"UserSearchCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"user search cell"];
+    [_queryView registerClass:[UserSearchCell class] forCellReuseIdentifier:@"user search cell"];
     
     _queryView.delegate = self;
     _queryView.dataSource = self;
     _queryView.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
+    _queryView.separatorStyle = UITableViewCellSeparatorStyleNone;
    
     UILabel* label = [[UILabel alloc]init];
     label.text = @"认识更多的朋友";
@@ -94,15 +96,14 @@
     UserSearchCell* cell = [tableView dequeueReusableCellWithIdentifier:@"user search cell"];
     
     if (cell == nil) {
-        NSArray* nib = [[NSBundle mainBundle] loadNibNamed:@"UserSearchCell" owner:self options:nil];
-        cell = [nib firstObject];
+//        NSArray* nib = [[NSBundle mainBundle] loadNibNamed:@"UserSearchCell" owner:self options:nil];
+//        cell = [nib firstObject];
+        cell = [[UserSearchCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"user search cell"];
     }
   
     NSDictionary* dic = [_um.userSearchResult objectAtIndex:indexPath.row];
-    
-    [cell setUserRoleTag:[dic objectForKey:@"role_tag"]];
-    [cell setUserScreenName:[dic objectForKey:@"screen_name"]];
-    [cell setUserScreenPhoto:[dic objectForKey:@"screen_photo"]];
+   
+    [cell setUserHeaderWithScreenName:[dic objectForKey:@"screen_name"] roleTag:[dic objectForKey:@"role_tag"] andScreenPhoto:[dic objectForKey:@"screen_photo"]];
     [cell setUserContentImages:[dic objectForKey:@"preview"]];
     return cell;
 }

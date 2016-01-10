@@ -24,15 +24,24 @@
 @property (nonatomic, strong) UILabel* userNameLabel;
 @end
 
-@implementation MessageFriendsCell
+@implementation MessageFriendsCell {
+    CALayer* line;
+}
 
 @synthesize user_screen_photo = _user_screen_photo;
 @synthesize relationContainer = _relationContainer;
 @synthesize userRoleTagBtn = _userRoleTagBtn;
 @synthesize userNameLabel = _userNameLabel;
 
+@synthesize isHiddenLine = _isHiddenLine;
+
 + (CGFloat)preferredHeight {
     return PREFERRED_HEIGHT;
+}
+
+- (void)setHiddenLine:(BOOL)isHiddenLine {
+    _isHiddenLine = isHiddenLine;
+    line.hidden = _isHiddenLine;
 }
 
 - (void)awakeFromNib {
@@ -57,7 +66,7 @@
         [self addSubview:_userNameLabel];
     }
     
-    CALayer* line = [CALayer layer];
+    line = [CALayer layer];
     line.borderWidth = 1.f;
     line.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.25].CGColor;
     line.frame = CGRectMake(0, PREFERRED_HEIGHT - 1, [UIScreen mainScreen].bounds.size.width + 10, 1);

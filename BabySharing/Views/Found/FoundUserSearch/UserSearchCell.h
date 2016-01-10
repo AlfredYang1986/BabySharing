@@ -12,8 +12,6 @@
 
 + (CGFloat)preferredHeight;
 
-- (void)setUserScreenPhoto:(NSString*)photo;
+- (void)setUserHeaderWithScreenName:(NSString*)name roleTag:(NSString*)role_tag andScreenPhoto:(NSString*)photo;
 - (void)setUserContentImages:(NSArray*)arr;
-- (void)setUserScreenName:(NSString*)name;
-- (void)setUserRoleTag:(NSString*)rolg_tag;
 @end
