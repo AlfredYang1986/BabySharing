@@ -16,17 +16,21 @@
 #import "FoundSearchModel.h"
 
 #import "HomeTagsController.h"
+#import "OBShapedButton.h"
 
-#define SEARCH_BAR_HEIGHT   44
-#define SEG_BAR_HEIGHT      44
-#define MARGIN              8
+#define SEARCH_BAR_HEIGHT               44
+#define SEG_BAR_HEIGHT                  44
+#define MARGIN                          8
 
-#define STATUS_BAR_HEIGHT   20
-#define TAB_BAR_HEIGHT      49
+#define CANCEL_BTN_WIDTH                70
+#define CANCEL_BTN_WIDTH_WITH_MARGIN    70
+#define STATUS_BAR_HEIGHT               20
+#define TAB_BAR_HEIGHT                  49
 
 @interface FoundSearchController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *queryView;
+@property (weak, nonatomic) IBOutlet UIView *cancelBgView;
 @property (strong, nonatomic) SearchSegView2* seg;
 @property (weak, nonatomic) FoundSearchModel* fm;
 @end
@@ -37,6 +41,7 @@
 
 @synthesize searchBar = _searchBar;
 @synthesize queryView = _queryView;
+@synthesize cancelBgView = _cancelBgView;
 @synthesize seg = _seg;
 @synthesize fm = _fm;
 
@@ -73,8 +78,8 @@
 //    [tmp addTarget:self action:@selector(cancelSearchSelected) forControlEvents:UIControlEventTouchUpInside];
     
     _queryView.scrollEnabled = NO;
-    _queryView.backgroundColor = [UIColor lightGrayColor];
-    self.view.backgroundColor = [UIColor lightGrayColor];
+    _queryView.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
+    self.view.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
     
     [_queryView registerNib:[UINib nibWithNibName:@"FoundSearchHeader" bundle:[NSBundle mainBundle]] forHeaderFooterViewReuseIdentifier:@"found header"];
     [_queryView registerClass:[FoundHotTagsCell class] forCellReuseIdentifier:@"Hot Tag Cell"];
@@ -93,7 +98,7 @@
 //    _inputArea.delegate = self;
     
     _searchBar.delegate = self;
-    _searchBar.showsCancelButton = YES;
+    _searchBar.showsCancelButton = NO;
     _searchBar.placeholder = @"搜索";
     _searchBar.backgroundColor = [UIColor clearColor];
     UIImageView* iv = [[UIImageView alloc] initWithImage:[self imageWithColor:[UIColor whiteColor] size:CGSizeMake(width, SEARCH_BAR_HEIGHT)]];
@@ -117,6 +122,17 @@
         //      v.backgroundColor = [UIColor whiteColor];
         // }
     }
+    
+    _cancelBgView.backgroundColor = [UIColor whiteColor];
+    UIButton* btn = [[UIButton alloc]init];
+    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btn setBackgroundColor:[UIColor orangeColor]];
+    [btn setTitle:@"取消" forState:UIControlStateNormal];
+    btn.titleLabel.font = [UIFont systemFontOfSize:16.f];
+    [btn sizeToFit];
+    btn.center = CGPointMake(CANCEL_BTN_WIDTH / 2, SEARCH_BAR_HEIGHT / 2);
+    [btn addTarget:self action:@selector(cancelSearchSelected) forControlEvents:UIControlEventTouchUpInside];
+    [_cancelBgView addSubview:btn];
 }
 
 //取消searchbar背景色
@@ -157,7 +173,10 @@
     CGFloat height = [UIScreen mainScreen].bounds.size.height;
     CGFloat offset_y = STATUS_BAR_HEIGHT;
 //    _inputView.frame = CGRectMake(0, offset_y, width, SEARCH_BAR_HEIGHT);
-  
+ 
+    _searchBar.frame = CGRectMake(0, offset_y, width - CANCEL_BTN_WIDTH, SEARCH_BAR_HEIGHT);
+    _cancelBgView.frame = CGRectMake(width - CANCEL_BTN_WIDTH, offset_y, CANCEL_BTN_WIDTH, SEARCH_BAR_HEIGHT);
+    
     offset_y += SEARCH_BAR_HEIGHT;
     _seg.frame = CGRectMake(0, offset_y, width, SEG_BAR_HEIGHT);
     
@@ -181,7 +200,7 @@
 
 #pragma mark -- table view
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0) {
+    if (_fm.previewDic.count == 0) {
         return 1;
     } else {
         return _fm.previewDic.count;
@@ -189,7 +208,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
+    if (_fm.previewDic.count == 0) {
         return [self queryHotTagCellInTableView:tableView];
     } else {
         return [self querySearchResultInTableView:tableView atIndex:indexPath.row];
@@ -197,7 +216,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
+    if (_fm.previewDic.count == 0) {
         return [FoundHotTagsCell preferredHeight];
     } else {
         return [FoundSearchResultCell preferredHeight];
@@ -205,26 +224,20 @@
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
-        return NO;
-    } else {
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
-      
-        FoundSearchResultCell* cell = [tableView cellForRowAtIndexPath:indexPath];
-        
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        HomeTagsController* svc = [storyboard instantiateViewControllerWithIdentifier:@"TagSearch"];
-        svc.tag_name = cell.tag_name;
-        svc.tag_type = cell.tag_type.integerValue;
-        
-        [self.navigationController pushViewController:svc animated:YES];
-        
-        return YES;
-    }
+    return _fm.previewDic.count > 0;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
+    FoundSearchResultCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    HomeTagsController* svc = [storyboard instantiateViewControllerWithIdentifier:@"TagSearch"];
+    svc.tag_name = cell.tag_name;
+    svc.tag_type = cell.tag_type.integerValue;
+    
+    [self.navigationController pushViewController:svc animated:YES];
 }
 
 - (UITableViewCell*)queryHotTagCellInTableView:(UITableView*)tableView {
@@ -254,7 +267,8 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return _fm.previewDic.count == 0 ? 1 : 2;
+//    return _fm.previewDic.count == 0 ? 1 : 2;
+    return 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -272,7 +286,8 @@
         header = [[FoundSearchHeader alloc]initWithReuseIdentifier:@"found header"];
     }
     
-    if (section == 0) {
+//    if (section == 0) {
+    if (_fm.previewDic.count == 0) {
         NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
         NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
         NSString* filepath = [resourceBundle pathForResource:@"found_hot_tag" ofType:@"png"];
@@ -319,5 +334,20 @@
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     [self cancelSearchSelected];
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [_fm queryFoundTagSearchWithInput:_searchBar.text andFinishBlock:^(BOOL success, NSDictionary *preview) {
+        [_queryView reloadData];
+    }];
+    
+    [_searchBar resignFirstResponder];
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    if ([searchText isEqualToString:@""]) {
+        _fm.previewDic = nil;
+        [_queryView reloadData];
+    }
 }
 @end

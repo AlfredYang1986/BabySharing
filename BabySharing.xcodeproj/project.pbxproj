@@ -71,7 +71,6 @@
 		EE76A5791B7205CF00036747 /* ConnectionOwner+ContextOpt.m in Sources */ = {isa = PBXBuildFile; fileRef = EE76A5781B7205CF00036747 /* ConnectionOwner+ContextOpt.m */; };
 		EE76A57C1B72181300036747 /* ConnectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EE76A57B1B72181300036747 /* ConnectionModel.m */; };
 		EE7910401B841A33005E455B /* DropDownItem.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACC3D1B44E90400D05C0B /* DropDownItem.m */; };
-		EE7910411B841A7B005E455B /* TagQueryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACC2A1B44E90400D05C0B /* TagQueryCell.m */; };
 		EE7910421B841A92005E455B /* DropDownView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACC3F1B44E90400D05C0B /* DropDownView.m */; };
 		EE7910431B841AA0005E455B /* AlbumTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACC2F1B44E90400D05C0B /* AlbumTableCell.m */; };
 		EE7910441B841AAC005E455B /* SGGridMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACC251B44E90400D05C0B /* SGGridMenu.m */; };
@@ -648,8 +647,6 @@
 		EEAACC251B44E90400D05C0B /* SGGridMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGGridMenu.m; sourceTree = "<group>"; };
 		EEAACC261B44E90400D05C0B /* SGSheetMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGSheetMenu.h; sourceTree = "<group>"; };
 		EEAACC271B44E90400D05C0B /* SGSheetMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGSheetMenu.m; sourceTree = "<group>"; };
-		EEAACC291B44E90400D05C0B /* TagQueryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagQueryCell.h; sourceTree = "<group>"; };
-		EEAACC2A1B44E90400D05C0B /* TagQueryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagQueryCell.m; sourceTree = "<group>"; };
 		EEAACC2C1B44E90400D05C0B /* AlbumGridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumGridCell.h; sourceTree = "<group>"; };
 		EEAACC2D1B44E90400D05C0B /* AlbumGridCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumGridCell.m; sourceTree = "<group>"; };
 		EEAACC2E1B44E90400D05C0B /* AlbumTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumTableCell.h; sourceTree = "<group>"; };
@@ -1784,7 +1781,6 @@
 				EE7EB54C1B46309D003281F7 /* Message */,
 				EEAACBD11B44E90300D05C0B /* Home */,
 				EEAACC051B44E90300D05C0B /* Profile */,
-				EEAACC281B44E90400D05C0B /* TagsQuery */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1897,15 +1893,6 @@
 				EEAACC271B44E90400D05C0B /* SGSheetMenu.m */,
 			);
 			path = SGActionView;
-			sourceTree = "<group>";
-		};
-		EEAACC281B44E90400D05C0B /* TagsQuery */ = {
-			isa = PBXGroup;
-			children = (
-				EEAACC291B44E90400D05C0B /* TagQueryCell.h */,
-				EEAACC2A1B44E90400D05C0B /* TagQueryCell.m */,
-			);
-			path = TagsQuery;
 			sourceTree = "<group>";
 		};
 		EEAACC2B1B44E90400D05C0B /* Album */ = {
@@ -2739,7 +2726,6 @@
 				EE7910431B841AA0005E455B /* AlbumTableCell.m in Sources */,
 				EE26D77A1C1EBA2700342E02 /* PreviewContent.m in Sources */,
 				EE7910421B841A92005E455B /* DropDownView.m in Sources */,
-				EE7910411B841A7B005E455B /* TagQueryCell.m in Sources */,
 				EE76398D1B95805F0025A56D /* CollectionQueryModel.m in Sources */,
 				EE7910631B847DBA005E455B /* ChatGroupController.m in Sources */,
 				EEFCDEED1BCB93A400A53CAB /* ChatMessageCell.m in Sources */,

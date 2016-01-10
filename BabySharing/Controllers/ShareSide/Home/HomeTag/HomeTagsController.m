@@ -10,86 +10,71 @@
 #import "AppDelegate.h"
 #import "QueryModel.h"
 #import "QueryContent.h"
-#import "TagQueryCell.h"
+//#import "TagQueryCell.h"
+#import "FoundMoreFriendCell.h"
+#import "AlbumTableCell.h"
+#import "QueryContentItem.h"
+#import "HomeViewController.h"
+#import "UserHomeViewDataDelegate.h"
 
-@interface HomeTagsController ()
-@property (weak, nonatomic) IBOutlet UIImageView *imgView;
+#define TAGED_USER_CELL             0
+#define TAGED_RESULT_COUNT_CELL     1
+
+#define TAGED_OFFSET                2
+
+#define PHOTO_PER_LINE  3
+
+@interface HomeTagsController () <AlbumTableCellDelegate>
+//@property (weak, nonatomic) IBOutlet UIImageView *imgView;
 @property (weak, nonatomic) IBOutlet UITableView *queryView;
 
-@property (weak, nonatomic) IBOutlet UIButton *contentBtn;
-@property (weak, nonatomic) IBOutlet UIButton *userBtn;
+//@property (weak, nonatomic) IBOutlet UIButton *contentBtn;
+//@property (weak, nonatomic) IBOutlet UIButton *userBtn;
 @end
 
 @implementation HomeTagsController {
     NSArray* content_arr;
+    NSArray* recommend_users;
 }
 
 @synthesize tag_name = _tag_name;
 @synthesize tag_type = _tag_type;
 
-@synthesize imgView = _imgView;
+//@synthesize imgView = _imgView;
 @synthesize queryView = _queryView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    _contentBtn.layer.borderWidth = 1.f;
-    _contentBtn.layer.borderColor = [UIColor blueColor].CGColor;
-    _contentBtn.layer.cornerRadius = 8.f;
-    _contentBtn.layer.masksToBounds = YES;
-    
-    _userBtn.layer.borderWidth = 1.f;
-    _userBtn.layer.borderColor = [UIColor blueColor].CGColor;
-    _userBtn.layer.cornerRadius = 8.f;
-    _userBtn.layer.masksToBounds = YES;
-    
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
-    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-    NSString * filePath = nil;
-    switch (_tag_type) {
-        case 0:
-            filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"Location"] ofType:@"png"];
-            break;
-        case 1:
-            filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"Time"] ofType:@"png"];
-            break;
-        case 2:
-            filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"Tag"] ofType:@"png"];
-            break;
-            
-        default:
-            filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"Tag"] ofType:@"png"];
-            break;
-    }
-    _imgView.backgroundColor = [UIColor clearColor];
-    _imgView.image = [UIImage imageNamed:filePath];
-    
    
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+  
     dispatch_queue_t aq = dispatch_queue_create("query tag content queue", nil);
     dispatch_async(aq, ^{
         [self refreshTagData];
     });
+    
+    [self queryUserDataAsync];
    
     /**
      * comments header and footer
      */
-    [_queryView registerClass:[TagQueryCell class] forCellReuseIdentifier:@"tag cell"];
+//    [_queryView registerClass:[TagQueryCell class] forCellReuseIdentifier:@"tag cell"];
+    [_queryView registerClass:[AlbumTableCell class] forCellReuseIdentifier:@"tag cell"];
+    [_queryView registerNib:[UINib nibWithNibName:@"FoundMoreFriendCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"tag users"];
     
     UILabel* label_t = [[UILabel alloc]init];
-    label_t.text = @"tags";
-    label_t.textColor = [UIColor whiteColor];
+    label_t.text = _tag_name;
+    label_t.textColor = [UIColor colorWithWhite:0.5050 alpha:1.f];
     [label_t sizeToFit];
     self.navigationItem.titleView = label_t;
    
     UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
-//    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
-//    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-//    NSString* filepath = [resourceBundle pathForResource:@"Previous_blue" ofType:@"png"];
-    NSString* filepath = [resourceBundle pathForResource:@"Previous_simple" ofType:@"png"];
+    NSString* filepath = [resourceBundle pathForResource:@"dongda_back" ofType:@"png"];
     CALayer * layer = [CALayer layer];
     layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
-    layer.frame = CGRectMake(0, 0, 25, 25);
+    layer.frame = CGRectMake(-7, 0, 25, 25);
     layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
     [barBtn.layer addSublayer:layer];
 //    [barBtn setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
@@ -97,6 +82,10 @@
     [barBtn addTarget:self action:@selector(didPopControllerBtnSelected) forControlEvents:UIControlEventTouchDown];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn];
+    
+    self.view.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
+    _queryView.backgroundColor = [UIColor whiteColor];
+    _queryView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
 - (void)didPopControllerBtnSelected {
@@ -136,15 +125,18 @@
     }];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)queryUserDataAsync {
+    dispatch_queue_t aq = dispatch_queue_create("query new user", nil);
+    dispatch_async(aq, ^{
+        AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+        [app.lm querRecommendUserProlfilesWithFinishBlock:^(BOOL success, NSArray *lst) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                recommend_users = lst;
+                [_queryView reloadData];
+            });
+        }];
+    });
 }
-*/
 
 #pragma mark -- table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -157,46 +149,129 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [TagQueryCell getPreferHeight];
+    
+    if (indexPath.row == TAGED_USER_CELL) {
+        return [FoundMoreFriendCell preferredHeight];
+        
+    } else if (indexPath.row == TAGED_RESULT_COUNT_CELL) {
+        return 46 + 8;
+        
+    } else {
+        return [AlbumTableCell prefferCellHeight];
+    }
 }
 
 #pragma mark -- table view datasource
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    TagQueryCell* cell = [tableView dequeueReusableCellWithIdentifier:@"tag cell"];
+    if (indexPath.row == TAGED_USER_CELL) {
+        FoundMoreFriendCell* cell = [tableView dequeueReusableCellWithIdentifier:@"tag users"];
+        
+        if (cell == nil) {
+            NSArray* nib = [[NSBundle mainBundle] loadNibNamed:@"FoundMoreFriendCell" owner:self options:nil];
+            cell = [nib firstObject];
+        }
+        
+        [cell setUserImages:recommend_users];
+        cell.des = @"最近有5个用户打过这个标签";
+        cell.isHiddenIcon = YES;
+        return cell;
     
-    if (cell == nil) {
-        cell = [[TagQueryCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"tag cell"];
+    } else if (indexPath.row == TAGED_RESULT_COUNT_CELL) {
+        UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"defatult"];
+        
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"default"];
+        }
+       
+        if ([cell viewWithTag:-1] == nil) {
+            UIView* margin = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 8)];
+            margin.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
+            margin.tag = -1;
+            [cell addSubview:margin];
+        }
+       
+        if ([cell viewWithTag:-2] == nil) {
+            UILabel* label = [[UILabel alloc]init];
+            label.tag = -2;
+            label.textColor = [UIColor colorWithWhite:0.5059 alpha:1.f];
+            label.font = [UIFont systemFontOfSize:14.f];
+            
+            [cell addSubview:label];
+        }
+
+        UILabel* label = (UILabel*)[cell viewWithTag:-2];
+        label.text = [NSString stringWithFormat:@"%lu个分享", (unsigned long)content_arr.count];
+        [label sizeToFit];
+        label.center = CGPointMake(8 + 8 + label.frame.size.width / 2, 10 + (cell.frame.size.height - 8) / 2);
+
+        return cell;
+        
+    } else {
+        
+        AlbumTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"tag cell"];
+        
+        if (cell == nil) {
+            cell = [[AlbumTableCell alloc]init];
+        }
+        cell.delegate = self;
+        NSInteger row = indexPath.row - TAGED_OFFSET;
+        @try {
+            NSArray* arr_tmp = [content_arr objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(row * PHOTO_PER_LINE, PHOTO_PER_LINE)]];
+            NSMutableArray* arr_content = [[NSMutableArray alloc]initWithCapacity:PHOTO_PER_LINE];
+            for (QueryContent* item in arr_tmp) {
+                [arr_content addObject:((QueryContentItem*)item.items.allObjects.firstObject).item_name];
+            }
+            [cell setUpContentViewWithImageNames:arr_content atLine:row andType:AlbumControllerTypePhoto];
+            cell.cannot_selected = YES;
+        }
+        @catch (NSException *exception) {
+            NSArray* arr_tmp = [content_arr objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(row * PHOTO_PER_LINE, content_arr.count - row * PHOTO_PER_LINE)]];
+            NSMutableArray* arr_content = [[NSMutableArray alloc]initWithCapacity:PHOTO_PER_LINE];
+            for (QueryContent* item in arr_tmp) {
+                [arr_content addObject:((QueryContentItem*)item.items.allObjects.firstObject).item_name];
+            }
+            [cell setUpContentViewWithImageNames:arr_content atLine:row andType:AlbumControllerTypePhoto];
+            cell.cannot_selected = YES;
+        }
+        
+        return cell;
     }
-   
-    NSInteger line = [TagQueryCell getRowItemCount];
-    NSArray* arr_content = [content_arr objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(indexPath.row * line, MIN(line- 1, content_arr.count ))]];
-    [cell setRangeContent:arr_content];
-    return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return content_arr.count == 0 ? 0 : content_arr.count / [TagQueryCell getRowItemCount] + 1;
+//    return content_arr.count == 0 ? 0 : content_arr.count / [TagQueryCell getRowItemCount] + 1;
+    return TAGED_OFFSET + (content_arr.count == 0 ? 0 : content_arr.count / PHOTO_PER_LINE + 1);
 }
 
-#pragma mark -- button action
-- (IBAction)didSelectContentBtn {
-    
-    if (_contentBtn.highlighted == YES) {
-        return;
-    }
-    
-    _contentBtn.highlighted = YES;
-    _userBtn.highlighted = NO;
+#pragma mark -- album cell delegate
+- (NSInteger)getViewsCount {
+    return PHOTO_PER_LINE;
 }
 
-- (IBAction)didSelectUserBtn {
+- (NSInteger)indexByRow:(NSInteger)row andCol:(NSInteger)col {
+    return row * PHOTO_PER_LINE + col;
+}
 
-    if (_userBtn.highlighted == YES) {
-        return;
-    }
-    _contentBtn.highlighted = NO;
-    _userBtn.highlighted = YES;
+- (BOOL)isSelectedAtIndex:(NSInteger)index {
+    return false;
+}
+
+- (void)didSelectOneImageAtIndex:(NSInteger)index {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    HomeViewController* hv = [storyboard instantiateViewControllerWithIdentifier:@"HomeView"];
+    hv.isPushed = YES;
+    hv.delegate = [[UserHomeViewDataDelegate alloc]init];
+    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    [hv.delegate pushExistingData:app.qm.querydata];
+    [hv.delegate setSelectIndex:index];
+    hv.nav_title = _tag_name;
+    //    hv.nav_title = @"Mother's Choice";
+    [self.navigationController pushViewController:hv animated:YES];
+}
+
+- (void)didUnSelectOneImageAtIndex:(NSInteger)index {
+    // do nothing
 }
 @end

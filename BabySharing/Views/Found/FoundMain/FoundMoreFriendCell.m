@@ -24,6 +24,10 @@
 @synthesize moreFriendIcon = _moreFriendIcon;
 @synthesize nextIcon = _nextIcon;
 
+@synthesize isHiddenIcon = _isHiddenIcon;
+@synthesize isHiddenSep = _isHiddenSep;
+@synthesize des = _des;
+
 + (CGFloat)preferredHeight {
     return 46;
 }
@@ -56,6 +60,37 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)setDes:(NSString *)des {
+    _des = des;
+    UILabel* label = (UILabel*)[self viewWithTag:1];
+    label.text = _des;
+    [label sizeToFit];
+    [self setNeedsLayout];
+}
+
+- (void)setHiddenIcon:(BOOL)isHiddenIcon {
+    _isHiddenIcon = isHiddenIcon;
+    [self setNeedsLayout];
+
+    UIView* img = [self viewWithTag:2];
+    img.hidden = YES;
+    
+    UILabel* label = (UILabel*)[self viewWithTag:1];
+    label.center = CGPointMake(10.5 + label.frame.size.width / 2, label.center.y);
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    if (_isHiddenIcon) {
+        UIView* img = [self viewWithTag:2];
+        img.hidden = YES;
+    
+        UILabel* label = (UILabel*)[self viewWithTag:1];
+        label.center = CGPointMake(10.5 + label.frame.size.width / 2, label.center.y);
+    }
 }
 
 #define RECOMMEND_USER_COUNT    3

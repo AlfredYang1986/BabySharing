@@ -87,6 +87,7 @@
     UIImage* image0 = [UIImage imageNamed:[resourceBundle pathForResource:@"tag-time" ofType:@"png"]];
     UIImage* image1 = [UIImage imageNamed:[resourceBundle pathForResource:@"tag-location" ofType:@"png"]];
     int index = 0;
+    CGFloat offset = 0;
     for (RecommandTag* tmp in arr) {
        
         UIFont* font = [UIFont systemFontOfSize:11.f];
@@ -116,7 +117,9 @@
         btn.layer.cornerRadius = btn.frame.size.height / 2;
         btn.clipsToBounds = YES;
         
-        btn.center = CGPointMake(MARGIN + btn.frame.size.width / 2 + index * (MARGIN + btn.frame.size.width), MARGIN_VER + btn.frame.size.height / 2);
+//        btn.center = CGPointMake(MARGIN + btn.frame.size.width / 2 + index * (MARGIN + btn.frame.size.width), MARGIN_VER + btn.frame.size.height / 2);
+        btn.center = CGPointMake(MARGIN + btn.frame.size.width / 2 + offset, MARGIN_VER + btn.frame.size.height / 2);
+        offset += btn.frame.size.width;
         [self addSubview:btn];
         ++index;
     }

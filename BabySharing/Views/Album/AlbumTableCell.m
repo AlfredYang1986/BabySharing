@@ -27,7 +27,7 @@
     CGFloat screen_width = [UIScreen mainScreen].bounds.size.width;
     CGFloat step_width = screen_width / views_count;
     //      CGFloat height = rc.size.height;
-    CGFloat height = [self prefferCellHeight];
+    CGFloat height = [AlbumTableCell prefferCellHeight];
     
     for (int index = 0; index < image_view.count; ++index) {
         [((UIView*)[image_view objectAtIndex:index]) removeFromSuperview];
@@ -68,7 +68,7 @@
     CGFloat screen_width = [UIScreen mainScreen].bounds.size.width;
     CGFloat step_width = screen_width / views_count;
     //      CGFloat height = rc.size.height;
-    CGFloat height = [self prefferCellHeight];
+    CGFloat height = [AlbumTableCell prefferCellHeight];
     
     for (int index = 0; index < image_view.count; ++index) {
         [((UIView*)[image_view objectAtIndex:index]) removeFromSuperview];
@@ -115,7 +115,7 @@
     CGFloat screen_width = [UIScreen mainScreen].bounds.size.width;
     CGFloat step_width = screen_width / views_count;
 //      CGFloat height = rc.size.height;
-    CGFloat height = [self prefferCellHeight];
+    CGFloat height = [AlbumTableCell prefferCellHeight];
 
     for (int index = 0; index < image_view.count; ++index) {
         [((UIView*)[image_view objectAtIndex:index]) removeFromSuperview];
@@ -234,7 +234,7 @@
     // Configure the view for the selected state
 }
 
-- (CGFloat)prefferCellHeight {
++ (CGFloat)prefferCellHeight {
     CGFloat screen_width = [UIScreen mainScreen].bounds.size.width;
 //    return 96;
     return screen_width / 3;

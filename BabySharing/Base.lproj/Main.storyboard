@@ -1025,7 +1025,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
         <!--Tags-->
         <scene sceneID="nMh-5O-HfU">
             <objects>
-                <viewController storyboardIdentifier="TagSearch" id="7gh-NJ-uaY" customClass="HomeTagsController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TagSearch" automaticallyAdjustsScrollViewInsets="NO" id="7gh-NJ-uaY" customClass="HomeTagsController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bhM-nC-JsR"/>
                         <viewControllerLayoutGuide type="bottom" id="fwt-m1-AVh"/>
@@ -1034,77 +1034,8 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lxk-dI-8tK">
-                                <rect key="frame" x="0.0" y="64" width="600" height="182"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7c4-1z-Y3F">
-                                        <rect key="frame" x="269" y="66" width="50" height="50"/>
-                                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="mGd-pQ-rya"/>
-                                            <constraint firstAttribute="width" constant="50" id="qMQ-ok-7St"/>
-                                        </constraints>
-                                    </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZWl-nf-Ga2">
-                                        <rect key="frame" x="8" y="144" width="166" height="30"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                        <state key="normal" title="内容">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="didSelectContentBtn" destination="7gh-NJ-uaY" eventType="touchUpInside" id="4U6-hS-jY5"/>
-                                        </connections>
-                                    </button>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6dO-FJ-W8A">
-                                        <rect key="frame" x="289" y="154" width="10" height="10"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="1" id="Td1-wv-mCE"/>
-                                            <constraint firstAttribute="height" constant="1" id="Zdb-7P-pd0"/>
-                                        </constraints>
-                                    </view>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FOm-aP-dGi">
-                                        <rect key="frame" x="546" y="144" width="30" height="30"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                        <state key="normal" title="用户">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="didSelectUserBtn" destination="7gh-NJ-uaY" eventType="touchUpInside" id="CWa-2l-cpV"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="FOm-aP-dGi" firstAttribute="leading" secondItem="ZWl-nf-Ga2" secondAttribute="trailing" constant="8" id="7dz-F3-EWQ"/>
-                                    <constraint firstAttribute="bottom" secondItem="ZWl-nf-Ga2" secondAttribute="bottom" constant="8" id="9lf-pC-5k2"/>
-                                    <constraint firstItem="ZWl-nf-Ga2" firstAttribute="leading" secondItem="lxk-dI-8tK" secondAttribute="leading" constant="8" id="ODW-d3-qNi"/>
-                                    <constraint firstAttribute="centerY" secondItem="7c4-1z-Y3F" secondAttribute="centerY" id="Oyq-ZV-rFn"/>
-                                    <constraint firstItem="6dO-FJ-W8A" firstAttribute="leading" secondItem="ZWl-nf-Ga2" secondAttribute="trailing" id="VrV-4U-lUJ"/>
-                                    <constraint firstAttribute="trailing" secondItem="FOm-aP-dGi" secondAttribute="trailing" constant="8" id="Vwd-7v-xag"/>
-                                    <constraint firstItem="FOm-aP-dGi" firstAttribute="leading" secondItem="ZWl-nf-Ga2" secondAttribute="trailing" constant="8" id="X1e-B6-d4S"/>
-                                    <constraint firstAttribute="centerX" secondItem="7c4-1z-Y3F" secondAttribute="centerX" id="c0y-Yf-EHq"/>
-                                    <constraint firstItem="6dO-FJ-W8A" firstAttribute="top" secondItem="7c4-1z-Y3F" secondAttribute="bottom" constant="38" id="cU2-e1-uKW"/>
-                                    <constraint firstItem="FOm-aP-dGi" firstAttribute="leading" secondItem="6dO-FJ-W8A" secondAttribute="trailing" id="dMN-Zw-tSZ"/>
-                                    <constraint firstAttribute="bottom" secondItem="FOm-aP-dGi" secondAttribute="bottom" constant="8" id="grc-eD-D4F"/>
-                                    <constraint firstAttribute="trailing" secondItem="FOm-aP-dGi" secondAttribute="trailing" constant="8" id="k0l-fr-Abq"/>
-                                    <constraint firstAttribute="centerX" secondItem="6dO-FJ-W8A" secondAttribute="centerX" id="kc6-f4-eSb"/>
-                                    <constraint firstAttribute="height" constant="182" id="lNF-bf-hzX"/>
-                                    <constraint firstAttribute="trailing" secondItem="FOm-aP-dGi" secondAttribute="trailing" constant="8" id="ulK-Tz-BCn"/>
-                                    <constraint firstAttribute="centerX" secondItem="FOm-aP-dGi" secondAttribute="centerX" constant="-15" id="waq-Sf-ANo"/>
-                                    <constraint firstItem="6dO-FJ-W8A" firstAttribute="top" secondItem="7c4-1z-Y3F" secondAttribute="bottom" constant="8" symbolic="YES" id="xXe-uP-Rka"/>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="xXe-uP-Rka"/>
-                                        <exclude reference="7dz-F3-EWQ"/>
-                                        <exclude reference="Vwd-7v-xag"/>
-                                        <exclude reference="X1e-B6-d4S"/>
-                                        <exclude reference="k0l-fr-Abq"/>
-                                        <exclude reference="waq-Sf-ANo"/>
-                                    </mask>
-                                </variation>
-                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="IeB-6H-uaG">
-                                <rect key="frame" x="0.0" y="270" width="600" height="281"/>
+                                <rect key="frame" x="0.0" y="72" width="600" height="479"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="7gh-NJ-uaY" id="kbI-hO-wzt"/>
@@ -1114,21 +1045,15 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="IeB-6H-uaG" firstAttribute="top" secondItem="bhM-nC-JsR" secondAttribute="bottom" constant="8" id="ECD-xh-5ib"/>
                             <constraint firstItem="IeB-6H-uaG" firstAttribute="leading" secondItem="r25-e5-lgC" secondAttribute="leadingMargin" constant="-16" id="H8g-9f-eTD"/>
-                            <constraint firstItem="lxk-dI-8tK" firstAttribute="top" secondItem="bhM-nC-JsR" secondAttribute="bottom" id="LyN-kU-NMR"/>
                             <constraint firstAttribute="trailingMargin" secondItem="IeB-6H-uaG" secondAttribute="trailing" constant="-16" id="R2V-eC-RwX"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="lxk-dI-8tK" secondAttribute="trailing" constant="-16" id="Tcb-ZO-RAT"/>
-                            <constraint firstItem="IeB-6H-uaG" firstAttribute="top" secondItem="lxk-dI-8tK" secondAttribute="bottom" id="gSv-UN-ceI"/>
-                            <constraint firstItem="lxk-dI-8tK" firstAttribute="leading" secondItem="r25-e5-lgC" secondAttribute="leadingMargin" constant="-16" id="hdC-iX-k1b"/>
                             <constraint firstItem="fwt-m1-AVh" firstAttribute="top" secondItem="IeB-6H-uaG" secondAttribute="bottom" id="mJu-j3-kqC"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Tags" id="cvz-3o-LQK"/>
                     <connections>
-                        <outlet property="contentBtn" destination="ZWl-nf-Ga2" id="9Q3-3m-RXU"/>
-                        <outlet property="imgView" destination="7c4-1z-Y3F" id="xCd-AE-KmA"/>
                         <outlet property="queryView" destination="IeB-6H-uaG" id="CtB-Bm-qeg"/>
-                        <outlet property="userBtn" destination="FOm-aP-dGi" id="CW1-FD-u03"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0cL-kb-6s2" userLabel="First Responder" sceneMemberID="firstResponder"/>

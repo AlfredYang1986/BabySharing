@@ -10,6 +10,10 @@
 
 @interface FoundMoreFriendCell : UITableViewCell
 
+@property (nonatomic, setter=setHiddenIcon:) BOOL isHiddenIcon;
+@property (nonatomic) BOOL isHiddenSep;
+@property (nonatomic, weak, setter=setDes:) NSString* des;
+
 + (CGFloat)preferredHeight;
 
 - (void)setUserImages:(NSArray*)img_arr;
