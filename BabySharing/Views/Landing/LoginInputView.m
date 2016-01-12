@@ -251,7 +251,8 @@
 
 - (void)handleTimer:(NSTimer*)sender {
     if (-- seconds > 0) {
-        [confirm_btn setTitle:[NSString stringWithFormat:@"(%ld)秒重试", (long)seconds] forState:UIControlStateDisabled];
+//        [confirm_btn setTitle:[NSString stringWithFormat:@"(%ld)秒重试", (long)seconds] forState:UIControlStateDisabled];
+        [confirm_btn setTitle:[NSString stringWithFormat:@"%lds", (long)seconds] forState:UIControlStateDisabled];
     } else {
         seconds = 60;
         [timer setFireDate:[NSDate distantFuture]];

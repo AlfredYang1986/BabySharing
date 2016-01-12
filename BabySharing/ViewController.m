@@ -57,6 +57,8 @@ enum DisplaySide {
     
     BOOL isQueryModelReady;
     BOOL isMessageModelReady;
+    
+    INTUAnimationID moving_id;
 }
 
 @synthesize lm = _lm;
@@ -99,6 +101,8 @@ enum DisplaySide {
     
     isQueryModelReady = NO;
     isMessageModelReady = NO;
+    
+    moving_id = -1;
 }
 
 #define LOGO_WIDTH     150
@@ -310,7 +314,7 @@ enum DisplaySide {
     static const CGFloat kAnimationDuration = 0.30; // in seconds
     CGPoint p_start = inputView.center;
     CGPoint p_end = CGPointMake(p_start.x, p_start.y + move);
-    [INTUAnimationEngine animateWithDuration:kAnimationDuration
+    moving_id = [INTUAnimationEngine animateWithDuration:kAnimationDuration
                                                           delay:0.0
                                                          easing:INTUEaseInOutQuadratic
                                                         options:INTUAnimationOptionNone
@@ -320,6 +324,7 @@ enum DisplaySide {
                                                      completion:^(BOOL finished) {
                                                          // NOTE: When passing INTUAnimationOptionRepeat, this completion block is NOT executed at the end of each cycle. It will only run if the animation is canceled.
                                                          NSLog(@"%@", finished ? @"Animation Completed" : @"Animation Canceled");
+                                                         moving_id = -1;
                                                      }];
 }
 
@@ -406,6 +411,18 @@ enum DisplaySide {
 }
 
 - (void)didStartEditing {
+    
+    if (moving_id >= 0) {
+        
+        [INTUAnimationEngine cancelAnimationWithID:moving_id];
+        
+        title.hidden = YES;
+        slg.hidden = YES;
+        CGFloat last_height = inputView.bounds.size.height;
+        inputView.frame = CGRectMake(0, INPUT_VIEW_START_POINT - 110, [UIScreen mainScreen].bounds.size.width, last_height);
+        return;
+    }
+    
     if (inputView.frame.origin.y == INPUT_VIEW_START_POINT) {
         title.hidden = YES;
         slg.hidden = YES;
@@ -414,9 +431,11 @@ enum DisplaySide {
 }
 
 - (void)didEndEditing {
-    [self moveView:110];
-    title.hidden = NO;
-    slg.hidden = NO;
+    if (![inputView isEditing]) {
+        [self moveView:110];
+        title.hidden = NO;
+        slg.hidden = NO;
+    }
 }
 
 - (void)didSelectUserPrivacyBtn {
