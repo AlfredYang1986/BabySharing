@@ -22,6 +22,32 @@
 @synthesize bottomLabel = _bottomLabel;
 @synthesize privacyView = _privacyView;
 
+- (void)loadView {
+    [super loadView];
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 6) {
+        CGFloat width = [UIScreen mainScreen].bounds.size.width;
+        [[UINavigationBar appearance] setShadowImage:[self imageWithColor:[UIColor colorWithWhite:0.5922 alpha:0.25] size:CGSizeMake(width, 1)]];
+        [[UINavigationBar appearance] setBackgroundImage:[self imageWithColor:[UIColor whiteColor] size:CGSizeMake(width, 64)] forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
+    }
+}
+
+//取消searchbar背景色
+- (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size
+{
+    CGRect rect = CGRectMake(0, 0, size.width, size.height);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -33,6 +59,9 @@
  
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+
+    NSString * bundlePath_dongda = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle_dongda = [NSBundle bundleWithPath:bundlePath_dongda];
     
     NSString* filepath2 = [resourceBundle pathForResource:@"More" ofType:@"png"];
     UIButton* barBtn2 = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
@@ -48,17 +77,16 @@
     
     UILabel* label = [[UILabel alloc]init];
     label.text = @"咚哒用户协议";
-    label.textColor = [UIColor whiteColor];
+    label.textColor = [UIColor colorWithWhite:0.5059 alpha:1.f];
     [label sizeToFit];
     self.navigationItem.titleView = label;
    
-    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
-//    NSString* filepath = [resourceBundle pathForResource:@"Previous_blue" ofType:@"png"];
-    NSString* filepath = [resourceBundle pathForResource:@"Previous_simple" ofType:@"png"];
+    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 25, 25)];
+    NSString* filepath = [resourceBundle_dongda pathForResource:@"dongda_back" ofType:@"png"];
     CALayer * layer = [CALayer layer];
     layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
-    layer.frame = CGRectMake(0, 0, 13, 20);
-    layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
+    layer.frame = CGRectMake(-7, 0, 25, 25);
+//    layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
     [barBtn.layer addSublayer:layer];
 //    [barBtn setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
 //    [barBtn setImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];

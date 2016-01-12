@@ -1784,10 +1784,10 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
             </objects>
             <point key="canvasLocation" x="754" y="982"/>
         </scene>
-        <!--Home Navigation Controller-->
+        <!--Navigation Controller-->
         <scene sceneID="6rJ-F1-o9G">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="cMB-n2-C0T" customClass="HomeNavigationController" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="cMB-n2-C0T" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="01J-HA-weu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
