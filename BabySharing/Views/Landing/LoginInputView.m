@@ -9,18 +9,25 @@
 #import "LoginInputView.h"
 #import "OBShapedButton.h"
 
-#define BASICMARGIN         8
+#define BASICMARGIN                         8
 
-#define SNS_BUTTON_WIDTH    40
-#define SNS_BUTTON_HEIGHT   SNS_BUTTON_WIDTH
+#define SNS_TOP_MARGIN                      130
 
-#define SNS_QQ              0
-#define SNS_WEIBO           1
-#define SNS_WECHAT          2
+#define AREA_CODE_WIDTH                     66
+#define INPUT_TEXT_FIELD_HEIGHT             45.5
+#define INPUT_MARGIN                        32.5
 
-#define SNS_COUNT           3
+#define TEXT_FIELD_LEFT_PADDING             10
+#define LINE_MARGIN                         5
+#define CODE_BTN_WIDTH                      80
 
-#define SNS_TOP_MARGIN          130
+#define LOGIN_BTN_TOP_MARGIN                60
+#define LOGIN_BTN_HEIGHT                    37
+#define LOGIN_BTN_BOTTOM_MARGIN             40
+
+@interface LoginInputView () <UITextFieldDelegate>
+
+@end
 
 @implementation LoginInputView {
     UIButton * area_code_btn;
@@ -29,19 +36,11 @@
     UIButton * next_btn;
     UIButton * confirm_btn;
     
-    UIImageView* split_img;
-    UIButton * user_private_btn;
-    NSArray* sns_btns;
-    
     NSTimer* timer;
     NSInteger seconds;
 }
 
 @synthesize delegate = _delegate;
-
-#define AREA_CODE_WIDTH             66
-#define INPUT_TEXT_FIELD_HEIGHT     45.5
-#define INPUT_MARGIN                32.5
 
 - (void)createAreaCodeBtnInRect:(CGRect)rect {
 
@@ -88,7 +87,7 @@
     [phone_area setBackground:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_light_input_bg" ofType:@"png"]]];
     phone_area.font = font;
     CGRect frame = phone_area.frame;
-#define TEXT_FIELD_LEFT_PADDING     10
+    
     frame.size.width = TEXT_FIELD_LEFT_PADDING;
     UIView *leftview = [[UIView alloc] initWithFrame:frame];
     phone_area.leftViewMode = UITextFieldViewModeAlways;
@@ -100,11 +99,11 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(phoneTextFieldChanged:) name:UITextFieldTextDidChangeNotification object:nil];
     phone_area.delegate = self;
     phone_area.keyboardType = UIKeyboardTypeNumberPad;
+    phone_area.clearButtonMode = UITextFieldViewModeWhileEditing;
     
     [self addSubview:phone_area];
 }
 
-#define LINE_MARGIN     5
 - (void)createCodeLabelInRect:(CGRect)rect {
     NSString * bundlePath_dongda = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle_dongda = [NSBundle bundleWithPath:bundlePath_dongda];
@@ -126,7 +125,6 @@
     [self addSubview:tmp];
 }
 
-#define CODE_BTN_WIDTH      80
 - (void)createConfirmCodeAreaInRect:(CGRect)rect {
     CGFloat width = rect.size.width;
     NSString * bundlePath_dongda = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
@@ -165,8 +163,6 @@
     [self addSubview:confirm_btn];
 }
 
-#define LOGIN_BTN_TOP_MARGIN    60
-#define LOGIN_BTN_HEIGHT        37
 
 - (void)createLoginBtnInRect:(CGRect)rect {
     CGFloat width = rect.size.width;
@@ -184,13 +180,9 @@
     [self addSubview:next_btn];
 }
 
-#define LOGIN_BTN_BOTTOM_MARGIN     40
 
 - (void)setUpWithFrame:(CGRect)rect {
     CGFloat width = rect.size.width;
-    
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
-    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
 
     [self createAreaCodeBtnInRect:rect];
     [self createPhoneAreaIn:rect];
@@ -198,79 +190,12 @@
     [self createConfirmCodeAreaInRect:rect];
     [self createCodeBtnInRect:rect];
     [self createLoginBtnInRect:rect];
- 
-    UIFont* font = [UIFont systemFontOfSize:14.f];
-    CGSize sz = [@"用户协议&隐私政策" sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
     
-    CGFloat third_line_ver_margin = BASICMARGIN + INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN + INPUT_TEXT_FIELD_HEIGHT + LOGIN_BTN_TOP_MARGIN + LOGIN_BTN_HEIGHT + LOGIN_BTN_BOTTOM_MARGIN;
-    CGFloat screen_width = [UIScreen mainScreen].bounds.size.width;
-    split_img = [[UIImageView alloc]initWithFrame:CGRectMake(0, third_line_ver_margin, screen_width, sz.height)];
-    NSString * split_file = [resourceBundle pathForResource:[NSString stringWithFormat:@"split-file"] ofType:@"png"];
-    split_img.image = [UIImage imageNamed:split_file];
-    
-    [self addSubview:split_img];
-    
-    UIButton* qq_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, SNS_BUTTON_WIDTH, SNS_BUTTON_HEIGHT)];
-    NSString * qq_file = [resourceBundle pathForResource:[NSString stringWithFormat:@"qq"] ofType:@"png"];
-    UIImage * qq_image = [UIImage imageNamed:qq_file];
-    [qq_btn setBackgroundImage:qq_image forState:UIControlStateNormal];
-    [qq_btn addTarget:self action:@selector(qqBtnSelected:) forControlEvents:UIControlEventTouchDown];
-    qq_btn.backgroundColor = [UIColor clearColor];
-    qq_btn.layer.cornerRadius = SNS_BUTTON_WIDTH / 2;
-    qq_btn.clipsToBounds = YES;
-    qq_btn.contentMode = UIViewContentModeCenter;
-    [self addSubview:qq_btn];
-    
-    UIButton* weibo_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, SNS_BUTTON_WIDTH, SNS_BUTTON_HEIGHT)];
-    NSString * weibo_file = [resourceBundle pathForResource:[NSString stringWithFormat:@"weibo"] ofType:@"png"];
-    UIImage * weibo_image = [UIImage imageNamed:weibo_file];
-    [weibo_btn setBackgroundImage:weibo_image forState:UIControlStateNormal];
-    [weibo_btn addTarget:self action:@selector(weiboBtnSelected:) forControlEvents:UIControlEventTouchDown];
-    weibo_btn.backgroundColor = [UIColor clearColor];
-    weibo_btn.layer.cornerRadius = SNS_BUTTON_WIDTH / 2;
-    weibo_btn.clipsToBounds = YES;
-    weibo_btn.contentMode = UIViewContentModeCenter;
-    [self addSubview:weibo_btn];
-    
-    UIButton* wechat_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, SNS_BUTTON_WIDTH, SNS_BUTTON_HEIGHT)];
-    NSString * wechat_file = [resourceBundle pathForResource:[NSString stringWithFormat:@"wechat"] ofType:@"png"];
-    UIImage * wechat_image = [UIImage imageNamed:wechat_file];
-    [wechat_btn setBackgroundImage:wechat_image forState:UIControlStateNormal];
-    [wechat_btn addTarget:self action:@selector(wechatBtnSelected:) forControlEvents:UIControlEventTouchDown];
-    wechat_btn.backgroundColor = [UIColor clearColor];
-    wechat_btn.clipsToBounds = YES;
-    wechat_btn.layer.cornerRadius = SNS_BUTTON_WIDTH / 2;
-    wechat_btn.contentMode = UIViewContentModeCenter;
-    [self addSubview:wechat_btn];
-
-    CGFloat forth_line_ver_line = third_line_ver_margin + sz.height + 2 * BASICMARGIN + SNS_BUTTON_HEIGHT / 2;
-    weibo_btn.center = CGPointMake(width / 2, forth_line_ver_line);
-    qq_btn.center = CGPointMake(width / 2 - 2 * SNS_BUTTON_WIDTH, forth_line_ver_line);
-    wechat_btn.center = CGPointMake(width / 2 + 2 * SNS_BUTTON_WIDTH, forth_line_ver_line);
-   
-    CGFloat fifth_line_ver_line = forth_line_ver_line + SNS_BUTTON_HEIGHT / 2 + 2 * BASICMARGIN;
-    user_private_btn = [[UIButton alloc]initWithFrame:CGRectMake((width - sz.width) / 2, fifth_line_ver_line, sz.width, sz.height)];
-    user_private_btn.titleLabel.font = [UIFont systemFontOfSize:12.f];
-    [user_private_btn setTitleColor:[UIColor colorWithWhite:1.f alpha:0.6] forState:UIControlStateNormal];
-    [user_private_btn setTitle:@"用户协议&隐私政策" forState:UIControlStateNormal];
-    [user_private_btn addTarget:self action:@selector(userPrivacyBtnSelected) forControlEvents:UIControlEventTouchDown];
-    [self addSubview:user_private_btn];
-    
-    CGFloat height = fifth_line_ver_line + sz.height + BASICMARGIN;
+    CGFloat height = BASICMARGIN + INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN + INPUT_TEXT_FIELD_HEIGHT + LOGIN_BTN_TOP_MARGIN + LOGIN_BTN_HEIGHT + BASICMARGIN;
     self.bounds = CGRectMake(0, 0, width, height);
 }
 
-- (void)qqBtnSelected:(UIButton*)sender {
-    [_delegate didSelectQQBtn];
-}
 
-- (void)weiboBtnSelected:(UIButton*)sender {
-    [_delegate didSelectWeiboBtn];
-}
-
-- (void)wechatBtnSelected:(UIButton*)sender {
-    [_delegate didSelectWechatBtn];
-}
 
 - (void)phoneTextFieldChanged:(UITextField*)tf {
     if ([phone_area.text isEqualToString:@""]) {
@@ -293,9 +218,9 @@
     [confirm_area resignFirstResponder];
 }
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField {
-    [_delegate didStartEditing];
-}
+//- (void)textFieldDidBeginEditing:(UITextField *)textField {
+//    [_delegate didStartEditing];
+//}
 
 - (void)areaCodeBtnSelected:(UIButton*)sender {
     [_delegate didSelectAreaCodeBtn];
@@ -317,9 +242,6 @@
     return confirm_area.text;
 }
 
-- (void)userPrivacyBtnSelected {
-    [_delegate didSelectUserPrivacyBtn];
-}
 
 - (void)sendConfirmCodeRequestSuccess {
     seconds = 60;
@@ -362,5 +284,14 @@
     tmp.text = [@"+" stringByAppendingString:code];
     [tmp sizeToFit];
 //    [area_code_btn setTitle:[@"+" stringByAppendingString:code] forState:UIControlStateNormal];
+}
+
+#pragma mark -- text field delegate
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    [_delegate didStartEditing];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    [_delegate didEndEditing];
 }
 @end

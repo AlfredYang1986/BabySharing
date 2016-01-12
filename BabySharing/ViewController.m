@@ -16,6 +16,7 @@
 #import "NicknameInputViewController.h"
 #import "AlreadLogedViewController.h"
 #import "LoginInputView.h"
+#import "LoginSNSView.h"
 #import "ChooseAreaViewController.h"
 #import "GotyeOCAPI.h"
 #import "GotyeOCDeleget.h"
@@ -41,21 +42,17 @@ enum DisplaySide {
     CGPoint point;                   // for gesture
     
     BOOL isMoved;
-
-    CGFloat h_offset;
-    CGFloat v_offset_title;
-    CGFloat v_offset_input;
     
     BOOL isHerMoved;
     
     NSTimer* timer;
     NSInteger seconds;
    
-    /**********************************************/
-//    UILabel * title;                // title
     UIImageView* title;                // title
+    UILabel* slg;
     
     LoginInputView* inputView;
+    LoginSNSView* snsView;
     BOOL isSNSLogin;
     
     BOOL isQueryModelReady;
@@ -104,31 +101,27 @@ enum DisplaySide {
     isMessageModelReady = NO;
 }
 
+#define LOGO_WIDTH     150
+#define LOGO_HEIGHT     50
+#define LOGO_TOP_MARGIN 97
+
+#define INPUT_VIEW_TOP_MARGIN       60
+
+#define INPUT_VIEW_START_POINT      title.frame.origin.y + title.frame.size.height + INPUT_VIEW_TOP_MARGIN
+
 - (void)createSubviews {
 
-    /**
-     * 1. input view
-     */
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     CGFloat height = [UIScreen mainScreen].bounds.size.height;
-    
-    inputView = [[LoginInputView alloc]initWithFrame:CGRectMake(0, 0, width, height)];
-    inputView.delegate = self;
-    
-    CGFloat last_height = inputView.bounds.size.height;
-    inputView.frame = CGRectMake(0, height - last_height, width, last_height);
-//    inputView.backgroundColor = [UIColor redColor];
-    [self.view addSubview:inputView];
-    [self.view bringSubviewToFront:inputView];
-   
+  
     /**
      * 2. logo view
      */
-    title = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 150, 50)];
+    title = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, LOGO_WIDTH, LOGO_HEIGHT)];
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
     title.image = [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"login_logo"] ofType:@"png"]];
-    title.center = CGPointMake(width / 2, 97 + title.frame.size.height / 2);
+    title.center = CGPointMake(width / 2, LOGO_TOP_MARGIN + title.frame.size.height / 2);
     
     [self.view addSubview:title];
     [self.view bringSubviewToFront:title];
@@ -136,7 +129,7 @@ enum DisplaySide {
     /**
      * 3. slogen view
      */
-    UILabel* slg = [[UILabel alloc]init];
+    slg = [[UILabel alloc]init];
     slg.textAlignment = NSTextAlignmentCenter;
     slg.textColor = [UIColor whiteColor];
     slg.font = [UIFont systemFontOfSize:15.f];
@@ -146,6 +139,31 @@ enum DisplaySide {
 
     [self.view addSubview:slg];
     [self.view bringSubviewToFront:slg];
+    
+    /**
+     * 1. input view
+     */
+    inputView = [[LoginInputView alloc]initWithFrame:CGRectMake(0, 0, width, height)];
+    inputView.delegate = self;
+    
+    CGFloat last_height = inputView.bounds.size.height;
+    inputView.frame = CGRectMake(0, INPUT_VIEW_START_POINT, width, last_height);
+//    inputView.backgroundColor = [UIColor redColor];
+    [self.view addSubview:inputView];
+    [self.view bringSubviewToFront:inputView];
+    
+    /**
+     * 4. SNS view
+     */
+    snsView = [[LoginSNSView alloc]initWithFrame:CGRectMake(0, 0, width, height)];
+    snsView.delegate = self;
+    
+    CGFloat sns_height = snsView.bounds.size.height;
+    snsView.frame = CGRectMake(0, height - sns_height, width, sns_height);
+//    snsView.backgroundColor = [UIColor redColor];
+    [self.view addSubview:snsView];
+    [self.view bringSubviewToFront:snsView];
+    
 }
 
 - (void)dealloc {
@@ -289,20 +307,20 @@ enum DisplaySide {
 }
 
 - (void)moveView:(float)move {
-//    static const CGFloat kAnimationDuration = 0.30; // in seconds
-//    CGPoint p_start = inputView.center;
-//    CGPoint p_end = CGPointMake(p_start.x, p_start.y + move);
-//    [INTUAnimationEngine animateWithDuration:kAnimationDuration
-//                                                          delay:0.0
-//                                                         easing:INTUEaseInOutQuadratic
-//                                                        options:INTUAnimationOptionNone
-//                                                     animations:^(CGFloat progress) {
-//                                                         inputView.center = INTUInterpolateCGPoint(p_start, p_end, progress);
-//                                                     }
-//                                                     completion:^(BOOL finished) {
-//                                                         // NOTE: When passing INTUAnimationOptionRepeat, this completion block is NOT executed at the end of each cycle. It will only run if the animation is canceled.
-//                                                         NSLog(@"%@", finished ? @"Animation Completed" : @"Animation Canceled");
-//                                                     }];
+    static const CGFloat kAnimationDuration = 0.30; // in seconds
+    CGPoint p_start = inputView.center;
+    CGPoint p_end = CGPointMake(p_start.x, p_start.y + move);
+    [INTUAnimationEngine animateWithDuration:kAnimationDuration
+                                                          delay:0.0
+                                                         easing:INTUEaseInOutQuadratic
+                                                        options:INTUAnimationOptionNone
+                                                     animations:^(CGFloat progress) {
+                                                         inputView.center = INTUInterpolateCGPoint(p_start, p_end, progress);
+                                                     }
+                                                     completion:^(BOOL finished) {
+                                                         // NOTE: When passing INTUAnimationOptionRepeat, this completion block is NOT executed at the end of each cycle. It will only run if the animation is canceled.
+                                                         NSLog(@"%@", finished ? @"Animation Completed" : @"Animation Canceled");
+                                                     }];
 }
 
 #pragma mark -- pan gusture
@@ -388,13 +406,17 @@ enum DisplaySide {
 }
 
 - (void)didStartEditing {
-    if (inputView.frame.origin.y + inputView.frame.size.height == [UIScreen mainScreen].bounds.size.height) {
-        [self moveView:-210];
+    if (inputView.frame.origin.y == INPUT_VIEW_START_POINT) {
+        title.hidden = YES;
+        slg.hidden = YES;
+        [self moveView:-110];
     }
 }
 
 - (void)didEndEditing {
-    [self moveView:210];
+    [self moveView:110];
+    title.hidden = NO;
+    slg.hidden = NO;
 }
 
 - (void)didSelectUserPrivacyBtn {
