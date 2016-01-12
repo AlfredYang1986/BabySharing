@@ -125,9 +125,9 @@ enum DisplaySide {
      * 2. logo view
      */
     title = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 150, 50)];
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-    title.image = [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"DongDaHeaderLogo"] ofType:@"png"]];
+    title.image = [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"login_logo"] ofType:@"png"]];
     title.center = CGPointMake(width / 2, 97 + title.frame.size.height / 2);
     
     [self.view addSubview:title];
@@ -139,10 +139,10 @@ enum DisplaySide {
     UILabel* slg = [[UILabel alloc]init];
     slg.textAlignment = NSTextAlignmentCenter;
     slg.textColor = [UIColor whiteColor];
-    slg.font = [UIFont systemFontOfSize:20.f];
-    slg.text = @"新生命 新体验 新主张";
+    slg.font = [UIFont systemFontOfSize:15.f];
+    slg.text = @"品质妈咪的生活指南";
     [slg sizeToFit];
-    slg.center = CGPointMake(title.center.x, title.center.y + 68);
+    slg.center = CGPointMake(title.center.x, title.center.y + 48);
 
     [self.view addSubview:slg];
     [self.view bringSubviewToFront:slg];

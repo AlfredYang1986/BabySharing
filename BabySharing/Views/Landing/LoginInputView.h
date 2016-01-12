@@ -7,25 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@protocol LoginInputViewDelegate <NSObject>
-#pragma mark -- button actions
-- (void)didSelectAreaCodeBtn;
-- (void)didSelectConfirmBtn;
-- (void)didSelectNextBtn;
-
-#pragma mark -- text delegate
-- (void)didStartEditing;
-- (void)didEndEditing;
-
-#pragma mark -- SNS actions
-- (void)didSelectQQBtn;
-- (void)didSelectWeiboBtn;
-- (void)didSelectWechatBtn;
-
-#pragma mark -- user privacy actions
-- (void)didSelectUserPrivacyBtn;
-@end
+#import "LoginViewsDelegate.h"
 
 @interface LoginInputView : UIView <UITextFieldDelegate>
 

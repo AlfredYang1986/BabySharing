@@ -310,6 +310,7 @@
 		70530B0F1C3F9D1E00505121 /* SearchSegImgTextItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSegImgTextItem.m; sourceTree = "<group>"; };
 		70530B101C3F9D1E00505121 /* SearchSegItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSegItem.h; sourceTree = "<group>"; };
 		70530B111C3F9D1E00505121 /* SearchSegItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSegItem.m; sourceTree = "<group>"; };
+		706E84471C44C8C200D4CA91 /* LoginViewsDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewsDelegate.h; sourceTree = "<group>"; };
 		70A9BB6F1C3CF5F1000DFE53 /* SearchFriendsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchFriendsController.h; sourceTree = "<group>"; };
 		70A9BB701C3CF5F1000DFE53 /* SearchFriendsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchFriendsController.m; sourceTree = "<group>"; };
 		70D22C421C3A16F6008B8403 /* DongDaBoundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DongDaBoundle.bundle; sourceTree = "<group>"; };
@@ -2534,6 +2535,7 @@
 		EEFD6F4C1B4E4443008AC4F5 /* Landing */ = {
 			isa = PBXGroup;
 			children = (
+				706E84471C44C8C200D4CA91 /* LoginViewsDelegate.h */,
 				EEFD6F4D1B4E44C1008AC4F5 /* LoginInputView.h */,
 				EEFD6F4E1B4E44C1008AC4F5 /* LoginInputView.m */,
 				EEFD6F501B4E452D008AC4F5 /* SloganView.h */,
