@@ -9,7 +9,7 @@
         <!--认识更多的朋友-->
         <scene sceneID="CB3-Xe-s4V">
             <objects>
-                <viewController storyboardIdentifier="UserSearch" id="bUp-GG-spM" customClass="UserSearchController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UserSearch" automaticallyAdjustsScrollViewInsets="NO" id="bUp-GG-spM" customClass="UserSearchController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="LWr-lG-khV"/>
                         <viewControllerLayoutGuide type="bottom" id="aJu-4L-z4e"/>
@@ -19,14 +19,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gIU-uQ-U7x">
-                                <rect key="frame" x="0.0" y="44" width="600" height="556"/>
+                                <rect key="frame" x="0.0" y="74" width="600" height="526"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="gIU-uQ-U7x" secondAttribute="trailing" constant="-20" id="5de-5B-VhH"/>
-                            <constraint firstItem="gIU-uQ-U7x" firstAttribute="top" secondItem="LWr-lG-khV" secondAttribute="bottom" constant="-20" id="JI4-oA-eB1"/>
+                            <constraint firstItem="gIU-uQ-U7x" firstAttribute="top" secondItem="LWr-lG-khV" secondAttribute="bottom" constant="10" id="JI4-oA-eB1"/>
                             <constraint firstAttribute="trailingMargin" secondItem="gIU-uQ-U7x" secondAttribute="trailing" constant="-20" id="KPg-9k-frU"/>
                             <constraint firstItem="gIU-uQ-U7x" firstAttribute="leading" secondItem="paH-0O-Q4l" secondAttribute="leadingMargin" constant="-20" id="O0y-mN-Vfh"/>
                             <constraint firstItem="aJu-4L-z4e" firstAttribute="top" secondItem="gIU-uQ-U7x" secondAttribute="bottom" id="UU2-MG-JMi"/>

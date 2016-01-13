@@ -109,8 +109,7 @@ enum DisplaySide {
 #define LOGO_HEIGHT     50
 #define LOGO_TOP_MARGIN 97
 
-#define INPUT_VIEW_TOP_MARGIN       60
-
+#define INPUT_VIEW_TOP_MARGIN       [UIScreen mainScreen].bounds.size.height / 6.0
 #define INPUT_VIEW_START_POINT      title.frame.origin.y + title.frame.size.height + INPUT_VIEW_TOP_MARGIN
 
 - (void)createSubviews {
@@ -164,10 +163,9 @@ enum DisplaySide {
     
     CGFloat sns_height = snsView.bounds.size.height;
     snsView.frame = CGRectMake(0, height - sns_height, width, sns_height);
-//    snsView.backgroundColor = [UIColor redColor];
+//    snsView.backgroundColor = [UIColor greenColor];
     [self.view addSubview:snsView];
     [self.view bringSubviewToFront:snsView];
-    
 }
 
 - (void)dealloc {
@@ -292,7 +290,7 @@ enum DisplaySide {
         CGFloat height = [UIScreen mainScreen].bounds.size.height;
         
         CGFloat last_height = inputView.bounds.size.height;
-        inputView.frame = CGRectMake(0, height - last_height, inputView.bounds.size.width, last_height);
+        inputView.frame = CGRectMake(0, INPUT_VIEW_START_POINT, inputView.bounds.size.width, last_height);
     }
  
     if (![GotyeOCAPI isOnline]) {

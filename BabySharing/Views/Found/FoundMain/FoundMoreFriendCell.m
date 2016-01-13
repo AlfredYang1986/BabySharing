@@ -44,8 +44,8 @@
         UIView* tmp = [self viewWithTag:index];
         if (tmp) {
             tmp.backgroundColor = [UIColor whiteColor];
-            tmp.layer.borderColor = [UIColor whiteColor].CGColor;
-            tmp.layer.borderWidth = 1.f;
+//            tmp.layer.borderColor = [UIColor whiteColor].CGColor;
+//            tmp.layer.borderWidth = 1.f;
             tmp.layer.cornerRadius = USER_PHOTO_WIDTH / 2;
             tmp.clipsToBounds = YES;
             [self bringSubviewToFront:tmp];

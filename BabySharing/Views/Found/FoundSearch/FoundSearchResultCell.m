@@ -10,16 +10,18 @@
 #import "TmpFileStorageModel.h"
 #import "RemoteInstance.h"
 
-#define RECOMMEND_COUNT 3
+#define RECOMMEND_COUNT         3
 
-#define MARGIN 13
-#define MARGIN_VER 16
+#define MARGIN                  13
+#define MARGIN_VER              12
 // 内部
-#define ICON_WIDTH 15
-#define ICON_HEIGHT 15
+#define ICON_WIDTH              15
+#define ICON_HEIGHT             15
 
-#define TAG_HEIGHT 20
-#define TAG_MARGIN 10
+#define TAG_HEIGHT              25
+#define TAG_MARGIN              10
+#define TAG_CORDIUS             5
+#define TAG_MARGIN_BETWEEN      10.5
 
 @interface FoundSearchResultCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *nextIcon;
@@ -41,6 +43,12 @@
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
     
     _nextIcon.image = [UIImage imageNamed:[resourceBundle pathForResource:@"found-more-friend-arror" ofType:@"png"]];
+    
+    CALayer* layer = [CALayer layer];
+    layer.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.25].CGColor;
+    layer.borderWidth = 1.f;
+    layer.frame = CGRectMake(0, [FoundSearchResultCell preferredHeight] - 1, [UIScreen mainScreen].bounds.size.width, 1);
+    [self.layer addSublayer:layer];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -59,6 +67,8 @@
         NSDictionary* item = items.firstObject;
         
         UIImageView* tmp = (UIImageView*)[self viewWithTag:-1 - index];
+        tmp.layer.cornerRadius = 3.f;
+        tmp.clipsToBounds = YES;
         
         NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"User"] ofType:@"png"];
         NSString* photo_name = [item objectForKey:@"name"];
@@ -93,13 +103,14 @@
     
     UIView* btn = [[UIView alloc]initWithFrame:CGRectMake(0, 0, sz.width, sz.height)];
    
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
     
-    UIImage* image0 = [UIImage imageNamed:[resourceBundle pathForResource:@"tag-time" ofType:@"png"]];
-    UIImage* image1 = [UIImage imageNamed:[resourceBundle pathForResource:@"tag-location" ofType:@"png"]];
+    UIImage* image0 = [UIImage imageNamed:[resourceBundle pathForResource:@"tag_time_dark" ofType:@"png"]];
+    UIImage* image1 = [UIImage imageNamed:[resourceBundle pathForResource:@"tag_location_dark" ofType:@"png"]];
     
     UIImageView* img = [[UIImageView alloc]initWithFrame:CGRectMake(TAG_MARGIN / 2, TAG_MARGIN / 4, ICON_WIDTH, ICON_HEIGHT)];
+    img.center = CGPointMake(TAG_MARGIN / 2 + img.frame.size.width / 2, TAG_HEIGHT / 2);
     if (type.integerValue == 0) {
         img.image = image0;
     } else {
@@ -110,19 +121,19 @@
     UILabel* label = [[UILabel alloc]init];
     label.font = font;
     label.text = title;
-    label.textColor = [UIColor brownColor];
+    label.textColor = [UIColor colorWithWhite:0.3059 alpha:1.f];
     label.frame = CGRectMake(TAG_MARGIN + ICON_WIDTH, 0, sz_font.width, TAG_HEIGHT);
     label.textAlignment = NSTextAlignmentLeft;
     [btn addSubview:label];
     
-    btn.layer.borderColor = [UIColor brownColor].CGColor;
+    btn.layer.borderColor = [UIColor colorWithWhite:0.6078 alpha:1.f].CGColor;
     btn.layer.borderWidth = 1.f;
-    btn.layer.cornerRadius = btn.frame.size.height / 2;
+    btn.layer.cornerRadius = TAG_CORDIUS;
     btn.clipsToBounds = YES;
     
     btn.center = CGPointMake(MARGIN + btn.frame.size.width / 2, [FoundSearchResultCell preferredHeight] / 2);
     [self addSubview:btn];
-
+    
     CGFloat width = self.frame.size.width;;
     UIView* tmp = [self viewWithTag:-1];
     if (width - MARGIN - sz.width - tmp.frame.origin.x > _resultCountLabel.frame.size.width + 20) {

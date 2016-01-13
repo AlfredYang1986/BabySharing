@@ -175,14 +175,32 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     if (section == FOUND_SEARCH_INDEX) {
-        return 5;
+        return 10;
     }else if (section == FOUND_USER_PHOTO_INDEX) {
-        return 5;
+        return 10;
     } else if (section == FOUND_TITLE_INDEX) {
         return 0;
     } else {
         return 0;
     }
+}
+
+- (UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    UIView* reVal = [[UIView alloc]init];
+
+    CALayer* layer = [CALayer layer];
+    layer.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.25].CGColor;
+    layer.borderWidth = 1.f;
+    layer.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 1);
+    [reVal.layer addSublayer:layer];
+    
+    CALayer* line = [CALayer layer];
+    line.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.18].CGColor;
+    line.borderWidth = 1.f;
+    line.frame = CGRectMake(0, 10, [UIScreen mainScreen].bounds.size.width, 1);
+    [reVal.layer addSublayer:line];
+    
+    return reVal;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

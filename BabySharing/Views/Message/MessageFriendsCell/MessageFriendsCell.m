@@ -35,6 +35,8 @@
 
 @synthesize isHiddenLine = _isHiddenLine;
 
+@synthesize cellHeight = _cellHeight;
+
 + (CGFloat)preferredHeight {
     return PREFERRED_HEIGHT;
 }
@@ -71,6 +73,8 @@
     line.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.25].CGColor;
     line.frame = CGRectMake(0, PREFERRED_HEIGHT - 1, [UIScreen mainScreen].bounds.size.width + 10, 1);
     [self.layer addSublayer:line];
+    
+    _cellHeight = [MessageFriendsCell preferredHeight];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -142,7 +146,8 @@
     
 #define TAG_2_NAME_MARGIN   10
 #define USER_NAME_TOP_MARGIN    8
-    _userNameLabel.center = CGPointMake(_user_screen_photo.center.x + _user_screen_photo.frame.size.width / 2 + NAME_LEFT_MARGIN + _userNameLabel.frame.size.width / 2, PREFERRED_HEIGHT / 2);
+//    _userNameLabel.center = CGPointMake(_user_screen_photo.center.x + _user_screen_photo.frame.size.width / 2 + NAME_LEFT_MARGIN + _userNameLabel.frame.size.width / 2, PREFERRED_HEIGHT / 2);
+    _userNameLabel.center = CGPointMake(_user_screen_photo.center.x + _user_screen_photo.frame.size.width / 2 + NAME_LEFT_MARGIN + _userNameLabel.frame.size.width / 2, _cellHeight / 2);
 }
 
 - (void)setUserRoleTag:(NSString*)role_tag {
@@ -163,7 +168,8 @@
     label.center = CGPointMake(5 + label.frame.size.width / 2, ROLE_TAG_MARGIN + label.frame.size.height / 2);
     
     _userRoleTagBtn.frame = CGRectMake(0, 0, label.frame.size.width + 10 + ROLE_TAG_MARGIN, label.frame.size.height + 2 * ROLE_TAG_MARGIN);
-    _userRoleTagBtn.center = CGPointMake(_user_screen_photo.center.x + _user_screen_photo.frame.size.width / 2 + NAME_LEFT_MARGIN + _userNameLabel.frame.size.width + TAG_2_NAME_MARGIN + _userRoleTagBtn.frame.size.width / 2, PREFERRED_HEIGHT / 2);
+//    _userRoleTagBtn.center = CGPointMake(_user_screen_photo.center.x + _user_screen_photo.frame.size.width / 2 + NAME_LEFT_MARGIN + _userNameLabel.frame.size.width + TAG_2_NAME_MARGIN + _userRoleTagBtn.frame.size.width / 2, PREFERRED_HEIGHT / 2);
+    _userRoleTagBtn.center = CGPointMake(_user_screen_photo.center.x + _user_screen_photo.frame.size.width / 2 + NAME_LEFT_MARGIN + _userNameLabel.frame.size.width + TAG_2_NAME_MARGIN + _userRoleTagBtn.frame.size.width / 2, _cellHeight / 2);
     
     if ([@"" isEqualToString:role_tag]) {
         _userRoleTagBtn.hidden = YES;

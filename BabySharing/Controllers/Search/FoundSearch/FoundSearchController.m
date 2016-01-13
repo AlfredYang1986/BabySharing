@@ -30,7 +30,7 @@
 @interface FoundSearchController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *queryView;
-@property (weak, nonatomic) IBOutlet UIView *cancelBgView;
+//@property (weak, nonatomic) IBOutlet UIView *cancelBgView;
 @property (strong, nonatomic) SearchSegView2* seg;
 @property (weak, nonatomic) FoundSearchModel* fm;
 @end
@@ -41,7 +41,7 @@
 
 @synthesize searchBar = _searchBar;
 @synthesize queryView = _queryView;
-@synthesize cancelBgView = _cancelBgView;
+//@synthesize cancelBgView = _cancelBgView;
 @synthesize seg = _seg;
 @synthesize fm = _fm;
 
@@ -78,7 +78,7 @@
 //    [tmp addTarget:self action:@selector(cancelSearchSelected) forControlEvents:UIControlEventTouchUpInside];
     
     _queryView.scrollEnabled = NO;
-    _queryView.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
+    _queryView.backgroundColor = [UIColor whiteColor]; //[UIColor colorWithWhite:0.9490 alpha:1.f];
     self.view.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
     
     [_queryView registerNib:[UINib nibWithNibName:@"FoundSearchHeader" bundle:[NSBundle mainBundle]] forHeaderFooterViewReuseIdentifier:@"found header"];
@@ -98,7 +98,7 @@
 //    _inputArea.delegate = self;
     
     _searchBar.delegate = self;
-    _searchBar.showsCancelButton = NO;
+    _searchBar.showsCancelButton = YES;
     _searchBar.placeholder = @"搜索";
     _searchBar.backgroundColor = [UIColor clearColor];
     UIImageView* iv = [[UIImageView alloc] initWithImage:[self imageWithColor:[UIColor whiteColor] size:CGSizeMake(width, SEARCH_BAR_HEIGHT)]];
@@ -112,27 +112,42 @@
         } else if ([v isKindOfClass:[UIButton class]]) {
             UIButton* cancel_btn = (UIButton*)v;
 //            [cancel_btn setTitle:@"test" forState:UIControlStateNormal];
-            cancel_btn.backgroundColor = [UIColor orangeColor];
-            cancel_btn.layer.cornerRadius = 8.f;
-            cancel_btn.titleLabel.font = [UIFont systemFontOfSize:12.f];
-            [cancel_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            [cancel_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
+//            cancel_btn.backgroundColor = [UIColor orangeColor];
+//            cancel_btn.layer.cornerRadius = 8.f;
+            cancel_btn.titleLabel.font = [UIFont systemFontOfSize:14.f];
+            [cancel_btn setTitleColor:[UIColor colorWithWhite:0.3059 alpha:1.f] forState:UIControlStateNormal];
+            [cancel_btn setTitleColor:[UIColor colorWithWhite:0.3059 alpha:1.f] forState:UIControlStateDisabled];
         }
         // else if ([v isKindOfClass:NSClassFromString(@"UISearchBarBackground")]) {
         //      v.backgroundColor = [UIColor whiteColor];
         // }
     }
     
-    _cancelBgView.backgroundColor = [UIColor whiteColor];
-    UIButton* btn = [[UIButton alloc]init];
-    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [btn setBackgroundColor:[UIColor orangeColor]];
-    [btn setTitle:@"取消" forState:UIControlStateNormal];
-    btn.titleLabel.font = [UIFont systemFontOfSize:16.f];
-    [btn sizeToFit];
-    btn.center = CGPointMake(CANCEL_BTN_WIDTH / 2, SEARCH_BAR_HEIGHT / 2);
-    [btn addTarget:self action:@selector(cancelSearchSelected) forControlEvents:UIControlEventTouchUpInside];
-    [_cancelBgView addSubview:btn];
+//    _cancelBgView.backgroundColor = [UIColor whiteColor];
+//    UIButton* btn = [[UIButton alloc]init];
+//    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//    [btn setBackgroundColor:[UIColor orangeColor]];
+//    [btn setTitle:@"取消" forState:UIControlStateNormal];
+//    btn.titleLabel.font = [UIFont systemFontOfSize:16.f];
+//    [btn sizeToFit];
+//    btn.center = CGPointMake(CANCEL_BTN_WIDTH / 2, SEARCH_BAR_HEIGHT / 2);
+//    [btn addTarget:self action:@selector(cancelSearchSelected) forControlEvents:UIControlEventTouchUpInside];
+//    [_cancelBgView addSubview:btn];
+    
+    CALayer* layer = [CALayer layer];
+    layer.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.25].CGColor;
+    layer.borderWidth = 1.f;
+    layer.frame = CGRectMake(0, STATUS_BAR_HEIGHT + SEARCH_BAR_HEIGHT + SEG_BAR_HEIGHT, [UIScreen mainScreen].bounds.size.width, 1);
+    [self.view.layer addSublayer:layer];
+   
+    CALayer* line = [CALayer layer];
+    line.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.10].CGColor;
+    line.borderWidth = 1.f;
+    line.frame = CGRectMake(0, STATUS_BAR_HEIGHT + SEARCH_BAR_HEIGHT + SEG_BAR_HEIGHT + MARGIN - 1, [UIScreen mainScreen].bounds.size.width, 1);
+    [self.view.layer addSublayer:line];
+    
+    [_searchBar becomeFirstResponder];
+    _queryView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
 //取消searchbar背景色
@@ -174,8 +189,9 @@
     CGFloat offset_y = STATUS_BAR_HEIGHT;
 //    _inputView.frame = CGRectMake(0, offset_y, width, SEARCH_BAR_HEIGHT);
  
-    _searchBar.frame = CGRectMake(0, offset_y, width - CANCEL_BTN_WIDTH, SEARCH_BAR_HEIGHT);
-    _cancelBgView.frame = CGRectMake(width - CANCEL_BTN_WIDTH, offset_y, CANCEL_BTN_WIDTH, SEARCH_BAR_HEIGHT);
+    _searchBar.frame = CGRectMake(0, offset_y, width, SEARCH_BAR_HEIGHT);
+//    _searchBar.frame = CGRectMake(0, offset_y, width - CANCEL_BTN_WIDTH, SEARCH_BAR_HEIGHT);
+//    _cancelBgView.frame = CGRectMake(width - CANCEL_BTN_WIDTH, offset_y, CANCEL_BTN_WIDTH, SEARCH_BAR_HEIGHT);
     
     offset_y += SEARCH_BAR_HEIGHT;
     _seg.frame = CGRectMake(0, offset_y, width, SEG_BAR_HEIGHT);
@@ -275,9 +291,9 @@
     return 44;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 8;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+//    return 8;
+//}
 
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     FoundSearchHeader* header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"found header"];
@@ -288,17 +304,21 @@
     
 //    if (section == 0) {
     if (_fm.previewDic.count == 0) {
-        NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
-        NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-        NSString* filepath = [resourceBundle pathForResource:@"found_hot_tag" ofType:@"png"];
-        UIImage* img = [UIImage imageNamed:filepath];
-        header.headImg.image = img;
-        header.headImg.frame = CGRectMake(header.headImg.frame.origin.x, header.headImg.frame.origin.y, 25, 25);
-        header.headImg.contentMode = UIViewContentModeScaleAspectFit;
+//        NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
+//        NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+//        NSString* filepath = [resourceBundle pathForResource:@"found_hot_tag" ofType:@"png"];
+//        UIImage* img = [UIImage imageNamed:filepath];
+//        header.headImg.image = img;
+//        header.headImg.frame = CGRectMake(header.headImg.frame.origin.x, header.headImg.frame.origin.y, 25, 25);
+//        header.headImg.contentMode = UIViewContentModeScaleAspectFit;
         header.headLabell.text = @"热门标签";
+        header.headLabell.textColor = [UIColor colorWithWhite:0.3059 alpha:1.f];
+        header.headLabell.font = [UIFont systemFontOfSize:14.f];
         
     } else {
         header.headLabell.text = @"搜索结果";
+        header.headLabell.textColor = [UIColor colorWithWhite:0.3059 alpha:1.f];
+        header.headLabell.font = [UIFont systemFontOfSize:14.f];
     }
 
     header.backgroundView = [[UIImageView alloc] initWithImage:[FoundSearchController imageWithColor:[UIColor whiteColor] size:header.bounds.size alpha:1.0]];

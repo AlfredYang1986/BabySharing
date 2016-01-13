@@ -23,25 +23,25 @@
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" tag="-3" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FK0-S6-3L0">
-                        <rect key="frame" x="358" y="13" width="50" height="50"/>
+                        <rect key="frame" x="363" y="16" width="45" height="45"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="50" id="GbS-eK-GfP"/>
-                            <constraint firstAttribute="height" constant="50" id="Jbc-Rx-yhc"/>
+                            <constraint firstAttribute="width" constant="45" id="GbS-eK-GfP"/>
+                            <constraint firstAttribute="height" constant="45" id="Jbc-Rx-yhc"/>
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" tag="-2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KIi-pJ-96g">
                         <rect key="frame" x="300" y="13" width="50" height="50"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="50" id="UGl-mB-rsg"/>
-                            <constraint firstAttribute="height" constant="50" id="cLX-nq-CbR"/>
+                            <constraint firstAttribute="width" constant="45" id="UGl-mB-rsg"/>
+                            <constraint firstAttribute="height" constant="45" id="cLX-nq-CbR"/>
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" tag="-1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fAu-Zm-eJE">
                         <rect key="frame" x="242" y="13" width="50" height="50"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="50" id="P2z-61-Np4"/>
-                            <constraint firstAttribute="width" constant="50" id="TCY-gZ-0gw"/>
-                            <constraint firstAttribute="height" constant="50" id="geZ-ua-oan"/>
+                            <constraint firstAttribute="width" constant="45" id="TCY-gZ-0gw"/>
+                            <constraint firstAttribute="height" constant="45" id="geZ-ua-oan"/>
                             <constraint firstAttribute="width" constant="50" id="pP0-1X-6wp"/>
                         </constraints>
                         <variation key="default">
@@ -60,11 +60,11 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="fAu-Zm-eJE" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="CQf-2o-za1"/>
-                    <constraint firstItem="FK0-S6-3L0" firstAttribute="leading" secondItem="KIi-pJ-96g" secondAttribute="trailing" id="CzE-0s-s4q"/>
+                    <constraint firstItem="FK0-S6-3L0" firstAttribute="leading" secondItem="KIi-pJ-96g" secondAttribute="trailing" constant="4" id="CzE-0s-s4q"/>
                     <constraint firstItem="FK0-S6-3L0" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="LYS-h1-dbP"/>
                     <constraint firstItem="KIi-pJ-96g" firstAttribute="leading" secondItem="fAu-Zm-eJE" secondAttribute="trailing" constant="8" id="XEo-w7-9Ge"/>
                     <constraint firstItem="fAu-Zm-eJE" firstAttribute="leading" secondItem="rms-cc-DID" secondAttribute="trailing" constant="28" id="ak1-ZX-1vb"/>
-                    <constraint firstItem="KIi-pJ-96g" firstAttribute="leading" secondItem="fAu-Zm-eJE" secondAttribute="trailing" id="cor-VD-442"/>
+                    <constraint firstItem="KIi-pJ-96g" firstAttribute="leading" secondItem="fAu-Zm-eJE" secondAttribute="trailing" constant="4" id="cor-VD-442"/>
                     <constraint firstItem="dLk-81-nF9" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="kzD-Rm-oV9"/>
                     <constraint firstItem="dLk-81-nF9" firstAttribute="leading" secondItem="FK0-S6-3L0" secondAttribute="trailing" constant="8" id="lAv-uR-cFL"/>
                     <constraint firstItem="rms-cc-DID" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="mVC-6u-HwL"/>

@@ -53,6 +53,7 @@
     [barBtn addTarget:self action:@selector(didPopViewControllerBtn) forControlEvents:UIControlEventTouchDown];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn];
+    self.view.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
     
     [self asyncQueryData];
 }

@@ -10,6 +10,8 @@
 #import "AlbumGridCell.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 
+#define BORDER_MODIFY       1
+
 @implementation AlbumTableCell
 
 @synthesize delegate = _delegate;
@@ -24,7 +26,7 @@
     if (image_view == nil) {
         image_view = [[NSMutableArray alloc]initWithCapacity:views_count];
     }
-    CGFloat screen_width = [UIScreen mainScreen].bounds.size.width;
+    CGFloat screen_width = [UIScreen mainScreen].bounds.size.width + 2 * BORDER_MODIFY;
     CGFloat step_width = screen_width / views_count;
     //      CGFloat height = rc.size.height;
     CGFloat height = [AlbumTableCell prefferCellHeight];
@@ -39,7 +41,7 @@
         if (index > image_arr.count)
             continue;
         
-        AlbumGridCell* tmp = [[AlbumGridCell alloc]initWithFrame:CGRectMake(index * step_width, 0, step_width, height)];
+        AlbumGridCell* tmp = [[AlbumGridCell alloc]initWithFrame:CGRectMake(index * step_width - BORDER_MODIFY, 0, step_width, height)];
         tmp.userInteractionEnabled = YES;
         
         UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageSubViewTaped:)];

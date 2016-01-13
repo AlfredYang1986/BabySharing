@@ -50,7 +50,7 @@
     NSString * bundlePath_dongda = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle_dongda = [NSBundle bundleWithPath:bundlePath_dongda];
 
-    UIFont* font = [UIFont systemFontOfSize:14.f];
+    UIFont* font = [UIFont systemFontOfSize:12.f];
     area_code_btn = [[UIButton alloc]initWithFrame:CGRectMake(INPUT_MARGIN, BASICMARGIN, AREA_CODE_WIDTH, INPUT_TEXT_FIELD_HEIGHT)];
     [area_code_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_dark_input_bg" ofType:@"png"]] forState:UIControlStateNormal];
     
@@ -86,15 +86,15 @@
     phone_area = [[UITextField alloc]initWithFrame:CGRectMake(first_line_start_margin, BASICMARGIN, width - AREA_CODE_WIDTH - 2 * INPUT_MARGIN, INPUT_TEXT_FIELD_HEIGHT)];
     [phone_area setBackground:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_light_input_bg" ofType:@"png"]]];
     phone_area.font = font;
-    CGRect frame = phone_area.frame;
     
+    CGRect frame = phone_area.frame;
     frame.size.width = TEXT_FIELD_LEFT_PADDING;
     UIView *leftview = [[UIView alloc] initWithFrame:frame];
     phone_area.leftViewMode = UITextFieldViewModeAlways;
     phone_area.leftView = leftview;
     
     phone_area.placeholder = @"输入您的手机号";
-    [phone_area setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
+    [phone_area setValue:[UIColor colorWithWhite:1.f alpha:0.50] forKeyPath:@"_placeholderLabel.textColor"];
     phone_area.textColor = [UIColor whiteColor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(phoneTextFieldChanged:) name:UITextFieldTextDidChangeNotification object:nil];
     phone_area.delegate = self;
@@ -134,10 +134,16 @@
     confirm_area = [[UITextField alloc]initWithFrame:CGRectMake(INPUT_MARGIN + AREA_CODE_WIDTH, BASICMARGIN + INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN, width - 2 * INPUT_MARGIN - AREA_CODE_WIDTH - CODE_BTN_WIDTH, INPUT_TEXT_FIELD_HEIGHT)];
     confirm_area.font = font;
     [confirm_area setBackground:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_light_input_bg" ofType:@"png"]]];
+   
+    CGRect frame = confirm_area.frame;
+    frame.size.width = TEXT_FIELD_LEFT_PADDING;
+    UIView *leftview = [[UIView alloc] initWithFrame:frame];
+    confirm_area.leftViewMode = UITextFieldViewModeAlways;
+    confirm_area.leftView = leftview;
     
     confirm_area.placeholder = @"请输入验证码";
-    confirm_area.textAlignment = NSTextAlignmentCenter;
-    [confirm_area setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
+    confirm_area.textAlignment = NSTextAlignmentLeft;
+    [confirm_area setValue:[UIColor colorWithWhite:1.f alpha:0.50] forKeyPath:@"_placeholderLabel.textColor"];
     confirm_area.textColor = [UIColor whiteColor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(confirmCodeTextFieldChanged:) name:UITextFieldTextDidChangeNotification object:nil];
     confirm_area.delegate = self;
@@ -171,11 +177,13 @@
     
     next_btn = [[OBShapedButton alloc]initWithFrame:CGRectMake(INPUT_MARGIN, BASICMARGIN + INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN + INPUT_TEXT_FIELD_HEIGHT + LOGIN_BTN_TOP_MARGIN, width - 2 * INPUT_MARGIN, LOGIN_BTN_HEIGHT)];
     [next_btn addTarget:self action:@selector(nextBtnSelected:) forControlEvents:UIControlEventTouchDown];
-    next_btn.titleLabel.font = [UIFont systemFontOfSize:12.f];
-    [next_btn setTitle:@"登陆" forState:UIControlStateNormal];
+    next_btn.titleLabel.font = [UIFont systemFontOfSize:14.f];
+    [next_btn setTitle:@"登 陆" forState:UIControlStateNormal];
     [next_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     next_btn.clipsToBounds = YES;
     [next_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_btn_bg" ofType:@"png"]] forState:UIControlStateNormal];
+    [next_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_btn_bg_disable" ofType:@"png"]] forState:UIControlStateDisabled];
+    next_btn.enabled = NO;
     
     [self addSubview:next_btn];
 }
@@ -195,22 +203,27 @@
     self.bounds = CGRectMake(0, 0, width, height);
 }
 
-
-
 - (void)phoneTextFieldChanged:(UITextField*)tf {
-    if ([phone_area.text isEqualToString:@""]) {
-        
+//    if (!([phone_area.text isEqualToString:@""] || [confirm_area.text isEqualToString:@""])) {
+    if (![phone_area.text isEqualToString:@""] && confirm_area.text.length >= 5) {
+        next_btn.enabled = YES;
     } else {
-    
+        next_btn.enabled = NO;
     }
 }
 
 - (void)confirmCodeTextFieldChanged:(UITextField*)tf {
-    if ([confirm_area.text isEqualToString:@""]) {
-    
+//    if (!([phone_area.text isEqualToString:@""] || [confirm_area.text isEqualToString:@""])) {
+    if (![phone_area.text isEqualToString:@""] && confirm_area.text.length >= 5) {
+        next_btn.enabled = YES;
     } else {
-    
+        next_btn.enabled = NO;
     }
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if (textField == confirm_area && confirm_area.text.length >= 5 && ![string isEqualToString:@""]) return NO;
+    else return YES;
 }
 
 - (void)endEditing {

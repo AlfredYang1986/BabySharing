@@ -16,10 +16,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yta-1M-4L6">
-                        <rect key="frame" x="11" y="29" width="20" height="15"/>
+                        <rect key="frame" x="11" y="29" width="0.0" height="15"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="kHi-mD-Y0K"/>
-                            <constraint firstAttribute="width" constant="20" id="qlg-ct-TyU"/>
+                            <constraint firstAttribute="width" id="qlg-ct-TyU"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="认识更多朋友" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Qv-mc-H3p">
@@ -90,7 +90,7 @@
                     <constraint firstItem="sOY-mt-jFH" firstAttribute="leading" secondItem="hPc-zB-vfc" secondAttribute="trailing" constant="-10" id="jPS-eQ-zH0"/>
                     <constraint firstItem="GLx-u4-bxu" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="jwf-yD-Ict"/>
                     <constraint firstItem="GLx-u4-bxu" firstAttribute="leading" secondItem="Ob5-SH-baf" secondAttribute="trailing" constant="48" id="mki-Ta-JKg"/>
-                    <constraint firstItem="9Qv-mc-H3p" firstAttribute="leading" secondItem="yta-1M-4L6" secondAttribute="trailing" constant="8" id="tn3-G1-yiJ"/>
+                    <constraint firstItem="9Qv-mc-H3p" firstAttribute="leading" secondItem="yta-1M-4L6" secondAttribute="trailing" id="tn3-G1-yiJ"/>
                     <constraint firstItem="hPc-zB-vfc" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="tvJ-bc-iBX"/>
                     <constraint firstItem="9Qv-mc-H3p" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="x14-0N-nxJ"/>
                 </constraints>

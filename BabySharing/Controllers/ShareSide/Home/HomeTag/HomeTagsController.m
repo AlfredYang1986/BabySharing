@@ -17,12 +17,16 @@
 #import "HomeViewController.h"
 #import "UserHomeViewDataDelegate.h"
 
-#define TAGED_USER_CELL             0
-#define TAGED_RESULT_COUNT_CELL     1
+#define TAGED_USER_CELL                 0
+#define TAGED_RESULT_COUNT_CELL         1
 
-#define TAGED_OFFSET                2
+#define TAGED_OFFSET                    2
 
-#define PHOTO_PER_LINE  3
+#define PHOTO_PER_LINE                  3
+
+
+#define COUNT_CELL_CONTENT_HEIGHT       46
+#define COUNT_CELL_MARGIN               10
 
 @interface HomeTagsController () <AlbumTableCellDelegate>
 //@property (weak, nonatomic) IBOutlet UIImageView *imgView;
@@ -86,6 +90,16 @@
     self.view.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
     _queryView.backgroundColor = [UIColor whiteColor];
     _queryView.separatorStyle = UITableViewCellSeparatorStyleNone;
+   
+#define STATUS_HEIGHT               20
+#define NAV_BAR_HEIGHT              44
+#define TABVIEW_TOP_MARGIN          10
+    CALayer* line = [CALayer layer];
+    line.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.10].CGColor;
+//    line.borderColor = [UIColor redColor].CGColor;
+    line.borderWidth = 1.f;
+    line.frame = CGRectMake(0, STATUS_HEIGHT + NAV_BAR_HEIGHT + TABVIEW_TOP_MARGIN - 1, [UIScreen mainScreen].bounds.size.width, 1);
+    [self.view.layer addSublayer:line];
 }
 
 - (void)didPopControllerBtnSelected {
@@ -154,7 +168,7 @@
         return [FoundMoreFriendCell preferredHeight];
         
     } else if (indexPath.row == TAGED_RESULT_COUNT_CELL) {
-        return 46 + 8;
+        return COUNT_CELL_CONTENT_HEIGHT + COUNT_CELL_MARGIN;
         
     } else {
         return [AlbumTableCell prefferCellHeight];
@@ -186,10 +200,22 @@
         }
        
         if ([cell viewWithTag:-1] == nil) {
-            UIView* margin = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 8)];
+            UIView* margin = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, COUNT_CELL_MARGIN)];
             margin.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
             margin.tag = -1;
             [cell addSubview:margin];
+            
+            CALayer* layer = [CALayer layer];
+            layer.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.25].CGColor;
+            layer.borderWidth = 1.f;
+            layer.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 1);
+            [cell.layer addSublayer:layer];
+            
+            CALayer* line = [CALayer layer];
+            line.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.10].CGColor;
+            line.borderWidth = 1.f;
+            line.frame = CGRectMake(0, COUNT_CELL_MARGIN - 1, [UIScreen mainScreen].bounds.size.width, 1);
+            [cell.layer addSublayer:line];
         }
        
         if ([cell viewWithTag:-2] == nil) {
@@ -204,7 +230,7 @@
         UILabel* label = (UILabel*)[cell viewWithTag:-2];
         label.text = [NSString stringWithFormat:@"%lu个分享", (unsigned long)content_arr.count];
         [label sizeToFit];
-        label.center = CGPointMake(8 + 8 + label.frame.size.width / 2, 10 + (cell.frame.size.height - 8) / 2);
+        label.center = CGPointMake(10.5 + label.frame.size.width / 2, COUNT_CELL_MARGIN + COUNT_CELL_CONTENT_HEIGHT / 2);
 
         return cell;
         

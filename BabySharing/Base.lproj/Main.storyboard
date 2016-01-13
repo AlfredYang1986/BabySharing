@@ -374,11 +374,11 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <constraints>
                             <constraint firstItem="i1W-mi-dmf" firstAttribute="top" secondItem="fJh-Ts-ais" secondAttribute="bottom" id="Jcn-ti-chM"/>
                             <constraint firstAttribute="trailingMargin" secondItem="fJh-Ts-ais" secondAttribute="trailing" constant="-16" id="Tg7-5t-dPr"/>
-                            <constraint firstItem="fJh-Ts-ais" firstAttribute="top" secondItem="19h-Xu-hfB" secondAttribute="bottom" constant="8" id="Xsc-Jb-pRg"/>
-                            <constraint firstItem="19h-Xu-hfB" firstAttribute="leading" secondItem="Gom-rl-E18" secondAttribute="leadingMargin" id="Z96-vs-e64"/>
-                            <constraint firstItem="19h-Xu-hfB" firstAttribute="trailing" secondItem="Gom-rl-E18" secondAttribute="trailingMargin" id="lWJ-uV-B9l"/>
+                            <constraint firstItem="fJh-Ts-ais" firstAttribute="top" secondItem="19h-Xu-hfB" secondAttribute="bottom" id="Xsc-Jb-pRg"/>
+                            <constraint firstItem="19h-Xu-hfB" firstAttribute="leading" secondItem="Gom-rl-E18" secondAttribute="leadingMargin" constant="-16" id="Z96-vs-e64"/>
+                            <constraint firstItem="19h-Xu-hfB" firstAttribute="trailing" secondItem="Gom-rl-E18" secondAttribute="trailingMargin" constant="16" id="lWJ-uV-B9l"/>
                             <constraint firstItem="fJh-Ts-ais" firstAttribute="leading" secondItem="Gom-rl-E18" secondAttribute="leadingMargin" constant="-16" id="rTk-ga-mrH"/>
-                            <constraint firstItem="19h-Xu-hfB" firstAttribute="top" secondItem="do5-gs-m9i" secondAttribute="bottom" constant="8" id="zZn-qg-HOU"/>
+                            <constraint firstItem="19h-Xu-hfB" firstAttribute="top" secondItem="do5-gs-m9i" secondAttribute="bottom" constant="10" id="zZn-qg-HOU"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="咚哒用户协议" id="Eh2-dx-6Yu"/>
@@ -538,16 +538,24 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ch6-NT-arK">
-                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Zgg-Ar-Wco">
+                                <rect key="frame" x="0.0" y="293" width="600" height="307"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="xdg-vF-3pg" id="sa8-Sz-Hd8"/>
+                                    <outlet property="delegate" destination="xdg-vF-3pg" id="jyU-CR-K6N"/>
+                                </connections>
+                            </tableView>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6gl-Dr-p7I">
+                                <rect key="frame" x="0.0" y="88" width="600" height="30"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="A67-il-nhp"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ch6-NT-arK">
+                                <rect key="frame" x="0.0" y="147" width="600" height="44"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qmu-Kk-Hp6">
-                                        <rect key="frame" x="8" y="8" width="40" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="Xoy-kz-h3d"/>
-                                            <constraint firstAttribute="width" constant="30" id="xaF-0h-bMf"/>
-                                        </constraints>
-                                    </imageView>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zDo-Yo-pRA">
                                         <rect key="frame" x="56" y="13" width="348" height="30"/>
                                         <constraints>
@@ -569,30 +577,13 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="1B1-tn-RUF"/>
-                                    <constraint firstItem="qmu-Kk-Hp6" firstAttribute="top" secondItem="Ch6-NT-arK" secondAttribute="top" constant="8" id="EhN-Pc-2pW"/>
-                                    <constraint firstItem="zDo-Yo-pRA" firstAttribute="centerY" secondItem="Ch6-NT-arK" secondAttribute="centerY" id="HnR-1V-uEx"/>
-                                    <constraint firstItem="qmu-Kk-Hp6" firstAttribute="centerY" secondItem="Ch6-NT-arK" secondAttribute="centerY" id="Mqm-y4-Q2m"/>
+                                    <constraint firstItem="zDo-Yo-pRA" firstAttribute="leading" secondItem="Ch6-NT-arK" secondAttribute="leading" constant="11" id="3wl-wF-4sc"/>
+                                    <constraint firstItem="zDo-Yo-pRA" firstAttribute="centerY" secondItem="Ch6-NT-arK" secondAttribute="centerY" constant="-3" id="HnR-1V-uEx"/>
                                     <constraint firstAttribute="trailing" secondItem="em9-St-Jiq" secondAttribute="trailing" constant="8" id="XFa-qg-LIb"/>
-                                    <constraint firstItem="zDo-Yo-pRA" firstAttribute="leading" secondItem="qmu-Kk-Hp6" secondAttribute="trailing" constant="8" id="Zlv-iX-oL3"/>
-                                    <constraint firstItem="zDo-Yo-pRA" firstAttribute="leading" secondItem="qmu-Kk-Hp6" secondAttribute="trailing" constant="8" id="gIs-QJ-iLx"/>
                                     <constraint firstItem="em9-St-Jiq" firstAttribute="leading" secondItem="zDo-Yo-pRA" secondAttribute="trailing" constant="10" id="lAD-7M-DRF"/>
-                                    <constraint firstItem="em9-St-Jiq" firstAttribute="centerY" secondItem="Ch6-NT-arK" secondAttribute="centerY" id="nKo-ID-Pd1"/>
-                                    <constraint firstItem="qmu-Kk-Hp6" firstAttribute="leading" secondItem="Ch6-NT-arK" secondAttribute="leading" constant="8" id="y0u-m3-yzm"/>
+                                    <constraint firstItem="em9-St-Jiq" firstAttribute="centerY" secondItem="Ch6-NT-arK" secondAttribute="centerY" constant="-3" id="nKo-ID-Pd1"/>
                                 </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="EhN-Pc-2pW"/>
-                                    </mask>
-                                </variation>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Zgg-Ar-Wco">
-                                <rect key="frame" x="0.0" y="108" width="600" height="492"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="xdg-vF-3pg" id="sa8-Sz-Hd8"/>
-                                    <outlet property="delegate" destination="xdg-vF-3pg" id="jyU-CR-K6N"/>
-                                </connections>
-                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -601,14 +592,19 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                             <constraint firstItem="Ch6-NT-arK" firstAttribute="top" secondItem="lAU-OW-yGM" secondAttribute="bottom" id="9yB-Wp-yVc"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Zgg-Ar-Wco" secondAttribute="trailing" constant="-16" id="Jxc-kI-seX"/>
                             <constraint firstItem="Zgg-Ar-Wco" firstAttribute="top" secondItem="Ch6-NT-arK" secondAttribute="bottom" id="UFx-vo-s67"/>
+                            <constraint firstItem="Ch6-NT-arK" firstAttribute="top" secondItem="6gl-Dr-p7I" secondAttribute="bottom" id="VeM-qz-G1A"/>
                             <constraint firstItem="Zgg-Ar-Wco" firstAttribute="leading" secondItem="wRa-na-O1g" secondAttribute="leadingMargin" constant="-16" id="WTG-R5-UPm"/>
-                            <constraint firstItem="Zgg-Ar-Wco" firstAttribute="leading" secondItem="wRa-na-O1g" secondAttribute="leadingMargin" constant="-20" id="ZHA-47-7Mc"/>
+                            <constraint firstItem="Zgg-Ar-Wco" firstAttribute="leading" secondItem="wRa-na-O1g" secondAttribute="leadingMargin" constant="-10" id="ZHA-47-7Mc"/>
+                            <constraint firstItem="6gl-Dr-p7I" firstAttribute="top" secondItem="lAU-OW-yGM" secondAttribute="bottom" id="cLF-Ol-wo8"/>
+                            <constraint firstItem="6gl-Dr-p7I" firstAttribute="leading" secondItem="wRa-na-O1g" secondAttribute="leadingMargin" constant="-16" id="dVr-Oc-254"/>
                             <constraint firstAttribute="bottomMargin" secondItem="Zgg-Ar-Wco" secondAttribute="bottom" id="h7n-HI-eUQ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="6gl-Dr-p7I" secondAttribute="trailing" constant="-16" id="iXs-eG-8m9"/>
                             <constraint firstAttribute="bottomMargin" secondItem="Zgg-Ar-Wco" secondAttribute="bottom" id="qa1-6P-0nb"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Zgg-Ar-Wco" secondAttribute="trailing" constant="-20" id="rmE-Nk-QwL"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Zgg-Ar-Wco" secondAttribute="trailing" constant="-16" id="rmE-Nk-QwL"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="9yB-Wp-yVc"/>
                                 <exclude reference="Jxc-kI-seX"/>
                                 <exclude reference="WTG-R5-UPm"/>
                                 <exclude reference="qa1-6P-0nb"/>
@@ -618,8 +614,9 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                     <navigationItem key="navigationItem" title="Choose Contry or Area" id="yTl-BN-o3b"/>
                     <connections>
                         <outlet property="areaTableView" destination="Zgg-Ar-Wco" id="0gc-ye-DuB"/>
+                        <outlet property="bgView" destination="Ch6-NT-arK" id="AUx-d6-eDv"/>
                         <outlet property="confirmBtn" destination="em9-St-Jiq" id="mb0-CN-4VF"/>
-                        <outlet property="searchIcon" destination="qmu-Kk-Hp6" id="jEN-6g-sCa"/>
+                        <outlet property="fakeBar" destination="6gl-Dr-p7I" id="aNI-oj-Fdv"/>
                         <outlet property="searchTextField" destination="zDo-Yo-pRA" id="hBX-cG-Lhg"/>
                     </connections>
                 </viewController>
@@ -1045,7 +1042,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="IeB-6H-uaG" firstAttribute="top" secondItem="bhM-nC-JsR" secondAttribute="bottom" constant="8" id="ECD-xh-5ib"/>
+                            <constraint firstItem="IeB-6H-uaG" firstAttribute="top" secondItem="bhM-nC-JsR" secondAttribute="bottom" constant="10" id="ECD-xh-5ib"/>
                             <constraint firstItem="IeB-6H-uaG" firstAttribute="leading" secondItem="r25-e5-lgC" secondAttribute="leadingMargin" constant="-16" id="H8g-9f-eTD"/>
                             <constraint firstAttribute="trailingMargin" secondItem="IeB-6H-uaG" secondAttribute="trailing" constant="-16" id="R2V-eC-RwX"/>
                             <constraint firstItem="fwt-m1-AVh" firstAttribute="top" secondItem="IeB-6H-uaG" secondAttribute="bottom" id="mJu-j3-kqC"/>

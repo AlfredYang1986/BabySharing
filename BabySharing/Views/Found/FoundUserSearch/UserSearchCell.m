@@ -19,8 +19,8 @@
 #import "UserHomeViewDataDelegate.h"
 #import "AppDelegate.h"
 
-#define CELL_HEADER_HEIGHT  80//55
-#define CELL_FOOTER_HEIGHT  25 + 8
+#define CELL_HEADER_HEIGHT  55
+#define CELL_FOOTER_HEIGHT  25 + 10
 
 #define PHOTO_PER_LINE      3
 
@@ -71,7 +71,7 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    queryView.frame = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height);
+    queryView.frame = CGRectMake(4, 0, self.bounds.size.width, self.bounds.size.height);
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -141,6 +141,7 @@
         }
         
 //        NSDictionary* tmp = [data_arr objectAtIndex:indexPath.row];
+        cell.cellHeight = CELL_HEADER_HEIGHT;
         [cell setUserScreenPhoto:screen_photo];
         [cell setRelationship:2];
         [cell setUserScreenName:screen_name];
@@ -197,9 +198,21 @@
         }
         
         if ([cell viewWithTag:2] == nil) {
-            UIView* marginView = [[UIView alloc]initWithFrame:CGRectMake(0, 25, [UIScreen mainScreen].bounds.size.width, 8)];
+            UIView* marginView = [[UIView alloc]initWithFrame:CGRectMake(0, 25, [UIScreen mainScreen].bounds.size.width, 10)];
             marginView.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
             [cell addSubview:marginView];
+            
+            CALayer* layer = [CALayer layer];
+            layer.borderWidth = 1.f;
+            layer.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.35].CGColor;
+            layer.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 1);
+            [marginView.layer addSublayer:layer];
+            
+            CALayer* line = [CALayer layer];
+            line.borderWidth = 1.f;
+            line.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.10].CGColor;
+            line.frame = CGRectMake(0, 10 - 1, [UIScreen mainScreen].bounds.size.width, 1);
+            [marginView.layer addSublayer:line];
         }
         
         return cell;

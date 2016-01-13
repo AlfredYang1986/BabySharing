@@ -545,7 +545,9 @@
     [dic setObject:_current_user.who.user_id forKey:@"user_id"];
     [dic setObject:_current_user.who.auth_token forKey:@"auth_token"];
 
-    [dic setObject:_apns_token forKey:@"device_token"];
+    if (_apns_token) {
+        [dic setObject:_apns_token forKey:@"device_token"];
+    }
     
     NSError * error = nil;
     NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
