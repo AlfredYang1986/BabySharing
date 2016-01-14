@@ -159,12 +159,15 @@
 
     confirm_btn = [[OBShapedButton alloc]initWithFrame:CGRectMake(width - INPUT_MARGIN - CODE_BTN_WIDTH, BASICMARGIN + INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN, CODE_BTN_WIDTH, INPUT_TEXT_FIELD_HEIGHT)];
     confirm_btn.titleLabel.font = [UIFont systemFontOfSize:12.f];
+//    [confirm_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
+//    [confirm_btn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [confirm_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     confirm_btn.clipsToBounds = YES;
     [confirm_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_dark_input_bg" ofType:@"png"]] forState:UIControlStateNormal];
     
     [confirm_btn setTitle:@"发送验证码" forState:UIControlStateNormal];
     [confirm_btn addTarget:self action:@selector(confirmBtnSelected:) forControlEvents:UIControlEventTouchDown];
+//    confirm_btn.enabled = NO;
     
     [self addSubview:confirm_btn];
 }
@@ -210,6 +213,12 @@
     } else {
         next_btn.enabled = NO;
     }
+    
+//    if (phone_area.text.length > 0) {
+//        confirm_btn.enabled = YES;
+//    } else {
+//        confirm_btn.enabled = NO;
+//    }
 }
 
 - (void)confirmCodeTextFieldChanged:(UITextField*)tf {

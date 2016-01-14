@@ -109,8 +109,8 @@ enum DisplaySide {
 #define LOGO_HEIGHT     50
 #define LOGO_TOP_MARGIN 97
 
-#define INPUT_VIEW_TOP_MARGIN       [UIScreen mainScreen].bounds.size.height / 6.0
-#define INPUT_VIEW_START_POINT      title.frame.origin.y + title.frame.size.height + INPUT_VIEW_TOP_MARGIN
+#define INPUT_VIEW_TOP_MARGIN       ([UIScreen mainScreen].bounds.size.height / 6.0)
+#define INPUT_VIEW_START_POINT      (title.frame.origin.y + title.frame.size.height + INPUT_VIEW_TOP_MARGIN)
 
 - (void)createSubviews {
 
@@ -421,7 +421,7 @@ enum DisplaySide {
         return;
     }
     
-    if (inputView.frame.origin.y == INPUT_VIEW_START_POINT) {
+    if (fabs(inputView.frame.origin.y - INPUT_VIEW_START_POINT) < 1.f / 10000.0) {
         title.hidden = YES;
         slg.hidden = YES;
         [self moveView:-110];

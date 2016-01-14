@@ -26,9 +26,7 @@
 #define MARGIN_MODIFY                       5
 
 @implementation LoginSNSView {
-//    UIImageView* split_img;
     UIView* split_img;
-    UIButton * user_private_btn;
     NSArray* sns_btns;
 }
 
@@ -54,7 +52,7 @@
     UIFont* font = [UIFont systemFontOfSize:14.f];
     CGSize sz = [@"用户协议&隐私政策" sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
 
-#define SPLIT_VIEW_HEIGHT                   15
+#define SPLIT_VIEW_HEIGHT                   18
 #define SPLIT_VIEW_TEXT_WIDTH               83
 #define SPLIT_VIEW_TEXT_LINE_MARGIN         13.5
     
@@ -121,13 +119,6 @@
 
     CGFloat forth_line_ver_line = third_line_ver_margin + sz.height + MARGIN_MODIFY / 2 + 2 * BASICMARGIN + SNS_BUTTON_HEIGHT / 2;
     CGFloat fifth_line_ver_line = forth_line_ver_line + SNS_BUTTON_HEIGHT / 2 + 2 * BASICMARGIN;
-
-    user_private_btn = [[UIButton alloc]initWithFrame:CGRectMake((width - sz.width) / 2, fifth_line_ver_line, sz.width, sz.height)];
-    user_private_btn.titleLabel.font = [UIFont systemFontOfSize:12.f];
-    [user_private_btn setTitleColor:[UIColor colorWithWhite:1.f alpha:0.6] forState:UIControlStateNormal];
-    [user_private_btn setTitle:@"用户协议&隐私政策" forState:UIControlStateNormal];
-    [user_private_btn addTarget:self action:@selector(userPrivacyBtnSelected) forControlEvents:UIControlEventTouchDown];
-    [self addSubview:user_private_btn];
     
     CGFloat height = fifth_line_ver_line + sz.height + BASICMARGIN + MARGIN_MODIFY;
     self.bounds = CGRectMake(0, 0, width, height);
@@ -135,8 +126,6 @@
     wechat_btn.center = CGPointMake(width / 2 - SNS_BUTTON_MARGIN, height / 2 + SPLIT_VIEW_HEIGHT / 2);
     qq_btn.center = CGPointMake(width / 2, height / 2 + SPLIT_VIEW_HEIGHT / 2);
     weibo_btn.center = CGPointMake(width / 2 + SNS_BUTTON_MARGIN, height / 2 + SPLIT_VIEW_HEIGHT / 2);
-
-
 }
 
 - (void)qqBtnSelected:(UIButton*)sender {

@@ -10,23 +10,27 @@
 
 @protocol NickNameInputViewDelegate <NSObject>
 
-- (void)didStartInputName;
-- (void)didEndInputName;
+//- (void)didStartInputName;
+//- (void)didEndInputName;
+//- (void)didStartInputTags;
 
-- (void)didStartInputTags;
+- (void)didStartEditingScreenName;
+- (void)didEndEditingScreenName;
+- (void)didEditRoleTag;
+- (void)didClickNextBtn;
 
+- (NSString*)getPreScreenName;
+- (NSString*)getPreRoleTag;
 @end
 
 @interface NickNameInputView : UIView <UITextFieldDelegate>
 
 @property (nonatomic, weak) id<NickNameInputViewDelegate> delegate;
 
-- (id)initWithSNSLogin:(BOOL)sns_login;
-- (CGSize)getPreferredBounds;
+@property (nonatomic, weak, setter=setScreenName:, getter=getScreenName) NSString* screen_name;
+@property (nonatomic, weak, setter=setRoleTag:, getter=getRoleTag) NSString* role_tag;
 
-- (void)resetTags:(NSString*)tags;
+- (id)initWithFrame:(CGRect)frame;
 
-- (NSString*)getInputName;
 - (void)endInputName;
-- (NSString*)getInputTags;
 @end

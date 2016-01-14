@@ -432,7 +432,6 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <segue destination="VBe-2x-igG" kind="presentation" identifier="contentSegue" id="xp0-sv-3qd"/>
                         <segue destination="xdg-vF-3pg" kind="push" identifier="areaCode" id="aA6-l7-gCY"/>
                         <segue destination="SUX-v2-GUS" kind="custom" identifier="loginSuccessSegue" customClass="LandingNextSegue" id="qbd-0n-vJA"/>
-                        <segue destination="abe-ov-l8U" kind="push" identifier="UserPrivacy" id="364-Ag-SdU"/>
                         <segue destination="zja-7A-2Mn" kind="custom" identifier="alreadyLogSegue" customClass="LandingNextSegue" id="p7c-UN-FtH"/>
                     </connections>
                 </viewController>
@@ -467,6 +466,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                     <navigationItem key="navigationItem" id="2bd-Z2-KRg"/>
                     <connections>
                         <segue destination="SBe-tp-xup" kind="push" identifier="SeachRoleTags" id="T0S-j0-lUX"/>
+                        <segue destination="abe-ov-l8U" kind="push" identifier="UserPrivacy" id="NSb-gu-xlf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Af1-4X-5tF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1894,7 +1894,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
         <image name="BackgroundImage" width="375" height="667"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="qbd-0n-vJA"/>
+        <segue reference="2PU-iO-cFw"/>
         <segue reference="Xl7-6t-OQ8"/>
     </inferredMetricsTieBreakers>
 </document>
