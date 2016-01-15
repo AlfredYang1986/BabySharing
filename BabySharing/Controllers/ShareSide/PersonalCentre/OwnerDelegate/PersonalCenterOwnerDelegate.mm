@@ -245,7 +245,7 @@
         [header setPersonalSign:[_delegate getSign]];
         [header setNickName:[_delegate getNickName]];
         
-        header.seg.selectedSegmentIndex = [_delegate getCurrentSegIndex];
+//        header.seg.selectedSegmentIndex = [_delegate getCurrentSegIndex];
         
         [header setRelations:UserPostOwnerConnectionsSamePerson];
         header.deleagate = _delegate;

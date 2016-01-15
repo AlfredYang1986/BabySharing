@@ -11,12 +11,6 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xxo-ZS-z1q">
-                    <rect key="frame" x="262" y="105" width="63" height="26"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mei-Rc-8ep">
                     <rect key="frame" x="269" y="32" width="50" height="50"/>
                     <constraints>
@@ -24,26 +18,14 @@
                         <constraint firstAttribute="width" constant="50" id="nOC-OO-1tu"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aie-ea-mbv">
-                    <rect key="frame" x="263" y="139" width="61" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                    <color key="textColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="Aie-ea-mbv" firstAttribute="centerX" secondItem="ChB-hb-hZ3" secondAttribute="centerX" id="4RT-Z1-HzB"/>
-                <constraint firstItem="Aie-ea-mbv" firstAttribute="top" secondItem="Xxo-ZS-z1q" secondAttribute="bottom" id="YXR-Ld-bWR"/>
-                <constraint firstItem="Xxo-ZS-z1q" firstAttribute="top" secondItem="mei-Rc-8ep" secondAttribute="bottom" constant="16" id="cW9-0v-D1w"/>
-                <constraint firstItem="Xxo-ZS-z1q" firstAttribute="centerX" secondItem="ChB-hb-hZ3" secondAttribute="centerX" id="iVb-ac-Z3E"/>
-                <constraint firstItem="mei-Rc-8ep" firstAttribute="top" secondItem="ChB-hb-hZ3" secondAttribute="top" constant="8" id="kfi-Wg-S07"/>
+                <constraint firstItem="mei-Rc-8ep" firstAttribute="top" secondItem="ChB-hb-hZ3" secondAttribute="top" constant="34" id="kfi-Wg-S07"/>
                 <constraint firstItem="mei-Rc-8ep" firstAttribute="centerX" secondItem="ChB-hb-hZ3" secondAttribute="centerX" id="xKV-53-0jm"/>
             </constraints>
             <connections>
                 <outlet property="imgView" destination="mei-Rc-8ep" id="nFv-cz-3Te"/>
-                <outlet property="locationLabel" destination="Aie-ea-mbv" id="XsQ-Pe-qa6"/>
-                <outlet property="nameLabel" destination="Xxo-ZS-z1q" id="7kp-hg-UH4"/>
             </connections>
             <point key="canvasLocation" x="180" y="394"/>
         </view>

@@ -32,6 +32,8 @@
 
 #import "ProfileOverView.h"
 
+#define STATUS_BAR_HEIGHT       20
+
 @interface PersonalCentreTmpViewController () <PersonalCenterProtocol, ProfileViewDelegate, AlbumTableCellDelegate, personalDetailChanged>
 @property (weak, nonatomic, readonly) NSString* current_user_id;
 @property (weak, nonatomic, readonly) NSString* current_auth_token;
@@ -52,6 +54,8 @@
     NSDictionary* dic_profile_details;
     
     NSInteger current_seg_index;
+    
+    UIView* bkView;
 }
 
 @synthesize current_auth_token = _current_auth_token;
@@ -168,6 +172,10 @@
         
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn];
     }
+    
+    bkView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, STATUS_BAR_HEIGHT)];
+    bkView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:bkView];
 }
 
 - (void)didPopControllerSelected {
@@ -181,22 +189,27 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated  {
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [self updateProfileDetails];
     [_om queryContentsByUser:_current_user_id withToken:_current_auth_token andOwner:_owner_id withStartIndex:0 finishedBlock:^(BOOL success) {
         [_queryView reloadData];
     }];
     
-    dispatch_queue_t cq = dispatch_queue_create("query collections", nil);
-    dispatch_async(cq, ^{
-        [_cqm queryCollectionContentsByUser:_current_user_id withToken:_current_user_id andOwner:_owner_id withStartIndex:0 finishedBlock:^(BOOL success) {
-            if (((ProfileOverView*)[_queryView headerViewForSection:0]).seg.selectedSegmentIndex == 3) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [_queryView reloadData];
-                });
-            }
-        }];
-    });
+//    dispatch_queue_t cq = dispatch_queue_create("query collections", nil);
+//    dispatch_async(cq, ^{
+//        [_cqm queryCollectionContentsByUser:_current_user_id withToken:_current_user_id andOwner:_owner_id withStartIndex:0 finishedBlock:^(BOOL success) {
+//            if (((ProfileOverView*)[_queryView headerViewForSection:0]).seg.selectedSegmentIndex == 3) {
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    [_queryView reloadData];
+//                });
+//            }
+//        }];
+//    });
 }
 
 #pragma mark - Navigation

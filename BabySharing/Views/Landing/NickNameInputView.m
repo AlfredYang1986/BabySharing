@@ -41,13 +41,13 @@
 
 @synthesize delegate = _delegate;
 
-- (id)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-        [self setUpWithFrame:frame];
-    }
-    return self;
-}
+//- (id)initWithFrame:(CGRect)frame {
+//    self = [super initWithFrame:frame];
+//    if (self) {
+//        [self setUpWithFrame:frame];
+//    }
+//    return self;
+//}
 
 - (void)createLabelInRect:(CGRect)rect andTitle:(NSString*)title andTopMargin:(CGFloat)top {
     NSString * bundlePath_dongda = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
@@ -130,6 +130,7 @@
     [next_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     next_btn.clipsToBounds = YES;
     [next_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_btn_bg" ofType:@"png"]] forState:UIControlStateNormal];
+    [next_btn addTarget:_delegate action:@selector(didClickNextBtn) forControlEvents:UIControlEventTouchUpInside];
 //    [next_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_btn_bg_disable" ofType:@"png"]] forState:UIControlStateDisabled];
 //    next_btn.enabled = NO;
     
@@ -144,7 +145,7 @@
     [self createLabelInRect:rect andTitle:@"昵称" andTopMargin:BASICMARGIN];
     name_text_field = [self createInputAreaInRect:rect andTopMargin:BASICMARGIN andPlaceholder:@"填写你的昵称" andPreString:[_delegate getPreScreenName] andRightImage:nil andCallback:@selector(textFieldChanged:)];
     [self createLabelInRect:rect andTitle:@"昵称" andTopMargin:BASICMARGIN + INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN];
-    tag_text_field = [self createInputAreaInRect:rect andTopMargin:BASICMARGIN + INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN andPlaceholder:@"填写你的角色标签" andPreString:[_delegate getPreScreenName] andRightImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"dongda_back_light" ofType:@"png"]] andCallback:@selector(textFieldChanged:)];
+    tag_text_field = [self createInputAreaInRect:rect andTopMargin:BASICMARGIN + INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN andPlaceholder:@"填写你的角色标签" andPreString:[_delegate getPreRoleTag] andRightImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"dongda_back_light" ofType:@"png"]] andCallback:@selector(textFieldChanged:)];
     [self createNextBtnInRect:rect];
 
     CGFloat height = BASICMARGIN + INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN + INPUT_TEXT_FIELD_HEIGHT + LOGIN_BTN_TOP_MARGIN + LOGIN_BTN_HEIGHT + BASICMARGIN;

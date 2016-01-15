@@ -30,7 +30,6 @@
 @property (nonatomic, weak, setter=setScreenName:, getter=getScreenName) NSString* screen_name;
 @property (nonatomic, weak, setter=setRoleTag:, getter=getRoleTag) NSString* role_tag;
 
-- (id)initWithFrame:(CGRect)frame;
-
+- (void)setUpWithFrame:(CGRect)rect;
 - (void)endInputName;
 @end

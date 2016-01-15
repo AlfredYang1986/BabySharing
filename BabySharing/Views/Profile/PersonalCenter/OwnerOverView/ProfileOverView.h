@@ -25,5 +25,5 @@
 + (CGFloat)preferredHeight;
 
 @property (nonatomic, weak) id<ProfileViewDelegate> deleagate;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *seg;
+//@property (weak, nonatomic) IBOutlet UISegmentedControl *seg;
 @end

@@ -76,8 +76,8 @@
     // Do any additional setup after loading the view.
 //    [self.navigationController setNavigationBarHidden:NO animated:NO];
    
-//    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
-//    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
 
     NSString * bundlePath_dongda = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle_dongda = [NSBundle bundleWithPath:bundlePath_dongda];
@@ -92,21 +92,25 @@
     [self.view addSubview:_loginImgBtn];
     [self.view bringSubviewToFront:_loginImgBtn];
    
+    _loginImgBtn.clipsToBounds = YES;
     if (_isSNSLogIn) {
         _loginImgBtn.hidden = YES;
+        UIImage* img = [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"User_Big"] ofType:@"png"]];
+        [_loginImgBtn setBackgroundImage:img forState:UIControlStateNormal];
+//        [self asyncGetUserImage];
     } else {
-         _loginImgBtn.clipsToBounds = YES;
-        
         UIImage* img = [UIImage imageNamed:[resourceBundle_dongda pathForResource:[NSString stringWithFormat:@"login_camera_btn"] ofType:@"png"]];
         [_loginImgBtn setBackgroundImage:img forState:UIControlStateNormal];
-        [_loginImgBtn addTarget:self action:@selector(didSelectImgBtn) forControlEvents:UIControlEventTouchUpInside];
     }
+    [_loginImgBtn addTarget:self action:@selector(didSelectImgBtn) forControlEvents:UIControlEventTouchUpInside];
     /***********************************************************************************************************************/
     
     /***********************************************************************************************************************/
     // input view
-    inputView = [[NickNameInputView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+//    inputView = [[NickNameInputView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    inputView = [[NickNameInputView alloc]init];
     inputView.delegate = self;
+    [inputView setUpWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     inputView.center = CGPointMake(SCREEN_WIDTH / 2, SCREEN_PHOTO_TOP_MARGIN + SCREEN_PHOTO_HEIGHT + INPUT_VIEW_2_SCREEN_PHOTO_MARGIN + inputView.frame.size.height / 2);
     
     [self.view addSubview:inputView];
@@ -231,6 +235,26 @@
 //    inputView.center = CGPointMake(width, height);
 //}
 
+//- (void)asyncGetUserImage {
+//    dispatch_queue_t queue = dispatch_queue_create("get user image", nil);
+//    dispatch_async(queue, ^{
+//        [TmpFileStorageModel enumImageWithName:[_login_attr objectForKey:@"screen_photo"] withDownLoadFinishBolck:^(BOOL success, UIImage* download_img) {
+//            if (success) {
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    [_loginImgBtn setBackgroundImage:download_img forState:UIControlStateNormal];
+//                    NSLog(@"change img success");
+//                });
+//            } else {
+//                NSLog(@"down load image %@ failed", [_login_attr objectForKey:@"screen_photo"]);
+//            }
+//        }];
+//        
+//        //        dispatch_async(dispatch_get_main_queue(), ^{
+//        //            [_loginImgBtn setBackgroundImage:img forState:UIControlStateNormal];
+//        //        });
+//    });
+//}
+
 - (void)userPrivacyBtnSelected {
     [self performSegueWithIdentifier:@"UserPrivacy" sender:nil];
 }
@@ -304,15 +328,20 @@
 }
 
 - (void)didClickNextBtn {
-    
+    [self didConfirm];
 }
 
 - (NSString*)getPreScreenName {
-    return @"No Implementation";
+    NSString* name = [_login_attr objectForKey:@"name"];
+    NSString* screen_name = [_login_attr objectForKey:@"screen_name"];
+    
+    if (name && [name isEqualToString:@""])
+        return screen_name;
+    else return name;
 }
 
 - (NSString*)getPreRoleTag {
-    return @"No Implementation";
+    return [_login_attr objectForKey:@"role_tag"];
 }
 
 - (void)didSelectGenderBtn:(UIButton*)sender {
