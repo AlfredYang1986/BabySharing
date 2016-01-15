@@ -683,7 +683,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
         <!--Setting-->
         <scene sceneID="zcu-Tp-Ihk">
             <objects>
-                <viewController id="Epo-Wf-qOr" customClass="ProfileSettingController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Epo-Wf-qOr" customClass="ProfileSettingController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jBv-pD-cZV"/>
                         <viewControllerLayoutGuide type="bottom" id="hQ9-J5-2Fb"/>
@@ -706,7 +706,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                             <constraint firstItem="a9i-Ha-SaP" firstAttribute="bottom" secondItem="OGk-em-arC" secondAttribute="bottomMargin" id="158-1O-QaX"/>
                             <constraint firstItem="a9i-Ha-SaP" firstAttribute="leading" secondItem="OGk-em-arC" secondAttribute="leadingMargin" constant="-16" id="90o-Tb-G74"/>
                             <constraint firstAttribute="trailingMargin" secondItem="a9i-Ha-SaP" secondAttribute="trailing" constant="-16" id="J8C-bj-KCs"/>
-                            <constraint firstItem="a9i-Ha-SaP" firstAttribute="top" secondItem="OGk-em-arC" secondAttribute="topMargin" id="egb-eI-aOV"/>
+                            <constraint firstItem="a9i-Ha-SaP" firstAttribute="top" secondItem="OGk-em-arC" secondAttribute="topMargin" constant="74" id="egb-eI-aOV"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Setting" id="KIp-DK-QrV"/>
@@ -1617,35 +1617,45 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uHa-v3-ve1">
-                                <rect key="frame" x="225" y="72" width="150" height="150"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="Ahm-9t-Fxb"/>
-                                    <constraint firstAttribute="height" constant="150" id="IXU-VV-lfr"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="版本号" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oHH-2f-5PM">
-                                <rect key="frame" x="279" y="289" width="51" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Nfl-Ep-dEe">
-                                <rect key="frame" x="0.0" y="326" width="600" height="141"/>
+                                <rect key="frame" x="0.0" y="324" width="600" height="141"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="132" id="4zt-lk-mKg"/>
+                                    <constraint firstAttribute="height" constant="88" id="4zt-lk-mKg"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="4zt-lk-mKg"/>
+                                    </mask>
+                                </variation>
                             </tableView>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6nL-kB-KJA">
+                                <rect key="frame" x="0.0" y="72" width="600" height="226"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uHa-v3-ve1">
+                                        <rect key="frame" x="225" y="75" width="150" height="75"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="250" id="Ahm-9t-Fxb"/>
+                                            <constraint firstAttribute="height" constant="169" id="IXU-VV-lfr"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="uHa-v3-ve1" secondAttribute="bottom" constant="26" id="Rr4-lk-pw5"/>
+                                    <constraint firstItem="uHa-v3-ve1" firstAttribute="centerX" secondItem="6nL-kB-KJA" secondAttribute="centerX" id="ajE-0i-vac"/>
+                                    <constraint firstAttribute="height" constant="250" id="mvA-V5-nmZ"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Nfl-Ep-dEe" firstAttribute="leading" secondItem="hCO-rp-TJH" secondAttribute="leadingMargin" constant="-16" id="4CG-g9-09e"/>
-                            <constraint firstAttribute="centerX" secondItem="uHa-v3-ve1" secondAttribute="centerX" id="AQo-SQ-GfO"/>
-                            <constraint firstAttribute="centerX" secondItem="oHH-2f-5PM" secondAttribute="centerX" id="M4v-N8-or0"/>
-                            <constraint firstItem="oHH-2f-5PM" firstAttribute="top" secondItem="uHa-v3-ve1" secondAttribute="bottom" constant="8" id="Tmk-9O-Oqp"/>
-                            <constraint firstItem="Nfl-Ep-dEe" firstAttribute="top" secondItem="oHH-2f-5PM" secondAttribute="bottom" constant="16" id="kh2-A7-2w8"/>
-                            <constraint firstItem="uHa-v3-ve1" firstAttribute="top" secondItem="3zM-vL-jc9" secondAttribute="bottom" constant="8" id="udw-zE-CZl"/>
+                            <constraint firstItem="Uua-q2-N4v" firstAttribute="top" secondItem="Nfl-Ep-dEe" secondAttribute="bottom" id="JLs-Zy-Spk"/>
+                            <constraint firstItem="6nL-kB-KJA" firstAttribute="top" secondItem="3zM-vL-jc9" secondAttribute="bottom" constant="10" id="eAR-ze-h31"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="6nL-kB-KJA" secondAttribute="trailing" constant="-20" id="eBf-BX-Pvb"/>
+                            <constraint firstItem="6nL-kB-KJA" firstAttribute="leading" secondItem="hCO-rp-TJH" secondAttribute="leadingMargin" constant="-20" id="fRy-JL-c86"/>
+                            <constraint firstItem="Nfl-Ep-dEe" firstAttribute="top" secondItem="6nL-kB-KJA" secondAttribute="bottom" id="m5F-vK-h0h"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Nfl-Ep-dEe" secondAttribute="trailing" constant="-16" id="yNt-T7-0Rd"/>
                         </constraints>
                     </view>
@@ -1653,7 +1663,6 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                     <connections>
                         <outlet property="logoImg" destination="uHa-v3-ve1" id="0Tm-jb-VXS"/>
                         <outlet property="settingView" destination="Nfl-Ep-dEe" id="7Yd-hf-Gel"/>
-                        <outlet property="versionLabel" destination="oHH-2f-5PM" id="neO-xX-a8o"/>
                         <segue destination="Y5Q-3I-InN" kind="push" identifier="VersionChanges" id="usm-AO-bWs"/>
                     </connections>
                 </viewController>
@@ -1895,6 +1904,6 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="2PU-iO-cFw"/>
-        <segue reference="Xl7-6t-OQ8"/>
+        <segue reference="mYA-47-s6C"/>
     </inferredMetricsTieBreakers>
 </document>

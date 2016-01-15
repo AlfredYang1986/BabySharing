@@ -86,7 +86,8 @@
     /*************************************************************************************************************************/
     // background view
     UIView* bkView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, [ProfileOverView preferredHeight])];
-    bkView.backgroundColor = [UIColor whiteColor];
+//    bkView.backgroundColor = [UIColor whiteColor];
+    bkView.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
     bkView.tag = -1;
     [self addSubview:bkView];
     /*************************************************************************************************************************/

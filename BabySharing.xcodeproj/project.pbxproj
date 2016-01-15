@@ -93,7 +93,6 @@
 		EE7910571B841CBE005E455B /* FoundPCGCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACBEE1B44E90300D05C0B /* FoundPCGCell.m */; };
 		EE7910591B841D14005E455B /* WEBlockingGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6D6DAB1B7B28A6004D29C8 /* WEBlockingGestureRecognizer.m */; };
 		EE79105B1B842105005E455B /* ProfileOverView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEE94E301B74BF870011321A /* ProfileOverView.xib */; };
-		EE79105C1B84212A005E455B /* ProfileOthersOverView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEE94E331B74BFBD0011321A /* ProfileOthersOverView.xib */; };
 		EE7910601B845818005E455B /* UIBarButtonItem+WEPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6D6DA91B7B28A6004D29C8 /* UIBarButtonItem+WEPopover.m */; };
 		EE7910631B847DBA005E455B /* ChatGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7910621B847DBA005E455B /* ChatGroupController.m */; };
 		EE7951971B45065200CC28A2 /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EE7951961B45065200CC28A2 /* libGPUImage.a */; };
@@ -285,7 +284,6 @@
 		EEE94E271B74BE3B0011321A /* ProfileSettingController.mm in Sources */ = {isa = PBXBuildFile; fileRef = EEE94E241B74BE3B0011321A /* ProfileSettingController.mm */; };
 		EEE94E2B1B74BE910011321A /* PersonalCentreOthersDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE94E2A1B74BE910011321A /* PersonalCentreOthersDelegate.m */; };
 		EEE94E311B74BF870011321A /* ProfileOverView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE94E2F1B74BF870011321A /* ProfileOverView.m */; };
-		EEE94E371B74C0810011321A /* ProfileOthersOverView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE94E361B74C0810011321A /* ProfileOthersOverView.m */; };
 		EEF29BC31C0ED2C2004B9511 /* ContentCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEF29BC11C0ED2C2004B9511 /* ContentCardView.m */; };
 		EEF29BC41C0ED2C2004B9511 /* ContentCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEF29BC21C0ED2C2004B9511 /* ContentCardView.xib */; };
 		EEF538F51B525F7F009C8CB9 /* PostPreViewEffectController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEF538F41B525F7F009C8CB9 /* PostPreViewEffectController.m */; };
@@ -842,9 +840,6 @@
 		EEE94E2E1B74BF870011321A /* ProfileOverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileOverView.h; sourceTree = "<group>"; };
 		EEE94E2F1B74BF870011321A /* ProfileOverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileOverView.m; sourceTree = "<group>"; };
 		EEE94E301B74BF870011321A /* ProfileOverView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileOverView.xib; sourceTree = "<group>"; };
-		EEE94E331B74BFBD0011321A /* ProfileOthersOverView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileOthersOverView.xib; sourceTree = "<group>"; };
-		EEE94E351B74C0810011321A /* ProfileOthersOverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileOthersOverView.h; sourceTree = "<group>"; };
-		EEE94E361B74C0810011321A /* ProfileOthersOverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileOthersOverView.m; sourceTree = "<group>"; };
 		EEE94E381B74C3840011321A /* PersonalCenterProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonalCenterProtocol.h; sourceTree = "<group>"; };
 		EEEEA0C91B7B456C001D949D /* MyCycleCellHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCycleCellHeader.h; sourceTree = "<group>"; };
 		EEEEA0CA1B7B456C001D949D /* MyCycleCellHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCycleCellHeader.m; sourceTree = "<group>"; };
@@ -1088,7 +1083,6 @@
 			isa = PBXGroup;
 			children = (
 				EEBFFC191B9169CD005AAE36 /* PersonalSetting */,
-				EEE94E2C1B74BF870011321A /* OtherOverView */,
 				EEE94E2D1B74BF870011321A /* OwnerOverView */,
 				EE817F4A1B79B1E600988734 /* ProfileViewDelegate.h */,
 			);
@@ -2429,16 +2423,6 @@
 			path = OtherUserDelegate;
 			sourceTree = "<group>";
 		};
-		EEE94E2C1B74BF870011321A /* OtherOverView */ = {
-			isa = PBXGroup;
-			children = (
-				EEE94E351B74C0810011321A /* ProfileOthersOverView.h */,
-				EEE94E361B74C0810011321A /* ProfileOthersOverView.m */,
-				EEE94E331B74BFBD0011321A /* ProfileOthersOverView.xib */,
-			);
-			path = OtherOverView;
-			sourceTree = "<group>";
-		};
 		EEE94E2D1B74BF870011321A /* OwnerOverView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2637,7 +2621,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE92AE351BCE3627008DA020 /* CycleAddConditionCell.xib in Resources */,
-				EE79105C1B84212A005E455B /* ProfileOthersOverView.xib in Resources */,
 				EEC980B31B8EB9EA0087E5A7 /* status-bar-pattern-default.jpg in Resources */,
 				EE79105B1B842105005E455B /* ProfileOverView.xib in Resources */,
 				EE968D081C1AB0700063362E /* MessageFriendsCell.xib in Resources */,
@@ -2814,7 +2797,6 @@
 				EE96763F1B7C3D5C00445254 /* CycleDescriptionCell.m in Sources */,
 				EE6D6DE21B7B404E004D29C8 /* CycleDetailController.m in Sources */,
 				EECB445B1C059343008F05B8 /* OBShapedButton.m in Sources */,
-				EEE94E371B74C0810011321A /* ProfileOthersOverView.m in Sources */,
 				EECB445C1C059343008F05B8 /* UIImage+ColorAtPixel.m in Sources */,
 				EE5D686C1B75A55A0067A2DF /* MessageAndNotificationModel.xcdatamodeld in Sources */,
 				EE76A5761B72056800036747 /* Followed.m in Sources */,

@@ -22,7 +22,7 @@
 - (NSString*)getLocation;
 - (NSString*)getSign;
 - (NSString*)getRoleTag;
-- (NSString*)getRelations;
+- (NSInteger)getRelations;
 - (NSString*)getNickName;
 
 - (OwnerQueryModel*)getOM;

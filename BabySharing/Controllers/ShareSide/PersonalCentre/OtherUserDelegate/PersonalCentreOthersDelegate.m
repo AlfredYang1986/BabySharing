@@ -6,11 +6,13 @@
 //  Copyright (c) 2015 BM. All rights reserved.
 //
 #import "PersonalCentreOthersDelegate.h"
-#import "ProfileOthersOverview.h"
+//#import "ProfileOthersOverview.h"
 #import "OwnerQueryModel.h"
 #import "QueryContent+ContextOpt.h"
 #import "QueryContentItem.h"
 #import "PersonalCenterDefines.h"
+
+#import "profileOverView.h"
 
 @interface PersonalCentreOthersDelegate ()
 
@@ -23,21 +25,21 @@
 #pragma mark -- UITableView Delegate
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     if (section == 0) {
-        ProfileOthersOverView* header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"Profile Others Overview"];
+        ProfileOverView* header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"Profile Others Overview"];
         
         if (header == nil) {
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ProfileOthersOverView" owner:self options:nil];
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ProfileOverView" owner:self options:nil];
             header = [nib objectAtIndex:0];
         }
         
         [header setOwnerPhoto:[_delegate getPhotoName]];
         [header setLoation:[_delegate getLocation]];
-        [header setRoleTag:[_delegate getRoleTag]];
         [header setFriendsCount:[_delegate getFriendsCount]];
         [header setShareCount:[_delegate getSharedCount]];
         [header setCycleCount:[_delegate getCycleCount]];
         [header setPersonalSign:[_delegate getSign]];
-        [header setPersonalNickName:[_delegate getNickName]];
+        [header setNickName:[_delegate getNickName]];
+        [header setRoleTag:[_delegate getRoleTag]];
         
         [header setRelations:[_delegate getRelations]];
         
@@ -57,7 +59,8 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (section == 0) {
-        return [ProfileOthersOverView preferredHeight];
+//        return [ProfileOthersOverView preferredHeight];
+        return [ProfileOverView preferredHeight];
     } else return 0;
 }
 

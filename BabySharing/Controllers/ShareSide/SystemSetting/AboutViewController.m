@@ -13,7 +13,7 @@
 
 @interface AboutViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *logoImg;
-@property (weak, nonatomic) IBOutlet UILabel *versionLabel;
+//@property (weak, nonatomic) IBOutlet UILabel *versionLabel;
 @property (weak, nonatomic) IBOutlet UITableView *settingView;
 
 @end
@@ -23,15 +23,19 @@
 }
 
 @synthesize logoImg = _logoImg;
-@synthesize versionLabel = _versionLabel;
+//@synthesize versionLabel = _versionLabel;
 @synthesize settingView = _settingView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    titles = @[@"用户协议", @"隐私政策", @"版本更新介绍"];
-   
-    _logoImg.image = [UIImage imageNamed:@"icon.png"];
+//    titles = @[@"用户协议", @"隐私政策", @"版本更新介绍"];
+    titles = @[@"用户协议", @"隐私政策"];
+
+    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+    _logoImg.image = [UIImage imageNamed:[resourceBundle pathForResource:@"profile_about_dongda" ofType:@"png"]];
     _logoImg.layer.cornerRadius = 8.f;
     _logoImg.clipsToBounds = YES;
     
@@ -39,30 +43,30 @@
     _settingView.delegate = self;
     _settingView.dataSource = self;
    
-    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    _versionLabel.text = [app.sm getCurrentVersion];
+//    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//    _versionLabel.text = [app.sm getCurrentVersion];
 
     UILabel* label = [[UILabel alloc]init];
     label.text = @"关于咚哒";
-    label.textColor = [UIColor whiteColor];
+    label.textColor = [UIColor colorWithWhite:0.5922 alpha:1.f];
+    label.font = [UIFont systemFontOfSize:20.f];
     [label sizeToFit];
     self.navigationItem.titleView = label;
-   
-    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
-    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+
 //    NSString* filepath = [resourceBundle pathForResource:@"Previous_blue" ofType:@"png"];
-    NSString* filepath = [resourceBundle pathForResource:@"Previous_simple" ofType:@"png"];
+    NSString* filepath = [resourceBundle pathForResource:@"dongda_back" ofType:@"png"];
     CALayer * layer = [CALayer layer];
     layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
-    layer.frame = CGRectMake(0, 0, 13, 20);
-    layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
+    layer.frame = CGRectMake(-7, 0, 25, 25);
+//    layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
     [barBtn.layer addSublayer:layer];
 //    [barBtn setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
 //    [barBtn setImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
     [barBtn addTarget:self action:@selector(didPopControllerSelected) forControlEvents:UIControlEventTouchDown];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn];
+    
+    self.view.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
 }
 
 - (void)didPopControllerSelected {
@@ -114,7 +118,7 @@
 
 #pragma mark -- table view data source
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -127,7 +131,13 @@
     
     cell.textLabel.text = [titles objectAtIndex:indexPath.row];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    cell.textLabel.textColor = [UIColor grayColor];
+    cell.textLabel.textColor = [UIColor colorWithWhite:0.3059 alpha:1.f];
+    
+    CALayer* line = [CALayer layer];
+    line.borderWidth = 1.f;
+    line.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.10].CGColor;
+    line.frame = CGRectMake(16, 44 - 1, tableView.frame.size.width - 48, 1);
+    [cell.layer addSublayer:line];
     
     return cell;
 }
