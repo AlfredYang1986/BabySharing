@@ -20,7 +20,8 @@
 
 #define MOVIE_MAX_SECONDS       15
 #define MOVIE_CALL_BACK_STEP    (1.0 / 12.0)
-#define FAKE_NAVIGATION_BAR_HEIGHT 49
+//#define FAKE_NAVIGATION_BAR_HEIGHT 49
+#define FAKE_NAVIGATION_BAR_HEIGHT 64
 
 @interface CVMovieController () <SearchSegViewDelegate> {
 
@@ -98,21 +99,29 @@
      * fake navigation bar
      */
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
-    UIView * bar = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, 49)];
+    UIView * bar = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, FAKE_NAVIGATION_BAR_HEIGHT)];
     bar.backgroundColor = [UIColor colorWithRed:0.1373 green:0.1216 blue:0.1255 alpha:1.f];
     [self.view addSubview:bar];
     [self.view bringSubviewToFront:bar];
+   
+#define CANCEL_BTN_WIDTH            30
+#define CANCEL_BTN_HEIGHT           CANCEL_BTN_WIDTH
+#define CANCEL_BTN_LEFT_MARGIN      10.5
     
-    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
-    barBtn.center = CGPointMake(30 / 2 + 16, 49 / 2);
+    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, CANCEL_BTN_WIDTH, CANCEL_BTN_HEIGHT)];
+    barBtn.center = CGPointMake(CANCEL_BTN_WIDTH / 2 + CANCEL_BTN_LEFT_MARGIN, FAKE_NAVIGATION_BAR_HEIGHT / 2);
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
     NSString* filepath = [resourceBundle pathForResource:@"camera-cancel" ofType:@"png"];
     //    [barBtn setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
     CALayer* cancel_layer = [CALayer layer];
     cancel_layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
-    cancel_layer.frame = CGRectMake(0, 0, 22, 21);
-    cancel_layer.position = CGPointMake(30 / 2, 30 / 2);
+    
+#define CANCEL_ICON_WIDTH            22
+#define CANCEL_ICON_HEIGHT           CANCEL_ICON_WIDTH
+    
+    cancel_layer.frame = CGRectMake(0, 0, CANCEL_ICON_WIDTH, CANCEL_ICON_HEIGHT);
+    cancel_layer.position = CGPointMake(CANCEL_ICON_WIDTH / 2, CANCEL_BTN_HEIGHT / 2);
     [barBtn.layer addSublayer:cancel_layer];
     [barBtn addTarget:self action:@selector(dismissCVViewController) forControlEvents:UIControlEventTouchDown];
     [bar addSubview:barBtn];
@@ -121,7 +130,7 @@
     titleView.text = @"视频";
     titleView.textColor = [UIColor whiteColor];
     [titleView sizeToFit];
-    titleView.center = CGPointMake(width / 2, 49 / 2);
+    titleView.center = CGPointMake(width / 2, FAKE_NAVIGATION_BAR_HEIGHT / 2);
     [bar addSubview:titleView];
     
     UIButton* bar_right_btn = [[UIButton alloc]initWithFrame:CGRectMake(width - 13 - 41, 25, 25, 25)];
@@ -135,9 +144,11 @@
     /**
      * funciton bar
      */
-    CGFloat height = width * aspectRatio - 44;
-    UIView* f_bar = [[UIView alloc]initWithFrame:CGRectMake(0, height, width, 44)];
-    f_bar.backgroundColor = [UIColor clearColor];
+#define FUNCTION_BAR_HEIGHT         44
+    CGFloat height = width * aspectRatio - FUNCTION_BAR_HEIGHT;
+    UIView* f_bar = [[UIView alloc]initWithFrame:CGRectMake(0, height, width, FUNCTION_BAR_HEIGHT)];
+//    f_bar.backgroundColor = [UIColor clearColor];
+    f_bar.backgroundColor = [UIColor darkGrayColor];
     
     //    CAGradientLayer* bl = [CAGradientLayer layer];
     //    [bl setStartPoint:CGPointMake(0.0, 0.0)];
@@ -160,13 +171,17 @@
 //    isLayoutHelp = NO;
 //    layout_help_layers = [[NSMutableArray alloc]initWithCapacity:4];
 //    f_btn_0.hidden = YES;
+   
+#define FUNCTION_BAR_BTN_WIDTH      25
+#define FUNCTION_BAR_BTN_HEIGHT     25
+#define FUNCTION_BAR_BTN_MARGIN     8
     
-    UIButton* f_btn_1 = [[UIButton alloc]initWithFrame:CGRectMake(8, 8, 30, 25)];
+    UIButton* f_btn_1 = [[UIButton alloc]initWithFrame:CGRectMake(FUNCTION_BAR_BTN_MARGIN, FUNCTION_BAR_BTN_MARGIN, FUNCTION_BAR_BTN_WIDTH, FUNCTION_BAR_BTN_HEIGHT)];
     //    [f_btn_1 setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"CameraRefresh" ofType:@"png"]] forState:UIControlStateNormal];
     [f_btn_1 setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"camera-change" ofType:@"png"]] forState:UIControlStateNormal];
     [f_btn_1 addTarget:self action:@selector(didChangeCameraBtn) forControlEvents:UIControlEventTouchDown];
     [f_bar addSubview:f_btn_1];
-    f_btn_1.center = CGPointMake(8 + 30 / 2, 22);
+    f_btn_1.center = CGPointMake(FUNCTION_BAR_BTN_MARGIN + FUNCTION_BAR_BTN_WIDTH / 2, FUNCTION_BAR_HEIGHT / 2);
     
 //    f_btn_2 = [[UIButton alloc]initWithFrame:CGRectMake(8, 8, 30, 25)];
 //    [f_btn_2 setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Lighting_off" ofType:@"png"]] forState:UIControlStateNormal];

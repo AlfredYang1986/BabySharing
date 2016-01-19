@@ -18,8 +18,9 @@
 #import "DropDownItem.h"
 
 #define PHOTO_PER_LINE  3
-#define FAKE_NAVIGATION_BAR_HEIGHT  49
-#define FUNCTION_BAR_HEIGHT 30
+//#define FAKE_NAVIGATION_BAR_HEIGHT  49
+#define FAKE_NAVIGATION_BAR_HEIGHT  64
+#define FUNCTION_BAR_HEIGHT 22
 
 @interface AlbumViewController2 () <SearchSegViewDelegate, DropDownDatasource, DropDownDelegate>
 
@@ -95,29 +96,42 @@
 //    bar.backgroundColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
     [self.view addSubview:bar];
     [self.view bringSubviewToFront:bar];
+   
+#define CANCEL_BTN_WIDTH            30
+#define CANCEL_BTN_HEIGHT           CANCEL_BTN_WIDTH
+#define CANCEL_BTN_LEFT_MARGIN      10.5
     
-    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
-    barBtn.center = CGPointMake(30 / 2 + 16, FAKE_NAVIGATION_BAR_HEIGHT / 2);
+    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, CANCEL_BTN_WIDTH, CANCEL_BTN_HEIGHT)];
+    barBtn.center = CGPointMake(CANCEL_BTN_WIDTH / 2 + CANCEL_BTN_LEFT_MARGIN, FAKE_NAVIGATION_BAR_HEIGHT / 2);
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
     NSString* filepath = [resourceBundle pathForResource:@"camera-cancel" ofType:@"png"];
     //    [barBtn setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
+
+#define CANCEL_ICON_WIDTH            22
+#define CANCEL_ICON_HEIGHT           CANCEL_ICON_WIDTH
+
     CALayer* cancel_layer = [CALayer layer];
     cancel_layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
-    cancel_layer.frame = CGRectMake(0, 0, 22, 21);
-    cancel_layer.position = CGPointMake(30 / 2, 30 / 2);
+    cancel_layer.frame = CGRectMake(0, 0, CANCEL_ICON_WIDTH, CANCEL_ICON_HEIGHT);
+    cancel_layer.position = CGPointMake(CANCEL_ICON_WIDTH / 2, CANCEL_BTN_HEIGHT / 2);
     [barBtn.layer addSublayer:cancel_layer];
     [barBtn addTarget:self action:@selector(dismissCVViewController) forControlEvents:UIControlEventTouchDown];
     [bar addSubview:barBtn];
 
-    UIButton* bar_right_btn = [[UIButton alloc]initWithFrame:CGRectMake(width - 13 - 41, 25, 25, 25)];
+#define RIGHT_BTN_WIDTH             25
+#define RIGHT_BTN_HEIGHT            RIGHT_BTN_WIDTH
+    
+#define RIGHT_BTN_RIGHT_MARGIN      10.5
+    
+    UIButton* bar_right_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, RIGHT_BTN_WIDTH, RIGHT_BTN_HEIGHT)];
 //    NSString* filepath_right = [resourceBundle pathForResource:@"Next_blue" ofType:@"png"];
 //    [bar_right_btn setBackgroundImage:[UIImage imageNamed:filepath_right] forState:UIControlStateNormal];
     [bar_right_btn setTitleColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f] forState:UIControlStateNormal];
     [bar_right_btn setTitle:@"下一步" forState:UIControlStateNormal];
     [bar_right_btn sizeToFit];
     [bar_right_btn addTarget:self action:@selector(didNextBtnSelected) forControlEvents:UIControlEventTouchDown];
-    bar_right_btn.center = CGPointMake(width - 8 - bar_right_btn.frame.size.width / 2, FAKE_NAVIGATION_BAR_HEIGHT / 2);
+    bar_right_btn.center = CGPointMake(width - RIGHT_BTN_RIGHT_MARGIN - bar_right_btn.frame.size.width / 2, FAKE_NAVIGATION_BAR_HEIGHT / 2);
     [bar addSubview:bar_right_btn];
     
     /**
@@ -247,6 +261,8 @@
     isAllowMutiSelection = NO;
     images_select_arr = [[NSMutableArray alloc]init];
     last_scale = 1.f;
+    
+    self.automaticallyAdjustsScrollViewInsets = NO;
 }
 
 - (void)dismissCVViewController {
@@ -442,16 +458,17 @@
 }
 
 - (void)didTapFunctionBar:(UITapGestureRecognizer*)gesture {
-    
+   
+#define FUNCTION_BAR_TOP_MARGIN             11
     static const CGFloat kAnimationDuration = 0.15; // in seconds
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     CGFloat height = width * aspectRatio;
     CGRect f_bar_start = CGRectMake(0, height - FUNCTION_BAR_HEIGHT, width, FUNCTION_BAR_HEIGHT);
-    CGRect f_bar_end = CGRectMake(0, 5, width, FUNCTION_BAR_HEIGHT);
+    CGRect f_bar_end = CGRectMake(0, FUNCTION_BAR_TOP_MARGIN, width, FUNCTION_BAR_HEIGHT);
 
-    CGFloat tab_bar_height_offset = [UIScreen mainScreen].bounds.size.height - 44;
+    CGFloat tab_bar_height_offset = [UIScreen mainScreen].bounds.size.height - 49;
     CGRect table_view_start = CGRectMake(0, height, width, tab_bar_height_offset - height);
-    CGRect table_view_end = CGRectMake(0, FUNCTION_BAR_HEIGHT + 5, width, tab_bar_height_offset - 49);
+    CGRect table_view_end = CGRectMake(0, FUNCTION_BAR_HEIGHT + FUNCTION_BAR_TOP_MARGIN, width, tab_bar_height_offset);
     
     if (isMainContentViewShown) {
 
@@ -636,7 +653,7 @@
         [self moveView:move_x and:move_y];
         
     } else if (gesture.state == UIGestureRecognizerStateChanged) {
-        NSLog(@"changeed");
+        NSLog(@"changed");
         CGPoint newPoint = [gesture translationInView:mainContentView];
         
         mainContentPhotoLayer.position = CGPointMake(mainContentPhotoLayer.position.x + (newPoint.x - point.x), mainContentPhotoLayer.position.y + (newPoint.y - point.y));
@@ -712,11 +729,10 @@
     } else if (gesture.state == UIGestureRecognizerStateEnded) {
         [self checkScale];
         
-        
         last_scale = MAX(mainContentView.frame.size.width /  img.size.width, mainContentView.frame.size.height / img.size.height);
         
     } else if (gesture.state == UIGestureRecognizerStateChanged) {
-        NSLog(@"changeed");
+        NSLog(@"changed");
         //        mainContentPhotoLayer.transform = CGAffineTransformScale(mainContentPhotoLayer.transform, gesture.scale,gesture.scale);
         CGPoint cp = mainContentPhotoLayer.position;
         CGFloat scale = 1 + (gesture.scale - 1) * 0.1;
@@ -786,7 +802,8 @@
 
 #pragma mark -- DropDownDatasource
 - (NSInteger)itemCount {
-    return album_name_arr.count + 1;
+//    return album_name_arr.count + 1;
+    return album_name_arr.count;
 }
 
 - (UITableViewCell*)cellForRow:(NSInteger)row inTableView:(UITableView*)tableview {
@@ -796,12 +813,13 @@
         cell = [[DropDownItem alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"drop item"];
     }
     
-    if (row != 0) {
-        ALAssetsGroup* group = [album_name_arr objectAtIndex:row - 1];
+//    if (row != 0) {
+//        ALAssetsGroup* group = [album_name_arr objectAtIndex:row - 1];
+        ALAssetsGroup* group = [album_name_arr objectAtIndex:row];
         NSString* album_name = [group valueForProperty:ALAssetsGroupPropertyName];
         cell.textLabel.text = album_name;
         cell.group = group;
-    }
+//    }
     
     return cell;
 }
@@ -817,14 +835,15 @@
 - (void)showContentsTableView:(UITableView*)tableview {
 //    NSInteger width = self.view.frame.size.width;
 //    NSInteger height = self.view.frame.size.height / 2;
-    tableview.frame = CGRectMake(0, 0, tableview.bounds.size.width, tableview.bounds.size.height);
+    tableview.frame = CGRectMake(0, FAKE_NAVIGATION_BAR_HEIGHT, tableview.bounds.size.width, tableview.bounds.size.height);
     
     [self.view addSubview:tableview];
     [self.view bringSubviewToFront:bar];
 }
 
 - (NSString*)titleForCellAtRow:(NSInteger)row inTableView:(UITableView*)tableview {
-    ALAssetsGroup* group = [album_name_arr objectAtIndex:row - 1];
+//    ALAssetsGroup* group = [album_name_arr objectAtIndex:row - 1];
+    ALAssetsGroup* group = [album_name_arr objectAtIndex:row];
     return [group valueForProperty:ALAssetsGroupPropertyName];
 }
 @end
