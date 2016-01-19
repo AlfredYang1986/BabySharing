@@ -13,6 +13,9 @@
 #import "SearchAddRoleTagDelegate.h"
 #import "SearchAddViewController.h"
 
+#import "FoundHotTagsCell.h"
+#import "FoundSearchHeader.h"
+
 typedef void(^queryRoleTagFinishBlock)(BOOL success, NSString* msg, NSArray* result);
 
 @implementation SearchRoleTagDelegate {
@@ -58,10 +61,10 @@ typedef void(^queryRoleTagFinishBlock)(BOOL success, NSString* msg, NSArray* res
     AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
     
     NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
-    [dic setValue:app.lm.current_user_id forKey:@"user_id"];
-    [dic setValue:app.lm.current_auth_token forKey:@"auth_token"];
+//    [dic setValue:app.lm.current_user_id forKey:@"user_id"];
+//    [dic setValue:app.lm.current_auth_token forKey:@"auth_token"];
     
-    [dic setValue:[NSNumber numberWithInteger:skip] forKey:@"skit"];
+    [dic setValue:[NSNumber numberWithInteger:skip] forKey:@"skip"];
     [dic setValue:[NSNumber numberWithInteger:take] forKey:@"take"];
     
     NSError * error = nil;
@@ -138,29 +141,72 @@ typedef void(^queryRoleTagFinishBlock)(BOOL success, NSString* msg, NSArray* res
 //    [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+    return NO;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return [FoundSearchHeader prefferredHeight];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return [FoundHotTagsCell preferredHeight];
+}
+
+- (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    FoundSearchHeader* header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"hot role header"];
+    
+    if (header == nil) {
+        header = [[FoundSearchHeader alloc]initWithReuseIdentifier:@"hot role header"];
+    }
+    
+    header.headLabell.text = @"热门角色";
+//    header.headLabell.textColor = [UIColor colorWithWhite:0.3059 alpha:1.f];
+    header.headLabell.textColor = [UIColor whiteColor];
+    header.headLabell.font = [UIFont systemFontOfSize:14.f];
+        
+    header.backgroundView = [[UIImageView alloc] initWithImage:[SearchRoleTagDelegate imageWithColor:[UIColor blackColor] size:header.bounds.size alpha:1.0]];
+    return header;
+}
+
++ (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size alpha:(float)alpha {
+    CGRect rect = CGRectMake(0, 0, size.width, size.height);
+    
+    UIGraphicsBeginImageContext(rect.size);
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetAlpha(context, alpha);
+    CGContextSetFillColorWithColor(context,color.CGColor);
+    CGContextFillRect(context, rect);
+    
+    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return img;
+}
+
 #pragma mark -- table view data source
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 //    return [test_tag_arr count];
-    return [final_tag_arr count];
+//    return [final_tag_arr count];
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"default"];
-    
+    FoundHotTagsCell* cell = [tableView dequeueReusableCellWithIdentifier:@"hot role tags"];
     if (!cell) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"default"];
+        cell = [[FoundHotTagsCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"hot role tags"];
     }
-  
-//    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
-//    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-//    UIImage* img_0 = [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Tags"] ofType:@"png"]];
-//    
-//    cell.imageView.image = img_0;
-    NSInteger index = indexPath.row;
-    cell.textLabel.text = [final_tag_arr objectAtIndex:index];
-    cell.textLabel.font = [UIFont boldSystemFontOfSize:17.f];
-    cell.textLabel.textColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
+   
+    cell.isDarkTheme = YES;
+    [cell setHotTagsTest:final_tag_arr];
+    cell.backgroundColor = [UIColor blackColor];
+    
     return cell;
 }
 

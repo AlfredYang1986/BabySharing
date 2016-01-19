@@ -81,9 +81,8 @@
     return YES;
 }
 
-- (void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//    [_delegate addNewTag:[_delegate getUserInputString]];
     
     if (showing_data.count == 0) {
         [_actions addNewItem:[_delegate getUserInputString]];
@@ -112,6 +111,7 @@
     
     cell.textLabel.font = [UIFont boldSystemFontOfSize:17.f];
     cell.textLabel.textColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
+    cell.backgroundColor = [UIColor blackColor];
     return cell;
 }
 @end

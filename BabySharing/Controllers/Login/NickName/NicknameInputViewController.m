@@ -516,8 +516,8 @@
 
 #pragma mark -- controler protocol
 - (void)didSelectItem:(NSString*)item {
-//    [inputView resetTags:item];
-//    [self.navigationController popToViewController:self animated:YES];
+    inputView.role_tag = item;
+    [self.navigationController popToViewController:self animated:YES];
 }
 
 - (void)addNewItem:(NSString*)item {

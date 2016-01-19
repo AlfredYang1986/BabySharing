@@ -10,6 +10,8 @@
 #import "UserSearchCell.h"
 #import "UserSearchModel.h"
 
+#import "FoundHotTagsCell.h"
+
 @interface UserSearchController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *queryView;
