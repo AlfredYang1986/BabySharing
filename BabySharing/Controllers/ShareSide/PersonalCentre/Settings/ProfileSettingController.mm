@@ -58,7 +58,7 @@
     UILabel* label = [[UILabel alloc]init];
     label.text = @"设置";
     label.textColor = [UIColor colorWithWhite:0.3059 alpha:1.f];
-    label.font = [UIFont systemFontOfSize:20.f];
+    label.font = [UIFont systemFontOfSize:18.f];
     [label sizeToFit];
     self.navigationItem.titleView = label;
    
@@ -154,12 +154,19 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"default"];
     }
-    
-    cell.textLabel.textColor = [UIColor colorWithWhite:0.3059 alpha:1.f];
-    cell.textLabel.text = [data objectAtIndex:indexPath.row];
+   
+    UILabel* label = [[UILabel alloc]init];
+    label.textColor = [UIColor colorWithWhite:0.3059 alpha:1.f];
+    label.font = [UIFont systemFontOfSize:14.f];
+    label.text = [data objectAtIndex:indexPath.row];
+    label.center = CGPointMake(label.frame.size.width / 2 + 8, 13);
+    [label sizeToFit];
+    [cell addSubview:label];
+
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
-    if ([cell.textLabel.text isEqualToString:@"退出登录"]) {
+//    if ([cell.textLabel.text isEqualToString:@"退出登录"]) {
+    if ([label.text isEqualToString:@"退出登录"]) {
         cell.backgroundColor = [UIColor redColor];
         
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
@@ -167,10 +174,14 @@
         [str addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0,str.length)];
         cell.textLabel.attributedText = str;
         cell.accessoryType = UITableViewCellAccessoryNone;
-    } else if ([cell.textLabel.text isEqualToString:@""]) {
+//    } else if ([cell.textLabel.text isEqualToString:@""]) {
+    } else if ([label.text isEqualToString:@""]) {
         cell.accessoryType = UITableViewCellAccessoryNone;
-    } else if ([cell.textLabel.text isEqualToString:@"清除缓存"]) {
-        cell.textLabel.text = [cell.textLabel.text stringByAppendingString:[NSString stringWithFormat:@"(%.2fM)", [TmpFileStorageModel tmpFileStorageSize]]];
+//    } else if ([cell.textLabel.text isEqualToString:@"清除缓存"]) {
+    } else if ([label.text isEqualToString:@"清除缓存"]) {
+//        cell.textLabel.text = [cell.textLabel.text stringByAppendingString:[NSString stringWithFormat:@"(%.2fM)", [TmpFileStorageModel tmpFileStorageSize]]];
+        label.text = [label.text stringByAppendingString:[NSString stringWithFormat:@"(%.2fM)", [TmpFileStorageModel tmpFileStorageSize]]];
+        [label sizeToFit];
         cell.accessoryType = UITableViewCellAccessoryNone;
 //        cell.textLabel.textColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
     }
@@ -178,7 +189,7 @@
     CALayer* line = [CALayer layer];
     line.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.10].CGColor;
     line.borderWidth = 1.f;
-    line.frame = CGRectMake(16, 44 - 1, tableView.frame.size.width - 32, 1);
+    line.frame = CGRectMake(8, 44 - 1, tableView.frame.size.width, 1);
     [cell.layer addSublayer:line];
     
     return cell;

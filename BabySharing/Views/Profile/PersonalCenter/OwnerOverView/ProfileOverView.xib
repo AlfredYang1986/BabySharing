@@ -14,14 +14,14 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mei-Rc-8ep">
                     <rect key="frame" x="269" y="32" width="50" height="50"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="50" id="0to-te-rof"/>
-                        <constraint firstAttribute="width" constant="50" id="nOC-OO-1tu"/>
+                        <constraint firstAttribute="height" constant="75" id="0to-te-rof"/>
+                        <constraint firstAttribute="width" constant="75" id="nOC-OO-1tu"/>
                     </constraints>
                 </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="mei-Rc-8ep" firstAttribute="top" secondItem="ChB-hb-hZ3" secondAttribute="top" constant="34" id="kfi-Wg-S07"/>
+                <constraint firstItem="mei-Rc-8ep" firstAttribute="top" secondItem="ChB-hb-hZ3" secondAttribute="top" constant="39" id="kfi-Wg-S07"/>
                 <constraint firstItem="mei-Rc-8ep" firstAttribute="centerX" secondItem="ChB-hb-hZ3" secondAttribute="centerX" id="xKV-53-0jm"/>
             </constraints>
             <connections>

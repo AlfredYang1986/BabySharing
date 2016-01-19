@@ -17,15 +17,15 @@
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qda-Vl-8BQ">
                         <rect key="frame" x="8" y="8" width="42" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2qS-AU-rex">
-                        <rect key="frame" x="487" y="8" width="50" height="50"/>
+                        <rect key="frame" x="529" y="20" width="26" height="26"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="50" id="XSI-p6-VUV"/>
-                            <constraint firstAttribute="height" constant="50" id="lbN-JB-P0w"/>
+                            <constraint firstAttribute="width" constant="26" id="XSI-p6-VUV"/>
+                            <constraint firstAttribute="height" constant="26" id="lbN-JB-P0w"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eYg-63-cqK">
@@ -43,8 +43,8 @@
                     <constraint firstItem="2qS-AU-rex" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="50" id="bBn-k6-f5a"/>
                     <constraint firstItem="qda-Vl-8BQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="f3L-ah-h6b"/>
                     <constraint firstAttribute="trailingMargin" secondItem="eYg-63-cqK" secondAttribute="trailing" constant="8" id="fg9-BC-tXg"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="eYg-63-cqK" secondAttribute="trailing" constant="8" id="g7c-RP-EUr"/>
-                    <constraint firstItem="2qS-AU-rex" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="-20" id="jJK-kC-LMc"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="eYg-63-cqK" secondAttribute="trailing" id="g7c-RP-EUr"/>
+                    <constraint firstItem="2qS-AU-rex" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="-2" id="jJK-kC-LMc"/>
                     <constraint firstAttribute="centerY" secondItem="qda-Vl-8BQ" secondAttribute="centerY" id="jnJ-3b-y8k"/>
                     <constraint firstItem="qda-Vl-8BQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="qGK-Eg-wvu"/>
                 </constraints>

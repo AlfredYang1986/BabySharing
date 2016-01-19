@@ -11,31 +11,35 @@
 #import "OBShapedButton.h"
 #import "SearchSegView2.h"
 
-#define BASE_LINE_HEIGHT        115
+//#define BASE_LINE_HEIGHT        115
+#define BASE_LINE_HEIGHT        185
 #define MARGIN_AFTER_BASE_LINE  8
 #define BUTTON_WIDTH            90
 #define BUTTON_HEIGHT           25
 #define HEADER_BOTTOM_MARGIN    10
 #define SPLIT_LINE_HEIGHT       2
 
-#define ICE_HOT_ICON_WIDTH    15
-#define ICE_HOT_ICON_HEIGHT   15
+#define ICE_HOT_ICON_WIDTH    20
+#define ICE_HOT_ICON_HEIGHT   20
 #define HOT_RIGHT_MARGIN       8
 
 #define NAME_LABEL_FONT_SIZE                    14.f
 #define ROLE_TAG_LABEL_FONT_SIZE                12.f
 #define LOCATION_LABEL_FONT_SIZE                12.f
 
-#define NAME_LABEL_2_SCREEN_PHOTO_MARGIN        15
+#define NAME_LABEL_2_SCREEN_PHOTO_MARGIN        50
 #define ROLE_TAG_LABEL_2_SCREEN_PHOTO_MARGIN    9
 #define NAME_LABEL_2_ROLE_TAG_LABEL_MARGIN      4.5
-#define LOCATION_LABEL_2_SCREEN_PHOTO_MARGIN    35
+#define LOCATION_LABEL_2_SCREEN_PHOTO_MARGIN    70
 
 #define LOCATION_ICON_WIDTH                     11
 #define LOCATION_ICON_HEIGHT                    LOCATION_ICON_WIDTH
 
 #define SCREEN_WIDTH                            [UIScreen mainScreen].bounds.size.width
 #define SCREEN_HEIGHT                           [UIScreen mainScreen].bounds.size.height
+
+#define USER_PHOTO_WIDTH                        75
+#define USER_PHOTO_HEIGHT                       USER_PHOTO_HEIGHT
 
 @interface ProfileOverView ()
 
@@ -86,21 +90,24 @@
     /*************************************************************************************************************************/
     // background view
     UIView* bkView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, [ProfileOverView preferredHeight])];
-//    bkView.backgroundColor = [UIColor whiteColor];
-    bkView.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
+    bkView.backgroundColor = [UIColor whiteColor];
+//    bkView.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
     bkView.tag = -1;
     [self addSubview:bkView];
     /*************************************************************************************************************************/
     
     /*************************************************************************************************************************/
     // image view
-    _imgView.layer.cornerRadius = 25.f;
+    _imgView.layer.cornerRadius = USER_PHOTO_WIDTH / 2;
+    _imgView.layer.borderColor = [UIColor colorWithWhite:1.f alpha:0.3].CGColor;
+    _imgView.layer.borderWidth = 2.5f;
     _imgView.clipsToBounds = YES;
     
     hotTagView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 90, 25)];
     [self addSubview:hotTagView];
     
     relations_btn = [[OBShapedButton alloc]initWithFrame:CGRectMake(0, 0, 69, 25)];
+    [relations_btn addTarget:self action:@selector(didSelectRelationBtn) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:relations_btn];
    
     hotTagView.center = CGPointMake(17.5 + 90 / 2, BASE_LINE_HEIGHT + MARGIN_AFTER_BASE_LINE + BUTTON_HEIGHT / 2 + 4);
@@ -138,8 +145,21 @@
     [search_seg addItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:@"profile_forward" ofType:@"png"]] andSelectImage:[UIImage imageNamed:[resourceBundle pathForResource:@"profile_forward_selected" ofType:@"png"]]];
    
     search_seg.selectedIndex = 0;
-    search_seg.margin_between_items = 30;
+    search_seg.margin_between_items = 0.148 * SCREEN_WIDTH;
     [bkView addSubview:search_seg];
+    
+    CALayer* line0 = [CALayer layer];
+    line0.borderWidth = 1.5f;
+    line0.borderColor = [UIColor whiteColor].CGColor;
+    line0.frame = CGRectMake(SCREEN_WIDTH / 3, 11, 1, 22);
+    [search_seg.layer addSublayer:line0];
+    
+    CALayer* line1 = [CALayer layer];
+    line1.borderWidth = 1.5f;
+    line1.borderColor = [UIColor whiteColor].CGColor;
+    line1.frame = CGRectMake(SCREEN_WIDTH * 2 / 3, 11, 1, 22);
+    [search_seg.layer addSublayer:line1];
+    
     /*************************************************************************************************************************/
     
     if (_userRoleTagBtn == nil) {
@@ -292,11 +312,13 @@
         default:
             break;
     }
+    relations_btn.tag = 100 - relations;
 }
 
 + (CGFloat)preferredHeight {
 //    return 225;
     return BASE_LINE_HEIGHT + MARGIN_AFTER_BASE_LINE + BUTTON_HEIGHT + HEADER_BOTTOM_MARGIN + SPLIT_LINE_HEIGHT + [SearchSegView2 preferredHeight];
+//    return 295;
 }
 
 - (IBAction)editBtnSelected {
@@ -305,5 +327,11 @@
 
 - (void)segControlValueChanged {
 //    [_deleagate segControlValueChangedWithSelectedIndex:_seg.selectedSegmentIndex];
+}
+
+- (void)didSelectRelationBtn {
+    if (relations_btn.tag == 100 - UserPostOwnerConnectionsSamePerson) {
+        [_deleagate editBtnSelected];
+    }
 }
 @end

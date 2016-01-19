@@ -67,6 +67,14 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn];
     
     self.view.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
+    
+    CALayer* line = [CALayer layer];
+    line.borderWidth = 1.f;
+    line.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.10].CGColor;
+    line.frame = CGRectMake(0, 73, [UIScreen mainScreen].bounds.size.width, 1);
+    [self.view.layer addSublayer:line];
+    
+    _settingView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
 - (void)didPopControllerSelected {
@@ -136,7 +144,7 @@
     CALayer* line = [CALayer layer];
     line.borderWidth = 1.f;
     line.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.10].CGColor;
-    line.frame = CGRectMake(16, 44 - 1, tableView.frame.size.width - 48, 1);
+    line.frame = CGRectMake(8, 44 - 1, tableView.frame.size.width, 1);
     [cell.layer addSublayer:line];
     
     return cell;

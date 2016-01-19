@@ -24,11 +24,14 @@
 - (void)awakeFromNib {
     // Initialization code
     _contentImage.hidden = YES;
-    _contentImage.layer.cornerRadius = 25.f;
+    _contentImage.layer.borderColor = [UIColor colorWithWhite:1.f alpha:0.25].CGColor;
+    _contentImage.layer.borderWidth = 1.5f;
+    _contentImage.layer.cornerRadius = 13.f;
     _contentImage.clipsToBounds = YES;
     
     _titleLabel.textColor = [UIColor grayColor];
-    _contentLabel.textColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
+    _contentLabel.textColor = [UIColor colorWithWhite:0.3059 alpha:1.f];
+    _contentLabel.font = [UIFont systemFontOfSize:13.f];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -38,8 +41,9 @@
 }
 
 + (CGFloat)preferredHeightWithImage:(BOOL)bImg {
-    if (bImg) return 67;
-    else return 44;
+//    if (bImg) return 67;
+//    else return 44;
+    return 44;
 }
 
 - (void)changeCellTitile:(NSString*)title {

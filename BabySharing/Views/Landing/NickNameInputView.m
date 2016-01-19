@@ -37,6 +37,8 @@
 //    UIButton* tag_text_btn;
     
     BOOL isSNSLogin;
+    
+    UIButton* clear_btn;
 }
 
 @synthesize delegate = _delegate;
@@ -71,7 +73,7 @@
     [self addSubview:tmp];
 }
 
-- (UITextField*)createInputAreaInRect:(CGRect)rect andTopMargin:(CGFloat)top andPlaceholder:(NSString*)placeholder andPreString:(NSString*)defaultString andRightImage:(UIImage*)img andCallback:(SEL)cb {
+- (UITextField*)createInputAreaInRect:(CGRect)rect andTopMargin:(CGFloat)top andPlaceholder:(NSString*)placeholder andPreString:(NSString*)defaultString andRightImage:(UIImage*)img andCallback:(SEL)cb andCancelBtn:(BOOL)bCancel {
     CGFloat width = rect.size.width;
     CGFloat first_line_start_margin = INPUT_MARGIN;
     first_line_start_margin = INPUT_MARGIN + AREA_CODE_WIDTH;
@@ -95,19 +97,35 @@
     phone_area.placeholder = placeholder;
     [phone_area setValue:[UIColor colorWithWhite:1.f alpha:0.50] forKeyPath:@"_placeholderLabel.textColor"];
     phone_area.textColor = [UIColor whiteColor];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:cb name:UITextFieldTextDidChangeNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:cb name:UITextFieldTextDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChanged:) name:UITextFieldTextDidChangeNotification object:nil];
     phone_area.delegate = self;
-    phone_area.keyboardType = UIKeyboardTypeNumberPad;
+//    phone_area.keyboardType = UIKeyboardTypeNumberPad;
     phone_area.clearButtonMode = UITextFieldViewModeWhileEditing;
+   
+    if (bCancel) {
+        clear_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 25, phone_area.frame.size.height)];
+        clear_btn.center = CGPointMake(phone_area.frame.size.width - 25 / 2, phone_area.frame.size.height / 2);
+        [phone_area addSubview:clear_btn];
+        
+        CALayer* layer = [CALayer layer];
+        layer.contents = (id)[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_input_clear_btn" ofType:@"png"]].CGImage;
+        layer.frame = CGRectMake(0, 0, 12, 12);
+        layer.position = CGPointMake(10, phone_area.frame.size.height / 2 - 1);
+        [clear_btn.layer addSublayer:layer];
+        
+        clear_btn.hidden = YES;
+    }
     
 #define TEXT_FIELD_RIGHT_PADDING        25
+#define DONGDA_NEXT_ICON_WIDTH          12
     if (img) {
         CGRect frame = phone_area.frame;
         frame.size.width = TEXT_FIELD_RIGHT_PADDING;
         UIView *rightview = [[UIView alloc] initWithFrame:frame];
         CALayer* layer = [CALayer layer];
         layer.contents = (id)img.CGImage;
-        layer.frame = CGRectMake(0, (INPUT_TEXT_FIELD_HEIGHT - 23) / 2, 23, 23);
+        layer.frame = CGRectMake(0, (INPUT_TEXT_FIELD_HEIGHT - DONGDA_NEXT_ICON_WIDTH) / 2, DONGDA_NEXT_ICON_WIDTH, DONGDA_NEXT_ICON_WIDTH);
         [rightview.layer addSublayer:layer];
         
         phone_area.rightViewMode = UITextFieldViewModeAlways;
@@ -143,9 +161,9 @@
     NSBundle *resourceBundle_dongda = [NSBundle bundleWithPath:bundlePath_dongda];
     
     [self createLabelInRect:rect andTitle:@"昵称" andTopMargin:BASICMARGIN];
-    name_text_field = [self createInputAreaInRect:rect andTopMargin:BASICMARGIN andPlaceholder:@"填写你的昵称" andPreString:[_delegate getPreScreenName] andRightImage:nil andCallback:@selector(textFieldChanged:)];
-    [self createLabelInRect:rect andTitle:@"昵称" andTopMargin:BASICMARGIN + INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN];
-    tag_text_field = [self createInputAreaInRect:rect andTopMargin:BASICMARGIN + INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN andPlaceholder:@"填写你的角色标签" andPreString:[_delegate getPreRoleTag] andRightImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"dongda_back_light" ofType:@"png"]] andCallback:@selector(textFieldChanged:)];
+    name_text_field = [self createInputAreaInRect:rect andTopMargin:BASICMARGIN andPlaceholder:@"填写你的昵称" andPreString:[_delegate getPreScreenName] andRightImage:nil andCallback:@selector(textFieldChanged:) andCancelBtn:YES];
+    [self createLabelInRect:rect andTitle:@"角色" andTopMargin:BASICMARGIN + INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN];
+    tag_text_field = [self createInputAreaInRect:rect andTopMargin:BASICMARGIN + INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN andPlaceholder:@"填写你的角色标签" andPreString:[_delegate getPreRoleTag] andRightImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"dongda_next" ofType:@"png"]] andCallback:@selector(textFieldChanged:) andCancelBtn:NO];
     [self createNextBtnInRect:rect];
 
     CGFloat height = BASICMARGIN + INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN + INPUT_TEXT_FIELD_HEIGHT + LOGIN_BTN_TOP_MARGIN + LOGIN_BTN_HEIGHT + BASICMARGIN;
@@ -156,8 +174,13 @@
     [_delegate didEditRoleTag];
 }
 
-- (void)textFieldChanged:(UITextField*)tf {
-    
+- (void)textFieldChanged:(NSNotification*)notify {
+    UITextField* tf = notify.object;
+    if (![tf.text isEqualToString:@""]) {
+        clear_btn.hidden = NO;
+    } else {
+        clear_btn.hidden = YES;
+    }
 }
 
 #pragma mark -- text delegate
@@ -194,5 +217,6 @@
 
 - (void)endInputName {
     [name_text_field resignFirstResponder];
+    [_delegate didEndEditingScreenName];
 }
 @end

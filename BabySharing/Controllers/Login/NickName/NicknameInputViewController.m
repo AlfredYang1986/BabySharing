@@ -51,6 +51,7 @@
 @interface NicknameInputViewController () </*SearchUserTagControllerDelegate,*/ NickNameInputViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, SearchActionsProtocol>
 @property (strong, nonatomic) IBOutlet UIButton *loginImgBtn;
 //@property (strong, nonatomic) IBOutlet UIButton *nextBtn;
+@property (strong, nonatomic) UIView* fakeBar;
 @end
 
 @implementation NicknameInputViewController {
@@ -58,7 +59,9 @@
     NSURL* user_img_url;
     
     UIView* mother_view;
+    UIButton* mother_btn;
     UIView* father_view;
+    UIButton* father_btn;
 
     UIButton * user_private_btn;
     OBShapedButton* tick_btn;
@@ -70,6 +73,8 @@
 @synthesize lm = _lm;
 @synthesize login_attr = _login_attr;
 @synthesize isSNSLogIn = _isSNSLogIn;
+
+@synthesize fakeBar = _fakeBar;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -119,11 +124,14 @@
     /***********************************************************************************************************************/
     // mother view
     mother_view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, GENDER_BTN_WIDTH, 2 * GENDER_BTN_HEIGHT)];
-    UIButton* mother_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, GENDER_BTN_WIDTH, GENDER_BTN_HEIGHT)];
+    mother_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, GENDER_BTN_WIDTH, GENDER_BTN_HEIGHT)];
     mother_btn.backgroundColor = [UIColor clearColor];
     [mother_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_mother" ofType:@"png"]] forState:UIControlStateNormal];
+    [mother_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_mother_selected" ofType:@"png"]] forState:UIControlStateSelected];
     [mother_btn addTarget:self action:@selector(didSelectGenderBtn:) forControlEvents:UIControlEventTouchUpInside];
+    mother_btn.tag = -98;
     [mother_view addSubview:mother_btn];
+    mother_btn.selected = YES;
     
     CALayer* mother_text_layer = [CALayer layer];
     mother_text_layer.frame = CGRectMake(0, GENDER_BTN_HEIGHT, GENDER_BTN_WIDTH, 30);
@@ -132,7 +140,7 @@
     mother_text_line_one.contentsScale = 2.f;
     mother_text_line_one.fontSize = 12.f;
     mother_text_line_one.string = @"妈咪";
-    mother_text_line_one.frame = CGRectMake(0, 0, GENDER_BTN_WIDTH, 15);
+    mother_text_line_one.frame = CGRectMake(0, 6, GENDER_BTN_WIDTH, 15);
     mother_text_line_one.alignmentMode = @"center";
     [mother_text_layer addSublayer:mother_text_line_one];
     
@@ -140,7 +148,7 @@
     mother_text_line_two.contentsScale = 2.f;
     mother_text_line_two.fontSize = 12.f;
     mother_text_line_two.string = @"要够辣";
-    mother_text_line_two.frame = CGRectMake(0, 15, GENDER_BTN_WIDTH, 15);
+    mother_text_line_two.frame = CGRectMake(0, 21, GENDER_BTN_WIDTH, 15);
     mother_text_line_two.alignmentMode = @"center";
     [mother_text_layer addSublayer:mother_text_line_two];
     
@@ -152,14 +160,11 @@
     /***********************************************************************************************************************/
     // father view
     father_view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, GENDER_BTN_WIDTH, 2 * GENDER_BTN_HEIGHT)];
-    UIButton* father_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, GENDER_BTN_WIDTH, GENDER_BTN_HEIGHT)];
-    father_btn.backgroundColor = [UIColor clearColor];
-    CALayer* layer = [CALayer layer];
-    layer.frame = CGRectMake(0, 0, FATHER_ICON_WIDTH, FATHER_ICON_HEIGHT);
-    layer.contents = (id)[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_father" ofType:@"png"]].CGImage;
-    layer.position = CGPointMake(GENDER_BTN_WIDTH / 2, GENDER_BTN_HEIGHT / 2);
-    [father_btn.layer addSublayer:layer];
+    father_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, GENDER_BTN_WIDTH, GENDER_BTN_HEIGHT)];
+    [father_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_father" ofType:@"png"]] forState:UIControlStateNormal];
+    [father_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_father_selected" ofType:@"png"]] forState:UIControlStateSelected];
     [father_btn addTarget:self action:@selector(didSelectGenderBtn:) forControlEvents:UIControlEventTouchUpInside];
+    father_btn.tag = -99;
     [father_view addSubview:father_btn];
 
     CALayer* father_text_layer = [CALayer layer];
@@ -169,7 +174,7 @@
     father_text_line_one.contentsScale = 2.f;
     father_text_line_one.fontSize = 12.f;
     father_text_line_one.string = @"爸比";
-    father_text_line_one.frame = CGRectMake(0, 0, GENDER_BTN_WIDTH, 15);
+    father_text_line_one.frame = CGRectMake(0, 6, GENDER_BTN_WIDTH, 15);
     father_text_line_one.alignmentMode = @"center";
     [father_text_layer addSublayer:father_text_line_one];
     
@@ -177,7 +182,7 @@
     father_text_line_two.contentsScale = 2.f;
     father_text_line_two.fontSize = 12.f;
     father_text_line_two.string = @"要靠谱";
-    father_text_line_two.frame = CGRectMake(0, 15, GENDER_BTN_WIDTH, 15);
+    father_text_line_two.frame = CGRectMake(0, 21, GENDER_BTN_WIDTH, 15);
     father_text_line_two.alignmentMode = @"center";
     [father_text_layer addSublayer:father_text_line_two];
     
@@ -210,6 +215,37 @@
     [tick_btn addTarget:self action:@selector(didTickPrivacy) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:tick_btn];
     /***********************************************************************************************************************/
+    
+    /***********************************************************************************************************************/
+    // fake bar
+//    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
+//    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+#define SCREEN_WIDTH            [UIScreen mainScreen].bounds.size.width
+#define FAKE_BAR_HEIGHT         44
+#define STATUS_BAR_HEIGHT       20
+    
+#define BACK_BTN_LEFT_MARGIN    16 + 10
+    _fakeBar = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 74)];
+    _fakeBar.backgroundColor = [UIColor clearColor];
+    
+    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 25)];
+    NSString* filepath = [resourceBundle_dongda pathForResource:@"dongda_back_light" ofType:@"png"];
+    CALayer * layer_btn = [CALayer layer];
+    layer_btn.contents = (id)[UIImage imageNamed:filepath].CGImage;
+    layer_btn.frame = CGRectMake(0, 0, 25, 25);
+    //    layer_btn.position = CGPointMake(10, barBtn.frame.size.height / 2);
+    layer_btn.position = CGPointMake(0, barBtn.frame.size.height / 2 + 5);
+    [barBtn.layer addSublayer:layer_btn];
+    barBtn.center = CGPointMake(BACK_BTN_LEFT_MARGIN + barBtn.frame.size.width / 2, STATUS_BAR_HEIGHT + FAKE_BAR_HEIGHT / 2);
+    
+    [barBtn addTarget:self action:@selector(didPopViewController) forControlEvents:UIControlEventTouchDown];
+    [_fakeBar addSubview:barBtn];
+    [self.view addSubview:_fakeBar];
+    [self.view bringSubviewToFront:_fakeBar];
+    /***********************************************************************************************************************/
+    
+    UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapGesture:)];
+    [self.view addGestureRecognizer:tap];
 }
 
 - (void)didPopViewController {
@@ -263,6 +299,10 @@
     tick_btn.selected = !tick_btn.selected;
 }
 
+- (void)tapGesture:(UITapGestureRecognizer*)gesture {
+    [inputView endInputName];
+}
+
 - (IBAction)didConfirm {
 
     NSString* auth_token = [_login_attr objectForKey:@"auth_token"];
@@ -303,14 +343,17 @@
 }
 
 #pragma mark -- NickNameInputView Delegate
+#define MOVE_STEP               90
 - (void)didStartEditingScreenName {
     NSLog(@"start input name");
-    [self moveView:-210];
+    [self moveView:-MOVE_STEP];
 }
 
 - (void)didEndEditingScreenName {
     NSLog(@"End input name");
-    [self moveView:210];
+    if (self.view.frame.origin.y != 0) {
+        [self moveView:MOVE_STEP];
+    }
 }
 
 - (void)didEditRoleTag {
@@ -345,7 +388,14 @@
 }
 
 - (void)didSelectGenderBtn:(UIButton*)sender {
-    
+    if (sender.tag == -99) {
+        mother_btn.selected = NO;
+        father_btn.selected = YES;
+        
+    } else if (sender.tag == -98) {
+        mother_btn.selected = YES;
+        father_btn.selected = NO;
+    }
 }
 
 #pragma mark -- Search tags delegate

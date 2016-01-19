@@ -238,12 +238,12 @@
         
         [header setOwnerPhoto:[_delegate getPhotoName]];
         [header setLoation:[_delegate getLocation]];
-        [header setRoleTag:[_delegate getRoleTag]];
         [header setFriendsCount:[_delegate getFriendsCount]];
         [header setShareCount:[_delegate getSharedCount]];
         [header setCycleCount:[_delegate getCycleCount]];
         [header setPersonalSign:[_delegate getSign]];
         [header setNickName:[_delegate getNickName]];
+        [header setRoleTag:[_delegate getRoleTag]];
         
 //        header.seg.selectedSegmentIndex = [_delegate getCurrentSegIndex];
         

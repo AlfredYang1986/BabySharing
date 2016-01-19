@@ -762,7 +762,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
         <!--个人信息-->
         <scene sceneID="9Zr-gx-T8d">
             <objects>
-                <viewController id="Qni-nN-2Jw" customClass="PersonalSettingController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Qni-nN-2Jw" customClass="PersonalSettingController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hlw-Fq-R6p"/>
                         <viewControllerLayoutGuide type="bottom" id="Fb2-hU-bcJ"/>
@@ -785,8 +785,14 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                             <constraint firstItem="oix-Er-DQz" firstAttribute="bottom" secondItem="SS1-Uf-N33" secondAttribute="bottomMargin" id="42R-Kz-gdt"/>
                             <constraint firstAttribute="trailingMargin" secondItem="oix-Er-DQz" secondAttribute="trailing" constant="-16" id="6cV-mL-rxB"/>
                             <constraint firstItem="oix-Er-DQz" firstAttribute="top" secondItem="SS1-Uf-N33" secondAttribute="topMargin" id="8uc-Mz-cPG"/>
+                            <constraint firstItem="oix-Er-DQz" firstAttribute="top" secondItem="SS1-Uf-N33" secondAttribute="topMargin" constant="74" id="BbM-4y-76q"/>
                             <constraint firstItem="oix-Er-DQz" firstAttribute="leading" secondItem="SS1-Uf-N33" secondAttribute="leadingMargin" constant="-16" id="RKN-hF-660"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="8uc-Mz-cPG"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="个人信息" id="gzV-kX-Ww8"/>
                     <connections>
@@ -1904,6 +1910,6 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="2PU-iO-cFw"/>
-        <segue reference="mYA-47-s6C"/>
+        <segue reference="Xl7-6t-OQ8"/>
     </inferredMetricsTieBreakers>
 </document>

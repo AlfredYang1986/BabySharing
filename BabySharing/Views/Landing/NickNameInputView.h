@@ -32,4 +32,5 @@
 
 - (void)setUpWithFrame:(CGRect)rect;
 - (void)endInputName;
+//- (void)textFieldChanged:(UITextField*)tf;
 @end

@@ -38,6 +38,9 @@
     
     NSTimer* timer;
     NSInteger seconds;
+    
+//    OBShapedButton* clear_btn;
+    UIButton* clear_btn;
 }
 
 @synthesize delegate = _delegate;
@@ -100,6 +103,18 @@
     phone_area.delegate = self;
     phone_area.keyboardType = UIKeyboardTypeNumberPad;
     phone_area.clearButtonMode = UITextFieldViewModeWhileEditing;
+    
+    clear_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 25, phone_area.frame.size.height)];
+    clear_btn.center = CGPointMake(phone_area.frame.size.width - 25 / 2, phone_area.frame.size.height / 2);
+    [phone_area addSubview:clear_btn];
+    
+    CALayer* layer = [CALayer layer];
+    layer.contents = (id)[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_input_clear_btn" ofType:@"png"]].CGImage;
+    layer.frame = CGRectMake(0, 0, 12, 12);
+    layer.position = CGPointMake(10, phone_area.frame.size.height / 2 - 1);
+    [clear_btn.layer addSublayer:layer];
+    
+    clear_btn.hidden = YES;
     
     [self addSubview:phone_area];
 }
@@ -212,6 +227,12 @@
         next_btn.enabled = YES;
     } else {
         next_btn.enabled = NO;
+    }
+    
+    if (![phone_area.text isEqualToString:@""]) {
+        clear_btn.hidden = NO;
+    } else {
+        clear_btn.hidden = YES;
     }
     
 //    if (phone_area.text.length > 0) {

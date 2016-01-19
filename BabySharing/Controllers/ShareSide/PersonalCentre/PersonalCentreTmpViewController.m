@@ -174,8 +174,8 @@
 //    }
     
     bkView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, STATUS_BAR_HEIGHT)];
-//    bkView.backgroundColor = [UIColor whiteColor];
-    bkView.backgroundColor = [UIColor colorWithWhite:0.949 alpha:1.f];
+    bkView.backgroundColor = [UIColor whiteColor];
+//    bkView.backgroundColor = [UIColor colorWithWhite:0.949 alpha:1.f];
     [self.view addSubview:bkView];
    
 #define FAKE_BAR_HEIGHT        44
@@ -192,8 +192,8 @@
         NSString* filepath = [resourceBundle_dongda pathForResource:@"dongda_back" ofType:@"png"];
         CALayer * layer = [CALayer layer];
         layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
-        layer.frame = CGRectMake(0, 0, 25, 25);
-        layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
+        layer.frame = CGRectMake(-7, 0, 25, 25);
+//        layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
         [barBtn.layer addSublayer:layer];
         //    [barBtn setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
         //    [barBtn setImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
@@ -201,8 +201,9 @@
         [fake_bar addSubview:barBtn];
 
     } else {
-        UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 13 - 15, (44 - 25) / 2, 30, 25)];
-        NSString* filepath = [resourceBundle_dongda pathForResource:@"profile_setting" ofType:@"png"];
+//        UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 13 - 15, (44 - 25) / 2, 30, 25)];
+        UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, (44 - 25) / 2, 30, 25)];
+        NSString* filepath = [resourceBundle_dongda pathForResource:@"profile_setting_dark" ofType:@"png"];
         CALayer * layer = [CALayer layer];
         layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
         layer.frame = CGRectMake(0, 0, 25, 25);
