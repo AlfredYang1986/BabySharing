@@ -284,6 +284,10 @@
     return false;
 }
 
+- (BOOL)isAllowMultipleSelected {
+    return NO;
+}
+
 - (void)didSelectOneImageAtIndex:(NSInteger)index {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     HomeViewController* hv = [storyboard instantiateViewControllerWithIdentifier:@"HomeView"];

@@ -50,6 +50,8 @@
 
 @property (nonatomic, weak, setter=setProtocol:) id<PostEffectAdapterProtocol> delegate;
 
+@property (nonatomic, weak) UIView* content_parent_view;
+
 // for effort of the image
 @property (nonatomic, strong, readonly) GPUImagePicture* ip;
 
@@ -64,4 +66,5 @@
 - (UIImage*)didSelectEffectFilterForPhoto:(UIButton*)sender;
 - (void)didSelectTagForPhoto:(UIButton*)sender;
 - (void)didSelectPasteForPhoto:(UIButton*)sender;
+- (void)didSelectHideTagView:(UITapGestureRecognizer*)gesture;
 @end

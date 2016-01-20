@@ -230,7 +230,11 @@
 }
 
 - (BOOL)isSelectedAtIndex:(NSInteger)index {
-    return false;
+    return NO;
+}
+
+- (BOOL)isAllowMultipleSelected {
+    return NO;
 }
 
 - (void)didSelectOneImageAtIndex:(NSInteger)index {

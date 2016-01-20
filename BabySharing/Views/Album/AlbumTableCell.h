@@ -17,6 +17,7 @@
 - (NSInteger)indexByRow:(NSInteger)row andCol:(NSInteger)col;
 - (NSInteger)getViewsCount;
 - (BOOL)isSelectedAtIndex:(NSInteger)index;
+- (BOOL)isAllowMultipleSelected;
 
 @optional
 - (void)didSelectOneImageAtIndex:(NSInteger)index;

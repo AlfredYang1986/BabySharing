@@ -260,10 +260,17 @@
     UITapGestureRecognizer* tap = (UITapGestureRecognizer*)sender;
     AlbumGridCell* ck = (AlbumGridCell*)(tap.view);
     NSInteger index = [_delegate indexByRow:ck.row andCol:ck.col];
-    
-    if (ck.viewSelected) {
-        [_delegate didUnSelectOneImageAtIndex:index];
-        ck.viewSelected = NO;
+   
+    if ([_delegate isAllowMultipleSelected]) {
+        if (ck.viewSelected) {
+            [_delegate didUnSelectOneImageAtIndex:index];
+            ck.viewSelected = NO;
+        } else {
+            [_delegate didSelectOneImageAtIndex:index];
+            if (_cannot_selected == NO) {
+                ck.viewSelected = YES;
+            }
+        }
     } else {
         [_delegate didSelectOneImageAtIndex:index];
         if (_cannot_selected == NO) {

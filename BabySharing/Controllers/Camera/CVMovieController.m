@@ -123,7 +123,7 @@
     cancel_layer.frame = CGRectMake(0, 0, CANCEL_ICON_WIDTH, CANCEL_ICON_HEIGHT);
     cancel_layer.position = CGPointMake(CANCEL_ICON_WIDTH / 2, CANCEL_BTN_HEIGHT / 2);
     [barBtn.layer addSublayer:cancel_layer];
-    [barBtn addTarget:self action:@selector(dismissCVViewController) forControlEvents:UIControlEventTouchDown];
+    [barBtn addTarget:self action:@selector(dismissCVViewController) forControlEvents:UIControlEventTouchUpInside];
     [bar addSubview:barBtn];
     
     UILabel* titleView = [[UILabel alloc]init];
@@ -132,13 +132,18 @@
     [titleView sizeToFit];
     titleView.center = CGPointMake(width / 2, FAKE_NAVIGATION_BAR_HEIGHT / 2);
     [bar addSubview:titleView];
+   
+#define RIGHT_BTN_WIDTH             25
+#define RIGHT_BTN_HEIGHT            RIGHT_BTN_WIDTH
     
-    UIButton* bar_right_btn = [[UIButton alloc]initWithFrame:CGRectMake(width - 13 - 41, 25, 25, 25)];
+#define RIGHT_BTN_RIGHT_MARGIN      10.5
+    
+    UIButton* bar_right_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, RIGHT_BTN_WIDTH, RIGHT_BTN_HEIGHT)];
     [bar_right_btn setTitleColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f] forState:UIControlStateNormal];
     [bar_right_btn setTitle:@"下一步" forState:UIControlStateNormal];
     [bar_right_btn sizeToFit];
-    [bar_right_btn addTarget:self action:@selector(didSelectMergeBtn) forControlEvents:UIControlEventTouchDown];
-    bar_right_btn.center = CGPointMake(width - 8 - bar_right_btn.frame.size.width / 2, FAKE_NAVIGATION_BAR_HEIGHT / 2);
+    [bar_right_btn addTarget:self action:@selector(didSelectMergeBtn) forControlEvents:UIControlEventTouchUpInside];
+    bar_right_btn.center = CGPointMake(width - RIGHT_BTN_RIGHT_MARGIN - bar_right_btn.frame.size.width / 2, FAKE_NAVIGATION_BAR_HEIGHT / 2);
     [bar addSubview:bar_right_btn];
     
     /**
@@ -181,7 +186,7 @@
     [f_btn_1 setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"camera-change" ofType:@"png"]] forState:UIControlStateNormal];
     [f_btn_1 addTarget:self action:@selector(didChangeCameraBtn) forControlEvents:UIControlEventTouchDown];
     [f_bar addSubview:f_btn_1];
-    f_btn_1.center = CGPointMake(FUNCTION_BAR_BTN_MARGIN + FUNCTION_BAR_BTN_WIDTH / 2, FUNCTION_BAR_HEIGHT / 2);
+    f_btn_1.center = CGPointMake(width - FUNCTION_BAR_BTN_MARGIN - FUNCTION_BAR_BTN_WIDTH / 2, FUNCTION_BAR_HEIGHT / 2);
     
 //    f_btn_2 = [[UIButton alloc]initWithFrame:CGRectMake(8, 8, 30, 25)];
 //    [f_btn_2 setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Lighting_off" ofType:@"png"]] forState:UIControlStateNormal];
@@ -274,14 +279,16 @@
 //    progress_layer.borderColor = [UIColor whiteColor].CGColor;
     progress_layer.borderColor = [UIColor blackColor].CGColor;
     progress_layer.borderWidth = 2.f;
-    progress_layer.frame = CGRectMake(0, height + 44, width, 2);
+//    progress_layer.frame = CGRectMake(0, height + 44, width, 2);
+    progress_layer.frame = CGRectMake(0, height, width, 2);
     [self.view.layer addSublayer:progress_layer];
     
     progress_using_layer = [CALayer layer];
 //    progress_using_layer.borderColor = [UIColor greenColor].CGColor;
     progress_using_layer.borderColor = [UIColor whiteColor].CGColor;
     progress_using_layer.borderWidth = 4.f;
-    progress_using_layer.frame = CGRectMake(0, height + 44, 0, 4);
+//    progress_using_layer.frame = CGRectMake(0, height + 44, 0, 4);
+    progress_using_layer.frame = CGRectMake(0, height, 0, 2);
     [self.view.layer addSublayer:progress_using_layer];
     
     timer = [NSTimer scheduledTimerWithTimeInterval: MOVIE_CALL_BACK_STEP //1.0 / 12.0

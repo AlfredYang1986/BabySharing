@@ -13,6 +13,12 @@
 		706E844A1C44CF5B00D4CA91 /* LoginSNSView.m in Sources */ = {isa = PBXBuildFile; fileRef = 706E84491C44CF5B00D4CA91 /* LoginSNSView.m */; };
 		70A9BB711C3CF5F1000DFE53 /* SearchFriendsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70A9BB701C3CF5F1000DFE53 /* SearchFriendsController.m */; };
 		70D22C431C3A16F6008B8403 /* DongDaBoundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 70D22C421C3A16F6008B8403 /* DongDaBoundle.bundle */; };
+		70E06F771C4F799E00B740CD /* SearchBrandsDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E06F761C4F799E00B740CD /* SearchBrandsDelegate.m */; };
+		70E06F7A1C4F79B100B740CD /* SearchAddBrandsDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E06F791C4F79B100B740CD /* SearchAddBrandsDelegate.m */; };
+		70E06F7E1C4F966200B740CD /* SearchLocationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E06F7D1C4F966200B740CD /* SearchLocationDelegate.m */; };
+		70E06F811C4F967400B740CD /* SearchAddLocationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E06F801C4F967400B740CD /* SearchAddLocationDelegate.m */; };
+		70E06F851C4F988800B740CD /* SearchTimeDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E06F841C4F988800B740CD /* SearchTimeDelegate.m */; };
+		70E06F881C4F989700B740CD /* SearchAddTimeDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E06F871C4F989700B740CD /* SearchAddTimeDelegate.m */; };
 		70EF02D21C22CE7A00DABCFC /* PostPublichViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EF02D11C22CE7A00DABCFC /* PostPublichViewController.m */; };
 		70F501491C23ABC7007769F4 /* PhotoAddTagController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70F501481C23ABC7007769F4 /* PhotoAddTagController.m */; };
 		70F5014B1C23ADC2007769F4 /* PostPreview.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70F5014A1C23ADC2007769F4 /* PostPreview.storyboard */; };
@@ -315,6 +321,18 @@
 		70A9BB6F1C3CF5F1000DFE53 /* SearchFriendsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchFriendsController.h; sourceTree = "<group>"; };
 		70A9BB701C3CF5F1000DFE53 /* SearchFriendsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchFriendsController.m; sourceTree = "<group>"; };
 		70D22C421C3A16F6008B8403 /* DongDaBoundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DongDaBoundle.bundle; sourceTree = "<group>"; };
+		70E06F751C4F799E00B740CD /* SearchBrandsDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchBrandsDelegate.h; sourceTree = "<group>"; };
+		70E06F761C4F799E00B740CD /* SearchBrandsDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchBrandsDelegate.m; sourceTree = "<group>"; };
+		70E06F781C4F79B100B740CD /* SearchAddBrandsDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchAddBrandsDelegate.h; sourceTree = "<group>"; };
+		70E06F791C4F79B100B740CD /* SearchAddBrandsDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchAddBrandsDelegate.m; sourceTree = "<group>"; };
+		70E06F7C1C4F966200B740CD /* SearchLocationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchLocationDelegate.h; sourceTree = "<group>"; };
+		70E06F7D1C4F966200B740CD /* SearchLocationDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchLocationDelegate.m; sourceTree = "<group>"; };
+		70E06F7F1C4F967400B740CD /* SearchAddLocationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchAddLocationDelegate.h; sourceTree = "<group>"; };
+		70E06F801C4F967400B740CD /* SearchAddLocationDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchAddLocationDelegate.m; sourceTree = "<group>"; };
+		70E06F831C4F988800B740CD /* SearchTimeDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTimeDelegate.h; sourceTree = "<group>"; };
+		70E06F841C4F988800B740CD /* SearchTimeDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTimeDelegate.m; sourceTree = "<group>"; };
+		70E06F861C4F989700B740CD /* SearchAddTimeDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchAddTimeDelegate.h; sourceTree = "<group>"; };
+		70E06F871C4F989700B740CD /* SearchAddTimeDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchAddTimeDelegate.m; sourceTree = "<group>"; };
 		70EF02D01C22CE7A00DABCFC /* PostPublichViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostPublichViewController.h; sourceTree = "<group>"; };
 		70EF02D11C22CE7A00DABCFC /* PostPublichViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostPublichViewController.m; sourceTree = "<group>"; };
 		70F501471C23ABC7007769F4 /* PhotoAddTagController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoAddTagController.h; sourceTree = "<group>"; };
@@ -922,6 +940,39 @@
 				70530B111C3F9D1E00505121 /* SearchSegItem.m */,
 			);
 			path = SearchSegItem;
+			sourceTree = "<group>";
+		};
+		70E06F741C4F78B700B740CD /* BrandSearch */ = {
+			isa = PBXGroup;
+			children = (
+				70E06F751C4F799E00B740CD /* SearchBrandsDelegate.h */,
+				70E06F761C4F799E00B740CD /* SearchBrandsDelegate.m */,
+				70E06F781C4F79B100B740CD /* SearchAddBrandsDelegate.h */,
+				70E06F791C4F79B100B740CD /* SearchAddBrandsDelegate.m */,
+			);
+			path = BrandSearch;
+			sourceTree = "<group>";
+		};
+		70E06F7B1C4F959600B740CD /* LocationSearch */ = {
+			isa = PBXGroup;
+			children = (
+				70E06F7C1C4F966200B740CD /* SearchLocationDelegate.h */,
+				70E06F7D1C4F966200B740CD /* SearchLocationDelegate.m */,
+				70E06F7F1C4F967400B740CD /* SearchAddLocationDelegate.h */,
+				70E06F801C4F967400B740CD /* SearchAddLocationDelegate.m */,
+			);
+			path = LocationSearch;
+			sourceTree = "<group>";
+		};
+		70E06F821C4F987700B740CD /* TimeSearch */ = {
+			isa = PBXGroup;
+			children = (
+				70E06F831C4F988800B740CD /* SearchTimeDelegate.h */,
+				70E06F841C4F988800B740CD /* SearchTimeDelegate.m */,
+				70E06F861C4F989700B740CD /* SearchAddTimeDelegate.h */,
+				70E06F871C4F989700B740CD /* SearchAddTimeDelegate.m */,
+			);
+			path = TimeSearch;
 			sourceTree = "<group>";
 		};
 		EE03E9801B4FABDC00F21EF5 /* Album */ = {
@@ -2182,6 +2233,9 @@
 		EEC8847F1BFEC5DB006A237D /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				70E06F821C4F987700B740CD /* TimeSearch */,
+				70E06F7B1C4F959600B740CD /* LocationSearch */,
+				70E06F741C4F78B700B740CD /* BrandSearch */,
 				EEBE1B8B1C17D1E900EAA9D2 /* UserSearch */,
 				EEA1F54E1C1690A5009B8724 /* FoundSearch */,
 				EEA1F5441C169049009B8724 /* SearchBase */,
@@ -2701,6 +2755,7 @@
 				EE79104F1B841BC3005E455B /* LoginInputView.m in Sources */,
 				EE79104D1B841B69005E455B /* ProfileDetailChatGroupCell.m in Sources */,
 				EE79104B1B841B38005E455B /* MessageNotificationDetailCell.m in Sources */,
+				70E06F851C4F988800B740CD /* SearchTimeDelegate.m in Sources */,
 				EE79104A1B841B1A005E455B /* SGBaseMenu.m in Sources */,
 				EE7910491B841B0F005E455B /* SGSheetMenu.m in Sources */,
 				EE7910471B841AD5005E455B /* PhotoTagView.m in Sources */,
@@ -2714,6 +2769,7 @@
 				EE7910421B841A92005E455B /* DropDownView.m in Sources */,
 				EE76398D1B95805F0025A56D /* CollectionQueryModel.m in Sources */,
 				EE7910631B847DBA005E455B /* ChatGroupController.m in Sources */,
+				70E06F771C4F799E00B740CD /* SearchBrandsDelegate.m in Sources */,
 				EEFCDEED1BCB93A400A53CAB /* ChatMessageCell.m in Sources */,
 				EE7910401B841A33005E455B /* DropDownItem.m in Sources */,
 				EE7C68711B82D2D20003C593 /* CycleOverCell.m in Sources */,
@@ -2724,6 +2780,7 @@
 				EEAACCCB1B44E90400D05C0B /* INTUInterpolationFunctions.m in Sources */,
 				EEE94E0B1B74A8C20011321A /* MessageViewController.m in Sources */,
 				EEB3DDD01B7B0505003750A2 /* DropDownMenu.m in Sources */,
+				70E06F7A1C4F79B100B740CD /* SearchAddBrandsDelegate.m in Sources */,
 				EE981F861B5A10400029723A /* LoginToken.m in Sources */,
 				EEAACC9A1B44E90400D05C0B /* AppDelegate.m in Sources */,
 				EE262C991C1958F8008DCC4E /* DONNotificationDelegate.m in Sources */,
@@ -2789,6 +2846,7 @@
 				EE664E9A1B73145000ACD57E /* QueryContent.m in Sources */,
 				EEB4C8BE1BFC823C0023E2AD /* QueryCell.m in Sources */,
 				EEBE1B951C17D42B00EAA9D2 /* UserSearchCell.m in Sources */,
+				70E06F811C4F967400B740CD /* SearchAddLocationDelegate.m in Sources */,
 				EE76A57C1B72181300036747 /* ConnectionModel.m in Sources */,
 				EEE031141C1FBA9300F4D40A /* UserSearchModel.m in Sources */,
 				EE9F736D1B8576B100F800DC /* MessageChatGroupHeader.m in Sources */,
@@ -2813,6 +2871,7 @@
 				EEA2017D1B744E59006B81E4 /* Friends.m in Sources */,
 				EEA8A60F1BFAC1F800130293 /* HomeViewFoundDelegateAndDatasource.m in Sources */,
 				EE26D7781C1EBA2700342E02 /* PreviewTag.m in Sources */,
+				70E06F881C4F989700B740CD /* SearchAddTimeDelegate.m in Sources */,
 				EEE94E2B1B74BE910011321A /* PersonalCentreOthersDelegate.m in Sources */,
 				EEAACCD91B44E90400D05C0B /* Providers+ContextOpt.m in Sources */,
 				EEAAC8FE1B44E81A00D05C0B /* main.m in Sources */,
@@ -2863,6 +2922,7 @@
 				EEA8A60C1BFAC0EE00130293 /* FoundViewController.m in Sources */,
 				EEA2017C1B744E59006B81E4 /* ConnectionOwner.m in Sources */,
 				EEB812321B7AF2ED00BC0774 /* UserKids.m in Sources */,
+				70E06F7E1C4F966200B740CD /* SearchLocationDelegate.m in Sources */,
 				EEBE1B871C17CB4E00EAA9D2 /* FoundHotTagsCell.m in Sources */,
 				EED774D71BABF86D001C9B57 /* HomeTagsController.m in Sources */,
 				EE26D7731C1EBA2700342E02 /* PreviewItem+CoreDataProperties.m in Sources */,

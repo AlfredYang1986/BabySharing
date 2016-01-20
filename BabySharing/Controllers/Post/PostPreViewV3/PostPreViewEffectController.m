@@ -13,11 +13,19 @@
 #import <AVFoundation/AVFoundation.h>
 #import "SearchSegView2.h"
 #import "PostPublichViewController.h"
+#import "SearhViewControllerActionsDelegate.h"
 
-#define FAKE_NAVIGATION_BAR_HEIGHT      49
-#define FUNC_BAR_HEIGHT                 44
+#import "SearchViewController.h"
+#import "SearchBrandsDelegate.h"
+#import "SearchLocationDelegate.h"
+#import "SearchTimeDelegate.h"
 
-@interface PostPreViewEffectController () <PostEffectAdapterProtocol, addingTagsProtocol, UIAlertViewDelegate, SearchSegViewDelegate>
+//#define FAKE_NAVIGATION_BAR_HEIGHT      49
+#define FAKE_NAVIGATION_BAR_HEIGHT      64
+//#define FUNC_BAR_HEIGHT                 44
+#define FUNC_BAR_HEIGHT                 47
+
+@interface PostPreViewEffectController () <PostEffectAdapterProtocol, addingTagsProtocol, UIAlertViewDelegate, SearchSegViewDelegate, SearchActionsProtocol>
 
 @end
 
@@ -53,6 +61,10 @@
     UIView* bar;
     /***********************************************************************/
 
+    /***********************************************************************/
+    // search tag
+    TagType current_type;
+    NSString* searchControllerTitle;
 }
 
 @synthesize type = _type;
@@ -92,21 +104,28 @@
     bar.backgroundColor = [UIColor colorWithRed:0.1373 green:0.1216 blue:0.1255 alpha:1.f];
     [self.view addSubview:bar];
     [self.view bringSubviewToFront:bar];
-    
-    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
    
-    barBtn.center = CGPointMake(30 / 2 + 16, 49 / 2);
+#define CANCEL_BTN_WIDTH            30
+#define CANCEL_BTN_HEIGHT           CANCEL_BTN_WIDTH
+#define CANCEL_BTN_LEFT_MARGIN      10.5
     
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, CANCEL_BTN_WIDTH, CANCEL_BTN_HEIGHT)];
+   
+    barBtn.center = CGPointMake(CANCEL_BTN_WIDTH / 2 + CANCEL_BTN_LEFT_MARGIN, FAKE_NAVIGATION_BAR_HEIGHT / 2);
+    
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-    NSString* filepath = [resourceBundle pathForResource:@"Previous_simple" ofType:@"png"];
-    
+    NSString* filepath = [resourceBundle pathForResource:@"dongda_back" ofType:@"png"];
+
+#define CANCEL_ICON_WIDTH            22
+#define CANCEL_ICON_HEIGHT           CANCEL_ICON_WIDTH
+
     CALayer * layer = [CALayer layer];
     layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
-    layer.frame = CGRectMake(0, 0, 15, 21);
-    layer.position = CGPointMake(30 / 2, 30 / 2);
+    layer.frame = CGRectMake(0, 0, CANCEL_ICON_WIDTH, CANCEL_ICON_HEIGHT);
+    layer.position = CGPointMake(CANCEL_ICON_WIDTH / 2, CANCEL_BTN_HEIGHT / 2);
     [barBtn.layer addSublayer:layer];
-    [barBtn addTarget:self action:@selector(didPopControllerSelected) forControlEvents:UIControlEventTouchDown];
+    [barBtn addTarget:self action:@selector(didPopControllerSelected) forControlEvents:UIControlEventTouchUpInside];
     [bar addSubview:barBtn];
     
     UILabel* titleView = [[UILabel alloc]init];
@@ -115,15 +134,20 @@
     titleView.text = @"编辑图片";
     titleView.textColor = [UIColor whiteColor];
     [titleView sizeToFit];
-    titleView.center = CGPointMake(width / 2, 49 / 2);
+    titleView.center = CGPointMake(width / 2, FAKE_NAVIGATION_BAR_HEIGHT / 2);
     [bar addSubview:titleView];
     
-    UIButton* bar_right_btn = [[UIButton alloc]initWithFrame:CGRectMake(width - 13 - 41, 25, 25, 25)];
+#define RIGHT_BTN_WIDTH             25
+#define RIGHT_BTN_HEIGHT            RIGHT_BTN_WIDTH
+    
+#define RIGHT_BTN_RIGHT_MARGIN      10.5
+    
+    UIButton* bar_right_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, RIGHT_BTN_WIDTH, RIGHT_BTN_HEIGHT)];
     [bar_right_btn setTitleColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f] forState:UIControlStateNormal];
     [bar_right_btn setTitle:@"下一步" forState:UIControlStateNormal];
     [bar_right_btn sizeToFit];
-    [bar_right_btn addTarget:self action:@selector(didNextBtnSelected) forControlEvents:UIControlEventTouchDown];
-    bar_right_btn.center = CGPointMake(width - 8 - bar_right_btn.frame.size.width / 2, FAKE_NAVIGATION_BAR_HEIGHT / 2);
+    [bar_right_btn addTarget:self action:@selector(didNextBtnSelected) forControlEvents:UIControlEventTouchUpInside];
+    bar_right_btn.center = CGPointMake(width - RIGHT_BTN_RIGHT_MARGIN - bar_right_btn.frame.size.width / 2, FAKE_NAVIGATION_BAR_HEIGHT / 2);
     [bar addSubview:bar_right_btn];
     /***************************************************************************************/
     
@@ -148,13 +172,6 @@
         [f_bar addItemWithTitle:@"滤镜"];
         f_bar.margin_between_items = 80;
         f_bar.selectedIndex = 0;
-     
-//        NSInteger button_count = 4;
-        
-//        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"滤镜" andImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Effect" ofType:@"png"]] andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 1 / (2*button_count),f_bar.frame.size.height / 2)]];
-//        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"标签" andImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Tag" ofType:@"png"]] andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 3 / (2*button_count),f_bar.frame.size.height / 2)]];
-//        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"贴图" andImage:[UIImage imageNamed:[resourceBundle pathForResource:@"PasteEffect" ofType:@"png"]] andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 5 / (2*button_count),f_bar.frame.size.height / 2)]];
-//        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"工具" andImage:[UIImage imageNamed:[resourceBundle pathForResource:@"ToolEffect" ofType:@"png"]] andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 7 / (2*button_count),f_bar.frame.size.height / 2)]];
         
     } else if (_type == PostPreViewMovie) {
 
@@ -162,13 +179,7 @@
         [f_bar addItemWithTitle:@"滤镜"];
         f_bar.margin_between_items = 80;
         f_bar.selectedIndex = 0;
-        
-//        NSInteger button_count = 5;
-//        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"滤镜" andImage:nil andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 1 / (2*button_count), f_bar.frame.size.height / 2)]];
-//        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"剪切" andImage:nil andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 3 / (2*button_count), f_bar.frame.size.height / 2)]];
-//        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"变速" andImage:nil andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 5 / (2*button_count), f_bar.frame.size.height / 2)]];
-//        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"封面" andImage:nil andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 7 / (2*button_count), f_bar.frame.size.height / 2)]];
-//        [f_bar addSubview:[self addFunctionBarBtnWithTitle:@"声音" andImage:nil andCallBack:@selector(didSelectFunctionBtn:) andRect:CGRectMake(0, 0, width / button_count, f_bar.frame.size.height) andCenter:CGPointMake(width * 9 / (2*button_count), f_bar.frame.size.height / 2)]];
+
     } else {
         // error
     }   
@@ -178,8 +189,11 @@
     /**
      * function area
      */
+    function_dic = [[NSMutableDictionary alloc]init];
+
     adapter = [[PostEffectAdapter alloc]init];
     adapter.delegate = self;
+    adapter.content_parent_view = self.view;
     CGFloat prefered_height = [UIScreen mainScreen].bounds.size.height - height - FUNC_BAR_HEIGHT;
   
     if (_type == PostPreViewPhote) {
@@ -234,8 +248,6 @@
     }
     
     /***************************************************************************************/
-    
-    function_dic = [[NSMutableDictionary alloc]init];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -481,6 +493,10 @@
             break;
         case TagTypeTags:
             point_tmp = CGPointMake(width * 3 / 4 - tmp.bounds.size.width / 2, height / 2);
+            break;
+        case TagTypeBrand:
+            point_tmp = CGPointMake(width * 3 / 4 - tmp.bounds.size.width / 2, height / 2);
+            break;
         default:
             break;
     }
@@ -525,13 +541,50 @@
 }
 
 - (void)queryTagContetnWithTagType:(TagType)tag_type andImg:(UIImage*)tag_img {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"PostPreview" bundle:nil];
-    PhotoAddTagController* addTagController = [storyboard instantiateViewControllerWithIdentifier:@"AddTags"];
-    addTagController.tagImg = tag_img;
-    addTagController.type = tag_type;
-    addTagController.delegate = self;
     
-    [self.navigationController pushViewController:addTagController animated:YES];
+    if (tag_type == TagTypeBrand) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SearchViewController" bundle:nil];
+        SearchViewController* svc = [storyboard instantiateViewControllerWithIdentifier:@"Search"];
+        SearchBrandsDelegate* sd = [[SearchBrandsDelegate alloc]init];
+        sd.delegate = svc;
+        sd.actions = self;
+        searchControllerTitle = @"添加品牌标签";
+        current_type = TagTypeBrand;
+        [self.navigationController pushViewController:svc animated:YES];
+        svc.delegate = sd;
+        
+    } else if (tag_type == TagTypeLocation) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SearchViewController" bundle:nil];
+        SearchViewController* svc = [storyboard instantiateViewControllerWithIdentifier:@"Search"];
+        SearchLocationDelegate* sd = [[SearchLocationDelegate alloc]init];
+        sd.delegate = svc;
+        sd.actions = self;
+        searchControllerTitle = @"添加地点标签";
+        current_type = TagTypeLocation;
+        [self.navigationController pushViewController:svc animated:YES];
+        svc.delegate = sd;
+        
+    } else if (tag_type == TagTypeTime) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SearchViewController" bundle:nil];
+        SearchViewController* svc = [storyboard instantiateViewControllerWithIdentifier:@"Search"];
+        SearchTimeDelegate* sd = [[SearchTimeDelegate alloc]init];
+        sd.delegate = svc;
+        sd.actions = self;
+        searchControllerTitle = @"添加时刻标签";
+        current_type = TagTypeLocation;
+        [self.navigationController pushViewController:svc animated:YES];
+        svc.delegate = sd;
+        
+    }
+//    else {
+//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"PostPreview" bundle:nil];
+//        PhotoAddTagController* addTagController = [storyboard instantiateViewControllerWithIdentifier:@"AddTags"];
+//        addTagController.tagImg = tag_img;
+//        addTagController.type = tag_type;
+//        addTagController.delegate = self;
+//        
+//        [self.navigationController pushViewController:addTagController animated:YES];       
+//    }
 }
 
 - (void)pasteWithImage:(UIImage*)img {
@@ -660,5 +713,57 @@
     }
     [self.view addSubview:tmp];
     [self.view bringSubviewToFront:tmp];
+
+    if ([title isEqualToString:@"标签"]) {
+        [self.view viewWithTag:-9].hidden = NO;
+    } else {
+        [self.view viewWithTag:-9].hidden = YES;
+    }
+}
+
+#pragma mark -- controler protocol
+- (void)didSelectItem:(NSString*)item {
+    [self didSelectTag:item andType:current_type];
+    [self.navigationController popToViewController:self animated:YES];
+}
+
+- (void)addNewItem:(NSString*)item {
+//    dispatch_queue_t aq = dispatch_queue_create("add tag", nil);
+//    dispatch_async(aq, ^{
+//        
+//        AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//        
+//        NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
+//        [dic setValue:app.lm.current_user_id forKey:@"user_id"];
+//        [dic setValue:app.lm.current_auth_token forKey:@"auth_token"];
+//        [dic setValue:item forKey:@"tag_name"];
+//        
+//        NSError * error = nil;
+//        NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
+//        
+//        NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:ROLETAGS_ADD_ROLETAGE]];
+//        
+//        if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
+//            NSString* msg = [result objectForKeyedSubscript:@"result"];
+//            NSLog(@"query role tags : %@", msg);
+//            
+//        } else {
+//            NSDictionary* reError = [result objectForKey:@"error"];
+//            NSString* msg = [reError objectForKey:@"message"];
+//            
+//            NSLog(@"query role tags error : %@", msg);
+//        }
+//    });
+//    
+//    inputView.role_tag = item;
+//    [self.navigationController popToViewController:self animated:YES];
+}
+
+- (NSString*)getControllerTitle {
+    return searchControllerTitle;
+}
+
+- (UINavigationController*)getViewController {
+    return self.navigationController;
 }
 @end

@@ -58,7 +58,7 @@ typedef void(^queryRoleTagFinishBlock)(BOOL success, NSString* msg, NSArray* res
 }
 
 - (void)queryRoleTagsWithStartIndex:(NSInteger)skip andLenth:(NSInteger)take withFinishBlock:(queryRoleTagFinishBlock)block {
-    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
     
     NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
 //    [dic setValue:app.lm.current_user_id forKey:@"user_id"];

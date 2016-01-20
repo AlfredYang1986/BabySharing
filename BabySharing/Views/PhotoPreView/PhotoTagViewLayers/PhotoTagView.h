@@ -17,6 +17,7 @@ typedef enum : NSUInteger {
     TagTypeLocation,
     TagTypeTime,
     TagTypeTags,
+    TagTypeBrand,
 } TagType;
 
 @interface PhotoTagView : UIView

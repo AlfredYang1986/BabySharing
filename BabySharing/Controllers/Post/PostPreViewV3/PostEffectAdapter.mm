@@ -110,16 +110,49 @@ UIButton* addPhotoEffectBtn(NSString* title, CGRect bounds, CGPoint center, NSOb
     return btn;
 }
 
-UIButton* addTagBtn(NSString* title, CGRect bounds, CGPoint center, NSObject* callBackObj, SEL callBack, UIImage* img) {
+UIView* addTagBtn(NSString* title, CGRect bounds, CGPoint center, NSObject* callBackObj, SEL callBack, UIImage* img) {
 
-    UIButton* btn = [[UIButton alloc]initWithFrame:bounds];
-    btn.center = center;
-    [btn setImage:img forState:UIControlStateNormal];
-    [btn addTarget:callBackObj action:callBack forControlEvents:UIControlEventTouchDown];
-    [btn setTitle:title forState:UIControlStateNormal];
-    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-   
-    return btn;
+#define TAG_BTN_WIDTH                   50
+#define TAG_BTN_HEIGHT                  50
+
+#define TAG_ICON_WIDTH                  25
+#define TAG_ICON_HEIGHT                 TAG_ICON_WIDTH
+    
+#define TAG_LABEL_WIDTH                 TAG_BTN_WIDTH
+#define TAG_LABEL_HEIGHT                20
+#define TAG_LABEL_FONT_SIXE             14.f
+
+#define TAG_VIEW_WIDTH                  TAG_BTN_WIDTH
+#define TAG_VIEW_HEIGHT                 TAG_BTN_HEIGHT + TAG_LABEL_HEIGHT
+
+    UIView* reVal = [[UIView alloc]initWithFrame:CGRectMake(0, 0, TAG_VIEW_WIDTH, TAG_VIEW_HEIGHT)];
+    
+    UIButton* tag_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, TAG_BTN_WIDTH, TAG_BTN_WIDTH)];
+    tag_btn.backgroundColor = [UIColor colorWithWhite:0.f alpha:0.6];
+    tag_btn.layer.cornerRadius = TAG_BTN_WIDTH / 2;
+    tag_btn.clipsToBounds = YES;
+    tag_btn.titleLabel.text = title;
+    tag_btn.titleLabel.hidden = YES;
+    
+    CALayer* icon = [CALayer layer];
+    icon.contents = (id)img.CGImage;
+    icon.frame = CGRectMake(0, 0, TAG_ICON_WIDTH, TAG_ICON_HEIGHT);
+    icon.position = CGPointMake(TAG_BTN_WIDTH / 2, TAG_BTN_HEIGHT / 2);
+    [tag_btn.layer addSublayer:icon];
+    
+    [tag_btn addTarget:callBackObj action:callBack forControlEvents:UIControlEventTouchUpInside];
+    [reVal addSubview:tag_btn];
+    
+    UILabel* tag_label = [[UILabel alloc]initWithFrame:CGRectMake(0, TAG_BTN_HEIGHT, TAG_LABEL_WIDTH, TAG_LABEL_HEIGHT)];
+    tag_label.font = [UIFont systemFontOfSize:14.f];
+    tag_label.textColor = [UIColor whiteColor];
+    tag_label.textAlignment = NSTextAlignmentCenter;
+    tag_label.text = title;
+    [reVal addSubview:tag_label];
+    
+    reVal.center = center;
+    
+    return reVal;
 }
 
 UIButton* addPasteBtn(CGRect bounds, CGPoint center, NSObject* callBackObj, SEL callBack, UIImage* img) {
@@ -163,27 +196,44 @@ UIView* effectFilterForPhoto(PostEffectAdapter* adapter, CGFloat height) {
 
 UIView* tagForPhoto(PostEffectAdapter* adapter, CGFloat height) {
     
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
 
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    CGFloat screen_height = [UIScreen mainScreen].bounds.size.height;
     CGFloat button_height = height / 3;
 
     UIView* reVal = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, height)];
 //    reVal.backgroundColor = [UIColor colorWithRed:0.9050 green:0.9050 blue:0.9050 alpha:1.f];
     reVal.backgroundColor = [UIColor darkGrayColor];
     
-    [reVal addSubview:addTagBtn(@"时刻", CGRectMake(0, 0, 3 * button_height, button_height), CGPointMake(reVal.frame.size.width / 2 - 10 - 3 * button_height / 2, reVal.frame.size.height / 2), adapter, @selector(didSelectTagForPhoto:), [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Location"] ofType:@"png"]])];
-//    [reVal addSubview:addTagBtn(@"地点", CGRectMake(0, 0, 3 * button_height, button_height), CGPointMake(reVal.frame.size.width / 2, reVal.frame.size.height / 2), adapter, @selector(didSelectTagForPhoto:), [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Time"] ofType:@"png"]])];
-    [reVal addSubview:addTagBtn(@"地点", CGRectMake(0, 0, 3 * button_height, button_height), CGPointMake(reVal.frame.size.width / 2 + 10 + 3 * button_height / 2, reVal.frame.size.height / 2), adapter, @selector(didSelectTagForPhoto:), [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Tag"] ofType:@"png"]])];
+   
+    UILabel* label = [[UILabel alloc]init];
+    label.text = @"标记这一时刻，这一地点";
+    label.textColor = [UIColor lightGrayColor];
+    [label sizeToFit];
+    [reVal addSubview:label];
+    label.center = CGPointMake(reVal.frame.size.width / 2, reVal.frame.size.height / 2);
     
-//    UILabel* label = [[UILabel alloc]init];
-//    label.text = @"标记这一时刻，这一地点";
-//    label.textColor = [UIColor lightGrayColor];
-//    [label sizeToFit];
-//    [reVal addSubview:label];
-//    label.center = CGPointMake(reVal.frame.size.width / 2, reVal.frame.size.height / 2);
+#define FAKE_NAVIGATION_BAR_HEIGHT      64
+#define FUNC_BAR_HEIGHT                 47
     
+    CGFloat main_content_height = screen_height - FAKE_NAVIGATION_BAR_HEIGHT - FUNC_BAR_HEIGHT - height;
+    
+    UIView* bg = [[UIView alloc]initWithFrame:CGRectMake(0, FAKE_NAVIGATION_BAR_HEIGHT, width, main_content_height)];
+    bg.tag = -9;
+    bg.backgroundColor = [UIColor clearColor];
+   
+#define TAG_BTN_MARGIN_BETWEEN          (50 + TAG_BTN_WIDTH)
+    [bg addSubview:addTagBtn(@"品牌", CGRectMake(0, 0, 3 * button_height, button_height), CGPointMake(bg.frame.size.width / 2 - TAG_BTN_MARGIN_BETWEEN, bg.frame.size.height / 2), adapter, @selector(didSelectTagForPhoto:), [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"tag_tag"] ofType:@"png"]])];
+    [bg addSubview:addTagBtn(@"时刻", CGRectMake(0, 0, 3 * button_height, button_height), CGPointMake(bg.frame.size.width / 2, bg.frame.size.height / 2), adapter, @selector(didSelectTagForPhoto:), [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"tag_time"] ofType:@"png"]])];
+    [bg addSubview:addTagBtn(@"地点", CGRectMake(0, 0, 3 * button_height, button_height), CGPointMake(bg.frame.size.width / 2 + TAG_BTN_MARGIN_BETWEEN, bg.frame.size.height / 2), adapter, @selector(didSelectTagForPhoto:), [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"tag_location"] ofType:@"png"]])];
+    
+    [adapter.content_parent_view addSubview:bg];
+    
+    UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:adapter action:@selector(didSelectHideTagView:)];
+    [bg addGestureRecognizer:tap];
+
     return reVal;
 }
 
@@ -295,6 +345,10 @@ void timeTagView(PostEffectAdapter* obj, UIImage* tag_img) {
 void otherTagView(PostEffectAdapter* obj, UIImage* tag_img) {
     [obj.delegate queryTagContetnWithTagType:TagTypeTags andImg:tag_img];
 }
+
+void brandTagView(PostEffectAdapter* obj, UIImage* tag_img) {
+    [obj.delegate queryTagContetnWithTagType:TagTypeBrand andImg:tag_img];
+}
 /*******************************************************************/
 @implementation PostEffectAdapter {
     // for effort of the image
@@ -307,6 +361,7 @@ void otherTagView(PostEffectAdapter* obj, UIImage* tag_img) {
 //    GPUImageSmoothToonFilter* smoothToonFilter;
 }
 
+@synthesize content_parent_view = _content_parent_view;
 @synthesize delegate = _delegate;
 @synthesize ip = _ip;
 @synthesize originFilter = _originFilter;
@@ -426,6 +481,7 @@ void otherTagView(PostEffectAdapter* obj, UIImage* tag_img) {
 //        tagNode{"时间", TagTypeTime, &timeTagView},
         tagNode{"时刻", TagTypeTime, &timeTagView},
         tagNode{"标签", TagTypeTags, &otherTagView},
+        tagNode{"品牌", TagTypeBrand, &brandTagView},
     };
     
     for (int index = 0; index < vec.size(); ++index) {
@@ -438,5 +494,9 @@ void otherTagView(PostEffectAdapter* obj, UIImage* tag_img) {
 
 - (void)didSelectPasteForPhoto:(UIButton*)sender {
     [_delegate pasteWithImage:[sender backgroundImageForState:UIControlStateNormal]];
+}
+
+- (void)didSelectHideTagView:(UITapGestureRecognizer*)gesture {
+    gesture.view.hidden = YES;
 }
 @end

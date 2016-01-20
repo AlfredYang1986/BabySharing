@@ -166,7 +166,8 @@
 //    }];
     AlbumViewController2* distination = [[AlbumViewController2 alloc]init];
     distination.delegate = self;
-    [parent presentViewController:distination animated:YES completion: ^(void){
+    HomeNavigationController * nav = [[HomeNavigationController alloc]initWithRootViewController:distination];
+    [parent presentViewController:nav animated:YES completion: ^(void){
         NSLog(@"Ablum controller running ...");
     }];
 //    [self.navigationController pushViewController:distination animated:YES];

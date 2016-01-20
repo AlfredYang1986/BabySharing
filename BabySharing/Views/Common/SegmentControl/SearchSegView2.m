@@ -175,13 +175,13 @@
 
 - (void)segSelected:(UITapGestureRecognizer*)gesture {
     SearchSegItem* tmp = (SearchSegItem*)gesture.view;
-    if (tmp.status != 1) {
+//    if (tmp.status != 1) {
         for (SearchSegItem* iter in [self getSegItems]) {
             iter.status = iter == tmp ? 1 : 0;
         }
         
         [_delegate segValueChanged2:self];
-    }
+//    }
 }
 
 - (void)segImgSelected:(UITapGestureRecognizer*)gesture {

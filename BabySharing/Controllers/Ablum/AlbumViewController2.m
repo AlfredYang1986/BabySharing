@@ -116,28 +116,30 @@
     cancel_layer.frame = CGRectMake(0, 0, CANCEL_ICON_WIDTH, CANCEL_ICON_HEIGHT);
     cancel_layer.position = CGPointMake(CANCEL_ICON_WIDTH / 2, CANCEL_BTN_HEIGHT / 2);
     [barBtn.layer addSublayer:cancel_layer];
-    [barBtn addTarget:self action:@selector(dismissCVViewController) forControlEvents:UIControlEventTouchDown];
+    [barBtn addTarget:self action:@selector(dismissCVViewController) forControlEvents:UIControlEventTouchUpInside];
     [bar addSubview:barBtn];
 
 #define RIGHT_BTN_WIDTH             25
 #define RIGHT_BTN_HEIGHT            RIGHT_BTN_WIDTH
     
 #define RIGHT_BTN_RIGHT_MARGIN      10.5
-    
+   
     UIButton* bar_right_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, RIGHT_BTN_WIDTH, RIGHT_BTN_HEIGHT)];
 //    NSString* filepath_right = [resourceBundle pathForResource:@"Next_blue" ofType:@"png"];
 //    [bar_right_btn setBackgroundImage:[UIImage imageNamed:filepath_right] forState:UIControlStateNormal];
     [bar_right_btn setTitleColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f] forState:UIControlStateNormal];
     [bar_right_btn setTitle:@"下一步" forState:UIControlStateNormal];
     [bar_right_btn sizeToFit];
-    [bar_right_btn addTarget:self action:@selector(didNextBtnSelected) forControlEvents:UIControlEventTouchDown];
     bar_right_btn.center = CGPointMake(width - RIGHT_BTN_RIGHT_MARGIN - bar_right_btn.frame.size.width / 2, FAKE_NAVIGATION_BAR_HEIGHT / 2);
+    [bar_right_btn addTarget:self action:@selector(didNextBtnSelected) forControlEvents:UIControlEventTouchUpInside];
     [bar addSubview:bar_right_btn];
     
     /**
      * set drop down list view
      */
-    dp = [[DropDownView alloc]initWithFrame:CGRectMake(0, 0, 100, 44)];
+#define TITLE_LABEL_WIDTH       100
+#define TITLE_LABEL_HEIGHT      44
+    dp = [[DropDownView alloc]initWithFrame:CGRectMake(0, 0, TITLE_LABEL_WIDTH, TITLE_LABEL_HEIGHT)];
     [dp setTitle:@"相机胶卷" forState:UIControlStateNormal];
     dp.center = CGPointMake(width / 2, FAKE_NAVIGATION_BAR_HEIGHT / 2);
     
@@ -292,7 +294,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+
     if (_type == AlbumControllerTypeMovie) {
         if (![mainContentView.layer.sublayers containsObject:avPlayerLayer]) {
             avPlayerLayer.frame = mainContentView.bounds;
@@ -617,6 +620,10 @@
         if (((NSNumber*)[images_select_arr objectAtIndex:i]).integerValue == index)
             [images_select_arr removeObjectAtIndex:i];
     }
+}
+
+- (BOOL)isAllowMultipleSelected {
+    return isAllowMutiSelection;
 }
 
 - (AlbumGridCell*)queryCellByIndex:(NSInteger)index {
