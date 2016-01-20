@@ -194,23 +194,24 @@
     adapter = [[PostEffectAdapter alloc]init];
     adapter.delegate = self;
     adapter.content_parent_view = self.view;
-    CGFloat prefered_height = [UIScreen mainScreen].bounds.size.height - height - FUNC_BAR_HEIGHT;
-  
-    if (_type == PostPreViewPhote) {
-        [self segValueChanged2:f_bar];
-
-    } else if (_type == PostPreViewMovie) {
-       
-        UIView* tmp = [adapter getFunctionViewByTitle:@"滤镜" andType:_type andPreferedHeight:prefered_height];
-        tmp.frame = CGRectMake(0, height + FUNC_BAR_HEIGHT, tmp.frame.size.width, tmp.frame.size.height);
-        
-        function_dic = [[NSMutableDictionary alloc]init];
-        [function_dic setValue:tmp forKey:@"滤镜"];
-        
-        [self.view addSubview:tmp];
-    } else {
-        // error
-    }
+//    CGFloat prefered_height = [UIScreen mainScreen].bounds.size.height - height - FUNC_BAR_HEIGHT;
+    adapter.movie_url = _editing_movie;
+    [self segValueChanged2:f_bar];
+    
+//    if (_type == PostPreViewPhote) {
+//        [self segValueChanged2:f_bar];
+//
+//    } else if (_type == PostPreViewMovie) {
+//      
+//        adapter.movie_url = _editing_movie;
+//        UIView* tmp = [adapter getFunctionViewByTitle:@"滤镜" andType:_type andPreferedHeight:prefered_height];
+//        tmp.frame = CGRectMake(0, height + FUNC_BAR_HEIGHT, tmp.frame.size.width, tmp.frame.size.height);
+//        [function_dic setValue:tmp forKey:@"滤镜"];
+//        
+//        [self.view addSubview:tmp];
+//    } else {
+//        // error
+//    }
     /***************************************************************************************/
    
     /***************************************************************************************/

@@ -276,7 +276,65 @@ UIView* asserateForMovie(PostEffectAdapter* adapter, CGFloat height) {
 }
 
 UIView* coverForMovie(PostEffectAdapter* adapter, CGFloat height) {
-    return thisViewIsNotImplemented(height);
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    UIView* reVal = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, height)];
+    
+    AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:adapter.movie_url options:nil];
+  
+    /**
+     * 1. get total length of the asset
+     */
+    CGFloat seconds = asset.duration.value / asset.duration.timescale;   // seconds
+//    NSInteger steps = seconds > 10 ? 10 : seconds;
+    NSInteger steps = 10;
+    NSError *error = nil;
+    CMTime actualTime;
+    
+    AVAssetImageGenerator *gen = [[AVAssetImageGenerator alloc] initWithAsset:asset];
+    gen.appliesPreferredTrackTransform = YES;
+   
+    /**
+     * 2. get thumb through movie
+     */
+    NSMutableArray* thumbs = [[NSMutableArray alloc]initWithCapacity:steps];
+    for (int index = 0; index < steps; ++index) {
+        CMTime time = CMTimeMakeWithSeconds(seconds / steps * index, 600);
+        CGImageRef image = [gen copyCGImageAtTime:time actualTime:&actualTime error:&error];
+        [thumbs addObject:[[UIImage alloc] initWithCGImage:image]];
+        CGImageRelease(image);
+    }
+   
+    /**
+     * 3. create container view
+     */
+#define THUMB_SMALL_HEIGHT          31
+#define THUMB_SMALL_WIDTH           THUMB_SMALL_HEIGHT
+
+#define THUMB_LARGE_WIDTH           51
+#define THUMB_LARGE_HEIGHT          THUMB_LARGE_WIDTH
+    
+    UIView* container = [[UIView alloc]initWithFrame:CGRectMake(0, 0, THUMB_SMALL_WIDTH * steps, THUMB_SMALL_HEIGHT)];
+    
+    for (int index = 0; index < steps; ++index) {
+        UIImageView* tmp = [[UIImageView alloc]initWithFrame:CGRectMake(index * THUMB_SMALL_WIDTH, 0, THUMB_SMALL_WIDTH, THUMB_SMALL_HEIGHT)];
+        tmp.image = [thumbs objectAtIndex:index];
+        tmp.userInteractionEnabled = YES;
+        [container addSubview:tmp];
+
+        UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:adapter action:@selector(didClickThumb:)];
+        [tmp addGestureRecognizer:tap];
+        
+        if (index == 0) {
+            CGPoint ct = tmp.center;
+            tmp.bounds = CGRectMake(0, 0, THUMB_LARGE_WIDTH, THUMB_LARGE_HEIGHT);
+            tmp.center = ct;
+        }
+    }
+   
+    container.center = CGPointMake([UIScreen mainScreen].bounds.size.width / 2, height / 2);
+    
+    [reVal addSubview:container];
+    return reVal;
 }
 
 UIView* soundForMovie(PostEffectAdapter* adapter, CGFloat height) {
@@ -361,6 +419,7 @@ void brandTagView(PostEffectAdapter* obj, UIImage* tag_img) {
 //    GPUImageSmoothToonFilter* smoothToonFilter;
 }
 
+@synthesize movie_url = _movie_url;
 @synthesize content_parent_view = _content_parent_view;
 @synthesize delegate = _delegate;
 @synthesize ip = _ip;
@@ -498,5 +557,24 @@ void brandTagView(PostEffectAdapter* obj, UIImage* tag_img) {
 
 - (void)didSelectHideTagView:(UITapGestureRecognizer*)gesture {
     gesture.view.hidden = YES;
+}
+
+- (void)didClickThumb:(UITapGestureRecognizer*)gesture {
+    /**
+     * 1. 变小所有
+     */
+    UIView* container = gesture.view.superview;
+    for (UIView* tmp in container.subviews) {
+        CGPoint ct = tmp.center;
+        tmp.bounds = CGRectMake(0, 0, THUMB_SMALL_WIDTH, THUMB_SMALL_HEIGHT);
+        tmp.center = ct;
+    }
+   
+    /**
+     * 2. 变大一个
+     */
+    CGPoint ct = gesture.view.center;
+    gesture.view.bounds = CGRectMake(0, 0, THUMB_LARGE_WIDTH, THUMB_LARGE_HEIGHT);
+    gesture.view.center = ct;
 }
 @end

@@ -52,6 +52,9 @@
 
 @property (nonatomic, weak) UIView* content_parent_view;
 
+// for efforf of the movie
+@property (nonatomic, strong) NSURL* movie_url;
+
 // for effort of the image
 @property (nonatomic, strong, readonly) GPUImagePicture* ip;
 
@@ -67,4 +70,5 @@
 - (void)didSelectTagForPhoto:(UIButton*)sender;
 - (void)didSelectPasteForPhoto:(UIButton*)sender;
 - (void)didSelectHideTagView:(UITapGestureRecognizer*)gesture;
+- (void)didClickThumb:(UITapGestureRecognizer*)gesture;
 @end
