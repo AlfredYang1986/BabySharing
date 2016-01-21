@@ -10,9 +10,10 @@
 #import "SearchRoleTagDelegate.h"
 
 #import "FoundHotTagsCell.h"
+#import "DongDaSearchBar2.h"
 
 @interface SearchViewController () <UITextFieldDelegate>
-@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet DongDaSearchBar2 *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *queryView;
 @property (weak, nonatomic) IBOutlet UIView *bkView;
 
@@ -38,49 +39,44 @@
     _queryView.dataSource = _delegate;
     _searchBar.delegate = _delegate;
     _searchBar.showsCancelButton = YES;
-  
+ 
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
-    UIImageView* iv = [[UIImageView alloc] initWithImage:[SearchViewController imageWithColor:[UIColor blackColor] size:CGSizeMake(width + 10, 44)]];
-    [_searchBar insertSubview:iv atIndex:1];
+    _searchBar.bounds = CGRectMake(0, 0, width + 10, 56);
+    _searchBar.sb_bg = [UIColor colorWithWhite:0.1098 alpha:1.f];
+    _searchBar.textField.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
+    _searchBar.textField.borderStyle = UITextBorderStyleRoundedRect;
+    _searchBar.textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    [_searchBar.cancleBtn setTitleColor:[UIColor colorWithWhite:1.f alpha:1.f] forState:UIControlStateNormal];
+    [_searchBar.cancleBtn setTitleColor:[UIColor colorWithWhite:1.f alpha:1.f] forState:UIControlStateDisabled];
+    _searchBar.cancleBtn.backgroundColor = [UIColor colorWithRed:0.9686 green:0.7294 blue:0.1961 alpha:1.f];
+    _searchBar.cancleBtn.layer.cornerRadius = 5.f;
+    _searchBar.cancleBtn.clipsToBounds = YES;
+    _searchBar.cancleBtn.titleLabel.font = [UIFont systemFontOfSize:14.f];
     _searchBar.placeholder = @"搜索角色标签";
-    for (UIView* v in _searchBar.subviews.firstObject.subviews) {
-        if ( [v isKindOfClass: [UITextField class]] ) {
-            UITextField *tf = (UITextField *)v;
-            tf.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
-            tf.borderStyle = UITextBorderStyleRoundedRect;
-            tf.clearButtonMode = UITextFieldViewModeWhileEditing;
-        } else if ([v isKindOfClass:[UIButton class]]) {
-            UIButton* cancel_btn = (UIButton*)v;
-            //            [cancel_btn setTitle:@"test" forState:UIControlStateNormal];
-            [cancel_btn setTitleColor:[UIColor colorWithWhite:0.4667 alpha:1.f] forState:UIControlStateNormal];
-            [cancel_btn setTitleColor:[UIColor colorWithWhite:0.4667 alpha:1.f] forState:UIControlStateDisabled];
-            cancel_btn.backgroundColor = [UIColor orangeColor];
-            cancel_btn.layer.cornerRadius = 4.f;
-            cancel_btn.clipsToBounds = YES;
-            cancel_btn.titleLabel.font = [UIFont systemFontOfSize:14.f];
-        }
-        //        else if ([v isKindOfClass:NSClassFromString(@"UISearchBarBackground")]) {
-        //            v.backgroundColor = [UIColor whiteColor];
-        //        }
-    }
-    _bkView.backgroundColor =  [UIColor colorWithWhite:0.f alpha:1.f];
+    [_searchBar setPostLayoutSize:CGSizeMake(61, 30)];
     
+    _bkView.backgroundColor =  [UIColor colorWithWhite:0.1098 alpha:1.f];
     [_delegate collectData];
+    
     UILabel* lb = [[UILabel alloc]init];
     lb.text = [_delegate getControllerTitle];
+    lb.font = [UIFont systemFontOfSize:18.f];
     [lb sizeToFit];
     lb.textColor = [UIColor whiteColor];
-//    self.navigationItem.titleView = lb;
-    lb.center = CGPointMake([UIScreen mainScreen].bounds.size.width / 2, 20 + 44 / 2);
+    lb.center = CGPointMake([UIScreen mainScreen].bounds.size.width / 2, 22 + lb.frame.size.height / 2);
     [_bkView addSubview:lb];
     
-    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
+    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(14.5, 20.5, 30, 25)];
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-    NSString* filepath = [resourceBundle pathForResource:@"dongda_back" ofType:@"png"];
+    NSString* filepath = [resourceBundle pathForResource:@"dongda_back_light" ofType:@"png"];
     CALayer * layer = [CALayer layer];
     layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
-    layer.frame = CGRectMake(0, 0, 25, 25);
+    
+#define BACK_ICON_WIDTH         22
+#define BACK_ICON_HEIGHT        BACK_ICON_WIDTH
+    
+    layer.frame = CGRectMake(0, 0, BACK_ICON_WIDTH, BACK_ICON_HEIGHT);
 //    layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
     [barBtn.layer addSublayer:layer];
     // [barBtn setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
@@ -90,26 +86,10 @@
 //    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn];
     [_bkView addSubview:barBtn];
     
-    _queryView.backgroundColor = [UIColor blackColor];
+    _queryView.backgroundColor = [UIColor colorWithRed:0.2039 green:0.2078 blue:0.2314 alpha:1.f];
     _queryView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [_queryView registerClass:[FoundHotTagsCell class] forCellReuseIdentifier:@"hot role tags"];
     [_queryView registerNib:[UINib nibWithNibName:@"FoundSearchHeader" bundle:[NSBundle mainBundle]] forHeaderFooterViewReuseIdentifier:@"hot role header"];
-}
-
-+ (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size {
-    CGRect rect = CGRectMake(0, 0, size.width, size.height);
-    
-    UIGraphicsBeginImageContext(rect.size);
-    
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetAlpha(context, 1.f);
-    CGContextSetFillColorWithColor(context,color.CGColor);
-    CGContextFillRect(context, rect);
-    
-    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return img;
 }
 
 - (void)didPopViewControllerBtn {

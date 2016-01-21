@@ -17,6 +17,8 @@
 @synthesize row = _row;
 @synthesize col = _col;
 @synthesize viewSelected = _viewSelected;
+@synthesize grid_border_color = _grid_border_color;
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
@@ -32,6 +34,13 @@
         self.layer.borderWidth = 0.75f;
     }
     return self;
+}
+
+- (void)setGridBorderColor:(UIColor *)c {
+    _grid_border_color = c;
+    if (!_viewSelected) {
+        self.layer.borderColor = _grid_border_color.CGColor;
+    }
 }
 
 - (void)setCellViewSelected2:(BOOL)select {
@@ -57,13 +66,13 @@
 
 - (void)setCellViewSelected:(BOOL)select {
     if (select == NO) {
-        self.layer.borderColor = [UIColor clearColor].CGColor;
-        self.layer.borderWidth = 0.f;
+        UIColor* c = _grid_border_color == nil ? [UIColor whiteColor] : _grid_border_color;
+        self.layer.borderColor = c.CGColor;
+        self.layer.borderWidth = 0.75f;
         
     } else {
         self.layer.borderColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f].CGColor;
-        self.layer.borderWidth = 4.f;
-        
+        self.layer.borderWidth = 2.f;
     }
     _viewSelected = select;
 }

@@ -169,7 +169,7 @@ typedef void(^queryRoleTagFinishBlock)(BOOL success, NSString* msg, NSArray* res
     header.headLabell.textColor = [UIColor whiteColor];
     header.headLabell.font = [UIFont systemFontOfSize:14.f];
         
-    header.backgroundView = [[UIImageView alloc] initWithImage:[SearchRoleTagDelegate imageWithColor:[UIColor blackColor] size:header.bounds.size alpha:1.0]];
+    header.backgroundView = [[UIImageView alloc] initWithImage:[SearchRoleTagDelegate imageWithColor:[UIColor colorWithWhite:0.1098 alpha:1.f] size:header.bounds.size alpha:1.0]];
     return header;
 }
 
@@ -205,7 +205,7 @@ typedef void(^queryRoleTagFinishBlock)(BOOL success, NSString* msg, NSArray* res
    
     cell.isDarkTheme = YES;
     [cell setHotTagsTest:final_tag_arr];
-    cell.backgroundColor = [UIColor blackColor];
+    cell.backgroundColor = [UIColor colorWithWhite:0.1098 alpha:1.f];
     
     return cell;
 }

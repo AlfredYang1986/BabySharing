@@ -79,7 +79,7 @@
     trait.delegate = self;
     movie_list = [[NSMutableArray alloc]init];
     isRecording = NO;
-    self.view.backgroundColor = UIColor.blackColor;
+    self.view.backgroundColor = [UIColor colorWithWhite:0.1098 alpha:1.f];
     
     videoCamera = [[GPUImageStillCamera alloc] initWithSessionPreset:AVCaptureSessionPreset640x480 cameraPosition:AVCaptureDevicePositionBack];
     videoCamera.outputImageOrientation = UIInterfaceOrientationPortrait;
@@ -110,10 +110,9 @@
     
     UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, CANCEL_BTN_WIDTH, CANCEL_BTN_HEIGHT)];
     barBtn.center = CGPointMake(CANCEL_BTN_WIDTH / 2 + CANCEL_BTN_LEFT_MARGIN, FAKE_NAVIGATION_BAR_HEIGHT / 2);
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-    NSString* filepath = [resourceBundle pathForResource:@"camera-cancel" ofType:@"png"];
-    //    [barBtn setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
+    NSString* filepath = [resourceBundle pathForResource:@"post_cancel" ofType:@"png"];
     CALayer* cancel_layer = [CALayer layer];
     cancel_layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
     
@@ -128,6 +127,7 @@
     
     UILabel* titleView = [[UILabel alloc]init];
     titleView.text = @"视频";
+    titleView.font = [UIFont systemFontOfSize:18.f];
     titleView.textColor = [UIColor whiteColor];
     [titleView sizeToFit];
     titleView.center = CGPointMake(width / 2, FAKE_NAVIGATION_BAR_HEIGHT / 2);
@@ -152,112 +152,55 @@
 #define FUNCTION_BAR_HEIGHT         44
     CGFloat height = width * aspectRatio - FUNCTION_BAR_HEIGHT;
     UIView* f_bar = [[UIView alloc]initWithFrame:CGRectMake(0, height, width, FUNCTION_BAR_HEIGHT)];
-//    f_bar.backgroundColor = [UIColor clearColor];
-    f_bar.backgroundColor = [UIColor darkGrayColor];
-    
-    //    CAGradientLayer* bl = [CAGradientLayer layer];
-    //    [bl setStartPoint:CGPointMake(0.0, 0.0)];
-    //    [bl setEndPoint:CGPointMake(0.0, 1.0)];
-    //    bl.colors = [NSArray arrayWithObjects:
-    //                    (id)[UIColor colorWithRed:0.2549 green:0.2510 blue:0.2588 alpha:1.f].CGColor,
-    //                    (id)[UIColor blackColor].CGColor, nil];
-    //
-    //    bl.frame = CGRectMake(0, 0, width, 44);
-    //    [f_bar.layer addSublayer:bl];
-    
+    f_bar.backgroundColor = [UIColor colorWithWhite:0.1098 alpha:1.f];
+   
     [self.view addSubview:f_bar];
     [self.view bringSubviewToFront:f_bar];
-    
-//    UIButton* f_btn_0 = [[UIButton alloc]initWithFrame:CGRectMake(8, 8, 25, 25)];
-//    [f_btn_0 setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Grid" ofType:@"png"]] forState:UIControlStateNormal];
-//    [f_btn_0 addTarget:self action:@selector(didLayoutHelpSelected) forControlEvents:UIControlEventTouchDown];
-//    [f_bar addSubview:f_btn_0];
-//    f_btn_0.center = CGPointMake(width / 2 - width / 3, 22);
-//    isLayoutHelp = NO;
-//    layout_help_layers = [[NSMutableArray alloc]initWithCapacity:4];
-//    f_btn_0.hidden = YES;
-   
+  
 #define FUNCTION_BAR_BTN_WIDTH      25
 #define FUNCTION_BAR_BTN_HEIGHT     25
 #define FUNCTION_BAR_BTN_MARGIN     8
     
-    UIButton* f_btn_1 = [[UIButton alloc]initWithFrame:CGRectMake(FUNCTION_BAR_BTN_MARGIN, FUNCTION_BAR_BTN_MARGIN, FUNCTION_BAR_BTN_WIDTH, FUNCTION_BAR_BTN_HEIGHT)];
-    //    [f_btn_1 setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"CameraRefresh" ofType:@"png"]] forState:UIControlStateNormal];
-    [f_btn_1 setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"camera-change" ofType:@"png"]] forState:UIControlStateNormal];
+    UIButton* f_btn_1 = [[UIButton alloc]initWithFrame:CGRectMake(FUNCTION_BAR_BTN_MARGIN, FUNCTION_BAR_BTN_MARGIN, FUNCTION_BAR_BTN_WIDTH + 5, FUNCTION_BAR_BTN_HEIGHT + 5)];
+    [f_btn_1 setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"post_change_camera" ofType:@"png"]] forState:UIControlStateNormal];
     [f_btn_1 addTarget:self action:@selector(didChangeCameraBtn) forControlEvents:UIControlEventTouchDown];
     [f_bar addSubview:f_btn_1];
     f_btn_1.center = CGPointMake(width - FUNCTION_BAR_BTN_MARGIN - FUNCTION_BAR_BTN_WIDTH / 2, FUNCTION_BAR_HEIGHT / 2);
-    
-//    f_btn_2 = [[UIButton alloc]initWithFrame:CGRectMake(8, 8, 30, 25)];
-//    [f_btn_2 setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Lighting_off" ofType:@"png"]] forState:UIControlStateNormal];
-//    [f_btn_2 addTarget:self action:@selector(didChangeFreshLight) forControlEvents:UIControlEventTouchDown];
-//    [f_bar addSubview:f_btn_2];
-//    f_btn_2.center = CGPointMake(width - 8 - 30 / 2, 22);
-//    isFlash = NO;
     
     /**
      * action buttons
      */
     CGFloat last_height = [UIScreen mainScreen].bounds.size.height - height;
-//    take_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, last_height * 0.8, last_height * 0.8)];
-//    take_btn.layer.cornerRadius = last_height * 0.4;
-//    take_btn.layer.borderColor = [UIColor whiteColor].CGColor;
-//    take_btn.layer.borderWidth = 5.f;
-//    take_btn.clipsToBounds = YES;
+
+#define PHOTO_TAKEN_BTN_WIDTH                   92
+#define PHOTO_TAKEN_BTN_HEIGHT                  PHOTO_TAKEN_BTN_WIDTH
+#define PHOTO_TAKEN_BTN_MODIFY_MARGIN           -15
     take_btn = [[OBShapedButton alloc]init];
-    [take_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"camera-movie" ofType:@"png"]] forState:UIControlStateNormal];
+    [take_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"post_movie_btn" ofType:@"png"]] forState:UIControlStateNormal];
+    [take_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"post_movie_btn_down" ofType:@"png"]] forState:UIControlStateHighlighted];
     [self.view addSubview:take_btn];
     [take_btn addTarget:self action:@selector(didSelectTakePicBtn) forControlEvents:UIControlEventTouchDown];
-    take_btn.frame = CGRectMake(0, 0, 92, 92);
-    take_btn.center = CGPointMake(width / 2, height + last_height / 2);
+    [take_btn addTarget:self action:@selector(didSelectTakePicBtn) forControlEvents:UIControlEventTouchUpInside];
+    [take_btn addTarget:self action:@selector(didSelectTakePicBtn) forControlEvents:UIControlEventTouchUpOutside];
+    take_btn.frame = CGRectMake(0, 0, PHOTO_TAKEN_BTN_WIDTH, PHOTO_TAKEN_BTN_HEIGHT);
+    take_btn.center = CGPointMake(width / 2, height + last_height / 2 + PHOTO_TAKEN_BTN_MODIFY_MARGIN);
     
-//    inner_take_btn_layer = [CALayer layer];
-//    inner_take_btn_layer.frame = CGRectMake(7, 7, last_height * 0.8 - 14, last_height * 0.8 - 14);
-//    inner_take_btn_layer.cornerRadius = inner_take_btn_layer.frame.size.width / 2;
-//    inner_take_btn_layer.backgroundColor = [UIColor redColor].CGColor;
-//    inner_take_btn_layer.masksToBounds = YES;
-//    [take_btn.layer addSublayer:inner_take_btn_layer];
-//    inner_take_btn_layer.position = CGPointMake(take_btn.frame.size.width / 2, take_btn.frame.size.height / 2);
-//    
-//    UIButton* album_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, last_height * 0.5, last_height * 0.5)];
-//    [album_btn addTarget:self action:@selector(didSelectAlbumBtn) forControlEvents:UIControlEventTouchDown];
-//    [self.view addSubview:album_btn];
-//    album_btn.center = CGPointMake(width / 2 + width / 3, height + 44 + last_height / 2);
-//    
-//    AlbumModule* am = [[AlbumModule alloc]init];
-//    [am enumFirstAssetWithProprty:ALAssetTypeVideo finishBlock:^(NSArray *result) {
-//        ALAsset* al = result.firstObject;
-//        UIImage* img = [UIImage imageWithCGImage:al.thumbnail];
-//        if (img != nil) {
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                [album_btn setBackgroundImage:img forState:UIControlStateNormal];
-//            });
-//        }
-//    }];
-    
-    //    UIButton* movie_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, last_height * 0.5, last_height * 0.5)];
-//    UIButton* movie_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
-//    [movie_btn addTarget:self action:@selector(didSelectCameraBtn) forControlEvents:UIControlEventTouchDown];
-//    [self.view addSubview:movie_btn];
-//    movie_btn.center = CGPointMake(width / 2 - width / 3, height + 44 + last_height / 2);
-////    NSString* movie_img_file = [resourceBundle pathForResource:@"Camera_blue" ofType:@"png"];
-//    NSString* movie_img_file = [resourceBundle pathForResource:@"Camera_change" ofType:@"png"];
-//    [movie_btn setBackgroundImage:[UIImage imageNamed:movie_img_file] forState:UIControlStateNormal];
-   
     /**
      * menu bar
      */
     CGFloat screen_height = [UIScreen mainScreen].bounds.size.height;
     seg = [[SearchSegView2 alloc]initWithFrame:CGRectMake(0, screen_height - 44, width, 44)];
-    seg.backgroundColor = [UIColor blackColor];
+    seg.backgroundColor = [UIColor colorWithWhite:0.1098 alpha:1.f];
     
     [seg addItemWithTitle:@"相册"];
     [seg addItemWithTitle:@"拍照"];
     [seg addItemWithTitle:@"视频"];
+   
+#define SEG_BTN_MARGIN_BETWEEN          45
     
     seg.selectedIndex = 2;
     seg.delegate = self;
-    seg.margin_between_items = 30;
+    seg.margin_between_items = SEG_BTN_MARGIN_BETWEEN;
     
     [self.view addSubview:seg];
     
@@ -265,8 +208,9 @@
      * delete btn
      */
     delete_current_movie_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, screen_height - 44, width, 44)];
-    delete_current_movie_btn.backgroundColor = [UIColor blackColor];
-    [delete_current_movie_btn setTitle:@"删除" forState:UIControlStateNormal];
+    delete_current_movie_btn.backgroundColor = [UIColor colorWithWhite:0.1098 alpha:1.f];
+    [delete_current_movie_btn setTitle:@"删 除" forState:UIControlStateNormal];
+    delete_current_movie_btn.titleLabel.font = [UIFont systemFontOfSize:14.f];
     [delete_current_movie_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [delete_current_movie_btn addTarget:self action:@selector(didSelectDeleteBtn) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:delete_current_movie_btn];
@@ -276,19 +220,15 @@
      * progress bar for movie
      */
     progress_layer = [CALayer layer];
-//    progress_layer.borderColor = [UIColor whiteColor].CGColor;
-    progress_layer.borderColor = [UIColor blackColor].CGColor;
-    progress_layer.borderWidth = 2.f;
-//    progress_layer.frame = CGRectMake(0, height + 44, width, 2);
-    progress_layer.frame = CGRectMake(0, height, width, 2);
+    progress_layer.borderColor = [UIColor colorWithWhite:0.1098 alpha:1.f].CGColor;
+    progress_layer.borderWidth = 4.f;
+    progress_layer.frame = CGRectMake(0, height, width, 4);
     [self.view.layer addSublayer:progress_layer];
     
     progress_using_layer = [CALayer layer];
-//    progress_using_layer.borderColor = [UIColor greenColor].CGColor;
     progress_using_layer.borderColor = [UIColor whiteColor].CGColor;
     progress_using_layer.borderWidth = 4.f;
-//    progress_using_layer.frame = CGRectMake(0, height + 44, 0, 4);
-    progress_using_layer.frame = CGRectMake(0, height, 0, 2);
+    progress_using_layer.frame = CGRectMake(0, height, 0, 4);
     [self.view.layer addSublayer:progress_using_layer];
     
     timer = [NSTimer scheduledTimerWithTimeInterval: MOVIE_CALL_BACK_STEP //1.0 / 12.0
@@ -298,7 +238,6 @@
                                             repeats: YES];
     [timer setFireDate:[NSDate distantFuture]]; // stop
 }
-
 //    [timer setFireDate:[NSDate distantPast]]; // start
 
 - (void)handleTimer:(NSTimer*)sender {

@@ -12,6 +12,8 @@
 		70530B141C3F9D1E00505121 /* SearchSegItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 70530B111C3F9D1E00505121 /* SearchSegItem.m */; };
 		706E844A1C44CF5B00D4CA91 /* LoginSNSView.m in Sources */ = {isa = PBXBuildFile; fileRef = 706E84491C44CF5B00D4CA91 /* LoginSNSView.m */; };
 		70A9BB711C3CF5F1000DFE53 /* SearchFriendsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70A9BB701C3CF5F1000DFE53 /* SearchFriendsController.m */; };
+		70C75B5B1C50B5E000E7587A /* DongDaSearchBar2.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C75B5A1C50B5E000E7587A /* DongDaSearchBar2.m */; };
+		70C75B621C50DF1100E7587A /* SearchAddController2.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C75B611C50DF1100E7587A /* SearchAddController2.m */; };
 		70D22C431C3A16F6008B8403 /* DongDaBoundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 70D22C421C3A16F6008B8403 /* DongDaBoundle.bundle */; };
 		70E06F771C4F799E00B740CD /* SearchBrandsDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E06F761C4F799E00B740CD /* SearchBrandsDelegate.m */; };
 		70E06F7A1C4F79B100B740CD /* SearchAddBrandsDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E06F791C4F79B100B740CD /* SearchAddBrandsDelegate.m */; };
@@ -320,6 +322,10 @@
 		706E84491C44CF5B00D4CA91 /* LoginSNSView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginSNSView.m; sourceTree = "<group>"; };
 		70A9BB6F1C3CF5F1000DFE53 /* SearchFriendsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchFriendsController.h; sourceTree = "<group>"; };
 		70A9BB701C3CF5F1000DFE53 /* SearchFriendsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchFriendsController.m; sourceTree = "<group>"; };
+		70C75B591C50B5E000E7587A /* DongDaSearchBar2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DongDaSearchBar2.h; sourceTree = "<group>"; };
+		70C75B5A1C50B5E000E7587A /* DongDaSearchBar2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DongDaSearchBar2.m; sourceTree = "<group>"; };
+		70C75B601C50DF1100E7587A /* SearchAddController2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchAddController2.h; sourceTree = "<group>"; };
+		70C75B611C50DF1100E7587A /* SearchAddController2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchAddController2.m; sourceTree = "<group>"; };
 		70D22C421C3A16F6008B8403 /* DongDaBoundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DongDaBoundle.bundle; sourceTree = "<group>"; };
 		70E06F751C4F799E00B740CD /* SearchBrandsDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchBrandsDelegate.h; sourceTree = "<group>"; };
 		70E06F761C4F799E00B740CD /* SearchBrandsDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchBrandsDelegate.m; sourceTree = "<group>"; };
@@ -1362,6 +1368,8 @@
 				EEA1F5481C169049009B8724 /* SearchViewController.m */,
 				EEA1F5491C169049009B8724 /* SearchViewController.storyboard */,
 				EEA1F54A1C169049009B8724 /* SearhViewControllerActionsDelegate.h */,
+				70C75B601C50DF1100E7587A /* SearchAddController2.h */,
+				70C75B611C50DF1100E7587A /* SearchAddController2.m */,
 			);
 			path = SearchBase;
 			sourceTree = "<group>";
@@ -2142,6 +2150,8 @@
 			children = (
 				EEBE1B581C17CA9400EAA9D2 /* DongDaSearchBar.h */,
 				EEBE1B591C17CA9400EAA9D2 /* DongDaSearchBar.m */,
+				70C75B591C50B5E000E7587A /* DongDaSearchBar2.h */,
+				70C75B5A1C50B5E000E7587A /* DongDaSearchBar2.m */,
 			);
 			path = SearchBar;
 			sourceTree = "<group>";
@@ -2827,6 +2837,7 @@
 				EE9633C91B92A4CF00DB4EA5 /* PersonalCenterSignaturesController.m in Sources */,
 				EEDCF6A01B9AB8DA005F4F4D /* UserSetting+ContextOpt.m in Sources */,
 				EE9785B41B90060B00C454C5 /* CycleAddHometownController.m in Sources */,
+				70C75B5B1C50B5E000E7587A /* DongDaSearchBar2.m in Sources */,
 				EEAACCEB1B44E90400D05C0B /* TmpFileStorageModel.m in Sources */,
 				EEBE1B811C17CB4E00EAA9D2 /* FoundMoreFriendCell.m in Sources */,
 				EE90C9871BFC1C68002D5D1D /* MainHomeViewDataDelegate.m in Sources */,
@@ -2847,6 +2858,7 @@
 				EEB4C8BE1BFC823C0023E2AD /* QueryCell.m in Sources */,
 				EEBE1B951C17D42B00EAA9D2 /* UserSearchCell.m in Sources */,
 				70E06F811C4F967400B740CD /* SearchAddLocationDelegate.m in Sources */,
+				70C75B621C50DF1100E7587A /* SearchAddController2.m in Sources */,
 				EE76A57C1B72181300036747 /* ConnectionModel.m in Sources */,
 				EEE031141C1FBA9300F4D40A /* UserSearchModel.m in Sources */,
 				EE9F736D1B8576B100F800DC /* MessageChatGroupHeader.m in Sources */,

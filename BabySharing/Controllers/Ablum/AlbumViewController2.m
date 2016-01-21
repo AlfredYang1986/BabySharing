@@ -63,7 +63,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
-    self.view.backgroundColor = UIColor.blackColor;
+    self.view.backgroundColor = [UIColor colorWithWhite:0.1098 alpha:1.f];
 
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     aspectRatio = 4.0 / 3.0;
@@ -92,8 +92,7 @@
      * fake navigation bar
      */
     bar = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, FAKE_NAVIGATION_BAR_HEIGHT)];
-    bar.backgroundColor = [UIColor blackColor];
-//    bar.backgroundColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
+    bar.backgroundColor = [UIColor colorWithWhite:0.1098 alpha:1.f];
     [self.view addSubview:bar];
     [self.view bringSubviewToFront:bar];
    
@@ -103,10 +102,9 @@
     
     UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, CANCEL_BTN_WIDTH, CANCEL_BTN_HEIGHT)];
     barBtn.center = CGPointMake(CANCEL_BTN_WIDTH / 2 + CANCEL_BTN_LEFT_MARGIN, FAKE_NAVIGATION_BAR_HEIGHT / 2);
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-    NSString* filepath = [resourceBundle pathForResource:@"camera-cancel" ofType:@"png"];
-    //    [barBtn setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
+    NSString* filepath = [resourceBundle pathForResource:@"post_cancel" ofType:@"png"];
 
 #define CANCEL_ICON_WIDTH            22
 #define CANCEL_ICON_HEIGHT           CANCEL_ICON_WIDTH
@@ -125,8 +123,6 @@
 #define RIGHT_BTN_RIGHT_MARGIN      10.5
    
     UIButton* bar_right_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, RIGHT_BTN_WIDTH, RIGHT_BTN_HEIGHT)];
-//    NSString* filepath_right = [resourceBundle pathForResource:@"Next_blue" ofType:@"png"];
-//    [bar_right_btn setBackgroundImage:[UIImage imageNamed:filepath_right] forState:UIControlStateNormal];
     [bar_right_btn setTitleColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f] forState:UIControlStateNormal];
     [bar_right_btn setTitle:@"下一步" forState:UIControlStateNormal];
     [bar_right_btn sizeToFit];
@@ -147,14 +143,6 @@
     dp.delegate = self;
     
     [bar addSubview:dp];
-    
-//    UILabel* titleLabel = [[UILabel alloc]init];
-//    titleLabel.textColor = [UIColor whiteColor];
-//    titleLabel.text = @"选择照片";
-//    [titleLabel sizeToFit];
-//    titleLabel.center = CGPointMake(width / 2, FAKE_NAVIGATION_BAR_HEIGHT / 2);
-//    titleLabel.textAlignment = NSTextAlignmentCenter;
-//    [bar addSubview:titleLabel];
     /***************************************************************************************/
     
     /***************************************************************************************/
@@ -162,35 +150,21 @@
      * funciton bar
      */
     CGFloat height = width * aspectRatio;
-//    f_bar = [[UIView alloc]initWithFrame:CGRectMake(0, height - 44, width, 44)];
     f_bar = [[UIView alloc]initWithFrame:CGRectMake(0, height - FUNCTION_BAR_HEIGHT, width, FUNCTION_BAR_HEIGHT)];
-    f_bar.backgroundColor = [UIColor colorWithWhite:0.4 alpha:0.6];
+    f_bar.backgroundColor = [UIColor colorWithWhite:0.1098 alpha:1.f];
     [self.view addSubview:f_bar];
     [self.view bringSubviewToFront:f_bar];
 
     /**
      * gradient layer for gradient background,
      */
-//    CAGradientLayer* gl = [CAGradientLayer layer];
-//    gl.frame = CGRectMake(0, 0, f_bar.frame.size.width, f_bar.frame.size.height);
-//    gl.colors = [NSArray arrayWithObjects:
-//                             (id)[[UIColor clearColor] CGColor],
-//                             (id)[[UIColor darkGrayColor] CGColor], nil];
-//    gl.startPoint = CGPointMake(0.5, 0.5);
-//    gl.endPoint = CGPointMake(0.5, 1.0);
-//    [f_bar.layer addSublayer:gl];
-    
+   
     /**
      * button layer for function bar
      */
     CALayer* round_bottom = [CALayer layer];
-    round_bottom.frame = CGRectMake(0, 0, 27, 15);
-    round_bottom.contents = (id)[UIImage imageNamed:[resourceBundle pathForResource:@"album-more" ofType:@"png"]].CGImage;
-//    round_bottom.cornerRadius = 3.f;
-//    round_bottom.masksToBounds = YES;
-//    round_bottom.borderWidth = 1.f;
-//    round_bottom.borderColor = [UIColor blackColor].CGColor;
-//    round_bottom.backgroundColor = [UIColor blackColor].CGColor;
+    round_bottom.frame = CGRectMake(0, 0, 24, 20);
+    round_bottom.contents = (id)[UIImage imageNamed:[resourceBundle pathForResource:@"post_three_line" ofType:@"png"]].CGImage;
     round_bottom.position = CGPointMake(f_bar.frame.size.width / 2, f_bar.frame.size.height / 2);
     [f_bar.layer addSublayer:round_bottom];
     
@@ -214,34 +188,19 @@
     /**
      * bottom function area
      */
-//    UIView* tab_bar = [[UIView alloc]initWithFrame:CGRectMake(0, tab_bar_height_offset, width, 44)];
-//    tab_bar.backgroundColor = [UIColor colorWithRed:0.3176 green:0.7529 blue:0.6941 alpha:1.f];
-//    [self.view addSubview:tab_bar];
-//   
-//    if (_type == AlbumControllerTypePhoto) {
-//        [self createButtonsForView:tab_bar inRect:CGRectMake(0, 0, width / 3, 44) andTitle:@"相机胶卷"];
-//        [self createButtonsForView:tab_bar inRect:CGRectMake(width / 3, 0, width / 3, 44) andTitle:@"面孔"];
-//        [self createButtonsForView:tab_bar inRect:CGRectMake(width * 2 / 3, 0, width / 3, 44) andTitle:@"地点"];
-//    } else {
-//        [self createButtonsForView:tab_bar inRect:CGRectMake(0, 0, width, 44) andTitle:@"视频"];
-//        
-//        if (player == nil) {
-//            player = [[AVPlayer alloc]init];
-//            avPlayerLayer = [AVPlayerLayer playerLayerWithPlayer:player];
-//        }
-//    }
-    
     CGFloat screen_height = [UIScreen mainScreen].bounds.size.height;
     seg = [[SearchSegView2 alloc]initWithFrame:CGRectMake(0, screen_height - 44, width, 44)];
-    seg.backgroundColor = [UIColor blackColor];
+    seg.backgroundColor = [UIColor colorWithWhite:0.1098 alpha:1.f];
     
     [seg addItemWithTitle:@"相册"];
     [seg addItemWithTitle:@"拍照"];
     [seg addItemWithTitle:@"视频"];
     
+#define SEG_BTN_MARGIN_BETWEEN          45
+    
     seg.selectedIndex = 0;
     seg.delegate = self;
-    seg.margin_between_items = 30;
+    seg.margin_between_items = SEG_BTN_MARGIN_BETWEEN;
     
     [self.view addSubview:seg];
     /***************************************************************************************/
@@ -462,7 +421,7 @@
 
 - (void)didTapFunctionBar:(UITapGestureRecognizer*)gesture {
    
-#define FUNCTION_BAR_TOP_MARGIN             11
+#define FUNCTION_BAR_TOP_MARGIN             22
     static const CGFloat kAnimationDuration = 0.15; // in seconds
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     CGFloat height = width * aspectRatio;
@@ -542,6 +501,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     AlbumTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AlbumTableViewCell"];
+    cell.grid_border_color = [UIColor colorWithWhite:0.1806 alpha:1.f];
     
     if (cell == nil) {
         cell = [[AlbumTableCell alloc]init];

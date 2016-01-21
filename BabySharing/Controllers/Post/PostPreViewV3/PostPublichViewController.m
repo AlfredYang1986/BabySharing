@@ -15,7 +15,7 @@
 #import "SearchSegView2.h"
 #import "INTUAnimationEngine.h"
 
-#define FAKE_NAVIGATION_BAR_HEIGHT  44
+#define FAKE_NAVIGATION_BAR_HEIGHT  64
 #define SNS_BUTTON_WIDTH            25
 #define SNS_BUTTON_HEIGHT           SNS_BUTTON_WIDTH
 
@@ -138,20 +138,29 @@
     bar.backgroundColor = [UIColor colorWithRed:0.1373 green:0.1216 blue:0.1255 alpha:1.f];
     [self.view addSubview:bar];
     [self.view bringSubviewToFront:bar];
+
+#define CANCEL_BTN_WIDTH            30
+#define CANCEL_BTN_HEIGHT           CANCEL_BTN_WIDTH
+#define CANCEL_BTN_LEFT_MARGIN      10.5
+ 
+    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, CANCEL_BTN_WIDTH, CANCEL_BTN_HEIGHT)];
+    barBtn.center = CGPointMake(CANCEL_BTN_WIDTH / 2 + CANCEL_BTN_LEFT_MARGIN, FAKE_NAVIGATION_BAR_HEIGHT / 2);
     
-    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
-    
-    barBtn.center = CGPointMake(30 / 2 + 16, 49 / 2);
-    
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-    NSString* filepath = [resourceBundle pathForResource:@"Previous_simple" ofType:@"png"];
+    NSString* filepath = [resourceBundle pathForResource:@"dongda_back_light" ofType:@"png"];
+    
+#define CANCEL_ICON_WIDTH            22
+#define CANCEL_ICON_HEIGHT           CANCEL_ICON_WIDTH
     
     CALayer * layer = [CALayer layer];
     layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
-    layer.frame = CGRectMake(0, 0, 15, 21);
-    layer.position = CGPointMake(30 / 2, 30 / 2);
+    layer.frame = CGRectMake(0, 0, CANCEL_ICON_WIDTH, CANCEL_ICON_HEIGHT);
+    layer.position = CGPointMake(CANCEL_ICON_WIDTH / 2, CANCEL_BTN_HEIGHT / 2);
     [barBtn.layer addSublayer:layer];
+//    [barBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//    [barBtn setTitle:@"取消" forState:UIControlStateNormal];
+    
     [barBtn addTarget:self action:@selector(didPopControllerSelected) forControlEvents:UIControlEventTouchDown];
     [bar addSubview:barBtn];
     
@@ -161,7 +170,7 @@
     titleView.text = @"编辑图片";
     titleView.textColor = [UIColor whiteColor];
     [titleView sizeToFit];
-    titleView.center = CGPointMake(width / 2, 49 / 2);
+    titleView.center = CGPointMake(width / 2, FAKE_NAVIGATION_BAR_HEIGHT / 2);
     [bar addSubview:titleView];
     
     UIButton* bar_right_btn = [[UIButton alloc]initWithFrame:CGRectMake(width - 13 - 41, 25, 50, 30)];
@@ -199,18 +208,20 @@
      * SNS view
      */
     SNS_bar = [[UIView alloc]initWithFrame:CGRectMake(0, height - 44, width, 44)];
-    SNS_bar.backgroundColor = [UIColor blackColor];
+    SNS_bar.backgroundColor = [UIColor colorWithWhite:0.1098 alpha:1.f];
     
     UILabel* label = [[UILabel alloc]init];
     label.textColor = [UIColor whiteColor];
     label.text = @"同步到";
     [label sizeToFit];
-    CGFloat margin = 20;
+    CGFloat margin = 45;
     label.center = CGPointMake(width / 2 - margin - label.frame.size.width, 22);
     [SNS_bar addSubview:label];
+    
+    margin -= 20;
    
     UIButton* wechat_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, SNS_BUTTON_WIDTH, SNS_BUTTON_HEIGHT)];
-    NSString * wechat_file = [resourceBundle pathForResource:[NSString stringWithFormat:@"wechat"] ofType:@"png"];
+    NSString * wechat_file = [resourceBundle pathForResource:[NSString stringWithFormat:@"login_wechat"] ofType:@"png"];
     UIImage * wechat_image = [UIImage imageNamed:wechat_file];
     [wechat_btn setBackgroundImage:wechat_image forState:UIControlStateNormal];
     [wechat_btn addTarget:self action:@selector(SNSBtnSelected:) forControlEvents:UIControlEventTouchDown];
@@ -218,11 +229,11 @@
     //    weibo_btn.layer.cornerRadius = SNS_BUTTON_WIDTH / 2;
     //    weibo_btn.clipsToBounds = YES;
     //    weibo_btn.contentMode = UIViewContentModeCenter;
-    wechat_btn.center = CGPointMake(width / 2 + 40 - margin, 22);
+    wechat_btn.center = CGPointMake(width / 2 - margin, 22);
     [SNS_bar addSubview:wechat_btn];
     
     UIButton* qq_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, SNS_BUTTON_WIDTH, SNS_BUTTON_HEIGHT)];
-    NSString * qq_file = [resourceBundle pathForResource:[NSString stringWithFormat:@"qq"] ofType:@"png"];
+    NSString * qq_file = [resourceBundle pathForResource:[NSString stringWithFormat:@"login_qq"] ofType:@"png"];
     UIImage * qq_image = [UIImage imageNamed:qq_file];
     [qq_btn setBackgroundImage:qq_image forState:UIControlStateNormal];
     [qq_btn addTarget:self action:@selector(SNSBtnSelected:) forControlEvents:UIControlEventTouchDown];
@@ -230,11 +241,11 @@
 //    weibo_btn.layer.cornerRadius = SNS_BUTTON_WIDTH / 2;
 //    weibo_btn.clipsToBounds = YES;
 //    weibo_btn.contentMode = UIViewContentModeCenter;
-    qq_btn.center = CGPointMake(width / 2 - margin, 22);
+    qq_btn.center = CGPointMake(width / 2 + 60 - margin, 22);
     [SNS_bar addSubview:qq_btn];
     
     UIButton* weibo_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, SNS_BUTTON_WIDTH, SNS_BUTTON_HEIGHT)];
-    NSString * weibo_file = [resourceBundle pathForResource:[NSString stringWithFormat:@"weibo"] ofType:@"png"];
+    NSString * weibo_file = [resourceBundle pathForResource:[NSString stringWithFormat:@"login_weibo"] ofType:@"png"];
     UIImage * weibo_image = [UIImage imageNamed:weibo_file];
     [weibo_btn setBackgroundImage:weibo_image forState:UIControlStateNormal];
     [weibo_btn addTarget:self action:@selector(SNSBtnSelected:) forControlEvents:UIControlEventTouchDown];
@@ -242,7 +253,7 @@
     //    weibo_btn.layer.cornerRadius = SNS_BUTTON_WIDTH / 2;
     //    weibo_btn.clipsToBounds = YES;
     //    weibo_btn.contentMode = UIViewContentModeCenter;
-    weibo_btn.center = CGPointMake(width / 2 + 80 - margin, 22);
+    weibo_btn.center = CGPointMake(width / 2 + 120 - margin, 22);
     [SNS_bar addSubview:weibo_btn];
    
     sns_buttons = @[wechat_btn, weibo_btn, qq_btn];

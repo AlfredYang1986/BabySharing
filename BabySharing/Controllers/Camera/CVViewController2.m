@@ -35,7 +35,6 @@
     UIButton* f_btn_2;
     
     // take animation
-//    UIButton* take_btn;
     OBShapedButton* take_btn;
     CALayer* inner_take_btn_layer;
     
@@ -53,8 +52,7 @@
     [super viewDidLoad];
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];  // for < ios 7.0
     
-//    self.view.backgroundColor = UIColor.blackColor;
-    self.view.backgroundColor = [UIColor darkGrayColor];
+    self.view.backgroundColor = [UIColor colorWithWhite:0.1098 alpha:1.f];
    
     stillCamera = [[GPUImageStillCamera alloc] initWithSessionPreset:AVCaptureSessionPreset640x480 cameraPosition:AVCaptureDevicePositionBack];
     stillCamera.outputImageOrientation = UIInterfaceOrientationPortrait;
@@ -85,12 +83,12 @@
     
     UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, CANCEL_BTN_WIDTH, CANCEL_BTN_HEIGHT)];
     barBtn.center = CGPointMake(CANCEL_BTN_WIDTH / 2 + CANCEL_BTN_LEFT_MARGIN, FAKE_NAVIGATION_BAR_HEIGHT / 2);
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-    NSString* filepath = [resourceBundle pathForResource:@"camera-cancel" ofType:@"png"];
-//    [barBtn setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
+
+    NSString* filepath = [resourceBundle pathForResource:@"post_cancel" ofType:@"png"];
     
-#define CANCEL_ICON_WIDTH            22
+#define CANCEL_ICON_WIDTH            20
 #define CANCEL_ICON_HEIGHT           CANCEL_ICON_WIDTH
     
     CALayer* cancel_layer = [CALayer layer];
@@ -103,18 +101,11 @@
     
     UILabel* titleView = [[UILabel alloc]init];
     titleView.text = @"拍照";
+    titleView.font = [UIFont systemFontOfSize:18.f];
     titleView.textColor = [UIColor whiteColor];
     [titleView sizeToFit];
     titleView.center = CGPointMake(width / 2, FAKE_NAVIGATION_BAR_HEIGHT / 2);
     [bar addSubview:titleView];
-    
-//    UIButton* bar_right_btn = [[UIButton alloc]initWithFrame:CGRectMake(width - 13 - 41, 25, 25, 25)];
-//    [bar_right_btn setTitleColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f] forState:UIControlStateNormal];
-//    [bar_right_btn setTitle:@"下一步" forState:UIControlStateNormal];
-//    [bar_right_btn sizeToFit];
-//    [bar_right_btn addTarget:self action:@selector(didNextBtnSelected) forControlEvents:UIControlEventTouchDown];
-//    bar_right_btn.center = CGPointMake(width - 8 - bar_right_btn.frame.size.width / 2, FAKE_NAVIGATION_BAR_HEIGHT / 2);
-//    [bar addSubview:bar_right_btn];
     
     /**
      * funciton bar
@@ -122,18 +113,7 @@
 #define FUNCTION_BAR_HEIGHT         44
     CGFloat height = width * aspectRatio - FUNCTION_BAR_HEIGHT;
     UIView* f_bar = [[UIView alloc]initWithFrame:CGRectMake(0, height, width, FUNCTION_BAR_HEIGHT)];
-//    f_bar.backgroundColor = [UIColor clearColor];
-    f_bar.backgroundColor = [UIColor darkGrayColor];
-    
-//    CAGradientLayer* bl = [CAGradientLayer layer];
-//    [bl setStartPoint:CGPointMake(0.0, 0.0)];
-//    [bl setEndPoint:CGPointMake(0.0, 1.0)];
-//    bl.colors = [NSArray arrayWithObjects:
-//                    (id)[UIColor colorWithRed:0.2549 green:0.2510 blue:0.2588 alpha:1.f].CGColor,
-//                    (id)[UIColor blackColor].CGColor, nil];
-//    
-//    bl.frame = CGRectMake(0, 0, width, 44);
-//    [f_bar.layer addSublayer:bl];
+    f_bar.backgroundColor = [UIColor colorWithWhite:0.1098 alpha:1.f];
     
     [self.view addSubview:f_bar];
     [self.view bringSubviewToFront:f_bar];
@@ -142,28 +122,16 @@
 #define FUNCTION_BAR_BTN_HEIGHT     25
 #define FUNCTION_BAR_BTN_MARGIN     8
     
-//    UIButton* f_btn_0 = [[UIButton alloc]initWithFrame:CGRectMake(FUNCTION_BAR_BTN_MARGIN, FUNCTION_BAR_BTN_MARGIN, FUNCTION_BAR_BTN_WIDTH, FUNCTION_BAR_BTN_HEIGHT)];
-//    [f_btn_0 setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Grid" ofType:@"png"]] forState:UIControlStateNormal];
-//    [f_btn_0 addTarget:self action:@selector(didLayoutHelpSelected) forControlEvents:UIControlEventTouchDown];
-//    [f_bar addSubview:f_btn_0];
-//    f_btn_0.center = CGPointMake(width / 2 - width / 3, FUNCTION_BAR_HEIGHT / 2);
-//    isLayoutHelp = NO;
-//    layout_help_layers = [[NSMutableArray alloc]initWithCapacity:4];
-//    f_btn_0.hidden = YES;
-
-    UIButton* f_btn_1 = [[UIButton alloc]initWithFrame:CGRectMake(FUNCTION_BAR_BTN_MARGIN, FUNCTION_BAR_BTN_MARGIN, FUNCTION_BAR_BTN_WIDTH, FUNCTION_BAR_BTN_HEIGHT)];
-//    [f_btn_1 setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"CameraRefresh" ofType:@"png"]] forState:UIControlStateNormal];
-    [f_btn_1 setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"camera-change" ofType:@"png"]] forState:UIControlStateNormal];
+    UIButton* f_btn_1 = [[UIButton alloc]initWithFrame:CGRectMake(FUNCTION_BAR_BTN_MARGIN, FUNCTION_BAR_BTN_MARGIN, FUNCTION_BAR_BTN_WIDTH + 5, FUNCTION_BAR_BTN_HEIGHT + 5)];
+    [f_btn_1 setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"post_change_camera" ofType:@"png"]] forState:UIControlStateNormal];
     [f_btn_1 addTarget:self action:@selector(didChangeCameraBtn) forControlEvents:UIControlEventTouchDown];
     [f_bar addSubview:f_btn_1];
-//    f_btn_1.center = CGPointMake(FUNCTION_BAR_BTN_MARGIN + FUNCTION_BAR_BTN_WIDTH / 2, FUNCTION_BAR_HEIGHT / 2);
     f_btn_1.center = CGPointMake(width - FUNCTION_BAR_BTN_MARGIN - FUNCTION_BAR_BTN_WIDTH / 2, FUNCTION_BAR_HEIGHT / 2);
 
     f_btn_2 = [[UIButton alloc]initWithFrame:CGRectMake(FUNCTION_BAR_BTN_MARGIN, FUNCTION_BAR_BTN_MARGIN, FUNCTION_BAR_BTN_WIDTH, FUNCTION_BAR_BTN_HEIGHT)];
-    [f_btn_2 setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Lighting_off" ofType:@"png"]] forState:UIControlStateNormal];
+    [f_btn_2 setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"post_flash_off" ofType:@"png"]] forState:UIControlStateNormal];
     [f_btn_2 addTarget:self action:@selector(didChangeFreshLight) forControlEvents:UIControlEventTouchDown];
     [f_bar addSubview:f_btn_2];
-//    f_btn_2.center = CGPointMake(width - FUNCTION_BAR_BTN_MARGIN - FUNCTION_BAR_BTN_WIDTH / 2, FUNCTION_BAR_HEIGHT / 2);
     f_btn_2.center = CGPointMake(FUNCTION_BAR_BTN_MARGIN + FUNCTION_BAR_BTN_WIDTH / 2, FUNCTION_BAR_HEIGHT / 2);
     isFlash = NO;
     
@@ -171,60 +139,32 @@
      * action buttons
      */
     CGFloat last_height = [UIScreen mainScreen].bounds.size.height - height;
-//    take_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, last_height * 0.8, last_height * 0.8)];
-//    take_btn.layer.cornerRadius = last_height * 0.4;
-//    take_btn.layer.borderColor = [UIColor whiteColor].CGColor;
-//    take_btn.layer.borderWidth = 5.f;
-//    take_btn.clipsToBounds = YES;
     take_btn = [[OBShapedButton alloc]init];
-    [take_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"camera-take-pic" ofType:@"png"]] forState:UIControlStateNormal];
+    [take_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"post_take_btn" ofType:@"png"]] forState:UIControlStateNormal];
+    [take_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"post_take_btn_down" ofType:@"png"]] forState:UIControlStateHighlighted];
     [self.view addSubview:take_btn];
-    [take_btn addTarget:self action:@selector(didSelectTakePicBtn) forControlEvents:UIControlEventTouchDown];
-    take_btn.frame = CGRectMake(0, 0, 92, 92);
-    take_btn.center = CGPointMake(width / 2, height + last_height / 2);
+    [take_btn addTarget:self action:@selector(didSelectTakePicBtn) forControlEvents:UIControlEventTouchUpInside];
     
-//    inner_take_btn_layer = [CALayer layer];
-//    inner_take_btn_layer.frame = CGRectMake(7, 7, last_height * 0.8 - 14, last_height * 0.8 - 14);
-//    inner_take_btn_layer.cornerRadius = inner_take_btn_layer.frame.size.width / 2;
-//    inner_take_btn_layer.backgroundColor = [UIColor whiteColor].CGColor;
-//    inner_take_btn_layer.masksToBounds = YES;
-//    [take_btn.layer addSublayer:inner_take_btn_layer];
-//    inner_take_btn_layer.position = CGPointMake(take_btn.frame.size.width / 2, take_btn.frame.size.height / 2);
+#define PHOTO_TAKEN_BTN_WIDTH                   92
+#define PHOTO_TAKEN_BTN_HEIGHT                  PHOTO_TAKEN_BTN_WIDTH
+#define PHOTO_TAKEN_BTN_MODIFY_MARGIN           -15
     
-//    UIButton* album_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, last_height * 0.5, last_height * 0.5)];
-//    [album_btn addTarget:self action:@selector(didSelectAlbumBtn) forControlEvents:UIControlEventTouchDown];
-//    [self.view addSubview:album_btn];
-//    album_btn.center = CGPointMake(width / 2 - width / 3, height + 44 + last_height / 2);
-//    
-//    AlbumModule* am = [[AlbumModule alloc]init];
-//    [am enumFirstAssetWithProprty:ALAssetTypePhoto finishBlock:^(NSArray *result) {
-//        ALAsset* al = result.firstObject;
-//        UIImage* img = [UIImage imageWithCGImage:al.thumbnail];
-//        if (img != nil) {
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                [album_btn setBackgroundImage:img forState:UIControlStateNormal];
-//            });
-//        }
-//    }];
-//    
-//    UIButton* movie_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
-//    [movie_btn addTarget:self action:@selector(didSelectMovieBtn) forControlEvents:UIControlEventTouchDown];
-//    [self.view addSubview:movie_btn];
-//    movie_btn.center = CGPointMake(width / 2 + width / 3, height + 44 + last_height / 2);
-//    NSString* movie_img_file = [resourceBundle pathForResource:@"Video" ofType:@"png"];
-//    [movie_btn setBackgroundImage:[UIImage imageNamed:movie_img_file] forState:UIControlStateNormal];
-   
+    take_btn.frame = CGRectMake(0, 0, PHOTO_TAKEN_BTN_WIDTH, PHOTO_TAKEN_BTN_HEIGHT);
+    take_btn.center = CGPointMake(width / 2, height + last_height / 2 + PHOTO_TAKEN_BTN_MODIFY_MARGIN);
+    
     CGFloat screen_height = [UIScreen mainScreen].bounds.size.height;
     seg = [[SearchSegView2 alloc]initWithFrame:CGRectMake(0, screen_height - 44, width, 44)];
-    seg.backgroundColor = [UIColor blackColor];
+    seg.backgroundColor = [UIColor colorWithWhite:0.1098 alpha:1.f];
    
     [seg addItemWithTitle:@"相册"];
     [seg addItemWithTitle:@"拍照"];
     [seg addItemWithTitle:@"视频"];
     
+#define SEG_BTN_MARGIN_BETWEEN          45
+
     seg.selectedIndex = 1;
     seg.delegate = self;
-    seg.margin_between_items = 30;
+    seg.margin_between_items = SEG_BTN_MARGIN_BETWEEN;
     
     [self.view addSubview:seg];
 }
@@ -330,15 +270,15 @@
     [device lockForConfiguration:nil];
     
 //    [device setTorchMode:AVCaptureTorchModeOn];
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
     if (isFlash) {
         [device setFlashMode:AVCaptureFlashModeOff];
-        [f_btn_2 setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Lighting_off" ofType:@"png"]] forState:UIControlStateNormal];
+        [f_btn_2 setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"post_flash_off" ofType:@"png"]] forState:UIControlStateNormal];
         isFlash = NO;
     } else {
         [device setFlashMode:AVCaptureFlashModeOn];
-        [f_btn_2 setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Lighting" ofType:@"png"]] forState:UIControlStateNormal];
+        [f_btn_2 setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"post_flash_on" ofType:@"png"]] forState:UIControlStateNormal];
         isFlash = YES;
     }
     

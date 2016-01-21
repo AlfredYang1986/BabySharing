@@ -8,7 +8,8 @@
 
 #import "SearchLocationDelegate.h"
 #import "SearchAddLocationDelegate.h"
-#import "SearchAddViewController.h"
+//#import "SearchAddViewController.h"
+#import "SearchAddController2.h"
 
 #import "FoundSearchHeader.h"
 #import "FoundHotTagsCell.h"
@@ -35,7 +36,7 @@
     
     cell.isDarkTheme = YES;
     [cell setHotTagsTest:@[@"asos", @"brands"]];
-    cell.backgroundColor = [UIColor blackColor];
+    cell.backgroundColor = [UIColor colorWithWhite:0.1098 alpha:1.f];
     
     return cell;
 }
@@ -64,7 +65,7 @@
     header.headLabell.textColor = [UIColor whiteColor];
     header.headLabell.font = [UIFont systemFontOfSize:14.f];
     
-    header.backgroundView = [[UIImageView alloc] initWithImage:[SearchLocationDelegate imageWithColor:[UIColor blackColor] size:header.bounds.size alpha:1.0]];
+    header.backgroundView = [[UIImageView alloc] initWithImage:[SearchLocationDelegate imageWithColor:[UIColor colorWithWhite:0.1098 alpha:1.f] size:header.bounds.size alpha:1.0]];
     return header;
 }
 
@@ -88,7 +89,8 @@
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SearchViewController" bundle:nil];
-    SearchAddViewController* svc = [storyboard instantiateViewControllerWithIdentifier:@"SearchAdd"];
+//    SearchAddViewController* svc = [storyboard instantiateViewControllerWithIdentifier:@"SearchAdd"];
+    SearchAddController2* svc = [storyboard instantiateViewControllerWithIdentifier:@"SearchAdd2"];
     SearchAddLocationDelegate* sd = [[SearchAddLocationDelegate alloc]init];
     sd.delegate = svc;
     sd.actions = self;

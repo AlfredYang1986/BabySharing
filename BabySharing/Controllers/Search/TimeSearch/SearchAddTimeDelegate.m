@@ -111,9 +111,22 @@
         cell.textLabel.text = [showing_data objectAtIndex:indexPath.row];
     }
     
-    cell.textLabel.font = [UIFont boldSystemFontOfSize:17.f];
-    cell.textLabel.textColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
-    cell.backgroundColor = [UIColor blackColor];
+    cell.textLabel.font = [UIFont systemFontOfSize:14.f];
+    cell.textLabel.textColor = [UIColor colorWithWhite:0.3059 alpha:1.f];
+    //    cell.backgroundColor = [UIColor colorWithRed:0.2039 green:0.2078 blue:0.2314 alpha:1.f];//[UIColor colorWithWhite:0.1882 alpha:1.f];
+    cell.backgroundColor = [UIColor whiteColor];
+    
+    if (cell.layer.sublayers.count == 1) {
+        CALayer* line = [CALayer layer];
+        line.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.30].CGColor;
+        line.borderWidth = 1.f;
+        line.frame = CGRectMake(10.5, 44 - 1, [UIScreen mainScreen].bounds.size.width - 10.5 * 2 + 8, 1);
+        [cell.layer addSublayer:line];
+    }
     return cell;
+}
+
+- (NSString*)getControllerTitle {
+    return [_actions getControllerTitle];
 }
 @end

@@ -20,9 +20,7 @@
 #import "SearchLocationDelegate.h"
 #import "SearchTimeDelegate.h"
 
-//#define FAKE_NAVIGATION_BAR_HEIGHT      49
 #define FAKE_NAVIGATION_BAR_HEIGHT      64
-//#define FUNC_BAR_HEIGHT                 44
 #define FUNC_BAR_HEIGHT                 47
 
 @interface PostPreViewEffectController () <PostEffectAdapterProtocol, addingTagsProtocol, UIAlertViewDelegate, SearchSegViewDelegate, SearchActionsProtocol>
@@ -101,7 +99,7 @@
      * fake navigation bar
      */
     bar = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, FAKE_NAVIGATION_BAR_HEIGHT)];
-    bar.backgroundColor = [UIColor colorWithRed:0.1373 green:0.1216 blue:0.1255 alpha:1.f];
+    bar.backgroundColor = [UIColor colorWithWhite:0.1098 alpha:1.f];
     [self.view addSubview:bar];
     [self.view bringSubviewToFront:bar];
    
@@ -115,7 +113,7 @@
     
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-    NSString* filepath = [resourceBundle pathForResource:@"dongda_back" ofType:@"png"];
+    NSString* filepath = [resourceBundle pathForResource:@"dongda_back_light" ofType:@"png"];
 
 #define CANCEL_ICON_WIDTH            22
 #define CANCEL_ICON_HEIGHT           CANCEL_ICON_WIDTH
@@ -133,6 +131,7 @@
     titleView.textAlignment = NSTextAlignmentCenter;
     titleView.text = @"编辑图片";
     titleView.textColor = [UIColor whiteColor];
+    titleView.font = [UIFont systemFontOfSize:18.f];
     [titleView sizeToFit];
     titleView.center = CGPointMake(width / 2, FAKE_NAVIGATION_BAR_HEIGHT / 2);
     [bar addSubview:titleView];
@@ -158,7 +157,7 @@
     CGFloat height = width * aspectRatio;
 //    UIView* f_bar = [[UIView alloc]initWithFrame:CGRectMake(0, height, width, FUNC_BAR_HEIGHT)];
     SearchSegView2* f_bar = [[SearchSegView2 alloc]initWithFrame:CGRectMake(0, height, width, FUNC_BAR_HEIGHT)];
-    f_bar.backgroundColor = [UIColor blackColor];
+    f_bar.backgroundColor = [UIColor colorWithWhite:0.0706 alpha:1.f];
     f_bar.delegate = self;
     [self.view addSubview:f_bar];
     [self.view bringSubviewToFront:f_bar];
@@ -507,15 +506,15 @@
     
     [tags setObject:tmp forKey:[NSNumber numberWithInteger:type]];
 //    [already_taged_views setObject:tmp forKey:[NSNumber numberWithInt:type]];
-//    
+    
 //    UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleTagTapped:)];
 //    [tmp addGestureRecognizer:tap];
-//    
-//    UILongPressGestureRecognizer* lg = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(handleLongPress:)];
-//    [tmp addGestureRecognizer:lg];
-//    
-//    UIPanGestureRecognizer* pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(handleTagPan:)];
-//    [tmp addGestureRecognizer:pan];
+    
+    UILongPressGestureRecognizer* lg = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(handleLongPress:)];
+    [tmp addGestureRecognizer:lg];
+    
+    UIPanGestureRecognizer* pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(handlePastePan:)];
+    [tmp addGestureRecognizer:pan];
 }
 
 #pragma mark -- function button protocol

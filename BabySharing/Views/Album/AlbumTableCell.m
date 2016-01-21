@@ -16,6 +16,7 @@
 
 @synthesize delegate = _delegate;
 @synthesize cannot_selected = _cannot_selected;
+@synthesize grid_border_color = _grid_border_color;
 
 - (AlbumGridCell*)queryGridCellByIndex:(NSInteger)index {
     return (AlbumGridCell*)[image_view objectAtIndex:index % 3];
@@ -42,6 +43,7 @@
             continue;
         
         AlbumGridCell* tmp = [[AlbumGridCell alloc]initWithFrame:CGRectMake(index * step_width - BORDER_MODIFY, 0, step_width, height)];
+        tmp.grid_border_color = _grid_border_color;
         tmp.userInteractionEnabled = YES;
         
         UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageSubViewTaped:)];
@@ -85,6 +87,7 @@
         ALAsset* at = [image_arr objectAtIndex:index];
         UIImage* img = [UIImage imageWithCGImage:[at thumbnail]];
         AlbumGridCell* tmp = [[AlbumGridCell alloc]initWithFrame:CGRectMake(index * step_width, 0, step_width, height)];
+        tmp.grid_border_color = _grid_border_color;
         if ([[at valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
             NSNumber* duration = [at valueForProperty:ALAssetPropertyDuration];
             [tmp setMovieDurationLayer:duration];
@@ -158,6 +161,7 @@
             ALAsset* at = [image_arr objectAtIndex:index - 1];
             UIImage* img = [UIImage imageWithCGImage:[at thumbnail]];
             AlbumGridCell* tmp = [[AlbumGridCell alloc]initWithFrame:CGRectMake(index * step_width, 0, step_width, height)];
+            tmp.grid_border_color = _grid_border_color;
             if ([[at valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
                 id duration = [at valueForProperty:ALAssetPropertyDuration];
                 [tmp setMovieDurationLayer:duration];
@@ -188,6 +192,7 @@
             ALAsset* at = [image_arr objectAtIndex:index];
             UIImage* img = [UIImage imageWithCGImage:[at thumbnail]];
             AlbumGridCell* tmp = [[AlbumGridCell alloc]initWithFrame:CGRectMake(index * step_width, 0, step_width, height)];
+            tmp.grid_border_color = _grid_border_color;
             if ([[at valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
                 NSNumber* duration = [at valueForProperty:ALAssetPropertyDuration];
                 [tmp setMovieDurationLayer:duration];
@@ -219,6 +224,7 @@
 
     if (self != nil) {
 //        [self setUpContentViewWithImageURLs:nil];
+        _grid_border_color = [UIColor whiteColor];
     }
     
     return self;

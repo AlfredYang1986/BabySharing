@@ -8,7 +8,8 @@
 
 #import "SearchBrandsDelegate.h"
 #import "SearchAddBrandsDelegate.h"
-#import "SearchAddViewController.h"
+//#import "SearchAddViewController.h"
+#import "SearchAddController2.h"
 
 #import "FoundSearchHeader.h"
 #import "FoundHotTagsCell.h"
@@ -34,15 +35,21 @@
         cell = [[FoundHotTagsCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"brand tags"];
     }
     
+    cell.ver_margin = 5;
     cell.isDarkTheme = YES;
     [cell setHotTagsTest:@[@"asos", @"brands"]];
-    cell.backgroundColor = [UIColor blackColor];
+    cell.isHiddenSepline = YES;
+    cell.backgroundColor = [UIColor colorWithRed:0.2039 green:0.2078 blue:0.2314 alpha:1.f];//[UIColor colorWithWhite:0.1882 alpha:1.f];
     
     return cell;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 52;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 44;
+    return [FoundSearchHeader prefferredHeight];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -55,17 +62,28 @@
     if (header == nil) {
         header = [[FoundSearchHeader alloc]initWithReuseIdentifier:@"hot role header"];
     }
+
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
    
     if (section == 0) {
+        
+        NSString* filepath = [resourceBundle pathForResource:@"post_resent_tag" ofType:@"png"];
+        
+        header.headImg.image = [UIImage imageNamed:filepath];
         header.headLabell.text = @"使用过的品牌";
     } else {
-        header.headLabell.text = @"已用品牌";
+
+        NSString* filepath = [resourceBundle pathForResource:@"post_recommand_brand" ofType:@"png"];
+        
+        header.headImg.image = [UIImage imageNamed:filepath];
+        header.headLabell.text = @"推荐品牌";
     }
     //    header.headLabell.textColor = [UIColor colorWithWhite:0.3059 alpha:1.f];
     header.headLabell.textColor = [UIColor whiteColor];
     header.headLabell.font = [UIFont systemFontOfSize:14.f];
     
-    header.backgroundView = [[UIImageView alloc] initWithImage:[SearchBrandsDelegate imageWithColor:[UIColor blackColor] size:header.bounds.size alpha:1.0]];
+//    header.backgroundView = [[UIImageView alloc] initWithImage:[SearchBrandsDelegate imageWithColor:[UIColor colorWithRed:0.2039 green:0.2078 blue:0.2314 alpha:1.f] size:header.bounds.size alpha:1.0]];
     return header;
 }
 
@@ -89,7 +107,7 @@
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SearchViewController" bundle:nil];
-    SearchAddViewController* svc = [storyboard instantiateViewControllerWithIdentifier:@"SearchAdd"];
+    SearchAddController2* svc = [storyboard instantiateViewControllerWithIdentifier:@"SearchAdd2"];
     SearchAddBrandsDelegate* sd = [[SearchAddBrandsDelegate alloc]init];
     sd.delegate = svc;
     sd.actions = self;

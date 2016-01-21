@@ -17,6 +17,7 @@
 @property (nonatomic) NSInteger col;
 
 @property (nonatomic, setter=setCellViewSelected:) BOOL viewSelected;
+@property (nonatomic, strong, setter=setGridBorderColor:) UIColor* grid_border_color;
 
 - (void)setCellViewSelected:(BOOL)select;
 - (void)setMovieDurationLayer:(id)duration;

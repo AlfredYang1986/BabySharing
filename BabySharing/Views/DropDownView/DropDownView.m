@@ -9,7 +9,13 @@
 #import "DropDownView.h"
 #import "DropDownItem.h"
 
-@implementation DropDownView
+#define DROP_DOWN_WIDTH         20
+#define DROP_DOWN_HEIGHT        20
+#define DROP_DOWN_ICON_MARGIN   5
+
+@implementation DropDownView {
+    CALayer* drop_down_layer;
+}
 
 @synthesize datasource = _datasource;
 @synthesize delegate = _delegate;
@@ -32,6 +38,15 @@
 }
 
 - (void)setMessageHandler {
+   
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+    
+    drop_down_layer = [CALayer layer];
+    drop_down_layer.contents = (id)[UIImage imageNamed:[resourceBundle pathForResource:@"post_drop_down" ofType:@"png"]].CGImage;
+    drop_down_layer.frame = CGRectMake(0, 0, DROP_DOWN_WIDTH, DROP_DOWN_HEIGHT);
+    [self.layer addSublayer:drop_down_layer];
+    
     [self addTarget:self action:@selector(clickHandler:) forControlEvents:UIControlEventTouchDown];
     
     items = [[UITableView alloc]init];
@@ -63,6 +78,30 @@
         [self setMessageHandler];
     }
     return self;
+}
+
+- (void)sizeToFit {
+    [super sizeToFit];
+    CGRect bounds = self.bounds;
+    CGPoint ct = self.center;
+    self.bounds = CGRectMake(0, 0, bounds.size.width + DROP_DOWN_WIDTH + 2 * DROP_DOWN_ICON_MARGIN, bounds.size.height);
+    self.center = ct;
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    UILabel* label = self.titleLabel;
+    CGPoint ct = label.center;
+    label.center = CGPointMake(ct.x - DROP_DOWN_WIDTH / 2 - DROP_DOWN_ICON_MARGIN, ct.y - 2);
+}
+
+- (void)layoutSublayersOfLayer:(CALayer *)layer {
+    [super layoutSublayersOfLayer:layer];
+    if (layer == self.layer) {
+        CGRect bounds = self.bounds;
+        drop_down_layer.frame = CGRectMake(0, 0, DROP_DOWN_WIDTH, DROP_DOWN_HEIGHT);
+        drop_down_layer.position = CGPointMake(bounds.size.width - DROP_DOWN_ICON_MARGIN - DROP_DOWN_WIDTH / 2, bounds.size.height / 2);
+    }
 }
 
 #pragma mark -- table view delegate

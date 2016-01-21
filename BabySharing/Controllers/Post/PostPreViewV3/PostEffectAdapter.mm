@@ -41,7 +41,8 @@ UIView* thisViewIsNotImplemented(CGFloat height) {
     CGFloat button_height = height / 2;
 
     UIView* reVal = [[UIView alloc]initWithFrame:CGRectMake(0, 0, MAX(width, 4 * (margin + button_height)), height)];
-    reVal.backgroundColor = [UIColor colorWithRed:0.9050 green:0.9050 blue:0.9050 alpha:1.f];
+//    reVal.backgroundColor = [UIColor colorWithRed:0.9050 green:0.9050 blue:0.9050 alpha:1.f];
+    reVal.backgroundColor = [UIColor colorWithWhite:0.1098 alpha:1.f];
     
     UILabel* label = [[UILabel alloc]init];
     label.text = @"This View is not implemented";
@@ -128,7 +129,7 @@ UIView* addTagBtn(NSString* title, CGRect bounds, CGPoint center, NSObject* call
     UIView* reVal = [[UIView alloc]initWithFrame:CGRectMake(0, 0, TAG_VIEW_WIDTH, TAG_VIEW_HEIGHT)];
     
     UIButton* tag_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, TAG_BTN_WIDTH, TAG_BTN_WIDTH)];
-    tag_btn.backgroundColor = [UIColor colorWithWhite:0.f alpha:0.6];
+    tag_btn.backgroundColor = [UIColor colorWithWhite:0.1098 alpha:0.7];
     tag_btn.layer.cornerRadius = TAG_BTN_WIDTH / 2;
     tag_btn.clipsToBounds = YES;
     tag_btn.titleLabel.text = title;
@@ -143,7 +144,7 @@ UIView* addTagBtn(NSString* title, CGRect bounds, CGPoint center, NSObject* call
     [tag_btn addTarget:callBackObj action:callBack forControlEvents:UIControlEventTouchUpInside];
     [reVal addSubview:tag_btn];
     
-    UILabel* tag_label = [[UILabel alloc]initWithFrame:CGRectMake(0, TAG_BTN_HEIGHT, TAG_LABEL_WIDTH, TAG_LABEL_HEIGHT)];
+    UILabel* tag_label = [[UILabel alloc]initWithFrame:CGRectMake(0, TAG_BTN_HEIGHT + 2, TAG_LABEL_WIDTH, TAG_LABEL_HEIGHT)];
     tag_label.font = [UIFont systemFontOfSize:14.f];
     tag_label.textColor = [UIColor whiteColor];
     tag_label.textAlignment = NSTextAlignmentCenter;
@@ -181,7 +182,8 @@ UIView* effectFilterForPhoto(PostEffectAdapter* adapter, CGFloat height) {
     CGFloat preferred_width = MIN(width, 5 * (margin + button_height));
     CGFloat edge_margin = ABS(width - preferred_width) / 2;
     UIView* reVal = [[UIView alloc]initWithFrame:CGRectMake(0, 0, preferred_width, height)];
-    reVal.backgroundColor = [UIColor darkGrayColor];
+    reVal.backgroundColor = [UIColor colorWithWhite:0.1098 alpha:1.f];
+//    reVal.backgroundColor = [UIColor darkGrayColor];
 //    reVal.backgroundColor = [UIColor colorWithRed:0.9050 green:0.9050 blue:0.9050 alpha:1.f];
   
     [reVal addSubview:addPhotoEffectBtn(@"Tilt", CGRectMake(0, 0, button_height, button_height), CGPointMake(edge_margin + margin + button_height / 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:))];
@@ -205,7 +207,8 @@ UIView* tagForPhoto(PostEffectAdapter* adapter, CGFloat height) {
 
     UIView* reVal = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, height)];
 //    reVal.backgroundColor = [UIColor colorWithRed:0.9050 green:0.9050 blue:0.9050 alpha:1.f];
-    reVal.backgroundColor = [UIColor darkGrayColor];
+//    reVal.backgroundColor = [UIColor darkGrayColor];
+    reVal.backgroundColor = [UIColor colorWithWhite:0.1098 alpha:1.f];
     
    
     UILabel* label = [[UILabel alloc]init];
@@ -278,6 +281,7 @@ UIView* asserateForMovie(PostEffectAdapter* adapter, CGFloat height) {
 UIView* coverForMovie(PostEffectAdapter* adapter, CGFloat height) {
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     UIView* reVal = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, height)];
+    reVal.backgroundColor = [UIColor colorWithWhite:0.1098 alpha:1.f];
     
     AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:adapter.movie_url options:nil];
   
@@ -314,7 +318,8 @@ UIView* coverForMovie(PostEffectAdapter* adapter, CGFloat height) {
 #define THUMB_LARGE_HEIGHT          THUMB_LARGE_WIDTH
     
     UIView* container = [[UIView alloc]initWithFrame:CGRectMake(0, 0, THUMB_SMALL_WIDTH * steps, THUMB_SMALL_HEIGHT)];
-    
+   
+    UIView* large = nil;
     for (int index = 0; index < steps; ++index) {
         UIImageView* tmp = [[UIImageView alloc]initWithFrame:CGRectMake(index * THUMB_SMALL_WIDTH, 0, THUMB_SMALL_WIDTH, THUMB_SMALL_HEIGHT)];
         tmp.image = [thumbs objectAtIndex:index];
@@ -324,13 +329,19 @@ UIView* coverForMovie(PostEffectAdapter* adapter, CGFloat height) {
         UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:adapter action:@selector(didClickThumb:)];
         [tmp addGestureRecognizer:tap];
         
-        if (index == 0) {
+        if (index == 1) {
             CGPoint ct = tmp.center;
             tmp.bounds = CGRectMake(0, 0, THUMB_LARGE_WIDTH, THUMB_LARGE_HEIGHT);
             tmp.center = ct;
+            
+            tmp.layer.borderColor = [UIColor colorWithRed:0.2745 green:0.8566 blue:0.7922 alpha:1.f].CGColor;
+            tmp.layer.borderWidth = 2.f;
+          
+            large = tmp;
         }
     }
    
+    [container bringSubviewToFront:large];
     container.center = CGPointMake([UIScreen mainScreen].bounds.size.width / 2, height / 2);
     
     [reVal addSubview:container];
@@ -568,6 +579,8 @@ void brandTagView(PostEffectAdapter* obj, UIImage* tag_img) {
         CGPoint ct = tmp.center;
         tmp.bounds = CGRectMake(0, 0, THUMB_SMALL_WIDTH, THUMB_SMALL_HEIGHT);
         tmp.center = ct;
+        
+        tmp.layer.borderWidth = 0.f;
     }
    
     /**
@@ -576,5 +589,9 @@ void brandTagView(PostEffectAdapter* obj, UIImage* tag_img) {
     CGPoint ct = gesture.view.center;
     gesture.view.bounds = CGRectMake(0, 0, THUMB_LARGE_WIDTH, THUMB_LARGE_HEIGHT);
     gesture.view.center = ct;
+    [container bringSubviewToFront:gesture.view];
+    
+    gesture.view.layer.borderWidth = 2.f;
+    gesture.view.layer.borderColor = [UIColor colorWithRed:0.2745 green:0.8566 blue:0.7922 alpha:1.f].CGColor;
 }
 @end

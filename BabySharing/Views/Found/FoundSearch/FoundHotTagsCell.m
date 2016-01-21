@@ -23,18 +23,24 @@
 
 #define PREFERRED_HEIGHT        62
 
-@implementation FoundHotTagsCell
+@implementation FoundHotTagsCell {
+    CALayer* line;
+}
 
 @synthesize isDarkTheme = _isDarkTheme;
+@synthesize isHiddenSepline = _isHiddenSepline;
+@synthesize ver_margin = _ver_margin;
 
 - (id)init {
     self = [super init];
     if (self) {
-        CALayer* layer = [CALayer layer];
-        layer.borderWidth = 1.f;
-        layer.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.25].CGColor;
-        layer.frame = CGRectMake(0, PREFERRED_HEIGHT - 1, [UIScreen mainScreen].bounds.size.width, 1);
-        [self.layer addSublayer:layer];
+        line = [CALayer layer];
+        line.borderWidth = 1.f;
+        line.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.25].CGColor;
+        line.frame = CGRectMake(0, PREFERRED_HEIGHT - 1, [UIScreen mainScreen].bounds.size.width, 1);
+        [self.layer addSublayer:line];
+        
+        _ver_margin = MARGIN_VER;
     }
     return self;   
 }
@@ -42,18 +48,15 @@
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        CALayer* layer = [CALayer layer];
-        layer.borderWidth = 1.f;
-        layer.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.25].CGColor;
-        layer.frame = CGRectMake(0, PREFERRED_HEIGHT - 1, [UIScreen mainScreen].bounds.size.width, 1);
-        [self.layer addSublayer:layer];
+        line = [CALayer layer];
+        line.borderWidth = 1.f;
+        line.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.25].CGColor;
+        line.frame = CGRectMake(0, PREFERRED_HEIGHT - 1, [UIScreen mainScreen].bounds.size.width, 1);
+        [self.layer addSublayer:line];
+
+        _ver_margin = MARGIN_VER;
     }
     return self;
-}
-
-- (void)awakeFromNib {
-    // Initialization code
-
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -68,6 +71,11 @@
 
 + (CGFloat)preferredHeightWithTags:(NSArray*)arr {
     return PREFERRED_HEIGHT;
+}
+
+- (void)setHiddenLine:(BOOL)b {
+    _isHiddenSepline = b;
+    line.hidden = _isHiddenSepline;
 }
 
 - (void)setHotTagsTest:(NSArray*)arr {
@@ -96,7 +104,7 @@
         btn.clipsToBounds = YES;
         
 //        btn.center = CGPointMake(MARGIN + btn.frame.size.width / 2 + index * (MARGIN + btn.frame.size.width), MARGIN_VER + btn.frame.size.height / 2);
-        btn.center = CGPointMake(MARGIN + btn.frame.size.width / 2 + offset, MARGIN_VER + btn.frame.size.height / 2);
+        btn.center = CGPointMake(MARGIN + btn.frame.size.width / 2 + offset, _ver_margin + btn.frame.size.height / 2);
         offset += btn.frame.size.width + TAG_MARGIN_BETWEEN;
 
         if (offset >= [UIScreen mainScreen].bounds.size.width - 10)
@@ -149,7 +157,7 @@
         btn.clipsToBounds = YES;
         
 //        btn.center = CGPointMake(MARGIN + btn.frame.size.width / 2 + index * (MARGIN + btn.frame.size.width), MARGIN_VER + btn.frame.size.height / 2);
-        btn.center = CGPointMake(MARGIN + btn.frame.size.width / 2 + offset, MARGIN_VER + btn.frame.size.height / 2);
+        btn.center = CGPointMake(MARGIN + btn.frame.size.width / 2 + offset, _ver_margin + btn.frame.size.height / 2);
         offset += btn.frame.size.width + TAG_MARGIN_BETWEEN;
         
         if (offset >= [UIScreen mainScreen].bounds.size.width - 10)

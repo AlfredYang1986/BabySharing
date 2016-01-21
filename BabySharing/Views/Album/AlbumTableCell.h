@@ -39,6 +39,7 @@
     NSInteger views_count;
 }
 
+@property (nonatomic, strong) UIColor* grid_border_color;
 @property (nonatomic) BOOL cannot_selected;
 @property (nonatomic, weak) id<AlbumTableCellDelegate> delegate;
 
