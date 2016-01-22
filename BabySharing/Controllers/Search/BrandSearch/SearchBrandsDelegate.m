@@ -83,7 +83,7 @@
     header.headLabell.textColor = [UIColor whiteColor];
     header.headLabell.font = [UIFont systemFontOfSize:14.f];
     
-//    header.backgroundView = [[UIImageView alloc] initWithImage:[SearchBrandsDelegate imageWithColor:[UIColor colorWithRed:0.2039 green:0.2078 blue:0.2314 alpha:1.f] size:header.bounds.size alpha:1.0]];
+    header.backgroundView = [[UIImageView alloc] initWithImage:[SearchBrandsDelegate imageWithColor:[UIColor colorWithRed:0.2039 green:0.2078 blue:0.2314 alpha:1.f] size:header.bounds.size alpha:1.0]];
     return header;
 }
 

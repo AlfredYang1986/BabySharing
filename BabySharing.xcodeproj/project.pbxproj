@@ -11,6 +11,7 @@
 		70530B131C3F9D1E00505121 /* SearchSegImgTextItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 70530B0F1C3F9D1E00505121 /* SearchSegImgTextItem.m */; };
 		70530B141C3F9D1E00505121 /* SearchSegItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 70530B111C3F9D1E00505121 /* SearchSegItem.m */; };
 		706E844A1C44CF5B00D4CA91 /* LoginSNSView.m in Sources */ = {isa = PBXBuildFile; fileRef = 706E84491C44CF5B00D4CA91 /* LoginSNSView.m */; };
+		707C08901C51D035003C6F53 /* PhotoTagEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 707C088F1C51D035003C6F53 /* PhotoTagEditView.m */; };
 		70A9BB711C3CF5F1000DFE53 /* SearchFriendsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70A9BB701C3CF5F1000DFE53 /* SearchFriendsController.m */; };
 		70C75B5B1C50B5E000E7587A /* DongDaSearchBar2.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C75B5A1C50B5E000E7587A /* DongDaSearchBar2.m */; };
 		70C75B621C50DF1100E7587A /* SearchAddController2.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C75B611C50DF1100E7587A /* SearchAddController2.m */; };
@@ -320,6 +321,9 @@
 		706E84471C44C8C200D4CA91 /* LoginViewsDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewsDelegate.h; sourceTree = "<group>"; };
 		706E84481C44CF5B00D4CA91 /* LoginSNSView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginSNSView.h; sourceTree = "<group>"; };
 		706E84491C44CF5B00D4CA91 /* LoginSNSView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginSNSView.m; sourceTree = "<group>"; };
+		707C088E1C51D035003C6F53 /* PhotoTagEditView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoTagEditView.h; sourceTree = "<group>"; };
+		707C088F1C51D035003C6F53 /* PhotoTagEditView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoTagEditView.m; sourceTree = "<group>"; };
+		707C08911C51D130003C6F53 /* PhotoTagEnumDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoTagEnumDefines.h; sourceTree = "<group>"; };
 		70A9BB6F1C3CF5F1000DFE53 /* SearchFriendsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchFriendsController.h; sourceTree = "<group>"; };
 		70A9BB701C3CF5F1000DFE53 /* SearchFriendsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchFriendsController.m; sourceTree = "<group>"; };
 		70C75B591C50B5E000E7587A /* DongDaSearchBar2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DongDaSearchBar2.h; sourceTree = "<group>"; };
@@ -946,6 +950,15 @@
 				70530B111C3F9D1E00505121 /* SearchSegItem.m */,
 			);
 			path = SearchSegItem;
+			sourceTree = "<group>";
+		};
+		707C088D1C51D017003C6F53 /* PhotoTagEditView */ = {
+			isa = PBXGroup;
+			children = (
+				707C088E1C51D035003C6F53 /* PhotoTagEditView.h */,
+				707C088F1C51D035003C6F53 /* PhotoTagEditView.m */,
+			);
+			path = PhotoTagEditView;
 			sourceTree = "<group>";
 		};
 		70E06F741C4F78B700B740CD /* BrandSearch */ = {
@@ -1995,10 +2008,12 @@
 		EEAACC681B44E90400D05C0B /* PhotoPreView */ = {
 			isa = PBXGroup;
 			children = (
+				707C08911C51D130003C6F53 /* PhotoTagEnumDefines.h */,
 				EEAACC691B44E90400D05C0B /* PhotoPreViewEditView.h */,
 				EEAACC6A1B44E90400D05C0B /* PhotoPreViewEditView.m */,
 				EEAACC6B1B44E90400D05C0B /* PhotoTagControlView.h */,
 				EEAACC6C1B44E90400D05C0B /* PhotoTagControlView.m */,
+				707C088D1C51D017003C6F53 /* PhotoTagEditView */,
 				EEAACC6D1B44E90400D05C0B /* PhotoTagViewLayers */,
 			);
 			path = PhotoPreView;
@@ -2898,6 +2913,7 @@
 				EEE94E0A1B74A8C20011321A /* FriendsTableDelegate.m in Sources */,
 				EE8B1D8C1C08499A00056AC8 /* LandingNextSegue.mm in Sources */,
 				70530B121C3F9D1E00505121 /* SearchSegImgItem.m in Sources */,
+				707C08901C51D035003C6F53 /* PhotoTagEditView.m in Sources */,
 				EE5D686F1B75A9FC0067A2DF /* NotificationOwner.m in Sources */,
 				70EF02D21C22CE7A00DABCFC /* PostPublichViewController.m in Sources */,
 				EE86D1B21B537469001C4650 /* PostEffectAdapter.mm in Sources */,

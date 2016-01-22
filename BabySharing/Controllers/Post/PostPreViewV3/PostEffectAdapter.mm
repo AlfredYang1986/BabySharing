@@ -181,7 +181,8 @@ UIView* effectFilterForPhoto(PostEffectAdapter* adapter, CGFloat height) {
 
     CGFloat preferred_width = MIN(width, 5 * (margin + button_height));
     CGFloat edge_margin = ABS(width - preferred_width) / 2;
-    UIView* reVal = [[UIView alloc]initWithFrame:CGRectMake(0, 0, preferred_width, height)];
+//    UIView* reVal = [[UIView alloc]initWithFrame:CGRectMake(0, 0, preferred_width, height)];
+    UIView* reVal = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, height)];
     reVal.backgroundColor = [UIColor colorWithWhite:0.1098 alpha:1.f];
 //    reVal.backgroundColor = [UIColor darkGrayColor];
 //    reVal.backgroundColor = [UIColor colorWithRed:0.9050 green:0.9050 blue:0.9050 alpha:1.f];

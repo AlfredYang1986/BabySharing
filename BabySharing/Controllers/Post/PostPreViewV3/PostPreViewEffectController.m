@@ -20,10 +20,13 @@
 #import "SearchLocationDelegate.h"
 #import "SearchTimeDelegate.h"
 
+#import "PhotoTagEnumDefines.h"
+#import "PhotoTagEditView.h"
+
 #define FAKE_NAVIGATION_BAR_HEIGHT      64
 #define FUNC_BAR_HEIGHT                 47
 
-@interface PostPreViewEffectController () <PostEffectAdapterProtocol, addingTagsProtocol, UIAlertViewDelegate, SearchSegViewDelegate, SearchActionsProtocol>
+@interface PostPreViewEffectController () <PostEffectAdapterProtocol, addingTagsProtocol, UIAlertViewDelegate, SearchSegViewDelegate, SearchActionsProtocol, PhotoTagEditViewDelegate>
 
 @end
 
@@ -45,6 +48,9 @@
     NSMutableArray* paste_img_arr;
     CGPoint point;
     UIView* cur_long_press;
+    
+    PhotoTagEditView* edit;
+    UIView* edit_bg;
     
     UIImage* result_img;
    
@@ -466,7 +472,6 @@
         tmp.frame = CGRectMake(0, height + FUNC_BAR_HEIGHT, tmp.frame.size.width, tmp.frame.size.height);
     }
     [self.view addSubview:tmp];
-    
 }
 
 #pragma mark -- adding tag protocol
@@ -673,13 +678,43 @@
         NSLog(@"begin");
         
         cur_long_press = gesture.view;
-        UIAlertView* view = [[UIAlertView alloc]initWithTitle:@"delect" message:@"remove paste image" delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"yes", nil];
-        [view show];
+//        UIAlertView* view = [[UIAlertView alloc]initWithTitle:@"delect" message:@"remove paste image" delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"yes", nil];
+//        [view show];
+       
+        if (edit == nil && edit_bg == nil) {
+            
+            edit_bg = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
+            [self.view addSubview:edit_bg];
+            edit_bg.backgroundColor = [UIColor clearColor];
+            
+            UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hiddenEditView)];
+            [edit_bg addGestureRecognizer:tap];
+            
+            edit = [[PhotoTagEditView alloc]init];
+            [edit setUpView];
+            [self.view addSubview:edit];
+//            [cur_long_press.superview addSubview:edit];
+            edit.delegate = self;
+        }
+
+        edit.tag_type = ((PhotoTagView*)cur_long_press).type;
+        edit.center = CGPointMake(cur_long_press.center.x, cur_long_press.center.y - cur_long_press.bounds.size.height / 2 - edit.bounds.size.height / 2);
+        edit.hidden = NO;
+
+        edit_bg.hidden = NO;
+        [self.view bringSubviewToFront:edit_bg];
+        [self.view bringSubviewToFront:edit];
+//        [cur_long_press.superview bringSubviewToFront:edit];
         
     } else if (gesture.state == UIGestureRecognizerStateChanged) {
         NSLog(@"changeed");
         
     }
+}
+
+- (void)hiddenEditView {
+    edit_bg.hidden = YES;
+    edit.hidden = YES;
 }
 
 #pragma mark -- alert view delegate
@@ -757,6 +792,8 @@
 //    
 //    inputView.role_tag = item;
 //    [self.navigationController popToViewController:self animated:YES];
+    [self didSelectTag:item andType:current_type];
+    [self.navigationController popToViewController:self animated:YES];
 }
 
 - (NSString*)getControllerTitle {
@@ -765,5 +802,17 @@
 
 - (UINavigationController*)getViewController {
     return self.navigationController;
+}
+
+#pragma mark -- photo tag edit view delegate
+- (void)didSelectedEditBtnWithType:(TagType)tag_type {
+    [self queryTagContetnWithTagType:tag_type andImg:nil];
+}
+
+- (void)didSelectedDeleteBtnWithType:(TagType)tag_type {
+    [cur_long_press removeFromSuperview];
+    [paste_img_arr removeObject:cur_long_press];
+    cur_long_press = nil;
+    edit.hidden = YES;
 }
 @end

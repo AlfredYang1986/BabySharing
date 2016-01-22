@@ -7,18 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-typedef enum : NSUInteger {
-    PhotoTagViewStatusRight,
-    PhotoTagViewStatusLeft,
-} PhotoTagViewStatus;
-
-typedef enum : NSUInteger {
-    TagTypeLocation,
-    TagTypeTime,
-    TagTypeTags,
-    TagTypeBrand,
-} TagType;
+#import "PhotoTagEnumDefines.h"
 
 @interface PhotoTagView : UIView
 
