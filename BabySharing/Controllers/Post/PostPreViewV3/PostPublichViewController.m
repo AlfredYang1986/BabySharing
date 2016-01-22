@@ -64,6 +64,14 @@
     // place holder
     UILabel* placeholder;
     /***********************************************************************/
+    
+    /***********************************************************************/
+    // bar actions
+    UIButton* bar_back_btn;
+    UIButton* bar_publich_btn;
+    UIButton* bar_cancel_btn;
+    UIButton* bar_save_btn;
+    /***********************************************************************/
 }
 
 @synthesize descriptionView = _descriptionView;
@@ -100,8 +108,8 @@
     img_layer.contents = (id)_preViewImg.CGImage;
     [mainContentView.layer addSublayer:img_layer];
     
-    UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleTap:)];
-    [mainContentView addGestureRecognizer:tap];
+//    UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleTap:)];
+//    [mainContentView addGestureRecognizer:tap];
     
     /***************************************************************************************/
     // movie
@@ -138,13 +146,16 @@
     bar.backgroundColor = [UIColor colorWithRed:0.1373 green:0.1216 blue:0.1255 alpha:1.f];
     [self.view addSubview:bar];
     [self.view bringSubviewToFront:bar];
+    /***************************************************************************************/
 
 #define CANCEL_BTN_WIDTH            30
 #define CANCEL_BTN_HEIGHT           CANCEL_BTN_WIDTH
 #define CANCEL_BTN_LEFT_MARGIN      10.5
  
-    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, CANCEL_BTN_WIDTH, CANCEL_BTN_HEIGHT)];
-    barBtn.center = CGPointMake(CANCEL_BTN_WIDTH / 2 + CANCEL_BTN_LEFT_MARGIN, FAKE_NAVIGATION_BAR_HEIGHT / 2);
+    /***************************************************************************************/
+    // back button
+    bar_back_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, CANCEL_BTN_WIDTH, CANCEL_BTN_HEIGHT)];
+    bar_back_btn.center = CGPointMake(CANCEL_BTN_WIDTH / 2 + CANCEL_BTN_LEFT_MARGIN, FAKE_NAVIGATION_BAR_HEIGHT / 2);
     
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
@@ -157,13 +168,16 @@
     layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
     layer.frame = CGRectMake(0, 0, CANCEL_ICON_WIDTH, CANCEL_ICON_HEIGHT);
     layer.position = CGPointMake(CANCEL_ICON_WIDTH / 2, CANCEL_BTN_HEIGHT / 2);
-    [barBtn.layer addSublayer:layer];
+    [bar_back_btn.layer addSublayer:layer];
 //    [barBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 //    [barBtn setTitle:@"取消" forState:UIControlStateNormal];
     
-    [barBtn addTarget:self action:@selector(didPopControllerSelected) forControlEvents:UIControlEventTouchDown];
-    [bar addSubview:barBtn];
+    [bar_back_btn addTarget:self action:@selector(didPopControllerSelected) forControlEvents:UIControlEventTouchDown];
+    [bar addSubview:bar_back_btn];
+    /***************************************************************************************/
     
+    /***************************************************************************************/
+    // title view
     UILabel* titleView = [[UILabel alloc]init];
     titleView.tag = -1;
     titleView.textAlignment = NSTextAlignmentCenter;
@@ -172,17 +186,50 @@
     [titleView sizeToFit];
     titleView.center = CGPointMake(width / 2, FAKE_NAVIGATION_BAR_HEIGHT / 2);
     [bar addSubview:titleView];
+    /***************************************************************************************/
     
-    UIButton* bar_right_btn = [[UIButton alloc]initWithFrame:CGRectMake(width - 13 - 41, 25, 50, 30)];
-    [bar_right_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [bar_right_btn setTitle:@"发布" forState:UIControlStateNormal];
-    bar_right_btn.backgroundColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
-    bar_right_btn.layer.cornerRadius = 4.f;
-    bar_right_btn.clipsToBounds = YES;
+    /***************************************************************************************/
+    // public btn
+    bar_publich_btn = [[UIButton alloc]initWithFrame:CGRectMake(width - 13 - 41, 25, 50, 30)];
+    [bar_publich_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [bar_publich_btn setTitle:@"发布" forState:UIControlStateNormal];
+    [bar_publich_btn setBackgroundImage:[self imageWithColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.F] size:CGSizeMake(bar_publich_btn.bounds.size.width, bar_publich_btn.bounds.size.height)] forState:UIControlStateNormal];
+    [bar_publich_btn setBackgroundImage:[self imageWithColor:[UIColor darkGrayColor] size:CGSizeMake(bar_publich_btn.bounds.size.width, bar_publich_btn.bounds.size.height)] forState:UIControlStateDisabled];
+    bar_publich_btn.layer.cornerRadius = 4.f;
+    bar_publich_btn.clipsToBounds = YES;
 //    [bar_right_btn sizeToFit];
-    [bar_right_btn addTarget:self action:@selector(didSelectPostBtn) forControlEvents:UIControlEventTouchUpInside];
-    bar_right_btn.center = CGPointMake(width - 8 - bar_right_btn.frame.size.width / 2, FAKE_NAVIGATION_BAR_HEIGHT / 2);
-    [bar addSubview:bar_right_btn];
+    [bar_publich_btn addTarget:self action:@selector(didSelectPostBtn) forControlEvents:UIControlEventTouchUpInside];
+    bar_publich_btn.center = CGPointMake(width - 8 - bar_publich_btn.frame.size.width / 2, FAKE_NAVIGATION_BAR_HEIGHT / 2);
+    [bar addSubview:bar_publich_btn];
+    bar_publich_btn.enabled = NO;
+    /***************************************************************************************/
+
+    /***************************************************************************************/
+    // cancel btn
+    bar_cancel_btn = [[UIButton alloc]init];
+    [bar_cancel_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [bar_cancel_btn setTitle:@"取消" forState:UIControlStateNormal];
+    bar_cancel_btn.backgroundColor = [UIColor colorWithWhite:0.1098 alpha:1.f];
+    [bar_cancel_btn sizeToFit];
+    [bar_cancel_btn addTarget:self action:@selector(didSelectCancelBtn) forControlEvents:UIControlEventTouchUpInside];
+    bar_cancel_btn.frame = CGRectMake(bar_back_btn.frame.origin.x, bar_back_btn.frame.origin.y, bar_cancel_btn.bounds.size.width, bar_cancel_btn.bounds.size.height);
+    bar_cancel_btn.hidden = YES;
+    [bar addSubview:bar_cancel_btn];
+    /***************************************************************************************/
+    
+    /***************************************************************************************/
+    // save btn
+    bar_save_btn = [[UIButton alloc]initWithFrame:CGRectMake(width - 13 - 41, 25, 50, 30)];
+    [bar_save_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [bar_save_btn setTitle:@"保存" forState:UIControlStateNormal];
+    [bar_save_btn setBackgroundImage:[self imageWithColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.F] size:CGSizeMake(bar_publich_btn.bounds.size.width, bar_save_btn.bounds.size.height)] forState:UIControlStateNormal];
+    bar_save_btn.layer.cornerRadius = 4.f;
+    bar_save_btn.clipsToBounds = YES;
+//    [bar_right_btn sizeToFit];
+    [bar_save_btn addTarget:self action:@selector(didSelectSaveBtn) forControlEvents:UIControlEventTouchUpInside];
+    bar_save_btn.center = CGPointMake(width - 8 - bar_publich_btn.frame.size.width / 2, FAKE_NAVIGATION_BAR_HEIGHT / 2);
+    bar_save_btn.hidden = YES;
+    [bar addSubview:bar_save_btn];
     /***************************************************************************************/
     
     /***************************************************************************************/
@@ -261,6 +308,20 @@
     /***************************************************************************************/
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismissPostViewController) name:@"post success" object:nil];
+}
+
+- (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size {
+    CGRect rect = CGRectMake(0, 0, size.width, size.height);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
 }
 
 - (void)dismissPostViewController {
@@ -436,16 +497,41 @@
     }
 }
 
+- (void)didSelectCancelBtn {
+    if ([_descriptionView isFirstResponder]) {
+        [_descriptionView resignFirstResponder];
+        _descriptionView.text = @"";
+        bar_cancel_btn.hidden = YES;
+        bar_save_btn.hidden = YES;
+        [self moveView:210];
+    }
+}
+
+- (void)didSelectSaveBtn {
+    if ([_descriptionView isFirstResponder]) {
+        [_descriptionView resignFirstResponder];
+        bar_cancel_btn.hidden = YES;
+        bar_save_btn.hidden = YES;
+        [self moveView:210];
+//        bar_publich_btn.enabled = YES;
+    }
+}
+
 #pragma mark -- text area delegate
 - (void)textViewDidChange:(UITextView *)textView {
     if (textView.text.length < 1) {
         placeholder.hidden = NO;
+        bar_publich_btn.enabled = NO;
     } else {
         placeholder.hidden = YES;
+        bar_publich_btn.enabled = YES;
     }
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
+    bar_cancel_btn.hidden = NO;
+    bar_save_btn.hidden = NO;
+    
     [self moveView:-210];
 }
 @end
