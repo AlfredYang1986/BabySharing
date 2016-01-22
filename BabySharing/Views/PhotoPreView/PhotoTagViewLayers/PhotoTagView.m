@@ -11,6 +11,7 @@
 #import "PhotoTagTariangleLayer.h"
 #import "PhotoTagTariangleLayer2.h"
 
+
 //#define VER_MARGIN      10
 //#define HER_MARGIN      10
 
@@ -25,7 +26,10 @@
 
 @end
 
-@implementation PhotoTagView
+@implementation PhotoTagView {
+    CATextLayer* text_content;
+    CALayer* text_bg;
+}
 
 @synthesize status = _status;
 @synthesize content = _content;
@@ -79,12 +83,12 @@
     
     CGRect text_bounds = [self getTitleBoundsWithTagTitle:_content];
 //    CAGradientLayer* text_bg = [CAGradientLayer layer];
-    CALayer* text_bg = [CALayer layer];
+    text_bg = [CALayer layer];
     text_bg.frame = CGRectMake(TEXT_LEFT_MARGIN, 0, text_bounds.size.width, TAG_HEIGHT);
     text_bg.contents = (id)[UIImage imageNamed:[resourceBundle pathForResource:@"tag_text" ofType:@"png"]].CGImage;
     [self.layer addSublayer:text_bg];
     
-    CATextLayer* text_content = [CATextLayer layer];
+    text_content = [CATextLayer layer];
     text_content.frame = CGRectMake(0, (TAG_HEIGHT - text_bounds.size.height) / 2, text_bounds.size.width, text_bounds.size.height);
     text_content.string = _content;
     text_content.font = CFBridgingRetain(TEXT_FONT);
@@ -100,5 +104,38 @@
     tail.frame = CGRectMake(self.bounds.size.width - TEXT_RIGHT_MARGIN, 0, TEXT_RIGHT_MARGIN, TAG_HEIGHT);
     tail.contents = (id)[UIImage imageNamed:[resourceBundle pathForResource:@"tag_tail" ofType:@"png"]].CGImage;
     [self.layer addSublayer:tail];
+}
+
+- (void)layoutSublayersOfLayer:(CALayer *)layer {
+    if (layer == text_content) {
+    }
+}
+
+- (void)setTagDirection:(PhotoTagViewDirection)direction {
+   
+    if (_direction != direction) {
+        _direction = direction;
+        
+        if (_direction == PhotoTagViewDirectionLeftToRight) {
+            self.transform = CGAffineTransformIdentity;
+
+            [CATransaction begin];
+            [CATransaction setDisableActions:YES];
+            [text_content setAnchorPoint:CGPointMake(0.5, 0.5)];
+            [text_content setTransform:CATransform3DMakeRotation(0, 0, 0, 1)];
+            [CATransaction commit];
+            
+        } else {
+            CGAffineTransform trans = CGAffineTransformRotate(CGAffineTransformIdentity, M_PI);
+            self.transform = CGAffineTransformIdentity;
+            self.transform = trans;
+           
+             [CATransaction begin];
+             [CATransaction setDisableActions:YES];
+            [text_content setAnchorPoint:CGPointMake(0.5, 0.5)];
+            [text_content setTransform:CATransform3DMakeRotation(M_PI, 0, 0, 1)];
+            [CATransaction commit];
+        }
+    }
 }
 @end

@@ -9,6 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "PhotoTagEnumDefines.h"
 
+typedef enum : NSUInteger {
+    PhotoTagViewDirectionLeftToRight,
+    PhotoTagViewDirectionRightToLeft,
+} PhotoTagViewDirection;
+
 @interface PhotoTagView : UIView
 
 @property (nonatomic) PhotoTagViewStatus status;
@@ -18,6 +23,8 @@
 
 @property (nonatomic) CGFloat offset_x;
 @property (nonatomic) CGFloat offset_y;
+
+@property (nonatomic, setter=setTagDirection:) PhotoTagViewDirection direction;
 
 - (id)initWithTagName:(NSString*)name andType:(TagType)type;
 
