@@ -174,7 +174,7 @@ UIView* effectFilterForPhoto(PostEffectAdapter* adapter, CGFloat height) {
     /**
      * 4 filter effect
      */
-#define MAGIC_NUMBER    0.6f
+#define MAGIC_NUMBER    0.4f
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     CGFloat margin = 0;
     CGFloat button_height = (height - 2 * margin) * MAGIC_NUMBER;

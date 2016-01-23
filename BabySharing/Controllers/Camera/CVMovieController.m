@@ -150,7 +150,8 @@
      * funciton bar
      */
 #define FUNCTION_BAR_HEIGHT         44
-    CGFloat height = width * aspectRatio - FUNCTION_BAR_HEIGHT;
+//    CGFloat height = width * aspectRatio - FUNCTION_BAR_HEIGHT;
+    CGFloat height = FAKE_NAVIGATION_BAR_HEIGHT + width;
     UIView* f_bar = [[UIView alloc]initWithFrame:CGRectMake(0, height, width, FUNCTION_BAR_HEIGHT)];
     f_bar.backgroundColor = [UIColor colorWithWhite:0.1098 alpha:1.f];
    
@@ -269,7 +270,8 @@
     float width = self.view.frame.size.width;
     float height = self.view.frame.size.width * aspectRatio;
     
-    filterView.frame = CGRectMake(0, 0, width, height);
+    filterView.frame = CGRectMake(0, width - height + FAKE_NAVIGATION_BAR_HEIGHT, width, height);
+//    filterView.frame = CGRectMake(0, 0, width, height);
     
     [videoCamera startCameraCapture];
 }

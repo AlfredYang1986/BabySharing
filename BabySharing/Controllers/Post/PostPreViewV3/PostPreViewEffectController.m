@@ -85,15 +85,16 @@
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     aspectRatio = 4.0 / 3.0;
     
-    CGFloat img_height = width * aspectRatio;
+    CGFloat img_height = width; //width * aspectRatio;
     
     /***************************************************************************************/
     /**
      * main content view
      */
-    mainContentView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, width, img_height)];
+    mainContentView = [[UIImageView alloc]initWithFrame:CGRectMake(0, FAKE_NAVIGATION_BAR_HEIGHT, width, img_height)];
     mainContentView.backgroundColor = [UIColor clearColor];
     mainContentView.userInteractionEnabled = YES;
+    mainContentView.clipsToBounds = YES;
     [self.view addSubview:mainContentView];
     img_layer = [CALayer layer];
     img_layer.frame = mainContentView.bounds;
@@ -160,7 +161,7 @@
     /**
      * funciton bar
      */
-    CGFloat height = width * aspectRatio;
+    CGFloat height = FAKE_NAVIGATION_BAR_HEIGHT + img_height; //width * aspectRatio;
 //    UIView* f_bar = [[UIView alloc]initWithFrame:CGRectMake(0, height, width, FUNC_BAR_HEIGHT)];
     SearchSegView2* f_bar = [[SearchSegView2 alloc]initWithFrame:CGRectMake(0, height, width, FUNC_BAR_HEIGHT)];
     f_bar.backgroundColor = [UIColor colorWithWhite:0.0706 alpha:1.f];
@@ -703,7 +704,7 @@
         }
 
         edit.tag_type = ((PhotoTagView*)cur_long_press).type;
-        edit.center = CGPointMake(cur_long_press.center.x, cur_long_press.center.y - cur_long_press.bounds.size.height / 2 - edit.bounds.size.height / 2);
+        edit.center = CGPointMake(cur_long_press.center.x, FAKE_NAVIGATION_BAR_HEIGHT + cur_long_press.center.y - cur_long_press.bounds.size.height / 2 - edit.bounds.size.height / 2);
         edit.hidden = NO;
 
         edit_bg.hidden = NO;
@@ -737,7 +738,7 @@
 - (void)segValueChanged2:(SearchSegView2*)s {
    
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
-    CGFloat height = width * aspectRatio;
+    CGFloat height = FAKE_NAVIGATION_BAR_HEIGHT + width; //width * aspectRatio;
     CGFloat prefered_height = [UIScreen mainScreen].bounds.size.height - height - FUNC_BAR_HEIGHT;
    
     NSString* title = [s queryItemTitleAtIndex:s.selectedIndex];

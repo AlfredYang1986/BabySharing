@@ -68,15 +68,17 @@
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     aspectRatio = 4.0 / 3.0;
     
-    CGFloat img_height = width * aspectRatio;
+    CGFloat img_height = width; //width * aspectRatio;
    
     /***************************************************************************************/
     /**
      * main content view
      */
-    mainContentView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, width, img_height)];
+    mainContentView = [[UIImageView alloc]initWithFrame:CGRectMake(0, FAKE_NAVIGATION_BAR_HEIGHT, width, img_height)];
     mainContentView.backgroundColor = [UIColor clearColor];
     mainContentView.userInteractionEnabled = YES;
+    mainContentView.clipsToBounds = YES;
+//    mainContentView.backgroundColor = [UIColor redColor];
     [self.view addSubview:mainContentView];
     
     if (_type == AlbumControllerTypePhoto) {
@@ -149,7 +151,7 @@
     /**
      * funciton bar
      */
-    CGFloat height = width * aspectRatio;
+    CGFloat height = FAKE_NAVIGATION_BAR_HEIGHT + img_height;//width * aspectRatio;
     f_bar = [[UIView alloc]initWithFrame:CGRectMake(0, height - FUNCTION_BAR_HEIGHT, width, FUNCTION_BAR_HEIGHT)];
     f_bar.backgroundColor = [UIColor colorWithWhite:0.1098 alpha:1.f];
     [self.view addSubview:f_bar];
@@ -307,7 +309,7 @@
         [mainContentPhotoLayer removeFromSuperlayer];
         
         last_scale = MAX(mainContentView.frame.size.width /  img.size.width, mainContentView.frame.size.height / img.size.height);
-        
+       
         mainContentPhotoLayer.frame = CGRectMake(0, 0, img.size.width * last_scale, img.size.height * last_scale);
         mainContentPhotoLayer.contents = (id)asset.defaultRepresentation.fullResolutionImage;
         [mainContentView.layer addSublayer:mainContentPhotoLayer];
@@ -424,7 +426,7 @@
 #define FUNCTION_BAR_TOP_MARGIN             22
     static const CGFloat kAnimationDuration = 0.15; // in seconds
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
-    CGFloat height = width * aspectRatio;
+    CGFloat height = FAKE_NAVIGATION_BAR_HEIGHT + width;//width * aspectRatio;
     CGRect f_bar_start = CGRectMake(0, height - FUNCTION_BAR_HEIGHT, width, FUNCTION_BAR_HEIGHT);
     CGRect f_bar_end = CGRectMake(0, FUNCTION_BAR_TOP_MARGIN, width, FUNCTION_BAR_HEIGHT);
 

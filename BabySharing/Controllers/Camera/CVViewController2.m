@@ -111,7 +111,8 @@
      * funciton bar
      */
 #define FUNCTION_BAR_HEIGHT         44
-    CGFloat height = width * aspectRatio - FUNCTION_BAR_HEIGHT;
+//    CGFloat height = width * aspectRatio - FUNCTION_BAR_HEIGHT;
+    CGFloat height = FAKE_NAVIGATION_BAR_HEIGHT + width;
     UIView* f_bar = [[UIView alloc]initWithFrame:CGRectMake(0, height, width, FUNCTION_BAR_HEIGHT)];
     f_bar.backgroundColor = [UIColor colorWithWhite:0.1098 alpha:1.f];
     
@@ -177,7 +178,8 @@
     float width = self.view.frame.size.width;
     float height = self.view.frame.size.width * aspectRatio;
     
-    filterView.frame = CGRectMake(0, 0, width, height);
+//    filterView.frame = CGRectMake(0, 0, width, width);
+    filterView.frame = CGRectMake(0, width - height + FAKE_NAVIGATION_BAR_HEIGHT, width, height);
 
     [stillCamera startCameraCapture];
     
@@ -376,7 +378,8 @@
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 PostPreViewEffectController * distination = [[PostPreViewEffectController alloc]init];
-                distination.cutted_img = processedImage;
+                CGFloat width = [UIScreen mainScreen].bounds.size.width;
+                distination.cutted_img = [self clipImage:processedImage withRect:CGRectMake(0, processedImage.size.height - processedImage.size.width, processedImage.size.width, processedImage.size.width)];
                 distination.type = PostPreViewPhote;
                 sleep(0.5);
                 [self.navigationController pushViewController:distination animated:YES];
@@ -384,6 +387,20 @@
             });
         }];
     });
+}
+
+- (UIImage*)clipImage:(UIImage*)image withRect:(CGRect)rect {
+   
+    CGImageRef subImageRef = CGImageCreateWithImageInRect(image.CGImage, rect);
+    //    CGRect smallBounds = CGRectMake(0, 0, CGImageGetWidth(subImageRef), CGImageGetHeight(subImageRef));
+    
+    //    UIGraphicsBeginImageContext(smallBounds.size);
+    //    CGContextRef context = UIGraphicsGetCurrentContext();
+    //    CGContextDrawImage(context, smallBounds, subImageRef);
+    UIImage* smallImage = [UIImage imageWithCGImage:subImageRef];
+    //    UIGraphicsEndImageContext();
+    
+    return smallImage;
 }
 
 #pragma mark -- save image callback

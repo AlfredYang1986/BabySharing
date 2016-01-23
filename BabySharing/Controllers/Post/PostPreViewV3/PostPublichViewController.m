@@ -93,13 +93,13 @@
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     aspectRatio = 4.0 / 3.0;
     
-    CGFloat img_height = width * aspectRatio;
+    CGFloat img_height = width; //width * aspectRatio;
     
     /***************************************************************************************/
     /**
      * main content view
      */
-    mainContentView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, width, img_height)];
+    mainContentView = [[UIImageView alloc]initWithFrame:CGRectMake(0, FAKE_NAVIGATION_BAR_HEIGHT, width, img_height)];
     mainContentView.backgroundColor = [UIColor clearColor];
     mainContentView.userInteractionEnabled = YES;
     [self.view addSubview:mainContentView];
@@ -236,8 +236,9 @@
     /**
      * description view
      */
+#define BOTTON_BAR_HEIGHT           74
     CGFloat height = [UIScreen mainScreen].bounds.size.height;
-    _descriptionView = [[UITextView alloc]initWithFrame:CGRectMake(0, img_height, width, height - img_height - 44)];
+    _descriptionView = [[UITextView alloc]initWithFrame:CGRectMake(0, img_height + FAKE_NAVIGATION_BAR_HEIGHT, width, height - img_height - FAKE_NAVIGATION_BAR_HEIGHT - BOTTON_BAR_HEIGHT)];
     _descriptionView.delegate = self;
     _descriptionView.editable = YES;
     [self.view addSubview:_descriptionView];
@@ -254,7 +255,7 @@
     /**
      * SNS view
      */
-    SNS_bar = [[UIView alloc]initWithFrame:CGRectMake(0, height - 44, width, 44)];
+    SNS_bar = [[UIView alloc]initWithFrame:CGRectMake(0, height - BOTTON_BAR_HEIGHT, width, BOTTON_BAR_HEIGHT)];
     SNS_bar.backgroundColor = [UIColor colorWithWhite:0.1098 alpha:1.f];
     
     UILabel* label = [[UILabel alloc]init];
@@ -262,7 +263,7 @@
     label.text = @"同步到";
     [label sizeToFit];
     CGFloat margin = 45;
-    label.center = CGPointMake(width / 2 - margin - label.frame.size.width, 22);
+    label.center = CGPointMake(width / 2 - margin - label.frame.size.width, BOTTON_BAR_HEIGHT / 2);
     [SNS_bar addSubview:label];
     
     margin -= 20;
@@ -273,10 +274,7 @@
     [wechat_btn setBackgroundImage:wechat_image forState:UIControlStateNormal];
     [wechat_btn addTarget:self action:@selector(SNSBtnSelected:) forControlEvents:UIControlEventTouchDown];
     wechat_btn.backgroundColor = [UIColor clearColor];
-    //    weibo_btn.layer.cornerRadius = SNS_BUTTON_WIDTH / 2;
-    //    weibo_btn.clipsToBounds = YES;
-    //    weibo_btn.contentMode = UIViewContentModeCenter;
-    wechat_btn.center = CGPointMake(width / 2 - margin, 22);
+    wechat_btn.center = CGPointMake(width / 2 - margin, BOTTON_BAR_HEIGHT / 2);
     [SNS_bar addSubview:wechat_btn];
     
     UIButton* qq_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, SNS_BUTTON_WIDTH, SNS_BUTTON_HEIGHT)];
@@ -285,10 +283,7 @@
     [qq_btn setBackgroundImage:qq_image forState:UIControlStateNormal];
     [qq_btn addTarget:self action:@selector(SNSBtnSelected:) forControlEvents:UIControlEventTouchDown];
     qq_btn.backgroundColor = [UIColor clearColor];
-//    weibo_btn.layer.cornerRadius = SNS_BUTTON_WIDTH / 2;
-//    weibo_btn.clipsToBounds = YES;
-//    weibo_btn.contentMode = UIViewContentModeCenter;
-    qq_btn.center = CGPointMake(width / 2 + 60 - margin, 22);
+    qq_btn.center = CGPointMake(width / 2 + 60 - margin, BOTTON_BAR_HEIGHT / 2);
     [SNS_bar addSubview:qq_btn];
     
     UIButton* weibo_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, SNS_BUTTON_WIDTH, SNS_BUTTON_HEIGHT)];
@@ -297,10 +292,7 @@
     [weibo_btn setBackgroundImage:weibo_image forState:UIControlStateNormal];
     [weibo_btn addTarget:self action:@selector(SNSBtnSelected:) forControlEvents:UIControlEventTouchDown];
     weibo_btn.backgroundColor = [UIColor clearColor];
-    //    weibo_btn.layer.cornerRadius = SNS_BUTTON_WIDTH / 2;
-    //    weibo_btn.clipsToBounds = YES;
-    //    weibo_btn.contentMode = UIViewContentModeCenter;
-    weibo_btn.center = CGPointMake(width / 2 + 120 - margin, 22);
+    weibo_btn.center = CGPointMake(width / 2 + 120 - margin, BOTTON_BAR_HEIGHT / 2);
     [SNS_bar addSubview:weibo_btn];
    
     sns_buttons = @[wechat_btn, weibo_btn, qq_btn];
@@ -413,10 +405,12 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+#define KEYBOARD_HEIGHT         180
+
 - (void)handleTap:(UITapGestureRecognizer*)gueture {
     if ([_descriptionView isFirstResponder]) {
         [_descriptionView resignFirstResponder];
-        [self moveView:210];
+        [self moveView:KEYBOARD_HEIGHT];
     }
 }
 
@@ -503,7 +497,7 @@
         _descriptionView.text = @"";
         bar_cancel_btn.hidden = YES;
         bar_save_btn.hidden = YES;
-        [self moveView:210];
+        [self moveView:KEYBOARD_HEIGHT];
     }
 }
 
@@ -512,7 +506,7 @@
         [_descriptionView resignFirstResponder];
         bar_cancel_btn.hidden = YES;
         bar_save_btn.hidden = YES;
-        [self moveView:210];
+        [self moveView:KEYBOARD_HEIGHT];
 //        bar_publich_btn.enabled = YES;
     }
 }
@@ -532,6 +526,6 @@
     bar_cancel_btn.hidden = NO;
     bar_save_btn.hidden = NO;
     
-    [self moveView:-210];
+    [self moveView:-KEYBOARD_HEIGHT];
 }
 @end
