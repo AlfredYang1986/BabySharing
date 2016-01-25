@@ -315,7 +315,7 @@ UIView* coverForMovie(PostEffectAdapter* adapter, CGFloat height) {
 #define THUMB_SMALL_HEIGHT          31
 #define THUMB_SMALL_WIDTH           THUMB_SMALL_HEIGHT
 
-#define THUMB_LARGE_WIDTH           51
+#define THUMB_LARGE_WIDTH           61
 #define THUMB_LARGE_HEIGHT          THUMB_LARGE_WIDTH
     
     UIView* container = [[UIView alloc]initWithFrame:CGRectMake(0, 0, THUMB_SMALL_WIDTH * steps, THUMB_SMALL_HEIGHT)];

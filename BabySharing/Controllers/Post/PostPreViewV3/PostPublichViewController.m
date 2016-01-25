@@ -25,6 +25,8 @@
 
 #define SNS_BTN_COUNT               3
 
+#define BOTTON_BAR_HEIGHT           74
+
 @interface PostPublichViewController () <UITextViewDelegate>
 @property (nonatomic, strong) UITextView* descriptionView;
 @property (nonatomic) BOOL isShareWeibo;
@@ -34,6 +36,8 @@
 
 @implementation PostPublichViewController {
     CGFloat aspectRatio;
+   
+    UIView* mainContentContainer;
     UIView* mainContentView;
     
     /***********************************************************************/
@@ -88,28 +92,39 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.view.backgroundColor = [UIColor darkGrayColor];
+    self.view.backgroundColor = [UIColor colorWithWhite:0.1098 alpha:1.f];
     
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     aspectRatio = 4.0 / 3.0;
     
-    CGFloat img_height = width; //width * aspectRatio;
+    CGFloat img_height = width - 10.5 * 2; //width * aspectRatio;
     
     /***************************************************************************************/
     /**
      * main content view
      */
-    mainContentView = [[UIImageView alloc]initWithFrame:CGRectMake(0, FAKE_NAVIGATION_BAR_HEIGHT, width, img_height)];
+    
+#define CARD_CONTENG_MARGIN             10.5
+    
+    CGFloat height = [UIScreen mainScreen].bounds.size.height;
+    mainContentContainer = [[UIView alloc]initWithFrame:CGRectMake(CARD_CONTENG_MARGIN, FAKE_NAVIGATION_BAR_HEIGHT, width - 2 * CARD_CONTENG_MARGIN, height - FAKE_NAVIGATION_BAR_HEIGHT - BOTTON_BAR_HEIGHT - CARD_CONTENG_MARGIN)];
+    mainContentContainer.layer.cornerRadius = 5.f;
+    mainContentContainer.clipsToBounds = YES;
+    [self.view addSubview:mainContentContainer];
+    
+//    mainContentView = [[UIImageView alloc]initWithFrame:CGRectMake(CARD_CONTENG_MARGIN, FAKE_NAVIGATION_BAR_HEIGHT + CARD_CONTENG_MARGIN, width - 2 * CARD_CONTENG_MARGIN, img_height)];
+    mainContentView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, width - 2 * CARD_CONTENG_MARGIN, img_height)];
     mainContentView.backgroundColor = [UIColor clearColor];
     mainContentView.userInteractionEnabled = YES;
-    [self.view addSubview:mainContentView];
+//    [self.view addSubview:mainContentView];
     img_layer = [CALayer layer];
     img_layer.frame = mainContentView.bounds;
     img_layer.contents = (id)_preViewImg.CGImage;
     [mainContentView.layer addSublayer:img_layer];
+    [mainContentContainer addSubview:mainContentView];
     
-//    UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleTap:)];
-//    [mainContentView addGestureRecognizer:tap];
+    UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleTap:)];
+    [mainContentView addGestureRecognizer:tap];
     
     /***************************************************************************************/
     // movie
@@ -143,7 +158,8 @@
      * fake navigation bar
      */
     bar = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, FAKE_NAVIGATION_BAR_HEIGHT)];
-    bar.backgroundColor = [UIColor colorWithRed:0.1373 green:0.1216 blue:0.1255 alpha:1.f];
+//    bar.backgroundColor = [UIColor colorWithRed:0.1373 green:0.1216 blue:0.1255 alpha:1.f];
+    bar.backgroundColor = [UIColor colorWithWhite:0.1098 alpha:1.f];
     [self.view addSubview:bar];
     [self.view bringSubviewToFront:bar];
     /***************************************************************************************/
@@ -181,6 +197,7 @@
     UILabel* titleView = [[UILabel alloc]init];
     titleView.tag = -1;
     titleView.textAlignment = NSTextAlignmentCenter;
+    titleView.font = [UIFont systemFontOfSize:18.f];
     titleView.text = @"编辑图片";
     titleView.textColor = [UIColor whiteColor];
     [titleView sizeToFit];
@@ -190,18 +207,19 @@
     
     /***************************************************************************************/
     // public btn
-    bar_publich_btn = [[UIButton alloc]initWithFrame:CGRectMake(width - 13 - 41, 25, 50, 30)];
+    bar_publich_btn = [[UIButton alloc]initWithFrame:CGRectMake(width - 10.5 - 50, 25, 50, 30)];
     [bar_publich_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [bar_publich_btn setTitle:@"发布" forState:UIControlStateNormal];
+    bar_publich_btn.titleLabel.font = [UIFont systemFontOfSize:14.f];
     [bar_publich_btn setBackgroundImage:[self imageWithColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.F] size:CGSizeMake(bar_publich_btn.bounds.size.width, bar_publich_btn.bounds.size.height)] forState:UIControlStateNormal];
     [bar_publich_btn setBackgroundImage:[self imageWithColor:[UIColor darkGrayColor] size:CGSizeMake(bar_publich_btn.bounds.size.width, bar_publich_btn.bounds.size.height)] forState:UIControlStateDisabled];
     bar_publich_btn.layer.cornerRadius = 4.f;
     bar_publich_btn.clipsToBounds = YES;
 //    [bar_right_btn sizeToFit];
     [bar_publich_btn addTarget:self action:@selector(didSelectPostBtn) forControlEvents:UIControlEventTouchUpInside];
-    bar_publich_btn.center = CGPointMake(width - 8 - bar_publich_btn.frame.size.width / 2, FAKE_NAVIGATION_BAR_HEIGHT / 2);
+    bar_publich_btn.center = CGPointMake(width - 10 - bar_publich_btn.frame.size.width / 2, FAKE_NAVIGATION_BAR_HEIGHT / 2);
     [bar addSubview:bar_publich_btn];
-    bar_publich_btn.enabled = NO;
+//    bar_publich_btn.enabled = NO;
     /***************************************************************************************/
 
     /***************************************************************************************/
@@ -219,15 +237,16 @@
     
     /***************************************************************************************/
     // save btn
-    bar_save_btn = [[UIButton alloc]initWithFrame:CGRectMake(width - 13 - 41, 25, 50, 30)];
+    bar_save_btn = [[UIButton alloc]initWithFrame:CGRectMake(width - 10.5 - 50, 25, 50, 30)];
     [bar_save_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [bar_save_btn setTitle:@"保存" forState:UIControlStateNormal];
+    bar_save_btn.titleLabel.font = [UIFont systemFontOfSize:14.f];
     [bar_save_btn setBackgroundImage:[self imageWithColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.F] size:CGSizeMake(bar_publich_btn.bounds.size.width, bar_save_btn.bounds.size.height)] forState:UIControlStateNormal];
     bar_save_btn.layer.cornerRadius = 4.f;
     bar_save_btn.clipsToBounds = YES;
 //    [bar_right_btn sizeToFit];
     [bar_save_btn addTarget:self action:@selector(didSelectSaveBtn) forControlEvents:UIControlEventTouchUpInside];
-    bar_save_btn.center = CGPointMake(width - 8 - bar_publich_btn.frame.size.width / 2, FAKE_NAVIGATION_BAR_HEIGHT / 2);
+    bar_save_btn.center = CGPointMake(width - 10 - bar_publich_btn.frame.size.width / 2, FAKE_NAVIGATION_BAR_HEIGHT / 2);
     bar_save_btn.hidden = YES;
     [bar addSubview:bar_save_btn];
     /***************************************************************************************/
@@ -236,12 +255,12 @@
     /**
      * description view
      */
-#define BOTTON_BAR_HEIGHT           74
-    CGFloat height = [UIScreen mainScreen].bounds.size.height;
-    _descriptionView = [[UITextView alloc]initWithFrame:CGRectMake(0, img_height + FAKE_NAVIGATION_BAR_HEIGHT, width, height - img_height - FAKE_NAVIGATION_BAR_HEIGHT - BOTTON_BAR_HEIGHT)];
+//    _descriptionView = [[UITextView alloc]initWithFrame:CGRectMake(CARD_CONTENG_MARGIN, img_height + FAKE_NAVIGATION_BAR_HEIGHT + CARD_CONTENG_MARGIN, width - 2 * CARD_CONTENG_MARGIN, height - img_height - FAKE_NAVIGATION_BAR_HEIGHT - BOTTON_BAR_HEIGHT - 2 * CARD_CONTENG_MARGIN)];
+    _descriptionView = [[UITextView alloc]initWithFrame:CGRectMake(0, img_height , width - 2 * CARD_CONTENG_MARGIN, height - img_height - FAKE_NAVIGATION_BAR_HEIGHT - BOTTON_BAR_HEIGHT - CARD_CONTENG_MARGIN)];
     _descriptionView.delegate = self;
     _descriptionView.editable = YES;
-    [self.view addSubview:_descriptionView];
+//    [self.view addSubview:_descriptionView];
+    [mainContentContainer addSubview:_descriptionView];
   
     placeholder = [[UILabel alloc]init];
     placeholder.textColor = [UIColor darkGrayColor];
@@ -270,8 +289,11 @@
    
     UIButton* wechat_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, SNS_BUTTON_WIDTH, SNS_BUTTON_HEIGHT)];
     NSString * wechat_file = [resourceBundle pathForResource:[NSString stringWithFormat:@"login_wechat"] ofType:@"png"];
+    NSString * wechat_file_click = [resourceBundle pathForResource:[NSString stringWithFormat:@"login_wechat_clicked"] ofType:@"png"];
     UIImage * wechat_image = [UIImage imageNamed:wechat_file];
+    UIImage * wechat_image_click = [UIImage imageNamed:wechat_file_click];
     [wechat_btn setBackgroundImage:wechat_image forState:UIControlStateNormal];
+    [wechat_btn setBackgroundImage:wechat_image_click forState:UIControlStateSelected];
     [wechat_btn addTarget:self action:@selector(SNSBtnSelected:) forControlEvents:UIControlEventTouchDown];
     wechat_btn.backgroundColor = [UIColor clearColor];
     wechat_btn.center = CGPointMake(width / 2 - margin, BOTTON_BAR_HEIGHT / 2);
@@ -279,8 +301,11 @@
     
     UIButton* qq_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, SNS_BUTTON_WIDTH, SNS_BUTTON_HEIGHT)];
     NSString * qq_file = [resourceBundle pathForResource:[NSString stringWithFormat:@"login_qq"] ofType:@"png"];
+    NSString * qq_file_click = [resourceBundle pathForResource:[NSString stringWithFormat:@"login_qq_clicked"] ofType:@"png"];
     UIImage * qq_image = [UIImage imageNamed:qq_file];
+    UIImage * qq_image_click = [UIImage imageNamed:qq_file_click];
     [qq_btn setBackgroundImage:qq_image forState:UIControlStateNormal];
+    [qq_btn setBackgroundImage:qq_image_click forState:UIControlStateSelected];
     [qq_btn addTarget:self action:@selector(SNSBtnSelected:) forControlEvents:UIControlEventTouchDown];
     qq_btn.backgroundColor = [UIColor clearColor];
     qq_btn.center = CGPointMake(width / 2 + 60 - margin, BOTTON_BAR_HEIGHT / 2);
@@ -288,8 +313,11 @@
     
     UIButton* weibo_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, SNS_BUTTON_WIDTH, SNS_BUTTON_HEIGHT)];
     NSString * weibo_file = [resourceBundle pathForResource:[NSString stringWithFormat:@"login_weibo"] ofType:@"png"];
+    NSString * weibo_file_click = [resourceBundle pathForResource:[NSString stringWithFormat:@"login_weibo_clicked"] ofType:@"png"];
     UIImage * weibo_image = [UIImage imageNamed:weibo_file];
+    UIImage * weibo_image_click = [UIImage imageNamed:weibo_file_click];
     [weibo_btn setBackgroundImage:weibo_image forState:UIControlStateNormal];
+    [weibo_btn setBackgroundImage:weibo_image_click forState:UIControlStateSelected];
     [weibo_btn addTarget:self action:@selector(SNSBtnSelected:) forControlEvents:UIControlEventTouchDown];
     weibo_btn.backgroundColor = [UIColor clearColor];
     weibo_btn.center = CGPointMake(width / 2 + 120 - margin, BOTTON_BAR_HEIGHT / 2);
@@ -410,20 +438,23 @@
 - (void)handleTap:(UITapGestureRecognizer*)gueture {
     if ([_descriptionView isFirstResponder]) {
         [_descriptionView resignFirstResponder];
+        bar_cancel_btn.hidden = YES;
+        bar_save_btn.hidden = YES;
         [self moveView:KEYBOARD_HEIGHT];
     }
 }
 
 - (void)moveView:(float)move {
     static const CGFloat kAnimationDuration = 0.30; // in seconds
-    CGPoint p_start = _descriptionView.center;
+    CGPoint p_start = mainContentContainer.center;
     CGPoint p_end = CGPointMake(p_start.x, p_start.y + move);
     [INTUAnimationEngine animateWithDuration:kAnimationDuration
                                                           delay:0.0
                                                          easing:INTUEaseInOutQuadratic
                                                         options:INTUAnimationOptionNone
                                                      animations:^(CGFloat progress) {
-                                                         _descriptionView.center = INTUInterpolateCGPoint(p_start, p_end, progress);
+//                                                         _descriptionView.center = INTUInterpolateCGPoint(p_start, p_end, progress);
+                                                         mainContentContainer.center = INTUInterpolateCGPoint(p_start, p_end, progress);
                                                      }
                                                      completion:^(BOOL finished) {
                                                          // NOTE: When passing INTUAnimationOptionRepeat, this completion block is NOT executed at the end of each cycle. It will only run if the animation is canceled.
@@ -446,10 +477,12 @@
     }
 
     if (tmp) {
-        btn.layer.borderWidth = 1.f;
-        btn.layer.borderColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f].CGColor;
+        btn.selected = YES;
+//        btn.layer.borderWidth = 1.f;
+//        btn.layer.borderColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f].CGColor;
     } else {
-        btn.layer.borderWidth = 0.f;
+        btn.selected = NO;
+//        btn.layer.borderWidth = 0.f;
     }
 }
 
@@ -495,6 +528,7 @@
     if ([_descriptionView isFirstResponder]) {
         [_descriptionView resignFirstResponder];
         _descriptionView.text = @"";
+        placeholder.hidden = NO;
         bar_cancel_btn.hidden = YES;
         bar_save_btn.hidden = YES;
         [self moveView:KEYBOARD_HEIGHT];

@@ -19,6 +19,10 @@
 #import "SearchBrandsDelegate.h"
 #import "SearchLocationDelegate.h"
 #import "SearchTimeDelegate.h"
+#import "SearchAddController2.h"
+#import "SearchAddBrandsDelegate.h"
+#import "SearchAddLocationDelegate.h"
+#import "SearchAddTimeDelegate.h"
 
 #import "PhotoTagEnumDefines.h"
 #import "PhotoTagEditView.h"
@@ -330,6 +334,14 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES];
+    
+    /**
+     * clear view
+     * TODO: actions with the back wards
+     */
+    edit_bg.hidden = YES;
+    edit.hidden = YES;
+    
     if (_type == PostPreViewMovie) {
         if (![mainContentView.layer.sublayers containsObject:avPlayerLayer]) {
             avPlayerLayer.frame = mainContentView.bounds;
@@ -784,7 +796,63 @@
 
 #pragma mark -- photo tag edit view delegate
 - (void)didSelectedEditBtnWithType:(TagType)tag_type {
-    [self queryTagContetnWithTagType:tag_type andImg:nil];
+    if (tag_type == TagTypeBrand) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SearchViewController" bundle:nil];
+        SearchViewController* svc = [storyboard instantiateViewControllerWithIdentifier:@"Search"];
+        SearchBrandsDelegate* sd = [[SearchBrandsDelegate alloc]init];
+        sd.delegate = svc;
+        sd.actions = self;
+        searchControllerTitle = @"添加品牌标签";
+        current_type = TagTypeBrand;
+        [self.navigationController pushViewController:svc animated:YES];
+        svc.delegate = sd;
+        
+        SearchAddController2* svc2 = [storyboard instantiateViewControllerWithIdentifier:@"SearchAdd2"];
+        SearchAddBrandsDelegate* sd2 = [[SearchAddBrandsDelegate alloc]init];
+        sd2.delegate = svc2;
+        sd2.actions = sd;
+        [self.navigationController pushViewController:svc2 animated:NO];
+        svc2.delegate = sd2;
+        [sd2 pushExistingData:@[@"abcde", @"brand"]];
+        
+    } else if (tag_type == TagTypeLocation) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SearchViewController" bundle:nil];
+        SearchViewController* svc = [storyboard instantiateViewControllerWithIdentifier:@"Search"];
+        SearchLocationDelegate* sd = [[SearchLocationDelegate alloc]init];
+        sd.delegate = svc;
+        sd.actions = self;
+        searchControllerTitle = @"添加地点标签";
+        current_type = TagTypeLocation;
+        [self.navigationController pushViewController:svc animated:YES];
+        svc.delegate = sd;
+        
+        SearchAddController2* svc2 = [storyboard instantiateViewControllerWithIdentifier:@"SearchAdd2"];
+        SearchAddLocationDelegate* sd2 = [[SearchAddLocationDelegate alloc]init];
+        sd2.delegate = svc2;
+        sd2.actions = sd;
+        [self.navigationController pushViewController:svc2 animated:NO];
+        svc2.delegate = sd2;
+        [sd2 pushExistingData:@[@"abcde", @"location"]];
+        
+    } else if (tag_type == TagTypeTime) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SearchViewController" bundle:nil];
+        SearchViewController* svc = [storyboard instantiateViewControllerWithIdentifier:@"Search"];
+        SearchTimeDelegate* sd = [[SearchTimeDelegate alloc]init];
+        sd.delegate = svc;
+        sd.actions = self;
+        searchControllerTitle = @"添加时刻标签";
+        current_type = TagTypeLocation;
+        [self.navigationController pushViewController:svc animated:YES];
+        svc.delegate = sd;
+        
+        SearchAddController2* svc2 = [storyboard instantiateViewControllerWithIdentifier:@"SearchAdd2"];
+        SearchAddTimeDelegate* sd2 = [[SearchAddTimeDelegate alloc]init];
+        sd2.delegate = svc2;
+        sd2.actions = sd;
+        [self.navigationController pushViewController:svc2 animated:NO];
+        svc2.delegate = sd2;
+        [sd2 pushExistingData:@[@"abcde", @"time"]];
+    }
 }
 
 - (void)didSelectedDeleteBtnWithType:(TagType)tag_type {
