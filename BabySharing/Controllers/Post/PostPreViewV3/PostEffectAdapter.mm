@@ -75,13 +75,14 @@ UIButton* addPhotoEffectBtn(NSString* title, CGRect bounds, CGPoint center, NSOb
      */
     CATextLayer* tl = [CATextLayer layer];
     tl.string = title;
-    tl.foregroundColor = [UIColor colorWithRed:0.1373 green:0.1255 blue:0.1216 alpha:1.f].CGColor;
+    tl.foregroundColor = [UIColor whiteColor].CGColor; //[UIColor colorWithRed:0.1373 green:0.1255 blue:0.1216 alpha:1.f].CGColor;
     tl.backgroundColor = [UIColor clearColor].CGColor;
     tl.fontSize = 11.f;
     
     CGSize s = [title sizeWithFont:[UIFont systemFontOfSize:11.f] constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
     tl.frame = CGRectMake(0, bounds.size.height - s.height, bounds.size.width, s.height);
     tl.alignmentMode = @"center";
+    tl.contentsScale = 2.f;
     [btn.layer addSublayer:tl];
 
     /**
@@ -108,6 +109,7 @@ UIButton* addPhotoEffectBtn(NSString* title, CGRect bounds, CGPoint center, NSOb
     il.tag = -5;
     [btn addSubview:il];
     btn.tag = -1;
+    
     return btn;
 }
 

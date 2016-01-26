@@ -422,7 +422,7 @@
 }
 
 - (void)didTapFunctionBar:(UITapGestureRecognizer*)gesture {
-   
+  
 #define FUNCTION_BAR_TOP_MARGIN             22
     static const CGFloat kAnimationDuration = 0.15; // in seconds
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
@@ -450,7 +450,6 @@
                                           NSLog(@"%@", finished ? @"Animation Completed" : @"Animation Canceled");
                                           // self.animationID = NSNotFound;
                                           bar.hidden = YES;
-                                          
                                       }];
         
         isMainContentViewShown = NO;
@@ -470,7 +469,6 @@
                                           NSLog(@"%@", finished ? @"Animation Completed" : @"Animation Canceled");
                                           // self.animationID = NSNotFound;
                                           bar.hidden = NO;
-                                          
                                       }];
         
         isMainContentViewShown = YES;
@@ -814,5 +812,18 @@
 //    ALAssetsGroup* group = [album_name_arr objectAtIndex:row - 1];
     ALAssetsGroup* group = [album_name_arr objectAtIndex:row];
     return [group valueForProperty:ALAssetsGroupPropertyName];
+}
+
+#pragma mark -- scroll view delegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+   
+    static CGFloat offset_origin_y = 0;
+    CGFloat offset_now_y = scrollView.contentOffset.y;
+   
+    if (offset_now_y - offset_origin_y > 30 && isMainContentViewShown) {
+        [self didTapFunctionBar:nil];
+    }
+    
+    offset_origin_y = offset_now_y;
 }
 @end

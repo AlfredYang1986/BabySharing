@@ -8,6 +8,9 @@
 
 #import "DongDaTabBarItem.h"
 
+#define LAYER_ICON_MID_WIDTH_S     27.5
+#define LAYER_ICON_MID_HEIGHT_S    LAYER_ICON_MID_WIDTH_S
+
 #define LAYER_ICON_NORMAL_WIDTH  25
 #define LAYER_ICON_NORMAL_HEIGHT LAYER_ICON_NORMAL_WIDTH
 
@@ -51,7 +54,7 @@
         
         img_layer = [CALayer layer];
         img_layer.contents = (id)image.CGImage;
-        img_layer.frame = CGRectMake(0, 0, LAYER_ICON_NORMAL_WIDTH, LAYER_ICON_NORMAL_HEIGHT);
+        img_layer.frame = CGRectMake(0, 0, LAYER_ICON_MID_WIDTH_S, LAYER_ICON_MID_HEIGHT_S);
         [self.layer addSublayer:img_layer];
     }
     return self;

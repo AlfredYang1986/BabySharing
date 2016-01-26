@@ -70,6 +70,8 @@
     /***********************************************************************/
 
     /***********************************************************************/
+    SearchSegView2* f_bar;      // segment control
+    /***********************************************************************/
     // search tag
     TagType current_type;
     NSString* searchControllerTitle;
@@ -100,6 +102,10 @@
     mainContentView.userInteractionEnabled = YES;
     mainContentView.clipsToBounds = YES;
     [self.view addSubview:mainContentView];
+    
+    UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(mainViewHandleTap:)];
+    [mainContentView addGestureRecognizer:tap];
+    
     img_layer = [CALayer layer];
     img_layer.frame = mainContentView.bounds;
     img_layer.contents = (id)_cutted_img.CGImage;
@@ -167,7 +173,8 @@
      */
     CGFloat height = FAKE_NAVIGATION_BAR_HEIGHT + img_height; //width * aspectRatio;
 //    UIView* f_bar = [[UIView alloc]initWithFrame:CGRectMake(0, height, width, FUNC_BAR_HEIGHT)];
-    SearchSegView2* f_bar = [[SearchSegView2 alloc]initWithFrame:CGRectMake(0, height, width, FUNC_BAR_HEIGHT)];
+//    SearchSegView2* f_bar = [[SearchSegView2 alloc]initWithFrame:CGRectMake(0, height, width, FUNC_BAR_HEIGHT)];
+    f_bar = [[SearchSegView2 alloc]initWithFrame:CGRectMake(0, height, width, FUNC_BAR_HEIGHT)];
     f_bar.backgroundColor = [UIColor colorWithWhite:0.0706 alpha:1.f];
     f_bar.delegate = self;
     [self.view addSubview:f_bar];
@@ -337,7 +344,6 @@
     
     /**
      * clear view
-     * TODO: actions with the back wards
      */
     edit_bg.hidden = YES;
     edit.hidden = YES;
@@ -559,6 +565,8 @@
 }
 
 - (void)queryTagContetnWithTagType:(TagType)tag_type andImg:(UIImage*)tag_img {
+   
+    [self.view viewWithTag:-9].hidden = YES;
     
     if (tag_type == TagTypeBrand) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SearchViewController" bundle:nil];
@@ -860,5 +868,12 @@
     [paste_img_arr removeObject:cur_long_press];
     cur_long_press = nil;
     edit.hidden = YES;
+}
+
+#pragma mark -- tap to main image
+- (void)mainViewHandleTap:(UIGestureRecognizer*)tap {
+    if (f_bar.selectedIndex == 0 && _type == PostPreViewPhote) {
+        [self.view viewWithTag:-9].hidden = NO;
+    }
 }
 @end
