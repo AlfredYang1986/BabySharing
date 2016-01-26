@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7041A5BB1C575A7400FEBFCD /* MessageChatGroupHeader2.m in Sources */ = {isa = PBXBuildFile; fileRef = 7041A5BA1C575A7400FEBFCD /* MessageChatGroupHeader2.m */; };
+		7041A5BD1C575A8700FEBFCD /* MessageChatGroupHeader2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7041A5BC1C575A8700FEBFCD /* MessageChatGroupHeader2.xib */; };
 		70530B121C3F9D1E00505121 /* SearchSegImgItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 70530B0D1C3F9D1E00505121 /* SearchSegImgItem.m */; };
 		70530B131C3F9D1E00505121 /* SearchSegImgTextItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 70530B0F1C3F9D1E00505121 /* SearchSegImgTextItem.m */; };
 		70530B141C3F9D1E00505121 /* SearchSegItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 70530B111C3F9D1E00505121 /* SearchSegItem.m */; };
@@ -312,6 +314,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7041A5B91C575A7400FEBFCD /* MessageChatGroupHeader2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageChatGroupHeader2.h; sourceTree = "<group>"; };
+		7041A5BA1C575A7400FEBFCD /* MessageChatGroupHeader2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageChatGroupHeader2.m; sourceTree = "<group>"; };
+		7041A5BC1C575A8700FEBFCD /* MessageChatGroupHeader2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageChatGroupHeader2.xib; sourceTree = "<group>"; };
 		70530B0C1C3F9D1E00505121 /* SearchSegImgItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSegImgItem.h; sourceTree = "<group>"; };
 		70530B0D1C3F9D1E00505121 /* SearchSegImgItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSegImgItem.m; sourceTree = "<group>"; };
 		70530B0E1C3F9D1E00505121 /* SearchSegImgTextItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSegImgTextItem.h; sourceTree = "<group>"; };
@@ -1358,6 +1363,9 @@
 				EE9F736B1B8576B100F800DC /* MessageChatGroupHeader.h */,
 				EE9F736C1B8576B100F800DC /* MessageChatGroupHeader.m */,
 				EE9F736E1B8576C400F800DC /* MessageChatGroupHeader.xib */,
+				7041A5B91C575A7400FEBFCD /* MessageChatGroupHeader2.h */,
+				7041A5BA1C575A7400FEBFCD /* MessageChatGroupHeader2.m */,
+				7041A5BC1C575A8700FEBFCD /* MessageChatGroupHeader2.xib */,
 			);
 			path = MessageChatGroupHeader;
 			sourceTree = "<group>";
@@ -2712,6 +2720,7 @@
 				EEB4C8BF1BFC823C0023E2AD /* QueryCell.xib in Resources */,
 				EE7910461B841AC8005E455B /* MessageViewCell.xib in Resources */,
 				EEBE1B891C17CB4E00EAA9D2 /* FoundSearchResultCell.xib in Resources */,
+				7041A5BD1C575A8700FEBFCD /* MessageChatGroupHeader2.xib in Resources */,
 				EE0DCE7E1C081FD400B5386B /* LaunchScreen.xib in Resources */,
 				EE7C68731B82D31F0003C593 /* CycleOverCell.xib in Resources */,
 				EEAACD741B44EA2D00D05C0B /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
@@ -2953,6 +2962,7 @@
 				70E06F7E1C4F966200B740CD /* SearchLocationDelegate.m in Sources */,
 				EEBE1B871C17CB4E00EAA9D2 /* FoundHotTagsCell.m in Sources */,
 				EED774D71BABF86D001C9B57 /* HomeTagsController.m in Sources */,
+				7041A5BB1C575A7400FEBFCD /* MessageChatGroupHeader2.m in Sources */,
 				EE26D7731C1EBA2700342E02 /* PreviewItem+CoreDataProperties.m in Sources */,
 				EEA1F54C1C169049009B8724 /* SearchViewController.m in Sources */,
 				EEAACCA11B44E90400D05C0B /* CVMovieController.m in Sources */,
