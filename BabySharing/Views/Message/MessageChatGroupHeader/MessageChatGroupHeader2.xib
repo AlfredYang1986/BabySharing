@@ -12,41 +12,45 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2iB-fS-MOC" customClass="OBShapedButton">
-                    <rect key="frame" x="277" y="30" width="46" height="30"/>
+                    <rect key="frame" x="274" y="30" width="53" height="25"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="53" id="0WC-Dy-lB0"/>
+                        <constraint firstAttribute="height" constant="25" id="74s-3V-nqP"/>
+                    </constraints>
                     <state key="normal" title="Button"/>
                 </button>
                 <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QrF-9B-Qt2">
                     <rect key="frame" x="0.0" y="68" width="600" height="95"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jbP-Wh-Iuy">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jbP-Wh-Iuy">
                             <rect key="frame" x="32" y="0.0" width="50" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="VLY-Yu-5ZT"/>
+                                <constraint firstAttribute="width" constant="40" id="tVn-6S-s3v"/>
+                            </constraints>
                         </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bjf-sM-cgm" customClass="OBShapedButton">
-                            <rect key="frame" x="100" y="0.0" width="46" height="30"/>
-                            <state key="normal" title="Button"/>
-                        </button>
                     </subviews>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="jbP-Wh-Iuy" firstAttribute="leading" secondItem="QrF-9B-Qt2" secondAttribute="leading" constant="45" id="5fh-LX-hH1"/>
-                        <constraint firstItem="jbP-Wh-Iuy" firstAttribute="top" secondItem="QrF-9B-Qt2" secondAttribute="top" constant="30" id="8A5-S4-FO0"/>
-                        <constraint firstItem="bjf-sM-cgm" firstAttribute="leading" secondItem="jbP-Wh-Iuy" secondAttribute="trailing" constant="10.5" id="HXz-Zq-SDI"/>
-                        <constraint firstItem="bjf-sM-cgm" firstAttribute="top" secondItem="QrF-9B-Qt2" secondAttribute="top" id="Tgy-cO-fy6"/>
+                        <constraint firstItem="jbP-Wh-Iuy" firstAttribute="leading" secondItem="QrF-9B-Qt2" secondAttribute="leading" constant="21" id="5fh-LX-hH1"/>
+                        <constraint firstItem="jbP-Wh-Iuy" firstAttribute="top" secondItem="QrF-9B-Qt2" secondAttribute="top" id="8A5-S4-FO0"/>
                     </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="QrF-9B-Qt2" secondAttribute="trailing" id="2eP-59-yg3"/>
+                <constraint firstItem="QrF-9B-Qt2" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Jrf-cx-Lo1"/>
                 <constraint firstItem="2iB-fS-MOC" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="30" id="mlh-2n-JIT"/>
                 <constraint firstItem="2iB-fS-MOC" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="nZI-Js-c6G"/>
                 <constraint firstItem="QrF-9B-Qt2" firstAttribute="top" secondItem="2iB-fS-MOC" secondAttribute="bottom" constant="10.5" id="x4z-7s-nRl"/>
             </constraints>
             <connections>
-                <outlet property="chatContent" destination="bjf-sM-cgm" id="W02-2g-dMv"/>
                 <outlet property="contentContainer" destination="QrF-9B-Qt2" id="VVF-ms-qyd"/>
                 <outlet property="screenPhoto" destination="jbP-Wh-Iuy" id="hsm-8L-AcI"/>
                 <outlet property="timeLabel" destination="2iB-fS-MOC" id="buq-Qu-kci"/>
             </connections>
+            <point key="canvasLocation" x="83" y="204"/>
         </view>
     </objects>
 </document>

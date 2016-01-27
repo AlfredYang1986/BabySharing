@@ -8,13 +8,29 @@
 		<data>
 		kqqaoXL7YOmJQ6bVd8ilEQn3624=
 		</data>
+		<key>Resources/chat_mine_bg.png</key>
+		<data>
+		9dkepeknippHZiDGetoVsNGlOwI=
+		</data>
 		<key>Resources/chat_mine_label.png</key>
 		<data>
 		/ciqnQEp/8xyaxGmX6Pi1iS8adA=
 		</data>
+		<key>Resources/chat_mine_tri.png</key>
+		<data>
+		Jb4/MJzMWgLBlCDxEpAPdtObBZw=
+		</data>
+		<key>Resources/chat_other_bg.png</key>
+		<data>
+		lKUm/OrslGcP5AfOAVZPXozPYTU=
+		</data>
 		<key>Resources/chat_other_label.png</key>
 		<data>
 		0V5I1YZ5WVG+JXiSkaOpLW1ub70=
+		</data>
+		<key>Resources/chat_other_tri.png</key>
+		<data>
+		WnIVMqQBrJ+SEygDjAV6yhJtb6Q=
 		</data>
 		<key>Resources/chat_round.png</key>
 		<data>
@@ -22,7 +38,7 @@
 		</data>
 		<key>Resources/chat_time_label.png</key>
 		<data>
-		bP9kw4PAPRKo9kU0jotbFVjgSfY=
+		Zz5QBs3jajquTuOuIF5FO0suXU0=
 		</data>
 		<key>Resources/dongda_back.png</key>
 		<data>
@@ -87,6 +103,14 @@
 		<key>Resources/friend_wechat.png</key>
 		<data>
 		Yj6A1mA8HIWkWlhGFxtE9mHUP4A=
+		</data>
+		<key>Resources/group_chat_head.png</key>
+		<data>
+		fuN7ckz1BbmVvh528qllthisXDI=
+		</data>
+		<key>Resources/group_chat_input_bg.png</key>
+		<data>
+		i12QH7lOG8f8hJWOcS1ev+Q6ruM=
 		</data>
 		<key>Resources/home_card_bg.png</key>
 		<data>
@@ -431,13 +455,29 @@
 		<data>
 		kqqaoXL7YOmJQ6bVd8ilEQn3624=
 		</data>
+		<key>Resources/chat_mine_bg.png</key>
+		<data>
+		9dkepeknippHZiDGetoVsNGlOwI=
+		</data>
 		<key>Resources/chat_mine_label.png</key>
 		<data>
 		/ciqnQEp/8xyaxGmX6Pi1iS8adA=
 		</data>
+		<key>Resources/chat_mine_tri.png</key>
+		<data>
+		Jb4/MJzMWgLBlCDxEpAPdtObBZw=
+		</data>
+		<key>Resources/chat_other_bg.png</key>
+		<data>
+		lKUm/OrslGcP5AfOAVZPXozPYTU=
+		</data>
 		<key>Resources/chat_other_label.png</key>
 		<data>
 		0V5I1YZ5WVG+JXiSkaOpLW1ub70=
+		</data>
+		<key>Resources/chat_other_tri.png</key>
+		<data>
+		WnIVMqQBrJ+SEygDjAV6yhJtb6Q=
 		</data>
 		<key>Resources/chat_round.png</key>
 		<data>
@@ -445,7 +485,7 @@
 		</data>
 		<key>Resources/chat_time_label.png</key>
 		<data>
-		bP9kw4PAPRKo9kU0jotbFVjgSfY=
+		Zz5QBs3jajquTuOuIF5FO0suXU0=
 		</data>
 		<key>Resources/dongda_back.png</key>
 		<data>
@@ -510,6 +550,14 @@
 		<key>Resources/friend_wechat.png</key>
 		<data>
 		Yj6A1mA8HIWkWlhGFxtE9mHUP4A=
+		</data>
+		<key>Resources/group_chat_head.png</key>
+		<data>
+		fuN7ckz1BbmVvh528qllthisXDI=
+		</data>
+		<key>Resources/group_chat_input_bg.png</key>
+		<data>
+		i12QH7lOG8f8hJWOcS1ev+Q6ruM=
 		</data>
 		<key>Resources/home_card_bg.png</key>
 		<data>

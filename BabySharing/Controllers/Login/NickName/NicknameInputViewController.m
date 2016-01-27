@@ -322,7 +322,6 @@
 
     [dic setValue:auth_token forKey:@"auth_token"];
     [dic setValue:user_id forKey:@"user_id"];
-
     
     if ([_lm updateUserProfile:[dic copy]]) {
 //    if ([_lm sendScreenName:[inputView getInputName] forToken:auth_token andUserID:user_id]) {

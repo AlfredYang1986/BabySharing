@@ -1159,7 +1159,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
         <!--ChatGroup-->
         <scene sceneID="cQr-Si-4Sy">
             <objects>
-                <viewController id="lUX-aE-qZw" customClass="ChatGroupController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="lUX-aE-qZw" customClass="ChatGroupController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fRE-X0-z2p"/>
                         <viewControllerLayoutGuide type="bottom" id="71x-7F-O97"/>
@@ -1168,6 +1168,9 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GroupChatGgImage" translatesAutoresizingMaskIntoConstraints="NO" id="Aue-r6-5Es">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                            </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Snx-PU-A6j">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1176,103 +1179,27 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                                     <outlet property="delegate" destination="lUX-aE-qZw" id="Taw-BK-g2Z"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PBm-De-CrX">
-                                <rect key="frame" x="0.0" y="551" width="600" height="49"/>
-                                <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KxI-Wm-Pcz">
-                                        <rect key="frame" x="8" y="10" width="508" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                        <connections>
-                                            <outlet property="delegate" destination="lUX-aE-qZw" id="Wam-vB-sMg"/>
-                                        </connections>
-                                    </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qBP-9w-Gmo">
-                                        <rect key="frame" x="562" y="11" width="30" height="30"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                        <state key="normal">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RN0-54-cXr">
-                                        <rect key="frame" x="524" y="11" width="30" height="30"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                        <state key="normal">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="emojiBtnSelected" destination="lUX-aE-qZw" eventType="touchUpInside" id="lSW-CY-SYV"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.1575035102" green="1" blue="0.2256678731" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="49" id="6Fg-5K-BaH"/>
-                                    <constraint firstAttribute="trailing" secondItem="qBP-9w-Gmo" secondAttribute="trailing" constant="8" id="80N-Rf-fFe"/>
-                                    <constraint firstItem="KxI-Wm-Pcz" firstAttribute="leading" secondItem="PBm-De-CrX" secondAttribute="leading" constant="8" id="AaY-t2-FHz"/>
-                                    <constraint firstAttribute="centerY" secondItem="RN0-54-cXr" secondAttribute="centerY" id="ERc-Rj-ILM"/>
-                                    <constraint firstAttribute="centerX" secondItem="KxI-Wm-Pcz" secondAttribute="centerX" id="I6W-zC-5GV"/>
-                                    <constraint firstAttribute="centerY" secondItem="qBP-9w-Gmo" secondAttribute="centerY" id="IZi-X3-enJ"/>
-                                    <constraint firstAttribute="centerX" secondItem="qBP-9w-Gmo" secondAttribute="centerX" id="JJ7-dM-qbi"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="49" id="Jr8-Xh-hpA"/>
-                                    <constraint firstAttribute="centerX" secondItem="RN0-54-cXr" secondAttribute="centerX" id="QR3-YD-5ke"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="49" id="TYJ-hJ-Nh3"/>
-                                    <constraint firstItem="qBP-9w-Gmo" firstAttribute="leading" secondItem="RN0-54-cXr" secondAttribute="trailing" constant="8" id="c3f-Hn-lNe"/>
-                                    <constraint firstItem="RN0-54-cXr" firstAttribute="leading" secondItem="KxI-Wm-Pcz" secondAttribute="trailing" constant="8" id="dC4-fq-vcb"/>
-                                    <constraint firstItem="KxI-Wm-Pcz" firstAttribute="centerY" secondItem="qBP-9w-Gmo" secondAttribute="centerY" id="fjp-WJ-0an"/>
-                                    <constraint firstAttribute="centerY" secondItem="KxI-Wm-Pcz" secondAttribute="centerY" id="nKe-Sn-2eX"/>
-                                    <constraint firstItem="KxI-Wm-Pcz" firstAttribute="leading" secondItem="PBm-De-CrX" secondAttribute="leading" constant="8" id="rYU-dm-Ccm"/>
-                                    <constraint firstAttribute="trailing" secondItem="qBP-9w-Gmo" secondAttribute="trailing" constant="8" id="tcg-cB-FWD"/>
-                                    <constraint firstItem="KxI-Wm-Pcz" firstAttribute="centerY" secondItem="RN0-54-cXr" secondAttribute="centerY" id="te2-77-TGg"/>
-                                    <constraint firstItem="qBP-9w-Gmo" firstAttribute="leading" secondItem="RN0-54-cXr" secondAttribute="trailing" constant="8" id="xyh-sh-zQ9"/>
-                                    <constraint firstItem="RN0-54-cXr" firstAttribute="leading" secondItem="KxI-Wm-Pcz" secondAttribute="trailing" constant="8" id="yEk-zf-ico"/>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="Jr8-Xh-hpA"/>
-                                        <exclude reference="TYJ-hJ-Nh3"/>
-                                        <exclude reference="AaY-t2-FHz"/>
-                                        <exclude reference="I6W-zC-5GV"/>
-                                        <exclude reference="fjp-WJ-0an"/>
-                                        <exclude reference="te2-77-TGg"/>
-                                        <exclude reference="QR3-YD-5ke"/>
-                                        <exclude reference="dC4-fq-vcb"/>
-                                        <exclude reference="JJ7-dM-qbi"/>
-                                        <exclude reference="tcg-cB-FWD"/>
-                                        <exclude reference="xyh-sh-zQ9"/>
-                                    </mask>
-                                </variation>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="PBm-De-CrX" firstAttribute="top" secondItem="Snx-PU-A6j" secondAttribute="bottom" id="CcI-ja-9MM"/>
-                            <constraint firstItem="71x-7F-O97" firstAttribute="top" secondItem="PBm-De-CrX" secondAttribute="bottom" constant="-49" id="MMC-4K-ckK"/>
-                            <constraint firstItem="PBm-De-CrX" firstAttribute="leading" secondItem="e73-Pv-2Hg" secondAttribute="leadingMargin" constant="-16" id="OvV-MW-B2l"/>
+                            <constraint firstItem="71x-7F-O97" firstAttribute="top" secondItem="Aue-r6-5Es" secondAttribute="bottom" id="4jd-m6-k72"/>
+                            <constraint firstItem="Aue-r6-5Es" firstAttribute="top" secondItem="e73-Pv-2Hg" secondAttribute="topMargin" id="Nne-Pi-RL7"/>
                             <constraint firstItem="71x-7F-O97" firstAttribute="top" secondItem="Snx-PU-A6j" secondAttribute="bottom" id="PoR-dE-PLU"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="PBm-De-CrX" secondAttribute="trailing" constant="-16" id="UlE-4D-GtB"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Aue-r6-5Es" secondAttribute="trailing" constant="-20" id="Q44-n6-xE2"/>
+                            <constraint firstItem="Aue-r6-5Es" firstAttribute="leading" secondItem="e73-Pv-2Hg" secondAttribute="leadingMargin" constant="-20" id="V2l-LQ-tZy"/>
                             <constraint firstItem="Snx-PU-A6j" firstAttribute="leading" secondItem="e73-Pv-2Hg" secondAttribute="leadingMargin" constant="-16" id="bZP-Ct-aHQ"/>
                             <constraint firstItem="Snx-PU-A6j" firstAttribute="top" secondItem="e73-Pv-2Hg" secondAttribute="topMargin" id="dLV-it-Fdg"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Snx-PU-A6j" secondAttribute="trailing" constant="-16" id="jR6-7P-z41"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="CcI-ja-9MM"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="ChatGroup" id="IhA-HB-d3D"/>
                     <connections>
-                        <outlet property="faceBtn" destination="RN0-54-cXr" id="Wph-2d-nDE"/>
-                        <outlet property="funcBtn" destination="qBP-9w-Gmo" id="eb6-bI-KA8"/>
-                        <outlet property="inputContainer" destination="PBm-De-CrX" id="hDM-bs-dOr"/>
-                        <outlet property="inputField" destination="KxI-Wm-Pcz" id="taj-Xp-8Zh"/>
                         <outlet property="queryView" destination="Snx-PU-A6j" id="LbE-tJ-7fK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GgD-qW-uAW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3507" y="1787"/>
+            <point key="canvasLocation" x="3425" y="1787"/>
         </scene>
         <!--Notifications-->
         <scene sceneID="dfA-GK-KH0">
@@ -1907,6 +1834,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
     </scenes>
     <resources>
         <image name="BackgroundImage" width="375" height="667"/>
+        <image name="GroupChatGgImage" width="375" height="667"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="2PU-iO-cFw"/>

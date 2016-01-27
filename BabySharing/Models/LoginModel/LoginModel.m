@@ -232,8 +232,8 @@
     if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
         NSDictionary* reVal = [result objectForKey:@"result"];
         NSString* user_id = (NSString*)[reVal objectForKey:@"user_id"];
-//        [LoginToken updataLoginUserInContext:_doc.managedObjectContext withUserID:user_id andAttrs:reVal];
-        [LoginToken createTokenInContext:_doc.managedObjectContext withUserID:user_id andAttrs:reVal];
+//        [LoginToken createTokenInContext:_doc.managedObjectContext withUserID:user_id andAttrs:reVal];
+        [LoginToken createTokenInContext:_doc.managedObjectContext withUserID:user_id andAttrs:attrs];
         return YES;
     } else {
         NSDictionary* reError = [result objectForKey:@"error"];
@@ -600,6 +600,9 @@
     
     if (self.current_user == nil || _current_user.who.user_id == nil)
         return NO;
+   
+    NSLog(@"user_id = %@", _current_user.who.user_id);
+    NSLog(@"auth_token = %@", _current_user.who.auth_token);
     
     NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
     

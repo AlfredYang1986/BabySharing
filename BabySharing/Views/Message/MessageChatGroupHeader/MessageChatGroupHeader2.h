@@ -19,6 +19,5 @@
 
 - (void)setChatGroupThemeTitle:(NSString*)title;
 //- (void)setCHatGroupJoinerNumber:(NSNumber*)number;
-
 //- (void)setChatGroupUserList:(NSArray*)user_lst;
 @end

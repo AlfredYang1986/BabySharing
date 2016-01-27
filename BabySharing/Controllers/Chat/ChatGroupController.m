@@ -7,7 +7,7 @@
 //
 
 #import "ChatGroupController.h"
-#import "MessageChatGroupHeader.h"
+#import "MessageChatGroupHeader2.h"
 #import "INTUAnimationEngine.h"
 
 #import "AppDelegate.h"
@@ -23,23 +23,24 @@
 #import "chatEmojiView.h"
 #import "ChatMessageCell.h"
 
-@interface ChatGroupController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, GotyeOCDelegate, ChatEmoji>
+@interface ChatGroupController () <UITableViewDataSource, UITableViewDelegate, /*UITextFieldDelegate,*/ GotyeOCDelegate, ChatEmoji, UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *queryView;
-@property (weak, nonatomic) IBOutlet UITextField *inputField;
-@property (weak, nonatomic) IBOutlet UIButton *faceBtn;
-@property (weak, nonatomic) IBOutlet UIButton *funcBtn;
-@property (weak, nonatomic) IBOutlet UIView *inputContainer;
+//@property (weak, nonatomic) IBOutlet UITextField *inputField;
+//@property (weak, nonatomic) IBOutlet UIButton *faceBtn;
+//@property (weak, nonatomic) IBOutlet UIButton *funcBtn;
+//@property (weak, nonatomic) IBOutlet UIView *inputContainer;
 
 @end
 
 @implementation ChatGroupController {
-    UIButton* chatBtn;
+    
+    UIView * inputContainer;
+    UIButton* userBtn;
+    UITextView* inputView;
     UIButton* backBtn;
     
     NSDictionary* founder_dic;
-    
     NSMutableArray* current_message;
-    
     NSMutableArray* current_talk_users;
     
     /**
@@ -52,10 +53,10 @@
 }
 
 @synthesize queryView = _queryView;
-@synthesize inputField = _inputField;
-@synthesize faceBtn = _faceBtn;
-@synthesize funcBtn = _funcBtn;
-@synthesize inputContainer = _inputContainer;
+//@synthesize inputField = _inputField;
+//@synthesize faceBtn = _faceBtn;
+//@synthesize funcBtn = _funcBtn;
+//@synthesize inputContainer = _inputContainer;
 
 @synthesize founder_id = _founder_id;
 @synthesize lm = _lm;
@@ -73,37 +74,13 @@
     
     current_message = [[NSMutableArray alloc]init];
     current_talk_users = [[NSMutableArray alloc]init];
-    
-    _queryView.separatorStyle = UITableViewCellSeparatorStyleNone;  // 去除表框
-    [_queryView registerNib:[UINib nibWithNibName:@"MessageChatGroupHeader" bundle:[NSBundle mainBundle]] forHeaderFooterViewReuseIdentifier:@"chat group header"];
    
-    CGFloat width = [UIScreen mainScreen].bounds.size.width;
-    CGFloat height = [UIScreen mainScreen].bounds.size.height;
-
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
-    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-    
-    
-    chatBtn = [[UIButton alloc]initWithFrame:CGRectMake(8, height - 38, 30, 30)];
-    chatBtn.layer.borderColor = [UIColor blueColor].CGColor;
-    chatBtn.layer.borderWidth = 1.f;
-    chatBtn.layer.cornerRadius = 15.f;
-    chatBtn.clipsToBounds = YES;
-    [chatBtn addTarget:self action:@selector(chatBtnSelected) forControlEvents:UIControlEventTouchDown];
-    [chatBtn setImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Chat" ofType:@"png"]] forState:UIControlStateNormal];
-    [self.view addSubview:chatBtn];
-    [self.view bringSubviewToFront:chatBtn];
-    
-    backBtn = [[UIButton alloc]initWithFrame:CGRectMake(width - 38, height - 38, 30, 30)];
-    backBtn.layer.borderColor = [UIColor blueColor].CGColor;
-    backBtn.layer.borderWidth = 1.f;
-    backBtn.layer.cornerRadius = 15.f;
-    backBtn.clipsToBounds = YES;
-    [backBtn addTarget:self action:@selector(backBtnSelected) forControlEvents:UIControlEventTouchDown];
-    [backBtn setImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Previous" ofType:@"png"]] forState:UIControlStateNormal];
-    [self.view addSubview:backBtn];
-    [self.view bringSubviewToFront:backBtn];
+    _queryView.backgroundColor = [UIColor clearColor];
+    _queryView.separatorStyle = UITableViewCellSeparatorStyleNone;  // 去除表框
+    [_queryView registerNib:[UINib nibWithNibName:@"MessageChatGroupHeader2" bundle:[NSBundle mainBundle]] forHeaderFooterViewReuseIdentifier:@"chat group header"];
   
+    [self setUpInputView];
+    
     /**
      * get founder info
      */
@@ -125,9 +102,10 @@
            
             dispatch_async(dispatch_get_main_queue(), ^{
                 UIView* tmp = [_queryView headerViewForSection:0];
-                [self setFounderInfoForChatGroupHeader:(MessageChatGroupHeader*)tmp];
-                [self setGroupInfoForChatGroupHeader:(MessageChatGroupHeader*)tmp];
-                [_queryView reloadData];
+                [self setFounderInfoForChatGroupHeader:(MessageChatGroupHeader2*)tmp];
+                [self setGroupInfoForChatGroupHeader:(MessageChatGroupHeader2*)tmp];
+//                [_queryView reloadData];
+                [self reloadData];
             });
             
         } else {
@@ -190,18 +168,95 @@
 //    self.navigationController.navigationBarHidden = NO;
 }
 
-- (void)viewDidLayoutSubviews {
-    if ([_inputField isFirstResponder]) {
-        CGFloat move = 299;
-        CGRect rc_start = _queryView.frame;
-        CGRect rc_end = CGRectMake(rc_start.origin.x, rc_start.origin.y, rc_start.size.width, rc_start.size.height - move);
+- (void)reloadData {
+    [_queryView reloadData];
+    inputView.text = @"";
+//    [userBtn setTitle:[NSString stringWithFormat:@"%d", _joiner_count.intValue] forState:UIControlStateNormal];
+//    [userBtn setTitle:@"123" forState:UIControlStateNormal];
+//    [userBtn setNeedsDisplay];
+}
 
-        CGRect input_start = _inputContainer.frame;
-        CGRect input_end = CGRectMake(input_start.origin.x, input_start.origin.y - move, input_start.size.width, input_start.size.height);
-        
-        _queryView.frame = rc_end;
-        _inputContainer.frame = input_end;
-    }
+//取消searchbar背景色
+- (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size {
+    CGRect rect = CGRectMake(0, 0, size.width, size.height);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
+- (void)setUpInputView {
+   
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    CGFloat height = [UIScreen mainScreen].bounds.size.height;
+
+    NSString * bundlePath_dongda = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle_dongda = [NSBundle bundleWithPath:bundlePath_dongda];
+    
+#define BACK_BTN_WIDTH          23
+#define BACK_BTN_HEIGHT         23
+#define BOTTOM_MARGIN           10.5
+    
+#define INPUT_HEIGHT            37
+    
+#define INPUT_CONTAINER_HEIGHT  49
+    
+#define SCREEN_WIDTH            [UIScreen mainScreen].bounds.size.width
+    
+#define USER_BTN_WIDTH          40
+#define USER_BTN_HEIGHT         23
+
+    inputContainer = [[UIView alloc]initWithFrame:CGRectMake(0, height - INPUT_CONTAINER_HEIGHT, SCREEN_WIDTH, INPUT_CONTAINER_HEIGHT)];
+    inputContainer.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:inputContainer];
+    [self.view bringSubviewToFront:inputContainer];
+    
+    backBtn = [[UIButton alloc]initWithFrame:CGRectMake(8, (INPUT_CONTAINER_HEIGHT - BACK_BTN_HEIGHT) / 2, BACK_BTN_WIDTH, BACK_BTN_HEIGHT)];
+    backBtn.layer.borderColor = [UIColor blueColor].CGColor;
+    [backBtn addTarget:self action:@selector(backBtnSelected) forControlEvents:UIControlEventTouchUpInside];
+    [backBtn setImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"dongda_back_light" ofType:@"png"]] forState:UIControlStateNormal];
+    [inputContainer addSubview:backBtn];
+    
+    inputView = [[UITextView alloc]init];
+    CGFloat input_width = [UIScreen mainScreen].bounds.size.width - 8 - BACK_BTN_WIDTH - BOTTOM_MARGIN - USER_BTN_WIDTH - BOTTOM_MARGIN - 8;
+    inputView.frame = CGRectMake(8 + BACK_BTN_WIDTH + BOTTOM_MARGIN, (INPUT_CONTAINER_HEIGHT - INPUT_HEIGHT) / 2, input_width, INPUT_HEIGHT);
+    inputView.delegate = self;
+    inputView.backgroundColor = [UIColor clearColor];
+    inputView.scrollEnabled = NO;
+    
+    UIImageView* img = [[UIImageView alloc]init];
+    img.image = [UIImage imageNamed:[resourceBundle_dongda pathForResource:@"group_chat_input_bg" ofType:@"png"]];
+    img.frame = CGRectMake(0, 0, input_width, INPUT_HEIGHT);
+    [inputView addSubview:img];
+    [inputView sendSubviewToBack:img];
+    
+    [inputContainer addSubview:inputView];
+    
+    userBtn = [[UIButton alloc]initWithFrame:CGRectMake(width - USER_BTN_WIDTH - BOTTOM_MARGIN, (INPUT_CONTAINER_HEIGHT - BACK_BTN_HEIGHT) / 2, USER_BTN_WIDTH, USER_BTN_HEIGHT)];
+    [userBtn addTarget:self action:@selector(backBtnSelected) forControlEvents:UIControlEventTouchDown];
+//    [userBtn setImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"group_chat_head" ofType:@"png"]] forState:UIControlStateNormal];
+    CALayer* layer = [CALayer layer];
+    layer.contents = (id)[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"group_chat_head" ofType:@"png"]].CGImage;
+    layer.frame = CGRectMake(0, 0, 16, 16);
+    layer.position = CGPointMake(8, USER_BTN_HEIGHT / 2);
+    [userBtn.layer addSublayer: layer];
+   
+    CATextLayer* text = [CATextLayer layer];
+    text.string = @"12";
+    text.fontSize = 12.f;
+    text.contentsScale = 2.f;
+    text.alignmentMode = @"center";
+    text.frame = CGRectMake(0 + 16 + 8, 0, 30, USER_BTN_HEIGHT);
+    text.position = CGPointMake(0 + 16 + 15, USER_BTN_HEIGHT / 2 + 3);
+    [userBtn.layer addSublayer:text];
+    
+    [inputContainer addSubview:userBtn];
 }
 
 #pragma mark -- gotye delegate
@@ -235,9 +290,9 @@
         
         if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
            
-            MessageChatGroupHeader* tmp = (MessageChatGroupHeader*)[_queryView headerViewForSection:0];
+            MessageChatGroupHeader2* tmp = (MessageChatGroupHeader2*)[_queryView headerViewForSection:0];
             current_talk_users = [result objectForKey:@"result"];
-            [tmp setChatGroupUserList:current_talk_users];
+//            [tmp setChatGroupUserList:current_talk_users];
             
         } else {
 //            NSDictionary* reError = [result objectForKey:@"error"];
@@ -258,14 +313,16 @@
   
     [current_message addObject:message];
     dispatch_async(dispatch_get_main_queue(), ^{
-        [_queryView reloadData];
+//        [_queryView reloadData];
+        [self reloadData];
     });
 }
 
 - (void)onSendMessage:(GotyeStatusCode)code message:(GotyeOCMessage *)message {
     [current_message addObject:message];
     dispatch_async(dispatch_get_main_queue(), ^{
-        [_queryView reloadData];
+//        [_queryView reloadData];
+        [self reloadData];
     });
 }
 
@@ -280,7 +337,7 @@
 */
 
 - (void)chatBtnSelected {
-    [_inputField becomeFirstResponder];
+//    [_inputField becomeFirstResponder];
     [self moveView:-250];
 }
 
@@ -288,12 +345,12 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)setGroupInfoForChatGroupHeader:(MessageChatGroupHeader*)header {
+- (void)setGroupInfoForChatGroupHeader:(MessageChatGroupHeader2*)header {
     [header setChatGroupThemeTitle:_group_name];
-    [header setCHatGroupJoinerNumber:_joiner_count];
+//    [header setCHatGroupJoinerNumber:_joiner_count];
 }
 
-- (void)setFounderInfoForChatGroupHeader:(MessageChatGroupHeader*)header {
+- (void)setFounderInfoForChatGroupHeader:(MessageChatGroupHeader2*)header {
     [header setFounderScreenName:[founder_dic objectForKey:@"screen_name"]];
     [header setFounderScreenPhoto:[founder_dic objectForKey:@"screen_photo"]];
     [header setFounderRelations:[founder_dic objectForKey:@"relations"]];
@@ -302,26 +359,31 @@
 
 #pragma mark -- table view delegate
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return [MessageChatGroupHeader preferredHeight];
+    return [MessageChatGroupHeader2 preferredHeightWithContent:@"abcde"];
 }
 
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    MessageChatGroupHeader* header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"chat group header"];
+   
+    MessageChatGroupHeader2* header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"chat group header"];
     
     if (header == nil) {
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MessageChatGroupHeader" owner:self options:nil];
         header = [nib objectAtIndex:0];
     }
-   
+    
     [self setFounderInfoForChatGroupHeader:header];
     [self setGroupInfoForChatGroupHeader:header];
-    [header setChatGroupUserList:current_talk_users];
+//    [header setChatGroupUserList:current_talk_users];
     return header;
 }
 
 #pragma mark -- table view data source
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return current_message.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return [ChatMessageCell preferredHeightWithInputText:@"abcde"];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -384,11 +446,10 @@
 #pragma mark -- move view when chat
 - (void)moveView:(float)move {
     static const CGFloat kAnimationDuration = 0.30; // in seconds
-    move = move > 0 ? move + 49 : move - 49;
     CGRect rc_start = _queryView.frame;
     CGRect rc_end = CGRectMake(rc_start.origin.x, rc_start.origin.y, rc_start.size.width, rc_start.size.height + move);
     
-    CGRect input_start = _inputContainer.frame;
+    CGRect input_start = inputContainer.frame;
     CGRect input_end = CGRectMake(input_start.origin.x, input_start.origin.y + move, input_start.size.width, input_start.size.height);
     
     [INTUAnimationEngine animateWithDuration:kAnimationDuration
@@ -397,7 +458,7 @@
                                      options:INTUAnimationOptionNone
                                   animations:^(CGFloat progress) {
                                       _queryView.frame = INTUInterpolateCGRect(rc_start, rc_end, progress);
-                                      _inputContainer.frame = INTUInterpolateCGRect(input_start, input_end, progress);
+                                      inputContainer.frame = INTUInterpolateCGRect(input_start, input_end, progress);
                                       
                                       // NSLog(@"Progress: %.2f", progress);
                                   }
@@ -409,19 +470,42 @@
 }
 
 #pragma mark -- textfield delegate
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    [self moveView:-250];
+}
+
+- (void)textViewDidChange:(UITextView *)textView {
+    
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    if ([text isEqualToString:@"\n"]){ //判断输入的字是否是回车，即按下return
+        //在这里做你响应return键的代码
+        [self moveView:+250];
+        [textView resignFirstResponder];
+        
+        GotyeOCRoom* room = [GotyeOCRoom roomWithId:_group_id.longLongValue];
+        GotyeOCMessage* m = [GotyeOCMessage createTextMessage:room text:textView.text];
+        [GotyeOCAPI sendMessage:m];
+        return NO; //这里返回NO，就代表return键值失效，即页面上按下return，不会出现换行，如果为yes，则输入页面会换行
+    }
+    
+    return YES;
+}
+
 //- (void)textFieldDidBeginEditing:(UITextField *)textField {
 //    [self moveView:-250];
 //}
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [self moveView:+250];
-    [textField resignFirstResponder];
-    
-    GotyeOCRoom* room = [GotyeOCRoom roomWithId:_group_id.longLongValue];
-    GotyeOCMessage* m = [GotyeOCMessage createTextMessage:room text:textField.text];
-    [GotyeOCAPI sendMessage:m];
-    return YES;
-}
+//- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+//    [self moveView:+250];
+//    [textField resignFirstResponder];
+//    
+//    GotyeOCRoom* room = [GotyeOCRoom roomWithId:_group_id.longLongValue];
+//    GotyeOCMessage* m = [GotyeOCMessage createTextMessage:room text:textField.text];
+//    [GotyeOCAPI sendMessage:m];
+//    return YES;
+//}
 
 #pragma mark -- emoji
 - (void)keyboardDidShow:(NSNotification*)notification {
@@ -458,25 +542,25 @@
 
 - (IBAction)emojiBtnSelected {
     
-    if (isEmoji == NO) {
-        [_inputField becomeFirstResponder];
-        isEmoji = YES;
-        
-        if (keyboardView) {
-            [emoji removeFromSuperview];
-            emoji.frame = keyBoardFrame;
-            [keyboardView addSubview:emoji];
-            [keyboardView bringSubviewToFront:emoji];
-        }
-    } else {
-        [emoji removeFromSuperview];
-        isEmoji = NO;
-    }
+//    if (isEmoji == NO) {
+//        [_inputField becomeFirstResponder];
+//        isEmoji = YES;
+//        
+//        if (keyboardView) {
+//            [emoji removeFromSuperview];
+//            emoji.frame = keyBoardFrame;
+//            [keyboardView addSubview:emoji];
+//            [keyboardView bringSubviewToFront:emoji];
+//        }
+//    } else {
+//        [emoji removeFromSuperview];
+//        isEmoji = NO;
+//    }
 }
 
 - (void)ChatEmojiSelected:(NSString*)emoji_str {
-    _inputField.text = [_inputField.text stringByAppendingString:emoji_str];
-    NSLog(@"text now is: %@", _inputField.text);
+//    _inputField.text = [_inputField.text stringByAppendingString:emoji_str];
+//    NSLog(@"text now is: %@", _inputField.text);
 }
 
 @end
