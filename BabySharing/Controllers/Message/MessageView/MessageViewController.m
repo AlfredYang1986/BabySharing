@@ -48,6 +48,8 @@
     DONNotificationDelegate* del;
     
     UIButton* btn;
+    
+    CALayer* line_friend_up;
 }
 
 @synthesize queryView = _queryView;     // message
@@ -88,6 +90,7 @@
     del = [[DONNotificationDelegate alloc]init];
     _queryView.delegate = del;
     _queryView.dataSource = del;
+    del.controller = self;
     
     _friendsQueryView = [[UITableView alloc]init];
     _friendsQueryView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -99,10 +102,11 @@
     fd.queryView = _friendsQueryView;
     fd.current = self;
     
-    CALayer* line_friend_up = [CALayer layer];
+    line_friend_up = [CALayer layer];
     line_friend_up.borderWidth = 1.f;
     line_friend_up.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.18].CGColor;
     line_friend_up.frame = CGRectMake(0, 74 + SEARCH_BAR_MARGIN_TOP + SEARCH_BAR_HEIGHT + SEARCH_BAR_MARGIN_BOT + SEGAMENT_HEGHT + SEGAMENT_MARGIN_BOTTOM, width, 1);
+    line_friend_up.hidden = YES;
     [self.view.layer addSublayer:line_friend_up];
     
 //    CGFloat width = [UIScreen mainScreen].bounds.size.width;
@@ -359,6 +363,9 @@
                                       //                                                         self.animationID = NSNotFound;
                                       if (sg.selectedIndex == 1) {
                                           [self friendSegValueChanged:nil];
+                                          line_friend_up.hidden = NO;
+                                      } else {
+                                          line_friend_up.hidden = YES;
                                       }
                                   }];
 }

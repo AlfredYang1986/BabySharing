@@ -9,9 +9,21 @@
 #import <UIKit/UIKit.h>
 #import "EnumDefines.h"
 
+@class Notifications;
+
+@protocol MessageNotificationCellDelegate <NSObject>
+
+- (void)didSelectedSender:(Notifications*)notify;
+- (void)didSelectedReceiver:(Notifications*)notify;
+- (void)didselectedPostContent:(Notifications*)notify;
+- (void)didselectedRelationsBtn:(Notifications*)notify;
+@end
+
 @interface MessageNotificationDetailCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *detailView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) Notifications* notification;
+@property (weak, nonatomic) id<MessageNotificationCellDelegate> delegate;
 
 + (CGFloat)preferedHeight;
 

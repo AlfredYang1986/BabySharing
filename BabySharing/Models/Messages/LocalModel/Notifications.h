@@ -1,9 +1,9 @@
 //
 //  Notifications.h
-//  
+//  BabySharing
 //
-//  Created by Alfred Yang on 9/08/2015.
-//
+//  Created by Alfred Yang on 1/28/16.
+//  Copyright © 2016 BM. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -11,14 +11,14 @@
 
 @class NotificationOwner;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface Notifications : NSManagedObject
 
-@property (nonatomic, retain) NSDate * date;
-@property (nonatomic, retain) NSString * sender_id;
-@property (nonatomic, retain) NSString * sender_screen_name;
-@property (nonatomic, retain) NSNumber * type;
-@property (nonatomic, retain) NSString * sender_screen_photo;
-@property (nonatomic, retain) NSNumber * status;
-@property (nonatomic, retain) NotificationOwner *beNotified;
+// Insert code here to declare functionality of your managed object subclass
 
 @end
+
+NS_ASSUME_NONNULL_END
+
+#import "Notifications+CoreDataProperties.h"

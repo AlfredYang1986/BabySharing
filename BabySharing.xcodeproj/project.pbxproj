@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		70079F891C59B6FC00DB8D85 /* ChatGroupUserInfoTableDelegateAndDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = 70079F881C59B6FC00DB8D85 /* ChatGroupUserInfoTableDelegateAndDatasource.m */; };
+		700B0B881C5A1D5E00692A20 /* Notifications+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 700B0B851C5A1D5E00692A20 /* Notifications+CoreDataProperties.m */; };
+		700B0B891C5A1D5E00692A20 /* Notifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 700B0B871C5A1D5E00692A20 /* Notifications.m */; };
 		7041A5BB1C575A7400FEBFCD /* MessageChatGroupHeader2.m in Sources */ = {isa = PBXBuildFile; fileRef = 7041A5BA1C575A7400FEBFCD /* MessageChatGroupHeader2.m */; };
 		7041A5BD1C575A8700FEBFCD /* MessageChatGroupHeader2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7041A5BC1C575A8700FEBFCD /* MessageChatGroupHeader2.xib */; };
 		70530B121C3F9D1E00505121 /* SearchSegImgItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 70530B0D1C3F9D1E00505121 /* SearchSegImgItem.m */; };
@@ -151,7 +153,6 @@
 		EEA8A60C1BFAC0EE00130293 /* FoundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEA8A60B1BFAC0EE00130293 /* FoundViewController.m */; };
 		EEA8A60F1BFAC1F800130293 /* HomeViewFoundDelegateAndDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = EEA8A60E1BFAC1F800130293 /* HomeViewFoundDelegateAndDatasource.m */; };
 		EEA991481B775B4F001F6CC6 /* DDNNotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEA991471B775B4F001F6CC6 /* DDNNotificationViewController.m */; };
-		EEAAA9771B77177C00BEDA6D /* Notifications.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAAA9761B77177C00BEDA6D /* Notifications.m */; };
 		EEAAC8FE1B44E81A00D05C0B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAAC8FD1B44E81A00D05C0B /* main.m */; };
 		EEAAC91B1B44E81A00D05C0B /* BabySharingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAAC91A1B44E81A00D05C0B /* BabySharingTests.m */; };
 		EEAACC9A1B44E90400D05C0B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACAF11B44E90300D05C0B /* AppDelegate.m */; };
@@ -319,6 +320,10 @@
 /* Begin PBXFileReference section */
 		70079F871C59B6FC00DB8D85 /* ChatGroupUserInfoTableDelegateAndDatasource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatGroupUserInfoTableDelegateAndDatasource.h; sourceTree = "<group>"; };
 		70079F881C59B6FC00DB8D85 /* ChatGroupUserInfoTableDelegateAndDatasource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatGroupUserInfoTableDelegateAndDatasource.m; sourceTree = "<group>"; };
+		700B0B841C5A1D5E00692A20 /* Notifications+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Notifications+CoreDataProperties.h"; sourceTree = "<group>"; };
+		700B0B851C5A1D5E00692A20 /* Notifications+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Notifications+CoreDataProperties.m"; sourceTree = "<group>"; };
+		700B0B861C5A1D5E00692A20 /* Notifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notifications.h; sourceTree = "<group>"; };
+		700B0B871C5A1D5E00692A20 /* Notifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Notifications.m; sourceTree = "<group>"; };
 		7041A5B91C575A7400FEBFCD /* MessageChatGroupHeader2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageChatGroupHeader2.h; sourceTree = "<group>"; };
 		7041A5BA1C575A7400FEBFCD /* MessageChatGroupHeader2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageChatGroupHeader2.m; sourceTree = "<group>"; };
 		7041A5BC1C575A8700FEBFCD /* MessageChatGroupHeader2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageChatGroupHeader2.xib; sourceTree = "<group>"; };
@@ -562,8 +567,6 @@
 		EEA991431B773F1B001F6CC6 /* UIBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBadgeView.m; sourceTree = "<group>"; };
 		EEA991461B775B4F001F6CC6 /* DDNNotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDNNotificationViewController.h; sourceTree = "<group>"; };
 		EEA991471B775B4F001F6CC6 /* DDNNotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDNNotificationViewController.m; sourceTree = "<group>"; };
-		EEAAA9751B77177C00BEDA6D /* Notifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notifications.h; sourceTree = "<group>"; };
-		EEAAA9761B77177C00BEDA6D /* Notifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Notifications.m; sourceTree = "<group>"; };
 		EEAAC8F81B44E81A00D05C0B /* BabySharing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BabySharing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEAAC8FC1B44E81A00D05C0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EEAAC8FD1B44E81A00D05C0B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -1147,8 +1150,10 @@
 		EE5D68691B75A5360067A2DF /* LocalModel */ = {
 			isa = PBXGroup;
 			children = (
-				EEAAA9751B77177C00BEDA6D /* Notifications.h */,
-				EEAAA9761B77177C00BEDA6D /* Notifications.m */,
+				700B0B841C5A1D5E00692A20 /* Notifications+CoreDataProperties.h */,
+				700B0B851C5A1D5E00692A20 /* Notifications+CoreDataProperties.m */,
+				700B0B861C5A1D5E00692A20 /* Notifications.h */,
+				700B0B871C5A1D5E00692A20 /* Notifications.m */,
 				EE5D68761B75A9FD0067A2DF /* Messages.h */,
 				EE5D68771B75A9FD0067A2DF /* Messages.m */,
 				EE5D68731B75A9FD0067A2DF /* Targets.h */,
@@ -2881,7 +2886,6 @@
 				EEBE1B811C17CB4E00EAA9D2 /* FoundMoreFriendCell.m in Sources */,
 				EE90C9871BFC1C68002D5D1D /* MainHomeViewDataDelegate.m in Sources */,
 				EEBE1B881C17CB4E00EAA9D2 /* FoundSearchResultCell.m in Sources */,
-				EEAAA9771B77177C00BEDA6D /* Notifications.m in Sources */,
 				EE5D687B1B75B12B0067A2DF /* NotificationOwner+ContextOpt.m in Sources */,
 				EE5D68781B75A9FD0067A2DF /* Messages.m in Sources */,
 				EE26D7621C1EB8AA00342E02 /* FoundSearchData.xcdatamodeld in Sources */,
@@ -2961,6 +2965,7 @@
 				EEAACCE91B44E90400D05C0B /* QueryModel.m in Sources */,
 				EE76A5741B72056800036747 /* Following.m in Sources */,
 				EEAACCEC1B44E90400D05C0B /* MoviePlayTrait.m in Sources */,
+				700B0B891C5A1D5E00692A20 /* Notifications.m in Sources */,
 				EEAACCDC1B44E90400D05C0B /* RegTmpToken.m in Sources */,
 				EE26D7761C1EBA2700342E02 /* RecommandTag.m in Sources */,
 				EE9744171B78886300E81A70 /* MessageNotificationCell.m in Sources */,
@@ -2978,6 +2983,7 @@
 				70E06F7E1C4F966200B740CD /* SearchLocationDelegate.m in Sources */,
 				EEBE1B871C17CB4E00EAA9D2 /* FoundHotTagsCell.m in Sources */,
 				EED774D71BABF86D001C9B57 /* HomeTagsController.m in Sources */,
+				700B0B881C5A1D5E00692A20 /* Notifications+CoreDataProperties.m in Sources */,
 				7041A5BB1C575A7400FEBFCD /* MessageChatGroupHeader2.m in Sources */,
 				EE26D7731C1EBA2700342E02 /* PreviewItem+CoreDataProperties.m in Sources */,
 				EEA1F54C1C169049009B8724 /* SearchViewController.m in Sources */,

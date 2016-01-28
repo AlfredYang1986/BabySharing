@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14E46" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15D21" minimumToolsVersion="Xcode 4.3">
     <entity name="Messages" representedClassName="Messages" syncable="YES">
         <attribute name="message_content" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="message_date" optional="YES" attributeType="Date" syncable="YES"/>
@@ -13,7 +13,11 @@
         <relationship name="notifications" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Notifications" inverseName="beNotified" inverseEntity="Notifications" syncable="YES"/>
     </entity>
     <entity name="Notifications" representedClassName="Notifications" syncable="YES">
+        <attribute name="action_post_id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="receiver_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="receiver_screen_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="receiver_screen_photo" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sender_id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sender_screen_name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sender_screen_photo" optional="YES" attributeType="String" syncable="YES"/>
@@ -37,7 +41,7 @@
     <elements>
         <element name="Messages" positionX="-9011" positionY="-1458" width="128" height="118"/>
         <element name="NotificationOwner" positionX="-8739" positionY="-1809" width="128" height="88"/>
-        <element name="Notifications" positionX="-8489" positionY="-1953" width="128" height="148"/>
+        <element name="Notifications" positionX="-8489" positionY="-1953" width="128" height="208"/>
         <element name="Targets" positionX="-9000" positionY="-1710" width="128" height="208"/>
     </elements>
 </model>

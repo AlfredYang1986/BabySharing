@@ -1,23 +1,16 @@
 //
 //  Notifications.m
-//  
+//  BabySharing
 //
-//  Created by Alfred Yang on 9/08/2015.
-//
+//  Created by Alfred Yang on 1/28/16.
+//  Copyright © 2016 BM. All rights reserved.
 //
 
 #import "Notifications.h"
 #import "NotificationOwner.h"
 
-
 @implementation Notifications
 
-@dynamic date;
-@dynamic sender_id;
-@dynamic sender_screen_name;
-@dynamic type;
-@dynamic sender_screen_photo;
-@dynamic status;
-@dynamic beNotified;
+// Insert code here to add functionality to your managed object subclass
 
 @end

@@ -43,7 +43,7 @@
     
     tmp.date = [NSDate dateWithTimeIntervalSince1970:((NSNumber*)[notification objectForKey:@"date"]).longLongValue / 1000];
     tmp.type = (NSNumber*)[notification objectForKey:@"type"];
-    tmp.sender_id = user_id;
+    tmp.sender_id = [notification objectForKey:@"sender_id"];
     tmp.sender_screen_name = [notification objectForKey:@"sender_screen_name"];
     tmp.sender_screen_photo = [notification objectForKey:@"sender_screen_photo"];
     tmp.status = [NSNumber numberWithInt:MessagesStatusUnread];

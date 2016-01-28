@@ -11,8 +11,9 @@
 #import "LoginModel.h"
 #import "AppDelegate.h"
 #import "EnumDefines.h"
-#import "MessageNotificationDetailCell.h"
 #import "Notifications.h"
+#import "PersonalCentreTmpViewController.h"
+#import "PersonalCentreOthersDelegate.h"
 
 @interface DONNotificationDelegate ()
 @property (nonatomic, weak) MessageModel* mm;
@@ -26,6 +27,7 @@
 @synthesize mm = _mm;
 @synthesize lm = _lm;
 @synthesize queryView = _queryView;
+@synthesize controller = _controller;
 
 - (id)init {
     self = [super init];
@@ -59,7 +61,7 @@
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
+    return NO;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -98,7 +100,9 @@
     }
     
     Notifications* tmp = [queryData objectAtIndex:indexPath.row];
-    
+ 
+    cell.delegate = self;
+    cell.notification = tmp;
     [cell setUserImage:tmp.sender_screen_photo];
 //    cell.detailView.text = [cell getActtionTmplate:tmp.type.integerValue];//, tmp.sender_screen_name];
 //    cell.nameLabel.text = tmp.sender_screen_name;
@@ -110,5 +114,29 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return queryData.count;
+}
+
+#pragma mark --  notify delegate
+- (void)didSelectedSender:(Notifications*)notify {
+    NSLog(@"sender button push");
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    PersonalCentreTmpViewController* pc = [storyboard instantiateViewControllerWithIdentifier:@"PersonalCenter"];
+    PersonalCentreOthersDelegate* delegate = [[PersonalCentreOthersDelegate alloc]init];
+    pc.current_delegate = delegate;
+    pc.owner_id = notify.sender_id;
+    [self.controller.navigationController setNavigationBarHidden:NO];
+    [self.controller.navigationController pushViewController:pc animated:YES];
+}
+
+- (void)didSelectedReceiver:(Notifications*)notify {
+    
+}
+
+- (void)didselectedPostContent:(Notifications*)notify {
+    
+}
+
+- (void)didselectedRelationsBtn:(Notifications*)notify {
+    NSLog(@"relations button pushed");
 }
 @end

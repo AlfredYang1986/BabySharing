@@ -8,12 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "MessageNotificationDetailCell.h"
 
 @class MessageModel;
 @class LoginModel;
 
-@interface DONNotificationDelegate : NSObject <UITableViewDelegate, UITableViewDataSource>
+@interface DONNotificationDelegate : NSObject <UITableViewDelegate, UITableViewDataSource, MessageNotificationCellDelegate>
 @property (weak, nonatomic) UITableView* queryView;
+@property (weak, nonatomic) UIViewController* controller;
 
 - (void)reloadData;
 @end
