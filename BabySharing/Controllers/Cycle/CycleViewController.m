@@ -93,7 +93,7 @@
                                                  name:kReachabilityChangedNotification
                                                object:nil];
 
-    isRecommmend = NO;
+    isRecommmend = YES;
     isSync = NO;
   
     if (_ry.isReachable) {

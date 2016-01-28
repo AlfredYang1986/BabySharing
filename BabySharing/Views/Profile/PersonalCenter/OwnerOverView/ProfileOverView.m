@@ -332,6 +332,8 @@
 - (void)didSelectRelationBtn {
     if (relations_btn.tag == 100 - UserPostOwnerConnectionsSamePerson) {
         [_deleagate editBtnSelected];
+    } else {
+        [_deleagate followBtnSelected];
     }
 }
 @end
