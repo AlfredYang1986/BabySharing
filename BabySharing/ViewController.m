@@ -525,8 +525,9 @@ enum DisplaySide {
  * @param msglist: 消息列表
  * @param downloadMediaIfNeed: 是否需要下载
  */
--(void) onGetMessageList:(GotyeStatusCode)code totalCount:(unsigned)totalCount downloadMediaIfNeed:(bool*)downloadMediaIfNeed {
-    NSLog(@"get message count : %d", totalCount);
+//-(void) onGetMessageList:(GotyeStatusCode)code totalCount:(unsigned)totalCount downloadMediaIfNeed:(bool*)downloadMediaIfNeed {
+-(void) onGetMessageList:(GotyeStatusCode)code msglist:(NSArray *)msgList downloadMediaIfNeed:(bool*)downloadMediaIfNeed {
+    NSLog(@"get message count : %lu", (unsigned long)msgList.count);
 
     /**
      * for notification
