@@ -23,7 +23,9 @@
 #import "chatEmojiView.h"
 #import "ChatMessageCell.h"
 
-@interface ChatGroupController () <UITableViewDataSource, UITableViewDelegate, /*UITextFieldDelegate,*/ GotyeOCDelegate, ChatEmoji, UITextViewDelegate>
+#import "ChatGroupUserInfoTableDelegateAndDatasource.h"
+
+@interface ChatGroupController () <UITableViewDataSource, UITableViewDelegate, /*UITextFieldDelegate,*/ GotyeOCDelegate, ChatEmoji, UITextViewDelegate, userInfoPaneDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *queryView;
 //@property (weak, nonatomic) IBOutlet UITextField *inputField;
 //@property (weak, nonatomic) IBOutlet UIButton *faceBtn;
@@ -42,6 +44,10 @@
     NSDictionary* founder_dic;
     NSMutableArray* current_message;
     NSMutableArray* current_talk_users;
+    
+    UIView* userInfoPane;
+    UITableView* userInfoTable;
+    ChatGroupUserInfoTableDelegateAndDatasource* delegate;
     
     /**
      * for emoji
@@ -80,6 +86,7 @@
     [_queryView registerNib:[UINib nibWithNibName:@"MessageChatGroupHeader2" bundle:[NSBundle mainBundle]] forHeaderFooterViewReuseIdentifier:@"chat group header"];
   
     [self setUpInputView];
+    [self setUpUserInfoPane];
     
     /**
      * get founder info
@@ -170,6 +177,7 @@
 
 - (void)reloadData {
     [_queryView reloadData];
+    [userInfoTable reloadData];
     inputView.text = @"";
 //    [userBtn setTitle:[NSString stringWithFormat:@"%d", _joiner_count.intValue] forState:UIControlStateNormal];
 //    [userBtn setTitle:@"123" forState:UIControlStateNormal];
@@ -189,6 +197,65 @@
     UIGraphicsEndImageContext();
     
     return image;
+}
+
+- (void)setUpUserInfoPane {
+    
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    CGFloat height = [UIScreen mainScreen].bounds.size.height;
+    
+#define USER_INFO_PANE_HEIGHT               190
+#define USER_INFO_PANE_MARGIN               10.5
+#define USER_INFO_PANE_WIDTH                width - 2 * USER_INFO_PANE_MARGIN
+    
+    userInfoPane = [[UIView alloc]initWithFrame:CGRectMake(USER_INFO_PANE_MARGIN, height - USER_INFO_PANE_MARGIN - USER_INFO_PANE_HEIGHT, width - 2 * USER_INFO_PANE_MARGIN, USER_INFO_PANE_HEIGHT)];
+//    userInfoPane.backgroundColor = [UIColor colorWithWhite:1.f alpha:0.6];
+//    userInfoPane.layer.cornerRadius = 5.f;
+//    userInfoPane.clipsToBounds = YES;
+    userInfoPane.backgroundColor = [UIColor clearColor];
+    
+#define USER_INFO_BACK_BTN_HEIGHT           30
+#define USER_INFO_BACK_BTN_WIDTH            30
+    
+    NSString * bundlePath_dongda = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle_dongda = [NSBundle bundleWithPath:bundlePath_dongda];
+
+    UIButton* back_btn = [[UIButton alloc]init];
+    
+    CALayer* layer = [CALayer layer];
+    layer.contents = (id)[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"dongda_next_light" ofType:@"png"]].CGImage;
+    layer.frame = CGRectMake(0, 0, 11, 20);
+    layer.position = CGPointMake(USER_INFO_BACK_BTN_WIDTH / 2, USER_INFO_BACK_BTN_HEIGHT / 2);
+    
+//    [back_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"dongda_next_light" ofType:@"png"]] forState:UIControlStateNormal];
+    [back_btn addTarget:self action:@selector(userInfo2InputView) forControlEvents:UIControlEventTouchUpInside];
+    back_btn.frame = CGRectMake(userInfoPane.bounds.size.width - USER_INFO_BACK_BTN_WIDTH, 0, USER_INFO_BACK_BTN_WIDTH, USER_INFO_BACK_BTN_HEIGHT);
+    [back_btn.layer addSublayer:layer];
+    [userInfoPane addSubview:back_btn];
+    
+#define USER_INFO_CONTAINER_HEIGHT          USER_INFO_PANE_HEIGHT - USER_INFO_BACK_BTN_HEIGHT - USER_INFO_PANE_MARGIN
+  
+    userInfoTable = [[UITableView alloc]initWithFrame:CGRectMake(0, USER_INFO_BACK_BTN_HEIGHT + USER_INFO_PANE_MARGIN, USER_INFO_PANE_WIDTH, USER_INFO_CONTAINER_HEIGHT)];
+    
+    delegate = [[ChatGroupUserInfoTableDelegateAndDatasource alloc]init];
+    delegate.delegate = self;
+    
+    userInfoTable.delegate = delegate;
+    userInfoTable.dataSource = delegate;
+    userInfoTable.scrollEnabled = NO;
+    userInfoTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+    userInfoTable.backgroundColor = [UIColor colorWithWhite:1.f alpha:0.6];
+    userInfoTable.layer.cornerRadius = 5.0;
+    userInfoTable.clipsToBounds = YES;
+    [userInfoTable registerNib:[UINib nibWithNibName:@"MessageFriendsCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"user info header"];
+    [userInfoTable registerNib:[UINib nibWithNibName:@"MessageChatGroupInfoCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"user info cell"];
+    
+    [userInfoPane addSubview:userInfoTable];
+    
+    [self.view addSubview:userInfoPane];
+    [self.view bringSubviewToFront:userInfoPane];
+    
+    userInfoPane.center = CGPointMake(userInfoPane.center.x + width, userInfoPane.center.y);
 }
 
 - (void)setUpInputView {
@@ -239,7 +306,7 @@
     [inputContainer addSubview:inputView];
     
     userBtn = [[UIButton alloc]initWithFrame:CGRectMake(width - USER_BTN_WIDTH - BOTTOM_MARGIN, (INPUT_CONTAINER_HEIGHT - BACK_BTN_HEIGHT) / 2, USER_BTN_WIDTH, USER_BTN_HEIGHT)];
-    [userBtn addTarget:self action:@selector(backBtnSelected) forControlEvents:UIControlEventTouchDown];
+    [userBtn addTarget:self action:@selector(inputView2UserInfo) forControlEvents:UIControlEventTouchDown];
 //    [userBtn setImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"group_chat_head" ofType:@"png"]] forState:UIControlStateNormal];
     CALayer* layer = [CALayer layer];
     layer.contents = (id)[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"group_chat_head" ofType:@"png"]].CGImage;
@@ -290,8 +357,11 @@
         
         if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
            
-            MessageChatGroupHeader2* tmp = (MessageChatGroupHeader2*)[_queryView headerViewForSection:0];
+//            MessageChatGroupHeader2* tmp = (MessageChatGroupHeader2*)[_queryView headerViewForSection:0];
             current_talk_users = [result objectForKey:@"result"];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self reloadData];
+            });
 //            [tmp setChatGroupUserList:current_talk_users];
             
         } else {
@@ -465,7 +535,34 @@
                                   completion:^(BOOL finished) {
                                       // NOTE: When passing INTUAnimationOptionRepeat, this completion block is NOT executed at the end of each cycle. It will only run if the animation is canceled.
                                       NSLog(@"%@", finished ? @"Animation Completed" : @"Animation Canceled");
-                                      //                                                         self.animationID = NSNotFound;
+                                      // self.animationID = NSNotFound;
+                                  }];
+}
+
+
+- (void)moveView:(float)move withFinish:(SEL)block {
+    static const CGFloat kAnimationDuration = 0.30; // in seconds
+    CGRect rc_start = _queryView.frame;
+    CGRect rc_end = CGRectMake(rc_start.origin.x, rc_start.origin.y, rc_start.size.width, rc_start.size.height + move);
+    
+    CGRect input_start = inputContainer.frame;
+    CGRect input_end = CGRectMake(input_start.origin.x, input_start.origin.y + move, input_start.size.width, input_start.size.height);
+    
+    [INTUAnimationEngine animateWithDuration:kAnimationDuration
+                                       delay:0.0
+                                      easing:INTUEaseInOutQuadratic
+                                     options:INTUAnimationOptionNone
+                                  animations:^(CGFloat progress) {
+                                      _queryView.frame = INTUInterpolateCGRect(rc_start, rc_end, progress);
+                                      inputContainer.frame = INTUInterpolateCGRect(input_start, input_end, progress);
+                                      
+                                      // NSLog(@"Progress: %.2f", progress);
+                                  }
+                                  completion:^(BOOL finished) {
+                                      // NOTE: When passing INTUAnimationOptionRepeat, this completion block is NOT executed at the end of each cycle. It will only run if the animation is canceled.
+                                      NSLog(@"%@", finished ? @"Animation Completed" : @"Animation Canceled");
+                                      // self.animationID = NSNotFound;
+                                      [self performSelector:block withObject:nil];
                                   }];
 }
 
@@ -563,4 +660,89 @@
 //    NSLog(@"text now is: %@", _inputField.text);
 }
 
+#pragma mark -- input view 2 user info view
+- (void)userInfo2InputView {
+    static const CGFloat kAnimationDuration = 0.30; // in seconds
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    
+    CGPoint input_start = inputContainer.center;
+    CGPoint input_end   = CGPointMake(input_start.x + width, input_start.y);
+    
+    CGPoint user_start  = userInfoPane.center;
+    CGPoint user_end   = CGPointMake(user_start.x + width, user_start.y);
+    
+    [INTUAnimationEngine animateWithDuration:kAnimationDuration
+                                       delay:0.0
+                                      easing:INTUEaseInOutQuadratic
+                                     options:INTUAnimationOptionNone
+                                  animations:^(CGFloat progress) {
+                                      inputContainer.center = INTUInterpolateCGPoint(input_start, input_end, progress);
+                                      userInfoPane.center = INTUInterpolateCGPoint(user_start, user_end, progress);
+                                      
+                                      // NSLog(@"Progress: %.2f", progress);
+                                  }
+                                  completion:^(BOOL finished) {
+                                      // NOTE: When passing INTUAnimationOptionRepeat, this completion block is NOT executed at the end of each cycle. It will only run if the animation is canceled.
+                                      NSLog(@"%@", finished ? @"Animation Completed" : @"Animation Canceled");
+                                      // self.animationID = NSNotFound;
+                                  }];
+}
+
+- (void)inputView2UserInfo {
+    if (inputView.isFirstResponder) {
+        [inputView resignFirstResponder];
+        [self moveView:+250 withFinish:@selector(inputView2UserInfo)];
+    } else {
+        static const CGFloat kAnimationDuration = 0.30; // in seconds
+        CGFloat width = [UIScreen mainScreen].bounds.size.width;
+        
+        CGPoint input_start = inputContainer.center;
+        CGPoint input_end   = CGPointMake(input_start.x - width, input_start.y);
+        
+        CGPoint user_start  = userInfoPane.center;
+        CGPoint user_end   = CGPointMake(user_start.x - width, user_start.y);
+        
+        [INTUAnimationEngine animateWithDuration:kAnimationDuration
+                                           delay:0.0
+                                          easing:INTUEaseInOutQuadratic
+                                         options:INTUAnimationOptionNone
+                                      animations:^(CGFloat progress) {
+                                          inputContainer.center = INTUInterpolateCGPoint(input_start, input_end, progress);
+                                          userInfoPane.center = INTUInterpolateCGPoint(user_start, user_end, progress);
+                                          
+                                          // NSLog(@"Progress: %.2f", progress);
+                                      }
+                                      completion:^(BOOL finished) {
+                                          // NOTE: When passing INTUAnimationOptionRepeat, this completion block is NOT executed at the end of each cycle. It will only run if the animation is canceled.
+                                          NSLog(@"%@", finished ? @"Animation Completed" : @"Animation Canceled");
+                                          // self.animationID = NSNotFound;
+                                      }];
+    }
+}
+
+#pragma mark -- user info delegate
+- (NSString*)getFounderScreenName {
+    return [founder_dic objectForKey:@"screen_name"];
+}
+
+- (NSString*)getFounderScreenPhoto {
+    return [founder_dic objectForKey:@"screen_photo"];
+}
+
+- (NSString*)getFounderRoleTag {
+    return [founder_dic objectForKey:@"role_tag"];
+}
+
+- (NSInteger)getFounderRelations {
+//    return ((NSNumber*)[founder_dic objectForKey:@"relations"]).intValue;
+    return 2;
+}
+
+- (NSNumber*)getGroupJoinNumber {
+    return _joiner_count;
+}
+
+- (NSArray*)getGroupJoinNumberList {
+    return current_talk_users;
+}
 @end

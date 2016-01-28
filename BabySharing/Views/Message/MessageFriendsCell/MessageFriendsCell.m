@@ -175,4 +175,10 @@
         _userRoleTagBtn.hidden = YES;
     }
 }
+
+- (void)setCellHeight:(CGFloat)cellHeight {
+    _cellHeight = cellHeight;
+    
+    line.frame = CGRectMake(0, _cellHeight - 1, [UIScreen mainScreen].bounds.size.width + 10, 1);
+}
 @end

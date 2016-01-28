@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		70079F891C59B6FC00DB8D85 /* ChatGroupUserInfoTableDelegateAndDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = 70079F881C59B6FC00DB8D85 /* ChatGroupUserInfoTableDelegateAndDatasource.m */; };
 		7041A5BB1C575A7400FEBFCD /* MessageChatGroupHeader2.m in Sources */ = {isa = PBXBuildFile; fileRef = 7041A5BA1C575A7400FEBFCD /* MessageChatGroupHeader2.m */; };
 		7041A5BD1C575A8700FEBFCD /* MessageChatGroupHeader2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7041A5BC1C575A8700FEBFCD /* MessageChatGroupHeader2.xib */; };
 		70530B121C3F9D1E00505121 /* SearchSegImgItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 70530B0D1C3F9D1E00505121 /* SearchSegImgItem.m */; };
@@ -14,6 +15,8 @@
 		70530B141C3F9D1E00505121 /* SearchSegItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 70530B111C3F9D1E00505121 /* SearchSegItem.m */; };
 		706E844A1C44CF5B00D4CA91 /* LoginSNSView.m in Sources */ = {isa = PBXBuildFile; fileRef = 706E84491C44CF5B00D4CA91 /* LoginSNSView.m */; };
 		707C08901C51D035003C6F53 /* PhotoTagEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 707C088F1C51D035003C6F53 /* PhotoTagEditView.m */; };
+		7082FFC91C59D2BA0056D1FC /* MessageChatGroupInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7082FFC71C59D2BA0056D1FC /* MessageChatGroupInfoCell.m */; };
+		7082FFCA1C59D2BA0056D1FC /* MessageChatGroupInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7082FFC81C59D2BA0056D1FC /* MessageChatGroupInfoCell.xib */; };
 		70A9BB711C3CF5F1000DFE53 /* SearchFriendsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70A9BB701C3CF5F1000DFE53 /* SearchFriendsController.m */; };
 		70C75B5B1C50B5E000E7587A /* DongDaSearchBar2.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C75B5A1C50B5E000E7587A /* DongDaSearchBar2.m */; };
 		70C75B621C50DF1100E7587A /* SearchAddController2.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C75B611C50DF1100E7587A /* SearchAddController2.m */; };
@@ -314,6 +317,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		70079F871C59B6FC00DB8D85 /* ChatGroupUserInfoTableDelegateAndDatasource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatGroupUserInfoTableDelegateAndDatasource.h; sourceTree = "<group>"; };
+		70079F881C59B6FC00DB8D85 /* ChatGroupUserInfoTableDelegateAndDatasource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatGroupUserInfoTableDelegateAndDatasource.m; sourceTree = "<group>"; };
 		7041A5B91C575A7400FEBFCD /* MessageChatGroupHeader2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageChatGroupHeader2.h; sourceTree = "<group>"; };
 		7041A5BA1C575A7400FEBFCD /* MessageChatGroupHeader2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageChatGroupHeader2.m; sourceTree = "<group>"; };
 		7041A5BC1C575A8700FEBFCD /* MessageChatGroupHeader2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageChatGroupHeader2.xib; sourceTree = "<group>"; };
@@ -329,6 +334,9 @@
 		707C088E1C51D035003C6F53 /* PhotoTagEditView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoTagEditView.h; sourceTree = "<group>"; };
 		707C088F1C51D035003C6F53 /* PhotoTagEditView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoTagEditView.m; sourceTree = "<group>"; };
 		707C08911C51D130003C6F53 /* PhotoTagEnumDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoTagEnumDefines.h; sourceTree = "<group>"; };
+		7082FFC61C59D2BA0056D1FC /* MessageChatGroupInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageChatGroupInfoCell.h; sourceTree = "<group>"; };
+		7082FFC71C59D2BA0056D1FC /* MessageChatGroupInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageChatGroupInfoCell.m; sourceTree = "<group>"; };
+		7082FFC81C59D2BA0056D1FC /* MessageChatGroupInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageChatGroupInfoCell.xib; sourceTree = "<group>"; };
 		70A9BB6F1C3CF5F1000DFE53 /* SearchFriendsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchFriendsController.h; sourceTree = "<group>"; };
 		70A9BB701C3CF5F1000DFE53 /* SearchFriendsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchFriendsController.m; sourceTree = "<group>"; };
 		70C75B591C50B5E000E7587A /* DongDaSearchBar2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DongDaSearchBar2.h; sourceTree = "<group>"; };
@@ -1249,6 +1257,8 @@
 				EE817F481B79A78E00988734 /* UserChatController.m */,
 				EE7910611B847DBA005E455B /* ChatGroupController.h */,
 				EE7910621B847DBA005E455B /* ChatGroupController.m */,
+				70079F871C59B6FC00DB8D85 /* ChatGroupUserInfoTableDelegateAndDatasource.h */,
+				70079F881C59B6FC00DB8D85 /* ChatGroupUserInfoTableDelegateAndDatasource.m */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -1366,6 +1376,9 @@
 				7041A5B91C575A7400FEBFCD /* MessageChatGroupHeader2.h */,
 				7041A5BA1C575A7400FEBFCD /* MessageChatGroupHeader2.m */,
 				7041A5BC1C575A8700FEBFCD /* MessageChatGroupHeader2.xib */,
+				7082FFC61C59D2BA0056D1FC /* MessageChatGroupInfoCell.h */,
+				7082FFC71C59D2BA0056D1FC /* MessageChatGroupInfoCell.m */,
+				7082FFC81C59D2BA0056D1FC /* MessageChatGroupInfoCell.xib */,
 			);
 			path = MessageChatGroupHeader;
 			sourceTree = "<group>";
@@ -2740,6 +2753,7 @@
 				EEC980B11B8EB9EA0087E5A7 /* status-bar-pattern-black.jpg in Resources */,
 				EEC980B61B8EB9EA0087E5A7 /* status-bar-progress@2x.png in Resources */,
 				EEAACD071B44E90400D05C0B /* FoundPCGCell.xib in Resources */,
+				7082FFCA1C59D2BA0056D1FC /* MessageChatGroupInfoCell.xib in Resources */,
 				EEBFFC1E1B916A0F005AAE36 /* PersonalSettingCell.xib in Resources */,
 				EE7415D21B5B7215002CA1BC /* Localizable.strings in Resources */,
 				EED64D471B8184C1008CB134 /* CycleAddKidsCell.xib in Resources */,
@@ -2841,6 +2855,7 @@
 				EEAACD151B44E90400D05C0B /* ProfileDetailPostCell.m in Sources */,
 				EEBE1B6E1C17CA9400EAA9D2 /* SearchSegView2.m in Sources */,
 				EEDCF6881B9AB42B005F4F4D /* SystemSettingLocalModel.xcdatamodeld in Sources */,
+				70079F891C59B6FC00DB8D85 /* ChatGroupUserInfoTableDelegateAndDatasource.m in Sources */,
 				EE2A26DB1C02F7950080FB1B /* HomeViewTableCellDelegate.m in Sources */,
 				EE26D7791C1EBA2700342E02 /* PreviewContent+CoreDataProperties.m in Sources */,
 				EE26D7771C1EBA2700342E02 /* PreviewTag+CoreDataProperties.m in Sources */,
@@ -2933,6 +2948,7 @@
 				EEE94E131B74AB6B0011321A /* AddressBookDelegate.m in Sources */,
 				EEAACCE01B44E90400D05C0B /* PostModel.m in Sources */,
 				EE83F40A1B96EDDF00D51FDF /* CycleAddSchoolViewController.m in Sources */,
+				7082FFC91C59D2BA0056D1FC /* MessageChatGroupInfoCell.m in Sources */,
 				EEAACCE11B44E90400D05C0B /* QueryComments.m in Sources */,
 				EE5C7E4F1B511CC000104CAB /* AlbumViewController2.m in Sources */,
 				EEBE1B6F1C17CA9400EAA9D2 /* DongDaTabBar.m in Sources */,
