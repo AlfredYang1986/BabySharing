@@ -68,13 +68,14 @@
     [super layoutSubviews];
   
     CGFloat h = [QueryHeader preferredHeight] + [QueryCell preferredHeightWithDescription:@"Any word"];
-    _queryView.frame = CGRectMake(4, 4, self.bounds.size.width - 8, h);
+    CGFloat w = [UIScreen mainScreen].bounds.size.width - 21 - 8;
+    _queryView.frame = CGRectMake(4, 4, w, h);
     _queryView.clipsToBounds = YES;
     
     [CATransaction begin];
     [CATransaction setDisableActions:YES];
 //    _shadow.frame = CGRectMake(-4, -4, _queryView.frame.size.width + 8, _queryView.frame.size.height + 8);
-    _shadow.frame = CGRectMake(0, 0, self.bounds.size.width, h + 8);
+    _shadow.frame = CGRectMake(0, 0, w + 8, h + 8);
     [CATransaction commit];
 //    _shadow.frame = self.bounds;
 }

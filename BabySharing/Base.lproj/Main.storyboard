@@ -1290,7 +1290,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
         <!--Message View Controller-->
         <scene sceneID="81g-Nk-e9J">
             <objects>
-                <viewController id="yaZ-zx-97W" customClass="MessageViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="yaZ-zx-97W" customClass="MessageViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="JMU-OE-RgO"/>
                         <viewControllerLayoutGuide type="bottom" id="7bS-LO-zV7"/>

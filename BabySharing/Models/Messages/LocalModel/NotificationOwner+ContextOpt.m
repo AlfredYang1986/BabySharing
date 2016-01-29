@@ -64,7 +64,15 @@
 + (NSArray*)enumNotificationsForOwner:(NSString*)user_id inContext:(NSManagedObjectContext*)context {
     
     NotificationOwner* owner = [self enumNotificationOwnerWithID:user_id inContext:context];
-    return owner.notifications.allObjects;
+    NSComparator cmptr = ^(id obj1, id obj2){
+        if (((Notifications*)obj1).date.timeIntervalSince1970 > ((Notifications*)obj2).date.timeIntervalSince1970) {
+            return (NSComparisonResult)NSOrderedAscending;
+        } else if (((Notifications*)obj1).date.timeIntervalSince1970 < ((Notifications*)obj2).date.timeIntervalSince1970) {
+            return (NSComparisonResult)NSOrderedDescending;
+        } else
+            return (NSComparisonResult)NSOrderedSame;
+    };
+    return [owner.notifications.allObjects sortedArrayUsingComparator:cmptr];
 }
 
 + (void)removeAllNotificationsForOwner:(NSString*)user_id inContext:(NSManagedObjectContext*)context {
