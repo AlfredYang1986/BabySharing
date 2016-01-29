@@ -31,6 +31,8 @@
 #import "OBShapedButton.h"
 #import "ContentCardView.h"
 
+#import "MJRefresh.h"
+
 #define HEADER_MARGIN_TO_SCREEN 10.5
 #define CONTENT_START_POINT     71
 #define PAN_HANDLE_CHECK_POINT  10
@@ -47,8 +49,10 @@
 #define SHADOW_WIDTH 4
 #define MARGIN_BETWEEN_CARD     3
 
+#define DEBUG_NEW_HOME_PAGE
+
 //@interface HomeViewController () <UITableViewDelegate, UITableViewDataSource, QueryCellActionProtocol> //, HomeSegControlDelegate>
-@interface HomeViewController () 
+@interface HomeViewController () <UITableViewDataSource, UITableViewDelegate>
     
 //@property (weak, nonatomic) IBOutlet UITableView *queryView;
 @property (weak, nonatomic, readonly) NSString* current_user_id;
@@ -73,6 +77,8 @@
     
     CGPoint point;
     BOOL isAnimation;
+    
+    UITableView* queryView;
 }
 
 //@synthesize queryView = _queryView;
@@ -145,8 +151,47 @@
     datasource.controller = self;
     datasource.delegate = _delegate;
     datasource.current_index = _current_index;
-    
+   
+#ifdef DEBUG_NEW_HOME_PAGE
+    {
+        CGFloat width = [UIScreen mainScreen].bounds.size.width;
+        CGFloat height = [UIScreen mainScreen].bounds.size.height - 64 - 49;
+        queryView = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, width, height)];
+        queryView.backgroundColor = [UIColor colorWithRed:0.9529 green:0.9529 blue:0.9529 alpha:1.f];
+        queryView.dataSource = self;
+        queryView.delegate = self;
+        queryView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//        queryView.bounces = NO;
+       
+        if (!_isPushed) {
+            __unsafe_unretained UITableView *tableView = queryView;
+            
+            // 下拉刷新
+            tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+                [_delegate collectData:^(NSArray *data) {
+                    [queryView reloadData];
+                    [tableView.mj_header endRefreshing];
+                }];
+            }];
+            
+            // 设置自动切换透明度(在导航栏下面自动隐藏)
+            tableView.mj_header.automaticallyChangeAlpha = YES;
+            
+            // 上拉刷新
+            tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+                [_delegate appendData:^(NSArray *data) {
+                    [queryView reloadData];
+                    [tableView.mj_footer endRefreshing];
+                }];
+            }];
+        }
+        
+        [self.view addSubview:queryView];
+        [self.view bringSubviewToFront:queryView];
+    }
+#else
     [self createContentCardView];
+#endif
     
     for (int index = 0; index < queryViewLst.count; ++index) {
         ContentCardView* tmp = [queryViewLst objectAtIndex:index];
@@ -230,6 +275,28 @@
 }
 
 #pragma mark -- table view for card content
+- (ContentCardView*)createOneContentCardViewAtIndex:(NSInteger)index {
+    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ContentCardView" owner:self options:nil];
+    ContentCardView* tmp = [nib objectAtIndex:0];
+    
+    tmp.queryView.delegate = datasource;
+    tmp.queryView.dataSource = datasource;
+    
+    CGFloat width = [UIScreen mainScreen].bounds.size.width - 2 * HEADER_MARGIN_TO_SCREEN;
+    CGSize size = CGSizeMake(width, [QueryHeader preferredHeight] + [QueryCell preferredHeightWithDescription:@"Any Word"]);
+#ifdef DEBUG_NEW_HOME_PAGE
+    tmp.frame = CGRectMake(HEADER_MARGIN_TO_SCREEN,  HEADER_MARGIN_TO_SCREEN - 4, size.width, size.height);
+#else
+    tmp.frame = CGRectMake(HEADER_MARGIN_TO_SCREEN + index * 4, CONTENT_START_POINT + index * (size.height + MARGIN_BETWEEN_CARD), size.width - index * 8, size.height);
+#endif
+    
+//    UIPanGestureRecognizer* pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(handlePan:)];
+//    [tmp addGestureRecognizer:pan];
+   
+    [tmp layoutSubviews];
+    return tmp;
+}
+
 - (NSArray*)createContentCardView {
   
     self.automaticallyAdjustsScrollViewInsets = NO;
@@ -239,22 +306,10 @@
    
     for (int index = 0; index < 3; ++index) {
 
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ContentCardView" owner:self options:nil];
-        ContentCardView* tmp = [nib objectAtIndex:0];
-       
-        tmp.queryView.delegate = datasource;
-        tmp.queryView.dataSource = datasource;
-        CGFloat width = [UIScreen mainScreen].bounds.size.width - 2 * HEADER_MARGIN_TO_SCREEN;
-        CGSize size = CGSizeMake(width, [QueryHeader preferredHeight] + [QueryCell preferredHeightWithDescription:@"Any Word"]);
-        tmp.frame = CGRectMake(HEADER_MARGIN_TO_SCREEN + index * 4, CONTENT_START_POINT + index * (size.height + MARGIN_BETWEEN_CARD), size.width - index * 8, size.height);
+        ContentCardView* tmp = [self createOneContentCardViewAtIndex:index];
         
-        UIPanGestureRecognizer* pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(handlePan:)];
-        [tmp addGestureRecognizer:pan];
-       
         [self.view addSubview:tmp];
         [queryViewLst addObject:tmp];
-        
-        [tmp layoutSubviews];
     }
     
     [self.view bringSubviewToFront:queryViewLst.firstObject];
@@ -263,6 +318,7 @@
     return queryViewLst;
 }
 
+#ifndef DEBUG_NEW_HOME_PAGE
 - (void)nextCard {
   
     if ([_delegate count] == _current_index + 1) {
@@ -396,6 +452,7 @@
     } else if (gesture.state == UIGestureRecognizerStateChanged) {
     }
 }
+#endif
 
 - (NSInteger)getShowingIndex:(UITableView*)tableView {
     return _current_index;
@@ -457,6 +514,8 @@
     BWStatusBarOverlay* tmp = [BWStatusBarOverlay shared];
     [tmp removeGestureRecognizer:tap];
 }
+
+//- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 
 //- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 //    
@@ -603,5 +662,60 @@
 #pragma mark -- enter chat group
 - (void)pushControllerWithTarget:(Targets*)target {
     [self performSegueWithIdentifier:@"ChatSegue" sender:target];
+}
+
+#pragma mark -- table view delegate
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return _qm.querydata.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+  
+    
+    
+    CGFloat h = [QueryHeader preferredHeight] + [QueryCell preferredHeightWithDescription:@"Any Word"];
+    return h + HEADER_MARGIN_TO_SCREEN + 2;
+}
+
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"defatult"];
+    
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"default"];
+    }
+    
+    ContentCardView* tmp = [cell viewWithTag:-101];
+    if (tmp == nil) {
+        tmp = [self createOneContentCardViewAtIndex:0];
+        cell.backgroundColor = [UIColor colorWithRed:0.9529 green:0.9529 blue:0.9529 alpha:1.f];
+        cell.clipsToBounds = YES;
+        [cell addSubview:tmp];
+    }
+   
+    tmp.queryView.tag = indexPath.row;
+    return cell;
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    if (queryView.mj_header.state == MJRefreshStateRefreshing || queryView.mj_footer.state == MJRefreshStateRefreshing) {
+        return;
+    }
+    
+    CGFloat step_length = [QueryHeader preferredHeight] + [QueryCell preferredHeightWithDescription:@"Any Word"] + HEADER_MARGIN_TO_SCREEN + 2;
+    CGFloat height = [UIScreen mainScreen].bounds.size.height - 64 - 49;
+    NSInteger step = (scrollView.contentOffset.y + height) / step_length;
+    [scrollView setContentOffset:CGPointMake(0, step_length * (step - 1)) animated:YES];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    
+    if (queryView.mj_header.state == MJRefreshStateRefreshing || queryView.mj_footer.state == MJRefreshStateRefreshing) {
+        return;
+    }
+
+    CGFloat step_length = [QueryHeader preferredHeight] + [QueryCell preferredHeightWithDescription:@"Any Word"] + HEADER_MARGIN_TO_SCREEN + 2;
+    CGFloat height = [UIScreen mainScreen].bounds.size.height - 64 - 49;
+    NSInteger step = (scrollView.contentOffset.y + height) / step_length;
+    [scrollView setContentOffset:CGPointMake(0, step_length * (step - 1)) animated:YES];
 }
 @end

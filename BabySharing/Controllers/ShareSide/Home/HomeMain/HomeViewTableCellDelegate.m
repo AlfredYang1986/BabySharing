@@ -198,12 +198,8 @@
    
     cell.backgroundColor = [UIColor clearColor];
     [cell showTags];
-    
+   
     return cell;
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {     // Default is 1 if not implemented
-    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

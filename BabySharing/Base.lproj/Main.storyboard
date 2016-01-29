@@ -874,7 +874,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
         <!--Home-->
         <scene sceneID="uKw-Qr-Yhw">
             <objects>
-                <viewController storyboardIdentifier="HomeView" id="F2b-Q4-GUQ" customClass="HomeViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeView" automaticallyAdjustsScrollViewInsets="NO" id="F2b-Q4-GUQ" customClass="HomeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gdd-Kj-LAg"/>
                         <viewControllerLayoutGuide type="bottom" id="UcI-2t-RVT"/>
@@ -1837,7 +1837,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
         <image name="GroupChatGgImage" width="375" height="667"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="2PU-iO-cFw"/>
+        <segue reference="qbd-0n-vJA"/>
         <segue reference="Xl7-6t-OQ8"/>
     </inferredMetricsTieBreakers>
 </document>

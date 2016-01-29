@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ContentCardView : UIView
-@property (weak, nonatomic) IBOutlet UITableView *queryView;
+@property (strong, nonatomic) IBOutlet UITableView *queryView;
 @property (strong, nonatomic) CALayer* shadow;
 @end

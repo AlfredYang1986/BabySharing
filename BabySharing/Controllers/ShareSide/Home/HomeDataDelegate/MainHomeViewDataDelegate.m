@@ -57,6 +57,7 @@
 
 - (BOOL)appendData:(SyncDataCallBack)block {
     [_qm appendQueryDataByUser:_lm.current_user_id withToken:_lm.current_auth_token andBeginIndex:_qm.querydata.count];
+    block(_qm.querydata);
     return YES;
 }
 

@@ -8,6 +8,7 @@
 
 #import "ContentCardView.h"
 #import "QueryHeader.h"
+#import "QueryCell.h"
 
 @implementation ContentCardView {
 }
@@ -24,6 +25,9 @@
 */
 
 - (void)awakeFromNib {
+    _queryView = [[UITableView alloc]init];
+    [self addSubview:_queryView];
+    
     UINib* nib = [UINib nibWithNibName:@"QueryCell" bundle:[NSBundle mainBundle]];
     [_queryView registerNib:nib forCellReuseIdentifier:@"query cell"];
     [_queryView registerClass:[QueryHeader class] forHeaderFooterViewReuseIdentifier:@"query header"];
@@ -46,25 +50,31 @@
     _shadow = [CALayer layer];
 //    _shadow.frame = CGRectMake(-4, -4, _queryView.frame.size.width + 8, _queryView.frame.size.height + 8);
     _shadow.contents = (id)img.CGImage;
-    [_queryView.layer addSublayer:_shadow];
+    [self.layer addSublayer:_shadow];
     
-    for (UIView* a in _queryView.subviews) {
-        [_queryView bringSubviewToFront:a];
-    }
+//    for (UIView* a in _queryView.subviews) {
+//        [_queryView bringSubviewToFront:a];
+//    }
     
     [self bringSubviewToFront:_queryView];
     
     [UIView setAnimationsEnabled:NO];
     
     self.backgroundColor = [UIColor colorWithRed:0.9529 green:0.9529 blue:0.9529 alpha:1.f];
+    
 }
 
 - (void)layoutSubviews {
     [super layoutSubviews];
+  
+    CGFloat h = [QueryHeader preferredHeight] + [QueryCell preferredHeightWithDescription:@"Any word"];
+    _queryView.frame = CGRectMake(4, 4, self.bounds.size.width - 8, h);
+    _queryView.clipsToBounds = YES;
     
     [CATransaction begin];
     [CATransaction setDisableActions:YES];
-    _shadow.frame = CGRectMake(-4, -4, _queryView.frame.size.width + 8, _queryView.frame.size.height + 8);
+//    _shadow.frame = CGRectMake(-4, -4, _queryView.frame.size.width + 8, _queryView.frame.size.height + 8);
+    _shadow.frame = CGRectMake(0, 0, self.bounds.size.width, h + 8);
     [CATransaction commit];
 //    _shadow.frame = self.bounds;
 }
