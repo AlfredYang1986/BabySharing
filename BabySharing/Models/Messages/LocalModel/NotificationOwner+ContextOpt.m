@@ -46,6 +46,11 @@
     tmp.sender_id = [notification objectForKey:@"sender_id"];
     tmp.sender_screen_name = [notification objectForKey:@"sender_screen_name"];
     tmp.sender_screen_photo = [notification objectForKey:@"sender_screen_photo"];
+    tmp.receiver_id = [notification objectForKey:@"receiver_id"];
+    tmp.receiver_screen_name = [notification objectForKey:@"receiver_screen_name"];
+    tmp.receiver_screen_photo = [notification objectForKey:@"receiver_screen_photo"];
+    tmp.action_post_id = [notification objectForKey:@"post_id"];
+    tmp.action_post_item = [notification objectForKey:@"post_item"];
     tmp.status = [NSNumber numberWithInt:MessagesStatusUnread];
 
     tmp.beNotified = owner;

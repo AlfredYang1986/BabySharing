@@ -14,6 +14,7 @@
     </entity>
     <entity name="Notifications" representedClassName="Notifications" syncable="YES">
         <attribute name="action_post_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="action_post_item" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="receiver_id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="receiver_screen_name" optional="YES" attributeType="String" syncable="YES"/>
@@ -41,7 +42,7 @@
     <elements>
         <element name="Messages" positionX="-9011" positionY="-1458" width="128" height="118"/>
         <element name="NotificationOwner" positionX="-8739" positionY="-1809" width="128" height="88"/>
-        <element name="Notifications" positionX="-8489" positionY="-1953" width="128" height="208"/>
+        <element name="Notifications" positionX="-8489" positionY="-1953" width="128" height="223"/>
         <element name="Targets" positionX="-9000" positionY="-1710" width="128" height="208"/>
     </elements>
 </model>

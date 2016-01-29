@@ -14,6 +14,8 @@
 #import "Notifications.h"
 #import "PersonalCentreTmpViewController.h"
 #import "PersonalCentreOthersDelegate.h"
+#import "HomeViewController.h"
+#import "UserHomeViewDataDelegate.h"
 
 @interface DONNotificationDelegate ()
 @property (nonatomic, weak) MessageModel* mm;
@@ -118,7 +120,6 @@
 
 #pragma mark --  notify delegate
 - (void)didSelectedSender:(Notifications*)notify {
-    NSLog(@"sender button push");
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     PersonalCentreTmpViewController* pc = [storyboard instantiateViewControllerWithIdentifier:@"PersonalCenter"];
     PersonalCentreOthersDelegate* delegate = [[PersonalCentreOthersDelegate alloc]init];
@@ -133,7 +134,15 @@
 }
 
 - (void)didselectedPostContent:(Notifications*)notify {
-    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    HomeViewController* hv = [storyboard instantiateViewControllerWithIdentifier:@"HomeView"];
+    hv.isPushed = YES;
+    hv.delegate = [[UserHomeViewDataDelegate alloc]init];
+    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    [hv.delegate pushExistingData:app.qm.querydata];
+    [hv.delegate setSelectIndex:0];
+    hv.nav_title = @"赞了";
+    [self.controller.navigationController pushViewController:hv animated:YES];
 }
 
 - (void)didselectedRelationsBtn:(Notifications*)notify {

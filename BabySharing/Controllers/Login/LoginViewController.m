@@ -93,8 +93,8 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"inputCodeSegue"]) {
-        //    NSString* phoneNo = self.phoneNoFiled.text;
-        NSString* phoneNo = @"13720200856";
+            NSString* phoneNo = self.phoneNoFiled.text;
+//        NSString* phoneNo = @"13720200856";
         ((PhoneInputViewController*)[segue destinationViewController]).lm = self.lm;
         ((PhoneInputViewController*)[segue destinationViewController]).inputing_phone_number = phoneNo;
     } else if ([segue.identifier isEqualToString:@"chooseAreaSegue"]) {

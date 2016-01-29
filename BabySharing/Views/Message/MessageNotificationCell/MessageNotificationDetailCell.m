@@ -96,6 +96,30 @@
     [self.imgView setImage:userImg];
 }
 
+- (void)UIImageView:(UIImageView*)imgView setPostImage:(NSString*)photo_name {
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+    NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"User"] ofType:@"png"];
+    
+    UIImage* userImg = [TmpFileStorageModel enumImageWithName:photo_name withDownLoadFinishBolck:^(BOOL success, UIImage *user_img) {
+        if (success) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (self) {
+                    imgView.image = user_img;
+                    NSLog(@"owner img download success");
+                }
+            });
+        } else {
+            NSLog(@"down load owner image %@ failed", photo_name);
+        }
+    }];
+    
+    if (userImg == nil) {
+        userImg = [UIImage imageNamed:filePath];
+    }
+    [imgView setImage:userImg];
+}
+
 - (void)setDetailTarget:(NSString*)screen_name andActionType:(NotificationActionType)type andConnectContent:(NSString*)Post_id {
     switch (type) {
         case NotificationActionTypeFollow: {
@@ -107,22 +131,55 @@
             if (tmp == nil) {
                 tmp = [[UIImageView alloc]init];
                 [_connectContentView addSubview:tmp];
+
+                tmp.frame = CGRectMake(0, 0, 50, 22);
+                tmp.center = CGPointMake(25, 25);
+               
+                tmp.userInteractionEnabled = YES;
+                UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(relationBtnClicked:)];
+                [tmp addGestureRecognizer:tap];
             }
             
             NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
             NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
             NSString* filepath = [resourceBundle pathForResource:@"friend_relation_follow" ofType:@"png"];
-            tmp.frame = CGRectMake(0, 0, 50, 22);
-            tmp.center = CGPointMake(25, 25);
             tmp.image = [UIImage imageNamed:filepath];
-           
-            tmp.userInteractionEnabled = YES;
-            UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(relationBtnClicked:)];
-            [tmp addGestureRecognizer:tap];
+
             }
             break;
         case NotificationActionTypeUnFollow:
-        case NotificationActionTypeLike:
+        case NotificationActionTypeLike: {
+            
+            NSString* sender_name = _notification.sender_screen_name;
+            NSString* receiver_id = _notification.receiver_screen_name;
+            
+            NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:[[[sender_name stringByAppendingString:@" 赞了 "] stringByAppendingString:receiver_id] stringByAppendingString:@"的照片"]];
+            [str addAttribute:NSForegroundColorAttributeName value:[UIColor greenColor] range:NSMakeRange(0,sender_name.length)];
+            [str addAttribute:NSForegroundColorAttributeName value:[UIColor greenColor] range:NSMakeRange(sender_name.length + 4, receiver_id.length)];
+            _nameLabel.attributedText = str;
+            
+            UIImageView* tmp = [_connectContentView viewWithTag:-1];
+            if (tmp == nil) {
+                tmp = [[UIImageView alloc]init];
+                [_connectContentView addSubview:tmp];
+
+                tmp.frame = CGRectMake(0, 0, 50, 50);
+                tmp.center = CGPointMake(25, 25);
+                tmp.layer.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.3].CGColor;
+                tmp.layer.borderWidth = 1.f;
+                tmp.layer.cornerRadius = 5.f;
+                tmp.clipsToBounds = YES;
+                
+                tmp.userInteractionEnabled = YES;
+                UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(postContentClicked:)];
+                [tmp addGestureRecognizer:tap];
+            }
+            
+            [self UIImageView:tmp setPostImage:_notification.action_post_item];
+            
+
+            }
+            break;
         case NotificationActionTypePush:
         case NotificationActionTypeMessage:
             break;
@@ -147,5 +204,9 @@
 
 - (void)senderImgSelected:(UITapGestureRecognizer*)geture {
     [_delegate didSelectedSender:_notification];
+}
+
+- (void)postContentClicked:(UITapGestureRecognizer*)geture {
+    [_delegate didselectedPostContent:_notification];
 }
 @end
