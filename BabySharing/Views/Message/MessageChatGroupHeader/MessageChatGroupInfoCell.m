@@ -25,6 +25,7 @@
     _user_list_view.backgroundColor = [UIColor clearColor];
     
     _online_count_label.font = [UIFont systemFontOfSize:14.f];
+    _online_count_label.textColor = [UIColor colorWithWhite:151.f / 255.f alpha:1.f];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -33,7 +34,7 @@
     // Configure the view for the selected state
 }
 
-#define PREFERRED_HEIGHT            88
+#define PREFERRED_HEIGHT            98.5
 
 + (CGFloat)preferredHeight {
     return PREFERRED_HEIGHT;
@@ -60,6 +61,8 @@
             NSDictionary* user_dic = [user_lst objectAtIndex:index];
             UIButton* tmp = [[UIButton alloc]initWithFrame:CGRectMake(offset, offset_y / 2, PHOTO_WIDTH, PHOTO_HEIGHT)];
             tmp.layer.cornerRadius = PHOTO_HEIGHT / 2;
+            tmp.layer.borderColor = [UIColor colorWithWhite:1.f alpha:0.25f].CGColor;
+            tmp.layer.borderWidth = 1.5f;
             tmp.clipsToBounds = YES;
             
             NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];

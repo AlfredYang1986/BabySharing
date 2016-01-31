@@ -47,7 +47,8 @@
         [cell setUserScreenName:[_delegate getFounderScreenName]];
         [cell setUserRoleTag:[_delegate getFounderRoleTag]];
       
-        cell.cellHeight = 55;
+        cell.cellHeight = 55.f;
+        cell.lineMargin = 10.f;
         cell.backgroundColor = [UIColor clearColor];
         return cell;
         

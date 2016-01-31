@@ -31,8 +31,8 @@
 - (void)awakeFromNib {
     // Initialization code
     _imgView.layer.borderWidth = 1.5f;
-    _imgView.layer.borderColor = [UIColor colorWithWhite:0.5922 alpha:1.f].CGColor;
-    _imgView.layer.cornerRadius = 25.f;
+    _imgView.layer.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.25f].CGColor;
+    _imgView.layer.cornerRadius = 19.f;
     _imgView.clipsToBounds = YES;
     _imgView.userInteractionEnabled = YES;
     
@@ -44,6 +44,8 @@
     line.borderWidth = 1.f;
     line.frame = CGRectMake(10.5, 80 - 1, [UIScreen mainScreen].bounds.size.width - 10.5 * 2, 1);
     [self.layer addSublayer:line];
+
+    _detailView.textColor = [UIColor colorWithWhite:151.f / 255.f alpha:1.f];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -124,7 +126,9 @@
     switch (type) {
         case NotificationActionTypeFollow: {
             NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:[screen_name stringByAppendingString:@" 关注了你"]];
-            [str addAttribute:NSForegroundColorAttributeName value:[UIColor greenColor] range:NSMakeRange(0,screen_name.length)];
+//            [str addAttribute:NSForegroundColorAttributeName value:[UIColor greenColor] range:NSMakeRange(0,screen_name.length)];
+            [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:70.f / 255.f green:219.f / 255.f blue:202.f / 255.f alpha:1.f] range:NSMakeRange(0,screen_name.length)];
+            [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithWhite:151.f / 255.f alpha:1.f] range:NSMakeRange(screen_name.length + 1, 4)];
             _nameLabel.attributedText = str;
            
             UIImageView* tmp = [_connectContentView viewWithTag:-1];
@@ -132,8 +136,8 @@
                 tmp = [[UIImageView alloc]init];
                 [_connectContentView addSubview:tmp];
 
-                tmp.frame = CGRectMake(0, 0, 50, 22);
-                tmp.center = CGPointMake(25, 25);
+                tmp.frame = CGRectMake(0, 0, 45, 20.5);
+                tmp.center = CGPointMake(25 - 2, 25);
                
                 tmp.userInteractionEnabled = YES;
                 UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(relationBtnClicked:)];
@@ -142,7 +146,7 @@
             
             NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
             NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-            NSString* filepath = [resourceBundle pathForResource:@"friend_relation_follow" ofType:@"png"];
+            NSString* filepath = [resourceBundle pathForResource:@"command_follow" ofType:@"png"];
             tmp.image = [UIImage imageNamed:filepath];
 
             }
@@ -153,9 +157,11 @@
             NSString* sender_name = _notification.sender_screen_name;
             NSString* receiver_id = _notification.receiver_screen_name;
             
-            NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:[[[sender_name stringByAppendingString:@" 赞了 "] stringByAppendingString:receiver_id] stringByAppendingString:@"的照片"]];
-            [str addAttribute:NSForegroundColorAttributeName value:[UIColor greenColor] range:NSMakeRange(0,sender_name.length)];
-            [str addAttribute:NSForegroundColorAttributeName value:[UIColor greenColor] range:NSMakeRange(sender_name.length + 4, receiver_id.length)];
+            NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:[[[sender_name stringByAppendingString:@" 赞了 "] stringByAppendingString:receiver_id] stringByAppendingString:@" 的照片"]];
+            [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:70.f / 255.f green:219.f / 255.f blue:202.f / 255.f alpha:1.f] range:NSMakeRange(0,sender_name.length)];
+            [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:70.f / 255.f green:219.f / 255.f blue:202.f / 255.f alpha:1.f] range:NSMakeRange(sender_name.length + 4, receiver_id.length)];
+            [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithWhite:151.f / 255.f alpha:1.f] range:NSMakeRange(sender_name.length, 4)];
+            [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithWhite:151.f / 255.f alpha:1.f] range:NSMakeRange(sender_name.length + 4 + receiver_id.length, 4)];
             _nameLabel.attributedText = str;
             
             UIImageView* tmp = [_connectContentView viewWithTag:-1];
@@ -163,7 +169,7 @@
                 tmp = [[UIImageView alloc]init];
                 [_connectContentView addSubview:tmp];
 
-                tmp.frame = CGRectMake(0, 0, 50, 50);
+                tmp.frame = CGRectMake(0, 0, 45, 45);
                 tmp.center = CGPointMake(25, 25);
                 tmp.layer.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.3].CGColor;
                 tmp.layer.borderWidth = 1.f;

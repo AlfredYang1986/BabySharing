@@ -12,6 +12,7 @@
 @interface MessageFriendsCell : UITableViewCell
 
 @property (nonatomic, setter=setHiddenLine:) BOOL isHiddenLine;
+@property (nonatomic, setter=setLineMargin:) CGFloat lineMargin;
 @property (nonatomic, setter=setCellHeight:) CGFloat cellHeight;
 
 + (CGFloat)preferredHeight;

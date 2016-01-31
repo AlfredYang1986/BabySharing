@@ -1541,6 +1541,7 @@
 		EEA1F5371C15B96A009B8724 /* Found */ = {
 			isa = PBXGroup;
 			children = (
+				EECB44541C059343008F05B8 /* ShapedButton */,
 				EEBE1B911C17D40900EAA9D2 /* FoundUserSearch */,
 				EEBE1B711C17CB4E00EAA9D2 /* FoundMain */,
 				EEBE1B7B1C17CB4E00EAA9D2 /* FoundSearch */,
@@ -2011,7 +2012,6 @@
 			children = (
 				70D15B161C5B64C9007AC9AB /* MJRefresh */,
 				EEA1F5371C15B96A009B8724 /* Found */,
-				EECB44541C059343008F05B8 /* ShapedButton */,
 				EEFCDECC1BCB936500A53CAB /* Chat */,
 				EEDAF4651BA674300035CC31 /* Common */,
 				EEC980A71B8EB9EA0087E5A7 /* BWStatusBarOverlay */,
@@ -2478,7 +2478,8 @@
 				EECB44551C059343008F05B8 /* OBShapedButton */,
 				EECB44581C059343008F05B8 /* UIImage+ColorAtPixel */,
 			);
-			path = ShapedButton;
+			name = ShapedButton;
+			path = ../ShapedButton;
 			sourceTree = "<group>";
 		};
 		EECB44551C059343008F05B8 /* OBShapedButton */ = {

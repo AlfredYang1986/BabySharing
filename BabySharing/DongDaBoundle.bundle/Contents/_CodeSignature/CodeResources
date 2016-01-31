@@ -40,6 +40,14 @@
 		<data>
 		Zz5QBs3jajquTuOuIF5FO0suXU0=
 		</data>
+		<key>Resources/command_follow.png</key>
+		<data>
+		1KBIwfQHRYOZB5MffJgX8bJaZRM=
+		</data>
+		<key>Resources/command_following.png</key>
+		<data>
+		jA0SwVtJoMFvbCqQFcDWQdshkaw=
+		</data>
 		<key>Resources/dongda_back.png</key>
 		<data>
 		2Zzt56+GxkGNL8mPBBA8T0Pt7PQ=
@@ -258,7 +266,7 @@
 		</data>
 		<key>Resources/post_change_camera.png</key>
 		<data>
-		Kpe3sWEEx4kl9TdY6kS0YXaWtWs=
+		carlh97AYWAJsVLt6ezf5krrPWM=
 		</data>
 		<key>Resources/post_drop_down.png</key>
 		<data>
@@ -312,6 +320,14 @@
 		<data>
 		MZgSocJw3Nx9kWjYEvVUtpZl9Xk=
 		</data>
+		<key>Resources/profile_bg.png</key>
+		<data>
+		69AzWeZ55vE0REq0zspCUcAnw/Q=
+		</data>
+		<key>Resources/profile_bg_up.png</key>
+		<data>
+		xp46M1Z5qz5IZmpwTcZErHnKRfo=
+		</data>
 		<key>Resources/profile_forward.png</key>
 		<data>
 		usMmbZ45YRh93iyR5Q7/tBgmHCw=
@@ -342,7 +358,7 @@
 		</data>
 		<key>Resources/profile_setting_dark.png</key>
 		<data>
-		TL43X3QrhssJ6DmHwQTST7kL43Y=
+		CkgNCrY1vB5JwWqL/Bnam5uvfFE=
 		</data>
 		<key>Resources/profile_tag.png</key>
 		<data>
@@ -491,6 +507,14 @@
 		<data>
 		Zz5QBs3jajquTuOuIF5FO0suXU0=
 		</data>
+		<key>Resources/command_follow.png</key>
+		<data>
+		1KBIwfQHRYOZB5MffJgX8bJaZRM=
+		</data>
+		<key>Resources/command_following.png</key>
+		<data>
+		jA0SwVtJoMFvbCqQFcDWQdshkaw=
+		</data>
 		<key>Resources/dongda_back.png</key>
 		<data>
 		2Zzt56+GxkGNL8mPBBA8T0Pt7PQ=
@@ -709,7 +733,7 @@
 		</data>
 		<key>Resources/post_change_camera.png</key>
 		<data>
-		Kpe3sWEEx4kl9TdY6kS0YXaWtWs=
+		carlh97AYWAJsVLt6ezf5krrPWM=
 		</data>
 		<key>Resources/post_drop_down.png</key>
 		<data>
@@ -763,6 +787,14 @@
 		<data>
 		MZgSocJw3Nx9kWjYEvVUtpZl9Xk=
 		</data>
+		<key>Resources/profile_bg.png</key>
+		<data>
+		69AzWeZ55vE0REq0zspCUcAnw/Q=
+		</data>
+		<key>Resources/profile_bg_up.png</key>
+		<data>
+		xp46M1Z5qz5IZmpwTcZErHnKRfo=
+		</data>
 		<key>Resources/profile_forward.png</key>
 		<data>
 		usMmbZ45YRh93iyR5Q7/tBgmHCw=
@@ -793,7 +825,7 @@
 		</data>
 		<key>Resources/profile_setting_dark.png</key>
 		<data>
-		TL43X3QrhssJ6DmHwQTST7kL43Y=
+		CkgNCrY1vB5JwWqL/Bnam5uvfFE=
 		</data>
 		<key>Resources/profile_tag.png</key>
 		<data>

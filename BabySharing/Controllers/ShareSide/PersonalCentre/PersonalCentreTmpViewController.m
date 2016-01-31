@@ -55,7 +55,7 @@
     
     NSInteger current_seg_index;
     
-    UIView* bkView;
+    UIImageView* bkView;
 }
 
 @synthesize current_auth_token = _current_auth_token;
@@ -116,8 +116,10 @@
         _owner_id = _current_user_id;
     }
     
-    _queryView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
-    _queryView.backgroundColor = [UIColor whiteColor];
+    _queryView.frame = CGRectMake(0, 20, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
+//    _queryView.backgroundColor = [UIColor whiteColor];
+    _queryView.backgroundColor = [UIColor clearColor];
+    _queryView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
 //    if ([_owner_id isEqualToString:_current_user_id]) {
 //        UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
@@ -173,18 +175,20 @@
 //        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn];
 //    }
     
-    bkView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, STATUS_BAR_HEIGHT)];
+    NSString * bundlePath_dongda = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle_dongda = [NSBundle bundleWithPath:bundlePath_dongda];
+    bkView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, STATUS_BAR_HEIGHT)];
+    UIImage* img_bg = [UIImage imageNamed:[resourceBundle_dongda pathForResource:@"profile_bg_up" ofType:@"png"]];
+    bkView.image = img_bg;
     bkView.backgroundColor = [UIColor whiteColor];
-//    bkView.backgroundColor = [UIColor colorWithWhite:0.949 alpha:1.f];
+    bkView.backgroundColor = [UIColor colorWithWhite:0.949 alpha:1.f];
     [self.view addSubview:bkView];
    
 #define FAKE_BAR_HEIGHT        44
     UIView* fake_bar = [[UIView alloc]initWithFrame:CGRectMake(0, 20, [UIScreen mainScreen].bounds.size.width, FAKE_BAR_HEIGHT)];
     fake_bar.backgroundColor = [UIColor clearColor];
     [self.view addSubview:fake_bar];
-    
-    NSString * bundlePath_dongda = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
-    NSBundle *resourceBundle_dongda = [NSBundle bundleWithPath:bundlePath_dongda];
+    [self.view bringSubviewToFront:fake_bar];
     
     if (self.navigationController.viewControllers.count > 1) {
         UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, (44 - 25) / 2, 30, 25)];
@@ -213,6 +217,12 @@
         [fake_bar addSubview:barBtn];
         
     }
+
+    UIImageView* img_bg_bg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"profile_bg" ofType:@"png"]]];
+    img_bg_bg.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 295);
+    [self.view addSubview:img_bg_bg];
+    [self.view sendSubviewToBack:img_bg_bg];
+    self.view.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)didPopControllerSelected {

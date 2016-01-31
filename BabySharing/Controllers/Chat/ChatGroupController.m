@@ -206,9 +206,10 @@
     
 #define USER_INFO_PANE_HEIGHT               190
 #define USER_INFO_PANE_MARGIN               10.5
+#define USER_INGO_PANE_BOTTOM_MARGIN        4
 #define USER_INFO_PANE_WIDTH                width - 2 * USER_INFO_PANE_MARGIN
     
-    userInfoPane = [[UIView alloc]initWithFrame:CGRectMake(USER_INFO_PANE_MARGIN, height - USER_INFO_PANE_MARGIN - USER_INFO_PANE_HEIGHT, width - 2 * USER_INFO_PANE_MARGIN, USER_INFO_PANE_HEIGHT)];
+    userInfoPane = [[UIView alloc]initWithFrame:CGRectMake(USER_INFO_PANE_MARGIN, height - USER_INGO_PANE_BOTTOM_MARGIN - USER_INFO_PANE_HEIGHT, width - 2 * USER_INFO_PANE_MARGIN, USER_INFO_PANE_HEIGHT)];
 //    userInfoPane.backgroundColor = [UIColor colorWithWhite:1.f alpha:0.6];
 //    userInfoPane.layer.cornerRadius = 5.f;
 //    userInfoPane.clipsToBounds = YES;
@@ -225,7 +226,7 @@
     CALayer* layer = [CALayer layer];
     layer.contents = (id)[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"dongda_next_light" ofType:@"png"]].CGImage;
     layer.frame = CGRectMake(0, 0, 11, 20);
-    layer.position = CGPointMake(USER_INFO_BACK_BTN_WIDTH / 2, USER_INFO_BACK_BTN_HEIGHT / 2);
+    layer.position = CGPointMake(USER_INFO_BACK_BTN_WIDTH / 2 + 7, USER_INFO_BACK_BTN_HEIGHT / 2);
     
 //    [back_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"dongda_next_light" ofType:@"png"]] forState:UIControlStateNormal];
     [back_btn addTarget:self action:@selector(userInfo2InputView) forControlEvents:UIControlEventTouchUpInside];
@@ -233,9 +234,9 @@
     [back_btn.layer addSublayer:layer];
     [userInfoPane addSubview:back_btn];
     
-#define USER_INFO_CONTAINER_HEIGHT          USER_INFO_PANE_HEIGHT - USER_INFO_BACK_BTN_HEIGHT - USER_INFO_PANE_MARGIN
+#define USER_INFO_CONTAINER_HEIGHT          USER_INFO_PANE_HEIGHT - USER_INFO_BACK_BTN_HEIGHT - USER_INGO_PANE_BOTTOM_MARGIN
   
-    userInfoTable = [[UITableView alloc]initWithFrame:CGRectMake(0, USER_INFO_BACK_BTN_HEIGHT + USER_INFO_PANE_MARGIN, USER_INFO_PANE_WIDTH, USER_INFO_CONTAINER_HEIGHT)];
+    userInfoTable = [[UITableView alloc]initWithFrame:CGRectMake(0, USER_INFO_BACK_BTN_HEIGHT + USER_INGO_PANE_BOTTOM_MARGIN, USER_INFO_PANE_WIDTH, USER_INFO_CONTAINER_HEIGHT)];
     
     delegate = [[ChatGroupUserInfoTableDelegateAndDatasource alloc]init];
     delegate.delegate = self;
@@ -311,16 +312,16 @@
     CALayer* layer = [CALayer layer];
     layer.contents = (id)[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"group_chat_head" ofType:@"png"]].CGImage;
     layer.frame = CGRectMake(0, 0, 16, 16);
-    layer.position = CGPointMake(8, USER_BTN_HEIGHT / 2);
+    layer.position = CGPointMake(12, USER_BTN_HEIGHT / 2);
     [userBtn.layer addSublayer: layer];
    
     CATextLayer* text = [CATextLayer layer];
     text.string = @"12";
-    text.fontSize = 12.f;
+    text.fontSize = 14.f;
     text.contentsScale = 2.f;
     text.alignmentMode = @"center";
     text.frame = CGRectMake(0 + 16 + 8, 0, 30, USER_BTN_HEIGHT);
-    text.position = CGPointMake(0 + 16 + 15, USER_BTN_HEIGHT / 2 + 3);
+    text.position = CGPointMake(0 + 16 + 14, USER_BTN_HEIGHT / 2 + 3);
     [userBtn.layer addSublayer:text];
     
     [inputContainer addSubview:userBtn];

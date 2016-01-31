@@ -13,6 +13,7 @@
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mei-Rc-8ep">
                     <rect key="frame" x="269" y="32" width="50" height="50"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="75" id="0to-te-rof"/>
                         <constraint firstAttribute="width" constant="75" id="nOC-OO-1tu"/>

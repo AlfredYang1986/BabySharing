@@ -34,7 +34,7 @@
 @synthesize userNameLabel = _userNameLabel;
 
 @synthesize isHiddenLine = _isHiddenLine;
-
+@synthesize lineMargin = _lineMargin;
 @synthesize cellHeight = _cellHeight;
 
 + (CGFloat)preferredHeight {
@@ -71,7 +71,7 @@
     line = [CALayer layer];
     line.borderWidth = 1.f;
     line.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.25].CGColor;
-    line.frame = CGRectMake(0, PREFERRED_HEIGHT - 1, [UIScreen mainScreen].bounds.size.width + 10, 1);
+    line.frame = CGRectMake(_lineMargin, PREFERRED_HEIGHT - 1, self.bounds.size.width - 2 * _lineMargin, 1);
     [self.layer addSublayer:line];
     
     _cellHeight = [MessageFriendsCell preferredHeight];
@@ -81,6 +81,12 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)layoutSublayersOfLayer:(CALayer *)layer {
+    if (layer == line) {
+        line.frame = CGRectMake(_lineMargin, _cellHeight - 1, self.bounds.size.width - 2 * _lineMargin, 1);
+    }
 }
 
 - (void)setUserScreenPhoto:(NSString*)photo_name {
@@ -179,6 +185,12 @@
 - (void)setCellHeight:(CGFloat)cellHeight {
     _cellHeight = cellHeight;
     
-    line.frame = CGRectMake(0, _cellHeight - 1, [UIScreen mainScreen].bounds.size.width + 10, 1);
+    line.frame = CGRectMake(_lineMargin, _cellHeight - 1, self.bounds.size.width - 2 * _lineMargin, 1);
+}
+
+- (void)setLineMargin:(CGFloat)lineMargin {
+    _lineMargin = lineMargin;
+    
+    line.frame = CGRectMake(_lineMargin, _cellHeight - 1, self.bounds.size.width -  2 * _lineMargin, 1);
 }
 @end

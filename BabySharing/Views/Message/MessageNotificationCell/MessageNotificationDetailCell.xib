@@ -16,10 +16,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HGS-Xy-xnp">
-                        <rect key="frame" x="8" y="8" width="50" height="50"/>
+                        <rect key="frame" x="8" y="14" width="38" height="38"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="50" id="2aa-86-1rK"/>
-                            <constraint firstAttribute="height" constant="50" id="ZOB-pf-Ix5"/>
+                            <constraint firstAttribute="width" constant="38" id="2aa-86-1rK"/>
+                            <constraint firstAttribute="height" constant="38" id="ZOB-pf-Ix5"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="discription label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vKU-aH-Vtn">
@@ -41,7 +41,7 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="50" id="phL-TP-PzS"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                         <variation key="default">
