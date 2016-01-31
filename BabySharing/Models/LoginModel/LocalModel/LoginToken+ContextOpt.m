@@ -80,7 +80,7 @@
     [reVal setValue:user.user_id forKey:@"user_id"];
     [reVal setValue:user.auth_token forKey:@"auth_token"];
     [reVal setValue:user.phoneNo forKey:@"phoneNo"];
-    [reVal setValue:user.screen_name forKey:@"name"];
+    [reVal setValue:user.screen_name forKey:@"screen_name"];
     [reVal setValue:user.screen_image forKey:@"screen_photo"];
     [reVal setValue:user.role_tag forKey:@"role_tag"];
     
@@ -97,8 +97,8 @@
             tmp.auth_token = [dic objectForKey:iter];
         } else if ([iter isEqualToString:@"phoneNo"]) {
             tmp.phoneNo = [dic objectForKey:iter];
-//        } else if ([iter isEqualToString:@"screen_name"]) {
-        } else if ([iter isEqualToString:@"name"]) {
+        } else if ([iter isEqualToString:@"screen_name"]) {
+//        } else if ([iter isEqualToString:@"name"]) {
             tmp.screen_name = [dic objectForKey:iter];
         } else if ([iter isEqualToString:@"screen_photo"]) {
             tmp.screen_image = [dic objectForKey:iter];

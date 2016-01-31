@@ -49,8 +49,6 @@
 #define TICK_BTN_2_PRIVACY_MARGIN               10
 
 @interface NicknameInputViewController () </*SearchUserTagControllerDelegate,*/ NickNameInputViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, SearchActionsProtocol>
-@property (strong, nonatomic) IBOutlet UIButton *loginImgBtn;
-//@property (strong, nonatomic) IBOutlet UIButton *nextBtn;
 @property (strong, nonatomic) UIView* fakeBar;
 @end
 
@@ -65,9 +63,13 @@
 
     UIButton * user_private_btn;
     OBShapedButton* tick_btn;
+    
+    
+    UIButton *loginImgBtn;
+//    UIImageView* loginImgBtn;
 }
 
-@synthesize loginImgBtn = _loginImgBtn;
+//@synthesize loginImgBtn = _loginImgBtn;
 //@synthesize nextBtn = _nextBtn;
 
 @synthesize lm = _lm;
@@ -89,25 +91,33 @@
 
     /***********************************************************************************************************************/
     // Screen photo
-    _loginImgBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, SCREEN_PHOTO_WIDTH, SCREEN_PHOTO_HEIGHT)];
-    _loginImgBtn.layer.cornerRadius = SCREEN_PHOTO_HEIGHT / 2;
-    _loginImgBtn.clipsToBounds = YES;
-    _loginImgBtn.backgroundColor = [UIColor clearColor];
-    _loginImgBtn.center = CGPointMake(SCREEN_WIDTH / 2, SCREEN_PHOTO_TOP_MARGIN + SCREEN_PHOTO_HEIGHT / 2);
-    [self.view addSubview:_loginImgBtn];
-    [self.view bringSubviewToFront:_loginImgBtn];
+    loginImgBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, SCREEN_PHOTO_WIDTH, SCREEN_PHOTO_HEIGHT)];
+//    loginImgBtn = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_PHOTO_WIDTH, SCREEN_PHOTO_HEIGHT)];
+    loginImgBtn.layer.cornerRadius = SCREEN_PHOTO_HEIGHT / 2;
+    loginImgBtn.clipsToBounds = YES;
+    loginImgBtn.tag = -110;
+    loginImgBtn.backgroundColor = [UIColor clearColor];
+//    loginImgBtn.backgroundColor = [UIColor redColor];
+    loginImgBtn.center = CGPointMake(SCREEN_WIDTH / 2, SCREEN_PHOTO_TOP_MARGIN + SCREEN_PHOTO_HEIGHT / 2);
+    [self.view addSubview:loginImgBtn];
+    [self.view bringSubviewToFront:loginImgBtn];
    
-    _loginImgBtn.clipsToBounds = YES;
-    if (_isSNSLogIn) {
-        _loginImgBtn.hidden = YES;
-        UIImage* img = [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"User_Big"] ofType:@"png"]];
-        [_loginImgBtn setBackgroundImage:img forState:UIControlStateNormal];
-//        [self asyncGetUserImage];
-    } else {
+    loginImgBtn.clipsToBounds = YES;
+//    if (_isSNSLogIn) {
+//        loginImgBtn.hidden = YES;
+//        UIImage* img = [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"User_Big"] ofType:@"png"]];
+//        [loginImgBtn setBackgroundImage:img forState:UIControlStateNormal];
+////        loginImgBtn.image = img;
+//        if (![[_login_attr objectForKey:@"screen_photo"] isEqualToString:@""]) {
+//            [self asyncGetUserImage];
+//        }
+//    } else {
         UIImage* img = [UIImage imageNamed:[resourceBundle_dongda pathForResource:[NSString stringWithFormat:@"login_camera_btn"] ofType:@"png"]];
-        [_loginImgBtn setBackgroundImage:img forState:UIControlStateNormal];
-    }
-    [_loginImgBtn addTarget:self action:@selector(didSelectImgBtn) forControlEvents:UIControlEventTouchUpInside];
+        [loginImgBtn setBackgroundImage:img forState:UIControlStateNormal];
+//        loginImgBtn.image = img;
+//    }
+    [self asyncGetUserImage];
+    [loginImgBtn addTarget:self action:@selector(didSelectImgBtn) forControlEvents:UIControlEventTouchUpInside];
     /***********************************************************************************************************************/
     
     /***********************************************************************************************************************/
@@ -117,7 +127,7 @@
     inputView.delegate = self;
     [inputView setUpWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     inputView.center = CGPointMake(SCREEN_WIDTH / 2, SCREEN_PHOTO_TOP_MARGIN + SCREEN_PHOTO_HEIGHT + INPUT_VIEW_2_SCREEN_PHOTO_MARGIN + inputView.frame.size.height / 2);
-    
+  
     [self.view addSubview:inputView];
     /***********************************************************************************************************************/
    
@@ -257,6 +267,12 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    if (![[_login_attr objectForKey:@"screen_photo"] isEqualToString:@""]) {
+        [self asyncGetUserImage];
+    }   
+}
+
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:NO];
@@ -271,25 +287,25 @@
 //    inputView.center = CGPointMake(width, height);
 //}
 
-//- (void)asyncGetUserImage {
-//    dispatch_queue_t queue = dispatch_queue_create("get user image", nil);
-//    dispatch_async(queue, ^{
-//        [TmpFileStorageModel enumImageWithName:[_login_attr objectForKey:@"screen_photo"] withDownLoadFinishBolck:^(BOOL success, UIImage* download_img) {
-//            if (success) {
-//                dispatch_async(dispatch_get_main_queue(), ^{
-//                    [_loginImgBtn setBackgroundImage:download_img forState:UIControlStateNormal];
-//                    NSLog(@"change img success");
-//                });
-//            } else {
-//                NSLog(@"down load image %@ failed", [_login_attr objectForKey:@"screen_photo"]);
-//            }
-//        }];
-//        
-//        //        dispatch_async(dispatch_get_main_queue(), ^{
-//        //            [_loginImgBtn setBackgroundImage:img forState:UIControlStateNormal];
-//        //        });
-//    });
-//}
+- (void)asyncGetUserImage {
+    UIImage* img = [TmpFileStorageModel enumImageWithName:[_login_attr objectForKey:@"screen_photo"] withDownLoadFinishBolck:^(BOOL success, UIImage* download_img) {
+        if (success) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [loginImgBtn setBackgroundImage:download_img forState:UIControlStateNormal];
+//                loginImgBtn.image = download_img;
+                NSLog(@"change img success");
+            });
+        } else {
+            NSLog(@"down load image %@ failed", [_login_attr objectForKey:@"screen_photo"]);
+        }
+    }];
+    if (img) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [loginImgBtn setBackgroundImage:img forState:UIControlStateNormal];
+//            loginImgBtn.backgroundColor = [UIColor redColor];
+        });
+    }
+}
 
 - (void)userPrivacyBtnSelected {
     [self performSegueWithIdentifier:@"UserPrivacy" sender:nil];
@@ -377,7 +393,7 @@
     NSString* name = [_login_attr objectForKey:@"name"];
     NSString* screen_name = [_login_attr objectForKey:@"screen_name"];
     
-    if (name && [name isEqualToString:@""])
+    if (!name || [name isEqualToString:@""])
         return screen_name;
     else return name;
 }
@@ -491,7 +507,8 @@
                 dispatch_async(dispatch_get_main_queue(), ^(void){
 //                    [_delegate personalDetailChanged:[dic copy]];
 //                    [_queryView reloadData];
-                    [_loginImgBtn setBackgroundImage:img forState:UIControlStateNormal];
+                    [loginImgBtn setBackgroundImage:img forState:UIControlStateNormal];
+//                    loginImgBtn.image = img;
                 });
             }
            

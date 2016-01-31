@@ -192,23 +192,19 @@
 }
 
 - (void)asyncGetUserImage {
-    dispatch_queue_t queue = dispatch_queue_create("get user image", nil);
-    dispatch_async(queue, ^{
-        [TmpFileStorageModel enumImageWithName:[_login_attr objectForKey:@"screen_photo"] withDownLoadFinishBolck:^(BOOL success, UIImage* download_img) {
-            if (success) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [_loginImgBtn setBackgroundImage:download_img forState:UIControlStateNormal];
-                    NSLog(@"change img success");
-                });
-            } else {
-                NSLog(@"down load image %@ failed", [_login_attr objectForKey:@"screen_photo"]);
-            }
-        }];
-    
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [_loginImgBtn setBackgroundImage:img forState:UIControlStateNormal];
-//        });
-    });
+    UIImage* img = [TmpFileStorageModel enumImageWithName:[_login_attr objectForKey:@"screen_photo"] withDownLoadFinishBolck:^(BOOL success, UIImage* download_img) {
+        if (success) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [_loginImgBtn setBackgroundImage:download_img forState:UIControlStateNormal];
+                NSLog(@"change img success");
+            });
+        } else {
+            NSLog(@"down load image %@ failed", [_login_attr objectForKey:@"screen_photo"]);
+        }
+    }];
+    if (img) {
+        [_loginImgBtn setBackgroundImage:img forState:UIControlStateNormal];
+    }
 }
 
 - (void)didPopViewController {
@@ -218,6 +214,11 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self asyncGetUserImage];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

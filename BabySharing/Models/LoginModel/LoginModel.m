@@ -482,6 +482,16 @@
                     [dic setValue:img_name forKey:@"screen_photo"];
                     [self updateUserProfile:[dic copy]];
                     
+                    /**
+                     *  4. push notification to the controller
+                     *      and controller to refresh the view
+                     */
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [_doc.managedObjectContext save:nil];
+                        NSLog(@"end get user info from weibo");
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"SNS login success" object:nil];
+                    });
+                    
                     dispatch_queue_t post_queue = dispatch_queue_create("post queue", nil);
                     dispatch_async(post_queue, ^(void){
                         [RemoteInstance uploadPicture:img withName:img_name toUrl:[NSURL URLWithString:[POST_HOST_DOMAIN stringByAppendingString:POST_UPLOAD]] callBack:^(BOOL successs, NSString *message) {
@@ -495,14 +505,6 @@
                     });
                 }
             });
-      
-            /**
-             *  4. push notification to the controller
-             *      and controller to refresh the view
-             */
-            [_doc.managedObjectContext save:nil];
-            NSLog(@"end get user info from weibo");
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"SNS login success" object:nil];
         }
     }];
 }
