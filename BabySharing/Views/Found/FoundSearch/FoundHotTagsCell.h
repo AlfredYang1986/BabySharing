@@ -8,11 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol FoundHotTagsCellDelegate <NSObject>
+- (void)recommandTagBtnSelected:(NSString*)tag_name adnType:(NSInteger)tag_type;
+@end
+
 @interface FoundHotTagsCell : UITableViewCell
 
 @property (nonatomic) BOOL isDarkTheme;
 @property (nonatomic, setter=setHiddenLine:) BOOL isHiddenSepline;
 @property (nonatomic) CGFloat ver_margin;
+
+@property (nonatomic, weak) id<FoundHotTagsCellDelegate> delegate;
 
 + (CGFloat)preferredHeight;
 - (void)setHotTags:(NSArray*)arr;

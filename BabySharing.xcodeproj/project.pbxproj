@@ -19,6 +19,7 @@
 		707C08901C51D035003C6F53 /* PhotoTagEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 707C088F1C51D035003C6F53 /* PhotoTagEditView.m */; };
 		7082FFC91C59D2BA0056D1FC /* MessageChatGroupInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7082FFC71C59D2BA0056D1FC /* MessageChatGroupInfoCell.m */; };
 		7082FFCA1C59D2BA0056D1FC /* MessageChatGroupInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7082FFC81C59D2BA0056D1FC /* MessageChatGroupInfoCell.xib */; };
+		70A93CD41C7448F100026A6A /* FoundHotTagBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 70A93CD31C7448F100026A6A /* FoundHotTagBtn.m */; };
 		70A9BB711C3CF5F1000DFE53 /* SearchFriendsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70A9BB701C3CF5F1000DFE53 /* SearchFriendsController.m */; };
 		70C75B5B1C50B5E000E7587A /* DongDaSearchBar2.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C75B5A1C50B5E000E7587A /* DongDaSearchBar2.m */; };
 		70C75B621C50DF1100E7587A /* SearchAddController2.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C75B611C50DF1100E7587A /* SearchAddController2.m */; };
@@ -361,6 +362,9 @@
 		7082FFC61C59D2BA0056D1FC /* MessageChatGroupInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageChatGroupInfoCell.h; sourceTree = "<group>"; };
 		7082FFC71C59D2BA0056D1FC /* MessageChatGroupInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageChatGroupInfoCell.m; sourceTree = "<group>"; };
 		7082FFC81C59D2BA0056D1FC /* MessageChatGroupInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageChatGroupInfoCell.xib; sourceTree = "<group>"; };
+		70A93CD01C74036300026A6A /* SearchDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchDefines.h; sourceTree = "<group>"; };
+		70A93CD21C7448F100026A6A /* FoundHotTagBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoundHotTagBtn.h; sourceTree = "<group>"; };
+		70A93CD31C7448F100026A6A /* FoundHotTagBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoundHotTagBtn.m; sourceTree = "<group>"; };
 		70A9BB6F1C3CF5F1000DFE53 /* SearchFriendsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchFriendsController.h; sourceTree = "<group>"; };
 		70A9BB701C3CF5F1000DFE53 /* SearchFriendsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchFriendsController.m; sourceTree = "<group>"; };
 		70C75B591C50B5E000E7587A /* DongDaSearchBar2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DongDaSearchBar2.h; sourceTree = "<group>"; };
@@ -1034,6 +1038,15 @@
 			path = PhotoTagEditView;
 			sourceTree = "<group>";
 		};
+		70A93CD11C7448DA00026A6A /* FoundHotTagBtn */ = {
+			isa = PBXGroup;
+			children = (
+				70A93CD21C7448F100026A6A /* FoundHotTagBtn.h */,
+				70A93CD31C7448F100026A6A /* FoundHotTagBtn.m */,
+			);
+			path = FoundHotTagBtn;
+			sourceTree = "<group>";
+		};
 		70D15B161C5B64C9007AC9AB /* MJRefresh */ = {
 			isa = PBXGroup;
 			children = (
@@ -1541,6 +1554,7 @@
 		EEA1F5371C15B96A009B8724 /* Found */ = {
 			isa = PBXGroup;
 			children = (
+				70A93CD11C7448DA00026A6A /* FoundHotTagBtn */,
 				EECB44541C059343008F05B8 /* ShapedButton */,
 				EEBE1B911C17D40900EAA9D2 /* FoundUserSearch */,
 				EEBE1B711C17CB4E00EAA9D2 /* FoundMain */,
@@ -2435,6 +2449,7 @@
 		EEC8847F1BFEC5DB006A237D /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				70A93CD01C74036300026A6A /* SearchDefines.h */,
 				70E06F821C4F987700B740CD /* TimeSearch */,
 				70E06F7B1C4F959600B740CD /* LocationSearch */,
 				70E06F741C4F78B700B740CD /* BrandSearch */,
@@ -3154,6 +3169,7 @@
 				EEBE1B871C17CB4E00EAA9D2 /* FoundHotTagsCell.m in Sources */,
 				EED774D71BABF86D001C9B57 /* HomeTagsController.m in Sources */,
 				700B0B881C5A1D5E00692A20 /* Notifications+CoreDataProperties.m in Sources */,
+				70A93CD41C7448F100026A6A /* FoundHotTagBtn.m in Sources */,
 				7041A5BB1C575A7400FEBFCD /* MessageChatGroupHeader2.m in Sources */,
 				70D15B521C5B64C9007AC9AB /* MJRefreshConst.m in Sources */,
 				EE26D7731C1EBA2700342E02 /* PreviewItem+CoreDataProperties.m in Sources */,

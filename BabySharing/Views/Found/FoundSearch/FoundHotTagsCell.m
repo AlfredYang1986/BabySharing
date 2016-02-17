@@ -8,6 +8,7 @@
 
 #import "FoundHotTagsCell.h"
 #import "RecommandTag.h"
+#import "FoundHotTagBtn.h"
 
 #define MARGIN                  13
 #define MARGIN_VER              12
@@ -30,6 +31,8 @@
 @synthesize isDarkTheme = _isDarkTheme;
 @synthesize isHiddenSepline = _isHiddenSepline;
 @synthesize ver_margin = _ver_margin;
+
+@synthesize delegate = _delegate;
 
 - (id)init {
     self = [super init];
@@ -88,7 +91,7 @@
         CGSize sz_font = [tmp sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
         CGSize sz = CGSizeMake(TAG_MARGIN /*+ ICON_WIDTH*/ + sz_font.width + TAG_MARGIN, TAG_HEIGHT);
         
-        UIView* btn = [[UIView alloc]initWithFrame:CGRectMake(0, 0, sz.width, sz.height)];
+        FoundHotTagBtn* btn = [[FoundHotTagBtn alloc]initWithFrame:CGRectMake(0, 0, sz.width, sz.height)];
        
         UILabel* label = [[UILabel alloc]init];
         label.font = font;
@@ -132,7 +135,10 @@
         CGSize sz_font = [tmp.tag_name sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
         CGSize sz = CGSizeMake(TAG_MARGIN + ICON_WIDTH + sz_font.width + TAG_MARGIN, TAG_HEIGHT);
         
-        UIView* btn = [[UIView alloc]initWithFrame:CGRectMake(0, 0, sz.width, sz.height)];
+//        UIView* btn = [[UIView alloc]initWithFrame:CGRectMake(0, 0, sz.width, sz.height)];
+        FoundHotTagBtn* btn = [[FoundHotTagBtn alloc]initWithFrame:CGRectMake(0, 0, sz.width, sz.height)];
+        btn.tag_name = tmp.tag_name;
+        btn.tag_type = tmp.tag_type.intValue;
         
         UIImageView* img = [[UIImageView alloc]initWithFrame:CGRectMake(TAG_MARGIN / 2, TAG_MARGIN / 4, ICON_WIDTH, ICON_HEIGHT)];
         img.center = CGPointMake(TAG_MARGIN / 2 + img.frame.size.width / 2, TAG_HEIGHT / 2);
@@ -162,6 +168,9 @@
         
         if (offset >= [UIScreen mainScreen].bounds.size.width - 10)
             break;
+       
+        UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tagBtnSelected:)];
+        [btn addGestureRecognizer:tap];
         
         [self addSubview:btn];
         ++index;
@@ -172,5 +181,10 @@
     while (self.subviews.count > 0) {
         [self.subviews.firstObject removeFromSuperview];
     }
+}
+
+- (void)tagBtnSelected:(UITapGestureRecognizer*)tap {
+    FoundHotTagBtn* tmp = (FoundHotTagBtn*)tap.view;
+    [_delegate recommandTagBtnSelected:tmp.tag_name adnType:tmp.tag_type];
 }
 @end

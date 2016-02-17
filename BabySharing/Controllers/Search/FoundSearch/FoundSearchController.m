@@ -18,6 +18,8 @@
 #import "HomeTagsController.h"
 #import "OBShapedButton.h"
 
+#import "SearchDefines.h"
+
 #define SEARCH_BAR_HEIGHT               44
 #define SEG_BAR_HEIGHT                  44
 #define MARGIN                          8
@@ -27,7 +29,7 @@
 #define STATUS_BAR_HEIGHT               20
 #define TAB_BAR_HEIGHT                  49
 
-@interface FoundSearchController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
+@interface FoundSearchController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, FoundHotTagsCellDelegate>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *queryView;
 //@property (weak, nonatomic) IBOutlet UIView *cancelBgView;
@@ -214,6 +216,13 @@
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
+- (SearchStatus)status {
+    if (_searchBar.text.length == 0) return SearchStatusNoInput;
+    else if (_searchBar.text.length > 0 && _fm.previewDic.count > 0) return SearchStatusInputWithResult;
+    else if (_searchBar.text.length > 0 && _fm.previewDic.count == 0) return SearchStatusInputWithNoResult;
+    else return SearchStatusUnknow;
+}
+
 #pragma mark -- table view
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (_fm.previewDic.count == 0) {
@@ -264,6 +273,7 @@
     }
    
     [cell setHotTags:_fm.recommandsdata];
+    cell.delegate = self;
     return cell;
 }
 
@@ -369,5 +379,16 @@
         _fm.previewDic = nil;
         [_queryView reloadData];
     }
+}
+
+#pragma mark -- recommand tag delegate
+- (void)recommandTagBtnSelected:(NSString *)tag_name adnType:(NSInteger)tag_type {
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    HomeTagsController* svc = [storyboard instantiateViewControllerWithIdentifier:@"TagSearch"];
+    svc.tag_name = tag_name;
+    svc.tag_type = tag_type;
+    
+    [self.navigationController pushViewController:svc animated:YES];
 }
 @end

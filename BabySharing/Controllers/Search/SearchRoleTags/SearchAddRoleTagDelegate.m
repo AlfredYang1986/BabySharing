@@ -7,6 +7,7 @@
 //
 
 #import "SearchAddRoleTagDelegate.h"
+#import "searchDefines.h"
 
 @implementation SearchAddRoleTagDelegate {
     NSArray* exist_data;
@@ -60,20 +61,76 @@
 }
 
 #pragma mark -- table view delegate
+
+- (SearchStatus)status {
+   
+    NSString* input = [_delegate getUserInputString];
+    if (input.length == 0) return SearchStatusNoInput;
+    else if (input.length > 0 && showing_data.count == 0) return SearchStatusInputWithNoResult;
+    else if (input.length > 0 && showing_data.count > 0) return SearchStatusInputWithResult;
+    else return SearchStatusUnknow;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+   
+    SearchStatus status = [self status];
+   
+    switch (status) {
+        case SearchStatusNoInput:
+            return 1;
+           
+        case SearchStatusInputWithNoResult:
+            return 1;
+       
+        case SearchStatusInputWithResult:
+            return 2;
+            
+        default:
+            NSLog(@"error with status");
+            return 0;
+    }
 }
 
 - (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return @"添加新角色";
-//    return [_delegate getAddSectionTitle];
+
+    SearchStatus status = [self status];
+    
+    switch (status) {
+        case SearchStatusNoInput:
+            return @"";
+            
+        case SearchStatusInputWithNoResult:
+            return @"添加新角色";
+            
+        case SearchStatusInputWithResult: {
+            if (section == 0) {
+                return @"添加新角色";
+            } else {
+                return @"搜索结果";
+            }
+        }
+        default:
+            NSLog(@"error with status");
+            return @"";
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (showing_data.count == 0) {
-        return 22;
-    } else {
-        return 0;
+    SearchStatus status = [self status];
+    
+    switch (status) {
+        case SearchStatusNoInput:
+            return 0;
+            
+        case SearchStatusInputWithNoResult:
+            return 22;
+            
+        case SearchStatusInputWithResult:
+            return 22;
+            
+        default:
+            NSLog(@"error with status");
+            return 0;
     }
 }
 
@@ -84,16 +141,55 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (showing_data.count == 0) {
-        [_actions addNewItem:[_delegate getUserInputString]];
-    } else {
-        [_actions didSelectItem:[showing_data objectAtIndex:indexPath.row]];
+    SearchStatus status = [self status];
+    
+    switch (status) {
+        case SearchStatusNoInput:
+            [_actions didSelectItem:[showing_data objectAtIndex:indexPath.row]];
+            break;
+            
+        case SearchStatusInputWithNoResult:
+            [_actions addNewItem:[_delegate getUserInputString]];
+            break;
+            
+        case SearchStatusInputWithResult: {
+            if (indexPath.section == 0) {
+                [_actions addNewItem:[_delegate getUserInputString]];
+            } else {
+                [_actions didSelectItem:[showing_data objectAtIndex:indexPath.row]];
+            }
+            }
+            break;
+            
+        default:
+            NSLog(@"error with status");
     }
 }
 
 #pragma mark -- table view datasource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return MAX(showing_data.count, 1);
+   
+    SearchStatus status = [self status];
+    
+    switch (status) {
+        case SearchStatusNoInput:
+            return showing_data.count;
+            
+        case SearchStatusInputWithNoResult:
+            return 1;
+            
+        case SearchStatusInputWithResult: {
+            if (section == 0) {
+                return 1;
+            } else {
+                return MAX(showing_data.count, 1);
+            }
+        }
+            
+        default:
+            NSLog(@"error with status");
+            return 0;
+    }
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -102,11 +198,30 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"default"];
     }
-   
-    if (showing_data.count == 0) {
-        cell.textLabel.text = [_delegate getUserInputString];
-    } else {
-        cell.textLabel.text = [showing_data objectAtIndex:indexPath.row];
+
+    SearchStatus status = [self status];
+    
+    switch (status) {
+        case SearchStatusNoInput:
+            cell.textLabel.text = [showing_data objectAtIndex:indexPath.row];
+            break;
+            
+        case SearchStatusInputWithNoResult:
+            cell.textLabel.text = [_delegate getUserInputString];
+            break;
+            
+        case SearchStatusInputWithResult: {
+            if (indexPath.section == 0) {
+                cell.textLabel.text = [_delegate getUserInputString];
+            } else {
+                cell.textLabel.text = [showing_data objectAtIndex:indexPath.row];
+            }
+            }
+            break;
+            
+        default:
+            NSLog(@"error with status");
+            return 0;
     }
     
     cell.textLabel.font = [UIFont boldSystemFontOfSize:17.f];
