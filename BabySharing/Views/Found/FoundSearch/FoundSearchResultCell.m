@@ -27,6 +27,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *nextIcon;
 @property (weak, nonatomic) IBOutlet UILabel *resultCountLabel;
 
+@property (nonatomic) BOOL isScreenPhoto;
 @end
 
 @implementation FoundSearchResultCell
@@ -34,9 +35,12 @@
 @synthesize resultCountLabel = _resultCountLabel;
 @synthesize nextIcon = _nextIcon;
 
+@synthesize isScreenPhoto = _isScreenPhoto;
+
 - (void)awakeFromNib {
     // Initialization code
     _resultCountLabel.text = @"共%d个结果";
+    _resultCountLabel.hidden = YES;
     [_resultCountLabel sizeToFit];
     
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
@@ -55,6 +59,27 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    if (_isScreenPhoto) {
+        for (int index = 0; index < RECOMMEND_COUNT; ++index) {
+            UIImageView* tmp = (UIImageView*)[self viewWithTag:-1 - index];
+            tmp.layer.cornerRadius = 12.5f;
+            tmp.clipsToBounds = YES;
+            tmp.bounds = CGRectMake(0, 0, 25, 25);
+            
+            tmp.layer.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.3].CGColor;
+            tmp.layer.borderWidth = 1.f;
+        }
+    }
+}
+
+- (void)setUserPhotoImage:(NSArray*)img_arr {
+    _isScreenPhoto = YES;
+    [self setUserContentImages:img_arr];
 }
 
 - (void)setUserContentImages:(NSArray*)img_arr {
@@ -111,7 +136,10 @@
     
     UIImageView* img = [[UIImageView alloc]initWithFrame:CGRectMake(TAG_MARGIN / 2, TAG_MARGIN / 4, ICON_WIDTH, ICON_HEIGHT)];
     img.center = CGPointMake(TAG_MARGIN / 2 + img.frame.size.width / 2, TAG_HEIGHT / 2);
-    if (type.integerValue == 0) {
+    
+    if (type.integerValue == -1) {
+        img.image = nil;
+    } else if (type.integerValue == 0) {
         img.image = image0;
     } else {
         img.image = image1;

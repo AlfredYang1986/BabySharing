@@ -14,13 +14,20 @@
 
 #import "RecommandTag.h"
 #import "RecommandTag+ContextOpt.h"
+#import "RecommandRoleTag+ContextOpt.h"
 
 @implementation FoundSearchModel
 
 @synthesize doc = _doc;
+@synthesize delegate = _delegate;
+
+#pragma mark -- Found Search Tags Property
 @synthesize recommandsdata = _recommandsdata;
 @synthesize previewDic = _previewDic;
-@synthesize delegate = _delegate;
+
+#pragma mark -- Found Search Role Tags Property
+@synthesize recommandsRoleTag = _recommandsRoleTag;
+@synthesize previewRoleDic = _previewRoleDic;
 
 #pragma mark -- instuction
 - (void)enumDataFromLocalDB:(UIManagedDocument*)document {
@@ -69,6 +76,7 @@
     return self;
 }
 
+#pragma mark -- Found Search Tags Methhod
 - (void)enumRecommandTagsLocal {
     _recommandsdata = [RecommandTag enumRecommandTagsInContext:_doc.managedObjectContext];
 }
@@ -78,8 +86,6 @@
     
     [dic setValue:_delegate.lm.current_auth_token forKey:@"auth_token"];
     [dic setValue:_delegate.lm.current_user_id forKey:@"user_id"];
-//    [dic setValue:follow_user_id forKey:@"follow_user_id"];
-//    [dic setValue:_delegate.lm.current_user_id forKey:@"owner_id"];
     
     NSError * error = nil;
     NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
@@ -89,9 +95,11 @@
     if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
         NSArray* reVal = [result objectForKey:@"recommands"];
         NSLog(@"recommand tag are: %@", reVal);
-        [RecommandTag upDateRecommandTags:reVal inContext:_doc.managedObjectContext];
-        [self enumRecommandTagsLocal];
-        block(YES, reVal);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [RecommandTag upDateRecommandTags:reVal inContext:_doc.managedObjectContext];
+            [self enumRecommandTagsLocal];
+            block(YES, reVal);
+        });
         
     } else {
         block(NO, nil);
@@ -104,7 +112,6 @@
     [dic setValue:_delegate.lm.current_auth_token forKey:@"auth_token"];
     [dic setValue:_delegate.lm.current_user_id forKey:@"user_id"];
     [dic setValue:input forKey:@"tag_name"];
-    //    [dic setValue:_delegate.lm.current_user_id forKey:@"owner_id"];
     
     NSError * error = nil;
     NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
@@ -116,6 +123,60 @@
         NSArray* reVal = [result objectForKey:@"preview"];
         NSLog(@"search result: %@", reVal);
         _previewDic = reVal;
+        block(YES, nil);
+        
+    } else {
+        block(NO, nil);
+    }
+}
+
+#pragma mark -- Found Search Role Tags Method
+- (void)enumRecommandRoleTagsLocal {
+    _recommandsRoleTag = [RecommandRoleTag enumRecommandRoleTagsInContext:_doc.managedObjectContext];
+}
+
+- (void)queryRecommandRoleTagsWithFinishBlock:(queryRecommondTagFinishBlock)block {
+    NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
+    
+    [dic setValue:_delegate.lm.current_auth_token forKey:@"auth_token"];
+    [dic setValue:_delegate.lm.current_user_id forKey:@"user_id"];
+    
+    NSError * error = nil;
+    NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
+    
+    NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:ROLETAGS_RECOMMAND_ROLETAGS]];
+    
+    if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
+        NSArray* reVal = [result objectForKey:@"result"];
+        NSLog(@"recommand tag are: %@", reVal);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [RecommandRoleTag upDateRecommandRoleTags:reVal inContext:_doc.managedObjectContext];
+            [self enumRecommandRoleTagsLocal];
+        });
+        block(YES, reVal);
+        
+    } else {
+        block(NO, nil);
+    }
+}
+
+- (void)queryFoundRoleTagSearchWithInput:(NSString*)input andFinishBlock:(queryFoundTagSearchFinishBlock)block {
+    NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
+    
+    [dic setValue:_delegate.lm.current_auth_token forKey:@"auth_token"];
+    [dic setValue:_delegate.lm.current_user_id forKey:@"user_id"];
+    [dic setValue:input forKey:@"role_tag"];
+    
+    NSError * error = nil;
+    NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
+    
+    //    NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:TAG_PREVIEW_QUERY]];
+    NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:ROLETAGS_PREVIEW_SEARCH]];
+    
+    if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
+        NSArray* reVal = [result objectForKey:@"preview"];
+        NSLog(@"search result: %@", reVal);
+        _previewRoleDic = reVal;
         block(YES, nil);
         
     } else {

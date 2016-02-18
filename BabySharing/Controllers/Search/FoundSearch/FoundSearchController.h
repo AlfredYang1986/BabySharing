@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FoundHotTagsCell.h"
 
-@interface FoundSearchController : UIViewController
+@interface FoundSearchController : UIViewController <FoundHotTagsCellDelegate>
 
 @end

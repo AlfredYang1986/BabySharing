@@ -10,6 +10,7 @@
 
 @protocol FoundHotTagsCellDelegate <NSObject>
 - (void)recommandTagBtnSelected:(NSString*)tag_name adnType:(NSInteger)tag_type;
+- (void)recommandRoleTagBtnSelected:(NSString*)tag_name;
 @end
 
 @interface FoundHotTagsCell : UITableViewCell

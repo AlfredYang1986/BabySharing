@@ -15,6 +15,11 @@
 		70530B121C3F9D1E00505121 /* SearchSegImgItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 70530B0D1C3F9D1E00505121 /* SearchSegImgItem.m */; };
 		70530B131C3F9D1E00505121 /* SearchSegImgTextItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 70530B0F1C3F9D1E00505121 /* SearchSegImgTextItem.m */; };
 		70530B141C3F9D1E00505121 /* SearchSegItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 70530B111C3F9D1E00505121 /* SearchSegItem.m */; };
+		706D7A1C1C7561C0006750AC /* FoundSearchTagDeleage.m in Sources */ = {isa = PBXBuildFile; fileRef = 706D7A1B1C7561C0006750AC /* FoundSearchTagDeleage.m */; };
+		706D7A221C757379006750AC /* RecommandRoleTag+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 706D7A1F1C757379006750AC /* RecommandRoleTag+CoreDataProperties.m */; };
+		706D7A231C757379006750AC /* RecommandRoleTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 706D7A211C757379006750AC /* RecommandRoleTag.m */; };
+		706D7A291C757446006750AC /* RecommandRoleTag+ContextOpt.m in Sources */ = {isa = PBXBuildFile; fileRef = 706D7A281C757446006750AC /* RecommandRoleTag+ContextOpt.m */; };
+		706D7A2C1C757F38006750AC /* FoundSearchRoleTagDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 706D7A2B1C757F38006750AC /* FoundSearchRoleTagDelegate.m */; };
 		706E844A1C44CF5B00D4CA91 /* LoginSNSView.m in Sources */ = {isa = PBXBuildFile; fileRef = 706E84491C44CF5B00D4CA91 /* LoginSNSView.m */; };
 		707C08901C51D035003C6F53 /* PhotoTagEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 707C088F1C51D035003C6F53 /* PhotoTagEditView.m */; };
 		7082FFC91C59D2BA0056D1FC /* MessageChatGroupInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7082FFC71C59D2BA0056D1FC /* MessageChatGroupInfoCell.m */; };
@@ -353,6 +358,17 @@
 		70530B0F1C3F9D1E00505121 /* SearchSegImgTextItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSegImgTextItem.m; sourceTree = "<group>"; };
 		70530B101C3F9D1E00505121 /* SearchSegItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSegItem.h; sourceTree = "<group>"; };
 		70530B111C3F9D1E00505121 /* SearchSegItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSegItem.m; sourceTree = "<group>"; };
+		706D7A1A1C7561C0006750AC /* FoundSearchTagDeleage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoundSearchTagDeleage.h; sourceTree = "<group>"; };
+		706D7A1B1C7561C0006750AC /* FoundSearchTagDeleage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoundSearchTagDeleage.m; sourceTree = "<group>"; };
+		706D7A1D1C756AC3006750AC /* FoundSearchProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FoundSearchProtocol.h; sourceTree = "<group>"; };
+		706D7A1E1C757379006750AC /* RecommandRoleTag+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RecommandRoleTag+CoreDataProperties.h"; sourceTree = "<group>"; };
+		706D7A1F1C757379006750AC /* RecommandRoleTag+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RecommandRoleTag+CoreDataProperties.m"; sourceTree = "<group>"; };
+		706D7A201C757379006750AC /* RecommandRoleTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommandRoleTag.h; sourceTree = "<group>"; };
+		706D7A211C757379006750AC /* RecommandRoleTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommandRoleTag.m; sourceTree = "<group>"; };
+		706D7A271C757446006750AC /* RecommandRoleTag+ContextOpt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RecommandRoleTag+ContextOpt.h"; sourceTree = "<group>"; };
+		706D7A281C757446006750AC /* RecommandRoleTag+ContextOpt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RecommandRoleTag+ContextOpt.m"; sourceTree = "<group>"; };
+		706D7A2A1C757F38006750AC /* FoundSearchRoleTagDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoundSearchRoleTagDelegate.h; sourceTree = "<group>"; };
+		706D7A2B1C757F38006750AC /* FoundSearchRoleTagDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoundSearchRoleTagDelegate.m; sourceTree = "<group>"; };
 		706E84471C44C8C200D4CA91 /* LoginViewsDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewsDelegate.h; sourceTree = "<group>"; };
 		706E84481C44CF5B00D4CA91 /* LoginSNSView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginSNSView.h; sourceTree = "<group>"; };
 		706E84491C44CF5B00D4CA91 /* LoginSNSView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginSNSView.m; sourceTree = "<group>"; };
@@ -1240,6 +1256,10 @@
 		EE26D75F1C1EB88E00342E02 /* LocalModel */ = {
 			isa = PBXGroup;
 			children = (
+				706D7A1E1C757379006750AC /* RecommandRoleTag+CoreDataProperties.h */,
+				706D7A1F1C757379006750AC /* RecommandRoleTag+CoreDataProperties.m */,
+				706D7A201C757379006750AC /* RecommandRoleTag.h */,
+				706D7A211C757379006750AC /* RecommandRoleTag.m */,
 				EE26D7631C1EBA2700342E02 /* PreviewItem+CoreDataProperties.h */,
 				EE26D7641C1EBA2700342E02 /* PreviewItem+CoreDataProperties.m */,
 				EE26D7651C1EBA2700342E02 /* PreviewItem.h */,
@@ -1259,6 +1279,8 @@
 				EE26D7601C1EB8AA00342E02 /* FoundSearchData.xcdatamodeld */,
 				EE26D77B1C1EBB5600342E02 /* RecommandTag+ContextOpt.h */,
 				EE26D77C1C1EBB5600342E02 /* RecommandTag+ContextOpt.m */,
+				706D7A271C757446006750AC /* RecommandRoleTag+ContextOpt.h */,
+				706D7A281C757446006750AC /* RecommandRoleTag+ContextOpt.m */,
 			);
 			path = LocalModel;
 			sourceTree = "<group>";
@@ -1584,6 +1606,11 @@
 				EEA1F54F1C1690D1009B8724 /* FoundSearchController.h */,
 				EEA1F5501C1690D1009B8724 /* FoundSearchController.m */,
 				EEA1F5521C169106009B8724 /* FoundSearch.storyboard */,
+				706D7A1A1C7561C0006750AC /* FoundSearchTagDeleage.h */,
+				706D7A1B1C7561C0006750AC /* FoundSearchTagDeleage.m */,
+				706D7A1D1C756AC3006750AC /* FoundSearchProtocol.h */,
+				706D7A2A1C757F38006750AC /* FoundSearchRoleTagDelegate.h */,
+				706D7A2B1C757F38006750AC /* FoundSearchRoleTagDelegate.m */,
 			);
 			path = FoundSearch;
 			sourceTree = "<group>";
@@ -3000,6 +3027,7 @@
 				EEBE1B691C17CA9400EAA9D2 /* DongDaFollowBtn.m in Sources */,
 				EEAACCC31B44E90400D05C0B /* ShareSideBaseController.m in Sources */,
 				EEAACCC91B44E90400D05C0B /* INTUAnimationEngine.m in Sources */,
+				706D7A1C1C7561C0006750AC /* FoundSearchTagDeleage.m in Sources */,
 				EEAACD1B1B44E90400D05C0B /* ProfileDetailUserHeaderCell.m in Sources */,
 				EEAACCCB1B44E90400D05C0B /* INTUInterpolationFunctions.m in Sources */,
 				EEE94E0B1B74A8C20011321A /* MessageViewController.m in Sources */,
@@ -3017,6 +3045,7 @@
 				EEBE1B8E1C17D2E500EAA9D2 /* UserSearchController.m in Sources */,
 				70530B131C3F9D1E00505121 /* SearchSegImgTextItem.m in Sources */,
 				EED774D61BABF86D001C9B57 /* HomeSearchController.m in Sources */,
+				706D7A231C757379006750AC /* RecommandRoleTag.m in Sources */,
 				EEB4C8C01BFC823C0023E2AD /* QueryHeader.m in Sources */,
 				EE76398A1B956CFB0025A56D /* CellConstructParameters.m in Sources */,
 				EE8B1D8F1C084B8400056AC8 /* FixBackGroundSegueController.mm in Sources */,
@@ -3066,12 +3095,14 @@
 				EE5D68781B75A9FD0067A2DF /* Messages.m in Sources */,
 				70D15B4A1C5B64C9007AC9AB /* MJRefreshAutoStateFooter.m in Sources */,
 				EE26D7621C1EB8AA00342E02 /* FoundSearchData.xcdatamodeld in Sources */,
+				706D7A291C757446006750AC /* RecommandRoleTag+ContextOpt.m in Sources */,
 				EE933CA81B997DAD00DA15DC /* VersionChangesController.m in Sources */,
 				70D15B4B1C5B64C9007AC9AB /* MJRefreshBackGifFooter.m in Sources */,
 				EEAACCEF1B44E90400D05C0B /* ViewController.m in Sources */,
 				EEA1F5511C1690D1009B8724 /* FoundSearchController.m in Sources */,
 				EE76A56D1B72021900036747 /* ConnectionLocalModel.xcdatamodeld in Sources */,
 				EE3F62151C05483D004507B0 /* HomeCycleSegue.m in Sources */,
+				706D7A221C757379006750AC /* RecommandRoleTag+CoreDataProperties.m in Sources */,
 				EE0CEC581BDB13070016B6F4 /* UserPrivacyController.m in Sources */,
 				EEAACD201B44E90400D05C0B /* SGAlertMenu.m in Sources */,
 				EEAACCCA1B44E90400D05C0B /* INTUEasingFunctions.m in Sources */,
@@ -3087,6 +3118,7 @@
 				EE97440E1B78699A00E81A70 /* Reachability.m in Sources */,
 				EEC8848A1BFED6B7006A237D /* SearchRoleTagDelegate.m in Sources */,
 				EE96763F1B7C3D5C00445254 /* CycleDescriptionCell.m in Sources */,
+				706D7A2C1C757F38006750AC /* FoundSearchRoleTagDelegate.m in Sources */,
 				EE6D6DE21B7B404E004D29C8 /* CycleDetailController.m in Sources */,
 				EECB445B1C059343008F05B8 /* OBShapedButton.m in Sources */,
 				EECB445C1C059343008F05B8 /* UIImage+ColorAtPixel.m in Sources */,
