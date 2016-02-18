@@ -14,6 +14,7 @@
 @property (strong, nonatomic) NSNumber* tag_type;
 
 + (CGFloat)preferredHeight;
+- (void)setUserPhotoImage:(NSArray*)img_arr;
 - (void)setUserContentImages:(NSArray*)img_arr;
 //- (void)setSearchTag:(NSString*)title andImage:(UIImage*)img;
 - (void)setSearchTag:(NSString*)title andType:(NSNumber*)type;

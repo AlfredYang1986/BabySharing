@@ -67,9 +67,9 @@
     if (_isScreenPhoto) {
         for (int index = 0; index < RECOMMEND_COUNT; ++index) {
             UIImageView* tmp = (UIImageView*)[self viewWithTag:-1 - index];
-            tmp.layer.cornerRadius = 12.5f;
+            tmp.layer.cornerRadius = 22.5f;
             tmp.clipsToBounds = YES;
-            tmp.bounds = CGRectMake(0, 0, 25, 25);
+            tmp.frame = CGRectMake(0, 0, 25, 25);
             
             tmp.layer.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.3].CGColor;
             tmp.layer.borderWidth = 1.f;
@@ -79,7 +79,36 @@
 
 - (void)setUserPhotoImage:(NSArray*)img_arr {
     _isScreenPhoto = YES;
-    [self setUserContentImages:img_arr];
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+    for (int index = 0; index < MIN(RECOMMEND_COUNT, img_arr.count); ++index) {
+        //        NSDictionary* iter = [img_arr objectAtIndex:index];
+        NSDictionary* iter = [img_arr objectAtIndex:index];
+        
+        UIImageView* tmp = (UIImageView*)[self viewWithTag:-1 - index];
+        tmp.layer.cornerRadius = 3.f;
+        tmp.clipsToBounds = YES;
+        
+        NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"User"] ofType:@"png"];
+        NSString* photo_name = [iter objectForKey:@"screen_photo"];
+        UIImage* userImg = [TmpFileStorageModel enumImageWithName:photo_name withDownLoadFinishBolck:^(BOOL success, UIImage *user_img) {
+            if (success) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (self) {
+                        tmp.image = user_img;
+                        NSLog(@"owner img download success");
+                    }
+                });
+            } else {
+                NSLog(@"down load owner image %@ failed", photo_name);
+            }
+        }];
+        
+        if (userImg == nil) {
+            userImg = [UIImage imageNamed:filePath];
+        }
+        [tmp setImage:userImg];
+    }
 }
 
 - (void)setUserContentImages:(NSArray*)img_arr {

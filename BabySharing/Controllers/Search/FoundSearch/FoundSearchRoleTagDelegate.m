@@ -87,7 +87,7 @@
     //    [cell setSearchResultCount:188];
     NSDictionary* dic = [_fm.previewRoleDic objectAtIndex:index];
     [cell setSearchTag:[dic objectForKey:@"role_tag"] andType:[NSNumber numberWithInt:-1]];
-    [cell setUserContentImages:[dic objectForKey:@"content"]];
+    [cell setUserPhotoImage:[dic objectForKey:@"content"]];
     
     return cell;
 }

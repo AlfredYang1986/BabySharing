@@ -22,6 +22,7 @@
 @property (nonatomic, weak) id<FoundHotTagsCellDelegate> delegate;
 
 + (CGFloat)preferredHeight;
+- (void)setHotTagsText:(NSArray*)arr;
 - (void)setHotTags:(NSArray*)arr;
 - (void)setHotTagsTest:(NSArray*)arr;
 @end

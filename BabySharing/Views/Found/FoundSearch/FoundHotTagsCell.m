@@ -82,6 +82,48 @@
     line.hidden = _isHiddenSepline;
 }
 
+- (void)setHotTagsText:(NSArray*)arr {
+    [self clearAllTags];
+    
+    int index = 0;
+    CGFloat offset = 0;
+    for (NSString* tmp in arr) {
+        
+        UIFont* font = [UIFont systemFontOfSize:11.f];
+        CGSize sz_font = [tmp sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
+        CGSize sz = CGSizeMake(TAG_MARGIN /*+ ICON_WIDTH*/ + sz_font.width + TAG_MARGIN, TAG_HEIGHT);
+        
+        FoundHotTagBtn* btn = [[FoundHotTagBtn alloc]initWithFrame:CGRectMake(0, 0, sz.width, sz.height)];
+        btn.tag_name = tmp;//.tag_name;
+        
+        UILabel* label = [[UILabel alloc]init];
+        label.font = font;
+        label.text = tmp; //tmp.tag_name;
+        label.textColor = _isDarkTheme ? [UIColor whiteColor] : [UIColor brownColor];
+        label.frame = CGRectMake(TAG_MARGIN /*+ ICON_WIDTH*/, 0, sz_font.width, TAG_HEIGHT);
+        label.textAlignment = NSTextAlignmentLeft;
+        [btn addSubview:label];
+        
+        btn.layer.borderColor = _isDarkTheme ?[UIColor whiteColor].CGColor : [UIColor colorWithWhite:0.5922 alpha:1.f].CGColor;
+        btn.layer.borderWidth = 1.f;
+        btn.layer.cornerRadius = TAG_CORDIUS;
+        btn.clipsToBounds = YES;
+        
+        //        btn.center = CGPointMake(MARGIN + btn.frame.size.width / 2 + index * (MARGIN + btn.frame.size.width), MARGIN_VER + btn.frame.size.height / 2);
+        btn.center = CGPointMake(MARGIN + btn.frame.size.width / 2 + offset, _ver_margin + btn.frame.size.height / 2);
+        offset += btn.frame.size.width + TAG_MARGIN_BETWEEN;
+        
+//        UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(roleTagBtnSelected:)];
+//        [btn addGestureRecognizer:tap];
+        
+        if (offset >= [UIScreen mainScreen].bounds.size.width - 10)
+            break;
+        
+        [self addSubview:btn];
+        ++index;
+    }
+}
+
 - (void)setHotTagsTest:(NSArray*)arr {
 
     [self clearAllTags];

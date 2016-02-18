@@ -204,7 +204,7 @@ typedef void(^queryRoleTagFinishBlock)(BOOL success, NSString* msg, NSArray* res
     }
    
     cell.isDarkTheme = YES;
-    [cell setHotTagsTest:final_tag_arr];
+    [cell setHotTagsText:final_tag_arr];
     cell.backgroundColor = [UIColor colorWithWhite:0.1098 alpha:1.f];
     
     return cell;
