@@ -64,7 +64,7 @@ typedef void(^chatGroupOptFinishBlock)(BOOL success, id result);
 - (void)endActiveForTarget:(NSString*)target_id;
 
 #pragma mark -- chat group
-- (void)createChatGroupWithGroupThemeName:(NSString*)theme_name andPostID:(NSString*)post_id andFinishBlock:(chatGroupOptFinishBlock)block;
+- (void)createChatGroupWithGroupThemeName:(NSString*)theme_name andPostID:(NSString*)post_id andOwnerID:(NSString*)owner_id andFinishBlock:(chatGroupOptFinishBlock)block;
 //- (void)createChatGroupWithGroupThemeName:(NSString*)theme_name andFinishBlock:(chatGroupOptFinishBlock)block;
 - (void)updateChatGroupWithGroup:(NSDictionary*)dic andFinishBlock:(chatGroupOptFinishBlock)block;
 - (void)addChatGroupWithGroupAttr:(NSDictionary*)attr;

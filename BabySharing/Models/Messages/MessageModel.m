@@ -202,7 +202,7 @@
 }
 
 #pragma mark -- chat group
-- (void)createChatGroupWithGroupThemeName:(NSString*)theme_name andPostID:(NSString*)post_id andFinishBlock:(chatGroupOptFinishBlock)block {
+- (void)createChatGroupWithGroupThemeName:(NSString*)theme_name andPostID:(NSString*)post_id andOwnerID:(NSString*)owner_id andFinishBlock:(chatGroupOptFinishBlock)block {
     
     AppDelegate* delegate = (AppDelegate*)([UIApplication sharedApplication].delegate);
     NSString* auth_token = delegate.lm.current_auth_token;
@@ -213,6 +213,7 @@
     [dic setValue:user_id forKey:@"user_id"];
     [dic setValue:theme_name forKey:@"group_name"];
     [dic setValue:post_id forKey:@"post_id"];
+    [dic setValue:owner_id forKey:@"owner_id"];
     
     NSError * error = nil;
     NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];

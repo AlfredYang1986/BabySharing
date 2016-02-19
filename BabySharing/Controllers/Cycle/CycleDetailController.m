@@ -100,16 +100,19 @@
 }
 
 - (void)createCycleDetailBtnSelected {
+    
+    NSLog(@"not allow it");
+    return;
 
-    NSIndexPath* i = [NSIndexPath indexPathForRow:0 inSection:0];
-    UITableViewCell* cell = [_queryView cellForRowAtIndexPath:i];
-    UITextField* t = (UITextField*)[cell viewWithTag:1];
-   
-    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    [app.mm createChatGroupWithGroupThemeName:t.text andPostID:@"" andFinishBlock:^(BOOL success, NSDictionary *result) {
-        [_delegate createUpdateChatGroup:success];
-    }];
-    [self.navigationController popViewControllerAnimated:YES];
+//    NSIndexPath* i = [NSIndexPath indexPathForRow:0 inSection:0];
+//    UITableViewCell* cell = [_queryView cellForRowAtIndexPath:i];
+//    UITextField* t = (UITextField*)[cell viewWithTag:1];
+//   
+//    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//    [app.mm createChatGroupWithGroupThemeName:t.text andPostID:@"" andOwnerID:@"" andFinishBlock:^(BOOL success, NSDictionary *result) {
+//        [_delegate createUpdateChatGroup:success];
+//    }];
+//    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)endTextViewEdit:(UITapGestureRecognizer*)gesture {

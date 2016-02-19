@@ -626,13 +626,14 @@
     
     NSString* post_id = cur.content_post_id;
     NSString* content_description = cur.content_description;
+    NSString* owner_id = cur.owner_id;
     /**
      * 1. check is there chat group exist
      *      1.1 query if exist
      *      1.2 create if not
      */
     AppDelegate* app = [UIApplication sharedApplication].delegate;
-    [app.mm createChatGroupWithGroupThemeName:content_description andPostID:post_id andFinishBlock:^(BOOL success, id result) {
+    [app.mm createChatGroupWithGroupThemeName:content_description andPostID:post_id andOwnerID:owner_id andFinishBlock:^(BOOL success, id result) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         ChatGroupController* pc = [storyboard instantiateViewControllerWithIdentifier:@"chatGroup"];
         NSDictionary* tar = (NSDictionary*)result;
