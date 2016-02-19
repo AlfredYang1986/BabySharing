@@ -295,13 +295,37 @@
 /*改变删除按钮的title*/
 - (nullable NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(8_0) {
     
-    UITableViewRowAction * act = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"删 除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
-        [tableView.dataSource tableView:tableView commitEditingStyle:UITableViewCellEditingStyleDelete forRowAtIndexPath:indexPath];
+    UITableViewRowAction * act = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"退 出" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+//        [tableView.dataSource tableView:tableView commitEditingStyle:UITableViewCellEditingStyleDelete forRowAtIndexPath:indexPath];
+        
+        /**
+         * 1. leave chat group
+         */
+        Targets* tmp = nil;
+        if (indexPath.section == 0) {
+            tmp = [chatGroupArray_mine objectAtIndex:indexPath.row];
+        } else {
+            tmp = [chatGroupArray_recommend objectAtIndex:indexPath.row];
+        }
+        
+        NSNumber* group_id = tmp.group_id;
+        
+        [_mm leaveChatGroup:group_id andFinishBlock:^(BOOL success, id result) {
+            /**
+             * 2. table view reload data
+             */
+            chatGroupArray_mine = [_mm enumMyChatGroupLocal];
+            [tableView reloadData];
+        }];
+        
+
+        
     }];
     act.backgroundColor = [UIColor colorWithRed:0.2745 green:0.8588 blue:0.7922 alpha:1.f];
 
     UITableViewRowAction * act2 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"取 消" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
         [tableView endEditing:YES];
+        [tableView reloadData];
         
     }];
     act2.backgroundColor = [UIColor colorWithRed:0.6078 green:0.6078 blue:0.6078 alpha:1.f];

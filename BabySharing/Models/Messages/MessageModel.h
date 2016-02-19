@@ -74,4 +74,5 @@ typedef void(^chatGroupOptFinishBlock)(BOOL success, id result);
 - (NSArray*)enumRecommendChatGroupLocal;
 - (void)enumChatGroupWithFinishBlock:(chatGroupOptFinishBlock)block;
 - (void)joinChatGroup:(NSNumber*)group_id andFinishBlock:(chatGroupOptFinishBlock)block;
+- (void)leaveChatGroup:(NSNumber*)group_id andFinishBlock:(chatGroupOptFinishBlock)block;
 @end

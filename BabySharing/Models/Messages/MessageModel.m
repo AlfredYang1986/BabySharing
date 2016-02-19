@@ -328,12 +328,43 @@
         
     if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
       
-        [NotificationOwner addChatGroupWithOwnerID:_delegate.lm.current_user_id chatGroup:[result objectForKey:@"result"] inContext:_doc.managedObjectContext];
-        block(YES, nil);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [NotificationOwner addChatGroupWithOwnerID:_delegate.lm.current_user_id chatGroup:[result objectForKey:@"result"] inContext:_doc.managedObjectContext];
+            block(YES, nil);
+        });
     } else {
         NSDictionary* reError = [result objectForKey:@"error"];
         NSString* msg = [reError objectForKey:@"message"];
             
+        NSLog(@"query user profile failed");
+        NSLog(@"%@", msg);
+    }
+}
+
+- (void)leaveChatGroup:(NSNumber*)group_id andFinishBlock:(chatGroupOptFinishBlock)block {
+    NSString* auth_token = _delegate.lm.current_auth_token;
+    NSString* user_id = _delegate.lm.current_user_id;
+    
+    NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
+    [dic setValue:auth_token forKey:@"auth_token"];
+    [dic setValue:user_id forKey:@"user_id"];
+    [dic setValue:group_id forKey:@"group_id"];
+    
+    NSError * error = nil;
+    NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
+    
+    NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:CHAT_GROUP_LEAVE]];
+    
+    if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [NotificationOwner leaveChatGroupWithOnwerID:_delegate.lm.current_user_id andGroupID:group_id inManagedObjectContext:_doc.managedObjectContext];
+            block(YES, nil);
+        });
+    } else {
+        NSDictionary* reError = [result objectForKey:@"error"];
+        NSString* msg = [reError objectForKey:@"message"];
+        
         NSLog(@"query user profile failed");
         NSLog(@"%@", msg);
     }

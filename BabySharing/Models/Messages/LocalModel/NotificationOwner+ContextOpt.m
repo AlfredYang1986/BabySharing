@@ -201,6 +201,17 @@
     return target;
 }
 
++ (void)leaveChatGroupWithOnwerID:(NSString*)owner_id andGroupID:(NSNumber*)group_id inManagedObjectContext:(NSManagedObjectContext*)context {
+    NotificationOwner* owner = [self enumNotificationOwnerWithID:owner_id inContext:context];
+    
+    Targets* target = [self enumTargetWith:owner andGroupID:group_id];
+    if (target != nil) {
+        [owner removeChatWithObject:target];
+        [context deleteObject:target];
+        [context save:nil];
+    }
+}
+
 + (Targets*)addChatGroupWithOwnerID:(NSString*)owner_id chatGroup:(NSDictionary*)tar inContext:(NSManagedObjectContext*)context {
     NotificationOwner* owner = [self enumNotificationOwnerWithID:owner_id inContext:context];
     
