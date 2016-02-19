@@ -182,6 +182,7 @@
     albumView = [[UITableView alloc]initWithFrame:CGRectMake(0, height, width, tab_bar_height_offset - height)];
     albumView.dataSource = self;
     albumView.delegate = self;
+    albumView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:albumView];
     
     /***************************************************************************************/
@@ -761,9 +762,7 @@
         
     } else if (seg.selectedIndex == 2) {
         [_delegate didSelectMovieBtn2:self];
-        
     } else {
-        
     }
 
 }

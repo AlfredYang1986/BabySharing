@@ -33,10 +33,9 @@
     NSLog(@"show list");
     if (!isDroped) {
         CGFloat width = [UIScreen mainScreen].bounds.size.width;
-        NSInteger count = [self tableView:items numberOfRowsInSection:0];
-        items.bounds = CGRectMake(0, 0, width, 80 * count);
-        
+        items.bounds = CGRectMake(0, 0, width, [UIScreen mainScreen].bounds.size.height - 64);
         [_delegate showContentsTableView:items];
+        drop_down_layer.transform = CATransform3DMakeRotation(M_PI, 0, 0, 1);
         isDroped = !isDroped;
     } else {
         [self dismissListFromSuper];
@@ -44,7 +43,8 @@
 }
 
 - (void)dismissListFromSuper {
-
+    
+    drop_down_layer.transform = CATransform3DMakeRotation(0, 0, 0, 1);
     [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         items.frame = CGRectMake(0, 64 - items.frame.size.height, items.frame.size.width, items.frame.size.height);
     } completion:^(BOOL finished) {
@@ -72,6 +72,9 @@
     items.dataSource = self;
     items.scrollEnabled = NO;
     items.separatorStyle = UITableViewCellSeparatorStyleNone;
+    UIView *footView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    [items setTableFooterView:footView];
+    [footView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissListFromSuper)]];
     [items registerClass:[DropDownItem class] forCellReuseIdentifier:@"drop item"];
 }
 
@@ -155,7 +158,4 @@
     return [_datasource itemCount];
 }
 
-- (void)removeTableView {
-//    [items removeFromSuperview];
-}
 @end
