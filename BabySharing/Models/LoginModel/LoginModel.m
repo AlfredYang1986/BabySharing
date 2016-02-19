@@ -614,6 +614,7 @@
     NSError * error = nil;
     NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
     
+    return YES;
     NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:AUTH_ONLINE_USER]];
     
     if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {

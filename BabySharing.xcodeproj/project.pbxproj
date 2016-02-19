@@ -57,6 +57,8 @@
 		70EF02D21C22CE7A00DABCFC /* PostPublichViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EF02D11C22CE7A00DABCFC /* PostPublichViewController.m */; };
 		70F501491C23ABC7007769F4 /* PhotoAddTagController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70F501481C23ABC7007769F4 /* PhotoAddTagController.m */; };
 		70F5014B1C23ADC2007769F4 /* PostPreview.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70F5014A1C23ADC2007769F4 /* PostPreview.storyboard */; };
+		A0D0D95C1C76CB4000BF416E /* libgotyeapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D0D95A1C76CB4000BF416E /* libgotyeapi.a */; };
+		A0D0D9631C76D38000BF416E /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D0D9621C76D38000BF416E /* libGPUImage.a */; };
 		EE03E9831B4FABFB00F21EF5 /* AlbumModule.m in Sources */ = {isa = PBXBuildFile; fileRef = EE03E9821B4FABFB00F21EF5 /* AlbumModule.m */; };
 		EE0CEC541BDB13070016B6F4 /* AlreadLogedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0CEC421BDB13070016B6F4 /* AlreadLogedViewController.m */; };
 		EE0CEC551BDB13070016B6F4 /* ChooseAreaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0CEC451BDB13070016B6F4 /* ChooseAreaViewController.m */; };
@@ -66,7 +68,6 @@
 		EE0CEC5D1BDB15790016B6F4 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0CEC5C1BDB15790016B6F4 /* LoginViewController.m */; };
 		EE0DCE7E1C081FD400B5386B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE0DCE7D1C081FD400B5386B /* LaunchScreen.xib */; };
 		EE20BED41B6F430D00DE8455 /* OwnerQueryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EE20BED31B6F430D00DE8455 /* OwnerQueryModel.m */; };
-		EE223BE01C228F7C006C8C32 /* libgotyeapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EE223BDE1C228F7C006C8C32 /* libgotyeapi.a */; };
 		EE262C991C1958F8008DCC4E /* DONNotificationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EE262C981C1958F8008DCC4E /* DONNotificationDelegate.m */; };
 		EE26D7621C1EB8AA00342E02 /* FoundSearchData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EE26D7601C1EB8AA00342E02 /* FoundSearchData.xcdatamodeld */; };
 		EE26D7731C1EBA2700342E02 /* PreviewItem+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = EE26D7641C1EBA2700342E02 /* PreviewItem+CoreDataProperties.m */; };
@@ -136,7 +137,6 @@
 		EE79105B1B842105005E455B /* ProfileOverView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEE94E301B74BF870011321A /* ProfileOverView.xib */; };
 		EE7910601B845818005E455B /* UIBarButtonItem+WEPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6D6DA91B7B28A6004D29C8 /* UIBarButtonItem+WEPopover.m */; };
 		EE7910631B847DBA005E455B /* ChatGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7910621B847DBA005E455B /* ChatGroupController.m */; };
-		EE7951971B45065200CC28A2 /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EE7951961B45065200CC28A2 /* libGPUImage.a */; };
 		EE7C68711B82D2D20003C593 /* CycleOverCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7C68701B82D2D20003C593 /* CycleOverCell.m */; };
 		EE7C68731B82D31F0003C593 /* CycleOverCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE7C68721B82D31F0003C593 /* CycleOverCell.xib */; };
 		EE817F491B79A78E00988734 /* UserChatController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE817F481B79A78E00988734 /* UserChatController.m */; };
@@ -443,6 +443,9 @@
 		70F501471C23ABC7007769F4 /* PhotoAddTagController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoAddTagController.h; sourceTree = "<group>"; };
 		70F501481C23ABC7007769F4 /* PhotoAddTagController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoAddTagController.m; sourceTree = "<group>"; };
 		70F5014A1C23ADC2007769F4 /* PostPreview.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PostPreview.storyboard; sourceTree = "<group>"; };
+		A0D0D95A1C76CB4000BF416E /* libgotyeapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libgotyeapi.a; sourceTree = "<group>"; };
+		A0D0D9601C76D35100BF416E /* libGPUImage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGPUImage.a; path = GPUImage.framework/libGPUImage.a; sourceTree = "<group>"; };
+		A0D0D9621C76D38000BF416E /* libGPUImage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGPUImage.a; path = libGPUImage/libGPUImage.a; sourceTree = "<group>"; };
 		EE03E9811B4FABFB00F21EF5 /* AlbumModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumModule.h; sourceTree = "<group>"; };
 		EE03E9821B4FABFB00F21EF5 /* AlbumModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumModule.m; sourceTree = "<group>"; };
 		EE0CEC411BDB13070016B6F4 /* AlreadLogedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlreadLogedViewController.h; sourceTree = "<group>"; };
@@ -460,7 +463,6 @@
 		EE0DCE7D1C081FD400B5386B /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		EE20BED21B6F430D00DE8455 /* OwnerQueryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OwnerQueryModel.h; sourceTree = "<group>"; };
 		EE20BED31B6F430D00DE8455 /* OwnerQueryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OwnerQueryModel.m; sourceTree = "<group>"; };
-		EE223BDE1C228F7C006C8C32 /* libgotyeapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libgotyeapi.a; sourceTree = "<group>"; };
 		EE262C971C1958F8008DCC4E /* DONNotificationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DONNotificationDelegate.h; path = BabySharing/Controllers/Message/NotificationsView/DONNotificationDelegate.h; sourceTree = SOURCE_ROOT; };
 		EE262C981C1958F8008DCC4E /* DONNotificationDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DONNotificationDelegate.m; path = BabySharing/Controllers/Message/NotificationsView/DONNotificationDelegate.m; sourceTree = SOURCE_ROOT; };
 		EE26D7611C1EB8AA00342E02 /* FoundSearchData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FoundSearchData.xcdatamodel; sourceTree = "<group>"; };
@@ -559,7 +561,6 @@
 		EE76A57B1B72181300036747 /* ConnectionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionModel.m; sourceTree = "<group>"; };
 		EE7910611B847DBA005E455B /* ChatGroupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatGroupController.h; sourceTree = "<group>"; };
 		EE7910621B847DBA005E455B /* ChatGroupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatGroupController.m; sourceTree = "<group>"; };
-		EE7951961B45065200CC28A2 /* libGPUImage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGPUImage.a; path = GPUImage.framework/libGPUImage.a; sourceTree = "<group>"; };
 		EE7C686F1B82D2D20003C593 /* CycleOverCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleOverCell.h; sourceTree = "<group>"; };
 		EE7C68701B82D2D20003C593 /* CycleOverCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleOverCell.m; sourceTree = "<group>"; };
 		EE7C68721B82D31F0003C593 /* CycleOverCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CycleOverCell.xib; sourceTree = "<group>"; };
@@ -976,13 +977,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0D0D9631C76D38000BF416E /* libGPUImage.a in Frameworks */,
 				EE40826A1B70C18E0094A88B /* libstdc++.dylib in Frameworks */,
 				EE4082681B70C1850094A88B /* libstdc++.6.0.9.dylib in Frameworks */,
 				EE4082661B70C13F0094A88B /* AudioToolbox.framework in Frameworks */,
 				EE4082641B70C1330094A88B /* CoreTelephony.framework in Frameworks */,
 				EE4082621B70C1240094A88B /* AddressBook.framework in Frameworks */,
 				EE4082601B70C11A0094A88B /* CoreLocation.framework in Frameworks */,
-				EE7951971B45065200CC28A2 /* libGPUImage.a in Frameworks */,
 				EEAACDAA1B44EEDD00D05C0B /* UIKit.framework in Frameworks */,
 				EEAACDAB1B44EEDD00D05C0B /* AssetsLibrary.framework in Frameworks */,
 				EEAACDAC1B44EEDD00D05C0B /* MobileCoreServices.framework in Frameworks */,
@@ -995,11 +996,11 @@
 				EEAACD971B44ED8600D05C0B /* SystemConfiguration.framework in Frameworks */,
 				EEAACD951B44ED7B00D05C0B /* libc++.dylib in Frameworks */,
 				EEAACD8E1B44ECDD00D05C0B /* CoreMedia.framework in Frameworks */,
-				EE223BE01C228F7C006C8C32 /* libgotyeapi.a in Frameworks */,
 				EEAACD8F1B44ECDD00D05C0B /* CoreVideo.framework in Frameworks */,
 				EEAACD901B44ECDD00D05C0B /* OpenGLES.framework in Frameworks */,
 				EEAACD911B44ECDD00D05C0B /* QuartzCore.framework in Frameworks */,
 				EEAACD921B44ECDD00D05C0B /* Foundation.framework in Frameworks */,
+				A0D0D95C1C76CB4000BF416E /* libgotyeapi.a in Frameworks */,
 				EEAACD931B44ECDD00D05C0B /* AVFoundation.framework in Frameworks */,
 				EEAACD801B44EBDE00D05C0B /* MediaPlayer.framework in Frameworks */,
 				EE933CA51B99438000DA15DC /* TencentOpenAPI.framework in Frameworks */,
@@ -1176,6 +1177,14 @@
 			path = TimeSearch;
 			sourceTree = "<group>";
 		};
+		A0D0D9591C76CB4000BF416E /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				A0D0D95A1C76CB4000BF416E /* libgotyeapi.a */,
+			);
+			path = libs;
+			sourceTree = "<group>";
+		};
 		EE03E9801B4FABDC00F21EF5 /* Album */ = {
 			isa = PBXGroup;
 			children = (
@@ -1290,8 +1299,8 @@
 		EE4082501B70C0CE0094A88B /* gotyeapi */ = {
 			isa = PBXGroup;
 			children = (
+				A0D0D9591C76CB4000BF416E /* libs */,
 				EE4082511B70C0CE0094A88B /* include */,
-				EE40825A1B70C0CE0094A88B /* libs */,
 			);
 			path = gotyeapi;
 			sourceTree = "<group>";
@@ -1309,14 +1318,6 @@
 				EE4082591B70C0CE0094A88B /* GotyeOCStatusCode.h */,
 			);
 			path = include;
-			sourceTree = "<group>";
-		};
-		EE40825A1B70C0CE0094A88B /* libs */ = {
-			isa = PBXGroup;
-			children = (
-				EE223BDE1C228F7C006C8C32 /* libgotyeapi.a */,
-			);
-			path = libs;
 			sourceTree = "<group>";
 		};
 		EE5D68691B75A5360067A2DF /* LocalModel */ = {
@@ -1636,6 +1637,7 @@
 		EEAAC8EF1B44E81A00D05C0B = {
 			isa = PBXGroup;
 			children = (
+				A0D0D9621C76D38000BF416E /* libGPUImage.a */,
 				EEAACD791B44EA8800D05C0B /* BabySharing.mobileprovision */,
 				EE4082501B70C0CE0094A88B /* gotyeapi */,
 				EEAACDB91B44FAA300D05C0B /* libGPUImage */,
@@ -2305,7 +2307,7 @@
 		EEAACDB91B44FAA300D05C0B /* libGPUImage */ = {
 			isa = PBXGroup;
 			children = (
-				EE7951961B45065200CC28A2 /* libGPUImage.a */,
+				A0D0D9601C76D35100BF416E /* libGPUImage.a */,
 				EEAACDBA1B44FAA300D05C0B /* GPUImage.framework */,
 			);
 			path = libGPUImage;
@@ -3354,6 +3356,7 @@
 					"$(PROJECT_DIR)/libWeiboSDK",
 					"$(PROJECT_DIR)/libGPUImage/GPUImage.framework",
 					"$(PROJECT_DIR)/gotyeapi/libs",
+					"$(PROJECT_DIR)/libGPUImage",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -3390,6 +3393,7 @@
 					"$(PROJECT_DIR)/libWeiboSDK",
 					"$(PROJECT_DIR)/libGPUImage/GPUImage.framework",
 					"$(PROJECT_DIR)/gotyeapi/libs",
+					"$(PROJECT_DIR)/libGPUImage",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",

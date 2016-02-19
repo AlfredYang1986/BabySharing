@@ -15,6 +15,7 @@
 
 @implementation DropDownView {
     CALayer* drop_down_layer;
+    BOOL isDroped;
 }
 
 @synthesize datasource = _datasource;
@@ -30,29 +31,47 @@
 
 - (void)clickHandler:(id)sender {
     NSLog(@"show list");
-    CGFloat width = [UIScreen mainScreen].bounds.size.width;
-    NSInteger count = [self tableView:items numberOfRowsInSection:0];
-    items.bounds = CGRectMake(0, 0, width, 44 * count);
-    
-    [_delegate showContentsTableView:items];
+    if (!isDroped) {
+        CGFloat width = [UIScreen mainScreen].bounds.size.width;
+        NSInteger count = [self tableView:items numberOfRowsInSection:0];
+        items.bounds = CGRectMake(0, 0, width, 80 * count);
+        
+        [_delegate showContentsTableView:items];
+        isDroped = !isDroped;
+    } else {
+        [self dismissListFromSuper];
+    }
+}
+
+- (void)dismissListFromSuper {
+
+    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        items.frame = CGRectMake(0, 64 - items.frame.size.height, items.frame.size.width, items.frame.size.height);
+    } completion:^(BOOL finished) {
+        [items removeFromSuperview];
+    }];
+    isDroped = NO;
 }
 
 - (void)setMessageHandler {
    
+    isDroped = NO;
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
     
+    drop_down_layer.delegate = self;
     drop_down_layer = [CALayer layer];
     drop_down_layer.contents = (id)[UIImage imageNamed:[resourceBundle pathForResource:@"post_drop_down" ofType:@"png"]].CGImage;
     drop_down_layer.frame = CGRectMake(0, 0, DROP_DOWN_WIDTH, DROP_DOWN_HEIGHT);
     [self.layer addSublayer:drop_down_layer];
     
-    [self addTarget:self action:@selector(clickHandler:) forControlEvents:UIControlEventTouchDown];
     
+    [self addTarget:self action:@selector(clickHandler:) forControlEvents:UIControlEventTouchDown];
     items = [[UITableView alloc]init];
     items.delegate = self;
     items.dataSource = self;
     items.scrollEnabled = NO;
+    items.separatorStyle = UITableViewCellSeparatorStyleNone;
     [items registerClass:[DropDownItem class] forCellReuseIdentifier:@"drop item"];
 }
 
@@ -90,17 +109,26 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    UILabel* label = self.titleLabel;
-    CGPoint ct = label.center;
-    label.center = CGPointMake(ct.x - DROP_DOWN_WIDTH / 2 - DROP_DOWN_ICON_MARGIN, ct.y - 2);
+    UILabel *label = self.titleLabel;
+    [label sizeToFit];
+    CGRect frame = label.frame;
+    CGPoint center = self.center;
+    
+    self.frame = CGRectMake(0, 0, frame.size.width + 30, self.frame.size.height);
+    label.frame = CGRectMake(0, 0, label.frame.size.width, self.frame.size.height);
+    self.layer.delegate = self;
+    self.center = center;
 }
 
 - (void)layoutSublayersOfLayer:(CALayer *)layer {
     [super layoutSublayersOfLayer:layer];
     if (layer == self.layer) {
         CGRect bounds = self.bounds;
+        [CATransaction begin];
+        [CATransaction setAnimationDuration:0];
         drop_down_layer.frame = CGRectMake(0, 0, DROP_DOWN_WIDTH, DROP_DOWN_HEIGHT);
         drop_down_layer.position = CGPointMake(bounds.size.width - DROP_DOWN_ICON_MARGIN - DROP_DOWN_WIDTH / 2, bounds.size.height / 2);
+        [CATransaction commit];
     }
 }
 
@@ -110,10 +138,11 @@
     NSLog(@"selet row");
     [self setTitle:[_datasource titleForCellAtRow:indexPath.row inTableView:tableView] forState:UIControlStateNormal];
     [_delegate didSelectCell:[tableView cellForRowAtIndexPath:indexPath]];
+    [self dismissListFromSuper];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 44;
+    return 80;
 }
 
 #pragma mark -- table view datasource
@@ -127,6 +156,6 @@
 }
 
 - (void)removeTableView {
-    [items removeFromSuperview];
+//    [items removeFromSuperview];
 }
 @end

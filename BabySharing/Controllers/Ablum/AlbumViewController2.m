@@ -52,8 +52,8 @@
     UIImage* img;
     NSURL* cur_movie_url;
     
-    SearchSegView2* seg;
-    DropDownView* dp;
+    SearchSegView2 *seg;
+    DropDownView *dropDownView;
 }
 
 @synthesize type = _type;
@@ -137,14 +137,14 @@
      */
 #define TITLE_LABEL_WIDTH       100
 #define TITLE_LABEL_HEIGHT      44
-    dp = [[DropDownView alloc]initWithFrame:CGRectMake(0, 0, TITLE_LABEL_WIDTH, TITLE_LABEL_HEIGHT)];
-    [dp setTitle:@"相机胶卷" forState:UIControlStateNormal];
-    dp.center = CGPointMake(width / 2, FAKE_NAVIGATION_BAR_HEIGHT / 2);
+    dropDownView = [[DropDownView alloc]initWithFrame:CGRectMake(0, 0, TITLE_LABEL_WIDTH, TITLE_LABEL_HEIGHT)];
+    [dropDownView setTitle:@"相机胶卷" forState:UIControlStateNormal];
+    dropDownView.center = CGPointMake(width / 2, FAKE_NAVIGATION_BAR_HEIGHT / 2);
     
-    dp.datasource = self;
-    dp.delegate = self;
+    dropDownView.datasource = self;
+    dropDownView.delegate = self;
     
-    [bar addSubview:dp];
+    [bar addSubview:dropDownView];
     /***************************************************************************************/
     
     /***************************************************************************************/
@@ -510,7 +510,8 @@
     cell.delegate = self;
     NSInteger row = indexPath.row;
     @try {
-        NSArray* arr_content = [images_arr objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(row * PHOTO_PER_LINE, PHOTO_PER_LINE)]];     // there is a bug
+        NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(row * PHOTO_PER_LINE, PHOTO_PER_LINE)];
+        NSArray* arr_content = [images_arr objectsAtIndexes:indexSet];     // there is a bug
         [cell setUpContentViewWithImageURLs2:arr_content atLine:row andType:_type];
     }
     @catch (NSException *exception) {
@@ -776,36 +777,47 @@
 - (UITableViewCell*)cellForRow:(NSInteger)row inTableView:(UITableView*)tableview {
     DropDownItem* cell = [tableview dequeueReusableCellWithIdentifier:@"drop item"];
     
-    if (cell == nil) {
-        cell = [[DropDownItem alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"drop item"];
-    }
+//    if (cell == nil) {
+//        cell = [[DropDownItem alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"drop item"];
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//    }
     
 //    if (row != 0) {
 //        ALAssetsGroup* group = [album_name_arr objectAtIndex:row - 1];
-        ALAssetsGroup* group = [album_name_arr objectAtIndex:row];
-        NSString* album_name = [group valueForProperty:ALAssetsGroupPropertyName];
-        cell.textLabel.text = album_name;
-        cell.group = group;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    ALAssetsGroup* group = [album_name_arr objectAtIndex:row];
+//        NSString* album_name = [group valueForProperty:ALAssetsGroupPropertyName];
+//        cell.textLabel.text = album_name;
+    cell.group = group;
 //    }
     
     return cell;
 }
 
 #pragma mark -- DropDownDelegate
-- (void)didSelectCell:(UITableViewCell*)cell {
-    DropDownItem* tmp = (DropDownItem*)cell;
+- (void)didSelectCell:(UITableViewCell *)cell {
+    DropDownItem *tmp = (DropDownItem *)cell;
     [self enumPhotoAblumByAlbumName:tmp.group];
-    
-    [dp removeTableView];
+//    [dp removeTableView];
 }
 
 - (void)showContentsTableView:(UITableView*)tableview {
 //    NSInteger width = self.view.frame.size.width;
 //    NSInteger height = self.view.frame.size.height / 2;
     tableview.frame = CGRectMake(0, FAKE_NAVIGATION_BAR_HEIGHT, tableview.bounds.size.width, tableview.bounds.size.height);
+//    tableview.center = self.view.center;
     
     [self.view addSubview:tableview];
     [self.view bringSubviewToFront:bar];
+    
+//    tableview.userInteractionEnabled = NO;
+//     animation
+//    sleep(1);
+//    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+//        tableview.frame = CGRectMake(0, FAKE_NAVIGATION_BAR_HEIGHT, tableview.bounds.size.width, tableview.bounds.size.height);
+//    } completion:^(BOOL finished) {
+//        tableview.userInteractionEnabled = YES;
+//    }];
 }
 
 - (NSString*)titleForCellAtRow:(NSInteger)row inTableView:(UITableView*)tableview {
