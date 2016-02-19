@@ -1159,7 +1159,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
         <!--ChatGroup-->
         <scene sceneID="cQr-Si-4Sy">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="lUX-aE-qZw" customClass="ChatGroupController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="chatGroup" automaticallyAdjustsScrollViewInsets="NO" id="lUX-aE-qZw" customClass="ChatGroupController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fRE-X0-z2p"/>
                         <viewControllerLayoutGuide type="bottom" id="71x-7F-O97"/>

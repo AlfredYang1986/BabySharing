@@ -202,7 +202,7 @@
 }
 
 #pragma mark -- chat group
-- (void)createChatGroupWithGroupThemeName:(NSString*)theme_name andFinishBlock:(chatGroupOptFinishBlock)block {
+- (void)createChatGroupWithGroupThemeName:(NSString*)theme_name andPostID:(NSString*)post_id andFinishBlock:(chatGroupOptFinishBlock)block {
     
     AppDelegate* delegate = (AppDelegate*)([UIApplication sharedApplication].delegate);
     NSString* auth_token = delegate.lm.current_auth_token;
@@ -212,6 +212,7 @@
     [dic setValue:auth_token forKey:@"auth_token"];
     [dic setValue:user_id forKey:@"user_id"];
     [dic setValue:theme_name forKey:@"group_name"];
+    [dic setValue:post_id forKey:@"post_id"];
     
     NSError * error = nil;
     NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
@@ -298,8 +299,10 @@
     if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
   
         NSArray* reVal = [result objectForKey:@"result"];
-        [NotificationOwner updateMultipleChatGroupWithOwnerID:_delegate.lm.current_user_id chatGroups:reVal inContext:_doc.managedObjectContext];
-        block(YES, reVal);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [NotificationOwner updateMultipleChatGroupWithOwnerID:_delegate.lm.current_user_id chatGroups:reVal inContext:_doc.managedObjectContext];
+            block(YES, reVal);
+        });
     } else {
 
         NSDictionary* error = [result objectForKey:@"error"];

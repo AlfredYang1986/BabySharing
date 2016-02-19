@@ -616,7 +616,35 @@
 }
 
 - (void)didSelectCommentsBtn:(id)content {
-    [self performSegueWithIdentifier:@"HomeDetailSegue" sender:content];
+//    [self performSegueWithIdentifier:@"HomeDetailSegue" sender:content];
+  
+    /**
+     * 0. get create info
+     */
+    QueryContent* cur = (QueryContent*)content;
+    NSLog(@"like post id: %@", cur.content_post_id);
+    
+    NSString* post_id = cur.content_post_id;
+    NSString* content_description = cur.content_description;
+    /**
+     * 1. check is there chat group exist
+     *      1.1 query if exist
+     *      1.2 create if not
+     */
+    AppDelegate* app = [UIApplication sharedApplication].delegate;
+    [app.mm createChatGroupWithGroupThemeName:content_description andPostID:post_id andFinishBlock:^(BOOL success, id result) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        ChatGroupController* pc = [storyboard instantiateViewControllerWithIdentifier:@"chatGroup"];
+        NSDictionary* tar = (NSDictionary*)result;
+        
+        pc.group_id = [tar objectForKey:@"group_id"];//group_id;
+        pc.joiner_count = [tar objectForKey:@"joiners_count"];//tmp.number_count;
+        pc.group_name = [tar objectForKey:@"group_name"];//tmp.target_name;
+        pc.founder_id = [tar objectForKey:@"owner_id"];//tmp.owner_id;
+        
+        [self.navigationController setNavigationBarHidden:NO];
+        [self.navigationController pushViewController:pc animated:YES];
+    }];
 }
 
 - (void)didSelectCollectionBtn:(id)content {

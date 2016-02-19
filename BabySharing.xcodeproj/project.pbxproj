@@ -773,16 +773,6 @@
 		EEAACC2D1B44E90400D05C0B /* AlbumGridCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumGridCell.m; sourceTree = "<group>"; };
 		EEAACC2E1B44E90400D05C0B /* AlbumTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumTableCell.h; sourceTree = "<group>"; };
 		EEAACC2F1B44E90400D05C0B /* AlbumTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumTableCell.m; sourceTree = "<group>"; };
-		EEAACC311B44E90400D05C0B /* ChatViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewCell.h; sourceTree = "<group>"; };
-		EEAACC321B44E90400D05C0B /* ChatViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewCell.m; sourceTree = "<group>"; };
-		EEAACC331B44E90400D05C0B /* ChatViewOtherCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewOtherCell.h; sourceTree = "<group>"; };
-		EEAACC341B44E90400D05C0B /* ChatViewOtherCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewOtherCell.m; sourceTree = "<group>"; };
-		EEAACC351B44E90400D05C0B /* ChatViewOtherCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatViewOtherCell.xib; sourceTree = "<group>"; };
-		EEAACC361B44E90400D05C0B /* ChatViewOwnerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewOwnerCell.h; sourceTree = "<group>"; };
-		EEAACC371B44E90400D05C0B /* ChatViewOwnerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewOwnerCell.m; sourceTree = "<group>"; };
-		EEAACC381B44E90400D05C0B /* ChatViewOwnerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatViewOwnerCell.xib; sourceTree = "<group>"; };
-		EEAACC391B44E90400D05C0B /* UserHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserHeadView.h; sourceTree = "<group>"; };
-		EEAACC3A1B44E90400D05C0B /* UserHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserHeadView.m; sourceTree = "<group>"; };
 		EEAACC3C1B44E90400D05C0B /* DropDownItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropDownItem.h; sourceTree = "<group>"; };
 		EEAACC3D1B44E90400D05C0B /* DropDownItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropDownItem.m; sourceTree = "<group>"; };
 		EEAACC3E1B44E90400D05C0B /* DropDownView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropDownView.h; sourceTree = "<group>"; };
@@ -973,9 +963,6 @@
 		EEFA44FD1B58F7D4007DF294 /* NickNameInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NickNameInputView.m; sourceTree = "<group>"; };
 		EEFCDECF1BCB936500A53CAB /* ChatEmojiView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatEmojiView.h; sourceTree = "<group>"; };
 		EEFCDED01BCB936500A53CAB /* ChatEmojiView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatEmojiView.m; sourceTree = "<group>"; };
-		EEFCDED11BCB936500A53CAB /* ChatViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewCell.h; sourceTree = "<group>"; };
-		EEFCDED21BCB936500A53CAB /* ChatViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewCell.m; sourceTree = "<group>"; };
-		EEFCDED31BCB936500A53CAB /* ChatViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatViewCell.xib; sourceTree = "<group>"; };
 		EEFCDEE91BCB93A400A53CAB /* ChatMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatMessageCell.h; sourceTree = "<group>"; };
 		EEFCDEEA1BCB93A400A53CAB /* ChatMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatMessageCell.m; sourceTree = "<group>"; };
 		EEFD6F4D1B4E44C1008AC4F5 /* LoginInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginInputView.h; sourceTree = "<group>"; };
@@ -2057,7 +2044,6 @@
 				EEDAF4651BA674300035CC31 /* Common */,
 				EEC980A71B8EB9EA0087E5A7 /* BWStatusBarOverlay */,
 				EEAACC1D1B44E90400D05C0B /* SGActionView */,
-				EEAACC301B44E90400D05C0B /* ChatRoom */,
 				EEAACC2B1B44E90400D05C0B /* Album */,
 				EEAACC681B44E90400D05C0B /* PhotoPreView */,
 				EEAACC3B1B44E90400D05C0B /* DropDownView */,
@@ -2190,23 +2176,6 @@
 				EEAACC2F1B44E90400D05C0B /* AlbumTableCell.m */,
 			);
 			path = Album;
-			sourceTree = "<group>";
-		};
-		EEAACC301B44E90400D05C0B /* ChatRoom */ = {
-			isa = PBXGroup;
-			children = (
-				EEAACC311B44E90400D05C0B /* ChatViewCell.h */,
-				EEAACC321B44E90400D05C0B /* ChatViewCell.m */,
-				EEAACC331B44E90400D05C0B /* ChatViewOtherCell.h */,
-				EEAACC341B44E90400D05C0B /* ChatViewOtherCell.m */,
-				EEAACC351B44E90400D05C0B /* ChatViewOtherCell.xib */,
-				EEAACC361B44E90400D05C0B /* ChatViewOwnerCell.h */,
-				EEAACC371B44E90400D05C0B /* ChatViewOwnerCell.m */,
-				EEAACC381B44E90400D05C0B /* ChatViewOwnerCell.xib */,
-				EEAACC391B44E90400D05C0B /* UserHeadView.h */,
-				EEAACC3A1B44E90400D05C0B /* UserHeadView.m */,
-			);
-			path = ChatRoom;
 			sourceTree = "<group>";
 		};
 		EEAACC3B1B44E90400D05C0B /* DropDownView */ = {
@@ -2802,9 +2771,6 @@
 			children = (
 				EEFCDECF1BCB936500A53CAB /* ChatEmojiView.h */,
 				EEFCDED01BCB936500A53CAB /* ChatEmojiView.m */,
-				EEFCDED11BCB936500A53CAB /* ChatViewCell.h */,
-				EEFCDED21BCB936500A53CAB /* ChatViewCell.m */,
-				EEFCDED31BCB936500A53CAB /* ChatViewCell.xib */,
 			);
 			path = ChatEmoji;
 			sourceTree = "<group>";

@@ -177,7 +177,7 @@
     chat_btn.titleLabel.font = [UIFont systemFontOfSize:12.f];
     [chat_btn sizeToFit];
     chat_btn.center = CGPointMake([UIScreen mainScreen].bounds.size.width - FUNC_BTN_MARGIN_2 * 4 - chat_btn.frame.size.width / 2, FUNC_VIEW_HEIGHT / 2);
-    [chat_btn addTarget:self action:@selector(collectBtnSelected) forControlEvents:UIControlEventTouchUpInside];
+    [chat_btn addTarget:self action:@selector(commentsBtnSelected) forControlEvents:UIControlEventTouchUpInside];
     [_funcActArea addSubview:chat_btn];
     /***********************************************************************************************/
 
@@ -494,7 +494,7 @@
 }
 
 - (void)commentsBtnSelected {
-//    [_delegate didSelectCommentsBtn:self];
+    [_delegate didSelectCommentsBtn:_content];
 }
 
 - (void)disappearFuncView {
