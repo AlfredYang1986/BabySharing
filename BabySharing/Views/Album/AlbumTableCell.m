@@ -85,7 +85,8 @@
             continue;
         
         ALAsset* at = [image_arr objectAtIndex:index];
-        UIImage* img = [UIImage imageWithCGImage:[at thumbnail]];
+//        UIImage* img = [UIImage imageWithCGImage:[at thumbnail]];
+        UIImage* img = [UIImage imageWithCGImage:[at aspectRatioThumbnail]];
         AlbumGridCell* tmp = [[AlbumGridCell alloc]initWithFrame:CGRectMake(index * step_width, 0, step_width, height)];
         tmp.grid_border_color = _grid_border_color;
         if ([[at valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {

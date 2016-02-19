@@ -35,7 +35,7 @@
     }
     
     cell.isDarkTheme = YES;
-    [cell setHotTagsTest:@[@"asos", @"brands"]];
+    [cell setHotTagsText:@[@"asos", @"brands"]];
     cell.isHiddenSepline = YES;
     cell.backgroundColor = [UIColor colorWithRed:0.2039 green:0.2078 blue:0.2314 alpha:1.f];//[UIColor colorWithWhite:0.1882 alpha:1.f];
     
