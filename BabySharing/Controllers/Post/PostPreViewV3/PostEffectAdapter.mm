@@ -149,10 +149,10 @@ UIView* addTagBtn(NSString* title, CGRect bounds, CGPoint center, NSObject* call
     UILabel* tag_label = [[UILabel alloc]initWithFrame:CGRectMake(0, TAG_BTN_HEIGHT + 2, TAG_LABEL_WIDTH, TAG_LABEL_HEIGHT)];
     tag_label.font = [UIFont systemFontOfSize:14.f];
     tag_label.textColor = [UIColor whiteColor];
+
     tag_label.textAlignment = NSTextAlignmentCenter;
     tag_label.text = title;
     [reVal addSubview:tag_label];
-    
     reVal.center = center;
     
     return reVal;
@@ -228,7 +228,7 @@ UIView* tagForPhoto(PostEffectAdapter* adapter, CGFloat height) {
     
     UIView* bg = [[UIView alloc]initWithFrame:CGRectMake(0, FAKE_NAVIGATION_BAR_HEIGHT, width, main_content_height)];
     bg.tag = -9;
-    bg.backgroundColor = [UIColor clearColor];
+    bg.backgroundColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.2f];
    
 #define TAG_BTN_MARGIN_BETWEEN          (50 + TAG_BTN_WIDTH)
     [bg addSubview:addTagBtn(@"品牌", CGRectMake(0, 0, 3 * button_height, button_height), CGPointMake(bg.frame.size.width / 2 - TAG_BTN_MARGIN_BETWEEN, bg.frame.size.height / 2), adapter, @selector(didSelectTagForPhoto:), [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"tag_tag"] ofType:@"png"]])];

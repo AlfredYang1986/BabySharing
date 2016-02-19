@@ -19,13 +19,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BabySharing/Views/Common/SegmentControl/SearchSegView2.m"
-            timestampString = "477567673.903105"
+            filePath = "BabySharing/Controllers/Post/PostPreViewV3/PostEffectAdapter.mm"
+            timestampString = "477569606.805816"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "183"
-            endingLineNumber = "183"
-            landmarkName = "-segSelected:"
+            startingLineNumber = "552"
+            endingLineNumber = "552"
+            landmarkName = "-didSelectTagForPhoto:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BabySharing/RemoteInstance/RemoteInstance.m"
+            timestampString = "477570031.547257"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "+remoteDownloadFileWithName:andHost:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

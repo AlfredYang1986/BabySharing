@@ -31,6 +31,4 @@
 - (id)init;
 - (id)initWithCoder:(NSCoder *)aDecoder;
 - (id)initWithFrame:(CGRect)frame;
-
-- (void)removeTableView;
 @end
