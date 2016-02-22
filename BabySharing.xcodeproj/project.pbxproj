@@ -444,8 +444,7 @@
 		70F501481C23ABC7007769F4 /* PhotoAddTagController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoAddTagController.m; sourceTree = "<group>"; };
 		70F5014A1C23ADC2007769F4 /* PostPreview.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PostPreview.storyboard; sourceTree = "<group>"; };
 		A0D0D95A1C76CB4000BF416E /* libgotyeapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libgotyeapi.a; sourceTree = "<group>"; };
-		A0D0D9601C76D35100BF416E /* libGPUImage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGPUImage.a; path = GPUImage.framework/libGPUImage.a; sourceTree = "<group>"; };
-		A0D0D9621C76D38000BF416E /* libGPUImage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGPUImage.a; path = libGPUImage/libGPUImage.a; sourceTree = "<group>"; };
+		A0D0D9621C76D38000BF416E /* libGPUImage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGPUImage.a; sourceTree = "<group>"; };
 		EE03E9811B4FABFB00F21EF5 /* AlbumModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumModule.h; sourceTree = "<group>"; };
 		EE03E9821B4FABFB00F21EF5 /* AlbumModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumModule.m; sourceTree = "<group>"; };
 		EE0CEC411BDB13070016B6F4 /* AlreadLogedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlreadLogedViewController.h; sourceTree = "<group>"; };
@@ -1637,7 +1636,6 @@
 		EEAAC8EF1B44E81A00D05C0B = {
 			isa = PBXGroup;
 			children = (
-				A0D0D9621C76D38000BF416E /* libGPUImage.a */,
 				EEAACD791B44EA8800D05C0B /* BabySharing.mobileprovision */,
 				EE4082501B70C0CE0094A88B /* gotyeapi */,
 				EEAACDB91B44FAA300D05C0B /* libGPUImage */,
@@ -2307,7 +2305,7 @@
 		EEAACDB91B44FAA300D05C0B /* libGPUImage */ = {
 			isa = PBXGroup;
 			children = (
-				A0D0D9601C76D35100BF416E /* libGPUImage.a */,
+				A0D0D9621C76D38000BF416E /* libGPUImage.a */,
 				EEAACDBA1B44FAA300D05C0B /* GPUImage.framework */,
 			);
 			path = libGPUImage;
