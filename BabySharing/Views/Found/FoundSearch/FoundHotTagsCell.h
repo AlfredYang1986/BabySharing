@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @protocol FoundHotTagsCellDelegate <NSObject>
+@required
 - (void)recommandTagBtnSelected:(NSString*)tag_name adnType:(NSInteger)tag_type;
+@optional
 - (void)recommandRoleTagBtnSelected:(NSString*)tag_name;
 @end
 

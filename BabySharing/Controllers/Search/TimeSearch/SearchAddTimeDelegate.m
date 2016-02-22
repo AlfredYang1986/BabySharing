@@ -8,6 +8,14 @@
 
 #import "SearchAddTimeDelegate.h"
 
+#import "AppDelegate.h"
+#import "FoundSearchModel.h"
+
+@interface SearchAddTimeDelegate ()
+
+@property (nonatomic, weak, getter=getFoundSearchModel) FoundSearchModel* fm;
+@end
+
 @implementation SearchAddTimeDelegate {
     NSArray* exist_data;
     NSArray* showing_data;
@@ -16,44 +24,32 @@
 @synthesize delegate = _delegate;
 @synthesize actions = _actions;
 
+@synthesize fm = _fm;
+
 - (void)pushExistingData:(NSArray *)data {
     exist_data = data;
     showing_data = exist_data;
 }
 
-#pragma mark -- search bar delegate
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    
-    //    if (!isSync) {
-    //        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"cannot edit until sync" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-    //        [alert show];
-    //        return;
-    //    }
-    
-    if ([searchText isEqualToString:@""]) {
-        showing_data = exist_data;
-        //        self.current_delegate = self;
-        //        [_searchBar resignFirstResponder];
-        
-    } else {
-        //        NSString *regex = [NSString stringWithFormat:@"^[%@]\\w*", searchText];
-        NSString *regex = [NSString stringWithFormat:@"^%@\\w*", searchText];
-        NSPredicate* p = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
-        
-        NSMutableArray* tmp = [[NSMutableArray alloc]initWithCapacity:exist_data.count];
-        for (NSString* iter in exist_data) {
-            if ([p evaluateWithObject:iter]) {
-                [tmp addObject:iter];
-            }
-        }
-        showing_data = [tmp copy];
-        
-        //        if (final_tag_arr.count == 0) self.current_delegate = add_delegate;
-        //        else self.current_delegate = self;
+- (FoundSearchModel*)getFoundSearchModel {
+    if (_fm == nil) {
+        AppDelegate* app = [UIApplication sharedApplication].delegate;
+        _fm = app.fm;
     }
-    
-    //    [_queryView reloadData];
-    [_delegate needToReloadData];
+    return _fm;
+}
+
+#pragma mark -- search bar delegate
+#define TIME 1
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    [self.fm queryFoundTagSearchWithInput:searchText andType:TIME andFinishBlock:^(BOOL success, NSDictionary *preview) {
+        NSMutableArray* arr = [[NSMutableArray alloc]initWithCapacity:self.fm.tagSearchResult.count];
+        for (NSDictionary* iter in self.fm.tagSearchResult) {
+            [arr addObject:[iter objectForKey:@"tag_name"]];
+        }
+        showing_data = [arr copy];
+        [_delegate needToReloadData];
+    }];
 }
 
 #pragma mark -- search bar delegate

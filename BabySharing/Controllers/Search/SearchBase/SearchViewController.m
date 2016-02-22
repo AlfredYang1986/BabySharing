@@ -122,6 +122,8 @@
     _queryView.delegate = _delegate;
     _queryView.dataSource = _delegate;
     _searchBar.delegate = _delegate;
+    
+    protocol.controller = self;
 }
 
 #pragma mark -- status bar color

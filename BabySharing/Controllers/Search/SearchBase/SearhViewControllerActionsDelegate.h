@@ -16,6 +16,8 @@ typedef void(^SearchCallback)(BOOL success, NSArray* data);
 
 @protocol SearchDataCollectionProtocol <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 
+@property (weak, nonatomic) UIViewController* controller;
+
 @optional
 - (NSString*)getControllerTitle;
 - (void)collectData;

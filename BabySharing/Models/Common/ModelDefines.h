@@ -116,6 +116,7 @@ static const NSString* kUserPostOwnerConnectionsFriends = @"kUserPostOwnerConnec
 #define TAG_RECOMMAND_QUERY                 [TAG_HOST_DOMAIN stringByAppendingString:@"queryRecommandTags"]
 #define TAG_PREVIEW_QUERY                   [TAG_HOST_DOMAIN stringByAppendingString:@"queryTagPreViewWithTagName"]
 #define TAG_FOUND_SEARCH                    [TAG_HOST_DOMAIN stringByAppendingString:@"queryFoundSearchTagData"]
+#define TAG_FOUND_SEARCH_WITH_INPUT         [TAG_HOST_DOMAIN stringByAppendingString:@"queryTagSearchWithInput"]
 
 #pragma mark -- USER SEARCH QUERY
 #define USER_SEARCH_HOST_DOMAIN             [HOST_DOMAIN stringByAppendingString:@"users/"]

@@ -19,7 +19,9 @@
 
 #import "RecommandTag.h"
 
-@interface SearchBrandsDelegate ()
+#import "HomeTagsController.h"
+
+@interface SearchBrandsDelegate () <FoundHotTagsCellDelegate>
 
 @property (nonatomic, weak, readonly, getter=getFoundTagModel) FoundSearchModel* fm;
 @end
@@ -28,6 +30,8 @@
 
 @synthesize delegate = _delegate;
 @synthesize actions = _actions;
+
+@synthesize controller = _controller;
 
 @synthesize fm = _fm;
 
@@ -44,6 +48,10 @@
 }
 
 #pragma mark -- table view delegate and datasource
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+    return indexPath.section != 0;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 1;
 }
@@ -174,5 +182,16 @@
             block(success, arr_re_tags);
         });
     }];
+}
+
+#pragma mark -- Found Search Delegate
+- (void)recommandTagBtnSelected:(NSString*)tag_name adnType:(NSInteger)tag_type {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    HomeTagsController* svc = [storyboard instantiateViewControllerWithIdentifier:@"TagSearch"];
+    svc.tag_name = tag_name;
+    svc.tag_type = tag_type;
+    
+    [_controller.navigationController setNavigationBarHidden:NO animated:YES];
+    [_controller.navigationController pushViewController:svc animated:YES];
 }
 @end

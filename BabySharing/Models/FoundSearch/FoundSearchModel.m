@@ -29,6 +29,9 @@
 @synthesize recommandsRoleTag = _recommandsRoleTag;
 @synthesize previewRoleDic = _previewRoleDic;
 
+#pragma mark -- tag search (not preview only tag)
+@synthesize tagSearchResult = _tagSearchResult;
+
 #pragma mark -- instuction
 - (void)enumDataFromLocalDB:(UIManagedDocument*)document {
     //    dispatch_queue_t aq = dispatch_queue_create("load_relationship_data", NULL);
@@ -212,6 +215,26 @@
 }
 
 - (void)queryFoundTagSearchWithInput:(NSString*)input andType:(NSInteger)tage_type andFinishBlock:(queryFoundTagSearchFinishBlock)block {
+    NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
     
+    [dic setValue:_delegate.lm.current_auth_token forKey:@"auth_token"];
+    [dic setValue:_delegate.lm.current_user_id forKey:@"user_id"];
+    [dic setValue:input forKey:@"tag_name"];
+    [dic setValue:[NSNumber numberWithInteger:tage_type] forKey:@"tag_type"];
+    
+    NSError * error = nil;
+    NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
+    
+    NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:TAG_FOUND_SEARCH_WITH_INPUT]];
+    
+    if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
+        NSArray* reVal = [result objectForKey:@"result"];
+        NSLog(@"search result: %@", reVal);
+        _tagSearchResult = reVal;
+        block(YES, nil);
+
+    } else {
+        block(NO, nil);
+    }
 }
 @end

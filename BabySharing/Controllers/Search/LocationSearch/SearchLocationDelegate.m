@@ -18,7 +18,9 @@
 #import "FoundSearchModel.h"
 #import "RecommandTag.h"
 
-@interface SearchLocationDelegate ()
+#import "HomeTagsController.h"
+
+@interface SearchLocationDelegate () <FoundHotTagsCellDelegate>
 
 @property (nonatomic, weak, getter=getFoundTagModel) FoundSearchModel* fm;
 @end
@@ -26,6 +28,8 @@
 @implementation SearchLocationDelegate
 @synthesize delegate = _delegate;
 @synthesize actions = _actions;
+
+@synthesize controller = _controller;
 
 @synthesize fm = _fm;
 
@@ -42,6 +46,10 @@
 }
 
 #pragma mark -- table view delegate and datasource
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+    return indexPath.section != 0;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 1;
 }
@@ -56,6 +64,7 @@
     cell.isDarkTheme = YES;
 //    [cell setHotTagsText:@[@"asos", @"brands"]];
     [cell setHotTags:self.fm.recommandsdata];
+    cell.delegate = self;
     cell.isHiddenSepline = YES;
     cell.backgroundColor = [UIColor colorWithRed:0.2039 green:0.2078 blue:0.2314 alpha:1.f];//[UIColor colorWithWhite:0.1882 alpha:1.f];
     
@@ -158,5 +167,16 @@
             block(success, arr_re_tags);
         });
     }];
+}
+
+#pragma mark -- Found Search Delegate
+- (void)recommandTagBtnSelected:(NSString*)tag_name adnType:(NSInteger)tag_type {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    HomeTagsController* svc = [storyboard instantiateViewControllerWithIdentifier:@"TagSearch"];
+    svc.tag_name = tag_name;
+    svc.tag_type = tag_type;
+    
+    [_controller.navigationController setNavigationBarHidden:NO animated:YES];
+    [_controller.navigationController pushViewController:svc animated:YES];
 }
 @end

@@ -22,6 +22,7 @@ typedef void(^queryFoundTagSearchFinishBlock)(BOOL success, NSDictionary* previe
 #pragma mark -- Found Search Tags Property
 @property (strong, nonatomic) NSArray* recommandsdata;
 @property (strong, nonatomic) NSArray* previewDic;
+@property (strong, nonatomic) NSArray* tagSearchResult;
 
 #pragma mark -- Found Search Role Tags Property
 @property (strong, nonatomic) NSArray* recommandsRoleTag;
