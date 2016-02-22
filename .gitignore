@@ -112,3 +112,4 @@ xcuserdata
 # ...none. Everything is now explained. 
 gotyeapi/libs/*
 libGPUImage/libGPUImage.a
+libGPUImage/*.a
