@@ -55,7 +55,6 @@
 		70E06F851C4F988800B740CD /* SearchTimeDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E06F841C4F988800B740CD /* SearchTimeDelegate.m */; };
 		70E06F881C4F989700B740CD /* SearchAddTimeDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E06F871C4F989700B740CD /* SearchAddTimeDelegate.m */; };
 		70EF02D21C22CE7A00DABCFC /* PostPublichViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EF02D11C22CE7A00DABCFC /* PostPublichViewController.m */; };
-		70F501491C23ABC7007769F4 /* PhotoAddTagController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70F501481C23ABC7007769F4 /* PhotoAddTagController.m */; };
 		70F5014B1C23ADC2007769F4 /* PostPreview.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70F5014A1C23ADC2007769F4 /* PostPreview.storyboard */; };
 		A0D0D95C1C76CB4000BF416E /* libgotyeapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D0D95A1C76CB4000BF416E /* libgotyeapi.a */; };
 		A0D0D9631C76D38000BF416E /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D0D9621C76D38000BF416E /* libGPUImage.a */; };
@@ -352,6 +351,7 @@
 		7041A5B91C575A7400FEBFCD /* MessageChatGroupHeader2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageChatGroupHeader2.h; sourceTree = "<group>"; };
 		7041A5BA1C575A7400FEBFCD /* MessageChatGroupHeader2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageChatGroupHeader2.m; sourceTree = "<group>"; };
 		7041A5BC1C575A8700FEBFCD /* MessageChatGroupHeader2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageChatGroupHeader2.xib; sourceTree = "<group>"; };
+		704A3CD81C7AABC8009D62A2 /* AddingTagsProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddingTagsProtocol.h; sourceTree = "<group>"; };
 		70530B0C1C3F9D1E00505121 /* SearchSegImgItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSegImgItem.h; sourceTree = "<group>"; };
 		70530B0D1C3F9D1E00505121 /* SearchSegImgItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSegImgItem.m; sourceTree = "<group>"; };
 		70530B0E1C3F9D1E00505121 /* SearchSegImgTextItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSegImgTextItem.h; sourceTree = "<group>"; };
@@ -440,8 +440,6 @@
 		70E06F871C4F989700B740CD /* SearchAddTimeDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchAddTimeDelegate.m; sourceTree = "<group>"; };
 		70EF02D01C22CE7A00DABCFC /* PostPublichViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostPublichViewController.h; sourceTree = "<group>"; };
 		70EF02D11C22CE7A00DABCFC /* PostPublichViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostPublichViewController.m; sourceTree = "<group>"; };
-		70F501471C23ABC7007769F4 /* PhotoAddTagController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoAddTagController.h; sourceTree = "<group>"; };
-		70F501481C23ABC7007769F4 /* PhotoAddTagController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoAddTagController.m; sourceTree = "<group>"; };
 		70F5014A1C23ADC2007769F4 /* PostPreview.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PostPreview.storyboard; sourceTree = "<group>"; };
 		A0D0D95A1C76CB4000BF416E /* libgotyeapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libgotyeapi.a; sourceTree = "<group>"; };
 		A0D0D9621C76D38000BF416E /* libGPUImage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGPUImage.a; sourceTree = "<group>"; };
@@ -2736,9 +2734,8 @@
 		EEF538F21B525EC3009C8CB9 /* PostPreViewV3 */ = {
 			isa = PBXGroup;
 			children = (
+				704A3CD81C7AABC8009D62A2 /* AddingTagsProtocol.h */,
 				70F5014A1C23ADC2007769F4 /* PostPreview.storyboard */,
-				70F501471C23ABC7007769F4 /* PhotoAddTagController.h */,
-				70F501481C23ABC7007769F4 /* PhotoAddTagController.m */,
 				EEF538F31B525F7F009C8CB9 /* PostPreViewEffectController.h */,
 				EEF538F41B525F7F009C8CB9 /* PostPreViewEffectController.m */,
 				EE86D1B01B537469001C4650 /* PostEffectAdapter.h */,
@@ -3183,7 +3180,6 @@
 				70530B141C3F9D1E00505121 /* SearchSegItem.m in Sources */,
 				EE817F491B79A78E00988734 /* UserChatController.m in Sources */,
 				EE76A5791B7205CF00036747 /* ConnectionOwner+ContextOpt.m in Sources */,
-				70F501491C23ABC7007769F4 /* PhotoAddTagController.m in Sources */,
 				EEE94E271B74BE3B0011321A /* ProfileSettingController.mm in Sources */,
 				EEAACCC01B44E90400D05C0B /* PersonalCentreTmpViewController.m in Sources */,
 				EEFCDEDF1BCB936500A53CAB /* ChatEmojiView.m in Sources */,

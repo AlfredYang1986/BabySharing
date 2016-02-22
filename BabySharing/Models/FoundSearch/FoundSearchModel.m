@@ -183,4 +183,35 @@
         block(NO, nil);
     }
 }
+
+#pragma mark -- Found Search Tag Method with tag type
+- (void)queryRecommandTagsWithType:(NSInteger)tag_type andFinishBlock:(queryRecommondTagFinishBlock)block {
+    NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
+    
+    [dic setValue:_delegate.lm.current_auth_token forKey:@"auth_token"];
+    [dic setValue:_delegate.lm.current_user_id forKey:@"user_id"];
+    [dic setValue:[NSNumber numberWithInteger:tag_type] forKey:@"tag_type"];
+    
+    NSError * error = nil;
+    NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
+    
+    NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:TAG_RECOMMAND_QUERY]];
+    
+    if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
+        NSArray* reVal = [result objectForKey:@"recommands"];
+        NSLog(@"recommand tag are: %@", reVal);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [RecommandTag upDateRecommandTags:reVal inContext:_doc.managedObjectContext];
+            [self enumRecommandTagsLocal];
+            block(YES, reVal);
+        });
+        
+    } else {
+        block(NO, nil);
+    }
+}
+
+- (void)queryFoundTagSearchWithInput:(NSString*)input andType:(NSInteger)tage_type andFinishBlock:(queryFoundTagSearchFinishBlock)block {
+    
+}
 @end

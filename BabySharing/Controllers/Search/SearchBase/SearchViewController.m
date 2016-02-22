@@ -29,6 +29,8 @@
 
 @synthesize delegate = _delegate;
 
+@synthesize isNeedAsyncData = _isNeedAsyncData;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here.
@@ -90,6 +92,14 @@
     _queryView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [_queryView registerClass:[FoundHotTagsCell class] forCellReuseIdentifier:@"hot role tags"];
     [_queryView registerNib:[UINib nibWithNibName:@"FoundSearchHeader" bundle:[NSBundle mainBundle]] forHeaderFooterViewReuseIdentifier:@"hot role header"];
+   
+    if (_isNeedAsyncData) {
+        [_delegate asyncQueryDataWithFinishCallback:^(BOOL success, NSArray *data) {
+            if (success) {
+                [_queryView reloadData];
+            }
+        }];
+    }
 }
 
 - (void)didPopViewControllerBtn {

@@ -24,6 +24,9 @@ typedef void(^SearchCallback)(BOOL success, NSArray* data);
 - (NSArray*)enumedData;
 - (NSArray*)enumedDataWithPredicate:(NSPredicate*)pred;
 - (NSString*)enumedDataAtIndex:(NSInteger)index;
+
+@optional
+- (void)asyncQueryDataWithFinishCallback:(SearchCallback)block;
 @end
 
 @protocol SearchViewControllerProtocol <NSObject>

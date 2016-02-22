@@ -12,4 +12,5 @@
 @interface SearchViewController : UIViewController <SearchViewControllerProtocol>
 
 @property (strong, nonatomic, setter=setDataDelegate:) id<SearchDataCollectionProtocol> delegate;
+@property (nonatomic) BOOL isNeedAsyncData;
 @end

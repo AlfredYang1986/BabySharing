@@ -8,7 +8,8 @@
 
 #import "PostPreViewEffectController.h"
 #import "PostEffectAdapter.h"
-#import "PhotoAddTagController.h"
+//#import "PhotoAddTagController.h"
+#import "AddingTagsProtocol.h"
 #import "INTUAnimationEngine.h"
 #import <AVFoundation/AVFoundation.h>
 #import "SearchSegView2.h"
@@ -576,6 +577,7 @@
         sd.actions = self;
         searchControllerTitle = @"添加品牌标签";
         current_type = TagTypeBrand;
+        svc.isNeedAsyncData = YES;
         [self.navigationController pushViewController:svc animated:YES];
         svc.delegate = sd;
         
@@ -587,6 +589,7 @@
         sd.actions = self;
         searchControllerTitle = @"添加地点标签";
         current_type = TagTypeLocation;
+        svc.isNeedAsyncData = YES;
         [self.navigationController pushViewController:svc animated:YES];
         svc.delegate = sd;
         
@@ -598,6 +601,7 @@
         sd.actions = self;
         searchControllerTitle = @"添加时刻标签";
         current_type = TagTypeLocation;
+        svc.isNeedAsyncData = YES;
         [self.navigationController pushViewController:svc animated:YES];
         svc.delegate = sd;
         

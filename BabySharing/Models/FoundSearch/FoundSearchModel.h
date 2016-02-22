@@ -38,4 +38,8 @@ typedef void(^queryFoundTagSearchFinishBlock)(BOOL success, NSDictionary* previe
 - (void)enumRecommandRoleTagsLocal;
 - (void)queryRecommandRoleTagsWithFinishBlock:(queryRecommondTagFinishBlock)block;
 - (void)queryFoundRoleTagSearchWithInput:(NSString*)input andFinishBlock:(queryFoundTagSearchFinishBlock)block;
+
+#pragma mark -- Found Search Brand Tag Method
+- (void)queryRecommandTagsWithType:(NSInteger)tag_type andFinishBlock:(queryRecommondTagFinishBlock)block;
+- (void)queryFoundTagSearchWithInput:(NSString*)input andType:(NSInteger)tage_type andFinishBlock:(queryFoundTagSearchFinishBlock)block;     // for search
 @end

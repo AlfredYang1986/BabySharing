@@ -14,10 +14,30 @@
 #import "FoundSearchHeader.h"
 #import "FoundHotTagsCell.h"
 
+#import "AppDelegate.h"
+#import "FoundSearchModel.h"
+
+#import "RecommandTag.h"
+
+@interface SearchBrandsDelegate ()
+
+@property (nonatomic, weak, readonly, getter=getFoundTagModel) FoundSearchModel* fm;
+@end
+
 @implementation SearchBrandsDelegate
 
 @synthesize delegate = _delegate;
 @synthesize actions = _actions;
+
+@synthesize fm = _fm;
+
+- (FoundSearchModel*)getFoundTagModel {
+    if (_fm == nil) {
+        AppDelegate* app = [UIApplication sharedApplication].delegate;
+        _fm = app.fm;
+    }
+    return _fm;
+}
 
 - (void)collectData {
 
@@ -37,7 +57,8 @@
     
     cell.ver_margin = 5;
     cell.isDarkTheme = YES;
-    [cell setHotTagsText:@[@"asos", @"brands"]];
+//    [cell setHotTagsText:@[@"asos", @"brands"]];
+    [cell setHotTags:self.fm.recommandsdata];
     cell.isHiddenSepline = YES;
     cell.backgroundColor = [UIColor colorWithRed:0.2039 green:0.2078 blue:0.2314 alpha:1.f];//[UIColor colorWithWhite:0.1882 alpha:1.f];
     
@@ -113,7 +134,13 @@
     sd.actions = self;
     [[_actions getViewController] pushViewController:svc animated:NO];
     svc.delegate = sd;
-    [sd pushExistingData:@[@"abcde", @"brand"]];
+   
+    NSMutableArray* arr = [[NSMutableArray alloc]initWithCapacity:self.fm.recommandsdata.count];
+    for (RecommandTag* tag in self.fm.recommandsdata) {
+        [arr addObject:tag.tag_name];
+    }
+    
+    [sd pushExistingData:[arr copy]];
     return NO;
 }
 
@@ -137,5 +164,15 @@
 
 - (UINavigationController*)getViewController {
     return [_actions getViewController];
+}
+
+#pragma mark -- async query data
+#define BRAND  3
+- (void)asyncQueryDataWithFinishCallback:(SearchCallback)block {
+    [self.fm queryRecommandTagsWithType:BRAND andFinishBlock:^(BOOL success, NSArray *arr_re_tags) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            block(success, arr_re_tags);
+        });
+    }];
 }
 @end
