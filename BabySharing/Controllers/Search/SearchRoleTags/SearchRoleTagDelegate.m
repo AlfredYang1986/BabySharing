@@ -15,8 +15,13 @@
 
 #import "FoundHotTagsCell.h"
 #import "FoundSearchHeader.h"
+#import "HomeTagsController.h"
 
 typedef void(^queryRoleTagFinishBlock)(BOOL success, NSString* msg, NSArray* result);
+
+@interface SearchRoleTagDelegate () <FoundHotTagsCellDelegate>
+
+@end
 
 @implementation SearchRoleTagDelegate {
 //    NSArray* role_data;
@@ -30,6 +35,8 @@ typedef void(^queryRoleTagFinishBlock)(BOOL success, NSString* msg, NSArray* res
 
 @synthesize delegate = _delegate;
 @synthesize actions = _actions;
+
+@synthesize controller = _controller;
 
 #pragma mark -- search protocol
 //- (void)dataWithCallBack:(SearchCallback)block {
@@ -205,6 +212,7 @@ typedef void(^queryRoleTagFinishBlock)(BOOL success, NSString* msg, NSArray* res
    
     cell.isDarkTheme = YES;
     [cell setHotTagsText:final_tag_arr];
+    cell.delegate = self;
     cell.backgroundColor = [UIColor colorWithWhite:0.1098 alpha:1.f];
     
     return cell;
@@ -248,5 +256,20 @@ typedef void(^queryRoleTagFinishBlock)(BOOL success, NSString* msg, NSArray* res
 - (void)addNewItem:(NSString*)item {
     // TODO: something, then call actions
     [_actions addNewItem:item];
+}
+
+#pragma mark -- found
+- (void)recommandTagBtnSelected:(NSString*)tag_name adnType:(NSInteger)tag_type {
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    HomeTagsController* svc = [storyboard instantiateViewControllerWithIdentifier:@"TagSearch"];
+//    svc.tag_name = tag_name;
+//    svc.tag_type = tag_type;
+//    
+//    [_controller.navigationController setNavigationBarHidden:NO animated:YES];
+//    [_controller.navigationController pushViewController:svc animated:YES];
+}
+
+- (void)recommandRoleTagBtnSelected:(NSString*)tag_name {
+    [_actions didSelectItem:tag_name];
 }
 @end

@@ -169,12 +169,13 @@
 
 #pragma mark -- Found Search Delegate
 - (void)recommandTagBtnSelected:(NSString*)tag_name adnType:(NSInteger)tag_type {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    HomeTagsController* svc = [storyboard instantiateViewControllerWithIdentifier:@"TagSearch"];
-    svc.tag_name = tag_name;
-    svc.tag_type = tag_type;
-    
-    [_controller.navigationController setNavigationBarHidden:NO animated:YES];
-    [_controller.navigationController pushViewController:svc animated:YES];
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    HomeTagsController* svc = [storyboard instantiateViewControllerWithIdentifier:@"TagSearch"];
+//    svc.tag_name = tag_name;
+//    svc.tag_type = tag_type;
+//    
+//    [_controller.navigationController setNavigationBarHidden:NO animated:YES];
+//    [_controller.navigationController pushViewController:svc animated:YES];
+    [self didSelectItem:tag_name];
 }
 @end

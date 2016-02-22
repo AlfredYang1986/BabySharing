@@ -113,8 +113,8 @@
         btn.center = CGPointMake(MARGIN + btn.frame.size.width / 2 + offset, _ver_margin + btn.frame.size.height / 2);
         offset += btn.frame.size.width + TAG_MARGIN_BETWEEN;
         
-//        UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(roleTagBtnSelected:)];
-//        [btn addGestureRecognizer:tap];
+        UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(roleTagBtnSelected:)];
+        [btn addGestureRecognizer:tap];
         
         if (offset >= [UIScreen mainScreen].bounds.size.width - 10)
             break;
