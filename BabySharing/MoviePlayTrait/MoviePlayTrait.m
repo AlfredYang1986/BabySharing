@@ -114,11 +114,13 @@
     CMTime time = kCMTimeZero;
     
     for (int index = 0; index < arr.count; ++index) {
-        AVAsset* tmp  = [AVAsset assetWithURL:[arr objectAtIndex:index]];
+        AVAsset *tmp  = [AVAsset assetWithURL:[arr objectAtIndex:index]];
         if (index == 0) {
             time = tmp.duration;
             time.value = 0;
         }
+        
+        NSLog(@"tmp.duration, %lld", tmp.duration.value);
         [videoTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, tmp.duration)
                             ofTrack:[[tmp tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0] atTime:time error:nil];
         

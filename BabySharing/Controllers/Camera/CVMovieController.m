@@ -75,9 +75,9 @@
     // Do any additional setup after loading the view from its nib.
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];  // for < ios 7.0
 
-    trait = [[MoviePlayTrait alloc]init];
+    trait = [[MoviePlayTrait alloc] init];
     trait.delegate = self;
-    movie_list = [[NSMutableArray alloc]init];
+    movie_list = [[NSMutableArray alloc] init];
     isRecording = NO;
     self.view.backgroundColor = [UIColor colorWithWhite:0.1098 alpha:1.f];
     
@@ -365,7 +365,7 @@
     if (!isRecording) {
         
         if (seconds > MOVIE_MAX_SECONDS) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Moive is too long" message:@"No movie should over 15 seconds" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"视频过长" message:@"视频不准超过15秒" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
             [alert show];
             return;
         }
@@ -419,10 +419,14 @@
 }
 
 - (void)didSelectMergeBtn {
-    if (movie_list.count > 0) {
+    // 如果没有录制视频怎么办？
+    if (movie_list.count > 1) {
+        // 合成视频和音频
         [trait mergeMultipleAssertWithURLs:movie_list andAudio:nil];
-    } else {
+    } else if(movie_list.count == 1){
         [self MergeMovieSuccessfulWithFinalURL:[movie_list firstObject]];
+    } else {
+        [[[UIAlertView alloc] initWithTitle:@"通知" message:@"当前未录制视频" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
     }
 }
 

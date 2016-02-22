@@ -121,7 +121,7 @@
         //        header.headImg.image = img;
         //        header.headImg.frame = CGRectMake(header.headImg.frame.origin.x, header.headImg.frame.origin.y, 25, 25);
         //        header.headImg.contentMode = UIViewContentModeScaleAspectFit;
-        header.headLabell.text = @"热门标签";
+        header.headLabell.text = @"热门角色";
         header.headLabell.textColor = [UIColor colorWithWhite:0.3059 alpha:1.f];
         header.headLabell.font = [UIFont systemFontOfSize:14.f];
         

@@ -44,20 +44,20 @@
     
     /***********************************************************************/
     // photo
-    CALayer* img_layer;
+    CALayer *img_layer;
     
-    NSMutableDictionary* function_dic;
+    NSMutableDictionary *function_dic;
     
-    NSMutableDictionary* tags;
+    NSMutableDictionary *tags;
     
-    NSMutableArray* paste_img_arr;
+    NSMutableArray *paste_img_arr;
     CGPoint point;
-    UIView* cur_long_press;
+    UIView *cur_long_press;
     
-    PhotoTagEditView* edit;
-    UIView* edit_bg;
+    PhotoTagEditView *edit;
+    UIView *edit_bg;
     
-    UIImage* result_img;
+    UIImage *result_img;
    
     /***********************************************************************/
     // movie
@@ -496,16 +496,16 @@
 
 #pragma mark -- adding tag protocol
 - (void)didSelectTag:(NSString *)tag andType:(TagType)type {
-    // TODO: adding tag
+    // TODO: adding tagdd
     NSLog(@"adding tags: %@, %d", tag, (int)type);
     
     if ([tags.allKeys containsObject:[NSNumber numberWithInteger:type]]) {
-        UIView* last = [tags objectForKey:[NSNumber numberWithInteger:type]];
+        UIView *last = [tags objectForKey:[NSNumber numberWithInteger:type]];
         [last removeFromSuperview];
         [tags removeObjectForKey:[NSNumber numberWithInteger:type]];
     }
     
-    PhotoTagView* tmp = [[PhotoTagView alloc]initWithTagName:tag andType:type];
+    PhotoTagView *tmp = [[PhotoTagView alloc]initWithTagName:tag andType:type];
     CGFloat width = mainContentView.frame.size.width;
     CGFloat height = mainContentView.frame.size.height;
     CGPoint point_tmp;
@@ -530,7 +530,6 @@
     [mainContentView bringSubviewToFront:tmp];
     
     [tags setObject:tmp forKey:[NSNumber numberWithInteger:type]];
-//    [already_taged_views setObject:tmp forKey:[NSNumber numberWithInt:type]];
     
     UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleTagTapped:)];
     [tmp addGestureRecognizer:tap];
@@ -853,7 +852,7 @@
         sd.delegate = svc;
         sd.actions = self;
         searchControllerTitle = @"添加时刻标签";
-        current_type = TagTypeLocation;
+        current_type = TagTypeTime;
         [self.navigationController pushViewController:svc animated:YES];
         svc.delegate = sd;
         

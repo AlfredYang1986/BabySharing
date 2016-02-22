@@ -2849,7 +2849,6 @@
 				TargetAttributes = {
 					EEAAC8F71B44E81A00D05C0B = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = V6843SSXWV;
 					};
 					EEAAC9131B44E81A00D05C0B = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -3356,6 +3355,7 @@
 					"-ObjC",
 					"-fobjc-arc",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = BS.BabySharing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -3393,6 +3393,7 @@
 					"-ObjC",
 					"-fobjc-arc",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = BS.BabySharing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

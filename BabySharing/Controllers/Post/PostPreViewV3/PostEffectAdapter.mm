@@ -232,7 +232,9 @@ UIView* tagForPhoto(PostEffectAdapter* adapter, CGFloat height) {
    
 #define TAG_BTN_MARGIN_BETWEEN          (50 + TAG_BTN_WIDTH)
     [bg addSubview:addTagBtn(@"品牌", CGRectMake(0, 0, 3 * button_height, button_height), CGPointMake(bg.frame.size.width / 2 - TAG_BTN_MARGIN_BETWEEN, bg.frame.size.height / 2), adapter, @selector(didSelectTagForPhoto:), [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"tag_tag"] ofType:@"png"]])];
+    
     [bg addSubview:addTagBtn(@"时刻", CGRectMake(0, 0, 3 * button_height, button_height), CGPointMake(bg.frame.size.width / 2, bg.frame.size.height / 2), adapter, @selector(didSelectTagForPhoto:), [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"tag_time"] ofType:@"png"]])];
+    
     [bg addSubview:addTagBtn(@"地点", CGRectMake(0, 0, 3 * button_height, button_height), CGPointMake(bg.frame.size.width / 2 + TAG_BTN_MARGIN_BETWEEN, bg.frame.size.height / 2), adapter, @selector(didSelectTagForPhoto:), [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"tag_location"] ofType:@"png"]])];
     
     [adapter.content_parent_view addSubview:bg];
@@ -285,7 +287,6 @@ UIView* coverForMovie(PostEffectAdapter* adapter, CGFloat height) {
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     UIView* reVal = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, height)];
     reVal.backgroundColor = [UIColor colorWithWhite:0.1098 alpha:1.f];
-    
     AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:adapter.movie_url options:nil];
   
     /**
