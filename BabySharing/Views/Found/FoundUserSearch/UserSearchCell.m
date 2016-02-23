@@ -31,7 +31,7 @@
 
 #define CELL_COUNTS         3
 
-@interface UserSearchCell () <UITableViewDataSource, UITableViewDelegate, AlbumTableCellDelegate> {
+@interface UserSearchCell () <UITableViewDataSource, UITableViewDelegate, AlbumTableCellDelegate, MessageFriendsCellDelegate> {
     UITableView* queryView;
 //    UIView* marginView;
     
@@ -46,6 +46,9 @@
 @end
 
 @implementation UserSearchCell
+
+@synthesize delegate = _delegate;
+@synthesize user_id = _user_id;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -141,6 +144,7 @@
         }
         
 //        NSDictionary* tmp = [data_arr objectAtIndex:indexPath.row];
+        cell.delegate = self;
         cell.cellHeight = CELL_HEADER_HEIGHT;
         [cell setUserScreenPhoto:screen_photo];
         [cell setRelationship:2];
@@ -254,5 +258,14 @@
 
 - (void)didUnSelectOneImageAtIndex:(NSInteger)index {
     // do nothing
+}
+
+#pragma mark -- message friend cell delegate
+- (void)didSelectedScreenPhoto:(NSString *)user_id {
+    [_delegate didSelectedUserScreenPhoto:_user_id];
+}
+
+- (void)didSelectedRelationBtn:(NSString *)user_id andCurrentRelation:(UserPostOwnerConnections)connections {
+//    [_delegate didSelectedUserContentImages:0 andUserID:user_id];
 }
 @end

@@ -37,6 +37,10 @@
 @synthesize lineMargin = _lineMargin;
 @synthesize cellHeight = _cellHeight;
 
+@synthesize delegate = _delegate;
+@synthesize user_id = _user_id;
+@synthesize connections = _connections;
+
 + (CGFloat)preferredHeight {
     return PREFERRED_HEIGHT;
 }
@@ -52,6 +56,10 @@
     _user_screen_photo.layer.borderWidth = 1.5f;
     _user_screen_photo.layer.cornerRadius = IMG_WIDTH / 2;
     _user_screen_photo.clipsToBounds = YES;
+   
+    _user_screen_photo.userInteractionEnabled = YES;
+    UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didSelectedScreenPhoto)];
+    [_user_screen_photo addGestureRecognizer:tap];
    
     if (_userRoleTagBtn == nil) {
         _userRoleTagBtn = [[OBShapedButton alloc]init];
@@ -111,6 +119,8 @@
 }
 
 - (void)setRelationship:(UserPostOwnerConnections)connections {
+    _connections = connections;
+    
     OBShapedButton* tmp = [self viewWithTag:-1];
     if (tmp == Nil) {
         tmp = [[OBShapedButton alloc]init];
@@ -192,5 +202,14 @@
     _lineMargin = lineMargin;
     
     line.frame = CGRectMake(_lineMargin, _cellHeight - 1, self.bounds.size.width -  2 * _lineMargin, 1);
+}
+
+#pragma mark -- action
+- (void)didSelectedScreenPhoto {
+    [_delegate didSelectedScreenPhoto:@""];
+}
+
+- (void)didSelectedRelationBtn {
+    [_delegate didSelectedRelationBtn:@"" andCurrentRelation:UserPostOwnerConnectionsSamePerson];
 }
 @end

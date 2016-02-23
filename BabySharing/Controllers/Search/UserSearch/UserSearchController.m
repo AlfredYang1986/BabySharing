@@ -11,8 +11,10 @@
 #import "UserSearchModel.h"
 
 #import "FoundHotTagsCell.h"
+#import "PersonalCentreTmpViewController.h"
+#import "PersonalCentreOthersDelegate.h"
 
-@interface UserSearchController () <UITableViewDataSource, UITableViewDelegate>
+@interface UserSearchController () <UITableViewDataSource, UITableViewDelegate, UserSearchCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *queryView;
 @end
@@ -60,6 +62,10 @@
     [self asyncQueryData];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
+
 - (void)didPopViewControllerBtn {
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -105,7 +111,9 @@
     }
   
     NSDictionary* dic = [_um.userSearchResult objectAtIndex:indexPath.row];
-   
+ 
+    cell.delegate = self;
+    cell.user_id = [dic objectForKey:@"user_id"];
     [cell setUserHeaderWithScreenName:[dic objectForKey:@"screen_name"] roleTag:[dic objectForKey:@"role_tag"] andScreenPhoto:[dic objectForKey:@"screen_photo"]];
     [cell setUserContentImages:[dic objectForKey:@"preview"]];
     return cell;
@@ -113,5 +121,20 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return [UserSearchCell preferredHeight];
+}
+
+#pragma mark -- user search cell delegate
+- (void)didSelectedUserScreenPhoto:(NSString*)user_id {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    PersonalCentreTmpViewController* pc = [storyboard instantiateViewControllerWithIdentifier:@"PersonalCenter"];
+    PersonalCentreOthersDelegate* delegate = [[PersonalCentreOthersDelegate alloc]init];
+    pc.current_delegate = delegate;
+    pc.owner_id = user_id;
+    [self.navigationController setNavigationBarHidden:NO];
+    [self.navigationController pushViewController:pc animated:YES];
+}
+
+- (void)didSelectedUserContentImages:(NSInteger)index andUserID:(NSString*)user_id {
+    
 }
 @end

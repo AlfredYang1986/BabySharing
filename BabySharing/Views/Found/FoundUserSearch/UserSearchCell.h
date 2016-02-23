@@ -8,7 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol UserSearchCellDelegate <NSObject>
+
+- (void)didSelectedUserScreenPhoto:(NSString*)user_id;
+- (void)didSelectedUserContentImages:(NSInteger)index andUserID:(NSString*)user_id;
+@end
+
 @interface UserSearchCell : UITableViewCell
+
+@property (nonatomic, strong) NSString* user_id;
+@property (nonatomic, weak) id<UserSearchCellDelegate> delegate;
 
 + (CGFloat)preferredHeight;
 

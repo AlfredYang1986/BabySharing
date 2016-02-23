@@ -9,11 +9,21 @@
 #import <UIKit/UIKit.h>
 #import "ModelDefines.h"
 
+@protocol MessageFriendsCellDelegate <NSObject>
+
+- (void)didSelectedScreenPhoto:(NSString*)user_id;
+- (void)didSelectedRelationBtn:(NSString*)user_id andCurrentRelation:(UserPostOwnerConnections)connections;
+@end
+
 @interface MessageFriendsCell : UITableViewCell
 
 @property (nonatomic, setter=setHiddenLine:) BOOL isHiddenLine;
 @property (nonatomic, setter=setLineMargin:) CGFloat lineMargin;
 @property (nonatomic, setter=setCellHeight:) CGFloat cellHeight;
+
+@property (nonatomic, weak) id<MessageFriendsCellDelegate> delegate;
+@property (nonatomic, strong) NSString* user_id;
+@property (nonatomic, setter=setRelationship:) UserPostOwnerConnections connections;
 
 + (CGFloat)preferredHeight;
 
