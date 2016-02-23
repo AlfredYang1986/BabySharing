@@ -24,6 +24,7 @@
 @property (strong, nonatomic) IBOutlet UIView *chatingView; // 47
 @property (strong, nonatomic) IBOutlet UIView *funcActArea;
 @property (strong, nonatomic) IBOutlet UIButton *funcBtn;
+@property (strong, nonatomic) UIImageView *playImageView;
 
 @property (nonatomic) PostPreViewType type;
 @property (nonatomic, strong) NSURL* movieURL;

@@ -9,6 +9,7 @@
 #import "QueryHeader.h"
 #import "TmpFileStorageModel.h"
 #import "OBShapedButton.h"
+#import "Tools.h"
 
 #define HEADER_HEIGHT                   46
 #define MARGIN                          8
@@ -140,10 +141,11 @@
 }
 
 - (void)setUserName:(NSString*)name {
-    _userNameLabel.text = @"123456789123456789";
+    
+    _userNameLabel.text = [Tools subStringWithByte:18 str:name];
     [_userNameLabel sizeToFit];
     _userNameLabel.center = CGPointMake(USER_IMG_MARGIN + USER_IMG_WIDTH + USER_IMG_MARGIN + _userNameLabel.frame.size.width / 2, USER_NAME_TOP_MARGIN + _userNameLabel.frame.size.height / 2);
-    _userNameLabel.text = name;
+    
 }
 
 - (void)setTimeText:(NSString*)time {
@@ -222,8 +224,10 @@
         [_userRoleTagBtn addSubview:label];
     }
     
-    label.text = role_tag;
+    label.text = [Tools subStringWithByte:14 str:role_tag];
     [label sizeToFit];
+    label.text = role_tag;
+    
     label.center = CGPointMake(5 + label.frame.size.width / 2, ROLE_TAG_MARGIN + label.frame.size.height / 2);
     
     _userRoleTagBtn.frame = CGRectMake(_userNameLabel.center.x + _userNameLabel.frame.size.width / 2 + TAG_2_NAME_MARGIN, 6, label.frame.size.width + 10 + ROLE_TAG_MARGIN, label.frame.size.height + 2 * ROLE_TAG_MARGIN);

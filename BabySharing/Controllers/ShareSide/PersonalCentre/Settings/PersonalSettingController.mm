@@ -241,7 +241,9 @@
     }
     pickerImage.delegate = self;
     pickerImage.allowsEditing = NO;
-    [self presentModalViewController:pickerImage animated:YES];
+    [self presentViewController:pickerImage animated:YES completion:^{
+        
+    }];
 }
 
 - (void)openAppCamera {
@@ -254,15 +256,42 @@
     //sourceType = UIImagePickerControllerSourceTypePhotoLibrary; //图片库
     //sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum; //保存的相片
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];//初始化
-    picker.delegate = self;
-    picker.allowsEditing = YES;//设置可编辑
-    picker.sourceType = sourceType;
-    [self presentModalViewController:picker animated:YES];//进入照相界面
+    if ([UIImagePickerController isSourceTypeAvailable:sourceType]) {
+        picker.delegate = self;
+        picker.allowsEditing = YES;//设置可编辑
+        picker.sourceType = sourceType;
+    }
+    
+    [self presentViewController:picker animated:YES completion:nil];//进入照相界面
+//    [self presentModalViewController:picker animated:YES];//进入照相界面 废弃
 }
 
 #pragma mark -- UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(nullable NSDictionary<NSString *,id> *)editingInfo {
-    
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    [self updateImage:image];
+}
+
+//完成拍照
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    [picker dismissViewControllerAnimated:YES completion:^{}];
+    UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
+    if (image == nil) {
+        image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    }
+    if (image != nil) {
+        [self updateImage:image];
+    }
+}
+
+//用户取消拍照
+-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)updateImage:(UIImage *)image {
     dispatch_queue_t aq = dispatch_queue_create("weibo profile img queue", nil);
     dispatch_async(aq, ^{
         /**
@@ -283,7 +312,7 @@
             [dic setValue:[lm getCurrentAuthToken] forKey:@"auth_token"];
             [dic setValue:[lm getCurrentUserID] forKey:@"user_id"];
             [dic setValue:img_name forKey:@"screen_photo"];
-//            [lm updateUserProfile:[dic copy]];
+            //            [lm updateUserProfile:[dic copy]];
             if ([lm updateUserProfile:[dic copy]]) {
                 /**
                  * 4. refresh UI
@@ -291,9 +320,11 @@
                 dispatch_async(dispatch_get_main_queue(), ^(void){
                     [_delegate personalDetailChanged:[dic copy]];
                     [_queryView reloadData];
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"通知" message:@"照片修改成功" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil];
+                    [alert show];
                 });
             }
-           
+            
             /**
              * 3. updata picture
              */

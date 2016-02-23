@@ -120,6 +120,15 @@
     _imgView.contentMode = UIViewContentModeScaleToFill;
     [self addSubview:_imgView];
     
+    // 播放按钮
+    _playImageView = [[UIImageView alloc] init];
+    NSString * yyBundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSBundle *yyResourceBundle = [NSBundle bundleWithPath:yyBundlePath];
+    UIImage *image = [UIImage imageNamed:[yyResourceBundle pathForResource:[NSString stringWithFormat:@"playvideo"] ofType:@"png"]];
+    [_imgView addSubview:_playImageView];
+    _playImageView.image = image;
+    [_playImageView sizeToFit];
+    
     _imgView.userInteractionEnabled = YES;
     UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didClickImage:)];
     [_imgView addGestureRecognizer:tap];
@@ -225,6 +234,8 @@
     offset_y += CHATING_VIEW_HEIGHT;
     _bkgView.frame = CGRectMake(0, offset_y, width, DESCRIPTION_VIEW_HEIGHT);
 //    _funcBtn.frame = CGRectMake(width - FUNC_BTN_WIDTH - HER_MARGIN, FUNC_BTN_TOP_MARGIN, FUNC_BTN_WIDTH, FUNC_BTN_WIDTH);
+    _playImageView.hidden = self.type == PostPreViewMovie ? NO : YES;
+    _playImageView.center = CGPointMake(CGRectGetWidth(_imgView.frame) - CGRectGetWidth(_playImageView.frame)/2 - 5, CGRectGetHeight(_playImageView.frame)/2 + 5);
 }
 
 - (void)createTagsWithContentData {

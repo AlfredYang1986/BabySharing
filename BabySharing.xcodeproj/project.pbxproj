@@ -59,6 +59,8 @@
 		A0B7A7241C7AE42B00D78E6E /* TagSearchModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A0B7A7221C7AE42B00D78E6E /* TagSearchModel.xcdatamodeld */; };
 		A0B7A7571C7B0FDD00D78E6E /* TagSearchModelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B7A7561C7B0FDD00D78E6E /* TagSearchModelManager.m */; };
 		A0B7A75D1C7BF20B00D78E6E /* TagSearchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B7A75B1C7BF20B00D78E6E /* TagSearchModel.m */; };
+		A0B7A7611C7C0B9100D78E6E /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B7A7601C7C0B9100D78E6E /* Tools.m */; };
+		A0B7A7631C7C23CC00D78E6E /* YYBoundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A0B7A7621C7C23CC00D78E6E /* YYBoundle.bundle */; };
 		A0D0D95C1C76CB4000BF416E /* libgotyeapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D0D95A1C76CB4000BF416E /* libgotyeapi.a */; };
 		A0D0D9631C76D38000BF416E /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D0D9621C76D38000BF416E /* libGPUImage.a */; };
 		EE03E9831B4FABFB00F21EF5 /* AlbumModule.m in Sources */ = {isa = PBXBuildFile; fileRef = EE03E9821B4FABFB00F21EF5 /* AlbumModule.m */; };
@@ -230,7 +232,6 @@
 		EEAACD1F1B44E90400D05C0B /* SGActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACC1F1B44E90400D05C0B /* SGActionView.m */; };
 		EEAACD201B44E90400D05C0B /* SGAlertMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACC211B44E90400D05C0B /* SGAlertMenu.m */; };
 		EEAACD411B44E90400D05C0B /* PhotoPreViewEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACC6A1B44E90400D05C0B /* PhotoPreViewEditView.m */; };
-		EEAACD5B1B44E91A00D05C0B /* YYBoundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EEAACD5A1B44E91A00D05C0B /* YYBoundle.bundle */; };
 		EEAACD741B44EA2D00D05C0B /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EEAACD601B44EA2D00D05C0B /* TencentOpenApi_IOS_Bundle.bundle */; };
 		EEAACD751B44EA2D00D05C0B /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EEAACD621B44EA2D00D05C0B /* libWeChatSDK.a */; };
 		EEAACD761B44EA2D00D05C0B /* read_me.txt in Resources */ = {isa = PBXBuildFile; fileRef = EEAACD631B44EA2D00D05C0B /* read_me.txt */; };
@@ -449,6 +450,9 @@
 		A0B7A7561C7B0FDD00D78E6E /* TagSearchModelManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagSearchModelManager.m; sourceTree = "<group>"; };
 		A0B7A75A1C7BF20B00D78E6E /* TagSearchModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagSearchModel.h; sourceTree = "<group>"; };
 		A0B7A75B1C7BF20B00D78E6E /* TagSearchModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagSearchModel.m; sourceTree = "<group>"; };
+		A0B7A75F1C7C0B9100D78E6E /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
+		A0B7A7601C7C0B9100D78E6E /* Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
+		A0B7A7621C7C23CC00D78E6E /* YYBoundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = YYBoundle.bundle; sourceTree = "<group>"; };
 		A0D0D95A1C76CB4000BF416E /* libgotyeapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libgotyeapi.a; sourceTree = "<group>"; };
 		A0D0D9621C76D38000BF416E /* libGPUImage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGPUImage.a; sourceTree = "<group>"; };
 		EE03E9811B4FABFB00F21EF5 /* AlbumModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumModule.h; sourceTree = "<group>"; };
@@ -789,7 +793,6 @@
 		EEAACC6C1B44E90400D05C0B /* PhotoTagControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoTagControlView.m; sourceTree = "<group>"; };
 		EEAACC721B44E90400D05C0B /* PhotoTagView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoTagView.h; sourceTree = "<group>"; };
 		EEAACC731B44E90400D05C0B /* PhotoTagView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoTagView.m; sourceTree = "<group>"; };
-		EEAACD5A1B44E91A00D05C0B /* YYBoundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = YYBoundle.bundle; sourceTree = "<group>"; };
 		EEAACD5F1B44EA2D00D05C0B /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
 		EEAACD601B44EA2D00D05C0B /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
 		EEAACD621B44EA2D00D05C0B /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
@@ -1192,6 +1195,15 @@
 				A0B7A75B1C7BF20B00D78E6E /* TagSearchModel.m */,
 			);
 			path = TagSearchModel;
+			sourceTree = "<group>";
+		};
+		A0B7A75E1C7C0B8300D78E6E /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				A0B7A75F1C7C0B9100D78E6E /* Tools.h */,
+				A0B7A7601C7C0B9100D78E6E /* Tools.m */,
+			);
+			path = Tools;
 			sourceTree = "<group>";
 		};
 		A0D0D9591C76CB4000BF416E /* libs */ = {
@@ -1679,6 +1691,7 @@
 		EEAAC8FA1B44E81A00D05C0B /* BabySharing */ = {
 			isa = PBXGroup;
 			children = (
+				A0B7A75E1C7C0B8300D78E6E /* Tools */,
 				EEAACDB51B44F61700D05C0B /* Main */,
 				EEAACAF71B44E90300D05C0B /* Controllers */,
 				EEAACB591B44E90300D05C0B /* INTUAnimationEngine */,
@@ -1695,10 +1708,10 @@
 		EEAAC8FB1B44E81A00D05C0B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A0B7A7621C7C23CC00D78E6E /* YYBoundle.bundle */,
 				70D22C421C3A16F6008B8403 /* DongDaBoundle.bundle */,
 				EE7416251B5B8CDF002CA1BC /* AreaCodeJson.txt */,
 				EE7415D61B5B7740002CA1BC /* icon.png */,
-				EEAACD5A1B44E91A00D05C0B /* YYBoundle.bundle */,
 				EEAAC8FC1B44E81A00D05C0B /* Info.plist */,
 				EEAAC8FD1B44E81A00D05C0B /* main.m */,
 				EE7415CE1B5B70D5002CA1BC /* InfoPlist.strings */,
@@ -2917,6 +2930,7 @@
 				EEBE1B891C17CB4E00EAA9D2 /* FoundSearchResultCell.xib in Resources */,
 				7041A5BD1C575A8700FEBFCD /* MessageChatGroupHeader2.xib in Resources */,
 				EE0DCE7E1C081FD400B5386B /* LaunchScreen.xib in Resources */,
+				A0B7A7631C7C23CC00D78E6E /* YYBoundle.bundle in Resources */,
 				EE7C68731B82D31F0003C593 /* CycleOverCell.xib in Resources */,
 				EEAACD741B44EA2D00D05C0B /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				EE9F736F1B8576C400F800DC /* MessageChatGroupHeader.xib in Resources */,
@@ -2926,7 +2940,6 @@
 				EED64D4C1B8189C6008CB134 /* CycleAddKidsFooter.xib in Resources */,
 				EE7415D71B5B7740002CA1BC /* icon.png in Resources */,
 				EEBE1B841C17CB4E00EAA9D2 /* FoundMotherChoiceCell.xib in Resources */,
-				EEAACD5B1B44E91A00D05C0B /* YYBoundle.bundle in Resources */,
 				EE7415C91B5B7097002CA1BC /* Main.storyboard in Resources */,
 				EEAACCA51B44E90400D05C0B /* MovieNib.storyboard in Resources */,
 				EEF29BC41C0ED2C2004B9511 /* ContentCardView.xib in Resources */,
@@ -3028,6 +3041,7 @@
 				EEDCF6A31B9ABE07005F4F4D /* SystemSettingModel.m in Sources */,
 				EEBE1B8E1C17D2E500EAA9D2 /* UserSearchController.m in Sources */,
 				70530B131C3F9D1E00505121 /* SearchSegImgTextItem.m in Sources */,
+				A0B7A7611C7C0B9100D78E6E /* Tools.m in Sources */,
 				EED774D61BABF86D001C9B57 /* HomeSearchController.m in Sources */,
 				706D7A231C757379006750AC /* RecommandRoleTag.m in Sources */,
 				EEB4C8C01BFC823C0023E2AD /* QueryHeader.m in Sources */,
