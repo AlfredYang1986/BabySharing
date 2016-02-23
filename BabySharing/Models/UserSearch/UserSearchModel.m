@@ -15,6 +15,7 @@
 
 @synthesize delegate = _delegate;
 @synthesize userSearchResult = _userSearchResult;
+@synthesize lastSearchResult = _lastSearchResult;
 
 - (id)initWithDelegate:(AppDelegate*)delegate {
     self = [super init];

@@ -731,10 +731,10 @@
         return;
     }
     
-    CGFloat step_length = [QueryHeader preferredHeight] + [QueryCell preferredHeightWithDescription:@"Any Word"] + HEADER_MARGIN_TO_SCREEN + 2;
-    CGFloat height = [UIScreen mainScreen].bounds.size.height - 64 - 49;
-    NSInteger step = (scrollView.contentOffset.y + height) / step_length;
-    [scrollView setContentOffset:CGPointMake(0, step_length * (step - 1)) animated:YES];
+//    CGFloat step_length = [QueryHeader preferredHeight] + [QueryCell preferredHeightWithDescription:@"Any Word"] + HEADER_MARGIN_TO_SCREEN + 2;
+//    CGFloat height = [UIScreen mainScreen].bounds.size.height - 64 - 49;
+//    NSInteger step = (scrollView.contentOffset.y + height) / step_length;
+//    [scrollView setContentOffset:CGPointMake(0, step_length * (step - 1)) animated:YES];
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
@@ -743,9 +743,9 @@
         return;
     }
 
-    CGFloat step_length = [QueryHeader preferredHeight] + [QueryCell preferredHeightWithDescription:@"Any Word"] + HEADER_MARGIN_TO_SCREEN + 2;
-    CGFloat height = [UIScreen mainScreen].bounds.size.height - 64 - 49;
-    NSInteger step = (scrollView.contentOffset.y + height) / step_length;
-    [scrollView setContentOffset:CGPointMake(0, step_length * (step - 1)) animated:YES];
+//    CGFloat step_length = [QueryHeader preferredHeight] + [QueryCell preferredHeightWithDescription:@"Any Word"] + HEADER_MARGIN_TO_SCREEN + 2;
+//    CGFloat height = [UIScreen mainScreen].bounds.size.height - 64 - 49;
+//    NSInteger step = (scrollView.contentOffset.y + height) / step_length;
+//    [scrollView setContentOffset:CGPointMake(0, step_length * (step - 1)) animated:YES];
 }
 @end

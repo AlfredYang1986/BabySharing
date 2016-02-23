@@ -81,6 +81,7 @@
     NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
     
     NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:[QUERY_HOST_DOMAIN stringByAppendingString:QUERY_REFRESH_HOME]]];
+//    NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:USER_SEARCH_POST]];
     
     if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
         NSArray* reVal = [result objectForKey:@"result"];
@@ -116,6 +117,7 @@
     NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
     
     NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:[QUERY_HOST_DOMAIN stringByAppendingString:QUERY_REFRESH_HOME]]];
+//    NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:USER_SEARCH_POST]];
     
     if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
         NSArray* reVal = [result objectForKey:@"result"];

@@ -49,6 +49,7 @@
 
 @synthesize delegate = _delegate;
 @synthesize user_id = _user_id;
+@synthesize screen_name = _screen_name;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -252,8 +253,9 @@
 //    hv.nav_title = @"辣妈的选择";
 //    //    hv.nav_title = @"Mother's Choice";
 //    [self.navigationController pushViewController:hv animated:YES];
-    NSIndexPath* path = [[NSIndexPath alloc]initWithIndex:0];
-    [queryView.delegate tableView:queryView didSelectRowAtIndexPath:path];
+//    NSIndexPath* path = [[NSIndexPath alloc]initWithIndex:0];
+//    [queryView.delegate tableView:queryView didSelectRowAtIndexPath:path];
+    [_delegate didSelectedUserContentImages:0 andUserID:_user_id andUserScreenName:_screen_name];
 }
 
 - (void)didUnSelectOneImageAtIndex:(NSInteger)index {

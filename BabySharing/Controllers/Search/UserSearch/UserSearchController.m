@@ -10,6 +10,9 @@
 #import "UserSearchCell.h"
 #import "UserSearchModel.h"
 
+#import "HomeViewController.h"
+#import "UserHomeViewDataDelegate.h"
+#import "AppDelegate.h"
 #import "FoundHotTagsCell.h"
 #import "PersonalCentreTmpViewController.h"
 #import "PersonalCentreOthersDelegate.h"
@@ -114,6 +117,7 @@
  
     cell.delegate = self;
     cell.user_id = [dic objectForKey:@"user_id"];
+    cell.screen_name = [dic objectForKey:@"screen_name"];
     [cell setUserHeaderWithScreenName:[dic objectForKey:@"screen_name"] roleTag:[dic objectForKey:@"role_tag"] andScreenPhoto:[dic objectForKey:@"screen_photo"]];
     [cell setUserContentImages:[dic objectForKey:@"preview"]];
     return cell;
@@ -134,7 +138,19 @@
     [self.navigationController pushViewController:pc animated:YES];
 }
 
-- (void)didSelectedUserContentImages:(NSInteger)index andUserID:(NSString*)user_id {
-    
+- (void)didSelectedUserContentImages:(NSInteger)index andUserID:(NSString*)user_id andUserScreenName:(NSString*)screen_name {
+
+    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    [app.om queryContentsByUser:app.lm.current_user_id withToken:app.lm.current_auth_token andOwner:user_id withStartIndex:index finishedBlock:^(BOOL success) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        HomeViewController* hv = [storyboard instantiateViewControllerWithIdentifier:@"HomeView"];
+        hv.isPushed = YES;
+        hv.delegate = [[UserHomeViewDataDelegate alloc]init];
+        [hv.delegate pushExistingData:app.om.querydata];
+        [hv.delegate setSelectIndex:index];
+        hv.nav_title = screen_name;
+        //    hv.nav_title = @"Mother's Choice";
+        [self.navigationController pushViewController:hv animated:YES];
+    }];
 }
 @end

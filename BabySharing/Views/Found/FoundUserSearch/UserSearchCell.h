@@ -11,12 +11,13 @@
 @protocol UserSearchCellDelegate <NSObject>
 
 - (void)didSelectedUserScreenPhoto:(NSString*)user_id;
-- (void)didSelectedUserContentImages:(NSInteger)index andUserID:(NSString*)user_id;
+- (void)didSelectedUserContentImages:(NSInteger)index andUserID:(NSString*)user_id andUserScreenName:(NSString*)screen_name;
 @end
 
 @interface UserSearchCell : UITableViewCell
 
 @property (nonatomic, strong) NSString* user_id;
+@property (nonatomic, strong) NSString* screen_name;
 @property (nonatomic, weak) id<UserSearchCellDelegate> delegate;
 
 + (CGFloat)preferredHeight;
