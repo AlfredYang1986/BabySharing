@@ -17,4 +17,5 @@
 
 + (void)refreshMessageSettingWithUserID:(NSString*)user_id andSetting:(NSDictionary*)setting inContext:(NSManagedObjectContext*)context;
 + (MessageSetting*)queryMessageSettingWithUserID:(NSString*)user_id inContext:(NSManagedObjectContext*)context;
+
 @end

@@ -33,7 +33,7 @@
     [_queryView registerClass:[QueryHeader class] forHeaderFooterViewReuseIdentifier:@"query header"];
     _queryView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _queryView.scrollEnabled = NO;
-    
+
 //    _queryView.delegate = datasource;
 //    _queryView.dataSource = datasource;
     
@@ -71,6 +71,7 @@
     CGFloat w = [UIScreen mainScreen].bounds.size.width - 21 - 8;
     _queryView.frame = CGRectMake(4, 4, w, h);
     _queryView.clipsToBounds = YES;
+    
     
     [CATransaction begin];
     [CATransaction setDisableActions:YES];

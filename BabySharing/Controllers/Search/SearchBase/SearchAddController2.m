@@ -8,12 +8,16 @@
 
 #import "SearchAddController2.h"
 #import "DongDaSearchBar2.h"
+#import "AppDelegate.h"
+#import "TagSearchModel.h"
 
 @interface SearchAddController2 ()
 
 @property (weak, nonatomic) IBOutlet UIView *bkView;
 @property (weak, nonatomic) IBOutlet DongDaSearchBar2 *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *queryView;
+@property (weak, nonatomic) LoginModel *loginModel;
+
 @end
 
 @implementation SearchAddController2
@@ -34,7 +38,11 @@
     
     _searchBar.showsCancelButton = YES;
     _searchBar.placeholder = @"搜索角色标签";
+    _searchBar.backgroundColor = [UIColor redColor];
     [_searchBar becomeFirstResponder];
+    // 获取当前的用户id
+    self.loginModel = [AppDelegate defaultAppDelegate].lm;
+    
     
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     _searchBar.bounds = CGRectMake(0, 0, width + 10, 56);

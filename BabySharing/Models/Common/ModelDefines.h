@@ -160,6 +160,7 @@ static const NSString* kUserPostOwnerConnectionsFriends = @"kUserPostOwnerConnec
 
 #pragma mark -- database
 #define LOCALDB_LOGIN                       @"loginData.sqlite"
+#define LOCALDB_TAGSEARCH                   @"tagSearch.sqlite"
 #define LOCALDB_QUERY                       @"quertData.sqlite"
 #define LOCALDB_MESSAGEG_NOTIFICATION       @"notifyData.sqlite"
 #define LOCALDB_TAG_QUERY                   @"tagQuery.sqlite"

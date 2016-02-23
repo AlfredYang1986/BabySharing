@@ -137,13 +137,13 @@
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SearchViewController" bundle:nil];
     SearchAddController2* svc = [storyboard instantiateViewControllerWithIdentifier:@"SearchAdd2"];
-    SearchAddBrandsDelegate* sd = [[SearchAddBrandsDelegate alloc]init];
+    SearchAddBrandsDelegate* sd = [[SearchAddBrandsDelegate alloc] init];
     sd.delegate = svc;
     sd.actions = self;
     [[_actions getViewController] pushViewController:svc animated:NO];
     svc.delegate = sd;
    
-    NSMutableArray* arr = [[NSMutableArray alloc]initWithCapacity:self.fm.recommandsdata.count];
+    NSMutableArray* arr = [[NSMutableArray alloc] initWithCapacity:self.fm.recommandsdata.count];
     for (RecommandTag* tag in self.fm.recommandsdata) {
         [arr addObject:tag.tag_name];
     }

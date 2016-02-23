@@ -49,7 +49,7 @@
     //    });
 }
 
-- (id)initWithDelegate:(AppDelegate*)app {
+- (id)initWithDelegate:(AppDelegate *)app {
     self = [super init];
     if (self) {
         
@@ -59,7 +59,7 @@
          */
         NSString* docs=[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
         NSURL* url =[NSURL fileURLWithPath:[docs stringByAppendingPathComponent:LOCALDB_RELATIONSHIP]];
-        _doc = (UIManagedDocument*)[[UIManagedDocument alloc]initWithFileURL:url];
+        _doc = (UIManagedDocument *)[[UIManagedDocument alloc] initWithFileURL:url];
         
         if (![[NSFileManager defaultManager]fileExistsAtPath:[url path] isDirectory:nil]) {
             [_doc saveToURL:url forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {

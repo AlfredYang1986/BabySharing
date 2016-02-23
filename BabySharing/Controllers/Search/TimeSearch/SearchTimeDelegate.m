@@ -126,7 +126,7 @@
     [[_actions getViewController] pushViewController:svc animated:NO];
     svc.delegate = sd;
     
-    NSMutableArray* arr = [[NSMutableArray alloc]initWithCapacity:self.fm.recommandsdata.count];
+    NSMutableArray* arr = [[NSMutableArray alloc] initWithCapacity:self.fm.recommandsdata.count];
     for (RecommandTag* tag in self.fm.recommandsdata) {
         [arr addObject:tag.tag_name];
     }

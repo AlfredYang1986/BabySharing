@@ -49,8 +49,8 @@
 }
 
 - (void)createSearchModel {
-    if (!_fm) _fm = [[FoundSearchModel alloc]initWithDelegate:self];
-    if (!_um) _um = [[UserSearchModel alloc]initWithDelegate:self];
+    if (!_fm) _fm = [[FoundSearchModel alloc] initWithDelegate:self];
+    if (!_um) _um = [[UserSearchModel alloc] initWithDelegate:self];
 }
 
 - (void)createMessageAndNotificationModel {
@@ -62,7 +62,8 @@
     // Override point for customization after application launch.
     _lm  = [[LoginModel alloc] init];
     _pm  = [[PostModel alloc] init];
-
+    NSLog(@"项目路径 === %@", [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject]);
+    
     /**
      * Notification
      */
@@ -218,4 +219,9 @@
     if ([_lm isCurrentUserConnectWithWeibo]) return [WeiboSDK handleOpenURL:url delegate:_lm];
     else return [TencentOAuth HandleOpenURL:url];
 }
+
++ (AppDelegate *)defaultAppDelegate {
+    return (AppDelegate*)[UIApplication sharedApplication].delegate;
+}
+
 @end

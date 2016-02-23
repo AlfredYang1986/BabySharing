@@ -86,7 +86,7 @@
      */
     NSString* docs=[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     NSURL* url =[NSURL fileURLWithPath:[docs stringByAppendingPathComponent:LOCALDB_LOGIN]];
-    _doc = (UIManagedDocument*)[[UIManagedDocument alloc]initWithFileURL:url];
+    _doc = (UIManagedDocument*)[[UIManagedDocument alloc] initWithFileURL:url];
     
     if (![[NSFileManager defaultManager]fileExistsAtPath:[url path] isDirectory:NO]) {
         [_doc saveToURL:url forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success){
@@ -126,7 +126,7 @@
    
     NSError * error = nil;
     NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
-
+    
     NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:[AUTH_HOST_DOMAIN stringByAppendingString:AUTH_WITH_PHONE]]];
  
     if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {

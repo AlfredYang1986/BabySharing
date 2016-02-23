@@ -13,6 +13,7 @@
 #import "DongDaSearchBar2.h"
 
 @interface SearchViewController () <UITextFieldDelegate>
+
 @property (weak, nonatomic) IBOutlet DongDaSearchBar2 *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *queryView;
 @property (weak, nonatomic) IBOutlet UIView *bkView;

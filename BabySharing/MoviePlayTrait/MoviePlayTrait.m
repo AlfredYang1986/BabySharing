@@ -111,6 +111,8 @@
 - (void)mergeMultipleAssertWithURLs:(NSArray*)arr andAudio:(NSURL*)audioUrl {
     AVMutableComposition *mixComposition = [[AVMutableComposition alloc] init];
     AVMutableCompositionTrack *videoTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
+    AVMutableCompositionTrack *audioTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:kCMPersistentTrackID_Invalid];
+
     CMTime time = kCMTimeZero;
     
     for (int index = 0; index < arr.count; ++index) {
@@ -123,6 +125,8 @@
         NSLog(@"tmp.duration, %lld", tmp.duration.value);
         [videoTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, tmp.duration)
                             ofTrack:[[tmp tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0] atTime:time error:nil];
+        [audioTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, tmp.duration)
+                            ofTrack:[[tmp tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0] atTime:time error:nil];
         
         // only works when this is no 加速 减速
         if (index == 0) {

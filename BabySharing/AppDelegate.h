@@ -60,6 +60,6 @@
 
 - (void)createQueryModel;
 - (void)createMessageAndNotificationModel;
-
 - (void)registerDeviceTokenWithCurrentUser;
++ (AppDelegate *)defaultAppDelegate;
 @end

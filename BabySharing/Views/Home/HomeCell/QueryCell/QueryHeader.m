@@ -140,11 +140,10 @@
 }
 
 - (void)setUserName:(NSString*)name {
-    _userNameLabel.text = name;
+    _userNameLabel.text = @"123456789123456789";
     [_userNameLabel sizeToFit];
-   
-//    _userNameLabel.center = CGPointMake(_userRoleTagBtn.center.x + _userRoleTagBtn.frame.size.width / 2 + TAG_2_NAME_MARGIN + _userNameLabel.frame.size.width / 2, USER_NAME_TOP_MARGIN + _userNameLabel.frame.size.height / 2);
     _userNameLabel.center = CGPointMake(USER_IMG_MARGIN + USER_IMG_WIDTH + USER_IMG_MARGIN + _userNameLabel.frame.size.width / 2, USER_NAME_TOP_MARGIN + _userNameLabel.frame.size.height / 2);
+    _userNameLabel.text = name;
 }
 
 - (void)setTimeText:(NSString*)time {

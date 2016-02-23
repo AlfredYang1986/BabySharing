@@ -22,6 +22,7 @@
 @property (nonatomic, retain) NSSet *connectWith;
 @property (nonatomic, retain) CurrentToken *logined;
 @property (nonatomic, retain) DetailInfo *detailInfo;
+
 @end
 
 @interface LoginToken (CoreDataGeneratedAccessors)

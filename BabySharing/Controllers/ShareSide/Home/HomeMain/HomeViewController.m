@@ -722,6 +722,7 @@
     }
    
     tmp.queryView.tag = indexPath.row;
+    
     return cell;
 }
 

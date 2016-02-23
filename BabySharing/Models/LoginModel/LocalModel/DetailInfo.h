@@ -20,6 +20,7 @@
 @property (nonatomic, retain) NSDate * dob;
 @property (nonatomic, retain) NSSet *kids;
 @property (nonatomic, retain) LoginToken *who;
+
 @end
 
 @interface DetailInfo (CoreDataGeneratedAccessors)

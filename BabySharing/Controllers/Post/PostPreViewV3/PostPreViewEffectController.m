@@ -583,7 +583,7 @@
     } else if (tag_type == TagTypeLocation) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SearchViewController" bundle:nil];
         SearchViewController* svc = [storyboard instantiateViewControllerWithIdentifier:@"Search"];
-        SearchLocationDelegate* sd = [[SearchLocationDelegate alloc]init];
+        SearchLocationDelegate* sd = [[SearchLocationDelegate alloc] init];
         sd.delegate = svc;
         sd.actions = self;
         searchControllerTitle = @"添加地点标签";
@@ -599,7 +599,7 @@
         sd.delegate = svc;
         sd.actions = self;
         searchControllerTitle = @"添加时刻标签";
-        current_type = TagTypeLocation;
+        current_type = TagTypeTime;
         svc.isNeedAsyncData = YES;
         [self.navigationController pushViewController:svc animated:YES];
         svc.delegate = sd;

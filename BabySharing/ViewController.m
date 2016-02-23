@@ -394,7 +394,7 @@ enum DisplaySide {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"input wrong phone number" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
         [alert show];
     } else {
-        NSDictionary* tmp =[[NSDictionary alloc]init];
+        NSDictionary* tmp =[[NSDictionary alloc] init];
         LoginModelConfirmResult reVal = [self.lm sendConfirrmCode:code ToPhone:phoneNo withToken:token.reg_token toResult:&tmp];
         if (reVal == LoginModelResultSuccess) {
             [self performSegueWithIdentifier:@"loginSuccessSegue" sender:tmp];
@@ -404,7 +404,7 @@ enum DisplaySide {
             NSLog(@"already login by others");
         }
     }
-    
+
     [inputView endEditing];
 }
 

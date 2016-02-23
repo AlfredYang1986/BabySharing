@@ -21,4 +21,5 @@ typedef void(^userSearchFinishBlock)(BOOL success, NSArray* result);
 
 - (void)queryUserSearchWithFinishBlock:(userSearchFinishBlock)block;
 - (void)queryUserSearchWithRoleTag:(NSString*)role_tag andFinishBlock:(userSearchFinishBlock)block;
+
 @end

@@ -119,6 +119,7 @@
         line.frame = CGRectMake(10.5, 44 - 1, [UIScreen mainScreen].bounds.size.width - 10.5 * 2 + 8, 1);
         [cell.layer addSublayer:line];
     }
+    cell.contentView.backgroundColor = [UIColor redColor];
     return cell;
 }
 
