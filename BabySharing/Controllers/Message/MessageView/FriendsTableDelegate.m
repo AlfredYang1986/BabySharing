@@ -93,7 +93,7 @@
     
     NSDictionary* tmp = [data_arr objectAtIndex:indexPath.row];
     [cell setUserScreenPhoto:[tmp objectForKey:@"screen_photo"]];
-    [cell setRelationship:2];
+    [cell setRelationship:((NSNumber*)[tmp objectForKey:@"relations"]).integerValue];
     [cell setUserScreenName:[tmp objectForKey:@"screen_name"]];
     [cell setUserRoleTag:[tmp objectForKey:@"role_tag"]];
     

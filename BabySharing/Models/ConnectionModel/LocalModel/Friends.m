@@ -1,18 +1,16 @@
 //
 //  Friends.m
-//  
+//  BabySharing
 //
-//  Created by Alfred Yang on 7/08/2015.
-//
+//  Created by Alfred Yang on 2/23/16.
+//  Copyright © 2016 BM. All rights reserved.
 //
 
 #import "Friends.h"
 #import "ConnectionOwner.h"
 
-
 @implementation Friends
 
-@dynamic user_id;
-@dynamic friendsWith;
+// Insert code here to add functionality to your managed object subclass
 
 @end

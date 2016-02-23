@@ -103,9 +103,10 @@
 
 + (void)addLocalFriendsWithOwner:(ConnectionOwner*)owner withData:(NSArray*)friends_arr inContext:(NSManagedObjectContext*)context {
     
-    for (NSString* friend in friends_arr) {
+    for (NSDictionary* friend in friends_arr) {
         Friends* tmp = [NSEntityDescription insertNewObjectForEntityForName:@"Friends" inManagedObjectContext:context];
-        tmp.user_id = friend;
+        tmp.user_id = [friend objectForKey:@"user_id"];
+        tmp.relations = [friend objectForKey:@"relations"];
         tmp.friendsWith = owner;
         [owner addFriendsObject:tmp];
     }
@@ -121,9 +122,10 @@
 
 + (void)addLocalFollowingsWithOwner:(ConnectionOwner*)owner withData:(NSArray*)following_arr inContext:(NSManagedObjectContext*)context {
    
-    for (NSString* following in following_arr) {
+    for (NSDictionary* following in following_arr) {
         Following* tmp = [NSEntityDescription insertNewObjectForEntityForName:@"Following" inManagedObjectContext:context];
-        tmp.user_id = following;
+        tmp.user_id = [following objectForKey:@"user_id"];
+        tmp.relations = [following objectForKey:@"relations"];
         tmp.followingBy = owner;
         [owner addFollowingObject:tmp];
     }
@@ -138,9 +140,10 @@
 }
 
 + (void)addLocalFollowedWithOwner:(ConnectionOwner*)owner withData:(NSArray*)followed_arr inContext:(NSManagedObjectContext*)context {
-        for (NSString* followed in followed_arr) {
+    for (NSDictionary* followed in followed_arr) {
         Followed* tmp = [NSEntityDescription insertNewObjectForEntityForName:@"Followed" inManagedObjectContext:context];
-        tmp.user_id = followed;
+        tmp.user_id = [followed objectForKey:@"user_id"];
+        tmp.relations = [followed objectForKey:@"relations"];
         tmp.followedBy = owner;
         [owner addFollowedObject:tmp];
     }

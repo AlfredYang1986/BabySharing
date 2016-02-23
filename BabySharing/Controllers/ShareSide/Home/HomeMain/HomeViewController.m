@@ -695,7 +695,8 @@
 
 #pragma mark -- table view delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _qm.querydata.count;
+//    return _qm.querydata.count;
+    return [_delegate count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

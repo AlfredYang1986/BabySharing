@@ -28,6 +28,14 @@
 		70A9BB711C3CF5F1000DFE53 /* SearchFriendsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70A9BB701C3CF5F1000DFE53 /* SearchFriendsController.m */; };
 		70C75B5B1C50B5E000E7587A /* DongDaSearchBar2.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C75B5A1C50B5E000E7587A /* DongDaSearchBar2.m */; };
 		70C75B621C50DF1100E7587A /* SearchAddController2.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C75B611C50DF1100E7587A /* SearchAddController2.m */; };
+		70CC1C621C7C6BF20022B62E /* Friends+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 70CC1C531C7C6BF20022B62E /* Friends+CoreDataProperties.m */; };
+		70CC1C631C7C6BF20022B62E /* Friends.m in Sources */ = {isa = PBXBuildFile; fileRef = 70CC1C551C7C6BF20022B62E /* Friends.m */; };
+		70CC1C641C7C6BF20022B62E /* Followed+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 70CC1C571C7C6BF20022B62E /* Followed+CoreDataProperties.m */; };
+		70CC1C651C7C6BF20022B62E /* Followed.m in Sources */ = {isa = PBXBuildFile; fileRef = 70CC1C591C7C6BF20022B62E /* Followed.m */; };
+		70CC1C661C7C6BF20022B62E /* ConnectionOwner+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 70CC1C5B1C7C6BF20022B62E /* ConnectionOwner+CoreDataProperties.m */; };
+		70CC1C671C7C6BF20022B62E /* ConnectionOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = 70CC1C5D1C7C6BF20022B62E /* ConnectionOwner.m */; };
+		70CC1C681C7C6BF20022B62E /* Following+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 70CC1C5F1C7C6BF20022B62E /* Following+CoreDataProperties.m */; };
+		70CC1C691C7C6BF20022B62E /* Following.m in Sources */ = {isa = PBXBuildFile; fileRef = 70CC1C611C7C6BF20022B62E /* Following.m */; };
 		70D15B431C5B64C9007AC9AB /* MJRefreshAutoFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D15B191C5B64C9007AC9AB /* MJRefreshAutoFooter.m */; };
 		70D15B441C5B64C9007AC9AB /* MJRefreshBackFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D15B1B1C5B64C9007AC9AB /* MJRefreshBackFooter.m */; };
 		70D15B451C5B64C9007AC9AB /* MJRefreshComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D15B1D1C5B64C9007AC9AB /* MJRefreshComponent.m */; };
@@ -113,8 +121,6 @@
 		EE76398A1B956CFB0025A56D /* CellConstructParameters.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7639891B956CFB0025A56D /* CellConstructParameters.m */; };
 		EE76398D1B95805F0025A56D /* CollectionQueryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EE76398C1B95805F0025A56D /* CollectionQueryModel.m */; };
 		EE76A56D1B72021900036747 /* ConnectionLocalModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EE76A56B1B72021800036747 /* ConnectionLocalModel.xcdatamodeld */; };
-		EE76A5741B72056800036747 /* Following.m in Sources */ = {isa = PBXBuildFile; fileRef = EE76A56F1B72056800036747 /* Following.m */; };
-		EE76A5761B72056800036747 /* Followed.m in Sources */ = {isa = PBXBuildFile; fileRef = EE76A5731B72056800036747 /* Followed.m */; };
 		EE76A5791B7205CF00036747 /* ConnectionOwner+ContextOpt.m in Sources */ = {isa = PBXBuildFile; fileRef = EE76A5781B7205CF00036747 /* ConnectionOwner+ContextOpt.m */; };
 		EE76A57C1B72181300036747 /* ConnectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EE76A57B1B72181300036747 /* ConnectionModel.m */; };
 		EE7910401B841A33005E455B /* DropDownItem.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACC3D1B44E90400D05C0B /* DropDownItem.m */; };
@@ -177,8 +183,6 @@
 		EEA1F54D1C169049009B8724 /* SearchViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEA1F5491C169049009B8724 /* SearchViewController.storyboard */; };
 		EEA1F5511C1690D1009B8724 /* FoundSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEA1F5501C1690D1009B8724 /* FoundSearchController.m */; };
 		EEA1F5531C169106009B8724 /* FoundSearch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEA1F5521C169106009B8724 /* FoundSearch.storyboard */; };
-		EEA2017C1B744E59006B81E4 /* ConnectionOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = EEA201791B744E59006B81E4 /* ConnectionOwner.m */; };
-		EEA2017D1B744E59006B81E4 /* Friends.m in Sources */ = {isa = PBXBuildFile; fileRef = EEA2017B1B744E59006B81E4 /* Friends.m */; };
 		EEA8A60C1BFAC0EE00130293 /* FoundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEA8A60B1BFAC0EE00130293 /* FoundViewController.m */; };
 		EEA8A60F1BFAC1F800130293 /* HomeViewFoundDelegateAndDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = EEA8A60E1BFAC1F800130293 /* HomeViewFoundDelegateAndDatasource.m */; };
 		EEA991481B775B4F001F6CC6 /* DDNNotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEA991471B775B4F001F6CC6 /* DDNNotificationViewController.m */; };
@@ -391,6 +395,22 @@
 		70C75B5A1C50B5E000E7587A /* DongDaSearchBar2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DongDaSearchBar2.m; sourceTree = "<group>"; };
 		70C75B601C50DF1100E7587A /* SearchAddController2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchAddController2.h; sourceTree = "<group>"; };
 		70C75B611C50DF1100E7587A /* SearchAddController2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchAddController2.m; sourceTree = "<group>"; };
+		70CC1C521C7C6BF20022B62E /* Friends+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Friends+CoreDataProperties.h"; sourceTree = "<group>"; };
+		70CC1C531C7C6BF20022B62E /* Friends+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Friends+CoreDataProperties.m"; sourceTree = "<group>"; };
+		70CC1C541C7C6BF20022B62E /* Friends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Friends.h; sourceTree = "<group>"; };
+		70CC1C551C7C6BF20022B62E /* Friends.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Friends.m; sourceTree = "<group>"; };
+		70CC1C561C7C6BF20022B62E /* Followed+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Followed+CoreDataProperties.h"; sourceTree = "<group>"; };
+		70CC1C571C7C6BF20022B62E /* Followed+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Followed+CoreDataProperties.m"; sourceTree = "<group>"; };
+		70CC1C581C7C6BF20022B62E /* Followed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Followed.h; sourceTree = "<group>"; };
+		70CC1C591C7C6BF20022B62E /* Followed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Followed.m; sourceTree = "<group>"; };
+		70CC1C5A1C7C6BF20022B62E /* ConnectionOwner+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ConnectionOwner+CoreDataProperties.h"; sourceTree = "<group>"; };
+		70CC1C5B1C7C6BF20022B62E /* ConnectionOwner+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ConnectionOwner+CoreDataProperties.m"; sourceTree = "<group>"; };
+		70CC1C5C1C7C6BF20022B62E /* ConnectionOwner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionOwner.h; sourceTree = "<group>"; };
+		70CC1C5D1C7C6BF20022B62E /* ConnectionOwner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionOwner.m; sourceTree = "<group>"; };
+		70CC1C5E1C7C6BF20022B62E /* Following+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Following+CoreDataProperties.h"; sourceTree = "<group>"; };
+		70CC1C5F1C7C6BF20022B62E /* Following+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Following+CoreDataProperties.m"; sourceTree = "<group>"; };
+		70CC1C601C7C6BF20022B62E /* Following.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Following.h; sourceTree = "<group>"; };
+		70CC1C611C7C6BF20022B62E /* Following.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Following.m; sourceTree = "<group>"; };
 		70D15B181C5B64C9007AC9AB /* MJRefreshAutoFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshAutoFooter.h; sourceTree = "<group>"; };
 		70D15B191C5B64C9007AC9AB /* MJRefreshAutoFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshAutoFooter.m; sourceTree = "<group>"; };
 		70D15B1A1C5B64C9007AC9AB /* MJRefreshBackFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBackFooter.h; sourceTree = "<group>"; };
@@ -560,10 +580,6 @@
 		EE76398B1B95805F0025A56D /* CollectionQueryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionQueryModel.h; sourceTree = "<group>"; };
 		EE76398C1B95805F0025A56D /* CollectionQueryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionQueryModel.m; sourceTree = "<group>"; };
 		EE76A56C1B72021900036747 /* ConnectionLocalModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ConnectionLocalModel.xcdatamodel; sourceTree = "<group>"; };
-		EE76A56E1B72056800036747 /* Following.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Following.h; sourceTree = "<group>"; };
-		EE76A56F1B72056800036747 /* Following.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Following.m; sourceTree = "<group>"; };
-		EE76A5721B72056800036747 /* Followed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Followed.h; sourceTree = "<group>"; };
-		EE76A5731B72056800036747 /* Followed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Followed.m; sourceTree = "<group>"; };
 		EE76A5771B7205CF00036747 /* ConnectionOwner+ContextOpt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ConnectionOwner+ContextOpt.h"; sourceTree = "<group>"; };
 		EE76A5781B7205CF00036747 /* ConnectionOwner+ContextOpt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ConnectionOwner+ContextOpt.m"; sourceTree = "<group>"; };
 		EE76A57A1B72181300036747 /* ConnectionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionModel.h; sourceTree = "<group>"; };
@@ -641,10 +657,6 @@
 		EEA1F54F1C1690D1009B8724 /* FoundSearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoundSearchController.h; sourceTree = "<group>"; };
 		EEA1F5501C1690D1009B8724 /* FoundSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoundSearchController.m; sourceTree = "<group>"; };
 		EEA1F5521C169106009B8724 /* FoundSearch.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FoundSearch.storyboard; sourceTree = "<group>"; };
-		EEA201781B744E59006B81E4 /* ConnectionOwner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionOwner.h; sourceTree = "<group>"; };
-		EEA201791B744E59006B81E4 /* ConnectionOwner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionOwner.m; sourceTree = "<group>"; };
-		EEA2017A1B744E59006B81E4 /* Friends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Friends.h; sourceTree = "<group>"; };
-		EEA2017B1B744E59006B81E4 /* Friends.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Friends.m; sourceTree = "<group>"; };
 		EEA72A471B955AB9000BEC2E /* AddingFriendsProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddingFriendsProtocol.h; sourceTree = "<group>"; };
 		EEA8A60A1BFAC0EE00130293 /* FoundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoundViewController.h; sourceTree = "<group>"; };
 		EEA8A60B1BFAC0EE00130293 /* FoundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoundViewController.m; sourceTree = "<group>"; };
@@ -1419,17 +1431,25 @@
 		EE76A56A1B7201C200036747 /* LocalModel */ = {
 			isa = PBXGroup;
 			children = (
-				EEA201781B744E59006B81E4 /* ConnectionOwner.h */,
-				EEA201791B744E59006B81E4 /* ConnectionOwner.m */,
+				70CC1C521C7C6BF20022B62E /* Friends+CoreDataProperties.h */,
+				70CC1C531C7C6BF20022B62E /* Friends+CoreDataProperties.m */,
+				70CC1C541C7C6BF20022B62E /* Friends.h */,
+				70CC1C551C7C6BF20022B62E /* Friends.m */,
+				70CC1C561C7C6BF20022B62E /* Followed+CoreDataProperties.h */,
+				70CC1C571C7C6BF20022B62E /* Followed+CoreDataProperties.m */,
+				70CC1C581C7C6BF20022B62E /* Followed.h */,
+				70CC1C591C7C6BF20022B62E /* Followed.m */,
+				70CC1C5A1C7C6BF20022B62E /* ConnectionOwner+CoreDataProperties.h */,
+				70CC1C5B1C7C6BF20022B62E /* ConnectionOwner+CoreDataProperties.m */,
+				70CC1C5C1C7C6BF20022B62E /* ConnectionOwner.h */,
+				70CC1C5D1C7C6BF20022B62E /* ConnectionOwner.m */,
+				70CC1C5E1C7C6BF20022B62E /* Following+CoreDataProperties.h */,
+				70CC1C5F1C7C6BF20022B62E /* Following+CoreDataProperties.m */,
+				70CC1C601C7C6BF20022B62E /* Following.h */,
+				70CC1C611C7C6BF20022B62E /* Following.m */,
 				EE76A5771B7205CF00036747 /* ConnectionOwner+ContextOpt.h */,
 				EE76A5781B7205CF00036747 /* ConnectionOwner+ContextOpt.m */,
-				EEA2017A1B744E59006B81E4 /* Friends.h */,
-				EEA2017B1B744E59006B81E4 /* Friends.m */,
 				EE76A56B1B72021800036747 /* ConnectionLocalModel.xcdatamodeld */,
-				EE76A56E1B72056800036747 /* Following.h */,
-				EE76A56F1B72056800036747 /* Following.m */,
-				EE76A5721B72056800036747 /* Followed.h */,
-				EE76A5731B72056800036747 /* Followed.m */,
 			);
 			path = LocalModel;
 			sourceTree = "<group>";
@@ -3007,6 +3027,7 @@
 				EE7910471B841AD5005E455B /* PhotoTagView.m in Sources */,
 				EEBE1B831C17CB4E00EAA9D2 /* FoundMotherChoiceCell.m in Sources */,
 				EE7910451B841ABC005E455B /* MessageViewCell.m in Sources */,
+				70CC1C681C7C6BF20022B62E /* Following+CoreDataProperties.m in Sources */,
 				EE7910441B841AAC005E455B /* SGGridMenu.m in Sources */,
 				EEB4C8B31BFC334B0023E2AD /* UserHomeViewDataDelegate.m in Sources */,
 				EE0CEC541BDB13070016B6F4 /* AlreadLogedViewController.m in Sources */,
@@ -3039,6 +3060,7 @@
 				EE26D7801C1EC70F00342E02 /* FoundSearchModel.m in Sources */,
 				EE0CEC551BDB13070016B6F4 /* ChooseAreaViewController.m in Sources */,
 				EEDCF6A31B9ABE07005F4F4D /* SystemSettingModel.m in Sources */,
+				70CC1C691C7C6BF20022B62E /* Following.m in Sources */,
 				EEBE1B8E1C17D2E500EAA9D2 /* UserSearchController.m in Sources */,
 				70530B131C3F9D1E00505121 /* SearchSegImgTextItem.m in Sources */,
 				A0B7A7611C7C0B9100D78E6E /* Tools.m in Sources */,
@@ -3066,6 +3088,7 @@
 				EE26D7771C1EBA2700342E02 /* PreviewTag+CoreDataProperties.m in Sources */,
 				EE6D6DB51B7B28A6004D29C8 /* WEPopoverContainerView.m in Sources */,
 				EEAACCD41B44E90400D05C0B /* CurrentToken+ContextOpt.m in Sources */,
+				70CC1C651C7C6BF20022B62E /* Followed.m in Sources */,
 				EEBFFC1D1B916A0F005AAE36 /* PersonalSettingCell.m in Sources */,
 				EE66B47D1BB3EEC600812F5F /* HomeNavigationController.m in Sources */,
 				EEBE1B851C17CB4E00EAA9D2 /* FoundSearchHeader.m in Sources */,
@@ -3122,9 +3145,9 @@
 				EECB445B1C059343008F05B8 /* OBShapedButton.m in Sources */,
 				EECB445C1C059343008F05B8 /* UIImage+ColorAtPixel.m in Sources */,
 				EE5D686C1B75A55A0067A2DF /* MessageAndNotificationModel.xcdatamodeld in Sources */,
-				EE76A5761B72056800036747 /* Followed.m in Sources */,
 				EE9633D31B92EBE000DB4EA5 /* PrivacySettingController.mm in Sources */,
 				EEAACD1F1B44E90400D05C0B /* SGActionView.m in Sources */,
+				70CC1C661C7C6BF20022B62E /* ConnectionOwner+CoreDataProperties.m in Sources */,
 				EEE94E181B74BDDD0011321A /* ProfileDetailController.m in Sources */,
 				EEE94E261B74BE3B0011321A /* PersonalSettingController.mm in Sources */,
 				EED774D41BABF86D001C9B57 /* HomeViewController.m in Sources */,
@@ -3134,7 +3157,6 @@
 				70D15B551C5B64C9007AC9AB /* UIView+MJExtension.m in Sources */,
 				EE92AE341BCE3627008DA020 /* CycleAddConditionCell.m in Sources */,
 				EEAACCDD1B44E90400D05C0B /* LoginModel.m in Sources */,
-				EEA2017D1B744E59006B81E4 /* Friends.m in Sources */,
 				EEA8A60F1BFAC1F800130293 /* HomeViewFoundDelegateAndDatasource.m in Sources */,
 				EE26D7781C1EBA2700342E02 /* PreviewTag.m in Sources */,
 				70E06F881C4F989700B740CD /* SearchAddTimeDelegate.m in Sources */,
@@ -3161,8 +3183,10 @@
 				EE86D1B21B537469001C4650 /* PostEffectAdapter.mm in Sources */,
 				EE9785B01B9004CD00C454C5 /* CycleAddKidsViewController.m in Sources */,
 				EEBE1B6D1C17CA9400EAA9D2 /* SearchSegView.m in Sources */,
+				70CC1C671C7C6BF20022B62E /* ConnectionOwner.m in Sources */,
 				EEBE1B6A1C17CA9400EAA9D2 /* DongDaSearchBar.m in Sources */,
 				EED5EABE1BD7375E000AFF36 /* PhotoTagTariangleLayer2.m in Sources */,
+				70CC1C641C7C6BF20022B62E /* Followed+CoreDataProperties.m in Sources */,
 				EEE94E131B74AB6B0011321A /* AddressBookDelegate.m in Sources */,
 				EEAACCE01B44E90400D05C0B /* PostModel.m in Sources */,
 				EE83F40A1B96EDDF00D51FDF /* CycleAddSchoolViewController.m in Sources */,
@@ -3178,7 +3202,6 @@
 				EEAACCDF1B44E90400D05C0B /* MessageModel.m in Sources */,
 				EEA1F54B1C169049009B8724 /* SearchAddViewController.m in Sources */,
 				EEAACCE91B44E90400D05C0B /* QueryModel.m in Sources */,
-				EE76A5741B72056800036747 /* Following.m in Sources */,
 				EEAACCEC1B44E90400D05C0B /* MoviePlayTrait.m in Sources */,
 				700B0B891C5A1D5E00692A20 /* Notifications.m in Sources */,
 				EEAACCDC1B44E90400D05C0B /* RegTmpToken.m in Sources */,
@@ -3192,13 +3215,14 @@
 				EEAACCEE1B44E90400D05C0B /* SRWebSocket.m in Sources */,
 				EE0CEC5D1BDB15790016B6F4 /* LoginViewController.m in Sources */,
 				70D15B431C5B64C9007AC9AB /* MJRefreshAutoFooter.m in Sources */,
+				70CC1C621C7C6BF20022B62E /* Friends+CoreDataProperties.m in Sources */,
 				EEDCF69A1B9AB674005F4F4D /* MessageSetting.m in Sources */,
 				EEA8A60C1BFAC0EE00130293 /* FoundViewController.m in Sources */,
-				EEA2017C1B744E59006B81E4 /* ConnectionOwner.m in Sources */,
 				EEB812321B7AF2ED00BC0774 /* UserKids.m in Sources */,
 				70E06F7E1C4F966200B740CD /* SearchLocationDelegate.m in Sources */,
 				EEBE1B871C17CB4E00EAA9D2 /* FoundHotTagsCell.m in Sources */,
 				EED774D71BABF86D001C9B57 /* HomeTagsController.m in Sources */,
+				70CC1C631C7C6BF20022B62E /* Friends.m in Sources */,
 				700B0B881C5A1D5E00692A20 /* Notifications+CoreDataProperties.m in Sources */,
 				70A93CD41C7448F100026A6A /* FoundHotTagBtn.m in Sources */,
 				7041A5BB1C575A7400FEBFCD /* MessageChatGroupHeader2.m in Sources */,

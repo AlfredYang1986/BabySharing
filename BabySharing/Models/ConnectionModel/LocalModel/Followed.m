@@ -1,18 +1,16 @@
 //
 //  Followed.m
-//  
+//  BabySharing
 //
-//  Created by Alfred Yang on 5/08/2015.
-//
+//  Created by Alfred Yang on 2/23/16.
+//  Copyright © 2016 BM. All rights reserved.
 //
 
 #import "Followed.h"
-//#import "NSManagedObject.h"
-
+#import "ConnectionOwner.h"
 
 @implementation Followed
 
-@dynamic user_id;
-@dynamic followedBy;
+// Insert code here to add functionality to your managed object subclass
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ModelDefines.h"
 
 @protocol UserSearchCellDelegate <NSObject>
 
@@ -18,6 +19,7 @@
 
 @property (nonatomic, strong) NSString* user_id;
 @property (nonatomic, strong) NSString* screen_name;
+@property (nonatomic) UserPostOwnerConnections connections;
 @property (nonatomic, weak) id<UserSearchCellDelegate> delegate;
 
 + (CGFloat)preferredHeight;

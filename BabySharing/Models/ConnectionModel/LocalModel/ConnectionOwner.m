@@ -1,9 +1,9 @@
 //
 //  ConnectionOwner.m
-//  
+//  BabySharing
 //
-//  Created by Alfred Yang on 7/08/2015.
-//
+//  Created by Alfred Yang on 2/23/16.
+//  Copyright © 2016 BM. All rights reserved.
 //
 
 #import "ConnectionOwner.h"
@@ -11,12 +11,8 @@
 #import "Following.h"
 #import "Friends.h"
 
-
 @implementation ConnectionOwner
 
-@dynamic user_id;
-@dynamic followed;
-@dynamic following;
-@dynamic friends;
+// Insert code here to add functionality to your managed object subclass
 
 @end

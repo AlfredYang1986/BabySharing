@@ -39,7 +39,7 @@
     NSString* screen_name;
     NSInteger relations;
     NSString* role_tag;
-    
+//
     NSArray* contents;
 }
 
@@ -50,6 +50,7 @@
 @synthesize delegate = _delegate;
 @synthesize user_id = _user_id;
 @synthesize screen_name = _screen_name;
+@synthesize connections = _connections;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -117,7 +118,6 @@
 #pragma mark -- table view datasource and delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -148,7 +148,7 @@
         cell.delegate = self;
         cell.cellHeight = CELL_HEADER_HEIGHT;
         [cell setUserScreenPhoto:screen_photo];
-        [cell setRelationship:2];
+        [cell setRelationship:_connections];
         [cell setUserScreenName:screen_name];
         [cell setUserRoleTag:role_tag];
         cell.isHiddenLine = YES;

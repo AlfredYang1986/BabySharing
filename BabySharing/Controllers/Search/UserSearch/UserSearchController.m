@@ -118,6 +118,7 @@
     cell.delegate = self;
     cell.user_id = [dic objectForKey:@"user_id"];
     cell.screen_name = [dic objectForKey:@"screen_name"];
+    cell.connections = ((NSNumber*)[dic objectForKey:@"relations"]).integerValue;
     [cell setUserHeaderWithScreenName:[dic objectForKey:@"screen_name"] roleTag:[dic objectForKey:@"role_tag"] andScreenPhoto:[dic objectForKey:@"screen_photo"]];
     [cell setUserContentImages:[dic objectForKey:@"preview"]];
     return cell;
