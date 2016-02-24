@@ -49,8 +49,11 @@
     NSString * bundlePath_dongda = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle_dongda = [NSBundle bundleWithPath:bundlePath_dongda];
 
-    UIFont* font = [UIFont systemFontOfSize:14.f];
-    CGSize sz = [@"用户协议&隐私政策" sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
+    
+    NSDictionary* attributes = @{NSFontAttributeName : [UIFont systemFontOfSize:12]};
+    CGSize sz = [@"用户协议&隐私政策"  sizeWithAttributes:attributes];
+//    UIFont* font = [UIFont systemFontOfSize:14.f];
+//    CGSize sz = [@"用户协议&隐私政策" sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
 
 #define SPLIT_VIEW_HEIGHT                   18
 #define SPLIT_VIEW_TEXT_WIDTH               83
@@ -59,7 +62,6 @@
     CGFloat third_line_ver_margin = BASICMARGIN;
     CGFloat screen_width = [UIScreen mainScreen].bounds.size.width;
     split_img = [[UIView alloc]initWithFrame:CGRectMake(0, third_line_ver_margin, screen_width, SPLIT_VIEW_HEIGHT)];
-    NSString * split_file = [resourceBundle_dongda pathForResource:[NSString stringWithFormat:@"split_text"] ofType:@"png"];
     
     CATextLayer* text_layer = [CATextLayer layer];
 //    text_layer.contents = (id)[UIImage imageNamed:split_file].CGImage;

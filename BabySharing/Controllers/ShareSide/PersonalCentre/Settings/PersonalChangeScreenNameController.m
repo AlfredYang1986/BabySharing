@@ -30,10 +30,7 @@
     UIButton* barBtn2 = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
     [barBtn2 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [barBtn2 addTarget:self action:@selector(doneChangeScreenName) forControlEvents:UIControlEventTouchDown];
-<<<<<<< Updated upstream
-=======
     [barBtn2 setTitleColor:[UIColor colorWithWhite:0.5922 alpha:1.f] forState:UIControlStateNormal];
->>>>>>> Stashed changes
     [barBtn2 setTitle:@"完成" forState:UIControlStateNormal];
     [barBtn2 sizeToFit];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn2];
@@ -46,12 +43,7 @@
     self.navigationItem.titleView = label;
    
     UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
-<<<<<<< Updated upstream
-    barBtn.backgroundColor = [UIColor redColor];
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
-=======
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
->>>>>>> Stashed changes
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
     NSString* filepath2 = [resourceBundle pathForResource:@"dongda_back" ofType:@"png"];
     CALayer * layer = [CALayer layer];
