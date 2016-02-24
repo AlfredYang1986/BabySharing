@@ -81,15 +81,15 @@
     
     if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
         NSDictionary* reVal = [result objectForKey:@"result"];
-        NSLog(@"connections result: %@", reVal);
-        block(YES, @"");
+        NSLog(@"connections result: %@", [reVal objectForKey:@"message"]);
+        block(YES, [reVal objectForKey:@"message"], ((NSNumber*)[reVal objectForKey:@"relations"]).integerValue);
         
     } else {
         //        NSDictionary* reError = [result objectForKey:@"error"];
         //        NSString* msg = [reError objectForKey:@"message"];
         //        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:msg delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
         //        [alert show];
-        block(NO, @"");
+        block(NO, @"error", -1);
     }
 }
 
@@ -109,14 +109,14 @@
     if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
         NSDictionary* reVal = [result objectForKey:@"result"];
         NSLog(@"connections result: %@", reVal);
-        block(YES, @"");
+        block(YES, [reVal objectForKey:@"message"], ((NSNumber*)[reVal objectForKey:@"relations"]).integerValue);
         
     } else {
         //        NSDictionary* reError = [result objectForKey:@"error"];
         //        NSString* msg = [reError objectForKey:@"message"];
         //        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:msg delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
         //        [alert show];
-        block(NO, @"");
+        block(NO, @"error", -1);
     }
 }
 

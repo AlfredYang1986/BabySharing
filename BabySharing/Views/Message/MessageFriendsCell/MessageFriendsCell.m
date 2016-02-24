@@ -127,6 +127,7 @@
         tmp.frame =  CGRectMake(0, 0, 69, 25);
         tmp.center = CGPointMake(51, 25);
         tmp.tag = -1;
+        [tmp addTarget:self action:@selector(didSelectedRelationBtn) forControlEvents:UIControlEventTouchUpInside];
         [_relationContainer addSubview:tmp];
     }
    
@@ -206,10 +207,10 @@
 
 #pragma mark -- action
 - (void)didSelectedScreenPhoto {
-    [_delegate didSelectedScreenPhoto:@""];
+    [_delegate didSelectedScreenPhoto:_user_id];
 }
 
 - (void)didSelectedRelationBtn {
-    [_delegate didSelectedRelationBtn:@"" andCurrentRelation:UserPostOwnerConnectionsSamePerson];
+    [_delegate didSelectedRelationBtn:_user_id andCurrentRelation:_connections];
 }
 @end

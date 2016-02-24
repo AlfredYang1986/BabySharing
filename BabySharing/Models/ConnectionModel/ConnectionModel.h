@@ -8,10 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "ModelDefines.h"
 
 @class AppDelegate;
 
-typedef void(^followFinishBlock)(BOOL success, NSString* message);
+//typedef void(^followFinishBlock)(BOOL success, NSString* message);
+typedef void(^followFinishBlock)(BOOL success, NSString* message, UserPostOwnerConnections new_relations);
 typedef void(^queryFinishBlock)(BOOL success);
 typedef void(^queryRelationShip)(NSInteger relations);
 

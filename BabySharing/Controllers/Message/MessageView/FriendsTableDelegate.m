@@ -9,14 +9,16 @@
 #import "FriendsTableDelegate.h"
 #import "AppDelegate.h"
 #import "LoginModel.h"
+#import "ConnectionModel.h"
 #import "TmpFileStorageModel.h"
 
 #import "PersonalCentreTmpViewController.h"
 #import "PersonalCentreOthersDelegate.h"
 #import "MessageFriendsCell.h"
 
-@interface FriendsTableDelegate ()
+@interface FriendsTableDelegate () <MessageFriendsCellDelegate>
 @property (nonatomic, weak, readonly) LoginModel* lm;
+@property (nonatomic, weak, readonly) ConnectionModel* cm;
 @end
 
 @implementation FriendsTableDelegate {
@@ -28,12 +30,14 @@
 
 @synthesize queryView = _queryView;
 @synthesize lm = _lm;
+@synthesize cm = _cm;
 
 - (id)init {
     self = [super init];
     if (self) {
         AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
         _lm = app.lm;
+        _cm = app.cm;
     }
     return self;
 }
@@ -92,6 +96,8 @@
     }
     
     NSDictionary* tmp = [data_arr objectAtIndex:indexPath.row];
+    cell.delegate = self;
+    cell.user_id = [tmp objectForKey:@"user_id"];
     [cell setUserScreenPhoto:[tmp objectForKey:@"screen_photo"]];
     [cell setRelationship:((NSNumber*)[tmp objectForKey:@"relations"]).integerValue];
     [cell setUserScreenName:[tmp objectForKey:@"screen_name"]];
@@ -169,5 +175,66 @@
     }
     NSLog(@"%@", data_arr);
     [_queryView reloadData];
+}
+
+- (BOOL)changeArrWithUserID:(NSString*)user_id andConnections:(UserPostOwnerConnections)new_connections {
+    NSPredicate* p = [NSPredicate predicateWithBlock:^BOOL(id  _Nonnull evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
+        NSDictionary* iter = (NSDictionary*)evaluatedObject;
+        return ![[iter objectForKey:@"user_id"] isEqualToString:user_id];
+    }];
+    
+    data_origin = [data_origin filteredArrayUsingPredicate:p];
+    data_arr = [data_origin mutableCopy];
+    return YES;
+}
+
+#pragma mark -- Message friend cell delegate
+- (void)didSelectedScreenPhoto:(NSString*)user_id {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    PersonalCentreTmpViewController* pc = [storyboard instantiateViewControllerWithIdentifier:@"PersonalCenter"];
+    PersonalCentreOthersDelegate* delegate = [[PersonalCentreOthersDelegate alloc]init];
+    pc.current_delegate = delegate;
+    pc.owner_id = user_id;
+    [_current.navigationController setNavigationBarHidden:NO];
+    [_current.navigationController pushViewController:pc animated:YES];
+}
+
+- (void)didSelectedRelationBtn:(NSString*)user_id andCurrentRelation:(UserPostOwnerConnections)connections {
+    NSLog(@"follow button selected");
+    
+    NSString* follow_user_id = user_id;
+    NSNumber* relations = [NSNumber numberWithInteger:connections];
+    
+    switch (relations.integerValue) {
+        case UserPostOwnerConnectionsSamePerson:
+            // my own post, do nothing
+            break;
+        case UserPostOwnerConnectionsNone:
+        case UserPostOwnerConnectionsFollowed: {
+            [_cm followOneUser:follow_user_id withFinishBlock:^(BOOL success, NSString *message, UserPostOwnerConnections new_connections) {
+                if (success && [self changeArrWithUserID:follow_user_id andConnections:new_connections]) {
+                    NSLog(@"follow success");
+                    [_queryView reloadData];
+                    
+                } else {
+                    NSLog(@"follow error, %@", message);
+                }
+            }];}
+            break;
+        case UserPostOwnerConnectionsFollowing:
+        case UserPostOwnerConnectionsFriends: {
+            [_cm unfollowOneUser:follow_user_id withFinishBlock:^(BOOL success, NSString *message, UserPostOwnerConnections new_connections) {
+                if (success && [self changeArrWithUserID:follow_user_id andConnections:new_connections]) {
+                    NSLog(@"unfollow success");
+                    [_queryView reloadData];
+                    
+                } else {
+                    NSLog(@"follow error, %@", message);
+                }
+            }];}
+            break;
+        default:
+            break;
+    }
 }
 @end

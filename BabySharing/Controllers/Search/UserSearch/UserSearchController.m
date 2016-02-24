@@ -101,7 +101,7 @@
 
 #pragma mark -- table view
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _um.userSearchResult.count;
+    return _um.userSearchPreviewResult.count;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -113,7 +113,7 @@
         cell = [[UserSearchCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"user search cell"];
     }
   
-    NSDictionary* dic = [_um.userSearchResult objectAtIndex:indexPath.row];
+    NSDictionary* dic = [_um.userSearchPreviewResult objectAtIndex:indexPath.row];
  
     cell.delegate = self;
     cell.user_id = [dic objectForKey:@"user_id"];

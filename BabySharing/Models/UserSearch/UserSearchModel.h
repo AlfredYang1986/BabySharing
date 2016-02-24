@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ModelDefines.h"
 
 @class AppDelegate;
 
@@ -16,12 +17,14 @@ typedef void(^userSearchPostFinishBlock)(BOOL success, NSDictionary* result);
 @interface UserSearchModel : NSObject
 
 @property (weak, nonatomic) AppDelegate* delegate;
-@property (strong, nonatomic) NSArray* userSearchResult;
-
-@property (strong, nonatomic) NSDictionary* lastSearchResult;
+@property (strong, nonatomic) NSArray* userSearchPreviewResult;
+@property (strong, nonatomic) NSArray* lastSearchScreenNameResult;
 
 - (id)initWithDelegate:(AppDelegate*)delegate;
 
 - (void)queryUserSearchWithFinishBlock:(userSearchFinishBlock)block;
 - (void)queryUserSearchWithRoleTag:(NSString*)role_tag andFinishBlock:(userSearchFinishBlock)block;
+- (void)queryUserSearchWithScreenName:(NSString*)screen_name andFinishBlock:(userSearchPostFinishBlock)block;
+
+- (BOOL)changeRelationsInMemory:(NSString*)user_id andConnections:(UserPostOwnerConnections)connections;
 @end

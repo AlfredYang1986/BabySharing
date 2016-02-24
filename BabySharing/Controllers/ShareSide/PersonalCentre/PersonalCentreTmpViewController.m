@@ -425,7 +425,7 @@
             break;
         case UserPostOwnerConnectionsNone:
         case UserPostOwnerConnectionsFollowed: {
-            [_cm followOneUser:follow_user_id withFinishBlock:^(BOOL success, NSString *message) {
+            [_cm followOneUser:follow_user_id withFinishBlock:^(BOOL success, NSString *message, UserPostOwnerConnections new_connections) {
                 if (success) {
                     NSLog(@"follow success");
                     if (relations.integerValue == UserPostOwnerConnectionsNone) {
@@ -443,7 +443,7 @@
             break;
         case UserPostOwnerConnectionsFollowing:
         case UserPostOwnerConnectionsFriends: {
-            [_cm unfollowOneUser:follow_user_id withFinishBlock:^(BOOL success, NSString *message) {
+            [_cm unfollowOneUser:follow_user_id withFinishBlock:^(BOOL success, NSString *message, UserPostOwnerConnections new_connections) {
                 if (success) {
                     NSLog(@"unfollow success");
                     if (relations.integerValue == UserPostOwnerConnectionsFollowing) {

@@ -9,10 +9,19 @@
 #import "SearchFriendsController.h"
 #import "MessageFriendsCell.h"
 
-@interface SearchFriendsController () <UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource>
+#import "AppDelegate.h"
+#import "UserSearchModel.h"
+#import "ConnectionModel.h"
+
+#import "PersonalCentreTmpViewController.h"
+#import "PersonalCentreOthersDelegate.h"
+
+@interface SearchFriendsController () <UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource, MessageFriendsCellDelegate>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *queryView;
 
+@property (weak, nonatomic) UserSearchModel* um;
+@property (weak, nonatomic) ConnectionModel* cm;
 @end
 
 @implementation SearchFriendsController {
@@ -22,10 +31,17 @@
 @synthesize searchBar = _searchBar;
 @synthesize queryView = _queryView;
 
+@synthesize um = _um;
+@synthesize cm = _cm;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.navigationController setNavigationBarHidden:YES animated:YES];
+   
+    AppDelegate* app = [UIApplication sharedApplication].delegate;
+    _um = app.um;
+    _cm = app.cm;
     
     _searchBar.showsCancelButton = YES;
     _searchBar.placeholder = @"搜索好友";
@@ -104,6 +120,12 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [_um queryUserSearchWithScreenName:searchBar.text andFinishBlock:^(BOOL success, NSDictionary *result) {
+        [_queryView reloadData];
+    }];
+}
+
 #pragma mark -- table view 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 3;
@@ -115,10 +137,10 @@
     reVal.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
    
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
-#define HEARDER_OFFSET      10.5
+#define HEARDER_OFFSET      0
 #define LEFT_MARGIN         10.5
 #define TOP_MARGIN          14
-    UIView* content = [[UIView alloc]initWithFrame:CGRectMake(0, HEARDER_OFFSET, width, 44 - HEARDER_OFFSET)];
+    UIView* content = [[UIView alloc]initWithFrame:CGRectMake(0, HEARDER_OFFSET, width, 36 - HEARDER_OFFSET)];
     content.backgroundColor = [UIColor whiteColor];
     
     UILabel* label = [[UILabel alloc]initWithFrame:CGRectMake(LEFT_MARGIN + (section == 0 ? 5 : 0), TOP_MARGIN, 1, 1)];
@@ -148,7 +170,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return section == 2 ? 4 : 1;
+    return section == 0 ? [_um.lastSearchScreenNameResult count] : 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -158,13 +180,71 @@
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MessageFriendsCell" owner:self options:nil];
         cell = [nib objectAtIndex:0];
     }
-    
-//    NSDictionary* tmp = [data_arr objectAtIndex:indexPath.row];
-    [cell setUserScreenPhoto:@""];
-    [cell setRelationship:2];
-    [cell setUserScreenName:@"user name"];
-    [cell setUserRoleTag:@"role tag"];
+   
+    if (indexPath.section == 0) {
+        NSDictionary* tmp = [_um.lastSearchScreenNameResult objectAtIndex:indexPath.row];
+        cell.delegate = self;
+        cell.user_id = [tmp objectForKey:@"user_id"];
+        [cell setUserScreenPhoto:[tmp objectForKey:@"screen_photo"]];
+        [cell setRelationship:((NSNumber*)[tmp objectForKey:@"relations"]).integerValue];
+        [cell setUserScreenName:[tmp objectForKey:@"screen_name"]];
+        [cell setUserRoleTag:[tmp objectForKey:@"role_tag"]];
+    }
     
     return cell;
+}
+
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+    return NO;
+}
+
+#pragma mark -- Message friend cell delegate
+- (void)didSelectedScreenPhoto:(NSString*)user_id {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    PersonalCentreTmpViewController* pc = [storyboard instantiateViewControllerWithIdentifier:@"PersonalCenter"];
+    PersonalCentreOthersDelegate* delegate = [[PersonalCentreOthersDelegate alloc]init];
+    pc.current_delegate = delegate;
+    pc.owner_id = user_id;
+    [self.navigationController setNavigationBarHidden:NO];
+    [self.navigationController pushViewController:pc animated:YES];
+}
+
+- (void)didSelectedRelationBtn:(NSString*)user_id andCurrentRelation:(UserPostOwnerConnections)connections {
+    NSLog(@"follow button selected");
+    
+    NSString* follow_user_id = user_id;
+    NSNumber* relations = [NSNumber numberWithInteger:connections];
+    
+    switch (relations.integerValue) {
+        case UserPostOwnerConnectionsSamePerson:
+            // my own post, do nothing
+            break;
+        case UserPostOwnerConnectionsNone:
+        case UserPostOwnerConnectionsFollowed: {
+            [_cm followOneUser:follow_user_id withFinishBlock:^(BOOL success, NSString *message, UserPostOwnerConnections new_connections) {
+                if (success && [_um changeRelationsInMemory:follow_user_id andConnections:new_connections]) {
+                    NSLog(@"follow success");
+                    [_queryView reloadData];
+                    
+                } else {
+                    NSLog(@"follow error, %@", message);
+                }
+            }];}
+            break;
+        case UserPostOwnerConnectionsFollowing:
+        case UserPostOwnerConnectionsFriends: {
+            [_cm unfollowOneUser:follow_user_id withFinishBlock:^(BOOL success, NSString *message, UserPostOwnerConnections new_connections) {
+                if (success && [_um changeRelationsInMemory:follow_user_id andConnections:new_connections]) {
+                    NSLog(@"unfollow success");
+                    [_queryView reloadData];
+                    
+                } else {
+                    NSLog(@"follow error, %@", message);
+                }
+            }];}
+            break;
+        default:
+            break;
+    }
 }
 @end
