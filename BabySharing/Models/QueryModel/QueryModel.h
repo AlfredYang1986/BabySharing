@@ -41,4 +41,5 @@ typedef void(^finishBlock)(void);
 - (UserPostOwnerConnections)queryLocalRelationsWithPost:(NSString*)post_id;
 - (void)refreshLocalRelationsWithPost:(NSString*)post_id withConnections:(UserPostOwnerConnections)reVal;
 //- (void)refreshRelationsWithPost:(NSString*)post_id withConnections:(UserPostOwnerConnections)relation;
+
 @end

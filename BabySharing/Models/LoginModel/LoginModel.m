@@ -562,10 +562,6 @@
         return YES;
         
     } else {
-//        NSDictionary* reError = [result objectForKey:@"error"];
-//        NSString* msg = [reError objectForKey:@"message"];
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:msg delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-//        [alert show];
         return NO;
     }
 }

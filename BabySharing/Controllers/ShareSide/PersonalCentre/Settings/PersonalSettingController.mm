@@ -20,6 +20,7 @@
 #import "TmpFileStorageModel.h"
 #import "RemoteInstance.h"
 #import "LoginModel.h"
+#import "PersonInfoCell.h"
 
 @interface PersonalSettingController () <UITableViewDataSource, UITableViewDelegate, chanageScreenNameProtocol, /*SearchUserTagControllerDelegate,*/ PersonalSignatureProtocol, UINavigationControllerDelegate, UIImagePickerControllerDelegate, SearchActionsProtocol>
 @property (weak, nonatomic) IBOutlet UITableView *queryView;
@@ -62,11 +63,13 @@
     [_queryView registerNib:[UINib nibWithNibName:@"PersonalSettingCell" bundle:[NSBundle mainBundle]] forHeaderFooterViewReuseIdentifier:@"personal setting cell"];
     
     UILabel* label = [[UILabel alloc]init];
-    label.text = @"个人信息";
+//    label.text = ;
 //    label.textColor = [UIColor whiteColor];
     label.textColor = [UIColor lightGrayColor];
     [label sizeToFit];
-    self.navigationItem.titleView = label;
+    self.navigationItem.title = @"个人信息";
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStyleDone target:self action:@selector(savePersonInfomation)];
+    self.navigationItem.rightBarButtonItem.tintColor = [UIColor blackColor];
    
     UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
@@ -91,6 +94,8 @@
     line.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.10].CGColor;
     line.frame = CGRectMake(0, 73, [UIScreen mainScreen].bounds.size.width, 1);
     [self.view.layer addSublayer:line];
+    
+
 }
 
 - (void)didPopControllerSelected {
@@ -121,15 +126,36 @@
     }
 }
 
+- (void)savePersonInfomation {
+#pragma mark 保存操作
+    // 获取昵称
+    PersonInfoCell *cell = [_queryView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    
+    NSMutableDictionary* dic = [[NSMutableDictionary alloc] init];
+    
+    [dic setObject:cell.nickTextFiled.text forKey:@"screen_name"];
+    
+    [dic setValue:app.lm.current_auth_token forKey:@"auth_token"];
+    [dic setValue:app.lm.current_user_id forKey:@"user_id"];
+    
+    [app.lm updateUserProfile:[dic copy]];
+    [self didChangeScreenName:cell.nickTextFiled.text];
+}
+
 #pragma mark - uitableview delegate
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
     return ![[data objectAtIndex:indexPath.row] isEqualToString:@""];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-
-    [self performSelector:functions[indexPath.row] withObject:nil];
+//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.row != 1) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        [self performSelector:functions[indexPath.row] withObject:nil];
+#pragma clang diagnostic pop
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -144,37 +170,55 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-   
-    PersonalSettingCell* cell = [tableView dequeueReusableCellWithIdentifier:@"personal setting cell"];
-    
+
+    static NSArray *indentifierArr = @[@"HeadViewType",@"NickNameType",@"RoleType"];
+    PersonInfoCell *cell = (PersonInfoCell *)[tableView dequeueReusableCellWithIdentifier:[indentifierArr objectAtIndex:indexPath.row]];
     if (cell == nil) {
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PersonalSettingCell" owner:self options:nil];
-        cell = [nib objectAtIndex:0];
+        cell = [[PersonInfoCell alloc] initWithCellType:PersonalSettingCellType(indexPath.row)];
     }
     
-    [cell changeCellTitile:[data objectAtIndex:indexPath.row]];
-    
-    id content = [self.dic_profile_details objectForKey:[title objectAtIndex:indexPath.row]];
-    if (content != nil) {
-        if (indexPath.row == 0) {
-            [cell changeCellImage:content];
-        } else {
-            [cell changeCellContent:content];
-        }
+    // 提取元素
+    if (indexPath.row == 0) {
+        id image = [self.dic_profile_details objectForKey:[title objectAtIndex:indexPath.row]];
+        [cell changeCellWithImageName:image];
+    } else if (indexPath.row == 1) {
+        id nickName = [self.dic_profile_details objectForKey:[title objectAtIndex:indexPath.row]];
+        [cell changeCellWithNickName:nickName];
+    } else if (indexPath.row == 2) {
+        id role = [self.dic_profile_details objectForKey:[title objectAtIndex:indexPath.row]];
+        [cell changeCellRoleRoleStr:role];
     }
     
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
-//    if (indexPath.row % 2 == 1) {
-//        cell.accessoryType = UITableViewCellAccessoryNone;
+//    PersonalSettingCell* cell = [tableView dequeueReusableCellWithIdentifier:@"personal setting cell"];
+//    if (cell == nil) {
+//        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PersonalSettingCell" owner:self options:nil];
+//        cell = [nib objectAtIndex:0];
 //    }
+//    
+//    [cell changeCellTitile:[data objectAtIndex:indexPath.row]];
+//    
+//    id content = [self.dic_profile_details objectForKey:[title objectAtIndex:indexPath.row]];
+//    if (content != nil) {
+//        if (indexPath.row == 0) {
+//            [cell changeCellImage:content];
+//        } else {
+//            [cell changeCellContent:content];
+//        }
+//    }
+//    
+//    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//    
+////    if (indexPath.row % 2 == 1) {
+////        cell.accessoryType = UITableViewCellAccessoryNone;
+////    }
     
     CALayer* line = [CALayer layer];
     line.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.10].CGColor;
     line.borderWidth = 1.f;
     line.frame = CGRectMake(8, [PersonalSettingCell preferredHeightWithImage:indexPath.row == 0] - 1, [UIScreen mainScreen].bounds.size.width, 1);
     [cell.layer addSublayer:line];
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
@@ -344,16 +388,11 @@
 }
 
 - (void)screenNameSelected {
+//    修改昵称
     [self performSegueWithIdentifier:@"addScreenName" sender:nil];
 }
 
 - (void)roleTagSelected {
-//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    SearchUserTagsController* sut = [storyboard instantiateViewControllerWithIdentifier:@"SearchPickRoleTags"];
-//    sut.delegate = self;
-//    
-//    [self.navigationController pushViewController:sut animated:YES];
-    
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SearchViewController" bundle:nil];
     SearchViewController* svc = [storyboard instantiateViewControllerWithIdentifier:@"Search"];
     SearchRoleTagDelegate* sd = [[SearchRoleTagDelegate alloc]init];

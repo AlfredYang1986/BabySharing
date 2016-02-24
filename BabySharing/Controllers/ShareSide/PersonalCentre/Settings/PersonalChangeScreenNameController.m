@@ -28,19 +28,21 @@
     
 //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(doneChangeScreenName)];
     UIButton* barBtn2 = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
+    [barBtn2 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [barBtn2 addTarget:self action:@selector(doneChangeScreenName) forControlEvents:UIControlEventTouchDown];
-    [barBtn2 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [barBtn2 setTitle:@"完成" forState:UIControlStateNormal];
     [barBtn2 sizeToFit];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn2];
     
     UILabel* label = [[UILabel alloc]init];
+    label.textColor = [UIColor blackColor];
     label.text = @"隐私&偏好";
-    label.textColor = [UIColor whiteColor];
+    label.textColor = [UIColor blackColor];
     [label sizeToFit];
     self.navigationItem.titleView = label;
    
     UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
+    barBtn.backgroundColor = [UIColor redColor];
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
     NSString* filepath2 = [resourceBundle pathForResource:@"Previous_simple" ofType:@"png"];
@@ -72,7 +74,7 @@
         
         AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
         
-        NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
+        NSMutableDictionary* dic = [[NSMutableDictionary alloc] init];
         
         [dic setObject:_screen_name_tf.text forKey:@"screen_name"];
 

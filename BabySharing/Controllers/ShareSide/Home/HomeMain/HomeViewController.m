@@ -275,7 +275,7 @@
 }
 
 #pragma mark -- table view for card content
-- (ContentCardView*)createOneContentCardViewAtIndex:(NSInteger)index {
+- (ContentCardView *)createOneContentCardViewAtIndex:(NSInteger)index {
     NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ContentCardView" owner:self options:nil];
     ContentCardView* tmp = [nib objectAtIndex:0];
     
@@ -289,9 +289,6 @@
 #else
     tmp.frame = CGRectMake(HEADER_MARGIN_TO_SCREEN + index * 4, CONTENT_START_POINT + index * (size.height + MARGIN_BETWEEN_CARD), size.width - index * 8, size.height);
 #endif
-    
-//    UIPanGestureRecognizer* pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(handlePan:)];
-//    [tmp addGestureRecognizer:pan];
    
     [tmp layoutSubviews];
     return tmp;

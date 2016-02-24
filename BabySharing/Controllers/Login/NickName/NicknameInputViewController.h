@@ -15,4 +15,5 @@
 @property (nonatomic, weak) LoginModel* lm;
 @property (nonatomic, strong) NSDictionary* login_attr;
 @property (nonatomic) BOOL isSNSLogIn;
+
 @end

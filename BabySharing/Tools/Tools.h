@@ -11,5 +11,6 @@
 @interface Tools : NSObject
 
 + (NSString *)subStringWithByte:(NSInteger)byte str:(NSString *)str;
++ (NSInteger)bityWithStr:(NSString *)str;
 
 @end

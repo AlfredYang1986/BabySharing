@@ -9,11 +9,14 @@
 #import <UIKit/UIKit.h>
 
 @protocol chanageScreenNameProtocol <NSObject>
+
 - (void)didChangeScreenName:(NSString*)name;
+
 @end
 
 @interface PersonalChangeScreenNameController : UIViewController
 
 @property (weak, nonatomic) id<chanageScreenNameProtocol> delegate;
 @property (weak, nonatomic) NSString* ori_screen_name;
+
 @end

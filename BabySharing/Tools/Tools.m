@@ -25,4 +25,8 @@
     return subStr;
 }
 
++ (NSInteger)bityWithStr:(NSString *)str {
+    return [str lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
+}
+
 @end

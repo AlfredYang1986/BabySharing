@@ -55,7 +55,6 @@
 		70D15B531C5B64C9007AC9AB /* UIScrollView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D15B3E1C5B64C9007AC9AB /* UIScrollView+MJExtension.m */; };
 		70D15B541C5B64C9007AC9AB /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D15B401C5B64C9007AC9AB /* UIScrollView+MJRefresh.m */; };
 		70D15B551C5B64C9007AC9AB /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D15B421C5B64C9007AC9AB /* UIView+MJExtension.m */; };
-		70D22C431C3A16F6008B8403 /* DongDaBoundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 70D22C421C3A16F6008B8403 /* DongDaBoundle.bundle */; };
 		70E06F771C4F799E00B740CD /* SearchBrandsDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E06F761C4F799E00B740CD /* SearchBrandsDelegate.m */; };
 		70E06F7A1C4F79B100B740CD /* SearchAddBrandsDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E06F791C4F79B100B740CD /* SearchAddBrandsDelegate.m */; };
 		70E06F7E1C4F966200B740CD /* SearchLocationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E06F7D1C4F966200B740CD /* SearchLocationDelegate.m */; };
@@ -69,6 +68,9 @@
 		A0B7A75D1C7BF20B00D78E6E /* TagSearchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B7A75B1C7BF20B00D78E6E /* TagSearchModel.m */; };
 		A0B7A7611C7C0B9100D78E6E /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B7A7601C7C0B9100D78E6E /* Tools.m */; };
 		A0B7A7631C7C23CC00D78E6E /* YYBoundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A0B7A7621C7C23CC00D78E6E /* YYBoundle.bundle */; };
+		A0B7A7661C7C563400D78E6E /* PersonInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B7A7651C7C563400D78E6E /* PersonInfoCell.m */; };
+		A0B7A7691C7C5B0F00D78E6E /* RoleLable.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B7A7681C7C5B0F00D78E6E /* RoleLable.m */; };
+		A0B7A76B1C7D505B00D78E6E /* DongDaBoundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A0B7A76A1C7D505B00D78E6E /* DongDaBoundle.bundle */; };
 		A0D0D95C1C76CB4000BF416E /* libgotyeapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D0D95A1C76CB4000BF416E /* libgotyeapi.a */; };
 		A0D0D9631C76D38000BF416E /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D0D9621C76D38000BF416E /* libGPUImage.a */; };
 		EE03E9831B4FABFB00F21EF5 /* AlbumModule.m in Sources */ = {isa = PBXBuildFile; fileRef = EE03E9821B4FABFB00F21EF5 /* AlbumModule.m */; };
@@ -449,7 +451,6 @@
 		70D15B401C5B64C9007AC9AB /* UIScrollView+MJRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+MJRefresh.m"; sourceTree = "<group>"; };
 		70D15B411C5B64C9007AC9AB /* UIView+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MJExtension.h"; sourceTree = "<group>"; };
 		70D15B421C5B64C9007AC9AB /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
-		70D22C421C3A16F6008B8403 /* DongDaBoundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DongDaBoundle.bundle; sourceTree = "<group>"; };
 		70E06F751C4F799E00B740CD /* SearchBrandsDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchBrandsDelegate.h; sourceTree = "<group>"; };
 		70E06F761C4F799E00B740CD /* SearchBrandsDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchBrandsDelegate.m; sourceTree = "<group>"; };
 		70E06F781C4F79B100B740CD /* SearchAddBrandsDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchAddBrandsDelegate.h; sourceTree = "<group>"; };
@@ -473,6 +474,11 @@
 		A0B7A75F1C7C0B9100D78E6E /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
 		A0B7A7601C7C0B9100D78E6E /* Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
 		A0B7A7621C7C23CC00D78E6E /* YYBoundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = YYBoundle.bundle; sourceTree = "<group>"; };
+		A0B7A7641C7C563400D78E6E /* PersonInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonInfoCell.h; sourceTree = "<group>"; };
+		A0B7A7651C7C563400D78E6E /* PersonInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonInfoCell.m; sourceTree = "<group>"; };
+		A0B7A7671C7C5B0F00D78E6E /* RoleLable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoleLable.h; sourceTree = "<group>"; };
+		A0B7A7681C7C5B0F00D78E6E /* RoleLable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoleLable.m; sourceTree = "<group>"; };
+		A0B7A76A1C7D505B00D78E6E /* DongDaBoundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DongDaBoundle.bundle; sourceTree = "<group>"; };
 		A0D0D95A1C76CB4000BF416E /* libgotyeapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libgotyeapi.a; sourceTree = "<group>"; };
 		A0D0D9621C76D38000BF416E /* libGPUImage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGPUImage.a; sourceTree = "<group>"; };
 		EE03E9811B4FABFB00F21EF5 /* AlbumModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumModule.h; sourceTree = "<group>"; };
@@ -1728,8 +1734,8 @@
 		EEAAC8FB1B44E81A00D05C0B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A0B7A76A1C7D505B00D78E6E /* DongDaBoundle.bundle */,
 				A0B7A7621C7C23CC00D78E6E /* YYBoundle.bundle */,
-				70D22C421C3A16F6008B8403 /* DongDaBoundle.bundle */,
 				EE7416251B5B8CDF002CA1BC /* AreaCodeJson.txt */,
 				EE7415D61B5B7740002CA1BC /* icon.png */,
 				EEAAC8FC1B44E81A00D05C0B /* Info.plist */,
@@ -2488,7 +2494,11 @@
 			children = (
 				EEBFFC1A1B916A0F005AAE36 /* PersonalSettingCell.h */,
 				EEBFFC1B1B916A0F005AAE36 /* PersonalSettingCell.m */,
+				A0B7A7671C7C5B0F00D78E6E /* RoleLable.h */,
+				A0B7A7681C7C5B0F00D78E6E /* RoleLable.m */,
 				EEBFFC1C1B916A0F005AAE36 /* PersonalSettingCell.xib */,
+				A0B7A7641C7C563400D78E6E /* PersonInfoCell.h */,
+				A0B7A7651C7C563400D78E6E /* PersonInfoCell.m */,
 			);
 			name = PersonalSetting;
 			path = BabySharing/Views/Profile/PersonalSetting;
@@ -2969,10 +2979,10 @@
 				EEC980B61B8EB9EA0087E5A7 /* status-bar-progress@2x.png in Resources */,
 				EEAACD071B44E90400D05C0B /* FoundPCGCell.xib in Resources */,
 				7082FFCA1C59D2BA0056D1FC /* MessageChatGroupInfoCell.xib in Resources */,
+				A0B7A76B1C7D505B00D78E6E /* DongDaBoundle.bundle in Resources */,
 				EEBFFC1E1B916A0F005AAE36 /* PersonalSettingCell.xib in Resources */,
 				EE7415D21B5B7215002CA1BC /* Localizable.strings in Resources */,
 				EED64D471B8184C1008CB134 /* CycleAddKidsCell.xib in Resources */,
-				70D22C431C3A16F6008B8403 /* DongDaBoundle.bundle in Resources */,
 				EE74162B1B5B9659002CA1BC /* AreaTableCell.xib in Resources */,
 				EE9676411B7C3D7700445254 /* CycleDescriptionCell.xib in Resources */,
 				EEAACD761B44EA2D00D05C0B /* read_me.txt in Resources */,
@@ -3205,6 +3215,7 @@
 				EEAACCEC1B44E90400D05C0B /* MoviePlayTrait.m in Sources */,
 				700B0B891C5A1D5E00692A20 /* Notifications.m in Sources */,
 				EEAACCDC1B44E90400D05C0B /* RegTmpToken.m in Sources */,
+				A0B7A7661C7C563400D78E6E /* PersonInfoCell.m in Sources */,
 				EE26D7761C1EBA2700342E02 /* RecommandTag.m in Sources */,
 				EE9744171B78886300E81A70 /* MessageNotificationCell.m in Sources */,
 				EED5EABA1BD73710000AFF36 /* PhotoTagRoundPointLayer.m in Sources */,
@@ -3219,6 +3230,7 @@
 				EEDCF69A1B9AB674005F4F4D /* MessageSetting.m in Sources */,
 				EEA8A60C1BFAC0EE00130293 /* FoundViewController.m in Sources */,
 				EEB812321B7AF2ED00BC0774 /* UserKids.m in Sources */,
+				A0B7A7691C7C5B0F00D78E6E /* RoleLable.m in Sources */,
 				70E06F7E1C4F966200B740CD /* SearchLocationDelegate.m in Sources */,
 				EEBE1B871C17CB4E00EAA9D2 /* FoundHotTagsCell.m in Sources */,
 				EED774D71BABF86D001C9B57 /* HomeTagsController.m in Sources */,

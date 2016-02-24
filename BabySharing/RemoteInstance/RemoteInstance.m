@@ -39,7 +39,6 @@
         NSArray *nsArray = (NSArray *)apperals;
         NSLog(@"Dersialized JSON Array = %@", nsArray);
         return nsArray;
-        
     } else {
         NSLog(@"An error happened while deserializing the JSON data.");
         return nil;

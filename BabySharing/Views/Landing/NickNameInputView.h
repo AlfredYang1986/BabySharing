@@ -23,7 +23,7 @@
 - (NSString*)getPreRoleTag;
 @end
 
-@interface NickNameInputView : UIView <UITextFieldDelegate>
+@interface NickNameInputView : UIView <UITextFieldDelegate, UITextFieldDelegate>
 
 @property (nonatomic, weak) id<NickNameInputViewDelegate> delegate;
 
@@ -32,4 +32,5 @@
 
 - (void)setUpWithFrame:(CGRect)rect;
 - (void)endInputName;
+
 @end
