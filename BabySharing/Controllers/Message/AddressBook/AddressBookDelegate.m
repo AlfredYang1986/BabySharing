@@ -241,11 +241,9 @@
             
             NSPredicate* p_match = [NSPredicate predicateWithBlock:^BOOL(id  _Nonnull evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
                 NSDictionary* iter = (NSDictionary*)evaluatedObject;
-                NSLog(@"phoneNo: %@", [iter objectForKey:@"phoneNo"]);
                 return [[iter objectForKey:@"phoneNo"] isEqualToString:phoneNo];
             }];
             
-            NSLog(@"p_match %@", [lst filteredArrayUsingPredicate:p_match]);
             if ([lst filteredArrayUsingPredicate:p_match].count > 0) return YES;
         }
         return NO;
@@ -267,7 +265,6 @@
                 return [[iter objectForKey:@"phoneNo"] isEqualToString:phoneNo];
             }];
            
-            NSLog(@"p_match %@", [lst filteredArrayUsingPredicate:p_match]);
             if ([lst filteredArrayUsingPredicate:p_match].count == 0) return YES;
         }
         return NO;
