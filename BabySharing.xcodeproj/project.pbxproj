@@ -63,6 +63,7 @@
 		70E06F881C4F989700B740CD /* SearchAddTimeDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E06F871C4F989700B740CD /* SearchAddTimeDelegate.m */; };
 		70EF02D21C22CE7A00DABCFC /* PostPublichViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EF02D11C22CE7A00DABCFC /* PostPublichViewController.m */; };
 		70F5014B1C23ADC2007769F4 /* PostPreview.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70F5014A1C23ADC2007769F4 /* PostPreview.storyboard */; };
+		A08AE9541C7E9C1A0029B660 /* libiconv.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A08AE9531C7E9C1A0029B660 /* libiconv.2.dylib */; };
 		A0A5C52F1C7DAD0500F07FE8 /* libgotyeapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A5C52E1C7DAD0500F07FE8 /* libgotyeapi.a */; };
 		A0A5C53E1C7DB1DF00F07FE8 /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A5C5311C7DB1DF00F07FE8 /* libWeiboSDK.a */; };
 		A0A5C53F1C7DB1DF00F07FE8 /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A0A5C53B1C7DB1DF00F07FE8 /* WeiboSDK.bundle */; };
@@ -466,6 +467,7 @@
 		70EF02D01C22CE7A00DABCFC /* PostPublichViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostPublichViewController.h; sourceTree = "<group>"; };
 		70EF02D11C22CE7A00DABCFC /* PostPublichViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostPublichViewController.m; sourceTree = "<group>"; };
 		70F5014A1C23ADC2007769F4 /* PostPreview.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PostPreview.storyboard; sourceTree = "<group>"; };
+		A08AE9531C7E9C1A0029B660 /* libiconv.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.2.dylib; path = ../../../../usr/lib/libiconv.2.dylib; sourceTree = "<group>"; };
 		A0A5C52E1C7DAD0500F07FE8 /* libgotyeapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libgotyeapi.a; sourceTree = "<group>"; };
 		A0A5C5311C7DB1DF00F07FE8 /* libWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeiboSDK.a; sourceTree = "<group>"; };
 		A0A5C5321C7DB1DF00F07FE8 /* WBHttpRequest+WeiboGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboGame.h"; sourceTree = "<group>"; };
@@ -1005,6 +1007,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A08AE9541C7E9C1A0029B660 /* libiconv.2.dylib in Frameworks */,
 				A0D0D9631C76D38000BF416E /* libGPUImage.a in Frameworks */,
 				EE40826A1B70C18E0094A88B /* libstdc++.dylib in Frameworks */,
 				EE4082681B70C1850094A88B /* libstdc++.6.0.9.dylib in Frameworks */,
@@ -1714,6 +1717,7 @@
 		EEAAC8EF1B44E81A00D05C0B = {
 			isa = PBXGroup;
 			children = (
+				A08AE9531C7E9C1A0029B660 /* libiconv.2.dylib */,
 				EEAACD791B44EA8800D05C0B /* BabySharing.mobileprovision */,
 				EE4082501B70C0CE0094A88B /* gotyeapi */,
 				EEAACDB91B44FAA300D05C0B /* libGPUImage */,
@@ -2949,6 +2953,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EEAACD741B44EA2D00D05C0B /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				EE92AE351BCE3627008DA020 /* CycleAddConditionCell.xib in Resources */,
 				EEC980B31B8EB9EA0087E5A7 /* status-bar-pattern-default.jpg in Resources */,
 				EE79105B1B842105005E455B /* ProfileOverView.xib in Resources */,
@@ -2966,7 +2971,6 @@
 				EE0DCE7E1C081FD400B5386B /* LaunchScreen.xib in Resources */,
 				A0B7A7631C7C23CC00D78E6E /* YYBoundle.bundle in Resources */,
 				EE7C68731B82D31F0003C593 /* CycleOverCell.xib in Resources */,
-				EEAACD741B44EA2D00D05C0B /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				EE9F736F1B8576C400F800DC /* MessageChatGroupHeader.xib in Resources */,
 				EE7416261B5B8CDF002CA1BC /* AreaCodeJson.txt in Resources */,
 				EE7415CC1B5B70D5002CA1BC /* InfoPlist.strings in Resources */,

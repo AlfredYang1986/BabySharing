@@ -359,7 +359,7 @@ enum DisplaySide {
 }
 
 - (void)didSelectWechatBtn {
-    
+    [_lm loginWithWeChat];
 }
 
 - (void)didSelectAreaCodeBtn {

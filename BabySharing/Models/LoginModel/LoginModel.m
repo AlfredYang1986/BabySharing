@@ -58,6 +58,7 @@
 - (void)enumDataFromLocalDB:(UIManagedDocument*)document {
     dispatch_queue_t aq = dispatch_queue_create("load_data", NULL);
    
+    
     dispatch_async(aq, ^(void){
         dispatch_async(dispatch_get_main_queue(), ^(void){
             [document.managedObjectContext performBlock:^(void){
@@ -69,7 +70,9 @@
                 [WeiboSDK registerApp:@"1584832986"];
 
                 // Tencent sdk init
-                qq_oauth = [[TencentOAuth alloc]initWithAppId:@"QQ41DA62FE" andDelegate:self];
+//                 @"1104592420"
+//                QQ41DA62FE
+                qq_oauth = [[TencentOAuth alloc] initWithAppId:@"1104831230" andDelegate:self];
                 qq_oauth.redirectURI = nil;
                 permissions =  [NSArray arrayWithObjects:@"get_user_info", @"get_simple_userinfo", @"add_t", nil];
                 
@@ -273,12 +276,58 @@
 
 #pragma mark - wechat login and call back
 - (void)loginWithWeChat {
-    
+//    SendAuthReq *req = [[SendAuthReq alloc] init];
+//    req.scope = @"BabySharing";
+//    req.state = @"0744";
+//    [WXApi sendReq:req];
 }
 
 #pragma mark - qq login and call back
 - (void)loginWithQQ {
-    [qq_oauth authorize:permissions inSafari:YES];
+        [qq_oauth authorize:permissions inSafari:YES];
+}
+
+- (void)loginSuccessWithQQAsUser:(NSString *)qq_openID accessToken:(NSString*)accessToken infoDic:(NSDictionary *)infoDic {
+    // 保存 accessToken 和 qq_openID 到本地 coreData 和服务器
+    _current_user = [self sendAuthProvidersName:@"qq" andProvideUserId:qq_openID andProvideToken:accessToken andProvideScreenName:[infoDic valueForKey:@"nickname"]];
+    // 获取头像
+    dispatch_queue_t aq = dispatch_queue_create("qq profile img queue", nil);
+    dispatch_async(aq, ^{
+            NSData* data = [RemoteInstance remoteDownDataFromUrl:[NSURL URLWithString:[infoDic valueForKey:@"figureurl_qq_2"]]];
+            UIImage* img = [UIImage imageWithData:data];
+            if (img) {
+                NSString* img_name = [TmpFileStorageModel generateFileName];
+                [TmpFileStorageModel saveToTmpDirWithImage:img withName:img_name];
+    
+                NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
+                [dic setValue:[self getCurrentAuthToken] forKey:@"auth_token"];
+                [dic setValue:[self getCurrentUserID] forKey:@"user_id"];
+                [dic setValue:img_name forKey:@"screen_photo"];
+                [self updateUserProfile:[dic copy]];
+    
+                /**
+                 *  4. push notification to the controller
+                 *      and controller to refresh the view
+                 */
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [_doc.managedObjectContext save:nil];
+                    NSLog(@"end get user info from weibo");
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"SNS login success" object:nil];
+                });
+    
+                dispatch_queue_t post_queue = dispatch_queue_create("post queue", nil);
+                dispatch_async(post_queue, ^(void){
+                    [RemoteInstance uploadPicture:img withName:img_name toUrl:[NSURL URLWithString:[POST_HOST_DOMAIN stringByAppendingString:POST_UPLOAD]] callBack:^(BOOL successs, NSString *message) {
+                        if (successs) {
+                            NSLog(@"post image success");
+                        } else {
+                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                            [alert show];
+                        }
+                    }];
+                });
+            }
+        });
 }
 
 #pragma mark - weibo login call back
@@ -297,9 +346,20 @@
     return [self sendAuthProvidersName:provider.provider_name andProvideUserId:provider.provider_user_id andProvideToken:provider.provider_token andProvideScreenName:provider.provider_screen_name];
 }
 
-- (CurrentToken*)sendAuthProvidersName:(NSString*)provide_name andProvideUserId:(NSString*)provide_user_id andProvideToken:(NSString*)provide_token andProvideScreenName:(NSString*)provide_screen_name {
+
+/**
+ *  保存到本地和服务器
+ *
+ *  @param provide_name        保存的方式
+ *  @param provide_user_id     用户id
+ *  @param provide_token       token
+ *  @param provide_screen_name 昵称
+ *
+ *  @return 返回当前的token
+ */
+- (CurrentToken *)sendAuthProvidersName:(NSString*)provide_name andProvideUserId:(NSString*)provide_user_id andProvideToken:(NSString*)provide_token andProvideScreenName:(NSString*)provide_screen_name {
   
-    NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
+    NSMutableDictionary* dic = [[NSMutableDictionary alloc] init];
     [dic setValue:@"" forKey:@"auth_token"];
     [dic setValue:@"" forKey:@"user_id"];
     [dic setValue:provide_name forKey:@"provide_name"];
@@ -730,10 +790,6 @@
             
             block(YES, [result objectForKey:@"result"]);
         } else {
-//            NSDictionary* reError = [result objectForKey:@"error"];
-//            NSString* msg = [reError objectForKey:@"message"];
-//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:msg delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-//            [alert show];
             block(NO, [result objectForKey:@"error"]);
         }
     });
@@ -820,9 +876,7 @@
                                                   otherButtonTitles:nil];
             [alert show];
         }
-    }
-    else if ([response isKindOfClass:WBPaymentResponse.class])
-    {
+    } else if ([response isKindOfClass:WBPaymentResponse.class]) {
         NSString *title = NSLocalizedString(@"支付结果", nil);
         NSString *message = [NSString stringWithFormat:@"%@: %d\nresponse.payStatusCode: %@\nresponse.payStatusMessage: %@\n%@: %@\n%@: %@", NSLocalizedString(@"响应状态", nil), (int)response.statusCode,[(WBPaymentResponse *)response payStatusCode], [(WBPaymentResponse *)response payStatusMessage], NSLocalizedString(@"响应UserInfo数据", nil),response.userInfo, NSLocalizedString(@"原请求UserInfo数据", nil), response.requestUserInfo];
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
@@ -831,8 +885,7 @@
                                               cancelButtonTitle:NSLocalizedString(@"确定", nil)
                                               otherButtonTitles:nil];
         [alert show];
-    }
-    else if ([response isKindOfClass:WBSDKAppRecommendResponse.class]) {
+    } else if ([response isKindOfClass:WBSDKAppRecommendResponse.class]) {
         
         NSString *title = @"推荐结果";
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
@@ -852,7 +905,9 @@
     NSLog(@"login succss with token : %@", qq_oauth.accessToken);
     if (qq_oauth.accessToken && 0 != [qq_oauth.accessToken length]) {
         //  记录登录用户的OpenID、Token以及过期时间
+        NSLog(@"张openId === %@", [qq_oauth getUserOpenID]);
         NSLog(@"login succss with token : %@", qq_oauth.accessToken);
+        NSLog(@"获取用户信息 === %c", [qq_oauth getUserInfo]);
     } else {
         NSLog(@"login error");
     }
@@ -876,4 +931,16 @@
 -(void)tencentDidNotNetWork {
     NSLog(@"login with no network");
 }
+
+/**
+ * 获取用户信息的回调
+ */
+- (void)getUserInfoResponse:(APIResponse *)response {
+    if (response.retCode == URLREQUEST_SUCCEED) {
+        [self loginSuccessWithQQAsUser:qq_oauth.openId accessToken:qq_oauth.accessToken infoDic:response.jsonResponse];
+    } else {
+        [[[UIAlertView alloc] initWithTitle:@"通知" message:@"获取QQ详细信息失败" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil] show];
+    }
+}
+
 @end
