@@ -13,4 +13,7 @@
 @interface AddressBookDelegate : NSObject <UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate, AddingFriendsProtocol>
 
 @property (nonatomic, weak) id<AsyncDelegateProtocol> delegate;
+
+- (NSArray*)getAllPhones;
+- (void)splitWithFriends:(NSArray*)lst;
 @end

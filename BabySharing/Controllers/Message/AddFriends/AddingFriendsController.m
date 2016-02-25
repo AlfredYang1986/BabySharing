@@ -15,6 +15,9 @@
 #import "SearchSegView2.h"
 #import "MessageFriendsCell.h"
 
+#import "AppDelegate.h"
+#import "LoginModel.h"
+
 @interface AddingFriendsController () <UISearchBarDelegate, AsyncDelegateProtocol, SearchSegViewDelegate, DongDaSearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *queryView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
@@ -48,7 +51,6 @@
     [_seg addItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:@"friend_qq" ofType:@"png"]] andSelectImage:[UIImage imageNamed:[resourceBundle pathForResource:@"friend_qq" ofType:@"png"]] andTitle:@"QQ"];
     _seg.isLayerHidden = YES;
     _seg.margin_between_items = 0.10 * [UIScreen mainScreen].bounds.size.width;
-    _seg.select_font_color = [UIColor grayColor];
 //    _seg.selectedIndex = 0;
     _seg.delegate = self;
     
@@ -164,8 +166,14 @@
 - (void)segValueChanged2:(SearchSegView2 *)seg {
     if (seg.selectedIndex == 0) {
 //        [self performSegueWithIdentifier:@"addressBook" sender:nil];
-        self.current_delegate = ab;
-        [_queryView reloadData];
+        
+        AppDelegate* app = [UIApplication sharedApplication].delegate;
+        [app.lm queryUserList:[ab getAllPhones] withProviderName:@"phone" andFinishBlock:^(BOOL success, NSArray *lst) {
+            self.current_delegate = ab;
+            [ab splitWithFriends:lst];
+            [_queryView reloadData];
+        }];
+        
     } else if (seg.selectedIndex == 1) {
         
     } else if (seg.selectedIndex == 2) {

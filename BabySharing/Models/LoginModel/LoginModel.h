@@ -31,6 +31,7 @@ typedef NS_ENUM(NSInteger, LoginModelConnectSNResult) {
 typedef void(^descriptionFinishBlock)(BOOL, NSDictionary*);
 typedef void(^weiboUsersFinishBlock)(BOOL success, NSArray* friends);
 typedef void(^queryRecommendUserFinishBlock)(BOOL success, NSArray* lst);
+typedef void(^queryUserListInSystemFinishBlock)(BOOL success, NSArray* lst);
 
 @interface LoginModel : NSObject <WeiboSDKDelegate, WXApiDelegate, TencentSessionDelegate> {
     NSArray* authorised_users;
@@ -101,4 +102,7 @@ typedef void(^queryRecommendUserFinishBlock)(BOOL success, NSArray* lst);
 
 - (void)currentDeltailInfoAsyncWithFinishBlock:(descriptionFinishBlock)block;
 - (NSDictionary*)currentDeltailInfoLocal;
+
+#pragma mark -- query users in system
+- (void)queryUserList:(NSArray*)user_lst withProviderName:(NSString*)provider_name andFinishBlock:(queryUserListInSystemFinishBlock)block;
 @end

@@ -38,8 +38,8 @@ static const NSString* kUserPostOwnerConnectionsFollowed = @"kUserPostOwnerConne
 static const NSString* kUserPostOwnerConnectionsFriends = @"kUserPostOwnerConnectionsFriends";
 
 #pragma mark -- HOST DOMAIN
-#define HOST_DOMAIN                     @"http://www.altlys.com:9000/"
-//#define HOST_DOMAIN                     @"http://192.168.3.101:9000/"
+//#define HOST_DOMAIN                     @"http://www.altlys.com:9000/"
+#define HOST_DOMAIN                     @"http://192.168.3.101:9000/"
 //#define HOST_DOMAIN_SENDBOX             @"http://192.168.1.105:9000/"
 
 #pragma mark -- DOWNLOAD
@@ -60,6 +60,7 @@ static const NSString* kUserPostOwnerConnectionsFriends = @"kUserPostOwnerConnec
 #define AUTH_WITH_THIRD                     @"authWithThird"
 #define AUTH_CREATE_WITH_PHONE              @"authCreateUserWithPhone"
 
+#define AUTH_USER_IN_SYSTEM                 [AUTH_HOST_DOMAIN stringByAppendingString:@"userLstInSystem"]
 #define AUTH_ONLINE_USER                    [AUTH_HOST_DOMAIN stringByAppendingString:@"online"]
 #define AUTH_OFFLINE_USER                   [AUTH_HOST_DOMAIN stringByAppendingString:@"offline"]
 #define AUTH_SINGOUT_USER                   [AUTH_HOST_DOMAIN stringByAppendingString:@"signout"]

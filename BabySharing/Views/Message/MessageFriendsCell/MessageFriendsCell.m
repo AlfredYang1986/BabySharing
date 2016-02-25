@@ -153,6 +153,7 @@
             break;
 //            return @"-取关";
         default:
+            [tmp setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"friend_invitation"] ofType:@"png"]] forState:UIControlStateNormal];
             break;
     }
 }
