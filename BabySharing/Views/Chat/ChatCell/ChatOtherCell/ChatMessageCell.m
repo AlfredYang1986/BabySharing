@@ -216,9 +216,9 @@
         if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
             NSDictionary* reVal = [result objectForKey:@"result"];
            
-            NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+            NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
             NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-            NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"User"] ofType:@"png"];
+            NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"default_user"] ofType:@"png"];
             
             NSString* photo_name = [reVal objectForKey:@"screen_photo"];
             UIImage* userImg = [TmpFileStorageModel enumImageWithName:photo_name withDownLoadFinishBolck:^(BOOL success, UIImage *user_img) {

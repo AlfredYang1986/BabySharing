@@ -79,7 +79,7 @@
 
 - (void)setUserPhotoImage:(NSArray*)img_arr {
     _isScreenPhoto = YES;
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
     for (int index = 0; index < MIN(RECOMMEND_COUNT, img_arr.count); ++index) {
         //        NSDictionary* iter = [img_arr objectAtIndex:index];
@@ -89,7 +89,7 @@
         tmp.layer.cornerRadius = 3.f;
         tmp.clipsToBounds = YES;
         
-        NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"User"] ofType:@"png"];
+        NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"default_user"] ofType:@"png"];
         NSString* photo_name = [iter objectForKey:@"screen_photo"];
         UIImage* userImg = [TmpFileStorageModel enumImageWithName:photo_name withDownLoadFinishBolck:^(BOOL success, UIImage *user_img) {
             if (success) {
@@ -112,7 +112,7 @@
 }
 
 - (void)setUserContentImages:(NSArray*)img_arr {
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
     for (int index = 0; index < MIN(RECOMMEND_COUNT, img_arr.count); ++index) {
 //        NSDictionary* iter = [img_arr objectAtIndex:index];
@@ -124,7 +124,7 @@
         tmp.layer.cornerRadius = 3.f;
         tmp.clipsToBounds = YES;
         
-        NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"User"] ofType:@"png"];
+        NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"default_user"] ofType:@"png"];
         NSString* photo_name = [item objectForKey:@"name"];
         UIImage* userImg = [TmpFileStorageModel enumImageWithName:photo_name withDownLoadFinishBolck:^(BOOL success, UIImage *user_img) {
             if (success) {

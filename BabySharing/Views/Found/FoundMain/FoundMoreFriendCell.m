@@ -95,14 +95,14 @@
 
 #define RECOMMEND_USER_COUNT    3
 - (void)setUserImages:(NSArray*)recommend_users {
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
     for (int index = 0; index < MIN(RECOMMEND_USER_COUNT, recommend_users.count); ++index) {
         NSDictionary* iter = [recommend_users objectAtIndex:index];
 
         UIImageView* tmp = (UIImageView*)[self viewWithTag:-1 - index];
 
-        NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"User"] ofType:@"png"];
+        NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"default_user"] ofType:@"png"];
         NSString* photo_name = [iter objectForKey:@"screen_photo"];
         UIImage* userImg = [TmpFileStorageModel enumImageWithName:photo_name withDownLoadFinishBolck:^(BOOL success, UIImage *user_img) {
             if (success) {

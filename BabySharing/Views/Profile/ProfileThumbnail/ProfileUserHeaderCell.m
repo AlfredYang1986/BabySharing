@@ -119,9 +119,9 @@
             });
         } else {
             NSLog(@"down load owner image %@ failed", photo_name);
-            NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+            NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
             NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-            NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"User"] ofType:@"png"];
+            NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"default_user"] ofType:@"png"];
             UIImage *image = [UIImage imageNamed:filePath];
             dispatch_async(dispatch_get_main_queue(), ^{
                 _imgView.image = image;
