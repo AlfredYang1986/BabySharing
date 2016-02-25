@@ -66,6 +66,7 @@ typedef void(^queryRecommendUserFinishBlock)(BOOL success, NSArray* lst);
 
 #pragma mark -- qq login and call back
 - (void)loginWithQQ;
+- (void)postContentOnQQzoneWithText:(NSString *)text andImage:(UIImage *)img;
 
 - (NSArray*)enumAllAuthorisedUsers;
 - (void)reloadDataFromLocalDB;

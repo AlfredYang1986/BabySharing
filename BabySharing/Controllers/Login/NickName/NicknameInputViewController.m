@@ -326,15 +326,15 @@
     
     NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
     
-    if (_isSNSLogIn) {
+//    if (_isSNSLogIn) {
 //        [dic setValue:[inputView getInputTags] forKey:@"role_tag"];
-        [dic setValue:inputView.role_tag forKey:@"role_tag"];
-    } else {
+//        [dic setValue:inputView.role_tag forKey:@"role_tag"];
+//    } else {
 //        [dic setValue:[inputView getInputName] forKey:@"screen_name"];
 //        [dic setValue:[inputView getInputTags] forKey:@"role_tag"];
         [dic setValue:inputView.screen_name forKey:@"screen_name"];
         [dic setValue:inputView.role_tag forKey:@"role_tag"];
-    }
+//    }
 
     [dic setValue:auth_token forKey:@"auth_token"];
     [dic setValue:user_id forKey:@"user_id"];

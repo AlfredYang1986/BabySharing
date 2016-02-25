@@ -311,6 +311,7 @@
     qq_btn.center = CGPointMake(width / 2 + 60 - margin, BOTTON_BAR_HEIGHT / 2);
     [SNS_bar addSubview:qq_btn];
     
+    // 同步到微博
     UIButton* weibo_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, SNS_BUTTON_WIDTH, SNS_BUTTON_HEIGHT)];
     NSString * weibo_file = [resourceBundle pathForResource:[NSString stringWithFormat:@"login_weibo"] ofType:@"png"];
     NSString * weibo_file_click = [resourceBundle pathForResource:[NSString stringWithFormat:@"login_weibo_clicked"] ofType:@"png"];
@@ -478,23 +479,22 @@
 
     if (tmp) {
         btn.selected = YES;
-//        btn.layer.borderWidth = 1.f;
-//        btn.layer.borderColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f].CGColor;
     } else {
         btn.selected = NO;
-//        btn.layer.borderWidth = 0.f;
     }
 }
 
 #pragma mark -- post the content
 - (void)didSelectPostBtn {
-    NSLog(@"Post Content");
+    NSLog(@"发布按钮点击");
     
     AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     if (_isShareWeibo) {
         [delegate.lm postContentOnWeiboWithText:_descriptionView.text andImage:_preViewImg];
     }
-
+    if (_isShareQQ) {
+        [delegate.lm postContentOnQQzoneWithText:_descriptionView.text andImage:_preViewImg];
+    }
     PostModel* pm = delegate.pm;
     
     if (_type == PostPreViewPhote) {
@@ -503,7 +503,7 @@
          */
         NSMutableArray* arr = [[NSMutableArray alloc]init];
         for (PhotoTagView* view in _already_taged) {
-            NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
+            NSMutableDictionary* dic = [[NSMutableDictionary alloc] init];
             [dic setObject:[NSNumber numberWithInt:view.type] forKey:@"type"];
             [dic setObject:view.content forKey:@"content"];
             [dic setObject:[NSNumber numberWithFloat:view.offset_x] forKey:@"offsetX"];

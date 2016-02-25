@@ -20,11 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BabySharing/Models/LoginModel/LoginModel.m"
-            timestampString = "478065143.586892"
+            timestampString = "478078091.920531"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "862"
-            endingLineNumber = "862"
+            startingLineNumber = "886"
+            endingLineNumber = "886"
             landmarkName = "-didReceiveWeiboResponse:"
             landmarkType = "5">
          </BreakpointContent>
@@ -36,11 +36,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BabySharing/Models/LoginModel/LoginModel.m"
-            timestampString = "478065143.586892"
+            timestampString = "478078091.920531"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "840"
-            endingLineNumber = "840"
+            startingLineNumber = "864"
+            endingLineNumber = "864"
             landmarkName = "-didReceiveWeiboResponse:"
             landmarkType = "5">
          </BreakpointContent>
@@ -52,11 +52,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BabySharing/Models/LoginModel/LoginModel.m"
-            timestampString = "478065143.586892"
+            timestampString = "478078091.920531"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "867"
-            endingLineNumber = "867"
+            startingLineNumber = "891"
+            endingLineNumber = "891"
             landmarkName = "-didReceiveWeiboResponse:"
             landmarkType = "5">
          </BreakpointContent>
@@ -68,11 +68,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BabySharing/Models/LoginModel/LoginModel.m"
-            timestampString = "478065143.586892"
+            timestampString = "478078091.920531"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "346"
-            endingLineNumber = "346"
+            startingLineNumber = "370"
+            endingLineNumber = "370"
             landmarkName = "-sendAuthProviders:"
             landmarkType = "5">
          </BreakpointContent>
@@ -84,11 +84,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BabySharing/Models/LoginModel/LoginModel.m"
-            timestampString = "478065143.586892"
+            timestampString = "478078091.920531"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "399"
-            endingLineNumber = "399"
+            startingLineNumber = "423"
+            endingLineNumber = "423"
             landmarkName = "-loadWeiboUsersWithCurrentUserWithFinishBlock:"
             landmarkType = "5">
          </BreakpointContent>
@@ -100,11 +100,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BabySharing/Models/LoginModel/LoginModel.m"
-            timestampString = "478065143.586892"
+            timestampString = "478078091.920531"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "518"
-            endingLineNumber = "518"
+            startingLineNumber = "542"
+            endingLineNumber = "542"
             landmarkName = "-loginSuccessWithWeiboAsUser:withToken:"
             landmarkType = "5">
          </BreakpointContent>
@@ -116,11 +116,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BabySharing/Models/LoginModel/LoginModel.m"
-            timestampString = "478065143.586892"
+            timestampString = "478078091.920531"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "499"
-            endingLineNumber = "499"
+            startingLineNumber = "523"
+            endingLineNumber = "523"
             landmarkName = "-loginSuccessWithWeiboAsUser:withToken:"
             landmarkType = "5">
             <Locations>
@@ -132,11 +132,11 @@
                   moduleName = "BabySharing"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/monkeyheng/Desktop/BabySharing/BabySharing/Models/LoginModel/LoginModel.m"
-                  timestampString = "478065144.127236"
+                  timestampString = "478078093.114528"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "499"
-                  endingLineNumber = "499"
+                  startingLineNumber = "523"
+                  endingLineNumber = "523"
                   offsetFromSymbolStart = "160">
                </Location>
                <Location
@@ -147,11 +147,11 @@
                   moduleName = "BabySharing"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/monkeyheng/Desktop/BabySharing/BabySharing/Models/LoginModel/LoginModel.m"
-                  timestampString = "478065144.127525"
+                  timestampString = "478078093.115114"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "499"
-                  endingLineNumber = "499"
+                  startingLineNumber = "523"
+                  endingLineNumber = "523"
                   offsetFromSymbolStart = "117">
                </Location>
             </Locations>
@@ -164,12 +164,44 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BabySharing/Models/LoginModel/LoginModel.m"
-            timestampString = "478065143.586892"
+            timestampString = "478078091.920531"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "524"
-            endingLineNumber = "524"
+            startingLineNumber = "548"
+            endingLineNumber = "548"
             landmarkName = "-loginSuccessWithWeiboAsUser:withToken:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BabySharing/Models/LoginModel/LoginModel.m"
+            timestampString = "478078091.920531"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "386"
+            endingLineNumber = "386"
+            landmarkName = "-sendAuthProvidersName:andProvideUserId:andProvideToken:andProvideScreenName:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BabySharing/Models/LoginModel/LoginModel.m"
+            timestampString = "478078091.920531"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "395"
+            endingLineNumber = "395"
+            landmarkName = "-sendAuthProvidersName:andProvideUserId:andProvideToken:andProvideScreenName:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

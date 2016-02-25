@@ -47,6 +47,30 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>mqq</string>
+		<string>mqqapi</string>
+		<string>mqqwpa</string>
+		<string>mqqbrowser</string>
+		<string>mttbrowser</string>
+		<string>mqqOpensdkSSoLogin</string>
+		<string>mqqopensdkapiV2</string>
+		<string>mqqopensdkapiV3</string>
+		<string>wtloginmqq2</string>
+		<string>mqzone</string>
+		<string>mqzoneopensdk</string>
+		<string>mqzoneopensdkapi</string>
+		<string>mqzoneopensdkapi19</string>
+		<string>mqzoneopensdkapiV2</string>
+		<string>mqqapiwallet</string>
+		<string>mqqopensdkfriend</string>
+		<string>mqqopensdkdataline</string>
+		<string>mqqgamebindinggroup</string>
+		<string>mqqopensdkgrouptribeshare</string>
+		<string>tencentapi.qq.reqContent</string>
+		<string>tencentapi.qzone.reqContent</string>
+	</array>
 	<key>LSHasLocalizedDisplayName</key>
 	<true/>
 	<key>LSRequiresIPhoneOS</key>

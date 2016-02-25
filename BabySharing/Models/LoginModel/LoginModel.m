@@ -17,6 +17,8 @@
 #import "ModelDefines.h"
 #import "TmpFileStorageModel.h"
 #import "Reachability.h"
+#import "QQApiInterfaceObject.h"
+#import "QQApiInterface.h"
 
 // weibo sdk
 #import "WBHttpRequest+WeiboUser.h"
@@ -293,41 +295,51 @@
     // 获取头像
     dispatch_queue_t aq = dispatch_queue_create("qq profile img queue", nil);
     dispatch_async(aq, ^{
-            NSData* data = [RemoteInstance remoteDownDataFromUrl:[NSURL URLWithString:[infoDic valueForKey:@"figureurl_qq_2"]]];
-            UIImage* img = [UIImage imageWithData:data];
-            if (img) {
-                NSString* img_name = [TmpFileStorageModel generateFileName];
-                [TmpFileStorageModel saveToTmpDirWithImage:img withName:img_name];
+        NSData* data = [RemoteInstance remoteDownDataFromUrl:[NSURL URLWithString:[infoDic valueForKey:@"figureurl_qq_2"]]];
+        UIImage* img = [UIImage imageWithData:data];
+        if (img) {
+            NSString* img_name = [TmpFileStorageModel generateFileName];
+            [TmpFileStorageModel saveToTmpDirWithImage:img withName:img_name];
+
+            NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
+            [dic setValue:[self getCurrentAuthToken] forKey:@"auth_token"];
+            [dic setValue:[self getCurrentUserID] forKey:@"user_id"];
+            [dic setValue:img_name forKey:@"screen_photo"];
+            [self updateUserProfile:[dic copy]];
+
+            /**
+             *  4. push notification to the controller
+             *      and controller to refresh the view
+             */
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [_doc.managedObjectContext save:nil];
+                NSLog(@"end get user info from weibo");
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"SNS login success" object:nil];
+            });
+
+            dispatch_queue_t post_queue = dispatch_queue_create("post queue", nil);
+            dispatch_async(post_queue, ^(void){
+                [RemoteInstance uploadPicture:img withName:img_name toUrl:[NSURL URLWithString:[POST_HOST_DOMAIN stringByAppendingString:POST_UPLOAD]] callBack:^(BOOL successs, NSString *message) {
+                    if (successs) {
+                        NSLog(@"post image success");
+                    } else {
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                        [alert show];
+                    }
+                }];
+            });
+        }
+    });
+}
+
+- (void)postContentOnQQzoneWithText:(NSString *)text andImage:(UIImage *)img {
     
-                NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
-                [dic setValue:[self getCurrentAuthToken] forKey:@"auth_token"];
-                [dic setValue:[self getCurrentUserID] forKey:@"user_id"];
-                [dic setValue:img_name forKey:@"screen_photo"];
-                [self updateUserProfile:[dic copy]];
+    NSData* data = UIImagePNGRepresentation(img);
     
-                /**
-                 *  4. push notification to the controller
-                 *      and controller to refresh the view
-                 */
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [_doc.managedObjectContext save:nil];
-                    NSLog(@"end get user info from weibo");
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"SNS login success" object:nil];
-                });
+    QQApiImageObject *imgObj = [QQApiImageObject objectWithData:data previewImageData:data title:@"分享" description:text];
+    SendMessageToQQReq* req = [SendMessageToQQReq reqWithContent:imgObj];
     
-                dispatch_queue_t post_queue = dispatch_queue_create("post queue", nil);
-                dispatch_async(post_queue, ^(void){
-                    [RemoteInstance uploadPicture:img withName:img_name toUrl:[NSURL URLWithString:[POST_HOST_DOMAIN stringByAppendingString:POST_UPLOAD]] callBack:^(BOOL successs, NSString *message) {
-                        if (successs) {
-                            NSLog(@"post image success");
-                        } else {
-                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-                            [alert show];
-                        }
-                    }];
-                });
-            }
-        });
+    NSLog(@"分享到QQ空间 == %d", [QQApiInterface sendReq:req]);
 }
 
 #pragma mark - weibo login call back
@@ -876,7 +888,9 @@
                                                   otherButtonTitles:nil];
             [alert show];
         }
-    } else if ([response isKindOfClass:WBPaymentResponse.class]) {
+    }
+    else if ([response isKindOfClass:WBPaymentResponse.class])
+    {
         NSString *title = NSLocalizedString(@"支付结果", nil);
         NSString *message = [NSString stringWithFormat:@"%@: %d\nresponse.payStatusCode: %@\nresponse.payStatusMessage: %@\n%@: %@\n%@: %@", NSLocalizedString(@"响应状态", nil), (int)response.statusCode,[(WBPaymentResponse *)response payStatusCode], [(WBPaymentResponse *)response payStatusMessage], NSLocalizedString(@"响应UserInfo数据", nil),response.userInfo, NSLocalizedString(@"原请求UserInfo数据", nil), response.requestUserInfo];
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
@@ -885,7 +899,8 @@
                                               cancelButtonTitle:NSLocalizedString(@"确定", nil)
                                               otherButtonTitles:nil];
         [alert show];
-    } else if ([response isKindOfClass:WBSDKAppRecommendResponse.class]) {
+    }
+    else if ([response isKindOfClass:WBSDKAppRecommendResponse.class]) {
         
         NSString *title = @"推荐结果";
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
