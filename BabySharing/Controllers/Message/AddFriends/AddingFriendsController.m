@@ -27,7 +27,7 @@
 
 @implementation AddingFriendsController {
     AddressBookDelegate* ab;
-    WeiboFriendsDelegate* wb;
+//    WeiboFriendsDelegate* wb;
 }
 
 @synthesize queryView = _queryView;
@@ -43,34 +43,28 @@
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
     
-    [_seg addItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:@"friend_address_book" ofType:@"png"]] andSelectImage:[UIImage imageNamed:[resourceBundle pathForResource:@"friend_address_book" ofType:@"png"]] andTitle:@"通讯录"];
+    [_seg addItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:@"friend_address_book" ofType:@"png"]] andSelectImage:[UIImage imageNamed:[resourceBundle pathForResource:@"friend_address_book_selected" ofType:@"png"]] andTitle:@"通讯录"];
     [_seg addItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:@"friend_wechat" ofType:@"png"]] andSelectImage:[UIImage imageNamed:[resourceBundle pathForResource:@"friend_wechat" ofType:@"png"]] andTitle:@"微信"];
     [_seg addItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:@"friend_qq" ofType:@"png"]] andSelectImage:[UIImage imageNamed:[resourceBundle pathForResource:@"friend_qq" ofType:@"png"]] andTitle:@"QQ"];
     _seg.isLayerHidden = YES;
     _seg.margin_between_items = 0.10 * [UIScreen mainScreen].bounds.size.width;
-    _seg.selectedIndex = 0;
+    _seg.select_font_color = [UIColor grayColor];
+//    _seg.selectedIndex = 0;
     _seg.delegate = self;
-    
-//    [_seg addTarget:self action:@selector(segValueChanged) forControlEvents:UIControlEventValueChanged];
-    
-    _searchBar.delegate = self;
     
     ab = [[AddressBookDelegate alloc]init];
 //    if ([ab isDelegateReady]) {
-        self.current_delegate = ab;
+//        self.current_delegate = ab;
 //    }
     
-    wb = [[WeiboFriendsDelegate alloc]init];
+//    wb = [[WeiboFriendsDelegate alloc]init];
     
     UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(10.5, 32, 25, 25)];
     NSString* filepath = [resourceBundle pathForResource:@"dongda_back" ofType:@"png"];
     CALayer * layer = [CALayer layer];
     layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
     layer.frame = CGRectMake(-10, 0, 20, 20);
-//    layer.position = CGPointMake(barBtn.frame.size.width / 2, barBtn.frame.size.height / 2);
     [barBtn.layer addSublayer:layer];
-//    [barBtn setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
-//    [barBtn setImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
     [barBtn addTarget:self action:@selector(didPopControllerSelected) forControlEvents:UIControlEventTouchDown];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn];
@@ -83,13 +77,13 @@
     self.navigationItem.titleView = label;
     
     self.view.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
-    
+   
+    _searchBar.delegate = self;
     _searchBar.placeholder = @"搜索好友";
     _searchBar.backgroundColor = [UIColor clearColor];
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     UIImageView* iv = [[UIImageView alloc] initWithImage:[self imageWithColor:[UIColor whiteColor] size:CGSizeMake(width + 10, 44)]];
     [_searchBar insertSubview:iv atIndex:1];
-    //    [_searchBar setSearchFieldBackgroundImage:[self imageWithColor:[UIColor whiteColor] size:_searchBar.bounds.size] forState:UIControlStateNormal];
     for (UIView* v in _searchBar.subviews.firstObject.subviews) {
         if ( [v isKindOfClass: [UITextField class]] ) {
             UITextField *tf = (UITextField *)v;
@@ -98,13 +92,9 @@
             tf.clearButtonMode = UITextFieldViewModeWhileEditing;
         } else if ([v isKindOfClass:[UIButton class]]) {
             UIButton* cancel_btn = (UIButton*)v;
-            //            [cancel_btn setTitle:@"test" forState:UIControlStateNormal];
             [cancel_btn setTitleColor:[UIColor colorWithWhite:0.4667 alpha:1.f] forState:UIControlStateNormal];
             [cancel_btn setTitleColor:[UIColor colorWithWhite:0.4667 alpha:1.f] forState:UIControlStateDisabled];
         }
-        //        else if ([v isKindOfClass:NSClassFromString(@"UISearchBarBackground")]) {
-        //            v.backgroundColor = [UIColor whiteColor];
-        //        }
     }
     
     [_queryView registerNib:[UINib nibWithNibName:@"MessageFriendsCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"friend cell"];
@@ -129,6 +119,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 - (void)didPopControllerSelected {
@@ -140,15 +131,12 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
 #pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"searchFriends"]) {
+    
+    }
 }
-*/
 
 - (void)setCurrentDelegate:(id<UITableViewDataSource,UITableViewDelegate,AddingFriendsProtocol>)current_delegate {
     _current_delegate = current_delegate;
@@ -162,38 +150,27 @@
     }
 }
 
-#pragma mark -- segement controll
-- (void)segValueChanged {
-//    if (_seg.selectedSegmentIndex == 0) {
-    if (_seg.selectedIndex == 0) {
-//        if ([ab isDelegateReady]) {
-            self.current_delegate = ab;
-            [_queryView reloadData];
-//        }
-    } else if (_seg.selectedIndex == 1) {
-        self.current_delegate = wb;
-    } else {
-        self.current_delegate = nil;
-    }
-
-    if ([self.current_delegate isDelegateReady]) {
-        [_queryView reloadData];
-    }
-}
-
 #pragma mark -- search bar delegate
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    [_current_delegate filterFriendsWithString:searchText];
-    [_queryView reloadData];
+//- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+//    [_current_delegate filterFriendsWithString:searchText];
+//    [_queryView reloadData];
+//}
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
+    [self performSegueWithIdentifier:@"searchFriends" sender:nil];
+    return NO;
 }
 
 #pragma mark -- seg delegate
-- (void)segValueChanged:(SearchSegView*)seg {
-    [self segValueChanged];
-}
-
 - (void)segValueChanged2:(SearchSegView2 *)seg {
-    NSLog(@"value changed");
+    if (seg.selectedIndex == 0) {
+//        [self performSegueWithIdentifier:@"addressBook" sender:nil];
+        self.current_delegate = ab;
+        [_queryView reloadData];
+    } else if (seg.selectedIndex == 1) {
+        
+    } else if (seg.selectedIndex == 2) {
+        
+    }
 }
 
 - (void)cancelBtnSelected {

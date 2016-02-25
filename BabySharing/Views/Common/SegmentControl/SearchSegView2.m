@@ -31,11 +31,14 @@
 
 @synthesize font_size = _font_size;
 @synthesize font_color = _font_color;
+@synthesize select_font_color = _select_font_color;
 
 - (id)init {
     self = [super init];
     if (self) {
         self.tag = -99;
+        self.font_color = [UIColor grayColor];
+        self.select_font_color = [UIColor colorWithRed:0.2745f green:0.8588 blue:0.7922 alpha:1.f];
     }
     return self;
 }
@@ -44,6 +47,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.tag = -99;
+        self.font_color = [UIColor grayColor];
+        self.select_font_color = [UIColor colorWithRed:0.2745f green:0.8588 blue:0.7922 alpha:1.f];
     }
     return self;
 }
@@ -52,6 +57,8 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         self.tag = -99;
+        self.font_color = [UIColor grayColor];
+        self.select_font_color = [UIColor colorWithRed:0.2745f green:0.8588 blue:0.7922 alpha:1.f];
     }
     return self;
 }
@@ -117,6 +124,13 @@
     }
 }
 
+- (void)resetSelectFontColor:(UIColor *)select_font_color {
+    _select_font_color = select_font_color;
+    for (SearchSegItem* iter in [self getSegItems]) {
+        iter.select_font_color = _select_font_color;
+    }
+}
+
 - (NSString*)queryItemTitleAtIndex:(NSInteger)i {
     SearchSegItem* tmp = [self viewWithTag:i + 1];
     return tmp.title;
@@ -129,6 +143,8 @@
     item.status = 0;
     item.tag = [self getSegItemsCount] + 1;
     item.isLayerHidden = _isLayerHidden;
+    item.select_font_color = _select_font_color;
+    item.font_color = _font_color;
     
     UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(segSelected:)];
     [item addGestureRecognizer:tap];
@@ -166,6 +182,8 @@
     item.title = title;
     item.isLayerHidden = _isLayerHidden;
     item.status = 0;
+    item.select_font_color = _select_font_color;
+    item.font_color = _font_color;
     
     UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(segImgTextSelected:)];
     [item addGestureRecognizer:tap];

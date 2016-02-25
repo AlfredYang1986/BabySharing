@@ -18,6 +18,7 @@
 @property (nonatomic, setter=setItemLayerHidden:) BOOL isLayerHidden;
 @property (nonatomic, setter=resetFontSize:) CGFloat font_size;
 @property (nonatomic, strong, setter=resetFontColor:) UIColor* font_color;
+@property (nonatomic, strong, setter=resetSelectFontColor:) UIColor* select_font_color;
 
 // view location property
 @property (nonatomic) CGFloat margin_to_edge;

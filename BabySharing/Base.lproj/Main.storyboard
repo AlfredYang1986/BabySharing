@@ -1305,7 +1305,6 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <segue destination="fav-i3-Xga" kind="push" identifier="addFriends" id="Z8a-iE-MvE"/>
                         <segue destination="vu1-ps-3xT" kind="push" identifier="startChat" id="2Bs-UG-c18"/>
                         <segue destination="ox0-xj-qsG" kind="push" identifier="showNotifications" id="Uuv-9c-sfa"/>
-                        <segue destination="JDk-zp-R2U" kind="push" identifier="searchFriends" id="ub0-0F-OXc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qnc-mR-mVz" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1500,43 +1499,12 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <outlet property="queryView" destination="ooZ-Cq-P0Q" id="i17-oS-cNf"/>
                         <outlet property="searchBar" destination="XAI-YK-qoZ" id="sf3-ZM-aBe"/>
                         <outlet property="seg" destination="bAi-0o-xBR" id="3ck-DU-iBi"/>
-                        <segue destination="ACV-6I-bvh" kind="push" id="tQd-di-kh2"/>
+                        <segue destination="JDk-zp-R2U" kind="push" identifier="searchFriends" id="wVz-0q-bkh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eRV-c9-hj9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2412" y="3252"/>
-        </scene>
-        <!--通讯录-->
-        <scene sceneID="HqT-Iv-Qiq">
-            <objects>
-                <viewController id="ACV-6I-bvh" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="0KP-IG-SIN"/>
-                        <viewControllerLayoutGuide type="bottom" id="gny-KS-c54"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="uSH-mh-JXp">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="ohD-TD-K1H">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="bottomMargin" secondItem="ohD-TD-K1H" secondAttribute="bottom" id="Opg-ju-7Dd"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="ohD-TD-K1H" secondAttribute="trailing" constant="-16" id="bHb-sZ-owF"/>
-                            <constraint firstItem="ohD-TD-K1H" firstAttribute="leading" secondItem="uSH-mh-JXp" secondAttribute="leadingMargin" constant="-16" id="biL-jx-e6l"/>
-                            <constraint firstItem="ohD-TD-K1H" firstAttribute="top" secondItem="uSH-mh-JXp" secondAttribute="topMargin" id="cEa-ub-lOQ"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="通讯录" id="zI4-W3-aBb"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="FpM-kN-gHc" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3226" y="3252"/>
         </scene>
         <!--关于咚嗒-->
         <scene sceneID="bYB-qw-tUA">
