@@ -60,7 +60,7 @@
 }
 
 - (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return @"添加新角色";
+    return @"添加新地址标签";
     //    return [_delegate getAddSectionTitle];
 }
 

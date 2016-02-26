@@ -25,13 +25,31 @@
 
 #import "ChatGroupUserInfoTableDelegateAndDatasource.h"
 
-@interface ChatGroupController () <UITableViewDataSource, UITableViewDelegate, /*UITextFieldDelegate,*/ GotyeOCDelegate, ChatEmoji, UITextViewDelegate, userInfoPaneDelegate>
-@property (weak, nonatomic) IBOutlet UITableView *queryView;
-//@property (weak, nonatomic) IBOutlet UITextField *inputField;
-//@property (weak, nonatomic) IBOutlet UIButton *faceBtn;
-//@property (weak, nonatomic) IBOutlet UIButton *funcBtn;
-//@property (weak, nonatomic) IBOutlet UIView *inputContainer;
+#define BACK_BTN_WIDTH          23
+#define BACK_BTN_HEIGHT         23
+#define BOTTOM_MARGIN           10.5
+    
+#define INPUT_HEIGHT            37
+    
+#define INPUT_CONTAINER_HEIGHT  49
+    
+#define SCREEN_WIDTH            [UIScreen mainScreen].bounds.size.width
+    
+#define USER_BTN_WIDTH          40
+#define USER_BTN_HEIGHT         23
 
+
+#define USER_INFO_PANE_HEIGHT               190
+#define USER_INFO_PANE_MARGIN               10.5
+#define USER_INGO_PANE_BOTTOM_MARGIN        4
+#define USER_INFO_PANE_WIDTH                width - 2 * USER_INFO_PANE_MARGIN
+#define USER_INFO_CONTAINER_HEIGHT          USER_INFO_PANE_HEIGHT - USER_INFO_BACK_BTN_HEIGHT - USER_INGO_PANE_BOTTOM_MARGIN
+
+#define USER_INFO_BACK_BTN_HEIGHT           30
+#define USER_INFO_BACK_BTN_WIDTH            30
+
+@interface ChatGroupController () <UITableViewDataSource, UITableViewDelegate, /*UITextFieldDelegate,*/ GotyeOCDelegate, ChatEmoji, UITextViewDelegate, userInfoPaneDelegate>
+@property (strong, nonatomic) IBOutlet UITableView *queryView;
 @end
 
 @implementation ChatGroupController {
@@ -56,13 +74,14 @@
     ChatEmojiView* emoji;
     CGRect keyBoardFrame;
     BOOL isEmoji;
+    
+    /**
+     * dispatch_semaphore_wait
+     */
+    dispatch_semaphore_t semaphore;
 }
 
 @synthesize queryView = _queryView;
-//@synthesize inputField = _inputField;
-//@synthesize faceBtn = _faceBtn;
-//@synthesize funcBtn = _funcBtn;
-//@synthesize inputContainer = _inputContainer;
 
 @synthesize founder_id = _founder_id;
 @synthesize lm = _lm;
@@ -80,7 +99,15 @@
     
     current_message = [[NSMutableArray alloc]init];
     current_talk_users = [[NSMutableArray alloc]init];
-   
+  
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    CGFloat height = [UIScreen mainScreen].bounds.size.height;
+    _queryView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, width, height)];
+    _queryView.delegate = self;
+    _queryView.dataSource = self;
+    [self.view addSubview:_queryView];
+    [self.view bringSubviewToFront:_queryView];
+    
     _queryView.backgroundColor = [UIColor clearColor];
     _queryView.separatorStyle = UITableViewCellSeparatorStyleNone;  // 去除表框
     [_queryView registerNib:[UINib nibWithNibName:@"MessageChatGroupHeader2" bundle:[NSBundle mainBundle]] forHeaderFooterViewReuseIdentifier:@"chat group header"];
@@ -91,6 +118,8 @@
     /**
      * get founder info
      */
+    semaphore = dispatch_semaphore_create(1);
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
     dispatch_queue_t up = dispatch_queue_create("Get Profile Details", nil);
     dispatch_async(up, ^{
         
@@ -122,27 +151,31 @@
             NSLog(@"query user profile failed");
             NSLog(@"%@", msg);
         }
+   
+        dispatch_semaphore_signal(semaphore);
     });
     
-    /**
-     * start enter group
-     */
-    dispatch_queue_t en = dispatch_queue_create("Get Profile Details", nil);
-    dispatch_async(en, ^{
-        [_mm joinChatGroup:_group_id andFinishBlock:^(BOOL success, id result) {
-            NSLog(@"join group success");
-        }];
-    });
+    [self enterChatRoom];
     
-    /**
-     * get user lst
-     */
-    GotyeOCRoom* room = [GotyeOCRoom roomWithId:_group_id.longLongValue];
-    if (![GotyeOCAPI isInRoom:room]) {
-        [GotyeOCAPI enterRoom:room];
-    } else {
-        [GotyeOCAPI reqRoomMemberList:room pageIndex:0];
-    }
+//    /**
+//     * start enter group
+//     */
+//    dispatch_queue_t en = dispatch_queue_create("Get Profile Details", nil);
+//    dispatch_async(en, ^{
+//        [_mm joinChatGroup:_group_id andFinishBlock:^(BOOL success, id result) {
+//            NSLog(@"join group success");
+//        }];
+//    });
+//    
+//    /**
+//     * get user lst
+//     */
+//    GotyeOCRoom* room = [GotyeOCRoom roomWithId:_group_id.longLongValue];
+//    if (![GotyeOCAPI isInRoom:room]) {
+//        [GotyeOCAPI enterRoom:room];
+//    } else {
+//        [GotyeOCAPI reqRoomMemberList:room pageIndex:0];
+//    }
     
     /**
      * get local messages for chat group
@@ -151,9 +184,14 @@
     /**
      * get emoji
      */
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
     emoji = [[ChatEmojiView alloc]init];
     emoji.delegate = self;
+    
+    /**
+     * input method
+     */
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasChange:) name:UIKeyboardDidChangeFrameNotification object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -165,10 +203,46 @@
     [GotyeOCAPI removeListener:self];
 }
 
+- (void)viewDidLayoutSubviews {
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    CGFloat height = [UIScreen mainScreen].bounds.size.height;
+    _queryView.frame = CGRectMake(0, 0, width, height);
+    inputContainer.frame = CGRectMake(0, height - INPUT_CONTAINER_HEIGHT, SCREEN_WIDTH, INPUT_CONTAINER_HEIGHT);
+    userInfoPane.frame = CGRectMake(USER_INFO_PANE_MARGIN + width, height - USER_INGO_PANE_BOTTOM_MARGIN - USER_INFO_PANE_HEIGHT, width - 2 * USER_INFO_PANE_MARGIN, USER_INFO_PANE_HEIGHT);
+}
+
+- (void)enterChatRoom {
+    /**
+     * start enter group
+     */
+    dispatch_queue_t en = dispatch_queue_create("Get Profile Details", nil);
+    dispatch_async(en, ^{
+        [_mm joinChatGroup:_group_id andFinishBlock:^(BOOL success, id result) {
+            NSLog(@"join group success");
+            /**
+             * get user lst
+             */
+            GotyeOCRoom* room = [GotyeOCRoom roomWithId:_group_id.longLongValue];
+            if (![GotyeOCAPI isInRoom:room]) {
+                [GotyeOCAPI enterRoom:room];
+            } else {
+                [GotyeOCAPI reqRoomMemberList:room pageIndex:0];
+            }
+        }];
+    });
+    
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     self.tabBarController.tabBar.hidden = YES;
     self.navigationController.navigationBarHidden = YES;
     [GotyeOCAPI addListener:self];
+    
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -178,7 +252,7 @@
 - (void)reloadData {
     [_queryView reloadData];
     [userInfoTable reloadData];
-    inputView.text = @"";
+//    inputView.text = @"";
 //    [userBtn setTitle:[NSString stringWithFormat:@"%d", _joiner_count.intValue] forState:UIControlStateNormal];
 //    [userBtn setTitle:@"123" forState:UIControlStateNormal];
 //    [userBtn setNeedsDisplay];
@@ -204,19 +278,12 @@
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     CGFloat height = [UIScreen mainScreen].bounds.size.height;
     
-#define USER_INFO_PANE_HEIGHT               190
-#define USER_INFO_PANE_MARGIN               10.5
-#define USER_INGO_PANE_BOTTOM_MARGIN        4
-#define USER_INFO_PANE_WIDTH                width - 2 * USER_INFO_PANE_MARGIN
-    
     userInfoPane = [[UIView alloc]initWithFrame:CGRectMake(USER_INFO_PANE_MARGIN, height - USER_INGO_PANE_BOTTOM_MARGIN - USER_INFO_PANE_HEIGHT, width - 2 * USER_INFO_PANE_MARGIN, USER_INFO_PANE_HEIGHT)];
 //    userInfoPane.backgroundColor = [UIColor colorWithWhite:1.f alpha:0.6];
 //    userInfoPane.layer.cornerRadius = 5.f;
 //    userInfoPane.clipsToBounds = YES;
     userInfoPane.backgroundColor = [UIColor clearColor];
     
-#define USER_INFO_BACK_BTN_HEIGHT           30
-#define USER_INFO_BACK_BTN_WIDTH            30
     
     NSString * bundlePath_dongda = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle_dongda = [NSBundle bundleWithPath:bundlePath_dongda];
@@ -233,8 +300,6 @@
     back_btn.frame = CGRectMake(userInfoPane.bounds.size.width - USER_INFO_BACK_BTN_WIDTH, 0, USER_INFO_BACK_BTN_WIDTH, USER_INFO_BACK_BTN_HEIGHT);
     [back_btn.layer addSublayer:layer];
     [userInfoPane addSubview:back_btn];
-    
-#define USER_INFO_CONTAINER_HEIGHT          USER_INFO_PANE_HEIGHT - USER_INFO_BACK_BTN_HEIGHT - USER_INGO_PANE_BOTTOM_MARGIN
   
     userInfoTable = [[UITableView alloc]initWithFrame:CGRectMake(0, USER_INFO_BACK_BTN_HEIGHT + USER_INGO_PANE_BOTTOM_MARGIN, USER_INFO_PANE_WIDTH, USER_INFO_CONTAINER_HEIGHT)];
     
@@ -266,19 +331,6 @@
 
     NSString * bundlePath_dongda = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle_dongda = [NSBundle bundleWithPath:bundlePath_dongda];
-    
-#define BACK_BTN_WIDTH          23
-#define BACK_BTN_HEIGHT         23
-#define BOTTOM_MARGIN           10.5
-    
-#define INPUT_HEIGHT            37
-    
-#define INPUT_CONTAINER_HEIGHT  49
-    
-#define SCREEN_WIDTH            [UIScreen mainScreen].bounds.size.width
-    
-#define USER_BTN_WIDTH          40
-#define USER_BTN_HEIGHT         23
 
     inputContainer = [[UIView alloc]initWithFrame:CGRectMake(0, height - INPUT_CONTAINER_HEIGHT, SCREEN_WIDTH, INPUT_CONTAINER_HEIGHT)];
     inputContainer.backgroundColor = [UIColor clearColor];
@@ -361,6 +413,8 @@
 //            MessageChatGroupHeader2* tmp = (MessageChatGroupHeader2*)[_queryView headerViewForSection:0];
             current_talk_users = [result objectForKey:@"result"];
             dispatch_async(dispatch_get_main_queue(), ^{
+//                [inputView resignFirstResponder];
+//                [self.view setNeedsDisplay];
                 [self reloadData];
             });
 //            [tmp setChatGroupUserList:current_talk_users];
@@ -394,6 +448,7 @@
     dispatch_async(dispatch_get_main_queue(), ^{
 //        [_queryView reloadData];
         [self reloadData];
+        inputView.text = @"";
     });
 }
 
@@ -409,7 +464,7 @@
 
 - (void)chatBtnSelected {
 //    [_inputField becomeFirstResponder];
-    [self moveView:-250];
+//    [self moveView:-keyBoardFrame.size.height];
 }
 
 - (void)backBtnSelected {
@@ -446,6 +501,10 @@
     [self setGroupInfoForChatGroupHeader:header];
 //    [header setChatGroupUserList:current_talk_users];
     return header;
+}
+
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+    return NO;
 }
 
 #pragma mark -- table view data source
@@ -569,7 +628,8 @@
 
 #pragma mark -- textfield delegate
 - (void)textViewDidBeginEditing:(UITextView *)textView {
-    [self moveView:-250];
+//    [self moveView:-250];
+//    [self moveView:-keyBoardFrame.size.height];
 }
 
 - (void)textViewDidChange:(UITextView *)textView {
@@ -579,7 +639,8 @@
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
     if ([text isEqualToString:@"\n"]){ //判断输入的字是否是回车，即按下return
         //在这里做你响应return键的代码
-        [self moveView:+250];
+//        [self moveView:+250];
+        [self moveView:keyBoardFrame.size.height];
         [textView resignFirstResponder];
         
         GotyeOCRoom* room = [GotyeOCRoom roomWithId:_group_id.longLongValue];
@@ -589,53 +650,6 @@
     }
     
     return YES;
-}
-
-//- (void)textFieldDidBeginEditing:(UITextField *)textField {
-//    [self moveView:-250];
-//}
-
-//- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-//    [self moveView:+250];
-//    [textField resignFirstResponder];
-//    
-//    GotyeOCRoom* room = [GotyeOCRoom roomWithId:_group_id.longLongValue];
-//    GotyeOCMessage* m = [GotyeOCMessage createTextMessage:room text:textField.text];
-//    [GotyeOCAPI sendMessage:m];
-//    return YES;
-//}
-
-#pragma mark -- emoji
-- (void)keyboardDidShow:(NSNotification*)notification {
-    UIView *result = nil;
-    NSArray *windowsArray = [UIApplication sharedApplication].windows;
-    for (UIView *tmpWindow in windowsArray) {
-        NSArray *viewArray = [tmpWindow subviews];
-        for (UIView *tmpView  in viewArray) {
-            NSLog(@"%@", [NSString stringWithUTF8String:object_getClassName(tmpView)]);
-//            if ([[NSString stringWithUTF8String:object_getClassName(tmpView)] isEqualToString:@"UIPeripheralHostView"]) {
-            if ([[NSString stringWithUTF8String:object_getClassName(tmpView)] isEqualToString:@"UIInputSetContainerView"]) {
-                result = tmpView;
-                break;
-            }
-        }
-        
-        if (result != nil) {
-            break;
-        }
-    }
-    
-    keyboardView = result;
-    NSDictionary *userInfo = [notification userInfo];
-    NSValue *value = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
-    keyBoardFrame = value.CGRectValue;
-    
-    if (isEmoji) {
-        [emoji removeFromSuperview];
-        emoji.frame = keyBoardFrame;
-        [keyboardView addSubview:emoji];
-        [keyboardView bringSubviewToFront:emoji];
-    }
 }
 
 - (IBAction)emojiBtnSelected {
@@ -692,7 +706,7 @@
 - (void)inputView2UserInfo {
     if (inputView.isFirstResponder) {
         [inputView resignFirstResponder];
-        [self moveView:+250 withFinish:@selector(inputView2UserInfo)];
+        [self moveView:keyBoardFrame.size.height withFinish:@selector(inputView2UserInfo)];
     } else {
         static const CGFloat kAnimationDuration = 0.30; // in seconds
         CGFloat width = [UIScreen mainScreen].bounds.size.width;
@@ -745,5 +759,50 @@
 
 - (NSArray*)getGroupJoinNumberList {
     return current_talk_users;
+}
+
+#pragma mark -- emoji
+#pragma mark -- get input view height
+- (void)keyboardDidShow:(NSNotification*)notification {
+    UIView *result = nil;
+    NSArray *windowsArray = [UIApplication sharedApplication].windows;
+    for (UIView *tmpWindow in windowsArray) {
+        NSArray *viewArray = [tmpWindow subviews];
+        for (UIView *tmpView  in viewArray) {
+            NSLog(@"%@", [NSString stringWithUTF8String:object_getClassName(tmpView)]);
+            // if ([[NSString stringWithUTF8String:object_getClassName(tmpView)] isEqualToString:@"UIPeripheralHostView"]) {
+            if ([[NSString stringWithUTF8String:object_getClassName(tmpView)] isEqualToString:@"UIInputSetContainerView"]) {
+                result = tmpView;
+                break;
+            }
+        }
+        
+        if (result != nil) {
+            break;
+        }
+    }
+    
+    keyboardView = result;
+    NSDictionary *userInfo = [notification userInfo];
+    NSValue *value = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    keyBoardFrame = value.CGRectValue;
+    
+    CGFloat height = [UIScreen mainScreen].bounds.size.height;
+    if (_queryView.frame.size.height == height) {
+        [self moveView:-keyBoardFrame.size.height];
+    }
+    
+    if (isEmoji) {
+        [emoji removeFromSuperview];
+        emoji.frame = keyBoardFrame;
+        [keyboardView addSubview:emoji];
+        [keyboardView bringSubviewToFront:emoji];
+    }
+}
+
+- (void)keyboardWasChange:(NSNotification *)notification {
+    NSDictionary *userInfo = [notification userInfo];
+    NSValue *value = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    keyBoardFrame = value.CGRectValue;
 }
 @end

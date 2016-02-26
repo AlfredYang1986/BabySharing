@@ -1171,31 +1171,16 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GroupChatGgImage" translatesAutoresizingMaskIntoConstraints="NO" id="Aue-r6-5Es">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                             </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Snx-PU-A6j">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="lUX-aE-qZw" id="vVF-wB-k2v"/>
-                                    <outlet property="delegate" destination="lUX-aE-qZw" id="Taw-BK-g2Z"/>
-                                </connections>
-                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="71x-7F-O97" firstAttribute="top" secondItem="Aue-r6-5Es" secondAttribute="bottom" id="4jd-m6-k72"/>
                             <constraint firstItem="Aue-r6-5Es" firstAttribute="top" secondItem="e73-Pv-2Hg" secondAttribute="topMargin" id="Nne-Pi-RL7"/>
-                            <constraint firstItem="71x-7F-O97" firstAttribute="top" secondItem="Snx-PU-A6j" secondAttribute="bottom" id="PoR-dE-PLU"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Aue-r6-5Es" secondAttribute="trailing" constant="-20" id="Q44-n6-xE2"/>
                             <constraint firstItem="Aue-r6-5Es" firstAttribute="leading" secondItem="e73-Pv-2Hg" secondAttribute="leadingMargin" constant="-20" id="V2l-LQ-tZy"/>
-                            <constraint firstItem="Snx-PU-A6j" firstAttribute="leading" secondItem="e73-Pv-2Hg" secondAttribute="leadingMargin" constant="-16" id="bZP-Ct-aHQ"/>
-                            <constraint firstItem="Snx-PU-A6j" firstAttribute="top" secondItem="e73-Pv-2Hg" secondAttribute="topMargin" id="dLV-it-Fdg"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Snx-PU-A6j" secondAttribute="trailing" constant="-16" id="jR6-7P-z41"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="ChatGroup" id="IhA-HB-d3D"/>
-                    <connections>
-                        <outlet property="queryView" destination="Snx-PU-A6j" id="LbE-tJ-7fK"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GgD-qW-uAW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

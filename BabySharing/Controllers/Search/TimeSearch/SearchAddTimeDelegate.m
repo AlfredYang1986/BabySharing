@@ -63,7 +63,7 @@
 }
 
 - (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return @"添加新角色";
+    return @"添加新时刻标签";
     //    return [_delegate getAddSectionTitle];
 }
 
@@ -119,7 +119,6 @@
         line.frame = CGRectMake(10.5, 44 - 1, [UIScreen mainScreen].bounds.size.width - 10.5 * 2 + 8, 1);
         [cell.layer addSublayer:line];
     }
-    cell.contentView.backgroundColor = [UIColor redColor];
     return cell;
 }
 

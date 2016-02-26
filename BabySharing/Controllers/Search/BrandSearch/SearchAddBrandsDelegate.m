@@ -66,7 +66,7 @@
 }
 
 - (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return @"添加新品牌";
+    return @"添加新品牌标签";
     //    return [_delegate getAddSectionTitle];
 }
 

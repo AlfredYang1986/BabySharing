@@ -78,6 +78,8 @@
 
 @synthesize fakeBar = _fakeBar;
 
+@synthesize gender = _gender;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -339,6 +341,8 @@
     [dic setValue:auth_token forKey:@"auth_token"];
     [dic setValue:user_id forKey:@"user_id"];
     
+    [dic setValue:[NSNumber numberWithInteger:self.gender] forKey:@"gender"];
+    
     if ([_lm updateUserProfile:[dic copy]]) {
 //    if ([_lm sendScreenName:[inputView getInputName] forToken:auth_token andUserID:user_id]) {
         NSString* phoneNo = (NSString*)[_login_attr objectForKey:@"phoneNo"];
@@ -406,10 +410,12 @@
     if (sender.tag == -99) {
         mother_btn.selected = NO;
         father_btn.selected = YES;
+        self.gender = DongDaGenderFather;
         
     } else if (sender.tag == -98) {
         mother_btn.selected = YES;
         father_btn.selected = NO;
+        self.gender = DongDaGenderMother;
     }
 }
 
