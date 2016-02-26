@@ -19,7 +19,6 @@
 - (NSURL *)applicationDocumentsDirectory;
 - (void)deleteWithEntityName:(NSString *)entityName key:(NSString *)key value:(NSString *)value;
 - (NSArray *)selectWithEntityName:(NSString *)entityName key:(NSString *)key value:(NSString *)value;
-
 - (NSArray *)selectWithuser_id:(NSString *)user_id search_type:(NSInteger)search_type;
 
 @end

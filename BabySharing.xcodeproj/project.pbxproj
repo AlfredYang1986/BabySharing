@@ -75,9 +75,9 @@
 		A0B7A7661C7C563400D78E6E /* PersonInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B7A7651C7C563400D78E6E /* PersonInfoCell.m */; };
 		A0B7A7691C7C5B0F00D78E6E /* RoleLable.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B7A7681C7C5B0F00D78E6E /* RoleLable.m */; };
 		A0B7A76B1C7D505B00D78E6E /* DongDaBoundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A0B7A76A1C7D505B00D78E6E /* DongDaBoundle.bundle */; };
-		A0D0D9631C76D38000BF416E /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D0D9621C76D38000BF416E /* libGPUImage.a */; };
 		A0E5126A1C7EDEDB00A7E947 /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A0E512681C7EDEDB00A7E947 /* TencentOpenApi_IOS_Bundle.bundle */; };
 		A0E5126B1C7EDEDB00A7E947 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0E512691C7EDEDB00A7E947 /* TencentOpenAPI.framework */; };
+		A0F2B3D81C7EFEF20090EF32 /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0F2B3D71C7EFEF20090EF32 /* libGPUImage.a */; };
 		EE03E9831B4FABFB00F21EF5 /* AlbumModule.m in Sources */ = {isa = PBXBuildFile; fileRef = EE03E9821B4FABFB00F21EF5 /* AlbumModule.m */; };
 		EE0CEC541BDB13070016B6F4 /* AlreadLogedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0CEC421BDB13070016B6F4 /* AlreadLogedViewController.m */; };
 		EE0CEC551BDB13070016B6F4 /* ChooseAreaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0CEC451BDB13070016B6F4 /* ChooseAreaViewController.m */; };
@@ -495,9 +495,9 @@
 		A0B7A7671C7C5B0F00D78E6E /* RoleLable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoleLable.h; sourceTree = "<group>"; };
 		A0B7A7681C7C5B0F00D78E6E /* RoleLable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoleLable.m; sourceTree = "<group>"; };
 		A0B7A76A1C7D505B00D78E6E /* DongDaBoundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DongDaBoundle.bundle; sourceTree = "<group>"; };
-		A0D0D9621C76D38000BF416E /* libGPUImage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGPUImage.a; sourceTree = "<group>"; };
 		A0E512681C7EDEDB00A7E947 /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
 		A0E512691C7EDEDB00A7E947 /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
+		A0F2B3D71C7EFEF20090EF32 /* libGPUImage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGPUImage.a; sourceTree = "<group>"; };
 		EE03E9811B4FABFB00F21EF5 /* AlbumModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumModule.h; sourceTree = "<group>"; };
 		EE03E9821B4FABFB00F21EF5 /* AlbumModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumModule.m; sourceTree = "<group>"; };
 		EE0CEC411BDB13070016B6F4 /* AlreadLogedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlreadLogedViewController.h; sourceTree = "<group>"; };
@@ -1007,8 +1007,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0F2B3D81C7EFEF20090EF32 /* libGPUImage.a in Frameworks */,
 				A08AE9541C7E9C1A0029B660 /* libiconv.2.dylib in Frameworks */,
-				A0D0D9631C76D38000BF416E /* libGPUImage.a in Frameworks */,
 				EE40826A1B70C18E0094A88B /* libstdc++.dylib in Frameworks */,
 				EE4082681B70C1850094A88B /* libstdc++.6.0.9.dylib in Frameworks */,
 				EE4082661B70C13F0094A88B /* AudioToolbox.framework in Frameworks */,
@@ -2371,7 +2371,7 @@
 		EEAACDB91B44FAA300D05C0B /* libGPUImage */ = {
 			isa = PBXGroup;
 			children = (
-				A0D0D9621C76D38000BF416E /* libGPUImage.a */,
+				A0F2B3D71C7EFEF20090EF32 /* libGPUImage.a */,
 				EEAACDBA1B44FAA300D05C0B /* GPUImage.framework */,
 			);
 			path = libGPUImage;
@@ -2921,6 +2921,7 @@
 				TargetAttributes = {
 					EEAAC8F71B44E81A00D05C0B = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = V6843SSXWV;
 					};
 					EEAAC9131B44E81A00D05C0B = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -3424,6 +3425,7 @@
 					"$(PROJECT_DIR)/libQQSDK/TencentOpenAPI.framework/Headers",
 				);
 				INFOPLIST_FILE = BabySharing/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3440,6 +3442,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = BS.BabySharing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -3462,6 +3465,7 @@
 					"$(PROJECT_DIR)/libQQSDK/TencentOpenAPI.framework/Headers",
 				);
 				INFOPLIST_FILE = BabySharing/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3478,6 +3482,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = BS.BabySharing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

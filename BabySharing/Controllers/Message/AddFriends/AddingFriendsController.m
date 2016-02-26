@@ -14,15 +14,17 @@
 #import "DongDaSearchBar.h"
 #import "SearchSegView2.h"
 #import "MessageFriendsCell.h"
+#import "AppDelegate.h"
 
 @interface AddingFriendsController () <UISearchBarDelegate, AsyncDelegateProtocol, SearchSegViewDelegate, DongDaSearchBarDelegate>
+
 @property (weak, nonatomic) IBOutlet UITableView *queryView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 //@property (weak, nonatomic) IBOutlet DongDaSearchBar* searchBar;
 //@property (weak, nonatomic) IBOutlet UISegmentedControl *seg;
 @property (weak, nonatomic) IBOutlet SearchSegView2 *seg;
-
 @property (weak, nonatomic, setter=setCurrentDelegate:) id<UITableViewDataSource, UITableViewDelegate, AddingFriendsProtocol> current_delegate;
+
 @end
 
 @implementation AddingFriendsController {
@@ -193,7 +195,13 @@
 }
 
 - (void)segValueChanged2:(SearchSegView2 *)seg {
-    NSLog(@"value changed");
+    if (seg.selectedIndex == 2) {
+        [seg setSegSelectedIndex:0];
+        [[AppDelegate defaultAppDelegate].lm postContentOnQQzoneWithText:@"快来加入咚哒吧！！！" andImage:[UIImage imageNamed:[[NSBundle mainBundle] pathForResource:@"icon" ofType:@"png"]]];
+    } else if (seg.selectedIndex == 1) {
+        [seg setSegSelectedIndex:0];
+    } else if (seg.selectedIndex == 0) {
+    }
 }
 
 - (void)cancelBtnSelected {

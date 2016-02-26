@@ -143,5 +143,9 @@
     return arr;
 }
 
+- (NSArray *)selectWithuser_id:(NSString *)user_id search_type:(NSInteger)search_type {
+    return nil;
+}
+
 
 @end

@@ -7,10 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface Tools : NSObject
 
++ (UIImage *)imageWithView:(UIView *)view;
 + (NSString *)subStringWithByte:(NSInteger)byte str:(NSString *)str;
 + (NSInteger)bityWithStr:(NSString *)str;
+
 
 @end

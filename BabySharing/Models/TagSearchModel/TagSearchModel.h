@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 // Insert code here to declare functionality of your managed object subclass
 @property (nullable, nonatomic, retain) NSString *user_id;
 @property (nullable, nonatomic, retain) NSString *search_text;
+// 1 品牌 2 时刻 3 地点
 @property (nullable, nonatomic, retain) NSNumber *search_type;
 
 @end

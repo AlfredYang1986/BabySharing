@@ -69,6 +69,7 @@ enum DisplaySide {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self classForCoder];
     // Do any additional setup after loading the view, typically from a nib.
     [self.navigationController setNavigationBarHidden:YES animated:NO];
     [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f]];
