@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -22,12 +22,6 @@
                             <constraint firstAttribute="height" constant="38" id="ZOB-pf-Ix5"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="discription label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vKU-aH-Vtn">
-                        <rect key="frame" x="66" y="8" width="339" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w4x-rG-154">
                         <rect key="frame" x="483" y="8" width="50" height="50"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -36,57 +30,23 @@
                             <constraint firstAttribute="height" constant="50" id="zs1-yu-wIR"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="time label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qxc-H4-5al">
-                        <rect key="frame" x="66" y="34" width="366" height="24"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="50" id="phL-TP-PzS"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="phL-TP-PzS"/>
-                            </mask>
-                        </variation>
-                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="w4x-rG-154" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="9DA-PY-VtW"/>
-                    <constraint firstItem="w4x-rG-154" firstAttribute="leading" secondItem="Qxc-H4-5al" secondAttribute="trailing" id="Bqe-TX-pF1"/>
-                    <constraint firstItem="Qxc-H4-5al" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" constant="10" id="C8L-ac-XpQ"/>
-                    <constraint firstItem="Qxc-H4-5al" firstAttribute="leading" secondItem="HGS-Xy-xnp" secondAttribute="trailing" constant="8" id="GB4-dI-VdB"/>
-                    <constraint firstItem="Qxc-H4-5al" firstAttribute="bottom" secondItem="HGS-Xy-xnp" secondAttribute="bottom" id="GlA-bz-Usr"/>
-                    <constraint firstItem="vKU-aH-Vtn" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" constant="-8" id="S4B-jv-wyW"/>
-                    <constraint firstItem="vKU-aH-Vtn" firstAttribute="top" secondItem="HGS-Xy-xnp" secondAttribute="top" id="Uhu-G8-9s0"/>
-                    <constraint firstItem="vKU-aH-Vtn" firstAttribute="leading" secondItem="HGS-Xy-xnp" secondAttribute="trailing" constant="8" id="buk-Em-3nQ"/>
                     <constraint firstItem="HGS-Xy-xnp" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="cbf-qb-LXr"/>
                     <constraint firstItem="HGS-Xy-xnp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="dhE-UI-Ofk"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="vKU-aH-Vtn" secondAttribute="trailing" id="i2X-9g-OAO"/>
                     <constraint firstItem="w4x-rG-154" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="jCJ-E9-CXH"/>
-                    <constraint firstItem="Qxc-H4-5al" firstAttribute="leading" secondItem="HGS-Xy-xnp" secondAttribute="trailing" constant="8" id="kaq-L5-X0P"/>
                     <constraint firstItem="HGS-Xy-xnp" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="nRh-PW-bqX"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="Qxc-H4-5al" secondAttribute="trailing" id="pfx-PA-xab"/>
-                    <constraint firstItem="w4x-rG-154" firstAttribute="leading" secondItem="vKU-aH-Vtn" secondAttribute="trailing" id="s8J-QY-MpG"/>
-                    <constraint firstItem="Qxc-H4-5al" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="xsT-3X-4Rf"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
                         <exclude reference="nRh-PW-bqX"/>
-                        <exclude reference="Uhu-G8-9s0"/>
-                        <exclude reference="i2X-9g-OAO"/>
-                        <exclude reference="GB4-dI-VdB"/>
-                        <exclude reference="GlA-bz-Usr"/>
-                        <exclude reference="pfx-PA-xab"/>
-                        <exclude reference="xsT-3X-4Rf"/>
                     </mask>
                 </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="connectContentView" destination="w4x-rG-154" id="2It-lz-0Pl"/>
-                <outlet property="detailView" destination="Qxc-H4-5al" id="0mi-FJ-wNW"/>
                 <outlet property="imgView" destination="HGS-Xy-xnp" id="gBG-Bx-fN1"/>
-                <outlet property="nameLabel" destination="vKU-aH-Vtn" id="afg-ig-GFk"/>
             </connections>
             <point key="canvasLocation" x="159.5" y="318"/>
         </tableViewCell>

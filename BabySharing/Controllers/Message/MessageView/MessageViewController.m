@@ -13,7 +13,7 @@
 #import "INTUAnimationEngine.h"
 #import "ConnectionModel.h"
 #import "AppDelegate.h"
-#import "DDNNotificationViewController.h"
+//#import "DDNNotificationViewController.h"
 #import "UserChatController.h"
 #import "Targets.h"
 //#import "HomeSegControl.h"
@@ -260,8 +260,8 @@
     if ([segue.identifier isEqualToString:@"addFriends"]) {
         
     } else if ([segue.identifier isEqualToString:@"showNotifications"]) {
-        ((DDNNotificationViewController*)segue.destinationViewController).lm = self.lm;
-        ((DDNNotificationViewController*)segue.destinationViewController).mm = self.mm;
+//        ((DDNNotificationViewController*)segue.destinationViewController).lm = self.lm;
+//        ((DDNNotificationViewController*)segue.destinationViewController).mm = self.mm;
     } else if ([segue.identifier isEqualToString:@"startChat"]) {
         UserChatController* con = (UserChatController*)segue.destinationViewController;
         con.lm = self.lm;

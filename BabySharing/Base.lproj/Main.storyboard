@@ -1186,44 +1186,6 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
             </objects>
             <point key="canvasLocation" x="3425" y="1787"/>
         </scene>
-        <!--Notifications-->
-        <scene sceneID="dfA-GK-KH0">
-            <objects>
-                <viewController id="ox0-xj-qsG" customClass="DDNNotificationViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ebf-5i-c86"/>
-                        <viewControllerLayoutGuide type="bottom" id="Zsa-Fd-te7"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kEw-xK-UfQ">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="7zl-w3-xdj">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="ox0-xj-qsG" id="ZZ8-eG-icF"/>
-                                    <outlet property="delegate" destination="ox0-xj-qsG" id="I2y-Ys-HhZ"/>
-                                </connections>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="7zl-w3-xdj" secondAttribute="trailing" constant="-16" id="BEc-XV-Il0"/>
-                            <constraint firstItem="7zl-w3-xdj" firstAttribute="leading" secondItem="kEw-xK-UfQ" secondAttribute="leadingMargin" constant="-16" id="JZq-cz-Shc"/>
-                            <constraint firstItem="7zl-w3-xdj" firstAttribute="top" secondItem="kEw-xK-UfQ" secondAttribute="topMargin" id="KsK-UX-fo9"/>
-                            <constraint firstItem="7zl-w3-xdj" firstAttribute="bottom" secondItem="kEw-xK-UfQ" secondAttribute="bottomMargin" id="UIr-qg-8MG"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Notifications" id="g3z-Ow-7HE"/>
-                    <connections>
-                        <outlet property="queryView" destination="7zl-w3-xdj" id="gKN-fD-UjM"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="EyX-Ck-RRk" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3294" y="2478"/>
-        </scene>
         <!--Search Friends Controller-->
         <scene sceneID="8SY-p8-7B2">
             <objects>
@@ -1289,7 +1251,6 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                     <connections>
                         <segue destination="fav-i3-Xga" kind="push" identifier="addFriends" id="Z8a-iE-MvE"/>
                         <segue destination="vu1-ps-3xT" kind="push" identifier="startChat" id="2Bs-UG-c18"/>
-                        <segue destination="ox0-xj-qsG" kind="push" identifier="showNotifications" id="Uuv-9c-sfa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qnc-mR-mVz" userLabel="First Responder" sceneMemberID="firstResponder"/>
