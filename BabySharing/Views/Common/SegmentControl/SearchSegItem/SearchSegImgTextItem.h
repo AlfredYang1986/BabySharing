@@ -18,6 +18,7 @@
 @property (nonatomic) BOOL isLayerHidden;
 @property (nonatomic, setter=resetFontSize:) CGFloat font_size;
 @property (nonatomic, weak, setter=resetFontColor:) UIColor* font_color;
+@property (nonatomic, weak, setter=resetSelectFontColor:) UIColor* select_font_color;
 
 + (CGSize)preferredSize;
 @end

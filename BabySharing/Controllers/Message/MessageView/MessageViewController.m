@@ -22,7 +22,7 @@
 #import "SearchSegView2.h"
 #import "DONNotificationDelegate.h"
 
-#define SEARCH_BAR_HEIGHT   44
+#define SEARCH_BAR_HEIGHT   0 //44
 #define SEGAMENT_HEGHT      46
 
 #define SEARCH_BAR_MARGIN_TOP 0
@@ -109,7 +109,6 @@
     line_friend_up.hidden = YES;
     [self.view.layer addSublayer:line_friend_up];
     
-//    CGFloat width = [UIScreen mainScreen].bounds.size.width;
     _friendSeg = [[SearchSegView2 alloc]initWithFrame:CGRectMake(0, 0, width, SEGAMENT_HEGHT)];
    
     _friendSeg.isLayerHidden = YES;
@@ -134,22 +133,15 @@
     CALayer* line_seg_up = [CALayer layer];
     line_seg_up.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.18].CGColor;
     line_seg_up.borderWidth = 1.f;
-//    line_seg_up.frame = CGRectMake(0, 64 + SEARCH_BAR_HEIGHT - 1, width, 1);
     line_seg_up.frame = CGRectMake(0, 0, width, 1);
-//    [self.view.layer addSublayer:line_seg_up];
     [_friendSeg.layer addSublayer:line_seg_up];
     
-//    _friendsSearchBar = [[DongDaSearchBar alloc]init];
-    _friendsSearchBar = [[UISearchBar alloc]init];
-//    _friendsSearchBar.backgroundColor = [UIColor whiteColor];
+//    _friendsSearchBar = [[UISearchBar alloc]init];
     _friendsSearchBar.delegate = self;
     _friendsSearchBar.placeholder = @"搜索好友";
     [self.view addSubview:_friendsSearchBar];
     
-//    _friendsSearchBar.showsCancelButton = YES;
-//    _friendsSearchBar.placeholder = @"搜索好友";
     _friendsSearchBar.backgroundColor = [UIColor clearColor];
-//    UIImageView* iv = [[UIImageView alloc] initWithImage:[self imageWithColor:[UIColor colorWithWhite:0.9490 alpha:1.f] size:CGSizeMake(width, SEARCH_BAR_HEIGHT)]];
     UIImageView* iv = [[UIImageView alloc] initWithImage:[self imageWithColor:[UIColor whiteColor] size:CGSizeMake(width, SEARCH_BAR_HEIGHT)]];
     [_friendsSearchBar insertSubview:iv atIndex:1];
     for (UIView* v in _friendsSearchBar.subviews.firstObject.subviews) {
@@ -159,14 +151,8 @@
             tf.borderStyle = UITextBorderStyleRoundedRect;
             tf.clearButtonMode = UITextFieldViewModeWhileEditing;
         } else if ([v isKindOfClass:[UIButton class]]) {
-//            UIButton* cancel_btn = (UIButton*)v;
-            //            [cancel_btn setTitle:@"test" forState:UIControlStateNormal];
-//            [cancel_btn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-//            [cancel_btn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
+    
         }
-        // else if ([v isKindOfClass:NSClassFromString(@"UISearchBarBackground")]) {
-        //      v.backgroundColor = [UIColor whiteColor];
-        // }
     }
     
     [self layoutSubviews];
@@ -183,7 +169,6 @@
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
     NSString* filepath = [resourceBundle pathForResource:@"friend_add" ofType:@"png"];
     btn = [[UIButton alloc]initWithFrame:CGRectMake(width - 23 - 25, 0, 50, 50)];
-//    [btn setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
     
     CALayer* layer = [CALayer layer];
     layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
@@ -192,17 +177,12 @@
     [btn.layer addSublayer:layer];
     
     [btn addTarget: self action: @selector(friendsAddingBtnSelected) forControlEvents: UIControlEventTouchUpInside];
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:btn];
-//    [self.navigationController.navigationBar addSubview:btn];
     
     AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
     _cm = app.cm;
     _lm = app.lm;
     _mm = app.mm;
-//    md.mm = _mm;
-//    md.lm = _lm;
     
-//    self.view.backgroundColor = [UIColor colorWithRed:0.9529 green:0.9529 blue:0.9529 alpha:1.f];
     self.view.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
     _queryView.backgroundColor = [UIColor whiteColor];
     _friendsQueryView.backgroundColor = [UIColor whiteColor];

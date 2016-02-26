@@ -21,6 +21,10 @@
     ABAddressBookRef tmpAddressBook;
     NSArray* people_all;
     NSMutableArray* people;
+    
+    NSArray* friend_profile_lst;
+    NSArray* friend_lst;
+    NSArray* none_friend_lst;
 }
 
 @synthesize delegate = _delegate;
@@ -45,6 +49,8 @@
         people_all = CFBridgingRelease(ABAddressBookCopyArrayOfAllPeople(tmpAddressBook));
         people = [people_all mutableCopy];
     }
+    
+    none_friend_lst = people;
     return self;
 }
 
@@ -156,32 +162,114 @@
         cell = [nib objectAtIndex:0];
     }
     
-    [cell setUserScreenPhoto:@""];
-    [cell setRelationship:UserPostOwnerConnectionsNone];
     
-    id tmpPerson = [people objectAtIndex:indexPath.row];
-    NSString* tmpFirstName = CFBridgingRelease(ABRecordCopyValue(CFBridgingRetain(tmpPerson), kABPersonFirstNameProperty));
+//    id tmpPerson = [people objectAtIndex:indexPath.row];
+    BOOL isFriends = NO;
+    id tmpPerson = nil;
+    @try {
+        tmpPerson = [friend_lst objectAtIndex:indexPath.row];
+        isFriends = YES;
+    }
+    @catch (NSException *exception) {
+        tmpPerson = [none_friend_lst objectAtIndex:indexPath.row - friend_lst.count];
+    }
+    @finally {
     
-    NSString* tmpLastName = CFBridgingRelease(ABRecordCopyValue(CFBridgingRetain(tmpPerson), kABPersonLastNameProperty));
-    
-    if (tmpLastName && tmpFirstName) {
-        [cell setUserScreenName:[tmpFirstName stringByAppendingString:tmpLastName]];
-    } else if (tmpFirstName) {
-        [cell setUserScreenName:tmpFirstName];
-    } else if (tmpLastName) {
-        [cell setUserScreenName:tmpLastName];
-    } else {
+    }
+   
+    if (isFriends) {
+        NSDictionary* tmp = [friend_profile_lst objectAtIndex:indexPath.row];
+//        cell.delegate = self;
+        cell.user_id = [tmp objectForKey:@"user_id"];
+        [cell setUserScreenPhoto:[tmp objectForKey:@"screen_photo"]];
+        [cell setRelationship:((NSNumber*)[tmp objectForKey:@"relations"]).integerValue];
+        [cell setUserScreenName:[tmp objectForKey:@"screen_name"]];
+        [cell setUserRoleTag:[tmp objectForKey:@"role_tag"]];
         
+    } else {
+        NSString* tmpFirstName = CFBridgingRelease(ABRecordCopyValue(CFBridgingRetain(tmpPerson), kABPersonFirstNameProperty));
+        NSString* tmpLastName = CFBridgingRelease(ABRecordCopyValue(CFBridgingRetain(tmpPerson), kABPersonLastNameProperty));
+        
+        if (tmpLastName && tmpFirstName) {
+            [cell setUserScreenName:[tmpFirstName stringByAppendingString:tmpLastName]];
+        } else if (tmpFirstName) {
+            [cell setUserScreenName:tmpFirstName];
+        } else if (tmpLastName) {
+            [cell setUserScreenName:tmpLastName];
+        } else {
+            
+        }
+        
+        [cell setUserScreenPhoto:@""];
+        [cell setRelationship:-1];
     }
     
     return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return people.count;
+//    return people.count;
+    return friend_lst.count + none_friend_lst.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return [MessageFriendsCell preferredHeight];
+}
+
+- (NSArray*)getAllPhones {
+    NSMutableArray* arr = [[NSMutableArray alloc]init];
+    for (id tmpPerson in people) {
+        ABMultiValueRef phones = ABRecordCopyValue(CFBridgingRetain(tmpPerson), kABPersonPhoneProperty);
+        CFIndex count = ABMultiValueGetCount(phones);
+        for (int index = 0; index < count; ++index) {
+            NSString* phoneNo = CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, index));
+            phoneNo = [phoneNo stringByReplacingOccurrencesOfString:@"-" withString:@""];
+            [arr addObject:phoneNo];
+        }
+    }
+    return [arr copy];
+}
+
+- (void)splitWithFriends:(NSArray*)lst {
+    NSPredicate* p = [NSPredicate predicateWithBlock:^BOOL(id  _Nonnull evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
+        id tmpPerson = evaluatedObject;
+        ABMultiValueRef phones = ABRecordCopyValue(CFBridgingRetain(tmpPerson), kABPersonPhoneProperty);
+        CFIndex count = ABMultiValueGetCount(phones);
+        for (int index = 0; index < count; ++index) {
+            NSString* phoneNo = CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, index));
+            phoneNo = [phoneNo stringByReplacingOccurrencesOfString:@"-" withString:@""];
+            
+            NSPredicate* p_match = [NSPredicate predicateWithBlock:^BOOL(id  _Nonnull evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
+                NSDictionary* iter = (NSDictionary*)evaluatedObject;
+                return [[iter objectForKey:@"phoneNo"] isEqualToString:phoneNo];
+            }];
+            
+            if ([lst filteredArrayUsingPredicate:p_match].count > 0) return YES;
+        }
+        return NO;
+    }];
+    
+    friend_lst = [people filteredArrayUsingPredicate:p];
+    friend_profile_lst = lst;
+  
+    NSPredicate* p_not = [NSPredicate predicateWithBlock:^BOOL(id  _Nonnull evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
+        id tmpPerson = evaluatedObject;
+        ABMultiValueRef phones = ABRecordCopyValue(CFBridgingRetain(tmpPerson), kABPersonPhoneProperty);
+        CFIndex count = ABMultiValueGetCount(phones);
+        for (int index = 0; index < count; ++index) {
+            NSString* phoneNo = CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, index));
+            phoneNo = [phoneNo stringByReplacingOccurrencesOfString:@"-" withString:@""];
+            
+            NSPredicate* p_match = [NSPredicate predicateWithBlock:^BOOL(id  _Nonnull evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
+                NSDictionary* iter = (NSDictionary*)evaluatedObject;
+                return [[iter objectForKey:@"phoneNo"] isEqualToString:phoneNo];
+            }];
+           
+            if ([lst filteredArrayUsingPredicate:p_match].count == 0) return YES;
+        }
+        return NO;
+    }];
+    
+    none_friend_lst = [people filteredArrayUsingPredicate:p_not];
 }
 @end

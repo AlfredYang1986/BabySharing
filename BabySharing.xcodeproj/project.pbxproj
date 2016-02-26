@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		70079F891C59B6FC00DB8D85 /* ChatGroupUserInfoTableDelegateAndDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = 70079F881C59B6FC00DB8D85 /* ChatGroupUserInfoTableDelegateAndDatasource.m */; };
+		700AC5A21C7EE21400BA4F96 /* AddressBookDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 700AC5A11C7EE21400BA4F96 /* AddressBookDelegate.m */; };
 		700B0B881C5A1D5E00692A20 /* Notifications+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 700B0B851C5A1D5E00692A20 /* Notifications+CoreDataProperties.m */; };
 		700B0B891C5A1D5E00692A20 /* Notifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 700B0B871C5A1D5E00692A20 /* Notifications.m */; };
 		7041A5BB1C575A7400FEBFCD /* MessageChatGroupHeader2.m in Sources */ = {isa = PBXBuildFile; fileRef = 7041A5BA1C575A7400FEBFCD /* MessageChatGroupHeader2.m */; };
@@ -159,7 +160,6 @@
 		EE817F491B79A78E00988734 /* UserChatController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE817F481B79A78E00988734 /* UserChatController.m */; };
 		EE83F40A1B96EDDF00D51FDF /* CycleAddSchoolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE83F4091B96EDDF00D51FDF /* CycleAddSchoolViewController.m */; };
 		EE86D1B21B537469001C4650 /* PostEffectAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = EE86D1B11B537469001C4650 /* PostEffectAdapter.mm */; };
-		EE87315E1B97E131004A25D8 /* WeiboFriendsDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EE87315D1B97E131004A25D8 /* WeiboFriendsDelegate.m */; };
 		EE8B1D8C1C08499A00056AC8 /* LandingNextSegue.mm in Sources */ = {isa = PBXBuildFile; fileRef = EE8B1D8B1C08499A00056AC8 /* LandingNextSegue.mm */; };
 		EE8B1D8F1C084B8400056AC8 /* FixBackGroundSegueController.mm in Sources */ = {isa = PBXBuildFile; fileRef = EE8B1D8E1C084B8400056AC8 /* FixBackGroundSegueController.mm */; };
 		EE90C9871BFC1C68002D5D1D /* MainHomeViewDataDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EE90C9861BFC1C68002D5D1D /* MainHomeViewDataDelegate.m */; };
@@ -326,7 +326,6 @@
 		EEE94E0B1B74A8C20011321A /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE94E061B74A8C20011321A /* MessageViewController.m */; };
 		EEE94E0C1B74A8C20011321A /* MesssageTableDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE94E081B74A8C20011321A /* MesssageTableDelegate.m */; };
 		EEE94E101B74A9320011321A /* AddingFriendsController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE94E0F1B74A9320011321A /* AddingFriendsController.m */; };
-		EEE94E131B74AB6B0011321A /* AddressBookDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE94E121B74AB6B0011321A /* AddressBookDelegate.m */; };
 		EEE94E181B74BDDD0011321A /* ProfileDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE94E161B74BDDD0011321A /* ProfileDetailController.m */; };
 		EEE94E191B74BDDD0011321A /* ProfileDetailNib.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEE94E171B74BDDD0011321A /* ProfileDetailNib.storyboard */; };
 		EEE94E1D1B74BE090011321A /* PersonalCenterOwnerDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = EEE94E1C1B74BE090011321A /* PersonalCenterOwnerDelegate.mm */; };
@@ -355,6 +354,9 @@
 /* Begin PBXFileReference section */
 		70079F871C59B6FC00DB8D85 /* ChatGroupUserInfoTableDelegateAndDatasource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatGroupUserInfoTableDelegateAndDatasource.h; sourceTree = "<group>"; };
 		70079F881C59B6FC00DB8D85 /* ChatGroupUserInfoTableDelegateAndDatasource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatGroupUserInfoTableDelegateAndDatasource.m; sourceTree = "<group>"; };
+		700AC59F1C7EE21400BA4F96 /* AddingFriendsProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddingFriendsProtocol.h; sourceTree = "<group>"; };
+		700AC5A01C7EE21400BA4F96 /* AddressBookDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressBookDelegate.h; sourceTree = "<group>"; };
+		700AC5A11C7EE21400BA4F96 /* AddressBookDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressBookDelegate.m; sourceTree = "<group>"; };
 		700B0B841C5A1D5E00692A20 /* Notifications+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Notifications+CoreDataProperties.h"; sourceTree = "<group>"; };
 		700B0B851C5A1D5E00692A20 /* Notifications+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Notifications+CoreDataProperties.m"; sourceTree = "<group>"; };
 		700B0B861C5A1D5E00692A20 /* Notifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notifications.h; sourceTree = "<group>"; };
@@ -467,7 +469,7 @@
 		70EF02D01C22CE7A00DABCFC /* PostPublichViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostPublichViewController.h; sourceTree = "<group>"; };
 		70EF02D11C22CE7A00DABCFC /* PostPublichViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostPublichViewController.m; sourceTree = "<group>"; };
 		70F5014A1C23ADC2007769F4 /* PostPreview.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PostPreview.storyboard; sourceTree = "<group>"; };
-		A08AE9531C7E9C1A0029B660 /* libiconv.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.2.dylib; path = ../../../../usr/lib/libiconv.2.dylib; sourceTree = "<group>"; };
+		A08AE9531C7E9C1A0029B660 /* libiconv.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.2.dylib; path = /usr/lib/libiconv.2.dylib; sourceTree = "<absolute>"; };
 		A0A5C52E1C7DAD0500F07FE8 /* libgotyeapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libgotyeapi.a; sourceTree = "<group>"; };
 		A0A5C5311C7DB1DF00F07FE8 /* libWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeiboSDK.a; sourceTree = "<group>"; };
 		A0A5C5321C7DB1DF00F07FE8 /* WBHttpRequest+WeiboGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboGame.h"; sourceTree = "<group>"; };
@@ -622,8 +624,6 @@
 		EE83F4091B96EDDF00D51FDF /* CycleAddSchoolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleAddSchoolViewController.m; sourceTree = "<group>"; };
 		EE86D1B01B537469001C4650 /* PostEffectAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostEffectAdapter.h; sourceTree = "<group>"; };
 		EE86D1B11B537469001C4650 /* PostEffectAdapter.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = PostEffectAdapter.mm; sourceTree = "<group>"; };
-		EE87315C1B97E131004A25D8 /* WeiboFriendsDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboFriendsDelegate.h; sourceTree = "<group>"; };
-		EE87315D1B97E131004A25D8 /* WeiboFriendsDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboFriendsDelegate.m; sourceTree = "<group>"; };
 		EE8B1D8A1C08499A00056AC8 /* LandingNextSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LandingNextSegue.h; sourceTree = "<group>"; };
 		EE8B1D8B1C08499A00056AC8 /* LandingNextSegue.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = LandingNextSegue.mm; sourceTree = "<group>"; };
 		EE8B1D8D1C084B8400056AC8 /* FixBackGroundSegueController.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = FixBackGroundSegueController.h; sourceTree = "<group>"; };
@@ -680,7 +680,6 @@
 		EEA1F54F1C1690D1009B8724 /* FoundSearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoundSearchController.h; sourceTree = "<group>"; };
 		EEA1F5501C1690D1009B8724 /* FoundSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoundSearchController.m; sourceTree = "<group>"; };
 		EEA1F5521C169106009B8724 /* FoundSearch.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FoundSearch.storyboard; sourceTree = "<group>"; };
-		EEA72A471B955AB9000BEC2E /* AddingFriendsProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddingFriendsProtocol.h; sourceTree = "<group>"; };
 		EEA8A60A1BFAC0EE00130293 /* FoundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoundViewController.h; sourceTree = "<group>"; };
 		EEA8A60B1BFAC0EE00130293 /* FoundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoundViewController.m; sourceTree = "<group>"; };
 		EEA8A60D1BFAC1F800130293 /* HomeViewFoundDelegateAndDatasource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewFoundDelegateAndDatasource.h; sourceTree = "<group>"; };
@@ -966,8 +965,6 @@
 		EEE94E081B74A8C20011321A /* MesssageTableDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MesssageTableDelegate.m; sourceTree = "<group>"; };
 		EEE94E0E1B74A9320011321A /* AddingFriendsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddingFriendsController.h; sourceTree = "<group>"; };
 		EEE94E0F1B74A9320011321A /* AddingFriendsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddingFriendsController.m; sourceTree = "<group>"; };
-		EEE94E111B74AB6B0011321A /* AddressBookDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressBookDelegate.h; sourceTree = "<group>"; };
-		EEE94E121B74AB6B0011321A /* AddressBookDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressBookDelegate.m; sourceTree = "<group>"; };
 		EEE94E151B74BDDD0011321A /* ProfileDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileDetailController.h; sourceTree = "<group>"; };
 		EEE94E161B74BDDD0011321A /* ProfileDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileDetailController.m; sourceTree = "<group>"; };
 		EEE94E171B74BDDD0011321A /* ProfileDetailNib.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ProfileDetailNib.storyboard; sourceTree = "<group>"; };
@@ -1051,6 +1048,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		700AC59B1C7EE0AF00BA4F96 /* AddressBook */ = {
+			isa = PBXGroup;
+			children = (
+				700AC59F1C7EE21400BA4F96 /* AddingFriendsProtocol.h */,
+				700AC5A01C7EE21400BA4F96 /* AddressBookDelegate.h */,
+				700AC5A11C7EE21400BA4F96 /* AddressBookDelegate.m */,
+			);
+			path = AddressBook;
+			sourceTree = "<group>";
+		};
 		70530B0B1C3F9D1E00505121 /* SearchSegItem */ = {
 			isa = PBXGroup;
 			children = (
@@ -1717,7 +1724,6 @@
 		EEAAC8EF1B44E81A00D05C0B = {
 			isa = PBXGroup;
 			children = (
-				A08AE9531C7E9C1A0029B660 /* libiconv.2.dylib */,
 				EEAACD791B44EA8800D05C0B /* BabySharing.mobileprovision */,
 				EE4082501B70C0CE0094A88B /* gotyeapi */,
 				EEAACDB91B44FAA300D05C0B /* libGPUImage */,
@@ -1847,6 +1853,7 @@
 		EEAACB141B44E90300D05C0B /* Message */ = {
 			isa = PBXGroup;
 			children = (
+				700AC59B1C7EE0AF00BA4F96 /* AddressBook */,
 				EEA991451B775B35001F6CC6 /* NotificationsView */,
 				EEE94E0D1B74A8E80011321A /* AddFriends */,
 				EEE94E001B74A8C20011321A /* MessageView */,
@@ -2349,6 +2356,7 @@
 				EEAACD941B44ED7B00D05C0B /* libc++.dylib */,
 				EE4082691B70C18E0094A88B /* libstdc++.dylib */,
 				EE4082671B70C1850094A88B /* libstdc++.6.0.9.dylib */,
+				A08AE9531C7E9C1A0029B660 /* libiconv.2.dylib */,
 			);
 			name = Framework;
 			sourceTree = "<group>";
@@ -2709,11 +2717,6 @@
 			children = (
 				EEE94E0E1B74A9320011321A /* AddingFriendsController.h */,
 				EEE94E0F1B74A9320011321A /* AddingFriendsController.m */,
-				EEE94E111B74AB6B0011321A /* AddressBookDelegate.h */,
-				EEE94E121B74AB6B0011321A /* AddressBookDelegate.m */,
-				EEA72A471B955AB9000BEC2E /* AddingFriendsProtocol.h */,
-				EE87315C1B97E131004A25D8 /* WeiboFriendsDelegate.h */,
-				EE87315D1B97E131004A25D8 /* WeiboFriendsDelegate.m */,
 			);
 			path = AddFriends;
 			sourceTree = "<group>";
@@ -3074,7 +3077,6 @@
 				EEAACC9A1B44E90400D05C0B /* AppDelegate.m in Sources */,
 				EE262C991C1958F8008DCC4E /* DONNotificationDelegate.m in Sources */,
 				EEAACCE21B44E90400D05C0B /* QueryContent+ContextOpt.m in Sources */,
-				EE87315E1B97E131004A25D8 /* WeiboFriendsDelegate.m in Sources */,
 				EEAACCCC1B44E90400D05C0B /* INTUSpringSolver.c in Sources */,
 				EE26D7801C1EC70F00342E02 /* FoundSearchModel.m in Sources */,
 				EE0CEC551BDB13070016B6F4 /* ChooseAreaViewController.m in Sources */,
@@ -3150,6 +3152,7 @@
 				EE664E9A1B73145000ACD57E /* QueryContent.m in Sources */,
 				EEB4C8BE1BFC823C0023E2AD /* QueryCell.m in Sources */,
 				EEBE1B951C17D42B00EAA9D2 /* UserSearchCell.m in Sources */,
+				700AC5A21C7EE21400BA4F96 /* AddressBookDelegate.m in Sources */,
 				70D15B4F1C5B64C9007AC9AB /* MJRefreshNormalHeader.m in Sources */,
 				70E06F811C4F967400B740CD /* SearchAddLocationDelegate.m in Sources */,
 				70C75B621C50DF1100E7587A /* SearchAddController2.m in Sources */,
@@ -3206,7 +3209,6 @@
 				EEBE1B6A1C17CA9400EAA9D2 /* DongDaSearchBar.m in Sources */,
 				EED5EABE1BD7375E000AFF36 /* PhotoTagTariangleLayer2.m in Sources */,
 				70CC1C641C7C6BF20022B62E /* Followed+CoreDataProperties.m in Sources */,
-				EEE94E131B74AB6B0011321A /* AddressBookDelegate.m in Sources */,
 				EEAACCE01B44E90400D05C0B /* PostModel.m in Sources */,
 				EE83F40A1B96EDDF00D51FDF /* CycleAddSchoolViewController.m in Sources */,
 				7082FFC91C59D2BA0056D1FC /* MessageChatGroupInfoCell.m in Sources */,
