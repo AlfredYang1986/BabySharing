@@ -14,4 +14,5 @@
 @property (nonatomic) PostPreViewType type;
 @property (nonatomic, strong) UIImage* cutted_img;
 @property (nonatomic, strong) NSURL* editing_movie;
+
 @end

@@ -19,13 +19,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BabySharing/Views/Landing/NickNameInputView.m"
-            timestampString = "478082529.795339"
+            filePath = "BabySharing/Controllers/Post/PostPreViewV3/PostPublichViewController.m"
+            timestampString = "478156411.471612"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "229"
-            endingLineNumber = "229"
-            landmarkName = "-setRoleTag:"
+            startingLineNumber = "498"
+            endingLineNumber = "498"
+            landmarkName = "-didSelectPostBtn"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -15,7 +15,7 @@
 #import "SearchSegView2.h"
 #import "PostPublichViewController.h"
 #import "SearhViewControllerActionsDelegate.h"
-
+#import "Tools.h"
 #import "SearchViewController.h"
 #import "SearchBrandsDelegate.h"
 #import "SearchLocationDelegate.h"
@@ -38,7 +38,7 @@
 @implementation PostPreViewEffectController {
     CGFloat aspectRatio;
     
-    UIView* mainContentView;
+    UIImageView* mainContentView;
     
     PostEffectAdapter* adapter;
     
@@ -58,6 +58,7 @@
     UIView *edit_bg;
     
     UIImage *result_img;
+    UIImage *share_img;
    
     /***********************************************************************/
     // movie
@@ -109,7 +110,10 @@
     
     img_layer = [CALayer layer];
     img_layer.frame = mainContentView.bounds;
-    img_layer.contents = (id)_cutted_img.CGImage;
+#pragma mark 为什么要用layer加到layer
+//    img_layer.contents = (id)_cutted_img.CGImage;
+    mainContentView.contentMode = UIViewContentModeScaleToFill;
+    mainContentView.image = _cutted_img;
     [mainContentView.layer addSublayer:img_layer];
     
     /***************************************************************************************/
@@ -407,16 +411,18 @@
 
 - (void)didNextBtnSelected {
 
+    NSLog(@"测色 == %ld", [[mainContentView subviews] count]);
+    
+    
     PostPublichViewController* pub = [[PostPublichViewController alloc]init];
-
 //    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"PhotoPreView" bundle:nil];
 //    PhotoPublishController* publishController = [storyboard instantiateViewControllerWithIdentifier:@"publishController"];
-
     if (_type == PostPreViewPhote) {
     
         UIImage* final_img = [self mergePasteAndEffect:result_img];
-       
         pub.preViewImg = final_img;
+        pub.share_img = [Tools imageWithView:mainContentView];
+        
        
         NSMutableArray* arr = [[NSMutableArray alloc]initWithCapacity:tags.count];
         for (int index = 0; index < tags.allValues.count; ++index) {

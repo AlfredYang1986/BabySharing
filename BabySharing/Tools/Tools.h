@@ -14,6 +14,6 @@
 + (UIImage *)imageWithView:(UIView *)view;
 + (NSString *)subStringWithByte:(NSInteger)byte str:(NSString *)str;
 + (NSInteger)bityWithStr:(NSString *)str;
-
++ (UIImage*) OriginImage:(UIImage *)image scaleToSize:(CGSize)size;
 
 @end

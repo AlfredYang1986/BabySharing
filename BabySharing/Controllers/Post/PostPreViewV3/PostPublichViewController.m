@@ -14,6 +14,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "SearchSegView2.h"
 #import "INTUAnimationEngine.h"
+#import "Tools.h"
 
 #define FAKE_NAVIGATION_BAR_HEIGHT  64
 #define SNS_BUTTON_WIDTH            25
@@ -490,10 +491,11 @@
     
     AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     if (_isShareWeibo) {
-        [delegate.lm postContentOnWeiboWithText:_descriptionView.text andImage:_preViewImg];
+        
+        [delegate.lm postContentOnWeiboWithText:_descriptionView.text andImage:self.share_img];
     }
     if (_isShareQQ) {
-        [delegate.lm postContentOnQQzoneWithText:_descriptionView.text andImage:_preViewImg];
+        [delegate.lm postContentOnQQzoneWithText:_descriptionView.text andImage:self.share_img];
     }
     PostModel* pm = delegate.pm;
     

@@ -19,6 +19,7 @@
 #import "Reachability.h"
 #import "QQApiInterfaceObject.h"
 #import "QQApiInterface.h"
+#import "Tools.h"
 
 // weibo sdk
 #import "WBHttpRequest+WeiboUser.h"
@@ -336,8 +337,8 @@
     
 //    if ([TencentOAuth iphoneQQInstalled]) {
         NSData* data = UIImagePNGRepresentation(img);
-    
-        QQApiImageObject *imgObj = [QQApiImageObject objectWithData:data previewImageData:data title:text description:text];
+    NSData *previewData = UIImagePNGRepresentation([Tools OriginImage:img scaleToSize:CGSizeMake(100, 100)]);
+        QQApiImageObject *imgObj = [QQApiImageObject objectWithData:data previewImageData:previewData title:text description:text];
         SendMessageToQQReq* req = [SendMessageToQQReq reqWithContent:imgObj];
         NSLog(@"分享到QQ空间 == %d", [QQApiInterface sendReq:req]);
 //    } else {

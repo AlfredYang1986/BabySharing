@@ -12,7 +12,7 @@
 @interface PostPublichViewController : UIViewController
 @property (nonatomic, strong) UIImage* preViewImg;
 @property (nonatomic, strong) NSArray* already_taged;
-
+@property (nonatomic, strong) UIImage *share_img;
 @property (nonatomic, weak) NSURL* movie_url;
 @property (nonatomic) PostPreViewType type;
 @end
