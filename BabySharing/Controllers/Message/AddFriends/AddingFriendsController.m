@@ -166,16 +166,12 @@
 
 #pragma mark -- seg delegate
 - (void)segValueChanged2:(SearchSegView2 *)seg {
-<<<<<<< HEAD
     if (seg.selectedIndex == 2) {
         [seg setSegSelectedIndex:0];
         [[AppDelegate defaultAppDelegate].lm postContentOnQQzoneWithText:@"快来加入咚哒吧！！！" andImage:[UIImage imageNamed:[[NSBundle mainBundle] pathForResource:@"icon" ofType:@"png"]]];
     } else if (seg.selectedIndex == 1) {
         [seg setSegSelectedIndex:0];
     } else if (seg.selectedIndex == 0) {
-=======
-    if (seg.selectedIndex == 0) {
-//        [self performSegueWithIdentifier:@"addressBook" sender:nil];
         
         AppDelegate* app = [UIApplication sharedApplication].delegate;
         [app.lm queryUserList:[ab getAllPhones] withProviderName:@"phone" andFinishBlock:^(BOOL success, NSArray *lst) {
@@ -183,12 +179,6 @@
             [ab splitWithFriends:lst];
             [_queryView reloadData];
         }];
-        
-    } else if (seg.selectedIndex == 1) {
-        
-    } else if (seg.selectedIndex == 2) {
-        
->>>>>>> origin/master
     }
 }
 
