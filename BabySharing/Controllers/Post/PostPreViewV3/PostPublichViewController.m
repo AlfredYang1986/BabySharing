@@ -265,7 +265,9 @@
   
     placeholder = [[UILabel alloc]init];
     placeholder.textColor = [UIColor darkGrayColor];
-    placeholder.text = @"添加照片说明";
+    placeholder.numberOfLines = 2;
+    placeholder.text = @"4-18个字节，\n限中英文，数字，表情符号";
+    placeholder.textAlignment = NSTextAlignmentCenter;
     [placeholder sizeToFit];
     placeholder.center = CGPointMake(_descriptionView.frame.size.width / 2, _descriptionView.frame.size.height / 2);
     [_descriptionView addSubview:placeholder];
@@ -543,7 +545,6 @@
         bar_cancel_btn.hidden = YES;
         bar_save_btn.hidden = YES;
         [self moveView:KEYBOARD_HEIGHT];
-//        bar_publich_btn.enabled = YES;
     }
 }
 
@@ -561,7 +562,18 @@
 - (void)textViewDidBeginEditing:(UITextView *)textView {
     bar_cancel_btn.hidden = NO;
     bar_save_btn.hidden = NO;
-    
     [self moveView:-KEYBOARD_HEIGHT];
 }
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if ([text isEqualToString:@""]) {
+        return YES;
+    }
+    if ([Tools bityWithStr:textView.text] >= 18) {
+        return NO;
+    } else {
+        return YES;
+    }
+}
+
 @end

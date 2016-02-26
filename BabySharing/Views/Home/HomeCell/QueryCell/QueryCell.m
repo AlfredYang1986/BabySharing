@@ -316,19 +316,14 @@
 }
 
 - (void)playMovie {
-    NSLog(@"play movie");
     if (_type == PostPreViewMovie) {
 //        [movie play];
-        
+        NSLog(@"play movie");
         if (avPlayerLayer == nil) {
             avPlayerLayer = [AVPlayerLayer playerLayerWithPlayer:_player];
         }
-       
         if (![self.layer.sublayers containsObject:avPlayerLayer]) {
-            CGFloat width = [UIScreen mainScreen].bounds.size.width - HER_MARGIN * 2;
-            CGFloat height = width;
-            avPlayerLayer.bounds = CGRectMake(0, 0, width, height);
-            avPlayerLayer.frame = CGRectMake(_imgView.frame.origin.x, _imgView.frame.origin.y, width, height);
+            avPlayerLayer.frame = CGRectMake(_imgView.frame.origin.x, _imgView.frame.origin.y, _imgView.frame.size.width, _imgView.frame.size.height);
             avPlayerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
             [self.layer addSublayer:avPlayerLayer];
         }
