@@ -192,6 +192,10 @@
      */
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasChange:) name:UIKeyboardDidChangeFrameNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHidden:) name:UIKeyboardDidHideNotification object:nil];
+    
+    UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapElseWhere:)];
+    [_queryView addGestureRecognizer:tap];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -640,7 +644,7 @@
     if ([text isEqualToString:@"\n"]){ //判断输入的字是否是回车，即按下return
         //在这里做你响应return键的代码
 //        [self moveView:+250];
-        [self moveView:keyBoardFrame.size.height];
+//        [self moveView:keyBoardFrame.size.height];
         [textView resignFirstResponder];
         
         GotyeOCRoom* room = [GotyeOCRoom roomWithId:_group_id.longLongValue];
@@ -706,7 +710,7 @@
 - (void)inputView2UserInfo {
     if (inputView.isFirstResponder) {
         [inputView resignFirstResponder];
-        [self moveView:keyBoardFrame.size.height withFinish:@selector(inputView2UserInfo)];
+//        [self moveView:keyBoardFrame.size.height withFinish:@selector(inputView2UserInfo)];
     } else {
         static const CGFloat kAnimationDuration = 0.30; // in seconds
         CGFloat width = [UIScreen mainScreen].bounds.size.width;
@@ -804,5 +808,18 @@
     NSDictionary *userInfo = [notification userInfo];
     NSValue *value = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
     keyBoardFrame = value.CGRectValue;
+}
+
+- (void)keyboardDidHidden:(NSNotification*)notification {
+    CGFloat height = [UIScreen mainScreen].bounds.size.height;
+    if (_queryView.frame.size.height != height) {
+        [self moveView:keyBoardFrame.size.height];
+    }
+}
+
+- (void)tapElseWhere:(UITapGestureRecognizer*)gusture {
+    if (inputView.isFirstResponder) {
+        [inputView resignFirstResponder];
+    }
 }
 @end

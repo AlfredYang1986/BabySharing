@@ -152,6 +152,8 @@
     datasource.delegate = _delegate;
     datasource.current_index = _current_index;
    
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
 #ifdef DEBUG_NEW_HOME_PAGE
     {
         CGFloat width = [UIScreen mainScreen].bounds.size.width;
@@ -175,6 +177,7 @@
             }];
             
             // 设置自动切换透明度(在导航栏下面自动隐藏)
+//            UIImage* img = [UIImage imageNamed:[resourceBundle pathForResource:@"home_refresh" ofType:@"gif"]];
             tableView.mj_header.automaticallyChangeAlpha = YES;
             
             // 上拉刷新
@@ -213,8 +216,6 @@
         [label sizeToFit];
         self.navigationItem.titleView = label;
         
-        NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
-        NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
         UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 25, 25)];
         NSString* filepath = [resourceBundle pathForResource:@"dongda_back" ofType:@"png"];
         CALayer * layer = [CALayer layer];

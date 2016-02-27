@@ -16,6 +16,7 @@
 		70530B121C3F9D1E00505121 /* SearchSegImgItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 70530B0D1C3F9D1E00505121 /* SearchSegImgItem.m */; };
 		70530B131C3F9D1E00505121 /* SearchSegImgTextItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 70530B0F1C3F9D1E00505121 /* SearchSegImgTextItem.m */; };
 		70530B141C3F9D1E00505121 /* SearchSegItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 70530B111C3F9D1E00505121 /* SearchSegItem.m */; };
+		706563B71C817580008BBAC8 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 706563B61C817580008BBAC8 /* Contacts.framework */; };
 		706D7A1C1C7561C0006750AC /* FoundSearchTagDeleage.m in Sources */ = {isa = PBXBuildFile; fileRef = 706D7A1B1C7561C0006750AC /* FoundSearchTagDeleage.m */; };
 		706D7A221C757379006750AC /* RecommandRoleTag+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 706D7A1F1C757379006750AC /* RecommandRoleTag+CoreDataProperties.m */; };
 		706D7A231C757379006750AC /* RecommandRoleTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 706D7A211C757379006750AC /* RecommandRoleTag.m */; };
@@ -370,6 +371,7 @@
 		70530B0F1C3F9D1E00505121 /* SearchSegImgTextItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSegImgTextItem.m; sourceTree = "<group>"; };
 		70530B101C3F9D1E00505121 /* SearchSegItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSegItem.h; sourceTree = "<group>"; };
 		70530B111C3F9D1E00505121 /* SearchSegItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSegItem.m; sourceTree = "<group>"; };
+		706563B61C817580008BBAC8 /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
 		706D7A1A1C7561C0006750AC /* FoundSearchTagDeleage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoundSearchTagDeleage.h; sourceTree = "<group>"; };
 		706D7A1B1C7561C0006750AC /* FoundSearchTagDeleage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoundSearchTagDeleage.m; sourceTree = "<group>"; };
 		706D7A1D1C756AC3006750AC /* FoundSearchProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FoundSearchProtocol.h; sourceTree = "<group>"; };
@@ -1001,6 +1003,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				706563B71C817580008BBAC8 /* Contacts.framework in Frameworks */,
 				A0F2B3D81C7EFEF20090EF32 /* libGPUImage.a in Frameworks */,
 				A08AE9541C7E9C1A0029B660 /* libiconv.2.dylib in Frameworks */,
 				EE40826A1B70C18E0094A88B /* libstdc++.dylib in Frameworks */,
@@ -2326,6 +2329,7 @@
 		EEAACD7F1B44EBC100D05C0B /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				706563B61C817580008BBAC8 /* Contacts.framework */,
 				EE4082651B70C13F0094A88B /* AudioToolbox.framework */,
 				EE4082631B70C1330094A88B /* CoreTelephony.framework */,
 				EE4082611B70C1240094A88B /* AddressBook.framework */,

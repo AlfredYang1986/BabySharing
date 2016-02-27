@@ -17,8 +17,14 @@
 
 #import "RemoteInstance.h"
 
+#import <Contacts/CNContact.h>
+#import <Contacts/CNContactStore.h>
+#import <Contacts/CNContactFetchRequest.h>
+
 @implementation AddressBookDelegate {
-    ABAddressBookRef tmpAddressBook;
+//    ABAddressBookRef tmpAddressBook;
+    CNContactStore* tmpAddressBook;
+    
     NSArray* people_all;
     NSMutableArray* people;
     
@@ -32,25 +38,39 @@
 - (id)init {
     self = [super init];
     if (self) {
-        if ([[UIDevice currentDevice].systemVersion floatValue] >= 6.0) {
-            tmpAddressBook = ABAddressBookCreateWithOptions(NULL, NULL);
-            dispatch_semaphore_t sema = dispatch_semaphore_create(0);
-            ABAddressBookRequestAccessWithCompletion(tmpAddressBook, ^(bool greanted, CFErrorRef error){
-                dispatch_semaphore_signal(sema);
-            });
-            
-            dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
-        } else {
-            tmpAddressBook = ABAddressBookCreate();
-        }
+//        if ([[UIDevice currentDevice].systemVersion floatValue] >= 6.0) {
+//            tmpAddressBook = ABAddressBookCreateWithOptions(NULL, NULL);
+//            dispatch_semaphore_t sema = dispatch_semaphore_create(1);
+//            ABAddressBookRequestAccessWithCompletion(tmpAddressBook, ^(bool greanted, CFErrorRef error){
+//                dispatch_semaphore_signal(sema);
+//            });
+//            
+//            dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+//        } else {
+//            tmpAddressBook = ABAddressBookCreate();
+//        }
+        tmpAddressBook = [[CNContactStore alloc]init];
+        people = [[NSMutableArray alloc]init];
     }
     
     if (tmpAddressBook) {
-        people_all = CFBridgingRelease(ABAddressBookCopyArrayOfAllPeople(tmpAddressBook));
-        people = [people_all mutableCopy];
+        CNContactFetchRequest* req = [[CNContactFetchRequest alloc]initWithKeysToFetch:@[CNContactGivenNameKey, CNContactMiddleNameKey, CNContactFamilyNameKey, CNContactPhoneNumbersKey]];
+        req.predicate = nil;
+        NSError* err = nil;
+        if ([tmpAddressBook enumerateContactsWithFetchRequest:req error:&err usingBlock:^(CNContact * _Nonnull contact, BOOL * _Nonnull stop) {
+            *stop = NO;
+            [people addObject:contact];
+        }]) {
+            none_friend_lst = people;
+            people_all = [people copy];
+        } else {
+            UIAlertView* alert = [[UIAlertView alloc]initWithTitle:[err.userInfo objectForKey:NSLocalizedDescriptionKey] message:[err.userInfo objectForKey:NSLocalizedFailureReasonErrorKey] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+            [alert show];
+        }
+//        people_all = CFBridgingRelease(ABAddressBookCopyArrayOfAllPeople(tmpAddressBook));
+//        people = [people_all mutableCopy];
     }
     
-    none_friend_lst = people;
     return self;
 }
 
@@ -61,9 +81,9 @@
 - (void)filterFriendsWithString:(NSString*)searchText {
 
     [people removeAllObjects];
-    for (id tmpPerson in people_all) {
-        NSString* tmpFirstName = CFBridgingRelease(ABRecordCopyValue(CFBridgingRetain(tmpPerson), kABPersonFirstNameProperty));
-        NSString* tmpLastName = CFBridgingRelease(ABRecordCopyValue(CFBridgingRetain(tmpPerson), kABPersonLastNameProperty));
+    for (CNContact* tmpPerson in people_all) {
+        NSString* tmpFirstName = tmpPerson.givenName; //CFBridgingRelease(ABRecordCopyValue(CFBridgingRetain(tmpPerson), kABPersonFirstNameProperty));
+        NSString* tmpLastName = tmpPerson.familyName; //CFBridgingRelease(ABRecordCopyValue(CFBridgingRetain(tmpPerson), kABPersonLastNameProperty));
       
         NSString* filter = nil;
         if (tmpLastName && tmpFirstName) {
@@ -113,13 +133,14 @@
         
         [dic setObject:tmp.who.screen_name forKey:@"screen_name"];
         
-        id tmpPerson = [people objectAtIndex:alertView.tag];
-        
-        ABMultiValueRef phoneNos = ABRecordCopyValue(CFBridgingRetain(tmpPerson), kABPersonPhoneProperty);
-        int count = ABMultiValueGetCount(phoneNos);
+        CNContact* tmpPerson = [people objectAtIndex:alertView.tag];
+      
+        NSArray<CNLabeledValue<CNPhoneNumber*>*>* phoneNos = tmpPerson.phoneNumbers;
+//        ABMultiValueRef phoneNos = ABRecordCopyValue(CFBridgingRetain(tmpPerson), kABPersonPhoneProperty);
+        int count = phoneNos.count; //ABMultiValueGetCount(phoneNos);
         
         if (count > 0) {
-            NSString* phoneNo = CFBridgingRelease(ABMultiValueCopyValueAtIndex(phoneNos, 0));
+            NSString* phoneNo = [phoneNos objectAtIndex:0].value.stringValue; //CFBridgingRelease(ABMultiValueCopyValueAtIndex(phoneNos, 0));
             [dic setObject:phoneNo forKey:@"phoneNo"];
             NSError * error = nil;
             NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
@@ -165,7 +186,7 @@
     
 //    id tmpPerson = [people objectAtIndex:indexPath.row];
     BOOL isFriends = NO;
-    id tmpPerson = nil;
+    CNContact* tmpPerson = nil;
     @try {
         tmpPerson = [friend_lst objectAtIndex:indexPath.row];
         isFriends = YES;
@@ -187,8 +208,8 @@
         [cell setUserRoleTag:[tmp objectForKey:@"role_tag"]];
         
     } else {
-        NSString* tmpFirstName = CFBridgingRelease(ABRecordCopyValue(CFBridgingRetain(tmpPerson), kABPersonFirstNameProperty));
-        NSString* tmpLastName = CFBridgingRelease(ABRecordCopyValue(CFBridgingRetain(tmpPerson), kABPersonLastNameProperty));
+        NSString* tmpFirstName = tmpPerson.givenName; //CFBridgingRelease(ABRecordCopyValue(CFBridgingRetain(tmpPerson), kABPersonFirstNameProperty));
+        NSString* tmpLastName = tmpPerson.familyName; //CFBridgingRelease(ABRecordCopyValue(CFBridgingRetain(tmpPerson), kABPersonLastNameProperty));
         
         if (tmpLastName && tmpFirstName) {
             [cell setUserScreenName:[tmpFirstName stringByAppendingString:tmpLastName]];
@@ -218,11 +239,12 @@
 
 - (NSArray*)getAllPhones {
     NSMutableArray* arr = [[NSMutableArray alloc]init];
-    for (id tmpPerson in people) {
-        ABMultiValueRef phones = ABRecordCopyValue(CFBridgingRetain(tmpPerson), kABPersonPhoneProperty);
-        CFIndex count = ABMultiValueGetCount(phones);
-        for (int index = 0; index < count; ++index) {
-            NSString* phoneNo = CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, index));
+    for (CNContact* tmpPerson in people) {
+//        ABMultiValueRef phones = ABRecordCopyValue(CFBridgingRetain(tmpPerson), kABPersonPhoneProperty);
+        NSArray<CNLabeledValue<CNPhoneNumber*>*>* phones = tmpPerson.phoneNumbers; //ABRecordCopyValue(CFBridgingRetain(tmpPerson), kABPersonPhoneProperty);
+//        CFIndex count = ABMultiValueGetCount(phones);
+        for (int index = 0; index < phones.count; ++index) {
+            NSString* phoneNo = [phones objectAtIndex:index].value.stringValue; //CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, index));
             phoneNo = [phoneNo stringByReplacingOccurrencesOfString:@"-" withString:@""];
             [arr addObject:phoneNo];
         }
@@ -232,11 +254,10 @@
 
 - (void)splitWithFriends:(NSArray*)lst {
     NSPredicate* p = [NSPredicate predicateWithBlock:^BOOL(id  _Nonnull evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
-        id tmpPerson = evaluatedObject;
-        ABMultiValueRef phones = ABRecordCopyValue(CFBridgingRetain(tmpPerson), kABPersonPhoneProperty);
-        CFIndex count = ABMultiValueGetCount(phones);
-        for (int index = 0; index < count; ++index) {
-            NSString* phoneNo = CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, index));
+        CNContact* tmpPerson = evaluatedObject;
+        NSArray<CNLabeledValue<CNPhoneNumber*>*>* phones = tmpPerson.phoneNumbers; //ABRecordCopyValue(CFBridgingRetain(tmpPerson), kABPersonPhoneProperty);
+        for (int index = 0; index < phones.count; ++index) {
+            NSString* phoneNo = [phones objectAtIndex:index].value.stringValue; //CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, index));
             phoneNo = [phoneNo stringByReplacingOccurrencesOfString:@"-" withString:@""];
             
             NSPredicate* p_match = [NSPredicate predicateWithBlock:^BOOL(id  _Nonnull evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
@@ -253,11 +274,10 @@
     friend_profile_lst = lst;
   
     NSPredicate* p_not = [NSPredicate predicateWithBlock:^BOOL(id  _Nonnull evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
-        id tmpPerson = evaluatedObject;
-        ABMultiValueRef phones = ABRecordCopyValue(CFBridgingRetain(tmpPerson), kABPersonPhoneProperty);
-        CFIndex count = ABMultiValueGetCount(phones);
-        for (int index = 0; index < count; ++index) {
-            NSString* phoneNo = CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, index));
+        CNContact* tmpPerson = evaluatedObject;
+        NSArray<CNLabeledValue<CNPhoneNumber*>*>* phones = tmpPerson.phoneNumbers; //ABRecordCopyValue(CFBridgingRetain(tmpPerson), kABPersonPhoneProperty);
+        for (int index = 0; index < phones.count; ++index) {
+            NSString* phoneNo = [phones objectAtIndex:index].value.stringValue; //CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, index));
             phoneNo = [phoneNo stringByReplacingOccurrencesOfString:@"-" withString:@""];
             
             NSPredicate* p_match = [NSPredicate predicateWithBlock:^BOOL(id  _Nonnull evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
