@@ -37,7 +37,7 @@
     
     NSString* screen_photo;
     NSString* screen_name;
-    NSInteger relations;
+//    NSInteger relations;
     NSString* role_tag;
 //
     NSArray* contents;
@@ -113,6 +113,11 @@
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     CGFloat img_height = width / PHOTO_PER_LINE;
     return CELL_HEADER_HEIGHT + img_height + CELL_FOOTER_HEIGHT;
+}
+
+- (void)setConnections:(UserPostOwnerConnections)connections {
+    _connections = connections;
+    [queryView reloadData];
 }
 
 #pragma mark -- table view datasource and delegate
@@ -269,5 +274,6 @@
 
 - (void)didSelectedRelationBtn:(NSString *)user_id andCurrentRelation:(UserPostOwnerConnections)connections {
 //    [_delegate didSelectedUserContentImages:0 andUserID:user_id];
+    [_delegate didSelectedUserRelationsUserID:_user_id andCurrentConnection:connections];
 }
 @end

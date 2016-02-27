@@ -12,6 +12,7 @@
 @protocol UserSearchCellDelegate <NSObject>
 
 - (void)didSelectedUserScreenPhoto:(NSString*)user_id;
+- (void)didSelectedUserRelationsUserID:(NSString*)user_id andCurrentConnection:(UserPostOwnerConnections)new_connections;
 - (void)didSelectedUserContentImages:(NSInteger)index andUserID:(NSString*)user_id andUserScreenName:(NSString*)screen_name;
 @end
 
@@ -19,7 +20,7 @@
 
 @property (nonatomic, strong) NSString* user_id;
 @property (nonatomic, strong) NSString* screen_name;
-@property (nonatomic) UserPostOwnerConnections connections;
+@property (nonatomic, setter=setConnections:) UserPostOwnerConnections connections;
 @property (nonatomic, weak) id<UserSearchCellDelegate> delegate;
 
 + (CGFloat)preferredHeight;
