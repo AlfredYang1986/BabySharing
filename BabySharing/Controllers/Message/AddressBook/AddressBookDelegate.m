@@ -137,9 +137,9 @@
       
         NSArray<CNLabeledValue<CNPhoneNumber*>*>* phoneNos = tmpPerson.phoneNumbers;
 //        ABMultiValueRef phoneNos = ABRecordCopyValue(CFBridgingRetain(tmpPerson), kABPersonPhoneProperty);
-        int count = phoneNos.count; //ABMultiValueGetCount(phoneNos);
+//        ABMultiValueGetCount(phoneNos);
         
-        if (count > 0) {
+        if (phoneNos.count > 0) {
             NSString* phoneNo = [phoneNos objectAtIndex:0].value.stringValue; //CFBridgingRelease(ABMultiValueCopyValueAtIndex(phoneNos, 0));
             [dic setObject:phoneNo forKey:@"phoneNo"];
             NSError * error = nil;

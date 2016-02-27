@@ -24,6 +24,8 @@
 #import "ChatMessageCell.h"
 
 #import "ChatGroupUserInfoTableDelegateAndDatasource.h"
+#import "PersonalCentreTmpViewController.h"
+#import "PersonalCentreOthersDelegate.h"
 
 #define BACK_BTN_WIDTH          23
 #define BACK_BTN_HEIGHT         23
@@ -48,7 +50,7 @@
 #define USER_INFO_BACK_BTN_HEIGHT           30
 #define USER_INFO_BACK_BTN_WIDTH            30
 
-@interface ChatGroupController () <UITableViewDataSource, UITableViewDelegate, /*UITextFieldDelegate,*/ GotyeOCDelegate, ChatEmoji, UITextViewDelegate, userInfoPaneDelegate>
+@interface ChatGroupController () <UITableViewDataSource, UITableViewDelegate, /*UITextFieldDelegate,*/ GotyeOCDelegate, ChatEmoji, UITextViewDelegate, userInfoPaneDelegate, ChatMessageCellDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *queryView;
 @end
 
@@ -78,6 +80,7 @@
     /**
      * dispatch_semaphore_wait
      */
+    BOOL isLoaded;
     dispatch_semaphore_t semaphore;
 }
 
@@ -241,8 +244,11 @@
     self.tabBarController.tabBar.hidden = YES;
     self.navigationController.navigationBarHidden = YES;
     [GotyeOCAPI addListener:self];
-    
-    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+   
+    if (!isLoaded) {
+        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+        isLoaded = YES;
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -529,6 +535,7 @@
    
     GotyeOCMessage* m = [current_message objectAtIndex:indexPath.row];
     cell.message = m;
+    cell.delegate = self;
     
     return cell;
     
@@ -821,5 +828,16 @@
     if (inputView.isFirstResponder) {
         [inputView resignFirstResponder];
     }
+}
+
+#pragma mark -- chat cell select delegate
+- (void)didSelectedScreenPhotoForUserID:(NSString*)user_id {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    PersonalCentreTmpViewController* pc = [storyboard instantiateViewControllerWithIdentifier:@"PersonalCenter"];
+    PersonalCentreOthersDelegate* pd = [[PersonalCentreOthersDelegate alloc]init];
+    pc.current_delegate = pd;
+    pc.owner_id = user_id;
+    [self.navigationController setNavigationBarHidden:NO];
+    [self.navigationController pushViewController:pc animated:YES];
 }
 @end
