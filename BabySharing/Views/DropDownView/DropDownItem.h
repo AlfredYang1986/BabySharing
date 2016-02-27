@@ -9,10 +9,13 @@
 #import <UIKit/UIKit.h>
 
 #import <AssetsLibrary/AssetsLibrary.h>
+#import <Photos/Photos.h>
 
 @interface DropDownItem : UITableViewCell
 
 @property (nonatomic, weak) ALAssetsGroup* group;
+@property (nonatomic, weak) PHFetchResult *fetchResult; //包含了相册中相册的容器对象
+@property (nonatomic, weak) PHCollection *collection;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;
 @end

@@ -26,7 +26,7 @@
         <element name="PreviewContent" positionX="-4241" positionY="-4441" width="128" height="88"/>
         <element name="PreviewItem" positionX="-3989" positionY="-4437" width="128" height="88"/>
         <element name="PreviewTag" positionX="-4493" positionY="-4426" width="128" height="88"/>
-        <element name="RecommandTag" positionX="-4295" positionY="-4599" width="128" height="73"/>
         <element name="RecommandRoleTag" positionX="-4286" positionY="-4275" width="128" height="58"/>
+        <element name="RecommandTag" positionX="-4295" positionY="-4599" width="128" height="75"/>
     </elements>
 </model>

@@ -191,7 +191,6 @@
     
 //    if ([cell.textLabel.text isEqualToString:@"退出登录"]) {
     if ([cell.label.text isEqualToString:@"退出登录"]) {
-        cell.backgroundColor = [UIColor redColor];
         
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
         NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:@"退出登录"];

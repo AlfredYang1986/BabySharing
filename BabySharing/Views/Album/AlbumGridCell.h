@@ -23,4 +23,5 @@
 - (void)setMovieDurationLayer:(id)duration;
 
 - (void)setShowingPhotoWithName:(NSString*)photo_name;
+
 @end

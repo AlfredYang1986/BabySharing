@@ -552,7 +552,6 @@ void brandTagView(PostEffectAdapter* obj, UIImage* tag_img) {
 - (void)didSelectTagForPhoto:(UIButton*)sender {
     static const vector<tagNode> vec = {
         tagNode{"地点", TagTypeLocation, &locationTagView},
-//        tagNode{"时间", TagTypeTime, &timeTagView},
         tagNode{"时刻", TagTypeTime, &timeTagView},
         tagNode{"标签", TagTypeTags, &otherTagView},
         tagNode{"品牌", TagTypeBrand, &brandTagView},

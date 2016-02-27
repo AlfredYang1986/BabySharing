@@ -10,9 +10,10 @@
 
 #import "AppDelegate.h"
 #import "FoundSearchModel.h"
-
+#import "Tools.h"
 #import "AppDelegate.h"
 #import "FoundSearchModel.h"
+#import "LocalTag.h"
 
 @interface SearchAddBrandsDelegate ()
 
@@ -29,9 +30,15 @@
 
 @synthesize fm = _fm;
 
-- (void)pushExistingData:(NSArray *)data {
+- (void)pushExistingData:(NSArray *)data localTag:(NSArray *)localTag {
     exist_data = data;
     showing_data = exist_data;
+}
+
+- (void)pushExistingData:(NSArray *)data{
+    exist_data = data;
+    showing_data = exist_data;
+    [_delegate needToReloadData];
 }
 
 - (FoundSearchModel*)getFoundSearchModel {
@@ -45,14 +52,17 @@
 #pragma mark -- search bar delegate
 #define BRAND 3
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    [self.fm queryFoundTagSearchWithInput:searchText andType:BRAND andFinishBlock:^(BOOL success, NSDictionary *preview) {
-        NSMutableArray* arr = [[NSMutableArray alloc]initWithCapacity:self.fm.tagSearchResult.count];
-        for (NSDictionary* iter in self.fm.tagSearchResult) {
-            [arr addObject:[iter objectForKey:@"tag_name"]];
-        }
-        showing_data = [arr copy];
-        [_delegate needToReloadData];
-    }];
+    
+    showing_data = [[Tools sortWithArr:exist_data headStr:searchText] copy];
+    [_delegate needToReloadData];
+//    [self.fm queryFoundTagSearchWithInput:searchText andType:BRAND andFinishBlock:^(BOOL success, NSDictionary *preview) {
+//        NSMutableArray* arr = [[NSMutableArray alloc]initWithCapacity:self.fm.tagSearchResult.count];
+//        for (NSDictionary* iter in self.fm.tagSearchResult) {
+//            [arr addObject:[iter objectForKey:@"tag_name"]];
+//        }
+//        showing_data = [arr copy];
+//        [_delegate needToReloadData];
+//    }];
 }
 
 #pragma mark -- search bar delegate
@@ -67,7 +77,6 @@
 
 - (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     return @"添加新品牌";
-    //    return [_delegate getAddSectionTitle];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -84,9 +93,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
     if (showing_data.count == 0) {
         [_actions addNewItem:[_delegate getUserInputString]];
+        [[AppDelegate defaultAppDelegate].localTagManager updateLocalTagWithType:BRAND text:[_delegate getUserInputString]];
     } else {
         [_actions didSelectItem:[showing_data objectAtIndex:indexPath.row]];
     }

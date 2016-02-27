@@ -56,6 +56,7 @@
     _searchBar.cancleBtn.clipsToBounds = YES;
     _searchBar.cancleBtn.titleLabel.font = [UIFont systemFontOfSize:14.f];
     _searchBar.placeholder = @"搜索角色标签";
+    
     [_searchBar setPostLayoutSize:CGSizeMake(61, 30)];
     
     _bkView.backgroundColor =  [UIColor colorWithWhite:0.1098 alpha:1.f];

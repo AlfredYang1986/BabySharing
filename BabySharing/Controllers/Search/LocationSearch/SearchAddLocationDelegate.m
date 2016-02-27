@@ -81,6 +81,7 @@
     
     if (showing_data.count == 0) {
         [_actions addNewItem:[_delegate getUserInputString]];
+        [[AppDelegate defaultAppDelegate].localTagManager updateLocalTagWithType:LOCATION text:[_delegate getUserInputString]];
     } else {
         [_actions didSelectItem:[showing_data objectAtIndex:indexPath.row]];
     }

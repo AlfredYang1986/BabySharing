@@ -15,5 +15,6 @@
 + (NSString *)subStringWithByte:(NSInteger)byte str:(NSString *)str;
 + (NSInteger)bityWithStr:(NSString *)str;
 + (UIImage*) OriginImage:(UIImage *)image scaleToSize:(CGSize)size;
++ (NSArray *)sortWithArr:(NSArray *)arr headStr:(NSString *)headStr;
 
 @end

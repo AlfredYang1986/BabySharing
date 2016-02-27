@@ -15,4 +15,5 @@
 + (void)upDateRecommandRoleTags:(NSArray*)tags_arr inContext:(NSManagedObjectContext*)context;
 + (NSArray*)enumRecommandRoleTagsInContext:(NSManagedObjectContext*)context;
 + (void)removeAllRecommandRoleTagsInContext:(NSManagedObjectContext*)context;
+
 @end

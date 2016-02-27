@@ -172,5 +172,6 @@ static const NSString* kUserPostOwnerConnectionsFriends = @"kUserPostOwnerConnec
 #define LOCALDB_RELATIONSHIP                @"Relationship.sqlite"
 #define LOCALDB_USERSETTING                 @"systemSetting.sqlite"
 #define LOCALDB_FOUND_SEARCH                @"foundSearch.sqlite"
+#define LOCALDB_TAG                         @"LocalTag.sqlite"
 //#define LOCALDB_CHAT                      @"chatData.sqlite"
 //#define LOCALDB_GROUP                     @"groupData.sqlite"

@@ -20,6 +20,7 @@
 #import "RecommandTag.h"
 
 #import "HomeTagsController.h"
+#import "LocalTag.h"
 
 @interface SearchBrandsDelegate () <FoundHotTagsCellDelegate>
 
@@ -69,7 +70,6 @@
     [cell setHotTags:self.fm.recommandsdata];
     cell.isHiddenSepline = YES;
     cell.backgroundColor = [UIColor colorWithRed:0.2039 green:0.2078 blue:0.2314 alpha:1.f];//[UIColor colorWithWhite:0.1882 alpha:1.f];
-    
     return cell;
 }
 
@@ -142,13 +142,13 @@
     sd.actions = self;
     [[_actions getViewController] pushViewController:svc animated:NO];
     svc.delegate = sd;
-   
-    NSMutableArray* arr = [[NSMutableArray alloc] initWithCapacity:self.fm.recommandsdata.count];
-    for (RecommandTag* tag in self.fm.recommandsdata) {
-        [arr addObject:tag.tag_name];
+    // 本地数据库
+    NSMutableArray *localArr = [[NSMutableArray alloc] init];
+    for (LocalTag *localTag in [[AppDelegate defaultAppDelegate].localTagManager enumLocalTagWithType:3]) {
+        NSLog(@"%@ === %@", @"", localTag.tag_text);
+        [localArr addObject:localTag.tag_text];
     }
-    
-    [sd pushExistingData:[arr copy]];
+    [sd pushExistingData:[localArr copy]];
     return NO;
 }
 

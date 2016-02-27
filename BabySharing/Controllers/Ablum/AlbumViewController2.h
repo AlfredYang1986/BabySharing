@@ -14,8 +14,9 @@
 
 @class ALAsset;
 
-@interface AlbumViewController2 : UIViewController <UITableViewDelegate, UITableViewDataSource, AlbumTableCellDelegate>
+@interface AlbumViewController2 : UIViewController <UITableViewDelegate, UITableViewDataSource, AlbumTableCellDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (nonatomic) AlbumControllerType type;
 @property (nonatomic, weak) id<CameraActionProtocol> delegate;
+
 @end

@@ -18,6 +18,7 @@
 #import "FoundSearchModel.h"
 #import "RecommandTag.h"
 #import "HomeTagsController.h"
+#import "LocalTag.h"
 
 @interface SearchTimeDelegate () <FoundHotTagsCellDelegate>
 
@@ -117,6 +118,8 @@
 #pragma mark -- search bar delegate
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
     
+    [[AppDelegate defaultAppDelegate].lm isCurrentUserConnectWithWeibo];
+    
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SearchViewController" bundle:nil];
 //    SearchAddViewController* svc = [storyboard instantiateViewControllerWithIdentifier:@"SearchAdd"];
     SearchAddController2* svc = [storyboard instantiateViewControllerWithIdentifier:@"SearchAdd2"];
@@ -125,14 +128,22 @@
     sd.actions = self;
     [[_actions getViewController] pushViewController:svc animated:NO];
     svc.delegate = sd;
-    
-    NSMutableArray* arr = [[NSMutableArray alloc] initWithCapacity:self.fm.recommandsdata.count];
-    for (RecommandTag* tag in self.fm.recommandsdata) {
-        [arr addObject:tag.tag_name];
+
+    NSMutableArray *localArr = [[NSMutableArray alloc] init];
+    for (LocalTag *localTag in [[AppDelegate defaultAppDelegate].localTagManager enumLocalTagWithType:1]) {
+        NSLog(@"%@ === %@", @"", localTag.tag_text);
+        [localArr addObject:localTag.tag_text];
     }
-    
-    [sd pushExistingData:[arr copy]];
+    [sd pushExistingData:[localArr copy]];
     return NO;
+    
+//    NSMutableArray* arr = [[NSMutableArray alloc] initWithCapacity:self.fm.recommandsdata.count];
+//    for (RecommandTag* tag in self.fm.recommandsdata) {
+//        [arr addObject:tag.tag_name];
+//    }
+//    
+//    [sd pushExistingData:[arr copy]];
+//    return NO;
 }
 
 #pragma mark -- SearchViewControllerProtocol

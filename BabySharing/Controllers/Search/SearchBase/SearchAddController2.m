@@ -9,7 +9,6 @@
 #import "SearchAddController2.h"
 #import "DongDaSearchBar2.h"
 #import "AppDelegate.h"
-#import "TagSearchModel.h"
 
 @interface SearchAddController2 ()
 
@@ -38,7 +37,6 @@
     
     _searchBar.showsCancelButton = YES;
     _searchBar.placeholder = @"搜索角色标签";
-    _searchBar.backgroundColor = [UIColor redColor];
     [_searchBar becomeFirstResponder];
     // 获取当前的用户id
     self.loginModel = [AppDelegate defaultAppDelegate].lm;

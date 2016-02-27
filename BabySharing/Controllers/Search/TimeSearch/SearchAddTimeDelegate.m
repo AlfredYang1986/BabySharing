@@ -84,6 +84,7 @@
     
     if (showing_data.count == 0) {
         [_actions addNewItem:[_delegate getUserInputString]];
+        [[AppDelegate defaultAppDelegate].localTagManager updateLocalTagWithType:TIME text:[_delegate getUserInputString]];
     } else {
         [_actions didSelectItem:[showing_data objectAtIndex:indexPath.row]];
     }
@@ -119,7 +120,6 @@
         line.frame = CGRectMake(10.5, 44 - 1, [UIScreen mainScreen].bounds.size.width - 10.5 * 2 + 8, 1);
         [cell.layer addSublayer:line];
     }
-    cell.contentView.backgroundColor = [UIColor redColor];
     return cell;
 }
 

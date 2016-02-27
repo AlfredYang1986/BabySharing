@@ -16,5 +16,7 @@
 @property (weak, nonatomic) id<SearchViewControllerProtocol> delegate;
 @property (weak, nonatomic) id<SearchActionsProtocol> actions;
 
+- (void)pushExistingData:(NSArray *)data localTag:(NSArray *)localTag;
 - (void)pushExistingData:(NSArray *)data;
+
 @end

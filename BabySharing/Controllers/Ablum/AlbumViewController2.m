@@ -16,6 +16,8 @@
 #import "SearchSegView2.h"
 #import "DropDownView.h"
 #import "DropDownItem.h"
+#import "PhotoCollectionViewCell.h"
+#import "AlbumTest.h"
 
 #define PHOTO_PER_LINE  3
 //#define FAKE_NAVIGATION_BAR_HEIGHT  49
@@ -31,11 +33,15 @@
     UIView* f_bar;
     UIView* bar;
     UITableView* albumView;
+    UICollectionView *albumCollectionView;
+    UICollectionViewFlowLayout *albumFlowLayout;
     
     CGFloat aspectRatio;
     
-    AlbumModule* am;
-    NSArray* images_arr;
+    AlbumModule* albumModule;
+//    NSArray<UIImage *> *images_arr;
+    NSArray *images_arr;
+    NSArray<PHAsset *> *phAssetArr;
     NSArray* album_name_arr;
     NSMutableArray * images_select_arr;
     BOOL isAllowMutiSelection;
@@ -49,7 +55,7 @@
     
     CGPoint point;
     CGFloat last_scale;
-    UIImage* img;
+    UIImage *img;
     NSURL* cur_movie_url;
     
     SearchSegView2 *seg;
@@ -187,6 +193,18 @@
     
     /***************************************************************************************/
     
+    albumFlowLayout = [[UICollectionViewFlowLayout alloc] init];
+    albumFlowLayout.itemSize = CGSizeMake(self.view.frame.size.width / 3, self.view.frame.size.width / 3);
+    albumFlowLayout.minimumInteritemSpacing = 0;
+    albumFlowLayout.minimumLineSpacing = 0;
+    [albumFlowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
+    albumCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, height, width, tab_bar_height_offset - height) collectionViewLayout:albumFlowLayout];
+    [albumCollectionView registerClass:[PhotoCollectionViewCell class] forCellWithReuseIdentifier:NSStringFromClass([PhotoCollectionViewCell class])];
+    albumCollectionView.delegate = self;
+    albumCollectionView.dataSource = self;
+#pragma mark 记得加上
+    
+    
     /***************************************************************************************/
     /**
      * bottom function area
@@ -208,7 +226,10 @@
     [self.view addSubview:seg];
     /***************************************************************************************/
     
-    am = [[AlbumModule alloc]init];
+    // 读取相册
+    albumModule = [[AlbumModule alloc] init];
+    albumModule.VC = self;
+    
     if (_type == AlbumControllerTypePhoto) {
         [self enumAllAssetWithProprty:ALAssetTypePhoto];
     } else if (_type == AlbumControllerTypeMovie) {
@@ -299,7 +320,56 @@
     [tab_bar addSubview:btn];   
 }
 
-- (void)changeMainContentWithAsset:(ALAsset*)asset {
+- (void)changeMainContentWithPHAsset:(PHAsset *)asset {
+    if (asset.mediaType == PHAssetMediaTypeImage) {
+        if (mainContentPhotoLayer == nil) {
+            mainContentPhotoLayer = [CALayer layer];
+        }
+        
+        [AlbumModule getRealPhotoWithPHAsset:asset block:^(UIImage *liveImage) {
+            img = liveImage;
+            [mainContentPhotoLayer removeFromSuperlayer];
+            last_scale = MAX(mainContentView.frame.size.width /  img.size.width, mainContentView.frame.size.height / img.size.height);
+            mainContentPhotoLayer.frame = CGRectMake(0, 0, img.size.width * last_scale, img.size.height * last_scale);
+            mainContentPhotoLayer.contents = (id)liveImage.CGImage;
+            
+            
+            [mainContentView.layer addSublayer:mainContentPhotoLayer];
+        }];
+        
+
+        
+    } else if (asset.mediaType == PHAssetMediaTypeVideo) {
+        
+        if (![mainContentView.layer.sublayers containsObject:avPlayerLayer]) {
+            avPlayerLayer.frame = mainContentView.bounds;
+            avPlayerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+            [mainContentView.layer addSublayer:avPlayerLayer];
+        }
+        
+        [player.currentItem removeObserver:self forKeyPath:@"status"];
+        
+        PHVideoRequestOptions *option = [[PHVideoRequestOptions alloc] init];
+        [[PHImageManager defaultManager] requestAVAssetForVideo:asset options:option resultHandler:^(AVAsset * _Nullable asset, AVAudioMix * _Nullable audioMix, NSDictionary * _Nullable info) {
+
+            if ([asset isKindOfClass:[AVURLAsset class]]) {
+                
+            }
+            AVURLAsset *aaa = (AVURLAsset *)asset;
+            cur_movie_url =  aaa.URL;
+            AVPlayerItem* tmp = [AVPlayerItem playerItemWithAsset:asset];
+            [tmp addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];// 监听status属性
+            [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(moviePlayDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:tmp];
+            [player replaceCurrentItemWithPlayerItem:tmp];
+            
+            player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
+        }];
+    } else {
+        
+    }
+}
+
+- (void)changeMainContentWithAsset:(ALAsset *)asset {
     NSString* cur_type = [asset valueForProperty:ALAssetPropertyType];
     if ([cur_type isEqualToString:ALAssetTypePhoto]) {
         if (mainContentPhotoLayer == nil) {
@@ -328,19 +398,13 @@
         cur_movie_url = asset.defaultRepresentation.url;
         AVPlayerItem* tmp = [AVPlayerItem playerItemWithURL:asset.defaultRepresentation.url];
         [tmp addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];// 监听status属性
-//        [tmp addObserver:self forKeyPath:@"loadedTimeRanges" options:NSKeyValueObservingOptionNew context:nil];// 监听loadedTimeRanges属性
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(moviePlayDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:tmp];
         [player replaceCurrentItemWithPlayerItem:tmp];
         
         player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
-//        [player seekToTime:kCMTimeZero completionHandler:^(BOOL finished) {
-//            [player play];
-//        }];
-//        
     } else {
-        // error asset type
+
     }
-    
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -348,18 +412,9 @@
         AVPlayerItem* playerItem = player.currentItem;
         if (playerItem.status == AVPlayerStatusReadyToPlay) {
             NSLog(@"AVPlayerStatusReadyToPlay");
-//            CMTime duration = self.playerItem.duration;// 获取视频总长度
-//            CGFloat totalSecond = playerItem.duration.value / playerItem.duration.timescale;// 转换成秒
-//            _totalTime = [self convertTime:totalSecond];// 转换成播放时间
-//            [self customVideoSlider:duration];// 自定义UISlider外观
-//            NSLog(@"movie total duration:%f",CMTimeGetSeconds(duration));
-//            [self monitoringPlayback:self.playerItem];// 监听播放状态
-
             [player seekToTime:kCMTimeZero completionHandler:^(BOOL finished) {
                 [player play];
             }];
-            
-            
         } else if (playerItem.status == AVPlayerStatusFailed) {
             NSLog(@"AVPlayerStatusFailed");
         }
@@ -377,16 +432,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 #pragma mark -- button actions
 - (void)didPopControllerSelected {
@@ -505,7 +550,7 @@
     cell.grid_border_color = [UIColor colorWithWhite:0.1806 alpha:1.f];
     
     if (cell == nil) {
-        cell = [[AlbumTableCell alloc]init];
+        cell = [[AlbumTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"AlbumTableViewCell"];
     }
     
     cell.delegate = self;
@@ -514,14 +559,12 @@
         NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(row * PHOTO_PER_LINE, PHOTO_PER_LINE)];
         NSArray* arr_content = [images_arr objectsAtIndexes:indexSet];     // there is a bug
         [cell setUpContentViewWithImageURLs2:arr_content atLine:row andType:_type];
-    }
-    @catch (NSException *exception) {
+    } @catch (NSException *exception) {
         NSArray* arr_content = [images_arr objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(row * PHOTO_PER_LINE, images_arr.count - row * PHOTO_PER_LINE)]];     // there is a bug
         [cell setUpContentViewWithImageURLs2:arr_content atLine:row andType:_type];
     }
     
     row == 0 ? [cell selectedAtIndex:0] : nil;
-    
     return cell;
 }
 
@@ -531,28 +574,52 @@
 }
 
 #pragma mark -- photo ablum access
+// 获取所有照片
 - (void)enumAllAssetWithProprty:(NSString*)type {
     bLoadData = NO;
-    [am enumAllAssetWithProprty:type finishBlock:^(NSArray *result) {
+//    [AlbumTest enumAllPhotoWithBlock:^(NSArray *result) {
+//        
+//        NSLog(@"%@ === %@", @"description", result);
+//    }];
+    
+    [AlbumModule enumAllPhotoWithBlock:^(NSArray *thumbnailImage, NSArray<PHAsset *> *phAsset) {
+        
+        NSLog(@"%@ === %@", thumbnailImage, phAsset);
+    
         bLoadData = YES;
-        images_arr = result;
+        images_arr = thumbnailImage;
+        phAssetArr = phAsset;
         [images_select_arr removeAllObjects];
         [albumView reloadData];
-        
-        [self changeMainContentWithAsset:images_arr.firstObject];
+        [self changeMainContentWithPHAsset:[phAsset firstObject]];
     }];
+    
+    
+//    bLoadData = NO;
+//    [albumModule enumAllAssetWithProprty:type finishBlock:^(NSArray *result) {
+//        bLoadData = YES;
+//        images_arr = result;
+//        [images_select_arr removeAllObjects];
+//        [albumView reloadData];
+//        [self changeMainContentWithAsset:images_arr.firstObject];
+//    }];
 }
 
+// 获取所有相册名称
 - (void)enumPhoteAlumName {
-    [am enumPhoteAlumNameWithBlock:^(NSArray *result) {
+    
+//    [AlbumModule enumAllAlbumWithBlock:^(NSArray *result) {
+//        album_name_arr = result;
+//    }];
+    [albumModule enumPhoteAlumNameWithBlock:^(NSArray *result) {
         album_name_arr = result;
     }];
-    // [self enumAllAssetWithProprty:ALAssetTypePhoto];
 }
 
+// 获取所有照片从相册
 - (void)enumPhotoAblumByAlbumName:(ALAssetsGroup*)group {
     bLoadData = NO;
-    [am enumPhotoAblumByAlbumName:group finishBlock:^(NSArray *result) {
+    [albumModule enumPhotoAblumByAlbumName:group finishBlock:^(NSArray *result) {
         bLoadData = YES;
         images_arr = result;
         [images_select_arr removeAllObjects];
@@ -560,8 +627,8 @@
     }];
 }
 
-#pragma mark -- PostTableCellDelegate
 
+#pragma mark -- PostTableCellDelegate --点击选择中的图片方法
 - (void)didSelectOneImageAtIndex:(NSInteger)index {
     NSLog(@"select index %ld", (long)index);
     
@@ -572,8 +639,10 @@
             [self didUnSelectOneImageAtIndex:index.integerValue];
         }
     }
+    
     [images_select_arr addObject:[NSNumber numberWithInteger:index]];
-    [self changeMainContentWithAsset:[images_arr objectAtIndex:index]];
+    [self changeMainContentWithPHAsset:[phAssetArr objectAtIndex:index]];
+//    [self changeMainContentWithAsset:[images_arr objectAtIndex:index]];
 }
 
 - (void)didUnSelectOneImageAtIndex:(NSInteger)index {
@@ -776,51 +845,27 @@
 - (UITableViewCell*)cellForRow:(NSInteger)row inTableView:(UITableView*)tableview {
     DropDownItem* cell = [tableview dequeueReusableCellWithIdentifier:@"drop item"];
     
-//    if (cell == nil) {
-//        cell = [[DropDownItem alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"drop item"];
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//    }
-    
-//    if (row != 0) {
-//        ALAssetsGroup* group = [album_name_arr objectAtIndex:row - 1];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    ALAssetsGroup* group = [album_name_arr objectAtIndex:row];
-//        NSString* album_name = [group valueForProperty:ALAssetsGroupPropertyName];
-//        cell.textLabel.text = album_name;
-    cell.group = group;
-//    }
+//    ALAssetsGroup *group = [album_name_arr objectAtIndex:row];
+//    cell.group = group;
+    cell.fetchResult = [album_name_arr objectAtIndex:row];
     
     return cell;
 }
 
-#pragma mark -- DropDownDelegate
+#pragma mark -- DropDownDelegate --得到相册
 - (void)didSelectCell:(UITableViewCell *)cell {
     DropDownItem *tmp = (DropDownItem *)cell;
     [self enumPhotoAblumByAlbumName:tmp.group];
-//    [dp removeTableView];
 }
 
 - (void)showContentsTableView:(UITableView*)tableview {
-//    NSInteger width = self.view.frame.size.width;
-//    NSInteger height = self.view.frame.size.height / 2;
     tableview.frame = CGRectMake(0, FAKE_NAVIGATION_BAR_HEIGHT, tableview.bounds.size.width, tableview.bounds.size.height);
-//    tableview.center = self.view.center;
-    
     [self.view addSubview:tableview];
     [self.view bringSubviewToFront:bar];
-    
-//    tableview.userInteractionEnabled = NO;
-//     animation
-//    sleep(1);
-//    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-//        tableview.frame = CGRectMake(0, FAKE_NAVIGATION_BAR_HEIGHT, tableview.bounds.size.width, tableview.bounds.size.height);
-//    } completion:^(BOOL finished) {
-//        tableview.userInteractionEnabled = YES;
-//    }];
 }
 
 - (NSString*)titleForCellAtRow:(NSInteger)row inTableView:(UITableView*)tableview {
-//    ALAssetsGroup* group = [album_name_arr objectAtIndex:row - 1];
     ALAssetsGroup* group = [album_name_arr objectAtIndex:row];
     return [group valueForProperty:ALAssetsGroupPropertyName];
 }
@@ -837,4 +882,5 @@
     
     offset_origin_y = offset_now_y;
 }
+
 @end

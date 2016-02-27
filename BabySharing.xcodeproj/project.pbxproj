@@ -65,17 +65,21 @@
 		70EF02D21C22CE7A00DABCFC /* PostPublichViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EF02D11C22CE7A00DABCFC /* PostPublichViewController.m */; };
 		70F5014B1C23ADC2007769F4 /* PostPreview.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70F5014A1C23ADC2007769F4 /* PostPreview.storyboard */; };
 		A08AE9541C7E9C1A0029B660 /* libiconv.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A08AE9531C7E9C1A0029B660 /* libiconv.2.dylib */; };
+		A09DF94E1C80440C00484FAB /* AlbumCollectionViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A09DF94D1C80440C00484FAB /* AlbumCollectionViewDelegate.m */; };
+		A09DF9511C8044C500484FAB /* PhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A09DF9501C8044C500484FAB /* PhotoCollectionViewCell.m */; };
 		A0A5C52F1C7DAD0500F07FE8 /* libgotyeapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A5C52E1C7DAD0500F07FE8 /* libgotyeapi.a */; };
 		A0A5C53E1C7DB1DF00F07FE8 /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A5C5311C7DB1DF00F07FE8 /* libWeiboSDK.a */; };
 		A0A5C53F1C7DB1DF00F07FE8 /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A0A5C53B1C7DB1DF00F07FE8 /* WeiboSDK.bundle */; };
-		A0B7A7241C7AE42B00D78E6E /* TagSearchModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A0B7A7221C7AE42B00D78E6E /* TagSearchModel.xcdatamodeld */; };
-		A0B7A7571C7B0FDD00D78E6E /* TagSearchModelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B7A7561C7B0FDD00D78E6E /* TagSearchModelManager.m */; };
-		A0B7A75D1C7BF20B00D78E6E /* TagSearchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B7A75B1C7BF20B00D78E6E /* TagSearchModel.m */; };
+		A0A90B2B1C81CA910022E79D /* AlbumTest.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A90B2A1C81CA910022E79D /* AlbumTest.m */; };
 		A0B7A7611C7C0B9100D78E6E /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B7A7601C7C0B9100D78E6E /* Tools.m */; };
 		A0B7A7631C7C23CC00D78E6E /* YYBoundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A0B7A7621C7C23CC00D78E6E /* YYBoundle.bundle */; };
 		A0B7A7661C7C563400D78E6E /* PersonInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B7A7651C7C563400D78E6E /* PersonInfoCell.m */; };
 		A0B7A7691C7C5B0F00D78E6E /* RoleLable.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B7A7681C7C5B0F00D78E6E /* RoleLable.m */; };
 		A0B7A76B1C7D505B00D78E6E /* DongDaBoundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A0B7A76A1C7D505B00D78E6E /* DongDaBoundle.bundle */; };
+		A0C4D8221C81FC7900F55B20 /* LocalTag+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A0C4D81D1C81FC7900F55B20 /* LocalTag+CoreDataProperties.m */; };
+		A0C4D8231C81FC7900F55B20 /* LocalTag.m in Sources */ = {isa = PBXBuildFile; fileRef = A0C4D81F1C81FC7900F55B20 /* LocalTag.m */; };
+		A0C4D8241C81FC7900F55B20 /* LocalTagModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A0C4D8201C81FC7900F55B20 /* LocalTagModel.xcdatamodeld */; };
+		A0C4D8271C8208D400F55B20 /* LocalTagManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A0C4D8261C8208D400F55B20 /* LocalTagManager.m */; };
 		A0E5126A1C7EDEDB00A7E947 /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A0E512681C7EDEDB00A7E947 /* TencentOpenApi_IOS_Bundle.bundle */; };
 		A0E5126B1C7EDEDB00A7E947 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0E512691C7EDEDB00A7E947 /* TencentOpenAPI.framework */; };
 		A0F2B3D81C7EFEF20090EF32 /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0F2B3D71C7EFEF20090EF32 /* libGPUImage.a */; };
@@ -470,6 +474,10 @@
 		70EF02D11C22CE7A00DABCFC /* PostPublichViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostPublichViewController.m; sourceTree = "<group>"; };
 		70F5014A1C23ADC2007769F4 /* PostPreview.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PostPreview.storyboard; sourceTree = "<group>"; };
 		A08AE9531C7E9C1A0029B660 /* libiconv.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.2.dylib; path = /usr/lib/libiconv.2.dylib; sourceTree = "<absolute>"; };
+		A09DF94C1C80440C00484FAB /* AlbumCollectionViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumCollectionViewDelegate.h; sourceTree = "<group>"; };
+		A09DF94D1C80440C00484FAB /* AlbumCollectionViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumCollectionViewDelegate.m; sourceTree = "<group>"; };
+		A09DF94F1C8044C500484FAB /* PhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCollectionViewCell.h; sourceTree = "<group>"; };
+		A09DF9501C8044C500484FAB /* PhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCollectionViewCell.m; sourceTree = "<group>"; };
 		A0A5C52E1C7DAD0500F07FE8 /* libgotyeapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libgotyeapi.a; sourceTree = "<group>"; };
 		A0A5C5311C7DB1DF00F07FE8 /* libWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeiboSDK.a; sourceTree = "<group>"; };
 		A0A5C5321C7DB1DF00F07FE8 /* WBHttpRequest+WeiboGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboGame.h"; sourceTree = "<group>"; };
@@ -484,11 +492,8 @@
 		A0A5C53B1C7DB1DF00F07FE8 /* WeiboSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WeiboSDK.bundle; sourceTree = "<group>"; };
 		A0A5C53C1C7DB1DF00F07FE8 /* WeiboSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboSDK.h; sourceTree = "<group>"; };
 		A0A5C53D1C7DB1DF00F07FE8 /* WeiboUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboUser.h; sourceTree = "<group>"; };
-		A0B7A7231C7AE42B00D78E6E /* TagSearchModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TagSearchModel.xcdatamodel; sourceTree = "<group>"; };
-		A0B7A7551C7B0FDD00D78E6E /* TagSearchModelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagSearchModelManager.h; sourceTree = "<group>"; };
-		A0B7A7561C7B0FDD00D78E6E /* TagSearchModelManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagSearchModelManager.m; sourceTree = "<group>"; };
-		A0B7A75A1C7BF20B00D78E6E /* TagSearchModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagSearchModel.h; sourceTree = "<group>"; };
-		A0B7A75B1C7BF20B00D78E6E /* TagSearchModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagSearchModel.m; sourceTree = "<group>"; };
+		A0A90B291C81CA910022E79D /* AlbumTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumTest.h; sourceTree = "<group>"; };
+		A0A90B2A1C81CA910022E79D /* AlbumTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumTest.m; sourceTree = "<group>"; };
 		A0B7A75F1C7C0B9100D78E6E /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
 		A0B7A7601C7C0B9100D78E6E /* Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
 		A0B7A7621C7C23CC00D78E6E /* YYBoundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = YYBoundle.bundle; sourceTree = "<group>"; };
@@ -497,6 +502,13 @@
 		A0B7A7671C7C5B0F00D78E6E /* RoleLable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoleLable.h; sourceTree = "<group>"; };
 		A0B7A7681C7C5B0F00D78E6E /* RoleLable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoleLable.m; sourceTree = "<group>"; };
 		A0B7A76A1C7D505B00D78E6E /* DongDaBoundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DongDaBoundle.bundle; sourceTree = "<group>"; };
+		A0C4D81C1C81FC7900F55B20 /* LocalTag+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LocalTag+CoreDataProperties.h"; sourceTree = "<group>"; };
+		A0C4D81D1C81FC7900F55B20 /* LocalTag+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "LocalTag+CoreDataProperties.m"; sourceTree = "<group>"; };
+		A0C4D81E1C81FC7900F55B20 /* LocalTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalTag.h; sourceTree = "<group>"; };
+		A0C4D81F1C81FC7900F55B20 /* LocalTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalTag.m; sourceTree = "<group>"; };
+		A0C4D8211C81FC7900F55B20 /* LocalTagModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LocalTagModel.xcdatamodel; sourceTree = "<group>"; };
+		A0C4D8251C8208D400F55B20 /* LocalTagManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalTagManager.h; sourceTree = "<group>"; };
+		A0C4D8261C8208D400F55B20 /* LocalTagManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalTagManager.m; sourceTree = "<group>"; };
 		A0E512681C7EDEDB00A7E947 /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
 		A0E512691C7EDEDB00A7E947 /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
 		A0F2B3D71C7EFEF20090EF32 /* libGPUImage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGPUImage.a; sourceTree = "<group>"; };
@@ -1243,18 +1255,6 @@
 			path = libWeiboSDK;
 			sourceTree = "<group>";
 		};
-		A0B7A7211C7AE40500D78E6E /* TagSearchModel */ = {
-			isa = PBXGroup;
-			children = (
-				A0B7A7221C7AE42B00D78E6E /* TagSearchModel.xcdatamodeld */,
-				A0B7A7551C7B0FDD00D78E6E /* TagSearchModelManager.h */,
-				A0B7A7561C7B0FDD00D78E6E /* TagSearchModelManager.m */,
-				A0B7A75A1C7BF20B00D78E6E /* TagSearchModel.h */,
-				A0B7A75B1C7BF20B00D78E6E /* TagSearchModel.m */,
-			);
-			path = TagSearchModel;
-			sourceTree = "<group>";
-		};
 		A0B7A75E1C7C0B8300D78E6E /* Tools */ = {
 			isa = PBXGroup;
 			children = (
@@ -1264,11 +1264,27 @@
 			path = Tools;
 			sourceTree = "<group>";
 		};
+		A0C4D81B1C81FC7900F55B20 /* TagSearchModel */ = {
+			isa = PBXGroup;
+			children = (
+				A0C4D81C1C81FC7900F55B20 /* LocalTag+CoreDataProperties.h */,
+				A0C4D81D1C81FC7900F55B20 /* LocalTag+CoreDataProperties.m */,
+				A0C4D81E1C81FC7900F55B20 /* LocalTag.h */,
+				A0C4D81F1C81FC7900F55B20 /* LocalTag.m */,
+				A0C4D8251C8208D400F55B20 /* LocalTagManager.h */,
+				A0C4D8261C8208D400F55B20 /* LocalTagManager.m */,
+				A0C4D8201C81FC7900F55B20 /* LocalTagModel.xcdatamodeld */,
+			);
+			path = TagSearchModel;
+			sourceTree = "<group>";
+		};
 		EE03E9801B4FABDC00F21EF5 /* Album */ = {
 			isa = PBXGroup;
 			children = (
 				EE03E9811B4FABFB00F21EF5 /* AlbumModule.h */,
 				EE03E9821B4FABFB00F21EF5 /* AlbumModule.m */,
+				A0A90B291C81CA910022E79D /* AlbumTest.h */,
+				A0A90B2A1C81CA910022E79D /* AlbumTest.m */,
 			);
 			path = Album;
 			sourceTree = "<group>";
@@ -1331,6 +1347,9 @@
 		EE26D75F1C1EB88E00342E02 /* LocalModel */ = {
 			isa = PBXGroup;
 			children = (
+				EE26D7601C1EB8AA00342E02 /* FoundSearchData.xcdatamodeld */,
+				706D7A271C757446006750AC /* RecommandRoleTag+ContextOpt.h */,
+				706D7A281C757446006750AC /* RecommandRoleTag+ContextOpt.m */,
 				706D7A1E1C757379006750AC /* RecommandRoleTag+CoreDataProperties.h */,
 				706D7A1F1C757379006750AC /* RecommandRoleTag+CoreDataProperties.m */,
 				706D7A201C757379006750AC /* RecommandRoleTag.h */,
@@ -1339,10 +1358,6 @@
 				EE26D7641C1EBA2700342E02 /* PreviewItem+CoreDataProperties.m */,
 				EE26D7651C1EBA2700342E02 /* PreviewItem.h */,
 				EE26D7661C1EBA2700342E02 /* PreviewItem.m */,
-				EE26D7671C1EBA2700342E02 /* RecommandTag+CoreDataProperties.h */,
-				EE26D7681C1EBA2700342E02 /* RecommandTag+CoreDataProperties.m */,
-				EE26D7691C1EBA2700342E02 /* RecommandTag.h */,
-				EE26D76A1C1EBA2700342E02 /* RecommandTag.m */,
 				EE26D76B1C1EBA2700342E02 /* PreviewTag+CoreDataProperties.h */,
 				EE26D76C1C1EBA2700342E02 /* PreviewTag+CoreDataProperties.m */,
 				EE26D76D1C1EBA2700342E02 /* PreviewTag.h */,
@@ -1351,11 +1366,12 @@
 				EE26D7701C1EBA2700342E02 /* PreviewContent+CoreDataProperties.m */,
 				EE26D7711C1EBA2700342E02 /* PreviewContent.h */,
 				EE26D7721C1EBA2700342E02 /* PreviewContent.m */,
-				EE26D7601C1EB8AA00342E02 /* FoundSearchData.xcdatamodeld */,
 				EE26D77B1C1EBB5600342E02 /* RecommandTag+ContextOpt.h */,
 				EE26D77C1C1EBB5600342E02 /* RecommandTag+ContextOpt.m */,
-				706D7A271C757446006750AC /* RecommandRoleTag+ContextOpt.h */,
-				706D7A281C757446006750AC /* RecommandRoleTag+ContextOpt.m */,
+				EE26D7671C1EBA2700342E02 /* RecommandTag+CoreDataProperties.h */,
+				EE26D7681C1EBA2700342E02 /* RecommandTag+CoreDataProperties.m */,
+				EE26D7691C1EBA2700342E02 /* RecommandTag.h */,
+				EE26D76A1C1EBA2700342E02 /* RecommandTag.m */,
 			);
 			path = LocalModel;
 			sourceTree = "<group>";
@@ -1818,6 +1834,10 @@
 			children = (
 				EE5C7E4D1B511CC000104CAB /* AlbumViewController2.h */,
 				EE5C7E4E1B511CC000104CAB /* AlbumViewController2.m */,
+				A09DF94C1C80440C00484FAB /* AlbumCollectionViewDelegate.h */,
+				A09DF94D1C80440C00484FAB /* AlbumCollectionViewDelegate.m */,
+				A09DF94F1C8044C500484FAB /* PhotoCollectionViewCell.h */,
+				A09DF9501C8044C500484FAB /* PhotoCollectionViewCell.m */,
 			);
 			path = Ablum;
 			sourceTree = "<group>";
@@ -1968,7 +1988,7 @@
 		EEAACB641B44E90300D05C0B /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				A0B7A7211C7AE40500D78E6E /* TagSearchModel */,
+				A0C4D81B1C81FC7900F55B20 /* TagSearchModel */,
 				EEE031111C1FBA8300F4D40A /* UserSearch */,
 				EE26D75E1C1EB82200342E02 /* FoundSearch */,
 				EEDCF6841B9AB3C6005F4F4D /* SystemSetteing */,
@@ -3040,6 +3060,7 @@
 				EE7910531B841C5B005E455B /* AreaTableCell.m in Sources */,
 				EE7910511B841C40005E455B /* MyCycleCellHeader.m in Sources */,
 				EE7910501B841BF1005E455B /* TagsRowCell.m in Sources */,
+				A0C4D8271C8208D400F55B20 /* LocalTagManager.m in Sources */,
 				EE79104F1B841BC3005E455B /* LoginInputView.m in Sources */,
 				EE79104D1B841B69005E455B /* ProfileDetailChatGroupCell.m in Sources */,
 				EE79104B1B841B38005E455B /* MessageNotificationDetailCell.m in Sources */,
@@ -3060,6 +3081,7 @@
 				EE76398D1B95805F0025A56D /* CollectionQueryModel.m in Sources */,
 				EE7910631B847DBA005E455B /* ChatGroupController.m in Sources */,
 				70E06F771C4F799E00B740CD /* SearchBrandsDelegate.m in Sources */,
+				A0A90B2B1C81CA910022E79D /* AlbumTest.m in Sources */,
 				EEFCDEED1BCB93A400A53CAB /* ChatMessageCell.m in Sources */,
 				EE7910401B841A33005E455B /* DropDownItem.m in Sources */,
 				EE7C68711B82D2D20003C593 /* CycleOverCell.m in Sources */,
@@ -3072,12 +3094,12 @@
 				EEE94E0B1B74A8C20011321A /* MessageViewController.m in Sources */,
 				EEB3DDD01B7B0505003750A2 /* DropDownMenu.m in Sources */,
 				70E06F7A1C4F79B100B740CD /* SearchAddBrandsDelegate.m in Sources */,
-				A0B7A75D1C7BF20B00D78E6E /* TagSearchModel.m in Sources */,
 				EE981F861B5A10400029723A /* LoginToken.m in Sources */,
 				EEAACC9A1B44E90400D05C0B /* AppDelegate.m in Sources */,
 				EE262C991C1958F8008DCC4E /* DONNotificationDelegate.m in Sources */,
 				EEAACCE21B44E90400D05C0B /* QueryContent+ContextOpt.m in Sources */,
 				EEAACCCC1B44E90400D05C0B /* INTUSpringSolver.c in Sources */,
+				A0C4D8221C81FC7900F55B20 /* LocalTag+CoreDataProperties.m in Sources */,
 				EE26D7801C1EC70F00342E02 /* FoundSearchModel.m in Sources */,
 				EE0CEC551BDB13070016B6F4 /* ChooseAreaViewController.m in Sources */,
 				EEDCF6A31B9ABE07005F4F4D /* SystemSettingModel.m in Sources */,
@@ -3131,7 +3153,6 @@
 				70C75B5B1C50B5E000E7587A /* DongDaSearchBar2.m in Sources */,
 				EEAACCEB1B44E90400D05C0B /* TmpFileStorageModel.m in Sources */,
 				EEBE1B811C17CB4E00EAA9D2 /* FoundMoreFriendCell.m in Sources */,
-				A0B7A7571C7B0FDD00D78E6E /* TagSearchModelManager.m in Sources */,
 				EE90C9871BFC1C68002D5D1D /* MainHomeViewDataDelegate.m in Sources */,
 				EEBE1B881C17CB4E00EAA9D2 /* FoundSearchResultCell.m in Sources */,
 				EE5D687B1B75B12B0067A2DF /* NotificationOwner+ContextOpt.m in Sources */,
@@ -3149,6 +3170,7 @@
 				EE0CEC581BDB13070016B6F4 /* UserPrivacyController.m in Sources */,
 				EEAACD201B44E90400D05C0B /* SGAlertMenu.m in Sources */,
 				EEAACCCA1B44E90400D05C0B /* INTUEasingFunctions.m in Sources */,
+				A09DF9511C8044C500484FAB /* PhotoCollectionViewCell.m in Sources */,
 				EE664E9A1B73145000ACD57E /* QueryContent.m in Sources */,
 				EEB4C8BE1BFC823C0023E2AD /* QueryCell.m in Sources */,
 				EEBE1B951C17D42B00EAA9D2 /* UserSearchCell.m in Sources */,
@@ -3188,10 +3210,12 @@
 				EEAAC8FE1B44E81A00D05C0B /* main.m in Sources */,
 				EEAACCC71B44E90400D05C0B /* WebSearchController.m in Sources */,
 				EEAACCEA1B44E90400D05C0B /* TagQueryModel.m in Sources */,
+				A09DF94E1C80440C00484FAB /* AlbumCollectionViewDelegate.m in Sources */,
 				EEF29BC31C0ED2C2004B9511 /* ContentCardView.m in Sources */,
 				EE9633D01B92CA8200DB4EA5 /* NewMessageSettingController.mm in Sources */,
 				EEAACCE61B44E90400D05C0B /* QueryLikes.m in Sources */,
 				EE26D7741C1EBA2700342E02 /* PreviewItem.m in Sources */,
+				A0C4D8241C81FC7900F55B20 /* LocalTagModel.xcdatamodeld in Sources */,
 				EEE94E0C1B74A8C20011321A /* MesssageTableDelegate.m in Sources */,
 				EEE94E311B74BF870011321A /* ProfileOverView.m in Sources */,
 				70D15B501C5B64C9007AC9AB /* MJRefreshStateHeader.m in Sources */,
@@ -3260,8 +3284,8 @@
 				EE03E9831B4FABFB00F21EF5 /* AlbumModule.m in Sources */,
 				EE26D77D1C1EBB5600342E02 /* RecommandTag+ContextOpt.m in Sources */,
 				EEBE1B701C17CA9400EAA9D2 /* DongDaTabBarItem.m in Sources */,
+				A0C4D8231C81FC7900F55B20 /* LocalTag.m in Sources */,
 				70530B141C3F9D1E00505121 /* SearchSegItem.m in Sources */,
-				A0B7A7241C7AE42B00D78E6E /* TagSearchModel.xcdatamodeld in Sources */,
 				EE817F491B79A78E00988734 /* UserChatController.m in Sources */,
 				EE76A5791B7205CF00036747 /* ConnectionOwner+ContextOpt.m in Sources */,
 				EEE94E271B74BE3B0011321A /* ProfileSettingController.mm in Sources */,
@@ -3427,7 +3451,7 @@
 					"$(PROJECT_DIR)/libQQSDK/TencentOpenAPI.framework/Headers",
 				);
 				INFOPLIST_FILE = BabySharing/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3467,7 +3491,7 @@
 					"$(PROJECT_DIR)/libQQSDK/TencentOpenAPI.framework/Headers",
 				);
 				INFOPLIST_FILE = BabySharing/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3555,13 +3579,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		A0B7A7221C7AE42B00D78E6E /* TagSearchModel.xcdatamodeld */ = {
+		A0C4D8201C81FC7900F55B20 /* LocalTagModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				A0B7A7231C7AE42B00D78E6E /* TagSearchModel.xcdatamodel */,
+				A0C4D8211C81FC7900F55B20 /* LocalTagModel.xcdatamodel */,
 			);
-			currentVersion = A0B7A7231C7AE42B00D78E6E /* TagSearchModel.xcdatamodel */;
-			path = TagSearchModel.xcdatamodeld;
+			currentVersion = A0C4D8211C81FC7900F55B20 /* LocalTagModel.xcdatamodel */;
+			path = LocalTagModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

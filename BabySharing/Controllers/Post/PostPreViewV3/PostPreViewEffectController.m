@@ -86,7 +86,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-//    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f]];
     
     self.view.backgroundColor = [UIColor darkGrayColor];
     
@@ -511,7 +510,7 @@
         [tags removeObjectForKey:[NSNumber numberWithInteger:type]];
     }
     
-    PhotoTagView *tmp = [[PhotoTagView alloc]initWithTagName:tag andType:type];
+    PhotoTagView *tmp = [[PhotoTagView alloc] initWithTagName:tag andType:type];
     CGFloat width = mainContentView.frame.size.width;
     CGFloat height = mainContentView.frame.size.height;
     CGPoint point_tmp;
@@ -878,7 +877,6 @@
     cur_long_press = nil;
     edit.hidden = YES;
 }
-
 #pragma mark -- tap to main image
 - (void)mainViewHandleTap:(UIGestureRecognizer*)tap {
     if (f_bar.selectedIndex == 0 && _type == PostPreViewPhote) {

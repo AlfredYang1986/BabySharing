@@ -15,4 +15,5 @@
 + (void)upDateRecommandTags:(NSArray*)tags_arr inContext:(NSManagedObjectContext*)context;
 + (NSArray*)enumRecommandTagsInContext:(NSManagedObjectContext*)context;
 + (void)removeAllRecommandTagsInContext:(NSManagedObjectContext*)context;
+
 @end

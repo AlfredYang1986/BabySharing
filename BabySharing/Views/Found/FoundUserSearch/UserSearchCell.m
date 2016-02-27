@@ -243,23 +243,10 @@
 }
 
 - (void)didSelectOneImageAtIndex:(NSInteger)index {
-//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    HomeViewController* hv = [storyboard instantiateViewControllerWithIdentifier:@"HomeView"];
-//    hv.isPushed = YES;
-//    hv.delegate = [[UserHomeViewDataDelegate alloc]init];
-//    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-//    [hv.delegate pushExistingData:app.qm.querydata];
-//    [hv.delegate setSelectIndex:index];
-//    hv.nav_title = @"辣妈的选择";
-//    //    hv.nav_title = @"Mother's Choice";
-//    [self.navigationController pushViewController:hv animated:YES];
-//    NSIndexPath* path = [[NSIndexPath alloc]initWithIndex:0];
-//    [queryView.delegate tableView:queryView didSelectRowAtIndexPath:path];
     [_delegate didSelectedUserContentImages:0 andUserID:_user_id andUserScreenName:_screen_name];
 }
 
 - (void)didUnSelectOneImageAtIndex:(NSInteger)index {
-    // do nothing
 }
 
 #pragma mark -- message friend cell delegate
@@ -268,6 +255,6 @@
 }
 
 - (void)didSelectedRelationBtn:(NSString *)user_id andCurrentRelation:(UserPostOwnerConnections)connections {
-//    [_delegate didSelectedUserContentImages:0 andUserID:user_id];
+
 }
 @end

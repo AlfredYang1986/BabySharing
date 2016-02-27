@@ -7,6 +7,7 @@
 //
 
 #import "RecommandTag+ContextOpt.h"
+#import "AppDelegate.h"
 
 @implementation RecommandTag(ContextOpt)
 

@@ -84,15 +84,17 @@
         if (index > image_arr.count)
             continue;
         
-        ALAsset* at = [image_arr objectAtIndex:index];
-//        UIImage* img = [UIImage imageWithCGImage:[at thumbnail]];
-        UIImage* img = [UIImage imageWithCGImage:[at aspectRatioThumbnail]];
+//        ALAsset* at = [image_arr objectAtIndex:index];
+//        UIImage* img = [UIImage imageWithCGImage:[at aspectRatioThumbnail]];
+        UIImage *img = [image_arr objectAtIndex:index];
+        
+        
         AlbumGridCell* tmp = [[AlbumGridCell alloc]initWithFrame:CGRectMake(index * step_width, 0, step_width, height)];
         tmp.grid_border_color = _grid_border_color;
-        if ([[at valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
-            NSNumber* duration = [at valueForProperty:ALAssetPropertyDuration];
-            [tmp setMovieDurationLayer:duration];
-        }
+//        if ([[at valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
+//            NSNumber* duration = [at valueForProperty:ALAssetPropertyDuration];
+//            [tmp setMovieDurationLayer:duration];
+//        }
         tmp.userInteractionEnabled = YES;
         
         UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageSubViewTaped:)];

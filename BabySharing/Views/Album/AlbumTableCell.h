@@ -30,10 +30,7 @@
 @end
 
 @interface AlbumTableCell : UITableViewCell {
-//    UIView* left_image_view;
-//    UIView* center_image_view;
-//    UIView* right_image_view;
-//    
+
     NSMutableArray* image_view;
     
     NSInteger views_count;

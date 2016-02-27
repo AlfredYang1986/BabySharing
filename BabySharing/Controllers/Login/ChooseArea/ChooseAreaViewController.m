@@ -17,8 +17,6 @@
 }
 @property (weak, nonatomic) IBOutlet UIButton *confirmBtn;
 @property (weak, nonatomic) IBOutlet UITextField *searchTextField;
-//@property (weak, nonatomic) IBOutlet UIImageView *searchIcon;
-//@property (weak, nonatomic) IBOutlet UISearchBar *areaSearchBar;
 @property (weak, nonatomic) IBOutlet UITableView *areaTableView;
 @property (weak, nonatomic) IBOutlet UIView *fakeBar;
 @property (weak, nonatomic) IBOutlet UIView *bgView;

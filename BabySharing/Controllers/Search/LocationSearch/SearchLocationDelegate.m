@@ -17,6 +17,7 @@
 #import "AppDelegate.h"
 #import "FoundSearchModel.h"
 #import "RecommandTag.h"
+#import "LocalTag.h"
 
 #import "HomeTagsController.h"
 
@@ -127,13 +128,20 @@
     sd.actions = self;
     [[_actions getViewController] pushViewController:svc animated:NO];
     svc.delegate = sd;
-    
-    NSMutableArray* arr = [[NSMutableArray alloc]initWithCapacity:self.fm.recommandsdata.count];
-    for (RecommandTag* tag in self.fm.recommandsdata) {
-        [arr addObject:tag.tag_name];
+//    
+//    NSMutableArray* arr = [[NSMutableArray alloc]initWithCapacity:self.fm.recommandsdata.count];
+//    for (RecommandTag* tag in self.fm.recommandsdata) {
+//        [arr addObject:tag.tag_name];
+//    }
+//    
+//    [sd pushExistingData:[arr copy]];
+    // 本地数据库
+    NSMutableArray *localArr = [[NSMutableArray alloc] init];
+    for (LocalTag *localTag in [[AppDelegate defaultAppDelegate].localTagManager enumLocalTagWithType:0]) {
+        NSLog(@"%@ === %@", @"", localTag.tag_text);
+        [localArr addObject:localTag.tag_text];
     }
-    
-    [sd pushExistingData:[arr copy]];
+    [sd pushExistingData:[localArr copy]];
     return NO;
 }
 
