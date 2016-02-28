@@ -245,6 +245,7 @@
 //        CFIndex count = ABMultiValueGetCount(phones);
         for (int index = 0; index < phones.count; ++index) {
             NSString* phoneNo = [phones objectAtIndex:index].value.stringValue; //CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, index));
+            phoneNo = [phoneNo stringByReplacingOccurrencesOfString:@" " withString:@""];
             phoneNo = [phoneNo stringByReplacingOccurrencesOfString:@"-" withString:@""];
             [arr addObject:phoneNo];
         }
@@ -258,6 +259,7 @@
         NSArray<CNLabeledValue<CNPhoneNumber*>*>* phones = tmpPerson.phoneNumbers; //ABRecordCopyValue(CFBridgingRetain(tmpPerson), kABPersonPhoneProperty);
         for (int index = 0; index < phones.count; ++index) {
             NSString* phoneNo = [phones objectAtIndex:index].value.stringValue; //CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, index));
+            phoneNo = [phoneNo stringByReplacingOccurrencesOfString:@" " withString:@""];
             phoneNo = [phoneNo stringByReplacingOccurrencesOfString:@"-" withString:@""];
             
             NSPredicate* p_match = [NSPredicate predicateWithBlock:^BOOL(id  _Nonnull evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
@@ -278,6 +280,7 @@
         NSArray<CNLabeledValue<CNPhoneNumber*>*>* phones = tmpPerson.phoneNumbers; //ABRecordCopyValue(CFBridgingRetain(tmpPerson), kABPersonPhoneProperty);
         for (int index = 0; index < phones.count; ++index) {
             NSString* phoneNo = [phones objectAtIndex:index].value.stringValue; //CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, index));
+            phoneNo = [phoneNo stringByReplacingOccurrencesOfString:@" " withString:@""];
             phoneNo = [phoneNo stringByReplacingOccurrencesOfString:@"-" withString:@""];
             
             NSPredicate* p_match = [NSPredicate predicateWithBlock:^BOOL(id  _Nonnull evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
