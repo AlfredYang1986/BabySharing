@@ -214,7 +214,7 @@
     sender_user_id = _message.sender.name;
 }
 
-- (void)setSenderImage:(NSString*)img_name {
+- (void)setSenderImage:(NSString*)photo_name {
     dispatch_queue_t up = dispatch_queue_create("Get Profile Details", nil);
     dispatch_async(up, ^{
         NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];

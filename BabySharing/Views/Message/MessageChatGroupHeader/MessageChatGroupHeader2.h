@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MessageChatGroupHeader2 : UITableViewHeaderFooterView
+//@interface MessageChatGroupHeader2 : UITableViewHeaderFooterView
+@interface MessageChatGroupHeader2 : UIView
 
 + (CGFloat)preferredHeightWithContent:(NSString*)content;
 

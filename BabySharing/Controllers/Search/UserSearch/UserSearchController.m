@@ -63,6 +63,7 @@
     self.view.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
     
     [self asyncQueryData];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {

@@ -151,8 +151,6 @@
     chatGroupArray_mine = [_mm enumMyChatGroupLocal];
     chatGroupArray_recommend = [_mm enumRecommendChatGroupLocal];
     [self viewDidLayoutSubviews];
-    
-
 }
 
 //- (void)setUpDescriptionView {
