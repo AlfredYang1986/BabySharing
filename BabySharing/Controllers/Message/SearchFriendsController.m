@@ -247,4 +247,8 @@
             break;
     }
 }
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [_searchBar resignFirstResponder];
+}
 @end

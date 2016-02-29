@@ -82,6 +82,11 @@
      */
     BOOL isLoaded;
     dispatch_semaphore_t semaphore;
+    
+    /**
+     * re-design layout
+     */
+    MessageChatGroupHeader2* header;
 }
 
 @synthesize queryView = _queryView;
@@ -105,7 +110,17 @@
   
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     CGFloat height = [UIScreen mainScreen].bounds.size.height;
-    _queryView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, width, height)];
+    
+//    header = [[MessageChatGroupHeader2 alloc]initWithFrame:CGRectMake(0, 0, width, height)];
+    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MessageChatGroupHeader2" owner:self options:nil];
+    header = [nib objectAtIndex:0];
+    header.frame = CGRectMake(0, 0, width, height);
+    header.backgroundColor = [UIColor clearColor];
+    
+    [self.view addSubview:header];
+    [self.view bringSubviewToFront:header];
+    
+    _queryView = [[UITableView alloc]init];
     _queryView.delegate = self;
     _queryView.dataSource = self;
     [self.view addSubview:_queryView];
@@ -113,7 +128,7 @@
     
     _queryView.backgroundColor = [UIColor clearColor];
     _queryView.separatorStyle = UITableViewCellSeparatorStyleNone;  // 去除表框
-    [_queryView registerNib:[UINib nibWithNibName:@"MessageChatGroupHeader2" bundle:[NSBundle mainBundle]] forHeaderFooterViewReuseIdentifier:@"chat group header"];
+//    [_queryView registerNib:[UINib nibWithNibName:@"MessageChatGroupHeader2" bundle:[NSBundle mainBundle]] forHeaderFooterViewReuseIdentifier:@"chat group header"];
   
     [self setUpInputView];
     [self setUpUserInfoPane];
@@ -140,11 +155,14 @@
             founder_dic = [result objectForKey:@"result"];
            
             dispatch_async(dispatch_get_main_queue(), ^{
-                UIView* tmp = [_queryView headerViewForSection:0];
-                [self setFounderInfoForChatGroupHeader:(MessageChatGroupHeader2*)tmp];
-                [self setGroupInfoForChatGroupHeader:(MessageChatGroupHeader2*)tmp];
+//                UIView* tmp = [_queryView headerViewForSection:0];
+//                [self setFounderInfoForChatGroupHeader:(MessageChatGroupHeader2*)tmp];
+//                [self setGroupInfoForChatGroupHeader:(MessageChatGroupHeader2*)tmp];
+                [self setFounderInfoForChatGroupHeader];
+                [self setGroupInfoForChatGroupHeader];
+                [header setNeedsLayout];
 //                [_queryView reloadData];
-                [self reloadData];
+//                [self reloadData];
             });
             
         } else {
@@ -199,6 +217,7 @@
     
     UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapElseWhere:)];
     [_queryView addGestureRecognizer:tap];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -213,7 +232,8 @@
 - (void)viewDidLayoutSubviews {
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     CGFloat height = [UIScreen mainScreen].bounds.size.height;
-    _queryView.frame = CGRectMake(0, 0, width, height);
+    CGFloat header_height = [MessageChatGroupHeader2 preferredHeightWithContent:@"abcde"];
+    _queryView.frame = CGRectMake(0, header_height, width, height - header_height - INPUT_CONTAINER_HEIGHT);
     inputContainer.frame = CGRectMake(0, height - INPUT_CONTAINER_HEIGHT, SCREEN_WIDTH, INPUT_CONTAINER_HEIGHT);
     userInfoPane.frame = CGRectMake(USER_INFO_PANE_MARGIN + width, height - USER_INGO_PANE_BOTTOM_MARGIN - USER_INFO_PANE_HEIGHT, width - 2 * USER_INFO_PANE_MARGIN, USER_INFO_PANE_HEIGHT);
 }
@@ -259,6 +279,17 @@
 //    self.navigationController.navigationBarHidden = NO;
 }
 
+- (void)scrollTableToFoot:(BOOL)animated {
+    NSInteger s = [self.queryView numberOfSections];
+    if (s<1) return;
+    NSInteger r = [self.queryView numberOfRowsInSection:s-1];
+    if (r<1) return;
+    
+    NSIndexPath *ip = [NSIndexPath indexPathForRow:r-1 inSection:s-1];
+    
+    [self.queryView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionBottom animated:animated];
+}
+
 - (void)reloadData {
     [_queryView reloadData];
     [userInfoTable reloadData];
@@ -266,6 +297,8 @@
 //    [userBtn setTitle:[NSString stringWithFormat:@"%d", _joiner_count.intValue] forState:UIControlStateNormal];
 //    [userBtn setTitle:@"123" forState:UIControlStateNormal];
 //    [userBtn setNeedsDisplay];
+   
+    [self scrollTableToFoot:YES];
 }
 
 //取消searchbar背景色
@@ -481,12 +514,14 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)setGroupInfoForChatGroupHeader:(MessageChatGroupHeader2*)header {
+//- (void)setGroupInfoForChatGroupHeader:(MessageChatGroupHeader2*)header {
+- (void)setGroupInfoForChatGroupHeader {
     [header setChatGroupThemeTitle:_group_name];
 //    [header setCHatGroupJoinerNumber:_joiner_count];
 }
 
-- (void)setFounderInfoForChatGroupHeader:(MessageChatGroupHeader2*)header {
+//- (void)setFounderInfoForChatGroupHeader:(MessageChatGroupHeader2*)header {
+- (void)setFounderInfoForChatGroupHeader {
     [header setFounderScreenName:[founder_dic objectForKey:@"screen_name"]];
     [header setFounderScreenPhoto:[founder_dic objectForKey:@"screen_photo"]];
     [header setFounderRelations:[founder_dic objectForKey:@"relations"]];
@@ -495,22 +530,23 @@
 
 #pragma mark -- table view delegate
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return [MessageChatGroupHeader2 preferredHeightWithContent:@"abcde"];
+//    return [MessageChatGroupHeader2 preferredHeightWithContent:@"abcde"];
+    return 0;//[MessageChatGroupHeader2 preferredHeightWithContent:@"abcde"];
 }
 
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
    
-    MessageChatGroupHeader2* header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"chat group header"];
-    
-    if (header == nil) {
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MessageChatGroupHeader" owner:self options:nil];
-        header = [nib objectAtIndex:0];
-    }
-    
-    [self setFounderInfoForChatGroupHeader:header];
-    [self setGroupInfoForChatGroupHeader:header];
-//    [header setChatGroupUserList:current_talk_users];
-    return header;
+//    MessageChatGroupHeader2* header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"chat group header"];
+//    
+//    if (header == nil) {
+//        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MessageChatGroupHeader" owner:self options:nil];
+//        header = [nib objectAtIndex:0];
+//    }
+//    
+//    [self setFounderInfoForChatGroupHeader:header];
+//    [self setGroupInfoForChatGroupHeader:header];
+//    return header;
+    return nil;
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -607,6 +643,7 @@
                                       // NOTE: When passing INTUAnimationOptionRepeat, this completion block is NOT executed at the end of each cycle. It will only run if the animation is canceled.
                                       NSLog(@"%@", finished ? @"Animation Completed" : @"Animation Canceled");
                                       // self.animationID = NSNotFound;
+                                      [self scrollTableToFoot:YES];
                                   }];
 }
 
@@ -799,7 +836,7 @@
     keyBoardFrame = value.CGRectValue;
     
     CGFloat height = [UIScreen mainScreen].bounds.size.height;
-    if (_queryView.frame.size.height == height) {
+    if (inputContainer.frame.origin.y + inputContainer.frame.size.height == height) {
         [self moveView:-keyBoardFrame.size.height];
     }
     
@@ -819,7 +856,7 @@
 
 - (void)keyboardDidHidden:(NSNotification*)notification {
     CGFloat height = [UIScreen mainScreen].bounds.size.height;
-    if (_queryView.frame.size.height != height) {
+    if (inputContainer.frame.origin.y + inputContainer.frame.size.height != height) {
         [self moveView:keyBoardFrame.size.height];
     }
 }
