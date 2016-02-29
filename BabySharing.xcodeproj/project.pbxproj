@@ -16,6 +16,7 @@
 		70530B121C3F9D1E00505121 /* SearchSegImgItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 70530B0D1C3F9D1E00505121 /* SearchSegImgItem.m */; };
 		70530B131C3F9D1E00505121 /* SearchSegImgTextItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 70530B0F1C3F9D1E00505121 /* SearchSegImgTextItem.m */; };
 		70530B141C3F9D1E00505121 /* SearchSegItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 70530B111C3F9D1E00505121 /* SearchSegItem.m */; };
+		706563B71C817580008BBAC8 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 706563B61C817580008BBAC8 /* Contacts.framework */; };
 		706D7A1C1C7561C0006750AC /* FoundSearchTagDeleage.m in Sources */ = {isa = PBXBuildFile; fileRef = 706D7A1B1C7561C0006750AC /* FoundSearchTagDeleage.m */; };
 		706D7A221C757379006750AC /* RecommandRoleTag+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 706D7A1F1C757379006750AC /* RecommandRoleTag+CoreDataProperties.m */; };
 		706D7A231C757379006750AC /* RecommandRoleTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 706D7A211C757379006750AC /* RecommandRoleTag.m */; };
@@ -195,7 +196,6 @@
 		EEA1F5531C169106009B8724 /* FoundSearch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEA1F5521C169106009B8724 /* FoundSearch.storyboard */; };
 		EEA8A60C1BFAC0EE00130293 /* FoundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEA8A60B1BFAC0EE00130293 /* FoundViewController.m */; };
 		EEA8A60F1BFAC1F800130293 /* HomeViewFoundDelegateAndDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = EEA8A60E1BFAC1F800130293 /* HomeViewFoundDelegateAndDatasource.m */; };
-		EEA991481B775B4F001F6CC6 /* DDNNotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEA991471B775B4F001F6CC6 /* DDNNotificationViewController.m */; };
 		EEAAC8FE1B44E81A00D05C0B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAAC8FD1B44E81A00D05C0B /* main.m */; };
 		EEAAC91B1B44E81A00D05C0B /* BabySharingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAAC91A1B44E81A00D05C0B /* BabySharingTests.m */; };
 		EEAACC9A1B44E90400D05C0B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACAF11B44E90300D05C0B /* AppDelegate.m */; };
@@ -375,6 +375,7 @@
 		70530B0F1C3F9D1E00505121 /* SearchSegImgTextItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSegImgTextItem.m; sourceTree = "<group>"; };
 		70530B101C3F9D1E00505121 /* SearchSegItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSegItem.h; sourceTree = "<group>"; };
 		70530B111C3F9D1E00505121 /* SearchSegItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSegItem.m; sourceTree = "<group>"; };
+		706563B61C817580008BBAC8 /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
 		706D7A1A1C7561C0006750AC /* FoundSearchTagDeleage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoundSearchTagDeleage.h; sourceTree = "<group>"; };
 		706D7A1B1C7561C0006750AC /* FoundSearchTagDeleage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoundSearchTagDeleage.m; sourceTree = "<group>"; };
 		706D7A1D1C756AC3006750AC /* FoundSearchProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FoundSearchProtocol.h; sourceTree = "<group>"; };
@@ -698,8 +699,6 @@
 		EEA8A60E1BFAC1F800130293 /* HomeViewFoundDelegateAndDatasource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewFoundDelegateAndDatasource.m; sourceTree = "<group>"; };
 		EEA991421B773F1B001F6CC6 /* UIBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBadgeView.h; sourceTree = "<group>"; };
 		EEA991431B773F1B001F6CC6 /* UIBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBadgeView.m; sourceTree = "<group>"; };
-		EEA991461B775B4F001F6CC6 /* DDNNotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDNNotificationViewController.h; sourceTree = "<group>"; };
-		EEA991471B775B4F001F6CC6 /* DDNNotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDNNotificationViewController.m; sourceTree = "<group>"; };
 		EEAAC8F81B44E81A00D05C0B /* BabySharing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BabySharing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEAAC8FC1B44E81A00D05C0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EEAAC8FD1B44E81A00D05C0B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -1016,6 +1015,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				706563B71C817580008BBAC8 /* Contacts.framework in Frameworks */,
 				A0F2B3D81C7EFEF20090EF32 /* libGPUImage.a in Frameworks */,
 				A08AE9541C7E9C1A0029B660 /* libiconv.2.dylib in Frameworks */,
 				EE40826A1B70C18E0094A88B /* libstdc++.dylib in Frameworks */,
@@ -1731,8 +1731,6 @@
 			children = (
 				EE262C971C1958F8008DCC4E /* DONNotificationDelegate.h */,
 				EE262C981C1958F8008DCC4E /* DONNotificationDelegate.m */,
-				EEA991461B775B4F001F6CC6 /* DDNNotificationViewController.h */,
-				EEA991471B775B4F001F6CC6 /* DDNNotificationViewController.m */,
 			);
 			path = NotificationsView;
 			sourceTree = "<group>";
@@ -2351,6 +2349,7 @@
 		EEAACD7F1B44EBC100D05C0B /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				706563B61C817580008BBAC8 /* Contacts.framework */,
 				EE4082651B70C13F0094A88B /* AudioToolbox.framework */,
 				EE4082631B70C1330094A88B /* CoreTelephony.framework */,
 				EE4082611B70C1240094A88B /* AddressBook.framework */,
@@ -2944,7 +2943,7 @@
 				TargetAttributes = {
 					EEAAC8F71B44E81A00D05C0B = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = V6843SSXWV;
+						DevelopmentTeam = 6AUL2A4AE9;
 					};
 					EEAAC9131B44E81A00D05C0B = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -3197,7 +3196,6 @@
 				EED774D41BABF86D001C9B57 /* HomeViewController.m in Sources */,
 				EEAACCA41B44E90400D05C0B /* CVViewController2.m in Sources */,
 				EED64D451B8184AE008CB134 /* CycleAddKidsCell.m in Sources */,
-				EEA991481B775B4F001F6CC6 /* DDNNotificationViewController.m in Sources */,
 				70D15B551C5B64C9007AC9AB /* UIView+MJExtension.m in Sources */,
 				EE92AE341BCE3627008DA020 /* CycleAddConditionCell.m in Sources */,
 				EEAACCDD1B44E90400D05C0B /* LoginModel.m in Sources */,
@@ -3465,7 +3463,7 @@
 					"-ObjC",
 					"-fobjc-arc",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = BS.BabySharing;
+				PRODUCT_BUNDLE_IDENTIFIER = monkeyheng.BabySharing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -3505,7 +3503,7 @@
 					"-ObjC",
 					"-fobjc-arc",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = BS.BabySharing;
+				PRODUCT_BUNDLE_IDENTIFIER = monkeyheng.BabySharing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -23,6 +23,9 @@
 @synthesize notification = _notification;
 @synthesize delegate = _delegate;
 
+@synthesize postTimeLabel = _postTimeLabel;
+@synthesize detailLabel = _detailLabel;
+
 + (CGFloat)preferedHeight {
 //    return 66;
     return 80;
@@ -44,8 +47,45 @@
     line.borderWidth = 1.f;
     line.frame = CGRectMake(10.5, 80 - 1, [UIScreen mainScreen].bounds.size.width - 10.5 * 2, 1);
     [self.layer addSublayer:line];
+    
+    _detailLabel = [[UILabel alloc]init];
+    _detailLabel.font = [UIFont systemFontOfSize:13.f];
+    _detailLabel.numberOfLines = 0;
+    [self addSubview:_detailLabel];
 
-    _detailView.textColor = [UIColor colorWithWhite:151.f / 255.f alpha:1.f];
+    _postTimeLabel = [[UILabel alloc]init];
+    _postTimeLabel.font = [UIFont systemFontOfSize:11.f];
+    [self addSubview:_postTimeLabel];
+    _postTimeLabel.textColor = [UIColor colorWithWhite:151.f / 255.f alpha:1.f];
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+   
+#define MARGIN  8
+#define IMG_WIDTH       38
+#define IMG_HEIGHT      IMG_WIDTH
+#define CONTENT_WIDTH   50
+#define CONTENT_HEIGHT  CONTENT_WIDTH
+   
+    CGSize sz = [_detailLabel.text sizeWithFont:_detailLabel.font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
+    CGFloat max_width = [UIScreen mainScreen].bounds.size.width - IMG_WIDTH - CONTENT_WIDTH - 3 * MARGIN;
+    if (sz.width > max_width) {
+        _detailLabel.frame = CGRectMake(0, 0, MIN(max_width, _detailLabel.frame.size.width), 2 * _detailLabel.frame.size.height);
+        _detailLabel.center = CGPointMake(IMG_WIDTH + 2 * MARGIN + _detailLabel.frame.size.width / 2, [MessageNotificationDetailCell preferedHeight] / 2);
+    } else {
+        _detailLabel.frame = CGRectMake(0, 0, MIN(max_width, _detailLabel.frame.size.width), _detailLabel.frame.size.height);
+        _detailLabel.center = CGPointMake(IMG_WIDTH + 2 * MARGIN + _detailLabel.frame.size.width / 2, [MessageNotificationDetailCell preferedHeight] / 2 - MARGIN);
+    }
+    
+    if (_detailLabel.frame.origin.x + _detailLabel.frame.size.width + _postTimeLabel.frame.size.width + 2 * MARGIN > [UIScreen mainScreen].bounds.size.width - 50) {
+        CGFloat offset = sz.width - _detailLabel.frame.size.width > 0 ? sz.width - _detailLabel.frame.size.width + MARGIN : 0;
+        _postTimeLabel.frame = CGRectMake(_detailLabel.frame.origin.x + offset, _detailLabel.frame.origin.y + sz.height + MARGIN / 2, _postTimeLabel.frame.size.width, _postTimeLabel.frame.size.height);
+        
+    } else {
+        _detailLabel.center = CGPointMake(IMG_WIDTH + 2 * MARGIN + _detailLabel.frame.size.width / 2, [MessageNotificationDetailCell preferedHeight] / 2);
+        _postTimeLabel.center = CGPointMake(_detailLabel.center.x + _detailLabel.frame.size.width / 2 + _postTimeLabel.frame.size.width / 2 + MARGIN, _detailLabel.center.y + 1);
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -129,7 +169,7 @@
 //            [str addAttribute:NSForegroundColorAttributeName value:[UIColor greenColor] range:NSMakeRange(0,screen_name.length)];
             [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:70.f / 255.f green:219.f / 255.f blue:202.f / 255.f alpha:1.f] range:NSMakeRange(0,screen_name.length)];
             [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithWhite:151.f / 255.f alpha:1.f] range:NSMakeRange(screen_name.length + 1, 4)];
-            _nameLabel.attributedText = str;
+            _detailLabel.attributedText = str;
            
             UIImageView* tmp = [_connectContentView viewWithTag:-1];
             if (tmp == nil) {
@@ -162,7 +202,7 @@
             [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:70.f / 255.f green:219.f / 255.f blue:202.f / 255.f alpha:1.f] range:NSMakeRange(sender_name.length + 4, receiver_id.length)];
             [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithWhite:151.f / 255.f alpha:1.f] range:NSMakeRange(sender_name.length, 4)];
             [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithWhite:151.f / 255.f alpha:1.f] range:NSMakeRange(sender_name.length + 4 + receiver_id.length, 4)];
-            _nameLabel.attributedText = str;
+            _detailLabel.attributedText = str;
             
             UIImageView* tmp = [_connectContentView viewWithTag:-1];
             if (tmp == nil) {
@@ -193,6 +233,7 @@
         default:
             break;
     }
+    [_detailLabel sizeToFit];
 }
 
 - (void)setTimeLabel:(NSDate*)time_label {
@@ -201,7 +242,8 @@
     formatter.dateStyle = NSDateFormatterShortStyle;
     formatter.timeStyle = NSDateFormatterShortStyle;
     
-    _detailView.text = [formatter stringForObjectValue:time_label];
+    _postTimeLabel.text = [formatter stringForObjectValue:time_label];
+    [_postTimeLabel sizeToFit];
 }
 
 - (void)relationBtnClicked:(UITapGestureRecognizer*)gesture {

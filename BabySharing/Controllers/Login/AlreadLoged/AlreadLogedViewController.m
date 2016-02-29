@@ -174,13 +174,12 @@
     _fakeBar = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 74)];
     _fakeBar.backgroundColor = [UIColor clearColor];
     
-    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 25)];
+    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 40)];
     NSString* filepath = [resourceBundle_dongda pathForResource:@"dongda_back_light" ofType:@"png"];
     CALayer * layer_btn = [CALayer layer];
     layer_btn.contents = (id)[UIImage imageNamed:filepath].CGImage;
     layer_btn.frame = CGRectMake(0, 0, 25, 25);
-    //    layer_btn.position = CGPointMake(10, barBtn.frame.size.height / 2);
-    layer_btn.position = CGPointMake(0, barBtn.frame.size.height / 2 + 5);
+    layer_btn.position = CGPointMake(40 / 2, 40 / 2);
     [barBtn.layer addSublayer:layer_btn];
     barBtn.center = CGPointMake(BACK_BTN_LEFT_MARGIN + barBtn.frame.size.width / 2, STATUS_BAR_HEIGHT + FAKE_BAR_HEIGHT / 2);
     

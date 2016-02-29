@@ -10,6 +10,7 @@
 
 #import "AppDelegate.h"
 #import "FoundSearchModel.h"
+#import "Tools.h"
 
 @interface SearchAddLocationDelegate ()
 
@@ -26,7 +27,7 @@
 
 - (void)pushExistingData:(NSArray *)data {
     exist_data = data;
-    showing_data = exist_data;
+    showing_data = [Tools sortWithArr:exist_data headStr:@""];
 }
 
 - (FoundSearchModel*)getFoundSearchModel {
@@ -39,14 +40,16 @@
 #pragma mark -- search bar delegate
 #define LOCATION 0
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    [self.fm queryFoundTagSearchWithInput:searchText andType:LOCATION andFinishBlock:^(BOOL success, NSDictionary *preview) {
-        NSMutableArray* arr = [[NSMutableArray alloc]initWithCapacity:self.fm.tagSearchResult.count];
-        for (NSDictionary* iter in self.fm.tagSearchResult) {
-            [arr addObject:[iter objectForKey:@"tag_name"]];
-        }
-        showing_data = [arr copy];
-        [_delegate needToReloadData];
-    }];
+    showing_data = [[Tools sortWithArr:exist_data headStr:searchText] copy];
+    [_delegate needToReloadData];
+//    [self.fm queryFoundTagSearchWithInput:searchText andType:LOCATION andFinishBlock:^(BOOL success, NSDictionary *preview) {
+//        NSMutableArray* arr = [[NSMutableArray alloc]initWithCapacity:self.fm.tagSearchResult.count];
+//        for (NSDictionary* iter in self.fm.tagSearchResult) {
+//            [arr addObject:[iter objectForKey:@"tag_name"]];
+//        }
+//        showing_data = [arr copy];
+//        [_delegate needToReloadData];
+//    }];
 }
 
 #pragma mark -- search bar delegate
@@ -60,7 +63,7 @@
 }
 
 - (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return @"添加新角色";
+    return @"添加新地址标签";
     //    return [_delegate getAddSectionTitle];
 }
 

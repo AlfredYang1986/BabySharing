@@ -1,4 +1,4 @@
-//
+  //
 //  AlbumViewController2.m
 //  BabySharing
 //
@@ -326,13 +326,13 @@
             mainContentPhotoLayer = [CALayer layer];
         }
         
+        NSLog(@"%@ === %@", @"PHAsset", asset);
         [AlbumModule getRealPhotoWithPHAsset:asset block:^(UIImage *liveImage) {
             img = liveImage;
             [mainContentPhotoLayer removeFromSuperlayer];
             last_scale = MAX(mainContentView.frame.size.width /  img.size.width, mainContentView.frame.size.height / img.size.height);
             mainContentPhotoLayer.frame = CGRectMake(0, 0, img.size.width * last_scale, img.size.height * last_scale);
             mainContentPhotoLayer.contents = (id)liveImage.CGImage;
-            
             
             [mainContentView.layer addSublayer:mainContentPhotoLayer];
         }];

@@ -395,7 +395,7 @@
         Providers* tmp = [Providers createProviderInContext:_doc.managedObjectContext ByName:provide_name andProviderUserId:provide_user_id andProviderToken:provide_token andProviderScreenName:provide_screen_name];
         LoginToken* user = [LoginToken createTokenInContext:_doc.managedObjectContext withUserID:user_id andAttrs:reVal];
         [user addConnectWithObject:tmp];
-       
+      
         return [CurrentToken changeCurrentLoginUser:user inContext:_doc.managedObjectContext];
     } else {
         NSDictionary* reError = [result objectForKey:@"error"];

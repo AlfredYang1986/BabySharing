@@ -37,7 +37,7 @@
 
 - (void)pushExistingData:(NSArray *)data{
     exist_data = data;
-    showing_data = exist_data;
+    showing_data = [Tools sortWithArr:exist_data headStr:@""];
     [_delegate needToReloadData];
 }
 
@@ -76,7 +76,8 @@
 }
 
 - (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return @"添加新品牌";
+    return @"添加新品牌标签";
+    //    return [_delegate getAddSectionTitle];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {

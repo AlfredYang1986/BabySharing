@@ -34,10 +34,13 @@
     CALayer* layer;
     
     BOOL isSenderByOwner;
+    
+    NSString* sender_user_id;
 }
 
 @synthesize message = _message;
 @synthesize lm = _lm;
+@synthesize delegate = _delegate;
 
 - (id)init {
     self = [super init];
@@ -121,7 +124,15 @@
         imgView.layer.cornerRadius = IMG_WIDTH / 2;
         imgView.clipsToBounds = YES;
         [self addSubview:imgView];
+        
+        imgView.userInteractionEnabled = YES;
+        UITapGestureRecognizer* gusture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(screenPhotoTaped:)];
+        [imgView addGestureRecognizer:gusture];
     }
+}
+
+- (void)screenPhotoTaped:(UITapGestureRecognizer*)gusture {
+    [_delegate didSelectedScreenPhotoForUserID:sender_user_id];
 }
 
 - (void)layoutSubviews {
@@ -178,14 +189,15 @@
         CGFloat content_width = width - 3 * MARGIN - 2 * IMG_WIDTH; // - label_size.width;
         UIFont* content_font = [UIFont systemFontOfSize:CONTENT_FONT_SIZE];
         CGSize content_size = [content.text sizeWithFont:content_font constrainedToSize:CGSizeMake(content_width, FLT_MAX)];
-//        content.frame = CGRectMake(offset_x, offset_y, content_size.width + 16, MAX(content_size.height + 2 * MARGIN, IMG_HEIGHT));
-        content.frame = CGRectMake(offset_x - content_size.width - 16, offset_y, content_size.width + 16, content_size.height + 2 * MARGIN);
+        content.frame = CGRectMake(offset_x, offset_y, content_size.width + 16, MAX(content_size.height + 2 * MARGIN, IMG_HEIGHT));
+//        content.frame = CGRectMake(offset_x - content_size.width - 16, offset_y, content_size.width + 16, content_size.height + 2 * MARGIN);
         content.backgroundColor = [UIColor colorWithRed:0.2745 green:0.8588 blue:0.7922 alpha:0.6];
+//        [content removeFromSuperview];
 
         NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
         NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
         layer.contents = (id)[UIImage imageNamed:[resourceBundle pathForResource:@"chat_other_tri" ofType:@"png"]].CGImage;
-        layer.frame = CGRectMake(offset_x, offset_y + 10.5, 7, 14);
+        layer.frame = CGRectMake(offset_x - 7, offset_y + 10.5, 7, 14);
         
         offset_x += content_width + MARGIN;
     }
@@ -198,6 +210,8 @@
     [self setSenderImage:@""];
     [self setContent:msg.text];
     [self setContentDate:nil];
+    
+    sender_user_id = _message.sender.name;
 }
 
 - (void)setSenderImage:(NSString*)img_name {

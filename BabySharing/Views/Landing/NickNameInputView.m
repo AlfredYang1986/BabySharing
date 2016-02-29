@@ -152,8 +152,6 @@
     next_btn.clipsToBounds = YES;
     [next_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_btn_bg" ofType:@"png"]] forState:UIControlStateNormal];
     [next_btn addTarget:_delegate action:@selector(didClickNextBtn) forControlEvents:UIControlEventTouchUpInside];
-//    [next_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_btn_bg_disable" ofType:@"png"]] forState:UIControlStateDisabled];
-//    next_btn.enabled = NO;
     
     [self addSubview:next_btn];
 }

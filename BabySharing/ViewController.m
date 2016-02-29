@@ -73,8 +73,6 @@ enum DisplaySide {
     // Do any additional setup after loading the view, typically from a nib.
     [self.navigationController setNavigationBarHidden:YES animated:NO];
     [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f]];
-//    [self.view setBackgroundColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f]];
-//    [self.navigationController.navigationBar setBackgroundColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f]];
     
     AppDelegate * del =(AppDelegate*)[[UIApplication sharedApplication] delegate];
     _lm = del.lm;
@@ -152,9 +150,9 @@ enum DisplaySide {
     
     CGFloat last_height = inputView.bounds.size.height;
     inputView.frame = CGRectMake(0, INPUT_VIEW_START_POINT, width, last_height);
-//    inputView.backgroundColor = [UIColor redColor];
     [self.view addSubview:inputView];
     [self.view bringSubviewToFront:inputView];
+
     
     /**
      * 4. SNS view
@@ -167,6 +165,7 @@ enum DisplaySide {
 //    snsView.backgroundColor = [UIColor greenColor];
     [self.view addSubview:snsView];
     [self.view bringSubviewToFront:snsView];
+    
 }
 
 - (void)dealloc {
@@ -180,7 +179,8 @@ enum DisplaySide {
 
 - (BOOL)isValidPhoneNumber:(NSString*)phoneNo inArea:(NSString*)areaCode {
 //    return phoneNo.length == 11;
-    return YES;
+    // 正则表达式
+    return [[NSPredicate predicateWithFormat:@"SELF MATCHES %@", @"^1[3,4,5,7,8]\\d{9}$"] evaluateWithObject:phoneNo];
 }
 
 - (BOOL)isValidPhoneCode:(NSString*)phoneCode {
@@ -190,7 +190,6 @@ enum DisplaySide {
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"loginSegue"]) {
         _loginController = [segue destinationViewController];
-//        ((LoginViewController*)((UINavigationController*)[segue destinationViewController]).childViewControllers[0]).lm = self.lm;
     } else if ([segue.identifier isEqualToString:@"areaCode"]) {
         NSLog(@"area code controller");
         ((ChooseAreaViewController*)segue.destinationViewController).delegate = self;
@@ -231,17 +230,12 @@ enum DisplaySide {
     isSNSLogin = NO;
     [self.navigationController popToRootViewControllerAnimated:NO];
     
-//    if (_loginController) {
-//        [_loginController dismissViewControllerAnimated:YES completion:^(void){
-            if ([_lm isLoginedByUser]) {
-                AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-                if (!isQueryModelReady) [delegate createQueryModel];
-                else [self queryDataIsReady:nil];
-                [delegate registerDeviceTokenWithCurrentUser];
-//                [GotyeOCAPI login:_lm.current_user_id password:nil];
-            }
-//        }];
-//    }
+    if ([_lm isLoginedByUser]) {
+        AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+        if (!isQueryModelReady) [delegate createQueryModel];
+        else [self queryDataIsReady:nil];
+        [delegate registerDeviceTokenWithCurrentUser];
+    }
 }
 
 - (void)userLogedOut:(id)sender {
@@ -329,21 +323,7 @@ enum DisplaySide {
 
 #pragma mark -- pan gusture
 - (void)handlePan:(UIPanGestureRecognizer*)gesture {
-//    NSLog(@"pan gesture");
-//    if (inputView.frame.origin.y + inputView.frame.size.height != [UIScreen mainScreen].bounds.size.height) {
-//        if (gesture.state == UIGestureRecognizerStateBegan) {
-//            point = [gesture translationInView:self.view];
-//            
-//        } else if (gesture.state == UIGestureRecognizerStateEnded) {
-//            CGPoint newPos = [gesture translationInView:self.view];
-//            
-//            if (newPos.y - point.y) {
-//                NSLog(@"down gesture");
-//                [inputView endEditing];
-//            }
-//            [self moveView:210];
-//        }
-//    }
+
 }
 
 - (void)handleTap:(UITapGestureRecognizer*)gesture {
@@ -372,7 +352,6 @@ enum DisplaySide {
     
     if ([self isValidPhoneNumber:phoneNo inArea:@"+86"] && [self.lm sendLoginRequestToPhone:phoneNo]) {
         [inputView sendConfirmCodeRequestSuccess];
-        
     } else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"input wrong phone number" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
         [alert show];
@@ -384,10 +363,11 @@ enum DisplaySide {
     NSString* phoneNo = [inputView getInputPhoneNumber];
     
     if (![self isValidPhoneCode:code]) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"input wrong phone number" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"验证码错误" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
         [alert show];
         return;
     }
+    
     
     RegTmpToken* token = [RegTmpToken enumRegTokenINContext:self.lm.doc.managedObjectContext WithPhoneNo:phoneNo];
     
@@ -405,8 +385,6 @@ enum DisplaySide {
             NSLog(@"already login by others");
         }
     }
-
-    [inputView endEditing];
 }
 
 - (void)didStartEditing {
@@ -427,6 +405,7 @@ enum DisplaySide {
         slg.hidden = YES;
         [self moveView:-110];
     }
+    NSLog(@"%@ === %@", @"dfdd", inputView);
 }
 
 - (void)didEndEditing {

@@ -21,6 +21,7 @@
 
 - (NSString*)getPreScreenName;
 - (NSString*)getPreRoleTag;
+
 @end
 
 @interface NickNameInputView : UIView <UITextFieldDelegate, UITextFieldDelegate>

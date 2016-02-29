@@ -13,5 +13,6 @@
 
 @property (weak, nonatomic) UIImageView* backgroundView;
 
-- (void*)animationViewsInController;
+- (void *)animationViewsInController;
+
 @end

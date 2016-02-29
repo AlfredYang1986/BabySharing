@@ -139,6 +139,68 @@
     [self.navigationController pushViewController:pc animated:YES];
 }
 
+- (void)didSelectedUserRelationsUserID:(NSString *)user_id andCurrentConnection:(UserPostOwnerConnections)connections {
+    NSLog(@"follow button selected");
+   
+    AppDelegate* app = [UIApplication sharedApplication].delegate;
+    ConnectionModel* cm = app.cm;
+    
+    NSString* follow_user_id = user_id;
+    NSNumber* relations = [NSNumber numberWithInteger:connections];
+    
+    switch (relations.integerValue) {
+        case UserPostOwnerConnectionsSamePerson:
+            // my own post, do nothing
+            break;
+        case UserPostOwnerConnectionsNone:
+        case UserPostOwnerConnectionsFollowed: {
+            [cm followOneUser:follow_user_id withFinishBlock:^(BOOL success, NSString *message, UserPostOwnerConnections new_connections) {
+                if (success && [self changeArrWithUserID:follow_user_id andConnections:new_connections]) {
+                    NSLog(@"follow success");
+                    [_queryView reloadData];
+                    
+                } else {
+                    NSLog(@"follow error, %@", message);
+                }
+            }];}
+            break;
+        case UserPostOwnerConnectionsFollowing:
+        case UserPostOwnerConnectionsFriends: {
+            [cm unfollowOneUser:follow_user_id withFinishBlock:^(BOOL success, NSString *message, UserPostOwnerConnections new_connections) {
+                if (success && [self changeArrWithUserID:follow_user_id andConnections:new_connections]) {
+                    NSLog(@"unfollow success");
+                    [_queryView reloadData];
+                    
+                } else {
+                    NSLog(@"follow error, %@", message);
+                }
+            }];}
+            break;
+        default:
+            break;
+    }
+}
+
+- (BOOL)changeArrWithUserID:(NSString*)user_id andConnections:(UserPostOwnerConnections)new_connections {
+    NSInteger index = [_um.userSearchPreviewResult indexOfObjectPassingTest:^BOOL(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        *stop = NO;
+        NSDictionary* dic = (NSDictionary*)obj;
+        if ([[dic objectForKey:@"user_id"] isEqualToString:user_id]) {
+            *stop = YES;
+            return YES;
+        } else return NO;
+    }];
+    
+    if (index > -1) {
+        NSDictionary* dic = [_um.userSearchPreviewResult objectAtIndex:index];
+        [dic setValue:[NSNumber numberWithInteger:new_connections] forKey:@"relations"];
+        return YES;
+    } else {
+        NSLog(@"nothing to be chenged");
+        return NO;
+    }
+}
+
 - (void)didSelectedUserContentImages:(NSInteger)index andUserID:(NSString*)user_id andUserScreenName:(NSString*)screen_name {
 
     AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;

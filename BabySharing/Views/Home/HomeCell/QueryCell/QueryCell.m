@@ -174,13 +174,6 @@
     
     // chat btn
     UIButton* chat_btn = [[UIButton alloc]init];
-//    [chat_btn setImage:[UIImage imageNamed:[resourceBundle pathForResource:@"home_chat" ofType:@"png"]] forState:UIControlStateNormal];
-    CALayer* chat_icon = [CALayer layer];
-    chat_icon.frame = CGRectMake(0, 0, FUNC_BTN_WIDTH_2, FUNC_BTN_HEIGHT_2);
-    chat_icon.contents = (id)[UIImage imageNamed:[resourceBundle pathForResource:@"home_chat" ofType:@"png"]].CGImage;
-    chat_icon.position = CGPointMake(-FUNC_BTN_WIDTH_2 + 5, FUNC_BTN_HEIGHT_2 / 2 + 1);
-    [chat_btn.layer addSublayer:chat_icon];
-    
     [chat_btn setTitle:@"加入圈聊" forState:UIControlStateNormal];
     [chat_btn setTitleColor:FONT_COLOR forState:UIControlStateNormal];
     chat_btn.titleLabel.font = [UIFont systemFontOfSize:12.f];
@@ -188,6 +181,33 @@
     chat_btn.center = CGPointMake([UIScreen mainScreen].bounds.size.width - FUNC_BTN_MARGIN_2 * 4 - chat_btn.frame.size.width / 2, FUNC_VIEW_HEIGHT / 2);
     [chat_btn addTarget:self action:@selector(commentsBtnSelected) forControlEvents:UIControlEventTouchUpInside];
     [_funcActArea addSubview:chat_btn];
+    
+    
+    UIButton *chat_icon = [[UIButton alloc] init];
+    chat_icon.frame = CGRectMake(0, 0, CGRectGetHeight(chat_btn.frame), CGRectGetHeight(chat_btn.frame));
+    chat_icon.center = CGPointMake(chat_btn.center.x - CGRectGetWidth(chat_btn.frame) / 2 - CGRectGetHeight(chat_btn.frame) / 2, chat_btn.center.y);
+    [chat_icon addTarget:self action:@selector(commentsBtnSelected) forControlEvents:UIControlEventTouchUpInside];
+    [_funcActArea addSubview:chat_icon];
+    
+    
+    CALayer* chat_icon_layer = [CALayer layer];
+    chat_icon_layer.frame = CGRectMake(0, 0, CGRectGetHeight(chat_btn.frame) / 2, CGRectGetHeight(chat_btn.frame) / 2);
+    chat_icon_layer.contents = (id)[UIImage imageNamed:[resourceBundle pathForResource:@"home_chat" ofType:@"png"]].CGImage;
+    chat_icon_layer.position = CGPointMake(CGRectGetHeight(chat_btn.frame) / 2, CGRectGetHeight(chat_btn.frame) / 2);
+    [chat_icon.layer addSublayer:chat_icon_layer];
+    
+    
+//    [chat_btn setImage:[UIImage imageNamed:[resourceBundle pathForResource:@"home_chat" ofType:@"png"]] forState:UIControlStateNormal];
+
+//    CALayer* chat_icon = [CALayer layer];
+//    chat_icon.frame = CGRectMake(0, 0, FUNC_BTN_WIDTH_2, FUNC_BTN_HEIGHT_2);
+//    chat_icon.contents = (id)[UIImage imageNamed:[resourceBundle pathForResource:@"home_chat" ofType:@"png"]].CGImage;
+//    chat_icon.position = CGPointMake(-FUNC_BTN_WIDTH_2 + 5, FUNC_BTN_HEIGHT_2 / 2 + 1);
+//    [chat_btn.layer addSublayer:chat_icon];
+    
+    
+    
+//    [_funcActArea addSubview:chat_icon];
     /***********************************************************************************************/
 
     /***********************************************************************************************/

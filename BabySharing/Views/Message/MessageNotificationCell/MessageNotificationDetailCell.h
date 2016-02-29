@@ -20,8 +20,8 @@
 @end
 
 @interface MessageNotificationDetailCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UILabel *detailView;
-@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (strong, nonatomic) UILabel *postTimeLabel;
+@property (strong, nonatomic) UILabel *detailLabel;
 @property (weak, nonatomic) Notifications* notification;
 @property (weak, nonatomic) id<MessageNotificationCellDelegate> delegate;
 

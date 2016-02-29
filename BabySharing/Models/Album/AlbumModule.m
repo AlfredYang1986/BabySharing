@@ -28,105 +28,19 @@
     NSMutableArray<UIImage *> *imageArr = [NSMutableArray array];
     NSMutableArray<PHAsset *> *assetArr = [NSMutableArray array];
     CGSize size = CGSizeMake([UIScreen mainScreen].bounds.size.width / 3, [UIScreen mainScreen].bounds.size.width / 3);
-    dispatch_async(queue, ^{
         PHAsset *asset;
-        for (int i = 0; i < 10; i++) {
-            asset = [fetchResult objectAtIndex:i];
-            [assetArr addObject:asset];
-            NSLog(@"%@ === %d", @"iiiiii", i);
-            [imageManager requestImageForAsset:asset targetSize:size contentMode:PHImageContentModeAspectFit options:nil resultHandler:^(UIImage *result, NSDictionary *info) {
-                static int i =0;
-                if (result == nil) {
-                    NSLog(@"%@ === %@", @"result", @"nil");
-                } else {
-                    NSLog(@"%@ === %d", @"TTTTTT", ++i);
-                    [imageArr addObject:result];
-                }
-                
-                if ([asset isEqual:fetchResult.lastObject]) {
-                    dispatch_semaphore_signal(semaphore);
-                }
-            }];
-        }
-        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-        dispatch_async(dispatch_get_main_queue(), ^{
-            block(imageArr, assetArr);
-        });
-    });
-    
-    
-//    PHFetchOptions *options = [[PHFetchOptions alloc] init];
-//    options.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:YES]];
-//    PHFetchResult *fetchResult = [PHAsset fetchAssetsWithOptions:options];
-//    
-//    PHCachingImageManager *imageManager = [[PHCachingImageManager alloc] init];
-//    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-//    dispatch_queue_t queue = dispatch_queue_create("aaaaa", nil);
-//    NSMutableArray<UIImage *> *imageArr = [NSMutableArray array];
-//    NSMutableArray<PHAsset *> *assetArr = [NSMutableArray array];
-//    CGSize size = CGSizeMake([UIScreen mainScreen].bounds.size.width / 3, [UIScreen mainScreen].bounds.size.width / 3);
-//    dispatch_async(queue, ^{
-//        for (PHAsset *asset in fetchResult) {
-//            [imageManager requestImageForAsset:asset targetSize:size contentMode:PHImageContentModeAspectFit options:nil resultHandler:^(UIImage *result, NSDictionary *info) {
-//                if (result != nil) {
-//                    [imageArr addObject:result];
-//                }
-//                if ([asset isEqual:fetchResult.lastObject]) {
-//                    dispatch_semaphore_signal(semaphore);
-//                }
-//            }];
-//        }
-//        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            block(imageArr, assetArr);
-//        });
-//    });
-    
-//    dispatch_queue_t queue = dispatch_queue_create("getThumbnailImage", nil);
-//    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-//    // 获取所有相册
-//    
-//    //PHFetchResult *fetchResult = [PHCollectionList fetchTopLevelUserCollectionsWithOptions:nil];
-//    PHFetchOptions *options = [[PHFetchOptions alloc] init];
-//    options.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:YES]];
-//    PHFetchResult *fetchResult = [PHAsset fetchAssetsWithOptions:options];
-//    NSMutableArray<UIImage *> *imageArr = [NSMutableArray array];
-//    NSMutableArray<PHAsset *> *assetArr = [NSMutableArray array];
-//    PHCachingImageManager *imageManager = [[PHCachingImageManager alloc] init];
-//    CGSize size = CGSizeMake([UIScreen mainScreen].bounds.size.width / 3, [UIScreen mainScreen].bounds.size.width / 3);
-//    for (PHAsset *asset in fetchResult) {
-//        [assetArr addObject:asset];
-//        [imageManager requestImageForAsset:asset targetSize:size contentMode:PHImageContentModeAspectFit options:nil resultHandler:^(UIImage *result, NSDictionary *info) {
-//            [imageArr addObject:result];
-////            if ([asset isEqual:[fetchResult lastObject]]) {
-////                dispatch_semaphore_signal(semaphore);
-////            }
-//        }];
-//    }
-    
-//    PHFetchOptions *allPhotosOptions = [[PHFetchOptions alloc] init];
-//    allPhotosOptions.predicate = [NSPredicate predicateWithFormat:@"mediaType = %d",PHAssetMediaTypeImage];
-//    // 所有照片集合
-//    PHFetchResult *allPhotos = [PHAsset fetchAssetsWithOptions:allPhotosOptions];
-//    PHImageManager *imageManager = [[PHImageManager alloc] init];
-//    NSMutableArray<UIImage *> *imageArr = [NSMutableArray array];
-//    NSMutableArray<PHAsset *> *assetArr = [NSMutableArray array];
-//    dispatch_async(queue, ^{
-//        for (PHAsset *photo in allPhotos) {
-//            [assetArr addObject:photo];
-//            CGSize size = CGSizeMake([UIScreen mainScreen].bounds.size.width / 3, [UIScreen mainScreen].bounds.size.width / 3);
-//            [imageManager requestImageForAsset:photo targetSize:size contentMode:PHImageContentModeDefault options:nil resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
-//                [imageArr addObject:result];
-//                if ([photo isEqual:[allPhotos lastObject]]) {
-//                    dispatch_semaphore_signal(semaphore);
-//                }
-//            }];
-//        }
-//        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            block(imageArr, assetArr);
-//        });
-//    });
+    PHImageRequestOptions *option = [[PHImageRequestOptions alloc] init];
+    option.synchronous = YES;
+    for (int i = 0; i < fetchResult.count; i++) {
+        asset = [fetchResult objectAtIndex:i];
+        [assetArr addObject:asset];
+        NSLog(@"%@ === %d", @"iiiiii", i);
+        [imageManager requestImageForAsset:asset targetSize:size contentMode:PHImageContentModeAspectFit options:option resultHandler:^(UIImage *result, NSDictionary *info) {
+            [imageArr addObject:result];
+            NSLog(@"%@ === %lu", @"iamgeArr", (unsigned long)imageArr.count);
+        }];
+    }
+    block(imageArr, assetArr);
 }
 
 + (void)enumAllAlbumWithBlock:(AssetsFindishBlock)block {
@@ -154,33 +68,32 @@
     PHCachingImageManager *imageManager = [[PHCachingImageManager alloc] init];
     NSMutableArray<UIImage *> *imageArr = [NSMutableArray array];
     NSMutableArray<PHAsset *> *assetArr = [NSMutableArray array];
-    dispatch_async(queue, ^{
+    PHImageRequestOptions *option = [[PHImageRequestOptions alloc] init];
+//    dispatch_async(queue, ^{
         for (PHAsset *photo in fetchResult) {
             [assetArr addObject:photo];
             CGSize size = CGSizeMake([UIScreen mainScreen].bounds.size.width / 3, [UIScreen mainScreen].bounds.size.width / 3);
-            [imageManager requestImageForAsset:photo targetSize:size contentMode:PHImageContentModeDefault options:nil resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+            [imageManager requestImageForAsset:photo targetSize:size contentMode:PHImageContentModeDefault options:option resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
                 [imageArr addObject:result];
                 if ([photo isEqual:[fetchResult lastObject]]) {
                     dispatch_semaphore_signal(semaphore);
                 }
             }];
         }
-        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-        dispatch_async(dispatch_get_main_queue(), ^{
+//        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+//        dispatch_async(dispatch_get_main_queue(), ^{
             block(imageArr, assetArr);
-        });
-    });
+//        });
+//    });
 }
 
 + (void)getRealPhotoWithPHAsset:(PHAsset *)pHAsset block:(RealPhotoFindishBlock)block{
-    [[PHImageManager defaultManager] requestImageDataForAsset:pHAsset options:nil resultHandler:^(NSData * _Nullable imageData, NSString * _Nullable dataUTI, UIImageOrientation orientation, NSDictionary * _Nullable info) {
-        dispatch_queue_t queue = dispatch_queue_create("realPhoto", nil);
-        dispatch_async(queue, ^{
-            UIImage *image = [UIImage imageWithData:imageData];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                block(image);
-            });
-        });
+    PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
+    options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
+    options.networkAccessAllowed = YES;
+    [[PHImageManager defaultManager] requestImageDataForAsset:pHAsset options:options resultHandler:^(NSData * _Nullable imageData, NSString * _Nullable dataUTI, UIImageOrientation orientation, NSDictionary * _Nullable info) {
+        NSLog(@"%@ === %@", @"pHAsset", [info description]);
+        block([UIImage imageWithData:imageData]);
     }];
 }
 

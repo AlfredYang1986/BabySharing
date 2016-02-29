@@ -11,10 +11,16 @@
 @class GotyeOCMessage;
 @class LoginModel;
 
+@protocol ChatMessageCellDelegate <NSObject>
+
+- (void)didSelectedScreenPhotoForUserID:(NSString*)user_id;
+@end
+
 @interface ChatMessageCell : UITableViewCell
 
 @property (nonatomic, weak, setter=setGotyeOCMessage:) GotyeOCMessage* message;
 @property (nonatomic, weak) LoginModel* lm;
+@property (nonatomic, weak) id<ChatMessageCellDelegate> delegate;
 
 + (CGFloat)preferredHeightWithInputText:(NSString*)content;
 

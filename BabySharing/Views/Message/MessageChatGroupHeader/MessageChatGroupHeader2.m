@@ -103,7 +103,7 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    _chatContent.frame = CGRectMake(7 + CHAT_CONTENT_NAME_2_CONTENT_MARGIN + SCREEN_PHOTO_WIDTH + CHAT_CONTENT_LEFT_MARGIN, 0, MAX(name_layer.bounds.size.width, content_layer.bounds.size.width), name_layer.bounds.size.height + CHAT_CONTENT_NAME_2_CONTENT_MARGIN + content_layer.bounds.size.height);
+    _chatContent.frame = CGRectMake(7 + CHAT_CONTENT_NAME_2_CONTENT_MARGIN + SCREEN_PHOTO_WIDTH + CHAT_CONTENT_LEFT_MARGIN, 0, MAX(name_layer.bounds.size.width, content_layer.bounds.size.width) + 16, name_layer.bounds.size.height + CHAT_CONTENT_NAME_2_CONTENT_MARGIN + content_layer.bounds.size.height);
     layer.frame = CGRectMake(CHAT_CONTENT_NAME_2_CONTENT_MARGIN + SCREEN_PHOTO_WIDTH + CHAT_CONTENT_LEFT_MARGIN, 10.5, 7, 12);
     _contentContainer.frame = CGRectMake(_contentContainer.frame.origin.x, _contentContainer.frame.origin.y, [UIScreen mainScreen].bounds.size.width, name_layer.bounds.size.height + CHAT_CONTENT_NAME_2_CONTENT_MARGIN + content_layer.bounds.size.height);
 }

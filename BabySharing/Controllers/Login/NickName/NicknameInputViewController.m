@@ -78,6 +78,8 @@
 
 @synthesize fakeBar = _fakeBar;
 
+@synthesize gender = _gender;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -238,17 +240,15 @@
     _fakeBar = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 74)];
     _fakeBar.backgroundColor = [UIColor clearColor];
     
-    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 25)];
+    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 40)];
     NSString* filepath = [resourceBundle_dongda pathForResource:@"dongda_back_light" ofType:@"png"];
     CALayer * layer_btn = [CALayer layer];
     layer_btn.contents = (id)[UIImage imageNamed:filepath].CGImage;
     layer_btn.frame = CGRectMake(0, 0, 25, 25);
-    //    layer_btn.position = CGPointMake(10, barBtn.frame.size.height / 2);
-    layer_btn.position = CGPointMake(0, barBtn.frame.size.height / 2 + 5);
+    layer_btn.position = CGPointMake(40 / 2, 40 / 2);
     [barBtn.layer addSublayer:layer_btn];
     barBtn.center = CGPointMake(BACK_BTN_LEFT_MARGIN + barBtn.frame.size.width / 2, STATUS_BAR_HEIGHT + FAKE_BAR_HEIGHT / 2);
-    
-    [barBtn addTarget:self action:@selector(didPopViewController) forControlEvents:UIControlEventTouchDown];
+    [barBtn addTarget:self action:@selector(printaaaaa) forControlEvents:UIControlEventTouchUpInside];
     [_fakeBar addSubview:barBtn];
     [self.view addSubview:_fakeBar];
     [self.view bringSubviewToFront:_fakeBar];
@@ -256,6 +256,10 @@
     
     UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapGesture:)];
     [self.view addGestureRecognizer:tap];
+}
+
+- (void)printaaaaa {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didPopViewController {
@@ -339,6 +343,8 @@
     [dic setValue:auth_token forKey:@"auth_token"];
     [dic setValue:user_id forKey:@"user_id"];
     
+    [dic setValue:[NSNumber numberWithInteger:self.gender] forKey:@"gender"];
+    
     if ([_lm updateUserProfile:[dic copy]]) {
 //    if ([_lm sendScreenName:[inputView getInputName] forToken:auth_token andUserID:user_id]) {
         NSString* phoneNo = (NSString*)[_login_attr objectForKey:@"phoneNo"];
@@ -406,10 +412,12 @@
     if (sender.tag == -99) {
         mother_btn.selected = NO;
         father_btn.selected = YES;
+        self.gender = DongDaGenderFather;
         
     } else if (sender.tag == -98) {
         mother_btn.selected = YES;
         father_btn.selected = NO;
+        self.gender = DongDaGenderMother;
     }
 }
 

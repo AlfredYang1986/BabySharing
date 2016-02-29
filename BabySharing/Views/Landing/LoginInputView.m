@@ -261,6 +261,14 @@
     [confirm_area resignFirstResponder];
 }
 
+- (void)setFrame:(CGRect)frame {
+    [super setFrame:frame];
+}
+
+- (void)setCenter:(CGPoint)center {
+    [super setCenter:center];
+}
+
 //- (void)textFieldDidBeginEditing:(UITextField *)textField {
 //    [_delegate didStartEditing];
 //}

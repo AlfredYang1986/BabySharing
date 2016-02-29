@@ -167,10 +167,10 @@
 #pragma mark -- seg delegate
 - (void)segValueChanged2:(SearchSegView2 *)seg {
     if (seg.selectedIndex == 2) {
-        [seg setSegSelectedIndex:0];
+        [seg setSegSelectedIndex:-1];
         [[AppDelegate defaultAppDelegate].lm postContentOnQQzoneWithText:@"快来加入咚哒吧！！！" andImage:[UIImage imageNamed:[[NSBundle mainBundle] pathForResource:@"icon" ofType:@"png"]]];
     } else if (seg.selectedIndex == 1) {
-        [seg setSegSelectedIndex:0];
+        [seg setSegSelectedIndex:-1];
     } else if (seg.selectedIndex == 0) {
         
         AppDelegate* app = [UIApplication sharedApplication].delegate;
