@@ -48,8 +48,8 @@
 
 - (NSArray *)enumLocalTagWithType:(NSInteger)type{
     NSFetchRequest* request = [NSFetchRequest fetchRequestWithEntityName:@"LocalTag"];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"tag_userID = %@", @"1213213f"]];
-//    NSPredicate *predicate = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"tag_type = %ld", (long)type]];
+//    NSPredicate *predicate = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"tag_userID = %@", @"1213213f"]];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"tag_type = %ld", (long)type]];
     request.predicate = predicate;
     NSError *error;
     NSArray *arr = [self.managerDocument.managedObjectContext executeFetchRequest:request error:&error];

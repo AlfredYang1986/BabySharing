@@ -26,7 +26,6 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
-    // Configure the view for the selected state
 }
 
 
@@ -34,7 +33,9 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.albumImage = [[UIImageView alloc] init];
-        self.albumTitle = [[UILabel alloc] init];
+        self.albumTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 30)];
+        self.albumTitle.textAlignment = NSTextAlignmentLeft;
+        self.albumTitle.textColor = [UIColor colorWithRed:74.0 / 255.0 green:74.0 / 255.0 blue:74.0 / 255.0 alpha:1.0];
         [self.contentView addSubview:self.albumImage];
         [self.contentView addSubview: self.albumTitle];
     }
@@ -47,11 +48,33 @@
     self.albumTitle.center = CGPointMake(CGRectGetHeight(self.contentView.frame) + CGRectGetWidth(self.albumTitle.frame) / 2, CGRectGetHeight(self.contentView.frame) / 2);
 }
 
-- (void)setGroup:(ALAssetsGroup *)group {
-    _group = group;
-    [self.albumImage setImage:[UIImage imageWithCGImage:group.posterImage]];
-    self.albumTitle.text = [NSString stringWithFormat:@"%@ %ld", [group valueForProperty:ALAssetsGroupPropertyName], (long)[group numberOfAssets]];
-    [self.albumTitle sizeToFit];
+- (void)setAlbum:(NSObject *)album {
+    _album = album;
+    if ([_album isKindOfClass:[PHFetchResult class]]) {
+        PHFetchResult *fetchResult = (PHFetchResult *)_album;
+        PHAsset *firstAsset = [fetchResult firstObject];
+        PHCachingImageManager *imageManager = [[PHCachingImageManager alloc] init];
+        [imageManager requestImageForAsset:firstAsset targetSize:self.albumImage.frame.size contentMode:PHImageContentModeAspectFit options:nil resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+            self.albumImage.image = result;
+        }];
+        self.albumTitle.text = [NSString stringWithFormat:@"所有照片 (%lu)", (unsigned long)fetchResult.count];
+    } else if ([_album isKindOfClass:[PHCollection class]]) {
+        PHAssetCollection *assetCollection = (PHAssetCollection *)_album;
+        PHFetchResult *fetchResult = [PHAsset fetchAssetsInAssetCollection:assetCollection options:nil];
+        PHAsset *firstAsset = [fetchResult firstObject];
+        PHCachingImageManager *imageManager = [[PHCachingImageManager alloc] init];
+        [imageManager requestImageForAsset:firstAsset targetSize:CGSizeMake(self.albumImage.frame.size.width * 2, self.albumImage.frame.size.width * 2) contentMode:PHImageContentModeAspectFit options:nil resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+            self.albumImage.image = result;
+        }];
+        self.albumTitle.text = [NSString stringWithFormat:@"%@ (%lu)", assetCollection.localizedTitle, (unsigned long)fetchResult.count];
+    }
 }
+
+//- (void)setGroup:(ALAssetsGroup *)group {
+//    _group = group;
+//    [self.albumImage setImage:[UIImage imageWithCGImage:group.posterImage]];
+//    self.albumTitle.text = [NSString stringWithFormat:@"%@ %ld", [group valueForProperty:ALAssetsGroupPropertyName], (long)[group numberOfAssets]];
+//    [self.albumTitle sizeToFit];
+//}
 
 @end

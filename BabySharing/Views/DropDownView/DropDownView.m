@@ -33,8 +33,8 @@
     NSLog(@"show list");
     if (!isDroped) {
         CGFloat width = [UIScreen mainScreen].bounds.size.width;
-        items.bounds = CGRectMake(0, 0, width, [UIScreen mainScreen].bounds.size.height - 64);
-        [_delegate showContentsTableView:items];
+        albumTableView.bounds = CGRectMake(0, 0, width, [UIScreen mainScreen].bounds.size.height - 64);
+        [_delegate showContentsTableView:albumTableView];
         drop_down_layer.transform = CATransform3DMakeRotation(M_PI, 0, 0, 1);
         isDroped = !isDroped;
     } else {
@@ -46,9 +46,9 @@
     
     drop_down_layer.transform = CATransform3DMakeRotation(0, 0, 0, 1);
     [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        items.frame = CGRectMake(0, 64 - items.frame.size.height, items.frame.size.width, items.frame.size.height);
+        albumTableView.frame = CGRectMake(0, 64 - albumTableView.frame.size.height, albumTableView.frame.size.width, albumTableView.frame.size.height);
     } completion:^(BOOL finished) {
-        [items removeFromSuperview];
+        [albumTableView removeFromSuperview];
     }];
     isDroped = NO;
 }
@@ -67,15 +67,16 @@
     
     
     [self addTarget:self action:@selector(clickHandler:) forControlEvents:UIControlEventTouchDown];
-    items = [[UITableView alloc]init];
-    items.delegate = self;
-    items.dataSource = self;
-    items.scrollEnabled = NO;
-    items.separatorStyle = UITableViewCellSeparatorStyleNone;
-    UIView *footView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    [items setTableFooterView:footView];
-    [footView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissListFromSuper)]];
-    [items registerClass:[DropDownItem class] forCellReuseIdentifier:@"drop item"];
+    albumTableView = [[UITableView alloc]init];
+    albumTableView.delegate = self;
+    albumTableView.dataSource = self;
+    albumTableView.scrollEnabled = YES;
+    albumTableView.bounces = YES;
+    albumTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    UIView *footView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+//    [albumTableView setTableFooterView:footView];
+//    [footView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissListFromSuper)]];
+    [albumTableView registerClass:[DropDownItem class] forCellReuseIdentifier:@"drop item"];
 }
 
 - (id)init {
@@ -138,8 +139,6 @@
 #pragma mark -- table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"selet row");
-    [self setTitle:[_datasource titleForCellAtRow:indexPath.row inTableView:tableView] forState:UIControlStateNormal];
     [_delegate didSelectCell:[tableView cellForRowAtIndexPath:indexPath]];
     [self dismissListFromSuper];
 }
@@ -150,7 +149,6 @@
 
 #pragma mark -- table view datasource
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
     return [_datasource cellForRow:indexPath.row inTableView:tableView];
 }
 

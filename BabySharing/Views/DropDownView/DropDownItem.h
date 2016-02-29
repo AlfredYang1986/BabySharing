@@ -14,8 +14,9 @@
 @interface DropDownItem : UITableViewCell
 
 @property (nonatomic, weak) ALAssetsGroup* group;
-@property (nonatomic, weak) PHFetchResult *fetchResult; //包含了相册中相册的容器对象
+@property (nonatomic, weak) NSObject *album;//包含了相册中相册的容器对象
 @property (nonatomic, weak) PHCollection *collection;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;
+- (void)setTitle:(NSString *)title;
 @end

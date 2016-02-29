@@ -144,7 +144,7 @@
 #define TITLE_LABEL_WIDTH       100
 #define TITLE_LABEL_HEIGHT      44
     dropDownView = [[DropDownView alloc]initWithFrame:CGRectMake(0, 0, TITLE_LABEL_WIDTH, TITLE_LABEL_HEIGHT)];
-    [dropDownView setTitle:@"相机胶卷" forState:UIControlStateNormal];
+    [dropDownView setTitle:@"所有照片" forState:UIControlStateNormal];
     dropDownView.center = CGPointMake(width / 2, FAKE_NAVIGATION_BAR_HEIGHT / 2);
     
     dropDownView.datasource = self;
@@ -577,15 +577,7 @@
 // 获取所有照片
 - (void)enumAllAssetWithProprty:(NSString*)type {
     bLoadData = NO;
-//    [AlbumTest enumAllPhotoWithBlock:^(NSArray *result) {
-//        
-//        NSLog(@"%@ === %@", @"description", result);
-//    }];
-    
     [AlbumModule enumAllPhotoWithBlock:^(NSArray *thumbnailImage, NSArray<PHAsset *> *phAsset) {
-        
-        NSLog(@"%@ === %@", thumbnailImage, phAsset);
-    
         bLoadData = YES;
         images_arr = thumbnailImage;
         phAssetArr = phAsset;
@@ -607,31 +599,45 @@
 
 // 获取所有相册名称
 - (void)enumPhoteAlumName {
-    
-//    [AlbumModule enumAllAlbumWithBlock:^(NSArray *result) {
-//        album_name_arr = result;
-//    }];
-    [albumModule enumPhoteAlumNameWithBlock:^(NSArray *result) {
+    [AlbumModule enumAllAlbumWithBlock:^(NSArray *result) {
         album_name_arr = result;
     }];
+//    [albumModule enumPhoteAlumNameWithBlock:^(NSArray *result) {
+//        album_name_arr = result;
+//    }];
 }
 
 // 获取所有照片从相册
-- (void)enumPhotoAblumByAlbumName:(ALAssetsGroup*)group {
+- (void)enumPhotoAblumByAlbum:(PHFetchResult *)album {
     bLoadData = NO;
-    [albumModule enumPhotoAblumByAlbumName:group finishBlock:^(NSArray *result) {
+    [AlbumModule enumAllPhotoWithPHFetchResult:album block:^(NSArray<UIImage *> *thumbnailImage, NSArray<PHAsset *> *phAsset) {
         bLoadData = YES;
-        images_arr = result;
+        images_arr = thumbnailImage;
+        phAssetArr = phAsset;
         [images_select_arr removeAllObjects];
         [albumView reloadData];
     }];
+//    [albumModule enumPhotoAblumByAlbumName:group finishBlock:^(NSArray *result) {
+//        bLoadData = YES;
+//        images_arr = result;
+//        [images_select_arr removeAllObjects];
+//        [albumView reloadData];
+//    }];
 }
+
+//- (void)enumPhotoAblumByAlbumName:(ALAssetsGroup*)group {
+//    bLoadData = NO;
+//    [albumModule enumPhotoAblumByAlbumName:group finishBlock:^(NSArray *result) {
+//        bLoadData = YES;
+//        images_arr = result;
+//        [images_select_arr removeAllObjects];
+//        [albumView reloadData];
+//    }];
+//}
 
 
 #pragma mark -- PostTableCellDelegate --点击选择中的图片方法
 - (void)didSelectOneImageAtIndex:(NSInteger)index {
-    NSLog(@"select index %ld", (long)index);
-    
     if (!isAllowMutiSelection) {
         for (NSNumber* index in images_select_arr) {
             AlbumGridCell* tmp = [self queryCellByIndex:index.integerValue];
@@ -642,7 +648,6 @@
     
     [images_select_arr addObject:[NSNumber numberWithInteger:index]];
     [self changeMainContentWithPHAsset:[phAssetArr objectAtIndex:index]];
-//    [self changeMainContentWithAsset:[images_arr objectAtIndex:index]];
 }
 
 - (void)didUnSelectOneImageAtIndex:(NSInteger)index {
@@ -832,42 +837,54 @@
     } else if (seg.selectedIndex == 2) {
         [_delegate didSelectMovieBtn2:self];
     } else {
+        
     }
 
 }
 
 #pragma mark -- DropDownDatasource
 - (NSInteger)itemCount {
-//    return album_name_arr.count + 1;
     return album_name_arr.count;
 }
 
-- (UITableViewCell*)cellForRow:(NSInteger)row inTableView:(UITableView*)tableview {
-    DropDownItem* cell = [tableview dequeueReusableCellWithIdentifier:@"drop item"];
-    
+- (UITableViewCell *)cellForRow:(NSInteger)row inTableView:(UITableView*)tableview {
+    DropDownItem *cell = [tableview dequeueReusableCellWithIdentifier:@"drop item"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//    ALAssetsGroup *group = [album_name_arr objectAtIndex:row];
-//    cell.group = group;
-    cell.fetchResult = [album_name_arr objectAtIndex:row];
-    
+    cell.album = [album_name_arr objectAtIndex:row];
     return cell;
 }
 
 #pragma mark -- DropDownDelegate --得到相册
 - (void)didSelectCell:(UITableViewCell *)cell {
     DropDownItem *tmp = (DropDownItem *)cell;
-    [self enumPhotoAblumByAlbumName:tmp.group];
+    if ([tmp.album isKindOfClass:[PHFetchResult class]]) {
+        [self enumPhotoAblumByAlbum:(PHFetchResult *)tmp.album];
+    } else if([tmp.album isKindOfClass:[PHCollection class]]){
+        PHFetchOptions *allPhotosOptions = [[PHFetchOptions alloc] init];
+        allPhotosOptions.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:YES]];
+        PHFetchResult *fetchResult = [PHAsset fetchAssetsInAssetCollection:(PHAssetCollection *)tmp.album options:allPhotosOptions];
+        [self enumPhotoAblumByAlbum:fetchResult];
+    }
+//    [self enumPhotoAblumByAlbumName:tmp.album];
 }
 
-- (void)showContentsTableView:(UITableView*)tableview {
+- (void)showContentsTableView:(UITableView *)tableview {
     tableview.frame = CGRectMake(0, FAKE_NAVIGATION_BAR_HEIGHT, tableview.bounds.size.width, tableview.bounds.size.height);
     [self.view addSubview:tableview];
     [self.view bringSubviewToFront:bar];
 }
 
 - (NSString*)titleForCellAtRow:(NSInteger)row inTableView:(UITableView*)tableview {
-    ALAssetsGroup* group = [album_name_arr objectAtIndex:row];
-    return [group valueForProperty:ALAssetsGroupPropertyName];
+    if ([[album_name_arr objectAtIndex:row] isKindOfClass:[PHFetchResult class]]) {
+        return @"所有照片";
+    } else if ([[album_name_arr objectAtIndex:row] isKindOfClass:[PHCollection class]]) {
+        PHCollection *collection = (PHCollection *)[album_name_arr objectAtIndex:row];
+        return collection.localizedTitle;
+    } else {
+        return @"";
+    }
+//    ALAssetsGroup* group = [album_name_arr objectAtIndex:row];
+//    return [group valueForProperty:ALAssetsGroupPropertyName];
 }
 
 #pragma mark -- scroll view delegate

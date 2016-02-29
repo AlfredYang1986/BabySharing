@@ -21,31 +21,32 @@
     PHFetchOptions *options = [[PHFetchOptions alloc] init];
     options.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:YES]];
     PHFetchResult *fetchResult = [PHAsset fetchAssetsWithOptions:options];
-    
+    dispatch_queue_t queue = dispatch_queue_create("getThumbnailImage", nil);
+//    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     PHCachingImageManager *imageManager = [[PHCachingImageManager alloc] init];
-    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-    dispatch_queue_t queue = dispatch_queue_create("aaaaa", nil);
     NSMutableArray<UIImage *> *imageArr = [NSMutableArray array];
     NSMutableArray<PHAsset *> *assetArr = [NSMutableArray array];
     CGSize size = CGSizeMake([UIScreen mainScreen].bounds.size.width / 3, [UIScreen mainScreen].bounds.size.width / 3);
-        PHAsset *asset;
     PHImageRequestOptions *option = [[PHImageRequestOptions alloc] init];
+//     client may get several image results when the call is asynchronous or will get one result when the call is synchronous
+    option.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
     option.synchronous = YES;
-    for (int i = 0; i < fetchResult.count; i++) {
-        asset = [fetchResult objectAtIndex:i];
-        [assetArr addObject:asset];
-        NSLog(@"%@ === %d", @"iiiiii", i);
-        [imageManager requestImageForAsset:asset targetSize:size contentMode:PHImageContentModeAspectFit options:option resultHandler:^(UIImage *result, NSDictionary *info) {
-            [imageArr addObject:result];
-            NSLog(@"%@ === %lu", @"iamgeArr", (unsigned long)imageArr.count);
-        }];
-    }
-    block(imageArr, assetArr);
+    dispatch_async(queue, ^{
+        PHAsset *asset;
+        for (int i = 0; i < fetchResult.count; i++) {
+            asset = [fetchResult objectAtIndex:i];
+            [assetArr addObject:asset];
+            [imageManager requestImageForAsset:asset targetSize:size contentMode:PHImageContentModeAspectFit options:option resultHandler:^(UIImage *result, NSDictionary *info) {
+                [imageArr addObject:result];
+            }];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            block(imageArr, assetArr);
+        });
+    });
 }
 
 + (void)enumAllAlbumWithBlock:(AssetsFindishBlock)block {
-
-    
     // 获取所有相册
     PHFetchOptions *allPhotosOptions = [[PHFetchOptions alloc] init];
     allPhotosOptions.predicate = [NSPredicate predicateWithFormat:@"mediaType = %d",PHAssetMediaTypeImage];
@@ -55,44 +56,57 @@
     PHFetchResult *topLevelUserCollections = [PHCollectionList fetchTopLevelUserCollectionsWithOptions:nil];
     NSMutableArray *albumArr = [NSMutableArray array];
     [albumArr addObject:allPhotos];
+    allPhotosOptions.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:YES]];
     for (PHCollection *album in topLevelUserCollections) {
         [albumArr addObject:album];
     }
     block(albumArr);
 }
 
+/**
+ *  根据fetchResult<>获取所有的缩略图和图片对象PHAsset
+ *
+ *  @param fetchResult PHFetchResult<PHAsset *> 对象
+ *  @param block       返回缩略图和图片对象PHAsset数组
+ */
 + (void)enumAllPhotoWithPHFetchResult:(PHFetchResult *)fetchResult block:(PhotoFindishBlock)block {
     // 缩略图和PHAsset
     dispatch_queue_t queue = dispatch_queue_create("getThumbnailImage", nil);
-    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    //    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     PHCachingImageManager *imageManager = [[PHCachingImageManager alloc] init];
     NSMutableArray<UIImage *> *imageArr = [NSMutableArray array];
     NSMutableArray<PHAsset *> *assetArr = [NSMutableArray array];
+    CGSize size = CGSizeMake([UIScreen mainScreen].bounds.size.width / 3, [UIScreen mainScreen].bounds.size.width / 3);
     PHImageRequestOptions *option = [[PHImageRequestOptions alloc] init];
-//    dispatch_async(queue, ^{
-        for (PHAsset *photo in fetchResult) {
-            [assetArr addObject:photo];
-            CGSize size = CGSizeMake([UIScreen mainScreen].bounds.size.width / 3, [UIScreen mainScreen].bounds.size.width / 3);
-            [imageManager requestImageForAsset:photo targetSize:size contentMode:PHImageContentModeDefault options:option resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+    //     client may get several image results when the call is asynchronous or will get one result when the call is synchronous
+    option.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
+    option.synchronous = YES;
+    dispatch_async(queue, ^{
+        PHAsset *asset;
+        for (int i = 0; i < fetchResult.count; i++) {
+            asset = [fetchResult objectAtIndex:i];
+            [assetArr addObject:asset];
+            [imageManager requestImageForAsset:asset targetSize:size contentMode:PHImageContentModeAspectFit options:option resultHandler:^(UIImage *result, NSDictionary *info) {
                 [imageArr addObject:result];
-                if ([photo isEqual:[fetchResult lastObject]]) {
-                    dispatch_semaphore_signal(semaphore);
-                }
             }];
         }
-//        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-//        dispatch_async(dispatch_get_main_queue(), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
             block(imageArr, assetArr);
-//        });
-//    });
+        });
+    });
 }
 
+/**
+ *  根据pHAsset获取大图
+ *
+ *  @param pHAsset 资源对象
+ *  @param block  返回大图
+ */
 + (void)getRealPhotoWithPHAsset:(PHAsset *)pHAsset block:(RealPhotoFindishBlock)block{
     PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
     options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
     options.networkAccessAllowed = YES;
     [[PHImageManager defaultManager] requestImageDataForAsset:pHAsset options:options resultHandler:^(NSData * _Nullable imageData, NSString * _Nullable dataUTI, UIImageOrientation orientation, NSDictionary * _Nullable info) {
-        NSLog(@"%@ === %@", @"pHAsset", [info description]);
         block([UIImage imageWithData:imageData]);
     }];
 }

@@ -22,7 +22,7 @@
 @end
 
 @interface DropDownView : UIButton <UITableViewDataSource, UITableViewDelegate> {
-    UITableView* items;
+    UITableView *albumTableView ;
 }
 
 @property (nonatomic, weak) id<DropDownDatasource> datasource;
