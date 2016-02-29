@@ -17,7 +17,9 @@
 #import "PostPreViewEffectController.h"
 #import "OBShapedButton.h"
 #import "SearchSegView2.h"
+#import "ProgressLayer.h"
 
+#define UNITLENGTH ([UIScreen mainScreen].bounds.size.width - 4) / 15
 #define MOVIE_MAX_SECONDS       15
 #define MOVIE_CALL_BACK_STEP    (1.0 / 12.0)
 //#define FAKE_NAVIGATION_BAR_HEIGHT 49
@@ -48,8 +50,9 @@
     CALayer* inner_take_btn_layer;
     
     // progress layer
-    CALayer* progress_layer;
-    CALayer* progress_using_layer;
+//    CALayer* progress_using_layer;
+    ProgressLayer *progress_using_layer;
+
     
     // timer for progress
     NSTimer* timer;
@@ -60,6 +63,7 @@
     
     // delect btn
     UIButton* delete_current_movie_btn;
+    NSMutableArray<ProgressLayer *> *layerSectionArr;
 }
 
 @end
@@ -176,7 +180,7 @@
 #define PHOTO_TAKEN_BTN_WIDTH                   92
 #define PHOTO_TAKEN_BTN_HEIGHT                  PHOTO_TAKEN_BTN_WIDTH
 #define PHOTO_TAKEN_BTN_MODIFY_MARGIN           -15
-    take_btn = [[OBShapedButton alloc]init];
+    take_btn = [[OBShapedButton alloc] init];
     [take_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"post_movie_btn" ofType:@"png"]] forState:UIControlStateNormal];
     [take_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"post_movie_btn_down" ofType:@"png"]] forState:UIControlStateHighlighted];
     [self.view addSubview:take_btn];
@@ -220,18 +224,13 @@
     /**
      * progress bar for movie
      */
-    progress_layer = [CALayer layer];
-    progress_layer.borderColor = [UIColor colorWithWhite:0.1098 alpha:1.f].CGColor;
-    progress_layer.borderWidth = 4.f;
-    progress_layer.frame = CGRectMake(0, height, width, 4);
-    [self.view.layer addSublayer:progress_layer];
-    
-    progress_using_layer = [CALayer layer];
+    progress_using_layer = [ProgressLayer layer];
     progress_using_layer.borderColor = [UIColor whiteColor].CGColor;
     progress_using_layer.borderWidth = 4.f;
     progress_using_layer.frame = CGRectMake(0, height, 0, 4);
     [self.view.layer addSublayer:progress_using_layer];
     
+    layerSectionArr = [NSMutableArray array];
     timer = [NSTimer scheduledTimerWithTimeInterval: MOVIE_CALL_BACK_STEP //1.0 / 12.0
                                              target: self
                                            selector: @selector(handleTimer:)
@@ -239,15 +238,15 @@
                                             repeats: YES];
     [timer setFireDate:[NSDate distantFuture]]; // stop
 }
-//    [timer setFireDate:[NSDate distantPast]]; // start
 
-- (void)handleTimer:(NSTimer*)sender {
+- (void)handleTimer:(NSTimer *)sender {
+
     seconds += MOVIE_CALL_BACK_STEP;
-    
     CGFloat presentage = seconds / MOVIE_MAX_SECONDS > 1.0 ? 1.0 : seconds / MOVIE_MAX_SECONDS;
     CGFloat width = [UIScreen mainScreen].bounds.size.width * presentage;
-
     progress_using_layer.frame = CGRectMake(progress_using_layer.frame.origin.x, progress_using_layer.frame.origin.y, width, progress_using_layer.frame.size.height);
+    
+    NSLog(@"MonkeyHengLog: %@ === %@", [progress_using_layer description], [[progress_using_layer.sublayers lastObject] description]);
     
     if (seconds > MOVIE_MAX_SECONDS) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -326,14 +325,11 @@
                                   animations:^(CGFloat progress) {
                                       inner_take_btn_layer.frame = INTUInterpolateCGRect(rc_start, rc_end, progress);
                                       inner_take_btn_layer.cornerRadius = INTUInterpolateCGFloat(radius_start, radius_end, progress);
-                                      // NSLog(@"Progress: %.2f", progress);
                                   }
                                   completion:^(BOOL finished) {
                                       // NOTE: When passing INTUAnimationOptionRepeat, this completion block is NOT executed at the end of each cycle. It will only run if the animation is canceled.
-                                      NSLog(@"%@", finished ? @"Animation Completed" : @"Animation Canceled");
-                                      // self.animationID = NSNotFound;
+                                      [progress_using_layer setPointWithTime:seconds];
                                       [timer setFireDate:[NSDate distantPast]]; // start
-                                      
                                   }];
 }
 
@@ -355,47 +351,34 @@
                                   }
                                   completion:^(BOOL finished) {
                                       // NOTE: When passing INTUAnimationOptionRepeat, this completion block is NOT executed at the end of each cycle. It will only run if the animation is canceled.
-                                      NSLog(@"%@", finished ? @"Animation Completed" : @"Animation Canceled");
-                                      // self.animationID = NSNotFound;
                                       [timer setFireDate:[NSDate distantFuture]];
                                   }];
 }
 
 - (void)didSelectTakePicBtn {
     if (!isRecording) {
-        
         if (seconds > MOVIE_MAX_SECONDS) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"视频过长" message:@"视频不准超过15秒" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
             [alert show];
             return;
         }
-        
         NSString* strDir = [TmpFileStorageModel BMTmpMovieDir];
         NSString *testfile = [strDir stringByAppendingPathComponent:[TmpFileStorageModel generateFileName]];
         NSString* path = [testfile stringByAppendingPathExtension:@"mp4"];
-        
         dis = [NSURL fileURLWithPath:path];
-        
         movieWriter = [[GPUImageMovieWriter alloc] initWithMovieURL:dis size:CGSizeMake(480.0, 640.0)];
         movieWriter.encodingLiveVideo = YES;
-        
         [filter addTarget:movieWriter];
         videoCamera.audioEncodingTarget = movieWriter;
         isRecording = true;
-//        [_takeBtn setTitle:@"stop" forState:UIControlStateNormal];
-        
         [self startRecordingAnimation];
         [movieWriter startRecording];
-        
         delete_current_movie_btn.hidden = NO;
-        
     } else {
         take_btn.enabled = NO;
         [filter removeTarget:movieWriter];
         videoCamera.audioEncodingTarget = nil;
-        
         [self endRecordingAnimation];
-        
         [movieWriter finishRecordingWithCompletionHandler:^{
             // save to photo Album
             ALAssetsLibrary* assetsLibrary = [[ALAssetsLibrary alloc] init];
@@ -409,12 +392,10 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 [movie_list addObject:dis];
                 dis = nil;
-//                [_takeBtn setTitle:@"start" forState:UIControlStateNormal];
                 take_btn.enabled = YES;
                 isRecording = false;
             });
         }];
-        NSLog(@"Movie completed");
     }
 }
 
@@ -461,18 +442,10 @@
 #pragma mark -- MovieActionProtocol
 - (void)MergeMovieSuccessfulWithFinalURL:(NSURL *)url {
     NSLog(@"Merge Movie Successful");
-//    [self dismissCVViewController:nil];
-
     PostPreViewEffectController * distination = [[PostPreViewEffectController alloc]init];
     distination.editing_movie = url;
     distination.type = PostPreViewMovie;
     [self.navigationController pushViewController:distination animated:YES];
-    
-//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"PostPreView" bundle:nil];
-//    PostPreViewController* postNav = [storyboard instantiateViewControllerWithIdentifier:@"PostPreView"];
-//    postNav.type = PostPreViewMovie;
-//    postNav.movieURL = url;
-//    [self.navigationController pushViewController:postNav animated:YES];
 }
 
 #pragma mark -- search delegate
@@ -482,7 +455,6 @@
         
     } else if (seg.selectedIndex == 1) {
         [_delegate didSelectCameraBtn2:self];
-        
     } else {
         
     }
@@ -495,12 +467,20 @@
         [view show];
         return;
     }
-   
-    progress_using_layer.frame = CGRectMake(progress_using_layer.frame.origin.x, progress_using_layer.frame.origin.y, 0, progress_using_layer.frame.size.height);
-//    [timer setFireDate:[NSDate distantFuture]]; // stop
-    seconds = 0.f;
-    [movie_list removeAllObjects];
     
-    delete_current_movie_btn.hidden = YES;
+    [progress_using_layer deletePoint];
+    seconds = [progress_using_layer getCurrentTime];
+    [movie_list removeLastObject];
+    if (movie_list.count == 0) {
+        delete_current_movie_btn.hidden = YES;
+    }
+    
+//    progress_using_layer.frame = CGRectMake(progress_using_layer.frame.origin.x, progress_using_layer.frame.origin.y, 0, progress_using_layer.frame.size.height);
+//    seconds = 0.f;
+//    [movie_list removeAllObjects];
+//    delete_current_movie_btn.hidden = YES;
 }
+
+
+
 @end

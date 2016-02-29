@@ -140,7 +140,7 @@
      * action buttons
      */
     CGFloat last_height = [UIScreen mainScreen].bounds.size.height - height;
-    take_btn = [[OBShapedButton alloc]init];
+    take_btn = [[OBShapedButton alloc] init];
     [take_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"post_take_btn" ofType:@"png"]] forState:UIControlStateNormal];
     [take_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"post_take_btn_down" ofType:@"png"]] forState:UIControlStateHighlighted];
     [self.view addSubview:take_btn];
@@ -378,7 +378,6 @@
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 PostPreViewEffectController * distination = [[PostPreViewEffectController alloc]init];
-                CGFloat width = [UIScreen mainScreen].bounds.size.width;
                 distination.cutted_img = [self clipImage:processedImage withRect:CGRectMake(0, processedImage.size.height - processedImage.size.width, processedImage.size.width, processedImage.size.width)];
                 distination.type = PostPreViewPhote;
                 sleep(0.5);

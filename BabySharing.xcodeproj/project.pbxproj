@@ -65,6 +65,10 @@
 		70E06F881C4F989700B740CD /* SearchAddTimeDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E06F871C4F989700B740CD /* SearchAddTimeDelegate.m */; };
 		70EF02D21C22CE7A00DABCFC /* PostPublichViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EF02D11C22CE7A00DABCFC /* PostPublichViewController.m */; };
 		70F5014B1C23ADC2007769F4 /* PostPreview.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70F5014A1C23ADC2007769F4 /* PostPreview.storyboard */; };
+		A0423D251C84253700039991 /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0423D231C84253700039991 /* GPUImage.framework */; };
+		A0423D261C84253700039991 /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0423D241C84253700039991 /* libGPUImage.a */; };
+		A0423D291C84374400039991 /* ProgressLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A0423D281C84374400039991 /* ProgressLayer.m */; };
+		A0423D2F1C8449AE00039991 /* PointLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A0423D2E1C8449AE00039991 /* PointLayer.m */; };
 		A08AE9541C7E9C1A0029B660 /* libiconv.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A08AE9531C7E9C1A0029B660 /* libiconv.2.dylib */; };
 		A09DF94E1C80440C00484FAB /* AlbumCollectionViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A09DF94D1C80440C00484FAB /* AlbumCollectionViewDelegate.m */; };
 		A09DF9511C8044C500484FAB /* PhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A09DF9501C8044C500484FAB /* PhotoCollectionViewCell.m */; };
@@ -83,7 +87,6 @@
 		A0C4D8271C8208D400F55B20 /* LocalTagManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A0C4D8261C8208D400F55B20 /* LocalTagManager.m */; };
 		A0E5126A1C7EDEDB00A7E947 /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A0E512681C7EDEDB00A7E947 /* TencentOpenApi_IOS_Bundle.bundle */; };
 		A0E5126B1C7EDEDB00A7E947 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0E512691C7EDEDB00A7E947 /* TencentOpenAPI.framework */; };
-		A0F2B3D81C7EFEF20090EF32 /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0F2B3D71C7EFEF20090EF32 /* libGPUImage.a */; };
 		EE03E9831B4FABFB00F21EF5 /* AlbumModule.m in Sources */ = {isa = PBXBuildFile; fileRef = EE03E9821B4FABFB00F21EF5 /* AlbumModule.m */; };
 		EE0CEC541BDB13070016B6F4 /* AlreadLogedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0CEC421BDB13070016B6F4 /* AlreadLogedViewController.m */; };
 		EE0CEC551BDB13070016B6F4 /* ChooseAreaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0CEC451BDB13070016B6F4 /* ChooseAreaViewController.m */; };
@@ -474,6 +477,12 @@
 		70EF02D01C22CE7A00DABCFC /* PostPublichViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostPublichViewController.h; sourceTree = "<group>"; };
 		70EF02D11C22CE7A00DABCFC /* PostPublichViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostPublichViewController.m; sourceTree = "<group>"; };
 		70F5014A1C23ADC2007769F4 /* PostPreview.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PostPreview.storyboard; sourceTree = "<group>"; };
+		A0423D231C84253700039991 /* GPUImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GPUImage.framework; sourceTree = "<group>"; };
+		A0423D241C84253700039991 /* libGPUImage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGPUImage.a; sourceTree = "<group>"; };
+		A0423D271C84374400039991 /* ProgressLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressLayer.h; sourceTree = "<group>"; };
+		A0423D281C84374400039991 /* ProgressLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressLayer.m; sourceTree = "<group>"; };
+		A0423D2D1C8449AE00039991 /* PointLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PointLayer.h; sourceTree = "<group>"; };
+		A0423D2E1C8449AE00039991 /* PointLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PointLayer.m; sourceTree = "<group>"; };
 		A08AE9531C7E9C1A0029B660 /* libiconv.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.2.dylib; path = /usr/lib/libiconv.2.dylib; sourceTree = "<absolute>"; };
 		A09DF94C1C80440C00484FAB /* AlbumCollectionViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumCollectionViewDelegate.h; sourceTree = "<group>"; };
 		A09DF94D1C80440C00484FAB /* AlbumCollectionViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumCollectionViewDelegate.m; sourceTree = "<group>"; };
@@ -512,7 +521,6 @@
 		A0C4D8261C8208D400F55B20 /* LocalTagManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalTagManager.m; sourceTree = "<group>"; };
 		A0E512681C7EDEDB00A7E947 /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
 		A0E512691C7EDEDB00A7E947 /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
-		A0F2B3D71C7EFEF20090EF32 /* libGPUImage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGPUImage.a; sourceTree = "<group>"; };
 		EE03E9811B4FABFB00F21EF5 /* AlbumModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumModule.h; sourceTree = "<group>"; };
 		EE03E9821B4FABFB00F21EF5 /* AlbumModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumModule.m; sourceTree = "<group>"; };
 		EE0CEC411BDB13070016B6F4 /* AlreadLogedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlreadLogedViewController.h; sourceTree = "<group>"; };
@@ -862,7 +870,6 @@
 		EEAACDA41B44EEB500D05C0B /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		EEAACDA61B44EEBF00D05C0B /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		EEAACDA81B44EEC700D05C0B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		EEAACDBA1B44FAA300D05C0B /* GPUImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GPUImage.framework; sourceTree = "<group>"; };
 		EEB3DDCE1B7B0505003750A2 /* DropDownMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropDownMenu.h; sourceTree = "<group>"; };
 		EEB3DDCF1B7B0505003750A2 /* DropDownMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropDownMenu.m; sourceTree = "<group>"; };
 		EEB4C8B11BFC334B0023E2AD /* UserHomeViewDataDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserHomeViewDataDelegate.h; sourceTree = "<group>"; };
@@ -1016,7 +1023,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				706563B71C817580008BBAC8 /* Contacts.framework in Frameworks */,
-				A0F2B3D81C7EFEF20090EF32 /* libGPUImage.a in Frameworks */,
 				A08AE9541C7E9C1A0029B660 /* libiconv.2.dylib in Frameworks */,
 				EE40826A1B70C18E0094A88B /* libstdc++.dylib in Frameworks */,
 				EE4082681B70C1850094A88B /* libstdc++.6.0.9.dylib in Frameworks */,
@@ -1035,6 +1041,7 @@
 				EEAACD9B1B44EDEB00D05C0B /* libz.dylib in Frameworks */,
 				EEAACD991B44EDD700D05C0B /* libsqlite3.0.dylib in Frameworks */,
 				EEAACD971B44ED8600D05C0B /* SystemConfiguration.framework in Frameworks */,
+				A0423D261C84253700039991 /* libGPUImage.a in Frameworks */,
 				EEAACD951B44ED7B00D05C0B /* libc++.dylib in Frameworks */,
 				EEAACD8E1B44ECDD00D05C0B /* CoreMedia.framework in Frameworks */,
 				EEAACD8F1B44ECDD00D05C0B /* CoreVideo.framework in Frameworks */,
@@ -1045,6 +1052,7 @@
 				EEAACD931B44ECDD00D05C0B /* AVFoundation.framework in Frameworks */,
 				A0A5C53E1C7DB1DF00F07FE8 /* libWeiboSDK.a in Frameworks */,
 				EEAACD801B44EBDE00D05C0B /* MediaPlayer.framework in Frameworks */,
+				A0423D251C84253700039991 /* GPUImage.framework in Frameworks */,
 				EEAACD811B44EBDE00D05C0B /* libicucore.dylib in Frameworks */,
 				EEAACD751B44EA2D00D05C0B /* libWeChatSDK.a in Frameworks */,
 			);
@@ -1225,6 +1233,15 @@
 				70E06F871C4F989700B740CD /* SearchAddTimeDelegate.m */,
 			);
 			path = TimeSearch;
+			sourceTree = "<group>";
+		};
+		A0423D221C84253700039991 /* libGPUImage */ = {
+			isa = PBXGroup;
+			children = (
+				A0423D231C84253700039991 /* GPUImage.framework */,
+				A0423D241C84253700039991 /* libGPUImage.a */,
+			);
+			path = libGPUImage;
 			sourceTree = "<group>";
 		};
 		A0A5C52D1C7DAD0500F07FE8 /* libs */ = {
@@ -1738,9 +1755,9 @@
 		EEAAC8EF1B44E81A00D05C0B = {
 			isa = PBXGroup;
 			children = (
+				A0423D221C84253700039991 /* libGPUImage */,
 				EEAACD791B44EA8800D05C0B /* BabySharing.mobileprovision */,
 				EE4082501B70C0CE0094A88B /* gotyeapi */,
-				EEAACDB91B44FAA300D05C0B /* libGPUImage */,
 				EEAACD5E1B44EA2D00D05C0B /* libQQSDK */,
 				EEAACD611B44EA2D00D05C0B /* libWeChatSDK */,
 				A0A5C5301C7DB1DF00F07FE8 /* libWeiboSDK */,
@@ -1850,6 +1867,10 @@
 				EEAACB061B44E90300D05C0B /* CVViewController2.h */,
 				EEAACB071B44E90300D05C0B /* CVViewController2.m */,
 				EEAACB081B44E90300D05C0B /* MovieNib.storyboard */,
+				A0423D271C84374400039991 /* ProgressLayer.h */,
+				A0423D281C84374400039991 /* ProgressLayer.m */,
+				A0423D2D1C8449AE00039991 /* PointLayer.h */,
+				A0423D2E1C8449AE00039991 /* PointLayer.m */,
 			);
 			path = Camera;
 			sourceTree = "<group>";
@@ -2395,15 +2416,6 @@
 			name = Main;
 			sourceTree = "<group>";
 		};
-		EEAACDB91B44FAA300D05C0B /* libGPUImage */ = {
-			isa = PBXGroup;
-			children = (
-				A0F2B3D71C7EFEF20090EF32 /* libGPUImage.a */,
-				EEAACDBA1B44FAA300D05C0B /* GPUImage.framework */,
-			);
-			path = libGPUImage;
-			sourceTree = "<group>";
-		};
 		EEB4C8B71BFC823C0023E2AD /* QueryCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -2938,7 +2950,7 @@
 		EEAAC8F01B44E81A00D05C0B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = BM;
 				TargetAttributes = {
 					EEAAC8F71B44E81A00D05C0B = {
@@ -3098,6 +3110,7 @@
 				EE262C991C1958F8008DCC4E /* DONNotificationDelegate.m in Sources */,
 				EEAACCE21B44E90400D05C0B /* QueryContent+ContextOpt.m in Sources */,
 				EEAACCCC1B44E90400D05C0B /* INTUSpringSolver.c in Sources */,
+				A0423D2F1C8449AE00039991 /* PointLayer.m in Sources */,
 				A0C4D8221C81FC7900F55B20 /* LocalTag+CoreDataProperties.m in Sources */,
 				EE26D7801C1EC70F00342E02 /* FoundSearchModel.m in Sources */,
 				EE0CEC551BDB13070016B6F4 /* ChooseAreaViewController.m in Sources */,
@@ -3237,6 +3250,7 @@
 				EEAACCE11B44E90400D05C0B /* QueryComments.m in Sources */,
 				70D15B471C5B64C9007AC9AB /* MJRefreshHeader.m in Sources */,
 				EE5C7E4F1B511CC000104CAB /* AlbumViewController2.m in Sources */,
+				A0423D291C84374400039991 /* ProgressLayer.m in Sources */,
 				EEBE1B6F1C17CA9400EAA9D2 /* DongDaTabBar.m in Sources */,
 				EEAACD411B44E90400D05C0B /* PhotoPreViewEditView.m in Sources */,
 				EE20BED41B6F430D00DE8455 /* OwnerQueryModel.m in Sources */,
@@ -3369,6 +3383,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -3449,7 +3464,7 @@
 					"$(PROJECT_DIR)/libQQSDK/TencentOpenAPI.framework/Headers",
 				);
 				INFOPLIST_FILE = BabySharing/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3489,7 +3504,7 @@
 					"$(PROJECT_DIR)/libQQSDK/TencentOpenAPI.framework/Headers",
 				);
 				INFOPLIST_FILE = BabySharing/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3524,6 +3539,7 @@
 				);
 				INFOPLIST_FILE = BabySharingTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "BM.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BabySharing.app/BabySharing";
 			};
@@ -3539,6 +3555,7 @@
 				);
 				INFOPLIST_FILE = BabySharingTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "BM.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BabySharing.app/BabySharing";
 			};
