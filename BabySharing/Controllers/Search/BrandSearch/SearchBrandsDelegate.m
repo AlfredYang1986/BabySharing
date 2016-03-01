@@ -48,6 +48,10 @@
 
 }
 
+- (NSString*)getSearchPlaceHolder {
+    return @"搜索品牌标签";
+}
+
 #pragma mark -- table view delegate and datasource
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
     return indexPath.section != 0;

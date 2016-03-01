@@ -26,6 +26,7 @@ typedef void(^SearchCallback)(BOOL success, NSArray* data);
 - (NSArray*)enumedData;
 - (NSArray*)enumedDataWithPredicate:(NSPredicate*)pred;
 - (NSString*)enumedDataAtIndex:(NSInteger)index;
+- (NSString*)getSearchPlaceHolder;
 
 @optional
 - (void)asyncQueryDataWithFinishCallback:(SearchCallback)block;

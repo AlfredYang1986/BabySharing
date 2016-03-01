@@ -12,6 +12,8 @@
 #import "FoundHotTagsCell.h"
 #import "DongDaSearchBar2.h"
 
+#import <objc/runtime.h>
+
 @interface SearchViewController () <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet DongDaSearchBar2 *searchBar;
@@ -55,12 +57,18 @@
     _searchBar.cancleBtn.layer.cornerRadius = 5.f;
     _searchBar.cancleBtn.clipsToBounds = YES;
     _searchBar.cancleBtn.titleLabel.font = [UIFont systemFontOfSize:14.f];
-    _searchBar.placeholder = @"搜索角色标签";
-    
+    _searchBar.placeholder = [_delegate getSearchPlaceHolder];// @"搜索角色标签";
     [_searchBar setPostLayoutSize:CGSizeMake(61, 30)];
     
     _bkView.backgroundColor =  [UIColor colorWithWhite:0.1098 alpha:1.f];
     [_delegate collectData];
+   
+//    Class cls = [_delegate class];
+//    IMP imp = class_getMethodImplementation(cls, @selector(getSearchPlaceHolder));
+//    if (imp) {
+//        _searchBar.placeholder = imp();
+//    }
+//    Method m = class_getClassMethod(cls, @selector(getSearchPlaceHolder));
     
     UILabel* lb = [[UILabel alloc]init];
     lb.text = [_delegate getControllerTitle];

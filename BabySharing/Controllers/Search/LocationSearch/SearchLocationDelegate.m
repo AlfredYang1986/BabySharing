@@ -42,6 +42,10 @@
     return _fm;
 }
 
+- (NSString*)getSearchPlaceHolder {
+    return @"搜索地点标签";
+}
+
 - (void)collectData {
     
 }

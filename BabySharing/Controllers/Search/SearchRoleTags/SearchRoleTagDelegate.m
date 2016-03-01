@@ -64,6 +64,10 @@ typedef void(^queryRoleTagFinishBlock)(BOOL success, NSString* msg, NSArray* res
     }
 }
 
+- (NSString*)getSearchPlaceHolder {
+    return @"搜索角色标签";
+}
+
 - (void)queryRoleTagsWithStartIndex:(NSInteger)skip andLenth:(NSInteger)take withFinishBlock:(queryRoleTagFinishBlock)block {
 //    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
     

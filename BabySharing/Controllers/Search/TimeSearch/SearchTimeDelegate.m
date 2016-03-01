@@ -40,6 +40,10 @@
    return _fm;
 }
 
+- (NSString*)getSearchPlaceHolder {
+    return @"搜索时刻标签";
+}
+
 - (void)collectData {
     
 }
