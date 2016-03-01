@@ -1,13 +1,12 @@
 //
-//  PersonalCentreTmpViewController2.h
-//  BabySharing
+//  PersonalCentreTmpViewController.h
+//  YYBabyAndMother
 //
-//  Created by Alfred Yang on 3/1/16.
-//  Copyright © 2016 BM. All rights reserved.
+//  Created by Alfred Yang on 23/01/2015.
+//  Copyright (c) 2015 YY. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-
 #import "PersonalCenterProtocol.h"
 
 @interface PersonalCentreTmpViewController : UIViewController

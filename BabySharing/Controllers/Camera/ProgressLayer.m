@@ -12,8 +12,7 @@
 
 #define POINT_WIDTH     2
 
-@implementation ProgressLayer
-{
+@implementation ProgressLayer {
     NSMutableArray<PointLayer *> *pointArr;
     CGFloat currentTime;
 }

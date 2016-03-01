@@ -636,23 +636,30 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ProfileBgImage" translatesAutoresizingMaskIntoConstraints="NO" id="1x2-ug-oMe">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="yJf-GU-xty">
-                                <rect key="frame" x="0.0" y="0.0" width="612" height="551"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="bottomMargin" secondItem="1x2-ug-oMe" secondAttribute="bottom" id="2Os-c0-X23"/>
                             <constraint firstItem="yJf-GU-xty" firstAttribute="top" secondItem="C4t-58-Pk8" secondAttribute="bottom" constant="-20" id="Gqr-Ji-Azc"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="1x2-ug-oMe" secondAttribute="trailing" constant="-20" id="MEQ-Bg-gtN"/>
                             <constraint firstItem="yJf-GU-xty" firstAttribute="top" secondItem="C4t-58-Pk8" secondAttribute="bottom" constant="-20" id="SUQ-xH-0JJ"/>
                             <constraint firstItem="yJf-GU-xty" firstAttribute="top" secondItem="Rt0-4B-ha8" secondAttribute="topMargin" constant="20" id="baX-9a-iy3"/>
                             <constraint firstItem="yJf-GU-xty" firstAttribute="top" secondItem="Rt0-4B-ha8" secondAttribute="topMargin" id="cZs-ce-TYj"/>
                             <constraint firstAttribute="trailingMargin" secondItem="yJf-GU-xty" secondAttribute="trailing" constant="-16" id="dsO-EU-DMy"/>
+                            <constraint firstItem="1x2-ug-oMe" firstAttribute="leading" secondItem="Rt0-4B-ha8" secondAttribute="leadingMargin" constant="-20" id="eWm-R0-RdA"/>
                             <constraint firstItem="yJf-GU-xty" firstAttribute="top" secondItem="C4t-58-Pk8" secondAttribute="bottom" id="juq-PH-Vz7"/>
                             <constraint firstItem="knz-W5-fbc" firstAttribute="top" secondItem="yJf-GU-xty" secondAttribute="bottom" id="l5s-sw-BEQ"/>
                             <constraint firstItem="yJf-GU-xty" firstAttribute="leading" secondItem="Rt0-4B-ha8" secondAttribute="leadingMargin" constant="-16" id="sKV-wZ-ITl"/>
                             <constraint firstItem="knz-W5-fbc" firstAttribute="top" secondItem="yJf-GU-xty" secondAttribute="bottom" id="t5s-rm-otC"/>
                             <constraint firstItem="yJf-GU-xty" firstAttribute="top" secondItem="C4t-58-Pk8" secondAttribute="bottom" constant="-44" id="uH9-sm-WG7"/>
+                            <constraint firstItem="1x2-ug-oMe" firstAttribute="top" secondItem="Rt0-4B-ha8" secondAttribute="topMargin" id="vzS-BF-0Fl"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -1749,9 +1756,10 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
     <resources>
         <image name="BackgroundImage" width="375" height="667"/>
         <image name="GroupChatGgImage" width="375" height="667"/>
+        <image name="ProfileBgImage" width="375" height="667"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="2PU-iO-cFw"/>
-        <segue reference="mYA-47-s6C"/>
+        <segue reference="Xl7-6t-OQ8"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -159,7 +159,6 @@
 		EE7910561B841CAB005E455B /* WETouchableView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6D6DB21B7B28A6004D29C8 /* WETouchableView.m */; };
 		EE7910571B841CBE005E455B /* FoundPCGCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACBEE1B44E90300D05C0B /* FoundPCGCell.m */; };
 		EE7910591B841D14005E455B /* WEBlockingGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6D6DAB1B7B28A6004D29C8 /* WEBlockingGestureRecognizer.m */; };
-		EE79105B1B842105005E455B /* ProfileOverView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEE94E301B74BF870011321A /* ProfileOverView.xib */; };
 		EE7910601B845818005E455B /* UIBarButtonItem+WEPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6D6DA91B7B28A6004D29C8 /* UIBarButtonItem+WEPopover.m */; };
 		EE7910631B847DBA005E455B /* ChatGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7910621B847DBA005E455B /* ChatGroupController.m */; };
 		EE7C68711B82D2D20003C593 /* CycleOverCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7C68701B82D2D20003C593 /* CycleOverCell.m */; };
@@ -995,7 +994,6 @@
 		EEE94E2A1B74BE910011321A /* PersonalCentreOthersDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalCentreOthersDelegate.m; sourceTree = "<group>"; };
 		EEE94E2E1B74BF870011321A /* ProfileOverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileOverView.h; sourceTree = "<group>"; };
 		EEE94E2F1B74BF870011321A /* ProfileOverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileOverView.m; sourceTree = "<group>"; };
-		EEE94E301B74BF870011321A /* ProfileOverView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileOverView.xib; sourceTree = "<group>"; };
 		EEE94E381B74C3840011321A /* PersonalCenterProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonalCenterProtocol.h; sourceTree = "<group>"; };
 		EEEEA0C91B7B456C001D949D /* MyCycleCellHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCycleCellHeader.h; sourceTree = "<group>"; };
 		EEEEA0CA1B7B456C001D949D /* MyCycleCellHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCycleCellHeader.m; sourceTree = "<group>"; };
@@ -2798,7 +2796,6 @@
 			children = (
 				EEE94E2E1B74BF870011321A /* ProfileOverView.h */,
 				EEE94E2F1B74BF870011321A /* ProfileOverView.m */,
-				EEE94E301B74BF870011321A /* ProfileOverView.xib */,
 			);
 			path = OwnerOverView;
 			sourceTree = "<group>";
@@ -2988,7 +2985,6 @@
 			files = (
 				EE92AE351BCE3627008DA020 /* CycleAddConditionCell.xib in Resources */,
 				EEC980B31B8EB9EA0087E5A7 /* status-bar-pattern-default.jpg in Resources */,
-				EE79105B1B842105005E455B /* ProfileOverView.xib in Resources */,
 				EE968D081C1AB0700063362E /* MessageFriendsCell.xib in Resources */,
 				EEBE1B901C17D2F400EAA9D2 /* UserSearch.storyboard in Resources */,
 				EEC980B51B8EB9EA0087E5A7 /* status-bar-progress.png in Resources */,

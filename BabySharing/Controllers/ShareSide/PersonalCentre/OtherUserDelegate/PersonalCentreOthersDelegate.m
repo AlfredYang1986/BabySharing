@@ -34,9 +34,9 @@
         
         [header setOwnerPhoto:[_delegate getPhotoName]];
         [header setLoation:[_delegate getLocation]];
-        [header setFriendsCount:[_delegate getFriendsCount]];
-        [header setShareCount:[_delegate getSharedCount]];
-        [header setCycleCount:[_delegate getCycleCount]];
+//        [header setFriendsCount:[_delegate getFriendsCount]];
+//        [header setShareCount:[_delegate getSharedCount]];
+//        [header setCycleCount:[_delegate getCycleCount]];
         [header setPersonalSign:[_delegate getSign]];
         [header setNickName:[_delegate getNickName]];
         [header setRoleTag:[_delegate getRoleTag]];
