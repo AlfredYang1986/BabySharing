@@ -15,6 +15,7 @@
 #import "QueryContent.h"
 #import "QueryContentTag.h"
 #import "PhotoTagView.h"
+#import "AppDelegate.h"
 
 #define HER_MARGIN  10
 #define VER_MARGIN  1
@@ -191,7 +192,7 @@
     
     
     CALayer* chat_icon_layer = [CALayer layer];
-    chat_icon_layer.frame = CGRectMake(0, 0, CGRectGetHeight(chat_btn.frame) / 2, CGRectGetHeight(chat_btn.frame) / 2);
+    chat_icon_layer.frame = CGRectMake(0, 0, CGRectGetHeight(chat_btn.frame) / 1.5, CGRectGetHeight(chat_btn.frame) / 1.5);
     chat_icon_layer.contents = (id)[UIImage imageNamed:[resourceBundle pathForResource:@"home_chat" ofType:@"png"]].CGImage;
     chat_icon_layer.position = CGPointMake(CGRectGetHeight(chat_btn.frame) / 2, CGRectGetHeight(chat_btn.frame) / 2);
     [chat_icon.layer addSublayer:chat_icon_layer];

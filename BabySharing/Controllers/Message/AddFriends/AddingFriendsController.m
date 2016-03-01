@@ -53,7 +53,7 @@
     [_seg addItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:@"friend_qq" ofType:@"png"]] andSelectImage:[UIImage imageNamed:[resourceBundle pathForResource:@"friend_qq" ofType:@"png"]] andTitle:@"QQ"];
     _seg.isLayerHidden = YES;
     _seg.margin_between_items = 0.10 * [UIScreen mainScreen].bounds.size.width;
-//    _seg.selectedIndex = 0;
+    _seg.selectedIndex = 0;
     _seg.delegate = self;
     
     ab = [[AddressBookDelegate alloc]init];
@@ -167,10 +167,10 @@
 #pragma mark -- seg delegate
 - (void)segValueChanged2:(SearchSegView2 *)seg {
     if (seg.selectedIndex == 2) {
-        [seg setSegSelectedIndex:-1];
+        [seg setSegSelectedIndex:0];
         [[AppDelegate defaultAppDelegate].lm postContentOnQQzoneWithText:@"快来加入咚哒吧！！！" andImage:[UIImage imageNamed:[[NSBundle mainBundle] pathForResource:@"icon" ofType:@"png"]]];
     } else if (seg.selectedIndex == 1) {
-        [seg setSegSelectedIndex:-1];
+        [seg setSegSelectedIndex:0];
     } else if (seg.selectedIndex == 0) {
         
         AppDelegate* app = [UIApplication sharedApplication].delegate;

@@ -68,7 +68,7 @@
 }
 
 - (void)changeCellWithNickName:(NSString *)content {
-    self.nickTextFiled.text = content;
+    self.nickTextFiled.text = [Tools subStringWithByte:18 str:content];
 }
 - (void)changeCellWithImageName:(NSString *)photo_name {
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];

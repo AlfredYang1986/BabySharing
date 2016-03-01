@@ -22,7 +22,7 @@ typedef void(^chatGroupOptFinishBlock)(BOOL success, id result);
 
 @interface MessageModel : NSObject
 
-@property (nonatomic, weak, readonly) AppDelegate* delegate;
+@property (nonatomic, weak, readonly) AppDelegate *delegate;
 @property (strong, nonatomic, readonly) UIManagedDocument* doc;
 
 #pragma mark -- constructor

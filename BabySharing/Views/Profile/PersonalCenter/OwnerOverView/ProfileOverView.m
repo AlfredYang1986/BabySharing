@@ -10,6 +10,7 @@
 #import "TmpFileStorageModel.h"
 #import "OBShapedButton.h"
 #import "SearchSegView2.h"
+#import "Tools.h"
 
 //#define BASE_LINE_HEIGHT        115
 #define BASE_LINE_HEIGHT        185
@@ -285,7 +286,7 @@
 }
 
 - (void)setNickName:(NSString*)nickName {
-    _nameLabel.text = nickName;
+    _nameLabel.text = [Tools subStringWithByte:18 str:nickName];
     [_nameLabel sizeToFit];
     _nameLabel.center = CGPointMake(SCREEN_WIDTH / 2 - NAME_LABEL_2_ROLE_TAG_LABEL_MARGIN - _nameLabel.frame.size.width / 2, _imgView.center.y + _imgView.frame.size.height / 2 + NAME_LABEL_2_SCREEN_PHOTO_MARGIN);
 }

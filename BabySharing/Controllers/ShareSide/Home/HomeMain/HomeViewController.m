@@ -635,12 +635,10 @@
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         ChatGroupController* pc = [storyboard instantiateViewControllerWithIdentifier:@"chatGroup"];
         NSDictionary* tar = (NSDictionary*)result;
-        
         pc.group_id = [tar objectForKey:@"group_id"];//group_id;
         pc.joiner_count = [tar objectForKey:@"joiners_count"];//tmp.number_count;
         pc.group_name = [tar objectForKey:@"group_name"];//tmp.target_name;
         pc.founder_id = [tar objectForKey:@"owner_id"];//tmp.owner_id;
-        
         [self.navigationController setNavigationBarHidden:NO];
         [self.navigationController pushViewController:pc animated:YES];
     }];

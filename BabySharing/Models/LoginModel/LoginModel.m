@@ -334,16 +334,15 @@
 }
 
 - (void)postContentOnQQzoneWithText:(NSString *)text andImage:(UIImage *)img {
-    
-//    if ([TencentOAuth iphoneQQInstalled]) {
+    if ([TencentOAuth iphoneQQInstalled]) {
         NSData* data = UIImagePNGRepresentation(img);
     NSData *previewData = UIImagePNGRepresentation([Tools OriginImage:img scaleToSize:CGSizeMake(100, 100)]);
         QQApiImageObject *imgObj = [QQApiImageObject objectWithData:data previewImageData:previewData title:text description:text];
         SendMessageToQQReq* req = [SendMessageToQQReq reqWithContent:imgObj];
         NSLog(@"分享到QQ空间 == %d", [QQApiInterface sendReq:req]);
-//    } else {
-//        [[[UIAlertView alloc] initWithTitle:@"通知" message:@"当前手机未安装QQ无法分享到QQ空间" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil] show];
-//    }
+    } else {
+        [[[UIAlertView alloc] initWithTitle:@"通知" message:@"当前手机未安装QQ无法分享到QQ空间" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil] show];
+    }
 }
 
 #pragma mark - weibo login call back

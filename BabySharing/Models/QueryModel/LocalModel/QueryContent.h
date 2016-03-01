@@ -30,6 +30,7 @@
 @property (nonatomic, retain) NSSet *items;
 @property (nonatomic, retain) NSSet *likes;
 @property (nonatomic, retain) NSSet *tags;
+
 @end
 
 @interface QueryContent (CoreDataGeneratedAccessors)

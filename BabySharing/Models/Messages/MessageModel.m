@@ -228,7 +228,6 @@
         [GotyeOCAPI enterRoom:room];
         block(YES, reVal);
     } else {
-
         block(NO, [result objectForKey:@"error"]);
     }
 }

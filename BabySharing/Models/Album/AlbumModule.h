@@ -19,7 +19,6 @@ typedef void(^AssetsFindishBlock)(NSArray* result);
 typedef void(^PhotoFindishBlock)(NSArray<UIImage *>* thumbnailImage, NSArray<PHAsset *> *phAsset);
 typedef void(^RealPhotoFindishBlock)(UIImage *liveImage);
 
-
 @interface AlbumModule : NSObject
 
 @property (nonatomic, weak) UIViewController *VC;
