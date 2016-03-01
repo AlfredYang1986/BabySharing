@@ -311,48 +311,51 @@
 }
 
 - (void)startRecordingAnimation {
+    [timer setFireDate:[NSDate distantPast]]; // start
     
-    static const CGFloat kAnimationDuration = 0.15; // in seconds
-    CGRect outer = take_btn.frame;
-    CGRect rc_start = CGRectMake(7, 7, outer.size.width - 14, outer.size.height - 14);
-    CGFloat radius_start = (outer.size.width - 14) / 2;
-    CGRect rc_end = CGRectMake(outer.size.width / 2 - 14, outer.size.height / 2 - 14, 28, 28);
-    CGFloat radius_end = 2;
-    [INTUAnimationEngine animateWithDuration:kAnimationDuration
-                                       delay:0.0
-                                      easing:INTUEaseInOutQuadratic
-                                     options:INTUAnimationOptionAutoreverse
-                                  animations:^(CGFloat progress) {
-                                      inner_take_btn_layer.frame = INTUInterpolateCGRect(rc_start, rc_end, progress);
-                                      inner_take_btn_layer.cornerRadius = INTUInterpolateCGFloat(radius_start, radius_end, progress);
-                                  }
-                                  completion:^(BOOL finished) {
-                                      // NOTE: When passing INTUAnimationOptionRepeat, this completion block is NOT executed at the end of each cycle. It will only run if the animation is canceled.
-                                      [progress_using_layer setPointWithTime:seconds];
-                                      [timer setFireDate:[NSDate distantPast]]; // start
-                                  }];
+//    static const CGFloat kAnimationDuration = 0.15; // in seconds
+//    CGRect outer = take_btn.frame;
+//    CGRect rc_start = CGRectMake(7, 7, outer.size.width - 14, outer.size.height - 14);
+//    CGFloat radius_start = (outer.size.width - 14) / 2;
+//    CGRect rc_end = CGRectMake(outer.size.width / 2 - 14, outer.size.height / 2 - 14, 28, 28);
+//    CGFloat radius_end = 2;
+//    [INTUAnimationEngine animateWithDuration:kAnimationDuration
+//                                       delay:0.0
+//                                      easing:INTUEaseInOutQuadratic
+//                                     options:INTUAnimationOptionAutoreverse
+//                                  animations:^(CGFloat progress) {
+//                                      inner_take_btn_layer.frame = INTUInterpolateCGRect(rc_start, rc_end, progress);
+//                                      inner_take_btn_layer.cornerRadius = INTUInterpolateCGFloat(radius_start, radius_end, progress);
+//                                  }
+//                                  completion:^(BOOL finished) {
+//                                      // NOTE: When passing INTUAnimationOptionRepeat, this completion block is NOT executed at the end of each cycle. It will only run if the animation is canceled.
+////                                      [progress_using_layer setPointWithTime:seconds];
+//                                  }];
 }
 
 - (void)endRecordingAnimation {
-    static const CGFloat kAnimationDuration = 0.15; // in seconds
-    CGRect outer = take_btn.frame;
-    CGRect rc_start = CGRectMake(7, 7, outer.size.width - 14, outer.size.height - 14);
-    CGFloat radius_start = (outer.size.width - 14) / 2;
-    CGRect rc_end = CGRectMake(outer.size.width / 2 - 14, outer.size.height / 2 - 14, 28, 28);
-    CGFloat radius_end = 2;
-    [INTUAnimationEngine animateWithDuration:kAnimationDuration
-                                       delay:0.0
-                                      easing:INTUEaseInOutQuadratic
-                                     options:INTUAnimationOptionAutoreverse
-                                  animations:^(CGFloat progress) {
-                                      inner_take_btn_layer.frame = INTUInterpolateCGRect(rc_end, rc_start, progress);
-                                      inner_take_btn_layer.cornerRadius = INTUInterpolateCGFloat(radius_end, radius_start, progress);
-                                      // NSLog(@"Progress: %.2f", progress);
-                                  }
-                                  completion:^(BOOL finished) {
-                                      // NOTE: When passing INTUAnimationOptionRepeat, this completion block is NOT executed at the end of each cycle. It will only run if the animation is canceled.
-                                      [timer setFireDate:[NSDate distantFuture]];
-                                  }];
+    [timer setFireDate:[NSDate distantFuture]];
+    [progress_using_layer addPointAtEnd];
+    
+//    static const CGFloat kAnimationDuration = 0.15; // in seconds
+//    CGRect outer = take_btn.frame;
+//    CGRect rc_start = CGRectMake(7, 7, outer.size.width - 14, outer.size.height - 14);
+//    CGFloat radius_start = (outer.size.width - 14) / 2;
+//    CGRect rc_end = CGRectMake(outer.size.width / 2 - 14, outer.size.height / 2 - 14, 28, 28);
+//    CGFloat radius_end = 2;
+//    [INTUAnimationEngine animateWithDuration:kAnimationDuration
+//                                       delay:0.0
+//                                      easing:INTUEaseInOutQuadratic
+//                                     options:INTUAnimationOptionAutoreverse
+//                                  animations:^(CGFloat progress) {
+//                                      inner_take_btn_layer.frame = INTUInterpolateCGRect(rc_end, rc_start, progress);
+//                                      inner_take_btn_layer.cornerRadius = INTUInterpolateCGFloat(radius_end, radius_start, progress);
+//                                      // NSLog(@"Progress: %.2f", progress);
+//                                  }
+//                                  completion:^(BOOL finished) {
+//                                      // NOTE: When passing INTUAnimationOptionRepeat, this completion block is NOT executed at the end of each cycle. It will only run if the animation is canceled.
+////                                      [progress_using_layer setPointWithTime:seconds];
+//                                  }];
 }
 
 - (void)didSelectTakePicBtn {
@@ -371,8 +374,8 @@
         [filter addTarget:movieWriter];
         videoCamera.audioEncodingTarget = movieWriter;
         isRecording = true;
-        [self startRecordingAnimation];
         [movieWriter startRecording];
+        [self startRecordingAnimation];
         delete_current_movie_btn.hidden = NO;
     } else {
         take_btn.enabled = NO;

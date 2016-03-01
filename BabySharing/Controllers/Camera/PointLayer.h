@@ -9,8 +9,6 @@
 #import <QuartzCore/QuartzCore.h>
 
 @interface PointLayer : CALayer
-
 @property (nonatomic, assign) CGFloat time;
-
 @end
 

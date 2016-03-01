@@ -223,6 +223,7 @@
         
         [cell setUserScreenPhoto:@""];
         [cell setRelationship:-1];
+        [cell setUserRoleTag:@""];
     }
     
     return cell;

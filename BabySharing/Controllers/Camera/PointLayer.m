@@ -9,5 +9,4 @@
 #import "PointLayer.h"
 
 @implementation PointLayer
-
 @end
