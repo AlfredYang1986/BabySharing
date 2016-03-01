@@ -1,5 +1,5 @@
 //
-//  PersonalCentreTmpViewController2.h
+//  PersonalCentreTmpViewController.h
 //  BabySharing
 //
 //  Created by Alfred Yang on 3/1/16.

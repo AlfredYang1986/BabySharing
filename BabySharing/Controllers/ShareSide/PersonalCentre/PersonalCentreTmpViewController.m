@@ -1,5 +1,5 @@
 //
-//  PersonalCentreTmpViewController2.m
+//  PersonalCentreTmpViewController.m
 //  BabySharing
 //
 //  Created by Alfred Yang on 3/1/16.
@@ -107,9 +107,9 @@
         _owner_id = _current_user_id;
     }
     
-    [self createFakeNaviBar];
     [self createHeadView];
     [self createSegamentCtr];
+    [self createFakeNaviBar];
     
     _queryView.frame = CGRectMake(QUERY_VIEW_MARGIN_LEFT, QUERY_VIEW_MARGIN_UP + HEADER_VIEW_HEIGHT + SEG_CTR_HEIGHT - 2, [UIScreen mainScreen].bounds.size.width - QUERY_VIEW_MARGIN_LEFT - QUERY_VIEW_MARGIN_RIGHT, [UIScreen mainScreen].bounds.size.height - QUERY_VIEW_MARGIN_UP - QUERY_VIEW_MARGIN_BOTTOM - HEADER_VIEW_HEIGHT);
     _queryView.backgroundColor = [UIColor whiteColor];
@@ -178,7 +178,7 @@
     [head_view setPersonalSign:[self getSign]];
     [head_view setNickName:[self getNickName]];
     [head_view setRoleTag:[self getRoleTag]];
-    [head_view setRelations:UserPostOwnerConnectionsSamePerson];
+    [head_view setRelations:[self getRelations]];
     [head_view setShareCount:[self getSharedCount] andThumUpCount:[self getSharedCount] andBeenThumupCount:[self getSharedCount]];
 }
 
