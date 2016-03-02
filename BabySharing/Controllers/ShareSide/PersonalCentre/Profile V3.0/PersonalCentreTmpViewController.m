@@ -1,9 +1,9 @@
 //
 //  PersonalCentreTmpViewController.m
-//  BabySharing
+//  YYBabyAndMother
 //
-//  Created by Alfred Yang on 3/1/16.
-//  Copyright © 2016 BM. All rights reserved.
+//  Created by Alfred Yang on 23/01/2015.
+//  Copyright (c) 2015 YY. All rights reserved.
 //
 
 #import "PersonalCentreTmpViewController.h"
@@ -13,8 +13,8 @@
 #import "ProfileDetailController.h"
 
 #import "PersonalCenterOwnerDelegate.h"
-//#import "ProfileUserHeaderCell.h"
-//#import "PersonalCenterDefines.h"
+#import "ProfileUserHeaderCell.h"
+#import "PersonalCenterDefines.h"
 
 #import "RemoteInstance.h"
 #import "ModelDefines.h"
@@ -25,27 +25,19 @@
 #import "CollectionQueryModel.h"
 
 #import "UserChatController.h"
+//#import "HomeDetailViewController.h"
 #import "HomeViewController.h"
 #import "UserHomeViewDataDelegate.h"
 #import "PersonalSettingController.h"
 
 #import "ProfileOverView.h"
-#import "SearchSegView2.h"
 
 #define STATUS_BAR_HEIGHT       20
-#define FAKE_BAR_HEIGHT        44
 
-#define QUERY_VIEW_MARGIN_LEFT      10.5
+#define QUERY_VIEW_MARGIN_LEFT      0
 #define QUERY_VIEW_MARGIN_RIGHT     QUERY_VIEW_MARGIN_LEFT
 #define QUERY_VIEW_MARGIN_UP        STATUS_BAR_HEIGHT
 #define QUERY_VIEW_MARGIN_BOTTOM    0
-
-#define HEADER_VIEW_HEIGHT          183
-
-#define MARGIN_LEFT                 10.5
-#define MARGIN_RIGHT                10.5
-
-#define SEG_CTR_HEIGHT              49
 
 @interface PersonalCentreTmpViewController () <PersonalCenterProtocol, ProfileViewDelegate, AlbumTableCellDelegate, personalDetailChanged>
 @property (weak, nonatomic, readonly) NSString* current_user_id;
@@ -57,13 +49,16 @@
 @property (weak, nonatomic, readonly) CollectionQueryModel* cqm;
 @end
 
+//#define TITLE 0
+//#define IMAGE 1
+
 @implementation PersonalCentreTmpViewController {
+//    NSArray* section_content;
+//    UIImage* next_indicator;
+    
     NSDictionary* dic_profile_details;
     NSInteger current_seg_index;
-//    UIImageView* bkView;
-    
-    ProfileOverView* head_view;
-    SearchSegView2* search_seg;
+    UIImageView* bkView;
 }
 
 @synthesize current_auth_token = _current_auth_token;
@@ -81,20 +76,38 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // Do any additional setup after loading the view.
+//    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f]];
+    
     AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     _current_user_id = delegate.lm.current_user_id;
     _current_auth_token = delegate.lm.current_auth_token;
-    
+ 
     _om = delegate.om;
     _cm = delegate.cm;
     _cqm = delegate.cqm;
-
     /**
      * Profile Header Cell
      */
     [_queryView registerNib:[UINib nibWithNibName:@"ProfileUserHeaderCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"Profile Header Cell"];
-    [_queryView registerNib:[UINib nibWithNibName:@"ProfileOverView" bundle:[NSBundle mainBundle]] forHeaderFooterViewReuseIdentifier:@"Profile Overview"];
     
+//    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+//    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+//    UIImage *image0 = [UIImage imageNamed:[resourceBundle pathForResource:@"Share" ofType:@"png"]];
+//    UIImage *image1 = [UIImage imageNamed:[resourceBundle pathForResource:@"Tag" ofType:@"png"]];
+//    UIImage *image2 = [UIImage imageNamed:[resourceBundle pathForResource:@"Like" ofType:@"png"]];
+//    UIImage *image3 = [UIImage imageNamed:[resourceBundle pathForResource:@"Dropbox" ofType:@"png"]];
+//    UIImage *image4 = [UIImage imageNamed:[resourceBundle pathForResource:@"Info" ofType:@"png"]];
+//    UIImage *image5 = [UIImage imageNamed:[resourceBundle pathForResource:@"Setting" ofType:@"png"]];
+
+//    next_indicator = [UIImage imageNamed:[resourceBundle pathForResource:@"Next2" ofType:@"png"]];
+    
+//    section_content = @[@[@[@"分享", @"标签", @"收集", @"讨论组"], @[image0, image1, image2, image3]], @[@[@"反馈信息中心", @"设置"], @[image4, image5]]];
+    
+   
+    [_queryView registerNib:[UINib nibWithNibName:@"ProfileOverView" bundle:[NSBundle mainBundle]] forHeaderFooterViewReuseIdentifier:@"Profile Overview"];
+//    [_queryView registerNib:[UINib nibWithNibName:@"ProfileOthersOverView" bundle:[NSBundle mainBundle]] forHeaderFooterViewReuseIdentifier:@"Profile Others Overview"];
+  
     if (!_current_delegate) {
         self.current_delegate = [[PersonalCenterOwnerDelegate alloc]init];
     }
@@ -105,15 +118,26 @@
     if (!_owner_id || [_owner_id isEqualToString:@""]) {
         _owner_id = _current_user_id;
     }
-    
-    [self createHeadView];
-    [self createSegamentCtr];
-    [self createFakeNaviBar];
-    
-    _queryView.frame = CGRectMake(QUERY_VIEW_MARGIN_LEFT, QUERY_VIEW_MARGIN_UP + HEADER_VIEW_HEIGHT + SEG_CTR_HEIGHT - 2, [UIScreen mainScreen].bounds.size.width - QUERY_VIEW_MARGIN_LEFT - QUERY_VIEW_MARGIN_RIGHT, [UIScreen mainScreen].bounds.size.height - QUERY_VIEW_MARGIN_UP - QUERY_VIEW_MARGIN_BOTTOM - HEADER_VIEW_HEIGHT);
-    _queryView.backgroundColor = [UIColor whiteColor];
+   
+    _queryView.frame = CGRectMake(QUERY_VIEW_MARGIN_LEFT, QUERY_VIEW_MARGIN_UP, [UIScreen mainScreen].bounds.size.width - QUERY_VIEW_MARGIN_LEFT - QUERY_VIEW_MARGIN_RIGHT, [UIScreen mainScreen].bounds.size.height - QUERY_VIEW_MARGIN_UP - QUERY_VIEW_MARGIN_BOTTOM);
+//    _queryView.backgroundColor = [UIColor whiteColor];
+    _queryView.backgroundColor = [UIColor clearColor];
     _queryView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.view bringSubviewToFront:_queryView];
+
+//    if ([_owner_id isEqualToString:_current_user_id]) {
+//        UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
+//        NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+//        NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+//        NSString* filepath = [resourceBundle pathForResource:@"DongDa_Plus" ofType:@"png"];
+//        CALayer * layer = [CALayer layer];
+//        layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
+//        layer.frame = CGRectMake(0, 0, 25, 25);
+//        layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
+//        [barBtn.layer addSublayer:layer];
+//        [barBtn addTarget:self action:@selector(didSelectSettingBtn) forControlEvents:UIControlEventTouchDown];
+//        
+//        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn];
+//    }
     
     current_seg_index = 0;
     
@@ -122,98 +146,94 @@
     label.text = @"用户信息";
     [label sizeToFit];
     self.navigationItem.titleView = label;
-}
-
-- (void)createSegamentCtr {
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
-    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-
-//    UIImage* img_seg_bg = [UIImage imageNamed:[resourceBundle pathForResource:@"profile_seg_bg" ofType:@"png"]];
-//    CALayer* seg_bg = [CALayer layer];
-//    seg_bg.contents = (id)img_seg_bg.CGImage;
-//    seg_bg.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [SearchSegView2 preferredHeight]);
-//    [search_seg.layer addSublayer:seg_bg];
-
-    search_seg = [[SearchSegView2 alloc]initWithFrame:CGRectMake(MARGIN_LEFT, QUERY_VIEW_MARGIN_UP + HEADER_VIEW_HEIGHT, [UIScreen mainScreen].bounds.size.width - MARGIN_LEFT - MARGIN_RIGHT, SEG_CTR_HEIGHT)];
-   
-    search_seg.backgroundColor = [UIColor whiteColor];
-    search_seg.layer.cornerRadius = 4.f;
-    [self.view addSubview:search_seg];
-    [self.view bringSubviewToFront:search_seg];
-
-    [search_seg addItemWithTitle:@"发布"];
-    [search_seg addItemWithTitle:@"推出"];
-    search_seg.isLayerHidden = YES;
     
-//    [search_seg addItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:@"profile_grid" ofType:@"png"]] andSelectImage:[UIImage imageNamed:[resourceBundle pathForResource:@"profile_grid_selected" ofType:@"png"]]];
-//    [search_seg addItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:@"profile_tag" ofType:@"png"]] andSelectImage:[UIImage imageNamed:[resourceBundle pathForResource:@"profile_tag_selected" ofType:@"png"]]];
-//    [search_seg addItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:@"profile_forward" ofType:@"png"]] andSelectImage:[UIImage imageNamed:[resourceBundle pathForResource:@"profile_forward_selected" ofType:@"png"]]];
-
-    search_seg.selectedIndex = 0;
-    search_seg.margin_between_items = 0.40 * [UIScreen mainScreen].bounds.size.width;
-//    [bkView addSubview:search_seg];
-}
-
-- (void)createHeadView {
-    CGFloat width = [UIScreen mainScreen].bounds.size.width;
-    head_view = [[ProfileOverView alloc]initWithFrame:CGRectMake(0, STATUS_BAR_HEIGHT, width, HEADER_VIEW_HEIGHT)];
-    head_view.backgroundColor = [UIColor redColor];
-    [self.view addSubview:head_view];
-    [self.view bringSubviewToFront:head_view];
-    head_view.deleagate = self;
-   
-    /**
-     * reset data
-     */
-    [self resetProfileData];
-}
-
-- (void)resetProfileData {
-    [head_view setOwnerPhoto:[self getPhotoName]];
-    [head_view setLoation:[self getLocation]];
-//    [head_view setFriendsCount:[self getFriendsCount]];
-//    [head_view setShareCount:[self getSharedCount]];
-//    [head_view setCycleCount:[self getCycleCount]];
-    [head_view setPersonalSign:[self getSign]];
-    [head_view setNickName:[self getNickName]];
-    [head_view setRoleTag:[self getRoleTag]];
-    [head_view setRelations:[self getRelations]];
-    [head_view setShareCount:[self getSharedCount] andThumUpCount:[self getSharedCount] andBeenThumupCount:[self getSharedCount]];
-}
-
-- (void)createFakeNaviBar {
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
-    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+//    if (self.navigationController.viewControllers.count > 1) {
+//        UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
+//        NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+//        NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+//    //    NSString* filepath = [resourceBundle pathForResource:@"Previous_blue" ofType:@"png"];
+//        NSString* filepath = [resourceBundle pathForResource:@"Previous_simple" ofType:@"png"];
+//        CALayer * layer = [CALayer layer];
+//        layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
+//        layer.frame = CGRectMake(0, 0, 13, 20);
+//        layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
+//        [barBtn.layer addSublayer:layer];
+//    //    [barBtn setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
+//    //    [barBtn setImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
+//        [barBtn addTarget:self action:@selector(didPopControllerSelected) forControlEvents:UIControlEventTouchDown];
+//        
+//        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn];
+//    } else {
+//        UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
+//        NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+//        NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+//        NSString* filepath = [resourceBundle pathForResource:@"DongDa_Plus" ofType:@"png"];
+//        CALayer * layer = [CALayer layer];
+//        layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
+//        layer.frame = CGRectMake(0, 0, 25, 25);
+//        layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
+//        [barBtn.layer addSublayer:layer];
+//        [barBtn addTarget:self action:@selector(didSelectSettingBtn) forControlEvents:UIControlEventTouchDown];
+//        
+//        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn];
+//    }
     
-    UIView* fake_bar = [[UIView alloc]initWithFrame:CGRectMake(0, STATUS_BAR_HEIGHT, [UIScreen mainScreen].bounds.size.width, FAKE_BAR_HEIGHT)];
+    NSString * bundlePath_dongda = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle_dongda = [NSBundle bundleWithPath:bundlePath_dongda];
+    bkView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, STATUS_BAR_HEIGHT)];
+    UIImage* img_bg = [UIImage imageNamed:[resourceBundle_dongda pathForResource:@"profile_bg_up" ofType:@"png"]];
+    bkView.image = img_bg;
+    bkView.backgroundColor = [UIColor whiteColor];
+    bkView.backgroundColor = [UIColor colorWithWhite:0.949 alpha:1.f];
+    [self.view addSubview:bkView];
+   
+#define FAKE_BAR_HEIGHT        44
+    UIView* fake_bar = [[UIView alloc]initWithFrame:CGRectMake(0, 20, [UIScreen mainScreen].bounds.size.width, FAKE_BAR_HEIGHT)];
     fake_bar.backgroundColor = [UIColor clearColor];
     [self.view addSubview:fake_bar];
     [self.view bringSubviewToFront:fake_bar];
     
     if (self.navigationController.viewControllers.count > 1) {
-        UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 25)];
-        NSString* filepath = [resourceBundle pathForResource:@"dongda_back" ofType:@"png"];
+        UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, (44 - 25) / 2, 30, 25)];
+        //    NSString* filepath = [resourceBundle pathForResource:@"Previous_blue" ofType:@"png"];
+        NSString* filepath = [resourceBundle_dongda pathForResource:@"dongda_back" ofType:@"png"];
         CALayer * layer = [CALayer layer];
         layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
-        layer.frame = CGRectMake(10, 10, 25, 25);
+        layer.frame = CGRectMake(-7, 0, 25, 25);
+//        layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
         [barBtn.layer addSublayer:layer];
+        //    [barBtn setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
+        //    [barBtn setImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
         [barBtn addTarget:self action:@selector(didPopControllerSelected) forControlEvents:UIControlEventTouchDown];
         [fake_bar addSubview:barBtn];
-        
+
     } else {
-        UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 25)];
-        NSString* filepath = [resourceBundle pathForResource:@"profile_setting_dark" ofType:@"png"];
+//        UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 13 - 15, (44 - 25) / 2, 30, 25)];
+        UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, (44 - 25) / 2, 30, 25)];
+        NSString* filepath = [resourceBundle_dongda pathForResource:@"profile_setting_dark" ofType:@"png"];
         CALayer * layer = [CALayer layer];
         layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
-        layer.frame = CGRectMake(10, 10, 25, 25);
-//        layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
+        layer.frame = CGRectMake(0, 0, 25, 25);
+        layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
         [barBtn.layer addSublayer:layer];
         [barBtn addTarget:self action:@selector(didSelectSettingBtn) forControlEvents:UIControlEventTouchDown];
         [fake_bar addSubview:barBtn];
+        
     }
+
+    UIImageView* img_bg_bg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"profile_bg" ofType:@"png"]]];
+    img_bg_bg.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 295);
+    [self.view addSubview:img_bg_bg];
+    [self.view sendSubviewToBack:img_bg_bg];
+    self.view.backgroundColor = [UIColor whiteColor];
 }
 
-#pragma mark -- life cycle
+- (void)didPopControllerSelected {
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
+    
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -228,18 +248,24 @@
     [self updateProfileDetails];
     [_om queryContentsByUser:_current_user_id withToken:_current_auth_token andOwner:_owner_id withStartIndex:0 finishedBlock:^(BOOL success) {
         [_queryView reloadData];
-        [self resetProfileData];
     }];
-}
-
-#pragma mark -- actions
-- (void)didPopControllerSelected {
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-    [self.navigationController popViewControllerAnimated:YES];
+    
+//    dispatch_queue_t cq = dispatch_queue_create("query collections", nil);
+//    dispatch_async(cq, ^{
+//        [_cqm queryCollectionContentsByUser:_current_user_id withToken:_current_user_id andOwner:_owner_id withStartIndex:0 finishedBlock:^(BOOL success) {
+//            if (((ProfileOverView*)[_queryView headerViewForSection:0]).seg.selectedSegmentIndex == 3) {
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    [_queryView reloadData];
+//                });
+//            }
+//        }];
+//    });
 }
 
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
     
     if ([segue.identifier isEqualToString:@"MoreSetting"]) {
         ((ProfileSettingController*)segue.destinationViewController).current_user_id = self.current_user_id;
@@ -321,7 +347,7 @@
 }
 
 - (NSString*)getLocation {
-    //    return @"Not Implemented";
+//    return @"Not Implemented";
     return @"北京 东城区";
 }
 
@@ -340,6 +366,21 @@
 }
 
 - (NSInteger)getRelations {
+//    if (dic_profile_details) {
+//        switch (((NSNumber*)[dic_profile_details objectForKey:@"relations"]).integerValue) {
+//            case UserPostOwnerConnectionsSamePerson:
+//                // my own post, do nothing
+//                return nil;
+//            case UserPostOwnerConnectionsNone:
+//            case UserPostOwnerConnectionsFollowed:
+//                return @"+关注";
+//            case UserPostOwnerConnectionsFollowing:
+//            case UserPostOwnerConnectionsFriends:
+////                return @"取消关注";
+//                return @"-取关";
+//            default:
+//                return nil;
+//    }} else return nil;
     return ((NSNumber*)[dic_profile_details objectForKey:@"relations"]).integerValue;
 }
 
@@ -376,7 +417,7 @@
     
     NSString* follow_user_id = _owner_id;
     NSNumber* relations = [dic_profile_details objectForKey:@"relations"];
-    
+ 
     switch (relations.integerValue) {
         case UserPostOwnerConnectionsSamePerson:
             // my own post, do nothing
@@ -393,7 +434,7 @@
                         [dic_profile_details setValue:[NSNumber numberWithInteger:[self getFriendsCount] + 1] forKey:@"friends_count"];
                     }
                     [_queryView reloadData];
-                    
+            
                 } else {
                     NSLog(@"follow error, %@", message);
                 }
@@ -445,6 +486,20 @@
 }
 
 - (void)didSelectOneImageAtIndex:(NSInteger)index {
+//    OwnerQueryModel* om = [self getOM];
+//    QueryContent* tmp = [om.querydata objectAtIndex:index];
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    HomeDetailViewController* detail = [storyboard instantiateViewControllerWithIdentifier:@"DetailContent"];
+//    detail.hidesBottomBarWhenPushed = YES;
+//    
+//    AppDelegate * app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//    detail.qm = app.qm;
+//    detail.current_content = tmp;
+//    detail.current_user_id = _current_user_id;
+//    detail.current_auth_token = _current_auth_token;
+//    
+//    [self.navigationController pushViewController:detail animated:YES];
+
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     HomeViewController* hv = [storyboard instantiateViewControllerWithIdentifier:@"HomeView"];
     hv.isPushed = YES;
