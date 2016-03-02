@@ -10,7 +10,8 @@
 #import "ProfileViewDelegate.h"
 #import "ModelDefines.h"
 
-@interface ProfileOverView : UITableViewHeaderFooterView
+//@interface ProfileOverView : UITableViewHeaderFooterView
+@interface ProfileOverView : UIView
 
 - (void)setOwnerPhoto:(NSString*)photo_name;
 //- (void)setShareCount:(NSInteger)count;
@@ -24,7 +25,7 @@
 
 - (void)setShareCount:(NSInteger)share_count andThumUpCount:(NSInteger)thumup_count andBeenThumupCount:(NSInteger)been_thumup_count;
 
-+ (CGFloat)preferredHeight;
+//+ (CGFloat)preferredHeight;
 
 @property (nonatomic, weak) id<ProfileViewDelegate> deleagate;
 //@property (weak, nonatomic) IBOutlet UISegmentedControl *seg;

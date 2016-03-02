@@ -374,11 +374,11 @@
     relations_btn.tag = 100 - relations;
 }
 
-+ (CGFloat)preferredHeight {
+//+ (CGFloat)preferredHeight {
 //    return 225;
-    return BASE_LINE_HEIGHT + MARGIN_AFTER_BASE_LINE + BUTTON_HEIGHT + HEADER_BOTTOM_MARGIN + SPLIT_LINE_HEIGHT + [SearchSegView2 preferredHeight];
+//    return BASE_LINE_HEIGHT + MARGIN_AFTER_BASE_LINE + BUTTON_HEIGHT + HEADER_BOTTOM_MARGIN + SPLIT_LINE_HEIGHT + [SearchSegView2 preferredHeight];
 //    return 295;
-}
+//}
 
 - (IBAction)editBtnSelected {
     [_deleagate editBtnSelected];
