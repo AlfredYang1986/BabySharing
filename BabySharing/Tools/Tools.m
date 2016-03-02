@@ -130,38 +130,53 @@
     return [UIColor colorWithRed:RED / 255.0 green:GREEN / 255.0 blue:BLUE / 255.0 alpha:ALPHA];
 }
 
-+ (UIImage *)addPortraitToImage:(UIImage *)image {
-    CGFloat width = [UIScreen mainScreen].bounds.size.width;
-    CGFloat height = [UIScreen mainScreen].bounds.size.width + 90;
-    //    UIGraphicsBeginImageContext(CGSizeMake(width, height));
-    UIGraphicsBeginImageContextWithOptions(CGSizeMake(width, height), NO, 0.0);
++ (UIImage *)addPortraitToImage:(UIImage *)image userHead:(UIImage *)userhead userName:(NSString *)userName{
+    UIGraphicsBeginImageContextWithOptions(image.size, NO, 1.0);
+    CGRect frame = CGRectMake(0, 0, image.size.width, image.size.height);
+    // Add a clip before drawing anything, in the shape of an rounded rect
+    [[UIBezierPath bezierPathWithRoundedRect:frame
+                                cornerRadius:5] addClip];
+    // Draw your image
+    [image drawInRect:frame];
+    // Retrieve and return the new image
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
     
-    [image drawInRect:CGRectMake(0, 0, width, width)];
+    //    374 482
+    CGFloat width = 375;
+    CGFloat height = 482;
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(width, height), NO, 0.0);
+    CGRect rect = CGRectInset(CGRectMake(0, 0, width, width), 10, 10);
+    
+    [newImage drawInRect:rect];
     
     // 画边框大圆
     [[UIColor whiteColor] set];
     CGFloat bigRadius = 50; //大圆半径
     CGFloat centerX = width / 2;
-    CGFloat centerY = width;
+    CGFloat centerY = width - 20;
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     CGContextAddArc(ctx, centerX, centerY, bigRadius, 0, M_PI * 2, 0);
     CGContextFillPath(ctx);
+    
     // 昵称
     CGContextSetLineWidth(ctx, 1.0);
-    CGContextSetRGBFillColor(ctx, 160 / 255.0, 160 / 255.0, 160 / 255.0, 1.0);
+    CGContextSetRGBFillColor(ctx, 74.0 / 255.0, 74.0 / 255.0, 74.0 / 255.0, 1.0);
     UIFont *font = [UIFont boldSystemFontOfSize:15];
-    NSString *nickName = @"慢飞啊慢飞啊_wda";
+    NSString *nickName = userName;
     CGSize size = [nickName sizeWithAttributes:@{ NSFontAttributeName :font }];
-    [nickName drawInRect:CGRectMake(width / 2 - size.width / 2, height - size.height * 1.5, size.width, size.height) withAttributes:@{ NSFontAttributeName :font }];
+    [nickName drawInRect:CGRectMake(width / 2 - size.width / 2, rect.origin.y + rect.size.height + 50, size.width, size.height) withAttributes:@{ NSFontAttributeName :font }];
+    
     // 画小圆
     CGFloat smallradius = 45;
     CGContextAddArc(ctx, centerX, centerY, smallradius, 0, M_PI * 2, 0);
     // 剪裁
     CGContextClip(ctx);
     // 画头像
-    UIImage *portrait = [UIImage imageNamed:@"head"];
-    NSLog(@"MonkeyHengLog: %f === %f", portrait.size.width, portrait.size.height);
-    [portrait drawInRect:CGRectMake(width / 2 - 50, width - 50, 100, 100)];
+    UIImage *userHead = userhead;
+    [userHead drawInRect:CGRectMake(width / 2 - 50, width - 70, 100, 100)];
+    
+    
     // 画一个半透明的圆环
     return UIGraphicsGetImageFromCurrentImageContext();
 }

@@ -168,11 +168,10 @@
 - (void)segValueChanged2:(SearchSegView2 *)seg {
     if (seg.selectedIndex == 2) {
         [seg setSegSelectedIndex:0];
-        [[AppDelegate defaultAppDelegate].lm postContentOnQQzoneWithText:@"快来加入咚哒吧！！！" andImage:[UIImage imageNamed:[[NSBundle mainBundle] pathForResource:@"icon" ofType:@"png"]]];
+        [[AppDelegate defaultAppDelegate].lm postContentOnQQzoneWithText:@"快来加入咚哒吧!!!" andImage:[UIImage imageNamed:[[NSBundle mainBundle] pathForResource:@"icon" ofType:@"png"]] type:ShareNews];
     } else if (seg.selectedIndex == 1) {
         [seg setSegSelectedIndex:0];
     } else if (seg.selectedIndex == 0) {
-        
         AppDelegate* app = [UIApplication sharedApplication].delegate;
         [app.lm queryUserList:[ab getAllPhones] withProviderName:@"phone" andFinishBlock:^(BOOL success, NSArray *lst) {
             self.current_delegate = ab;

@@ -334,14 +334,31 @@
     });
 }
 
-- (void)postContentOnQQzoneWithText:(NSString *)text andImage:(UIImage *)img {
-    if ([TencentOAuth iphoneQQInstalled]) {
-        NSData *previewData = UIImagePNGRepresentation([Tools OriginImage:img scaleToSize:CGSizeMake(100, 100)]);
-        QQApiNewsObject* img = [QQApiAudioObject objectWithURL:[NSURL URLWithString:@"www.baidu.com"] title:@"咚哒" description:text previewImageData:previewData targetContentType:QQApiURLTargetTypeNews];
-        SendMessageToQQReq* req = [SendMessageToQQReq reqWithContent:img];
-        NSLog(@"分享到QQ == %d", [QQApiInterface sendReq:req]);
-    } else {
+- (void)postContentOnQQzoneWithText:(NSString *)text andImage:(UIImage *)img type:(ShareResouseTyoe)type{
+    if (![TencentOAuth iphoneQQInstalled]) {
         [[[UIAlertView alloc] initWithTitle:@"通知" message:@"当前手机未安装QQ无法分享到QQ空间" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil] show];
+        return;
+    }
+    SendMessageToQQReq* req;
+    QQApiObject *qqObj;
+    switch (type) {
+        case ShareImage:{
+            NSData *thumbnailImg = UIImagePNGRepresentation([Tools OriginImage:img scaleToSize:CGSizeMake(100, 100)]);
+            NSData *previewImg = UIImagePNGRepresentation(img);
+            qqObj = [QQApiImageObject objectWithData:previewImg previewImageData:thumbnailImg title:@"咚哒" description:text];
+        }
+            break;
+        case ShareNews:{
+            NSData *previewData = UIImagePNGRepresentation([Tools OriginImage:img scaleToSize:CGSizeMake(100, 100)]);
+            qqObj = [QQApiAudioObject objectWithURL:[NSURL URLWithString:@"www.baidu.com"] title:@"咚哒" description:text previewImageData:previewData targetContentType:QQApiURLTargetTypeNews];
+        }
+            break;
+        default:
+            break;
+    }
+    req = [SendMessageToQQReq reqWithContent:qqObj];
+    if ([QQApiInterface sendReq:req] != EQQAPISENDSUCESS) {
+        [[[UIAlertView alloc] initWithTitle:@"通知" message:@"分享QQ失败" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil] show];
     }
 }
 
@@ -970,8 +987,8 @@
     [dic setValue:user_lst forKey:@"lst"];
     [dic setValue:provider_name forKey:@"provider_name"];
     
-    NSError * error = nil;
-    NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
+    NSError *error = nil;
+    NSData *jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
     
     NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:AUTH_USER_IN_SYSTEM]];
     
@@ -996,7 +1013,9 @@
         NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
         
         NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:[PROFILE_HOST_DOMAIN stringByAppendingString:PROFILE_QUERY_DETAILS]]];
-        block(result);
+        if ([[result valueForKey:@"status"] isEqualToString:@"ok"]) {
+            block([result valueForKey:@"result"]);
+        }
     });
 }
 

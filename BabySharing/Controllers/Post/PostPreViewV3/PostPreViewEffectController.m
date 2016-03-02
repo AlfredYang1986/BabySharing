@@ -657,10 +657,11 @@
         
     } else if (gesture.state == UIGestureRecognizerStateChanged) {
         NSLog(@"changeed");
-        CGPoint newPoint = [gesture translationInView:mainContentView];
-        
-        tmp.center = CGPointMake(tmp.center.x + (newPoint.x - point.x), tmp.center.y + (newPoint.y - point.y));
-        point = newPoint;
+        if ([gesture locationInView:mainContentView].y > mainContentView.frame.size.height - mainContentView.frame.size.height * 0.15) {
+            return;
+        } else {
+            tmp.center = [gesture locationInView:mainContentView];
+        }
     }
 }
 

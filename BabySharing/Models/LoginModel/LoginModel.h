@@ -28,6 +28,11 @@ typedef NS_ENUM(NSInteger, LoginModelConnectSNResult) {
     LoginModelConnectSNResultError,
 };
 
+typedef NS_ENUM(NSInteger, ShareResouseTyoe) {
+    ShareImage,
+    ShareNews,
+};
+
 typedef void(^descriptionFinishBlock)(BOOL, NSDictionary*);
 typedef void(^weiboUsersFinishBlock)(BOOL success, NSArray* friends);
 typedef void(^queryRecommendUserFinishBlock)(BOOL success, NSArray* lst);
@@ -69,7 +74,7 @@ typedef void(^requestUserInfoSeccess)(NSDictionary *data);
 
 #pragma mark -- qq login and call back
 - (void)loginWithQQ;
-- (void)postContentOnQQzoneWithText:(NSString *)text andImage:(UIImage *)img;
+- (void)postContentOnQQzoneWithText:(NSString *)text andImage:(UIImage *)img type:(ShareResouseTyoe)type;
 
 - (NSArray*)enumAllAuthorisedUsers;
 - (void)reloadDataFromLocalDB;
@@ -107,6 +112,6 @@ typedef void(^requestUserInfoSeccess)(NSDictionary *data);
 
 #pragma mark -- query users in system
 - (void)queryUserList:(NSArray*)user_lst withProviderName:(NSString*)provider_name andFinishBlock:(queryUserListInSystemFinishBlock)block;
-#pragma mark -- requestForUserInfo
+#pragma mark -- requestForUserInfo--这是一个异步线程
 + (void)requestUserInfo:(requestUserInfoSeccess)block;
 @end

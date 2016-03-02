@@ -57,7 +57,6 @@
 		70D15B531C5B64C9007AC9AB /* UIScrollView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D15B3E1C5B64C9007AC9AB /* UIScrollView+MJExtension.m */; };
 		70D15B541C5B64C9007AC9AB /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D15B401C5B64C9007AC9AB /* UIScrollView+MJRefresh.m */; };
 		70D15B551C5B64C9007AC9AB /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D15B421C5B64C9007AC9AB /* UIView+MJExtension.m */; };
-		70DAA40F1C85608900A64AD9 /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 70DAA40E1C85608900A64AD9 /* libGPUImage.a */; };
 		70E06F771C4F799E00B740CD /* SearchBrandsDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E06F761C4F799E00B740CD /* SearchBrandsDelegate.m */; };
 		70E06F7A1C4F79B100B740CD /* SearchAddBrandsDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E06F791C4F79B100B740CD /* SearchAddBrandsDelegate.m */; };
 		70E06F7E1C4F966200B740CD /* SearchLocationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E06F7D1C4F966200B740CD /* SearchLocationDelegate.m */; };
@@ -75,6 +74,7 @@
 		A0A5C53F1C7DB1DF00F07FE8 /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A0A5C53B1C7DB1DF00F07FE8 /* WeiboSDK.bundle */; };
 		A0A90B2B1C81CA910022E79D /* AlbumTest.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A90B2A1C81CA910022E79D /* AlbumTest.m */; };
 		A0B0E38F1C857BE0007C56B2 /* libgotyeapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0B0E38E1C857BE0007C56B2 /* libgotyeapi.a */; };
+		A0B0E4121C86B5D8007C56B2 /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0B0E4101C86B5D8007C56B2 /* libGPUImage.a */; };
 		A0B7A7611C7C0B9100D78E6E /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B7A7601C7C0B9100D78E6E /* Tools.m */; };
 		A0B7A7631C7C23CC00D78E6E /* YYBoundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A0B7A7621C7C23CC00D78E6E /* YYBoundle.bundle */; };
 		A0B7A7661C7C563400D78E6E /* PersonInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B7A7651C7C563400D78E6E /* PersonInfoCell.m */; };
@@ -460,7 +460,6 @@
 		70D15B401C5B64C9007AC9AB /* UIScrollView+MJRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+MJRefresh.m"; sourceTree = "<group>"; };
 		70D15B411C5B64C9007AC9AB /* UIView+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MJExtension.h"; sourceTree = "<group>"; };
 		70D15B421C5B64C9007AC9AB /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
-		70DAA40E1C85608900A64AD9 /* libGPUImage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGPUImage.a; sourceTree = "<group>"; };
 		70E06F751C4F799E00B740CD /* SearchBrandsDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchBrandsDelegate.h; sourceTree = "<group>"; };
 		70E06F761C4F799E00B740CD /* SearchBrandsDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchBrandsDelegate.m; sourceTree = "<group>"; };
 		70E06F781C4F79B100B740CD /* SearchAddBrandsDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchAddBrandsDelegate.h; sourceTree = "<group>"; };
@@ -502,6 +501,7 @@
 		A0A90B291C81CA910022E79D /* AlbumTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumTest.h; sourceTree = "<group>"; };
 		A0A90B2A1C81CA910022E79D /* AlbumTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumTest.m; sourceTree = "<group>"; };
 		A0B0E38E1C857BE0007C56B2 /* libgotyeapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libgotyeapi.a; sourceTree = "<group>"; };
+		A0B0E4101C86B5D8007C56B2 /* libGPUImage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGPUImage.a; sourceTree = "<group>"; };
 		A0B7A75F1C7C0B9100D78E6E /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
 		A0B7A7601C7C0B9100D78E6E /* Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
 		A0B7A7621C7C23CC00D78E6E /* YYBoundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = YYBoundle.bundle; sourceTree = "<group>"; };
@@ -1038,7 +1038,7 @@
 				EEAACD9B1B44EDEB00D05C0B /* libz.dylib in Frameworks */,
 				EEAACD991B44EDD700D05C0B /* libsqlite3.0.dylib in Frameworks */,
 				EEAACD971B44ED8600D05C0B /* SystemConfiguration.framework in Frameworks */,
-				70DAA40F1C85608900A64AD9 /* libGPUImage.a in Frameworks */,
+				A0B0E4121C86B5D8007C56B2 /* libGPUImage.a in Frameworks */,
 				EEAACD951B44ED7B00D05C0B /* libc++.dylib in Frameworks */,
 				A0B0E38F1C857BE0007C56B2 /* libgotyeapi.a in Frameworks */,
 				EEAACD8E1B44ECDD00D05C0B /* CoreMedia.framework in Frameworks */,
@@ -1234,7 +1234,7 @@
 		A0423D221C84253700039991 /* libGPUImage */ = {
 			isa = PBXGroup;
 			children = (
-				70DAA40E1C85608900A64AD9 /* libGPUImage.a */,
+				A0B0E4101C86B5D8007C56B2 /* libGPUImage.a */,
 				A0423D231C84253700039991 /* GPUImage.framework */,
 			);
 			path = libGPUImage;
@@ -2950,7 +2950,7 @@
 				TargetAttributes = {
 					EEAAC8F71B44E81A00D05C0B = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = V6843SSXWV;
+						DevelopmentTeam = 6AUL2A4AE9;
 					};
 					EEAAC9131B44E81A00D05C0B = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -3472,7 +3472,7 @@
 					"-ObjC",
 					"-fobjc-arc",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = BS.BabySharing;
+				PRODUCT_BUNDLE_IDENTIFIER = monkeyheng.BabySharing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -3512,7 +3512,7 @@
 					"-ObjC",
 					"-fobjc-arc",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = BS.BabySharing;
+				PRODUCT_BUNDLE_IDENTIFIER = monkeyheng.BabySharing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
