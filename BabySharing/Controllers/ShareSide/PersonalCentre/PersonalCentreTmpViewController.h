@@ -10,8 +10,9 @@
 #import "PersonalCenterProtocol.h"
 
 @interface PersonalCentreTmpViewController : UIViewController
+
 @property (nonatomic, strong, setter=setProfileDelegate:) id<UITableViewDataSource, UITableViewDelegate, PersonalCenterCallBack> current_delegate;
 @property (nonatomic, strong) NSString* owner_id;
-
 @property (nonatomic) BOOL isPushed;
+
 @end

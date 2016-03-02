@@ -15,6 +15,7 @@
 #import "SearchSegView2.h"
 #import "INTUAnimationEngine.h"
 #import "Tools.h"
+#import "TmpFileStorageModel.h"
 
 #define FAKE_NAVIGATION_BAR_HEIGHT  64
 #define SNS_BUTTON_WIDTH            25
@@ -497,7 +498,21 @@
         [delegate.lm postContentOnWeiboWithText:_descriptionView.text andImage:self.share_img];
     }
     if (_isShareQQ) {
-        [delegate.lm postContentOnQQzoneWithText:_descriptionView.text andImage:self.share_img];
+        [LoginModel requestUserInfo:^(NSDictionary *data) {
+            UIImage* userImg = [TmpFileStorageModel enumImageWithName:[data valueForKey:@""] withDownLoadFinishBolck:^(BOOL success, UIImage *user_img) {
+                if (success) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        if (self) {
+                            UIImage *shareImage = [Tools addPortraitToImage:user_img];
+                            [delegate.lm postContentOnQQzoneWithText:_descriptionView.text andImage:shareImage];
+                        }
+                    });
+                } else {
+                    [[[UIAlertView alloc] initWithTitle:@"通知" message:@"分享失败" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil] show];
+                }
+            }];
+            [delegate.lm postContentOnQQzoneWithText:_descriptionView.text andImage:userImg];
+        }];
     }
     PostModel* pm = delegate.pm;
     

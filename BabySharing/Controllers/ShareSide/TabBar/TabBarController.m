@@ -96,16 +96,6 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 #pragma marks - change to side B
 - (void)showSecretSideOnController:(UIViewController*)parent {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SecretNib" bundle:nil];
@@ -156,21 +146,12 @@
 }
 
 - (void)showAblumCameraController:(UIViewController*)parent andType:(AlbumControllerType)type {
-//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"AlbumNib" bundle:nil];
-//    UIViewController* postNav = [storyboard instantiateViewControllerWithIdentifier:@"AlbumNav"];
-//    [parent presentViewController:postNav animated:YES completion: ^(void){
-//        NSLog(@"Post controller running ...");
-//        AlbumViewController* pv = [[postNav childViewControllers] firstObject];
-//        pv.delegate = self;
-//        pv.actionType = type;
-//    }];
     AlbumViewController2* distination = [[AlbumViewController2 alloc]init];
     distination.delegate = self;
     HomeNavigationController * nav = [[HomeNavigationController alloc]initWithRootViewController:distination];
     [parent presentViewController:nav animated:YES completion: ^(void){
         NSLog(@"Ablum controller running ...");
     }];
-//    [self.navigationController pushViewController:distination animated:YES];
 }
 
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item {
@@ -278,15 +259,11 @@
 // 获取当前处于activity状态的view controller
 - (UIViewController *)activityViewController {
     UIViewController* activityViewController = nil;
-    
     UIWindow *window = [[UIApplication sharedApplication] keyWindow];
-    if(window.windowLevel != UIWindowLevelNormal)
-    {
+    if(window.windowLevel != UIWindowLevelNormal) {
         NSArray *windows = [[UIApplication sharedApplication] windows];
-        for(UIWindow *tmpWin in windows)
-        {
-            if(tmpWin.windowLevel == UIWindowLevelNormal)
-            {
+        for(UIWindow *tmpWin in windows) {
+            if(tmpWin.windowLevel == UIWindowLevelNormal) {
                 window = tmpWin;
                 break;
             }
@@ -294,22 +271,18 @@
     }
     
     NSArray *viewsArray = [window subviews];
-    if([viewsArray count] > 0)
-    {
+    if([viewsArray count] > 0) {
         UIView *frontView = [viewsArray objectAtIndex:0];
         
         id nextResponder = [frontView nextResponder];
         
-        if([nextResponder isKindOfClass:[UIViewController class]])
-        {
+        if([nextResponder isKindOfClass:[UIViewController class]]) {
             activityViewController = nextResponder;
         }
-        else
-        {
+        else {
             activityViewController = window.rootViewController;
         }
     }
-    
     return activityViewController;
 }
 @end

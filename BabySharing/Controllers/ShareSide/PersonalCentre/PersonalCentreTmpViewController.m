@@ -74,8 +74,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-//    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f]];
-    
     AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     _current_user_id = delegate.lm.current_user_id;
     _current_auth_token = delegate.lm.current_auth_token;
@@ -281,10 +279,6 @@
     [self performSegueWithIdentifier:@"MoreSetting" sender:nil];
 }
 
-//- (IBAction)didSelectSignOutBtn {
-//    [[NSNotificationCenter defaultCenter]postNotificationName:@"current user sign out" object:nil];
-//}
-
 - (void)updateProfileDetails {
     dispatch_queue_t up = dispatch_queue_create("Get Profile Details", nil);
     dispatch_async(up, ^{
@@ -304,7 +298,6 @@
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 [_queryView reloadData];
-//                self.navigationItem.title = [dic_profile_details objectForKey:@"screen_name"];
             });
             
         } else {
@@ -367,21 +360,6 @@
 }
 
 - (NSInteger)getRelations {
-//    if (dic_profile_details) {
-//        switch (((NSNumber*)[dic_profile_details objectForKey:@"relations"]).integerValue) {
-//            case UserPostOwnerConnectionsSamePerson:
-//                // my own post, do nothing
-//                return nil;
-//            case UserPostOwnerConnectionsNone:
-//            case UserPostOwnerConnectionsFollowed:
-//                return @"+关注";
-//            case UserPostOwnerConnectionsFollowing:
-//            case UserPostOwnerConnectionsFriends:
-////                return @"取消关注";
-//                return @"-取关";
-//            default:
-//                return nil;
-//    }} else return nil;
     return ((NSNumber*)[dic_profile_details objectForKey:@"relations"]).integerValue;
 }
 

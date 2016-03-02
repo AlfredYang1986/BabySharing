@@ -20,6 +20,7 @@
 #import "QQApiInterfaceObject.h"
 #import "QQApiInterface.h"
 #import "Tools.h"
+#import "AppDelegate.h"
 
 // weibo sdk
 #import "WBHttpRequest+WeiboUser.h"
@@ -335,11 +336,10 @@
 
 - (void)postContentOnQQzoneWithText:(NSString *)text andImage:(UIImage *)img {
     if ([TencentOAuth iphoneQQInstalled]) {
-        NSData* data = UIImagePNGRepresentation(img);
-    NSData *previewData = UIImagePNGRepresentation([Tools OriginImage:img scaleToSize:CGSizeMake(100, 100)]);
-        QQApiImageObject *imgObj = [QQApiImageObject objectWithData:data previewImageData:previewData title:text description:text];
-        SendMessageToQQReq* req = [SendMessageToQQReq reqWithContent:imgObj];
-        NSLog(@"分享到QQ空间 == %d", [QQApiInterface sendReq:req]);
+        NSData *previewData = UIImagePNGRepresentation([Tools OriginImage:img scaleToSize:CGSizeMake(100, 100)]);
+        QQApiNewsObject* img = [QQApiAudioObject objectWithURL:[NSURL URLWithString:@"www.baidu.com"] title:@"咚哒" description:text previewImageData:previewData targetContentType:QQApiURLTargetTypeNews];
+        SendMessageToQQReq* req = [SendMessageToQQReq reqWithContent:img];
+        NSLog(@"分享到QQ == %d", [QQApiInterface sendReq:req]);
     } else {
         [[[UIAlertView alloc] initWithTitle:@"通知" message:@"当前手机未安装QQ无法分享到QQ空间" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil] show];
     }
@@ -980,11 +980,24 @@
         NSLog(@"result is: %@", reVal);
         block(YES, reVal);
     } else {
-//        NSDictionary* reError = [result objectForKey:@"error"];
-//        NSString* msg = [reError objectForKey:@"message"];
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:msg delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-//        [alert show];
         block(NO, nil);
     }
 }
+
++ (void)requestUserInfo:(requestUserInfoSeccess)block {
+    dispatch_queue_t queue = dispatch_queue_create("get_userInfo", nil);
+    dispatch_async(queue, ^{
+        NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
+        [dic setValue:[AppDelegate defaultAppDelegate].lm.current_auth_token forKey:@"query_auth_token"];
+        [dic setValue:[AppDelegate defaultAppDelegate].lm.current_user_id forKey:@"query_user_id"];
+        [dic setValue:[AppDelegate defaultAppDelegate].lm.current_user_id forKey:@"owner_user_id"];
+        
+        NSError * error = nil;
+        NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
+        
+        NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:[PROFILE_HOST_DOMAIN stringByAppendingString:PROFILE_QUERY_DETAILS]]];
+        block(result);
+    });
+}
+
 @end

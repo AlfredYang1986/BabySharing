@@ -71,10 +71,10 @@
 		A08AE9541C7E9C1A0029B660 /* libiconv.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A08AE9531C7E9C1A0029B660 /* libiconv.2.dylib */; };
 		A09DF94E1C80440C00484FAB /* AlbumCollectionViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A09DF94D1C80440C00484FAB /* AlbumCollectionViewDelegate.m */; };
 		A09DF9511C8044C500484FAB /* PhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A09DF9501C8044C500484FAB /* PhotoCollectionViewCell.m */; };
-		A0A5C52F1C7DAD0500F07FE8 /* libgotyeapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A5C52E1C7DAD0500F07FE8 /* libgotyeapi.a */; };
 		A0A5C53E1C7DB1DF00F07FE8 /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A5C5311C7DB1DF00F07FE8 /* libWeiboSDK.a */; };
 		A0A5C53F1C7DB1DF00F07FE8 /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A0A5C53B1C7DB1DF00F07FE8 /* WeiboSDK.bundle */; };
 		A0A90B2B1C81CA910022E79D /* AlbumTest.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A90B2A1C81CA910022E79D /* AlbumTest.m */; };
+		A0B0E38F1C857BE0007C56B2 /* libgotyeapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0B0E38E1C857BE0007C56B2 /* libgotyeapi.a */; };
 		A0B7A7611C7C0B9100D78E6E /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B7A7601C7C0B9100D78E6E /* Tools.m */; };
 		A0B7A7631C7C23CC00D78E6E /* YYBoundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A0B7A7621C7C23CC00D78E6E /* YYBoundle.bundle */; };
 		A0B7A7661C7C563400D78E6E /* PersonInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B7A7651C7C563400D78E6E /* PersonInfoCell.m */; };
@@ -487,7 +487,6 @@
 		A09DF94D1C80440C00484FAB /* AlbumCollectionViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumCollectionViewDelegate.m; sourceTree = "<group>"; };
 		A09DF94F1C8044C500484FAB /* PhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCollectionViewCell.h; sourceTree = "<group>"; };
 		A09DF9501C8044C500484FAB /* PhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCollectionViewCell.m; sourceTree = "<group>"; };
-		A0A5C52E1C7DAD0500F07FE8 /* libgotyeapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libgotyeapi.a; sourceTree = "<group>"; };
 		A0A5C5311C7DB1DF00F07FE8 /* libWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeiboSDK.a; sourceTree = "<group>"; };
 		A0A5C5321C7DB1DF00F07FE8 /* WBHttpRequest+WeiboGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboGame.h"; sourceTree = "<group>"; };
 		A0A5C5331C7DB1DF00F07FE8 /* WBHttpRequest+WeiboShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboShare.h"; sourceTree = "<group>"; };
@@ -503,6 +502,7 @@
 		A0A5C53D1C7DB1DF00F07FE8 /* WeiboUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboUser.h; sourceTree = "<group>"; };
 		A0A90B291C81CA910022E79D /* AlbumTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumTest.h; sourceTree = "<group>"; };
 		A0A90B2A1C81CA910022E79D /* AlbumTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumTest.m; sourceTree = "<group>"; };
+		A0B0E38E1C857BE0007C56B2 /* libgotyeapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libgotyeapi.a; sourceTree = "<group>"; };
 		A0B7A75F1C7C0B9100D78E6E /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
 		A0B7A7601C7C0B9100D78E6E /* Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
 		A0B7A7621C7C23CC00D78E6E /* YYBoundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = YYBoundle.bundle; sourceTree = "<group>"; };
@@ -1042,12 +1042,12 @@
 				EEAACD971B44ED8600D05C0B /* SystemConfiguration.framework in Frameworks */,
 				70DAA40F1C85608900A64AD9 /* libGPUImage.a in Frameworks */,
 				EEAACD951B44ED7B00D05C0B /* libc++.dylib in Frameworks */,
+				A0B0E38F1C857BE0007C56B2 /* libgotyeapi.a in Frameworks */,
 				EEAACD8E1B44ECDD00D05C0B /* CoreMedia.framework in Frameworks */,
 				EEAACD8F1B44ECDD00D05C0B /* CoreVideo.framework in Frameworks */,
 				EEAACD901B44ECDD00D05C0B /* OpenGLES.framework in Frameworks */,
 				EEAACD911B44ECDD00D05C0B /* QuartzCore.framework in Frameworks */,
 				EEAACD921B44ECDD00D05C0B /* Foundation.framework in Frameworks */,
-				A0A5C52F1C7DAD0500F07FE8 /* libgotyeapi.a in Frameworks */,
 				EEAACD931B44ECDD00D05C0B /* AVFoundation.framework in Frameworks */,
 				A0A5C53E1C7DB1DF00F07FE8 /* libWeiboSDK.a in Frameworks */,
 				EEAACD801B44EBDE00D05C0B /* MediaPlayer.framework in Frameworks */,
@@ -1245,7 +1245,7 @@
 		A0A5C52D1C7DAD0500F07FE8 /* libs */ = {
 			isa = PBXGroup;
 			children = (
-				A0A5C52E1C7DAD0500F07FE8 /* libgotyeapi.a */,
+				A0B0E38E1C857BE0007C56B2 /* libgotyeapi.a */,
 			);
 			path = libs;
 			sourceTree = "<group>";

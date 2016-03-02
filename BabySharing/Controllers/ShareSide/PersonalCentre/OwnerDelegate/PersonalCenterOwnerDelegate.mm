@@ -245,8 +245,6 @@
         [header setNickName:[_delegate getNickName]];
         [header setRoleTag:[_delegate getRoleTag]];
         
-//        header.seg.selectedSegmentIndex = [_delegate getCurrentSegIndex];
-        
         [header setRelations:UserPostOwnerConnectionsSamePerson];
         header.deleagate = _delegate;
         

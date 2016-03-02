@@ -130,4 +130,40 @@
     return [UIColor colorWithRed:RED / 255.0 green:GREEN / 255.0 blue:BLUE / 255.0 alpha:ALPHA];
 }
 
++ (UIImage *)addPortraitToImage:(UIImage *)image {
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    CGFloat height = [UIScreen mainScreen].bounds.size.width + 90;
+    //    UIGraphicsBeginImageContext(CGSizeMake(width, height));
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(width, height), NO, 0.0);
+    
+    [image drawInRect:CGRectMake(0, 0, width, width)];
+    
+    // 画边框大圆
+    [[UIColor whiteColor] set];
+    CGFloat bigRadius = 50; //大圆半径
+    CGFloat centerX = width / 2;
+    CGFloat centerY = width;
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    CGContextAddArc(ctx, centerX, centerY, bigRadius, 0, M_PI * 2, 0);
+    CGContextFillPath(ctx);
+    // 昵称
+    CGContextSetLineWidth(ctx, 1.0);
+    CGContextSetRGBFillColor(ctx, 160 / 255.0, 160 / 255.0, 160 / 255.0, 1.0);
+    UIFont *font = [UIFont boldSystemFontOfSize:15];
+    NSString *nickName = @"慢飞啊慢飞啊_wda";
+    CGSize size = [nickName sizeWithAttributes:@{ NSFontAttributeName :font }];
+    [nickName drawInRect:CGRectMake(width / 2 - size.width / 2, height - size.height * 1.5, size.width, size.height) withAttributes:@{ NSFontAttributeName :font }];
+    // 画小圆
+    CGFloat smallradius = 45;
+    CGContextAddArc(ctx, centerX, centerY, smallradius, 0, M_PI * 2, 0);
+    // 剪裁
+    CGContextClip(ctx);
+    // 画头像
+    UIImage *portrait = [UIImage imageNamed:@"head"];
+    NSLog(@"MonkeyHengLog: %f === %f", portrait.size.width, portrait.size.height);
+    [portrait drawInRect:CGRectMake(width / 2 - 50, width - 50, 100, 100)];
+    // 画一个半透明的圆环
+    return UIGraphicsGetImageFromCurrentImageContext();
+}
+
 @end
