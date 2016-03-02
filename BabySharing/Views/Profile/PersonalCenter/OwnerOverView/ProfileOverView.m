@@ -26,7 +26,7 @@
 
 #define NAME_LABEL_FONT_SIZE                    14.f
 #define ROLE_TAG_LABEL_FONT_SIZE                12.f
-#define LOCATION_LABEL_FONT_SIZE                12.f
+#define LOCATION_LABEL_FONT_SIZE                13.f
 
 #define NAME_LABEL_2_SCREEN_PHOTO_MARGIN        50
 #define ROLE_TAG_LABEL_2_SCREEN_PHOTO_MARGIN    9
@@ -83,7 +83,7 @@
 
 - (void)setUpViews {
 
-    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+//    CGFloat width = [UIScreen mainScreen].bounds.size.width;
     
     /*************************************************************************************************************************/
     // split line
@@ -147,7 +147,7 @@
 #define WHITE_AREA_HEIGHT           98
     
 #define WHITE_AREA_ORIGIN_Y         MARGIN_TOP
-#define WHITE_AREA_TO_LOCATION      4
+#define WHITE_AREA_TO_LOCATION      10.5
     white_area = [[UIView alloc]initWithFrame:CGRectMake(MARGIN_LEFT, MARGIN_TOP, self.frame.size.width - MARGIN_LEFT - MARGIN_REGIT, WHITE_AREA_HEIGHT)];
     white_area.backgroundColor = [UIColor whiteColor];
     white_area.layer.cornerRadius = 4.f;
@@ -157,27 +157,37 @@
     
     /*************************************************************************************************************************/
     // image view
-#define USER_PHOTO_WIDTH_2          81
+#define USER_PHOTO_WIDTH_2          72
 #define USER_PHOTO_HEIGHT_2         USER_PHOTO_WIDTH_2
+#define USER_PHOTO_BG_WIDTH_2       82
+#define USER_PHOTO_BG_HEIGHT_2      USER_PHOTO_BG_WIDTH_2
 #define IMG_OFFSET_X                64
-#define IMG_OFFSET_Y                -12
-#define IMG_BORDER_WIDTH            5
+#define IMG_OFFSET_Y                -10
+#define IMG_BORDER_WIDTH            6
     
+    UIView* bg_view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, USER_PHOTO_BG_WIDTH_2, USER_PHOTO_BG_HEIGHT_2)];
+    bg_view.center = CGPointMake(white_area.frame.origin.x + IMG_OFFSET_X, white_area.frame.origin.y + IMG_OFFSET_Y);
+    bg_view.layer.cornerRadius = USER_PHOTO_BG_WIDTH_2 / 2;
+    bg_view.clipsToBounds = YES;
+    bg_view.backgroundColor = [UIColor whiteColor];
+    [self addSubview:bg_view];
+    [self bringSubviewToFront:bg_view];
+
     _imgView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, USER_PHOTO_WIDTH_2, USER_PHOTO_HEIGHT_2)];
-    _imgView.center = CGPointMake(white_area.frame.origin.x + IMG_OFFSET_X, white_area.frame.origin.y + IMG_OFFSET_Y);
+    _imgView.center = CGPointMake(USER_PHOTO_BG_WIDTH_2 / 2,  USER_PHOTO_BG_HEIGHT_2 / 2);
     _imgView.layer.cornerRadius = USER_PHOTO_WIDTH_2 / 2;
 //    _imgView.layer.borderColor = [UIColor colorWithWhite:1.f alpha:0.3].CGColor;
-    _imgView.layer.borderColor = [UIColor whiteColor].CGColor;
-    _imgView.layer.borderWidth = IMG_BORDER_WIDTH;
+//    _imgView.layer.borderColor = [UIColor whiteColor].CGColor;
+//    _imgView.layer.borderWidth = IMG_BORDER_WIDTH;
     _imgView.clipsToBounds = YES;
-    [self addSubview:_imgView];
-    [self bringSubviewToFront:_imgView];
+    [bg_view addSubview:_imgView];
+    [bg_view bringSubviewToFront:_imgView];
     /*************************************************************************************************************************/
     
     /*************************************************************************************************************************/
     // name label
     _nameLabel = [[UILabel alloc]init];
-    _nameLabel.textColor = [UIColor lightGrayColor];
+    _nameLabel.textColor = [UIColor colorWithWhite:0.2902 alpha:1.f];
     _nameLabel.font = [UIFont systemFontOfSize:NAME_LABEL_FONT_SIZE];
     [white_area addSubview:_nameLabel];
     [white_area bringSubviewToFront:_nameLabel];
@@ -207,9 +217,10 @@
 //    hotTagView.center = CGPointMake(17.5 + 90 / 2, BASE_LINE_HEIGHT + MARGIN_AFTER_BASE_LINE + BUTTON_HEIGHT / 2 + 4);
 //    relations_btn.center = CGPointMake(width - 10.5 - 69 / 2 , BASE_LINE_HEIGHT + MARGIN_AFTER_BASE_LINE + BUTTON_HEIGHT / 2);
     /*************************************************************************************************************************/
+#define THUMSUP_DES_FONT_SIZE       13.f
     thumup = [[UILabel alloc]init];
-    thumup.textColor = [UIColor colorWithWhite:0.5922 alpha:1.f];
-    thumup.font = [UIFont systemFontOfSize:14.f];
+    thumup.textColor = [UIColor colorWithWhite:0.6078 alpha:1.f];
+    thumup.font = [UIFont systemFontOfSize:THUMSUP_DES_FONT_SIZE];
     [white_area addSubview:thumup];
     [white_area bringSubviewToFront:thumup];
 }
@@ -288,7 +299,7 @@
     [_locationLabel sizeToFit];
     
 //    _locationLabel.center = CGPointMake(SCREEN_WIDTH / 2, _imgView.center.y + _imgView.frame.size.height / 2 + LOCATION_LABEL_2_SCREEN_PHOTO_MARGIN);
-    _locationLabel.center = CGPointMake(SCREEN_WIDTH - _locationLabel.frame.size.width / 2 - MARGIN_REGIT, WHITE_AREA_ORIGIN_Y - _locationLabel.frame.size.height / 2 - WHITE_AREA_TO_LOCATION);
+    _locationLabel.center = CGPointMake(SCREEN_WIDTH - _locationLabel.frame.size.width / 2 - MARGIN_REGIT * 2, WHITE_AREA_ORIGIN_Y - _locationLabel.frame.size.height / 2 - WHITE_AREA_TO_LOCATION);
 }
 
 - (void)setPersonalSign:(NSString*)sign_content {
@@ -300,7 +311,7 @@
     [_nameLabel sizeToFit];
 //    _nameLabel.center = CGPointMake(SCREEN_WIDTH / 2 - NAME_LABEL_2_ROLE_TAG_LABEL_MARGIN - _nameLabel.frame.size.width / 2, _imgView.center.y + _imgView.frame.size.height / 2 + NAME_LABEL_2_SCREEN_PHOTO_MARGIN);
    
-#define NAME_MARGIN_TOP         30
+#define NAME_MARGIN_TOP         37
     _nameLabel.center = CGPointMake(MARGIN_LEFT + _nameLabel.frame.size.width / 2, NAME_MARGIN_TOP + _nameLabel.frame.size.height / 2);
 }
 
@@ -388,6 +399,7 @@
 - (void)setShareCount:(NSInteger)share_count andThumUpCount:(NSInteger)thumup_count andBeenThumupCount:(NSInteger)been_thumup_count {
     thumup.text = [NSString stringWithFormat:@"赞 %ld    被赞 %ld    被推 %ld", thumup_count, been_thumup_count, share_count];
     [thumup sizeToFit];
-    thumup.frame = CGRectMake(MARGIN_LEFT, NAME_MARGIN_TOP + thumup.frame.size.height + 20, thumup.frame.size.width, thumup.frame.size.height);
+    thumup.frame = CGRectMake(MARGIN_LEFT, NAME_MARGIN_TOP + thumup.frame.size.height + 18, thumup.frame.size.width, thumup.frame.size.height);
+    thumup.center = CGPointMake(thumup.center.x, relations_btn.center.y);
 }
 @end

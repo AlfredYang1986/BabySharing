@@ -40,7 +40,14 @@
 @property (nonatomic) BOOL cannot_selected;
 @property (nonatomic, weak) id<AlbumTableCellDelegate> delegate;
 
+@property (nonatomic) CGFloat margin_left;
+@property (nonatomic) CGFloat margin_right;
+@property (nonatomic) CGFloat marign_between;
+@property (nonatomic) CGFloat cell_cor_radius;
+
 + (CGFloat)prefferCellHeight;
++ (CGFloat)prefferCellHeightWithMarginLeft:(CGFloat)left Right:(CGFloat)right Margin:(CGFloat)margin;
+
 - (void)setUpContentViewWithImageNames:(NSArray*)image_arr atLine:(NSInteger)row andType:(AlbumControllerType)type;
 - (void)setUpContentViewWithImageURLs2:(NSArray*)image_arr atLine:(NSInteger)row andType:(AlbumControllerType)type;
 - (void)setUpContentViewWithImageURLs:(NSArray*)image_arr atLine:(NSInteger)row andType:(AlbumControllerType)type;

@@ -98,7 +98,9 @@
     if (!_current_delegate) {
         self.current_delegate = [[PersonalCenterOwnerDelegate alloc]init];
     }
-    
+
+    _queryView.showsVerticalScrollIndicator = FALSE;
+    _queryView.showsHorizontalScrollIndicator = FALSE;
     _queryView.delegate = _current_delegate;
     _queryView.dataSource = _current_delegate;
     
@@ -125,8 +127,8 @@
 }
 
 - (void)createSegamentCtr {
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
-    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+//    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
+//    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
 
 //    UIImage* img_seg_bg = [UIImage imageNamed:[resourceBundle pathForResource:@"profile_seg_bg" ofType:@"png"]];
 //    CALayer* seg_bg = [CALayer layer];
@@ -201,11 +203,12 @@
         [fake_bar addSubview:barBtn];
         
     } else {
-        UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 25)];
+        CGFloat width = [UIScreen mainScreen].bounds.size.width;
+        UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(width - 15 - 30, 0, 30, 25)];
         NSString* filepath = [resourceBundle pathForResource:@"profile_setting_dark" ofType:@"png"];
         CALayer * layer = [CALayer layer];
         layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
-        layer.frame = CGRectMake(10, 10, 25, 25);
+        layer.frame = CGRectMake(0, 10, 25, 25);
 //        layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
         [barBtn.layer addSublayer:layer];
         [barBtn addTarget:self action:@selector(didSelectSettingBtn) forControlEvents:UIControlEventTouchDown];

@@ -53,8 +53,8 @@
 
 - (void)gridViewHeight:(CellHeightParameters*)para {
     
-    CGFloat width = [UIScreen mainScreen].bounds.size.width;
-    para.height = width / 3;
+//    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    para.height = [AlbumTableCell prefferCellHeightWithMarginLeft:10.5f Right:10.5f Margin:2.f];
 }
 
 - (void)gridViewCount:(CellCountParameters*)para {
@@ -73,6 +73,10 @@
         cell = [[AlbumTableCell alloc]init];
     }
     
+    cell.margin_left = 10.5f;
+    cell.margin_right = 10.5f;
+    cell.cell_cor_radius = 3.f;
+    cell.marign_between = 2.f;
     cell.delegate = _delegate;
     OwnerQueryModel* om = [_delegate getOM];
     NSInteger row = indexPath.row;
@@ -115,7 +119,11 @@
     if (cell == nil) {
         cell = [[AlbumTableCell alloc]init];
     }
-    
+   
+    cell.margin_left = 10.5f;
+    cell.margin_right = 10.5f;
+    cell.cell_cor_radius = 3.f;
+    cell.marign_between = 2.f;
     cell.delegate = _delegate;
     OwnerQueryModel* om = [_delegate getOM];
     NSInteger row = indexPath.row;

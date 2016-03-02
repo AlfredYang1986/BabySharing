@@ -19,6 +19,8 @@
 @synthesize viewSelected = _viewSelected;
 @synthesize grid_border_color = _grid_border_color;
 
+@synthesize cell_cor_radius = _cell_cor_radius;
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
@@ -31,9 +33,15 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.layer.borderColor = [UIColor whiteColor].CGColor;
-        self.layer.borderWidth = 0.75f;
+//        self.layer.borderWidth = 0.75f;
+        self.clipsToBounds = YES;
     }
     return self;
+}
+
+- (void)setCellCorRadius:(CGFloat)cell_cor_radius {
+    _cell_cor_radius = cell_cor_radius;
+    self.layer.cornerRadius = _cell_cor_radius;
 }
 
 - (void)setGridBorderColor:(UIColor *)c {

@@ -82,7 +82,10 @@
     if (cell == nil) {
         cell = [[AlbumTableCell alloc]init];
     }
-    
+   
+    cell.margin_left = 12.f;
+    cell.margin_right = 12.f;
+    cell.cell_cor_radius = 3.f;
     cell.delegate = _delegate;
     OwnerQueryModel* om = [_delegate getOM];
     NSInteger row = indexPath.row;

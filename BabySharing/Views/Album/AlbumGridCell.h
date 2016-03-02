@@ -19,6 +19,8 @@
 @property (nonatomic, setter=setCellViewSelected:) BOOL viewSelected;
 @property (nonatomic, strong, setter=setGridBorderColor:) UIColor* grid_border_color;
 
+@property (nonatomic, setter=setCellCorRadius:) CGFloat cell_cor_radius;
+
 - (void)setCellViewSelected:(BOOL)select;
 - (void)setMovieDurationLayer:(id)duration;
 

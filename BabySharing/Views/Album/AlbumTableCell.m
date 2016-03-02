@@ -18,6 +18,11 @@
 @synthesize cannot_selected = _cannot_selected;
 @synthesize grid_border_color = _grid_border_color;
 
+@synthesize margin_left = _margin_left;
+@synthesize margin_right = _margin_right;
+@synthesize marign_between = _marign_between;
+@synthesize cell_cor_radius = _cell_cor_radius;
+
 - (AlbumGridCell*)queryGridCellByIndex:(NSInteger)index {
     return (AlbumGridCell*)[image_view objectAtIndex:index % 3];
 }
@@ -27,10 +32,15 @@
     if (image_view == nil) {
         image_view = [[NSMutableArray alloc]initWithCapacity:views_count];
     }
-    CGFloat screen_width = [UIScreen mainScreen].bounds.size.width + 2 * BORDER_MODIFY;
+    
+    if (_marign_between == 0) {
+        _marign_between = 1.f;
+    }
+    
+    CGFloat screen_width = [UIScreen mainScreen].bounds.size.width - _margin_left - _margin_right - _marign_between * (views_count + 1); //2 * BORDER_MODIFY;
     CGFloat step_width = screen_width / views_count;
     //      CGFloat height = rc.size.height;
-    CGFloat height = [AlbumTableCell prefferCellHeight];
+    CGFloat height = step_width; //[AlbumTableCell prefferCellHeight];
     
     for (int index = 0; index < image_view.count; ++index) {
         [((UIView*)[image_view objectAtIndex:index]) removeFromSuperview];
@@ -42,7 +52,8 @@
         if (index > image_arr.count)
             continue;
         
-        AlbumGridCell* tmp = [[AlbumGridCell alloc]initWithFrame:CGRectMake(index * step_width - BORDER_MODIFY, 0, step_width, height)];
+        AlbumGridCell* tmp = [[AlbumGridCell alloc]initWithFrame:CGRectMake(index * (step_width + _marign_between) + _marign_between, _marign_between, step_width, height)];
+        tmp.cell_cor_radius = _cell_cor_radius;
         tmp.grid_border_color = _grid_border_color;
         tmp.userInteractionEnabled = YES;
         
@@ -69,7 +80,7 @@
     if (image_view == nil) {
         image_view = [[NSMutableArray alloc]initWithCapacity:views_count];
     }
-    CGFloat screen_width = [UIScreen mainScreen].bounds.size.width;
+    CGFloat screen_width = [UIScreen mainScreen].bounds.size.width - _margin_left - _margin_right;
     CGFloat step_width = screen_width / views_count;
     //      CGFloat height = rc.size.height;
     CGFloat height = [AlbumTableCell prefferCellHeight];
@@ -90,6 +101,7 @@
         
         
         AlbumGridCell* tmp = [[AlbumGridCell alloc]initWithFrame:CGRectMake(index * step_width, 0, step_width, height)];
+        tmp.cell_cor_radius = _cell_cor_radius;
         tmp.grid_border_color = _grid_border_color;
 //        if ([[at valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
 //            NSNumber* duration = [at valueForProperty:ALAssetPropertyDuration];
@@ -120,7 +132,7 @@
     if (image_view == nil) {
         image_view = [[NSMutableArray alloc]initWithCapacity:views_count];
     }
-    CGFloat screen_width = [UIScreen mainScreen].bounds.size.width;
+    CGFloat screen_width = [UIScreen mainScreen].bounds.size.width - _margin_left - _margin_right;;
     CGFloat step_width = screen_width / views_count;
 //      CGFloat height = rc.size.height;
     CGFloat height = [AlbumTableCell prefferCellHeight];
@@ -249,6 +261,11 @@
     CGFloat screen_width = [UIScreen mainScreen].bounds.size.width;
 //    return 96;
     return screen_width / 3;
+}
+
++ (CGFloat)prefferCellHeightWithMarginLeft:(CGFloat)left Right:(CGFloat)right Margin:(CGFloat)margin {
+    CGFloat screen_width = [UIScreen mainScreen].bounds.size.width - left - right - (3 + 1) * margin;
+    return screen_width / 3 + margin;
 }
 
 #pragma mark -- tap actions
