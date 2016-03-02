@@ -22,7 +22,7 @@
 
 #define AREA_CODE_WIDTH                     66
 #define INPUT_TEXT_FIELD_HEIGHT             45.5
-#define INPUT_MARGIN                        32.5
+#define INPUT_MARGIN                        10.5 //32.5
 
 #define TEXT_FIELD_LEFT_PADDING             10
 #define LINE_MARGIN                         5
@@ -62,12 +62,38 @@
 //    UIButton* tmp = [[UIButton alloc]initWithFrame:CGRectMake(INPUT_MARGIN, BASICMARGIN + INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN, AREA_CODE_WIDTH, INPUT_TEXT_FIELD_HEIGHT)];
     UIButton* tmp = [[UIButton alloc]initWithFrame:CGRectMake(INPUT_MARGIN, top, AREA_CODE_WIDTH, INPUT_TEXT_FIELD_HEIGHT)];
     
-    [tmp setBackgroundImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_dark_input_bg" ofType:@"png"]] forState:UIControlStateNormal];
+    [tmp setBackgroundImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_input_left" ofType:@"png"]] forState:UIControlStateNormal];
     
     UILabel* label = [[UILabel alloc]init];
     label.text = title;
     label.font = font;
-    label.textColor = [UIColor whiteColor];
+    label.textColor = [UIColor colorWithWhite:0.2902 alpha:1.f];
+    [label sizeToFit];
+    label.center = CGPointMake(AREA_CODE_WIDTH / 2, INPUT_TEXT_FIELD_HEIGHT / 2);
+    label.tag = -1;
+    [tmp addSubview:label];
+    
+    [self addSubview:tmp];
+}
+
+- (void)createColorfulLabelInRect:(CGRect)rect andTitle:(NSAttributedString*)title andTopMargin:(CGFloat)top {
+    NSString * bundlePath_dongda = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle_dongda = [NSBundle bundleWithPath:bundlePath_dongda];
+    
+    UIFont* font = [UIFont systemFontOfSize:14.f];
+    CGFloat width = rect.size.width;
+    CGFloat first_line_start_margin = INPUT_MARGIN;
+    first_line_start_margin = INPUT_MARGIN + AREA_CODE_WIDTH;
+    
+    //    UIButton* tmp = [[UIButton alloc]initWithFrame:CGRectMake(INPUT_MARGIN, BASICMARGIN + INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN, AREA_CODE_WIDTH, INPUT_TEXT_FIELD_HEIGHT)];
+    UIButton* tmp = [[UIButton alloc]initWithFrame:CGRectMake(first_line_start_margin, top, width - AREA_CODE_WIDTH - 2 * INPUT_MARGIN, INPUT_TEXT_FIELD_HEIGHT)];
+    
+    [tmp setBackgroundImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_input_right" ofType:@"png"]] forState:UIControlStateNormal];
+    
+    UILabel* label = [[UILabel alloc]init];
+    label.attributedText = title;
+    label.font = font;
+//    label.textColor = [UIColor whiteColor];
     [label sizeToFit];
     label.center = CGPointMake(AREA_CODE_WIDTH / 2, INPUT_TEXT_FIELD_HEIGHT / 2);
     label.tag = -1;
@@ -87,7 +113,7 @@
     
 //    UITextField* phone_area = [[UITextField alloc]initWithFrame:CGRectMake(first_line_start_margin, BASICMARGIN, width - AREA_CODE_WIDTH - 2 * INPUT_MARGIN, INPUT_TEXT_FIELD_HEIGHT)];
     UITextField* phone_area = [[UITextField alloc]initWithFrame:CGRectMake(first_line_start_margin, top, width - AREA_CODE_WIDTH - 2 * INPUT_MARGIN, INPUT_TEXT_FIELD_HEIGHT)];
-    [phone_area setBackground:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_light_input_bg" ofType:@"png"]]];
+    [phone_area setBackground:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_input_right" ofType:@"png"]]];
     phone_area.font = font;
     
     CGRect frame = phone_area.frame;
@@ -98,8 +124,8 @@
     phone_area.text = defaultString;
     
     phone_area.placeholder = placeholder;
-    [phone_area setValue:[UIColor colorWithWhite:1.f alpha:0.50] forKeyPath:@"_placeholderLabel.textColor"];
-    phone_area.textColor = [UIColor whiteColor];
+    [phone_area setValue:[UIColor colorWithWhite:0.6078 alpha:0.50] forKeyPath:@"_placeholderLabel.textColor"];
+    phone_area.textColor = [UIColor colorWithWhite:0.2902 alpha:1.f];
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:cb name:UITextFieldTextDidChangeNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChanged:) name:UITextFieldTextDidChangeNotification object:nil];
     phone_area.delegate = self;
@@ -144,7 +170,7 @@
     NSString * bundlePath_dongda = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle_dongda = [NSBundle bundleWithPath:bundlePath_dongda];
     
-    UIButton* next_btn = [[OBShapedButton alloc]initWithFrame:CGRectMake(INPUT_MARGIN, BASICMARGIN + INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN + INPUT_TEXT_FIELD_HEIGHT + LOGIN_BTN_TOP_MARGIN, width - 2 * INPUT_MARGIN, LOGIN_BTN_HEIGHT)];
+    UIButton* next_btn = [[OBShapedButton alloc]initWithFrame:CGRectMake(INPUT_MARGIN, BASICMARGIN + 2 * (INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN) + INPUT_TEXT_FIELD_HEIGHT + LOGIN_BTN_TOP_MARGIN, width - 2 * INPUT_MARGIN, LOGIN_BTN_HEIGHT)];
     [next_btn addTarget:_delegate action:@selector(didClickNextBtn) forControlEvents:UIControlEventTouchDown];
     next_btn.titleLabel.font = [UIFont systemFontOfSize:14.f];
     [next_btn setTitle:@"开启我的旅程" forState:UIControlStateNormal];
@@ -166,11 +192,16 @@
     name_text_field.font = [UIFont systemFontOfSize:12];
     name_text_field.delegate = self;
     
-    [self createLabelInRect:rect andTitle:@"角色" andTopMargin:BASICMARGIN + INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN];
-    tag_text_field = [self createInputAreaInRect:rect andTopMargin:BASICMARGIN + INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN andPlaceholder:@"填写你的角色标签" andPreString:[_delegate getPreRoleTag] andRightImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"dongda_next" ofType:@"png"]] andCallback:@selector(textFieldChanged:) andCancelBtn:NO];
+    [self createLabelInRect:rect andTitle:@"性别" andTopMargin:BASICMARGIN + INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN];
+    NSMutableAttributedString* str = [[NSMutableAttributedString alloc]initWithString:@"妈咪"];
+    [str addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(0, str.length)];
+    [self createColorfulLabelInRect:rect andTitle:[str copy] andTopMargin:BASICMARGIN + INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN];
+    
+    [self createLabelInRect:rect andTitle:@"角色" andTopMargin:BASICMARGIN + 2 * (INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN)];
+    tag_text_field = [self createInputAreaInRect:rect andTopMargin:BASICMARGIN + 2 * (INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN) andPlaceholder:@"填写你的角色标签" andPreString:[_delegate getPreRoleTag] andRightImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"dongda_next" ofType:@"png"]] andCallback:@selector(textFieldChanged:) andCancelBtn:NO];
     [self createNextBtnInRect:rect];
 
-    CGFloat height = BASICMARGIN + INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN + INPUT_TEXT_FIELD_HEIGHT + LOGIN_BTN_TOP_MARGIN + LOGIN_BTN_HEIGHT + BASICMARGIN;
+    CGFloat height = BASICMARGIN + 2 * (INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN) + INPUT_TEXT_FIELD_HEIGHT + LOGIN_BTN_TOP_MARGIN + LOGIN_BTN_HEIGHT + BASICMARGIN;
     self.bounds = CGRectMake(0, 0, width, height);
 }
 

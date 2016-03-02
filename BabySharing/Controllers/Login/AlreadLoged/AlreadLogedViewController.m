@@ -36,17 +36,18 @@
 @synthesize noBtn = _noBtn;
 
 #define SCREEN_PHOTO_TOP_MARGIN                 [UIScreen mainScreen].bounds.size.height * (0.5 - 0.1844)
+#define SCREEN_PHOTO_CENTER_MARGIN              -[UIScreen mainScreen].bounds.size.height * 0.1844
 #define SCREEN_PHOTO_WIDTH                      100
 #define SCREEN_PHOTO_HEIGHT                     SCREEN_PHOTO_WIDTH
 
-#define SCREEN_NAME_2_PHOTO_MARGIN              22
+#define SCREEN_NAME_2_PHOTO_MARGIN              0 //22
 
 #define SCREEN_NAME_2_ROLE_TAG_MARGIN           10
 
 #define IS_TAHT_YOU_LABEL_TO_CENTER_MARGIN      20
 #define IS_TAHT_YOU_LABEL_TO_IMG_MARGIN         172 / 2
 #define IS_TAHT_YOU_LABEL_TO_TOP_MARGIN         20
-#define YES_BTN_TOP_MARGIN                      81
+#define YES_BTN_TOP_MARGIN                      61 //81
 #define YES_BTN_2_NO_BTN_MARGIN                 34
 
 #define YES_NO_BTN_TO_EDGE_MARGIN               32.5
@@ -63,16 +64,16 @@
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     CGFloat height = [UIScreen mainScreen].bounds.size.height;
     
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
    
-    UIImage* img = [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"User_Big"] ofType:@"png"]];
+    UIImage* img = [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"default_user"] ofType:@"png"]];
     _loginImgBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, SCREEN_PHOTO_WIDTH, SCREEN_PHOTO_HEIGHT)];
     [_loginImgBtn setBackgroundImage:img forState:UIControlStateNormal];
     _loginImgBtn.layer.cornerRadius = _loginImgBtn.frame.size.width / 2;
     _loginImgBtn.clipsToBounds = YES;
     _loginImgBtn.backgroundColor = [UIColor clearColor];
-    _loginImgBtn.center = CGPointMake(width / 2, SCREEN_PHOTO_TOP_MARGIN + _loginImgBtn.frame.size.height / 2);
+    _loginImgBtn.center = CGPointMake(width / 2, SCREEN_PHOTO_CENTER_MARGIN + height / 2);
     
     _loginImgBtn.layer.borderWidth = 3.f;
     _loginImgBtn.layer.borderColor = [UIColor colorWithWhite:1.f alpha:0.30].CGColor;
@@ -96,7 +97,8 @@
     _nickNameLabel.font = [UIFont systemFontOfSize:14.f];
     [_nickNameLabel sizeToFit];
     _nickNameLabel.textColor = [UIColor colorWithWhite:0.5922 alpha:1.f];
-    _nickNameLabel.center = CGPointMake(width / 2, SCREEN_PHOTO_TOP_MARGIN + _loginImgBtn.frame.size.height + SCREEN_NAME_2_PHOTO_MARGIN + _nickNameLabel.frame.size.height / 2);
+//    _nickNameLabel.center = CGPointMake(width / 2, SCREEN_PHOTO_TOP_MARGIN + _loginImgBtn.frame.size.height + SCREEN_NAME_2_PHOTO_MARGIN + _nickNameLabel.frame.size.height / 2);
+    _nickNameLabel.center = CGPointMake(width / 2, SCREEN_PHOTO_CENTER_MARGIN + height / 2 + SCREEN_NAME_2_PHOTO_MARGIN + _nickNameLabel.frame.size.height / 2);
     [self.view addSubview:_nickNameLabel];
     [self.view bringSubviewToFront:_nickNameLabel];
     
@@ -133,10 +135,10 @@
      * Is that you? label
      */
     UILabel* qa = [[UILabel alloc]init];
-    qa.text = @"检测到手机已绑定如下账号";
-    qa.font = [UIFont boldSystemFontOfSize:18.f];
+    qa.text = @"已检测到手机号绑定如下账号";
+    qa.font = [UIFont boldSystemFontOfSize:14.f];
     [qa sizeToFit];
-    qa.textColor = [UIColor colorWithWhite:0.5922 alpha:1.f];
+    qa.textColor = [UIColor colorWithWhite:0.6078 alpha:1.f];
     qa.center = CGPointMake(width / 2, _loginImgBtn.center.y - IS_TAHT_YOU_LABEL_TO_IMG_MARGIN);
     [self.view addSubview:qa];
     [self.view bringSubviewToFront:qa];
@@ -157,7 +159,7 @@
     _noBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, YES_NO_BTN_WIDTH, YES_NO_BTN_HEIGHT)];
 //    [_noBtn setBackgroundImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_no_btn_bg" ofType:@"png"]] forState:UIControlStateNormal];
     [_noBtn setTitleColor:[UIColor colorWithWhite:0.5922 alpha:1.f] forState:UIControlStateNormal];
-    [_noBtn setTitle:@"不是本人, 重新注册" forState:UIControlStateNormal];
+    [_noBtn setTitle:@"不是我, 重新注册" forState:UIControlStateNormal];
     _noBtn.titleLabel.font = [UIFont systemFontOfSize:14.f];
     _noBtn.center = CGPointMake(width / 2, height / 2 + qa.frame.size.height + YES_BTN_TOP_MARGIN + YES_NO_BTN_HEIGHT + YES_BTN_2_NO_BTN_MARGIN + YES_NO_BTN_HEIGHT / 2);
     [self.view addSubview:_noBtn];
@@ -172,24 +174,27 @@
 #define FAKE_BAR_HEIGHT         44
 #define STATUS_BAR_HEIGHT       20
     
-#define BACK_BTN_LEFT_MARGIN    16 + 10
+#define BACK_BTN_LEFT_MARGIN    10 //16 + 10
     _fakeBar = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 74)];
     _fakeBar.backgroundColor = [UIColor clearColor];
     
-    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 40)];
-    NSString* filepath = [resourceBundle_dongda pathForResource:@"dongda_back_light" ofType:@"png"];
+    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 25, 25)];
+    NSString* filepath = [resourceBundle_dongda pathForResource:@"dongda_back" ofType:@"png"];
     CALayer * layer_btn = [CALayer layer];
     layer_btn.contents = (id)[UIImage imageNamed:filepath].CGImage;
     layer_btn.frame = CGRectMake(0, 0, 25, 25);
-    layer_btn.position = CGPointMake(40 / 2, 40 / 2);
+//    layer_btn.position = CGPointMake(40 / 2, 40 / 2);
     [barBtn.layer addSublayer:layer_btn];
     barBtn.center = CGPointMake(BACK_BTN_LEFT_MARGIN + barBtn.frame.size.width / 2, STATUS_BAR_HEIGHT + FAKE_BAR_HEIGHT / 2);
+//    barBtn.center = CGPointMake(BACK_BTN_LEFT_MARGIN + barBtn.frame.size.width / 2, STATUS_BAR_HEIGHT + FAKE_BAR_HEIGHT / 2);
     
     [barBtn addTarget:self action:@selector(didPopViewController) forControlEvents:UIControlEventTouchDown];
     [_fakeBar addSubview:barBtn];
     [self.view addSubview:_fakeBar];
     [self.view bringSubviewToFront:_fakeBar];
     /***********************************************************************************************************************/
+
+    self.view.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
 }
 
 - (void)asyncGetUserImage {

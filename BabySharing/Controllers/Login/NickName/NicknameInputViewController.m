@@ -41,7 +41,7 @@
 
 #define GENDER_BTN_BETWEEN_MARGIN               SCREEN_WIDTH / 4
 
-#define INPUT_VIEW_2_SCREEN_PHOTO_MARGIN        SCREEN_HEIGHT / 5
+#define INPUT_VIEW_2_SCREEN_PHOTO_MARGIN        SCREEN_HEIGHT / 10 //5
 
 #define TICK_BTN_WIDTH                          17
 #define TICK_BTN_HEIGHT                         TICK_BTN_WIDTH
@@ -56,10 +56,10 @@
     NickNameInputView* inputView;
     NSURL* user_img_url;
     
-    UIView* mother_view;
-    UIButton* mother_btn;
-    UIView* father_view;
-    UIButton* father_btn;
+//    UIView* mother_view;
+//    UIButton* mother_btn;
+//    UIView* father_view;
+//    UIButton* father_btn;
 
     UIButton * user_private_btn;
     OBShapedButton* tick_btn;
@@ -114,7 +114,7 @@
 //            [self asyncGetUserImage];
 //        }
 //    } else {
-        UIImage* img = [UIImage imageNamed:[resourceBundle_dongda pathForResource:[NSString stringWithFormat:@"login_camera_btn"] ofType:@"png"]];
+        UIImage* img = [UIImage imageNamed:[resourceBundle_dongda pathForResource:[NSString stringWithFormat:@"default_user"] ofType:@"png"]];
         [loginImgBtn setBackgroundImage:img forState:UIControlStateNormal];
 //        loginImgBtn.image = img;
 //    }
@@ -135,72 +135,72 @@
    
     /***********************************************************************************************************************/
     // mother view
-    mother_view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, GENDER_BTN_WIDTH, 2 * GENDER_BTN_HEIGHT)];
-    mother_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, GENDER_BTN_WIDTH, GENDER_BTN_HEIGHT)];
-    mother_btn.backgroundColor = [UIColor clearColor];
-    [mother_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_mother" ofType:@"png"]] forState:UIControlStateNormal];
-    [mother_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_mother_selected" ofType:@"png"]] forState:UIControlStateSelected];
-    [mother_btn addTarget:self action:@selector(didSelectGenderBtn:) forControlEvents:UIControlEventTouchUpInside];
-    mother_btn.tag = -98;
-    [mother_view addSubview:mother_btn];
-    mother_btn.selected = YES;
-    
-    CALayer* mother_text_layer = [CALayer layer];
-    mother_text_layer.frame = CGRectMake(0, GENDER_BTN_HEIGHT, GENDER_BTN_WIDTH, 30);
-    
-    CATextLayer* mother_text_line_one = [CATextLayer layer];
-    mother_text_line_one.contentsScale = 2.f;
-    mother_text_line_one.fontSize = 12.f;
-    mother_text_line_one.string = @"妈咪";
-    mother_text_line_one.frame = CGRectMake(0, 6, GENDER_BTN_WIDTH, 15);
-    mother_text_line_one.alignmentMode = @"center";
-    [mother_text_layer addSublayer:mother_text_line_one];
-    
-    CATextLayer* mother_text_line_two = [CATextLayer layer];
-    mother_text_line_two.contentsScale = 2.f;
-    mother_text_line_two.fontSize = 12.f;
-    mother_text_line_two.string = @"要够辣";
-    mother_text_line_two.frame = CGRectMake(0, 21, GENDER_BTN_WIDTH, 15);
-    mother_text_line_two.alignmentMode = @"center";
-    [mother_text_layer addSublayer:mother_text_line_two];
-    
-    [mother_view.layer addSublayer:mother_text_layer];
-    mother_view.center = CGPointMake(SCREEN_WIDTH / 2 - GENDER_BTN_BETWEEN_MARGIN, SCREEN_PHOTO_TOP_MARGIN + SCREEN_PHOTO_HEIGHT + SCREEN_PHOTO_2_GENDER_BTN_MARGIN + GENDER_BTN_HEIGHT / 2);
-    [self.view addSubview:mother_view];
+//    mother_view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, GENDER_BTN_WIDTH, 2 * GENDER_BTN_HEIGHT)];
+//    mother_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, GENDER_BTN_WIDTH, GENDER_BTN_HEIGHT)];
+//    mother_btn.backgroundColor = [UIColor clearColor];
+//    [mother_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_mother" ofType:@"png"]] forState:UIControlStateNormal];
+//    [mother_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_mother_selected" ofType:@"png"]] forState:UIControlStateSelected];
+//    [mother_btn addTarget:self action:@selector(didSelectGenderBtn:) forControlEvents:UIControlEventTouchUpInside];
+//    mother_btn.tag = -98;
+//    [mother_view addSubview:mother_btn];
+//    mother_btn.selected = YES;
+//    
+//    CALayer* mother_text_layer = [CALayer layer];
+//    mother_text_layer.frame = CGRectMake(0, GENDER_BTN_HEIGHT, GENDER_BTN_WIDTH, 30);
+//    
+//    CATextLayer* mother_text_line_one = [CATextLayer layer];
+//    mother_text_line_one.contentsScale = 2.f;
+//    mother_text_line_one.fontSize = 12.f;
+//    mother_text_line_one.string = @"妈咪";
+//    mother_text_line_one.frame = CGRectMake(0, 6, GENDER_BTN_WIDTH, 15);
+//    mother_text_line_one.alignmentMode = @"center";
+//    [mother_text_layer addSublayer:mother_text_line_one];
+//    
+//    CATextLayer* mother_text_line_two = [CATextLayer layer];
+//    mother_text_line_two.contentsScale = 2.f;
+//    mother_text_line_two.fontSize = 12.f;
+//    mother_text_line_two.string = @"要够辣";
+//    mother_text_line_two.frame = CGRectMake(0, 21, GENDER_BTN_WIDTH, 15);
+//    mother_text_line_two.alignmentMode = @"center";
+//    [mother_text_layer addSublayer:mother_text_line_two];
+//    
+//    [mother_view.layer addSublayer:mother_text_layer];
+//    mother_view.center = CGPointMake(SCREEN_WIDTH / 2 - GENDER_BTN_BETWEEN_MARGIN, SCREEN_PHOTO_TOP_MARGIN + SCREEN_PHOTO_HEIGHT + SCREEN_PHOTO_2_GENDER_BTN_MARGIN + GENDER_BTN_HEIGHT / 2);
+//    [self.view addSubview:mother_view];
     /***********************************************************************************************************************/
     
     /***********************************************************************************************************************/
     // father view
-    father_view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, GENDER_BTN_WIDTH, 2 * GENDER_BTN_HEIGHT)];
-    father_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, GENDER_BTN_WIDTH, GENDER_BTN_HEIGHT)];
-    [father_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_father" ofType:@"png"]] forState:UIControlStateNormal];
-    [father_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_father_selected" ofType:@"png"]] forState:UIControlStateSelected];
-    [father_btn addTarget:self action:@selector(didSelectGenderBtn:) forControlEvents:UIControlEventTouchUpInside];
-    father_btn.tag = -99;
-    [father_view addSubview:father_btn];
-
-    CALayer* father_text_layer = [CALayer layer];
-    father_text_layer.frame = CGRectMake(0, GENDER_BTN_HEIGHT, GENDER_BTN_WIDTH, 30);
-    
-    CATextLayer* father_text_line_one = [CATextLayer layer];
-    father_text_line_one.contentsScale = 2.f;
-    father_text_line_one.fontSize = 12.f;
-    father_text_line_one.string = @"爸比";
-    father_text_line_one.frame = CGRectMake(0, 6, GENDER_BTN_WIDTH, 15);
-    father_text_line_one.alignmentMode = @"center";
-    [father_text_layer addSublayer:father_text_line_one];
-    
-    CATextLayer* father_text_line_two = [CATextLayer layer];
-    father_text_line_two.contentsScale = 2.f;
-    father_text_line_two.fontSize = 12.f;
-    father_text_line_two.string = @"要靠谱";
-    father_text_line_two.frame = CGRectMake(0, 21, GENDER_BTN_WIDTH, 15);
-    father_text_line_two.alignmentMode = @"center";
-    [father_text_layer addSublayer:father_text_line_two];
-    
-    [father_view.layer addSublayer:father_text_layer];
-    father_view.center = CGPointMake(SCREEN_WIDTH / 2 + GENDER_BTN_BETWEEN_MARGIN, SCREEN_PHOTO_TOP_MARGIN + SCREEN_PHOTO_HEIGHT + SCREEN_PHOTO_2_GENDER_BTN_MARGIN + GENDER_BTN_HEIGHT / 2);
-    [self.view addSubview:father_view];
+//    father_view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, GENDER_BTN_WIDTH, 2 * GENDER_BTN_HEIGHT)];
+//    father_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, GENDER_BTN_WIDTH, GENDER_BTN_HEIGHT)];
+//    [father_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_father" ofType:@"png"]] forState:UIControlStateNormal];
+//    [father_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_father_selected" ofType:@"png"]] forState:UIControlStateSelected];
+//    [father_btn addTarget:self action:@selector(didSelectGenderBtn:) forControlEvents:UIControlEventTouchUpInside];
+//    father_btn.tag = -99;
+//    [father_view addSubview:father_btn];
+//
+//    CALayer* father_text_layer = [CALayer layer];
+//    father_text_layer.frame = CGRectMake(0, GENDER_BTN_HEIGHT, GENDER_BTN_WIDTH, 30);
+//    
+//    CATextLayer* father_text_line_one = [CATextLayer layer];
+//    father_text_line_one.contentsScale = 2.f;
+//    father_text_line_one.fontSize = 12.f;
+//    father_text_line_one.string = @"爸比";
+//    father_text_line_one.frame = CGRectMake(0, 6, GENDER_BTN_WIDTH, 15);
+//    father_text_line_one.alignmentMode = @"center";
+//    [father_text_layer addSublayer:father_text_line_one];
+//    
+//    CATextLayer* father_text_line_two = [CATextLayer layer];
+//    father_text_line_two.contentsScale = 2.f;
+//    father_text_line_two.fontSize = 12.f;
+//    father_text_line_two.string = @"要靠谱";
+//    father_text_line_two.frame = CGRectMake(0, 21, GENDER_BTN_WIDTH, 15);
+//    father_text_line_two.alignmentMode = @"center";
+//    [father_text_layer addSublayer:father_text_line_two];
+//    
+//    [father_view.layer addSublayer:father_text_layer];
+//    father_view.center = CGPointMake(SCREEN_WIDTH / 2 + GENDER_BTN_BETWEEN_MARGIN, SCREEN_PHOTO_TOP_MARGIN + SCREEN_PHOTO_HEIGHT + SCREEN_PHOTO_2_GENDER_BTN_MARGIN + GENDER_BTN_HEIGHT / 2);
+//    [self.view addSubview:father_view];
     /***********************************************************************************************************************/
    
     /***********************************************************************************************************************/
@@ -211,7 +211,7 @@
     
     user_private_btn = [[UIButton alloc]initWithFrame:CGRectMake((SCREEN_WIDTH - sz.width) / 2 + TICK_BTN_2_PRIVACY_MARGIN, SCREEN_HEIGHT - PRIVACY_BOTTOM_MARGIN, sz.width, sz.height)];
     user_private_btn.titleLabel.font = [UIFont systemFontOfSize:12.f];
-    [user_private_btn setTitleColor:[UIColor colorWithWhite:1.f alpha:0.6] forState:UIControlStateNormal];
+    [user_private_btn setTitleColor:[UIColor colorWithWhite:0.2902 alpha:1.f] forState:UIControlStateNormal];
     [user_private_btn setTitle:@"用户协议&隐私政策" forState:UIControlStateNormal];
     [user_private_btn addTarget:self action:@selector(userPrivacyBtnSelected) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:user_private_btn];
@@ -237,29 +237,31 @@
 #define STATUS_BAR_HEIGHT       20
     
 #define BACK_BTN_LEFT_MARGIN    16 + 10
-    _fakeBar = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 74)];
-    _fakeBar.backgroundColor = [UIColor clearColor];
+//    _fakeBar = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 74)];
+//    _fakeBar.backgroundColor = [UIColor whiteColor];
     
-    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 40)];
-    NSString* filepath = [resourceBundle_dongda pathForResource:@"dongda_back_light" ofType:@"png"];
+    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 25, 25)];
+    NSString* filepath = [resourceBundle_dongda pathForResource:@"dongda_back" ofType:@"png"];
     CALayer * layer_btn = [CALayer layer];
     layer_btn.contents = (id)[UIImage imageNamed:filepath].CGImage;
     layer_btn.frame = CGRectMake(0, 0, 25, 25);
-    layer_btn.position = CGPointMake(40 / 2, 40 / 2);
+//    layer_btn.position = CGPointMake(40 / 2, 40 / 2);
     [barBtn.layer addSublayer:layer_btn];
     barBtn.center = CGPointMake(BACK_BTN_LEFT_MARGIN + barBtn.frame.size.width / 2, STATUS_BAR_HEIGHT + FAKE_BAR_HEIGHT / 2);
-    [barBtn addTarget:self action:@selector(printaaaaa) forControlEvents:UIControlEventTouchUpInside];
-    [_fakeBar addSubview:barBtn];
-    [self.view addSubview:_fakeBar];
-    [self.view bringSubviewToFront:_fakeBar];
+    [barBtn addTarget:self action:@selector(didPopViewController) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn];
+    self.navigationItem.title = @"创建个人信息";
+    
+//    [_fakeBar addSubview:barBtn];
+//    [self.view addSubview:_fakeBar];
+//    [self.view bringSubviewToFront:_fakeBar];
     /***********************************************************************************************************************/
     
     UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapGesture:)];
     [self.view addGestureRecognizer:tap];
-}
 
-- (void)printaaaaa {
-    [self.navigationController popViewControllerAnimated:YES];
+    self.view.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
 }
 
 - (void)didPopViewController {
@@ -274,7 +276,9 @@
 - (void)viewWillAppear:(BOOL)animated {
     if (![[_login_attr objectForKey:@"screen_photo"] isEqualToString:@""]) {
         [self asyncGetUserImage];
-    }   
+    }
+    
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -410,13 +414,13 @@
 
 - (void)didSelectGenderBtn:(UIButton*)sender {
     if (sender.tag == -99) {
-        mother_btn.selected = NO;
-        father_btn.selected = YES;
+//        mother_btn.selected = NO;
+//        father_btn.selected = YES;
         self.gender = DongDaGenderFather;
         
     } else if (sender.tag == -98) {
-        mother_btn.selected = YES;
-        father_btn.selected = NO;
+//        mother_btn.selected = YES;
+//        father_btn.selected = NO;
         self.gender = DongDaGenderMother;
     }
 }
