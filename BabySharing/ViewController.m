@@ -101,6 +101,8 @@ enum DisplaySide {
     isMessageModelReady = NO;
     
     moving_id = -1;
+
+    self.view.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
 }
 
 #define LOGO_WIDTH     150
@@ -132,7 +134,7 @@ enum DisplaySide {
      */
     slg = [[UILabel alloc]init];
     slg.textAlignment = NSTextAlignmentCenter;
-    slg.textColor = [UIColor whiteColor];
+    slg.textColor = [UIColor colorWithWhite:0.5922 alpha:1.f];
     slg.font = [UIFont systemFontOfSize:15.f];
     slg.text = @"品质妈咪的生活指南";
     [slg sizeToFit];
@@ -164,7 +166,7 @@ enum DisplaySide {
 //    snsView.backgroundColor = [UIColor greenColor];
     [self.view addSubview:snsView];
     [self.view bringSubviewToFront:snsView];
-    
+
 }
 
 - (void)dealloc {

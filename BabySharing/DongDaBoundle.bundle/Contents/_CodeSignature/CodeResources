@@ -196,6 +196,10 @@
 		<data>
 		U/X8aNp7GKCs87aGo7mnYzxqNcE=
 		</data>
+		<key>Resources/login_code_bg.png</key>
+		<data>
+		48fXQ06xcXHa38q9be4eX8HAO/A=
+		</data>
 		<key>Resources/login_dark_input_bg.png</key>
 		<data>
 		aX0OZBk1diQ9TRMKf1AykoThS3I=
@@ -211,6 +215,14 @@
 		<key>Resources/login_input_clear_btn.png</key>
 		<data>
 		ipioU34Lf37rc8SRB9ghRuvOJak=
+		</data>
+		<key>Resources/login_input_left.png</key>
+		<data>
+		2rLrxUCqUTZEgr53A84UwTHzuxo=
+		</data>
+		<key>Resources/login_input_right.png</key>
+		<data>
+		SEg0Qw7kNmZvAgOuO7CTyYEuT08=
 		</data>
 		<key>Resources/login_light_input_bg.png</key>
 		<data>
@@ -252,6 +264,10 @@
 		<data>
 		/YWibH8lY1N6twE2nh/FWuzYRno=
 		</data>
+		<key>Resources/login_qq_gray.png</key>
+		<data>
+		2l3cgt7xteqlu05jrkMOoc2C9NI=
+		</data>
 		<key>Resources/login_wechat.png</key>
 		<data>
 		x4ZODmB7GT4h4zdFhi/XhCvt+8g=
@@ -260,6 +276,10 @@
 		<data>
 		VGV4+iNvmMOu6z4jn/KH7fZbvwE=
 		</data>
+		<key>Resources/login_wechat_gray.png</key>
+		<data>
+		titXCNuaZRtp8NNlNAnvi5HCkck=
+		</data>
 		<key>Resources/login_weibo.png</key>
 		<data>
 		j/mdzG7DdlrwKaxWm4oF7OEoDvs=
@@ -267,6 +287,10 @@
 		<key>Resources/login_weibo_clicked.png</key>
 		<data>
 		2BKfZkTyEB/wGOC56JcgIO9XUEE=
+		</data>
+		<key>Resources/login_weibo_gray.png</key>
+		<data>
+		+rNAA/H8A7Sfv5xILtEQpJsy+ps=
 		</data>
 		<key>Resources/login_yes_btn_bg.png</key>
 		<data>
@@ -679,6 +703,10 @@
 		<data>
 		U/X8aNp7GKCs87aGo7mnYzxqNcE=
 		</data>
+		<key>Resources/login_code_bg.png</key>
+		<data>
+		48fXQ06xcXHa38q9be4eX8HAO/A=
+		</data>
 		<key>Resources/login_dark_input_bg.png</key>
 		<data>
 		aX0OZBk1diQ9TRMKf1AykoThS3I=
@@ -694,6 +722,14 @@
 		<key>Resources/login_input_clear_btn.png</key>
 		<data>
 		ipioU34Lf37rc8SRB9ghRuvOJak=
+		</data>
+		<key>Resources/login_input_left.png</key>
+		<data>
+		2rLrxUCqUTZEgr53A84UwTHzuxo=
+		</data>
+		<key>Resources/login_input_right.png</key>
+		<data>
+		SEg0Qw7kNmZvAgOuO7CTyYEuT08=
 		</data>
 		<key>Resources/login_light_input_bg.png</key>
 		<data>
@@ -735,6 +771,10 @@
 		<data>
 		/YWibH8lY1N6twE2nh/FWuzYRno=
 		</data>
+		<key>Resources/login_qq_gray.png</key>
+		<data>
+		2l3cgt7xteqlu05jrkMOoc2C9NI=
+		</data>
 		<key>Resources/login_wechat.png</key>
 		<data>
 		x4ZODmB7GT4h4zdFhi/XhCvt+8g=
@@ -743,6 +783,10 @@
 		<data>
 		VGV4+iNvmMOu6z4jn/KH7fZbvwE=
 		</data>
+		<key>Resources/login_wechat_gray.png</key>
+		<data>
+		titXCNuaZRtp8NNlNAnvi5HCkck=
+		</data>
 		<key>Resources/login_weibo.png</key>
 		<data>
 		j/mdzG7DdlrwKaxWm4oF7OEoDvs=
@@ -750,6 +794,10 @@
 		<key>Resources/login_weibo_clicked.png</key>
 		<data>
 		2BKfZkTyEB/wGOC56JcgIO9XUEE=
+		</data>
+		<key>Resources/login_weibo_gray.png</key>
+		<data>
+		+rNAA/H8A7Sfv5xILtEQpJsy+ps=
 		</data>
 		<key>Resources/login_yes_btn_bg.png</key>
 		<data>

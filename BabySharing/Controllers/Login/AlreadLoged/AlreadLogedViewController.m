@@ -35,7 +35,7 @@
 @synthesize yesBtn = _yesBtn;
 @synthesize noBtn = _noBtn;
 
-#define SCREEN_PHOTO_TOP_MARGIN                 [UIScreen mainScreen].bounds.size.height / 6
+#define SCREEN_PHOTO_TOP_MARGIN                 [UIScreen mainScreen].bounds.size.height * (0.5 - 0.1844)
 #define SCREEN_PHOTO_WIDTH                      100
 #define SCREEN_PHOTO_HEIGHT                     SCREEN_PHOTO_WIDTH
 
@@ -44,6 +44,8 @@
 #define SCREEN_NAME_2_ROLE_TAG_MARGIN           10
 
 #define IS_TAHT_YOU_LABEL_TO_CENTER_MARGIN      20
+#define IS_TAHT_YOU_LABEL_TO_IMG_MARGIN         172 / 2
+#define IS_TAHT_YOU_LABEL_TO_TOP_MARGIN         20
 #define YES_BTN_TOP_MARGIN                      81
 #define YES_BTN_2_NO_BTN_MARGIN                 34
 
@@ -93,7 +95,7 @@
     _nickNameLabel.text = name;
     _nickNameLabel.font = [UIFont systemFontOfSize:14.f];
     [_nickNameLabel sizeToFit];
-    _nickNameLabel.textColor = [UIColor whiteColor];
+    _nickNameLabel.textColor = [UIColor colorWithWhite:0.5922 alpha:1.f];
     _nickNameLabel.center = CGPointMake(width / 2, SCREEN_PHOTO_TOP_MARGIN + _loginImgBtn.frame.size.height + SCREEN_NAME_2_PHOTO_MARGIN + _nickNameLabel.frame.size.height / 2);
     [self.view addSubview:_nickNameLabel];
     [self.view bringSubviewToFront:_nickNameLabel];
@@ -131,11 +133,11 @@
      * Is that you? label
      */
     UILabel* qa = [[UILabel alloc]init];
-    qa.text = @"这是你吗?";
+    qa.text = @"检测到手机已绑定如下账号";
     qa.font = [UIFont boldSystemFontOfSize:18.f];
     [qa sizeToFit];
-    qa.textColor = [UIColor whiteColor];
-    qa.center = CGPointMake(width / 2, height / 2 + IS_TAHT_YOU_LABEL_TO_CENTER_MARGIN);
+    qa.textColor = [UIColor colorWithWhite:0.5922 alpha:1.f];
+    qa.center = CGPointMake(width / 2, _loginImgBtn.center.y - IS_TAHT_YOU_LABEL_TO_IMG_MARGIN);
     [self.view addSubview:qa];
     [self.view bringSubviewToFront:qa];
     
@@ -145,7 +147,7 @@
     _yesBtn = [[OBShapedButton alloc]initWithFrame:CGRectMake(0, 0, YES_NO_BTN_WIDTH, YES_NO_BTN_HEIGHT)];
     [_yesBtn setBackgroundImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_yes_btn_bg" ofType:@"png"]] forState:UIControlStateNormal];
     [_yesBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [_yesBtn setTitle:@"是, 进入咚哒" forState:UIControlStateNormal];
+    [_yesBtn setTitle:@"是我, 进入咚哒" forState:UIControlStateNormal];
     _yesBtn.titleLabel.font = [UIFont systemFontOfSize:14.f];
     _yesBtn.center = CGPointMake(width / 2, height / 2 + qa.frame.size.height + YES_BTN_TOP_MARGIN + YES_NO_BTN_HEIGHT / 2);
     [self.view addSubview:_yesBtn];
@@ -154,8 +156,8 @@
 
     _noBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, YES_NO_BTN_WIDTH, YES_NO_BTN_HEIGHT)];
 //    [_noBtn setBackgroundImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_no_btn_bg" ofType:@"png"]] forState:UIControlStateNormal];
-    [_noBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [_noBtn setTitle:@"否, 重新注册" forState:UIControlStateNormal];
+    [_noBtn setTitleColor:[UIColor colorWithWhite:0.5922 alpha:1.f] forState:UIControlStateNormal];
+    [_noBtn setTitle:@"不是本人, 重新注册" forState:UIControlStateNormal];
     _noBtn.titleLabel.font = [UIFont systemFontOfSize:14.f];
     _noBtn.center = CGPointMake(width / 2, height / 2 + qa.frame.size.height + YES_BTN_TOP_MARGIN + YES_NO_BTN_HEIGHT + YES_BTN_2_NO_BTN_MARGIN + YES_NO_BTN_HEIGHT / 2);
     [self.view addSubview:_noBtn];

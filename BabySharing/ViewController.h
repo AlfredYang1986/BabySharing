@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FixBackGroundSegueController.h"
+//#import "FixBackGroundSegueController.h"
 
-@interface ViewController : FixBackGroundSegueController
+//@interface ViewController : FixBackGroundSegueController
+@interface ViewController : UIViewController // FixBackGroundSegueController
 //@property (weak, nonatomic) IBOutlet UIButton *entryButton;
 
 @end

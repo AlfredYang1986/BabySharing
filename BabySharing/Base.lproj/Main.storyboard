@@ -402,37 +402,14 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                     <view key="view" contentMode="scaleToFill" id="DQM-GH-85M">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" tag="-1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BackgroundImage" translatesAutoresizingMaskIntoConstraints="NO" id="guW-kh-Ink">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                            </imageView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="guW-kh-Ink" firstAttribute="leading" secondItem="DQM-GH-85M" secondAttribute="leadingMargin" id="028-ZT-2FG"/>
-                            <constraint firstItem="jhr-zt-DSk" firstAttribute="top" secondItem="guW-kh-Ink" secondAttribute="bottom" id="FVJ-Oi-Sya"/>
-                            <constraint firstItem="guW-kh-Ink" firstAttribute="top" secondItem="KdM-g7-ePs" secondAttribute="bottom" id="JKB-39-W8h"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="guW-kh-Ink" secondAttribute="trailing" constant="-20" id="SCX-iq-eDJ"/>
-                            <constraint firstItem="guW-kh-Ink" firstAttribute="leading" secondItem="DQM-GH-85M" secondAttribute="leadingMargin" constant="-20" id="gFR-3h-1p4"/>
-                            <constraint firstItem="guW-kh-Ink" firstAttribute="top" secondItem="DQM-GH-85M" secondAttribute="topMargin" id="l4Q-vH-PBZ"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="guW-kh-Ink" secondAttribute="trailing" id="stj-tJ-bLM"/>
-                            <constraint firstItem="jhr-zt-DSk" firstAttribute="top" secondItem="guW-kh-Ink" secondAttribute="bottom" id="wP6-GM-XJY"/>
-                        </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="028-ZT-2FG"/>
-                                <exclude reference="JKB-39-W8h"/>
-                                <exclude reference="stj-tJ-bLM"/>
-                                <exclude reference="FVJ-Oi-Sya"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="WtH-4A-pBP"/>
                     <connections>
                         <segue destination="VBe-2x-igG" kind="presentation" identifier="contentSegue" id="xp0-sv-3qd"/>
                         <segue destination="xdg-vF-3pg" kind="push" identifier="areaCode" id="aA6-l7-gCY"/>
-                        <segue destination="SUX-v2-GUS" kind="custom" identifier="loginSuccessSegue" customClass="LandingNextSegue" id="qbd-0n-vJA"/>
-                        <segue destination="zja-7A-2Mn" kind="custom" identifier="alreadyLogSegue" customClass="LandingNextSegue" id="p7c-UN-FtH"/>
+                        <segue destination="SUX-v2-GUS" kind="push" identifier="loginSuccessSegue" id="qbd-0n-vJA"/>
+                        <segue destination="zja-7A-2Mn" kind="push" identifier="alreadyLogSegue" id="p7c-UN-FtH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sUo-nq-Dex" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -450,18 +427,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                     <view key="view" contentMode="scaleToFill" id="GUY-yM-xaj">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" tag="-1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BackgroundImage" translatesAutoresizingMaskIntoConstraints="NO" id="dbc-Ga-DC1">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                            </imageView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="7OL-Gv-vsV" firstAttribute="top" secondItem="dbc-Ga-DC1" secondAttribute="bottom" id="6KV-p2-PZV"/>
-                            <constraint firstItem="dbc-Ga-DC1" firstAttribute="top" secondItem="GUY-yM-xaj" secondAttribute="topMargin" id="nYc-GL-IN7"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="dbc-Ga-DC1" secondAttribute="trailing" constant="-20" id="std-GX-FeQ"/>
-                            <constraint firstItem="dbc-Ga-DC1" firstAttribute="leading" secondItem="GUY-yM-xaj" secondAttribute="leadingMargin" constant="-20" id="yt2-Sc-1Tn"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="2bd-Z2-KRg"/>
                     <connections>
@@ -900,7 +866,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gik-1Z-yKA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1508" y="982"/>
+            <point key="canvasLocation" x="1590" y="988"/>
         </scene>
         <!--search-->
         <scene sceneID="aqg-9M-0r3">
@@ -1110,7 +1076,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tq6-OA-zCC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1516" y="1787"/>
+            <point key="canvasLocation" x="1590" y="1779"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="FbJ-dg-jQJ">
@@ -1730,22 +1696,11 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                     <view key="view" contentMode="scaleToFill" id="KQp-d7-gcs">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" tag="-1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BackgroundImage" translatesAutoresizingMaskIntoConstraints="NO" id="UzT-fh-YsN">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                            </imageView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="xAf-nk-aEA" firstAttribute="top" secondItem="UzT-fh-YsN" secondAttribute="bottom" id="B62-9E-AAz"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="UzT-fh-YsN" secondAttribute="trailing" constant="-20" id="MCG-d7-Htl"/>
-                            <constraint firstItem="UzT-fh-YsN" firstAttribute="leading" secondItem="KQp-d7-gcs" secondAttribute="leadingMargin" constant="-20" id="oOt-Gp-cvp"/>
-                            <constraint firstItem="UzT-fh-YsN" firstAttribute="top" secondItem="KQp-d7-gcs" secondAttribute="topMargin" id="qE0-T8-3cI"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Qyu-0h-HGO"/>
                     <connections>
-                        <segue destination="SUX-v2-GUS" kind="custom" identifier="bindNewAccountSegue" customClass="LandingNextSegue" id="2PU-iO-cFw"/>
+                        <segue destination="SUX-v2-GUS" kind="push" identifier="bindNewAccountSegue" id="2PU-iO-cFw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A4R-kz-8Jx" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1754,12 +1709,11 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
         </scene>
     </scenes>
     <resources>
-        <image name="BackgroundImage" width="375" height="667"/>
         <image name="GroupChatGgImage" width="375" height="667"/>
         <image name="ProfileBgImage" width="375" height="667"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="2PU-iO-cFw"/>
+        <segue reference="qbd-0n-vJA"/>
         <segue reference="Xl7-6t-OQ8"/>
     </inferredMetricsTieBreakers>
 </document>

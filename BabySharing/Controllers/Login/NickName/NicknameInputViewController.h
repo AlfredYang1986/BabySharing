@@ -8,14 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "LoginModel.h"
-#import "FixBackGroundSegueController.h"
+//#import "FixBackGroundSegueController.h"
 
 typedef enum : NSUInteger {
     DongDaGenderMother,
     DongDaGenderFather,
 } DongDaGender;
 
-@interface NicknameInputViewController : FixBackGroundSegueController
+//@interface NicknameInputViewController : FixBackGroundSegueController
+@interface NicknameInputViewController : UIViewController
 
 @property (nonatomic, weak) LoginModel* lm;
 @property (nonatomic, strong) NSDictionary* login_attr;

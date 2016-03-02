@@ -56,7 +56,7 @@
 //    CGSize sz = [@"用户协议&隐私政策" sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
 
 #define SPLIT_VIEW_HEIGHT                   18
-#define SPLIT_VIEW_TEXT_WIDTH               83
+#define SPLIT_VIEW_TEXT_WIDTH               128
 #define SPLIT_VIEW_TEXT_LINE_MARGIN         13.5
     
     CGFloat third_line_ver_margin = BASICMARGIN;
@@ -65,29 +65,31 @@
     
     CATextLayer* text_layer = [CATextLayer layer];
 //    text_layer.contents = (id)[UIImage imageNamed:split_file].CGImage;
-    text_layer.string = @"社交账户登录";
+    text_layer.foregroundColor = [UIColor colorWithWhite:0.2902 alpha:1.f].CGColor;
+    text_layer.string = @"或使用社交账户登录";
     text_layer.fontSize = 14.f;
     text_layer.contentsScale = 2.f;
+    text_layer.alignmentMode = @"center";
     text_layer.frame = CGRectMake(0, 0, SPLIT_VIEW_TEXT_WIDTH, SPLIT_VIEW_HEIGHT);
     text_layer.position = CGPointMake(screen_width / 2, SPLIT_VIEW_HEIGHT / 2);
     [split_img.layer addSublayer:text_layer];
     
-    CALayer* left_line = [CALayer layer];
-    left_line.borderWidth = 1.f;
-    left_line.borderColor = [UIColor colorWithWhite:1.f alpha:0.5].CGColor;
-    left_line.frame = CGRectMake(INPUT_MARGIN, SPLIT_VIEW_HEIGHT / 2 + 1, screen_width / 2 - SPLIT_VIEW_TEXT_WIDTH / 2 - SPLIT_VIEW_TEXT_LINE_MARGIN - INPUT_MARGIN, 1);
-    [split_img.layer addSublayer:left_line];
-    
-    CALayer* right_line = [CALayer layer];
-    right_line.borderWidth = 1.f;
-    right_line.borderColor = [UIColor colorWithWhite:1.f alpha:0.5].CGColor;
-    right_line.frame = CGRectMake(screen_width / 2 + SPLIT_VIEW_TEXT_WIDTH / 2 + SPLIT_VIEW_TEXT_LINE_MARGIN, SPLIT_VIEW_HEIGHT / 2 + 1, screen_width / 2 - SPLIT_VIEW_TEXT_WIDTH / 2 - SPLIT_VIEW_TEXT_LINE_MARGIN - INPUT_MARGIN, 1);
-    [split_img.layer addSublayer:right_line];
+//    CALayer* left_line = [CALayer layer];
+//    left_line.borderWidth = 1.f;
+//    left_line.borderColor = [UIColor colorWithWhite:1.f alpha:0.5].CGColor;
+//    left_line.frame = CGRectMake(INPUT_MARGIN, SPLIT_VIEW_HEIGHT / 2 + 1, screen_width / 2 - SPLIT_VIEW_TEXT_WIDTH / 2 - SPLIT_VIEW_TEXT_LINE_MARGIN - INPUT_MARGIN, 1);
+//    [split_img.layer addSublayer:left_line];
+//    
+//    CALayer* right_line = [CALayer layer];
+//    right_line.borderWidth = 1.f;
+//    right_line.borderColor = [UIColor colorWithWhite:1.f alpha:0.5].CGColor;
+//    right_line.frame = CGRectMake(screen_width / 2 + SPLIT_VIEW_TEXT_WIDTH / 2 + SPLIT_VIEW_TEXT_LINE_MARGIN, SPLIT_VIEW_HEIGHT / 2 + 1, screen_width / 2 - SPLIT_VIEW_TEXT_WIDTH / 2 - SPLIT_VIEW_TEXT_LINE_MARGIN - INPUT_MARGIN, 1);
+//    [split_img.layer addSublayer:right_line];
     
     [self addSubview:split_img];
 
     UIButton* qq_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, SNS_BUTTON_WIDTH, SNS_BUTTON_HEIGHT)];
-    NSString * qq_file = [resourceBundle_dongda pathForResource:[NSString stringWithFormat:@"login_qq"] ofType:@"png"];
+    NSString * qq_file = [resourceBundle_dongda pathForResource:[NSString stringWithFormat:@"login_qq_gray"] ofType:@"png"];
     UIImage * qq_image = [UIImage imageNamed:qq_file];
     [qq_btn setBackgroundImage:qq_image forState:UIControlStateNormal];
     [qq_btn addTarget:self action:@selector(qqBtnSelected:) forControlEvents:UIControlEventTouchDown];
@@ -98,7 +100,7 @@
     [self addSubview:qq_btn];
 
     UIButton* weibo_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, SNS_BUTTON_WIDTH, SNS_BUTTON_HEIGHT)];
-    NSString * weibo_file = [resourceBundle_dongda pathForResource:[NSString stringWithFormat:@"login_weibo"] ofType:@"png"];
+    NSString * weibo_file = [resourceBundle_dongda pathForResource:[NSString stringWithFormat:@"login_weibo_gray"] ofType:@"png"];
     UIImage * weibo_image = [UIImage imageNamed:weibo_file];
     [weibo_btn setBackgroundImage:weibo_image forState:UIControlStateNormal];
     [weibo_btn addTarget:self action:@selector(weiboBtnSelected:) forControlEvents:UIControlEventTouchDown];
@@ -109,7 +111,7 @@
     [self addSubview:weibo_btn];
 
     UIButton* wechat_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, SNS_BUTTON_WIDTH, SNS_BUTTON_HEIGHT)];
-    NSString * wechat_file = [resourceBundle_dongda pathForResource:[NSString stringWithFormat:@"login_wechat"] ofType:@"png"];
+    NSString * wechat_file = [resourceBundle_dongda pathForResource:[NSString stringWithFormat:@"login_wechat_gray"] ofType:@"png"];
     UIImage * wechat_image = [UIImage imageNamed:wechat_file];
     [wechat_btn setBackgroundImage:wechat_image forState:UIControlStateNormal];
     [wechat_btn addTarget:self action:@selector(wechatBtnSelected:) forControlEvents:UIControlEventTouchDown];

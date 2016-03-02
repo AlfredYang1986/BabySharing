@@ -23,34 +23,6 @@
 @synthesize delegate = _delegate;
 
 #pragma mark -- UITableView Delegate
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-//    if (section == 0) {
-//        ProfileOverView* header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"Profile Others Overview"];
-//        
-//        if (header == nil) {
-//            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ProfileOverView" owner:self options:nil];
-//            header = [nib objectAtIndex:0];
-//        }
-//        
-//        [header setOwnerPhoto:[_delegate getPhotoName]];
-//        [header setLoation:[_delegate getLocation]];
-////        [header setFriendsCount:[_delegate getFriendsCount]];
-////        [header setShareCount:[_delegate getSharedCount]];
-////        [header setCycleCount:[_delegate getCycleCount]];
-//        [header setPersonalSign:[_delegate getSign]];
-//        [header setNickName:[_delegate getNickName]];
-//        [header setRoleTag:[_delegate getRoleTag]];
-//        
-//        [header setRelations:[_delegate getRelations]];
-//        
-//        header.deleagate = _delegate;
-//        
-//        return header;
-//        
-//    } else
-        return nil;
-}
-
 #pragma mark -- UITableView DataSource
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
     if (section == 0 && [view isKindOfClass:[UITableViewHeaderFooterView class]]) {
@@ -86,6 +58,7 @@
     cell.margin_left = 12.f;
     cell.margin_right = 12.f;
     cell.cell_cor_radius = 3.f;
+    cell.marign_between = 2.f;
     cell.delegate = _delegate;
     OwnerQueryModel* om = [_delegate getOM];
     NSInteger row = indexPath.row;

@@ -32,6 +32,8 @@
 #import "ProfileOverView.h"
 #import "SearchSegView2.h"
 
+#import "UINavigationController+Retro.h"
+
 #define STATUS_BAR_HEIGHT       20
 #define FAKE_BAR_HEIGHT        44
 
@@ -159,7 +161,7 @@
 - (void)createHeadView {
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     head_view = [[ProfileOverView alloc]initWithFrame:CGRectMake(0, STATUS_BAR_HEIGHT, width, HEADER_VIEW_HEIGHT)];
-    head_view.backgroundColor = [UIColor redColor];
+    head_view.backgroundColor = [UIColor clearColor];
     [self.view addSubview:head_view];
     [self.view bringSubviewToFront:head_view];
     head_view.deleagate = self;
@@ -456,7 +458,8 @@
     [hv.delegate setSelectIndex:index];
     hv.nav_title = [self getNickName];
     hv.current_index = index;
-    [self.navigationController pushViewController:hv animated:YES];
+//    [self.navigationController pushViewController:hv animated:YES];
+    [self.navigationController pushViewControllerRetro:hv];
 }
 
 #pragma mark -- change date

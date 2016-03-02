@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "LoginModel.h"
-#import "FixBackGroundSegueController.h"
+//#import "FixBackGroundSegueController.h"
 
-@interface AlreadLogedViewController : FixBackGroundSegueController
+//@interface AlreadLogedViewController : FixBackGroundSegueController
+@interface AlreadLogedViewController : UIViewController
 
 @property (weak, nonatomic) LoginModel* lm;
 @property (strong, nonatomic) NSDictionary* login_attr;
