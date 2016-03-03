@@ -105,11 +105,15 @@
  *  @param block  返回大图
  */
 + (void)getRealPhotoWithPHAsset:(PHAsset *)pHAsset block:(RealPhotoFindishBlock)block{
+    static PHImageRequestID requestid = -1;
     PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
-    options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
+    options.deliveryMode = PHImageRequestOptionsDeliveryModeFastFormat;
     options.networkAccessAllowed = YES;
-    [[PHImageManager defaultManager] requestImageDataForAsset:pHAsset options:options resultHandler:^(NSData * _Nullable imageData, NSString * _Nullable dataUTI, UIImageOrientation orientation, NSDictionary * _Nullable info) {
-        block([UIImage imageWithData:imageData]);
+    [[PHImageManager defaultManager] cancelImageRequest:requestid];
+    requestid = [[PHImageManager defaultManager] requestImageDataForAsset:pHAsset options:options resultHandler:^(NSData * _Nullable imageData, NSString * _Nullable dataUTI, UIImageOrientation orientation, NSDictionary * _Nullable info) {
+        if (imageData != nil) {
+            block([UIImage imageWithData:imageData]);
+        }
     }];
 }
 

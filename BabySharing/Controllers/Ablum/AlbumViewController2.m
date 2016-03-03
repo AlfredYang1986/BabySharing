@@ -648,6 +648,9 @@
     
     [images_select_arr addObject:[NSNumber numberWithInteger:index]];
     [self changeMainContentWithPHAsset:[phAssetArr objectAtIndex:index]];
+    if (!isMainContentViewShown) {
+        [self didTapFunctionBar:nil];
+    }
 }
 
 - (void)didUnSelectOneImageAtIndex:(NSInteger)index {
@@ -866,6 +869,7 @@
         [self enumPhotoAblumByAlbum:fetchResult];
     }
 //    [self enumPhotoAblumByAlbumName:tmp.album];
+    // 主页面下滑
 }
 
 - (void)showContentsTableView:(UITableView *)tableview {
