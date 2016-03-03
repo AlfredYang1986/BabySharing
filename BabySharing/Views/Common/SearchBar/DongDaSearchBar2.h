@@ -15,6 +15,7 @@ typedef void(^postLayoutBlock)(CGSize cancel_btn_sz);
 @property (nonatomic, weak, getter=getTextFiled, readonly) UITextField* textField;
 @property (nonatomic, weak, getter=getCancelBtn, readonly) UIButton* cancleBtn;
 @property (nonatomic, weak, setter=setSearchBarBackgroundColor:) UIColor* sb_bg;
+@property (nonatomic, setter=setShowsSearchIcon:) BOOL showsSearchIcon;
 
 - (void)setPostLayoutSize:(CGSize)cancel_btn_sz;
 @end

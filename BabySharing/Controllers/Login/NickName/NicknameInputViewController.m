@@ -27,7 +27,7 @@
 #define SCREEN_WIDTH                            [UIScreen mainScreen].bounds.size.width
 #define SCREEN_HEIGHT                           [UIScreen mainScreen].bounds.size.height
 
-#define SCREEN_PHOTO_TOP_MARGIN                 SCREEN_HEIGHT / 7
+#define SCREEN_PHOTO_TOP_MARGIN                 SCREEN_HEIGHT / 6
 #define SCREEN_PHOTO_WIDTH                      100
 #define SCREEN_PHOTO_HEIGHT                     100
 
@@ -41,7 +41,7 @@
 
 #define GENDER_BTN_BETWEEN_MARGIN               SCREEN_WIDTH / 4
 
-#define INPUT_VIEW_2_SCREEN_PHOTO_MARGIN        SCREEN_HEIGHT / 10 //5
+#define INPUT_VIEW_2_SCREEN_PHOTO_MARGIN        (SCREEN_HEIGHT / 15 - 5)
 
 #define TICK_BTN_WIDTH                          17
 #define TICK_BTN_HEIGHT                         TICK_BTN_WIDTH
@@ -205,27 +205,27 @@
    
     /***********************************************************************************************************************/
     // private button
-#define PRIVACY_BOTTOM_MARGIN               30
-    UIFont* font = [UIFont systemFontOfSize:14.f];
-    CGSize sz = [@"用户协议&隐私政策" sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
+#define PRIVACY_BOTTOM_MARGIN               35
+    UIFont* font = [UIFont systemFontOfSize:12.f];
+    CGSize sz = [@"点击进入即同意隐私条款&用户协议" sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
     
-    user_private_btn = [[UIButton alloc]initWithFrame:CGRectMake((SCREEN_WIDTH - sz.width) / 2 + TICK_BTN_2_PRIVACY_MARGIN, SCREEN_HEIGHT - PRIVACY_BOTTOM_MARGIN, sz.width, sz.height)];
+    user_private_btn = [[UIButton alloc]initWithFrame:CGRectMake((SCREEN_WIDTH - sz.width) / 2 /*+ TICK_BTN_2_PRIVACY_MARGIN*/, SCREEN_HEIGHT - PRIVACY_BOTTOM_MARGIN, sz.width, sz.height)];
     user_private_btn.titleLabel.font = [UIFont systemFontOfSize:12.f];
-    [user_private_btn setTitleColor:[UIColor colorWithWhite:0.2902 alpha:1.f] forState:UIControlStateNormal];
-    [user_private_btn setTitle:@"用户协议&隐私政策" forState:UIControlStateNormal];
+    [user_private_btn setTitleColor:[UIColor colorWithWhite:0.6078 alpha:1.f] forState:UIControlStateNormal];
+    [user_private_btn setTitle:@"点击进入即同意隐私条款&用户协议" forState:UIControlStateNormal];
     [user_private_btn addTarget:self action:@selector(userPrivacyBtnSelected) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:user_private_btn];
     /***********************************************************************************************************************/
     
     /***********************************************************************************************************************/
     // tick btn
-    tick_btn = [[OBShapedButton alloc]initWithFrame:CGRectMake(0, 0, TICK_BTN_WIDTH, TICK_BTN_HEIGHT)];
-    [tick_btn setImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_privacy_tick" ofType:@"png"]] forState:UIControlStateSelected];
-    [tick_btn setImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_privacy_untick" ofType:@"png"]] forState:UIControlStateNormal];
-    tick_btn.selected = YES;
-    tick_btn.center = CGPointMake(user_private_btn.frame.origin.x - TICK_BTN_2_PRIVACY_MARGIN - TICK_BTN_WIDTH / 2, user_private_btn.center.y);
-    [tick_btn addTarget:self action:@selector(didTickPrivacy) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:tick_btn];
+//    tick_btn = [[OBShapedButton alloc]initWithFrame:CGRectMake(0, 0, TICK_BTN_WIDTH, TICK_BTN_HEIGHT)];
+//    [tick_btn setImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_privacy_tick" ofType:@"png"]] forState:UIControlStateSelected];
+//    [tick_btn setImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_privacy_untick" ofType:@"png"]] forState:UIControlStateNormal];
+//    tick_btn.selected = YES;
+//    tick_btn.center = CGPointMake(user_private_btn.frame.origin.x - TICK_BTN_2_PRIVACY_MARGIN - TICK_BTN_WIDTH / 2, user_private_btn.center.y);
+//    [tick_btn addTarget:self action:@selector(didTickPrivacy) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:tick_btn];
     /***********************************************************************************************************************/
     
     /***********************************************************************************************************************/
@@ -251,7 +251,12 @@
     [barBtn addTarget:self action:@selector(didPopViewController) forControlEvents:UIControlEventTouchUpInside];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn];
-    self.navigationItem.title = @"创建个人信息";
+    
+    UILabel* label = [[UILabel alloc]init];
+    label.text = @"创建个人信息";
+    label.font = [UIFont systemFontOfSize:18.f];
+    [label sizeToFit];
+    self.navigationItem.titleView = label;
     
 //    [_fakeBar addSubview:barBtn];
 //    [self.view addSubview:_fakeBar];
@@ -391,6 +396,7 @@
     SearchRoleTagDelegate* sd = [[SearchRoleTagDelegate alloc]init];
     sd.delegate = svc;
     sd.actions = self;
+    svc.isShowsSearchIcon = NO;
     [self.navigationController pushViewController:svc animated:YES];
     svc.delegate = sd;   
 }

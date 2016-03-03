@@ -28,7 +28,7 @@
 #define LINE_MARGIN                         5
 #define CODE_BTN_WIDTH                      80
 
-#define LOGIN_BTN_TOP_MARGIN                30
+#define LOGIN_BTN_TOP_MARGIN                66
 #define LOGIN_BTN_HEIGHT                    37
 #define LOGIN_BTN_BOTTOM_MARGIN             40
 
@@ -173,7 +173,7 @@
     UIButton* next_btn = [[OBShapedButton alloc]initWithFrame:CGRectMake(INPUT_MARGIN, BASICMARGIN + 2 * (INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN) + INPUT_TEXT_FIELD_HEIGHT + LOGIN_BTN_TOP_MARGIN, width - 2 * INPUT_MARGIN, LOGIN_BTN_HEIGHT)];
     [next_btn addTarget:_delegate action:@selector(didClickNextBtn) forControlEvents:UIControlEventTouchDown];
     next_btn.titleLabel.font = [UIFont systemFontOfSize:14.f];
-    [next_btn setTitle:@"开启我的旅程" forState:UIControlStateNormal];
+    [next_btn setTitle:@"进入咚哒" forState:UIControlStateNormal];
     [next_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     next_btn.clipsToBounds = YES;
     [next_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_btn_bg" ofType:@"png"]] forState:UIControlStateNormal];

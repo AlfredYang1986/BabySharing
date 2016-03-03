@@ -121,9 +121,9 @@
     }
     
     cell.textLabel.font = [UIFont systemFontOfSize:14.f];
-    cell.textLabel.textColor = [UIColor colorWithWhite:0.3059 alpha:1.f];
+//    cell.textLabel.textColor = [UIColor colorWithWhite:0.3059 alpha:1.f];
 //    cell.backgroundColor = [UIColor colorWithRed:0.2039 green:0.2078 blue:0.2314 alpha:1.f];//[UIColor colorWithWhite:0.1882 alpha:1.f];
-    cell.backgroundColor = [UIColor whiteColor];
+//    cell.backgroundColor = [UIColor whiteColor];
   
     if (cell.layer.sublayers.count == 1) {
         CALayer* line = [CALayer layer];

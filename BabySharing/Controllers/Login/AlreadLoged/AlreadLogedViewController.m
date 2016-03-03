@@ -36,23 +36,24 @@
 @synthesize noBtn = _noBtn;
 
 #define SCREEN_PHOTO_TOP_MARGIN                 [UIScreen mainScreen].bounds.size.height * (0.5 - 0.1844)
-#define SCREEN_PHOTO_CENTER_MARGIN              -[UIScreen mainScreen].bounds.size.height * 0.1844
+#define SCREEN_PHOTO_CENTER_MARGIN              -[UIScreen mainScreen].bounds.size.height * 0.1828 +12 + 10
 #define SCREEN_PHOTO_WIDTH                      100
 #define SCREEN_PHOTO_HEIGHT                     SCREEN_PHOTO_WIDTH
 
-#define SCREEN_NAME_2_PHOTO_MARGIN              0 //22
+#define SCREEN_NAME_2_PHOTO_MARGIN              6 //22
 
 #define SCREEN_NAME_2_ROLE_TAG_MARGIN           10
 
 #define IS_TAHT_YOU_LABEL_TO_CENTER_MARGIN      20
-#define IS_TAHT_YOU_LABEL_TO_IMG_MARGIN         172 / 2
+#define IS_TAHT_YOU_LABEL_TO_IMG_MARGIN         -108
 #define IS_TAHT_YOU_LABEL_TO_TOP_MARGIN         20
 #define YES_BTN_TOP_MARGIN                      61 //81
 #define YES_BTN_2_NO_BTN_MARGIN                 34
 
 #define YES_NO_BTN_TO_EDGE_MARGIN               32.5
 #define YES_NO_BTN_HEIGHT                       37
-#define YES_NO_BTN_WIDTH                        ([UIScreen mainScreen].bounds.size.width - 2 * YES_NO_BTN_TO_EDGE_MARGIN)
+//#define YES_NO_BTN_WIDTH                        ([UIScreen mainScreen].bounds.size.width - 2 * YES_NO_BTN_TO_EDGE_MARGIN)
+#define YES_NO_BTN_WIDTH                        ([UIScreen mainScreen].bounds.size.width * 0.584)
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -135,11 +136,11 @@
      * Is that you? label
      */
     UILabel* qa = [[UILabel alloc]init];
-    qa.text = @"已检测到手机号绑定如下账号";
-    qa.font = [UIFont boldSystemFontOfSize:14.f];
+    qa.text = @"检测到该手机号已注册如下账号";
+    qa.font = [UIFont systemFontOfSize:14.f];
     [qa sizeToFit];
-    qa.textColor = [UIColor colorWithWhite:0.6078 alpha:1.f];
-    qa.center = CGPointMake(width / 2, _loginImgBtn.center.y - IS_TAHT_YOU_LABEL_TO_IMG_MARGIN);
+    qa.textColor = [UIColor colorWithWhite:0.2902 alpha:1.f];
+    qa.center = CGPointMake(width / 2, _loginImgBtn.center.y + IS_TAHT_YOU_LABEL_TO_IMG_MARGIN);
     [self.view addSubview:qa];
     [self.view bringSubviewToFront:qa];
     
@@ -158,7 +159,7 @@
 
     _noBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, YES_NO_BTN_WIDTH, YES_NO_BTN_HEIGHT)];
 //    [_noBtn setBackgroundImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_no_btn_bg" ofType:@"png"]] forState:UIControlStateNormal];
-    [_noBtn setTitleColor:[UIColor colorWithWhite:0.5922 alpha:1.f] forState:UIControlStateNormal];
+    [_noBtn setTitleColor:[UIColor colorWithWhite:0.2902 alpha:1.f] forState:UIControlStateNormal];
     [_noBtn setTitle:@"不是我, 重新注册" forState:UIControlStateNormal];
     _noBtn.titleLabel.font = [UIFont systemFontOfSize:14.f];
     _noBtn.center = CGPointMake(width / 2, height / 2 + qa.frame.size.height + YES_BTN_TOP_MARGIN + YES_NO_BTN_HEIGHT + YES_BTN_2_NO_BTN_MARGIN + YES_NO_BTN_HEIGHT / 2);

@@ -71,7 +71,7 @@
     NSString * t_file = [resourceBundle pathForResource:[NSString stringWithFormat:@"triangle"] ofType:@"png"];
     t_layer.contents = (id)[UIImage imageNamed:t_file].CGImage;
     t_layer.frame = CGRectMake(0, 0, 9, 8);
-    t_layer.position = CGPointMake(area_code_btn.frame.size.width - 12, area_code_btn.frame.size.height / 2);
+    t_layer.position = CGPointMake(area_code_btn.frame.size.width - 18, area_code_btn.frame.size.height / 2);
     [area_code_btn.layer addSublayer:t_layer];
     [area_code_btn addTarget:self action:@selector(areaCodeBtnSelected:) forControlEvents:UIControlEventTouchUpInside];
 
@@ -98,8 +98,8 @@
     phone_area.leftViewMode = UITextFieldViewModeAlways;
     phone_area.leftView = leftview;
     
-    phone_area.placeholder = @"输入您的手机号";
-    [phone_area setValue:[UIColor colorWithWhite:0.2902 alpha:1.f] forKeyPath:@"_placeholderLabel.textColor"];
+    phone_area.placeholder = @"请输入您的手机号";
+    [phone_area setValue:[UIColor colorWithWhite:0.6078 alpha:1.f] forKeyPath:@"_placeholderLabel.textColor"];
     phone_area.textColor = [UIColor colorWithWhite:0.2902 alpha:1.f];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(phoneTextFieldChanged:) name:UITextFieldTextDidChangeNotification object:nil];
     phone_area.delegate = self;
@@ -162,7 +162,7 @@
     
     confirm_area.placeholder = @"请输入验证码";
     confirm_area.textAlignment = NSTextAlignmentLeft;
-    [confirm_area setValue:[UIColor colorWithWhite:0.2902 alpha:1.f] forKeyPath:@"_placeholderLabel.textColor"];
+    [confirm_area setValue:[UIColor colorWithWhite:0.6078 alpha:1.f] forKeyPath:@"_placeholderLabel.textColor"];
     confirm_area.textColor = [UIColor colorWithWhite:0.2902 alpha:1.f];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(confirmCodeTextFieldChanged:) name:UITextFieldTextDidChangeNotification object:nil];
     confirm_area.delegate = self;
@@ -201,7 +201,7 @@
     next_btn = [[OBShapedButton alloc]initWithFrame:CGRectMake(INPUT_MARGIN, BASICMARGIN + INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN + INPUT_TEXT_FIELD_HEIGHT + LOGIN_BTN_TOP_MARGIN, width - 2 * INPUT_MARGIN, LOGIN_BTN_HEIGHT)];
     [next_btn addTarget:self action:@selector(nextBtnSelected:) forControlEvents:UIControlEventTouchDown];
     next_btn.titleLabel.font = [UIFont systemFontOfSize:14.f];
-    [next_btn setTitle:@"登 陆" forState:UIControlStateNormal];
+    [next_btn setTitle:@"登 录" forState:UIControlStateNormal];
     [next_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     next_btn.clipsToBounds = YES;
     [next_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_btn_bg" ofType:@"png"]] forState:UIControlStateNormal];

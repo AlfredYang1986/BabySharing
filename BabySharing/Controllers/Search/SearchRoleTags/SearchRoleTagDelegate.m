@@ -65,7 +65,8 @@ typedef void(^queryRoleTagFinishBlock)(BOOL success, NSString* msg, NSArray* res
 }
 
 - (NSString*)getSearchPlaceHolder {
-    return @"搜索角色标签";
+//    return @"搜索角色标签";
+    return @"";
 }
 
 - (void)queryRoleTagsWithStartIndex:(NSInteger)skip andLenth:(NSInteger)take withFinishBlock:(queryRoleTagFinishBlock)block {
@@ -177,10 +178,11 @@ typedef void(^queryRoleTagFinishBlock)(BOOL success, NSString* msg, NSArray* res
     
     header.headLabell.text = @"热门角色";
 //    header.headLabell.textColor = [UIColor colorWithWhite:0.3059 alpha:1.f];
-    header.headLabell.textColor = [UIColor whiteColor];
+    header.headLabell.textColor = [UIColor colorWithWhite:0.2902 alpha:1.f];
     header.headLabell.font = [UIFont systemFontOfSize:14.f];
         
-    header.backgroundView = [[UIImageView alloc] initWithImage:[SearchRoleTagDelegate imageWithColor:[UIColor colorWithWhite:0.1098 alpha:1.f] size:header.bounds.size alpha:1.0]];
+//    header.backgroundView = [[UIImageView alloc] initWithImage:[SearchRoleTagDelegate imageWithColor:[UIColor colorWithWhite:0.1098 alpha:1.f] size:header.bounds.size alpha:1.0]];
+    header.backgroundView = [[UIImageView alloc] initWithImage:[SearchRoleTagDelegate imageWithColor:[UIColor whiteColor] size:header.bounds.size alpha:1.0]];
     return header;
 }
 
@@ -214,10 +216,10 @@ typedef void(^queryRoleTagFinishBlock)(BOOL success, NSString* msg, NSArray* res
         cell = [[FoundHotTagsCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"hot role tags"];
     }
    
-    cell.isDarkTheme = YES;
+//    cell.isDarkTheme = YES;
     [cell setHotTagsText:final_tag_arr];
     cell.delegate = self;
-    cell.backgroundColor = [UIColor colorWithWhite:0.1098 alpha:1.f];
+//    cell.backgroundColor = [UIColor colorWithWhite:0.1098 alpha:1.f];
     
     return cell;
 }

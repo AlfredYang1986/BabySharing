@@ -15,10 +15,11 @@
 @synthesize textField = _textField;
 @synthesize cancleBtn = _cancleBtn;
 @synthesize sb_bg = _sb_bg;
+@synthesize showsSearchIcon = _showsSearchIcon;
 
 - (void)setSearchBarBackgroundColor:(UIColor *)sb_bg {
     if ([self viewWithTag:-1] == nil) {
-        UIImageView* iv = [[UIImageView alloc] initWithImage:[DongDaSearchBar2 imageWithColor:[UIColor colorWithWhite:0.1098 alpha:1.f] size:CGSizeMake(self.bounds.size.width, self.bounds.size.height)]];
+        UIImageView* iv = [[UIImageView alloc] initWithImage:[DongDaSearchBar2 imageWithColor:sb_bg size:CGSizeMake(self.bounds.size.width, self.bounds.size.height)]];
         iv.tag = -1;
         [self insertSubview:iv atIndex:1];
     } else {
@@ -72,6 +73,13 @@
 
 - (void)setPostLayoutSize:(CGSize)cancel_btn_sz {
     sz = cancel_btn_sz;
+}
+
+- (void)setShowsSearchIcon:(BOOL)showsSearchIcon {
+    _showsSearchIcon = showsSearchIcon;
+    if (_showsSearchIcon == NO) {
+        self.textField.leftView = nil;
+    }
 }
 
 - (void)layoutSubviews {

@@ -64,12 +64,12 @@
         cell = [[FoundHotTagsCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"brand tags"];
     }
     
-    cell.isDarkTheme = YES;
+//    cell.isDarkTheme = YES;
     cell.delegate = self;
 //    [cell setHotTagsText:@[@"asos", @"brands"]];
     [cell setHotTags:self.fm.recommandsdata];
     cell.isHiddenSepline = YES;
-    cell.backgroundColor = [UIColor colorWithRed:0.2039 green:0.2078 blue:0.2314 alpha:1.f];//[UIColor colorWithWhite:0.1882 alpha:1.f];
+//    cell.backgroundColor = [UIColor colorWithRed:0.2039 green:0.2078 blue:0.2314 alpha:1.f];//[UIColor colorWithWhite:0.1882 alpha:1.f];
     
     return cell;
 }
@@ -99,7 +99,7 @@
     header.headLabell.font = [UIFont systemFontOfSize:14.f];
     
 //    header.backgroundView = [[UIImageView alloc] initWithImage:[SearchTimeDelegate imageWithColor:[UIColor colorWithWhite:0.1098 alpha:1.f] size:header.bounds.size alpha:1.0]];
-    header.backgroundView = [[UIImageView alloc] initWithImage:[SearchTimeDelegate imageWithColor:[UIColor colorWithRed:0.2039 green:0.2078 blue:0.2314 alpha:1.f] size:header.bounds.size alpha:1.0]];
+    header.backgroundView = [[UIImageView alloc] initWithImage:[SearchTimeDelegate imageWithColor:[UIColor whiteColor] size:header.bounds.size alpha:1.0]];
     return header;
 }
 

@@ -13,4 +13,5 @@
 
 @property (strong, nonatomic, setter=setDataDelegate:) id<SearchDataCollectionProtocol> delegate;
 @property (nonatomic) BOOL isNeedAsyncData;
+@property (nonatomic) BOOL isShowsSearchIcon;
 @end
