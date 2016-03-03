@@ -495,7 +495,26 @@
     AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     if (_isShareWeibo) {
         
-        [delegate.lm postContentOnWeiboWithText:_descriptionView.text andImage:self.share_img];
+        [LoginModel requestUserInfo:^(NSDictionary *data) {
+            UIImage* userImg = [TmpFileStorageModel enumImageWithName:[data valueForKey:@"screen_photo"] withDownLoadFinishBolck:^(BOOL success, UIImage *user_img) {
+                if (success) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        if (self) {
+                            UIImage *shareImage = [Tools addPortraitToImage:_share_img userHead:user_img userName:[data valueForKey:@"screen_name"]];
+                            [delegate.lm postContentOnQQzoneWithText:_descriptionView.text andImage:shareImage type:ShareImage];
+                        }
+                    });
+                } else {
+                    [[[UIAlertView alloc] initWithTitle:@"通知" message:@"分享失败" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil] show];
+                }
+            }];
+            if (userImg != nil) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    UIImage *shareImage = [Tools addPortraitToImage:_share_img userHead:userImg userName:[data valueForKey:@"screen_name"]];
+                    [delegate.lm postContentOnQQzoneWithText:_descriptionView.text andImage:shareImage type:ShareImage];
+                });
+            }
+        }];
     }
     if (_isShareQQ) {
         [LoginModel requestUserInfo:^(NSDictionary *data) {
@@ -515,6 +534,29 @@
                 dispatch_async(dispatch_get_main_queue(), ^{
                     UIImage *shareImage = [Tools addPortraitToImage:_share_img userHead:userImg userName:[data valueForKey:@"screen_name"]];
                     [delegate.lm postContentOnQQzoneWithText:_descriptionView.text andImage:shareImage type:ShareImage];
+                });
+            }
+        }];
+    }
+    
+    if (_isShareWechat) {
+        [LoginModel requestUserInfo:^(NSDictionary *data) {
+            UIImage* userImg = [TmpFileStorageModel enumImageWithName:[data valueForKey:@"screen_photo"] withDownLoadFinishBolck:^(BOOL success, UIImage *user_img) {
+                if (success) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        if (self) {
+                            UIImage *shareImage = [Tools addPortraitToImage:_share_img userHead:user_img userName:[data valueForKey:@"screen_name"]];
+                            [delegate.lm postContentOnWeChatWithText:_descriptionView.text andImage:shareImage];
+                        }
+                    });
+                } else {
+                    [[[UIAlertView alloc] initWithTitle:@"通知" message:@"分享失败" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil] show];
+                }
+            }];
+            if (userImg != nil) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    UIImage *shareImage = [Tools addPortraitToImage:_share_img userHead:userImg userName:[data valueForKey:@"screen_name"]];
+                    [delegate.lm postContentOnWeChatWithText:_descriptionView.text andImage:shareImage];
                 });
             }
         }];

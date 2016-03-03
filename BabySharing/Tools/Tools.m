@@ -146,8 +146,21 @@
     CGFloat width = 375;
     CGFloat height = 482;
     UIGraphicsBeginImageContextWithOptions(CGSizeMake(width, height), NO, 0.0);
-    CGRect rect = CGRectInset(CGRectMake(0, 0, width, width), 10, 10);
     
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    // 定义矩形的rect
+    CGRect rectangle = CGRectMake(0, 0, width, height);
+    
+    // 在当前路径下添加一个矩形路径
+    CGContextAddRect(ctx, rectangle);
+    
+    // 设置试图的当前填充色
+    CGContextSetFillColorWithColor(ctx, [UIColor whiteColor].CGColor);
+    
+    // 绘制当前路径区域
+    CGContextFillPath(ctx);
+    
+    CGRect rect = CGRectInset(CGRectMake(0, 0, width, width), 10, 10);
     [newImage drawInRect:rect];
     
     // 画边框大圆
@@ -155,7 +168,6 @@
     CGFloat bigRadius = 50; //大圆半径
     CGFloat centerX = width / 2;
     CGFloat centerY = width - 20;
-    CGContextRef ctx = UIGraphicsGetCurrentContext();
     CGContextAddArc(ctx, centerX, centerY, bigRadius, 0, M_PI * 2, 0);
     CGContextFillPath(ctx);
     
