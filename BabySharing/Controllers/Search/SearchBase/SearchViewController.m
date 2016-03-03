@@ -124,6 +124,12 @@
     line.borderWidth = 1.f;
     line.frame = CGRectMake(0, 117, width, 1);
     [self.view.layer addSublayer:line];
+    
+    CALayer* line_2 = [CALayer layer];
+    line_2.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.1].CGColor;
+    line_2.borderWidth = 1.f;
+    line_2.frame = CGRectMake(0, 127, width, 1);
+    [self.view.layer addSublayer:line_2];
 }
 
 - (void)didPopViewControllerBtn {

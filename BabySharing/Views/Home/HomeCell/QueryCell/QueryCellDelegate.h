@@ -12,7 +12,8 @@
 @protocol QueryCellActionProtocol <NSObject>
 - (void)didSelectLikeBtn:(id)content;
 - (void)didSelectShareBtn:(id)content;
-- (void)didSelectCommentsBtn:(id)content;
+//- (void)didSelectCommentsBtn:(id)content;
+- (void)didSelectJoinGroupBtn:(id)content;
 
 - (void)didSelectCollectionBtn:(id)content;
 - (void)didSelectNotLikeBtn:(id)content;

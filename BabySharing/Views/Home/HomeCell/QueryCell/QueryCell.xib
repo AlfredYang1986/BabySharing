@@ -11,7 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="290" height="273"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="290" height="273"/>
+                <rect key="frame" x="0.0" y="0.0" width="290" height="272"/>
                 <autoresizingMask key="autoresizingMask"/>
             </tableViewCellContentView>
             <point key="canvasLocation" x="334" y="178.5"/>

@@ -21,6 +21,7 @@
 
 #import "ProfileSettingController.h"
 #import "OwnerQueryModel.h"
+#import "OwnerQueryPushModel.h"
 #import "ConnectionModel.h"
 #import "CollectionQueryModel.h"
 
@@ -49,12 +50,13 @@
 
 #define SEG_CTR_HEIGHT              49
 
-@interface PersonalCentreTmpViewController () <PersonalCenterProtocol, ProfileViewDelegate, AlbumTableCellDelegate, personalDetailChanged>
+@interface PersonalCentreTmpViewController () <PersonalCenterProtocol, ProfileViewDelegate, AlbumTableCellDelegate, personalDetailChanged, SearchSegViewDelegate>
 @property (weak, nonatomic, readonly) NSString* current_user_id;
 @property (weak, nonatomic, readonly) NSString* current_auth_token;
 @property (weak, nonatomic) IBOutlet UITableView *queryView;
 
 @property (weak, nonatomic, readonly) OwnerQueryModel* om;
+@property (weak, nonatomic, readonly) OwnerQueryPushModel* opm;
 @property (weak, nonatomic, readonly) ConnectionModel* cm;
 @property (weak, nonatomic, readonly) CollectionQueryModel* cqm;
 @end
@@ -66,6 +68,11 @@
     
     ProfileOverView* head_view;
     SearchSegView2* search_seg;
+    
+    
+    dispatch_semaphore_t semaphore_om;
+    dispatch_semaphore_t semaphore_opm;
+    dispatch_semaphore_t semaphore_user_info;
 }
 
 @synthesize current_auth_token = _current_auth_token;
@@ -73,6 +80,7 @@
 @synthesize queryView = _queryView;
 
 @synthesize om = _om;
+@synthesize opm = _opm;
 @synthesize cm = _cm;
 @synthesize cqm = _cqm;
 
@@ -90,6 +98,7 @@
     _om = delegate.om;
     _cm = delegate.cm;
     _cqm = delegate.cqm;
+    _opm = delegate.opm;
 
     /**
      * Profile Header Cell
@@ -147,6 +156,7 @@
 
     [search_seg addItemWithTitle:@"发布"];
     [search_seg addItemWithTitle:@"推出"];
+    search_seg.delegate = self;
     search_seg.isLayerHidden = YES;
     
 //    [search_seg addItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:@"profile_grid" ofType:@"png"]] andSelectImage:[UIImage imageNamed:[resourceBundle pathForResource:@"profile_grid_selected" ofType:@"png"]]];
@@ -156,6 +166,10 @@
     search_seg.selectedIndex = 0;
     search_seg.margin_between_items = 0.40 * [UIScreen mainScreen].bounds.size.width;
 //    [bkView addSubview:search_seg];
+    
+    semaphore_om = dispatch_semaphore_create(0);
+    semaphore_opm = dispatch_semaphore_create(0);
+    semaphore_user_info = dispatch_semaphore_create(0);
 }
 
 - (void)createHeadView {
@@ -230,11 +244,32 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    dispatch_queue_t q1 = dispatch_queue_create("om queue", nil);
+    dispatch_async(q1, ^{
+        [_om queryContentsByUser:_current_user_id withToken:_current_auth_token andOwner:_owner_id withStartIndex:0 finishedBlock:^(BOOL success) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [_queryView reloadData];
+                [self resetProfileData];
+            });
+        }];
+        dispatch_semaphore_signal(semaphore_om);
+    });
+    
+    //    dispatch_semaphore_wait(semaphore_opm, DISPATCH_TIME_FOREVER);
+    dispatch_queue_t q2 = dispatch_queue_create("opm queue", nil);
+    dispatch_async(q2, ^{
+        [_opm queryContentsByUser:_current_user_id withToken:_current_auth_token andOwner:_owner_id withStartIndex:0 finishedBlock:^(BOOL success) {
+            [_queryView reloadData];
+            [self resetProfileData];
+        }];
+        dispatch_semaphore_signal(semaphore_opm);
+    });
+   
     [self updateProfileDetails];
-    [_om queryContentsByUser:_current_user_id withToken:_current_auth_token andOwner:_owner_id withStartIndex:0 finishedBlock:^(BOOL success) {
-        [_queryView reloadData];
-        [self resetProfileData];
-    }];
+    
+    dispatch_semaphore_wait(semaphore_om, DISPATCH_TIME_FOREVER);
+    dispatch_semaphore_wait(semaphore_opm, DISPATCH_TIME_FOREVER);
+    dispatch_semaphore_wait(semaphore_user_info, DISPATCH_TIME_FOREVER);
 }
 
 #pragma mark -- actions
@@ -282,6 +317,7 @@
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 [_queryView reloadData];
+                 [self resetProfileData];
 //                self.navigationItem.title = [dic_profile_details objectForKey:@"screen_name"];
             });
             
@@ -292,6 +328,7 @@
             NSLog(@"query user profile failed");
             NSLog(@"%@", msg);
         }
+        dispatch_semaphore_signal(semaphore_user_info);
     });
 }
 
@@ -350,6 +387,14 @@
 
 - (OwnerQueryModel*)getOM {
     return _om;
+}
+
+- (OwnerQueryPushModel*)getOPM {
+    return _opm;
+}
+
+- (NSArray*)getQueryData {
+    return search_seg.selectedIndex == 0 ? _om.querydata : _opm.querydata;
 }
 
 - (CollectionQueryModel*)getCQM {
@@ -467,5 +512,15 @@
     for (NSString* key in dic.allKeys) {
         [dic_profile_details setValue:[dic objectForKey:key] forKey:key];
     }
+}
+
+#pragma mark -- search seg view delegate
+- (void)segValueChanged2:(SearchSegView2*)seg {
+    //    if (seg.selectedIndex == 0) {
+    //
+    //    } else {
+    //
+    //    }
+    [_queryView reloadData];
 }
 @end

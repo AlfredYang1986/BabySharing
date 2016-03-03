@@ -163,7 +163,7 @@
     UIButton* like_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, FUNC_BTN_WIDTH_2, FUNC_BTN_HEIGHT_2)];
     [like_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"home_like" ofType:@"png"]] forState:UIControlStateNormal];
     like_btn.center = CGPointMake(FUNC_BTN_MARGIN_2 + FUNC_BTN_WIDTH_2 / 2, FUNC_VIEW_HEIGHT / 2);
-    [like_btn addTarget:self action:@selector(collectBtnSelected) forControlEvents:UIControlEventTouchUpInside];
+    [like_btn addTarget:self action:@selector(likeBtnSelected) forControlEvents:UIControlEventTouchUpInside];
     [_funcActArea addSubview:like_btn];
     
     // repush btn
@@ -516,12 +516,16 @@
     [_delegate didSelectNotLikeBtn:_content];
 }
 
+- (void)likeBtnSelected {
+    [_delegate didSelectLikeBtn:_content];
+}
+
 - (void)collectBtnSelected {
     [_delegate didSelectCollectionBtn:_content];
 }
 
 - (void)commentsBtnSelected {
-    [_delegate didSelectCommentsBtn:_content];
+    [_delegate didSelectJoinGroupBtn:_content];
 }
 
 - (void)disappearFuncView {

@@ -606,14 +606,26 @@
 
 #pragma mark -- QueryCellActionProtocol
 - (void)didSelectLikeBtn:(id)content {
-
+    NSLog(@"collect for this user");
+    QueryContent* cur = (QueryContent*)content;
+    NSLog(@"like post id: %@", cur.content_post_id);
+    
+    AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    [delegate.pm postLikeToServiceWithPostID:cur.content_post_id withFinishBlock:^(BOOL success, QueryContent *content) {
+        if (success) {
+            NSLog(@"like post success");
+            NSString* msg = @"like post success";
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success" message:msg delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+            [alert show];
+        }
+    }];
 }
 
 - (void)didSelectShareBtn:(id)content {
     
 }
 
-- (void)didSelectCommentsBtn:(id)content {
+- (void)didSelectJoinGroupBtn:(id)content {
 //    [self performSegueWithIdentifier:@"HomeDetailSegue" sender:content];
   
     /**
@@ -648,12 +660,12 @@
     NSLog(@"collect for this user");
     QueryContent* cur = (QueryContent*)content;
     NSLog(@"like post id: %@", cur.content_post_id);
-
+    
     AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    [delegate.pm postLikeToServiceWithPostID:cur.content_post_id withFinishBlock:^(BOOL success, QueryContent *content) {
+    [delegate.pm postPushToServiceWithPostID:cur.content_post_id withFinishBlock:^(BOOL success, QueryContent *content) {
         if (success) {
-            NSLog(@"like post success");
-            NSString* msg = @"like post success";
+            NSLog(@"push post success");
+            NSString* msg = @"push post success";
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success" message:msg delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
             [alert show];
         }

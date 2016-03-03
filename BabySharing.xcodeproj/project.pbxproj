@@ -28,6 +28,7 @@
 		7082FFCA1C59D2BA0056D1FC /* MessageChatGroupInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7082FFC81C59D2BA0056D1FC /* MessageChatGroupInfoCell.xib */; };
 		70A93CD41C7448F100026A6A /* FoundHotTagBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 70A93CD31C7448F100026A6A /* FoundHotTagBtn.m */; };
 		70A9BB711C3CF5F1000DFE53 /* SearchFriendsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70A9BB701C3CF5F1000DFE53 /* SearchFriendsController.m */; };
+		70B9BE8F1C884F73004C4413 /* OwnerQueryPushModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B9BE8E1C884F73004C4413 /* OwnerQueryPushModel.m */; };
 		70C75B5B1C50B5E000E7587A /* DongDaSearchBar2.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C75B5A1C50B5E000E7587A /* DongDaSearchBar2.m */; };
 		70C75B621C50DF1100E7587A /* SearchAddController2.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C75B611C50DF1100E7587A /* SearchAddController2.m */; };
 		70CC1C621C7C6BF20022B62E /* Friends+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 70CC1C531C7C6BF20022B62E /* Friends+CoreDataProperties.m */; };
@@ -399,6 +400,8 @@
 		70A93CD31C7448F100026A6A /* FoundHotTagBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoundHotTagBtn.m; sourceTree = "<group>"; };
 		70A9BB6F1C3CF5F1000DFE53 /* SearchFriendsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchFriendsController.h; sourceTree = "<group>"; };
 		70A9BB701C3CF5F1000DFE53 /* SearchFriendsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchFriendsController.m; sourceTree = "<group>"; };
+		70B9BE8D1C884F73004C4413 /* OwnerQueryPushModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OwnerQueryPushModel.h; sourceTree = "<group>"; };
+		70B9BE8E1C884F73004C4413 /* OwnerQueryPushModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OwnerQueryPushModel.m; sourceTree = "<group>"; };
 		70C75B591C50B5E000E7587A /* DongDaSearchBar2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DongDaSearchBar2.h; sourceTree = "<group>"; };
 		70C75B5A1C50B5E000E7587A /* DongDaSearchBar2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DongDaSearchBar2.m; sourceTree = "<group>"; };
 		70C75B601C50DF1100E7587A /* SearchAddController2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchAddController2.h; sourceTree = "<group>"; };
@@ -2067,6 +2070,8 @@
 		EEAACB961B44E90300D05C0B /* QueryModel */ = {
 			isa = PBXGroup;
 			children = (
+				70B9BE8D1C884F73004C4413 /* OwnerQueryPushModel.h */,
+				70B9BE8E1C884F73004C4413 /* OwnerQueryPushModel.m */,
 				EEAACB971B44E90300D05C0B /* LocalModel */,
 				EEAACBA81B44E90300D05C0B /* QueryModel.h */,
 				EEAACBA91B44E90300D05C0B /* QueryModel.m */,
@@ -3049,6 +3054,7 @@
 				EE79104D1B841B69005E455B /* ProfileDetailChatGroupCell.m in Sources */,
 				EE79104B1B841B38005E455B /* MessageNotificationDetailCell.m in Sources */,
 				70E06F851C4F988800B740CD /* SearchTimeDelegate.m in Sources */,
+				70B9BE8F1C884F73004C4413 /* OwnerQueryPushModel.m in Sources */,
 				EE79104A1B841B1A005E455B /* SGBaseMenu.m in Sources */,
 				EE7910491B841B0F005E455B /* SGSheetMenu.m in Sources */,
 				EE7910471B841AD5005E455B /* PhotoTagView.m in Sources */,

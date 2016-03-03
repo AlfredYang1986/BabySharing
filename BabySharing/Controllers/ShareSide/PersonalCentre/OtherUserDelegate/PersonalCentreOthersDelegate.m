@@ -60,10 +60,11 @@
     cell.cell_cor_radius = 3.f;
     cell.marign_between = 2.f;
     cell.delegate = _delegate;
-    OwnerQueryModel* om = [_delegate getOM];
+    NSArray* querydata = [_delegate getQueryData];
+    //    OwnerQueryModel* om = [_delegate getOM];
     NSInteger row = indexPath.row;
     @try {
-        NSArray* arr_tmp = [om.querydata objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(row * PHOTO_PER_LINE, PHOTO_PER_LINE)]];
+        NSArray* arr_tmp = [querydata objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(row * PHOTO_PER_LINE, PHOTO_PER_LINE)]];
         NSMutableArray* arr_content = [[NSMutableArray alloc]initWithCapacity:PHOTO_PER_LINE];
         for (QueryContent* item in arr_tmp) {
             [arr_content addObject:((QueryContentItem*)item.items.allObjects.firstObject).item_name];
@@ -71,7 +72,7 @@
         [cell setUpContentViewWithImageNames:arr_content atLine:row andType:AlbumControllerTypePhoto];
     }
     @catch (NSException *exception) {
-        NSArray* arr_tmp = [om.querydata objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(row * PHOTO_PER_LINE, om.querydata.count - row * PHOTO_PER_LINE)]];
+        NSArray* arr_tmp = [querydata objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(row * PHOTO_PER_LINE, querydata.count - row * PHOTO_PER_LINE)]];
         NSMutableArray* arr_content = [[NSMutableArray alloc]initWithCapacity:PHOTO_PER_LINE];
         for (QueryContent* item in arr_tmp) {
             [arr_content addObject:((QueryContentItem*)item.items.allObjects.firstObject).item_name];

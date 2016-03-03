@@ -25,6 +25,7 @@
 
 @synthesize tm = _tm;
 @synthesize om = _om;
+@synthesize opm = _opm;
 @synthesize cqm = _cqm;
 
 @synthesize cm = _cm;
@@ -41,6 +42,7 @@
     if (!_qm) _qm = [[QueryModel alloc]initWithDelegate:self];
     if (!_tm) _tm = [[TagQueryModel alloc]initWithDelegate:self];
     if (!_om) _om = [[OwnerQueryModel alloc]initWithDelegate:self];
+    if (!_opm) _opm = [[OwnerQueryPushModel alloc]initWithDelegate:self];
     if (!_cm) _cm = [[ConnectionModel alloc]initWithDelegate:self];
     if (!_cqm) _cqm = [[CollectionQueryModel alloc]initWithDelegate:self];
     if (!_sm) _sm = [[SystemSettingModel alloc]initWithDelegate:self];

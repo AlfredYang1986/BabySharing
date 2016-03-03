@@ -12,6 +12,7 @@
 #import "ProfileViewDelegate.h"
 
 @class OwnerQueryModel;
+@class OwnerQueryPushModel;
 @class CollectionQueryModel;
 
 @protocol PersonalCenterProtocol <NSObject>
@@ -26,6 +27,11 @@
 - (NSString*)getNickName;
 
 - (OwnerQueryModel*)getOM;
+- (OwnerQueryPushModel*)getOPM;
+
+- (NSArray*)getQueryData;
+
+
 - (CollectionQueryModel*)getCQM;
 
 - (NSInteger)getCurrentSegIndex;

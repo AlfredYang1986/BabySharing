@@ -38,8 +38,8 @@ static const NSString* kUserPostOwnerConnectionsFollowed = @"kUserPostOwnerConne
 static const NSString* kUserPostOwnerConnectionsFriends = @"kUserPostOwnerConnectionsFriends";
 
 #pragma mark -- HOST DOMAIN
-#define HOST_DOMAIN                     @"http://www.altlys.com:9000/"
-//#define HOST_DOMAIN                     @"http://192.168.3.101:9000/"
+//#define HOST_DOMAIN                     @"http://www.altlys.com:9000/"
+#define HOST_DOMAIN                     @"http://192.168.3.105:9000/"
 //#define HOST_DOMAIN_SENDBOX             @"http://192.168.1.105:9000/"
 
 #pragma mark -- DOWNLOAD
@@ -50,6 +50,7 @@ static const NSString* kUserPostOwnerConnectionsFriends = @"kUserPostOwnerConnec
 #define QUERY_REFRESH_HOME                  @"queryHomeContent"
 #define QUERY_COMMENTS                      @"queryComments"
 #define QUERY_COLLECTIONS                   [QUERY_HOST_DOMAIN stringByAppendingString:@"queryCollections"]
+#define QUERY_PUSH_CONTENT                  [QUERY_HOST_DOMAIN stringByAppendingString:@"queryPush"]
 
 #pragma mark -- AUTH
 #define AUTH_HOST_DOMAIN                    [HOST_DOMAIN stringByAppendingString:@"login/"]
@@ -72,6 +73,7 @@ static const NSString* kUserPostOwnerConnectionsFriends = @"kUserPostOwnerConnec
 #define POST_UPLOAD                         @"uploadFile"
 #define POST_COMMENT                        @"postComment"
 #define POST_LIKE                           @"postLike"
+#define POST_PUSH                           [POST_HOST_DOMAIN stringByAppendingString:@"postPush"]
 
 #pragma mark -- RPOFILE
 #define PROFILE_HOST_DOMAIN                 [HOST_DOMAIN stringByAppendingString:@"profile/"]
@@ -168,6 +170,7 @@ static const NSString* kUserPostOwnerConnectionsFriends = @"kUserPostOwnerConnec
 #define LOCALDB_MESSAGEG_NOTIFICATION       @"notifyData.sqlite"
 #define LOCALDB_TAG_QUERY                   @"tagQuery.sqlite"
 #define LOCALDB_OWNER_QUERY                 @"ownerQuery.sqlite"
+#define LOCALDB_OWNER_PUSH_QUERY            @"ownerPushQuery.sqlite"
 #define LOCALDB_COLLECTION_QUERY            @"collectionQuery.sqlite"
 #define LOCALDB_RELATIONSHIP                @"Relationship.sqlite"
 #define LOCALDB_USERSETTING                 @"systemSetting.sqlite"

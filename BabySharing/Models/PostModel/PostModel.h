@@ -22,4 +22,5 @@ typedef void(^likeFinishBlock)(BOOL success, QueryContent* content);
 
 - (QueryContent*)postLikeToServiceWithPostID:(NSString*)post_id;
 - (void)postLikeToServiceWithPostID:(NSString*)post_id withFinishBlock:(likeFinishBlock)block;
+- (void)postPushToServiceWithPostID:(NSString*)post_id withFinishBlock:(likeFinishBlock)block;
 @end
