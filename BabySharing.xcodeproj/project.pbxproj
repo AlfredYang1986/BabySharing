@@ -76,6 +76,8 @@
 		A0A90B2B1C81CA910022E79D /* AlbumTest.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A90B2A1C81CA910022E79D /* AlbumTest.m */; };
 		A0B0E38F1C857BE0007C56B2 /* libgotyeapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0B0E38E1C857BE0007C56B2 /* libgotyeapi.a */; };
 		A0B0E4121C86B5D8007C56B2 /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0B0E4101C86B5D8007C56B2 /* libGPUImage.a */; };
+		A0B0E4311C87F06D007C56B2 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0B0E42C1C87F06D007C56B2 /* libWeChatSDK.a */; };
+		A0B0E4321C87F06D007C56B2 /* read_me.txt in Resources */ = {isa = PBXBuildFile; fileRef = A0B0E42D1C87F06D007C56B2 /* read_me.txt */; };
 		A0B7A7611C7C0B9100D78E6E /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B7A7601C7C0B9100D78E6E /* Tools.m */; };
 		A0B7A7631C7C23CC00D78E6E /* YYBoundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A0B7A7621C7C23CC00D78E6E /* YYBoundle.bundle */; };
 		A0B7A7661C7C563400D78E6E /* PersonInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B7A7651C7C563400D78E6E /* PersonInfoCell.m */; };
@@ -244,8 +246,6 @@
 		EEAACD1F1B44E90400D05C0B /* SGActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACC1F1B44E90400D05C0B /* SGActionView.m */; };
 		EEAACD201B44E90400D05C0B /* SGAlertMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACC211B44E90400D05C0B /* SGAlertMenu.m */; };
 		EEAACD411B44E90400D05C0B /* PhotoPreViewEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACC6A1B44E90400D05C0B /* PhotoPreViewEditView.m */; };
-		EEAACD751B44EA2D00D05C0B /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EEAACD621B44EA2D00D05C0B /* libWeChatSDK.a */; };
-		EEAACD761B44EA2D00D05C0B /* read_me.txt in Resources */ = {isa = PBXBuildFile; fileRef = EEAACD631B44EA2D00D05C0B /* read_me.txt */; };
 		EEAACD7A1B44EA8800D05C0B /* BabySharing.mobileprovision in Resources */ = {isa = PBXBuildFile; fileRef = EEAACD791B44EA8800D05C0B /* BabySharing.mobileprovision */; };
 		EEAACD801B44EBDE00D05C0B /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEAACD7D1B44EBA400D05C0B /* MediaPlayer.framework */; };
 		EEAACD811B44EBDE00D05C0B /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EEAACD7B1B44EB9800D05C0B /* libicucore.dylib */; };
@@ -501,6 +501,11 @@
 		A0A90B2A1C81CA910022E79D /* AlbumTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumTest.m; sourceTree = "<group>"; };
 		A0B0E38E1C857BE0007C56B2 /* libgotyeapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libgotyeapi.a; sourceTree = "<group>"; };
 		A0B0E4101C86B5D8007C56B2 /* libGPUImage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGPUImage.a; sourceTree = "<group>"; };
+		A0B0E42C1C87F06D007C56B2 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		A0B0E42D1C87F06D007C56B2 /* read_me.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = read_me.txt; sourceTree = "<group>"; };
+		A0B0E42E1C87F06D007C56B2 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
+		A0B0E42F1C87F06D007C56B2 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		A0B0E4301C87F06D007C56B2 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		A0B7A75F1C7C0B9100D78E6E /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
 		A0B7A7601C7C0B9100D78E6E /* Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
 		A0B7A7621C7C23CC00D78E6E /* YYBoundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = YYBoundle.bundle; sourceTree = "<group>"; };
@@ -835,10 +840,6 @@
 		EEAACC6C1B44E90400D05C0B /* PhotoTagControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoTagControlView.m; sourceTree = "<group>"; };
 		EEAACC721B44E90400D05C0B /* PhotoTagView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoTagView.h; sourceTree = "<group>"; };
 		EEAACC731B44E90400D05C0B /* PhotoTagView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoTagView.m; sourceTree = "<group>"; };
-		EEAACD621B44EA2D00D05C0B /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
-		EEAACD631B44EA2D00D05C0B /* read_me.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = read_me.txt; sourceTree = "<group>"; };
-		EEAACD641B44EA2D00D05C0B /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
-		EEAACD651B44EA2D00D05C0B /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		EEAACD791B44EA8800D05C0B /* BabySharing.mobileprovision */ = {isa = PBXFileReference; lastKnownFileType = file; path = BabySharing.mobileprovision; sourceTree = "<group>"; };
 		EEAACD7B1B44EB9800D05C0B /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		EEAACD7D1B44EBA400D05C0B /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
@@ -1028,6 +1029,7 @@
 				EEAACD9D1B44EDF400D05C0B /* ImageIO.framework in Frameworks */,
 				EEAACD9B1B44EDEB00D05C0B /* libz.dylib in Frameworks */,
 				EEAACD991B44EDD700D05C0B /* libsqlite3.0.dylib in Frameworks */,
+				A0B0E4311C87F06D007C56B2 /* libWeChatSDK.a in Frameworks */,
 				EEAACD971B44ED8600D05C0B /* SystemConfiguration.framework in Frameworks */,
 				A0B0E4121C86B5D8007C56B2 /* libGPUImage.a in Frameworks */,
 				EEAACD951B44ED7B00D05C0B /* libc++.dylib in Frameworks */,
@@ -1041,7 +1043,6 @@
 				A0A5C53E1C7DB1DF00F07FE8 /* libWeiboSDK.a in Frameworks */,
 				EEAACD801B44EBDE00D05C0B /* MediaPlayer.framework in Frameworks */,
 				EEAACD811B44EBDE00D05C0B /* libicucore.dylib in Frameworks */,
-				EEAACD751B44EA2D00D05C0B /* libWeChatSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2332,10 +2333,11 @@
 		EEAACD611B44EA2D00D05C0B /* libWeChatSDK */ = {
 			isa = PBXGroup;
 			children = (
-				EEAACD621B44EA2D00D05C0B /* libWeChatSDK.a */,
-				EEAACD631B44EA2D00D05C0B /* read_me.txt */,
-				EEAACD641B44EA2D00D05C0B /* WXApi.h */,
-				EEAACD651B44EA2D00D05C0B /* WXApiObject.h */,
+				A0B0E42C1C87F06D007C56B2 /* libWeChatSDK.a */,
+				A0B0E42D1C87F06D007C56B2 /* read_me.txt */,
+				A0B0E42E1C87F06D007C56B2 /* WechatAuthSDK.h */,
+				A0B0E42F1C87F06D007C56B2 /* WXApi.h */,
+				A0B0E4301C87F06D007C56B2 /* WXApiObject.h */,
 			);
 			path = libWeChatSDK;
 			sourceTree = "<group>";
@@ -2964,6 +2966,7 @@
 				EEC980B31B8EB9EA0087E5A7 /* status-bar-pattern-default.jpg in Resources */,
 				EE968D081C1AB0700063362E /* MessageFriendsCell.xib in Resources */,
 				EEBE1B901C17D2F400EAA9D2 /* UserSearch.storyboard in Resources */,
+				A0B0E4321C87F06D007C56B2 /* read_me.txt in Resources */,
 				EEC980B51B8EB9EA0087E5A7 /* status-bar-progress.png in Resources */,
 				EEA1F5531C169106009B8724 /* FoundSearch.storyboard in Resources */,
 				EE79104E1B841B79005E455B /* ProfileDetailChatGroupCell.xib in Resources */,
@@ -3000,7 +3003,6 @@
 				EED64D471B8184C1008CB134 /* CycleAddKidsCell.xib in Resources */,
 				EE74162B1B5B9659002CA1BC /* AreaTableCell.xib in Resources */,
 				EE9676411B7C3D7700445254 /* CycleDescriptionCell.xib in Resources */,
-				EEAACD761B44EA2D00D05C0B /* read_me.txt in Resources */,
 				EEAACCC81B44E90400D05C0B /* Images.xcassets in Resources */,
 				EEAACCA01B44E90400D05C0B /* CameraNib2.storyboard in Resources */,
 				EEBE1B821C17CB4E00EAA9D2 /* FoundMoreFriendCell.xib in Resources */,

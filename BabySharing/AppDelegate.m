@@ -207,18 +207,24 @@
 
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-    NSLog(@"url is : %@", url);
-    NSLog(@"source Application : %@", sourceApplication);
-    if ([sourceApplication isEqualToString:@"com.sina.weibo"]) {
-        return [WeiboSDK handleOpenURL:url delegate:_lm];
-    } else {
-        return [TencentOAuth HandleOpenURL:url];
-    }
+    return [TencentOAuth HandleOpenURL:url] ||
+    [WeiboSDK handleOpenURL:url delegate:_lm] ||
+    [WXApi handleOpenURL:url delegate:_lm];;
+//    NSLog(@"url is : %@", url);
+//    NSLog(@"source Application : %@", sourceApplication);
+//    if ([sourceApplication isEqualToString:@"com.sina.weibo"]) {
+//        return [WeiboSDK handleOpenURL:url delegate:_lm];
+//    } else {
+//        return [TencentOAuth HandleOpenURL:url];
+//    }
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
-    if ([_lm isCurrentUserConnectWithWeibo]) return [WeiboSDK handleOpenURL:url delegate:_lm];
-    else return [TencentOAuth HandleOpenURL:url];
+//    if ([_lm isCurrentUserConnectWithWeibo]) return [WeiboSDK handleOpenURL:url delegate:_lm];
+//    else return [TencentOAuth HandleOpenURL:url];
+    return [TencentOAuth HandleOpenURL:url] ||
+    [WeiboSDK handleOpenURL:url delegate:_lm] ||
+    [WXApi handleOpenURL:url delegate:_lm];
 }
 
 + (AppDelegate *)defaultAppDelegate {

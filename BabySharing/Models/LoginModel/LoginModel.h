@@ -40,7 +40,7 @@ typedef void(^queryUserListInSystemFinishBlock)(BOOL success, NSArray* lst);
 typedef void(^requestUserInfoSeccess)(NSDictionary *data);
 
 //TencentSessionDelegate 这里有个接口 为了去除警告 注掉了
-@interface LoginModel : NSObject <WeiboSDKDelegate, WXApiDelegate> {
+@interface LoginModel : NSObject <WeiboSDKDelegate, WXApiDelegate, TencentSessionDelegate> {
     NSArray* authorised_users;
 }
 
@@ -71,6 +71,8 @@ typedef void(^requestUserInfoSeccess)(NSDictionary *data);
 
 #pragma mark -- we chat login
 - (void)loginWithWeChat;
+- (void)postContentOnWeChatWithText:(NSString *)text andImage:(UIImage *)img;
+- (void)postContentOnFriendShipWithText:(NSString *)text andImage:(UIImage *)img;
 
 #pragma mark -- qq login and call back
 - (void)loginWithQQ;
