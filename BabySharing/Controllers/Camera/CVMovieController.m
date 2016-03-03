@@ -384,14 +384,14 @@
         [self endRecordingAnimation];
         [movieWriter finishRecordingWithCompletionHandler:^{
             // save to photo Album
-            ALAssetsLibrary* assetsLibrary = [[ALAssetsLibrary alloc] init];
-            [assetsLibrary writeVideoAtPathToSavedPhotosAlbum:dis completionBlock:^(NSURL *assetURL, NSError *error) {
-                if (!error) {
-                    NSLog(@"captured video saved with no error.");
-                } else {
-                    NSLog(@"error occured while saving the video:%@", error);
-                }
-            }];
+//            ALAssetsLibrary* assetsLibrary = [[ALAssetsLibrary alloc] init];
+//            [assetsLibrary writeVideoAtPathToSavedPhotosAlbum:dis completionBlock:^(NSURL *assetURL, NSError *error) {
+//                if (!error) {
+//                    NSLog(@"captured video saved with no error.");
+//                } else {
+//                    NSLog(@"error occured while saving the video:%@", error);
+//                }
+//            }];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [movie_list addObject:dis];
                 dis = nil;

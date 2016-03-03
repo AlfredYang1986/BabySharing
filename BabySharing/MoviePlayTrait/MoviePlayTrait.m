@@ -153,6 +153,14 @@
 //    AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset:mixComposition presetName:AVAssetExportPresetHighestQuality];
     AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset:mixComposition presetName:AVAssetExportPresetMediumQuality];
 //    AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset:mixComposition presetName:AVAssetExportPresetLowQuality];
+    ALAssetsLibrary* assetsLibrary = [[ALAssetsLibrary alloc] init];
+    [assetsLibrary writeVideoAtPathToSavedPhotosAlbum:url completionBlock:^(NSURL *assetURL, NSError *error) {
+        if (!error) {
+            NSLog(@"captured video saved with no error.");
+        } else {
+            NSLog(@"error occured while saving the video:%@", error);
+        }
+    }];
 
     exporter.outputURL=url;
     exporter.outputFileType = AVFileTypeQuickTimeMovie;
