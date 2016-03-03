@@ -9,8 +9,7 @@
 #import <QuartzCore/QuartzCore.h>
 @interface ProgressLayer : CALayer
 // 只需要打点就可以了
-- (void)addPointAtEnd;
-//- (void)setPointWithTime:(CGFloat)time;
+- (void)addPointAtEndWith:(CGFloat)time;
 // 删除段落
 - (void)deletePoint;
 // 去到当前时间

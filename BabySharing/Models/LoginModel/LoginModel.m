@@ -419,18 +419,33 @@
 }
 
 - (void)postContentOnWeChatWithText:(NSString *)text andImage:(UIImage *)img {
+
     WXMediaMessage *message = [WXMediaMessage message];
-    [message setThumbImage:[Tools OriginImage:img scaleToSize:CGSizeMake(100, 100)]];
-    // 缩略图
-    WXImageObject *imageObject = [WXImageObject object];
-    imageObject.imageData = UIImagePNGRepresentation(img);
-    message.mediaObject = imageObject;
+    message.title = @"咚哒";
+    message.description = @"我在咚哒，快来加入咚哒吧";
+    message.thumbData = UIImagePNGRepresentation(img);
+    WXWebpageObject *webpageObject = [WXWebpageObject object];
+    webpageObject.webpageUrl = @"www.baidu.com";
+    message.mediaObject = webpageObject;
     
     SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
     req.bText = NO;
     req.message = message;
     req.scene = WXSceneSession;
     [WXApi sendReq:req];
+    
+//    WXMediaMessage *message = [WXMediaMessage message];
+//    [message setThumbImage:[Tools OriginImage:img scaleToSize:CGSizeMake(100, 100)]];
+//    // 缩略图
+//    WXImageObject *imageObject = [WXImageObject object];
+//    imageObject.imageData = UIImagePNGRepresentation(img);
+//    message.mediaObject = imageObject;
+//    
+//    SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
+//    req.bText = NO;
+//    req.message = message;
+//    req.scene = WXSceneSession;
+//    [WXApi sendReq:req];
 }
 
 - (void)postContentOnFriendShipWithText:(NSString *)text andImage:(UIImage *)img {

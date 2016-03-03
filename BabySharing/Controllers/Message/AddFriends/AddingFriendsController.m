@@ -170,6 +170,7 @@
         [seg setSegSelectedIndex:0];
         [[AppDelegate defaultAppDelegate].lm postContentOnQQzoneWithText:@"快来加入咚哒吧!!!" andImage:[UIImage imageNamed:[[NSBundle mainBundle] pathForResource:@"icon" ofType:@"png"]] type:ShareNews];
     } else if (seg.selectedIndex == 1) {
+        [[AppDelegate defaultAppDelegate].lm postContentOnWeChatWithText:@"快来加入咚哒吧!!!" andImage:[UIImage imageNamed:[[NSBundle mainBundle] pathForResource:@"icon" ofType:@"png"]]];
         [seg setSegSelectedIndex:0];
     } else if (seg.selectedIndex == 0) {
         AppDelegate* app = [UIApplication sharedApplication].delegate;

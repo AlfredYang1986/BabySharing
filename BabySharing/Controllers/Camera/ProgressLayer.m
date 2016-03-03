@@ -23,9 +23,9 @@
     }
 }
 
-- (void)addPointAtEnd {
+- (void)addPointAtEndWith:(CGFloat)time {
     PointLayer *pointLayer = [PointLayer layer];
-    pointLayer.time = currentTime;
+    pointLayer.time = time;
     pointLayer.backgroundColor = [UIColor redColor].CGColor;
     pointLayer.frame = CGRectMake(CGRectGetWidth(self.frame) - POINT_WIDTH, self.frame.origin.y, POINT_WIDTH, CGRectGetHeight(self.frame));
 

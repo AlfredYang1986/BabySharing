@@ -246,11 +246,10 @@
     CGFloat width = [UIScreen mainScreen].bounds.size.width * presentage;
     progress_using_layer.frame = CGRectMake(progress_using_layer.frame.origin.x, progress_using_layer.frame.origin.y, width, progress_using_layer.frame.size.height);
     
-    NSLog(@"MonkeyHengLog: %@ === %@", [progress_using_layer description], [[progress_using_layer.sublayers lastObject] description]);
-    
     if (seconds > MOVIE_MAX_SECONDS) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self didSelectTakePicBtn];
+            [[[UIAlertView alloc] initWithTitle:@"通知" message:@"视频录制时间达到15秒" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil] show];
         });
         [timer setFireDate:[NSDate distantFuture]];
     }
@@ -335,7 +334,7 @@
 
 - (void)endRecordingAnimation {
     [timer setFireDate:[NSDate distantFuture]];
-    [progress_using_layer addPointAtEnd];
+    [progress_using_layer addPointAtEndWith:seconds];
     
 //    static const CGFloat kAnimationDuration = 0.15; // in seconds
 //    CGRect outer = take_btn.frame;
@@ -466,7 +465,7 @@
 #pragma mark -- delete current 
 - (void)didSelectDeleteBtn {
     if (isRecording) {
-        UIAlertView* view = [[UIAlertView alloc]initWithTitle:@"error" message:@"cannot delete while recording" delegate:nil cancelButtonTitle:@"cancel" otherButtonTitles:nil];
+        UIAlertView* view = [[UIAlertView alloc]initWithTitle:@"通知" message:@"请等待视频录制完成" delegate:nil cancelButtonTitle:@"cancel" otherButtonTitles:nil];
         [view show];
         return;
     }
@@ -477,11 +476,6 @@
     if (movie_list.count == 0) {
         delete_current_movie_btn.hidden = YES;
     }
-    
-//    progress_using_layer.frame = CGRectMake(progress_using_layer.frame.origin.x, progress_using_layer.frame.origin.y, 0, progress_using_layer.frame.size.height);
-//    seconds = 0.f;
-//    [movie_list removeAllObjects];
-//    delete_current_movie_btn.hidden = YES;
 }
 
 
