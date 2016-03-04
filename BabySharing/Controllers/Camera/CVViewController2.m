@@ -28,7 +28,9 @@
     CGFloat aspectRatio;
     GPUImageStillCamera *stillCamera;
     
-    BOOL isFlash;
+//    BOOL isFlash;
+    AVCaptureFlashMode flashMode;
+
     BOOL isLayoutHelp;
     NSMutableArray* layout_help_layers;
     
@@ -134,7 +136,8 @@
     [f_btn_2 addTarget:self action:@selector(didChangeFreshLight) forControlEvents:UIControlEventTouchDown];
     [f_bar addSubview:f_btn_2];
     f_btn_2.center = CGPointMake(FUNCTION_BAR_BTN_MARGIN + FUNCTION_BAR_BTN_WIDTH / 2, FUNCTION_BAR_HEIGHT / 2);
-    isFlash = NO;
+//    isFlash = NO;
+    flashMode = AVCaptureFlashModeOff;
     
     /**
      * action buttons
@@ -274,15 +277,32 @@
 //    [device setTorchMode:AVCaptureTorchModeOn];
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-    if (isFlash) {
-        [device setFlashMode:AVCaptureFlashModeOff];
-        [f_btn_2 setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"post_flash_off" ofType:@"png"]] forState:UIControlStateNormal];
-        isFlash = NO;
-    } else {
-        [device setFlashMode:AVCaptureFlashModeOn];
-        [f_btn_2 setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"post_flash_on" ofType:@"png"]] forState:UIControlStateNormal];
-        isFlash = YES;
+    
+    flashMode = (++flashMode) % 3;
+    switch (flashMode) {
+        case AVCaptureFlashModeOff:
+            [f_btn_2 setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"post_flash_off" ofType:@"png"]] forState:UIControlStateNormal];
+            break;
+        case AVCaptureFlashModeOn:
+            [f_btn_2 setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"post_flash_on" ofType:@"png"]] forState:UIControlStateNormal];
+            break;
+        case AVCaptureFlashModeAuto:
+            [f_btn_2 setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"post_flash_auto" ofType:@"png"]] forState:UIControlStateNormal];
+            break;
+        default:
+            break;
     }
+    [device setFlashMode:flashMode];
+    
+//    if (isFlash) {
+//        [device setFlashMode:AVCaptureFlashModeOff];
+//        [f_btn_2 setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"post_flash_off" ofType:@"png"]] forState:UIControlStateNormal];
+//        isFlash = NO;
+//    } else {
+//        [device setFlashMode:AVCaptureFlashModeOn];
+//        [f_btn_2 setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"post_flash_on" ofType:@"png"]] forState:UIControlStateNormal];
+//        isFlash = YES;
+//    }
     
     [device unlockForConfiguration];
     [session commitConfiguration];

@@ -440,7 +440,7 @@
     AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
     [hv.delegate pushExistingData:app.qm.querydata];
     [hv.delegate setSelectIndex:index];
-    hv.nav_title = @"辣妈的选择";
+    hv.nav_title = @"发现更多内容";
 //    hv.nav_title = @"Mother's Choice";
     [_container.navigationController pushViewController:hv animated:YES];
 }
