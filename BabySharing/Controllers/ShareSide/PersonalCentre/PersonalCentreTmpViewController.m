@@ -154,8 +154,8 @@
     [self.view addSubview:search_seg];
     [self.view bringSubviewToFront:search_seg];
 
-    [search_seg addItemWithTitle:@"发布"];
-    [search_seg addItemWithTitle:@"推出"];
+    [search_seg addItemWithTitle:@"0" andSubTitle:@"发布"];
+    [search_seg addItemWithTitle:@"0" andSubTitle:@"推出"];
     search_seg.delegate = self;
     search_seg.isLayerHidden = YES;
     
@@ -250,6 +250,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 [_queryView reloadData];
                 [self resetProfileData];
+                [search_seg refreshItemTitle:[NSString stringWithFormat:@"%d", _om.querydata.count] atIndex:0];
             });
         }];
         dispatch_semaphore_signal(semaphore_om);
@@ -261,6 +262,7 @@
         [_opm queryContentsByUser:_current_user_id withToken:_current_auth_token andOwner:_owner_id withStartIndex:0 finishedBlock:^(BOOL success) {
             [_queryView reloadData];
             [self resetProfileData];
+            [search_seg refreshItemTitle:[NSString stringWithFormat:@"%d", _opm.querydata.count] atIndex:1];
         }];
         dispatch_semaphore_signal(semaphore_opm);
     });

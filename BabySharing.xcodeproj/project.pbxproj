@@ -39,6 +39,7 @@
 		70CC1C671C7C6BF20022B62E /* ConnectionOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = 70CC1C5D1C7C6BF20022B62E /* ConnectionOwner.m */; };
 		70CC1C681C7C6BF20022B62E /* Following+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 70CC1C5F1C7C6BF20022B62E /* Following+CoreDataProperties.m */; };
 		70CC1C691C7C6BF20022B62E /* Following.m in Sources */ = {isa = PBXBuildFile; fileRef = 70CC1C611C7C6BF20022B62E /* Following.m */; };
+		70CE77051C8943A300EA9C98 /* SearchSegTextTextItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 70CE77041C8943A300EA9C98 /* SearchSegTextTextItem.m */; };
 		70D15B431C5B64C9007AC9AB /* MJRefreshAutoFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D15B191C5B64C9007AC9AB /* MJRefreshAutoFooter.m */; };
 		70D15B441C5B64C9007AC9AB /* MJRefreshBackFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D15B1B1C5B64C9007AC9AB /* MJRefreshBackFooter.m */; };
 		70D15B451C5B64C9007AC9AB /* MJRefreshComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D15B1D1C5B64C9007AC9AB /* MJRefreshComponent.m */; };
@@ -423,6 +424,8 @@
 		70CC1C5F1C7C6BF20022B62E /* Following+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Following+CoreDataProperties.m"; sourceTree = "<group>"; };
 		70CC1C601C7C6BF20022B62E /* Following.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Following.h; sourceTree = "<group>"; };
 		70CC1C611C7C6BF20022B62E /* Following.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Following.m; sourceTree = "<group>"; };
+		70CE77031C8943A300EA9C98 /* SearchSegTextTextItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSegTextTextItem.h; sourceTree = "<group>"; };
+		70CE77041C8943A300EA9C98 /* SearchSegTextTextItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSegTextTextItem.m; sourceTree = "<group>"; };
 		70D15B181C5B64C9007AC9AB /* MJRefreshAutoFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshAutoFooter.h; sourceTree = "<group>"; };
 		70D15B191C5B64C9007AC9AB /* MJRefreshAutoFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshAutoFooter.m; sourceTree = "<group>"; };
 		70D15B1A1C5B64C9007AC9AB /* MJRefreshBackFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBackFooter.h; sourceTree = "<group>"; };
@@ -1081,6 +1084,8 @@
 				70530B0F1C3F9D1E00505121 /* SearchSegImgTextItem.m */,
 				70530B101C3F9D1E00505121 /* SearchSegItem.h */,
 				70530B111C3F9D1E00505121 /* SearchSegItem.m */,
+				70CE77031C8943A300EA9C98 /* SearchSegTextTextItem.h */,
+				70CE77041C8943A300EA9C98 /* SearchSegTextTextItem.m */,
 			);
 			path = SearchSegItem;
 			sourceTree = "<group>";
@@ -3233,6 +3238,7 @@
 				70CC1C671C7C6BF20022B62E /* ConnectionOwner.m in Sources */,
 				EEBE1B6A1C17CA9400EAA9D2 /* DongDaSearchBar.m in Sources */,
 				EED5EABE1BD7375E000AFF36 /* PhotoTagTariangleLayer2.m in Sources */,
+				70CE77051C8943A300EA9C98 /* SearchSegTextTextItem.m in Sources */,
 				70CC1C641C7C6BF20022B62E /* Followed+CoreDataProperties.m in Sources */,
 				EEAACCE01B44E90400D05C0B /* PostModel.m in Sources */,
 				EE83F40A1B96EDDF00D51FDF /* CycleAddSchoolViewController.m in Sources */,

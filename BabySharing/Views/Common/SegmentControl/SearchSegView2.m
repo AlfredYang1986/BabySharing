@@ -10,6 +10,7 @@
 #import "SearchSegImgItem.h"
 #import "SearchSegItem.h"
 #import "SearchSegImgTextItem.h"
+#import "SearchSegTextTextItem.h"
 
 @implementation SearchSegView2
 
@@ -136,6 +137,74 @@
     return tmp.title;
 }
 
+//- (void)refreshTitle:(NSDictionary*)lines, ... {
+//    
+//}
+//
+//- (void)addRefreshWithTitle:(NSDictionary*)lines, ... {
+//    va_list params;
+//    va_start(params, lines);
+//    
+//    NSDictionary *line;
+////    FiniteTimeAction *prev = action1;
+//    
+//    while(lines) {
+//        line = va_arg(params, NSDictionary*);
+//        if (line) {
+//            switch (((NSNumber*)[line objectForKey:@"type"]).integerValue) {
+//                case SearchSegLineTypeImg:      // wait for refactoring the code
+//                    
+//                    break;
+//                case SearchSegLineTypeText: {
+//                    
+//                    
+//                    }
+//                    break;
+//                default:
+//                    break;
+//            }
+//        }
+//        else
+//            break;
+//    }
+//    va_end(params);
+//}
+//
+//- (void)addTextLineWithArgs:(NSDictionary*)dic {
+//    CATextLayer* layer = [CATextLayer layer];
+//    layer.string = [dic objectForKey:@"text"];
+//    layer.contentsScale = 2.f;
+//    layer.fontSize = ((NSNumber*)[dic objectForKey:@"fontSize"]).floatValue;
+//    
+//}
+
+- (void)refreshItemTitle:(NSString*)title atIndex:(NSInteger)index {
+    id item = [self viewWithTag:index + 1];
+    if ([item isKindOfClass:[SearchSegTextTextItem class]]) {
+        ((SearchSegTextTextItem*)item).title = title;
+        
+    } else if ([item isKindOfClass:[SearchSegImgTextItem class]] || [item isKindOfClass:[SearchSegItem class]]) {
+    
+    }
+}
+
+- (void)addItemWithTitle:(NSString *)title andSubTitle:(NSString*)subTitle {
+    CGSize sz = [SearchSegTextTextItem preferredSize];
+    SearchSegTextTextItem* item = [[SearchSegTextTextItem alloc]initWithFrame:CGRectMake(0, 0, sz.width, sz.height)];
+    item.title = title;
+    item.subTitle = subTitle;
+    item.status = 0;
+    item.tag = [self getSegItemsCount] + 1;
+    item.isLayerHidden = _isLayerHidden;
+    item.select_font_color = _select_font_color;
+    item.font_color = _font_color;
+    
+    UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(segTextTextSelected:)];
+    [item addGestureRecognizer:tap];
+   
+    [self addSubview:item];
+}
+
 - (void)addItemWithTitle:(NSString *)title {
     CGSize sz = [SearchSegItem preferredSize];
     SearchSegItem* item = [[SearchSegItem alloc]initWithFrame:CGRectMake(0, 0, sz.width, sz.height)];
@@ -216,6 +285,16 @@
     UIView* tmp = gesture.view;
     
     for (SearchSegImgTextItem* iter in [self getSegItems]) {
+        iter.status = iter == tmp ? 1 : 0;
+    }
+    
+    [_delegate segValueChanged2:self];
+}
+
+- (void)segTextTextSelected:(UITapGestureRecognizer*)gesture {
+    UIView* tmp = gesture.view;
+    
+    for (SearchSegTextTextItem* iter in [self getSegItems]) {
         iter.status = iter == tmp ? 1 : 0;
     }
     

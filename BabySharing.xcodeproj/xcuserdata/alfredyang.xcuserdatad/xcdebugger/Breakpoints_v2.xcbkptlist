@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BabySharing/Controllers/ShareSide/PersonalCentre/PersonalCentreTmpViewController.m"
-            timestampString = "478696818.283604"
+            timestampString = "478762183.866648"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "447"
-            endingLineNumber = "447"
+            startingLineNumber = "449"
+            endingLineNumber = "449"
             landmarkName = "-followBtnSelected"
             landmarkType = "5">
          </BreakpointContent>

@@ -9,6 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "SearchSegDelegate.h"
 
+typedef enum : NSUInteger {
+    SearchSegLineTypeImg,
+    SearchSegLineTypeText,
+} SearchSegLineType;
+
 @interface SearchSegView2 : UIView
 
 @property (nonatomic, getter=getSegItems, readonly) NSArray* items;
@@ -25,7 +30,11 @@
 @property (nonatomic) CGFloat margin_between_items;
 
 - (NSString*)queryItemTitleAtIndex:(NSInteger)index;
+
+- (void)refreshItemTitle:(NSString*)title atIndex:(NSInteger)index;
+
 // title
+- (void)addItemWithTitle:(NSString *)title andSubTitle:(NSString*)subTitle;
 - (void)addItemWithTitle:(NSString *)title;
 - (void)removeItemAtIndex:(NSInteger)index;
 
