@@ -67,6 +67,7 @@
 		70EF02D21C22CE7A00DABCFC /* PostPublichViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EF02D11C22CE7A00DABCFC /* PostPublichViewController.m */; };
 		70F5014B1C23ADC2007769F4 /* PostPreview.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70F5014A1C23ADC2007769F4 /* PostPreview.storyboard */; };
 		70F771F81C86E5AA006AF176 /* UINavigationController+Retro.m in Sources */ = {isa = PBXBuildFile; fileRef = 70F771F71C86E5AA006AF176 /* UINavigationController+Retro.m */; };
+		A02154531C89387500791291 /* UIImage+fixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = A02154521C89387500791291 /* UIImage+fixOrientation.m */; };
 		A0423D291C84374400039991 /* ProgressLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A0423D281C84374400039991 /* ProgressLayer.m */; };
 		A0423D2F1C8449AE00039991 /* PointLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A0423D2E1C8449AE00039991 /* PointLayer.m */; };
 		A08AE9541C7E9C1A0029B660 /* libiconv.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A08AE9531C7E9C1A0029B660 /* libiconv.2.dylib */; };
@@ -477,6 +478,8 @@
 		70F5014A1C23ADC2007769F4 /* PostPreview.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PostPreview.storyboard; sourceTree = "<group>"; };
 		70F771F61C86E5AA006AF176 /* UINavigationController+Retro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+Retro.h"; sourceTree = "<group>"; };
 		70F771F71C86E5AA006AF176 /* UINavigationController+Retro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+Retro.m"; sourceTree = "<group>"; };
+		A02154511C89387500791291 /* UIImage+fixOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+fixOrientation.h"; sourceTree = "<group>"; };
+		A02154521C89387500791291 /* UIImage+fixOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+fixOrientation.m"; sourceTree = "<group>"; };
 		A0423D231C84253700039991 /* GPUImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GPUImage.framework; sourceTree = "<group>"; };
 		A0423D271C84374400039991 /* ProgressLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressLayer.h; sourceTree = "<group>"; };
 		A0423D281C84374400039991 /* ProgressLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressLayer.m; sourceTree = "<group>"; };
@@ -1270,6 +1273,8 @@
 				A0B7A7601C7C0B9100D78E6E /* Tools.m */,
 				70F771F61C86E5AA006AF176 /* UINavigationController+Retro.h */,
 				70F771F71C86E5AA006AF176 /* UINavigationController+Retro.m */,
+				A02154511C89387500791291 /* UIImage+fixOrientation.h */,
+				A02154521C89387500791291 /* UIImage+fixOrientation.m */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -3182,6 +3187,7 @@
 				EEAACD1F1B44E90400D05C0B /* SGActionView.m in Sources */,
 				70CC1C661C7C6BF20022B62E /* ConnectionOwner+CoreDataProperties.m in Sources */,
 				EEE94E181B74BDDD0011321A /* ProfileDetailController.m in Sources */,
+				A02154531C89387500791291 /* UIImage+fixOrientation.m in Sources */,
 				EEE94E261B74BE3B0011321A /* PersonalSettingController.mm in Sources */,
 				EED774D41BABF86D001C9B57 /* HomeViewController.m in Sources */,
 				EEAACCA41B44E90400D05C0B /* CVViewController2.m in Sources */,

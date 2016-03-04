@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <Photos/Photos.h>
+#import "UIImage+fixOrientation.h"
 
 @implementation AlbumModule {
     ALAssetsLibrary* assetsLibrary;
@@ -107,12 +108,12 @@
 + (void)getRealPhotoWithPHAsset:(PHAsset *)pHAsset block:(RealPhotoFindishBlock)block{
     static PHImageRequestID requestid = -1;
     PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
-    options.deliveryMode = PHImageRequestOptionsDeliveryModeFastFormat;
+    options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
     options.networkAccessAllowed = YES;
     [[PHImageManager defaultManager] cancelImageRequest:requestid];
     requestid = [[PHImageManager defaultManager] requestImageDataForAsset:pHAsset options:options resultHandler:^(NSData * _Nullable imageData, NSString * _Nullable dataUTI, UIImageOrientation orientation, NSDictionary * _Nullable info) {
         if (imageData != nil) {
-            block([UIImage imageWithData:imageData]);
+            block([[UIImage imageWithData:imageData] fixOrientation]);
         }
     }];
 }
