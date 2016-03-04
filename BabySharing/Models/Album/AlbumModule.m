@@ -108,8 +108,13 @@
 + (void)getRealPhotoWithPHAsset:(PHAsset *)pHAsset block:(RealPhotoFindishBlock)block{
     static PHImageRequestID requestid = -1;
     PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
-    options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
+    options.deliveryMode = PHImageRequestOptionsDeliveryModeFastFormat;
     options.networkAccessAllowed = YES;
+    options.progressHandler = ^(double progress, NSError *__nullable error, BOOL *stop, NSDictionary *__nullable info) {
+        if (!error) {
+            NSLog(@"MonkeyHengLog: %@ === %f", @"progress", progress);
+        }
+    };
     [[PHImageManager defaultManager] cancelImageRequest:requestid];
     requestid = [[PHImageManager defaultManager] requestImageDataForAsset:pHAsset options:options resultHandler:^(NSData * _Nullable imageData, NSString * _Nullable dataUTI, UIImageOrientation orientation, NSDictionary * _Nullable info) {
         if (imageData != nil) {
