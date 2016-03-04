@@ -76,7 +76,7 @@
     [self addSubview:tmp];
 }
 
-- (void)createColorfulLabelInRect:(CGRect)rect andTitle:(NSAttributedString*)title andTopMargin:(CGFloat)top {
+- (void)createColorfulLabelInRect:(CGRect)rect andTopMargin:(CGFloat)top {
     NSString * bundlePath_dongda = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle_dongda = [NSBundle bundleWithPath:bundlePath_dongda];
     
@@ -89,16 +89,44 @@
     UIButton* tmp = [[UIButton alloc]initWithFrame:CGRectMake(first_line_start_margin, top, width - AREA_CODE_WIDTH - 2 * INPUT_MARGIN, INPUT_TEXT_FIELD_HEIGHT)];
     
     [tmp setBackgroundImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_input_right" ofType:@"png"]] forState:UIControlStateNormal];
+   
+#define GENDER_ICON_WIDTH       18
+#define GENDER_ICON_HEIGHT      GENDER_ICON_WIDTH
     
-    UILabel* label = [[UILabel alloc]init];
-    label.attributedText = title;
-    label.font = font;
+    UILabel* label0 = [[UILabel alloc]init];
+    NSMutableAttributedString* str0 = [[NSMutableAttributedString alloc]initWithString:@"妈咪"];
+    [str0 addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:1.f green:0.4745 blue:0.4863 alpha:1.f] range:NSMakeRange(0, str0.length)];
+    label0.attributedText = str0;
+    label0.font = font;
 //    label.textColor = [UIColor whiteColor];
-    [label sizeToFit];
-    label.center = CGPointMake(AREA_CODE_WIDTH / 2, INPUT_TEXT_FIELD_HEIGHT / 2);
-    label.tag = -1;
-    [tmp addSubview:label];
+    [label0 sizeToFit];
+    label0.center = CGPointMake(TEXT_FIELD_LEFT_PADDING + GENDER_ICON_WIDTH + label0.frame.size.width / 2, INPUT_TEXT_FIELD_HEIGHT / 2);
+    label0.tag = -1;
+    [tmp addSubview:label0];
     
+    UIImage* female = [UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_female" ofType:@"png"]];
+    CALayer* layer0 = [CALayer layer];
+    layer0.contents = (id)female.CGImage;
+    layer0.frame = CGRectMake(TEXT_FIELD_LEFT_PADDING, (INPUT_TEXT_FIELD_HEIGHT - GENDER_ICON_HEIGHT) / 2, GENDER_ICON_WIDTH, GENDER_ICON_HEIGHT);
+    [tmp.layer addSublayer:layer0];
+
+    UILabel* label1 = [[UILabel alloc]init];
+    NSMutableAttributedString* str1 = [[NSMutableAttributedString alloc]initWithString:@"爸比暂不开放"];
+    [str1 addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithWhite:0.6078 alpha:1.f] range:NSMakeRange(0, str1.length)];
+    label1.attributedText = str1;
+    label1.font = font;
+//    label.textColor = [UIColor whiteColor];
+    [label1 sizeToFit];
+    label1.center = CGPointMake(TEXT_FIELD_LEFT_PADDING + GENDER_ICON_WIDTH + label1.frame.size.width / 2 + 42 + label0.frame.size.width + GENDER_ICON_WIDTH, INPUT_TEXT_FIELD_HEIGHT / 2);
+    label1.tag = -1;
+    [tmp addSubview:label1];
+
+    UIImage* male = [UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_male" ofType:@"png"]];
+    CALayer* layer1 = [CALayer layer];
+    layer1.contents = (id)male.CGImage;
+    layer1.frame = CGRectMake(TEXT_FIELD_LEFT_PADDING + GENDER_ICON_WIDTH + 42 + layer0.frame.size.width, (INPUT_TEXT_FIELD_HEIGHT - GENDER_ICON_HEIGHT) / 2, GENDER_ICON_WIDTH, GENDER_ICON_HEIGHT);
+    [tmp.layer addSublayer:layer1];
+
     [self addSubview:tmp];
 }
 
@@ -193,9 +221,7 @@
     name_text_field.delegate = self;
     
     [self createLabelInRect:rect andTitle:@"性别" andTopMargin:BASICMARGIN + INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN];
-    NSMutableAttributedString* str = [[NSMutableAttributedString alloc]initWithString:@"妈咪"];
-    [str addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(0, str.length)];
-    [self createColorfulLabelInRect:rect andTitle:[str copy] andTopMargin:BASICMARGIN + INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN];
+    [self createColorfulLabelInRect:rect andTopMargin:BASICMARGIN + INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN];
     
     [self createLabelInRect:rect andTitle:@"角色" andTopMargin:BASICMARGIN + 2 * (INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN)];
     tag_text_field = [self createInputAreaInRect:rect andTopMargin:BASICMARGIN + 2 * (INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN) andPlaceholder:@"填写你的角色标签" andPreString:[_delegate getPreRoleTag] andRightImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"dongda_next" ofType:@"png"]] andCallback:@selector(textFieldChanged:) andCancelBtn:NO];
