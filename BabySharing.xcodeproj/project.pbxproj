@@ -68,8 +68,8 @@
 		70F5014B1C23ADC2007769F4 /* PostPreview.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70F5014A1C23ADC2007769F4 /* PostPreview.storyboard */; };
 		70F771F81C86E5AA006AF176 /* UINavigationController+Retro.m in Sources */ = {isa = PBXBuildFile; fileRef = 70F771F71C86E5AA006AF176 /* UINavigationController+Retro.m */; };
 		A02154531C89387500791291 /* UIImage+fixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = A02154521C89387500791291 /* UIImage+fixOrientation.m */; };
-		A0423D291C84374400039991 /* ProgressLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A0423D281C84374400039991 /* ProgressLayer.m */; };
-		A0423D2F1C8449AE00039991 /* PointLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A0423D2E1C8449AE00039991 /* PointLayer.m */; };
+		A02154591C893A7200791291 /* PointLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A02154561C893A7200791291 /* PointLayer.m */; };
+		A021545A1C893A7200791291 /* ProgressLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A02154581C893A7200791291 /* ProgressLayer.m */; };
 		A08AE9541C7E9C1A0029B660 /* libiconv.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A08AE9531C7E9C1A0029B660 /* libiconv.2.dylib */; };
 		A09DF94E1C80440C00484FAB /* AlbumCollectionViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A09DF94D1C80440C00484FAB /* AlbumCollectionViewDelegate.m */; };
 		A09DF9511C8044C500484FAB /* PhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A09DF9501C8044C500484FAB /* PhotoCollectionViewCell.m */; };
@@ -480,11 +480,11 @@
 		70F771F71C86E5AA006AF176 /* UINavigationController+Retro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+Retro.m"; sourceTree = "<group>"; };
 		A02154511C89387500791291 /* UIImage+fixOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+fixOrientation.h"; sourceTree = "<group>"; };
 		A02154521C89387500791291 /* UIImage+fixOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+fixOrientation.m"; sourceTree = "<group>"; };
+		A02154551C893A7200791291 /* PointLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PointLayer.h; sourceTree = "<group>"; };
+		A02154561C893A7200791291 /* PointLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PointLayer.m; sourceTree = "<group>"; };
+		A02154571C893A7200791291 /* ProgressLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressLayer.h; sourceTree = "<group>"; };
+		A02154581C893A7200791291 /* ProgressLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressLayer.m; sourceTree = "<group>"; };
 		A0423D231C84253700039991 /* GPUImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GPUImage.framework; sourceTree = "<group>"; };
-		A0423D271C84374400039991 /* ProgressLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressLayer.h; sourceTree = "<group>"; };
-		A0423D281C84374400039991 /* ProgressLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressLayer.m; sourceTree = "<group>"; };
-		A0423D2D1C8449AE00039991 /* PointLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PointLayer.h; sourceTree = "<group>"; };
-		A0423D2E1C8449AE00039991 /* PointLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PointLayer.m; sourceTree = "<group>"; };
 		A08AE9531C7E9C1A0029B660 /* libiconv.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.2.dylib; path = /usr/lib/libiconv.2.dylib; sourceTree = "<absolute>"; };
 		A09DF94C1C80440C00484FAB /* AlbumCollectionViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumCollectionViewDelegate.h; sourceTree = "<group>"; };
 		A09DF94D1C80440C00484FAB /* AlbumCollectionViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumCollectionViewDelegate.m; sourceTree = "<group>"; };
@@ -1229,6 +1229,17 @@
 			path = TimeSearch;
 			sourceTree = "<group>";
 		};
+		A02154541C893A7200791291 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				A02154551C893A7200791291 /* PointLayer.h */,
+				A02154561C893A7200791291 /* PointLayer.m */,
+				A02154571C893A7200791291 /* ProgressLayer.h */,
+				A02154581C893A7200791291 /* ProgressLayer.m */,
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
 		A0423D221C84253700039991 /* libGPUImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -1849,10 +1860,6 @@
 				EEAACB061B44E90300D05C0B /* CVViewController2.h */,
 				EEAACB071B44E90300D05C0B /* CVViewController2.m */,
 				EEAACB081B44E90300D05C0B /* MovieNib.storyboard */,
-				A0423D271C84374400039991 /* ProgressLayer.h */,
-				A0423D281C84374400039991 /* ProgressLayer.m */,
-				A0423D2D1C8449AE00039991 /* PointLayer.h */,
-				A0423D2E1C8449AE00039991 /* PointLayer.m */,
 			);
 			path = Camera;
 			sourceTree = "<group>";
@@ -2152,6 +2159,7 @@
 		EEAACBBB1B44E90300D05C0B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A02154541C893A7200791291 /* Camera */,
 				70D15B161C5B64C9007AC9AB /* MJRefresh */,
 				EEA1F5371C15B96A009B8724 /* Found */,
 				EEFCDECC1BCB936500A53CAB /* Chat */,
@@ -3094,7 +3102,6 @@
 				EE262C991C1958F8008DCC4E /* DONNotificationDelegate.m in Sources */,
 				EEAACCE21B44E90400D05C0B /* QueryContent+ContextOpt.m in Sources */,
 				EEAACCCC1B44E90400D05C0B /* INTUSpringSolver.c in Sources */,
-				A0423D2F1C8449AE00039991 /* PointLayer.m in Sources */,
 				A0C4D8221C81FC7900F55B20 /* LocalTag+CoreDataProperties.m in Sources */,
 				EE26D7801C1EC70F00342E02 /* FoundSearchModel.m in Sources */,
 				EE0CEC551BDB13070016B6F4 /* ChooseAreaViewController.m in Sources */,
@@ -3125,6 +3132,7 @@
 				EE26D7771C1EBA2700342E02 /* PreviewTag+CoreDataProperties.m in Sources */,
 				EE6D6DB51B7B28A6004D29C8 /* WEPopoverContainerView.m in Sources */,
 				EEAACCD41B44E90400D05C0B /* CurrentToken+ContextOpt.m in Sources */,
+				A02154591C893A7200791291 /* PointLayer.m in Sources */,
 				70CC1C651C7C6BF20022B62E /* Followed.m in Sources */,
 				EEBFFC1D1B916A0F005AAE36 /* PersonalSettingCell.m in Sources */,
 				EE66B47D1BB3EEC600812F5F /* HomeNavigationController.m in Sources */,
@@ -3232,7 +3240,7 @@
 				EEAACCE11B44E90400D05C0B /* QueryComments.m in Sources */,
 				70D15B471C5B64C9007AC9AB /* MJRefreshHeader.m in Sources */,
 				EE5C7E4F1B511CC000104CAB /* AlbumViewController2.m in Sources */,
-				A0423D291C84374400039991 /* ProgressLayer.m in Sources */,
+				A021545A1C893A7200791291 /* ProgressLayer.m in Sources */,
 				EEBE1B6F1C17CA9400EAA9D2 /* DongDaTabBar.m in Sources */,
 				EEAACD411B44E90400D05C0B /* PhotoPreViewEditView.m in Sources */,
 				EE20BED41B6F430D00DE8455 /* OwnerQueryModel.m in Sources */,
