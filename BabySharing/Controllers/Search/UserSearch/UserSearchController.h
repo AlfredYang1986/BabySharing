@@ -18,5 +18,7 @@ typedef enum : NSUInteger {
 @interface UserSearchController : UIViewController
 
 @property (nonatomic) UserSearchType user_search_type;
+@property (nonatomic, strong) NSString* role_tag;
+
 @property (weak, nonatomic) UserSearchModel* um;
 @end

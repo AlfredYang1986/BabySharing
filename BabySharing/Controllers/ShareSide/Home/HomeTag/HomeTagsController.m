@@ -17,10 +17,10 @@
 #import "HomeViewController.h"
 #import "UserHomeViewDataDelegate.h"
 
-#define TAGED_USER_CELL                 0
-#define TAGED_RESULT_COUNT_CELL         1
+//#define TAGED_USER_CELL                 0
+#define TAGED_RESULT_COUNT_CELL         0
 
-#define TAGED_OFFSET                    2
+#define TAGED_OFFSET                    1
 
 #define PHOTO_PER_LINE                  3
 
@@ -94,12 +94,11 @@
 #define STATUS_HEIGHT               20
 #define NAV_BAR_HEIGHT              44
 #define TABVIEW_TOP_MARGIN          10
-    CALayer* line = [CALayer layer];
-    line.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.10].CGColor;
-//    line.borderColor = [UIColor redColor].CGColor;
-    line.borderWidth = 1.f;
-    line.frame = CGRectMake(0, STATUS_HEIGHT + NAV_BAR_HEIGHT + TABVIEW_TOP_MARGIN - 1, [UIScreen mainScreen].bounds.size.width, 1);
-    [self.view.layer addSublayer:line];
+//    CALayer* line = [CALayer layer];
+//    line.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.10].CGColor;
+//    line.borderWidth = 1.f;
+//    line.frame = CGRectMake(0, STATUS_HEIGHT + NAV_BAR_HEIGHT + TABVIEW_TOP_MARGIN - 1, [UIScreen mainScreen].bounds.size.width, 1);
+//    [self.view.layer addSublayer:line];
 }
 
 - (void)didPopControllerBtnSelected {
@@ -164,10 +163,11 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.row == TAGED_USER_CELL) {
-        return [FoundMoreFriendCell preferredHeight];
-        
-    } else if (indexPath.row == TAGED_RESULT_COUNT_CELL) {
+//    if (indexPath.row == TAGED_USER_CELL) {
+//        return [FoundMoreFriendCell preferredHeight];
+    
+//    } else
+    if (indexPath.row == TAGED_RESULT_COUNT_CELL) {
         return COUNT_CELL_CONTENT_HEIGHT + COUNT_CELL_MARGIN;
         
     } else {
@@ -179,20 +179,21 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    if (indexPath.row == TAGED_USER_CELL) {
-        FoundMoreFriendCell* cell = [tableView dequeueReusableCellWithIdentifier:@"tag users"];
-        
-        if (cell == nil) {
-            NSArray* nib = [[NSBundle mainBundle] loadNibNamed:@"FoundMoreFriendCell" owner:self options:nil];
-            cell = [nib firstObject];
-        }
-        
-        [cell setUserImages:recommend_users];
-        cell.des = @"最近有5个用户打过这个标签";
-        cell.isHiddenIcon = YES;
-        return cell;
-    
-    } else if (indexPath.row == TAGED_RESULT_COUNT_CELL) {
+//    if (indexPath.row == TAGED_USER_CELL) {
+//        FoundMoreFriendCell* cell = [tableView dequeueReusableCellWithIdentifier:@"tag users"];
+//        
+//        if (cell == nil) {
+//            NSArray* nib = [[NSBundle mainBundle] loadNibNamed:@"FoundMoreFriendCell" owner:self options:nil];
+//            cell = [nib firstObject];
+//        }
+//        
+//        [cell setUserImages:recommend_users];
+//        cell.des = @"最近有5个用户打过这个标签";
+//        cell.isHiddenIcon = YES;
+//        return cell;
+//    
+//    } else
+    if (indexPath.row == TAGED_RESULT_COUNT_CELL) {
         UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"defatult"];
         
         if (cell == nil) {

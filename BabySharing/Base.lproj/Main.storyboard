@@ -1021,7 +1021,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="IeB-6H-uaG" firstAttribute="top" secondItem="bhM-nC-JsR" secondAttribute="bottom" constant="10" id="ECD-xh-5ib"/>
+                            <constraint firstItem="IeB-6H-uaG" firstAttribute="top" secondItem="bhM-nC-JsR" secondAttribute="bottom" id="ECD-xh-5ib"/>
                             <constraint firstItem="IeB-6H-uaG" firstAttribute="leading" secondItem="r25-e5-lgC" secondAttribute="leadingMargin" constant="-16" id="H8g-9f-eTD"/>
                             <constraint firstAttribute="trailingMargin" secondItem="IeB-6H-uaG" secondAttribute="trailing" constant="-16" id="R2V-eC-RwX"/>
                             <constraint firstItem="fwt-m1-AVh" firstAttribute="top" secondItem="IeB-6H-uaG" secondAttribute="bottom" id="mJu-j3-kqC"/>
@@ -1039,7 +1039,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
         <!--Found View Controller-->
         <scene sceneID="bc8-cb-MU8">
             <objects>
-                <viewController id="HaM-A3-6vV" customClass="FoundViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="HaM-A3-6vV" customClass="FoundViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="99z-vN-zQQ"/>
                         <viewControllerLayoutGuide type="bottom" id="hvY-JV-hEP"/>
@@ -1052,6 +1052,10 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                                 <rect key="frame" x="46" y="143" width="427" height="324"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
+                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3bA-Ak-M4a">
+                                <rect key="frame" x="203" y="82" width="270" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -1072,6 +1076,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                     <navigationItem key="navigationItem" id="Jew-R0-GAN"/>
                     <connections>
                         <outlet property="queryView" destination="2nh-GQ-hM4" id="myG-aS-zc2"/>
+                        <outlet property="searchBar" destination="3bA-Ak-M4a" id="RzP-s8-CCH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tq6-OA-zCC" userLabel="First Responder" sceneMemberID="firstResponder"/>

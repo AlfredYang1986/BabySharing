@@ -27,7 +27,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *nextIcon;
 @property (weak, nonatomic) IBOutlet UILabel *resultCountLabel;
 
-@property (nonatomic) BOOL isScreenPhoto;
 @end
 
 @implementation FoundSearchResultCell
@@ -61,22 +60,6 @@
     // Configure the view for the selected state
 }
 
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    
-    if (_isScreenPhoto) {
-        for (int index = 0; index < RECOMMEND_COUNT; ++index) {
-            UIImageView* tmp = (UIImageView*)[self viewWithTag:-1 - index];
-            tmp.layer.cornerRadius = 22.5f;
-            tmp.clipsToBounds = YES;
-            tmp.frame = CGRectMake(0, 0, 25, 25);
-            
-            tmp.layer.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.3].CGColor;
-            tmp.layer.borderWidth = 1.f;
-        }
-    }
-}
-
 - (void)setUserPhotoImage:(NSArray*)img_arr {
     _isScreenPhoto = YES;
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
@@ -86,8 +69,11 @@
         NSDictionary* iter = [img_arr objectAtIndex:index];
         
         UIImageView* tmp = (UIImageView*)[self viewWithTag:-1 - index];
-        tmp.layer.cornerRadius = 3.f;
+        tmp.layer.cornerRadius = 22.5f;
         tmp.clipsToBounds = YES;
+        tmp.bounds = CGRectMake(0, 0, 25, 25);
+        tmp.layer.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.3].CGColor;
+        tmp.layer.borderWidth = 1.f;
         
         NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"default_user"] ofType:@"png"];
         NSString* photo_name = [iter objectForKey:@"screen_photo"];
