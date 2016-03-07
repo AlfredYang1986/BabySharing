@@ -59,7 +59,7 @@
     control_panes = [[NSMutableArray alloc]initWithCapacity:EFFECTS];
     CGFloat offset = _sg.frame.size.height + MARGIN;
     for (int index = 0; index < EFFECTS; ++index) {
-        UIView* tmp = [[UIView alloc]initWithFrame:CGRectMake(0, offset, width, width / 2 - offset)];
+        UIView* tmp = [[UIView alloc] initWithFrame:CGRectMake(0, offset, width, width / 2 - offset)];
         tmp.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.3];
         control_panes[index] = tmp;
         tmp.hidden = YES;

@@ -354,15 +354,10 @@
                                       for (int index = -1; index < 2; ++index) {
                                           ((UIView*)[queryViewLst objectAtIndex:index + 1]).frame = INTUInterpolateCGRect(((UIView*)[queryViewLst objectAtIndex:index + 1]).frame, CGRectMake(HEADER_MARGIN_TO_SCREEN + abs(index) * 4, CONTENT_START_POINT + index * (size.height + MARGIN_BETWEEN_CARD) - (index == -1 ? 28 : 0), size.width - abs(index) * 8, size.height), progress);
                                           [(UIView*)[queryViewLst objectAtIndex:index + 1] layoutSubviews];
-//                                          UIView* qv = ((ContentCardView*)[queryViewLst objectAtIndex:index + 1]).queryView;
-//                                          CALayer* shadow = ((ContentCardView*)[queryViewLst objectAtIndex:index + 1]).shadow;
-//                                          shadow.frame = INTUInterpolateCGRect(shadow.frame, CGRectMake(-4, -4, qv.frame.size.width + 8, qv.frame.size.height + 8), progress);
                                       }
                                   }
                                   completion:^(BOOL finished) {
-                                      // NOTE: When passing INTUAnimationOptionRepeat, this completion block is NOT executed at the end of each cycle. It will only run if the animation is canceled.
                                       NSLog(@"%@", finished ? @"Animation Completed" : @"Animation Canceled");
-                                      // self.animationID = NSNotFound;
                                       _isLoading = NO;
 
                                       UIView* head = [queryViewLst firstObject];
@@ -729,7 +724,6 @@
         cell.clipsToBounds = YES;
         [cell addSubview:tmp];
     }
-   
     tmp.queryView.tag = indexPath.row;
     
     return cell;

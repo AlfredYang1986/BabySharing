@@ -40,7 +40,8 @@
     CGFloat screen_width = [UIScreen mainScreen].bounds.size.width - _margin_left - _margin_right - _marign_between * (views_count + 1); //2 * BORDER_MODIFY;
     CGFloat step_width = screen_width / views_count;
     //      CGFloat height = rc.size.height;
-    CGFloat height = step_width; //[AlbumTableCell prefferCellHeight];
+    //      [AlbumTableCell prefferCellHeight];
+    CGFloat height = step_width;
     
     for (int index = 0; index < image_view.count; ++index) {
         [((UIView*)[image_view objectAtIndex:index]) removeFromSuperview];
@@ -52,15 +53,13 @@
         if (index > image_arr.count)
             continue;
         
-        AlbumGridCell* tmp = [[AlbumGridCell alloc]initWithFrame:CGRectMake(index * (step_width + _marign_between) + _marign_between, _marign_between, step_width, height)];
+        AlbumGridCell* tmp = [[AlbumGridCell alloc] initWithFrame:CGRectMake(index * (step_width + _marign_between) + _marign_between, _marign_between, step_width, height)];
         tmp.cell_cor_radius = _cell_cor_radius;
         tmp.grid_border_color = _grid_border_color;
         tmp.userInteractionEnabled = YES;
-        
-        UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageSubViewTaped:)];
+        UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageSubViewTaped:)];
         tap.numberOfTapsRequired = 1;
         [tmp addGestureRecognizer:tap];
-        
         [tmp setShowingPhotoWithName:[image_arr objectAtIndex:index]];
         tmp.row = row;
         tmp.col = index;
@@ -69,6 +68,7 @@
         if ([_delegate isSelectedAtIndex:iter]) {
             tmp.viewSelected = YES;
         }
+
         
         [image_view addObject:tmp];
         [self addSubview:tmp];
@@ -134,7 +134,6 @@
     }
     CGFloat screen_width = [UIScreen mainScreen].bounds.size.width - _margin_left - _margin_right;;
     CGFloat step_width = screen_width / views_count;
-//      CGFloat height = rc.size.height;
     CGFloat height = [AlbumTableCell prefferCellHeight];
 
     for (int index = 0; index < image_view.count; ++index) {
@@ -175,7 +174,7 @@
             
             ALAsset* at = [image_arr objectAtIndex:index - 1];
             UIImage* img = [UIImage imageWithCGImage:[at thumbnail]];
-            AlbumGridCell* tmp = [[AlbumGridCell alloc]initWithFrame:CGRectMake(index * step_width, 0, step_width, height)];
+            AlbumGridCell* tmp = [[AlbumGridCell alloc] initWithFrame:CGRectMake(index * step_width, 0, step_width, height)];
             tmp.grid_border_color = _grid_border_color;
             if ([[at valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
                 id duration = [at valueForProperty:ALAssetPropertyDuration];
@@ -206,7 +205,7 @@
             
             ALAsset* at = [image_arr objectAtIndex:index];
             UIImage* img = [UIImage imageWithCGImage:[at thumbnail]];
-            AlbumGridCell* tmp = [[AlbumGridCell alloc]initWithFrame:CGRectMake(index * step_width, 0, step_width, height)];
+            AlbumGridCell* tmp = [[AlbumGridCell alloc] initWithFrame:CGRectMake(index * step_width, 0, step_width, height)];
             tmp.grid_border_color = _grid_border_color;
             if ([[at valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
                 NSNumber* duration = [at valueForProperty:ALAssetPropertyDuration];
@@ -236,25 +235,27 @@
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     NSLog(@"dequeue table cell");
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-
     if (self != nil) {
-//        [self setUpContentViewWithImageURLs:nil];
         _grid_border_color = [UIColor whiteColor];
     }
-    
     return self;
 }
+
+//- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+//    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+//    if (self) {
+//        
+//    }
+//    return self;
+//}
 
 - (void)awakeFromNib {
     // Initialization code
     NSLog(@"awake from nib");
-//    [self setUpContentView];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 + (CGFloat)prefferCellHeight {
@@ -309,4 +310,5 @@
     [_delegate didSelectOneImageAtIndex:index];
     ((AlbumGridCell*)[image_view objectAtIndex:index]).viewSelected = YES;
 }
+
 @end

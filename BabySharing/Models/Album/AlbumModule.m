@@ -20,7 +20,7 @@
 + (void)enumAllPhotoWithBlock:(PhotoFindishBlock)block {
 
     PHFetchOptions *options = [[PHFetchOptions alloc] init];
-    options.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:YES]];
+    options.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:NO]];
     PHFetchResult *fetchResult = [PHAsset fetchAssetsWithOptions:options];
     dispatch_queue_t queue = dispatch_queue_create("getThumbnailImage", nil);
 //    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
@@ -53,13 +53,15 @@
     // 获取所有相册
     PHFetchOptions *allPhotosOptions = [[PHFetchOptions alloc] init];
     allPhotosOptions.predicate = [NSPredicate predicateWithFormat:@"mediaType = %d",PHAssetMediaTypeImage];
+    allPhotosOptions.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:NO]];
     // 所有照片集合
     PHFetchResult *allPhotos = [PHAsset fetchAssetsWithOptions:allPhotosOptions];
+    
     // 获取所有自定义相册
     PHFetchResult *topLevelUserCollections = [PHCollectionList fetchTopLevelUserCollectionsWithOptions:nil];
     NSMutableArray *albumArr = [NSMutableArray array];
     [albumArr addObject:allPhotos];
-    allPhotosOptions.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:YES]];
+    allPhotosOptions.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:NO]];
     for (PHCollection *album in topLevelUserCollections) {
         [albumArr addObject:album];
     }

@@ -15,5 +15,7 @@
 #import "ProfileViewDelegate.h"
 
 @interface PersonalCenterOwnerDelegate : NSObject <UITableViewDelegate, UITableViewDataSource, PersonalCenterCallBack>
+
 @property (nonatomic, weak) id<PersonalCenterProtocol, ProfileViewDelegate, AlbumTableCellDelegate> delegate;
+
 @end

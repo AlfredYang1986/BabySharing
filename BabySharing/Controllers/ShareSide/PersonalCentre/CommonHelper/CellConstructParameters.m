@@ -19,9 +19,22 @@
         _tableView = tb;
         _indexPath = path;
     }
-    
     return self;
 }
+
+
++ (instancetype)getInstance:(UITableView *)talbeView indexPath:(NSIndexPath *)indexPath {
+    
+    static CellConstructParameters *cellConstruct;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        cellConstruct = [[CellConstructParameters alloc] init];
+    });
+    cellConstruct.tableView = talbeView;
+    cellConstruct.indexPath = indexPath;
+    return cellConstruct;
+}
+
 @end
 
 

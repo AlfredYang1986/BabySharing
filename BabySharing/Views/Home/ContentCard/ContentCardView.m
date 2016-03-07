@@ -34,11 +34,6 @@
     _queryView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _queryView.scrollEnabled = NO;
 
-//    _queryView.delegate = datasource;
-//    _queryView.dataSource = datasource;
-    
-//    _queryView._shadow.borderColor = [UIColor lightGrayColor].CGColor;
-//    _queryView._shadow.borderWidth = 1.f;
     _queryView.layer.cornerRadius = 8.f;
     _queryView.clipsToBounds = NO;
    
@@ -48,13 +43,8 @@
     UIImage* img = [UIImage imageNamed:filepath];
     
     _shadow = [CALayer layer];
-//    _shadow.frame = CGRectMake(-4, -4, _queryView.frame.size.width + 8, _queryView.frame.size.height + 8);
     _shadow.contents = (id)img.CGImage;
     [self.layer addSublayer:_shadow];
-    
-//    for (UIView* a in _queryView.subviews) {
-//        [_queryView bringSubviewToFront:a];
-//    }
     
     [self bringSubviewToFront:_queryView];
     
@@ -75,9 +65,7 @@
     
     [CATransaction begin];
     [CATransaction setDisableActions:YES];
-//    _shadow.frame = CGRectMake(-4, -4, _queryView.frame.size.width + 8, _queryView.frame.size.height + 8);
     _shadow.frame = CGRectMake(0, 0, w + 8, h + 8);
     [CATransaction commit];
-//    _shadow.frame = self.bounds;
 }
 @end

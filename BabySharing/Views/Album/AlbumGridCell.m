@@ -113,7 +113,7 @@
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
     NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"User"] ofType:@"png"];
-    
+    self.backgroundColor = [UIColor redColor];
     UIImage* userImg = [TmpFileStorageModel enumImageWithName:photo_name withDownLoadFinishBolck:^(BOOL success, UIImage *user_img) {
         if (success) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -126,7 +126,6 @@
             NSLog(@"down load owner image %@ failed", photo_name);
         }
     }];
-    
     if (userImg == nil) {
         userImg = [UIImage imageNamed:filePath];
     }

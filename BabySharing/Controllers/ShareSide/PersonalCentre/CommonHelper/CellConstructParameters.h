@@ -13,12 +13,20 @@
  * construct cell
  */
 @interface CellConstructParameters : NSObject
-@property (nonatomic, weak, readonly) UITableView* tableView;
-@property (nonatomic, weak, readonly) NSIndexPath* indexPath;
-@property (nonatomic, strong) UITableViewCell* cell;
+//@property (nonatomic, weak, readonly) UITableView *tableView;
+//@property (nonatomic, weak, readonly) NSIndexPath *indexPath;
+@property (nonatomic, weak) UITableView *tableView;
+@property (nonatomic, weak) NSIndexPath *indexPath;
+@property (nonatomic, strong) UITableViewCell *cell;
 
-- (id)initWithTableView:(UITableView*)tb atIndex:(NSIndexPath*)path;
+- (id)initWithTableView:(UITableView *)tb atIndex:(NSIndexPath *)path;
+
+// 我推荐写成单例
++ (instancetype)getInstance:(UITableView *)talbeView indexPath:(NSIndexPath *)indexPath;
+
 @end
+
+
 
 /**
  * cell height
@@ -32,4 +40,6 @@
  */
 @interface CellCountParameters : NSObject 
 @property (nonatomic) NSInteger count;
+
+
 @end

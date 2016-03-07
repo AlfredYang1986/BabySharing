@@ -13,8 +13,6 @@
 #import "ProfileDetailController.h"
 
 #import "PersonalCenterOwnerDelegate.h"
-//#import "ProfileUserHeaderCell.h"
-//#import "PersonalCenterDefines.h"
 
 #import "RemoteInstance.h"
 #import "ModelDefines.h"
@@ -64,7 +62,6 @@
 @implementation PersonalCentreTmpViewController {
     NSDictionary* dic_profile_details;
     NSInteger current_seg_index;
-//    UIImageView* bkView;
     
     ProfileOverView* head_view;
     SearchSegView2* search_seg;
@@ -107,7 +104,7 @@
     [_queryView registerNib:[UINib nibWithNibName:@"ProfileOverView" bundle:[NSBundle mainBundle]] forHeaderFooterViewReuseIdentifier:@"Profile Overview"];
     
     if (!_current_delegate) {
-        self.current_delegate = [[PersonalCenterOwnerDelegate alloc]init];
+        self.current_delegate = [[PersonalCenterOwnerDelegate alloc] init];
     }
 
     _queryView.showsVerticalScrollIndicator = FALSE;
@@ -123,7 +120,7 @@
     [self createSegamentCtr];
     [self createFakeNaviBar];
     
-    _queryView.frame = CGRectMake(QUERY_VIEW_MARGIN_LEFT, QUERY_VIEW_MARGIN_UP + HEADER_VIEW_HEIGHT + SEG_CTR_HEIGHT - 2, [UIScreen mainScreen].bounds.size.width - QUERY_VIEW_MARGIN_LEFT - QUERY_VIEW_MARGIN_RIGHT, [UIScreen mainScreen].bounds.size.height - QUERY_VIEW_MARGIN_UP - QUERY_VIEW_MARGIN_BOTTOM - HEADER_VIEW_HEIGHT);
+    _queryView.frame = CGRectMake(QUERY_VIEW_MARGIN_LEFT, QUERY_VIEW_MARGIN_UP + HEADER_VIEW_HEIGHT + SEG_CTR_HEIGHT - 2, [UIScreen mainScreen].bounds.size.width - QUERY_VIEW_MARGIN_LEFT - QUERY_VIEW_MARGIN_RIGHT, [UIScreen mainScreen].bounds.size.height - QUERY_VIEW_MARGIN_UP - QUERY_VIEW_MARGIN_BOTTOM - HEADER_VIEW_HEIGHT - 100);
     _queryView.backgroundColor = [UIColor whiteColor];
     _queryView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view bringSubviewToFront:_queryView];
@@ -158,14 +155,9 @@
     [search_seg addItemWithTitle:@"0" andSubTitle:@"推出"];
     search_seg.delegate = self;
     search_seg.isLayerHidden = YES;
-    
-//    [search_seg addItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:@"profile_grid" ofType:@"png"]] andSelectImage:[UIImage imageNamed:[resourceBundle pathForResource:@"profile_grid_selected" ofType:@"png"]]];
-//    [search_seg addItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:@"profile_tag" ofType:@"png"]] andSelectImage:[UIImage imageNamed:[resourceBundle pathForResource:@"profile_tag_selected" ofType:@"png"]]];
-//    [search_seg addItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:@"profile_forward" ofType:@"png"]] andSelectImage:[UIImage imageNamed:[resourceBundle pathForResource:@"profile_forward_selected" ofType:@"png"]]];
 
     search_seg.selectedIndex = 0;
     search_seg.margin_between_items = 0.40 * [UIScreen mainScreen].bounds.size.width;
-//    [bkView addSubview:search_seg];
     
     semaphore_om = dispatch_semaphore_create(0);
     semaphore_opm = dispatch_semaphore_create(0);
@@ -189,9 +181,6 @@
 - (void)resetProfileData {
     [head_view setOwnerPhoto:[self getPhotoName]];
     [head_view setLoation:[self getLocation]];
-//    [head_view setFriendsCount:[self getFriendsCount]];
-//    [head_view setShareCount:[self getSharedCount]];
-//    [head_view setCycleCount:[self getCycleCount]];
     [head_view setPersonalSign:[self getSign]];
     [head_view setNickName:[self getNickName]];
     [head_view setRoleTag:[self getRoleTag]];
@@ -225,7 +214,6 @@
         CALayer * layer = [CALayer layer];
         layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
         layer.frame = CGRectMake(0, 10, 25, 25);
-//        layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
         [barBtn.layer addSublayer:layer];
         [barBtn addTarget:self action:@selector(didSelectSettingBtn) forControlEvents:UIControlEventTouchDown];
         [fake_bar addSubview:barBtn];
@@ -505,7 +493,6 @@
     [hv.delegate setSelectIndex:index];
     hv.nav_title = [self getNickName];
     hv.current_index = index;
-//    [self.navigationController pushViewController:hv animated:YES];
     [self.navigationController pushViewControllerRetro:hv];
 }
 
@@ -518,11 +505,7 @@
 
 #pragma mark -- search seg view delegate
 - (void)segValueChanged2:(SearchSegView2*)seg {
-    //    if (seg.selectedIndex == 0) {
-    //
-    //    } else {
-    //
-    //    }
     [_queryView reloadData];
 }
+
 @end

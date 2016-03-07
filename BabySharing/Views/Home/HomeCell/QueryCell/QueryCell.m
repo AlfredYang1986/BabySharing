@@ -128,24 +128,16 @@
     UIImage *image = [UIImage imageNamed:[yyResourceBundle pathForResource:[NSString stringWithFormat:@"playvideo"] ofType:@"png"]];
     [_imgView addSubview:_playImageView];
     _playImageView.image = image;
-    [_playImageView sizeToFit];
+    CGPoint center = _playImageView.center;
+    _playImageView.frame = CGRectMake(0, 0, 30, 30);
+    _playImageView.center = center;
     
     _imgView.userInteractionEnabled = YES;
     UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didClickImage:)];
     [_imgView addGestureRecognizer:tap];
 
-//    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
-//    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-//    NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"home-func-btn"] ofType:@"png"];
-
-//    _funcBtn = [[UIButton alloc]init];
-//    [_funcBtn addTarget:self action:@selector(didSelectFuncBtn) forControlEvents:UIControlEventTouchUpInside];
-//    [_bkgView addSubview:_funcBtn];
-//    [_funcBtn setImage:[UIImage imageNamed:filePath] forState:UIControlStateNormal];
-
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-//    NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"home-func-btn"] ofType:@"png"];
   
     /***********************************************************************************************/
     // funcActArea

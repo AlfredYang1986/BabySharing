@@ -56,4 +56,7 @@
 - (AlbumGridCell*)queryGridCellByIndex:(NSInteger)index;
 
 - (void)selectedAtIndex:(NSInteger)index;
+
+// 张恒写的以下是
+
 @end

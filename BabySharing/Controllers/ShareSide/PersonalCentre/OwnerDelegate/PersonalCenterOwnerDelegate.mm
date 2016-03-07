@@ -70,7 +70,7 @@
     AlbumTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AlbumTableViewCell"];
     
     if (cell == nil) {
-        cell = [[AlbumTableCell alloc]init];
+        cell = [[AlbumTableCell alloc] init];
     }
     
     cell.margin_left = 10.5f;
