@@ -15,7 +15,11 @@
 #import "HomeTagsController.h"
 #import "FoundSearchController.h"
 
+#import "UserSearchController.h"
+#import "UINavigationController+Retro.h"
+
 #import "FoundSearchTagDeleage.h"
+#import "AppDelegate.h"
 
 @implementation FoundSearchRoleTagDelegate
 
@@ -55,14 +59,17 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     FoundSearchResultCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+   
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"UserSearch" bundle:nil];
+    UserSearchController* svc = [storyboard instantiateViewControllerWithIdentifier:@"UserSearch"];
+    svc.role_tag = cell.tag_name;
+    svc.user_search_type = UserSearchTypeRoleTag;
     
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    HomeTagsController* svc = [storyboard instantiateViewControllerWithIdentifier:@"TagSearch"];
-    svc.tag_name = cell.tag_name;
-    svc.tag_type = cell.tag_type.integerValue;
+    AppDelegate* app = [UIApplication sharedApplication].delegate;
+    svc.um = app.um;
     
     //    [self.navigationController pushViewController:svc animated:YES];
-    [_controller.navigationController pushViewController:svc animated:YES];
+    [_controller.navigationController pushViewControllerRetro:svc];
 }
 
 - (UITableViewCell*)queryHotTagCellInTableView:(UITableView*)tableView {

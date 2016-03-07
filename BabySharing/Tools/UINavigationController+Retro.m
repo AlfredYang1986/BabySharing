@@ -12,7 +12,7 @@
 
 - (void)pushViewControllerRetro:(UIViewController *)viewController {
     CATransition *transition = [CATransition animation];
-    transition.duration = 0.25;
+    transition.duration = 0.30;
     transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     transition.type = kCATransitionPush;
     transition.subtype = kCATransitionFromRight;
@@ -23,7 +23,7 @@
 
 - (void)popViewControllerRetro {
     CATransition *transition = [CATransition animation];
-    transition.duration = 0.25;
+    transition.duration = 0.30;
     transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     transition.type = kCATransitionPush;
     transition.subtype = kCATransitionFromLeft;

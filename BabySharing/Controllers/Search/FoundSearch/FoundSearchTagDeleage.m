@@ -13,7 +13,9 @@
 #import "FoundHotTagsCell.h"
 #import "FoundSearchResultCell.h"
 #import "HomeTagsController.h"
+#import "UserSearchController.h"
 #import "FoundSearchController.h"
+#import "UINavigationController+Retro.h"
 
 @implementation FoundSearchTagDeleage
 
@@ -53,14 +55,16 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     FoundSearchResultCell* cell = [tableView cellForRowAtIndexPath:indexPath];
-    
+   
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     HomeTagsController* svc = [storyboard instantiateViewControllerWithIdentifier:@"TagSearch"];
     svc.tag_name = cell.tag_name;
     svc.tag_type = cell.tag_type.integerValue;
-    
-//    [self.navigationController pushViewController:svc animated:YES];
-    [_controller.navigationController pushViewController:svc animated:YES];
+        
+    //    [self.navigationController pushViewController:svc animated:YES];
+    [_controller.navigationController pushViewControllerRetro:svc];
+
+
 }
 
 - (UITableViewCell*)queryHotTagCellInTableView:(UITableView*)tableView {

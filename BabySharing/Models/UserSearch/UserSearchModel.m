@@ -48,7 +48,26 @@
 }
 
 - (void)queryUserSearchWithRoleTag:(NSString*)role_tag andFinishBlock:(userSearchFinishBlock)block {
+    NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
     
+    [dic setValue:_delegate.lm.current_auth_token forKey:@"auth_token"];
+    [dic setValue:_delegate.lm.current_user_id forKey:@"user_id"];
+    [dic setValue:role_tag forKey:@"role_tag"];
+    
+    NSError * error = nil;
+    NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
+    
+    NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:USER_RECOMMAND_USERS_ROLE_TAG]];
+    
+    if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
+        NSArray* reVal = [result objectForKey:@"recommandUsers"];
+        NSLog(@"search result: %@", reVal);
+        _userSearchPreviewResult = reVal;
+        block(YES, nil);
+        
+    } else {
+        block(NO, nil);
+    }
 }
 
 - (void)queryUserSearchWithScreenName:(NSString*)screen_name andFinishBlock:(userSearchPostFinishBlock)block {

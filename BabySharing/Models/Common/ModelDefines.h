@@ -127,6 +127,7 @@ static const NSString* kUserPostOwnerConnectionsFriends = @"kUserPostOwnerConnec
 #define USER_SEARCH_ROLE_TAG                [USER_SEARCH_HOST_DOMAIN stringByAppendingString:@"queryUsersWithRoleTag"]
 #define USER_SEARCH_POST                    [USER_SEARCH_HOST_DOMAIN stringByAppendingString:@"queryUsersPosts"]
 #define USER_SEARCH_SCREEN_NAME             [USER_SEARCH_HOST_DOMAIN stringByAppendingString:@"queryUsersWithScreenName"]
+#define USER_RECOMMAND_USERS_ROLE_TAG       [USER_SEARCH_HOST_DOMAIN stringByAppendingString:@"queryRecommandUsersWithRoleTag"]
 
 #pragma mark -- MESSAGE SNEDBOX
 //#define MESSAGES_HOST_DOMAIN_SENDBOX        [HOST_DOMAIN_SENDBOX stringByAppendingString:@"messages/"]

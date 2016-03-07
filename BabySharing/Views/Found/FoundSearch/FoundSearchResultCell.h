@@ -12,6 +12,7 @@
 
 @property (strong, nonatomic) NSString* tag_name;
 @property (strong, nonatomic) NSNumber* tag_type;
+@property (nonatomic) BOOL isScreenPhoto;
 
 + (CGFloat)preferredHeight;
 - (void)setUserPhotoImage:(NSArray*)img_arr;

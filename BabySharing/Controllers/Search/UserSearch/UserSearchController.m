@@ -26,6 +26,7 @@
 
 @synthesize um = _um;
 @synthesize user_search_type = _user_search_type;
+@synthesize role_tag = _role_tag;
 
 @synthesize queryView = _queryView;
 
@@ -42,7 +43,7 @@
     _queryView.separatorStyle = UITableViewCellSeparatorStyleNone;
    
     UILabel* label = [[UILabel alloc]init];
-    label.text = @"认识更多的朋友";
+    label.text = _role_tag == nil ? @"认识更多的朋友" : _role_tag;
     label.textColor = [UIColor colorWithWhite:0.5059 alpha:1.f];
     label.font = [UIFont systemFontOfSize:16.f];
     [label sizeToFit];
@@ -54,16 +55,19 @@
     NSString* filepath = [resourceBundle pathForResource:@"dongda_back" ofType:@"png"];
     CALayer * layer = [CALayer layer];
     layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
-    layer.frame = CGRectMake(-12, 0, 25, 25);
+    layer.frame = CGRectMake(0, 0, 25, 25);
     //    layer.position = CGPointMake(barBtn.frame.size.width / 2, barBtn.frame.size.height / 2);
     [barBtn.layer addSublayer:layer];
     [barBtn addTarget:self action:@selector(didPopViewControllerBtn) forControlEvents:UIControlEventTouchDown];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn];
     self.view.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
-    
-    [self asyncQueryData];
-    
+   
+    if (_user_search_type == UserSearchTypeMoreFriends) {
+        [self asyncQueryData];
+    } else {
+        [self asyncQueryDataWithRoleTag];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -83,6 +87,17 @@
     dispatch_queue_t ap = dispatch_queue_create("user query queue", nil);
     dispatch_async(ap, ^{
         [_um queryUserSearchWithFinishBlock:^(BOOL success, NSArray *result) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [_queryView reloadData];
+            });
+        }];
+    });
+}
+
+- (void)asyncQueryDataWithRoleTag {
+    dispatch_queue_t ap = dispatch_queue_create("user query queue", nil);
+    dispatch_async(ap, ^{
+        [_um queryUserSearchWithRoleTag:_role_tag andFinishBlock:^(BOOL success, NSArray *result) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [_queryView reloadData];
             });

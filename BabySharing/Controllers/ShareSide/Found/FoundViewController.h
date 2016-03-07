@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface FoundViewController : UIViewController
-
+- (void)scrollDidScroll:(UIScrollView*)scrollView;
 @end

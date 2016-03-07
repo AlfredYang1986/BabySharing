@@ -62,7 +62,7 @@
     _seg.frame = CGRectMake(0, 0, width, SEG_BAR_HEIGHT);
     _seg.backgroundColor = [UIColor whiteColor];
     
-    _queryView.scrollEnabled = NO;
+//    _queryView.scrollEnabled = NO;
     _queryView.backgroundColor = [UIColor whiteColor]; //[UIColor colorWithWhite:0.9490 alpha:1.f];
     self.view.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
     

@@ -30,14 +30,16 @@
 #import "FoundSearchController.h"
 #import "UserSearchController.h"
 
+#import "FoundViewController.h"
+
 //#define FOUND_REF_INDEX             -2
 //#define FOUND_IMG_INDEX             -1
-#define FOUND_SEARCH_INDEX          0
-#define FOUND_USER_PHOTO_INDEX      1
-#define FOUND_TITLE_INDEX           2
-#define FOUND_CONTENT_INDEX         3
+//#define FOUND_SEARCH_INDEX          0
+#define FOUND_USER_PHOTO_INDEX      0
+#define FOUND_TITLE_INDEX           1
+#define FOUND_CONTENT_INDEX         2
 
-#define FOUND_SECTION_COUNT         4
+#define FOUND_SECTION_COUNT         3
 
 #define PHOTO_PER_LINE  3
 
@@ -95,7 +97,7 @@
     NSLog(@"selet row");
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (indexPath.section == 1 && indexPath.row == 0) {
+    if (indexPath.section == 0 && indexPath.row == 0) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"UserSearch" bundle:nil];
         UserSearchController* svc = [storyboard instantiateViewControllerWithIdentifier:@"UserSearch"];
         AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
@@ -140,9 +142,10 @@
 //    } else if (index == FOUND_IMG_INDEX) {
 //        return [FoundPCGCell preferdHeight];
 //    } else
-    if (index == FOUND_SEARCH_INDEX) {
-        return 44;
-    }else if (index == FOUND_USER_PHOTO_INDEX) {
+//    if (index == FOUND_SEARCH_INDEX) {
+//        return 44;
+//    }else
+    if (index == FOUND_USER_PHOTO_INDEX) {
 //        CGFloat width = [UIScreen mainScreen].bounds.size.width - 32;
 //        return width / 5;
         return [FoundMoreFriendCell preferredHeight];
@@ -158,9 +161,10 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     NSInteger index = indexPath.section;
-    if (index == FOUND_SEARCH_INDEX) {
-        return [self querySearchCellWithTabelView:tableView];
-    }else if (index == FOUND_USER_PHOTO_INDEX) {
+//    if (index == FOUND_SEARCH_INDEX) {
+//        return [self querySearchCellWithTabelView:tableView];
+//    }else
+    if (index == FOUND_USER_PHOTO_INDEX) {
         return [self queryRecommendUserCellWithTableView:tableView];
     } else if (index == FOUND_TITLE_INDEX) {
         return [self queryMotherChoiceCellWithTableView:tableView];
@@ -174,9 +178,10 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    if (section == FOUND_SEARCH_INDEX) {
-        return 10;
-    }else if (section == FOUND_USER_PHOTO_INDEX) {
+//    if (section == FOUND_SEARCH_INDEX) {
+//        return 10;
+//    }else
+    if (section == FOUND_USER_PHOTO_INDEX) {
         return 10;
     } else if (section == FOUND_TITLE_INDEX) {
         return 0;
@@ -205,9 +210,10 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    if (section == FOUND_SEARCH_INDEX) {
-        return 1;
-    }else if (section == FOUND_USER_PHOTO_INDEX) {
+//    if (section == FOUND_SEARCH_INDEX) {
+//        return 1;
+//    }else
+    if (section == FOUND_USER_PHOTO_INDEX) {
         return 1;
     } else if (section == FOUND_TITLE_INDEX) {
         return 1;
@@ -361,7 +367,7 @@
 }
 
 #pragma mark -- scroll view delegate
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 //    NSLog(@"scrolling ... ");
     // 假设偏移表格高度的20%进行刷新
 //    if (!_isLoading) { // 判断是否处于刷新状态，刷新中就不执行
@@ -395,8 +401,8 @@
 //        
 //        // move and change
 //    }
-    
-}
+//    
+//}
 
 - (void)queryUserDataAsync {
     dispatch_queue_t aq = dispatch_queue_create("query new user", nil);
@@ -440,7 +446,7 @@
     AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
     [hv.delegate pushExistingData:app.qm.querydata];
     [hv.delegate setSelectIndex:index];
-    hv.nav_title = @"辣妈的选择";
+    hv.nav_title = @"发现更多内容";
 //    hv.nav_title = @"Mother's Choice";
     [_container.navigationController pushViewController:hv animated:YES];
 }
@@ -455,5 +461,11 @@
     FoundSearchController* svc = [storyboard instantiateViewControllerWithIdentifier:@"FoundSearch"];
     [_container.navigationController pushViewController:svc animated:NO];
     return NO;
+}
+
+#pragma mark -- scroll view delegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [_container scrollDidScroll:scrollView];
+
 }
 @end
