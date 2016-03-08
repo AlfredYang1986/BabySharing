@@ -60,7 +60,6 @@
 @property (weak, nonatomic, readonly) QueryModel* qm;
 @property (nonatomic) BOOL isLoading;
 
-@property (weak, nonatomic) IBOutlet UITableView *foundView;
 @end
 
 @implementation HomeViewController {
@@ -81,14 +80,11 @@
     UITableView* queryView;
 }
 
-//@synthesize queryView = _queryView;
 @synthesize current_auth_token = _current_auth_token;
 @synthesize current_user_id = _current_user_id;
 @synthesize qm = _qm;
 @synthesize isLoading = _isLoading;
 @synthesize delegate = _delegate;
-
-//@synthesize foundView = _foundView;
 
 @synthesize isPushed = _isPushed;
 @synthesize nav_title = _nav_title;
@@ -169,7 +165,7 @@
             __unsafe_unretained UITableView *tableView = queryView;
             
             // 下拉刷新
-            tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
                 [_delegate collectData:^(NSArray *data) {
                     [queryView reloadData];
                     [tableView.mj_header endRefreshing];
@@ -177,7 +173,6 @@
             }];
             
             // 设置自动切换透明度(在导航栏下面自动隐藏)
-//            UIImage* img = [UIImage imageNamed:[resourceBundle pathForResource:@"home_refresh" ofType:@"gif"]];
             tableView.mj_header.automaticallyChangeAlpha = YES;
             
             // 上拉刷新
@@ -714,7 +709,7 @@
     UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"defatult"];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"default"];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"default"];
     }
     
     ContentCardView* tmp = [cell viewWithTag:-101];
@@ -724,6 +719,7 @@
         cell.clipsToBounds = YES;
         [cell addSubview:tmp];
     }
+    
     tmp.queryView.tag = indexPath.row;
     
     return cell;
@@ -733,22 +729,11 @@
     if (queryView.mj_header.state == MJRefreshStateRefreshing || queryView.mj_footer.state == MJRefreshStateRefreshing) {
         return;
     }
-    
-//    CGFloat step_length = [QueryHeader preferredHeight] + [QueryCell preferredHeightWithDescription:@"Any Word"] + HEADER_MARGIN_TO_SCREEN + 2;
-//    CGFloat height = [UIScreen mainScreen].bounds.size.height - 64 - 49;
-//    NSInteger step = (scrollView.contentOffset.y + height) / step_length;
-//    [scrollView setContentOffset:CGPointMake(0, step_length * (step - 1)) animated:YES];
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-    
     if (queryView.mj_header.state == MJRefreshStateRefreshing || queryView.mj_footer.state == MJRefreshStateRefreshing) {
         return;
     }
-
-//    CGFloat step_length = [QueryHeader preferredHeight] + [QueryCell preferredHeightWithDescription:@"Any Word"] + HEADER_MARGIN_TO_SCREEN + 2;
-//    CGFloat height = [UIScreen mainScreen].bounds.size.height - 64 - 49;
-//    NSInteger step = (scrollView.contentOffset.y + height) / step_length;
-//    [scrollView setContentOffset:CGPointMake(0, step_length * (step - 1)) animated:YES];
 }
 @end

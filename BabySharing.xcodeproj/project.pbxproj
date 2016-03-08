@@ -68,6 +68,7 @@
 		70EF02D21C22CE7A00DABCFC /* PostPublichViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EF02D11C22CE7A00DABCFC /* PostPublichViewController.m */; };
 		70F5014B1C23ADC2007769F4 /* PostPreview.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70F5014A1C23ADC2007769F4 /* PostPreview.storyboard */; };
 		70F771F81C86E5AA006AF176 /* UINavigationController+Retro.m in Sources */ = {isa = PBXBuildFile; fileRef = 70F771F71C86E5AA006AF176 /* UINavigationController+Retro.m */; };
+		A011A62B1C8D352100553B80 /* LengthTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = A011A62A1C8D352100553B80 /* LengthTextField.m */; };
 		A02154531C89387500791291 /* UIImage+fixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = A02154521C89387500791291 /* UIImage+fixOrientation.m */; };
 		A02154591C893A7200791291 /* PointLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A02154561C893A7200791291 /* PointLayer.m */; };
 		A021545A1C893A7200791291 /* ProgressLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A02154581C893A7200791291 /* ProgressLayer.m */; };
@@ -497,6 +498,8 @@
 		70F5014A1C23ADC2007769F4 /* PostPreview.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PostPreview.storyboard; sourceTree = "<group>"; };
 		70F771F61C86E5AA006AF176 /* UINavigationController+Retro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+Retro.h"; sourceTree = "<group>"; };
 		70F771F71C86E5AA006AF176 /* UINavigationController+Retro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+Retro.m"; sourceTree = "<group>"; };
+		A011A6291C8D352100553B80 /* LengthTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LengthTextField.h; sourceTree = "<group>"; };
+		A011A62A1C8D352100553B80 /* LengthTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LengthTextField.m; sourceTree = "<group>"; };
 		A02154511C89387500791291 /* UIImage+fixOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+fixOrientation.h"; sourceTree = "<group>"; };
 		A02154521C89387500791291 /* UIImage+fixOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+fixOrientation.m"; sourceTree = "<group>"; };
 		A02154551C893A7200791291 /* PointLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PointLayer.h; sourceTree = "<group>"; };
@@ -1282,6 +1285,15 @@
 				70E06F871C4F989700B740CD /* SearchAddTimeDelegate.m */,
 			);
 			path = TimeSearch;
+			sourceTree = "<group>";
+		};
+		A011A6281C8D32EC00553B80 /* CustomeView */ = {
+			isa = PBXGroup;
+			children = (
+				A011A6291C8D352100553B80 /* LengthTextField.h */,
+				A011A62A1C8D352100553B80 /* LengthTextField.m */,
+			);
+			path = CustomeView;
 			sourceTree = "<group>";
 		};
 		A02154541C893A7200791291 /* Camera */ = {
@@ -2256,6 +2268,7 @@
 		EEAACBBB1B44E90300D05C0B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A011A6281C8D32EC00553B80 /* CustomeView */,
 				A02154541C893A7200791291 /* Camera */,
 				70D15B161C5B64C9007AC9AB /* MJRefresh */,
 				EEA1F5371C15B96A009B8724 /* Found */,
@@ -3258,6 +3271,7 @@
 				A06649671C89A2B90043FF07 /* SDWebImageDownloaderOperation.m in Sources */,
 				70C75B5B1C50B5E000E7587A /* DongDaSearchBar2.m in Sources */,
 				EEAACCEB1B44E90400D05C0B /* TmpFileStorageModel.m in Sources */,
+				A011A62B1C8D352100553B80 /* LengthTextField.m in Sources */,
 				EEBE1B811C17CB4E00EAA9D2 /* FoundMoreFriendCell.m in Sources */,
 				EE90C9871BFC1C68002D5D1D /* MainHomeViewDataDelegate.m in Sources */,
 				EEBE1B881C17CB4E00EAA9D2 /* FoundSearchResultCell.m in Sources */,
@@ -3585,7 +3599,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = BS.BabySharing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -3625,7 +3639,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = BS.BabySharing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

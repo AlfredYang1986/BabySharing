@@ -45,11 +45,6 @@
 - (BOOL)collectData:(SyncDataCallBack)block {
     data = nil;
     [_qm refreshQueryDataByUser:_lm.current_user_id withToken:_lm.current_auth_token withFinishBlock:^{
-//        CGRect tmp = rc;
-//        rc.origin.y = rc.origin.y - 44;
-//      [_queryView setFrame:rc];
-//        [_queryView reloadData];
-//        [self moveViewFromRect:tmp toRect:rc];
         block(self.data);
     }];
     return YES;

@@ -130,17 +130,16 @@
     [self addSubview:tmp];
 }
 
-- (UITextField*)createInputAreaInRect:(CGRect)rect andTopMargin:(CGFloat)top andPlaceholder:(NSString*)placeholder andPreString:(NSString*)defaultString andRightImage:(UIImage*)img andCallback:(SEL)cb andCancelBtn:(BOOL)bCancel {
+- (UITextField *)createInputAreaInRect:(CGRect)rect andTopMargin:(CGFloat)top andPlaceholder:(NSString*)placeholder andPreString:(NSString*)defaultString andRightImage:(UIImage*)img andCallback:(SEL)cb andCancelBtn:(BOOL)bCancel {
     CGFloat width = rect.size.width;
     CGFloat first_line_start_margin = INPUT_MARGIN;
     first_line_start_margin = INPUT_MARGIN + AREA_CODE_WIDTH;
     
-    UIFont* font = [UIFont systemFontOfSize:14.f];
-    NSString * bundlePath_dongda = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
+    UIFont *font = [UIFont systemFontOfSize:14.f];
+    NSString *bundlePath_dongda = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle_dongda = [NSBundle bundleWithPath:bundlePath_dongda];
     
-//    UITextField* phone_area = [[UITextField alloc]initWithFrame:CGRectMake(first_line_start_margin, BASICMARGIN, width - AREA_CODE_WIDTH - 2 * INPUT_MARGIN, INPUT_TEXT_FIELD_HEIGHT)];
-    UITextField* phone_area = [[UITextField alloc]initWithFrame:CGRectMake(first_line_start_margin, top, width - AREA_CODE_WIDTH - 2 * INPUT_MARGIN, INPUT_TEXT_FIELD_HEIGHT)];
+    UITextField *phone_area = [[UITextField alloc]initWithFrame:CGRectMake(first_line_start_margin, top, width - AREA_CODE_WIDTH - 2 * INPUT_MARGIN, INPUT_TEXT_FIELD_HEIGHT)];
     [phone_area setBackground:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_input_right" ofType:@"png"]]];
     phone_area.font = font;
     
@@ -154,10 +153,8 @@
     phone_area.placeholder = placeholder;
     [phone_area setValue:[UIColor colorWithWhite:0.6078 alpha:0.50] forKeyPath:@"_placeholderLabel.textColor"];
     phone_area.textColor = [UIColor colorWithWhite:0.2902 alpha:1.f];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:cb name:UITextFieldTextDidChangeNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChanged:) name:UITextFieldTextDidChangeNotification object:nil];
     phone_area.delegate = self;
-//    phone_area.keyboardType = UIKeyboardTypeNumberPad;
     phone_area.clearButtonMode = UITextFieldViewModeWhileEditing;
    
     if (bCancel) {

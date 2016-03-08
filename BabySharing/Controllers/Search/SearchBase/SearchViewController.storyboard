@@ -15,22 +15,22 @@
                         <viewControllerLayoutGuide type="bottom" id="hiL-pe-EbI"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="CuT-eT-Xz4">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="zik-Aa-pFK" customClass="DongDaSearchBar2">
-                                <rect key="frame" x="0.0" y="64" width="600" height="53"/>
+                                <rect key="frame" x="-4" y="64" width="383" height="53"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="53" id="Fhe-Qk-9B7"/>
                                 </constraints>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="F3R-Q6-v2I">
-                                <rect key="frame" x="0.0" y="127" width="600" height="473"/>
+                                <rect key="frame" x="0.0" y="127" width="375" height="540"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gq5-Eu-ehM">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
+                                <rect key="frame" x="-4" y="0.0" width="383" height="64"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="GrI-5S-B3s"/>
@@ -39,26 +39,29 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="F3R-Q6-v2I" firstAttribute="leading" secondItem="CuT-eT-Xz4" secondAttribute="leadingMargin" constant="-20" id="2pd-7R-a3P"/>
+                            <constraint firstItem="F3R-Q6-v2I" firstAttribute="leading" secondItem="CuT-eT-Xz4" secondAttribute="leading" id="0gR-mX-awe"/>
+                            <constraint firstAttribute="trailing" secondItem="F3R-Q6-v2I" secondAttribute="trailing" id="3Uc-1Z-C7h"/>
                             <constraint firstItem="gq5-Eu-ehM" firstAttribute="leading" secondItem="CuT-eT-Xz4" secondAttribute="leadingMargin" constant="-20" id="JJR-Cv-ZpV"/>
                             <constraint firstItem="zik-Aa-pFK" firstAttribute="top" secondItem="CuT-eT-Xz4" secondAttribute="topMargin" constant="64" id="LwC-oW-ZGp"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="F3R-Q6-v2I" secondAttribute="trailing" constant="-20" id="QW9-Wr-p0K"/>
+                            <constraint firstItem="hiL-pe-EbI" firstAttribute="top" secondItem="F3R-Q6-v2I" secondAttribute="bottom" id="TTL-zk-5cW"/>
                             <constraint firstItem="gq5-Eu-ehM" firstAttribute="top" secondItem="CuT-eT-Xz4" secondAttribute="topMargin" id="U8W-Aq-RAN"/>
+                            <constraint firstItem="F3R-Q6-v2I" firstAttribute="top" secondItem="zik-Aa-pFK" secondAttribute="bottom" constant="10" id="UOe-X3-Nso"/>
                             <constraint firstItem="zik-Aa-pFK" firstAttribute="leading" secondItem="CuT-eT-Xz4" secondAttribute="leadingMargin" constant="-20" id="Xem-kC-dsT"/>
                             <constraint firstItem="hiL-pe-EbI" firstAttribute="top" secondItem="F3R-Q6-v2I" secondAttribute="bottom" id="Zsp-is-vqA"/>
                             <constraint firstAttribute="trailingMargin" secondItem="zik-Aa-pFK" secondAttribute="trailing" constant="-20" id="cdf-hX-14d"/>
                             <constraint firstItem="zik-Aa-pFK" firstAttribute="top" secondItem="gq5-Eu-ehM" secondAttribute="bottom" id="fu3-FP-CFo"/>
                             <constraint firstAttribute="trailingMargin" secondItem="gq5-Eu-ehM" secondAttribute="trailing" constant="-20" id="hYI-aI-Ptd"/>
                             <constraint firstItem="F3R-Q6-v2I" firstAttribute="top" secondItem="zik-Aa-pFK" secondAttribute="bottom" id="iK1-CX-SfW"/>
-                            <constraint firstItem="F3R-Q6-v2I" firstAttribute="top" secondItem="zik-Aa-pFK" secondAttribute="bottom" constant="10" id="xGN-hx-aPk"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="LwC-oW-ZGp"/>
                                 <exclude reference="iK1-CX-SfW"/>
+                                <exclude reference="Zsp-is-vqA"/>
                             </mask>
                         </variation>
                     </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="bkView" destination="gq5-Eu-ehM" id="Qag-Bo-tyj"/>
                         <outlet property="queryView" destination="F3R-Q6-v2I" id="yrd-fT-wuM"/>
@@ -78,22 +81,22 @@
                         <viewControllerLayoutGuide type="bottom" id="W8b-LG-Pi7"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="zJq-Ig-buW">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="mGM-A0-pwx" customClass="DongDaSearchBar2">
-                                <rect key="frame" x="0.0" y="64" width="600" height="53"/>
+                                <rect key="frame" x="-4" y="64" width="383" height="53"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="53" id="qUV-jB-VuX"/>
                                 </constraints>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Yjq-kx-miH">
-                                <rect key="frame" x="0.0" y="127" width="600" height="473"/>
+                                <rect key="frame" x="-4" y="127" width="383" height="540"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ftK-xq-xte">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
+                                <rect key="frame" x="-4" y="0.0" width="383" height="64"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="ZlJ-7C-4sO"/>
@@ -114,6 +117,7 @@
                             <constraint firstItem="ftK-xq-xte" firstAttribute="leading" secondItem="zJq-Ig-buW" secondAttribute="leadingMargin" constant="-20" id="nCM-Ag-cb7"/>
                         </constraints>
                     </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="bkView" destination="ftK-xq-xte" id="fit-Fn-Z3E"/>
                         <outlet property="queryView" destination="Yjq-kx-miH" id="KNG-T5-Kpe"/>
@@ -133,22 +137,22 @@
                         <viewControllerLayoutGuide type="bottom" id="S04-RC-1V8"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="m4u-4f-h7b">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qWa-mo-CTc">
-                                <rect key="frame" x="0.0" y="127" width="600" height="473"/>
+                                <rect key="frame" x="-4" y="127" width="383" height="540"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="US9-rw-gke">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
+                                <rect key="frame" x="-4" y="0.0" width="383" height="64"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="FMB-Lw-trR"/>
                                 </constraints>
                             </view>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="xbe-4I-05E" customClass="DongDaSearchBar2">
-                                <rect key="frame" x="0.0" y="64" width="600" height="53"/>
+                                <rect key="frame" x="-4" y="64" width="383" height="53"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="53" id="M5H-H0-aPc"/>
                                 </constraints>
@@ -177,6 +181,7 @@
                             </mask>
                         </variation>
                     </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="bkView" destination="US9-rw-gke" id="zIQ-Ul-IMD"/>
                         <outlet property="queryView" destination="qWa-mo-CTc" id="Ar1-UE-CbH"/>

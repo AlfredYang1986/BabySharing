@@ -433,19 +433,6 @@
     req.message = message;
     req.scene = WXSceneSession;
     [WXApi sendReq:req];
-    
-//    WXMediaMessage *message = [WXMediaMessage message];
-//    [message setThumbImage:[Tools OriginImage:img scaleToSize:CGSizeMake(100, 100)]];
-//    // 缩略图
-//    WXImageObject *imageObject = [WXImageObject object];
-//    imageObject.imageData = UIImagePNGRepresentation(img);
-//    message.mediaObject = imageObject;
-//    
-//    SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
-//    req.bText = NO;
-//    req.message = message;
-//    req.scene = WXSceneSession;
-//    [WXApi sendReq:req];
 }
 
 - (void)postContentOnFriendShipWithText:(NSString *)text andImage:(UIImage *)img {
@@ -455,7 +442,6 @@
     WXImageObject *imageObject = [WXImageObject object];
     imageObject.imageData = UIImagePNGRepresentation(img);
     message.mediaObject = imageObject;
-    
     SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
     req.bText = NO;
     req.message = message;

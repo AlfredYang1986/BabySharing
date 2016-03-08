@@ -81,9 +81,9 @@
 		<string>tencentapi.qq.reqContent</string>
 		<string>tencentapi.qzone.reqContent</string>
 		<string>sinaweibohd</string>
-	    <string>sinaweibo</string>
-	    <string>weibosdk</string>
-	    <string>weibosdk2.5</string>
+		<string>sinaweibo</string>
+		<string>weibosdk</string>
+		<string>weibosdk2.5</string>
 	</array>
 	<key>LSHasLocalizedDisplayName</key>
 	<true/>

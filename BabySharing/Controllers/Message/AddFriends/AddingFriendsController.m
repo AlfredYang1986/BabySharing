@@ -152,6 +152,7 @@
     if (_current_delegate == delegate) {
         [_queryView reloadData];
     }
+    
 }
 
 #pragma mark -- search bar delegate

@@ -334,20 +334,18 @@
 
 - (IBAction)didConfirm {
 
+    if (inputView.screen_name.length == 0 || inputView.role_tag.length == 0) {
+        [[[UIAlertView alloc] initWithTitle:@"通知" message:@"您的名称或者角色没有输入，请输入" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil] show];
+        return;
+    }
+
+    
     NSString* auth_token = [_login_attr objectForKey:@"auth_token"];
     NSString* user_id = [_login_attr objectForKey:@"user_id"];
     
     NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
-    
-//    if (_isSNSLogIn) {
-//        [dic setValue:[inputView getInputTags] forKey:@"role_tag"];
-//        [dic setValue:inputView.role_tag forKey:@"role_tag"];
-//    } else {
-//        [dic setValue:[inputView getInputName] forKey:@"screen_name"];
-//        [dic setValue:[inputView getInputTags] forKey:@"role_tag"];
-        [dic setValue:inputView.screen_name forKey:@"screen_name"];
-        [dic setValue:inputView.role_tag forKey:@"role_tag"];
-//    }
+    [dic setValue:inputView.screen_name forKey:@"screen_name"];
+    [dic setValue:inputView.role_tag forKey:@"role_tag"];
 
     [dic setValue:auth_token forKey:@"auth_token"];
     [dic setValue:user_id forKey:@"user_id"];
@@ -389,11 +387,9 @@
 - (void)didEditRoleTag {
     NSLog(@"Start input tags");
     [inputView endInputName];
-//    [self performSegueWithIdentifier:@"SeachRoleTags" sender:nil];
-    
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SearchViewController" bundle:nil];
     SearchViewController* svc = [storyboard instantiateViewControllerWithIdentifier:@"Search"];
-    SearchRoleTagDelegate* sd = [[SearchRoleTagDelegate alloc]init];
+    SearchRoleTagDelegate* sd = [[SearchRoleTagDelegate alloc] init];
     sd.delegate = svc;
     sd.actions = self;
     svc.isShowsSearchIcon = NO;

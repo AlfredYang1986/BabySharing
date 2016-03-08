@@ -176,12 +176,10 @@ typedef void(^queryRoleTagFinishBlock)(BOOL success, NSString* msg, NSArray* res
         header = [[FoundSearchHeader alloc]initWithReuseIdentifier:@"hot role header"];
     }
     
-    header.headLabell.text = @"热门角色";
-//    header.headLabell.textColor = [UIColor colorWithWhite:0.3059 alpha:1.f];
+    header.headLabell.text = @"选择或者添加一个你的角色";
     header.headLabell.textColor = [UIColor colorWithWhite:0.2902 alpha:1.f];
     header.headLabell.font = [UIFont systemFontOfSize:14.f];
-        
-//    header.backgroundView = [[UIImageView alloc] initWithImage:[SearchRoleTagDelegate imageWithColor:[UIColor colorWithWhite:0.1098 alpha:1.f] size:header.bounds.size alpha:1.0]];
+    
     header.backgroundView = [[UIImageView alloc] initWithImage:[SearchRoleTagDelegate imageWithColor:[UIColor whiteColor] size:header.bounds.size alpha:1.0]];
     return header;
 }

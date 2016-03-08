@@ -395,7 +395,7 @@
                 [movie_list addObject:dis];
                 dis = nil;
                 take_btn.enabled = YES;
-                isRecording = false;
+                isRecording   = false;
             });
         }];
     }

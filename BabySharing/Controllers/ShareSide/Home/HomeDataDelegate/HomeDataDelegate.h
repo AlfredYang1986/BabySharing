@@ -27,8 +27,8 @@ typedef void(^currentIndexBlock)(NSInteger index);
 - (void)AsyncCollectData:(AsyncDataCallBack)block;
 - (void)AsyncAppendData:(AsyncDataCallBack)block;
 - (NSInteger)count;
-- (QueryContent*)queryItemAtIndex:(NSInteger)index;
-- (NSArray*)data; // TODO: need to delete
+- (QueryContent *)queryItemAtIndex:(NSInteger)index;
+- (NSArray *)data; // TODO: need to delete
 
 @optional
 - (void)pushExistingData:(NSArray*)ed;

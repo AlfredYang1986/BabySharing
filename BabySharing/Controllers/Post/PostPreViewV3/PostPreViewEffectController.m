@@ -200,7 +200,6 @@
         [f_bar addItemWithTitle:@"滤镜"];
         f_bar.margin_between_items = 80;
         f_bar.selectedIndex = 0;
-
     } else {
         // error
     }   
@@ -210,29 +209,13 @@
     /**
      * function area
      */
-    function_dic = [[NSMutableDictionary alloc]init];
+    function_dic = [[NSMutableDictionary alloc] init];
 
     adapter = [[PostEffectAdapter alloc]init];
     adapter.delegate = self;
     adapter.content_parent_view = self.view;
-//    CGFloat prefered_height = [UIScreen mainScreen].bounds.size.height - height - FUNC_BAR_HEIGHT;
     adapter.movie_url = _editing_movie;
     [self segValueChanged2:f_bar];
-    
-//    if (_type == PostPreViewPhote) {
-//        [self segValueChanged2:f_bar];
-//
-//    } else if (_type == PostPreViewMovie) {
-//      
-//        adapter.movie_url = _editing_movie;
-//        UIView* tmp = [adapter getFunctionViewByTitle:@"滤镜" andType:_type andPreferedHeight:prefered_height];
-//        tmp.frame = CGRectMake(0, height + FUNC_BAR_HEIGHT, tmp.frame.size.width, tmp.frame.size.height);
-//        [function_dic setValue:tmp forKey:@"滤镜"];
-//        
-//        [self.view addSubview:tmp];
-//    } else {
-//        // error
-//    }
     /***************************************************************************************/
    
     /***************************************************************************************/
@@ -258,12 +241,8 @@
             [mainContentView.layer addSublayer:avPlayerLayer];
         }
         
-//        [player.currentItem removeObserver:self forKeyPath:@"status"];
         
         AVPlayerItem* tmp = [AVPlayerItem playerItemWithURL:_editing_movie];
-//        [tmp addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];// 监听status属性
-        //        [tmp addObserver:self forKeyPath:@"loadedTimeRanges" options:NSKeyValueObservingOptionNew context:nil];// 监听loadedTimeRanges属性
-//        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(moviePlayDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:tmp];
         [player replaceCurrentItemWithPlayerItem:tmp];
         
         player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
@@ -277,13 +256,6 @@
         AVPlayerItem* playerItem = player.currentItem;
         if (playerItem.status == AVPlayerStatusReadyToPlay) {
             NSLog(@"AVPlayerStatusReadyToPlay");
-            //            CMTime duration = self.playerItem.duration;// 获取视频总长度
-            //            CGFloat totalSecond = playerItem.duration.value / playerItem.duration.timescale;// 转换成秒
-            //            _totalTime = [self convertTime:totalSecond];// 转换成播放时间
-            //            [self customVideoSlider:duration];// 自定义UISlider外观
-            //            NSLog(@"movie total duration:%f",CMTimeGetSeconds(duration));
-            //            [self monitoringPlayback:self.playerItem];// 监听播放状态
-            
             [player seekToTime:kCMTimeZero completionHandler:^(BOOL finished) {
                 [player play];
             }];
@@ -301,7 +273,6 @@
     }];
 }
 
-//- (UIButton*)addFunctionBarBtnWithTitle:(NSString*)title andCallBack:(SEL)callBack andRect:(CGRect)bounds andCenter:(CGPoint)center {
 - (UIButton*)addFunctionBarBtnWithTitle:(NSString*)title andImage:(UIImage*)img andCallBack:(SEL)callBack andRect:(CGRect)bounds andCenter:(CGPoint)center {
     UIButton* f_btn = [[UIButton alloc]initWithFrame:bounds];
     
@@ -309,11 +280,8 @@
         [f_btn setTitle:title forState:UIControlStateNormal];
         [f_btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     } else {
-//        f_btn.backgroundColor = [UIColor redColor];
         CALayer* il = [CALayer layer];
-//        il.frame = CGRectMake(0, 0, bounds.size.width / 3 * 2, bounds.size.height/ 3 * 2);
         il.frame = CGRectMake(0, 0, 25, 25);
-//        il.position = CGPointMake(bounds.size.width / 2, il.frame.size.height / 2);
         il.position = CGPointMake(bounds.size.width / 2, bounds.size.height / 3);
     
         il.contents = (id)img.CGImage;
@@ -386,8 +354,6 @@
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
-    //UIStatusBarStyleDefault = 0 黑色文字，浅色背景时使用
-    //UIStatusBarStyleLightContent = 1 白色文字，深色背景时使用
 }
 
 - (BOOL)prefersStatusBarHidden {
@@ -610,15 +576,6 @@
         svc.delegate = sd;
         
     }
-//    else {
-//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"PostPreview" bundle:nil];
-//        PhotoAddTagController* addTagController = [storyboard instantiateViewControllerWithIdentifier:@"AddTags"];
-//        addTagController.tagImg = tag_img;
-//        addTagController.type = tag_type;
-//        addTagController.delegate = self;
-//        
-//        [self.navigationController pushViewController:addTagController animated:YES];       
-//    }
 }
 
 - (void)pasteWithImage:(UIImage*)img {
@@ -764,7 +721,7 @@
 }
 
 #pragma mark -- search seg delegate
-- (void)segValueChanged2:(SearchSegView2*)s {
+- (void)segValueChanged2:(SearchSegView2 *)s {
    
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     CGFloat height = FAKE_NAVIGATION_BAR_HEIGHT + width; //width * aspectRatio;

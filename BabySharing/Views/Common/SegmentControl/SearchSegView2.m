@@ -207,7 +207,7 @@
 
 - (void)addItemWithTitle:(NSString *)title {
     CGSize sz = [SearchSegItem preferredSize];
-    SearchSegItem* item = [[SearchSegItem alloc]initWithFrame:CGRectMake(0, 0, sz.width, sz.height)];
+    SearchSegItem* item = [[SearchSegItem alloc] initWithFrame:CGRectMake(0, 0, sz.width, sz.height)];
     item.title = title;
     item.status = 0;
     item.tag = [self getSegItemsCount] + 1;

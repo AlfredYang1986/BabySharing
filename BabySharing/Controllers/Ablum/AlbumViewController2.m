@@ -860,14 +860,18 @@
 - (void)didSelectCell:(UITableViewCell *)cell {
     DropDownItem *tmp = (DropDownItem *)cell;
     if ([tmp.album isKindOfClass:[PHFetchResult class]]) {
+        [dropDownView setTitle:@"所有照片" forState:UIControlStateNormal];
         [self enumPhotoAblumByAlbum:(PHFetchResult *)tmp.album];
     } else if([tmp.album isKindOfClass:[PHCollection class]]){
+        PHAssetCollection *album = (PHAssetCollection *)tmp.album;
+        [dropDownView setTitle:album.localizedTitle forState:UIControlStateNormal];
         PHFetchOptions *allPhotosOptions = [[PHFetchOptions alloc] init];
         allPhotosOptions.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:YES]];
         PHFetchResult *fetchResult = [PHAsset fetchAssetsInAssetCollection:(PHAssetCollection *)tmp.album options:allPhotosOptions];
         [self enumPhotoAblumByAlbum:fetchResult];
     }
 //    [self enumPhotoAblumByAlbumName:tmp.album];
+    
     // 主页面下滑
 }
 

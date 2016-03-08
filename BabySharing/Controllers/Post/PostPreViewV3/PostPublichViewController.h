@@ -14,5 +14,7 @@
 @property (nonatomic, strong) NSArray* already_taged;
 @property (nonatomic, strong) UIImage *share_img;
 @property (nonatomic, weak) NSURL* movie_url;
+// 封面--》服务器没有接口
+@property (nonatomic, weak) UIImage *coverImage;
 @property (nonatomic) PostPreViewType type;
 @end
