@@ -70,7 +70,7 @@
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
    
     UIImage* img = [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"default_user"] ofType:@"png"]];
-    _loginImgBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, SCREEN_PHOTO_WIDTH, SCREEN_PHOTO_HEIGHT)];
+    _loginImgBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_PHOTO_WIDTH, SCREEN_PHOTO_HEIGHT)];
     [_loginImgBtn setBackgroundImage:img forState:UIControlStateNormal];
     _loginImgBtn.layer.cornerRadius = _loginImgBtn.frame.size.width / 2;
     _loginImgBtn.clipsToBounds = YES;
@@ -80,7 +80,7 @@
     _loginImgBtn.layer.borderWidth = 3.f;
     _loginImgBtn.layer.borderColor = [UIColor colorWithWhite:1.f alpha:0.30].CGColor;
     // 添加动作选择头像
-    [_loginImgBtn addTarget:self action:@selector(didSelectImgBtn) forControlEvents:UIControlEventTouchUpInside];
+//    [_loginImgBtn addTarget:self action:@selector(didSelectImgBtn) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:_loginImgBtn];
     [self.view bringSubviewToFront:_loginImgBtn];
@@ -302,7 +302,7 @@
 }
 
 - (IBAction)didSelectCreateNewAccount {
-    NSDictionary* tmp = [[NSDictionary alloc]init];
+    NSDictionary* tmp = [[NSDictionary alloc] init];
     if ([_lm sendCreateNewUserWithPhone:[_login_attr objectForKey:@"phoneNo"] toResult:&tmp]) {
         [self performSegueWithIdentifier:@"bindNewAccountSegue" sender:tmp];
     }

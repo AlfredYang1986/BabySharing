@@ -9,7 +9,6 @@
 #import "NicknameInputViewController.h"
 #import "LoginToken+ContextOpt.h"
 #import "INTUAnimationEngine.h"
-//#import "SearchUserTagsController.h"
 #import "SearchViewController.h"
 #import "SearchRoleTagDelegate.h"
 #import "NickNameInputView.h"
@@ -56,17 +55,10 @@
     NickNameInputView* inputView;
     NSURL* user_img_url;
     
-//    UIView* mother_view;
-//    UIButton* mother_btn;
-//    UIView* father_view;
-//    UIButton* father_btn;
-
     UIButton * user_private_btn;
     OBShapedButton* tick_btn;
-    
-    
+
     UIButton *loginImgBtn;
-//    UIImageView* loginImgBtn;
 }
 
 //@synthesize loginImgBtn = _loginImgBtn;
@@ -125,7 +117,7 @@
     /***********************************************************************************************************************/
     // input view
 //    inputView = [[NickNameInputView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    inputView = [[NickNameInputView alloc]init];
+    inputView = [[NickNameInputView alloc] init];
     inputView.delegate = self;
     [inputView setUpWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     inputView.center = CGPointMake(SCREEN_WIDTH / 2, SCREEN_PHOTO_TOP_MARGIN + SCREEN_PHOTO_HEIGHT + INPUT_VIEW_2_SCREEN_PHOTO_MARGIN + inputView.frame.size.height / 2);
@@ -301,11 +293,11 @@
 //}
 
 - (void)asyncGetUserImage {
+    
     UIImage* img = [TmpFileStorageModel enumImageWithName:[_login_attr objectForKey:@"screen_photo"] withDownLoadFinishBolck:^(BOOL success, UIImage* download_img) {
         if (success) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [loginImgBtn setBackgroundImage:download_img forState:UIControlStateNormal];
-//                loginImgBtn.image = download_img;
                 NSLog(@"change img success");
             });
         } else {
@@ -313,11 +305,26 @@
         }
     }];
     if (img) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [loginImgBtn setBackgroundImage:img forState:UIControlStateNormal];
-//            loginImgBtn.backgroundColor = [UIColor redColor];
-        });
+        [loginImgBtn setBackgroundImage:img forState:UIControlStateNormal];
     }
+    
+//    UIImage* img = [TmpFileStorageModel enumImageWithName:[_login_attr objectForKey:@"screen_photo"] withDownLoadFinishBolck:^(BOOL success, UIImage* download_img) {
+//        if (success) {
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [loginImgBtn setBackgroundImage:download_img forState:UIControlStateNormal];
+////                loginImgBtn.image = download_img;
+//                NSLog(@"change img success");
+//            });
+//        } else {
+//            NSLog(@"down load image %@ failed", [_login_attr objectForKey:@"screen_photo"]);
+//        }
+//    }];
+//    if (img) {
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [loginImgBtn setBackgroundImage:img forState:UIControlStateNormal];
+////            loginImgBtn.backgroundColor = [UIColor redColor];
+//        });
+//    }
 }
 
 - (void)userPrivacyBtnSelected {
@@ -358,7 +365,7 @@
         [LoginToken unbindTokenInContext:_lm.doc.managedObjectContext WithPhoneNum:phoneNo];
         LoginToken* token = [LoginToken enumLoginUserInContext:_lm.doc.managedObjectContext withUserID:user_id];
         [_lm setCurrentUser:token];
-        [_lm.doc.managedObjectContext save:nil];
+        [_lm.doc.managedObjectContext save:nil];        
         [[NSNotificationCenter defaultCenter] postNotificationName:@"login success" object:nil];
     } else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"set nick name error" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
@@ -401,7 +408,9 @@
     [self didConfirm];
 }
 
-- (NSString*)getPreScreenName {
+
+
+- (NSString *)getPreScreenName {
     NSString* name = [_login_attr objectForKey:@"name"];
     NSString* screen_name = [_login_attr objectForKey:@"screen_name"];
     
@@ -410,7 +419,7 @@
     else return name;
 }
 
-- (NSString*)getPreRoleTag {
+- (NSString *)getPreRoleTag {
     return [_login_attr objectForKey:@"role_tag"];
 }
 
@@ -497,7 +506,7 @@
 
 #pragma mark -- UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(nullable NSDictionary<NSString *,id> *)editingInfo {
-    
+    [picker dismissViewControllerAnimated:YES completion:nil];
     dispatch_queue_t aq = dispatch_queue_create("weibo profile img queue", nil);
     dispatch_async(aq, ^{
         /**
@@ -511,7 +520,7 @@
             /**
              * 2. change img_name in the server
              */
-            NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
+            NSMutableDictionary* dic = [[NSMutableDictionary alloc] init];
             [dic setValue:[_lm getCurrentAuthToken] forKey:@"auth_token"];
             [dic setValue:[_lm getCurrentUserID] forKey:@"user_id"];
             [dic setValue:img_name forKey:@"screen_photo"];

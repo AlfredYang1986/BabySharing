@@ -11,6 +11,7 @@
 #import "TmpFileStorageModel.h"
 #import "PersonalSettingController.h"
 #import "OBShapedButton.h"
+#import "Define.h"
 
 @interface SettingCell : UITableViewCell
 

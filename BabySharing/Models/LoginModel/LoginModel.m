@@ -170,10 +170,15 @@
 //    NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:@"http://192.168.0.104:8888/login/authConfirm"]];
     NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:[AUTH_HOST_DOMAIN stringByAppendingString:AUTH_CONFIRM]]];
  
+//    LoginToken *user = [LoginToken createTokenInContext:_doc.managedObjectContext withUserID:user_id andAttrs:reVal];
+//    [user addConnectWithObject:tmp];
+//    return [CurrentToken changeCurrentLoginUser:user inContext:_doc.managedObjectContext];
+    
     if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
         *reVal = [result objectForKey:@"result"];
         [RegTmpToken removeTokenInContext:_doc.managedObjectContext WithToken:reg_token];
-        [LoginToken createTokenInContext:_doc.managedObjectContext withUserID:[*reVal objectForKey:@"user_id"] andAttrs:*reVal];
+        LoginToken *user = [LoginToken createTokenInContext:_doc.managedObjectContext withUserID:[*reVal objectForKey:@"user_id"] andAttrs:*reVal];
+        _current_user = [CurrentToken changeCurrentLoginUser:user inContext:_doc.managedObjectContext];
         return LoginModelResultSuccess;
     } else {
         NSDictionary* reError = [result objectForKey:@"error"];
@@ -181,17 +186,17 @@
         if ([msg isEqualToString:@"already login"]) {
             [RegTmpToken removeTokenInContext:_doc.managedObjectContext WithToken:reg_token];
             *reVal = reError;
-            [LoginToken createTokenInContext:_doc.managedObjectContext withUserID:[*reVal objectForKey:@"user_id"] andAttrs:*reVal];
+            LoginToken *user = [LoginToken createTokenInContext:_doc.managedObjectContext withUserID:[*reVal objectForKey:@"user_id"] andAttrs:*reVal];
+            _current_user = [CurrentToken changeCurrentLoginUser:user inContext:_doc.managedObjectContext];
             return LoginModelResultOthersLogin;
         } else if ([msg isEqualToString:@"new user"]) {
             [RegTmpToken removeTokenInContext:_doc.managedObjectContext WithToken:reg_token];
             *reVal = reError;
-            [LoginToken createTokenInContext:_doc.managedObjectContext withUserID:[*reVal objectForKey:@"user_id"] andAttrs:*reVal];
+            LoginToken *user = [LoginToken createTokenInContext:_doc.managedObjectContext withUserID:[*reVal objectForKey:@"user_id"] andAttrs:*reVal];
+            _current_user = [CurrentToken changeCurrentLoginUser:user inContext:_doc.managedObjectContext];
             return LoginModelResultSuccess;
         } else {
-         
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:msg delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-            [alert show];
+            [[[UIAlertView alloc] initWithTitle:@"Error" message:msg delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil] show];
             return LoginModelResultError;
         }
     }
@@ -245,7 +250,6 @@
     if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
         NSDictionary* reVal = [result objectForKey:@"result"];
         NSString* user_id = (NSString*)[reVal objectForKey:@"user_id"];
-//        [LoginToken createTokenInContext:_doc.managedObjectContext withUserID:user_id andAttrs:reVal];
         [LoginToken createTokenInContext:_doc.managedObjectContext withUserID:user_id andAttrs:attrs];
         return YES;
     } else {

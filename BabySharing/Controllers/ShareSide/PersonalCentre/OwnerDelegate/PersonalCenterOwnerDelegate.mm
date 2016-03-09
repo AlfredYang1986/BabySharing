@@ -59,8 +59,6 @@
 }
 
 - (void)gridViewCount:(CellCountParameters *)para {
-//    para.count = index == 0 ?  ([_delegate getOM].querydata.count / PHOTO_PER_LINE) + 1 : ([_delegate getOPM].querydata.count / PHOTO_PER_LINE) + 1;
-    
     if ([[_delegate getOwnerModel] isKindOfClass:[OwnerQueryModel class]]) {
         OwnerQueryModel *model = (OwnerQueryModel *)[_delegate getOwnerModel];
         para.count = model.querydata.count;
@@ -102,7 +100,7 @@
         [cell setUpContentViewWithImageNames:arr_content atLine:row andType:AlbumControllerTypePhoto];
     }
     @catch (NSException *exception) {
-#pragma warning 这里有一个bug
+#warning 这地方又有一个闪退
         NSArray* arr_tmp = [querydata objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(row * PHOTO_PER_LINE, querydata.count - row * PHOTO_PER_LINE)]];
         NSMutableArray* arr_content = [[NSMutableArray alloc]initWithCapacity:PHOTO_PER_LINE];
         for (QueryContent* item in arr_tmp) {

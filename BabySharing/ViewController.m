@@ -370,13 +370,13 @@ enum DisplaySide {
     }
     
     
-    RegTmpToken* token = [RegTmpToken enumRegTokenINContext:self.lm.doc.managedObjectContext WithPhoneNo:phoneNo];
+    RegTmpToken *token = [RegTmpToken enumRegTokenINContext:self.lm.doc.managedObjectContext WithPhoneNo:phoneNo];
     
     if (token == nil) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"input wrong phone number" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"通知" message:@"输入的电话号码错误" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil];
         [alert show];
     } else {
-        NSDictionary* tmp =[[NSDictionary alloc] init];
+        NSDictionary *tmp =[[NSDictionary alloc] init];
         LoginModelConfirmResult reVal = [self.lm sendConfirrmCode:code ToPhone:phoneNo withToken:token.reg_token toResult:&tmp];
         if (reVal == LoginModelResultSuccess) {
             [self performSegueWithIdentifier:@"loginSuccessSegue" sender:tmp];
