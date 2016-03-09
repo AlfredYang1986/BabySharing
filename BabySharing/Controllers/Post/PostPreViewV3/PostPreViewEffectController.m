@@ -370,7 +370,7 @@
             [filter addTarget:filterView];
         }
         
-        [movieFile startProcessing];
+//        [movieFile startProcessing];
         
     } else {
         if (![mainContentView.layer.sublayers containsObject:img_layer]) {
@@ -383,6 +383,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    [movieFile endProcessing];
 //    if (_type == PostPreViewMovie) {
 //        if (player.currentItem) {
 //            [player.currentItem removeObserver:self forKeyPath:@"status"];
@@ -638,6 +639,18 @@
     [self imageWithEffect:img];
 }
 
+- (UIView*)queryViewWithTitle:(NSString *)title {
+    return [function_dic objectForKey:title];
+}
+
+- (GPUImageMovie*)getInput {
+    return movieFile;
+}
+
+- (GPUImageView*)getOutput {
+    return filterView;
+}
+
 #pragma mark -- paste img pan handle
 - (void)handlePastePan:(UIPanGestureRecognizer*)gesture {
     NSLog(@"pan gesture");
@@ -795,7 +808,7 @@
     if ([title isEqualToString:@"封面"]) {
 //        avPlayerLayer.hidden = YES;
         filterView.hidden = YES;
-        [self imageWithEffect:[adapter getMovieThumbWithView:tmp]];
+        [self imageWithEffect:[adapter getMovieThumb]];
         [movieFile endProcessing];
     } else {
    

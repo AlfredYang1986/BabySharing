@@ -19,8 +19,16 @@
 //@class GPUImageColorInvertFilter;
 //@class GPUImageSmoothToonFilter;
 @class GPUImageFilterGroup;
+@class GPUImageView;
+@class GPUImageMovie;
 
 @protocol PostEffectAdapterProtocol <NSObject>
+
+/**
+ * movie input and output
+ */
+- (GPUImageMovie*)getInput;
+- (GPUImageView*)getOutput;
 
 /**
  * type
@@ -50,6 +58,11 @@
  */
 - (void)didChangeCoverPage:(UIImage*)img;
 
+/**
+ * query views with title
+ */
+- (UIView*)queryViewWithTitle:(NSString*)title;
+
 @end
 
 @interface PostEffectAdapter : NSObject
@@ -61,7 +74,7 @@
 // for effort of the movie
 @property (nonatomic, strong) NSURL* movie_url;
 // for effort of the image
-@property (nonatomic, strong, readonly) GPUImagePicture* ip;
+//@property (nonatomic, strong, readonly) GPUImagePicture* ip;
 
 // filters
 @property (nonatomic, strong, readonly) GPUImageOutput<GPUImageInput> * originFilter;
@@ -78,9 +91,10 @@
 
 - (UIView*)getFunctionViewByTitle:(NSString*)title andType:(PostPreViewType)type andPreferedHeight:(CGFloat)height;
 - (UIImage*)didSelectEffectFilterForPhoto:(UIButton*)sender;
+- (void)didSelectEffectFilterForMovie:(UIButton*)sender;
 - (void)didSelectTagForPhoto:(UIButton*)sender;
 - (void)didSelectPasteForPhoto:(UIButton*)sender;
 - (void)didSelectHideTagView:(UITapGestureRecognizer*)gesture;
 - (void)didClickThumb:(UITapGestureRecognizer*)gesture;
-- (UIImage*)getMovieThumbWithView:(UIView*)view;
+- (UIImage*)getMovieThumb;
 @end
