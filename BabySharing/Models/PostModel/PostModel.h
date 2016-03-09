@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @class QueryContent;
 
@@ -14,7 +15,8 @@ typedef void(^likeFinishBlock)(BOOL success, QueryContent* content);
 
 @interface PostModel : NSObject
 
-- (BOOL)postJsonContentWithFileName:(NSString *)path withMessage:(NSString *)message;
+//- (BOOL)postJsonContentWithFileName:(NSString *)path withMessage:(NSString *)message;
+- (BOOL)postJsonContentWithFileName:(NSString *)path andThumb:(UIImage*)thumb withMessage:(NSString *)message;
 - (BOOL)postJsonContentWithFileURL:(NSURL*)path withMessage:(NSString *)message;
 - (BOOL)postJsonContentToServieWithTags:(NSArray*)tags andDescription:(NSString*)message andPhotos:(NSArray*)photos;
 

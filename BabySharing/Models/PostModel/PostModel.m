@@ -80,8 +80,9 @@
 /**
  * this is for post movie files
  */
-- (BOOL)postJsonContentWithFileName:(NSString *)path withMessage:(NSString *)message {
-    
+//- (BOOL)postJsonContentWithFileName:(NSString *)path withMessage:(NSString *)message {
+- (BOOL)postJsonContentWithFileName:(NSString *)path andThumb:(UIImage*)thumb withMessage:(NSString *)message {
+
     AppDelegate* delegate = (AppDelegate*)([UIApplication sharedApplication].delegate);
     NSString* auth_token = delegate.lm.current_auth_token;
     NSString* user_id = delegate.lm.current_user_id;
@@ -92,7 +93,7 @@
     [dic setValue:message forKey:@"description"];
     
     /**
-     * post image to server
+     * post movie to server
      */
     NSMutableArray* arr_items = [[NSMutableArray alloc]init];
     dispatch_queue_t post_queue = dispatch_queue_create("post queue", nil);
@@ -103,21 +104,42 @@
             NSLog(@"existing");
         }
         [RemoteInstance uploadFile:fullpath withName:filename toUrl:[NSURL URLWithString:[POST_HOST_DOMAIN stringByAppendingString:POST_UPLOAD]] callBack:^(BOOL successs, NSString *message) {
-        if (successs) {
-            NSLog(@"post image success");
-        } else {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-            [alert show];
-        }
-    }];
+            if (successs) {
+                NSLog(@"post movie success");
+            } else {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                [alert show];
+            }
+        }];
+    });
+    
+    /**
+     * post thumb to server
+     */
+    NSString* extent = [TmpFileStorageModel saveToTmpDirWithImage:thumb];
+    dispatch_queue_t thumb_queue = dispatch_queue_create("thumb queue", nil);
+    dispatch_async(thumb_queue, ^(void){
+        [RemoteInstance uploadPicture:thumb withName:extent toUrl:[NSURL URLWithString:[POST_HOST_DOMAIN stringByAppendingString:POST_UPLOAD]] callBack:^(BOOL successs, NSString *message) {
+            if (successs) {
+                NSLog(@"post thumb success");
+            } else {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                [alert show];
+            }
+        }];
     });
     
     NSNumber* type = [NSNumber numberWithInteger:ModelAttchmentTypeMovie];
     NSMutableDictionary* dic_tmp = [[NSMutableDictionary alloc]init];
     [dic_tmp setObject:type forKey:@"type"];
     [dic_tmp setObject:[path lastPathComponent] forKey:@"name"];
-        
     [arr_items addObject:dic_tmp];
+    
+    NSNumber* type1 = [NSNumber numberWithInteger:ModelAttchmentTypeImage];
+    NSMutableDictionary* dic_tmp1 = [[NSMutableDictionary alloc]init];
+    [dic_tmp1 setObject:type1 forKey:@"type"];
+    [dic_tmp1 setObject:extent forKey:@"name"];
+    [arr_items addObject:dic_tmp1];
     
     [dic setObject:arr_items forKey:@"items"];
     

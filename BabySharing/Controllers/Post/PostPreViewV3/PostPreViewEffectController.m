@@ -240,22 +240,6 @@
             [mainContentView addSubview:filterView];
             [filter addTarget:filterView];
         }
-        
-//        if (player == nil) {
-//            player = [[AVPlayer alloc]init];
-//            avPlayerLayer = [AVPlayerLayer playerLayerWithPlayer:player];
-//        }
-//        
-//        if (![mainContentView.layer.sublayers containsObject:avPlayerLayer]) {
-//            avPlayerLayer.frame = mainContentView.bounds;
-//            avPlayerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
-//            [mainContentView.layer addSublayer:avPlayerLayer];
-//        }
-//        
-//        
-//        AVPlayerItem* tmp = [AVPlayerItem playerItemWithURL:_editing_movie];
-//        [player replaceCurrentItemWithPlayerItem:tmp];
-//        player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
     }
     
     /***************************************************************************************/
@@ -264,28 +248,6 @@
     [self segValueChanged2:f_bar];
 
 }
-
-//- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-//    if ([keyPath isEqualToString:@"status"]) {
-//        AVPlayerItem* playerItem = player.currentItem;
-//        if (playerItem.status == AVPlayerStatusReadyToPlay) {
-//            NSLog(@"AVPlayerStatusReadyToPlay");
-//            [player seekToTime:kCMTimeZero completionHandler:^(BOOL finished) {
-//                [player play];
-//            }];
-//            
-//            
-//        } else if (playerItem.status == AVPlayerStatusFailed) {
-//            NSLog(@"AVPlayerStatusFailed");
-//        }
-//    }
-//}
-
-//-(void)moviePlayDidEnd:(AVPlayerItem*)item {
-//    [player seekToTime:kCMTimeZero completionHandler:^(BOOL finished) {
-//        [player play];
-//    }];
-//}
 
 - (UIButton*)addFunctionBarBtnWithTitle:(NSString*)title andImage:(UIImage*)img andCallBack:(SEL)callBack andRect:(CGRect)bounds andCenter:(CGPoint)center {
     UIButton* f_btn = [[UIButton alloc]initWithFrame:bounds];
@@ -335,21 +297,6 @@
     edit.hidden = YES;
     
     if (_type == PostPreViewMovie) {
-//        if (![mainContentView.layer.sublayers containsObject:avPlayerLayer]) {
-//            avPlayerLayer.frame = mainContentView.bounds;
-//            avPlayerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
-//            [mainContentView.layer addSublayer:avPlayerLayer];
-//        }
-//        
-//        if (player.currentItem) {
-//            if (player.currentItem.status == AVPlayerStatusReadyToPlay) {
-//                [player seekToTime:kCMTimeZero completionHandler:^(BOOL finished) {
-//                    [player play];
-//                }];
-//            }
-//            [player.currentItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];// 监听status属性
-//            [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(moviePlayDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:player.currentItem];
-//        }
         
         if (movieFile == nil) {
             movieFile = [[GPUImageMovie alloc] initWithURL:_editing_movie];
@@ -370,8 +317,6 @@
             [filter addTarget:filterView];
         }
         
-//        [movieFile startProcessing];
-        
     } else {
         if (![mainContentView.layer.sublayers containsObject:img_layer]) {
             img_layer.frame = mainContentView.bounds;
@@ -384,15 +329,6 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [movieFile endProcessing];
-//    if (_type == PostPreViewMovie) {
-//        if (player.currentItem) {
-//            [player.currentItem removeObserver:self forKeyPath:@"status"];
-//            [player pause];
-//        }
-//        if ([mainContentView.layer.sublayers containsObject:avPlayerLayer]) {
-//            [avPlayerLayer removeFromSuperlayer];
-//        }
-//    }
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -402,15 +338,6 @@
 - (BOOL)prefersStatusBarHidden {
     return YES; //返回NO表示要显示，返回YES将hiden
 }
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 #pragma mark -- button actions
 - (void)didPopControllerSelected {
@@ -428,7 +355,6 @@
         pub.preViewImg = final_img;
         pub.share_img = [Tools imageWithView:mainContentView];
         
-       
         NSMutableArray* arr = [[NSMutableArray alloc]initWithCapacity:tags.count];
         for (int index = 0; index < tags.allValues.count; ++index) {
             PhotoTagView* view = [tags.allValues objectAtIndex:index];
@@ -442,7 +368,8 @@
         pub.already_taged = [arr copy];
         
     } else if (_type == PostPreViewMovie) {
-       
+      
+        pub.preViewImg = [self mergePasteAndEffect:result_img];
         pub.movie_url = _editing_movie;
     }
 

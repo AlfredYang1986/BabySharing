@@ -562,6 +562,7 @@
             }
         }];
     }
+    
     PostModel* pm = delegate.pm;
     
     if (_type == PostPreViewPhote) {
@@ -586,7 +587,7 @@
         if ([filename containsString:@"assert"]) {
             [pm postJsonContentWithFileURL:_movie_url withMessage:_descriptionView.text];
         } else {
-            [pm postJsonContentWithFileName:filename withMessage:_descriptionView.text];
+            [pm postJsonContentWithFileName:filename andThumb:self.preViewImg withMessage:_descriptionView.text];
         }
     }
 }
