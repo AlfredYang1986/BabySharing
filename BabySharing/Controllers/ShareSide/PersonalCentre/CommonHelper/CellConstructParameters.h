@@ -13,8 +13,7 @@
  * construct cell
  */
 @interface CellConstructParameters : NSObject
-//@property (nonatomic, weak, readonly) UITableView *tableView;
-//@property (nonatomic, weak, readonly) NSIndexPath *indexPath;
+
 @property (nonatomic, weak) UITableView *tableView;
 @property (nonatomic, weak) NSIndexPath *indexPath;
 @property (nonatomic, strong) UITableViewCell *cell;

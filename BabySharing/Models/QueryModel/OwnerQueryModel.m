@@ -66,7 +66,7 @@
 }
 
 #pragma mark -- query content with tags
-- (NSArray*)queryContentsByUser:(NSString*)user_id withToken:(NSString*)token andOwner:(NSString*)owner_id withStartIndex:(NSInteger)startIndex finishedBlock:(queryFinishedBlock)block {
+- (NSArray *)queryContentsByUser:(NSString *)user_id withToken:(NSString *)token andOwner:(NSString *)owner_id withStartIndex:(NSInteger)startIndex finishedBlock:(queryFinishedBlock)block {
 
     NSMutableDictionary* dic_conditions = [[NSMutableDictionary alloc]init];
     [dic_conditions setObject:owner_id forKey:@"owner_id"];
@@ -90,16 +90,15 @@
         block(YES);
         
     } else {
-        //        NSDictionary* reError = [result objectForKey:@"error"];
-        //        NSString* msg = [reError objectForKey:@"message"];
-        //        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:msg delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-        //        [alert show];
+        NSDictionary* reError = [result objectForKey:@"error"];
+        NSString* msg = [reError objectForKey:@"message"];
+        [[[UIAlertView alloc] initWithTitle:@"Error" message:msg delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil] show];
         block(NO);
     }
     return nil;
 }
 
-- (NSArray*)appendContentsByUser:(NSString*)user_id withToken:(NSString*)token andOwner:(NSString*)owner_id withStartIndex:(NSInteger)startIndex finishedBlock:(queryFinishedBlock)block {
+- (NSArray*)appendContentsByUser:(NSString*)user_id withToken:(NSString*)token andOwner:(NSString*)owner_id withStartIndex:(NSInteger)startIndex finishedBlock:(queryFinishedBlock) block {
     
     NSMutableDictionary* dic_conditions = [[NSMutableDictionary alloc]init];
     [dic_conditions setObject:owner_id forKey:@"owner_id"];

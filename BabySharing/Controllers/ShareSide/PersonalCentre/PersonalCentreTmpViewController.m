@@ -53,8 +53,8 @@
 @property (weak, nonatomic, readonly) NSString* current_auth_token;
 @property (weak, nonatomic) IBOutlet UITableView *queryView;
 
-@property (weak, nonatomic, readonly) OwnerQueryModel* om;
-@property (weak, nonatomic, readonly) OwnerQueryPushModel* opm;
+@property (weak, nonatomic, readonly) OwnerQueryModel* ownerQueryModel;
+@property (weak, nonatomic, readonly) OwnerQueryPushModel* ownerQueryPushModel;
 @property (weak, nonatomic, readonly) ConnectionModel* cm;
 @property (weak, nonatomic, readonly) CollectionQueryModel* cqm;
 @end
@@ -75,11 +75,11 @@
 @synthesize current_auth_token = _current_auth_token;
 @synthesize current_user_id = _current_user_id;
 @synthesize queryView = _queryView;
-
-@synthesize om = _om;
-@synthesize opm = _opm;
-@synthesize cm = _cm;
-@synthesize cqm = _cqm;
+//
+//@synthesize om = _om;
+//@synthesize opm = _opm;
+//@synthesize cm = _cm;
+//@synthesize cqm = _cqm;
 
 @synthesize current_delegate = _current_delegate;
 @synthesize owner_id = _owner_id;
@@ -92,10 +92,10 @@
     _current_user_id = delegate.lm.current_user_id;
     _current_auth_token = delegate.lm.current_auth_token;
     
-    _om = delegate.om;
+    _ownerQueryModel = delegate.om;
     _cm = delegate.cm;
     _cqm = delegate.cqm;
-    _opm = delegate.opm;
+    _ownerQueryPushModel = delegate.opm;
 
     /**
      * Profile Header Cell
@@ -111,7 +111,7 @@
     _queryView.showsHorizontalScrollIndicator = FALSE;
     _queryView.delegate = _current_delegate;
     _queryView.dataSource = _current_delegate;
-    NSLog(@"MonkeyHengLog: %@ === %u", @"_om.querydata.count", _om.querydata.count);
+    NSLog(@"MonkeyHengLog: %@ === %u", @"_om.querydata.count", _ownerQueryModel.querydata.count);
 //    if (_om.querydata.count == 0) {
 //        // 没有东西加一句话
 //        UILabel *inform = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 50)];
@@ -144,7 +144,7 @@
 }
 
 - (void)createSegamentCtr {
-    search_seg = [[SearchSegView2 alloc]initWithFrame:CGRectMake(MARGIN_LEFT, QUERY_VIEW_MARGIN_UP + HEADER_VIEW_HEIGHT, [UIScreen mainScreen].bounds.size.width - MARGIN_LEFT - MARGIN_RIGHT, SEG_CTR_HEIGHT)];
+    search_seg = [[SearchSegView2 alloc] initWithFrame:CGRectMake(MARGIN_LEFT, QUERY_VIEW_MARGIN_UP + HEADER_VIEW_HEIGHT, [UIScreen mainScreen].bounds.size.width - MARGIN_LEFT - MARGIN_RIGHT, SEG_CTR_HEIGHT)];
    
     search_seg.backgroundColor = [UIColor whiteColor];
     search_seg.layer.cornerRadius = 4.f;
@@ -234,29 +234,28 @@
 - (void)viewDidAppear:(BOOL)animated {
     dispatch_queue_t q1 = dispatch_queue_create("om queue", nil);
     dispatch_async(q1, ^{
-        [_om queryContentsByUser:_current_user_id withToken:_current_auth_token andOwner:_owner_id withStartIndex:0 finishedBlock:^(BOOL success) {
+        [_ownerQueryModel queryContentsByUser:_current_user_id withToken:_current_auth_token andOwner:_owner_id withStartIndex:0 finishedBlock:^(BOOL success) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [_queryView reloadData];
                 [self resetProfileData];
-                [search_seg refreshItemTitle:[NSString stringWithFormat:@"%d", _om.querydata.count] atIndex:0];
+                [search_seg refreshItemTitle:[NSString stringWithFormat:@"%d", _ownerQueryModel.querydata.count] atIndex:0];
             });
         }];
         dispatch_semaphore_signal(semaphore_om);
     });
     
-    //    dispatch_semaphore_wait(semaphore_opm, DISPATCH_TIME_FOREVER);
     dispatch_queue_t q2 = dispatch_queue_create("opm queue", nil);
     dispatch_async(q2, ^{
-        [_opm queryContentsByUser:_current_user_id withToken:_current_auth_token andOwner:_owner_id withStartIndex:0 finishedBlock:^(BOOL success) {
+        [_ownerQueryPushModel queryContentsByUser:_current_user_id withToken:_current_auth_token andOwner:_owner_id withStartIndex:0 finishedBlock:^(BOOL success) {
             [_queryView reloadData];
             [self resetProfileData];
-            [search_seg refreshItemTitle:[NSString stringWithFormat:@"%d", _opm.querydata.count] atIndex:1];
+            [search_seg refreshItemTitle:[NSString stringWithFormat:@"%d", _ownerQueryPushModel.querydata.count] atIndex:1];
         }];
         dispatch_semaphore_signal(semaphore_opm);
     });
    
     [self updateProfileDetails];
-    
+
     dispatch_semaphore_wait(semaphore_om, DISPATCH_TIME_FOREVER);
     dispatch_semaphore_wait(semaphore_opm, DISPATCH_TIME_FOREVER);
     dispatch_semaphore_wait(semaphore_user_info, DISPATCH_TIME_FOREVER);
@@ -376,15 +375,19 @@
 }
 
 - (OwnerQueryModel*)getOM {
-    return _om;
+    return _ownerQueryModel;
 }
 
 - (OwnerQueryPushModel*)getOPM {
-    return _opm;
+    return _ownerQueryPushModel;
+}
+
+- (NSObject *)getOwnerModel {
+    return search_seg.selectedIndex == 0 ? _ownerQueryModel : _ownerQueryPushModel;
 }
 
 - (NSArray*)getQueryData {
-    return search_seg.selectedIndex == 0 ? _om.querydata : _opm.querydata;
+    return search_seg.selectedIndex == 0 ? _ownerQueryModel.querydata : _ownerQueryPushModel.querydata;
 }
 
 - (CollectionQueryModel*)getCQM {
@@ -504,7 +507,7 @@
 }
 
 #pragma mark -- search seg view delegate
-- (void)segValueChanged2:(SearchSegView2*)seg {
+- (void)segValueChanged2:(SearchSegView2 *)seg {
     [_queryView reloadData];
 }
 

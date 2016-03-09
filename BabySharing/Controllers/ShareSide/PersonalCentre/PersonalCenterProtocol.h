@@ -26,8 +26,9 @@
 - (NSInteger)getRelations;
 - (NSString*)getNickName;
 
-- (OwnerQueryModel*)getOM;
-- (OwnerQueryPushModel*)getOPM;
+- (OwnerQueryModel *)getOM;
+- (OwnerQueryPushModel *)getOPM;
+- (NSObject *)getOwnerModel;
 
 - (NSArray*)getQueryData;
 

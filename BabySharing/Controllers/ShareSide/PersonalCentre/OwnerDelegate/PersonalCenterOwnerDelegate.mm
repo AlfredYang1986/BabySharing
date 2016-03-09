@@ -9,6 +9,7 @@
 #import "PersonalCenterOwnerDelegate.h"
 #import "ProfileOverview.h"
 #import "OwnerQueryModel.h"
+#import "OwnerQueryPushModel.h"
 #import "QueryContent+ContextOpt.h"
 #import "QueryContentItem.h"
 #import "PersonalCenterDefines.h"
@@ -51,18 +52,30 @@
     return self;
 }
 
-- (void)gridViewHeight:(CellHeightParameters*)para {
+- (void)gridViewHeight:(CellHeightParameters *)para {
     
 //    CGFloat width = [UIScreen mainScreen].bounds.size.width;
     para.height = [AlbumTableCell prefferCellHeightWithMarginLeft:10.5f Right:10.5f Margin:2.f];
 }
 
-- (void)gridViewCount:(CellCountParameters*)para {
-    OwnerQueryModel* om = [_delegate getOM];
-    para.count = ((om.querydata.count) / PHOTO_PER_LINE) + 1;
+- (void)gridViewCount:(CellCountParameters *)para {
+//    para.count = index == 0 ?  ([_delegate getOM].querydata.count / PHOTO_PER_LINE) + 1 : ([_delegate getOPM].querydata.count / PHOTO_PER_LINE) + 1;
+    
+    if ([[_delegate getOwnerModel] isKindOfClass:[OwnerQueryModel class]]) {
+        OwnerQueryModel *model = (OwnerQueryModel *)[_delegate getOwnerModel];
+        para.count = model.querydata.count;
+    } else if([[_delegate getOwnerModel] isKindOfClass:[OwnerQueryPushModel class]]) {
+        OwnerQueryPushModel *model = (OwnerQueryPushModel *)[_delegate getOwnerModel];
+        para.count = model.querydata.count;
+    } else {
+        para.count = -1;
+    }
+    
+//    OwnerQueryModel* om = [_delegate getOM];
+//    para.count = ((om.querydata.count) / PHOTO_PER_LINE) + 1;
 }
 
-- (void)gridViewConstructorFuncwithParameters:(CellConstructParameters*)para {
+- (void)gridViewConstructorFuncwithParameters:(CellConstructParameters *)para {
    
     UITableView* tableView = para.tableView;
     NSIndexPath* indexPath = para.indexPath;
@@ -82,13 +95,14 @@
     NSInteger row = indexPath.row;
     @try {
         NSArray* arr_tmp = [querydata objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(row * PHOTO_PER_LINE, PHOTO_PER_LINE)]];
-        NSMutableArray* arr_content = [[NSMutableArray alloc]initWithCapacity:PHOTO_PER_LINE];
+        NSMutableArray* arr_content = [[NSMutableArray alloc] initWithCapacity:PHOTO_PER_LINE];
         for (QueryContent* item in arr_tmp) {
             [arr_content addObject:((QueryContentItem*)item.items.allObjects.firstObject).item_name];
         }
         [cell setUpContentViewWithImageNames:arr_content atLine:row andType:AlbumControllerTypePhoto];
     }
     @catch (NSException *exception) {
+#pragma warning 这里有一个bug
         NSArray* arr_tmp = [querydata objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(row * PHOTO_PER_LINE, querydata.count - row * PHOTO_PER_LINE)]];
         NSMutableArray* arr_content = [[NSMutableArray alloc]initWithCapacity:PHOTO_PER_LINE];
         for (QueryContent* item in arr_tmp) {
@@ -247,7 +261,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSInteger index = [_delegate getCurrentSegIndex];
-    CellHeightParameters * para = [[CellHeightParameters alloc]init];
+    CellHeightParameters * para = [[CellHeightParameters alloc] init];
     SuppressPerformSelectorLeakWarning([self performSelector:cell_constructor_height[index] withObject:para]);
     return para.height;
 }
