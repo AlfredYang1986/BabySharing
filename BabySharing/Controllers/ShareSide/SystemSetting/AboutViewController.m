@@ -36,8 +36,8 @@
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
     _logoImg.image = [UIImage imageNamed:[resourceBundle pathForResource:@"profile_about_dongda" ofType:@"png"]];
-    _logoImg.layer.cornerRadius = 8.f;
-    _logoImg.clipsToBounds = YES;
+//    _logoImg.layer.cornerRadius = 8.f;
+//    _logoImg.clipsToBounds = YES;
     
     _settingView.scrollEnabled = NO;
     _settingView.delegate = self;

@@ -11,6 +11,8 @@
 
 #import "PhotoTagView.h"
 
+#import "ImageFilterFactory.h"
+
 #include <vector>
 using std::vector;
 
@@ -189,11 +191,11 @@ UIView* effectFilterForPhoto(PostEffectAdapter* adapter, CGFloat height) {
 //    reVal.backgroundColor = [UIColor darkGrayColor];
 //    reVal.backgroundColor = [UIColor colorWithRed:0.9050 green:0.9050 blue:0.9050 alpha:1.f];
   
-    [reVal addSubview:addPhotoEffectBtn(@"Tilt", CGRectMake(0, 0, button_height, button_height), CGPointMake(edge_margin + margin + button_height / 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:))];
-    [reVal addSubview:addPhotoEffectBtn(@"Sketch", CGRectMake(0, 0, button_height, button_height), CGPointMake(edge_margin + 2 * margin + button_height * 3/ 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:))];
-    [reVal addSubview:addPhotoEffectBtn(@"Origin", CGRectMake(0, 0, button_height, button_height), CGPointMake(edge_margin + 3 * margin + button_height * 5/ 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:))];
-    [reVal addSubview:addPhotoEffectBtn(@"Color", CGRectMake(0, 0, button_height, button_height), CGPointMake(edge_margin + 4 * margin + button_height * 7/ 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:))];
-    [reVal addSubview:addPhotoEffectBtn(@"Smooth", CGRectMake(0, 0, button_height, button_height), CGPointMake(edge_margin + 5 * margin + button_height * 9/ 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:))];
+    [reVal addSubview:addPhotoEffectBtn(@"saturation", CGRectMake(0, 0, button_height, button_height), CGPointMake(edge_margin + margin + button_height / 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:))];
+    [reVal addSubview:addPhotoEffectBtn(@"exposure", CGRectMake(0, 0, button_height, button_height), CGPointMake(edge_margin + 2 * margin + button_height * 3/ 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:))];
+    [reVal addSubview:addPhotoEffectBtn(@"normal", CGRectMake(0, 0, button_height, button_height), CGPointMake(edge_margin + 3 * margin + button_height * 5/ 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:))];
+    [reVal addSubview:addPhotoEffectBtn(@"contrast", CGRectMake(0, 0, button_height, button_height), CGPointMake(edge_margin + 4 * margin + button_height * 7/ 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:))];
+    [reVal addSubview:addPhotoEffectBtn(@"group", CGRectMake(0, 0, button_height, button_height), CGPointMake(edge_margin + 5 * margin + button_height * 9/ 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:))];
 
     return reVal;
 }
@@ -362,44 +364,45 @@ UIView* soundForMovie(PostEffectAdapter* adapter, CGFloat height) {
 /**
  * photo effects
  */
-UIImage* tilShiftEffect(UIImage* source, PostEffectAdapter* obj) {
+UIImage* saturationEffect(UIImage* source, PostEffectAdapter* obj) {
     [obj.ip removeAllTargets];
-    [obj.ip addTarget:obj.tiltShiftFilter];
-    [obj.tiltShiftFilter useNextFrameForImageCapture];
+//    [obj.ip addTarget:obj.tiltShiftFilter];
+    [obj.ip addTarget:obj.saturation];
+    [obj.saturation useNextFrameForImageCapture];
     [obj.ip processImage];
-    return [obj.tiltShiftFilter imageFromCurrentFramebuffer];
+    return [obj.saturation imageFromCurrentFramebuffer];
 }
 
-UIImage* sketchEffect(UIImage* source, PostEffectAdapter* obj) {
+UIImage* exposureEffect(UIImage* source, PostEffectAdapter* obj) {
     [obj.ip removeAllTargets];
-    [obj.ip addTarget:obj.sketchFilter];
-    [obj.sketchFilter useNextFrameForImageCapture];
+    [obj.ip addTarget:obj.exposure];
+    [obj.exposure useNextFrameForImageCapture];
     [obj.ip processImage];
-    return [obj.sketchFilter imageFromCurrentFramebuffer];
+    return [obj.exposure imageFromCurrentFramebuffer];
 }
 
-UIImage* colorInvertEffect(UIImage* source, PostEffectAdapter* obj) {
+UIImage* contrastEffect(UIImage* source, PostEffectAdapter* obj) {
     [obj.ip removeAllTargets];
-    [obj.ip addTarget:obj.colorInvertFilter];
-    [obj.colorInvertFilter useNextFrameForImageCapture];
+    [obj.ip addTarget:obj.contrast];
+    [obj.contrast useNextFrameForImageCapture];
     [obj.ip processImage];
-    return [obj.colorInvertFilter imageFromCurrentFramebuffer];
+    return [obj.contrast imageFromCurrentFramebuffer];
 }
 
-UIImage* smoothToonEffect(UIImage* source, PostEffectAdapter* obj) {
+UIImage* groupEffect(UIImage* source, PostEffectAdapter* obj) {
     [obj.ip removeAllTargets];
-    [obj.ip addTarget:obj.smoothToonFilter];
-    [obj.smoothToonFilter useNextFrameForImageCapture];
+    [obj.ip addTarget:obj.group];
+    [obj.group useNextFrameForImageCapture];
     [obj.ip processImage];
-    return [obj.smoothToonFilter imageFromCurrentFramebuffer];
+    return [obj.group imageFromCurrentFramebuffer];
 }
 
-UIImage* originEffect(UIImage* source, PostEffectAdapter* obj) {
+UIImage* normalEffect(UIImage* source, PostEffectAdapter* obj) {
     [obj.ip removeAllTargets];
-    [obj.ip addTarget:obj.originFilter];
-    [obj.originFilter useNextFrameForImageCapture];
+    [obj.ip addTarget:obj.normal];
+    [obj.normal useNextFrameForImageCapture];
     [obj.ip processImage];
-    return [obj.originFilter imageFromCurrentFramebuffer];
+    return [obj.normal imageFromCurrentFramebuffer];
 }
 /*******************************************************************/
 
@@ -438,35 +441,39 @@ void brandTagView(PostEffectAdapter* obj, UIImage* tag_img) {
 @synthesize content_parent_view = _content_parent_view;
 @synthesize delegate = _delegate;
 @synthesize ip = _ip;
-@synthesize originFilter = _originFilter;
-@synthesize tiltShiftFilter = _tiltShiftFilter;
-@synthesize sketchFilter = _sketchFilter;
-@synthesize colorInvertFilter = _colorInvertFilter;
-@synthesize smoothToonFilter = _smoothToonFilter;
+
+//@synthesize originFilter = _originFilter;
+//@synthesize tiltShiftFilter = _tiltShiftFilter;
+//@synthesize sketchFilter = _sketchFilter;
+//@synthesize colorInvertFilter = _colorInvertFilter;
+//@synthesize smoothToonFilter = _smoothToonFilter;
+
+@synthesize normal = _normal;
+@synthesize saturation = _saturation;
+@synthesize exposure = _exposure;
+@synthesize contrast = _contrast;
+@synthesize group = _group;
 
 - (void)setUp {
     if ([_delegate currentType] == PostPreViewPhote) {
-        if (_tiltShiftFilter == nil) {
-            _tiltShiftFilter = [[GPUImageTiltShiftFilter alloc] init];
-            [_tiltShiftFilter setTopFocusLevel:1.f];
-            [_tiltShiftFilter setBottomFocusLevel:1.f];
-            [_tiltShiftFilter setFocusFallOffRate:0.2];
+        if (_normal == nil) {
+            _normal = [ImageFilterFactory normal];
         }
         
-        if (_sketchFilter == nil) {
-            _sketchFilter = [[GPUImageSketchFilter alloc] init];
+        if (_saturation == nil) {
+            _saturation = [ImageFilterFactory saturation];
         }
         
-        if (_colorInvertFilter == nil) {
-            _colorInvertFilter  = [[GPUImageColorInvertFilter alloc] init];
+        if (_exposure == nil) {
+            _exposure = [ImageFilterFactory exposure];
         }
         
-        if (_smoothToonFilter == nil) {
-            _smoothToonFilter = [[GPUImageSmoothToonFilter alloc] init];
+        if (_contrast == nil) {
+            _contrast = [ImageFilterFactory contrast];
         }
         
         if (_originFilter == nil) {
-            _originFilter = [[GPUImageFilter alloc]init];
+            _group = [ImageFilterFactory testGroup1];
         }
         
         if (_ip == nil) {
@@ -521,11 +528,11 @@ void brandTagView(PostEffectAdapter* obj, UIImage* tag_img) {
 
 - (UIImage*)didSelectEffectFilterForPhoto:(UIButton*)sender {
     static const vector<effectNode> vec = {
-        effectNode{"Tilt", &tilShiftEffect},
-        effectNode{"Sketch", &sketchEffect},
-        effectNode{"Color", &colorInvertEffect},
-        effectNode{"Smooth", &smoothToonEffect},
-        effectNode{"Origin", &originEffect},
+        effectNode{"saturation", &saturationEffect},
+        effectNode{"exposure", &exposureEffect},
+        effectNode{"contrast", &contrastEffect},
+        effectNode{"group", &groupEffect},
+        effectNode{"normal", &normalEffect},
     };
   
     for (UIView* tmp in sender.superview.subviews) {

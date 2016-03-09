@@ -16,6 +16,7 @@
 		70530B121C3F9D1E00505121 /* SearchSegImgItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 70530B0D1C3F9D1E00505121 /* SearchSegImgItem.m */; };
 		70530B131C3F9D1E00505121 /* SearchSegImgTextItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 70530B0F1C3F9D1E00505121 /* SearchSegImgTextItem.m */; };
 		70530B141C3F9D1E00505121 /* SearchSegItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 70530B111C3F9D1E00505121 /* SearchSegItem.m */; };
+		705D98461C8FCCC1003AFF3E /* ImageFilterFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 705D98451C8FCCC1003AFF3E /* ImageFilterFactory.m */; };
 		706563B71C817580008BBAC8 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 706563B61C817580008BBAC8 /* Contacts.framework */; };
 		706D7A1C1C7561C0006750AC /* FoundSearchTagDeleage.m in Sources */ = {isa = PBXBuildFile; fileRef = 706D7A1B1C7561C0006750AC /* FoundSearchTagDeleage.m */; };
 		706D7A221C757379006750AC /* RecommandRoleTag+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 706D7A1F1C757379006750AC /* RecommandRoleTag+CoreDataProperties.m */; };
@@ -393,6 +394,8 @@
 		70530B0F1C3F9D1E00505121 /* SearchSegImgTextItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSegImgTextItem.m; sourceTree = "<group>"; };
 		70530B101C3F9D1E00505121 /* SearchSegItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSegItem.h; sourceTree = "<group>"; };
 		70530B111C3F9D1E00505121 /* SearchSegItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSegItem.m; sourceTree = "<group>"; };
+		705D98441C8FCCC1003AFF3E /* ImageFilterFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageFilterFactory.h; sourceTree = "<group>"; };
+		705D98451C8FCCC1003AFF3E /* ImageFilterFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageFilterFactory.m; sourceTree = "<group>"; };
 		706563B61C817580008BBAC8 /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
 		706D7A1A1C7561C0006750AC /* FoundSearchTagDeleage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoundSearchTagDeleage.h; sourceTree = "<group>"; };
 		706D7A1B1C7561C0006750AC /* FoundSearchTagDeleage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoundSearchTagDeleage.m; sourceTree = "<group>"; };
@@ -1143,6 +1146,15 @@
 			path = SearchSegItem;
 			sourceTree = "<group>";
 		};
+		705D98431C8FCB4D003AFF3E /* ImageFilter */ = {
+			isa = PBXGroup;
+			children = (
+				705D98441C8FCCC1003AFF3E /* ImageFilterFactory.h */,
+				705D98451C8FCCC1003AFF3E /* ImageFilterFactory.m */,
+			);
+			path = ImageFilter;
+			sourceTree = "<group>";
+		};
 		707C088D1C51D017003C6F53 /* PhotoTagEditView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1883,6 +1895,7 @@
 		EEAAC8FA1B44E81A00D05C0B /* BabySharing */ = {
 			isa = PBXGroup;
 			children = (
+				705D98431C8FCB4D003AFF3E /* ImageFilter */,
 				A0B7A75E1C7C0B8300D78E6E /* Tools */,
 				EEAACDB51B44F61700D05C0B /* Main */,
 				EEAACAF71B44E90300D05C0B /* Controllers */,
@@ -3163,6 +3176,7 @@
 				EE7910591B841D14005E455B /* WEBlockingGestureRecognizer.m in Sources */,
 				EE7910571B841CBE005E455B /* FoundPCGCell.m in Sources */,
 				EE7910561B841CAB005E455B /* WETouchableView.m in Sources */,
+				705D98461C8FCCC1003AFF3E /* ImageFilterFactory.m in Sources */,
 				70D15B451C5B64C9007AC9AB /* MJRefreshComponent.m in Sources */,
 				EEDCF69D1B9AB674005F4F4D /* UserSetting.m in Sources */,
 				70D15B481C5B64C9007AC9AB /* MJRefreshAutoGifFooter.m in Sources */,

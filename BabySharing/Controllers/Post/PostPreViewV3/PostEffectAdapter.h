@@ -14,10 +14,11 @@
 @protocol GPUImageInput;
 @class GPUImageOutput;
 @class GPUImagePicture;
-@class GPUImageTiltShiftFilter;
-@class GPUImageSketchFilter;
-@class GPUImageColorInvertFilter;
-@class GPUImageSmoothToonFilter;
+//@class GPUImageTiltShiftFilter;
+//@class GPUImageSketchFilter;
+//@class GPUImageColorInvertFilter;
+//@class GPUImageSmoothToonFilter;
+@class GPUImageFilterGroup;
 
 @protocol PostEffectAdapterProtocol <NSObject>
 
@@ -60,10 +61,16 @@
 
 // filters
 @property (nonatomic, strong, readonly) GPUImageOutput<GPUImageInput> * originFilter;
-@property (nonatomic, strong, readonly) GPUImageTiltShiftFilter* tiltShiftFilter;
-@property (nonatomic, strong, readonly) GPUImageSketchFilter* sketchFilter;
-@property (nonatomic, strong, readonly) GPUImageColorInvertFilter* colorInvertFilter;
-@property (nonatomic, strong, readonly) GPUImageSmoothToonFilter* smoothToonFilter;
+//@property (nonatomic, strong, readonly) GPUImageTiltShiftFilter* tiltShiftFilter;
+//@property (nonatomic, strong, readonly) GPUImageSketchFilter* sketchFilter;
+//@property (nonatomic, strong, readonly) GPUImageColorInvertFilter* colorInvertFilter;
+//@property (nonatomic, strong, readonly) GPUImageSmoothToonFilter* smoothToonFilter;
+
+@property (nonatomic, strong, readonly) GPUImageFilterGroup* normal;
+@property (nonatomic, strong, readonly) GPUImageFilterGroup* saturation;
+@property (nonatomic, strong, readonly) GPUImageFilterGroup* exposure;
+@property (nonatomic, strong, readonly) GPUImageFilterGroup* contrast;
+@property (nonatomic, strong, readonly) GPUImageFilterGroup* group;
 
 - (UIView*)getFunctionViewByTitle:(NSString*)title andType:(PostPreViewType)type andPreferedHeight:(CGFloat)height;
 - (UIImage*)didSelectEffectFilterForPhoto:(UIButton*)sender;

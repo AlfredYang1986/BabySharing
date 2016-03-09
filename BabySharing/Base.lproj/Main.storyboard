@@ -1460,8 +1460,8 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uHa-v3-ve1">
                                         <rect key="frame" x="225" y="75" width="150" height="75"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="250" id="Ahm-9t-Fxb"/>
-                                            <constraint firstAttribute="height" constant="169" id="IXU-VV-lfr"/>
+                                            <constraint firstAttribute="width" constant="93" id="Ahm-9t-Fxb"/>
+                                            <constraint firstAttribute="height" constant="93" id="IXU-VV-lfr"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
