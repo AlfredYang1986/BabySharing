@@ -11,6 +11,7 @@
 #import "loginToken+ContextOpt.h"
 #import "TmpFileStorageModel.h"
 #import "OBShapedButton.h"
+#import "SGActionView.h"
 
 @interface AlreadLogedViewController ()
 @property (strong, nonatomic) IBOutlet UIButton *loginImgBtn;
@@ -78,6 +79,8 @@
     
     _loginImgBtn.layer.borderWidth = 3.f;
     _loginImgBtn.layer.borderColor = [UIColor colorWithWhite:1.f alpha:0.30].CGColor;
+    // 添加动作选择头像
+    [_loginImgBtn addTarget:self action:@selector(didSelectImgBtn) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:_loginImgBtn];
     [self.view bringSubviewToFront:_loginImgBtn];
@@ -232,6 +235,54 @@
     [super viewWillDisappear:animated];
 //    [self.navigationController setNavigationBarHidden:YES animated:NO];
 }
+
+#pragma mark -- change user img
+- (void)didSelectImgBtn {
+    [SGActionView showSheetWithTitle:@"" itemTitles:@[@"打开照相机", @"从相册中选择", @"取消"] selectedIndex:-1 selectedHandle:^(NSInteger index) {
+        switch (index) {
+            case 0:
+                [self openAppCamera];
+                break;
+            case 1:
+                [self openCameraRoll];
+                break;
+            default:
+                break;
+        }
+    }];
+}
+
+- (void)openCameraRoll {
+    UIImagePickerController *pickerImage = [[UIImagePickerController alloc] init];
+    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+        pickerImage.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        //pickerImage.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+        pickerImage.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:pickerImage.sourceType];
+        
+    }
+    pickerImage.delegate = self;
+    pickerImage.allowsEditing = NO;
+    [self presentViewController:pickerImage animated:YES completion:nil];
+}
+
+- (void)openAppCamera {
+    //先设定sourceType为相机，然后判断相机是否可用（ipod）没相机，不可用将sourceType设定为相片库
+    UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
+    //    if (![UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]) {
+    //        sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    //    }
+    //sourceType = UIImagePickerControllerSourceTypeCamera; //照相机
+    //sourceType = UIImagePickerControllerSourceTypePhotoLibrary; //图片库
+    //sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum; //保存的相片
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];//初始化
+    picker.delegate = self;
+    picker.allowsEditing = YES;//设置可编辑
+    picker.sourceType = sourceType;
+    [self presentViewController:picker animated:YES completion:nil];
+//    [self presentModalViewController:picker animated:YES];//进入照相界面
+}
+
+
 
 #pragma mark --
 - (IBAction)didSelectMeButton {

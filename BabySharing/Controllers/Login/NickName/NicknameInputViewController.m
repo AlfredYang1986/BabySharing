@@ -343,7 +343,7 @@
     NSString* auth_token = [_login_attr objectForKey:@"auth_token"];
     NSString* user_id = [_login_attr objectForKey:@"user_id"];
     
-    NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
+    NSMutableDictionary* dic = [[NSMutableDictionary alloc] init];
     [dic setValue:inputView.screen_name forKey:@"screen_name"];
     [dic setValue:inputView.role_tag forKey:@"role_tag"];
 
@@ -474,7 +474,8 @@
     }
     pickerImage.delegate = self;
     pickerImage.allowsEditing = NO;
-    [self presentModalViewController:pickerImage animated:YES];
+    [self presentViewController:pickerImage animated:YES completion:nil];
+//    [self presentModalViewController:pickerImage animated:YES];
 }
 
 - (void)openAppCamera {
@@ -490,7 +491,8 @@
     picker.delegate = self;
     picker.allowsEditing = YES;//设置可编辑
     picker.sourceType = sourceType;
-    [self presentModalViewController:picker animated:YES];//进入照相界面
+    [self presentViewController:picker animated:YES completion:nil];
+//    [self presentModalViewController:picker animated:YES];//进入照相界面
 }
 
 #pragma mark -- UIImagePickerControllerDelegate

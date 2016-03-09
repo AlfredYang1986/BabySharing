@@ -18,4 +18,5 @@ typedef void(^postLayoutBlock)(CGSize cancel_btn_sz);
 @property (nonatomic, setter=setShowsSearchIcon:) BOOL showsSearchIcon;
 
 - (void)setPostLayoutSize:(CGSize)cancel_btn_sz;
+
 @end

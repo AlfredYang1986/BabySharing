@@ -63,8 +63,8 @@
     NSDictionary* dic_profile_details;
     NSInteger current_seg_index;
     
-    ProfileOverView* head_view;
-    SearchSegView2* search_seg;
+    ProfileOverView *head_view;
+    SearchSegView2 *search_seg;
     
     
     dispatch_semaphore_t semaphore_om;
@@ -111,7 +111,16 @@
     _queryView.showsHorizontalScrollIndicator = FALSE;
     _queryView.delegate = _current_delegate;
     _queryView.dataSource = _current_delegate;
-    
+    NSLog(@"MonkeyHengLog: %@ === %u", @"_om.querydata.count", _om.querydata.count);
+//    if (_om.querydata.count == 0) {
+//        // 没有东西加一句话
+//        UILabel *inform = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 50)];
+//        inform.text = @"您还没有照片，快去发布吧";
+//        inform.textAlignment = NSTextAlignmentCenter;
+//        inform.center = CGPointMake(50, 100);
+//        [_queryView addSubview:inform];
+//    }
+
     if (!_owner_id || [_owner_id isEqualToString:@""]) {
         _owner_id = _current_user_id;
     }
@@ -135,15 +144,6 @@
 }
 
 - (void)createSegamentCtr {
-//    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
-//    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-
-//    UIImage* img_seg_bg = [UIImage imageNamed:[resourceBundle pathForResource:@"profile_seg_bg" ofType:@"png"]];
-//    CALayer* seg_bg = [CALayer layer];
-//    seg_bg.contents = (id)img_seg_bg.CGImage;
-//    seg_bg.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [SearchSegView2 preferredHeight]);
-//    [search_seg.layer addSublayer:seg_bg];
-
     search_seg = [[SearchSegView2 alloc]initWithFrame:CGRectMake(MARGIN_LEFT, QUERY_VIEW_MARGIN_UP + HEADER_VIEW_HEIGHT, [UIScreen mainScreen].bounds.size.width - MARGIN_LEFT - MARGIN_RIGHT, SEG_CTR_HEIGHT)];
    
     search_seg.backgroundColor = [UIColor whiteColor];

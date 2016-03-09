@@ -64,7 +64,6 @@
     split_img = [[UIView alloc]initWithFrame:CGRectMake(0, third_line_ver_margin, screen_width, SPLIT_VIEW_HEIGHT)];
     
     CATextLayer* text_layer = [CATextLayer layer];
-//    text_layer.contents = (id)[UIImage imageNamed:split_file].CGImage;
     text_layer.foregroundColor = [UIColor colorWithWhite:0.2902 alpha:1.f].CGColor;
     text_layer.string = @"或使用社交账户登录";
     text_layer.fontSize = 14.f;
@@ -74,18 +73,6 @@
     text_layer.position = CGPointMake(screen_width / 2, SPLIT_VIEW_HEIGHT / 2);
     [split_img.layer addSublayer:text_layer];
     
-//    CALayer* left_line = [CALayer layer];
-//    left_line.borderWidth = 1.f;
-//    left_line.borderColor = [UIColor colorWithWhite:1.f alpha:0.5].CGColor;
-//    left_line.frame = CGRectMake(INPUT_MARGIN, SPLIT_VIEW_HEIGHT / 2 + 1, screen_width / 2 - SPLIT_VIEW_TEXT_WIDTH / 2 - SPLIT_VIEW_TEXT_LINE_MARGIN - INPUT_MARGIN, 1);
-//    [split_img.layer addSublayer:left_line];
-//    
-//    CALayer* right_line = [CALayer layer];
-//    right_line.borderWidth = 1.f;
-//    right_line.borderColor = [UIColor colorWithWhite:1.f alpha:0.5].CGColor;
-//    right_line.frame = CGRectMake(screen_width / 2 + SPLIT_VIEW_TEXT_WIDTH / 2 + SPLIT_VIEW_TEXT_LINE_MARGIN, SPLIT_VIEW_HEIGHT / 2 + 1, screen_width / 2 - SPLIT_VIEW_TEXT_WIDTH / 2 - SPLIT_VIEW_TEXT_LINE_MARGIN - INPUT_MARGIN, 1);
-//    [split_img.layer addSublayer:right_line];
-    
     [self addSubview:split_img];
 
     UIButton* qq_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, SNS_BUTTON_WIDTH, SNS_BUTTON_HEIGHT)];
@@ -94,8 +81,6 @@
     [qq_btn setBackgroundImage:qq_image forState:UIControlStateNormal];
     [qq_btn addTarget:self action:@selector(qqBtnSelected:) forControlEvents:UIControlEventTouchDown];
     qq_btn.backgroundColor = [UIColor clearColor];
-//    qq_btn.layer.cornerRadius = SNS_BUTTON_WIDTH / 2;
-//    qq_btn.clipsToBounds = YES;
     qq_btn.contentMode = UIViewContentModeCenter;
     [self addSubview:qq_btn];
 
@@ -105,8 +90,6 @@
     [weibo_btn setBackgroundImage:weibo_image forState:UIControlStateNormal];
     [weibo_btn addTarget:self action:@selector(weiboBtnSelected:) forControlEvents:UIControlEventTouchDown];
     weibo_btn.backgroundColor = [UIColor clearColor];
-//    weibo_btn.layer.cornerRadius = SNS_BUTTON_WIDTH / 2;
-//    weibo_btn.clipsToBounds = YES;
     weibo_btn.contentMode = UIViewContentModeCenter;
     [self addSubview:weibo_btn];
 
@@ -117,8 +100,6 @@
     [wechat_btn addTarget:self action:@selector(wechatBtnSelected:) forControlEvents:UIControlEventTouchDown];
     wechat_btn.backgroundColor = [UIColor clearColor];
     wechat_btn.clipsToBounds = YES;
-//    wechat_btn.layer.cornerRadius = SNS_BUTTON_WIDTH / 2;
-//    wechat_btn.contentMode = UIViewContentModeCenter;
     [self addSubview:wechat_btn];
 
     CGFloat forth_line_ver_line = third_line_ver_margin + sz.height + MARGIN_MODIFY / 2 + 2 * BASICMARGIN + SNS_BUTTON_HEIGHT / 2;
@@ -127,8 +108,8 @@
     CGFloat height = fifth_line_ver_line + sz.height + BASICMARGIN + MARGIN_MODIFY;
     self.bounds = CGRectMake(0, 0, width, height);
     
-    wechat_btn.center = CGPointMake(width / 2 - SNS_BUTTON_MARGIN, height / 2 + SPLIT_VIEW_HEIGHT / 2);
-    qq_btn.center = CGPointMake(width / 2, height / 2 + SPLIT_VIEW_HEIGHT / 2);
+    wechat_btn.center = CGPointMake(width / 2, height / 2 + SPLIT_VIEW_HEIGHT / 2);
+    qq_btn.center = CGPointMake(width / 2 - SNS_BUTTON_MARGIN, height / 2 + SPLIT_VIEW_HEIGHT / 2);
     weibo_btn.center = CGPointMake(width / 2 + SNS_BUTTON_MARGIN, height / 2 + SPLIT_VIEW_HEIGHT / 2);
 }
 

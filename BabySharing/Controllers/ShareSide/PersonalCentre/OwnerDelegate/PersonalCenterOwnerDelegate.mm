@@ -12,10 +12,10 @@
 #import "QueryContent+ContextOpt.h"
 #import "QueryContentItem.h"
 #import "PersonalCenterDefines.h"
-
 #include <vector>
 #import "CellConstructParameters.h"
 #import "CollectionQueryModel.h"
+#import "Define.h"
 
 @interface PersonalCenterOwnerDelegate ()
 
@@ -79,7 +79,6 @@
     cell.marign_between = 2.f;
     cell.delegate = _delegate;
     NSArray* querydata = [_delegate getQueryData];
-    //    OwnerQueryModel* om = [_delegate getOM];
     NSInteger row = indexPath.row;
     @try {
         NSArray* arr_tmp = [querydata objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(row * PHOTO_PER_LINE, PHOTO_PER_LINE)]];
@@ -93,11 +92,10 @@
         NSArray* arr_tmp = [querydata objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(row * PHOTO_PER_LINE, querydata.count - row * PHOTO_PER_LINE)]];
         NSMutableArray* arr_content = [[NSMutableArray alloc]initWithCapacity:PHOTO_PER_LINE];
         for (QueryContent* item in arr_tmp) {
-            [arr_content addObject:((QueryContentItem*)item.items.allObjects.firstObject).item_name];
+            [arr_content addObject:((QueryContentItem *)item.items.allObjects.firstObject).item_name];
         }
         [cell setUpContentViewWithImageNames:arr_content atLine:row andType:AlbumControllerTypePhoto];
     }
-
     para.cell = cell;
 }
 
@@ -107,8 +105,6 @@
 }
 
 - (void)locationViewCount:(CellCountParameters*)para {
-    //    OwnerQueryModel* om = [_delegate getOM];
-    //    para.count = ((om.querydata.count) / PHOTO_PER_LINE) + 1;
     para.count = (([_delegate getQueryData].count) / PHOTO_PER_LINE) + 1;
 }
 
@@ -146,7 +142,6 @@
         }
         [cell setUpContentViewWithImageNames:arr_content atLine:row andType:AlbumControllerTypePhoto];
     }
-
     para.cell = cell;
 }
 
@@ -247,32 +242,27 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-//    if (section == 0) {
-//        return [ProfileOverView preferredHeight];
-//    } else
         return 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSInteger index = [_delegate getCurrentSegIndex];
     CellHeightParameters * para = [[CellHeightParameters alloc]init];
-    [self performSelector:cell_constructor_height[index] withObject:para];
+    SuppressPerformSelectorLeakWarning([self performSelector:cell_constructor_height[index] withObject:para]);
     return para.height;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSInteger index = [_delegate getCurrentSegIndex];
-    CellCountParameters* para = [[CellCountParameters alloc]init];
-    [self performSelector:cell_constructor_count[index] withObject:para];
+    CellCountParameters* para = [[CellCountParameters alloc] init];
+    SuppressPerformSelectorLeakWarning([self performSelector:cell_constructor_count[index] withObject:para]);
     return para.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-   
     NSInteger index = [_delegate getCurrentSegIndex];
-    
     CellConstructParameters* para = [[CellConstructParameters alloc]initWithTableView:tableView atIndex:indexPath];
-    [self performSelector:cell_constructor_func[index] withObject:para];
+    SuppressPerformSelectorLeakWarning([self performSelector:cell_constructor_func[index] withObject:para]);
      return para.cell;
 }
 

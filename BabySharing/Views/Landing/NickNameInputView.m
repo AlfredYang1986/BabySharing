@@ -100,14 +100,15 @@
     label0.font = font;
 //    label.textColor = [UIColor whiteColor];
     [label0 sizeToFit];
-    label0.center = CGPointMake(TEXT_FIELD_LEFT_PADDING + GENDER_ICON_WIDTH + label0.frame.size.width / 2, INPUT_TEXT_FIELD_HEIGHT / 2);
+    label0.center = CGPointMake(TEXT_FIELD_LEFT_PADDING + GENDER_ICON_WIDTH + label0.frame.size.width / 2 + 6, INPUT_TEXT_FIELD_HEIGHT / 2);
     label0.tag = -1;
     [tmp addSubview:label0];
     
     UIImage* female = [UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_female" ofType:@"png"]];
+    
     CALayer* layer0 = [CALayer layer];
     layer0.contents = (id)female.CGImage;
-    layer0.frame = CGRectMake(TEXT_FIELD_LEFT_PADDING, (INPUT_TEXT_FIELD_HEIGHT - GENDER_ICON_HEIGHT) / 2, GENDER_ICON_WIDTH, GENDER_ICON_HEIGHT);
+    layer0.frame = CGRectMake(TEXT_FIELD_LEFT_PADDING, (INPUT_TEXT_FIELD_HEIGHT - GENDER_ICON_HEIGHT) / 2 - 1, GENDER_ICON_WIDTH, GENDER_ICON_HEIGHT);
     [tmp.layer addSublayer:layer0];
 
     UILabel* label1 = [[UILabel alloc]init];
@@ -148,7 +149,7 @@
     UIView *leftview = [[UIView alloc] initWithFrame:frame];
     phone_area.leftViewMode = UITextFieldViewModeAlways;
     phone_area.leftView = leftview;
-    phone_area.text = defaultString;
+    phone_area.text = [Tools subStringWithByte:18 str:defaultString];
     
     phone_area.placeholder = placeholder;
     [phone_area setValue:[UIColor colorWithWhite:0.6078 alpha:0.50] forKeyPath:@"_placeholderLabel.textColor"];
@@ -262,7 +263,7 @@
     if ([string isEqualToString:@""]) {
         return YES;
     }
-    if ([Tools bityWithStr:textField.text] >= 14) {
+    if ([Tools bityWithStr:textField.text] >= 18) {
         return NO;
     } else {
         return YES;
@@ -271,7 +272,8 @@
 
 #pragma mark -- public
 - (void)setScreenName:(NSString*)name {
-    name_text_field.text = name;
+    // 设置字符串长度
+    name_text_field.text = [Tools subStringWithByte:18 str:name];
 }
 - (NSString*)getScreenName {
     return name_text_field.text;

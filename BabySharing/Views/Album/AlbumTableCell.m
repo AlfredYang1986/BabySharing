@@ -37,10 +37,8 @@
         _marign_between = 1.f;
     }
     
-    CGFloat screen_width = [UIScreen mainScreen].bounds.size.width - _margin_left - _margin_right - _marign_between * (views_count + 1); //2 * BORDER_MODIFY;
+    CGFloat screen_width = [UIScreen mainScreen].bounds.size.width - _margin_left - _margin_right - _marign_between * (views_count + 1);
     CGFloat step_width = screen_width / views_count;
-    //      CGFloat height = rc.size.height;
-    //      [AlbumTableCell prefferCellHeight];
     CGFloat height = step_width;
     
     for (int index = 0; index < image_view.count; ++index) {
@@ -53,7 +51,7 @@
         if (index > image_arr.count)
             continue;
         
-        AlbumGridCell* tmp = [[AlbumGridCell alloc] initWithFrame:CGRectMake(index * (step_width + _marign_between) + _marign_between, _marign_between, step_width, height)];
+        AlbumGridCell *tmp = [[AlbumGridCell alloc] initWithFrame:CGRectMake(index * (step_width + _marign_between) + _marign_between, _marign_between, step_width, height)];
         tmp.cell_cor_radius = _cell_cor_radius;
         tmp.grid_border_color = _grid_border_color;
         tmp.userInteractionEnabled = YES;

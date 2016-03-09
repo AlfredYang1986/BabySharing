@@ -553,8 +553,8 @@
         
     } else if (tag_type == TagTypeLocation) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SearchViewController" bundle:nil];
-        SearchViewController* svc = [storyboard instantiateViewControllerWithIdentifier:@"Search"];
-        SearchLocationDelegate* sd = [[SearchLocationDelegate alloc] init];
+        SearchViewController *svc = [storyboard instantiateViewControllerWithIdentifier:@"Search"];
+        SearchLocationDelegate *sd = [[SearchLocationDelegate alloc] init];
         sd.delegate = svc;
         sd.actions = self;
         searchControllerTitle = @"添加地点标签";
@@ -565,8 +565,8 @@
         
     } else if (tag_type == TagTypeTime) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SearchViewController" bundle:nil];
-        SearchViewController* svc = [storyboard instantiateViewControllerWithIdentifier:@"Search"];
-        SearchTimeDelegate* sd = [[SearchTimeDelegate alloc]init];
+        SearchViewController *svc = [storyboard instantiateViewControllerWithIdentifier:@"Search"];
+        SearchTimeDelegate *sd = [[SearchTimeDelegate alloc]init];
         sd.delegate = svc;
         sd.actions = self;
         searchControllerTitle = @"添加时刻标签";

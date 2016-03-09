@@ -307,10 +307,8 @@
 }
 
 - (void)setNickName:(NSString*)nickName {
-    _nameLabel.text = [Tools subStringWithByte:18 str:nickName];
+    _nameLabel.text = nickName;
     [_nameLabel sizeToFit];
-//    _nameLabel.center = CGPointMake(SCREEN_WIDTH / 2 - NAME_LABEL_2_ROLE_TAG_LABEL_MARGIN - _nameLabel.frame.size.width / 2, _imgView.center.y + _imgView.frame.size.height / 2 + NAME_LABEL_2_SCREEN_PHOTO_MARGIN);
-   
 #define NAME_MARGIN_TOP         37
     _nameLabel.center = CGPointMake(MARGIN_LEFT + _nameLabel.frame.size.width / 2, NAME_MARGIN_TOP + _nameLabel.frame.size.height / 2);
 }
@@ -397,7 +395,7 @@
 }
 
 - (void)setShareCount:(NSInteger)share_count andThumUpCount:(NSInteger)thumup_count andBeenThumupCount:(NSInteger)been_thumup_count {
-    thumup.text = [NSString stringWithFormat:@"赞 %ld    被赞 %ld    被推 %ld", thumup_count, been_thumup_count, share_count];
+    thumup.text = [NSString stringWithFormat:@"赞 %ld    被赞 %ld    被推 %ld", (long)thumup_count, (long)been_thumup_count, (long)share_count];
     [thumup sizeToFit];
     thumup.frame = CGRectMake(MARGIN_LEFT, NAME_MARGIN_TOP + thumup.frame.size.height + 18, thumup.frame.size.width, thumup.frame.size.height);
     thumup.center = CGPointMake(thumup.center.x, relations_btn.center.y);

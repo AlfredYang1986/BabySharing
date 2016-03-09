@@ -16,10 +16,10 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    _headLabell.layer.borderColor = [UIColor colorWithRed:70.0 / 255.0 green:219.0 / 255.0 blue:202.0 / 255.0 alpha:1.0].CGColor;
+//    _headLabell.layer.borderColor = [UIColor colorWithRed:70.0 / 255.0 green:219.0 / 255.0 blue:202.0 / 255.0 alpha:1.0].CGColor;
     _headLabell.textColor = [UIColor colorWithRed:70.0 / 255.0 green:219.0 / 255.0 blue:202.0 / 255.0 alpha:1.0];
-    _headLabell.layer.borderWidth = 1;
-    _headLabell.layer.cornerRadius = 5;
+//    _headLabell.layer.borderWidth = 1;
+//    _headLabell.layer.cornerRadius = 5;
 }
 
 + (CGFloat)prefferredHeight {

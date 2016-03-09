@@ -15,40 +15,40 @@
                         <viewControllerLayoutGuide type="bottom" id="so1-A2-tuK"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Vhf-J3-SKS">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VTo-al-1cd">
-                                <rect key="frame" x="0.0" y="98" width="600" height="502"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VTo-al-1cd">
+                                <rect key="frame" x="-4" y="96" width="383" height="571"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="we2-1P-dtf">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <rect key="frame" x="-4" y="0.0" width="383" height="44"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="Eif-ts-vV1"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cZD-fj-Uik">
-                                <rect key="frame" x="0.0" y="46" width="600" height="44"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cZD-fj-Uik">
+                                <rect key="frame" x="-4" y="44" width="383" height="44"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cDC-vO-GRj">
-                                        <rect key="frame" x="8" y="8" width="40" height="40"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cDC-vO-GRj">
+                                        <rect key="frame" x="8" y="7" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="Nt6-Vw-bZj"/>
                                             <constraint firstAttribute="width" constant="30" id="tV4-Mv-Xme"/>
                                         </constraints>
                                     </imageView>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZCm-ZG-TXX">
-                                        <rect key="frame" x="56" y="13" width="348" height="30"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZCm-ZG-TXX">
+                                        <rect key="frame" x="46" y="7" width="269" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="1Ml-f9-2me"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fhF-sc-FY7">
-                                        <rect key="frame" x="546" y="18" width="46" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fhF-sc-FY7">
+                                        <rect key="frame" x="325" y="7" width="50" height="30"/>
                                         <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="JzP-X9-xqK"/>
@@ -93,6 +93,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="VTo-al-1cd" secondAttribute="trailing" constant="-20" id="ylL-gQ-2yF"/>
                         </constraints>
                     </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="confirmBtn" destination="fhF-sc-FY7" id="7d3-kV-gyZ"/>
                         <outlet property="f_bar" destination="we2-1P-dtf" id="7I1-Xl-bDO"/>

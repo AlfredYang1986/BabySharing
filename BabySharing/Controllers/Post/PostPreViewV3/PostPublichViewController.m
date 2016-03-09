@@ -242,10 +242,10 @@
     bar_save_btn = [[UIButton alloc]initWithFrame:CGRectMake(width - 10.5 - 50, 25, 50, 30)];
     [bar_save_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [bar_save_btn setTitle:@"保存" forState:UIControlStateNormal];
-    bar_save_btn.titleLabel.font = [UIFont systemFontOfSize:14.f];
-    [bar_save_btn setBackgroundImage:[self imageWithColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.F] size:CGSizeMake(bar_publich_btn.bounds.size.width, bar_save_btn.bounds.size.height)] forState:UIControlStateNormal];
-    bar_save_btn.layer.cornerRadius = 4.f;
-    bar_save_btn.clipsToBounds = YES;
+    bar_save_btn.titleLabel.font = [UIFont systemFontOfSize:15.f];
+//    [bar_save_btn setBackgroundImage:[self imageWithColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.F] size:CGSizeMake(bar_publich_btn.bounds.size.width, bar_save_btn.bounds.size.height)] forState:UIControlStateNormal];
+//    bar_save_btn.layer.cornerRadius = 4.f;
+//    bar_save_btn.clipsToBounds = YES;
 //    [bar_right_btn sizeToFit];
     [bar_save_btn addTarget:self action:@selector(didSelectSaveBtn) forControlEvents:UIControlEventTouchUpInside];
     bar_save_btn.center = CGPointMake(width - 10 - bar_publich_btn.frame.size.width / 2, FAKE_NAVIGATION_BAR_HEIGHT / 2);
@@ -445,6 +445,7 @@
         [_descriptionView resignFirstResponder];
         bar_cancel_btn.hidden = YES;
         bar_save_btn.hidden = YES;
+        bar_publich_btn.hidden = NO;
         [self moveView:KEYBOARD_HEIGHT];
     }
 }
@@ -624,6 +625,7 @@
 - (void)textViewDidBeginEditing:(UITextView *)textView {
     bar_cancel_btn.hidden = NO;
     bar_save_btn.hidden = NO;
+    bar_publich_btn.hidden = YES;
     [self moveView:-KEYBOARD_HEIGHT];
 }
 

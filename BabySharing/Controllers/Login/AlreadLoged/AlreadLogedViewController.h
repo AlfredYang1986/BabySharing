@@ -11,8 +11,9 @@
 //#import "FixBackGroundSegueController.h"
 
 //@interface AlreadLogedViewController : FixBackGroundSegueController
-@interface AlreadLogedViewController : UIViewController
+@interface AlreadLogedViewController : UIViewController<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (weak, nonatomic) LoginModel* lm;
 @property (strong, nonatomic) NSDictionary* login_attr;
+
 @end

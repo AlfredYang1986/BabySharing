@@ -50,7 +50,7 @@
     _searchBar.textField.clearButtonMode = UITextFieldViewModeWhileEditing;
     [_searchBar.cancleBtn setTitleColor:[UIColor colorWithWhite:1.f alpha:1.f] forState:UIControlStateNormal];
     [_searchBar.cancleBtn setTitleColor:[UIColor colorWithWhite:1.f alpha:1.f] forState:UIControlStateDisabled];
-    _searchBar.cancleBtn.backgroundColor = [UIColor colorWithRed:0.9686 green:0.7294 blue:0.1961 alpha:1.f];
+    _searchBar.cancleBtn.backgroundColor = [UIColor colorWithRed:100.0 / 255.0 green:210.0 / 255.0 blue:210.0 / 255.0 alpha:1.f];
     _searchBar.cancleBtn.layer.cornerRadius = 5.f;
     _searchBar.cancleBtn.clipsToBounds = YES;
     _searchBar.cancleBtn.titleLabel.font = [UIFont systemFontOfSize:14.f];

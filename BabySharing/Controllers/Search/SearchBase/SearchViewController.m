@@ -59,7 +59,7 @@
     [_searchBar.cancleBtn setTitle:@"添加" forState:UIControlStateNormal];
     [_searchBar.cancleBtn setTitle:@"添加" forState:UIControlStateDisabled];
 //    _searchBar.placeholder = @"";
-    _searchBar.cancleBtn.backgroundColor = [UIColor colorWithRed:0.9686 green:0.7294 blue:0.1961 alpha:1.f];
+    _searchBar.cancleBtn.backgroundColor = [UIColor colorWithRed:104.0/255.0 green:210.0 / 255.0 blue:210.0 / 255.0 alpha:1.f];
     _searchBar.cancleBtn.layer.cornerRadius = 5.f;
     _searchBar.cancleBtn.clipsToBounds = YES;
     _searchBar.cancleBtn.titleLabel.font = [UIFont systemFontOfSize:14.f];
