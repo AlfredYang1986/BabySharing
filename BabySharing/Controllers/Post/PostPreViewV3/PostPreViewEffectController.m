@@ -28,6 +28,8 @@
 #import "PhotoTagEnumDefines.h"
 #import "PhotoTagEditView.h"
 
+#import "GPUImage.h"
+
 #define FAKE_NAVIGATION_BAR_HEIGHT      64
 #define FUNC_BAR_HEIGHT                 47
 
@@ -38,7 +40,7 @@
 @implementation PostPreViewEffectController {
     CGFloat aspectRatio;
     
-    UIImageView* mainContentView;
+    UIView* mainContentView;
     
     PostEffectAdapter* adapter;
     
@@ -62,8 +64,11 @@
    
     /***********************************************************************/
     // movie
-    AVPlayer* player;
-    AVPlayerLayer *avPlayerLayer;
+    GPUImageMovie* movieFile;
+    GPUImageView* filterView;
+    GPUImageFilter* filter;
+//    AVPlayer* player;
+//    AVPlayerLayer *avPlayerLayer;
     /***********************************************************************/
     
     /***********************************************************************/
@@ -100,7 +105,6 @@
      */
     mainContentView = [[UIImageView alloc]initWithFrame:CGRectMake(0, FAKE_NAVIGATION_BAR_HEIGHT, width, img_height)];
     mainContentView.backgroundColor = [UIColor clearColor];
-    mainContentView.userInteractionEnabled = YES;
     mainContentView.clipsToBounds = YES;
     [self.view addSubview:mainContentView];
     
@@ -109,10 +113,8 @@
     
     img_layer = [CALayer layer];
     img_layer.frame = mainContentView.bounds;
-#pragma mark 为什么要用layer加到layer
-//    img_layer.contents = (id)_cutted_img.CGImage;
-    mainContentView.contentMode = UIViewContentModeScaleToFill;
-    mainContentView.image = _cutted_img;
+#pragma mark 窗口层次一致性
+    img_layer.contents = (id)_cutted_img.CGImage;
     [mainContentView.layer addSublayer:img_layer];
     
     /***************************************************************************************/
@@ -176,8 +178,6 @@
      * funciton bar
      */
     CGFloat height = FAKE_NAVIGATION_BAR_HEIGHT + img_height; //width * aspectRatio;
-//    UIView* f_bar = [[UIView alloc]initWithFrame:CGRectMake(0, height, width, FUNC_BAR_HEIGHT)];
-//    SearchSegView2* f_bar = [[SearchSegView2 alloc]initWithFrame:CGRectMake(0, height, width, FUNC_BAR_HEIGHT)];
     f_bar = [[SearchSegView2 alloc]initWithFrame:CGRectMake(0, height, width, FUNC_BAR_HEIGHT)];
     f_bar.backgroundColor = [UIColor colorWithWhite:0.0706 alpha:1.f];
     f_bar.delegate = self;
@@ -191,18 +191,14 @@
         
         [f_bar addItemWithTitle:@"标签"];
         [f_bar addItemWithTitle:@"滤镜"];
-        f_bar.margin_between_items = 80;
-        f_bar.selectedIndex = 0;
         
     } else if (_type == PostPreViewMovie) {
-
+        
         [f_bar addItemWithTitle:@"封面"];
         [f_bar addItemWithTitle:@"滤镜"];
-        f_bar.margin_between_items = 80;
-        f_bar.selectedIndex = 0;
     } else {
         // error
-    }   
+    }
     /***************************************************************************************/
     
     /***************************************************************************************/
@@ -215,7 +211,6 @@
     adapter.delegate = self;
     adapter.content_parent_view = self.view;
     adapter.movie_url = _editing_movie;
-    [self segValueChanged2:f_bar];
     /***************************************************************************************/
    
     /***************************************************************************************/
@@ -229,49 +224,68 @@
     /***************************************************************************************/
     // movie
     else if (_type == PostPreViewMovie) {
-        
-        if (player == nil) {
-            player = [[AVPlayer alloc]init];
-            avPlayerLayer = [AVPlayerLayer playerLayerWithPlayer:player];
+
+        if (movieFile == nil) {
+            movieFile = [[GPUImageMovie alloc] initWithURL:_editing_movie];
+            movieFile.runBenchmark = YES;
+            movieFile.playAtActualSpeed = NO;
+            movieFile.shouldRepeat = YES;
+            
+            filter = [[GPUImageFilter alloc] init];
+            [movieFile addTarget:filter];
+            
+            filterView = [[GPUImageView alloc]init];
+            filterView.fillMode = kGPUImageFillModePreserveAspectRatioAndFill;
+            filterView.frame = CGRectMake(0, -FAKE_NAVIGATION_BAR_HEIGHT, width, img_height + FAKE_NAVIGATION_BAR_HEIGHT);
+            [mainContentView addSubview:filterView];
+            [filter addTarget:filterView];
         }
         
-        if (![mainContentView.layer.sublayers containsObject:avPlayerLayer]) {
-            avPlayerLayer.frame = mainContentView.bounds;
-            avPlayerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
-            [mainContentView.layer addSublayer:avPlayerLayer];
-        }
-        
-        
-        AVPlayerItem* tmp = [AVPlayerItem playerItemWithURL:_editing_movie];
-        [player replaceCurrentItemWithPlayerItem:tmp];
-        
-        player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
+//        if (player == nil) {
+//            player = [[AVPlayer alloc]init];
+//            avPlayerLayer = [AVPlayerLayer playerLayerWithPlayer:player];
+//        }
+//        
+//        if (![mainContentView.layer.sublayers containsObject:avPlayerLayer]) {
+//            avPlayerLayer.frame = mainContentView.bounds;
+//            avPlayerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+//            [mainContentView.layer addSublayer:avPlayerLayer];
+//        }
+//        
+//        
+//        AVPlayerItem* tmp = [AVPlayerItem playerItemWithURL:_editing_movie];
+//        [player replaceCurrentItemWithPlayerItem:tmp];
+//        player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
     }
     
     /***************************************************************************************/
+    f_bar.margin_between_items = 80;
+    f_bar.selectedIndex = 0;
+    [self segValueChanged2:f_bar];
+
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    if ([keyPath isEqualToString:@"status"]) {
-        AVPlayerItem* playerItem = player.currentItem;
-        if (playerItem.status == AVPlayerStatusReadyToPlay) {
-            NSLog(@"AVPlayerStatusReadyToPlay");
-            [player seekToTime:kCMTimeZero completionHandler:^(BOOL finished) {
-                [player play];
-            }];
-            
-            
-        } else if (playerItem.status == AVPlayerStatusFailed) {
-            NSLog(@"AVPlayerStatusFailed");
-        }
-    }
-}
+//- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+//    if ([keyPath isEqualToString:@"status"]) {
+//        AVPlayerItem* playerItem = player.currentItem;
+//        if (playerItem.status == AVPlayerStatusReadyToPlay) {
+//            NSLog(@"AVPlayerStatusReadyToPlay");
+//            [player seekToTime:kCMTimeZero completionHandler:^(BOOL finished) {
+//                [player play];
+//            }];
+//            
+//            
+//        } else if (playerItem.status == AVPlayerStatusFailed) {
+//            NSLog(@"AVPlayerStatusFailed");
+//        }
+//    }
+//}
 
--(void)moviePlayDidEnd:(AVPlayerItem*)item {
-    [player seekToTime:kCMTimeZero completionHandler:^(BOOL finished) {
-        [player play];
-    }];
-}
+//-(void)moviePlayDidEnd:(AVPlayerItem*)item {
+//    [player seekToTime:kCMTimeZero completionHandler:^(BOOL finished) {
+//        [player play];
+//    }];
+//}
 
 - (UIButton*)addFunctionBarBtnWithTitle:(NSString*)title andImage:(UIImage*)img andCallBack:(SEL)callBack andRect:(CGRect)bounds andCenter:(CGPoint)center {
     UIButton* f_btn = [[UIButton alloc]initWithFrame:bounds];
@@ -321,35 +335,63 @@
     edit.hidden = YES;
     
     if (_type == PostPreViewMovie) {
-        if (![mainContentView.layer.sublayers containsObject:avPlayerLayer]) {
-            avPlayerLayer.frame = mainContentView.bounds;
-            avPlayerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
-            [mainContentView.layer addSublayer:avPlayerLayer];
+//        if (![mainContentView.layer.sublayers containsObject:avPlayerLayer]) {
+//            avPlayerLayer.frame = mainContentView.bounds;
+//            avPlayerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+//            [mainContentView.layer addSublayer:avPlayerLayer];
+//        }
+//        
+//        if (player.currentItem) {
+//            if (player.currentItem.status == AVPlayerStatusReadyToPlay) {
+//                [player seekToTime:kCMTimeZero completionHandler:^(BOOL finished) {
+//                    [player play];
+//                }];
+//            }
+//            [player.currentItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];// 监听status属性
+//            [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(moviePlayDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:player.currentItem];
+//        }
+        
+        if (movieFile == nil) {
+            movieFile = [[GPUImageMovie alloc] initWithURL:_editing_movie];
+            movieFile.runBenchmark = YES;
+            movieFile.playAtActualSpeed = NO;
+            movieFile.shouldRepeat = YES;
+            
+            filter = [[GPUImageFilter alloc] init];
+            [movieFile addTarget:filter];
+            
+            CGFloat width = [UIScreen mainScreen].bounds.size.width;
+            CGFloat img_height = width; //width * aspectRatio;
+            
+            filterView = [[GPUImageView alloc]init];
+            filterView.fillMode = kGPUImageFillModePreserveAspectRatioAndFill;
+            filterView.frame = CGRectMake(0, -FAKE_NAVIGATION_BAR_HEIGHT, width, img_height + FAKE_NAVIGATION_BAR_HEIGHT);
+            [mainContentView addSubview:filterView];
+            [filter addTarget:filterView];
         }
         
-        if (player.currentItem) {
-            if (player.currentItem.status == AVPlayerStatusReadyToPlay) {
-                [player seekToTime:kCMTimeZero completionHandler:^(BOOL finished) {
-                    [player play];
-                }];
-            }
-            [player.currentItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];// 监听status属性
-            [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(moviePlayDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:player.currentItem];
+        [movieFile startProcessing];
+        
+    } else {
+        if (![mainContentView.layer.sublayers containsObject:img_layer]) {
+            img_layer.frame = mainContentView.bounds;
+            img_layer.backgroundColor = [UIColor greenColor].CGColor;
+            [mainContentView.layer addSublayer:img_layer];
         }
     }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    if (_type == PostPreViewMovie) {
-        if (player.currentItem) {
-            [player.currentItem removeObserver:self forKeyPath:@"status"];
-            [player pause];
-        }
-        if ([mainContentView.layer.sublayers containsObject:avPlayerLayer]) {
-            [avPlayerLayer removeFromSuperlayer];
-        }
-    }
+//    if (_type == PostPreViewMovie) {
+//        if (player.currentItem) {
+//            [player.currentItem removeObserver:self forKeyPath:@"status"];
+//            [player pause];
+//        }
+//        if ([mainContentView.layer.sublayers containsObject:avPlayerLayer]) {
+//            [avPlayerLayer removeFromSuperlayer];
+//        }
+//    }
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -376,9 +418,6 @@
 
 - (void)didNextBtnSelected {
 
-    NSLog(@"测色 == %ld", [[mainContentView subviews] count]);
-    
-    
     PostPublichViewController* pub = [[PostPublichViewController alloc]init];
 //    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"PhotoPreView" bundle:nil];
 //    PhotoPublishController* publishController = [storyboard instantiateViewControllerWithIdentifier:@"publishController"];
@@ -574,7 +613,6 @@
         svc.isNeedAsyncData = YES;
         [self.navigationController pushViewController:svc animated:YES];
         svc.delegate = sd;
-        
     }
 }
 
@@ -594,6 +632,10 @@
     [mainContentView bringSubviewToFront:tmp];
     
     [paste_img_arr addObject:tmp];
+}
+
+- (void)didChangeCoverPage:(UIImage *)img {
+    [self imageWithEffect:img];
 }
 
 #pragma mark -- paste img pan handle
@@ -742,10 +784,30 @@
     [self.view addSubview:tmp];
     [self.view bringSubviewToFront:tmp];
 
+    // for tag
     if ([title isEqualToString:@"标签"]) {
         [self.view viewWithTag:-9].hidden = NO;
     } else {
         [self.view viewWithTag:-9].hidden = YES;
+    }
+    
+    // for movie page
+    if ([title isEqualToString:@"封面"]) {
+//        avPlayerLayer.hidden = YES;
+        filterView.hidden = YES;
+        [self imageWithEffect:[adapter getMovieThumbWithView:tmp]];
+        [movieFile endProcessing];
+    } else {
+   
+    }
+    
+    // for movie filter
+    if ([title isEqualToString:@"滤镜"] && _type == PostPreViewMovie) {
+//        avPlayerLayer.hidden = NO;
+        filterView.hidden = NO;
+        [movieFile startProcessing];
+    } else {
+   
     }
 }
 

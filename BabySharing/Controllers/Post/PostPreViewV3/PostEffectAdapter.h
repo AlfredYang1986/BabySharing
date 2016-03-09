@@ -45,6 +45,11 @@
  */
 - (void)pasteWithImage:(UIImage*)img;
 
+/**
+ * change movie cover
+ */
+- (void)didChangeCoverPage:(UIImage*)img;
+
 @end
 
 @interface PostEffectAdapter : NSObject
@@ -53,9 +58,8 @@
 
 @property (nonatomic, weak) UIView* content_parent_view;
 
-// for efforf of the movie
+// for effort of the movie
 @property (nonatomic, strong) NSURL* movie_url;
-
 // for effort of the image
 @property (nonatomic, strong, readonly) GPUImagePicture* ip;
 
@@ -78,4 +82,5 @@
 - (void)didSelectPasteForPhoto:(UIButton*)sender;
 - (void)didSelectHideTagView:(UITapGestureRecognizer*)gesture;
 - (void)didClickThumb:(UITapGestureRecognizer*)gesture;
+- (UIImage*)getMovieThumbWithView:(UIView*)view;
 @end

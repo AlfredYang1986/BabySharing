@@ -274,7 +274,29 @@ UIView* toolForPhoto(PostEffectAdapter* adapter, CGFloat height) {
  * for movies
  */
 UIView* effectFilterForMovie(PostEffectAdapter* adapter, CGFloat height) {
-    return thisViewIsNotImplemented(height);
+    /**
+     * 4 filter effect
+     */
+//#define MAGIC_NUMBER    0.4f
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    CGFloat margin = 0;
+    CGFloat button_height = (height - 2 * margin) * MAGIC_NUMBER;
+    
+    CGFloat preferred_width = MIN(width, 5 * (margin + button_height));
+    CGFloat edge_margin = ABS(width - preferred_width) / 2;
+    //    UIView* reVal = [[UIView alloc]initWithFrame:CGRectMake(0, 0, preferred_width, height)];
+    UIView* reVal = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, height)];
+    reVal.backgroundColor = [UIColor colorWithWhite:0.1098 alpha:1.f];
+    //    reVal.backgroundColor = [UIColor darkGrayColor];
+    //    reVal.backgroundColor = [UIColor colorWithRed:0.9050 green:0.9050 blue:0.9050 alpha:1.f];
+    
+    [reVal addSubview:addPhotoEffectBtn(@"saturation", CGRectMake(0, 0, button_height, button_height), CGPointMake(edge_margin + margin + button_height / 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:))];
+    [reVal addSubview:addPhotoEffectBtn(@"exposure", CGRectMake(0, 0, button_height, button_height), CGPointMake(edge_margin + 2 * margin + button_height * 3/ 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:))];
+    [reVal addSubview:addPhotoEffectBtn(@"normal", CGRectMake(0, 0, button_height, button_height), CGPointMake(edge_margin + 3 * margin + button_height * 5/ 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:))];
+    [reVal addSubview:addPhotoEffectBtn(@"contrast", CGRectMake(0, 0, button_height, button_height), CGPointMake(edge_margin + 4 * margin + button_height * 7/ 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:))];
+    [reVal addSubview:addPhotoEffectBtn(@"group", CGRectMake(0, 0, button_height, button_height), CGPointMake(edge_margin + 5 * margin + button_height * 9/ 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:))];
+    
+    return reVal;
 }
 
 UIView* editForMovie(PostEffectAdapter* adapter, CGFloat height) {
@@ -330,6 +352,7 @@ UIView* coverForMovie(PostEffectAdapter* adapter, CGFloat height) {
         UIImageView* tmp = [[UIImageView alloc]initWithFrame:CGRectMake(index * THUMB_SMALL_WIDTH, 0, THUMB_SMALL_WIDTH, THUMB_SMALL_HEIGHT)];
         tmp.image = [thumbs objectAtIndex:index];
         tmp.userInteractionEnabled = YES;
+        tmp.tag = -999;
         [container addSubview:tmp];
 
         UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:adapter action:@selector(didClickThumb:)];
@@ -526,6 +549,23 @@ void brandTagView(PostEffectAdapter* obj, UIImage* tag_img) {
     return result;
 }
 
+- (void)didSelectEffectFilterForMovie:(UIButton*)sender {
+//    static const vector<effectNode> vec = {
+//        effectNode{"saturation", &saturationEffectMovie},
+//        effectNode{"exposure", &exposureEffectMovie},
+//        effectNode{"contrast", &contrastEffectMovie},
+//        effectNode{"group", &groupEffectMovie},
+//        effectNode{"normal", &normalEffectMovie},
+//    };
+//    
+//    for (int index = 0; index < vec.size(); ++index) {
+//        if (strcmp([sender.titleLabel.text UTF8String], vec[index].name) == 0) {
+//            vec[index].fp(nil, self);
+//            break;
+//        }
+//    }
+}
+
 - (UIImage*)didSelectEffectFilterForPhoto:(UIButton*)sender {
     static const vector<effectNode> vec = {
         effectNode{"saturation", &saturationEffect},
@@ -603,5 +643,12 @@ void brandTagView(PostEffectAdapter* obj, UIImage* tag_img) {
     
     gesture.view.layer.borderWidth = 2.f;
     gesture.view.layer.borderColor = [UIColor colorWithRed:0.2745 green:0.8566 blue:0.7922 alpha:1.f].CGColor;
+    
+    [_delegate didChangeCoverPage:((UIImageView*)gesture.view).image];
+}
+
+- (UIImage*)getMovieThumbWithView:(UIView*)view {
+    UIImageView* tmp = [view viewWithTag:-999];
+    return tmp.image;
 }
 @end
