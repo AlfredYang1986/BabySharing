@@ -73,6 +73,7 @@
 		A02154531C89387500791291 /* UIImage+fixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = A02154521C89387500791291 /* UIImage+fixOrientation.m */; };
 		A02154591C893A7200791291 /* PointLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A02154561C893A7200791291 /* PointLayer.m */; };
 		A021545A1C893A7200791291 /* ProgressLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A02154581C893A7200791291 /* ProgressLayer.m */; };
+		A06571131C911E71003518E7 /* HomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A06571121C911E71003518E7 /* HomeCell.m */; };
 		A06649611C89A2B90043FF07 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A06649411C89A2B90043FF07 /* MKAnnotationView+WebCache.m */; };
 		A06649621C89A2B90043FF07 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = A06649431C89A2B90043FF07 /* NSData+ImageContentType.m */; };
 		A06649631C89A2B90043FF07 /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A06649451C89A2B90043FF07 /* SDImageCache.m */; };
@@ -510,6 +511,8 @@
 		A02154571C893A7200791291 /* ProgressLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressLayer.h; sourceTree = "<group>"; };
 		A02154581C893A7200791291 /* ProgressLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressLayer.m; sourceTree = "<group>"; };
 		A0423D231C84253700039991 /* GPUImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GPUImage.framework; sourceTree = "<group>"; };
+		A06571111C911E71003518E7 /* HomeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCell.h; sourceTree = "<group>"; };
+		A06571121C911E71003518E7 /* HomeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCell.m; sourceTree = "<group>"; };
 		A06648DA1C897B150043FF07 /* Define.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Define.h; sourceTree = "<group>"; };
 		A06649401C89A2B90043FF07 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
 		A06649411C89A2B90043FF07 /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+WebCache.m"; sourceTree = "<group>"; };
@@ -2318,6 +2321,8 @@
 				EEB4C8B71BFC823C0023E2AD /* QueryCell */,
 				EEAACBEC1B44E90300D05C0B /* FoundPGCView */,
 				EEAACBF31B44E90300D05C0B /* TagsRowCell */,
+				A06571111C911E71003518E7 /* HomeCell.h */,
+				A06571121C911E71003518E7 /* HomeCell.m */,
 			);
 			path = HomeCell;
 			sourceTree = "<group>";
@@ -3201,6 +3206,7 @@
 				EE7910451B841ABC005E455B /* MessageViewCell.m in Sources */,
 				70CC1C681C7C6BF20022B62E /* Following+CoreDataProperties.m in Sources */,
 				EE7910441B841AAC005E455B /* SGGridMenu.m in Sources */,
+				A06571131C911E71003518E7 /* HomeCell.m in Sources */,
 				EEB4C8B31BFC334B0023E2AD /* UserHomeViewDataDelegate.m in Sources */,
 				EE0CEC541BDB13070016B6F4 /* AlreadLogedViewController.m in Sources */,
 				EE7910431B841AA0005E455B /* AlbumTableCell.m in Sources */,

@@ -526,4 +526,12 @@
     _funcBtn.transform = CGAffineTransformMakeRotation(0);
     _funcBtn.hidden = NO;
 }
+
+- (void)setResource:(NSArray *)resource {
+    if (![_resource isEqual:resource]) {
+        _resource = resource;
+    }
+    // 设置图片
+}
+
 @end
