@@ -242,7 +242,7 @@
     bar_save_btn = [[UIButton alloc]initWithFrame:CGRectMake(width - 10.5 - 50, 25, 50, 30)];
     [bar_save_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [bar_save_btn setTitle:@"保存" forState:UIControlStateNormal];
-    bar_save_btn.titleLabel.font = [UIFont systemFontOfSize:15.f];
+    bar_save_btn.titleLabel.font = [UIFont systemFontOfSize:17.f];
 //    [bar_save_btn setBackgroundImage:[self imageWithColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.F] size:CGSizeMake(bar_publich_btn.bounds.size.width, bar_save_btn.bounds.size.height)] forState:UIControlStateNormal];
 //    bar_save_btn.layer.cornerRadius = 4.f;
 //    bar_save_btn.clipsToBounds = YES;
@@ -608,6 +608,7 @@
         [_descriptionView resignFirstResponder];
         bar_cancel_btn.hidden = YES;
         bar_save_btn.hidden = YES;
+        bar_publich_btn.hidden = NO;
         [self moveView:KEYBOARD_HEIGHT];
     }
 }

@@ -97,7 +97,7 @@
     }
 }
 
-+ (RegTmpToken*)enumRegTokenINContext:(NSManagedObjectContext*)context WithPhoneNo:(NSString*)phoneNo {
++ (RegTmpToken *)enumRegTokenINContext:(NSManagedObjectContext*)context WithPhoneNo:(NSString*)phoneNo {
     
     NSFetchRequest* request = [NSFetchRequest fetchRequestWithEntityName:@"RegTmpToken"];
 

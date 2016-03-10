@@ -116,7 +116,7 @@
     }
 }
 
-+ (LoginToken*)createTokenInContext:(NSManagedObjectContext*)context withUserID:(NSString*)user_id andAttrs:(NSDictionary*)dic {
++ (LoginToken *)createTokenInContext:(NSManagedObjectContext*)context withUserID:(NSString*)user_id andAttrs:(NSDictionary*)dic {
     
     NSFetchRequest* request = [NSFetchRequest fetchRequestWithEntityName:@"LoginToken"];
     request.predicate = [NSPredicate predicateWithFormat:@"user_id = %@", user_id];
@@ -131,7 +131,7 @@
         NSLog(@"error with primary key");
         return nil;
     } else if (matches.count == 1) {
-        LoginToken* tmp = [matches lastObject];
+        LoginToken *tmp = [matches lastObject];
         [LoginToken handlerAttrInLoginToken:tmp withAttrs:dic];
         return tmp;
     } else {
