@@ -11,6 +11,8 @@
 		700AC5A21C7EE21400BA4F96 /* AddressBookDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 700AC5A11C7EE21400BA4F96 /* AddressBookDelegate.m */; };
 		700B0B881C5A1D5E00692A20 /* Notifications+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 700B0B851C5A1D5E00692A20 /* Notifications+CoreDataProperties.m */; };
 		700B0B891C5A1D5E00692A20 /* Notifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 700B0B871C5A1D5E00692A20 /* Notifications.m */; };
+		701233BF1C915260007F79C2 /* Targets+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 701233BC1C915260007F79C2 /* Targets+CoreDataProperties.m */; };
+		701233C01C915260007F79C2 /* Targets.m in Sources */ = {isa = PBXBuildFile; fileRef = 701233BE1C915260007F79C2 /* Targets.m */; };
 		7041A5BB1C575A7400FEBFCD /* MessageChatGroupHeader2.m in Sources */ = {isa = PBXBuildFile; fileRef = 7041A5BA1C575A7400FEBFCD /* MessageChatGroupHeader2.m */; };
 		7041A5BD1C575A8700FEBFCD /* MessageChatGroupHeader2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7041A5BC1C575A8700FEBFCD /* MessageChatGroupHeader2.xib */; };
 		70530B121C3F9D1E00505121 /* SearchSegImgItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 70530B0D1C3F9D1E00505121 /* SearchSegImgItem.m */; };
@@ -141,7 +143,6 @@
 		EE5C7E4F1B511CC000104CAB /* AlbumViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5C7E4E1B511CC000104CAB /* AlbumViewController2.m */; };
 		EE5D686C1B75A55A0067A2DF /* MessageAndNotificationModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EE5D686A1B75A55A0067A2DF /* MessageAndNotificationModel.xcdatamodeld */; };
 		EE5D686F1B75A9FC0067A2DF /* NotificationOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5D686E1B75A9FC0067A2DF /* NotificationOwner.m */; };
-		EE5D68751B75A9FD0067A2DF /* Targets.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5D68741B75A9FD0067A2DF /* Targets.m */; };
 		EE5D68781B75A9FD0067A2DF /* Messages.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5D68771B75A9FD0067A2DF /* Messages.m */; };
 		EE5D687B1B75B12B0067A2DF /* NotificationOwner+ContextOpt.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5D687A1B75B12B0067A2DF /* NotificationOwner+ContextOpt.m */; };
 		EE664E9A1B73145000ACD57E /* QueryContent.m in Sources */ = {isa = PBXBuildFile; fileRef = EE664E991B73145000ACD57E /* QueryContent.m */; };
@@ -384,6 +385,10 @@
 		700B0B851C5A1D5E00692A20 /* Notifications+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Notifications+CoreDataProperties.m"; sourceTree = "<group>"; };
 		700B0B861C5A1D5E00692A20 /* Notifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notifications.h; sourceTree = "<group>"; };
 		700B0B871C5A1D5E00692A20 /* Notifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Notifications.m; sourceTree = "<group>"; };
+		701233BB1C915260007F79C2 /* Targets+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Targets+CoreDataProperties.h"; sourceTree = "<group>"; };
+		701233BC1C915260007F79C2 /* Targets+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Targets+CoreDataProperties.m"; sourceTree = "<group>"; };
+		701233BD1C915260007F79C2 /* Targets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Targets.h; sourceTree = "<group>"; };
+		701233BE1C915260007F79C2 /* Targets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Targets.m; sourceTree = "<group>"; };
 		7041A5B91C575A7400FEBFCD /* MessageChatGroupHeader2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageChatGroupHeader2.h; sourceTree = "<group>"; };
 		7041A5BA1C575A7400FEBFCD /* MessageChatGroupHeader2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageChatGroupHeader2.m; sourceTree = "<group>"; };
 		7041A5BC1C575A8700FEBFCD /* MessageChatGroupHeader2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageChatGroupHeader2.xib; sourceTree = "<group>"; };
@@ -649,8 +654,6 @@
 		EE5D686B1B75A55A0067A2DF /* MessageAndNotificationModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MessageAndNotificationModel.xcdatamodel; sourceTree = "<group>"; };
 		EE5D686D1B75A9FC0067A2DF /* NotificationOwner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationOwner.h; sourceTree = "<group>"; };
 		EE5D686E1B75A9FC0067A2DF /* NotificationOwner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationOwner.m; sourceTree = "<group>"; };
-		EE5D68731B75A9FD0067A2DF /* Targets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Targets.h; sourceTree = "<group>"; };
-		EE5D68741B75A9FD0067A2DF /* Targets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Targets.m; sourceTree = "<group>"; };
 		EE5D68761B75A9FD0067A2DF /* Messages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Messages.h; sourceTree = "<group>"; };
 		EE5D68771B75A9FD0067A2DF /* Messages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Messages.m; sourceTree = "<group>"; };
 		EE5D68791B75B12B0067A2DF /* NotificationOwner+ContextOpt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NotificationOwner+ContextOpt.h"; sourceTree = "<group>"; };
@@ -1549,14 +1552,16 @@
 		EE5D68691B75A5360067A2DF /* LocalModel */ = {
 			isa = PBXGroup;
 			children = (
+				701233BB1C915260007F79C2 /* Targets+CoreDataProperties.h */,
+				701233BC1C915260007F79C2 /* Targets+CoreDataProperties.m */,
+				701233BD1C915260007F79C2 /* Targets.h */,
+				701233BE1C915260007F79C2 /* Targets.m */,
 				700B0B841C5A1D5E00692A20 /* Notifications+CoreDataProperties.h */,
 				700B0B851C5A1D5E00692A20 /* Notifications+CoreDataProperties.m */,
 				700B0B861C5A1D5E00692A20 /* Notifications.h */,
 				700B0B871C5A1D5E00692A20 /* Notifications.m */,
 				EE5D68761B75A9FD0067A2DF /* Messages.h */,
 				EE5D68771B75A9FD0067A2DF /* Messages.m */,
-				EE5D68731B75A9FD0067A2DF /* Targets.h */,
-				EE5D68741B75A9FD0067A2DF /* Targets.m */,
 				EE5D686D1B75A9FC0067A2DF /* NotificationOwner.h */,
 				EE5D686E1B75A9FC0067A2DF /* NotificationOwner.m */,
 				EE5D686A1B75A55A0067A2DF /* MessageAndNotificationModel.xcdatamodeld */,
@@ -3246,7 +3251,6 @@
 				EE9633CD1B92BB0F00DB4EA5 /* AboutViewController.m in Sources */,
 				EEAACD131B44E90400D05C0B /* ProfileDetailLocationCell.m in Sources */,
 				EEAACCD51B44E90400D05C0B /* CurrentToken.m in Sources */,
-				EE5D68751B75A9FD0067A2DF /* Targets.m in Sources */,
 				EE6D6DB61B7B28A6004D29C8 /* WEPopoverController.m in Sources */,
 				EEAACCE81B44E90400D05C0B /* QueryTimeSpan.m in Sources */,
 				EEAACD151B44E90400D05C0B /* ProfileDetailPostCell.m in Sources */,
@@ -3266,6 +3270,7 @@
 				EE66B47D1BB3EEC600812F5F /* HomeNavigationController.m in Sources */,
 				EEBE1B851C17CB4E00EAA9D2 /* FoundSearchHeader.m in Sources */,
 				70F771F81C86E5AA006AF176 /* UINavigationController+Retro.m in Sources */,
+				701233C01C915260007F79C2 /* Targets.m in Sources */,
 				A066496F1C89A2B90043FF07 /* UIImageView+WebCache.m in Sources */,
 				EE0CEC571BDB13070016B6F4 /* PhoneInputViewController.m in Sources */,
 				706E844A1C44CF5B00D4CA91 /* LoginSNSView.m in Sources */,
@@ -3425,6 +3430,7 @@
 				EEF538F51B525F7F009C8CB9 /* PostPreViewEffectController.m in Sources */,
 				EEE94E101B74A9320011321A /* AddingFriendsController.m in Sources */,
 				EE03E9831B4FABFB00F21EF5 /* AlbumModule.m in Sources */,
+				701233BF1C915260007F79C2 /* Targets+CoreDataProperties.m in Sources */,
 				EE26D77D1C1EBB5600342E02 /* RecommandTag+ContextOpt.m in Sources */,
 				EEBE1B701C17CA9400EAA9D2 /* DongDaTabBarItem.m in Sources */,
 				A0C4D8231C81FC7900F55B20 /* LocalTag.m in Sources */,

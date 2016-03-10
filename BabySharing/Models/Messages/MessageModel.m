@@ -19,6 +19,8 @@
 #import "GotyeOCChatTarget.h"
 #import "GotyeOCMessage.h"
 
+#import "Targets.h"
+
 @implementation MessageModel
 
 @synthesize delegate = _delegate;
@@ -268,7 +270,23 @@
 
 - (NSArray*)enumMyChatGroupLocal {
     NSPredicate* pred = [NSPredicate predicateWithFormat:@"in_the_group=1 AND target_type=1"];
-    return [NotificationOwner enumTargetForOwner:_delegate.lm.current_user_id andPred:pred inContext:_doc.managedObjectContext];
+    NSArray* result = [NotificationOwner enumTargetForOwner:_delegate.lm.current_user_id andPred:pred inContext:_doc.managedObjectContext];
+   
+    for (Targets* t in result) {
+        GotyeOCGroup* group = [GotyeOCGroup groupWithId:t.group_id.longLongValue];
+        GotyeOCMessage* m = [GotyeOCAPI getLastMessage:group];
+        t.last_time = [NSDate dateWithTimeIntervalSince1970:m.date];
+    }
+    
+    result = [result sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+        Targets* left = (Targets*)obj1;
+        Targets* right = (Targets*)obj2;
+        if (left.last_time.timeIntervalSince1970 < right.last_time.timeIntervalSince1970) return NSOrderedDescending;
+        else if (left.last_time.timeIntervalSince1970 > right.last_time.timeIntervalSince1970) return NSOrderedAscending;
+        else return NSOrderedSame;
+    }];
+    
+    return result;
 }
 
 - (NSInteger)recommendChatGroupCount {
@@ -341,6 +359,11 @@
 }
 
 - (void)leaveChatGroup:(NSNumber*)group_id andFinishBlock:(chatGroupOptFinishBlock)block {
+    
+    /**
+     * TODO: leave chat group in gotye
+     */
+    
     NSString* auth_token = _delegate.lm.current_auth_token;
     NSString* user_id = _delegate.lm.current_user_id;
     

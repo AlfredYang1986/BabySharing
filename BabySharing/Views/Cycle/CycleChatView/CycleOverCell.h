@@ -8,12 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@class Targets;
+
 @interface CycleOverCell : UITableViewCell
 //@property (weak, nonatomic) IBOutlet UILabel *numLabel;
 @property (weak, nonatomic) IBOutlet UILabel *themeLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *themeImg;
 @property (weak, nonatomic) IBOutlet UILabel *chatLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+
+@property (weak, nonatomic, setter=setSession:) Targets* current_session;
 
 + (CGFloat)preferredHeight;
 @end

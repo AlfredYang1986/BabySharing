@@ -8,46 +8,113 @@
 
 #import "CycleOverCell.h"
 #import "OBShapedButton.h"
-
-@interface CycleOverCell ()
-//@property (weak, nonatomic) IBOutlet UIButton *timeBtn;
-//@property (weak, nonatomic) IBOutlet UIButton *locationBtn;
-//@property (weak, nonatomic) IBOutlet UIButton *tagBtn;
-@end
+#import "Targets.h"
+#import "TmpFileStoragemodel.h"
+#import "GotyeOCAPI.h"
 
 @implementation CycleOverCell {
     OBShapedButton* brage;
 }
 
-//@synthesize numLabel = _numLabel;
-//@synthesize timeBtn = _timeBtn;
-//@synthesize locationBtn = _locationBtn;
-//@synthesize tagBtn = _tagBtn;
 @synthesize themeLabel = _themeLabel;
 @synthesize themeImg = _themeImg;
 @synthesize chatLabel = _chatLabel;
 @synthesize timeLabel = _timeLabel;
 
+@synthesize current_session = _current_session;
+
 + (CGFloat)preferredHeight {
     return 80;
 }
 
+- (void)setSession:(Targets *)current_session {
+    _current_session = current_session;
+   
+    [self changeImage];
+    [self changeThemeText];
+    [self changeMessageText];
+    [self changeTimeText];
+    [self changeUnreadLabel];
+}
+
+- (void)changeUnreadLabel {
+    GotyeOCGroup* group = [GotyeOCGroup groupWithId:_current_session.group_id.longLongValue];
+    int count = [GotyeOCAPI getUnreadMessageCount:group];
+    if (count > 0) {
+        brage.hidden = NO;
+        NSString* str = [NSString stringWithFormat:@"%d", count];
+        [brage setTitle:str forState:UIControlStateNormal];
+    } else {
+        brage.hidden = YES;
+    }
+}
+
+- (void)changeThemeText {
+    _themeLabel.text = _current_session.target_name;
+}
+
+- (void)changeMessageText {
+    GotyeOCGroup* group = [GotyeOCGroup groupWithId:_current_session.group_id.longLongValue];
+    GotyeOCMessage* m = [GotyeOCAPI getLastMessage:group];
+    _chatLabel.text = [[m.sender.name stringByAppendingString:@" : "] stringByAppendingString:m.text];
+}
+
+- (void)changeTimeText {
+    GotyeOCGroup* group = [GotyeOCGroup groupWithId:_current_session.group_id.longLongValue];
+    GotyeOCMessage* m = [GotyeOCAPI getLastMessage:group];
+    
+    NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    
+    NSTimeInterval now_time = [NSDate date].timeIntervalSince1970;
+    if (now_time - m.date > 24 * 60 * 60) {
+        [formatter setDateFormat:@"MM-dd"];
+    } else {
+        [formatter setDateFormat:@"hh:mm"];
+    }
+    
+    NSDate* date = [NSDate dateWithTimeIntervalSince1970:m.date];
+    _timeLabel.text = [formatter stringFromDate:date];
+}
+
+- (void)changeImage {
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+    NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"default_user"] ofType:@"png"];
+    
+    UIImage* userImg = [TmpFileStorageModel enumImageWithName:_current_session.post_thumb withDownLoadFinishBolck:^(BOOL success, UIImage *user_img) {
+        if (success) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (self) {
+                    self.themeImg.image = user_img;
+                    NSLog(@"owner img download success");
+                }
+            });
+        } else {
+            NSLog(@"down load owner image %@ failed", _current_session.post_thumb);
+        }
+    }];
+    
+    if (userImg == nil) {
+        userImg = [UIImage imageNamed:filePath];
+    }
+    [self.themeImg setImage:userImg];
+}
+
 - (void)awakeFromNib {
     // Initialization code
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-    NSString * filepath = [resourceBundle pathForResource:@"GroupImg" ofType:@"png"];
-   
-    _themeImg.image = [UIImage imageNamed:filepath];
+    
+//    _themeImg.image = [UIImage imageNamed:[resourceBundle pathForResource:@"default_user" ofType:@"png"]];
     _themeImg.layer.borderColor = [UIColor lightGrayColor].CGColor;
 //    _themeImg.layer.borderWidth = 1.f;
     _themeImg.layer.cornerRadius = 8.f;
     _themeImg.clipsToBounds = YES;
     
-    NSString * bundlePath2 = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
-    NSBundle *resourceBundle2 = [NSBundle bundleWithPath:bundlePath2];
     brage = [[OBShapedButton alloc]init];
-    [brage setBackgroundImage:[UIImage imageNamed:[resourceBundle2 pathForResource:@"chat_round" ofType:@"png"]] forState:UIControlStateNormal];
+    [brage setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"chat_round" ofType:@"png"]] forState:UIControlStateNormal];
 #define BRAGE_WIDTH     25
 #define BRAGE_HEIGHT    BRAGE_WIDTH
     brage.frame = CGRectMake(0, 0, BRAGE_WIDTH, BRAGE_HEIGHT);
@@ -67,21 +134,6 @@
     line.borderWidth = 1.f;
     line.frame = CGRectMake(10.5, 79, [UIScreen mainScreen].bounds.size.width - 10.5, 1);
     [self.layer addSublayer:line];
-    
-//    [_timeBtn setImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Time_Publish" ofType:@"png"]] forState:UIControlStateNormal];
-//    [_timeBtn setTitle:@"一年" forState:UIControlStateNormal];
-//    [_timeBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-//    [_locationBtn setImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Location_Publish" ofType:@"png"]] forState:UIControlStateNormal];
-//    [_locationBtn setTitle:@"北京" forState:UIControlStateNormal];
-//    [_locationBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-//    [_tagBtn setImage:[UIImage imageNamed:[resourceBundle pathForResource:@"Tag_Publish" ofType:@"png"]] forState:UIControlStateNormal];
-//    [_tagBtn setTitle:@"购物" forState:UIControlStateNormal];
-//    [_tagBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    
-//    _numLabel.backgroundColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
-//    _numLabel.layer.cornerRadius = 10.5;
-//    _numLabel.clipsToBounds = YES;
-//    _numLabel.textColor = [UIColor whiteColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

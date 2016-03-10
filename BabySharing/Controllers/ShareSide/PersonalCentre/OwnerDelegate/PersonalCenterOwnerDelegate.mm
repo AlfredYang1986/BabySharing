@@ -99,10 +99,6 @@
         [cell setUpContentViewWithImageNames:arr_content atLine:row andType:AlbumControllerTypePhoto];
     }
     @catch (NSException *exception) {
-<<<<<<< HEAD
-=======
-#warning 这地方又有一个闪退
->>>>>>> origin/master
         NSArray* arr_tmp = [querydata objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(row * PHOTO_PER_LINE, querydata.count - row * PHOTO_PER_LINE)]];
         NSMutableArray* arr_content = [[NSMutableArray alloc]initWithCapacity:PHOTO_PER_LINE];
         for (QueryContent* item in arr_tmp) {

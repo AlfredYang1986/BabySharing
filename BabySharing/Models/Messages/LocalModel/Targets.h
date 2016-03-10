@@ -1,9 +1,9 @@
 //
 //  Targets.h
-//  
+//  BabySharing
 //
-//  Created by Alfred Yang on 20/08/2015.
-//
+//  Created by Alfred Yang on 3/10/16.
+//  Copyright © 2016 BM. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -11,26 +11,14 @@
 
 @class Messages, NotificationOwner;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface Targets : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * group_id;
-@property (nonatomic, retain) NSDate * last_time;
-@property (nonatomic, retain) NSString * target_id;
-@property (nonatomic, retain) NSString * target_name;
-@property (nonatomic, retain) NSString * target_photo;
-@property (nonatomic, retain) NSNumber * target_type;
-@property (nonatomic, retain) NSNumber * in_the_group;
-@property (nonatomic, retain) NSString * owner_id;
-@property (nonatomic, retain) NSNumber * number_count;
-@property (nonatomic, retain) NotificationOwner *chatFrom;
-@property (nonatomic, retain) NSSet *messages;
-@end
-
-@interface Targets (CoreDataGeneratedAccessors)
-
-- (void)addMessagesObject:(Messages *)value;
-- (void)removeMessagesObject:(Messages *)value;
-- (void)addMessages:(NSSet *)values;
-- (void)removeMessages:(NSSet *)values;
+// Insert code here to declare functionality of your managed object subclass
 
 @end
+
+NS_ASSUME_NONNULL_END
+
+#import "Targets+CoreDataProperties.h"

@@ -193,6 +193,8 @@
         target.target_photo = [tar objectForKey:@"screen_photo"];
         target.in_the_group = 0;
         target.owner_id = target_id;
+        target.post_id = [tar objectForKey:@"post_id"];
+        target.post_thumb = [tar objectForKey:@"post_thumb"];
         target.number_count = [NSNumber numberWithInt:1];
         target.chatFrom = owner;
         [owner addChatWithObject:target];
@@ -240,6 +242,10 @@
             target.owner_id = [tar objectForKey:@"owner_id"];
         } else if ([iter isEqualToString:@"joiners_count"]) {
             target.number_count = [tar objectForKey:@"joiners_count"];
+        } else if ([iter isEqualToString:@"post_id"]) {
+            target.post_id = [tar objectForKey:@"post_id"];
+        } else if ([iter isEqualToString:@"post_thumb"]) {
+            target.post_thumb = [tar objectForKey:@"post_thumb"];
         } else {
             // user id, do nothing
         }

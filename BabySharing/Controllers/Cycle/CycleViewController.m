@@ -27,8 +27,8 @@
 
 #define TABLE_VIEW_TOP_MARGIN   74
 
-@interface CycleViewController () <UITableViewDataSource, UITableViewDelegate, DropDownMenuProcotol, WEPopoverControllerDelegate, UIPopoverControllerDelegate, createUpdateDetailProtocol>
-//@property (weak, nonatomic) IBOutlet UIView *descriptionView;
+/*DropDownMenuProcotol, WEPopoverControllerDelegate, UIPopoverControllerDelegate,*/
+@interface CycleViewController () <UITableViewDataSource, UITableViewDelegate,  createUpdateDetailProtocol>
 @property (weak, nonatomic) IBOutlet UITableView *cycleTableView;
 
 @property (weak, nonatomic) LoginModel* lm;
@@ -39,7 +39,7 @@
 @end
 
 @implementation CycleViewController {
-	WEPopoverController *popoverController;
+//	WEPopoverController *popoverController;
     
     NSMutableDictionary* dic_description;
     BOOL isSync;
@@ -153,70 +153,6 @@
     [self viewDidLayoutSubviews];
 }
 
-//- (void)setUpDescriptionView {
-//    CGFloat width = [UIScreen mainScreen].bounds.size.width;
-//    CGFloat height = [UIScreen mainScreen].bounds.size.height;
-//    
-//    NSString* str = @"丰富自己的描述，找到属于自己的圈子";
-//    UIFont* font = [UIFont systemFontOfSize:17.f];
-//    CGSize size = [str sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
-//    UILabel* label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, width, 66)];
-//    label.textAlignment = NSTextAlignmentCenter;
-//    label.text = str;
-//    label.backgroundColor = [UIColor lightGrayColor];
-//    label.textColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
-//    [_descriptionView addSubview:label];
-//    
-//    UIButton* btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 100, 100)];
-//    btn.layer.cornerRadius = 50.f;
-//    btn.clipsToBounds = YES;
-//   
-//    CALayer* outer_layer = [CALayer layer];
-//    outer_layer.backgroundColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:0.3].CGColor;
-//    outer_layer.bounds = CGRectMake(0, 0, 100, 100);
-//    outer_layer.position = CGPointMake(btn.frame.size.width / 2, btn.frame.size.height / 2);
-//    [btn.layer addSublayer:outer_layer];
-//    
-//    CALayer* mid_layer = [CALayer layer];
-//    mid_layer.backgroundColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.8941 alpha:1.f].CGColor;
-//    mid_layer.bounds = CGRectMake(0, 0, 80, 80);
-//    mid_layer.cornerRadius = mid_layer.bounds.size.width / 2;
-//    mid_layer.masksToBounds = YES;
-//    mid_layer.position = CGPointMake(btn.frame.size.width / 2, btn.frame.size.height / 2);
-//    [btn.layer addSublayer:mid_layer];
-//
-//    CALayer* inner_layer = [CALayer layer];
-//    inner_layer.backgroundColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f].CGColor;
-//    inner_layer.bounds = CGRectMake(0, 0, 60, 60);
-//    inner_layer.cornerRadius = inner_layer.bounds.size.width / 2;
-//    inner_layer.masksToBounds = YES;
-//    inner_layer.position = CGPointMake(btn.frame.size.width / 2, btn.frame.size.height / 2);
-//    [btn.layer addSublayer:inner_layer];
-//    
-//    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//    [btn setTitle:@"描述" forState:UIControlStateNormal];
-//    [btn setFont:[UIFont systemFontOfSize:14.f]];
-//    btn.center = CGPointMake(width / 2, height / 2 - 100);
-//    [_descriptionView addSubview:btn];
-//    [btn addTarget:self action:@selector(addDescriptionBtnSelected) forControlEvents:UIControlEventTouchDown];
-//    
-//    UILabel* label_2 = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, width, size.height + 10)];
-//    label_2.textAlignment = NSTextAlignmentCenter;
-//    label_2.text = @"了解更多";
-//    label_2.textColor = [UIColor redColor];
-//    label_2.center = CGPointMake(btn.center.x, btn.center.y + 100);
-//    [_descriptionView addSubview:label_2];
-//    
-//    UILabel* label_3 = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, width, size.width + 10)];
-//    label_3.textAlignment = NSTextAlignmentCenter;
-//    label_3.text = @"... ...";
-//    label_3.textColor = [UIColor redColor];
-//    label_3.center = CGPointMake(btn.center.x, btn.center.y + 100 + size.height + 20);
-//    [_descriptionView addSubview:label_3];
-//   
-//    _descriptionView.backgroundColor = [UIColor whiteColor];   
-//}
-
 - (void)reachabilityChanged:(Reachability*)sender {
     
     if (self.tabBarController.selectedIndex != 1) return;
@@ -258,14 +194,6 @@
 }
 
 - (void)resetViews {
-//    if (dic_description && dic_description.count > 1) {
-//    if ([self isDescriptionValidate]) {
-//        _cycleTableView.hidden = NO;
-//        _descriptionView.hidden = YES;
-//    } else {
-//        _cycleTableView.hidden = YES;
-//        _descriptionView.hidden = NO;
-//    }
     _cycleTableView.hidden = NO;
 }
 
@@ -274,7 +202,6 @@
     CGFloat height = [UIScreen mainScreen].bounds.size.height;
   
     CGRect rc = CGRectMake(0, TABLE_VIEW_TOP_MARGIN, width, height);
-//    _descriptionView.frame = rc;
     _cycleTableView.frame = rc;
     
     [self resetViews];
@@ -282,7 +209,6 @@
 
 - (BOOL)hasViewDescription {
     return [_lm isCurrentHasDetailInfo];
-//    return YES;
 }
 
 - (void)addDescriptionBtnSelected {
@@ -290,11 +216,9 @@
 }
 
 #pragma mark -- table view delegate
-/*改变删除按钮的title*/
 - (nullable NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(8_0) {
     
     UITableViewRowAction * act = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"退 出" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
-//        [tableView.dataSource tableView:tableView commitEditingStyle:UITableViewCellEditingStyleDelete forRowAtIndexPath:indexPath];
         
         /**
          * 1. leave chat group
@@ -331,34 +255,13 @@
     return @[act2, act];
 }
 
-
-/*删除用到的函数*/
--(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete && indexPath.row > 0) {
-        NSLog(@"delete one row");
-//        GotyeOCChatTarget* gotTarget = [_mm getTargetByIndex:indexPath.row - 1];
-//        [GotyeOCAPI deleteSession:gotTarget alsoRemoveMessages:YES];
-//        [tableView reloadData];
-    }
-}
-
-
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    // TODO: segue to user chat
     [self performSegueWithIdentifier:@"enterChatGroup" sender:indexPath];
-    
-//    Targets* tmp = nil;
-//    if (indexPath.section == 0) {
-//        tmp = [chatGroupArray_mine objectAtIndex:indexPath.row];
-//    } else {
-//        tmp = [chatGroupArray_recommend objectAtIndex:indexPath.row];
-//    }
-//    [self backToHomeThenPushChatGroup:tmp];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -370,12 +273,10 @@
     
     UIView* reVal = [[UIView alloc]init];
     reVal.backgroundColor = [UIColor whiteColor];
-//    reVal.backgroundColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
     
     UILabel* label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 0, 0)];
     
     if (section == 0) {
-//        label.text = @"我的圈子";
         label.text = @"最近关注的";
     } else {
         label.text = @"猜你喜欢";
@@ -397,42 +298,11 @@
     [reVal.layer addSublayer:line];
     
     return reVal;
-    
-//    if (section == 0) {
-//        MyCycleCellHeader* header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"my cycle header"];
-//        if (header == nil) {
-//            header = [[MyCycleCellHeader alloc]init];
-//        }
-//       
-//        header.role_tag = @"tags";
-//        [header viewLayoutSubviews];
-//        return header;
-//        
-//    } else if (section == 1) {
-//        return nil;
-//        
-//    } else {
-//        return nil;
-//    }
 }
-
-
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-//    if (section == 0) {
-//        return [MyCycleCellHeader preferHeight];
-//    } else {
-//        return 44;
-//    }
-//    return 34;
     return 46;
 }
-
-//- (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-//    if (section == 1) {
-//        return @"推荐";
-//    } return nil;
-//}
 
 #pragma mark -- table view datasource
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -459,64 +329,10 @@
     } else {
         tmp = [chatGroupArray_recommend objectAtIndex:indexPath.row];
     }
-    
-    cell.themeLabel.text = tmp.target_name;
+   
+    cell.current_session = tmp;
     
     return cell;
-}
-
-- (void)plusBtnSelected:(id)sender {
-
-    if (!popoverController) {
-     
-        NSArray* arr = nil;
-//        if (_descriptionView.hidden == NO) {
-            arr = @[@"创建圈子", @"编辑描述", @"更多推荐", @"取消"];
-//        } else {
-//            if (isRecommmend) arr = @[@"编辑描述", @"更多推荐", @"关闭圈子推荐", @"取消"];
-//            else arr = @[@"编辑描述", @"更多推荐", @"开启圈子推荐", @"取消"];
-//        }
-        
-//        CGFloat width = [UIScreen mainScreen].bounds.size.width;
-        DropDownMenu* menu = [[DropDownMenu alloc]init];
-        [menu setMenuText:arr];
-        menu.dropdownDelegate = self;
-        
-        popoverController = [[WEPopoverController alloc] initWithContentViewController:menu];
-        popoverController.delegate = self;
-        popoverController.passthroughViews = [NSArray arrayWithObject:self.navigationController.navigationBar];
-        
-//        [popoverController presentPopoverFromBarButtonItem:sender
-        [popoverController presentPopoverFromBarButtonItem:self.navigationItem.rightBarButtonItem
-                                  permittedArrowDirections:(UIPopoverArrowDirectionUp)
-                                                  animated:YES];
-        
-    } else {
-        [popoverController dismissPopoverAnimated:YES];
-        popoverController = nil;
-    }
-}
-
-
-#pragma mark -- drop down menu
-- (void)dropDownMenu:(DropDownMenu *)menu didSelectMuneItemAtIndex:(NSInteger)index {
-   
-//    if (_descriptionView.hidden == NO && index == 0) {
-//        [self performSegueWithIdentifier:@"addCycle" sender:nil];
-//    } else if (_descriptionView.hidden == YES && index == 0) {
-//        [self performSegueWithIdentifier:@"addDescription" sender:nil];
-//    } else if (_descriptionView.hidden == NO && index == 1) {
-//        [self performSegueWithIdentifier:@"addDescription" sender:nil];
-//    }
-    
-    if (index == 0) {
-        [self performSegueWithIdentifier:@"addCycle" sender:nil];
-    } else if (index == 1) {
-        [self performSegueWithIdentifier:@"addDescription" sender:nil];
-    }
-    
-    [popoverController dismissPopoverAnimated:YES];
-    popoverController = nil;
 }
 
 #pragma mark -- segue
