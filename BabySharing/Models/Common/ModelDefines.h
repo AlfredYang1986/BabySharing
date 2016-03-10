@@ -38,8 +38,8 @@ static const NSString* kUserPostOwnerConnectionsFollowed = @"kUserPostOwnerConne
 static const NSString* kUserPostOwnerConnectionsFriends = @"kUserPostOwnerConnectionsFriends";
 
 #pragma mark -- HOST DOMAIN
-//#define HOST_DOMAIN                     @"http://www.altlys.com:9000/"
-#define HOST_DOMAIN                     @"http://192.168.3.105:9000/"
+#define HOST_DOMAIN                     @"http://www.altlys.com:9000/"
+//#define HOST_DOMAIN                     @"http://192.168.3.105:9000/"
 //#define HOST_DOMAIN_SENDBOX             @"http://192.168.1.105:9000/"
 
 #pragma mark -- DOWNLOAD
@@ -128,6 +128,7 @@ static const NSString* kUserPostOwnerConnectionsFriends = @"kUserPostOwnerConnec
 #define USER_SEARCH_POST                    [USER_SEARCH_HOST_DOMAIN stringByAppendingString:@"queryUsersPosts"]
 #define USER_SEARCH_SCREEN_NAME             [USER_SEARCH_HOST_DOMAIN stringByAppendingString:@"queryUsersWithScreenName"]
 #define USER_RECOMMAND_USERS_ROLE_TAG       [USER_SEARCH_HOST_DOMAIN stringByAppendingString:@"queryRecommandUsersWithRoleTag"]
+#define USER_SCREEN_NAME_WITH_ID            [USER_SEARCH_HOST_DOMAIN stringByAppendingString:@"queryUserScreenWithId"]
 
 #pragma mark -- MESSAGE SNEDBOX
 //#define MESSAGES_HOST_DOMAIN_SENDBOX        [HOST_DOMAIN_SENDBOX stringByAppendingString:@"messages/"]

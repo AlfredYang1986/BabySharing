@@ -12,6 +12,9 @@
 #import "TmpFileStoragemodel.h"
 #import "GotyeOCAPI.h"
 
+#import "AppDelegate.h"
+#import "RemoteInstance.h"
+
 @implementation CycleOverCell {
     OBShapedButton* brage;
 }
@@ -22,6 +25,7 @@
 @synthesize timeLabel = _timeLabel;
 
 @synthesize current_session = _current_session;
+@synthesize screen_name = _screen_name;
 
 + (CGFloat)preferredHeight {
     return 80;
@@ -32,9 +36,49 @@
    
     [self changeImage];
     [self changeThemeText];
-    [self changeMessageText];
-    [self changeTimeText];
     [self changeUnreadLabel];
+
+    GotyeOCGroup* group = [GotyeOCGroup groupWithId:_current_session.group_id.longLongValue];
+    GotyeOCMessage* m = [GotyeOCAPI getLastMessage:group];
+   
+    [self changeMessageTextWithMessage:m];
+    [self changeTimeTextWithMessage:m];
+  
+    // TODO : 我日 以后改
+    if (_screen_name == nil) {
+        
+        dispatch_queue_t q = dispatch_queue_create("name qu", nil);
+        dispatch_async(q, ^{
+            NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
+           
+            AppDelegate* app = [UIApplication sharedApplication].delegate;
+            
+            [dic setObject:app.lm.current_user_id forKey:@"user_id"];
+            [dic setObject:app.lm.current_auth_token forKey:@"auth_token"];
+            [dic setObject:m.sender.name forKey:@"query_id"];
+            
+            NSError * error = nil;
+            NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
+            
+            NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:USER_SCREEN_NAME_WITH_ID]];
+            
+            if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
+                
+                _screen_name = [result objectForKey:@"result"];
+                NSLog(@"user screen name is %@", _screen_name);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self changeMessageTextWithMessage:m];
+                });
+                
+            } else {
+                //        NSDictionary* reError = [result objectForKey:@"error"];
+                //        NSString* msg = [reError objectForKey:@"message"];
+                //        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:msg delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                //        [alert show];
+                //        return nil;
+            }
+        });
+    }
 }
 
 - (void)changeUnreadLabel {
@@ -53,15 +97,17 @@
     _themeLabel.text = _current_session.target_name;
 }
 
-- (void)changeMessageText {
-    GotyeOCGroup* group = [GotyeOCGroup groupWithId:_current_session.group_id.longLongValue];
-    GotyeOCMessage* m = [GotyeOCAPI getLastMessage:group];
-    _chatLabel.text = [[m.sender.name stringByAppendingString:@" : "] stringByAppendingString:m.text];
+- (void)changeMessageTextWithMessage:(GotyeOCMessage*)m {
+//    GotyeOCGroup* group = [GotyeOCGroup groupWithId:_current_session.group_id.longLongValue];
+//    GotyeOCMessage* m = [GotyeOCAPI getLastMessage:group];
+    if (![m.text isEqualToString:@""]) {
+        _chatLabel.text = [[_screen_name stringByAppendingString:@" : "] stringByAppendingString:m.text];
+    }
 }
 
-- (void)changeTimeText {
-    GotyeOCGroup* group = [GotyeOCGroup groupWithId:_current_session.group_id.longLongValue];
-    GotyeOCMessage* m = [GotyeOCAPI getLastMessage:group];
+- (void)changeTimeTextWithMessage:(GotyeOCMessage*)m {
+//    GotyeOCGroup* group = [GotyeOCGroup groupWithId:_current_session.group_id.longLongValue];
+//    GotyeOCMessage* m = [GotyeOCAPI getLastMessage:group];
     
     NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
     [formatter setDateStyle:NSDateFormatterMediumStyle];

@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 
 @property (weak, nonatomic, setter=setSession:) Targets* current_session;
+@property (strong, nonatomic) NSString* screen_name;
 
 + (CGFloat)preferredHeight;
 @end

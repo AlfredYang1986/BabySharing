@@ -386,6 +386,7 @@
 - (void)onJoinGroup:(GotyeStatusCode)code group:(GotyeOCGroup *)group {
     NSLog(@"enter room status code %d", code);
     [GotyeOCAPI reqGroupMemberList:group pageIndex:0];
+    [GotyeOCAPI markMessagesAsRead:group isRead:YES];
 }
 
 - (void)onGetGroupMemberList:(GotyeStatusCode)code group:(GotyeOCGroup *)group pageIndex:(unsigned int)pageIndex curPageMemberList:(NSArray *)curPageMemberList allMemberList:(NSArray *)allMemberList {
