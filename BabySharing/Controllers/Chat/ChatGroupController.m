@@ -20,7 +20,7 @@
 #import "TmpFileStorageModel.h"
 #import "RemoteInstance.h"
 
-#import "chatEmojiView.h"
+//#import "chatEmojiView.h"         // emoji not implement
 #import "ChatMessageCell.h"
 
 #import "ChatGroupUserInfoTableDelegateAndDatasource.h"
@@ -50,7 +50,7 @@
 #define USER_INFO_BACK_BTN_HEIGHT           30
 #define USER_INFO_BACK_BTN_WIDTH            30
 
-@interface ChatGroupController () <UITableViewDataSource, UITableViewDelegate, /*UITextFieldDelegate,*/ GotyeOCDelegate, ChatEmoji, UITextViewDelegate, userInfoPaneDelegate, ChatMessageCellDelegate>
+@interface ChatGroupController () <UITableViewDataSource, UITableViewDelegate, /*UITextFieldDelegate,*/ GotyeOCDelegate, /*ChatEmoji,*/ UITextViewDelegate, userInfoPaneDelegate, ChatMessageCellDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *queryView;
 @end
 
@@ -70,12 +70,12 @@
     ChatGroupUserInfoTableDelegateAndDatasource* delegate;
     
     /**
-     * for emoji
+     * for emoji not implement for first version
      */
-    UIView* keyboardView;
-    ChatEmojiView* emoji;
+//    UIView* keyboardView;
+//    ChatEmojiView* emoji;
     CGRect keyBoardFrame;
-    BOOL isEmoji;
+//    BOOL isEmoji;
     
     /**
      * dispatch_semaphore_wait
@@ -111,7 +111,6 @@
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     CGFloat height = [UIScreen mainScreen].bounds.size.height;
     
-//    header = [[MessageChatGroupHeader2 alloc]initWithFrame:CGRectMake(0, 0, width, height)];
     NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MessageChatGroupHeader2" owner:self options:nil];
     header = [nib objectAtIndex:0];
     header.frame = CGRectMake(0, 0, width, height);
@@ -155,14 +154,9 @@
             founder_dic = [result objectForKey:@"result"];
            
             dispatch_async(dispatch_get_main_queue(), ^{
-//                UIView* tmp = [_queryView headerViewForSection:0];
-//                [self setFounderInfoForChatGroupHeader:(MessageChatGroupHeader2*)tmp];
-//                [self setGroupInfoForChatGroupHeader:(MessageChatGroupHeader2*)tmp];
                 [self setFounderInfoForChatGroupHeader];
                 [self setGroupInfoForChatGroupHeader];
                 [header setNeedsLayout];
-//                [_queryView reloadData];
-//                [self reloadData];
             });
             
         } else {
@@ -176,37 +170,7 @@
         dispatch_semaphore_signal(semaphore);
     });
     
-    [self enterChatRoom];
-    
-//    /**
-//     * start enter group
-//     */
-//    dispatch_queue_t en = dispatch_queue_create("Get Profile Details", nil);
-//    dispatch_async(en, ^{
-//        [_mm joinChatGroup:_group_id andFinishBlock:^(BOOL success, id result) {
-//            NSLog(@"join group success");
-//        }];
-//    });
-//    
-//    /**
-//     * get user lst
-//     */
-//    GotyeOCRoom* room = [GotyeOCRoom roomWithId:_group_id.longLongValue];
-//    if (![GotyeOCAPI isInRoom:room]) {
-//        [GotyeOCAPI enterRoom:room];
-//    } else {
-//        [GotyeOCAPI reqRoomMemberList:room pageIndex:0];
-//    }
-    
-    /**
-     * get local messages for chat group
-     */
-    
-    /**
-     * get emoji
-     */
-    emoji = [[ChatEmojiView alloc]init];
-    emoji.delegate = self;
+    [self enterChatGroup];
     
     /**
      * input method
@@ -238,7 +202,7 @@
     userInfoPane.frame = CGRectMake(USER_INFO_PANE_MARGIN + width, height - USER_INGO_PANE_BOTTOM_MARGIN - USER_INFO_PANE_HEIGHT, width - 2 * USER_INFO_PANE_MARGIN, USER_INFO_PANE_HEIGHT);
 }
 
-- (void)enterChatRoom {
+- (void)enterChatGroup {
     /**
      * start enter group
      */
@@ -249,12 +213,8 @@
             /**
              * get user lst
              */
-            GotyeOCRoom* room = [GotyeOCRoom roomWithId:_group_id.longLongValue];
-            if (![GotyeOCAPI isInRoom:room]) {
-                [GotyeOCAPI enterRoom:room];
-            } else {
-                [GotyeOCAPI reqRoomMemberList:room pageIndex:0];
-            }
+            GotyeOCGroup* group = [GotyeOCGroup groupWithId:_group_id.longLongValue];
+            [GotyeOCAPI joinGroup:group];
         }];
     });
     
@@ -293,10 +253,6 @@
 - (void)reloadData {
     [_queryView reloadData];
     [userInfoTable reloadData];
-//    inputView.text = @"";
-//    [userBtn setTitle:[NSString stringWithFormat:@"%d", _joiner_count.intValue] forState:UIControlStateNormal];
-//    [userBtn setTitle:@"123" forState:UIControlStateNormal];
-//    [userBtn setNeedsDisplay];
    
     [self scrollTableToFoot:YES];
 }
@@ -423,12 +379,18 @@
 }
 
 #pragma mark -- gotye delegate
-- (void)onEnterRoom:(GotyeStatusCode)code room:(GotyeOCRoom *)room {
+//- (void)onEnterRoom:(GotyeStatusCode)code room:(GotyeOCRoom *)room {
+//    NSLog(@"enter room status code %d", code);
+//    [GotyeOCAPI reqRoomMemberList:room pageIndex:0];
+//}
+- (void)onJoinGroup:(GotyeStatusCode)code group:(GotyeOCGroup *)group {
     NSLog(@"enter room status code %d", code);
-    [GotyeOCAPI reqRoomMemberList:room pageIndex:0];
+    [GotyeOCAPI reqGroupMemberList:group pageIndex:0];
 }
 
--(void) onGetRoomMemberList:(GotyeStatusCode)code room:(GotyeOCRoom*)room pageIndex:(unsigned)pageIndex curPageMemberList:(NSArray*)curPageMemberList allMemberList:(NSArray*)allMemberList {
+- (void)onGetGroupMemberList:(GotyeStatusCode)code group:(GotyeOCGroup *)group pageIndex:(unsigned int)pageIndex curPageMemberList:(NSArray *)curPageMemberList allMemberList:(NSArray *)allMemberList {
+    
+//-(void) onGetRoomMemberList:(GotyeStatusCode)code room:(GotyeOCRoom*)room pageIndex:(unsigned)pageIndex curPageMemberList:(NSArray*)curPageMemberList allMemberList:(NSArray*)allMemberList {
 
     dispatch_queue_t up = dispatch_queue_create("Get user list", nil);
     dispatch_async(up, ^{
@@ -453,25 +415,19 @@
         
         if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
            
-//            MessageChatGroupHeader2* tmp = (MessageChatGroupHeader2*)[_queryView headerViewForSection:0];
             current_talk_users = [result objectForKey:@"result"];
             dispatch_async(dispatch_get_main_queue(), ^{
-//                [inputView resignFirstResponder];
-//                [self.view setNeedsDisplay];
                 [self reloadData];
             });
-//            [tmp setChatGroupUserList:current_talk_users];
             
         } else {
-//            NSDictionary* reError = [result objectForKey:@"error"];
-//            NSString* msg = [reError objectForKey:@"message"];
-//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:msg delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-//            [alert show];
+
             NSLog(@"error: %@", [result objectForKey:@"error"]);
         }
     });
 }
 
+#pragma mark -- message delegate
 /**
  * @brief 接收消息回调
  * @param message: 接收到的消息对象
@@ -495,29 +451,12 @@
     });
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-- (void)chatBtnSelected {
-//    [_inputField becomeFirstResponder];
-//    [self moveView:-keyBoardFrame.size.height];
-}
-
 - (void)backBtnSelected {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-//- (void)setGroupInfoForChatGroupHeader:(MessageChatGroupHeader2*)header {
 - (void)setGroupInfoForChatGroupHeader {
     [header setChatGroupThemeTitle:_group_name];
-//    [header setCHatGroupJoinerNumber:_joiner_count];
 }
 
 //- (void)setFounderInfoForChatGroupHeader:(MessageChatGroupHeader2*)header {
@@ -529,26 +468,6 @@
 }
 
 #pragma mark -- table view delegate
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-//    return [MessageChatGroupHeader2 preferredHeightWithContent:@"abcde"];
-    return 0;//[MessageChatGroupHeader2 preferredHeightWithContent:@"abcde"];
-}
-
-- (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-   
-//    MessageChatGroupHeader2* header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"chat group header"];
-//    
-//    if (header == nil) {
-//        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MessageChatGroupHeader" owner:self options:nil];
-//        header = [nib objectAtIndex:0];
-//    }
-//    
-//    [self setFounderInfoForChatGroupHeader:header];
-//    [self setGroupInfoForChatGroupHeader:header];
-//    return header;
-    return nil;
-}
-
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
     return NO;
 }
@@ -574,50 +493,6 @@
     cell.delegate = self;
     
     return cell;
-    
-//    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"default"];
-//    
-//    if (cell == nil) {
-//        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"default"];
-//    }
-//   
-//    GotyeOCMessage* m = [current_message objectAtIndex:indexPath.row];
-//    cell.textLabel.text = m.text;
-// 
-//    NSString* photo_name = nil;
-//    NSPredicate* pred = [NSPredicate predicateWithFormat:@"user_id=%@", m.sender.name];
-//    NSArray* talker = [current_talk_users filteredArrayUsingPredicate:pred];
-//    if (talker.count != 0) {
-//        photo_name = [talker.firstObject objectForKey:@"screen_photo"];
-//    } else {
-//        NSDictionary* one_user = [_lm querMultipleProlfiles:@[m.sender.name]].firstObject;
-//        [current_talk_users addObject:one_user];
-//        photo_name = [one_user objectForKey:@"screen_photo"];
-//    }
-//    
-//    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
-//    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-//    NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"User"] ofType:@"png"];
-//    
-//    UIImage* userImg = [TmpFileStorageModel enumImageWithName:photo_name withDownLoadFinishBolck:^(BOOL success, UIImage *user_img) {
-//        if (success) {
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                if (self) {
-//                    cell.imageView.image = user_img;
-//                    NSLog(@"owner img download success");
-//                }
-//            });
-//        } else {
-//            NSLog(@"down load owner image %@ failed", photo_name);
-//        }
-//    }];
-//    
-//    if (userImg == nil) {
-//        userImg = [UIImage imageNamed:filePath];
-//    }
-//    [cell.imageView setImage:userImg];
-//    
-//    return cell;
 }
 
 #pragma mark -- move view when chat
@@ -685,42 +560,17 @@
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
-    if ([text isEqualToString:@"\n"]){ //判断输入的字是否是回车，即按下return
-        //在这里做你响应return键的代码
-//        [self moveView:+250];
-//        [self moveView:keyBoardFrame.size.height];
+    if ([text isEqualToString:@"\n"]) {
         [textView resignFirstResponder];
         
-        GotyeOCRoom* room = [GotyeOCRoom roomWithId:_group_id.longLongValue];
-        GotyeOCMessage* m = [GotyeOCMessage createTextMessage:room text:textView.text];
+//        GotyeOCRoom* room = [GotyeOCRoom roomWithId:_group_id.longLongValue];
+        GotyeOCGroup* group = [GotyeOCGroup groupWithId:_group_id.longLongValue];
+        GotyeOCMessage* m = [GotyeOCMessage createTextMessage:group text:textView.text];
         [GotyeOCAPI sendMessage:m];
         return NO; //这里返回NO，就代表return键值失效，即页面上按下return，不会出现换行，如果为yes，则输入页面会换行
     }
     
     return YES;
-}
-
-- (IBAction)emojiBtnSelected {
-    
-//    if (isEmoji == NO) {
-//        [_inputField becomeFirstResponder];
-//        isEmoji = YES;
-//        
-//        if (keyboardView) {
-//            [emoji removeFromSuperview];
-//            emoji.frame = keyBoardFrame;
-//            [keyboardView addSubview:emoji];
-//            [keyboardView bringSubviewToFront:emoji];
-//        }
-//    } else {
-//        [emoji removeFromSuperview];
-//        isEmoji = NO;
-//    }
-}
-
-- (void)ChatEmojiSelected:(NSString*)emoji_str {
-//    _inputField.text = [_inputField.text stringByAppendingString:emoji_str];
-//    NSLog(@"text now is: %@", _inputField.text);
 }
 
 #pragma mark -- input view 2 user info view
@@ -797,8 +647,8 @@
 }
 
 - (NSInteger)getFounderRelations {
-//    return ((NSNumber*)[founder_dic objectForKey:@"relations"]).intValue;
-    return 2;
+    return ((NSNumber*)[founder_dic objectForKey:@"relations"]).intValue;
+//    return 2;
 }
 
 - (NSNumber*)getGroupJoinNumber {
@@ -830,7 +680,7 @@
         }
     }
     
-    keyboardView = result;
+//    keyboardView = result;
     NSDictionary *userInfo = [notification userInfo];
     NSValue *value = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
     keyBoardFrame = value.CGRectValue;
@@ -840,12 +690,12 @@
         [self moveView:-keyBoardFrame.size.height];
     }
     
-    if (isEmoji) {
-        [emoji removeFromSuperview];
-        emoji.frame = keyBoardFrame;
-        [keyboardView addSubview:emoji];
-        [keyboardView bringSubviewToFront:emoji];
-    }
+//    if (isEmoji) {
+//        [emoji removeFromSuperview];
+//        emoji.frame = keyBoardFrame;
+//        [keyboardView addSubview:emoji];
+//        [keyboardView bringSubviewToFront:emoji];
+//    }
 }
 
 - (void)keyboardWasChange:(NSNotification *)notification {

@@ -63,14 +63,13 @@
     
     if ([[_delegate getOwnerModel] isKindOfClass:[OwnerQueryModel class]]) {
         OwnerQueryModel *model = (OwnerQueryModel *)[_delegate getOwnerModel];
-        para.count = model.querydata.count;
+        para.count = (model.querydata.count / PHOTO_PER_LINE) + 1;
     } else if([[_delegate getOwnerModel] isKindOfClass:[OwnerQueryPushModel class]]) {
         OwnerQueryPushModel *model = (OwnerQueryPushModel *)[_delegate getOwnerModel];
-        para.count = model.querydata.count;
+        para.count = (model.querydata.count / PHOTO_PER_LINE) + 1;
     } else {
         para.count = -1;
     }
-    
 //    OwnerQueryModel* om = [_delegate getOM];
 //    para.count = ((om.querydata.count) / PHOTO_PER_LINE) + 1;
 }
@@ -102,7 +101,6 @@
         [cell setUpContentViewWithImageNames:arr_content atLine:row andType:AlbumControllerTypePhoto];
     }
     @catch (NSException *exception) {
-#pragma warning 这里有一个bug
         NSArray* arr_tmp = [querydata objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(row * PHOTO_PER_LINE, querydata.count - row * PHOTO_PER_LINE)]];
         NSMutableArray* arr_content = [[NSMutableArray alloc]initWithCapacity:PHOTO_PER_LINE];
         for (QueryContent* item in arr_tmp) {

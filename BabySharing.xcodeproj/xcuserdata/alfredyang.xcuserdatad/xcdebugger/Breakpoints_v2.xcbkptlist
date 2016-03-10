@@ -9,61 +9,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BabySharing/Controllers/Post/PostPreViewV3/PostEffectAdapter.mm"
-            timestampString = "479208255.803657"
+            filePath = "BabySharing/Controllers/ShareSide/PersonalCentre/OwnerDelegate/PersonalCenterOwnerDelegate.mm"
+            timestampString = "479218102.570581"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "400"
-            endingLineNumber = "400"
-            landmarkName = "saturationEffect(UIImage* source, PostEffectAdapter* obj)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BabySharing/Controllers/Post/PostPreViewV3/PostEffectAdapter.mm"
-            timestampString = "479208255.803657"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "401"
-            endingLineNumber = "401"
-            landmarkName = "saturationEffect(UIImage* source, PostEffectAdapter* obj)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BabySharing/Controllers/Post/PostPreViewV3/PostEffectAdapter.mm"
-            timestampString = "479208255.803657"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "404"
-            endingLineNumber = "404"
-            landmarkName = "saturationEffect(UIImage* source, PostEffectAdapter* obj)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BabySharing/Controllers/Post/PostPreViewV3/PostEffectAdapter.mm"
-            timestampString = "479208411.24926"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "555"
-            endingLineNumber = "555"
-            landmarkName = "-setUp"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "-gridViewConstructorFuncwithParameters:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -73,13 +25,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BabySharing/Controllers/Post/PostPreViewV3/PostPublichViewController.m"
-            timestampString = "479210856.561379"
+            filePath = "BabySharing/Controllers/ShareSide/PersonalCentre/OwnerDelegate/PersonalCenterOwnerDelegate.mm"
+            timestampString = "479217290.419975"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
-            landmarkName = "-viewDidLoad"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
+            landmarkName = "-gridViewCount:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -89,13 +41,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BabySharing/Models/PostModel/PostModel.m"
-            timestampString = "479213011.624769"
+            filePath = "BabySharing/Controllers/ShareSide/PersonalCentre/OwnerDelegate/PersonalCenterOwnerDelegate.mm"
+            timestampString = "479217337.685317"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
-            landmarkName = "-postJsonContentWithFileName:andThumb:withMessage:"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "-gridViewCount:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -105,61 +57,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BabySharing/Models/PostModel/PostModel.m"
-            timestampString = "479213037.137611"
+            filePath = "BabySharing/Controllers/ShareSide/PersonalCentre/OwnerDelegate/PersonalCenterOwnerDelegate.mm"
+            timestampString = "479218170.273049"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
-            landmarkName = "-postJsonContentWithFileName:andThumb:withMessage:"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[PostModel postJsonContentWithFileName:andThumb:withMessage:]"
-                  moduleName = "BabySharing"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/alfredyang/Desktop/BabySharing/BabySharing/Models/PostModel/PostModel.m"
-                  timestampString = "479213204.857186"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "100"
-                  endingLineNumber = "100"
-                  offsetFromSymbolStart = "750">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__62-[PostModel postJsonContentWithFileName:andThumb:withMessage:]_block_invoke"
-                  moduleName = "BabySharing"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/alfredyang/Desktop/BabySharing/BabySharing/Models/PostModel/PostModel.m"
-                  timestampString = "479213204.857365"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "100"
-                  endingLineNumber = "100"
-                  offsetFromSymbolStart = "30">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BabySharing/Models/PostModel/PostModel.m"
-            timestampString = "479213042.90969"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119"
-            landmarkName = "-postJsonContentWithFileName:andThumb:withMessage:"
+            startingLineNumber = "150"
+            endingLineNumber = "150"
+            landmarkName = "-locationViewConstructorFuncwithParameters:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -169,13 +73,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BabySharing/Models/PostModel/PostModel.m"
-            timestampString = "479213203.732568"
+            filePath = "BabySharing/Controllers/ShareSide/PersonalCentre/OwnerDelegate/PersonalCenterOwnerDelegate.mm"
+            timestampString = "479218170.273049"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "132"
-            endingLineNumber = "132"
-            landmarkName = "-postJsonContentWithFileName:andThumb:withMessage:"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
+            landmarkName = "-locationViewConstructorFuncwithParameters:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -185,13 +89,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BabySharing/RemoteInstance/RemoteInstance.m"
-            timestampString = "479213190.042413"
+            filePath = "BabySharing/Controllers/ShareSide/PersonalCentre/OwnerDelegate/PersonalCenterOwnerDelegate.mm"
+            timestampString = "479218102.570581"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "193"
-            endingLineNumber = "193"
-            landmarkName = "+uploadFile:withName:toUrl:callBack:"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
+            landmarkName = "-gridViewConstructorFuncwithParameters:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -201,61 +105,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BabySharing/Models/PostModel/PostModel.m"
-            timestampString = "479213386.453649"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "106"
-            endingLineNumber = "106"
-            landmarkName = "-postJsonContentWithFileName:andThumb:withMessage:"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__62-[PostModel postJsonContentWithFileName:andThumb:withMessage:]_block_invoke"
-                  moduleName = "BabySharing"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/alfredyang/Desktop/BabySharing/BabySharing/Models/PostModel/PostModel.m"
-                  timestampString = "479213402.059004"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "106"
-                  endingLineNumber = "106"
-                  offsetFromSymbolStart = "352">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__62-[PostModel postJsonContentWithFileName:andThumb:withMessage:]_block_invoke_2"
-                  moduleName = "BabySharing"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/alfredyang/Desktop/BabySharing/BabySharing/Models/PostModel/PostModel.m"
-                  timestampString = "479213402.059116"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "106"
-                  endingLineNumber = "106"
-                  offsetFromSymbolStart = "32">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BabySharing/Models/PostModel/PostModel.m"
-            timestampString = "479213388.309595"
+            filePath = "BabySharing/Controllers/ShareSide/PersonalCentre/OwnerDelegate/PersonalCenterOwnerDelegate.mm"
+            timestampString = "479218170.273049"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "104"
             endingLineNumber = "104"
-            landmarkName = "-postJsonContentWithFileName:andThumb:withMessage:"
+            landmarkName = "-gridViewConstructorFuncwithParameters:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -265,13 +121,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BabySharing/RemoteInstance/RemoteInstance.m"
-            timestampString = "479213478.801837"
+            filePath = "BabySharing/Controllers/ShareSide/PersonalCentre/OwnerDelegate/PersonalCenterOwnerDelegate.mm"
+            timestampString = "479217730.030496"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "192"
-            endingLineNumber = "192"
-            landmarkName = "+uploadFile:withName:toUrl:callBack:"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "-gridViewCount:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -281,13 +137,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BabySharing/RemoteInstance/RemoteInstance.m"
-            timestampString = "479213506.744381"
+            filePath = "BabySharing/Controllers/ShareSide/PersonalCentre/OwnerDelegate/PersonalCenterOwnerDelegate.mm"
+            timestampString = "479217730.838539"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "244"
-            endingLineNumber = "244"
-            landmarkName = "+uploadFile:withName:toUrl:callBack:"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
+            landmarkName = "-gridViewCount:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -297,13 +153,93 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BabySharing/RemoteInstance/RemoteInstance.m"
-            timestampString = "479213512.992684"
+            filePath = "BabySharing/Controllers/ShareSide/PersonalCentre/PersonalCentreTmpViewController.m"
+            timestampString = "479217791.808127"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "246"
-            endingLineNumber = "246"
-            landmarkName = "+uploadFile:withName:toUrl:callBack:"
+            startingLineNumber = "386"
+            endingLineNumber = "386"
+            landmarkName = "-getOwnerModel"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BabySharing/Controllers/Chat/ChatGroupController.m"
+            timestampString = "479281694.346196"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "434"
+            endingLineNumber = "434"
+            landmarkName = "-onJoinGroup:group:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BabySharing/Controllers/Chat/ChatGroupController.m"
+            timestampString = "479281719.726267"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "252"
+            endingLineNumber = "252"
+            landmarkName = "-enterChatGroup"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BabySharing/Controllers/Chat/ChatGroupController.m"
+            timestampString = "479281813.093844"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "442"
+            endingLineNumber = "442"
+            landmarkName = "-onGetGroupMemberList:group:pageIndex:curPageMemberList:allMemberList:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BabySharing/Controllers/Chat/ChatGroupController.m"
+            timestampString = "479281818.31796"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "435"
+            endingLineNumber = "435"
+            landmarkName = "-onJoinGroup:group:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BabySharing/Controllers/Chat/ChatGroupController.m"
+            timestampString = "479281845.519163"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "463"
+            endingLineNumber = "463"
+            landmarkName = "-onGetGroupMemberList:group:pageIndex:curPageMemberList:allMemberList:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
