@@ -20,6 +20,7 @@
 @property (nonatomic, setter=setHiddenLine:) BOOL isHiddenLine;
 @property (nonatomic, setter=setLineMargin:) CGFloat lineMargin;
 @property (nonatomic, setter=setCellHeight:) CGFloat cellHeight;
+@property (nonatomic) BOOL isTopLine;
 
 @property (nonatomic, weak) id<MessageFriendsCellDelegate> delegate;
 @property (nonatomic, strong) NSString* user_id;

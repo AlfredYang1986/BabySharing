@@ -41,11 +41,11 @@
 #define USER_BTN_HEIGHT         23
 
 
-#define USER_INFO_PANE_HEIGHT               190
+#define USER_INFO_PANE_HEIGHT               194
 #define USER_INFO_PANE_MARGIN               10.5
 #define USER_INGO_PANE_BOTTOM_MARGIN        4
 #define USER_INFO_PANE_WIDTH                width - 2 * USER_INFO_PANE_MARGIN
-#define USER_INFO_CONTAINER_HEIGHT          USER_INFO_PANE_HEIGHT - USER_INFO_BACK_BTN_HEIGHT - USER_INGO_PANE_BOTTOM_MARGIN
+#define USER_INFO_CONTAINER_HEIGHT          USER_INFO_PANE_HEIGHT
 
 #define USER_INFO_BACK_BTN_HEIGHT           30
 #define USER_INFO_BACK_BTN_WIDTH            30
@@ -65,7 +65,8 @@
     NSMutableArray* current_message;
     NSMutableArray* current_talk_users;
     
-    UIView* userInfoPane;
+//    UIView* userInfoPane;
+    UIButton* back_btn;
     UITableView* userInfoTable;
     ChatGroupUserInfoTableDelegateAndDatasource* delegate;
     
@@ -199,7 +200,8 @@
     CGFloat header_height = [MessageChatGroupHeader2 preferredHeightWithContent:@"abcde"];
     _queryView.frame = CGRectMake(0, header_height, width, height - header_height - INPUT_CONTAINER_HEIGHT);
     inputContainer.frame = CGRectMake(0, height - INPUT_CONTAINER_HEIGHT, SCREEN_WIDTH, INPUT_CONTAINER_HEIGHT);
-    userInfoPane.frame = CGRectMake(USER_INFO_PANE_MARGIN + width, height - USER_INGO_PANE_BOTTOM_MARGIN - USER_INFO_PANE_HEIGHT, width - 2 * USER_INFO_PANE_MARGIN, USER_INFO_PANE_HEIGHT);
+    userInfoTable.frame = CGRectMake(USER_INFO_PANE_MARGIN + width, height - USER_INFO_CONTAINER_HEIGHT, USER_INFO_PANE_WIDTH, USER_INFO_CONTAINER_HEIGHT);
+    //CGRectMake(USER_INFO_PANE_MARGIN + width, height - USER_INGO_PANE_BOTTOM_MARGIN - USER_INFO_PANE_HEIGHT, width - 2 * USER_INFO_PANE_MARGIN, USER_INFO_PANE_HEIGHT);
 }
 
 - (void)enterChatGroup {
@@ -277,30 +279,13 @@
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     CGFloat height = [UIScreen mainScreen].bounds.size.height;
     
-    userInfoPane = [[UIView alloc]initWithFrame:CGRectMake(USER_INFO_PANE_MARGIN, height - USER_INGO_PANE_BOTTOM_MARGIN - USER_INFO_PANE_HEIGHT, width - 2 * USER_INFO_PANE_MARGIN, USER_INFO_PANE_HEIGHT)];
-//    userInfoPane.backgroundColor = [UIColor colorWithWhite:1.f alpha:0.6];
-//    userInfoPane.layer.cornerRadius = 5.f;
-//    userInfoPane.clipsToBounds = YES;
-    userInfoPane.backgroundColor = [UIColor clearColor];
-    
+//    userInfoPane = [[UIView alloc]initWithFrame:CGRectMake(USER_INFO_PANE_MARGIN, height - USER_INGO_PANE_BOTTOM_MARGIN - USER_INFO_PANE_HEIGHT, width - 2 * USER_INFO_PANE_MARGIN, USER_INFO_PANE_HEIGHT)];
+//    userInfoPane.backgroundColor = [UIColor clearColor];
     
     NSString * bundlePath_dongda = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle_dongda = [NSBundle bundleWithPath:bundlePath_dongda];
 
-    UIButton* back_btn = [[UIButton alloc]init];
-    
-    CALayer* layer = [CALayer layer];
-    layer.contents = (id)[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"dongda_next_light" ofType:@"png"]].CGImage;
-    layer.frame = CGRectMake(0, 0, 11, 20);
-    layer.position = CGPointMake(USER_INFO_BACK_BTN_WIDTH / 2 + 7, USER_INFO_BACK_BTN_HEIGHT / 2);
-    
-//    [back_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"dongda_next_light" ofType:@"png"]] forState:UIControlStateNormal];
-    [back_btn addTarget:self action:@selector(userInfo2InputView) forControlEvents:UIControlEventTouchUpInside];
-    back_btn.frame = CGRectMake(userInfoPane.bounds.size.width - USER_INFO_BACK_BTN_WIDTH, 0, USER_INFO_BACK_BTN_WIDTH, USER_INFO_BACK_BTN_HEIGHT);
-    [back_btn.layer addSublayer:layer];
-    [userInfoPane addSubview:back_btn];
-  
-    userInfoTable = [[UITableView alloc]initWithFrame:CGRectMake(0, USER_INFO_BACK_BTN_HEIGHT + USER_INGO_PANE_BOTTOM_MARGIN, USER_INFO_PANE_WIDTH, USER_INFO_CONTAINER_HEIGHT)];
+    userInfoTable = [[UITableView alloc]initWithFrame:CGRectMake(USER_INFO_PANE_MARGIN, height - USER_INFO_CONTAINER_HEIGHT, USER_INFO_PANE_WIDTH, USER_INFO_CONTAINER_HEIGHT)];
     
     delegate = [[ChatGroupUserInfoTableDelegateAndDatasource alloc]init];
     delegate.delegate = self;
@@ -315,12 +300,26 @@
     [userInfoTable registerNib:[UINib nibWithNibName:@"MessageFriendsCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"user info header"];
     [userInfoTable registerNib:[UINib nibWithNibName:@"MessageChatGroupInfoCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"user info cell"];
     
-    [userInfoPane addSubview:userInfoTable];
+//    [userInfoPane addSubview:userInfoTable];
     
-    [self.view addSubview:userInfoPane];
-    [self.view bringSubviewToFront:userInfoPane];
+    [self.view addSubview:userInfoTable];
+    [self.view bringSubviewToFront:userInfoTable];
     
-    userInfoPane.center = CGPointMake(userInfoPane.center.x + width, userInfoPane.center.y);
+    if (back_btn == nil) {
+        back_btn = [[UIButton alloc]init];
+        CALayer* layer = [CALayer layer];
+        layer.contents = (id)[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"group_chat" ofType:@"png"]].CGImage;
+        layer.frame = CGRectMake(0, 0, 22, 22);
+        layer.position = CGPointMake(USER_INFO_BACK_BTN_WIDTH / 2, USER_INFO_BACK_BTN_HEIGHT / 2);
+        
+        //  [back_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"dongda_next_light" ofType:@"png"]] forState:UIControlStateNormal];
+        [back_btn addTarget:self action:@selector(userInfo2InputView) forControlEvents:UIControlEventTouchUpInside];
+        back_btn.frame = CGRectMake(userInfoTable.bounds.size.width - USER_INFO_BACK_BTN_WIDTH - 10.5, 10.5, USER_INFO_BACK_BTN_WIDTH, USER_INFO_BACK_BTN_HEIGHT);
+        [back_btn.layer addSublayer:layer];
+        //  [userInfoPane addSubview:back_btn];
+    }
+    
+    userInfoTable.center = CGPointMake(userInfoTable.center.x + width, userInfoTable.center.y);
 }
 
 - (void)setUpInputView {
@@ -339,14 +338,15 @@
     backBtn = [[UIButton alloc]initWithFrame:CGRectMake(8, (INPUT_CONTAINER_HEIGHT - BACK_BTN_HEIGHT) / 2, BACK_BTN_WIDTH, BACK_BTN_HEIGHT)];
     backBtn.layer.borderColor = [UIColor blueColor].CGColor;
     [backBtn addTarget:self action:@selector(backBtnSelected) forControlEvents:UIControlEventTouchUpInside];
-    [backBtn setImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"dongda_back_light" ofType:@"png"]] forState:UIControlStateNormal];
+    [backBtn setImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"dongda_back" ofType:@"png"]] forState:UIControlStateNormal];
     [inputContainer addSubview:backBtn];
     
     inputView = [[UITextView alloc]init];
     CGFloat input_width = [UIScreen mainScreen].bounds.size.width - 8 - BACK_BTN_WIDTH - BOTTOM_MARGIN - USER_BTN_WIDTH - BOTTOM_MARGIN - 8;
-    inputView.frame = CGRectMake(8 + BACK_BTN_WIDTH + BOTTOM_MARGIN, (INPUT_CONTAINER_HEIGHT - INPUT_HEIGHT) / 2, input_width, INPUT_HEIGHT);
+    inputView.frame = CGRectMake(8 + BACK_BTN_WIDTH + BOTTOM_MARGIN, (INPUT_CONTAINER_HEIGHT - INPUT_HEIGHT) / 2 - 2, input_width, INPUT_HEIGHT);
     inputView.delegate = self;
     inputView.backgroundColor = [UIColor clearColor];
+    inputView.inputView.backgroundColor = [UIColor redColor];
     inputView.scrollEnabled = NO;
     
     UIImageView* img = [[UIImageView alloc]init];
@@ -368,6 +368,7 @@
    
     CATextLayer* text = [CATextLayer layer];
     text.string = @"12";
+    text.foregroundColor = [UIColor colorWithWhite:0.2902 alpha:1.f].CGColor;
     text.fontSize = 14.f;
     text.contentsScale = 2.f;
     text.alignmentMode = @"center";
@@ -479,7 +480,8 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [ChatMessageCell preferredHeightWithInputText:@"abcde"];
+    GotyeOCMessage* m = [current_message objectAtIndex:indexPath.row];
+    return [ChatMessageCell preferredHeightWithInputText:m.text];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -582,7 +584,7 @@
     CGPoint input_start = inputContainer.center;
     CGPoint input_end   = CGPointMake(input_start.x + width, input_start.y);
     
-    CGPoint user_start  = userInfoPane.center;
+    CGPoint user_start  = userInfoTable.center;
     CGPoint user_end   = CGPointMake(user_start.x + width, user_start.y);
     
     [INTUAnimationEngine animateWithDuration:kAnimationDuration
@@ -591,7 +593,7 @@
                                      options:INTUAnimationOptionNone
                                   animations:^(CGFloat progress) {
                                       inputContainer.center = INTUInterpolateCGPoint(input_start, input_end, progress);
-                                      userInfoPane.center = INTUInterpolateCGPoint(user_start, user_end, progress);
+                                      userInfoTable.center = INTUInterpolateCGPoint(user_start, user_end, progress);
                                       
                                       // NSLog(@"Progress: %.2f", progress);
                                   }
@@ -605,7 +607,7 @@
 - (void)inputView2UserInfo {
     if (inputView.isFirstResponder) {
         [inputView resignFirstResponder];
-//        [self moveView:keyBoardFrame.size.height withFinish:@selector(inputView2UserInfo)];
+        [self moveView:keyBoardFrame.size.height withFinish:@selector(inputView2UserInfo)];
     } else {
         static const CGFloat kAnimationDuration = 0.30; // in seconds
         CGFloat width = [UIScreen mainScreen].bounds.size.width;
@@ -613,7 +615,7 @@
         CGPoint input_start = inputContainer.center;
         CGPoint input_end   = CGPointMake(input_start.x - width, input_start.y);
         
-        CGPoint user_start  = userInfoPane.center;
+        CGPoint user_start  = userInfoTable.center;
         CGPoint user_end   = CGPointMake(user_start.x - width, user_start.y);
         
         [INTUAnimationEngine animateWithDuration:kAnimationDuration
@@ -622,7 +624,7 @@
                                          options:INTUAnimationOptionNone
                                       animations:^(CGFloat progress) {
                                           inputContainer.center = INTUInterpolateCGPoint(input_start, input_end, progress);
-                                          userInfoPane.center = INTUInterpolateCGPoint(user_start, user_end, progress);
+                                          userInfoTable.center = INTUInterpolateCGPoint(user_start, user_end, progress);
                                           
                                           // NSLog(@"Progress: %.2f", progress);
                                       }
@@ -658,6 +660,10 @@
 
 - (NSArray*)getGroupJoinNumberList {
     return current_talk_users;
+}
+
+- (UIButton*)getBackBtn {
+    return back_btn;
 }
 
 #pragma mark -- emoji

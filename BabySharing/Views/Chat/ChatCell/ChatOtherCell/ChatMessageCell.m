@@ -18,17 +18,21 @@
 #define IMG_HEIGHT              IMG_WIDTH
 
 #define MARGIN                  8
-#define MARGIN_BIG              10.5
+#define MARGIN_BIG              14
 
 #define TIME_LABEL_MARGIN       10.5
 #define TIME_LABEL_HEIGHT       26
 
-#define TIME_FONT_SIZE          13.f
+#define TIME_FONT_SIZE          10.f
+#define NAME_FONT_SIZE          10.f
 #define CONTENT_FONT_SIZE       14.f
 
 @implementation ChatMessageCell {
-    OBShapedButton* time_label;
+//    OBShapedButton* time_label;
     UITextView* content;
+    UILabel* time_label;
+    UILabel* name_label;
+//    UILabel* content;
     UIImageView* imgView;
    
     CALayer* layer;
@@ -85,25 +89,42 @@
     _lm = app.lm;
     self.backgroundColor = [UIColor clearColor];
     
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
-    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-
-    if (time_label == nil) {
-        time_label = [[OBShapedButton alloc]init];
-        [self addSubview:time_label];
-        time_label.titleLabel.font = [UIFont systemFontOfSize:TIME_FONT_SIZE];
+//    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
+//    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+//
+//    if (time_label == nil) {
+//        time_label = [[OBShapedButton alloc]init];
+//        [self addSubview:time_label];
+//        time_label.titleLabel.font = [UIFont systemFontOfSize:TIME_FONT_SIZE];
 //        time_label.backgroundColor = [UIColor darkGrayColor];
 //        time_label.layer.cornerRadius = TIME_LABEL_HEIGHT / 2;
 //        time_label.textAlignment = NSTextAlignmentCenter;
 //        time_label.clipsToBounds = YES;
-        [time_label setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"chat_time_label" ofType:@"png"]] forState:UIControlStateNormal];
+//        [time_label setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"chat_time_label" ofType:@"png"]] forState:UIControlStateNormal];
+//    }
+    
+    if (time_label == nil) {
+        time_label = [[UILabel alloc]init];
+        time_label.font = [UIFont systemFontOfSize:TIME_FONT_SIZE];
+        time_label.textColor = [UIColor colorWithWhite:0.2902 alpha:1.f];
+        [self addSubview:time_label];
+    }
+   
+    if (name_label == nil) {
+        name_label = [[UILabel alloc]init];
+        name_label.font = [UIFont systemFontOfSize:NAME_FONT_SIZE];
+        name_label.textColor = [UIColor colorWithWhite:0.2902 alpha:1.f];
+        [self addSubview:name_label];
     }
     
     if (content == nil) {
 
         content = [[UITextView alloc]init];
+//        content = [[UILabel alloc]init];
         content.editable = NO;
+//        content.numberOfLines = 0;
         [self addSubview:content];
+        content.textColor = [UIColor colorWithWhite:0.2902 alpha:1.f];
         content.layer.cornerRadius = 5.f;
         content.clipsToBounds = YES;
         content.layer.borderColor = [UIColor clearColor].CGColor;
@@ -141,17 +162,13 @@
         CGFloat width = [UIScreen mainScreen].bounds.size.width * (1 - 0.18);
         CGFloat offset_x = 0.18 * width + width - MARGIN_BIG;
 //        CGFloat offset_y = MARGIN;
-        CGFloat offset_y = MARGIN_BIG + TIME_LABEL_MARGIN + TIME_LABEL_HEIGHT;
+        CGFloat offset_y = MARGIN_BIG; // + TIME_LABEL_MARGIN + TIME_LABEL_HEIGHT;
         imgView.frame = CGRectMake(offset_x - IMG_WIDTH, offset_y, IMG_WIDTH, IMG_HEIGHT);
         
         offset_x -= IMG_WIDTH + MARGIN_BIG;
         
-        UIFont* font = [UIFont systemFontOfSize:TIME_FONT_SIZE];
-        CGSize label_size = [@"88-88" sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
-        
-//        [time_label sizeToFit];
-        time_label.bounds = CGRectMake(0, 0, label_size.width + 16, TIME_LABEL_HEIGHT);
-        time_label.center = CGPointMake([UIScreen mainScreen].bounds.size.width / 2, TIME_LABEL_MARGIN + TIME_LABEL_HEIGHT / 2);
+        [name_label sizeToFit];
+        name_label.center = CGPointMake(offset_x - name_label.bounds.size.width / 2, name_label.bounds.size.height / 2);
         
         CGFloat content_width = width - 3 * MARGIN - 2 * IMG_WIDTH; // - label_size.width;
         UIFont* content_font = [UIFont systemFontOfSize:CONTENT_FONT_SIZE];
@@ -167,23 +184,22 @@
         layer.contents = (id)[UIImage imageNamed:[resourceBundle pathForResource:@"chat_mine_tri" ofType:@"png"]].CGImage;
         layer.frame = CGRectMake(offset_x - content_size.width - 16 + content_size.width + 16 - 1, offset_y + 10.5, 7, 14);
         
-        offset_x -= content_width + MARGIN;
+        offset_x -= content_size.width + MARGIN;
+
+        [time_label sizeToFit];
+        time_label.center = CGPointMake(offset_x - 6 - TIME_LABEL_MARGIN - time_label.bounds.size.width / 2, offset_y + TIME_LABEL_HEIGHT / 2 - 4);
         
     } else {
 
         CGFloat offset_x = MARGIN_BIG;
-        CGFloat offset_y = MARGIN_BIG + TIME_LABEL_MARGIN + TIME_LABEL_HEIGHT;
+        CGFloat offset_y = MARGIN_BIG; // + TIME_LABEL_MARGIN + TIME_LABEL_HEIGHT;
 //        CGFloat offset_y = MARGIN;
         imgView.frame = CGRectMake(offset_x, offset_y, IMG_WIDTH, IMG_HEIGHT);
         
         offset_x += IMG_WIDTH + MARGIN_BIG;
-        
-        UIFont* font = [UIFont systemFontOfSize:TIME_FONT_SIZE];
-        CGSize label_size = [@"88-88" sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
-      
-//        [time_label sizeToFit];
-        time_label.bounds = CGRectMake(0, 0, label_size.width + 16, TIME_LABEL_HEIGHT);
-        time_label.center = CGPointMake([UIScreen mainScreen].bounds.size.width / 2, TIME_LABEL_MARGIN + TIME_LABEL_HEIGHT / 2);
+
+        [name_label sizeToFit];
+        name_label.center = CGPointMake(offset_x + name_label.bounds.size.width / 2, name_label.bounds.size.height / 2);
         
         CGFloat width = [UIScreen mainScreen].bounds.size.width * (1 - 0.18);
         CGFloat content_width = width - 3 * MARGIN - 2 * IMG_WIDTH; // - label_size.width;
@@ -199,7 +215,10 @@
         layer.contents = (id)[UIImage imageNamed:[resourceBundle pathForResource:@"chat_other_tri" ofType:@"png"]].CGImage;
         layer.frame = CGRectMake(offset_x - 7, offset_y + 10.5, 7, 14);
         
-        offset_x += content_width + MARGIN;
+        offset_x += content_size.width + MARGIN;
+
+        [time_label sizeToFit];
+        time_label.center = CGPointMake(offset_x + 6 + TIME_LABEL_MARGIN + time_label.bounds.size.width / 2, offset_y + TIME_LABEL_HEIGHT / 2 - 4);
     }
 }
 
@@ -254,6 +273,9 @@
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 [imgView setImage:userImg];
+                
+                name_label.text = [reVal objectForKey:@"screen_name"];
+                [name_label sizeToFit];
             });
         }
     });
@@ -276,8 +298,9 @@
     }
     
     NSDate* date = [NSDate dateWithTimeIntervalSince1970:_message.date];
-//    time_label.text = [formatter stringFromDate:date];
-    [time_label setTitle:[formatter stringFromDate:date] forState:UIControlStateNormal];
+    time_label.text = [formatter stringFromDate:date];
+//    time_label.text = @"刚刚";
+//    [time_label setTitle:[formatter stringFromDate:date] forState:UIControlStateNormal];
 }
 
 + (CGFloat)preferredHeightWithInputText:(NSString*)content {
@@ -296,8 +319,8 @@
     /**
      * 3. time label width and height
      */
-    UIFont* font = [UIFont systemFontOfSize:TIME_FONT_SIZE];
-    CGSize label_size = [@"88-88" sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
+//    UIFont* font = [UIFont systemFontOfSize:TIME_FONT_SIZE];
+//    CGSize label_size = [@"88-88" sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
 //    CGFloat time_label_width = label_size.width;
 //    CGFloat time_lable_height = label_size.height;
    
@@ -308,6 +331,6 @@
     UIFont* content_font = [UIFont systemFontOfSize:CONTENT_FONT_SIZE];
     CGSize content_size = [content sizeWithFont:content_font constrainedToSize:CGSizeMake(content_width, FLT_MAX)];
     
-    return MAX(IMG_HEIGHT + 2 * MARGIN, content_size.height + 6 * MARGIN) + TIME_LABEL_HEIGHT + TIME_LABEL_MARGIN;
+    return MAX(IMG_HEIGHT + 2 * MARGIN, content_size.height + 6 * MARGIN); // + TIME_LABEL_HEIGHT + TIME_LABEL_MARGIN;
 }
 @end

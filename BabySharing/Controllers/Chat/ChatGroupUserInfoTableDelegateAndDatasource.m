@@ -23,17 +23,18 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0) {
+    if (indexPath.row == 1) {
 //        return [MessageFriendsCell preferredHeight];
-        return 55;
+        return 80;
     } else {
-        return [MessageChatGroupInfoCell preferredHeight];
+//        return [MessageChatGroupInfoCell preferredHeight];
+        return 115;
     }
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    if (indexPath.row == 0) {
+    if (indexPath.row == 1) {
         
         MessageFriendsCell* cell = [tableView dequeueReusableCellWithIdentifier:@"user info header"];
         
@@ -46,10 +47,12 @@
         [cell setRelationship:[_delegate getFounderRelations]];
         [cell setUserScreenName:[_delegate getFounderScreenName]];
         [cell setUserRoleTag:[_delegate getFounderRoleTag]];
-      
-        cell.cellHeight = 55.f;
+     
+        cell.isTopLine = YES;
+//        cell.cellHeight = 55.f;
         cell.lineMargin = 10.f;
         cell.backgroundColor = [UIColor clearColor];
+
         return cell;
         
     } else {
@@ -65,6 +68,11 @@
         [cell setChatGroupUserList:[_delegate getGroupJoinNumberList]];
       
         cell.backgroundColor = [UIColor clearColor];
+        
+        UIView* btn = [_delegate getBackBtn];
+        [btn removeFromSuperview];
+        [cell addSubview:btn];
+        
         return cell;
     }
 }

@@ -36,6 +36,7 @@
 @synthesize isHiddenLine = _isHiddenLine;
 @synthesize lineMargin = _lineMargin;
 @synthesize cellHeight = _cellHeight;
+@synthesize isTopLine = _isTopLine;
 
 @synthesize delegate = _delegate;
 @synthesize user_id = _user_id;
@@ -202,8 +203,12 @@
 
 - (void)setLineMargin:(CGFloat)lineMargin {
     _lineMargin = lineMargin;
-    
-    line.frame = CGRectMake(_lineMargin, _cellHeight - 1, self.bounds.size.width -  2 * _lineMargin, 1);
+   
+    if (_isTopLine) {
+        line.frame = CGRectMake(_lineMargin, 0, self.bounds.size.width -  2 * _lineMargin, 1);
+    } else {
+        line.frame = CGRectMake(_lineMargin, _cellHeight - 1, self.bounds.size.width -  2 * _lineMargin, 1);
+    }
 }
 
 #pragma mark -- action

@@ -18,6 +18,8 @@
 
 - (NSNumber*)getGroupJoinNumber;
 - (NSArray*)getGroupJoinNumberList;
+
+- (UIButton*)getBackBtn;
 @end
 
 @interface ChatGroupUserInfoTableDelegateAndDatasource : NSObject <UITableViewDelegate, UITableViewDataSource>

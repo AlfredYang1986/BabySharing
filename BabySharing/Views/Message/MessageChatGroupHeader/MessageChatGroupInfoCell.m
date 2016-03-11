@@ -56,7 +56,7 @@
 #define PHOTO_MARGIN            8
         
         CGFloat offset = 8;
-        CGFloat offset_y = 8;
+        CGFloat offset_y = 38;
         for (int index = 0; index < MIN(user_lst.count, 6); ++index) {
             NSDictionary* user_dic = [user_lst objectAtIndex:index];
             UIButton* tmp = [[UIButton alloc]initWithFrame:CGRectMake(offset, offset_y / 2, PHOTO_WIDTH, PHOTO_HEIGHT)];
