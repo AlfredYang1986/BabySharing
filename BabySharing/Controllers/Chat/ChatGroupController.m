@@ -7,7 +7,8 @@
 //
 
 #import "ChatGroupController.h"
-#import "MessageChatGroupHeader2.h"
+//#import "MessageChatGroupHeader2.h"
+#import "MessageChatGroupHeader3.h"
 #import "INTUAnimationEngine.h"
 
 #import "AppDelegate.h"
@@ -61,6 +62,8 @@
     UITextView* inputView;
     UIButton* backBtn;
     
+    CATextLayer* group_count;
+    
     NSDictionary* founder_dic;
     NSMutableArray* current_message;
     NSMutableArray* current_talk_users;
@@ -87,7 +90,8 @@
     /**
      * re-design layout
      */
-    MessageChatGroupHeader2* header;
+//    MessageChatGroupHeader2* header;
+    MessageChatGroupHeader3* header;
 }
 
 @synthesize queryView = _queryView;
@@ -105,16 +109,16 @@
     AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
     _lm = app.lm;
     _mm = app.mm;
-    
-    current_message = [[NSMutableArray alloc]init];
+  
     current_talk_users = [[NSMutableArray alloc]init];
   
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
-    CGFloat height = [UIScreen mainScreen].bounds.size.height;
+//    CGFloat height = [UIScreen mainScreen].bounds.size.height;
     
-    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MessageChatGroupHeader2" owner:self options:nil];
-    header = [nib objectAtIndex:0];
-    header.frame = CGRectMake(0, 0, width, height);
+//    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MessageChatGroupHeader2" owner:self options:nil];
+//    header = [nib objectAtIndex:0];
+    header = [[MessageChatGroupHeader3 alloc]init];
+    header.frame = CGRectMake(0, 0, width, [header preferredHeight]);
     header.backgroundColor = [UIColor clearColor];
     
     [self.view addSubview:header];
@@ -185,6 +189,31 @@
     
 }
 
+//- (UIStatusBarStyle)preferredStatusBarStyle {
+//    return UIStatusBarStyleLightContent;
+//    //UIStatusBarStyleDefault = 0 黑色文字，浅色背景时使用
+//    //UIStatusBarStyleLightContent = 1 白色文字，深色背景时使用
+//}
+//
+//- (BOOL)prefersStatusBarHidden {
+//    return YES; //返回NO表示要显示，返回YES将hiden
+//}
+
+- (void)resetGroupID:(NSNumber *)group_id {
+    _group_id = group_id;
+   
+    GotyeOCGroup* group = [GotyeOCGroup groupWithId:_group_id.longLongValue];
+    int unReadCount = [GotyeOCAPI getUnreadMessageCount:group];
+   
+    if (unReadCount > 0) {
+        [GotyeOCAPI setMessageReadIncrement:unReadCount];
+        current_message = [[GotyeOCAPI getMessageList:group more:NO] mutableCopy];
+        [GotyeOCAPI setMessageReadIncrement:10];
+    } else {
+        current_message = [[NSMutableArray alloc]init];
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -197,7 +226,10 @@
 - (void)viewDidLayoutSubviews {
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     CGFloat height = [UIScreen mainScreen].bounds.size.height;
-    CGFloat header_height = [MessageChatGroupHeader2 preferredHeightWithContent:@"abcde"];
+//    CGFloat header_height = [MessageChatGroupHeader2 preferredHeightWithContent:@"abcde"];
+    CGFloat header_height = [header preferredHeight];
+    header.frame = CGRectMake(0, 0, width, header_height);
+    
     _queryView.frame = CGRectMake(0, header_height, width, height - header_height - INPUT_CONTAINER_HEIGHT);
     inputContainer.frame = CGRectMake(0, height - INPUT_CONTAINER_HEIGHT, SCREEN_WIDTH, INPUT_CONTAINER_HEIGHT);
     userInfoTable.frame = CGRectMake(USER_INFO_PANE_MARGIN + width, height - USER_INFO_CONTAINER_HEIGHT, USER_INFO_PANE_WIDTH, USER_INFO_CONTAINER_HEIGHT);
@@ -365,16 +397,18 @@
     layer.frame = CGRectMake(0, 0, 16, 16);
     layer.position = CGPointMake(12, USER_BTN_HEIGHT / 2);
     [userBtn.layer addSublayer: layer];
-   
-    CATextLayer* text = [CATextLayer layer];
-    text.string = @"12";
-    text.foregroundColor = [UIColor colorWithWhite:0.2902 alpha:1.f].CGColor;
-    text.fontSize = 14.f;
-    text.contentsScale = 2.f;
-    text.alignmentMode = @"center";
-    text.frame = CGRectMake(0 + 16 + 8, 0, 30, USER_BTN_HEIGHT);
-    text.position = CGPointMake(0 + 16 + 14, USER_BTN_HEIGHT / 2 + 3);
-    [userBtn.layer addSublayer:text];
+  
+    if (group_count == nil) {
+        group_count = [CATextLayer layer];
+        group_count.string = [NSString stringWithFormat:@"%d", _joiner_count.intValue];
+        group_count.foregroundColor = [UIColor colorWithWhite:0.2902 alpha:1.f].CGColor;
+        group_count.fontSize = 14.f;
+        group_count.contentsScale = 2.f;
+        group_count.alignmentMode = @"center";
+        group_count.frame = CGRectMake(0 + 16 + 8, 0, 30, USER_BTN_HEIGHT);
+        group_count.position = CGPointMake(0 + 16 + 14, USER_BTN_HEIGHT / 2 + 3);
+        [userBtn.layer addSublayer:group_count];
+    }
     
     [inputContainer addSubview:userBtn];
 }
@@ -458,15 +492,16 @@
 }
 
 - (void)setGroupInfoForChatGroupHeader {
-    [header setChatGroupThemeTitle:_group_name];
+//    [header setChatGroupThemeTitle:_group_name];
+    header.theme_label_text = _group_name;
 }
 
 //- (void)setFounderInfoForChatGroupHeader:(MessageChatGroupHeader2*)header {
 - (void)setFounderInfoForChatGroupHeader {
-    [header setFounderScreenName:[founder_dic objectForKey:@"screen_name"]];
-    [header setFounderScreenPhoto:[founder_dic objectForKey:@"screen_photo"]];
-    [header setFounderRelations:[founder_dic objectForKey:@"relations"]];
-    [header setFounderRoleTag:[founder_dic objectForKey:@"role_tag"]];
+//    [header setFounderScreenName:[founder_dic objectForKey:@"screen_name"]];
+//    [header setFounderScreenPhoto:[founder_dic objectForKey:@"screen_photo"]];
+//    [header setFounderRelations:[founder_dic objectForKey:@"relations"]];
+//    [header setFounderRoleTag:[founder_dic objectForKey:@"role_tag"]];
 }
 
 #pragma mark -- table view delegate

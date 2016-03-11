@@ -68,6 +68,7 @@
 		70E06F811C4F967400B740CD /* SearchAddLocationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E06F801C4F967400B740CD /* SearchAddLocationDelegate.m */; };
 		70E06F851C4F988800B740CD /* SearchTimeDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E06F841C4F988800B740CD /* SearchTimeDelegate.m */; };
 		70E06F881C4F989700B740CD /* SearchAddTimeDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E06F871C4F989700B740CD /* SearchAddTimeDelegate.m */; };
+		70EB291C1C92C3C30000E4CC /* MessageChatGroupHeader3.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EB291B1C92C3C30000E4CC /* MessageChatGroupHeader3.m */; };
 		70EF02D21C22CE7A00DABCFC /* PostPublichViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EF02D11C22CE7A00DABCFC /* PostPublichViewController.m */; };
 		70F5014B1C23ADC2007769F4 /* PostPreview.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70F5014A1C23ADC2007769F4 /* PostPreview.storyboard */; };
 		70F771F81C86E5AA006AF176 /* UINavigationController+Retro.m in Sources */ = {isa = PBXBuildFile; fileRef = 70F771F71C86E5AA006AF176 /* UINavigationController+Retro.m */; };
@@ -501,6 +502,8 @@
 		70E06F841C4F988800B740CD /* SearchTimeDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTimeDelegate.m; sourceTree = "<group>"; };
 		70E06F861C4F989700B740CD /* SearchAddTimeDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchAddTimeDelegate.h; sourceTree = "<group>"; };
 		70E06F871C4F989700B740CD /* SearchAddTimeDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchAddTimeDelegate.m; sourceTree = "<group>"; };
+		70EB291A1C92C3C30000E4CC /* MessageChatGroupHeader3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageChatGroupHeader3.h; sourceTree = "<group>"; };
+		70EB291B1C92C3C30000E4CC /* MessageChatGroupHeader3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageChatGroupHeader3.m; sourceTree = "<group>"; };
 		70EF02D01C22CE7A00DABCFC /* PostPublichViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostPublichViewController.h; sourceTree = "<group>"; };
 		70EF02D11C22CE7A00DABCFC /* PostPublichViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostPublichViewController.m; sourceTree = "<group>"; };
 		70F5014A1C23ADC2007769F4 /* PostPreview.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PostPreview.storyboard; sourceTree = "<group>"; };
@@ -1796,6 +1799,8 @@
 				7082FFC61C59D2BA0056D1FC /* MessageChatGroupInfoCell.h */,
 				7082FFC71C59D2BA0056D1FC /* MessageChatGroupInfoCell.m */,
 				7082FFC81C59D2BA0056D1FC /* MessageChatGroupInfoCell.xib */,
+				70EB291A1C92C3C30000E4CC /* MessageChatGroupHeader3.h */,
+				70EB291B1C92C3C30000E4CC /* MessageChatGroupHeader3.m */,
 			);
 			path = MessageChatGroupHeader;
 			sourceTree = "<group>";
@@ -3247,6 +3252,7 @@
 				A066496D1C89A2B90043FF07 /* UIImage+WebP.m in Sources */,
 				EEB4C8C01BFC823C0023E2AD /* QueryHeader.m in Sources */,
 				EE76398A1B956CFB0025A56D /* CellConstructParameters.m in Sources */,
+				70EB291C1C92C3C30000E4CC /* MessageChatGroupHeader3.m in Sources */,
 				EE968D071C1AB0700063362E /* MessageFriendsCell.m in Sources */,
 				EE9633CD1B92BB0F00DB4EA5 /* AboutViewController.m in Sources */,
 				EEAACD131B44E90400D05C0B /* ProfileDetailLocationCell.m in Sources */,
