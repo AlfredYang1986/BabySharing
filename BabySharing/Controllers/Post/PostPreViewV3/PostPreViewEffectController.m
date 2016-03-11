@@ -105,6 +105,7 @@
      */
     mainContentView = [[UIImageView alloc]initWithFrame:CGRectMake(0, FAKE_NAVIGATION_BAR_HEIGHT, width, img_height)];
     mainContentView.backgroundColor = [UIColor clearColor];
+    mainContentView.userInteractionEnabled = YES;
     mainContentView.clipsToBounds = YES;
     [self.view addSubview:mainContentView];
     
