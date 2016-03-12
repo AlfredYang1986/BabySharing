@@ -890,8 +890,6 @@
     } else {
         return @"";
     }
-//    ALAssetsGroup* group = [album_name_arr objectAtIndex:row];
-//    return [group valueForProperty:ALAssetsGroupPropertyName];
 }
 
 #pragma mark -- scroll view delegate

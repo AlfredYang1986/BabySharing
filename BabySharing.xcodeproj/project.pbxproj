@@ -73,6 +73,7 @@
 		A02154531C89387500791291 /* UIImage+fixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = A02154521C89387500791291 /* UIImage+fixOrientation.m */; };
 		A02154591C893A7200791291 /* PointLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A02154561C893A7200791291 /* PointLayer.m */; };
 		A021545A1C893A7200791291 /* ProgressLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A02154581C893A7200791291 /* ProgressLayer.m */; };
+		A0242B7C1C92B20000223774 /* DongDaBoundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A0242B7B1C92B20000223774 /* DongDaBoundle.bundle */; };
 		A06571131C911E71003518E7 /* HomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A06571121C911E71003518E7 /* HomeCell.m */; };
 		A06649611C89A2B90043FF07 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A06649411C89A2B90043FF07 /* MKAnnotationView+WebCache.m */; };
 		A06649621C89A2B90043FF07 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = A06649431C89A2B90043FF07 /* NSData+ImageContentType.m */; };
@@ -104,7 +105,6 @@
 		A0B7A7631C7C23CC00D78E6E /* YYBoundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A0B7A7621C7C23CC00D78E6E /* YYBoundle.bundle */; };
 		A0B7A7661C7C563400D78E6E /* PersonInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B7A7651C7C563400D78E6E /* PersonInfoCell.m */; };
 		A0B7A7691C7C5B0F00D78E6E /* RoleLable.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B7A7681C7C5B0F00D78E6E /* RoleLable.m */; };
-		A0B7A76B1C7D505B00D78E6E /* DongDaBoundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A0B7A76A1C7D505B00D78E6E /* DongDaBoundle.bundle */; };
 		A0C4D8221C81FC7900F55B20 /* LocalTag+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A0C4D81D1C81FC7900F55B20 /* LocalTag+CoreDataProperties.m */; };
 		A0C4D8231C81FC7900F55B20 /* LocalTag.m in Sources */ = {isa = PBXBuildFile; fileRef = A0C4D81F1C81FC7900F55B20 /* LocalTag.m */; };
 		A0C4D8241C81FC7900F55B20 /* LocalTagModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A0C4D8201C81FC7900F55B20 /* LocalTagModel.xcdatamodeld */; };
@@ -510,6 +510,7 @@
 		A02154561C893A7200791291 /* PointLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PointLayer.m; sourceTree = "<group>"; };
 		A02154571C893A7200791291 /* ProgressLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressLayer.h; sourceTree = "<group>"; };
 		A02154581C893A7200791291 /* ProgressLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressLayer.m; sourceTree = "<group>"; };
+		A0242B7B1C92B20000223774 /* DongDaBoundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DongDaBoundle.bundle; sourceTree = "<group>"; };
 		A0423D231C84253700039991 /* GPUImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GPUImage.framework; sourceTree = "<group>"; };
 		A06571111C911E71003518E7 /* HomeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCell.h; sourceTree = "<group>"; };
 		A06571121C911E71003518E7 /* HomeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCell.m; sourceTree = "<group>"; };
@@ -581,7 +582,6 @@
 		A0B7A7651C7C563400D78E6E /* PersonInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonInfoCell.m; sourceTree = "<group>"; };
 		A0B7A7671C7C5B0F00D78E6E /* RoleLable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoleLable.h; sourceTree = "<group>"; };
 		A0B7A7681C7C5B0F00D78E6E /* RoleLable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoleLable.m; sourceTree = "<group>"; };
-		A0B7A76A1C7D505B00D78E6E /* DongDaBoundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DongDaBoundle.bundle; sourceTree = "<group>"; };
 		A0C4D81C1C81FC7900F55B20 /* LocalTag+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LocalTag+CoreDataProperties.h"; sourceTree = "<group>"; };
 		A0C4D81D1C81FC7900F55B20 /* LocalTag+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "LocalTag+CoreDataProperties.m"; sourceTree = "<group>"; };
 		A0C4D81E1C81FC7900F55B20 /* LocalTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalTag.h; sourceTree = "<group>"; };
@@ -1916,7 +1916,7 @@
 		EEAAC8FB1B44E81A00D05C0B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				A0B7A76A1C7D505B00D78E6E /* DongDaBoundle.bundle */,
+				A0242B7B1C92B20000223774 /* DongDaBoundle.bundle */,
 				A0B7A7621C7C23CC00D78E6E /* YYBoundle.bundle */,
 				EE7416251B5B8CDF002CA1BC /* AreaCodeJson.txt */,
 				EE7415D61B5B7740002CA1BC /* icon.png */,
@@ -3075,7 +3075,7 @@
 				TargetAttributes = {
 					EEAAC8F71B44E81A00D05C0B = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = V6843SSXWV;
+						DevelopmentTeam = 6AUL2A4AE9;
 					};
 					EEAAC9131B44E81A00D05C0B = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -3142,10 +3142,10 @@
 				EEC980B61B8EB9EA0087E5A7 /* status-bar-progress@2x.png in Resources */,
 				EEAACD071B44E90400D05C0B /* FoundPCGCell.xib in Resources */,
 				7082FFCA1C59D2BA0056D1FC /* MessageChatGroupInfoCell.xib in Resources */,
-				A0B7A76B1C7D505B00D78E6E /* DongDaBoundle.bundle in Resources */,
 				A0A5C53F1C7DB1DF00F07FE8 /* WeiboSDK.bundle in Resources */,
 				EEBFFC1E1B916A0F005AAE36 /* PersonalSettingCell.xib in Resources */,
 				EE7415D21B5B7215002CA1BC /* Localizable.strings in Resources */,
+				A0242B7C1C92B20000223774 /* DongDaBoundle.bundle in Resources */,
 				EED64D471B8184C1008CB134 /* CycleAddKidsCell.xib in Resources */,
 				EE74162B1B5B9659002CA1BC /* AreaTableCell.xib in Resources */,
 				EE9676411B7C3D7700445254 /* CycleDescriptionCell.xib in Resources */,
@@ -3616,10 +3616,10 @@
 					"-ObjC",
 					"-fobjc-arc",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = BS.BabySharing;
+				PRODUCT_BUNDLE_IDENTIFIER = monkeyheng.BabySharing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -3656,10 +3656,10 @@
 					"-ObjC",
 					"-fobjc-arc",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = BS.BabySharing;
+				PRODUCT_BUNDLE_IDENTIFIER = monkeyheng.BabySharing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

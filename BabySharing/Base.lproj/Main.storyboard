@@ -15,11 +15,11 @@
                         <viewControllerLayoutGuide type="bottom" id="i1W-mi-dmf"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Gom-rl-E18">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="登录即表示同意用户协议&amp;隐私政策" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fJh-Ts-ais">
-                                <rect key="frame" x="0.0" y="10101" width="600" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登录即表示同意用户协议&amp;隐私政策" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fJh-Ts-ais">
+                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="ukJ-NR-XY8"/>
                                 </constraints>
@@ -27,8 +27,8 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="19h-Xu-hfB">
-                                <rect key="frame" x="16" y="72" width="568" height="10000"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="19h-Xu-hfB">
+                                <rect key="frame" x="0.0" y="74" width="320" height="450"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <string key="text">HIGO开放平台服务协议
 HIGO开放平台服务协议（以下简称“本协议”）由以下双方于201   年      月      日签订：
@@ -400,7 +400,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <viewControllerLayoutGuide type="bottom" id="jhr-zt-DSk"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="DQM-GH-85M">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -425,7 +425,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <viewControllerLayoutGuide type="bottom" id="7OL-Gv-vsV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="GUY-yM-xaj">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -448,15 +448,15 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <viewControllerLayoutGuide type="bottom" id="keQ-O6-4hN"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="dXw-06-EIO">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="dPO-7D-dfh">
-                                <rect key="frame" x="0.0" y="214" width="600" height="386"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="dPO-7D-dfh">
+                                <rect key="frame" x="0.0" y="116" width="320" height="452"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZLr-K2-aed" customClass="DongDaSearchBar">
-                                <rect key="frame" x="0.0" y="64" width="600" height="48"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZLr-K2-aed" customClass="DongDaSearchBar">
+                                <rect key="frame" x="-4" y="72" width="328" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="xUT-Mc-NNM"/>
@@ -501,37 +501,37 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <viewControllerLayoutGuide type="bottom" id="ngx-1N-Gpn"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="wRa-na-O1g">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Zgg-Ar-Wco">
-                                <rect key="frame" x="0.0" y="293" width="600" height="307"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Zgg-Ar-Wco">
+                                <rect key="frame" x="6" y="172" width="314" height="396"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="xdg-vF-3pg" id="sa8-Sz-Hd8"/>
                                     <outlet property="delegate" destination="xdg-vF-3pg" id="jyU-CR-K6N"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6gl-Dr-p7I">
-                                <rect key="frame" x="0.0" y="88" width="600" height="30"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6gl-Dr-p7I">
+                                <rect key="frame" x="0.0" y="64" width="320" height="64"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="A67-il-nhp"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ch6-NT-arK">
-                                <rect key="frame" x="0.0" y="147" width="600" height="44"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ch6-NT-arK">
+                                <rect key="frame" x="-4" y="128" width="328" height="44"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zDo-Yo-pRA">
-                                        <rect key="frame" x="56" y="13" width="348" height="30"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zDo-Yo-pRA">
+                                        <rect key="frame" x="11" y="4" width="249" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="v3t-0h-9zB"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="em9-St-Jiq">
-                                        <rect key="frame" x="546" y="18" width="46" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="em9-St-Jiq">
+                                        <rect key="frame" x="270" y="4" width="50" height="30"/>
                                         <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="Kfa-6U-3Lu"/>
@@ -599,14 +599,14 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <viewControllerLayoutGuide type="bottom" id="knz-W5-fbc"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Rt0-4B-ha8">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ProfileBgImage" translatesAutoresizingMaskIntoConstraints="NO" id="1x2-ug-oMe">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="-4" y="0.0" width="328" height="568"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="yJf-GU-xty">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                                <rect key="frame" x="27" y="125" width="273" height="306"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
@@ -662,11 +662,11 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <viewControllerLayoutGuide type="bottom" id="hQ9-J5-2Fb"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="OGk-em-arC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="a9i-Ha-SaP">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="a9i-Ha-SaP">
+                                <rect key="frame" x="0.0" y="74" width="320" height="494"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="Epo-Wf-qOr" id="hxK-yM-MKD"/>
@@ -693,7 +693,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="amd-Sd-Rk9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2412" y="3960"/>
+            <point key="canvasLocation" x="2412" y="3962"/>
         </scene>
         <!--昵称-->
         <scene sceneID="hQh-zQ-qnx">
@@ -704,11 +704,11 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <viewControllerLayoutGuide type="bottom" id="1TE-Tm-z8Z"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ZLg-Fc-a5Y">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YS8-J3-HPd">
-                                <rect key="frame" x="16" y="72" width="568" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YS8-J3-HPd">
+                                <rect key="frame" x="16" y="72" width="288" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
@@ -741,11 +741,11 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <viewControllerLayoutGuide type="bottom" id="Fb2-hU-bcJ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="SS1-Uf-N33">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="oix-Er-DQz">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="oix-Er-DQz">
+                                <rect key="frame" x="0.0" y="74" width="320" height="494"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="Qni-nN-2Jw" id="BQM-yE-zMO"/>
@@ -787,11 +787,11 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <viewControllerLayoutGuide type="bottom" id="V24-E5-0VK"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="OE2-ca-Kb2">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S5e-el-mHY">
-                                <rect key="frame" x="16" y="72" width="568" height="150"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S5e-el-mHY">
+                                <rect key="frame" x="16" y="72" width="288" height="150"/>
                                 <color key="backgroundColor" red="1" green="0.9864395789" blue="0.99014781760000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="Yte-WR-Zy2"/>
@@ -826,7 +826,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <viewControllerLayoutGuide type="bottom" id="JQB-61-Kwy"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="M5L-qc-Jh7">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Post" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uda-UH-l0u">
@@ -853,7 +853,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <viewControllerLayoutGuide type="bottom" id="UcI-2t-RVT"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="VkB-2S-8Kt">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -861,7 +861,6 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                     <connections>
                         <segue destination="xUO-Ek-g05" kind="push" identifier="HomeDetailSegue" id="Xtg-xA-TvV"/>
                         <segue destination="cou-sa-Bod" kind="push" identifier="search" id="Gc2-hk-FGC"/>
-                        <segue destination="OyS-hf-ms2" kind="push" identifier="ChatGroupSegue" id="LnD-Mz-TOI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gik-1Z-yKA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -877,7 +876,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <viewControllerLayoutGuide type="bottom" id="myk-uE-6wP"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="3Uz-fe-Nnr">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -896,19 +895,11 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <viewControllerLayoutGuide type="bottom" id="Mnx-9N-dSO"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="mk6-Bk-85D">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="e9f-af-LGS">
-                                <rect key="frame" x="0.0" y="64" width="600" height="445"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="xUO-Ek-g05" id="QvH-n3-zM6"/>
-                                    <outlet property="delegate" destination="xUO-Ek-g05" id="kMQ-Tj-gsk"/>
-                                </connections>
-                            </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w8f-Tc-XfK">
-                                <rect key="frame" x="54" y="513" width="30" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w8f-Tc-XfK">
+                                <rect key="frame" x="54" y="481" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="fGB-nO-7kU"/>
                                     <constraint firstAttribute="width" constant="30" id="q4M-IM-XYL"/>
@@ -920,8 +911,8 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                                     <action selector="collectionBtnSelected" destination="xUO-Ek-g05" eventType="touchUpInside" id="bbW-Dv-Y8U"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ivt-12-EvN">
-                                <rect key="frame" x="16" y="513" width="30" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ivt-12-EvN">
+                                <rect key="frame" x="16" y="481" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="AU2-uk-aIv"/>
                                     <constraint firstAttribute="height" constant="30" id="nXl-Um-lrm"/>
@@ -933,8 +924,8 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                                     <action selector="commentsBtnSelected" destination="xUO-Ek-g05" eventType="touchUpInside" id="hb8-Dt-2sp"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C41-uj-thm">
-                                <rect key="frame" x="92" y="513" width="30" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C41-uj-thm">
+                                <rect key="frame" x="92" y="481" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="JG7-Dk-Cbt"/>
                                     <constraint firstAttribute="height" constant="30" id="PV8-Wo-qP3"/>
@@ -947,7 +938,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QqI-zK-I2K">
-                                <rect key="frame" x="554" y="513" width="30" height="30"/>
+                                <rect key="frame" x="554" y="481" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="Jgd-0t-2kH"/>
                                     <constraint firstAttribute="height" constant="30" id="gcs-Pw-8Eb"/>
@@ -959,6 +950,14 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                                     <action selector="backBtnSelected" destination="xUO-Ek-g05" eventType="touchUpInside" id="rAo-tg-reC"/>
                                 </connections>
                             </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="e9f-af-LGS">
+                                <rect key="frame" x="52" y="108" width="248" height="384"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="xUO-Ek-g05" id="QvH-n3-zM6"/>
+                                    <outlet property="delegate" destination="xUO-Ek-g05" id="kMQ-Tj-gsk"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -1007,11 +1006,11 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <viewControllerLayoutGuide type="bottom" id="fwt-m1-AVh"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="r25-e5-lgC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="IeB-6H-uaG">
-                                <rect key="frame" x="0.0" y="72" width="600" height="479"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="IeB-6H-uaG">
+                                <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="7gh-NJ-uaY" id="kbI-hO-wzt"/>
@@ -1045,17 +1044,17 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <viewControllerLayoutGuide type="bottom" id="hvY-JV-hEP"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="9mh-10-naU">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2nh-GQ-hM4">
-                                <rect key="frame" x="46" y="143" width="427" height="324"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableView>
                             <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3bA-Ak-M4a">
-                                <rect key="frame" x="203" y="82" width="270" height="44"/>
+                                <rect key="frame" x="27" y="78" width="270" height="44"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2nh-GQ-hM4">
+                                <rect key="frame" x="44" y="134" width="233" height="324"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -1086,7 +1085,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
         <!--Tab Bar Controller-->
         <scene sceneID="FbJ-dg-jQJ">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="VBe-2x-igG" customClass="TabBarController" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="VBe-2x-igG" customClass="TabBarController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="mtj-o1-bZi">
@@ -1108,31 +1107,25 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
         <!--Cycle-->
         <scene sceneID="txH-Pe-lPu">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="OyS-hf-ms2" customClass="CycleViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChatGroup" hidesBottomBarWhenPushed="YES" id="OyS-hf-ms2" customClass="CycleViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xWG-CY-Sxy"/>
                         <viewControllerLayoutGuide type="bottom" id="h8D-l3-fU6"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="3Ek-gS-Pyy">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="hsJ-IJ-ldk">
-                                <rect key="frame" x="261" y="150" width="300" height="300"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Cycle" id="Jm6-ee-E2N"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="cycleTableView" destination="hsJ-IJ-ldk" id="kW7-zf-DRE"/>
-                        <segue destination="lUX-aE-qZw" kind="push" identifier="enterChatGroup" id="vRg-Gx-4i5"/>
+                        <segue destination="lUX-aE-qZw" kind="show" identifier="enterChatGroup" animates="NO" id="vRg-Gx-4i5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nVW-Kp-aRz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2572" y="1787"/>
+            <point key="canvasLocation" x="2356" y="1695"/>
         </scene>
         <!--ChatGroup-->
         <scene sceneID="cQr-Si-4Sy">
@@ -1143,11 +1136,11 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <viewControllerLayoutGuide type="bottom" id="71x-7F-O97"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="e73-Pv-2Hg">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GroupChatGgImage" translatesAutoresizingMaskIntoConstraints="NO" id="Aue-r6-5Es">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="GroupChatGgImage" translatesAutoresizingMaskIntoConstraints="NO" id="Aue-r6-5Es">
+                                <rect key="frame" x="-4" y="0.0" width="328" height="519"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1162,7 +1155,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GgD-qW-uAW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3425" y="1787"/>
+            <point key="canvasLocation" x="3167" y="1695"/>
         </scene>
         <!--Search Friends Controller-->
         <scene sceneID="8SY-p8-7B2">
@@ -1173,15 +1166,15 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <viewControllerLayoutGuide type="bottom" id="iuf-4r-WAH"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="nsd-NP-nm2">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="ZGk-C2-Sog">
-                                <rect key="frame" x="4" y="64" width="592" height="44"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="44"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CAx-X4-hM4">
-                                <rect key="frame" x="0.0" y="108" width="600" height="443"/>
+                                <rect key="frame" x="-4" y="108" width="328" height="411"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
@@ -1221,7 +1214,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <viewControllerLayoutGuide type="bottom" id="7bS-LO-zV7"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="t0P-LK-rGK">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -1244,37 +1237,37 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <viewControllerLayoutGuide type="bottom" id="LoS-gm-neE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="swX-IM-cia">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="4my-ro-iMe">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="503"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="4my-ro-iMe">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="470"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="vu1-ps-3xT" id="Ynk-qK-Hj1"/>
                                     <outlet property="delegate" destination="vu1-ps-3xT" id="IeU-dG-tZk"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qL5-xw-zCu">
-                                <rect key="frame" x="0.0" y="502" width="600" height="49"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qL5-xw-zCu">
+                                <rect key="frame" x="0.0" y="470" width="320" height="49"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kPy-2V-QRa">
-                                        <rect key="frame" x="8" y="10" width="508" height="30"/>
+                                        <rect key="frame" x="8" y="10" width="228" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
                                             <outlet property="delegate" destination="vu1-ps-3xT" id="4Jv-DJ-BvW"/>
                                         </connections>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UIS-CA-VOa">
-                                        <rect key="frame" x="562" y="11" width="30" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UIS-CA-VOa">
+                                        <rect key="frame" x="282" y="10" width="30" height="30"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <state key="normal">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GcU-ws-Syn">
-                                        <rect key="frame" x="524" y="11" width="30" height="30"/>
+                                        <rect key="frame" x="244" y="10" width="30" height="30"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <state key="normal">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1374,22 +1367,22 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <viewControllerLayoutGuide type="bottom" id="lz4-14-1BE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="t0m-Wo-yvt">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XAI-YK-qoZ" customClass="UISearchBar">
-                                <rect key="frame" x="0.0" y="64" width="600" height="36"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XAI-YK-qoZ" customClass="UISearchBar">
+                                <rect key="frame" x="-4" y="72" width="328" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="qzH-Xf-hLM"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="ooZ-Cq-P0Q">
-                                <rect key="frame" x="0.0" y="192" width="600" height="359"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="ooZ-Cq-P0Q">
+                                <rect key="frame" x="0.0" y="194" width="320" height="325"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bAi-0o-xBR" customClass="SearchSegView2">
-                                <rect key="frame" x="0.0" y="108" width="600" height="37"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bAi-0o-xBR" customClass="SearchSegView2">
+                                <rect key="frame" x="0.0" y="116" width="320" height="70"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="70" id="a20-6f-v5V"/>
@@ -1439,11 +1432,11 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <viewControllerLayoutGuide type="bottom" id="Uua-q2-N4v"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="hCO-rp-TJH">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Nfl-Ep-dEe">
-                                <rect key="frame" x="0.0" y="324" width="600" height="141"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Nfl-Ep-dEe">
+                                <rect key="frame" x="0.0" y="324" width="320" height="195"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="88" id="4zt-lk-mKg"/>
@@ -1454,11 +1447,11 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                                     </mask>
                                 </variation>
                             </tableView>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6nL-kB-KJA">
-                                <rect key="frame" x="0.0" y="72" width="600" height="226"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6nL-kB-KJA">
+                                <rect key="frame" x="-4" y="74" width="328" height="250"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uHa-v3-ve1">
-                                        <rect key="frame" x="225" y="75" width="150" height="75"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uHa-v3-ve1">
+                                        <rect key="frame" x="118" y="131" width="93" height="93"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="93" id="Ahm-9t-Fxb"/>
                                             <constraint firstAttribute="height" constant="93" id="IXU-VV-lfr"/>
@@ -1504,11 +1497,11 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <viewControllerLayoutGuide type="bottom" id="JZG-9S-gri"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="qm1-5F-S9w">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" text="老子在苦命的开发" translatesAutoresizingMaskIntoConstraints="NO" id="0mk-i7-Jjg">
-                                <rect key="frame" x="16" y="72" width="568" height="471"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="老子在苦命的开发" translatesAutoresizingMaskIntoConstraints="NO" id="0mk-i7-Jjg">
+                                <rect key="frame" x="16" y="72" width="288" height="439"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -1537,11 +1530,11 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <viewControllerLayoutGuide type="bottom" id="xPr-Fi-Ila"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="AXW-m7-ehu">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="q35-sN-mWy">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="q35-sN-mWy">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
@@ -1571,11 +1564,11 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <viewControllerLayoutGuide type="bottom" id="GHv-QO-2xm"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="cc6-3E-FJN">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="UH5-n4-ggL">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="UH5-n4-ggL">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
@@ -1620,6 +1613,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="cMB-n2-C0T" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="01J-HA-weu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1699,7 +1693,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                         <viewControllerLayoutGuide type="bottom" id="xAf-nk-aEA"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="KQp-d7-gcs">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>

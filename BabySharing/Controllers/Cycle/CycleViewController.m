@@ -24,12 +24,14 @@
 #import "ChatGroupController.h"
 #import "INTUAnimationEngine.h"
 #import "HomeViewController.h"
+#import "OBShapedButton.h"
+#import "HomeViewController.h"
 
 #define TABLE_VIEW_TOP_MARGIN   74
 
 @interface CycleViewController () <UITableViewDataSource, UITableViewDelegate, DropDownMenuProcotol, WEPopoverControllerDelegate, UIPopoverControllerDelegate, createUpdateDetailProtocol>
 //@property (weak, nonatomic) IBOutlet UIView *descriptionView;
-@property (weak, nonatomic) IBOutlet UITableView *cycleTableView;
+@property (strong, nonatomic) IBOutlet UITableView *cycleTableView;
 
 @property (weak, nonatomic) LoginModel* lm;
 @property (weak, nonatomic) MessageModel* mm;
@@ -48,6 +50,12 @@
     
     NSArray* chatGroupArray_mine;
     NSArray* chatGroupArray_recommend;
+    UIView *bkView;
+    UIButton* actionView;
+    CAShapeLayer *circleLayer;
+    UIView *animationView;
+    CGFloat radius;
+    CGPathRef startPath;
 }
 
 //@synthesize descriptionView = _descriptionView;
@@ -62,12 +70,19 @@
 @synthesize baseController = _baseController;
 
 - (void)viewDidLoad {
-//    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:0.949 green:0.949 blue:0.949 alpha:1.f]];
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 6) {
         CGFloat width = [UIScreen mainScreen].bounds.size.width;
         [[UINavigationBar appearance] setShadowImage:[self imageWithColor:[UIColor colorWithWhite:0.5922 alpha:0.25] size:CGSizeMake(width, 1)]];
         [[UINavigationBar appearance] setBackgroundImage:[self imageWithColor:[UIColor whiteColor] size:CGSizeMake(width, 64)] forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
     }
+    bkView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 64)];
+    bkView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:bkView];
+    [self createNavigationBar];
+    [self createHomeContentLogo];
+    [self createAnimateView];
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.extendedLayoutIncludesOpaqueBars = NO;
     
     CALayer* line_notify = [CALayer layer];
     line_notify.borderWidth = 1.f;
@@ -76,6 +91,8 @@
     line_notify.frame = CGRectMake(0, 73, width, 1);
     [self.view.layer addSublayer:line_notify];
 
+    _cycleTableView = [[UITableView alloc] init];
+    [self.view addSubview:_cycleTableView];
     _cycleTableView.dataSource = self;
     _cycleTableView.delegate = self;
     [_cycleTableView registerNib:[UINib nibWithNibName:@"CycleOverCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"cycle over cell"];
@@ -109,6 +126,8 @@
    
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+    
+    
     UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 25, 25)];
     NSString* filepath = [resourceBundle pathForResource:@"dongda_back" ofType:@"png"];
     CALayer * layer = [CALayer layer];
@@ -118,10 +137,120 @@
     [barBtn.layer addSublayer:layer];
     [barBtn addTarget:self action:@selector(didPopViewController) forControlEvents:UIControlEventTouchDown];
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:barBtn];
     self.view.backgroundColor = [UIColor colorWithRed:0.9529 green:0.9529 blue:0.9529 alpha:1.f];
     
     _cycleTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+}
+
+- (void)createNavigationBar {
+    actionView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 65, 38)];
+    
+    [actionView addTarget:self action:@selector(popToHomeViewController) forControlEvents:UIControlEventTouchUpInside];
+    actionView.tag = -99;
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    actionView.center = CGPointMake(width - actionView.frame.size.width / 2 + 5, 21 + actionView.frame.size.height / 2);
+    actionView.backgroundColor = [UIColor colorWithRed:78.0/255.0 green:219.0/255.0 blue:202.0/255.0 alpha:1.0];
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:actionView.bounds byRoundingCorners:UIRectCornerTopLeft | UIRectCornerBottomLeft cornerRadii:CGSizeMake(20, 20)];
+    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+    maskLayer.frame = actionView.bounds;
+    maskLayer.path = maskPath.CGPath;
+    actionView.layer.mask = maskLayer;
+    
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+    NSString* filepath = [resourceBundle pathForResource:@"home_chat_back" ofType:@"png"];
+    CALayer *layer = [[CALayer alloc] init];
+    layer.frame = CGRectMake(0, 0, 30, 30);
+    layer.position = CGPointMake(CGRectGetWidth(actionView.frame) / 2, CGRectGetHeight(actionView.frame) / 2);
+    layer.contents = (__bridge id _Nullable)([UIImage imageNamed:filepath].CGImage);
+    [actionView.layer addSublayer:layer];
+    
+    [bkView addSubview:actionView];
+}
+
+- (void)createHomeContentLogo {
+    UIImageView* imgView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 70, 22)];
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+    NSString* filepath = [resourceBundle pathForResource:@"home_title_logo" ofType:@"png"];
+    imgView.image = [UIImage imageNamed:filepath];
+    imgView.center = CGPointMake([UIScreen mainScreen].bounds.size.width / 2 + 2, 12 + 64 / 2);
+    imgView.tag = -98;
+    [bkView addSubview:imgView];
+}
+
+- (void)createAnimateView {
+    // 动画的layer
+    
+    CGPoint animateCenter = [actionView convertPoint:CGPointMake(19, actionView.frame.size.height / 2) toView:bkView];
+    
+    // 半径
+    radius = sqrt(pow(0 - animateCenter.x, 2) + pow(0 - animateCenter.y, 2));
+    animationView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, radius * 2, radius * 2)];
+    animationView.backgroundColor = [UIColor colorWithRed:78.0/255.0 green:219.0/255.0 blue:202.0/255.0 alpha:1.0];
+    animationView.center = animateCenter;
+    
+    
+    UIBezierPath *startCircle = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 0, CGRectGetWidth(animationView.frame), CGRectGetHeight(animationView.frame))];
+    circleLayer = [[CAShapeLayer alloc] init];
+    circleLayer.backgroundColor = [UIColor redColor].CGColor;
+    circleLayer.path = startCircle.CGPath;
+    animationView.layer.mask = circleLayer;
+    [bkView addSubview:animationView];
+    bkView.clipsToBounds = YES;
+    [bkView bringSubviewToFront:actionView];
+}
+
+- (void)popToHomeViewController {
+    // 获取倒数第二个ViewController
+    actionView.enabled = NO;
+    if ([[self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count - 2] isKindOfClass:[HomeViewController class]]) {
+        HomeViewController *homeVC = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count - 2];
+        [CATransaction begin];
+        [CATransaction setCompletionBlock:^{
+            // handle completion here
+            NSLog(@"pop结束");
+            
+            CABasicAnimation *maskLayerAnimation = [circleLayer animationForKey:@"path"] ? (CABasicAnimation *)[circleLayer animationForKey:@"path"] : [CABasicAnimation animationWithKeyPath:@"path"];
+            //    CABasicAnimation *maskLayerAnimation = [CABasicAnimation animationWithKeyPath:@"path"];
+            maskLayerAnimation.fromValue = (__bridge id)(circleLayer.path);
+            maskLayerAnimation.toValue = (__bridge id)([UIBezierPath bezierPathWithOvalInRect:CGRectInset(CGRectMake(0, 0, CGRectGetWidth(animationView.frame), CGRectGetHeight(animationView.frame)), radius - 19, radius - 19)].CGPath);
+            maskLayerAnimation.duration = 0.3;
+            maskLayerAnimation.delegate = self;
+            [circleLayer addAnimation:maskLayerAnimation forKey:@"path"];
+            circleLayer.path = [UIBezierPath bezierPathWithOvalInRect:CGRectInset(CGRectMake(0, 0, CGRectGetWidth(animationView.frame), CGRectGetHeight(animationView.frame)), radius - 19, radius - 19)].CGPath;
+            
+            
+            // 设置各个view的frame
+            homeVC.tabBarController.tabBar.hidden = NO;
+            homeVC.tabBarController.tabBar.frame = CGRectMake(-CGRectGetWidth(homeVC.tabBarController.tabBar.frame), CGRectGetMinY(homeVC.tabBarController.tabBar.frame), CGRectGetWidth(homeVC.tabBarController.tabBar.frame), CGRectGetHeight(homeVC.tabBarController.tabBar.frame));
+            homeVC.view.frame = CGRectMake(-CGRectGetWidth(homeVC.view.frame), 0, CGRectGetWidth(homeVC.view.frame), CGRectGetHeight(homeVC.view.frame));
+            self.view.frame = CGRectMake(CGRectGetWidth(homeVC.view.frame), 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
+            bkView.frame = CGRectMake(CGRectGetWidth(bkView.frame), 0, CGRectGetWidth(bkView.frame), CGRectGetHeight(bkView.frame));
+            [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                homeVC.view.frame = CGRectMake(0, 0, CGRectGetWidth(homeVC.view.frame), CGRectGetHeight(homeVC.view.frame));
+                bkView.frame = CGRectMake(0, 0, CGRectGetWidth(bkView.frame), CGRectGetHeight(bkView.frame));
+                homeVC.tabBarController.tabBar.frame = CGRectMake(0, CGRectGetMinY(homeVC.tabBarController.tabBar.frame), CGRectGetWidth(homeVC.tabBarController.tabBar.frame), CGRectGetHeight(homeVC.tabBarController.tabBar.frame));
+            } completion:^(BOOL finished) {
+                [self.view removeFromSuperview];
+                [bkView removeFromSuperview];
+                actionView.enabled = YES;
+            }];
+        }];
+        
+        [self.navigationController popViewControllerAnimated:NO];
+        homeVC.tabBarController.tabBar.hidden = YES;
+        // 将当前view加到上一个VC.view
+        self.view.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
+        [homeVC.view addSubview:self.view];
+        [homeVC.view bringSubviewToFront:self.view];
+        [homeVC.view addSubview:bkView];
+        [homeVC.view bringSubviewToFront:bkView];
+        [CATransaction commit];
+    } else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 //取消searchbar背景色
@@ -141,16 +270,16 @@
 }
 
 - (void)didPopViewController {
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-    [self.navigationController popViewControllerAnimated:YES];
+//    [self.navigationController setNavigationBarHidden:YES animated:YES];
+//    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
     dic_description = [[_lm currentDeltailInfoLocal] mutableCopy];
     chatGroupArray_mine = [_mm enumMyChatGroupLocal];
     chatGroupArray_recommend = [_mm enumRecommendChatGroupLocal];
-    [self viewDidLayoutSubviews];
+//    [self viewDidLayoutSubviews];
 }
 
 //- (void)setUpDescriptionView {
@@ -270,6 +399,7 @@
 }
 
 - (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     CGFloat height = [UIScreen mainScreen].bounds.size.height;
   
@@ -277,7 +407,7 @@
 //    _descriptionView.frame = rc;
     _cycleTableView.frame = rc;
     
-    [self resetViews];
+//    [self resetViews];
 }
 
 - (BOOL)hasViewDescription {
@@ -336,9 +466,6 @@
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete && indexPath.row > 0) {
         NSLog(@"delete one row");
-//        GotyeOCChatTarget* gotTarget = [_mm getTargetByIndex:indexPath.row - 1];
-//        [GotyeOCAPI deleteSession:gotTarget alsoRemoveMessages:YES];
-//        [tableView reloadData];
     }
 }
 
@@ -351,14 +478,6 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     // TODO: segue to user chat
     [self performSegueWithIdentifier:@"enterChatGroup" sender:indexPath];
-    
-//    Targets* tmp = nil;
-//    if (indexPath.section == 0) {
-//        tmp = [chatGroupArray_mine objectAtIndex:indexPath.row];
-//    } else {
-//        tmp = [chatGroupArray_recommend objectAtIndex:indexPath.row];
-//    }
-//    [self backToHomeThenPushChatGroup:tmp];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -370,12 +489,10 @@
     
     UIView* reVal = [[UIView alloc]init];
     reVal.backgroundColor = [UIColor whiteColor];
-//    reVal.backgroundColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
     
     UILabel* label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 0, 0)];
     
     if (section == 0) {
-//        label.text = @"我的圈子";
         label.text = @"最近关注的";
     } else {
         label.text = @"猜你喜欢";
@@ -387,7 +504,6 @@
     [label sizeToFit];
     [reVal addSubview:label];
     
-//    label.center = CGPointMake(10.5f + label.frame.size.width / 2, 34 / 2);
     label.center = CGPointMake(10.5f + label.frame.size.width / 2, 46 / 2);
     
     CALayer* line = [CALayer layer];
@@ -397,42 +513,13 @@
     [reVal.layer addSublayer:line];
     
     return reVal;
-    
-//    if (section == 0) {
-//        MyCycleCellHeader* header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"my cycle header"];
-//        if (header == nil) {
-//            header = [[MyCycleCellHeader alloc]init];
-//        }
-//       
-//        header.role_tag = @"tags";
-//        [header viewLayoutSubviews];
-//        return header;
-//        
-//    } else if (section == 1) {
-//        return nil;
-//        
-//    } else {
-//        return nil;
-//    }
 }
 
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-//    if (section == 0) {
-//        return [MyCycleCellHeader preferHeight];
-//    } else {
-//        return 44;
-//    }
-//    return 34;
     return 46;
 }
-
-//- (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-//    if (section == 1) {
-//        return @"推荐";
-//    } return nil;
-//}
 
 #pragma mark -- table view datasource
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -470,14 +557,7 @@
     if (!popoverController) {
      
         NSArray* arr = nil;
-//        if (_descriptionView.hidden == NO) {
-            arr = @[@"创建圈子", @"编辑描述", @"更多推荐", @"取消"];
-//        } else {
-//            if (isRecommmend) arr = @[@"编辑描述", @"更多推荐", @"关闭圈子推荐", @"取消"];
-//            else arr = @[@"编辑描述", @"更多推荐", @"开启圈子推荐", @"取消"];
-//        }
-        
-//        CGFloat width = [UIScreen mainScreen].bounds.size.width;
+        arr = @[@"创建圈子", @"编辑描述", @"更多推荐", @"取消"];
         DropDownMenu* menu = [[DropDownMenu alloc]init];
         [menu setMenuText:arr];
         menu.dropdownDelegate = self;
@@ -485,8 +565,7 @@
         popoverController = [[WEPopoverController alloc] initWithContentViewController:menu];
         popoverController.delegate = self;
         popoverController.passthroughViews = [NSArray arrayWithObject:self.navigationController.navigationBar];
-        
-//        [popoverController presentPopoverFromBarButtonItem:sender
+    
         [popoverController presentPopoverFromBarButtonItem:self.navigationItem.rightBarButtonItem
                                   permittedArrowDirections:(UIPopoverArrowDirectionUp)
                                                   animated:YES];
@@ -501,14 +580,6 @@
 #pragma mark -- drop down menu
 - (void)dropDownMenu:(DropDownMenu *)menu didSelectMuneItemAtIndex:(NSInteger)index {
    
-//    if (_descriptionView.hidden == NO && index == 0) {
-//        [self performSegueWithIdentifier:@"addCycle" sender:nil];
-//    } else if (_descriptionView.hidden == YES && index == 0) {
-//        [self performSegueWithIdentifier:@"addDescription" sender:nil];
-//    } else if (_descriptionView.hidden == NO && index == 1) {
-//        [self performSegueWithIdentifier:@"addDescription" sender:nil];
-//    }
-    
     if (index == 0) {
         [self performSegueWithIdentifier:@"addCycle" sender:nil];
     } else if (index == 1) {

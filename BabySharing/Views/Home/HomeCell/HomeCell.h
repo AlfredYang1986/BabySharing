@@ -10,5 +10,7 @@
 
 @interface HomeCell : UITableViewCell
 
+@property (nonatomic, strong) UILabel *number;
+- (void)updateViewWith:(NSObject *)object;
 
 @end
