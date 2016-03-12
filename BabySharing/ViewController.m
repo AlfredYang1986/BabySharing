@@ -59,6 +59,9 @@ enum DisplaySide {
     BOOL isMessageModelReady;
     
     INTUAnimationID moving_id;
+    
+    CGRect keyBoardFrame;
+    CGFloat modify;
 }
 
 @synthesize lm = _lm;
@@ -89,7 +92,9 @@ enum DisplaySide {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogedOut:) name:@"current user sign out" object:nil];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changingSide:) name:@"changing side" object:nil];
-   
+  
+    
+    
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [self.view addGestureRecognizer:tap];
     
@@ -103,6 +108,20 @@ enum DisplaySide {
     moving_id = -1;
 
     self.view.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
+    
+    /**
+     * input method
+     */
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasChange:) name:UIKeyboardDidChangeFrameNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHidden:) name:UIKeyboardDidHideNotification object:nil];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidChangeFrameNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidHideNotification object:nil];
+    [GotyeOCAPI removeListener:self];
 }
 
 #define LOGO_WIDTH     150
@@ -167,10 +186,6 @@ enum DisplaySide {
     [self.view addSubview:snsView];
     [self.view bringSubviewToFront:snsView];
 
-}
-
-- (void)dealloc {
-    [GotyeOCAPI removeListener:self];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -318,6 +333,8 @@ enum DisplaySide {
                                                      completion:^(BOOL finished) {
                                                          // NOTE: When passing INTUAnimationOptionRepeat, this completion block is NOT executed at the end of each cycle. It will only run if the animation is canceled.
                                                          NSLog(@"%@", finished ? @"Animation Completed" : @"Animation Canceled");
+                                                         inputView.isMoved = !inputView.isMoved;
+                                                         modify = inputView.isMoved == NO ? 0 : move;
                                                          moving_id = -1;
                                                      }];
 }
@@ -369,7 +386,6 @@ enum DisplaySide {
         return;
     }
     
-    
     RegTmpToken *token = [RegTmpToken enumRegTokenINContext:self.lm.doc.managedObjectContext WithPhoneNo:phoneNo];
     
     if (token == nil) {
@@ -388,35 +404,6 @@ enum DisplaySide {
     }
 }
 
-- (void)didStartEditing {
-    
-    if (moving_id >= 0) {
-        
-        [INTUAnimationEngine cancelAnimationWithID:moving_id];
-        
-        title.hidden = YES;
-        slg.hidden = YES;
-        CGFloat last_height = inputView.bounds.size.height;
-        inputView.frame = CGRectMake(0, INPUT_VIEW_START_POINT - 110, [UIScreen mainScreen].bounds.size.width, last_height);
-        return;
-    }
-    
-    if (fabs(inputView.frame.origin.y - INPUT_VIEW_START_POINT) < 1.f / 10000.0) {
-        title.hidden = YES;
-        slg.hidden = YES;
-        [self moveView:-110];
-    }
-    NSLog(@"%@ === %@", @"dfdd", inputView);
-}
-
-- (void)didEndEditing {
-    if (![inputView isEditing]) {
-        [self moveView:110];
-        title.hidden = NO;
-        slg.hidden = NO;
-    }
-}
-
 - (void)didSelectUserPrivacyBtn {
     [self performSegueWithIdentifier:@"UserPrivacy" sender:nil];
 }
@@ -424,6 +411,54 @@ enum DisplaySide {
 #pragma mark -- choose area controller delegate
 - (void)didSelectArea:(NSString*)code {
     [inputView setAreaCode:code];
+}
+
+#pragma mark -- get input view height
+- (void)keyboardDidShow:(NSNotification*)notification {
+    UIView *result = nil;
+    NSArray *windowsArray = [UIApplication sharedApplication].windows;
+    for (UIView *tmpWindow in windowsArray) {
+        NSArray *viewArray = [tmpWindow subviews];
+        for (UIView *tmpView  in viewArray) {
+            NSLog(@"%@", [NSString stringWithUTF8String:object_getClassName(tmpView)]);
+            // if ([[NSString stringWithUTF8String:object_getClassName(tmpView)] isEqualToString:@"UIPeripheralHostView"]) {
+            if ([[NSString stringWithUTF8String:object_getClassName(tmpView)] isEqualToString:@"UIInputSetContainerView"]) {
+                result = tmpView;
+                break;
+            }
+        }
+        
+        if (result != nil) {
+            break;
+        }
+    }
+    
+    //    keyboardView = result;
+    NSDictionary *userInfo = [notification userInfo];
+    NSValue *value = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    keyBoardFrame = value.CGRectValue;
+    
+    CGFloat height = [UIScreen mainScreen].bounds.size.height - (inputView.frame.size.height + inputView.frame.origin.y) + modify;
+    if (!inputView.isMoved) {
+        [self moveView:height - keyBoardFrame.size.height];
+        slg.hidden = YES;
+        title.hidden = YES;
+    }
+}
+
+- (void)keyboardWasChange:(NSNotification *)notification {
+    NSDictionary *userInfo = [notification userInfo];
+    NSValue *value = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    keyBoardFrame = value.CGRectValue;
+}
+
+- (void)keyboardDidHidden:(NSNotification*)notification {
+    CGFloat height = [UIScreen mainScreen].bounds.size.height - (inputView.frame.size.height + inputView.frame.origin.y) + modify;
+    if (inputView.isMoved) {
+        [self moveView:keyBoardFrame.size.height - height];
+        slg.hidden = NO;
+        title.hidden = NO;
+    }
 }
 
 #pragma mark -- Gotaye Delegate

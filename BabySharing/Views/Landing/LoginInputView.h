@@ -12,6 +12,7 @@
 @interface LoginInputView : UIView <UITextFieldDelegate>
 
 @property (nonatomic, weak) id<LoginInputViewDelegate> delegate;
+@property (nonatomic) BOOL isMoved;
 
 - (id)initWithFrame:(CGRect)rect;
 

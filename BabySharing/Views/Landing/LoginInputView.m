@@ -44,6 +44,7 @@
 }
 
 @synthesize delegate = _delegate;
+@synthesize isMoved = _isMoved;
 
 - (void)createAreaCodeBtnInRect:(CGRect)rect {
 
@@ -343,12 +344,12 @@
 //    [area_code_btn setTitle:[@"+" stringByAppendingString:code] forState:UIControlStateNormal];
 }
 
-#pragma mark -- text field delegate
-- (void)textFieldDidBeginEditing:(UITextField *)textField {
-    [_delegate didStartEditing];
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField {
-    [_delegate didEndEditing];
-}
+//#pragma mark -- text field delegate
+//- (void)textFieldDidBeginEditing:(UITextField *)textField {
+//    [_delegate didStartEditing];
+//}
+//
+//- (void)textFieldDidEndEditing:(UITextField *)textField {
+//    [_delegate didEndEditing];
+//}
 @end

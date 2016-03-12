@@ -19,7 +19,7 @@ typedef enum : NSUInteger {
 @interface NicknameInputViewController : UIViewController
 
 @property (nonatomic, weak) LoginModel* lm;
-@property (nonatomic, strong) NSDictionary* login_attr;
+@property (nonatomic, strong) NSMutableDictionary* login_attr;
 @property (nonatomic) BOOL isSNSLogIn;
 
 @property (nonatomic) DongDaGender gender;

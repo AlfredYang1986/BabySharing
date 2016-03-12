@@ -44,14 +44,7 @@
 }
 
 @synthesize delegate = _delegate;
-
-//- (id)initWithFrame:(CGRect)frame {
-//    self = [super initWithFrame:frame];
-//    if (self) {
-//        [self setUpWithFrame:frame];
-//    }
-//    return self;
-//}
+@synthesize isMoved = _isMoved;
 
 - (void)createLabelInRect:(CGRect)rect andTitle:(NSString*)title andTopMargin:(CGFloat)top {
     NSString * bundlePath_dongda = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
@@ -248,13 +241,13 @@
         [_delegate didEditRoleTag];
         return NO;
     } else if (textField == name_text_field) {
-        [_delegate didStartEditingScreenName];
+//        [_delegate didStartEditingScreenName];
     }
     return YES;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {              // called when 'return' key pressed. return NO to ignore.
-    [_delegate didEndEditingScreenName];
+//    [_delegate didEndEditingScreenName];
     [textField resignFirstResponder];
     return YES;
 }
@@ -288,6 +281,6 @@
 
 - (void)endInputName {
     [name_text_field resignFirstResponder];
-    [_delegate didEndEditingScreenName];
+//    [_delegate didEndEditingScreenName];
 }
 @end

@@ -10,12 +10,6 @@
 
 @protocol NickNameInputViewDelegate <NSObject>
 
-//- (void)didStartInputName;
-//- (void)didEndInputName;
-//- (void)didStartInputTags;
-
-- (void)didStartEditingScreenName;
-- (void)didEndEditingScreenName;
 - (void)didEditRoleTag;
 - (void)didClickNextBtn;
 
@@ -30,6 +24,8 @@
 
 @property (nonatomic, weak, setter=setScreenName:, getter=getScreenName) NSString* screen_name;
 @property (nonatomic, weak, setter=setRoleTag:, getter=getRoleTag) NSString* role_tag;
+
+@property (nonatomic) BOOL isMoved;
 
 - (void)setUpWithFrame:(CGRect)rect;
 - (void)endInputName;

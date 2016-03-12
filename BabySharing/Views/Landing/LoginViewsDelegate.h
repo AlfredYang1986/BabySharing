@@ -18,8 +18,8 @@
 - (void)didSelectNextBtn;
 
 #pragma mark -- text delegate
-- (void)didStartEditing;
-- (void)didEndEditing;
+//- (void)didStartEditing;
+//- (void)didEndEditing;
 
 #pragma mark -- SNS actions
 - (void)didSelectQQBtn;

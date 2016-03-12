@@ -1170,13 +1170,13 @@
     }
 }
 
-+ (void)requestUserInfo:(requestUserInfoSeccess)block {
+- (void)requestUserInfo:(requestUserInfoSeccess)block {
     dispatch_queue_t queue = dispatch_queue_create("get_userInfo", nil);
     dispatch_async(queue, ^{
         NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
-        [dic setValue:[AppDelegate defaultAppDelegate].lm.current_auth_token forKey:@"query_auth_token"];
-        [dic setValue:[AppDelegate defaultAppDelegate].lm.current_user_id forKey:@"query_user_id"];
-        [dic setValue:[AppDelegate defaultAppDelegate].lm.current_user_id forKey:@"owner_user_id"];
+        [dic setValue:self.current_auth_token forKey:@"query_auth_token"];
+        [dic setValue:self.current_user_id forKey:@"query_user_id"];
+        [dic setValue:self.current_user_id forKey:@"owner_user_id"];
         
         NSError * error = nil;
         NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];

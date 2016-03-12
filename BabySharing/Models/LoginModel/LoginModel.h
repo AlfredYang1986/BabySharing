@@ -40,7 +40,7 @@ typedef void(^queryUserListInSystemFinishBlock)(BOOL success, NSArray* lst);
 typedef void(^requestUserInfoSeccess)(NSDictionary *data);
 
 //TencentSessionDelegate 这里有个接口 为了去除警告 注掉了
-@interface LoginModel : NSObject <WeiboSDKDelegate, WXApiDelegate, TencentSessionDelegate> {
+@interface LoginModel : NSObject <WeiboSDKDelegate, WXApiDelegate> {
     NSArray* authorised_users;
 }
 
@@ -115,5 +115,5 @@ typedef void(^requestUserInfoSeccess)(NSDictionary *data);
 #pragma mark -- query users in system
 - (void)queryUserList:(NSArray*)user_lst withProviderName:(NSString*)provider_name andFinishBlock:(queryUserListInSystemFinishBlock)block;
 #pragma mark -- requestForUserInfo--这是一个异步线程
-+ (void)requestUserInfo:(requestUserInfoSeccess)block;
+- (void)requestUserInfo:(requestUserInfoSeccess)block;
 @end

@@ -496,7 +496,7 @@
     AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     if (_isShareWeibo) {
         
-        [LoginModel requestUserInfo:^(NSDictionary *data) {
+        [delegate.lm requestUserInfo:^(NSDictionary *data) {
             UIImage* userImg = [TmpFileStorageModel enumImageWithName:[data valueForKey:@"screen_photo"] withDownLoadFinishBolck:^(BOOL success, UIImage *user_img) {
                 if (success) {
                     dispatch_async(dispatch_get_main_queue(), ^{
@@ -518,7 +518,7 @@
         }];
     }
     if (_isShareQQ) {
-        [LoginModel requestUserInfo:^(NSDictionary *data) {
+        [delegate.lm requestUserInfo:^(NSDictionary *data) {
             UIImage* userImg = [TmpFileStorageModel enumImageWithName:[data valueForKey:@"screen_photo"] withDownLoadFinishBolck:^(BOOL success, UIImage *user_img) {
                 if (success) {
                     dispatch_async(dispatch_get_main_queue(), ^{
@@ -541,7 +541,7 @@
     }
     
     if (_isShareWechat) {
-        [LoginModel requestUserInfo:^(NSDictionary *data) {
+        [delegate.lm requestUserInfo:^(NSDictionary *data) {
             UIImage* userImg = [TmpFileStorageModel enumImageWithName:[data valueForKey:@"screen_photo"] withDownLoadFinishBolck:^(BOOL success, UIImage *user_img) {
                 if (success) {
                     dispatch_async(dispatch_get_main_queue(), ^{

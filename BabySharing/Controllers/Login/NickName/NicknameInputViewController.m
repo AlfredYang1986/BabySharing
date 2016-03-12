@@ -59,6 +59,9 @@
     OBShapedButton* tick_btn;
 
     UIButton *loginImgBtn;
+    
+    BOOL isChangeImg;
+    CGRect keyBoardFrame;
 }
 
 //@synthesize loginImgBtn = _loginImgBtn;
@@ -77,9 +80,6 @@
     // Do any additional setup after loading the view.
 //    [self.navigationController setNavigationBarHidden:NO animated:NO];
    
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
-    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-
     NSString * bundlePath_dongda = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle_dongda = [NSBundle bundleWithPath:bundlePath_dongda];
 
@@ -97,19 +97,8 @@
     [self.view bringSubviewToFront:loginImgBtn];
    
     loginImgBtn.clipsToBounds = YES;
-//    if (_isSNSLogIn) {
-//        loginImgBtn.hidden = YES;
-//        UIImage* img = [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"User_Big"] ofType:@"png"]];
-//        [loginImgBtn setBackgroundImage:img forState:UIControlStateNormal];
-////        loginImgBtn.image = img;
-//        if (![[_login_attr objectForKey:@"screen_photo"] isEqualToString:@""]) {
-//            [self asyncGetUserImage];
-//        }
-//    } else {
-        UIImage* img = [UIImage imageNamed:[resourceBundle_dongda pathForResource:[NSString stringWithFormat:@"default_user"] ofType:@"png"]];
-        [loginImgBtn setBackgroundImage:img forState:UIControlStateNormal];
-//        loginImgBtn.image = img;
-//    }
+    UIImage* img = [UIImage imageNamed:[resourceBundle_dongda pathForResource:[NSString stringWithFormat:@"default_user"] ofType:@"png"]];
+    [loginImgBtn setBackgroundImage:img forState:UIControlStateNormal];
     [self asyncGetUserImage];
     [loginImgBtn addTarget:self action:@selector(didSelectImgBtn) forControlEvents:UIControlEventTouchUpInside];
     /***********************************************************************************************************************/
@@ -126,76 +115,6 @@
     /***********************************************************************************************************************/
    
     /***********************************************************************************************************************/
-    // mother view
-//    mother_view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, GENDER_BTN_WIDTH, 2 * GENDER_BTN_HEIGHT)];
-//    mother_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, GENDER_BTN_WIDTH, GENDER_BTN_HEIGHT)];
-//    mother_btn.backgroundColor = [UIColor clearColor];
-//    [mother_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_mother" ofType:@"png"]] forState:UIControlStateNormal];
-//    [mother_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_mother_selected" ofType:@"png"]] forState:UIControlStateSelected];
-//    [mother_btn addTarget:self action:@selector(didSelectGenderBtn:) forControlEvents:UIControlEventTouchUpInside];
-//    mother_btn.tag = -98;
-//    [mother_view addSubview:mother_btn];
-//    mother_btn.selected = YES;
-//    
-//    CALayer* mother_text_layer = [CALayer layer];
-//    mother_text_layer.frame = CGRectMake(0, GENDER_BTN_HEIGHT, GENDER_BTN_WIDTH, 30);
-//    
-//    CATextLayer* mother_text_line_one = [CATextLayer layer];
-//    mother_text_line_one.contentsScale = 2.f;
-//    mother_text_line_one.fontSize = 12.f;
-//    mother_text_line_one.string = @"妈咪";
-//    mother_text_line_one.frame = CGRectMake(0, 6, GENDER_BTN_WIDTH, 15);
-//    mother_text_line_one.alignmentMode = @"center";
-//    [mother_text_layer addSublayer:mother_text_line_one];
-//    
-//    CATextLayer* mother_text_line_two = [CATextLayer layer];
-//    mother_text_line_two.contentsScale = 2.f;
-//    mother_text_line_two.fontSize = 12.f;
-//    mother_text_line_two.string = @"要够辣";
-//    mother_text_line_two.frame = CGRectMake(0, 21, GENDER_BTN_WIDTH, 15);
-//    mother_text_line_two.alignmentMode = @"center";
-//    [mother_text_layer addSublayer:mother_text_line_two];
-//    
-//    [mother_view.layer addSublayer:mother_text_layer];
-//    mother_view.center = CGPointMake(SCREEN_WIDTH / 2 - GENDER_BTN_BETWEEN_MARGIN, SCREEN_PHOTO_TOP_MARGIN + SCREEN_PHOTO_HEIGHT + SCREEN_PHOTO_2_GENDER_BTN_MARGIN + GENDER_BTN_HEIGHT / 2);
-//    [self.view addSubview:mother_view];
-    /***********************************************************************************************************************/
-    
-    /***********************************************************************************************************************/
-    // father view
-//    father_view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, GENDER_BTN_WIDTH, 2 * GENDER_BTN_HEIGHT)];
-//    father_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, GENDER_BTN_WIDTH, GENDER_BTN_HEIGHT)];
-//    [father_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_father" ofType:@"png"]] forState:UIControlStateNormal];
-//    [father_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_father_selected" ofType:@"png"]] forState:UIControlStateSelected];
-//    [father_btn addTarget:self action:@selector(didSelectGenderBtn:) forControlEvents:UIControlEventTouchUpInside];
-//    father_btn.tag = -99;
-//    [father_view addSubview:father_btn];
-//
-//    CALayer* father_text_layer = [CALayer layer];
-//    father_text_layer.frame = CGRectMake(0, GENDER_BTN_HEIGHT, GENDER_BTN_WIDTH, 30);
-//    
-//    CATextLayer* father_text_line_one = [CATextLayer layer];
-//    father_text_line_one.contentsScale = 2.f;
-//    father_text_line_one.fontSize = 12.f;
-//    father_text_line_one.string = @"爸比";
-//    father_text_line_one.frame = CGRectMake(0, 6, GENDER_BTN_WIDTH, 15);
-//    father_text_line_one.alignmentMode = @"center";
-//    [father_text_layer addSublayer:father_text_line_one];
-//    
-//    CATextLayer* father_text_line_two = [CATextLayer layer];
-//    father_text_line_two.contentsScale = 2.f;
-//    father_text_line_two.fontSize = 12.f;
-//    father_text_line_two.string = @"要靠谱";
-//    father_text_line_two.frame = CGRectMake(0, 21, GENDER_BTN_WIDTH, 15);
-//    father_text_line_two.alignmentMode = @"center";
-//    [father_text_layer addSublayer:father_text_line_two];
-//    
-//    [father_view.layer addSublayer:father_text_layer];
-//    father_view.center = CGPointMake(SCREEN_WIDTH / 2 + GENDER_BTN_BETWEEN_MARGIN, SCREEN_PHOTO_TOP_MARGIN + SCREEN_PHOTO_HEIGHT + SCREEN_PHOTO_2_GENDER_BTN_MARGIN + GENDER_BTN_HEIGHT / 2);
-//    [self.view addSubview:father_view];
-    /***********************************************************************************************************************/
-   
-    /***********************************************************************************************************************/
     // private button
 #define PRIVACY_BOTTOM_MARGIN               35
     UIFont* font = [UIFont systemFontOfSize:12.f];
@@ -207,17 +126,6 @@
     [user_private_btn setTitle:@"点击进入即同意隐私条款&用户协议" forState:UIControlStateNormal];
     [user_private_btn addTarget:self action:@selector(userPrivacyBtnSelected) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:user_private_btn];
-    /***********************************************************************************************************************/
-    
-    /***********************************************************************************************************************/
-    // tick btn
-//    tick_btn = [[OBShapedButton alloc]initWithFrame:CGRectMake(0, 0, TICK_BTN_WIDTH, TICK_BTN_HEIGHT)];
-//    [tick_btn setImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_privacy_tick" ofType:@"png"]] forState:UIControlStateSelected];
-//    [tick_btn setImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_privacy_untick" ofType:@"png"]] forState:UIControlStateNormal];
-//    tick_btn.selected = YES;
-//    tick_btn.center = CGPointMake(user_private_btn.frame.origin.x - TICK_BTN_2_PRIVACY_MARGIN - TICK_BTN_WIDTH / 2, user_private_btn.center.y);
-//    [tick_btn addTarget:self action:@selector(didTickPrivacy) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:tick_btn];
     /***********************************************************************************************************************/
     
     /***********************************************************************************************************************/
@@ -249,16 +157,25 @@
     label.font = [UIFont systemFontOfSize:18.f];
     [label sizeToFit];
     self.navigationItem.titleView = label;
-    
-//    [_fakeBar addSubview:barBtn];
-//    [self.view addSubview:_fakeBar];
-//    [self.view bringSubviewToFront:_fakeBar];
     /***********************************************************************************************************************/
     
     UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapGesture:)];
     [self.view addGestureRecognizer:tap];
 
     self.view.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
+    
+    /**
+     * input method
+     */
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasChange:) name:UIKeyboardDidChangeFrameNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHidden:) name:UIKeyboardDidHideNotification object:nil];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidChangeFrameNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidHideNotification object:nil];
 }
 
 - (void)didPopViewController {
@@ -283,15 +200,6 @@
     [self.navigationController setNavigationBarHidden:YES animated:NO];
 }
 
-//- (void)viewDidLayoutSubviews {
-//    /**
-//     * layout subview then layout input view
-//     */
-//    CGFloat width = [UIScreen mainScreen].bounds.size.width / 2;
-//    CGFloat height = [UIScreen mainScreen].bounds.size.height / 2 + inputView.bounds.size.height / 2;
-//    inputView.center = CGPointMake(width, height);
-//}
-
 - (void)asyncGetUserImage {
     
     UIImage* img = [TmpFileStorageModel enumImageWithName:[_login_attr objectForKey:@"screen_photo"] withDownLoadFinishBolck:^(BOOL success, UIImage* download_img) {
@@ -307,24 +215,6 @@
     if (img) {
         [loginImgBtn setBackgroundImage:img forState:UIControlStateNormal];
     }
-    
-//    UIImage* img = [TmpFileStorageModel enumImageWithName:[_login_attr objectForKey:@"screen_photo"] withDownLoadFinishBolck:^(BOOL success, UIImage* download_img) {
-//        if (success) {
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                [loginImgBtn setBackgroundImage:download_img forState:UIControlStateNormal];
-////                loginImgBtn.image = download_img;
-//                NSLog(@"change img success");
-//            });
-//        } else {
-//            NSLog(@"down load image %@ failed", [_login_attr objectForKey:@"screen_photo"]);
-//        }
-//    }];
-//    if (img) {
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [loginImgBtn setBackgroundImage:img forState:UIControlStateNormal];
-////            loginImgBtn.backgroundColor = [UIColor redColor];
-//        });
-//    }
 }
 
 - (void)userPrivacyBtnSelected {
@@ -341,11 +231,16 @@
 
 - (IBAction)didConfirm {
 
+    NSString* screen_photo = [_login_attr objectForKey:@"screen_photo"];
+    if ([screen_photo isEqualToString:@""]) {
+        [[[UIAlertView alloc] initWithTitle:@"通知" message:@"您的用户头像没有输入，请选择" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil] show];
+        return;
+    }
+    
     if (inputView.screen_name.length == 0 || inputView.role_tag.length == 0) {
         [[[UIAlertView alloc] initWithTitle:@"通知" message:@"您的名称或者角色没有输入，请输入" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil] show];
         return;
     }
-
     
     NSString* auth_token = [_login_attr objectForKey:@"auth_token"];
     NSString* user_id = [_login_attr objectForKey:@"user_id"];
@@ -358,6 +253,23 @@
     [dic setValue:user_id forKey:@"user_id"];
     
     [dic setValue:[NSNumber numberWithInteger:self.gender] forKey:@"gender"];
+    
+    if (isChangeImg) {
+        [dic setValue:screen_photo forKey:@"screen_photo"];
+        
+        dispatch_queue_t post_queue = dispatch_queue_create("post queue", nil);
+        dispatch_async(post_queue, ^(void){
+            UIImage* img = [TmpFileStorageModel enumImageWithName:screen_photo withDownLoadFinishBolck:nil];
+            [RemoteInstance uploadPicture:img withName:screen_photo toUrl:[NSURL URLWithString:[POST_HOST_DOMAIN stringByAppendingString:POST_UPLOAD]] callBack:^(BOOL successs, NSString *message) {
+                if (successs) {
+                    NSLog(@"post image success");
+                } else {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                    [alert show];
+                }
+             }];
+        });
+    }
     
     if ([_lm updateUserProfile:[dic copy]]) {
 //    if ([_lm sendScreenName:[inputView getInputName] forToken:auth_token andUserID:user_id]) {
@@ -378,18 +290,18 @@
 }
 
 #pragma mark -- NickNameInputView Delegate
-#define MOVE_STEP               90
-- (void)didStartEditingScreenName {
-    NSLog(@"start input name");
-    [self moveView:-MOVE_STEP];
-}
-
-- (void)didEndEditingScreenName {
-    NSLog(@"End input name");
-    if (self.view.frame.origin.y != 0) {
-        [self moveView:MOVE_STEP];
-    }
-}
+//#define MOVE_STEP               90
+//- (void)didStartEditingScreenName {
+//    NSLog(@"start input name");
+//    [self moveView:-MOVE_STEP];
+//}
+//
+//- (void)didEndEditingScreenName {
+//    NSLog(@"End input name");
+//    if (self.view.frame.origin.y != 0) {
+//        [self moveView:MOVE_STEP];
+//    }
+//}
 
 - (void)didEditRoleTag {
     NSLog(@"Start input tags");
@@ -408,8 +320,6 @@
     [self didConfirm];
 }
 
-
-
 - (NSString *)getPreScreenName {
     NSString* name = [_login_attr objectForKey:@"name"];
     NSString* screen_name = [_login_attr objectForKey:@"screen_name"];
@@ -425,13 +335,8 @@
 
 - (void)didSelectGenderBtn:(UIButton*)sender {
     if (sender.tag == -99) {
-//        mother_btn.selected = NO;
-//        father_btn.selected = YES;
         self.gender = DongDaGenderFather;
-        
     } else if (sender.tag == -98) {
-//        mother_btn.selected = YES;
-//        father_btn.selected = NO;
         self.gender = DongDaGenderMother;
     }
 }
@@ -454,6 +359,7 @@
                                       // NOTE: When passing INTUAnimationOptionRepeat, this completion block is NOT executed at the end of each cycle. It will only run if the animation is canceled.
                                       NSLog(@"%@", finished ? @"Animation Completed" : @"Animation Canceled");
                                       //                                                         self.animationID = NSNotFound;
+                                      inputView.isMoved = !inputView.isMoved;
                                   }];
 }
 
@@ -505,54 +411,17 @@
 }
 
 #pragma mark -- UIImagePickerControllerDelegate
+/**
+ * TODO: change at last
+ */
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(nullable NSDictionary<NSString *,id> *)editingInfo {
     [picker dismissViewControllerAnimated:YES completion:nil];
-    dispatch_queue_t aq = dispatch_queue_create("weibo profile img queue", nil);
-    dispatch_async(aq, ^{
-        /**
-         * 1. save the img to local
-         */
-        UIImage* img = image;
-        if (img) {
-            NSString* img_name = [TmpFileStorageModel generateFileName];
-            [TmpFileStorageModel saveToTmpDirWithImage:img withName:img_name];
-            
-            /**
-             * 2. change img_name in the server
-             */
-            NSMutableDictionary* dic = [[NSMutableDictionary alloc] init];
-            [dic setValue:[_lm getCurrentAuthToken] forKey:@"auth_token"];
-            [dic setValue:[_lm getCurrentUserID] forKey:@"user_id"];
-            [dic setValue:img_name forKey:@"screen_photo"];
-//            [lm updateUserProfile:[dic copy]];
-            if ([_lm updateUserProfile:[dic copy]]) {
-                /**
-                 * 4. refresh UI
-                 */
-                dispatch_async(dispatch_get_main_queue(), ^(void){
-//                    [_delegate personalDetailChanged:[dic copy]];
-//                    [_queryView reloadData];
-                    [loginImgBtn setBackgroundImage:img forState:UIControlStateNormal];
-//                    loginImgBtn.image = img;
-                });
-            }
-           
-            /**
-             * 3. updata picture
-             */
-            dispatch_queue_t post_queue = dispatch_queue_create("post queue", nil);
-            dispatch_async(post_queue, ^(void){
-                [RemoteInstance uploadPicture:img withName:img_name toUrl:[NSURL URLWithString:[POST_HOST_DOMAIN stringByAppendingString:POST_UPLOAD]] callBack:^(BOOL successs, NSString *message) {
-                    if (successs) {
-                        NSLog(@"post image success");
-                    } else {
-                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-                        [alert show];
-                    }
-                }];
-            });
-        }
-    });
+    
+    isChangeImg = YES;
+    NSString* img_name = [TmpFileStorageModel generateFileName];
+    [TmpFileStorageModel saveToTmpDirWithImage:image withName:img_name];
+    [_login_attr setValue:img_name forKey:@"screen_photo"];
+    [loginImgBtn setBackgroundImage:image forState:UIControlStateNormal];
 }
 
 #pragma mark -- controler protocol
@@ -599,5 +468,49 @@
 
 - (UINavigationController*)getViewController {
     return self.navigationController;
+}
+
+#pragma mark -- get input view height
+- (void)keyboardDidShow:(NSNotification*)notification {
+    UIView *result = nil;
+    NSArray *windowsArray = [UIApplication sharedApplication].windows;
+    for (UIView *tmpWindow in windowsArray) {
+        NSArray *viewArray = [tmpWindow subviews];
+        for (UIView *tmpView  in viewArray) {
+            NSLog(@"%@", [NSString stringWithUTF8String:object_getClassName(tmpView)]);
+            // if ([[NSString stringWithUTF8String:object_getClassName(tmpView)] isEqualToString:@"UIPeripheralHostView"]) {
+            if ([[NSString stringWithUTF8String:object_getClassName(tmpView)] isEqualToString:@"UIInputSetContainerView"]) {
+                result = tmpView;
+                break;
+            }
+        }
+        
+        if (result != nil) {
+            break;
+        }
+    }
+    
+    //    keyboardView = result;
+    NSDictionary *userInfo = [notification userInfo];
+    NSValue *value = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    keyBoardFrame = value.CGRectValue;
+   
+    CGFloat height = [UIScreen mainScreen].bounds.size.height - (inputView.frame.size.height + inputView.frame.origin.y);
+    if (!inputView.isMoved) {
+        [self moveView:-height];
+    }
+}
+
+- (void)keyboardWasChange:(NSNotification *)notification {
+    NSDictionary *userInfo = [notification userInfo];
+    NSValue *value = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    keyBoardFrame = value.CGRectValue;
+}
+
+- (void)keyboardDidHidden:(NSNotification*)notification {
+    CGFloat height = [UIScreen mainScreen].bounds.size.height - (inputView.frame.size.height + inputView.frame.origin.y);
+    if (inputView.isMoved) {
+        [self moveView:height];
+    }
 }
 @end
