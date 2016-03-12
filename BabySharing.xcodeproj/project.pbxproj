@@ -13,6 +13,9 @@
 		700B0B891C5A1D5E00692A20 /* Notifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 700B0B871C5A1D5E00692A20 /* Notifications.m */; };
 		701233BF1C915260007F79C2 /* Targets+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 701233BC1C915260007F79C2 /* Targets+CoreDataProperties.m */; };
 		701233C01C915260007F79C2 /* Targets.m in Sources */ = {isa = PBXBuildFile; fileRef = 701233BE1C915260007F79C2 /* Targets.m */; };
+		702491D81C93EE60007922BC /* RegCurrentToken+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 702491D51C93EE60007922BC /* RegCurrentToken+CoreDataProperties.m */; };
+		702491D91C93EE60007922BC /* RegCurrentToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 702491D71C93EE60007922BC /* RegCurrentToken.m */; };
+		702491DC1C93EED1007922BC /* RegCurrentToken+ContextOpt.m in Sources */ = {isa = PBXBuildFile; fileRef = 702491DB1C93EED1007922BC /* RegCurrentToken+ContextOpt.m */; };
 		7041A5BB1C575A7400FEBFCD /* MessageChatGroupHeader2.m in Sources */ = {isa = PBXBuildFile; fileRef = 7041A5BA1C575A7400FEBFCD /* MessageChatGroupHeader2.m */; };
 		7041A5BD1C575A8700FEBFCD /* MessageChatGroupHeader2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7041A5BC1C575A8700FEBFCD /* MessageChatGroupHeader2.xib */; };
 		70530B121C3F9D1E00505121 /* SearchSegImgItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 70530B0D1C3F9D1E00505121 /* SearchSegImgItem.m */; };
@@ -390,6 +393,12 @@
 		701233BC1C915260007F79C2 /* Targets+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Targets+CoreDataProperties.m"; sourceTree = "<group>"; };
 		701233BD1C915260007F79C2 /* Targets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Targets.h; sourceTree = "<group>"; };
 		701233BE1C915260007F79C2 /* Targets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Targets.m; sourceTree = "<group>"; };
+		702491D41C93EE60007922BC /* RegCurrentToken+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RegCurrentToken+CoreDataProperties.h"; sourceTree = "<group>"; };
+		702491D51C93EE60007922BC /* RegCurrentToken+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RegCurrentToken+CoreDataProperties.m"; sourceTree = "<group>"; };
+		702491D61C93EE60007922BC /* RegCurrentToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegCurrentToken.h; sourceTree = "<group>"; };
+		702491D71C93EE60007922BC /* RegCurrentToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegCurrentToken.m; sourceTree = "<group>"; };
+		702491DA1C93EED1007922BC /* RegCurrentToken+ContextOpt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RegCurrentToken+ContextOpt.h"; sourceTree = "<group>"; };
+		702491DB1C93EED1007922BC /* RegCurrentToken+ContextOpt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RegCurrentToken+ContextOpt.m"; sourceTree = "<group>"; };
 		7041A5B91C575A7400FEBFCD /* MessageChatGroupHeader2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageChatGroupHeader2.h; sourceTree = "<group>"; };
 		7041A5BA1C575A7400FEBFCD /* MessageChatGroupHeader2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageChatGroupHeader2.m; sourceTree = "<group>"; };
 		7041A5BC1C575A8700FEBFCD /* MessageChatGroupHeader2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageChatGroupHeader2.xib; sourceTree = "<group>"; };
@@ -2166,6 +2175,10 @@
 		EEAACB781B44E90300D05C0B /* LocalModel */ = {
 			isa = PBXGroup;
 			children = (
+				702491D41C93EE60007922BC /* RegCurrentToken+CoreDataProperties.h */,
+				702491D51C93EE60007922BC /* RegCurrentToken+CoreDataProperties.m */,
+				702491D61C93EE60007922BC /* RegCurrentToken.h */,
+				702491D71C93EE60007922BC /* RegCurrentToken.m */,
 				EEB8122D1B7AF2ED00BC0774 /* DetailInfo.h */,
 				EEB8122E1B7AF2ED00BC0774 /* DetailInfo.m */,
 				EEB8122F1B7AF2ED00BC0774 /* UserKids.h */,
@@ -2187,6 +2200,8 @@
 				EEAACB881B44E90300D05C0B /* RegTmpToken+ContextOpt.m */,
 				EEAACB891B44E90300D05C0B /* RegTmpToken.h */,
 				EEAACB8A1B44E90300D05C0B /* RegTmpToken.m */,
+				702491DA1C93EED1007922BC /* RegCurrentToken+ContextOpt.h */,
+				702491DB1C93EED1007922BC /* RegCurrentToken+ContextOpt.m */,
 			);
 			path = LocalModel;
 			sourceTree = "<group>";
@@ -3185,6 +3200,7 @@
 				EE7910601B845818005E455B /* UIBarButtonItem+WEPopover.m in Sources */,
 				EE7910591B841D14005E455B /* WEBlockingGestureRecognizer.m in Sources */,
 				EE7910571B841CBE005E455B /* FoundPCGCell.m in Sources */,
+				702491DC1C93EED1007922BC /* RegCurrentToken+ContextOpt.m in Sources */,
 				EE7910561B841CAB005E455B /* WETouchableView.m in Sources */,
 				705D98461C8FCCC1003AFF3E /* ImageFilterFactory.m in Sources */,
 				70D15B451C5B64C9007AC9AB /* MJRefreshComponent.m in Sources */,
@@ -3371,6 +3387,7 @@
 				70530B121C3F9D1E00505121 /* SearchSegImgItem.m in Sources */,
 				70D15B4C1C5B64C9007AC9AB /* MJRefreshBackNormalFooter.m in Sources */,
 				707C08901C51D035003C6F53 /* PhotoTagEditView.m in Sources */,
+				702491D81C93EE60007922BC /* RegCurrentToken+CoreDataProperties.m in Sources */,
 				EE5D686F1B75A9FC0067A2DF /* NotificationOwner.m in Sources */,
 				70EF02D21C22CE7A00DABCFC /* PostPublichViewController.m in Sources */,
 				A066496C1C89A2B90043FF07 /* UIImage+MultiFormat.m in Sources */,
@@ -3383,6 +3400,7 @@
 				70CE77051C8943A300EA9C98 /* SearchSegTextTextItem.m in Sources */,
 				70CC1C641C7C6BF20022B62E /* Followed+CoreDataProperties.m in Sources */,
 				EEAACCE01B44E90400D05C0B /* PostModel.m in Sources */,
+				702491D91C93EE60007922BC /* RegCurrentToken.m in Sources */,
 				EE83F40A1B96EDDF00D51FDF /* CycleAddSchoolViewController.m in Sources */,
 				7082FFC91C59D2BA0056D1FC /* MessageChatGroupInfoCell.m in Sources */,
 				EEAACCE11B44E90400D05C0B /* QueryComments.m in Sources */,

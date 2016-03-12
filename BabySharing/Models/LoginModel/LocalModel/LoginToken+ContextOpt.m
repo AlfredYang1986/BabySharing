@@ -67,7 +67,6 @@
     NSError* error = nil;
     NSArray* matches = [context executeFetchRequest:request error:&error];
     
-    
     for (LoginToken* tmp in matches) {
         tmp.phoneNo = @"";
     }
@@ -114,6 +113,8 @@
             // user id, do nothing
         }
     }
+
+    NSLog(@"new login token is : %@", tmp);
 }
 
 + (LoginToken *)createTokenInContext:(NSManagedObjectContext*)context withUserID:(NSString*)user_id andAttrs:(NSDictionary*)dic {
@@ -126,7 +127,8 @@
     
     NSError* error = nil;
     NSArray* matches = [context executeFetchRequest:request error:&error];
-    
+   
+    NSLog(@"dic : %@", dic);
     if (!matches || matches.count > 1) {
         NSLog(@"error with primary key");
         return nil;

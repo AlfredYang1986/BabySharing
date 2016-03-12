@@ -232,7 +232,7 @@
 - (IBAction)didConfirm {
 
     NSString* screen_photo = [_login_attr objectForKey:@"screen_photo"];
-    if ([screen_photo isEqualToString:@""]) {
+    if (!screen_photo || [screen_photo isEqualToString:@""]) {
         [[[UIAlertView alloc] initWithTitle:@"通知" message:@"您的用户头像没有输入，请选择" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil] show];
         return;
     }
@@ -254,6 +254,11 @@
     
     [dic setValue:[NSNumber numberWithInteger:self.gender] forKey:@"gender"];
     
+    if ([[_login_attr allKeys] containsObject:@"phoneNo"]) {
+        [dic setValue:[_login_attr objectForKey:@"phoneNo"] forKey:@"phoneNo"];
+        [dic setValue:[NSNumber numberWithInt:1] forKey:@"create"];
+    }
+    
     if (isChangeImg) {
         [dic setValue:screen_photo forKey:@"screen_photo"];
         
@@ -270,12 +275,13 @@
              }];
         });
     }
-    
-    if ([_lm updateUserProfile:[dic copy]]) {
+   
+    NSString* newID = nil;
+    if ([_lm updateAndCreateUserProfile:[dic copy] andUserId:&newID]) {
 //    if ([_lm sendScreenName:[inputView getInputName] forToken:auth_token andUserID:user_id]) {
         NSString* phoneNo = (NSString*)[_login_attr objectForKey:@"phoneNo"];
         [LoginToken unbindTokenInContext:_lm.doc.managedObjectContext WithPhoneNum:phoneNo];
-        LoginToken* token = [LoginToken enumLoginUserInContext:_lm.doc.managedObjectContext withUserID:user_id];
+        LoginToken* token = [LoginToken enumLoginUserInContext:_lm.doc.managedObjectContext withUserID:newID];
         [_lm setCurrentUser:token];
         [_lm.doc.managedObjectContext save:nil];        
         [[NSNotificationCenter defaultCenter] postNotificationName:@"login success" object:nil];
@@ -290,19 +296,6 @@
 }
 
 #pragma mark -- NickNameInputView Delegate
-//#define MOVE_STEP               90
-//- (void)didStartEditingScreenName {
-//    NSLog(@"start input name");
-//    [self moveView:-MOVE_STEP];
-//}
-//
-//- (void)didEndEditingScreenName {
-//    NSLog(@"End input name");
-//    if (self.view.frame.origin.y != 0) {
-//        [self moveView:MOVE_STEP];
-//    }
-//}
-
 - (void)didEditRoleTag {
     NSLog(@"Start input tags");
     [inputView endInputName];
@@ -321,12 +314,13 @@
 }
 
 - (NSString *)getPreScreenName {
-    NSString* name = [_login_attr objectForKey:@"name"];
-    NSString* screen_name = [_login_attr objectForKey:@"screen_name"];
-    
-    if (!name || [name isEqualToString:@""])
-        return screen_name;
-    else return name;
+//    NSString* name = [_login_attr objectForKey:@"name"];
+//    NSString* screen_name = [_login_attr objectForKey:@"screen_name"];
+//    
+//    if (!name || [name isEqualToString:@""])
+//        return screen_name;
+//    else return name;
+    return [_login_attr objectForKey:@"screen_name"];
 }
 
 - (NSString *)getPreRoleTag {

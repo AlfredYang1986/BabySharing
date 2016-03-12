@@ -106,7 +106,6 @@
     [self.view addSubview:_nickNameLabel];
     [self.view bringSubviewToFront:_nickNameLabel];
     
-   
     /**
      * border for role tags
      */
@@ -310,7 +309,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"bindNewAccountSegue"]){
-        ((NicknameInputViewController*)segue.destinationViewController).login_attr = (NSDictionary*)sender;
+        ((NicknameInputViewController*)segue.destinationViewController).login_attr = [(NSDictionary*)sender mutableCopy];
         ((NicknameInputViewController*)segue.destinationViewController).lm = _lm;
     }
 }

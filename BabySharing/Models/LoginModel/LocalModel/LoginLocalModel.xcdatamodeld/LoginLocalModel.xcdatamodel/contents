@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14E46" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15D21" minimumToolsVersion="Xcode 4.3">
     <entity name="CurrentToken" representedClassName="CurrentToken" syncable="YES">
         <attribute name="last_login_data" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="status" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -24,6 +24,7 @@
         <relationship name="connectWith" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Providers" inverseName="user" inverseEntity="Providers" syncable="YES"/>
         <relationship name="detailInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DetailInfo" inverseName="who" inverseEntity="DetailInfo" syncable="YES"/>
         <relationship name="logined" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CurrentToken" inverseName="who" inverseEntity="CurrentToken" syncable="YES"/>
+        <relationship name="reglogined" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RegCurrentToken" inverseName="who" inverseEntity="RegCurrentToken" syncable="YES"/>
     </entity>
     <entity name="Providers" representedClassName="Providers" syncable="YES">
         <attribute name="provider_name" optional="YES" attributeType="String" syncable="YES"/>
@@ -32,6 +33,11 @@
         <attribute name="provider_token" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="provider_user_id" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LoginToken" inverseName="connectWith" inverseEntity="LoginToken" syncable="YES"/>
+    </entity>
+    <entity name="RegCurrentToken" representedClassName="RegCurrentToken" syncable="YES">
+        <attribute name="last_login_data" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="who" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LoginToken" inverseName="reglogined" inverseEntity="LoginToken" syncable="YES"/>
     </entity>
     <entity name="RegTmpToken" representedClassName="RegTmpToken" syncable="YES">
         <attribute name="phoneNo" optional="YES" attributeType="String" syncable="YES"/>
@@ -48,9 +54,10 @@
     <elements>
         <element name="CurrentToken" positionX="-470" positionY="-49" width="128" height="88"/>
         <element name="DetailInfo" positionX="34" positionY="-513" width="128" height="148"/>
-        <element name="LoginToken" positionX="-261" positionY="-522" width="128" height="178"/>
+        <element name="LoginToken" positionX="-252" positionY="-522" width="128" height="193"/>
         <element name="Providers" positionX="-486" positionY="-585" width="128" height="133"/>
         <element name="RegTmpToken" positionX="-596" positionY="-306" width="128" height="73"/>
         <element name="UserKids" positionX="313" positionY="-513" width="128" height="133"/>
+        <element name="RegCurrentToken" positionX="-54" positionY="-135" width="128" height="88"/>
     </elements>
 </model>

@@ -92,8 +92,6 @@ enum DisplaySide {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogedOut:) name:@"current user sign out" object:nil];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changingSide:) name:@"changing side" object:nil];
-  
-    
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [self.view addGestureRecognizer:tap];
@@ -214,7 +212,7 @@ enum DisplaySide {
         // do nothing ....
         
     } else if ([segue.identifier isEqualToString:@"loginSuccessSegue"]) {
-        ((NicknameInputViewController*)segue.destinationViewController).login_attr = (NSDictionary*)sender;
+        ((NicknameInputViewController*)segue.destinationViewController).login_attr = [(NSDictionary*)sender mutableCopy];
         ((NicknameInputViewController*)segue.destinationViewController).lm = _lm;
         ((NicknameInputViewController*)segue.destinationViewController).isSNSLogIn = isSNSLogin;
     } else if ([segue.identifier isEqualToString:@"alreadyLogSegue"]) {
@@ -297,12 +295,12 @@ enum DisplaySide {
     AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
     _mm = app.mm;
     
-    if (inputView.frame.origin.y + inputView.frame.size.height != [UIScreen mainScreen].bounds.size.height) {
-        CGFloat height = [UIScreen mainScreen].bounds.size.height;
-        
-        CGFloat last_height = inputView.bounds.size.height;
-        inputView.frame = CGRectMake(0, INPUT_VIEW_START_POINT, inputView.bounds.size.width, last_height);
-    }
+//    if (inputView.frame.origin.y + inputView.frame.size.height != [UIScreen mainScreen].bounds.size.height) {
+//        CGFloat height = [UIScreen mainScreen].bounds.size.height;
+//        
+//        CGFloat last_height = inputView.bounds.size.height;
+//        inputView.frame = CGRectMake(0, INPUT_VIEW_START_POINT, inputView.bounds.size.width, last_height);
+//    }
  
     if (![GotyeOCAPI isOnline]) {
         [GotyeOCAPI login:_lm.current_user_id password:nil];
@@ -392,7 +390,7 @@ enum DisplaySide {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"通知" message:@"输入的电话号码错误" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil];
         [alert show];
     } else {
-        NSDictionary *tmp =[[NSDictionary alloc] init];
+        NSDictionary *tmp = nil;//[[NSDictionary alloc] init];
         LoginModelConfirmResult reVal = [self.lm sendConfirrmCode:code ToPhone:phoneNo withToken:token.reg_token toResult:&tmp];
         if (reVal == LoginModelResultSuccess) {
             [self performSegueWithIdentifier:@"loginSuccessSegue" sender:tmp];
