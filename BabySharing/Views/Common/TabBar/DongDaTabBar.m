@@ -59,27 +59,19 @@
 }
 
 - (void)addItemWithImg:(UIImage*)image andSelectedImg:(UIImage*)selectedImg {
-//    UIButton* btn = [[UIButton alloc]init];
-//    [btn setImage:image forState:UIControlStateNormal];
-//    [btn setImage:selectedImg forState:UIControlStateSelected];
-//    btn.backgroundColor = [UIColor redColor];
-//    CALayer* layer = [CALayer layer];
-//    layer.contents = (id)image.CGImage;
-//    layer.frame = CGRectMake(0, 0, 25, 25);
-//    layer.position = btn.center;
-//    [btn.layer addSublayer:layer];
-//    
-////    btn.imageView.contentScaleFactor = 0.1;
-//    btn.tag = self.count;
-//    [btn addTarget:self action:@selector(itemSelected:) forControlEvents:UIControlEventTouchUpInside];
-//    
-//    if (btn.tag == 0) {
-//        [btn setSelected:YES];
-//    }
-//    
-//    [self addSubview:btn];
-    
     DongDaTabBarItem* item = [[DongDaTabBarItem alloc]initWithImage:image andSelectImage:selectedImg];
+    item.tag = self.count;
+    [item addTarget:self action:@selector(itemSelected:) forControlEvents:UIControlEventTouchUpInside];
+    if (item.tag == 0) {
+        [item setSelected:YES];
+    }
+    
+    [self addSubview:item];
+}
+
+- (void)addItemWithImg:(UIImage*)image andSelectedImg:(UIImage*)selectedImg andTitle:(NSString*)title {
+    
+    DongDaTabBarItem* item = [[DongDaTabBarItem alloc]initWithImage:image andSelectImage:selectedImg andTitle:title];
     item.tag = self.count;
     [item addTarget:self action:@selector(itemSelected:) forControlEvents:UIControlEventTouchUpInside];
     if (item.tag == 0) {

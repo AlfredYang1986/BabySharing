@@ -12,5 +12,6 @@
 
 - (id)initWithMidImage:(UIImage*)image;
 - (id)initWithImage:(UIImage*)image andSelectImage:(UIImage*)selectImg;
+- (id)initWithImage:(UIImage*)image andSelectImage:(UIImage*)selectImg andTitle:(NSString*)title;
 - (void)setSelected:(BOOL)selected;
 @end

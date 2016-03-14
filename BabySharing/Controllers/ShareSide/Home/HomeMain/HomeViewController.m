@@ -763,7 +763,8 @@
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {    HomeCell *homeCell = (HomeCell *)cell;
+- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    HomeCell *homeCell = (HomeCell *)cell;
 //    [homeCell stopViedo];
 }
 

@@ -1087,7 +1087,6 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
             <objects>
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="VBe-2x-igG" customClass="TabBarController" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="mtj-o1-bZi">
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1251,7 +1250,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qL5-xw-zCu">
                                 <rect key="frame" x="0.0" y="470" width="320" height="49"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kPy-2V-QRa">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kPy-2V-QRa">
                                         <rect key="frame" x="8" y="10" width="228" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -1266,7 +1265,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GcU-ws-Syn">
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GcU-ws-Syn">
                                         <rect key="frame" x="244" y="10" width="30" height="30"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <state key="normal">
@@ -1589,11 +1588,11 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
             </objects>
             <point key="canvasLocation" x="3240" y="4888"/>
         </scene>
-        <!--Home-->
+        <!--主页-->
         <scene sceneID="xpf-RK-Rv1">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="aoW-yh-ycw" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Home" id="xS7-d9-dWJ"/>
+                    <tabBarItem key="tabBarItem" title="主页" id="xS7-d9-dWJ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="x8q-Gk-P1T">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1627,11 +1626,11 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
             </objects>
             <point key="canvasLocation" x="-689" y="240"/>
         </scene>
-        <!--Personal Center-->
+        <!--我的-->
         <scene sceneID="5Qu-FH-07n">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Uzu-dA-Pf3" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Personal Center" id="Ta3-I3-abj"/>
+                    <tabBarItem key="tabBarItem" title="我的" id="Ta3-I3-abj"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="nkh-62-JKK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1646,11 +1645,11 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
             </objects>
             <point key="canvasLocation" x="850" y="4114"/>
         </scene>
-        <!--Message-->
+        <!--好友-->
         <scene sceneID="mgT-Dh-7cN">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7hx-ud-h3I" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Message" id="GJY-jY-Mlv"/>
+                    <tabBarItem key="tabBarItem" title="好友" id="GJY-jY-Mlv"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="7fi-er-UA7">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1665,11 +1664,11 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
             </objects>
             <point key="canvasLocation" x="850" y="3358"/>
         </scene>
-        <!--Found-->
+        <!--发现-->
         <scene sceneID="tGE-Uq-2Ve">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Pa5-r2-UE1" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Found" id="7L6-5r-vv9"/>
+                    <tabBarItem key="tabBarItem" title="发现" id="7L6-5r-vv9"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="muW-SZ-U0Y">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

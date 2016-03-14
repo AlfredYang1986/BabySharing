@@ -414,8 +414,8 @@
 //    _current_user = [self sendAuthProvidersName:@"wechat" andProvideUserId:qq_openID andProvideToken:accessToken andProvideScreenName:[infoDic valueForKey:@"nickname"]];
     _reg_user = [self sendAuthProvidersName:@"wechat" andProvideUserId:qq_openID andProvideToken:accessToken andProvideScreenName:[infoDic valueForKey:@"nickname"]];
     NSLog(@"login user id is: %@", _reg_user.who.user_id);
-    NSLog(@"login auth token is: %@", _reg_user.who.user_id);
-    NSLog(@"login screen photo is: %@", _reg_user.who.user_id);
+    NSLog(@"login auth token is: %@", _reg_user.who.auth_token);
+    NSLog(@"login screen photo is: %@", _reg_user.who.screen_image);
 
     // 获取头像
     if (_reg_user.who.screen_image == nil || [_reg_user.who.screen_image isEqualToString:@""]) {
@@ -446,17 +446,17 @@
                 [self updateUserProfile:[dic copy]];
             }
         });
-        
-        /**
-         *  4. push notification to the controller
-         *      and controller to refresh the view
-         */
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [_doc.managedObjectContext save:nil];
-            NSLog(@"end get user info from weibo");
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"SNS login success" object:nil];
-        });
     }
+    
+    /**
+     *  4. push notification to the controller
+     *      and controller to refresh the view
+     */
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [_doc.managedObjectContext save:nil];
+        NSLog(@"end get user info from weibo");
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"SNS login success" object:nil];
+    });
     
 //    // 获取头像
 //    dispatch_queue_t aq = dispatch_queue_create("wechat profile img queue", nil);
@@ -540,14 +540,14 @@
 //    _current_user = [self sendAuthProvidersName:@"qq" andProvideUserId:qq_openID andProvideToken:accessToken andProvideScreenName:[infoDic valueForKey:@"nickname"]];
     _reg_user = [self sendAuthProvidersName:@"qq" andProvideUserId:qq_openID andProvideToken:accessToken andProvideScreenName:[infoDic valueForKey:@"nickname"]];
     NSLog(@"login user id is: %@", _reg_user.who.user_id);
-    NSLog(@"login auth token is: %@", _reg_user.who.user_id);
-    NSLog(@"login screen photo is: %@", _reg_user.who.user_id);
+    NSLog(@"login auth token is: %@", _reg_user.who.auth_token);
+    NSLog(@"login screen photo is: %@", _reg_user.who.screen_image);
     
     // 获取头像
     if (_reg_user.who.screen_image == nil || [_reg_user.who.screen_image isEqualToString:@""]) {
         dispatch_queue_t aq = dispatch_queue_create("qq profile img queue", nil);
         dispatch_async(aq, ^{
-            NSData* data = [RemoteInstance remoteDownDataFromUrl:[infoDic valueForKey:@"figureurl_qq_2"]];
+            NSData* data = [RemoteInstance remoteDownDataFromUrl:[NSURL URLWithString:[infoDic valueForKey:@"figureurl_qq_2"]]];
             UIImage* img = [UIImage imageWithData:data];
             if (img) {
                 NSString* img_name = [TmpFileStorageModel generateFileName];
@@ -572,17 +572,18 @@
                 [self updateUserProfile:[dic copy]];
             }
         });
-        
-        /**
-         *  4. push notification to the controller
-         *      and controller to refresh the view
-         */
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [_doc.managedObjectContext save:nil];
-            NSLog(@"end get user info from weibo");
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"SNS login success" object:nil];
-        });
     }
+    
+    /**
+     *  4. push notification to the controller
+     *      and controller to refresh the view
+     */
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [_doc.managedObjectContext save:nil];
+        NSLog(@"end get user info from weibo");
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"SNS login success" object:nil];
+    });
+    
 //    dispatch_queue_t aq = dispatch_queue_create("qq profile img queue", nil);
 //    dispatch_async(aq, ^{
 //        NSData* data = [RemoteInstance remoteDownDataFromUrl:[NSURL URLWithString:[infoDic valueForKey:@"figureurl_qq_2"]]];
