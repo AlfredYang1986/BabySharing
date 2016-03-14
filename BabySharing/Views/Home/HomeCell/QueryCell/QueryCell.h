@@ -29,6 +29,8 @@
 @property (nonatomic) PostPreViewType type;
 @property (nonatomic, strong) NSURL* movieURL;
 @property (nonatomic, strong) AVPlayer* player;
+// 所有的资源文件
+@property (nonatomic, weak) NSArray *resource;
 
 @property (weak, nonatomic) id<QueryCellActionProtocol> delegate;
 @property (weak, nonatomic) id content;

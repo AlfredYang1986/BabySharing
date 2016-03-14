@@ -15,4 +15,5 @@
 - (void)blockTouchEventForOtherViews;
 
 @property (weak, nonatomic) HomeViewController* baseController;
+
 @end

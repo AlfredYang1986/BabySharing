@@ -87,7 +87,6 @@
 //    CGFloat img_height = IMG_HEIGHT;
 //    CGFloat tmp = 89;
     CGFloat tmp = CHATING_VIEW_HEIGHT + DESCRIPTION_VIEW_HEIGHT;
-    
     if (width == 320.f)
         return img_height
             + tmp;
@@ -189,18 +188,6 @@
     chat_icon_layer.position = CGPointMake(CGRectGetHeight(chat_btn.frame) / 2, CGRectGetHeight(chat_btn.frame) / 2);
     [chat_icon.layer addSublayer:chat_icon_layer];
     
-    
-//    [chat_btn setImage:[UIImage imageNamed:[resourceBundle pathForResource:@"home_chat" ofType:@"png"]] forState:UIControlStateNormal];
-
-//    CALayer* chat_icon = [CALayer layer];
-//    chat_icon.frame = CGRectMake(0, 0, FUNC_BTN_WIDTH_2, FUNC_BTN_HEIGHT_2);
-//    chat_icon.contents = (id)[UIImage imageNamed:[resourceBundle pathForResource:@"home_chat" ofType:@"png"]].CGImage;
-//    chat_icon.position = CGPointMake(-FUNC_BTN_WIDTH_2 + 5, FUNC_BTN_HEIGHT_2 / 2 + 1);
-//    [chat_btn.layer addSublayer:chat_icon];
-    
-    
-    
-//    [_funcActArea addSubview:chat_icon];
     /***********************************************************************************************/
 
     /***********************************************************************************************/
@@ -273,53 +260,12 @@
 - (void)movieContentWithURL:(NSURL*)url withTriat:(MoviePlayTrait*)trait {
     self.type = PostPreViewMovie;
     self.movieURL = url;
-//    self.player = [trait getFreePlayerWithURL:url];
     if (self.player == nil) {
         self.player = [[AVPlayer alloc]initWithURL:url];
     }
-//    _type = PostPreViewMovie;
-    //视频播放对象
-//    CGFloat width = [UIScreen mainScreen].bounds.size.width - HER_MARGIN * 2;
-//    CGFloat height = IMG_HEIGHT;
-//    _movieURL = url;
-//    movie = [MoviePlayTrait createPlayerControllerInRect:CGRectMake(0, 0, width, height) andParentView:_imgView andContentUrl:_movieURL];
-//        // 注册一个播放结束的通知
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(movieFinishedCallback:)
-//                                                 name:MPMoviePlayerPlaybackDidFinishNotification
-//                                               object:movie];
-//    
-//    movie.view.hidden = YES;
 }
 
 - (void)movieFinishedCallback:(NSNotification*)notify {
-//    NSLog(@"movie play finished");
-//    NSNumber *reason = [notify.userInfo valueForKey:MPMoviePlayerPlaybackDidFinishReasonUserInfoKey];
-//    if (reason != nil){
-//        NSInteger reasonAsInteger = [reason integerValue];
-//        switch (reasonAsInteger){
-//            case MPMovieFinishReasonPlaybackEnded:{
-//                /* The movie ended normally */
-//                break;
-//            }
-//            case MPMovieFinishReasonPlaybackError:{
-//                /* An error happened and the movie ended */
-//                break;
-//            }
-//            case MPMovieFinishReasonUserExited:{
-//                /* The user exited the player */
-//                break;
-//            }
-//        }
-//        NSLog(@"Finish Reason = %ld", (long)reasonAsInteger);
-//    }
-//    
-//    //视频播放对象
-//    MPMoviePlayerController* theMovie = [notify object];
-//    //销毁播放通知
-//    [[NSNotificationCenter defaultCenter] removeObserver:self
-//                                                    name:MPMoviePlayerPlaybackDidFinishNotification
-//                                                  object:theMovie];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -373,7 +319,7 @@
     _timeLabel.text = result;
 }
 
-- (void)setTags:(NSString*)tags {
+- (void)setTags:(NSString *)tags {
     _tagsLabelView.text = tags;
 }
 
@@ -386,16 +332,6 @@
         descriptionView.textColor = [UIColor colorWithRed:0.3059 green:0.3059 blue:0.3059 alpha:1.f];
     }
    
-    /**
-     * show all text
-     */
-//    CGSize size = [QueryCell getSizeBaseOnDescription:description];
-//    descriptionView.frame = CGRectMake(HER_MARGIN, HER_MARGIN, [UIScreen mainScreen].bounds.size.width - HER_MARGIN * 2, size.height);
-//    descriptionView.text = description;
-  
-    /**
-     * only show first line
-     */
     UIFont* font = [UIFont systemFontOfSize:13.f];
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     CGSize size = [description sizeWithFont:font constrainedToSize:CGSizeMake(width - DESCRIPTION_LEFT_MARGIN * 2, FLT_MAX)];
@@ -403,11 +339,7 @@
     
     descriptionView.font = font;
     descriptionView.frame = CGRectMake(DESCRIPTION_LEFT_MARGIN, DESCRIPTION_TOP_MARGIN, [UIScreen mainScreen].bounds.size.width - DESCRIPTION_LEFT_MARGIN * 2, s.height);
-//    if (s.height == size.height) {
-        descriptionView.text = description;
-//    } else {
-//        descriptionView.text = [[description substringToIndex:10] stringByAppendingString:@"..."];
-//    }
+    descriptionView.text = description;
     [descriptionView sizeToFit];
 }
 
@@ -416,13 +348,8 @@
     static const CGFloat kAnimationDuration = 0.5; // in seconds
     
     if (funcView == nil) {
-//        funcView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 50, 100)];
-
-        /**
-         * option:1 shaped Btn
-         */
         CGFloat width = [UIScreen mainScreen].bounds.size.width;
-        funcView = [[OBShapedButton alloc]initWithFrame:CGRectMake(width - 113 - HEADER_MARGIN_TO_SCREEN, -60, 113, 167)];
+        funcView = [[OBShapedButton alloc] initWithFrame:CGRectMake(width - 113 - HEADER_MARGIN_TO_SCREEN, -60, 113, 167)];
         
         NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
         NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
@@ -444,32 +371,7 @@
         [funcView addSubview:collectBtn];
         [funcView addSubview:commentsBtn];
         
-        /**
-         * option:2 paneal
-         */
-//        funcView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 32 * 3, 32)];
-//
-//        NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
-//        NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-//        
-//        UIButton* didnotlikeBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 32)];
-//        [didnotlikeBtn addTarget:self action:@selector(notLikeBtnSelected) forControlEvents:UIControlEventTouchDown];
-//        [didnotlikeBtn setImage:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Cross"] ofType:@"png"]] forState:UIControlStateNormal];
-//        UIButton* collectBtn = [[UIButton alloc]initWithFrame:CGRectMake(32, 0, 32, 32)];
-//        [collectBtn setImage:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Star"] ofType:@"png"]] forState:UIControlStateNormal];
-//        [collectBtn addTarget:self action:@selector(collectBtnSelected) forControlEvents:UIControlEventTouchDown];
-//        UIButton* commentsBtn = [[UIButton alloc]initWithFrame:CGRectMake(32 * 2, 0, 32, 32)];
-//        [commentsBtn setImage:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"Comments"] ofType:@"png"]] forState:UIControlStateNormal];
-//        [commentsBtn addTarget:self action:@selector(commentsBtnSelected) forControlEvents:UIControlEventTouchDown];
-//        
-//        [funcView addSubview:didnotlikeBtn];
-//        [funcView addSubview:collectBtn];
-//        [funcView addSubview:commentsBtn];
-//
         [_bkgView addSubview:funcView];
-//        funcView.frame = CGRectMake(_funcBtn.frame.origin.x - 32 * 3 - 8, _funcBtn.frame.origin.y, 32 * 3, 32);
-//        funcView.frame = CGRectMake(_funcBtn.frame.origin.x - 45, _funcBtn.frame.origin.y - 20, 60, 50);
-//
         funcView.hidden = YES;
         [_bkgView bringSubviewToFront:funcView];
         [_bkgView bringSubviewToFront:_funcBtn];
@@ -526,4 +428,12 @@
     _funcBtn.transform = CGAffineTransformMakeRotation(0);
     _funcBtn.hidden = NO;
 }
+
+- (void)setResource:(NSArray *)resource {
+    if (![_resource isEqual:resource]) {
+        _resource = resource;
+    }
+    // 设置图片
+}
+
 @end

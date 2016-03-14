@@ -18,5 +18,7 @@
 + (NSArray *)sortWithArr:(NSArray *)arr headStr:(NSString *)headStr;
 + (UIColor *)colorWithRED:(CGFloat)RED GREEN:(CGFloat)GREEN BLUE:(CGFloat)BLUE ALPHA:(CGFloat)ALPHA;
 + (UIImage *)addPortraitToImage:(UIImage *)image userHead:(UIImage *)userhead userName:(NSString *)userName;
++ (NSString *)stringFromDate:(NSDate *)date;
++ (NSString *)compareCurrentTime:(NSDate*) compareDate;
 
 @end

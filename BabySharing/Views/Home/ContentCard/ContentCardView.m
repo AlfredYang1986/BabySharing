@@ -49,7 +49,6 @@
     [self bringSubviewToFront:_queryView];
     
     [UIView setAnimationsEnabled:NO];
-    
     self.backgroundColor = [UIColor colorWithRed:0.9529 green:0.9529 blue:0.9529 alpha:1.f];
     
 }

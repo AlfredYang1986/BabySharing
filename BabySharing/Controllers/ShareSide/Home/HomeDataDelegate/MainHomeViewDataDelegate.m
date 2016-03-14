@@ -45,7 +45,8 @@
 - (BOOL)collectData:(SyncDataCallBack)block {
     data = nil;
     [_qm refreshQueryDataByUser:_lm.current_user_id withToken:_lm.current_auth_token withFinishBlock:^{
-        block(self.data);
+//        block(self.data);
+        block(_qm.querydata);
     }];
     return YES;
 }
@@ -68,8 +69,8 @@
     return self.data.count;
 }
 
-- (QueryContent*)queryItemAtIndex:(NSInteger)index {
-    QueryContent* reVal = nil;
+- (QueryContent *)queryItemAtIndex:(NSInteger)index {
+    QueryContent *reVal = nil;
     @try {
         reVal = [self.data objectAtIndex:index];
     }

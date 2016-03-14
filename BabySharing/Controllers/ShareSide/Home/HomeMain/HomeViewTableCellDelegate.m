@@ -79,11 +79,9 @@
     [header setUpSubviews];
     QueryContent* tmp = [_delegate queryItemAtIndex:tableView.tag];
     [header setUserPhoto:tmp.owner_photo];
-    // [header setTimeText:@"金融/旅行/90后"];
     [header setTime:tmp.content_post_date];
     [header setUserName:tmp.owner_name];
     [header setRoleTag:@"创业少妇"];
-//    [header setPushTimes:[NSString stringWithFormat:@"%d", tmp.likes_count.intValue]];
     [header setPushTimes:@"1234"];
     
     header.delegate = _controller;
@@ -102,8 +100,8 @@
         cell = [nib objectAtIndex:0];
     }
     
-    QueryContent* tmp = [_delegate queryItemAtIndex:tableView.tag];
-    QueryContentItem* tmp_item = [tmp.items.objectEnumerator nextObject];
+    QueryContent *tmp = [_delegate queryItemAtIndex:tableView.tag];
+    QueryContentItem *tmp_item = [tmp.items.objectEnumerator nextObject];
     if (tmp_item.item_type.unsignedIntegerValue == PostPreViewPhote) {
         NSLog(@"photo field");
         NSLog(@"%@", tmp_item.item_name);

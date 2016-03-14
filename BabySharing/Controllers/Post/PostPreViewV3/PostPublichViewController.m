@@ -502,7 +502,8 @@
                     dispatch_async(dispatch_get_main_queue(), ^{
                         if (self) {
                             UIImage *shareImage = [Tools addPortraitToImage:_share_img userHead:user_img userName:[data valueForKey:@"screen_name"]];
-                            [delegate.lm postContentOnQQzoneWithText:_descriptionView.text andImage:shareImage type:ShareImage];
+//                            [delegate.lm postContentOnQQzoneWithText:_descriptionView.text andImage:shareImage type:ShareImage];
+                            [delegate.lm postContentOnWeiboWithText:_descriptionView.text andImage:shareImage];
                         }
                     });
                 } else {
@@ -512,7 +513,8 @@
             if (userImg != nil) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     UIImage *shareImage = [Tools addPortraitToImage:_share_img userHead:userImg userName:[data valueForKey:@"screen_name"]];
-                    [delegate.lm postContentOnQQzoneWithText:_descriptionView.text andImage:shareImage type:ShareImage];
+//                    [delegate.lm postContentOnQQzoneWithText:_descriptionView.text andImage:shareImage type:ShareImage];
+                    [delegate.lm postContentOnWeiboWithText:_descriptionView.text andImage:shareImage];
                 });
             }
         }];
