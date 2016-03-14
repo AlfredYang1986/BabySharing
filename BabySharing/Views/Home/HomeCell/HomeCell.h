@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QueryContent.h"
+#import "QueryCellDelegate.h"
 
 @interface HomeCell : UITableViewCell
 
 @property (nonatomic, strong) UILabel *number;
-- (void)updateViewWith:(NSObject *)object;
+@property (nonatomic, strong) id<QueryCellActionProtocol> delegate;
+- (void)stopViedo;
+- (void)updateViewWith:(QueryContent *)content;
 
 @end

@@ -87,7 +87,6 @@
 //    CGFloat img_height = IMG_HEIGHT;
 //    CGFloat tmp = 89;
     CGFloat tmp = CHATING_VIEW_HEIGHT + DESCRIPTION_VIEW_HEIGHT;
-    
     if (width == 320.f)
         return img_height
             + tmp;
@@ -320,7 +319,7 @@
     _timeLabel.text = result;
 }
 
-- (void)setTags:(NSString*)tags {
+- (void)setTags:(NSString *)tags {
     _tagsLabelView.text = tags;
 }
 
@@ -350,7 +349,7 @@
     
     if (funcView == nil) {
         CGFloat width = [UIScreen mainScreen].bounds.size.width;
-        funcView = [[OBShapedButton alloc]initWithFrame:CGRectMake(width - 113 - HEADER_MARGIN_TO_SCREEN, -60, 113, 167)];
+        funcView = [[OBShapedButton alloc] initWithFrame:CGRectMake(width - 113 - HEADER_MARGIN_TO_SCREEN, -60, 113, 167)];
         
         NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
         NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];

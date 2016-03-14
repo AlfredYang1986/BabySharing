@@ -15,10 +15,10 @@
 
 @interface QueryModel : NSObject
 
-@property (strong, nonatomic) UIManagedDocument* doc;
-@property (strong, nonatomic, readonly) NSArray* querydata;
+@property (strong, nonatomic) UIManagedDocument *doc;
+@property (strong, nonatomic, readonly) NSArray *querydata;
 
-@property (weak, nonatomic, readonly) AppDelegate* delegate;
+@property (weak, nonatomic, readonly) AppDelegate *delegate;
 
 #pragma mark -- constractor
 - (id)initWithDelegate:(AppDelegate*)app;
@@ -33,8 +33,8 @@ typedef void(^finishBlock)(void);
 - (void)saveTop:(NSInteger)top;
 
 #pragma mark -- comments query operation
-- (QueryContent*)refreshCommentsByUser:(NSString*)user_id withToken:(NSString*)token andPostID:(NSString*)post_id;
-- (QueryContent*)appendCommentsByUser:(NSString*)user_id withToken:(NSString*)token andBeginIndex:(NSInteger)skip andPostID:(NSString*)post_id;
+- (QueryContent *)refreshCommentsByUser:(NSString*)user_id withToken:(NSString*)token andPostID:(NSString*)post_id;
+- (QueryContent *)appendCommentsByUser:(NSString*)user_id withToken:(NSString*)token andBeginIndex:(NSInteger)skip andPostID:(NSString*)post_id;
 
 #pragma mark -- query relations between owner and current user
 - (UserPostOwnerConnections)queryRelationsWithPost:(NSString*)post_id withFinishBlock:(finishBlock)block;

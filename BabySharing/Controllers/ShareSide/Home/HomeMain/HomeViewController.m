@@ -27,7 +27,7 @@
 #import "HomeViewTableCellDelegate.h"
 #import "ChatGroupController.h"
 #import "Targets.h"
-
+#import "QueryContent.h"
 #import "OBShapedButton.h"
 #import "ContentCardView.h"
 #import "HomeCell.h"
@@ -80,8 +80,9 @@
     BOOL isAnimation;
     
     UITableView* queryView;
-    
     CGFloat rowHeight;
+    NSMutableArray<QueryContent *> *queryViewData;
+    
     
     CGFloat contentOffsetY;
     NSTimer *timer;
@@ -97,6 +98,7 @@
     CAShapeLayer *circleLayer;
     UIView *animationView;
     CGFloat radius;
+    CALayer *maskLayer;
 }
 
 @synthesize current_auth_token = _current_auth_token;
@@ -175,11 +177,11 @@
         
         CGFloat width = [UIScreen mainScreen].bounds.size.width;
         CGFloat height = [UIScreen mainScreen].bounds.size.height - 64 - 49;
+        queryViewData = [NSMutableArray array];
         queryView = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, width, height)];
         queryView.backgroundColor = [UIColor colorWithRed:0.9529 green:0.9529 blue:0.9529 alpha:1.f];
         queryView.dataSource = self;
         queryView.delegate = self;
-//        queryView.showsVerticalScrollIndicator = NO;
        
         if (!_isPushed) {
             __unsafe_unretained UITableView *tableView = queryView;
@@ -264,29 +266,35 @@
 #pragma mark -- create navigation action view
 - (void)createNavActionView {
     
-    actionView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 65, 38)];
+    actionView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 130, 38)];
     actionView.backgroundColor = [UIColor colorWithRed:78.0/255.0 green:219.0/255.0 blue:202.0/255.0 alpha:1.0];
     
     [actionView addTarget:self action:@selector(didSelectChatGroupBtn) forControlEvents:UIControlEventTouchUpInside];
     actionView.tag = -99;
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
-    actionView.center = CGPointMake(width - actionView.frame.size.width / 2 + 5, 21 + actionView.frame.size.height / 2);
-    
-    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:actionView.bounds byRoundingCorners:UIRectCornerTopLeft | UIRectCornerBottomLeft cornerRadii:CGSizeMake(19, 19)];
-    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
-    maskLayer.frame = actionView.bounds;
-    maskLayer.path = maskPath.CGPath;
-    actionView.layer.mask = maskLayer;
-    
+    actionView.center = CGPointMake(width - actionView.frame.size.width / 2 + 5 + 65, 21 + actionView.frame.size.height / 2);
+  
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-    NSString* filepath = [resourceBundle pathForResource:@"home_chat_circle" ofType:@"png"];
+    NSString* filepath = [resourceBundle pathForResource:@"home_chat_back" ofType:@"png"];
     CALayer *layer = [[CALayer alloc] init];
     layer.frame = CGRectMake(0, 0, 30, 30);
-    layer.position = CGPointMake(CGRectGetWidth(actionView.frame) / 2, CGRectGetHeight(actionView.frame) / 2);
+    layer.position = CGPointMake(CGRectGetWidth(actionView.frame) / 2 - 65 / 2 - 0.5, CGRectGetHeight(actionView.frame) / 2);
     layer.contents = (__bridge id _Nullable)([UIImage imageNamed:filepath].CGImage);
     [actionView.layer addSublayer:layer];
 
+    maskLayer = [[CALayer alloc] init];
+    maskLayer.frame = CGRectMake(0, 0, sqrt(pow(15, 2)), sqrt(pow(15, 2)));
+    maskLayer.position = CGPointMake(15, 15);
+    maskLayer.backgroundColor = [UIColor colorWithRed:78.0/255.0 green:219.0/255.0 blue:202.0/255.0 alpha:1.0].CGColor;
+    [layer addSublayer:maskLayer];
+    
+    actionView.layer.cornerRadius = 19;
+    actionView.layer.shadowColor = [UIColor blackColor].CGColor;
+    actionView.layer.shadowOffset = CGSizeMake(-1, 1);
+    actionView.layer.shadowOpacity = 0.3;
+    actionView.layer.shadowRadius = 1;
+//    加入两个线条
     [bkView addSubview:actionView];
 }
 
@@ -591,7 +599,6 @@
      */
     QueryContent* cur = (QueryContent*)content;
     NSLog(@"like post id: %@", cur.content_post_id);
-    
     NSString* post_id = cur.content_post_id;
     NSString* content_description = cur.content_description;
     NSString* owner_id = cur.owner_id;
@@ -653,7 +660,7 @@
 - (void)didSelectChatGroupBtn {
 //    [self performSegueWithIdentifier:@"ChatGroupSegue" sender:nil];
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UIViewController* groupVC = [storyboard instantiateViewControllerWithIdentifier:@"ChatGroup"];
+    UIViewController* groupVC = [storyboard instantiateViewControllerWithIdentifier:@"cycleViewController"];
     groupVC.view.frame = CGRectMake(CGRectGetWidth(self.navigationController.view.frame), 0, CGRectGetWidth(self.navigationController.view.frame), CGRectGetHeight(self.navigationController.view.frame));
     groupVC.view.backgroundColor = [UIColor redColor];
     
@@ -668,7 +675,26 @@
     maskLayerAnimation.duration = 0.4;
     maskLayerAnimation.delegate = self;
     [circleLayer addAnimation:maskLayerAnimation forKey:@"path"];
-
+    
+    CABasicAnimation *shadowAnimation = [CABasicAnimation animationWithKeyPath:@"shadowOpacity"];
+    shadowAnimation.fillMode=kCAFillModeForwards;
+    shadowAnimation.removedOnCompletion = NO;
+    shadowAnimation.duration = 0.25;
+    shadowAnimation.fromValue = [NSNumber numberWithFloat:0.3];
+    shadowAnimation.toValue = [NSNumber numberWithFloat:0.0];
+    [actionView.layer addAnimation:shadowAnimation forKey:@"shadowOpacity"];
+    
+    // 设定为缩放
+    CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    
+    // 动画选项设定
+    scaleAnimation.duration = 0.4; // 动画持续时间
+    scaleAnimation.repeatCount = 1; // 重复次数
+    // 缩放倍数
+    scaleAnimation.fromValue = [NSNumber numberWithFloat:1.0]; // 开始时的倍率
+    scaleAnimation.toValue = [NSNumber numberWithFloat:0.0]; // 结束时的倍率
+    // 添加动画
+    [maskLayer addAnimation:scaleAnimation forKey:@"scale-layer"];
 
     [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         for (UIView *subView in self.view.subviews) {
@@ -686,6 +712,7 @@
                 subView.frame = CGRectMake(CGRectGetMinX(subView.frame) + [UIScreen mainScreen].bounds.size.width, CGRectGetMinY(subView.frame), CGRectGetWidth(subView.frame), CGRectGetHeight(subView.frame));
             }
         }
+        actionView.layer.shadowOpacity = 0.3;
         actionView.enabled = YES;
     }];
 }
@@ -697,7 +724,7 @@
 
 #pragma mark -- table view delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//    return [_delegate count];
+    return [_delegate count];
     return 100;
 }
 
@@ -728,23 +755,16 @@
         cell = [[HomeCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"homeCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.number.textAlignment = NSTextAlignmentCenter;
+        cell.delegate = self;
     }
-    cell.number.text = [NSString stringWithFormat:@"%ld", indexPath.row];
+    [cell updateViewWith:[_delegate queryItemAtIndex:indexPath.row]];
+//    cell.number.text = [NSString stringWithFormat:@"%ld", indexPath.row];
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {    HomeCell *homeCell = (HomeCell *)cell;
+//    [homeCell stopViedo];
 }
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-}
-
-- (void)srollToNextCell {
-    
-}
-
 
 #pragma mark scrollViewDelegate
 
@@ -801,10 +821,6 @@
         duration = fabs(distance) / fabs(0.5 * velocity);
         acceleration = -velocity / duration;
     } else {
-//        NSLog(@"速度不够进入重置");
-//        distance = -(scrollView.contentOffset.y / rowHeight - floor(scrollView.contentOffset.y / rowHeight));
-//        velocity = -velocity;
-//        acceleration = -pow(velocity, 2.0) / 2 * distance;
         CGFloat offsetY = scrollView.contentOffset.y - floor(scrollView.contentOffset.y / rowHeight) * rowHeight;
         if (offsetY > rowHeight / 2) {
             [scrollView setContentOffset:CGPointMake(0, scrollView.contentOffset.y + rowHeight - offsetY) animated:YES];
@@ -843,8 +859,19 @@
         [self stopAnimation];
         allDistance = 0;
     }
-    [queryView setContentOffset:CGPointMake(0, queryView.contentOffset.y + offsetIndex * rowHeight)];
-    [queryView layoutIfNeeded];
+    CGPoint offset = CGPointMake(0, queryView.contentOffset.y + offsetIndex * rowHeight);
+    if (offset.y > 0 && offset.y < (queryView.contentSize.height - queryView.frame.size.height)) {
+        [queryView setContentOffset:CGPointMake(0, queryView.contentOffset.y + offsetIndex * rowHeight)];
+        [queryView layoutIfNeeded];
+    } else {
+        if (offset.y <= 0) {
+            [queryView setContentOffset:CGPointMake(0, 0)];
+        } else if(offset.y >= (queryView.contentSize.height - queryView.frame.size.height)){
+            [queryView setContentOffset:CGPointMake(0, queryView.contentSize.height - queryView.frame.size.height)];
+        }
+        [queryView layoutIfNeeded];
+        [self stopAnimation];
+    }
 }
 
 - (void)stopAnimation

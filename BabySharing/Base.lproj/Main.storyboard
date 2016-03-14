@@ -1107,7 +1107,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
         <!--Cycle-->
         <scene sceneID="txH-Pe-lPu">
             <objects>
-                <viewController storyboardIdentifier="ChatGroup" hidesBottomBarWhenPushed="YES" id="OyS-hf-ms2" customClass="CycleViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="cycleViewController" hidesBottomBarWhenPushed="YES" id="OyS-hf-ms2" customClass="CycleViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xWG-CY-Sxy"/>
                         <viewControllerLayoutGuide type="bottom" id="h8D-l3-fU6"/>
@@ -1251,7 +1251,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qL5-xw-zCu">
                                 <rect key="frame" x="0.0" y="470" width="320" height="49"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kPy-2V-QRa">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kPy-2V-QRa">
                                         <rect key="frame" x="8" y="10" width="228" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -1266,7 +1266,7 @@ HIGO有权根据经营需要、中华人民共和国（简称“中国”）政�
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GcU-ws-Syn">
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GcU-ws-Syn">
                                         <rect key="frame" x="244" y="10" width="30" height="30"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <state key="normal">

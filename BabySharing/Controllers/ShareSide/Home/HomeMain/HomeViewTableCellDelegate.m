@@ -100,8 +100,8 @@
         cell = [nib objectAtIndex:0];
     }
     
-    QueryContent* tmp = [_delegate queryItemAtIndex:tableView.tag];
-    QueryContentItem* tmp_item = [tmp.items.objectEnumerator nextObject];
+    QueryContent *tmp = [_delegate queryItemAtIndex:tableView.tag];
+    QueryContentItem *tmp_item = [tmp.items.objectEnumerator nextObject];
     if (tmp_item.item_type.unsignedIntegerValue == PostPreViewPhote) {
         NSLog(@"photo field");
         NSLog(@"%@", tmp_item.item_name);

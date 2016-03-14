@@ -196,4 +196,44 @@
     return UIGraphicsGetImageFromCurrentImageContext();
 }
 
++ (NSString *)stringFromDate:(NSDate *)date {
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    
+    //zzz表示时区，zzz可以删除，这样返回的日期字符将不包含时区信息。
+    
+    [dateFormatter setDateFormat:@"MM-dd"];
+    
+    NSString *destDateString = [dateFormatter stringFromDate:date];
+    
+    return destDateString;
+    
+}
+
++ (NSString *)compareCurrentTime:(NSDate *)compareDate {
+//    秒数差
+    NSTimeInterval  timeInterval = [compareDate timeIntervalSinceNow];
+    timeInterval = -timeInterval;
+    long temp = 0;
+    NSString *result;
+    if (timeInterval < 60 * 60) {
+//        一个小时内
+        result = [NSString stringWithFormat:@"刚刚"];
+    } else if((temp = timeInterval / (60 * 60)) < 24){
+//        几个小时内
+        result = [NSString stringWithFormat:@"%ld小时前",temp];
+    } else if((temp = timeInterval / (60 * 60) / 24) < 30){
+//        几天内
+        result = [NSString stringWithFormat:@"%ld天前",temp];
+    } else if((temp = timeInterval / (60 * 60) / 24) / 30 < 12){
+//        几月内
+        result = [NSString stringWithFormat:@"%ld月前",temp];
+    } else {
+//         几年内
+        temp = timeInterval / (60 * 60) / 24 / 30 / 12;
+        result = [NSString stringWithFormat:@"%ld年前",temp];
+    }
+    return result;
+}
+
 @end

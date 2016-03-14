@@ -56,6 +56,8 @@
     UIView *animationView;
     CGFloat radius;
     CGPathRef startPath;
+    
+    CALayer *scaleMaskLayer;
 }
 
 //@synthesize descriptionView = _descriptionView;
@@ -166,6 +168,14 @@
     layer.contents = (__bridge id _Nullable)([UIImage imageNamed:filepath].CGImage);
     [actionView.layer addSublayer:layer];
     
+    
+    scaleMaskLayer = [[CALayer alloc] init];
+    scaleMaskLayer.frame = CGRectMake(0, 0, 15, 15);
+    scaleMaskLayer.transform = CATransform3DMakeScale(0, 0, 0);
+    scaleMaskLayer.position = CGPointMake(15, 15);
+    scaleMaskLayer.backgroundColor = [UIColor colorWithRed:78.0/255.0 green:219.0/255.0 blue:202.0/255.0 alpha:1.0].CGColor;
+    [layer addSublayer:scaleMaskLayer];
+    
     [bkView addSubview:actionView];
 }
 
@@ -221,6 +231,17 @@
             [circleLayer addAnimation:maskLayerAnimation forKey:@"path"];
             circleLayer.path = [UIBezierPath bezierPathWithOvalInRect:CGRectInset(CGRectMake(0, 0, CGRectGetWidth(animationView.frame), CGRectGetHeight(animationView.frame)), radius - 19, radius - 19)].CGPath;
             
+            // 设定为缩放
+            CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+            
+            // 动画选项设定
+            scaleAnimation.duration = 0.4; // 动画持续时间
+            scaleAnimation.repeatCount = 1; // 重复次数
+            // 缩放倍数
+            scaleAnimation.fromValue = [NSNumber numberWithFloat:0]; // 开始时的倍率
+            scaleAnimation.toValue = [NSNumber numberWithFloat:1]; // 结束时的倍率
+            // 添加动画
+            [scaleMaskLayer addAnimation:scaleAnimation forKey:@"scale-layer"];
             
             // 设置各个view的frame
             homeVC.tabBarController.tabBar.hidden = NO;

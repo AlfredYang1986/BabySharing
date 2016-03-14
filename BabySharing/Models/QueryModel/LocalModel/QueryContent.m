@@ -33,4 +33,9 @@
 @dynamic likes;
 @dynamic tags;
 
+- (void)setValue:(id)value forUndefinedKey:(NSString *)key {
+    NSLog(@"MonkeyHengLog: %@ === %@", @"没有当前的key", key);
+    return;
+}
+
 @end

@@ -14,7 +14,7 @@
 
 @property (nonatomic, strong, readonly) UIImageView *ownerImage;
 @property (nonatomic, strong, readonly) UILabel *ownerNameLable;
-@property (nonatomic, strong, readonly) UILabel *ownerTags;
+@property (nonatomic, strong, readonly) UILabel *ownerRole;
 @property (nonatomic, strong, readonly) UILabel *ownerDate;
 @property (nonatomic, strong, readonly) UIImageView *mainImage;
 @property (nonatomic, strong, readonly) UILabel *descriptionLabel;
@@ -25,6 +25,8 @@
 @property (nonatomic, strong, readonly) UIImageView *thirdImage;
 @property (nonatomic, strong, readonly) UILabel *talkerCount;
 @property (nonatomic, strong, readonly) UITextField *jionGroup;
+
+@property (nonatomic, weak) QueryContent *content;
 
 @end
 
@@ -44,19 +46,30 @@
         [self.contentView addSubview:_ownerImage];
         
         _ownerNameLable = [[UILabel alloc] init];
+        _ownerNameLable.font = [UIFont systemFontOfSize:14];
         [self.contentView addSubview:_ownerNameLable];
         
-        _ownerTags = [[UILabel alloc] init];
-        [self.contentView addSubview:_ownerTags];
+        _ownerRole = [[UILabel alloc] init];
+        _ownerRole.text = @"没有返回角色标签";
+        _ownerRole.font = [UIFont systemFontOfSize:12];
+        _ownerRole.backgroundColor = [Tools colorWithRED:254.0 GREEN:192.0 BLUE:0.0 ALPHA:1.0];
+        _ownerRole.textAlignment = NSTextAlignmentCenter;
+        _ownerRole.layer.masksToBounds = YES;
+        _ownerRole.layer.cornerRadius = 3;
+        _ownerRole.layer.shouldRasterize = YES;
+        _ownerRole.layer.rasterizationScale = [UIScreen mainScreen].scale;
+        [self.contentView addSubview:_ownerRole];
         
         _ownerDate = [[UILabel alloc] init];
+        _ownerDate.font = [UIFont systemFontOfSize:11];
+        _ownerDate.textAlignment = NSTextAlignmentRight;
         [self.contentView addSubview:_ownerDate];
         
         _mainImage = [[UIImageView alloc] init];
         [self.contentView addSubview:_mainImage];
-        self.number = [[UILabel alloc] init];
-        self.number.font = [UIFont systemFontOfSize:30];
-        [_mainImage addSubview:self.number];
+//        self.number = [[UILabel alloc] init];
+//        self.number.font = [UIFont systemFontOfSize:30];
+//        [_mainImage addSubview:self.number];
         
         _descriptionLabel = [[UILabel alloc] init];
         [self.contentView addSubview:_descriptionLabel];
@@ -87,13 +100,14 @@
         
         [self.contentView addSubview:_thirdImage];
         _talkerCount = [[UILabel alloc] init];
-        
+        _talkerCount.text = @"没有返回全聊人数";
+        _talkerCount.font = [UIFont systemFontOfSize:13];
         [self.contentView addSubview:_talkerCount];
         
         _jionGroup = [[UITextField alloc] init];
         _jionGroup.enabled = YES;
         _jionGroup.font = [UIFont systemFontOfSize:13];
-        _jionGroup.text = @"加入圈聊";
+        _jionGroup.text = @" 加入圈聊";
         [self.contentView addSubview:_jionGroup];
         jionImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
         jionImage.image = [UIImage imageNamed:[resourceBundle pathForResource:@"home_chat" ofType:@"png"]];
@@ -107,12 +121,15 @@
         [_jionGroup addSubview:jionGroupView];
     
         
-        self.contentView.layer.cornerRadius = 6;
+        self.contentView.layer.cornerRadius = 19;
+        self.contentView.layer.shadowColor = [UIColor blackColor].CGColor;
+        self.contentView.layer.shadowOffset = CGSizeMake(1, 1);
+        self.contentView.layer.shadowOpacity = 0.3;
+        self.contentView.layer.shadowRadius = 1;
         self.contentView.layer.shouldRasterize = YES;
         self.contentView.layer.rasterizationScale = [UIScreen mainScreen].scale;
         self.backgroundColor = [Tools colorWithRED:242.0 GREEN:242.0 BLUE:242.0 ALPHA:1.0];
         self.contentView.backgroundColor = [UIColor whiteColor];
-        
         // 加入动作
         _mainImage.userInteractionEnabled = YES;
         [_mainImage addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(mainImageTap)]];
@@ -128,23 +145,22 @@
     self.contentView.frame = CGRectInset(self.contentView.frame, 10, 5);
     _ownerImage.frame = CGRectMake(12, 8, 28, 28);
     _ownerImage.backgroundColor = [UIColor redColor];
-    _ownerNameLable.frame = CGRectMake(50, 16, 100, 14);
-    _ownerNameLable.backgroundColor = [UIColor redColor];
-    _ownerTags.frame = CGRectMake(160, 16, 100, 14);
-    _ownerTags.backgroundColor = [UIColor redColor];
+    
+    [_ownerNameLable sizeToFit];
+    _ownerNameLable.frame = CGRectMake(50, 16, CGRectGetWidth(_ownerNameLable.frame), 14);
+    [_ownerRole sizeToFit];
+    _ownerRole.frame = CGRectMake(CGRectGetMaxX(_ownerNameLable.frame) + 10, 16, CGRectGetWidth(_ownerRole.frame) + 3, 14);
+    
     _ownerDate.frame = CGRectMake(CGRectGetWidth(self.contentView.frame) - 60, 16, 50, 14);
-    _ownerDate.backgroundColor = [UIColor redColor];
     _mainImage.frame = CGRectMake(0, 46, CGRectGetWidth(self.contentView.frame), CGRectGetHeight(self.contentView.frame) - 176);
     _mainImage.backgroundColor = [UIColor redColor];
     
-    self.number.frame = CGRectMake(0, 0, _mainImage.frame.size.width, _mainImage.frame.size.height);
-    self.number.frame = CGRectInset(self.number.frame, 20, 20);
-    self.number.backgroundColor = [UIColor whiteColor];
+//    self.number.frame = CGRectMake(0, 0, _mainImage.frame.size.width, _mainImage.frame.size.height);
+//    self.number.frame = CGRectInset(self.number.frame, 20, 20);
+//    self.number.backgroundColor = [UIColor whiteColor];
     
     _descriptionLabel.frame = CGRectMake(10, CGRectGetMaxY(_mainImage.frame), CGRectGetWidth(self.contentView.frame) - 20, 30);
-    _descriptionLabel.backgroundColor = [UIColor redColor];
     praiseImage.frame = CGRectMake(17, CGRectGetMaxY(_descriptionLabel.frame) + 15, 25, 25);
-    praiseImage.backgroundColor = [UIColor redColor];
     _praiseCount.frame = CGRectMake(57, CGRectGetMaxY(_descriptionLabel.frame) + 20, 30, 15);
     _praiseCount.backgroundColor = [UIColor redColor];
     _usefulCount.frame = CGRectMake(CGRectGetMaxX(_praiseCount.frame) + 80, CGRectGetMinY(_praiseCount.frame), 30, 15);
@@ -178,15 +194,39 @@
     self.firstImage.layer.shouldRasterize = YES;
     self.firstImage.layer.rasterizationScale = [UIScreen mainScreen].scale;
     
-    _jionGroup.frame = CGRectMake(CGRectGetWidth(self.contentView.frame) - 95 , CGRectGetMaxY(lineView.frame) + 7, 80, CGRectGetHeight(self.contentView.frame) - CGRectGetMaxY(lineView.frame) - 14);
+    _jionGroup.frame = CGRectMake(CGRectGetWidth(self.contentView.frame) - 95 , CGRectGetMaxY(lineView.frame) + 7, 82, CGRectGetHeight(self.contentView.frame) - CGRectGetMaxY(lineView.frame) - 14);
     jionGroupView.frame = CGRectMake(0, 0, CGRectGetWidth(_jionGroup.frame), CGRectGetHeight(_jionGroup.frame));
 }
 
-- (void)updateViewWith:(NSObject *)object {
+- (void)updateViewWith:(QueryContent *)content {
+//    @property (nonatomic, strong, readonly) UIImageView *ownerImage;
+//    @property (nonatomic, strong, readonly) UILabel *ownerNameLable;
+//    @property (nonatomic, strong, readonly) UILabel *ownerTags;
+//    @property (nonatomic, strong, readonly) UILabel *ownerDate;
+//    @property (nonatomic, strong, readonly) UIImageView *mainImage;
+//    @property (nonatomic, strong, readonly) UILabel *descriptionLabel;
+//    @property (nonatomic, strong, readonly) UILabel *praiseCount;
+//    @property (nonatomic, strong, readonly) UILabel *usefulCount;
+//    @property (nonatomic, strong, readonly) UIImageView *firstImage;
+//    @property (nonatomic, strong, readonly) UIImageView *secondImage;
+//    @property (nonatomic, strong, readonly) UIImageView *thirdImage;
+//    @property (nonatomic, strong, readonly) UILabel *talkerCount;
+//    @property (nonatomic, strong, readonly) UITextField *jionGroup;
+    
+    self.content = content;
+    
+    self.ownerNameLable.text = content.owner_name;
+//    self.ownerRole.text
+    self.descriptionLabel.text = content.content_description;
+    self.ownerDate.text = [Tools compareCurrentTime:content.content_post_date];
 }
 
 - (void)mainImageTap {
     NSLog(@"播放视频");
+}
+
+- (void)stopViedo {
+    NSLog(@"停止播放视频");
 }
 
 - (void)praiseImageTap {
@@ -195,6 +235,7 @@
 
 - (void)jionGroupTap {
     NSLog(@"加入圈聊");
+    [_delegate didSelectJoinGroupBtn:_content];
 }
 
 @end
