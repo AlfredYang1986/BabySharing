@@ -236,4 +236,7 @@
     return result;
 }
 
++ (NSString*)getDeviceUUID {
+    return [[UIDevice currentDevice].identifierForVendor UUIDString];
+}
 @end

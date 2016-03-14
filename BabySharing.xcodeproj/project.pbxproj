@@ -3110,7 +3110,7 @@
 				TargetAttributes = {
 					EEAAC8F71B44E81A00D05C0B = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = 6AUL2A4AE9;
+						DevelopmentTeam = V6843SSXWV;
 					};
 					EEAAC9131B44E81A00D05C0B = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -3658,7 +3658,7 @@
 					"-ObjC",
 					"-fobjc-arc",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = monkeyheng.BabySharing;
+				PRODUCT_BUNDLE_IDENTIFIER = BS.BabySharing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -3698,7 +3698,7 @@
 					"-ObjC",
 					"-fobjc-arc",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = monkeyheng.BabySharing;
+				PRODUCT_BUNDLE_IDENTIFIER = BS.BabySharing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;

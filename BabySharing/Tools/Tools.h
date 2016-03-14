@@ -21,4 +21,5 @@
 + (NSString *)stringFromDate:(NSDate *)date;
 + (NSString *)compareCurrentTime:(NSDate*) compareDate;
 
++ (NSString*)getDeviceUUID;
 @end

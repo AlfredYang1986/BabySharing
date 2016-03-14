@@ -11,6 +11,8 @@
 #import "ModelDefines.h"
 #import "Reachability.h"
 
+#import "Tools.h"
+
 @interface AppDelegate ()
 
 @end
@@ -185,7 +187,11 @@
 
 #pragma mark -- register device to service
 - (void)registerDeviceTokenWithCurrentUser {
-    if (_apns_token == nil || _lm.current_user_id == nil) {
+//    if (_apns_token == nil || _lm.current_user_id == nil) {
+//        return;
+//    }
+    
+    if (_lm.current_user_id == nil) {
         return;
     }
     
@@ -193,6 +199,8 @@
     [dic setValue:_lm.current_user_id forKey:@"user_id"];
     [dic setValue:_lm.current_auth_token forKey:@"auth_token"];
     [dic setValue:_apns_token forKey:@"device_token"];
+    [dic setValue:[Tools getDeviceUUID] forKey:@"device_uuid"];
+    [dic setValue:@"ios" forKey:@"device_system"];
     
     NSError * error = nil;
     NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
