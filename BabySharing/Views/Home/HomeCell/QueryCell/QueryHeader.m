@@ -272,4 +272,5 @@
 - (void)didScreenImgSelected {
     [_delegate didSelectScreenImg:_content];
 }
+
 @end

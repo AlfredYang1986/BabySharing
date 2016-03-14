@@ -261,7 +261,7 @@
     self.type = PostPreViewMovie;
     self.movieURL = url;
     if (self.player == nil) {
-        self.player = [[AVPlayer alloc]initWithURL:url];
+        self.player = [[AVPlayer alloc] initWithURL:url];
     }
 }
 

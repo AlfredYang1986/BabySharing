@@ -32,10 +32,14 @@
 @dynamic items;
 @dynamic likes;
 @dynamic tags;
+@dynamic isPush;
+@dynamic isLike;
+@dynamic group_chat_count;
 
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key {
     NSLog(@"MonkeyHengLog: %@ === %@", @"没有当前的key", key);
     return;
 }
+
 
 @end

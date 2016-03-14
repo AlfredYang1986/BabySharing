@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class QueryComments, QueryContentItem, QueryContentTag, QueryLikes;
+@class QueryComments, QueryContentItem, QueryContentTag, QueryLikes, QueryTalkers;
 
 @interface QueryContent : NSManagedObject
 
@@ -30,6 +30,10 @@
 @property (nonatomic, retain) NSSet *items;
 @property (nonatomic, retain) NSSet *likes;
 @property (nonatomic, retain) NSSet *tags;
+
+@property (nonatomic, retain) NSNumber *isLike;
+@property (nonatomic, retain) NSNumber *isPush;
+@property (nonatomic, retain) NSNumber *group_chat_count;
 
 @end
 
@@ -54,5 +58,10 @@
 - (void)removeTagsObject:(QueryContentTag *)value;
 - (void)addTags:(NSSet *)values;
 - (void)removeTags:(NSSet *)values;
+
+- (void)addChatsObject:(QueryTalkers *)value;
+- (void)removeChatsObject:(QueryTalkers *)value;
+- (void)addChats:(NSSet *)values;
+- (void)removeChats:(NSSet *)values;
 
 @end

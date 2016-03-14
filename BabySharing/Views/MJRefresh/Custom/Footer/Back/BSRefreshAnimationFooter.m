@@ -24,18 +24,20 @@
 {
     if (!_gifView) {
         UIImageView *gifView = [[UIImageView alloc] init];
-        NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
-        NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-        gifView.image = [UIImage imageNamed:[resourceBundle pathForResource:@"avatar_00019" ofType:@"png"]];
         [self addSubview:_gifView = gifView];
     
-        CABasicAnimation* rotationAnimation;
-        rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.y"];
-        rotationAnimation.toValue = [NSNumber numberWithFloat: M_PI * 2.0 ];
-        rotationAnimation.duration = 1.5;
-        rotationAnimation.cumulative = YES;
-        rotationAnimation.repeatCount = INT64_MAX;
-        [_gifView.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
+        NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
+        NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+        NSMutableArray *array = [NSMutableArray array];
+        for (int i = 19; i >= 0; i--) {
+            UIImage *image = [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"avatar_%d", i] ofType:@"png"]];
+            [array addObject:image];
+        }
+        
+        _gifView.animationImages = array;
+        _gifView.animationDuration = 1.5;
+        _gifView.animationRepeatCount = 0;
+        [_gifView startAnimating];
     }
     return _gifView;
 }

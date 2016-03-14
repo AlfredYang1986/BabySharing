@@ -771,9 +771,9 @@
 #pragma mark scrollViewDelegate
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    contentOffsetY = scrollView.contentOffset.y;
-    [timer invalidate];
-    timer = nil;
+//    contentOffsetY = scrollView.contentOffset.y;
+//    [timer invalidate];
+//    timer = nil;
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
@@ -786,18 +786,18 @@
     if (queryView.mj_header.state == MJRefreshStateRefreshing || queryView.mj_footer.state == MJRefreshStateRefreshing) {
         return;
     }
-    if (scrollView.contentOffset.y < 0 || scrollView.contentOffset.y > (scrollView.contentSize.height -CGRectGetHeight(scrollView.frame))) {
-        return;
-    }
-    isDecelerate = decelerate;
-    [scrollView setContentOffset:scrollView.contentOffset];
-    velocity = -[[scrollView panGestureRecognizer] velocityInView:scrollView].y / rowHeight;
-    acceleration = -velocity * 30 * (1.0 - 0.95);
-    distance = -pow(velocity, 2.0) / (2.0 * acceleration);
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [scrollView setContentOffset:scrollView.contentOffset animated:NO];
-        [self scrollToItemWithScrollView:scrollView];
-    });
+//    if (scrollView.contentOffset.y < 0 || scrollView.contentOffset.y > (scrollView.contentSize.height -CGRectGetHeight(scrollView.frame))) {
+//        return;
+//    }
+//    isDecelerate = decelerate;
+//    [scrollView setContentOffset:scrollView.contentOffset];
+//    velocity = -[[scrollView panGestureRecognizer] velocityInView:scrollView].y / rowHeight;
+//    acceleration = -velocity * 30 * (1.0 - 0.95);
+//    distance = -pow(velocity, 2.0) / (2.0 * acceleration);
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        [scrollView setContentOffset:scrollView.contentOffset animated:NO];
+//        [self scrollToItemWithScrollView:scrollView];
+//    });
 }
 
 - (void)scrollToItemWithScrollView:(UIScrollView *)scrollView {

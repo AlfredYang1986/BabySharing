@@ -109,7 +109,6 @@
         NSNumber*  time = [result objectForKey:@"date"];
         _querydata = [QueryContent refrashLocalQueryDataInContext:_doc.managedObjectContext withData:reVal andTimeSpan:time.longLongValue];
         block();
-        
     } else {
         NSDictionary* reError = [result objectForKey:@"error"];
         NSString* msg = [reError objectForKey:@"message"];

@@ -14,7 +14,6 @@
 #import "QueryContentTag.h"
 
 
-
 @implementation QueryContent (ContextOpt)
 
 #pragma mark -- enum posts
@@ -28,15 +27,13 @@
     return [context executeFetchRequest:request error:&error];
 }
 
-+ (NSArray*)refrashLocalQueryDataInContext:(NSManagedObjectContext*)context withData:(NSArray*)arr andTimeSpan:(long long)time {
++ (NSArray*)refrashLocalQueryDataInContext:(NSManagedObjectContext*)context withData:(NSArray *)arr andTimeSpan:(long long)time {
     [QueryContent removeAllQueryDataInContext:context];
    
     [QueryContent changeTimeSpan:time inContext:context];
     for (NSDictionary* iter in arr) {
         [QueryContent initWithAttrs:iter inContext:context];
     }
-//    [context save:nil];
-    
     return [QueryContent enumLocalQueyDataInContext:context];
 }
 
@@ -103,13 +100,15 @@
     tmp.likes_count = [attr objectForKey:@"likes_count"];
     tmp.comment_count = [attr objectForKey:@"comments_count"];
     tmp.content_post_location = [attr objectForKey:@"location"];
-    
     tmp.content_post_id = [attr objectForKey:@"post_id"];
     
     tmp.comment_time_span = [NSNumber numberWithLongLong:[NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970] * 1000].longLongValue];
     tmp.likes_time_span = tmp.comment_time_span;
     
     tmp.relations = [attr objectForKey:@"relations"];
+    tmp.isLike = [attr objectForKey:@"isLiked"];
+    tmp.isPush = [attr objectForKey:@"isPush"];
+    tmp.group_chat_count = [attr objectForKey:@"group_chat_count"];
    
     NSArray* items = [attr objectForKey:@"items"];
     for (NSDictionary* item in items) {
@@ -126,7 +125,7 @@
         [QueryContent addOneLikeToContent:tmp withAttr:item inContext:context];
     }
     
-    NSArray* tags = [attr objectForKey:@"tags"];
+    NSArray *tags = [attr objectForKey:@"tags"];
     for (NSDictionary* item in tags) {
         [QueryContent addOneTagToContent:tmp withAttr:item inContext:context];
     }
@@ -206,7 +205,7 @@
     }
 }
 
-+ (QueryContent*)appendCommentToPostWithID:(NSString*)post_id withAttrs:(NSArray*)comments_array andTotalCount:(NSNumber*)count inContext:(NSManagedObjectContext*)context {
++ (QueryContent *)appendCommentToPostWithID:(NSString*)post_id withAttrs:(NSArray*)comments_array andTotalCount:(NSNumber*)count inContext:(NSManagedObjectContext*)context {
 
     NSFetchRequest* request = [NSFetchRequest fetchRequestWithEntityName:@"QueryContent"];
     request.predicate = [NSPredicate predicateWithFormat:@"content_post_id = %@", post_id];
@@ -276,7 +275,7 @@
     tmp_tag.tag_offset_x = [tag_attr objectForKey:@"offsetX"];
     tmp_tag.tag_offset_y = [tag_attr objectForKey:@"offsetY"];
     
-    [content addTagsObject:tmp_tag];
+//    [content addTagsObject:tmp_tag];
 }
 
 + (void)removeAllTagsForContent:(QueryContent*)content inContext:(NSManagedObjectContext*)context {
@@ -287,6 +286,21 @@
         [context deleteObject:tag];
     }
 }
+
+#pragma mark -- chats
+//+ (void)addOneTalkerToContent:(QueryContent *)content withTalkerId:(NSString *)talkerId inContext:(NSManagedObjectContext*)context {
+//    QueryTalkers *tmp_talker = [NSEntityDescription insertNewObjectForEntityForName:@"QueryTalkers" inManagedObjectContext:context];
+//    tmp_talker.userid = talkerId;
+//    [content addChatsObject:tmp_talker];
+//}
+//
+//+ (void)removeAllChatsForContext:(QueryContent *)content inContext:(NSManagedObjectContext*)context {
+//    while (content.chats.count != 0) {
+//        QueryTalkers *chat = [content.chats.objectEnumerator nextObject];
+//        [content removeChatsObject:chat];
+//        [context deleteObject:chat];
+//    }
+//}
 
 #pragma mark -- private op comment
 + (void)addOneCommentToContent:(QueryContent*)content withAttr:(NSDictionary*)comment_attr inContext:(NSManagedObjectContext*)context {

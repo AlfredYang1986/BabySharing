@@ -8,7 +8,10 @@
 
 #import "HomeCell.h"
 #import "Tools.h"
-
+#import "TmpFileStorageModel.h"
+#import "QueryContentItem.h"
+#import <AVFoundation/AVFoundation.h>
+#import "GPUImage.h"
 
 @interface HomeCell()
 
@@ -25,8 +28,15 @@
 @property (nonatomic, strong, readonly) UIImageView *thirdImage;
 @property (nonatomic, strong, readonly) UILabel *talkerCount;
 @property (nonatomic, strong, readonly) UITextField *jionGroup;
-
+@property (nonatomic, strong, readonly) UIImageView *videoSign;
+@property (nonatomic, strong, readonly) QueryContentItem *queryContentItem;
+//@property (nonatomic, strong) AVPlayer *avplayer;
+//@property (nonatomic, strong) AVPlayerItem *avplayerItem;
+//@property (nonatomic, strong) AVPlayerLayer *playerLayer;
 @property (nonatomic, weak) QueryContent *content;
+
+@property (nonatomic, strong) GPUImageMovie *gpuImageMovie;
+@property (nonatomic, strong) GPUImageView *gpuImageView;
 
 @end
 
@@ -58,6 +68,7 @@
         _ownerRole.layer.cornerRadius = 3;
         _ownerRole.layer.shouldRasterize = YES;
         _ownerRole.layer.rasterizationScale = [UIScreen mainScreen].scale;
+        _ownerRole.textColor = [UIColor whiteColor];
         [self.contentView addSubview:_ownerRole];
         
         _ownerDate = [[UILabel alloc] init];
@@ -67,9 +78,6 @@
         
         _mainImage = [[UIImageView alloc] init];
         [self.contentView addSubview:_mainImage];
-//        self.number = [[UILabel alloc] init];
-//        self.number.font = [UIFont systemFontOfSize:30];
-//        [_mainImage addSubview:self.number];
         
         _descriptionLabel = [[UILabel alloc] init];
         [self.contentView addSubview:_descriptionLabel];
@@ -119,7 +127,20 @@
         jionGroupView.alpha = 0.1;
         jionGroupView.backgroundColor = [UIColor whiteColor];
         [_jionGroup addSubview:jionGroupView];
-    
+        // 播放按钮
+        _videoSign = [[UIImageView alloc] init];
+        NSString * yyBundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+        NSBundle *yyResourceBundle = [NSBundle bundleWithPath:yyBundlePath];
+        UIImage *image = [UIImage imageNamed:[yyResourceBundle pathForResource:[NSString stringWithFormat:@"playvideo"] ofType:@"png"]];
+        _videoSign.image = image;
+        _videoSign.frame = CGRectMake(0, 0, 30, 30);
+        [_mainImage addSubview:_videoSign];
+
+//        _playerLayer = [[AVPlayerLayer alloc] init];
+//        [_mainImage.layer addSublayer:_playerLayer];
+        _gpuImageView = [[GPUImageView alloc] init];
+        _gpuImageView.fillMode = kGPUImageFillModePreserveAspectRatioAndFill;
+        [_mainImage addSubview:_gpuImageView];
         
         self.contentView.layer.cornerRadius = 19;
         self.contentView.layer.shadowColor = [UIColor blackColor].CGColor;
@@ -144,22 +165,18 @@
     [super layoutSubviews];
     self.contentView.frame = CGRectInset(self.contentView.frame, 10, 5);
     _ownerImage.frame = CGRectMake(12, 8, 28, 28);
-    _ownerImage.backgroundColor = [UIColor redColor];
     
     [_ownerNameLable sizeToFit];
     _ownerNameLable.frame = CGRectMake(50, 16, CGRectGetWidth(_ownerNameLable.frame), 14);
     [_ownerRole sizeToFit];
-    _ownerRole.frame = CGRectMake(CGRectGetMaxX(_ownerNameLable.frame) + 10, 16, CGRectGetWidth(_ownerRole.frame) + 3, 14);
+    _ownerRole.frame = CGRectMake(CGRectGetMaxX(_ownerNameLable.frame) + 10, 16, CGRectGetWidth(_ownerRole.frame) + 3, 16);
     
     _ownerDate.frame = CGRectMake(CGRectGetWidth(self.contentView.frame) - 60, 16, 50, 14);
     _mainImage.frame = CGRectMake(0, 46, CGRectGetWidth(self.contentView.frame), CGRectGetHeight(self.contentView.frame) - 176);
-    _mainImage.backgroundColor = [UIColor redColor];
-    
-//    self.number.frame = CGRectMake(0, 0, _mainImage.frame.size.width, _mainImage.frame.size.height);
-//    self.number.frame = CGRectInset(self.number.frame, 20, 20);
-//    self.number.backgroundColor = [UIColor whiteColor];
-    
-    _descriptionLabel.frame = CGRectMake(10, CGRectGetMaxY(_mainImage.frame), CGRectGetWidth(self.contentView.frame) - 20, 30);
+    _videoSign.center = CGPointMake(CGRectGetWidth(_mainImage.frame) - CGRectGetWidth(_videoSign.frame) / 2 - 10, CGRectGetHeight(_videoSign.frame) / 2 + 10);
+//    _playerLayer.frame = CGRectMake(0, 0, CGRectGetWidth(_mainImage.frame), CGRectGetHeight(_mainImage.frame));
+    _gpuImageView.frame = CGRectMake(0, 0, CGRectGetWidth(_mainImage.frame), CGRectGetHeight(_mainImage.frame));
+    _descriptionLabel.frame = CGRectMake(10, CGRectGetMaxY(_mainImage.frame), CGRectGetWidth(self.contentView.frame) - 18, 30);
     praiseImage.frame = CGRectMake(17, CGRectGetMaxY(_descriptionLabel.frame) + 15, 25, 25);
     _praiseCount.frame = CGRectMake(57, CGRectGetMaxY(_descriptionLabel.frame) + 20, 30, 15);
     _praiseCount.backgroundColor = [UIColor redColor];
@@ -182,6 +199,7 @@
     
     // 圆角
     _ownerImage.layer.cornerRadius = CGRectGetWidth(_ownerImage.frame) / 2;
+    _ownerImage.layer.masksToBounds = YES;
     self.ownerImage.layer.shouldRasterize = YES;
     self.ownerImage.layer.rasterizationScale = [UIScreen mainScreen].scale;
     _thirdImage.layer.cornerRadius = CGRectGetWidth(_thirdImage.frame) / 2;
@@ -216,17 +234,98 @@
     self.content = content;
     
     self.ownerNameLable.text = content.owner_name;
-//    self.ownerRole.text
     self.descriptionLabel.text = content.content_description;
     self.ownerDate.text = [Tools compareCurrentTime:content.content_post_date];
+    
+    // 设置头像
+    NSString *bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+    NSString *defaultHeadPath = [resourceBundle pathForResource:[NSString stringWithFormat:@"default_user"] ofType:@"png"];
+    self.ownerImage.image = [TmpFileStorageModel enumImageWithName:self.content.owner_photo withDownLoadFinishBolck:^(BOOL success, UIImage *img) {
+        if (success) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (self) {
+                    self.ownerImage.image = img;
+                    NSLog(@"owner img download success");
+                }
+            });
+        }
+    }];
+    
+    if (self.ownerImage.image == nil) {
+        self.ownerImage.image = [UIImage imageNamed:defaultHeadPath];
+    }
+    
+    // 设置大图
+    for (QueryContentItem *item in self.content.items) {
+        if (item.item_type.unsignedIntegerValue != PostPreViewMovie) {
+            self.mainImage.image = [TmpFileStorageModel enumImageWithName:item.item_name withDownLoadFinishBolck:^(BOOL success, UIImage *img) {
+                if (success) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        if (self) {
+                            self.mainImage.image = img;
+                            NSLog(@"owner img download success");
+                        }
+                    });
+                }
+            }];
+            if (self.mainImage.image == nil) {
+                NSString *defaultMainPath = [resourceBundle pathForResource:[NSString stringWithFormat:@"chat_mine_bg"] ofType:@"png"];
+                self.mainImage.image = [UIImage imageNamed:defaultMainPath];
+            }
+            break;
+        }
+    }
+    _videoSign.hidden = YES;
+    _queryContentItem = nil;
+    for (QueryContentItem *item in self.content.items) {
+        if (item.item_type.unsignedIntegerValue == PostPreViewMovie) {
+            _queryContentItem = item;
+            _videoSign.hidden = NO;
+        }
+    }
+    
+    _gpuImageView.hidden = YES;
 }
 
 - (void)mainImageTap {
+    if (_queryContentItem != nil && _gpuImageMovie.progress == 0) {
+        NSURL* url = [TmpFileStorageModel enumFileWithName:_queryContentItem.item_name andType:_queryContentItem.item_type.unsignedIntegerValue withDownLoadFinishBlock:^(BOOL success, NSURL *path) {
+            if (success) {
+                _gpuImageView.hidden = NO;
+                _gpuImageMovie = [[GPUImageMovie alloc] initWithURL:path];
+                _gpuImageMovie.playAtActualSpeed = YES;
+                _gpuImageMovie.shouldRepeat = YES;
+                [_gpuImageMovie addTarget:_gpuImageView];
+                [_gpuImageMovie startProcessing];
+            } else {
+                NSLog(@"down load movie %@ failed", _queryContentItem.item_name);
+            }
+        }];
+        if (url) {
+            _gpuImageMovie = [[GPUImageMovie alloc] initWithURL:url];
+            _gpuImageView.hidden = NO;
+            _gpuImageMovie.playAtActualSpeed = YES;
+            _gpuImageMovie.shouldRepeat = YES;
+            [_gpuImageMovie addTarget:_gpuImageView];
+            [_gpuImageMovie startProcessing];
+        }
+    }
+    if (_gpuImageMovie.progress != 0) {
+        _gpuImageView.hidden = YES;
+        [_gpuImageMovie endProcessing];
+        [_gpuImageMovie cancelProcessing];
+        [_gpuImageMovie removeAllTargets];
+    }
     NSLog(@"播放视频");
 }
 
 - (void)stopViedo {
     NSLog(@"停止播放视频");
+    _gpuImageView.hidden = YES;
+    [_gpuImageMovie endProcessing];
+    [_gpuImageMovie cancelProcessing];
+    [_gpuImageMovie removeAllTargets];
 }
 
 - (void)praiseImageTap {
