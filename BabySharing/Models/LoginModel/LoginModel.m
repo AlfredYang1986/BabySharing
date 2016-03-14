@@ -129,6 +129,10 @@
 //    return NO;
 }
 
+- (BOOL)isTmpLoginProcess {
+    return _reg_user != nil;
+}
+
 - (NSArray*)enumAllAuthorisedUsers {
     [self reloadDataFromLocalDB];
 //    return authorised_users;
@@ -580,7 +584,7 @@
  *
  *  @return 返回当前的token
  */
-- (CurrentToken *)sendAuthProvidersName:(NSString*)provide_name andProvideUserId:(NSString*)provide_user_id andProvideToken:(NSString*)provide_token andProvideScreenName:(NSString*)provide_screen_name {
+- (RegCurrentToken *)sendAuthProvidersName:(NSString*)provide_name andProvideUserId:(NSString*)provide_user_id andProvideToken:(NSString*)provide_token andProvideScreenName:(NSString*)provide_screen_name {
   
     NSMutableDictionary* dic = [[NSMutableDictionary alloc] init];
     [dic setValue:@"" forKey:@"auth_token"];
@@ -603,7 +607,8 @@
         LoginToken* user = [LoginToken createTokenInContext:_doc.managedObjectContext withUserID:user_id andAttrs:reVal];
         [user addConnectWithObject:tmp];
       
-        return [CurrentToken changeCurrentLoginUser:user inContext:_doc.managedObjectContext];
+//        return [CurrentToken changeCurrentLoginUser:user inContext:_doc.managedObjectContext];
+        return [RegCurrentToken changeCurrentRegLoginUser:user inContext:_doc.managedObjectContext];
     } else {
         NSDictionary* reError = [result objectForKey:@"error"];
         NSString* msg = [reError objectForKey:@"message"];
@@ -744,49 +749,51 @@
             /**
              *  3. save auth_toke and weibo user profile in local DB
              */
-            _current_user = [self sendAuthProvidersName:@"weibo" andProvideUserId:weibo_user_id andProvideToken:weibo_token andProvideScreenName:screen_name];
-            NSLog(@"new user token %@", _current_user.who.auth_token);
-            NSLog(@"new user id %@", _current_user.who.user_id);
+//            _current_user = [self sendAuthProvidersName:@"weibo" andProvideUserId:weibo_user_id andProvideToken:weibo_token andProvideScreenName:screen_name];
+            _reg_user = [self sendAuthProvidersName:@"weibo" andProvideUserId:weibo_user_id andProvideToken:weibo_token andProvideScreenName:screen_name];
+            NSLog(@"new user token %@", _reg_user.who.auth_token);
+            NSLog(@"new user id %@", _reg_user.who.user_id);
+
+            NSLog(@"new user photo %@", _reg_user.who.screen_image);
+            
+            if (_reg_user.who.screen_image == nil || [_reg_user.who.screen_image isEqualToString:@""]) {
+                dispatch_queue_t aq = dispatch_queue_create("weibo profile img queue", nil);
+                dispatch_async(aq, ^{
+                    NSData* data = [RemoteInstance remoteDownDataFromUrl:[NSURL URLWithString:user.profileImageUrl]];
+                    UIImage* img = [UIImage imageWithData:data];
+                    if (img) {
+                        NSString* img_name = [TmpFileStorageModel generateFileName];
+                        [TmpFileStorageModel saveToTmpDirWithImage:img withName:img_name];
+                        
+                        dispatch_queue_t post_queue = dispatch_queue_create("post queue", nil);
+                        dispatch_async(post_queue, ^(void){
+                            [RemoteInstance uploadPicture:img withName:img_name toUrl:[NSURL URLWithString:[POST_HOST_DOMAIN stringByAppendingString:POST_UPLOAD]] callBack:^(BOOL successs, NSString *message) {
+                                if (successs) {
+                                    NSLog(@"post image success");
+                                } else {
+                                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                                    [alert show];
+                                }
+                            }];
+                        });
+                        
+                        NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
+                        [dic setValue:_reg_user.who.auth_token forKey:@"auth_token"];
+                        [dic setValue:_reg_user.who.user_id forKey:@"user_id"];
+                        [dic setValue:img_name forKey:@"screen_photo"];
+                        [self updateUserProfile:[dic copy]];
+                    }
+                });
+            }
             
             /**
-             * 3.1 user image
+             *  4. push notification to the controller
+             *      and controller to refresh the view
              */
-            dispatch_queue_t aq = dispatch_queue_create("weibo profile img queue", nil);
-            dispatch_async(aq, ^{
-                NSData* data = [RemoteInstance remoteDownDataFromUrl:[NSURL URLWithString:user.profileImageUrl]];
-                UIImage* img = [UIImage imageWithData:data];
-                if (img) {
-                    NSString* img_name = [TmpFileStorageModel generateFileName];
-                    [TmpFileStorageModel saveToTmpDirWithImage:img withName:img_name];
-                    
-                    NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
-                    [dic setValue:[self getCurrentAuthToken] forKey:@"auth_token"];
-                    [dic setValue:[self getCurrentUserID] forKey:@"user_id"];
-                    [dic setValue:img_name forKey:@"screen_photo"];
-                    [self updateUserProfile:[dic copy]];
-                    
-                    /**
-                     *  4. push notification to the controller
-                     *      and controller to refresh the view
-                     */
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [_doc.managedObjectContext save:nil];
-                        NSLog(@"end get user info from weibo");
-                        [[NSNotificationCenter defaultCenter] postNotificationName:@"SNS login success" object:nil];
-                    });
-                    
-                    dispatch_queue_t post_queue = dispatch_queue_create("post queue", nil);
-                    dispatch_async(post_queue, ^(void){
-                        [RemoteInstance uploadPicture:img withName:img_name toUrl:[NSURL URLWithString:[POST_HOST_DOMAIN stringByAppendingString:POST_UPLOAD]] callBack:^(BOOL successs, NSString *message) {
-                            if (successs) {
-                                NSLog(@"post image success");
-                            } else {
-                                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-                                [alert show];
-                            }
-                        }];
-                    });
-                }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [_doc.managedObjectContext save:nil];
+                NSLog(@"end get user info from weibo");
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"SNS login success" object:nil];
             });
         }
     }];
@@ -812,6 +819,11 @@
 
 - (NSDictionary*)getCurrentUserAttr {
     CurrentToken* cur = [CurrentToken enumCurrentLoginUserInContext:_doc.managedObjectContext];
+    return [LoginToken userToken2Attr:cur.who];
+}
+
+- (NSDictionary*)getRegTmpUserAttr {
+    RegCurrentToken* cur = [RegCurrentToken enumCurrentRegLoginUserInContext:_doc.managedObjectContext];
     return [LoginToken userToken2Attr:cur.who];
 }
 

@@ -85,14 +85,15 @@ typedef void(^requestUserInfoSeccess)(NSDictionary *data);
 - (void)loginSuccessWithWeiboAsUser:(NSString*)weibo_user_id withToken:(NSString*)weibo_token;
 
 - (BOOL)isLoginedByUser;
+- (BOOL)isTmpLoginProcess;
 
 - (void)setCurrentUser:(LoginToken*)token;
 - (CurrentToken*)getCurrentUser;
 - (NSDictionary*)getCurrentUserAttr;
-
 - (NSString*)getCurrentUserID;
 - (NSString*)getCurrentAuthToken;
 
+- (NSDictionary*)getRegTmpUserAttr;
 #pragma mark -- logout
 - (BOOL)signOutCurrentUser;
 - (BOOL)offlineCurrentUser;

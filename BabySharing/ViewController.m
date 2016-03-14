@@ -229,9 +229,10 @@ enum DisplaySide {
 
 - (void)SNSLogedIn:(id)sender {
     NSLog(@"SNS login success");
-    if ([_lm isLoginedByUser]) {
+//    if ([_lm isLoginedByUser]) {
+    if ([_lm isTmpLoginProcess]) {
         isSNSLogin = YES;
-        [self performSegueWithIdentifier:@"loginSuccessSegue" sender:[_lm getCurrentUserAttr]];
+        [self performSegueWithIdentifier:@"loginSuccessSegue" sender:[_lm getRegTmpUserAttr]];
     
     } else {
         // ERROR
