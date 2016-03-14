@@ -100,6 +100,8 @@ typedef void(^requestUserInfoSeccess)(NSDictionary *data);
 - (BOOL)onlineCurrentUser;
 - (BOOL)isCurrentUserOffline;
 
+- (void)resignTmpLoginUserProcess;
+
 #pragma mark -- query mutiple user simple profiles
 - (NSArray*)querMultipleProlfiles:(NSArray*)user_ids;
 - (void)querRecommendUserProlfilesWithFinishBlock:(queryRecommendUserFinishBlock)block;

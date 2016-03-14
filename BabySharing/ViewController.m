@@ -242,6 +242,11 @@ enum DisplaySide {
 
 - (void)userLogedIn:(id)sender {
     NSLog(@"login success");
+    
+    if ([_lm isTmpLoginProcess]) {
+        [_lm resignTmpLoginUserProcess];
+    }
+    
     isSNSLogin = NO;
     [self.navigationController popToRootViewControllerAnimated:NO];
     
