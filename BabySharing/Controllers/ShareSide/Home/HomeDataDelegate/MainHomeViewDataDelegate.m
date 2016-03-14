@@ -73,8 +73,7 @@
     QueryContent *reVal = nil;
     @try {
         reVal = [self.data objectAtIndex:index];
-    }
-    @catch (NSException *exception) {
+    } @catch (NSException *exception) {
     
     }
     return reVal;

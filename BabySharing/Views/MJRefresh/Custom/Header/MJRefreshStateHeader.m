@@ -154,4 +154,8 @@
     // 重新设置key（重新显示时间）
     self.lastUpdatedTimeKey = self.lastUpdatedTimeKey;
 }
+
+- (void)setNoTextState:(MJRefreshState)state {
+    MJRefreshCheckState
+}
 @end

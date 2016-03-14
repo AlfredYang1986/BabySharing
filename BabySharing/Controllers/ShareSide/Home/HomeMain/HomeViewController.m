@@ -79,7 +79,7 @@
     CGPoint point;
     BOOL isAnimation;
     
-    UITableView* queryView;
+    UITableView *queryView;
     CGFloat rowHeight;
     NSMutableArray<QueryContent *> *queryViewData;
     
@@ -182,23 +182,24 @@
         queryView.backgroundColor = [UIColor colorWithRed:0.9529 green:0.9529 blue:0.9529 alpha:1.f];
         queryView.dataSource = self;
         queryView.delegate = self;
+        queryView.separatorStyle = UITableViewCellSeparatorStyleNone;
        
         if (!_isPushed) {
             __unsafe_unretained UITableView *tableView = queryView;
             
             // 下拉刷新
-            tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            tableView.mj_header = [BSRefreshAnimationHeader headerWithRefreshingBlock:^{
                 [_delegate collectData:^(NSArray *data) {
                     [queryView reloadData];
                     [tableView.mj_header endRefreshing];
                 }];
             }];
-            
+
             // 设置自动切换透明度(在导航栏下面自动隐藏)
             tableView.mj_header.automaticallyChangeAlpha = YES;
             
             // 上拉刷新
-            tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+            tableView.mj_footer = [BSRefreshAnimationFooter footerWithRefreshingBlock:^{
                 [_delegate appendData:^(NSArray *data) {
                     [queryView reloadData];
                     [tableView.mj_footer endRefreshing];

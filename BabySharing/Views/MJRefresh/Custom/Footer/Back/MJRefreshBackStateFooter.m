@@ -76,4 +76,8 @@
     // 设置状态文字
     self.stateLabel.text = self.stateTitles[@(state)];
 }
+
+- (void)setNoTextState:(MJRefreshState)state {
+    MJRefreshCheckState
+}
 @end
