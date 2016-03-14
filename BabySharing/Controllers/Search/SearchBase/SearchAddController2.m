@@ -29,7 +29,8 @@
 
 - (void)viewDidLoad {
     //    _bkView.backgroundColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
-    _bkView.backgroundColor = [UIColor colorWithWhite:0.1098 alpha:1.f];
+//    _bkView.backgroundColor = [UIColor colorWithWhite:0.1098 alpha:1.f];
+    _bkView.backgroundColor = [UIColor whiteColor];
     
     _searchBar.delegate = _delegate;
     _queryView.dataSource = _delegate;
@@ -44,7 +45,8 @@
     
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     _searchBar.bounds = CGRectMake(0, 0, width + 10, 56);
-    _searchBar.sb_bg = [UIColor colorWithWhite:0.1098 alpha:1.f];
+    _searchBar.sb_bg = [UIColor whiteColor];
+//    _searchBar.sb_bg = [UIColor colorWithWhite:0.1098 alpha:1.f];
     _searchBar.textField.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
     _searchBar.textField.borderStyle = UITextBorderStyleRoundedRect;
     _searchBar.textField.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -65,25 +67,21 @@
     lb.text = [_delegate getControllerTitle];
     lb.font = [UIFont systemFontOfSize:18.f];
     [lb sizeToFit];
-    lb.textColor = [UIColor whiteColor];
-    lb.center = CGPointMake([UIScreen mainScreen].bounds.size.width / 2, 22 + lb.frame.size.height / 2);
+    lb.textColor = [UIColor colorWithWhite:0.2902 alpha:1.f];
+    lb.center = CGPointMake([UIScreen mainScreen].bounds.size.width / 2, 24 + (44 - lb.frame.size.height) / 2 + lb.frame.size.height / 2);
     [_bkView addSubview:lb];
     
-    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(14.5, 20.5, 30, 25)];
+    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(14.5, 34.5, 30, 25)];
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-    NSString* filepath = [resourceBundle pathForResource:@"dongda_back_light" ofType:@"png"];
+    NSString* filepath = [resourceBundle pathForResource:@"dongda_back" ofType:@"png"];
     CALayer * layer = [CALayer layer];
     layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
     
 #define BACK_ICON_WIDTH         22
 #define BACK_ICON_HEIGHT        BACK_ICON_WIDTH
-    
     layer.frame = CGRectMake(0, 0, BACK_ICON_WIDTH, BACK_ICON_HEIGHT);
-//    layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
     [barBtn.layer addSublayer:layer];
-    // [barBtn setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
-    // [barBtn setImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];
     [barBtn addTarget:self action:@selector(didPopViewControllerBtn) forControlEvents:UIControlEventTouchDown];
     
 //    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn];
@@ -101,7 +99,7 @@
 }
 
 - (void)didPopViewControllerBtn {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 - (void)setAddingDelegate:(id<SearchDataCollectionProtocol>)delegate {
@@ -114,13 +112,13 @@
 
 #pragma mark -- status bar color
 - (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
+    return UIStatusBarStyleDefault;
     //UIStatusBarStyleDefault = 0 黑色文字，浅色背景时使用
     //UIStatusBarStyleLightContent = 1 白色文字，深色背景时使用
 }
 
 - (BOOL)prefersStatusBarHidden {
-    return YES; //返回NO表示要显示，返回YES将hiden
+    return NO; //返回NO表示要显示，返回YES将hiden
 }
 
 - (void)needToReloadData {

@@ -57,13 +57,13 @@
     _bottomLabel.layer.cornerRadius = 8.f;
     _bottomLabel.clipsToBounds = YES;
  
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
-    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+//    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
+//    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
 
     NSString * bundlePath_dongda = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle_dongda = [NSBundle bundleWithPath:bundlePath_dongda];
     
-    NSString* filepath2 = [resourceBundle pathForResource:@"More" ofType:@"png"];
+    NSString* filepath2 = [resourceBundle_dongda pathForResource:@"home_chat" ofType:@"png"];
     UIButton* barBtn2 = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
     [barBtn2 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     CALayer * layer2 = [CALayer layer];

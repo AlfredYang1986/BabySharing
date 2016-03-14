@@ -212,10 +212,9 @@
     name_text_field.delegate = self;
     
     [self createLabelInRect:rect andTitle:@"性别" andTopMargin:BASICMARGIN + INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN];
-    [self createColorfulLabelInRect:rect andTopMargin:BASICMARGIN + INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN];
-    
-    [self createLabelInRect:rect andTitle:@"角色" andTopMargin:BASICMARGIN + 2 * (INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN)];
-    tag_text_field = [self createInputAreaInRect:rect andTopMargin:BASICMARGIN + 2 * (INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN) andPlaceholder:@"填写你的角色标签" andPreString:[_delegate getPreRoleTag] andRightImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"dongda_next" ofType:@"png"]] andCallback:@selector(textFieldChanged:) andCancelBtn:NO];
+//    [self createColorfulLabelInRect:rect andTopMargin:BASICMARGIN + INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN];
+    [self createLabelInRect:rect andTitle:@"角色" andTopMargin:BASICMARGIN + /*2 * */(INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN)];
+    tag_text_field = [self createInputAreaInRect:rect andTopMargin:BASICMARGIN + /*2 * */(INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN) andPlaceholder:@"填写你的角色标签" andPreString:[_delegate getPreRoleTag] andRightImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"dongda_next" ofType:@"png"]] andCallback:@selector(textFieldChanged:) andCancelBtn:NO];
     [self createNextBtnInRect:rect];
 
     CGFloat height = BASICMARGIN + 2 * (INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN) + INPUT_TEXT_FIELD_HEIGHT + LOGIN_BTN_TOP_MARGIN + LOGIN_BTN_HEIGHT + BASICMARGIN;
