@@ -19,46 +19,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BabySharing/Controllers/ShareSide/Home/HomeDataDelegate/MainHomeViewDataDelegate.m"
-            timestampString = "479645372.798689"
+            filePath = "BabySharing/Views/Home/HomeCell/HomeCell.m"
+            timestampString = "479700527.930155"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
-            landmarkName = "-collectData:"
+            startingLineNumber = "298"
+            endingLineNumber = "298"
+            landmarkName = "-mainImageTap"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[MainHomeViewDataDelegate collectData:]"
-                  moduleName = "BabySharing"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/monkeyheng/Desktop/BabySharing/BabySharing/Controllers/ShareSide/Home/HomeDataDelegate/MainHomeViewDataDelegate.m"
-                  timestampString = "479651268.450299"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "47"
-                  endingLineNumber = "47"
-                  offsetFromSymbolStart = "92">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__40-[MainHomeViewDataDelegate collectData:]_block_invoke"
-                  moduleName = "BabySharing"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/monkeyheng/Desktop/BabySharing/BabySharing/Controllers/ShareSide/Home/HomeDataDelegate/MainHomeViewDataDelegate.m"
-                  timestampString = "479651268.450459"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "47"
-                  endingLineNumber = "47"
-                  offsetFromSymbolStart = "24">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

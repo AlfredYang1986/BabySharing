@@ -293,6 +293,7 @@
         NSURL* url = [TmpFileStorageModel enumFileWithName:_queryContentItem.item_name andType:_queryContentItem.item_type.unsignedIntegerValue withDownLoadFinishBlock:^(BOOL success, NSURL *path) {
             if (success) {
                 _gpuImageView.hidden = NO;
+                _videoSign.hidden = YES;
                 _gpuImageMovie = [[GPUImageMovie alloc] initWithURL:path];
                 _gpuImageMovie.playAtActualSpeed = YES;
                 _gpuImageMovie.shouldRepeat = YES;
@@ -305,6 +306,7 @@
         if (url) {
             _gpuImageMovie = [[GPUImageMovie alloc] initWithURL:url];
             _gpuImageView.hidden = NO;
+            _videoSign.hidden = YES;
             _gpuImageMovie.playAtActualSpeed = YES;
             _gpuImageMovie.shouldRepeat = YES;
             [_gpuImageMovie addTarget:_gpuImageView];
@@ -312,17 +314,14 @@
         }
     }
     if (_gpuImageMovie.progress != 0) {
-        _gpuImageView.hidden = YES;
-        [_gpuImageMovie endProcessing];
-        [_gpuImageMovie cancelProcessing];
-        [_gpuImageMovie removeAllTargets];
+        [self stopViedo];
     }
-    NSLog(@"播放视频");
 }
 
 - (void)stopViedo {
     NSLog(@"停止播放视频");
     _gpuImageView.hidden = YES;
+    _videoSign.hidden = NO;
     [_gpuImageMovie endProcessing];
     [_gpuImageMovie cancelProcessing];
     [_gpuImageMovie removeAllTargets];

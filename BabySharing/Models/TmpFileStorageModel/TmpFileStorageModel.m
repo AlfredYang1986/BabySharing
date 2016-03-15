@@ -125,7 +125,7 @@
         dispatch_async(aq, ^{
             NSData* data = [RemoteInstance remoteDownloadFileWithName:name andHost:ATT_DOWNLOAD_HOST];
             NSURL* url = [NSURL fileURLWithPath:fullname];
-            unlink([fullname cString]);
+//            unlink([fullname cString]);
             NSLog(@"%@", url);
             NSError* error = nil;
             if ([data writeToFile:fullname options:NSDataWritingFileProtectionComplete error:&error]) {
