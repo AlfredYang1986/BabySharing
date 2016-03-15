@@ -372,7 +372,10 @@ enum DisplaySide {
 - (void)didSelectConfirmBtn {
     NSString* phoneNo = [inputView getInputPhoneNumber];
     
-    if ([self isValidPhoneNumber:phoneNo inArea:@"+86"] && [self.lm sendLoginRequestToPhone:phoneNo]) {
+    if ([self isValidPhoneNumber:phoneNo inArea:@"+86"]) {
+        if ([self.lm sendLoginRequestToPhone:phoneNo]) {
+            
+        }
         [inputView sendConfirmCodeRequestSuccess];
     } else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"input wrong phone number" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
