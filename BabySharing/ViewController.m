@@ -560,10 +560,17 @@ enum DisplaySide {
     for (int index = 0; index < arr.count; ++index) {
         GotyeOCMessage* m = [arr objectAtIndex:index];
         if (m.status == GotyeMessageStatusUnread) {
+            NSLog(@"message is : %@", m.text);
             
-            [_mm addNotification:[RemoteInstance searchDataFromData:[m.text dataUsingEncoding:NSUTF8StringEncoding]] withFinishBlock:^{
-//                [_contentController addOneNotification];
-            }];
+            NSDictionary* dic = [RemoteInstance searchDataFromData:[m.text dataUsingEncoding:NSUTF8StringEncoding]];
+            if (((NSNumber*)[dic objectForKey:@"type"]).intValue == NotificationActionTypeLoginOnOtherDevice) {
+                [_lm signOutCurrentUserLocal];
+            } else {
+                [_mm addNotification:dic withFinishBlock:^{
+//                  [_contentController addOneNotification];
+                }];
+            }
+            
         
             [GotyeOCAPI markOneMessageAsRead:m isRead:YES];
         }

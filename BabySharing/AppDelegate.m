@@ -13,7 +13,7 @@
 
 #import "Tools.h"
 
-@interface AppDelegate ()
+@interface AppDelegate () <UIAlertViewDelegate>
 
 @end
 
@@ -114,6 +114,34 @@
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    if ([_lm isLoginedByUser]) {
+        /**
+         * ping test
+         */
+        NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
+        [dic setValue:_lm.current_user_id forKey:@"user_id"];
+        [dic setValue:_lm.current_auth_token forKey:@"auth_token"];
+        
+        NSError * error = nil;
+        NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
+        
+        NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:AUTH_PING_TEST]];
+        
+        if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
+            NSLog(@"ping test success");
+        } else {
+            NSDictionary* reError = [result objectForKey:@"error"];
+            NSString* msg = [reError objectForKey:@"message"];
+            NSLog(@"error is : %@", msg);
+           
+            UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"别处登录" message:@"你的账号已经在别处登录" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+            [alert show];
+        }
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    [_lm signOutCurrentUserLocal];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {

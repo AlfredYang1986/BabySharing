@@ -957,6 +957,11 @@
     }
 }
 
+- (void)signOutCurrentUserLocal {
+    [CurrentToken logOutCurrentLoginUserInContext:_doc.managedObjectContext];
+    _current_user = nil;
+}
+
 - (BOOL)offlineCurrentUser {
   
     if (self.current_user == nil)

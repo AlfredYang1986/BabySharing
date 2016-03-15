@@ -95,6 +95,7 @@ typedef void(^requestUserInfoSeccess)(NSDictionary *data);
 
 - (NSDictionary*)getRegTmpUserAttr;
 #pragma mark -- logout
+- (void)signOutCurrentUserLocal;
 - (BOOL)signOutCurrentUser;
 - (BOOL)offlineCurrentUser;
 - (BOOL)onlineCurrentUser;

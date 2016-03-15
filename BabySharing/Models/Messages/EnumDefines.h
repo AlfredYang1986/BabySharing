@@ -35,6 +35,7 @@ typedef NS_ENUM(NSInteger, NotificationActionType) {
     NotificationActionTypeUnFollow,
     NotificationActionTypeLike,
     NotificationActionTypePush,
+    NotificationActionTypeLoginOnOtherDevice,
     NotificationActionTypeMessage,
 };
 #endif

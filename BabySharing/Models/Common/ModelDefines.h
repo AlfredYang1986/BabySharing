@@ -66,6 +66,8 @@ static const NSString* kUserPostOwnerConnectionsFriends = @"kUserPostOwnerConnec
 #define AUTH_OFFLINE_USER                   [AUTH_HOST_DOMAIN stringByAppendingString:@"offline"]
 #define AUTH_SINGOUT_USER                   [AUTH_HOST_DOMAIN stringByAppendingString:@"signout"]
 
+#define AUTH_PING_TEST                      [AUTH_HOST_DOMAIN stringByAppendingString:@"pingtest"]
+
 #pragma mark -- POST
 #define POST_HOST_DOMAIN                    [HOST_DOMAIN stringByAppendingString:@"post/"]
 
