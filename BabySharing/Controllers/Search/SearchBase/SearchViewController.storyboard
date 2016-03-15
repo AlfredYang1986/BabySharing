@@ -25,10 +25,6 @@
                                 </constraints>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="F3R-Q6-v2I">
-                                <rect key="frame" x="0.0" y="127" width="375" height="540"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gq5-Eu-ehM">
                                 <rect key="frame" x="-4" y="0.0" width="383" height="64"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -36,41 +32,52 @@
                                     <constraint firstAttribute="height" constant="64" id="GrI-5S-B3s"/>
                                 </constraints>
                             </view>
+                            <view alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jv1-9d-1hF">
+                                <rect key="frame" x="0.0" y="127" width="375" height="1"/>
+                                <color key="backgroundColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="fKj-wo-wi6"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="F3R-Q6-v2I">
+                                <rect key="frame" x="0.0" y="127" width="375" height="540"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="F3R-Q6-v2I" firstAttribute="leading" secondItem="CuT-eT-Xz4" secondAttribute="leading" id="0gR-mX-awe"/>
                             <constraint firstAttribute="trailing" secondItem="F3R-Q6-v2I" secondAttribute="trailing" id="3Uc-1Z-C7h"/>
+                            <constraint firstItem="jv1-9d-1hF" firstAttribute="top" secondItem="zik-Aa-pFK" secondAttribute="bottom" constant="10" id="Cuy-20-fYU"/>
+                            <constraint firstItem="F3R-Q6-v2I" firstAttribute="top" secondItem="jv1-9d-1hF" secondAttribute="bottom" id="FQm-rn-RjE"/>
                             <constraint firstItem="gq5-Eu-ehM" firstAttribute="leading" secondItem="CuT-eT-Xz4" secondAttribute="leadingMargin" constant="-20" id="JJR-Cv-ZpV"/>
-                            <constraint firstItem="zik-Aa-pFK" firstAttribute="top" secondItem="CuT-eT-Xz4" secondAttribute="topMargin" constant="64" id="LwC-oW-ZGp"/>
+                            <constraint firstAttribute="trailing" secondItem="jv1-9d-1hF" secondAttribute="trailing" id="RtQ-yj-dLk"/>
                             <constraint firstItem="hiL-pe-EbI" firstAttribute="top" secondItem="F3R-Q6-v2I" secondAttribute="bottom" id="TTL-zk-5cW"/>
                             <constraint firstItem="gq5-Eu-ehM" firstAttribute="top" secondItem="CuT-eT-Xz4" secondAttribute="topMargin" id="U8W-Aq-RAN"/>
                             <constraint firstItem="F3R-Q6-v2I" firstAttribute="top" secondItem="zik-Aa-pFK" secondAttribute="bottom" constant="10" id="UOe-X3-Nso"/>
                             <constraint firstItem="zik-Aa-pFK" firstAttribute="leading" secondItem="CuT-eT-Xz4" secondAttribute="leadingMargin" constant="-20" id="Xem-kC-dsT"/>
-                            <constraint firstItem="hiL-pe-EbI" firstAttribute="top" secondItem="F3R-Q6-v2I" secondAttribute="bottom" id="Zsp-is-vqA"/>
                             <constraint firstAttribute="trailingMargin" secondItem="zik-Aa-pFK" secondAttribute="trailing" constant="-20" id="cdf-hX-14d"/>
                             <constraint firstItem="zik-Aa-pFK" firstAttribute="top" secondItem="gq5-Eu-ehM" secondAttribute="bottom" id="fu3-FP-CFo"/>
                             <constraint firstAttribute="trailingMargin" secondItem="gq5-Eu-ehM" secondAttribute="trailing" constant="-20" id="hYI-aI-Ptd"/>
-                            <constraint firstItem="F3R-Q6-v2I" firstAttribute="top" secondItem="zik-Aa-pFK" secondAttribute="bottom" id="iK1-CX-SfW"/>
+                            <constraint firstItem="jv1-9d-1hF" firstAttribute="leading" secondItem="CuT-eT-Xz4" secondAttribute="leading" id="vRf-1i-THr"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="LwC-oW-ZGp"/>
-                                <exclude reference="iK1-CX-SfW"/>
-                                <exclude reference="Zsp-is-vqA"/>
+                                <exclude reference="FQm-rn-RjE"/>
                             </mask>
                         </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="bkView" destination="gq5-Eu-ehM" id="Qag-Bo-tyj"/>
+                        <outlet property="line" destination="jv1-9d-1hF" id="CAn-7R-3Lw"/>
                         <outlet property="queryView" destination="F3R-Q6-v2I" id="yrd-fT-wuM"/>
                         <outlet property="searchBar" destination="zik-Aa-pFK" id="FxJ-oP-fB1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="087-dd-oze" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="824" y="454"/>
+            <point key="canvasLocation" x="559.5" y="453.5"/>
         </scene>
         <!--Search Add Controller2-->
         <scene sceneID="S9r-xd-Nw6">
@@ -91,7 +98,7 @@
                                 </constraints>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Yjq-kx-miH">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Yjq-kx-miH">
                                 <rect key="frame" x="-4" y="127" width="383" height="540"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
@@ -103,7 +110,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="W8b-LG-Pi7" firstAttribute="top" secondItem="Yjq-kx-miH" secondAttribute="bottom" id="5NO-Z6-yqN"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ftK-xq-xte" secondAttribute="trailing" constant="-20" id="OZH-bx-ksL"/>

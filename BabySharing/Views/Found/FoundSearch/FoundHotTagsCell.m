@@ -10,6 +10,7 @@
 #import "RecommandTag.h"
 #import "RecommandRoleTag.h"
 #import "FoundHotTagBtn.h"
+#import "Tools.h"
 
 #define MARGIN                  13
 #define MARGIN_VER              12
@@ -42,7 +43,7 @@
         line.borderWidth = 1.f;
         line.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.25].CGColor;
         line.frame = CGRectMake(0, PREFERRED_HEIGHT - 1, [UIScreen mainScreen].bounds.size.width, 1);
-        [self.layer addSublayer:line];
+//        [self.layer addSublayer:line];
         
         _ver_margin = MARGIN_VER;
     }
@@ -56,7 +57,7 @@
         line.borderWidth = 1.f;
         line.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.25].CGColor;
         line.frame = CGRectMake(0, PREFERRED_HEIGHT - 1, [UIScreen mainScreen].bounds.size.width, 1);
-        [self.layer addSublayer:line];
+//        [self.layer addSublayer:line];
 
         _ver_margin = MARGIN_VER;
     }
@@ -82,25 +83,26 @@
     line.hidden = _isHiddenSepline;
 }
 
-- (void)setHotTagsText:(NSArray*)arr {
+- (void)setHotTagsText:(NSArray *)arr {
     [self clearAllTags];
     
     int index = 0;
     CGFloat offset = 0;
     for (NSString* tmp in arr) {
         
-        UIFont* font = [UIFont systemFontOfSize:11.f];
+        UIFont* font = [UIFont systemFontOfSize:16.f];
         CGSize sz_font = [tmp sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
         CGSize sz = CGSizeMake(TAG_MARGIN /*+ ICON_WIDTH*/ + sz_font.width + TAG_MARGIN, TAG_HEIGHT);
         
-        FoundHotTagBtn* btn = [[FoundHotTagBtn alloc]initWithFrame:CGRectMake(0, 0, sz.width, sz.height)];
+        FoundHotTagBtn* btn = [[FoundHotTagBtn alloc]initWithFrame:CGRectMake(0, 0, sz.width, sz.height + 4)];
         btn.tag_name = tmp;//.tag_name;
         
-        UILabel* label = [[UILabel alloc]init];
+        UILabel* label = [[UILabel alloc] init];
         label.font = font;
         label.text = tmp; //tmp.tag_name;
-        label.textColor = _isDarkTheme ? [UIColor whiteColor] : [UIColor brownColor];
-        label.frame = CGRectMake(TAG_MARGIN /*+ ICON_WIDTH*/, 0, sz_font.width, TAG_HEIGHT);
+//        label.textColor = _isDarkTheme ? [UIColor whiteColor] : [UIColor brownColor];
+        label.textColor = [Tools colorWithRED:74 GREEN:74 BLUE:74 ALPHA:1.0];
+        label.frame = CGRectMake(TAG_MARGIN /*+ ICON_WIDTH*/, 0 + 2, sz_font.width, TAG_HEIGHT);
         label.textAlignment = NSTextAlignmentLeft;
         [btn addSubview:label];
         
@@ -110,7 +112,7 @@
         btn.clipsToBounds = YES;
         
         //        btn.center = CGPointMake(MARGIN + btn.frame.size.width / 2 + index * (MARGIN + btn.frame.size.width), MARGIN_VER + btn.frame.size.height / 2);
-        btn.center = CGPointMake(MARGIN + btn.frame.size.width / 2 + offset, _ver_margin + btn.frame.size.height / 2);
+        btn.center = CGPointMake(MARGIN + btn.frame.size.width / 2 + offset, _ver_margin + btn.frame.size.height / 2 + 3);
         offset += btn.frame.size.width + TAG_MARGIN_BETWEEN;
         
         UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(roleTagBtnSelected:)];

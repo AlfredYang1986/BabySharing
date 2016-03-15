@@ -43,8 +43,10 @@ typedef void(^SearchCallback)(BOOL success, NSArray* data);
 @protocol SearchActionsProtocol <NSObject>
 - (void)didSelectItem:(NSString*)item;
 - (void)addNewItem:(NSString*)item;
-- (NSString*)getControllerTitle;
+- (NSString *)getControllerTitle;
 - (UINavigationController*)getViewController;
+@optional
+- (NSString *)getPlaceHolder;
 @end
 
 #endif /* SearhViewControllerActionsDelegate_h */

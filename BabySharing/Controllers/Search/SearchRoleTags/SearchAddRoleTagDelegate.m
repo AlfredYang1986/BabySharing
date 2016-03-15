@@ -8,6 +8,7 @@
 
 #import "SearchAddRoleTagDelegate.h"
 #import "searchDefines.h"
+#import "Tools.h"
 
 @implementation SearchAddRoleTagDelegate {
     NSArray* exist_data;
@@ -101,11 +102,11 @@
             return @"";
             
         case SearchStatusInputWithNoResult:
-            return @"添加新角色";
+            return @"解锁新角色:";
             
         case SearchStatusInputWithResult: {
             if (section == 0) {
-                return @"添加新角色";
+                return @"解锁新角色:";
             } else {
                 return @"搜索结果";
             }
@@ -124,11 +125,17 @@
             return 0;
             
         case SearchStatusInputWithNoResult:
-            return 22;
-            
+            if (section == 0) {
+                return 0;
+            } else {
+                return 22;
+            }
         case SearchStatusInputWithResult:
-            return 22;
-            
+            if (section == 0) {
+                return 0;
+            } else {
+                return 22;
+            }
         default:
             NSLog(@"error with status");
             return 0;
@@ -197,41 +204,83 @@
     UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"default"];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"default"];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"default"];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0,  [UIScreen mainScreen].bounds.size.width - 10, 43)];
+        label.font = [UIFont systemFontOfSize:14.0];
+        label.textColor = [Tools colorWithRED:74.0 GREEN:74.0 BLUE:74.0 ALPHA:1.0];
+        label.center = CGPointMake([UIScreen mainScreen].bounds.size.width / 2 + 10, 21);
+        [cell.contentView addSubview:label];
+        label.tag = 1111;
+        
+        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 44, [UIScreen mainScreen].bounds.size.width, 1)];
+        line.backgroundColor = [Tools colorWithRED:242 GREEN:242 BLUE:242 ALPHA:1.0];
+        [cell.contentView addSubview:line];
     }
 
     SearchStatus status = [self status];
-    
+    UILabel *label = [cell.contentView viewWithTag:1111];
     switch (status) {
         case SearchStatusNoInput:
-            cell.textLabel.text = [showing_data objectAtIndex:indexPath.row];
+//            if (indexPath.row == 0 && indexPath.section == 0) {
+//                label.text =  [showing_data objectAtIndex:indexPath.row]];
+//            } else {
+                label.text =  [showing_data objectAtIndex:indexPath.row];
+//            }
             break;
-            
         case SearchStatusInputWithNoResult:
-            cell.textLabel.text = [_delegate getUserInputString];
-            break;
-            
-        case SearchStatusInputWithResult: {
-            if (indexPath.section == 0) {
-                cell.textLabel.text = [_delegate getUserInputString];
+            if (indexPath.row == 0 && indexPath.section == 0) {
+                label.text =  [NSString stringWithFormat:@"解锁新角色：%@",  label.text = [_delegate getUserInputString]];
             } else {
-                cell.textLabel.text = [showing_data objectAtIndex:indexPath.row];
-            }
+                label.text = [_delegate getUserInputString];
             }
             break;
-            
+        case SearchStatusInputWithResult: {
+                if (indexPath.section == 0) {
+                    if (indexPath.row) {
+                        label.text =  [NSString stringWithFormat:@"解锁新角色：%@", [_delegate getUserInputString]];
+                    } else {
+                        label.text = [_delegate getUserInputString];
+                    }
+                } else {
+                    label.text = [showing_data objectAtIndex:indexPath.row];
+                }
+            }
+            break;
         default:
             NSLog(@"error with status");
             return 0;
     }
+//    switch (status) {
+//        case SearchStatusNoInput:
+//            cell.textLabel.text = [showing_data objectAtIndex:indexPath.row];
+//            break;
+//            
+//        case SearchStatusInputWithNoResult:
+//            cell.textLabel.text = [_delegate getUserInputString];
+//            break;
+//            
+//        case SearchStatusInputWithResult: {
+//            if (indexPath.section == 0) {
+//                cell.textLabel.text = [_delegate getUserInputString];
+//            } else {
+//                cell.textLabel.text = [showing_data objectAtIndex:indexPath.row];
+//            }
+//            }
+//            break;
+//            
+//        default:
+//            NSLog(@"error with status");
+//            return 0;
+//    }
+//    
+//    cell.textLabel.font = [UIFont boldSystemFontOfSize:17.f];
     
-    cell.textLabel.font = [UIFont boldSystemFontOfSize:17.f];
-//    cell.textLabel.textColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
-//    cell.backgroundColor = [UIColor blackColor];
+////    cell.textLabel.textColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
+////    cell.backgroundColor = [UIColor blackColor];
     return cell;
 }
 
 - (NSString*)getControllerTitle {
-    return @"添加你的角色";
+    return @"添加角色";
 }
 @end

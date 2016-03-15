@@ -30,7 +30,7 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="19h-Xu-hfB">
                                 <rect key="frame" x="0.0" y="74" width="320" height="450"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <mutableString key="text">用户协议
+                                <string key="text">用户协议
 欢迎您使用黑镜子科技（北京）有限公司提供的咚哒软件或服务。
 
 版权声明
@@ -122,7 +122,7 @@
 10.3如本协议中的任何条款无论因何种原因完全或部分无效或不具有执行力，本协议的其余条款仍应有效并且有约束力。
 10.4本使用协议之标题仅供方便而设，不具任何法律或契约效果；
 10.5黑镜子科技（北京）有限公司对本使用协议享有最终解释权。
-</mutableString>
+</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>

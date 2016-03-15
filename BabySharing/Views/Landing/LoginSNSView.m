@@ -65,7 +65,7 @@
     
     CATextLayer* text_layer = [CATextLayer layer];
     text_layer.foregroundColor = [UIColor colorWithWhite:0.2902 alpha:1.f].CGColor;
-    text_layer.string = @"或使用社交账户登录";
+    text_layer.string = @"第三方社交账户登录";
     text_layer.fontSize = 14.f;
     text_layer.contentsScale = 2.f;
     text_layer.alignmentMode = @"center";

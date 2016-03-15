@@ -11,7 +11,7 @@
 
 #import "FoundHotTagsCell.h"
 #import "DongDaSearchBar2.h"
-
+#import "Tools.h"
 #import <objc/runtime.h>
 
 @interface SearchViewController () <UITextFieldDelegate>
@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet DongDaSearchBar2 *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *queryView;
 @property (weak, nonatomic) IBOutlet UIView *bkView;
+@property (weak, nonatomic) IBOutlet UIView *line;
 
 @end
 
@@ -38,14 +39,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here.
-    
-//    role_tag = [[SearchRoleTagDelegate alloc]init];
-    
+
     _queryView.delegate = _delegate;
     _queryView.dataSource = _delegate;
     _searchBar.delegate = _delegate;
     _searchBar.showsCancelButton = YES;
- 
+
+    self.line.backgroundColor = [Tools colorWithRED:155 GREEN:155 BLUE:155 ALPHA:0.5];
+    [self.view bringSubviewToFront:self.line];
+    
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     
     _searchBar.bounds = CGRectMake(0, 0, width + 10, 53);
@@ -58,8 +60,7 @@
     [_searchBar.cancleBtn setTitleColor:[UIColor colorWithWhite:1.f alpha:1.f] forState:UIControlStateDisabled];
     [_searchBar.cancleBtn setTitle:@"添加" forState:UIControlStateNormal];
     [_searchBar.cancleBtn setTitle:@"添加" forState:UIControlStateDisabled];
-//    _searchBar.placeholder = @"";
-    _searchBar.cancleBtn.backgroundColor = [UIColor colorWithRed:104.0/255.0 green:210.0 / 255.0 blue:210.0 / 255.0 alpha:1.f];
+    _searchBar.cancleBtn.backgroundColor = [UIColor colorWithRed:70.0/255.0 green:219.0 / 255.0 blue:202.0 / 255.0 alpha:1.f];
     _searchBar.cancleBtn.layer.cornerRadius = 5.f;
     _searchBar.cancleBtn.clipsToBounds = YES;
     _searchBar.cancleBtn.titleLabel.font = [UIFont systemFontOfSize:14.f];
@@ -73,12 +74,6 @@
     _bkView.backgroundColor =  [UIColor whiteColor];
     [_delegate collectData];
    
-//    Class cls = [_delegate class];
-//    IMP imp = class_getMethodImplementation(cls, @selector(getSearchPlaceHolder));
-//    if (imp) {
-//        _searchBar.placeholder = imp();
-//    }
-//    Method m = class_getClassMethod(cls, @selector(getSearchPlaceHolder));
     
     UILabel* lb = [[UILabel alloc]init];
     lb.text = [_delegate getControllerTitle];

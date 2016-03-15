@@ -207,14 +207,22 @@
     NSBundle *resourceBundle_dongda = [NSBundle bundleWithPath:bundlePath_dongda];
     
     [self createLabelInRect:rect andTitle:@"昵称" andTopMargin:BASICMARGIN];
-    name_text_field = [self createInputAreaInRect:rect andTopMargin:BASICMARGIN andPlaceholder:@"4-18个字节，限中英文，数字，表情符号" andPreString:[_delegate getPreScreenName] andRightImage:nil andCallback:@selector(textFieldChanged:) andCancelBtn:YES];
-    name_text_field.font = [UIFont systemFontOfSize:12];
+    name_text_field = [self createInputAreaInRect:rect andTopMargin:BASICMARGIN andPlaceholder:@"请输入你的昵称" andPreString:[_delegate getPreScreenName] andRightImage:nil andCallback:@selector(textFieldChanged:) andCancelBtn:YES];
+    name_text_field.font = [UIFont systemFontOfSize:14];
     name_text_field.delegate = self;
-    
     [self createLabelInRect:rect andTitle:@"性别" andTopMargin:BASICMARGIN + INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN];
 //    [self createColorfulLabelInRect:rect andTopMargin:BASICMARGIN + INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN];
     [self createLabelInRect:rect andTitle:@"角色" andTopMargin:BASICMARGIN + /*2 * */(INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN)];
-    tag_text_field = [self createInputAreaInRect:rect andTopMargin:BASICMARGIN + /*2 * */(INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN) andPlaceholder:@"填写你的角色标签" andPreString:[_delegate getPreRoleTag] andRightImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"dongda_next" ofType:@"png"]] andCallback:@selector(textFieldChanged:) andCancelBtn:NO];
+    tag_text_field = [self createInputAreaInRect:rect andTopMargin:BASICMARGIN + /*2 * */(INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN) andPlaceholder:@"萌妹？辣妈？快来认领！" andPreString:[_delegate getPreRoleTag] andRightImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"dongda_next" ofType:@"png"]] andCallback:@selector(textFieldChanged:) andCancelBtn:NO];
+    tag_text_field.frame = CGRectMake(tag_text_field.frame.origin.x, tag_text_field.frame.origin.y, tag_text_field.frame.size.width, tag_text_field.frame.size.height);
+    UIImageView *goTo = [[UIImageView alloc] initWithFrame:CGRectMake(width - AREA_CODE_WIDTH - 2 * INPUT_MARGIN - 40, 0, 45.5, 45.5)];
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+    goTo.image = [UIImage imageNamed:[resourceBundle pathForResource:@"next" ofType:@"png"]];
+    goTo.contentMode = UIViewContentModeCenter;
+    goTo.transform = CGAffineTransformMakeScale(0.7f, 0.7f);
+    [tag_text_field addSubview:goTo];
+    
     [self createNextBtnInRect:rect];
 
     CGFloat height = BASICMARGIN + 2 * (INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN) + INPUT_TEXT_FIELD_HEIGHT + LOGIN_BTN_TOP_MARGIN + LOGIN_BTN_HEIGHT + BASICMARGIN;
@@ -240,9 +248,13 @@
         [_delegate didEditRoleTag];
         return NO;
     } else if (textField == name_text_field) {
-//        [_delegate didStartEditingScreenName];
+        name_text_field.placeholder = @"4-18个字节，限中英文，数字，表情符号";
+        name_text_field.font = [UIFont systemFontOfSize:12];
     }
     return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {              // called when 'return' key pressed. return NO to ignore.

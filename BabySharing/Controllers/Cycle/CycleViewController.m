@@ -210,7 +210,6 @@
     
     UIBezierPath *startCircle = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 0, CGRectGetWidth(animationView.frame), CGRectGetHeight(animationView.frame))];
     circleLayer = [[CAShapeLayer alloc] init];
-    circleLayer.backgroundColor = [UIColor redColor].CGColor;
     circleLayer.path = startCircle.CGPath;
     animationView.layer.mask = circleLayer;
     [bkView addSubview:animationView];

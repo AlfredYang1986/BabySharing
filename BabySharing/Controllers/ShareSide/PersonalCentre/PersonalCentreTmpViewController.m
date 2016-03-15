@@ -238,7 +238,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 [_queryView reloadData];
                 [self resetProfileData];
-                [search_seg refreshItemTitle:[NSString stringWithFormat:@"%d", _ownerQueryModel.querydata.count] atIndex:0];
+                [search_seg refreshItemTitle:[NSString stringWithFormat:@"%lu", _ownerQueryModel.querydata.count] atIndex:0];
             });
         }];
         dispatch_semaphore_signal(semaphore_om);
@@ -247,9 +247,12 @@
     dispatch_queue_t q2 = dispatch_queue_create("opm queue", nil);
     dispatch_async(q2, ^{
         [_ownerQueryPushModel queryContentsByUser:_current_user_id withToken:_current_auth_token andOwner:_owner_id withStartIndex:0 finishedBlock:^(BOOL success) {
-            [_queryView reloadData];
-            [self resetProfileData];
-            [search_seg refreshItemTitle:[NSString stringWithFormat:@"%d", _ownerQueryPushModel.querydata.count] atIndex:1];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [_queryView reloadData];
+                [self resetProfileData];
+                [search_seg refreshItemTitle:[NSString stringWithFormat:@"%lu", _ownerQueryPushModel.querydata.count] atIndex:1];
+                
+            });
         }];
         dispatch_semaphore_signal(semaphore_opm);
     });
@@ -259,6 +262,10 @@
     dispatch_semaphore_wait(semaphore_om, DISPATCH_TIME_FOREVER);
     dispatch_semaphore_wait(semaphore_opm, DISPATCH_TIME_FOREVER);
     dispatch_semaphore_wait(semaphore_user_info, DISPATCH_TIME_FOREVER);
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
 }
 
 #pragma mark -- actions
@@ -309,7 +316,6 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 [_queryView reloadData];
                  [self resetProfileData];
-//                self.navigationItem.title = [dic_profile_details objectForKey:@"screen_name"];
             });
             
         } else {
