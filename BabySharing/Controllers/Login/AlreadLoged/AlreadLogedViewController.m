@@ -12,11 +12,14 @@
 #import "TmpFileStorageModel.h"
 #import "OBShapedButton.h"
 #import "SGActionView.h"
+#import "Tools.h"
 
 @interface AlreadLogedViewController ()
 @property (strong, nonatomic) IBOutlet UIButton *loginImgBtn;
 @property (strong, nonatomic) IBOutlet UILabel *nickNameLabel;
-@property (strong, nonatomic) IBOutlet OBShapedButton *currentTagLabel;
+//@property (strong, nonatomic) IBOutlet OBShapedButton *currentTagLabel;
+@property (strong, nonatomic) UILabel *currentTagLabel;
+
 @property (strong, nonatomic) IBOutlet OBShapedButton *yesBtn;
 //@property (strong, nonatomic) IBOutlet OBShapedButton *noBtn;
 @property (strong, nonatomic) IBOutlet UIButton *noBtn;
@@ -76,7 +79,6 @@
     _loginImgBtn.clipsToBounds = YES;
     _loginImgBtn.backgroundColor = [UIColor clearColor];
     _loginImgBtn.center = CGPointMake(width / 2, SCREEN_PHOTO_CENTER_MARGIN + height / 2);
-    
     _loginImgBtn.layer.borderWidth = 3.f;
     _loginImgBtn.layer.borderColor = [UIColor colorWithWhite:1.f alpha:0.30].CGColor;
     // 添加动作选择头像
@@ -118,17 +120,37 @@
    
     NSString * bundlePath_dongda = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle_dongda = [NSBundle bundleWithPath:bundlePath_dongda];
-    _currentTagLabel = [[OBShapedButton alloc]init];
-    [_currentTagLabel setBackgroundImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"home_role_tag" ofType:@"png"]] forState:UIControlStateNormal];
-    _currentTagLabel.titleLabel.font = [UIFont systemFontOfSize:12.f];
-    [_currentTagLabel setTitle:tag forState:UIControlStateNormal];
-    [_currentTagLabel setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+//    _currentTagLabel = [[OBShapedButton alloc] init];
+//    [_currentTagLabel setBackgroundImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"home_role_tag" ofType:@"png"]] forState:UIControlStateNormal];
+//    _currentTagLabel.titleLabel.font = [UIFont systemFontOfSize:12.f];
+//    _currentTagLabel.titleLabel.textAlignment = NSTextAlignmentCenter;
+//    [_currentTagLabel setTitle:tag forState:UIControlStateNormal];
+//    [_currentTagLabel setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//    [_currentTagLabel sizeToFit];
+    _currentTagLabel = [[UILabel alloc] init];
+    _currentTagLabel.font = [UIFont systemFontOfSize:12];
+    _currentTagLabel.backgroundColor = [Tools colorWithRED:254.0 GREEN:192.0 BLUE:0.0 ALPHA:1.0];
+    _currentTagLabel.textAlignment = NSTextAlignmentCenter;
+    _currentTagLabel.layer.masksToBounds = YES;
+    _currentTagLabel.layer.cornerRadius = 3;
+    _currentTagLabel.text = tag;
+    _currentTagLabel.textColor = [UIColor whiteColor];
     [_currentTagLabel sizeToFit];
     
     if (hasTag) {
         CGFloat offset_y = SCREEN_PHOTO_TOP_MARGIN + _loginImgBtn.frame.size.height + SCREEN_NAME_2_PHOTO_MARGIN + _nickNameLabel.frame.size.height / 2;
-        _nickNameLabel.center = CGPointMake(width / 2 - _nickNameLabel.frame.size.width / 2 - SCREEN_NAME_2_ROLE_TAG_MARGIN, offset_y);
-        _currentTagLabel.center = CGPointMake(width / 2 + _currentTagLabel.frame.size.width / 2 + SCREEN_NAME_2_ROLE_TAG_MARGIN, offset_y);
+        _currentTagLabel.frame = CGRectMake(0, 0, _currentTagLabel.frame.size.width + 5, 18);
+//        _currentTagLabel.titleLabel.textAlignment
+        CGFloat allWidth = _nickNameLabel.frame.size.width + _currentTagLabel.frame.size.width +  10;
+        
+        CGFloat padding = (width - allWidth) / 2;
+        
+        
+        _nickNameLabel.center = CGPointMake(padding + _nickNameLabel.frame.size.width / 2, offset_y);
+        _currentTagLabel.center = CGPointMake(width - padding - _currentTagLabel.frame.size.width / 2, offset_y);
+//        _nickNameLabel.center = CGPointMake(width / 2 - _nickNameLabel.frame.size.width / 2 - SCREEN_NAME_2_ROLE_TAG_MARGIN, offset_y);
+//        _currentTagLabel.center = CGPointMake(width / 2 + _currentTagLabel.frame.size.width / 2 + SCREEN_NAME_2_ROLE_TAG_MARGIN, offset_y);
     }
     
     [self.view addSubview:_currentTagLabel];
@@ -138,7 +160,7 @@
      * Is that you? label
      */
     UILabel* qa = [[UILabel alloc]init];
-    qa.text = @"检测到该手机号已注册如下账号";
+    qa.text = @"检测到该手机号码已绑定如下账号";
     qa.font = [UIFont systemFontOfSize:14.f];
     [qa sizeToFit];
     qa.textColor = [UIColor colorWithWhite:0.2902 alpha:1.f];
@@ -162,7 +184,7 @@
     _noBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, YES_NO_BTN_WIDTH, YES_NO_BTN_HEIGHT)];
 //    [_noBtn setBackgroundImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"login_no_btn_bg" ofType:@"png"]] forState:UIControlStateNormal];
     [_noBtn setTitleColor:[UIColor colorWithWhite:0.2902 alpha:1.f] forState:UIControlStateNormal];
-    [_noBtn setTitle:@"不是我, 重新注册" forState:UIControlStateNormal];
+    [_noBtn setTitle:@"不是我, 帐号重建" forState:UIControlStateNormal];
     _noBtn.titleLabel.font = [UIFont systemFontOfSize:14.f];
     _noBtn.center = CGPointMake(width / 2, height / 2 + qa.frame.size.height + YES_BTN_TOP_MARGIN + YES_NO_BTN_HEIGHT + YES_BTN_2_NO_BTN_MARGIN + YES_NO_BTN_HEIGHT / 2);
     [self.view addSubview:_noBtn];

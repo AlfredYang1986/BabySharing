@@ -66,7 +66,7 @@ typedef void(^queryRoleTagFinishBlock)(BOOL success, NSString* msg, NSArray* res
 
 - (NSString*)getSearchPlaceHolder {
 //    return @"搜索角色标签";
-    return @"";
+    return [_actions getPlaceHolder];
 }
 
 - (void)queryRoleTagsWithStartIndex:(NSInteger)skip andLenth:(NSInteger)take withFinishBlock:(queryRoleTagFinishBlock)block {
@@ -104,9 +104,11 @@ typedef void(^queryRoleTagFinishBlock)(BOOL success, NSString* msg, NSArray* res
     return [final_tag_arr objectAtIndex:index];
 }
 
-- (NSString*)getControllerTitle {
+- (NSString *)getControllerTitle {
     return [_actions getControllerTitle];
 }
+
+
 
 #pragma mark -- Dongda Search Bar
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
@@ -218,7 +220,6 @@ typedef void(^queryRoleTagFinishBlock)(BOOL success, NSString* msg, NSArray* res
     [cell setHotTagsText:final_tag_arr];
     cell.delegate = self;
 //    cell.backgroundColor = [UIColor colorWithWhite:0.1098 alpha:1.f];
-    
     return cell;
 }
 

@@ -407,11 +407,17 @@
 }
 
 - (void)notLikeBtnSelected {
-    [_delegate didSelectNotLikeBtn:_content];
+    [_delegate didSelectNotLikeBtn:_content complete:^(BOOL success) {
+        
+        
+    }];
 }
 
 - (void)likeBtnSelected {
-    [_delegate didSelectLikeBtn:_content];
+    [_delegate didSelectLikeBtn:_content complete:^(BOOL success) {
+        
+        
+    }];
 }
 
 - (void)collectBtnSelected {

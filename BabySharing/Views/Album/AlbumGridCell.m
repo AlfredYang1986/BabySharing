@@ -110,9 +110,11 @@
 }
 
 - (void)setShowingPhotoWithName:(NSString*)photo_name {
+    NSLog(@"MonkeyHengLog: %@ === %@", @"photo_name", photo_name);
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
     NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"relase_imge_default"] ofType:@"png"];
+    [self setImage:[UIImage imageNamed:filePath]];
     UIImage* userImg = [TmpFileStorageModel enumImageWithName:photo_name withDownLoadFinishBolck:^(BOOL success, UIImage *user_img) {
         if (success) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -125,9 +127,9 @@
             NSLog(@"down load owner image %@ failed", photo_name);
         }
     }];
-    if (userImg == nil) {
-        userImg = [UIImage imageNamed:filePath];
+    if (userImg != nil) {
+        [self setImage:userImg];
+//        userImg = [UIImage imageNamed:filePath];
     }
-    [self setImage:userImg];
 }
 @end

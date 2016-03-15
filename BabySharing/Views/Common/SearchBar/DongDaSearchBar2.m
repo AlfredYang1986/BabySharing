@@ -10,6 +10,7 @@
 
 @implementation DongDaSearchBar2 {
     CGSize sz;
+    UILabel *placeLabel;
 }
 
 @synthesize textField = _textField;
@@ -44,12 +45,13 @@
     return img;
 }
 
-- (UITextField*)getTextFiled {
+- (UITextField *)getTextFiled {
     
     if (_textField == nil) {
         for (UIView* v in self.subviews.firstObject.subviews) {
             if ( [v isKindOfClass: [UITextField class]] ) {
-                _textField = (UITextField*)v;
+                _textField = (UITextField *)v;
+                _textField.leftView = nil;
                 break;
             }
         }
@@ -58,7 +60,7 @@
     return _textField;
 }
 
-- (UIButton*)getCancelBtn {
+- (UIButton *)getCancelBtn {
     if (_cancleBtn == nil) {
         for (UIView* v in self.subviews.firstObject.subviews) {
             if ( [v isKindOfClass: [UIButton class]] ) {
@@ -82,6 +84,20 @@
     }
 }
 
+- (UILabel *)getPlaceLabel {
+    
+    if (placeLabel == nil) {
+        for (UIView* v in self.textField.subviews) {
+            if ( [v isKindOfClass: [UILabel class]] ) {
+                placeLabel = (UILabel *)v;
+                break;
+            }
+        }
+    }
+    
+    return placeLabel;
+}
+
 - (void)layoutSubviews {
     [super layoutSubviews];
    
@@ -92,8 +108,12 @@
    
     CGFloat ver_margin = (height - sz.height) / 2;
     CGFloat textfield_width = width - CONTENT_MARGIN * 2 - TEXTFIELD_BTN_MARGIN_BETWEEN - sz.width;
+    
+    [UIView performWithoutAnimation:^{
+        self.textField.font = [UIFont systemFontOfSize:12];
+        self.textField.frame = CGRectMake(CONTENT_MARGIN, ver_margin, textfield_width, sz.height);
+        self.cancleBtn.frame = CGRectMake(CONTENT_MARGIN + textfield_width + TEXTFIELD_BTN_MARGIN_BETWEEN, ver_margin, sz.width, sz.height);
+    }];
 
-    self.textField.frame = CGRectMake(CONTENT_MARGIN, ver_margin, textfield_width, sz.height);
-    self.cancleBtn.frame = CGRectMake(CONTENT_MARGIN + textfield_width + TEXTFIELD_BTN_MARGIN_BETWEEN, ver_margin, sz.width, sz.height);
 }
 @end

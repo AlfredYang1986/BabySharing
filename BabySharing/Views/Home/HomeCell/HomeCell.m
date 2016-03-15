@@ -83,7 +83,7 @@
         [self.contentView addSubview:_descriptionLabel];
         
         praiseImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
-        praiseImage.image = [UIImage imageNamed:[resourceBundle pathForResource:@"home_like" ofType:@"png"]];
+        praiseImage.image = [UIImage imageNamed:[resourceBundle pathForResource:@"home_like_default" ofType:@"png"]];
         [self.contentView addSubview:praiseImage];
         
         [self.contentView addSubview:praiseImage];
@@ -286,6 +286,8 @@
     }
     
     _gpuImageView.hidden = YES;
+    
+    praiseImage.image = self.content.isLike.integerValue == 0 ? [UIImage imageNamed:[resourceBundle pathForResource:@"home_like_default" ofType:@"png"]] : [UIImage imageNamed:[resourceBundle pathForResource:@"home_like_like" ofType:@"png"]] ;
 }
 
 - (void)mainImageTap {
@@ -329,6 +331,27 @@
 
 - (void)praiseImageTap {
     NSLog(@"给了个赞");
+    if (self.content.isLike.integerValue == 1) {
+        [_delegate didSelectNotLikeBtn:_content complete:^(BOOL success) {
+            if (!success) {
+                [[[UIAlertView alloc] initWithTitle:@"通知" message:@"由于某些不可抗力，出现了错误" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil] show];
+            } else {
+                NSString *bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
+                NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+                praiseImage.image = [UIImage imageNamed:[resourceBundle pathForResource:@"home_like_default" ofType:@"png"]];
+            }
+        }];
+    } else {
+        [_delegate didSelectLikeBtn:_content complete:^(BOOL success) {
+            if (!success) {
+                [[[UIAlertView alloc] initWithTitle:@"通知" message:@"由于某些不可抗力，出现了错误" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil] show];
+            } else {
+                NSString *bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
+                NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+                praiseImage.image = [UIImage imageNamed:[resourceBundle pathForResource:@"home_like_like" ofType:@"png"]];
+            }
+        }];
+    }
 }
 
 - (void)jionGroupTap {

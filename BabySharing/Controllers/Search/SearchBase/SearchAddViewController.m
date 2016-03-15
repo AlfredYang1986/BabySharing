@@ -8,6 +8,7 @@
 
 #import "SearchAddViewController.h"
 #import "DongDaSearchBar2.h"
+#import "Tools.h"
 
 @interface SearchAddViewController ()
 @property (weak, nonatomic) IBOutlet UIView *bkView;
@@ -26,29 +27,41 @@
 
 - (void)viewDidLoad {
 //    _bkView.backgroundColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
+    [super viewDidLoad];
     _bkView.backgroundColor = [UIColor whiteColor];
 
+    self.view.backgroundColor = [Tools colorWithRED:242 GREEN:242 BLUE:242 ALPHA:1.0];
     _searchBar.delegate = _delegate;
     _queryView.dataSource = _delegate;
     _queryView.delegate = _delegate;
+    UIView *line1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 1)];
+    line1.backgroundColor = [Tools colorWithRED:155.0 GREEN:155.0 BLUE:155.0 ALPHA:0.15];
+    [_queryView addSubview:line1];
+    
+    UIView *line2 = [[UIView alloc] initWithFrame:CGRectMake(0, 52, [UIScreen mainScreen].bounds.size.width + 20, 1)];
+    line2.backgroundColor = [Tools colorWithRED:155.0 GREEN:155.0 BLUE:155.0 ALPHA:0.35];
+    [_searchBar addSubview:line2];
     
     _searchBar.showsCancelButton = YES;
-    _searchBar.placeholder = @"搜索角色标签";
+    _searchBar.placeholder = @"4-14个字节，限中英文、数字、表情";
     [_searchBar becomeFirstResponder];
     
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
-    _searchBar.bounds = CGRectMake(0, 0, width + 10, 53);
-//    _searchBar.sb_bg = [UIColor colorWithWhite:0.1098 alpha:1.f];
+    [UIView performWithoutAnimation:^{
+        _searchBar.bounds = CGRectMake(0, 0, width + 10, 53);
+    }];
     _searchBar.sb_bg = [UIColor whiteColor];
     _searchBar.textField.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
     _searchBar.textField.borderStyle = UITextBorderStyleRoundedRect;
     _searchBar.textField.clearButtonMode = UITextFieldViewModeWhileEditing;
     [_searchBar.cancleBtn setTitleColor:[UIColor colorWithWhite:1.f alpha:1.f] forState:UIControlStateNormal];
     [_searchBar.cancleBtn setTitleColor:[UIColor colorWithWhite:1.f alpha:1.f] forState:UIControlStateDisabled];
-    _searchBar.cancleBtn.backgroundColor = [UIColor colorWithRed:0.9686 green:0.7294 blue:0.1961 alpha:1.f];
+    _searchBar.cancleBtn.backgroundColor = [UIColor colorWithRed:70.0 / 255.0 green:219.0 / 255.0 blue:202.0 / 255.0 alpha:1.f];
     _searchBar.cancleBtn.layer.cornerRadius = 5.f;
+    [_searchBar.cancleBtn setTitle:@"添加" forState:UIControlStateNormal];
     _searchBar.cancleBtn.clipsToBounds = YES;
     _searchBar.cancleBtn.titleLabel.font = [UIFont systemFontOfSize:14.f];
+    
     
     [_searchBar setPostLayoutSize:CGSizeMake(61, 30)];
     
@@ -57,6 +70,7 @@
     
     UILabel* lb = [[UILabel alloc]init];
     lb.text = [_delegate getControllerTitle];
+    lb.textColor = [Tools colorWithRED:74.0 GREEN:74.0 BLUE:74.0 ALPHA:1.0];
     lb.font = [UIFont systemFontOfSize:18.f];
     [lb sizeToFit];
     lb.textColor = [UIColor colorWithWhite:0.2902 alpha:1.f];

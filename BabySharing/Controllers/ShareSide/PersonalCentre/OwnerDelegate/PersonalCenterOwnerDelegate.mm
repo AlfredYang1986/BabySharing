@@ -17,6 +17,7 @@
 #import "CellConstructParameters.h"
 #import "CollectionQueryModel.h"
 #import "Define.h"
+#import "PostDefine.h"
 
 @interface PersonalCenterOwnerDelegate ()
 
@@ -94,15 +95,26 @@
         NSArray* arr_tmp = [querydata objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(row * PHOTO_PER_LINE, PHOTO_PER_LINE)]];
         NSMutableArray* arr_content = [[NSMutableArray alloc] initWithCapacity:PHOTO_PER_LINE];
         for (QueryContent* item in arr_tmp) {
-            [arr_content addObject:((QueryContentItem*)item.items.allObjects.firstObject).item_name];
+            for (QueryContentItem *aaa in item.items) {
+                if (aaa.item_type.unsignedIntegerValue != PostPreViewMovie) {
+                    [arr_content addObject:aaa.item_name];
+                    break;
+                }
+            }
+//            [arr_content addObject:((QueryContentItem*)item.items.allObjects.firstObject).item_name];
         }
         [cell setUpContentViewWithImageNames:arr_content atLine:row andType:AlbumControllerTypePhoto];
-    }
-    @catch (NSException *exception) {
+    } @catch (NSException *exception) {
         NSArray* arr_tmp = [querydata objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(row * PHOTO_PER_LINE, querydata.count - row * PHOTO_PER_LINE)]];
         NSMutableArray* arr_content = [[NSMutableArray alloc]initWithCapacity:PHOTO_PER_LINE];
         for (QueryContent* item in arr_tmp) {
-            [arr_content addObject:((QueryContentItem *)item.items.allObjects.firstObject).item_name];
+            for (QueryContentItem *aaa in item.items) {
+                if (aaa.item_type.unsignedIntegerValue != PostPreViewMovie) {
+                    [arr_content addObject:aaa.item_name];
+                    break;
+                }
+            }
+//            [arr_content addObject:((QueryContentItem *)item.items.allObjects.firstObject).item_name];
         }
         [cell setUpContentViewWithImageNames:arr_content atLine:row andType:AlbumControllerTypePhoto];
     }
@@ -271,7 +283,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSInteger index = [_delegate getCurrentSegIndex];
-    CellConstructParameters* para = [[CellConstructParameters alloc]initWithTableView:tableView atIndex:indexPath];
+    CellConstructParameters* para = [[CellConstructParameters alloc] initWithTableView:tableView atIndex:indexPath];
     SuppressPerformSelectorLeakWarning([self performSelector:cell_constructor_func[index] withObject:para]);
      return para.cell;
 }

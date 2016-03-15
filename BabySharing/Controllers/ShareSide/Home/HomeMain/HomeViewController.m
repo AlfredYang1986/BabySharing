@@ -205,25 +205,6 @@
                     [tableView.mj_footer endRefreshing];
                 }];
             }];
-            
-            // 下拉刷新
-//            tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-//                [_delegate collectData:^(NSArray *data) {
-//                    [queryView reloadData];
-//                    [tableView.mj_header endRefreshing];
-//                }];
-//            }];
-//            
-//            // 设置自动切换透明度(在导航栏下面自动隐藏)
-//            tableView.mj_header.automaticallyChangeAlpha = YES;
-//            
-//            // 上拉刷新
-//            tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-//                [_delegate appendData:^(NSArray *data) {
-//                    [queryView reloadData];
-//                    [tableView.mj_footer endRefreshing];
-//                }];
-//            }];
         }
         
         [self.view addSubview:queryView];
@@ -533,14 +514,17 @@
 
 - (void)layoutTableViews {
     CGFloat screen_width = [UIScreen mainScreen].bounds.size.width;
-    bkView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, screen_width, 64)];
+    bkView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screen_width, 64)];
     bkView.backgroundColor = [UIColor whiteColor];
     
     CALayer* line = [CALayer layer];
     line.borderWidth = 1.f;
     line.borderColor = [UIColor colorWithRed:0.5922 green:0.5922 blue:0.5922 alpha:0.25].CGColor;
-    line.frame = CGRectMake(0, 64, screen_width, 1);
+    line.frame = CGRectMake(0, 63, screen_width, 1);
     [bkView.layer addSublayer:line];
+//    UIView* line = [[UIView alloc] initWithFrame:CGRectMake(0, 63, screen_width, 2)];
+//    line.backgroundColor = [UIColor colorWithRed:0.5922 green:0.5922 blue:0.5922 alpha:0.25];
+//    [bkView addSubview:line];
     
     [self.view addSubview:bkView];
     [self.view bringSubviewToFront:bkView];
@@ -591,19 +575,20 @@
 }
 
 #pragma mark -- QueryCellActionProtocol
-- (void)didSelectLikeBtn:(id)content {
+- (void)didSelectLikeBtn:(id)content complete:(complete)complete{
     NSLog(@"collect for this user");
     QueryContent* cur = (QueryContent*)content;
     NSLog(@"like post id: %@", cur.content_post_id);
     
     AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     [delegate.pm postLikeToServiceWithPostID:cur.content_post_id withFinishBlock:^(BOOL success, QueryContent *content) {
-        if (success) {
-            NSLog(@"like post success");
-            NSString* msg = @"like post success";
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success" message:msg delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-            [alert show];
-        }
+//        if (success) {
+//            NSLog(@"like post success");
+//            NSString* msg = @"like post success";
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success" message:msg delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+//            [alert show];
+//        }
+        complete(success);
     }];
 }
 
@@ -657,7 +642,7 @@
     }];
 }
 
-- (void)didSelectNotLikeBtn:(id)content {
+- (void)didSelectNotLikeBtn:(id)content complete:(complete)complete{
     
 }
 
@@ -745,7 +730,7 @@
 #pragma mark -- table view delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [_delegate count];
-//    return 100;
+//    return 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -460,7 +460,11 @@
 }
 
 - (NSString*)getControllerTitle {
-    return @"添加你的角色";
+    return @"添加角色";
+}
+
+- (NSString *)getPlaceHolder {
+    return @"说说你是谁";
 }
 
 - (UINavigationController*)getViewController {

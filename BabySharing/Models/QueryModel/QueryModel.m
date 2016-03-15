@@ -133,7 +133,6 @@
     
     if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
         NSArray* reVal = [result objectForKey:@"result"];
-        
         _querydata = [QueryContent appendLocalQueryDataInContext:_doc.managedObjectContext withData:reVal];
         
     } else {

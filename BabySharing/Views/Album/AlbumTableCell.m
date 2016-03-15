@@ -52,6 +52,7 @@
             continue;
         
         AlbumGridCell *tmp = [[AlbumGridCell alloc] initWithFrame:CGRectMake(index * (step_width + _marign_between) + _marign_between, _marign_between, step_width, height)];
+        tmp.backgroundColor = [UIColor redColor];
         tmp.cell_cor_radius = _cell_cor_radius;
         tmp.grid_border_color = _grid_border_color;
         tmp.userInteractionEnabled = YES;
