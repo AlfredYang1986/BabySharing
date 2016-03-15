@@ -233,12 +233,8 @@
 
 #define CODE_DIG_COUNT          4
 - (void)phoneTextFieldChanged:(UITextField*)tf {
-<<<<<<< HEAD
 //    if (!([phone_area.text isEqualToString:@""] || [confirm_area.text isEqualToString:@""])) {
     if (![phone_area.text isEqualToString:@""] && confirm_area.text.length >= CODE_DIG_COUNT) {
-=======
-    if (![phone_area.text isEqualToString:@""] && confirm_area.text.length >= 5) {
->>>>>>> origin/master
         next_btn.enabled = YES;
     } else {
         next_btn.enabled = NO;
@@ -252,12 +248,8 @@
 }
 
 - (void)confirmCodeTextFieldChanged:(UITextField*)tf {
-<<<<<<< HEAD
 //    if (!([phone_area.text isEqualToString:@""] || [confirm_area.text isEqualToString:@""])) {
     if (![phone_area.text isEqualToString:@""] && confirm_area.text.length >= CODE_DIG_COUNT) {
-=======
-    if (![phone_area.text isEqualToString:@""] && confirm_area.text.length >= 5) {
->>>>>>> origin/master
         next_btn.enabled = YES;
     } else {
         next_btn.enabled = NO;
