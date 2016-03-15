@@ -198,7 +198,7 @@ enum DisplaySide {
 }
 
 - (BOOL)isValidPhoneCode:(NSString*)phoneCode {
-    return phoneCode.length == 5;
+    return phoneCode.length == 4;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

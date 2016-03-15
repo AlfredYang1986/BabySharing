@@ -227,9 +227,10 @@
     self.bounds = CGRectMake(0, 0, width, height);
 }
 
+#define CODE_DIG_COUNT          4
 - (void)phoneTextFieldChanged:(UITextField*)tf {
 //    if (!([phone_area.text isEqualToString:@""] || [confirm_area.text isEqualToString:@""])) {
-    if (![phone_area.text isEqualToString:@""] && confirm_area.text.length >= 5) {
+    if (![phone_area.text isEqualToString:@""] && confirm_area.text.length >= CODE_DIG_COUNT) {
         next_btn.enabled = YES;
     } else {
         next_btn.enabled = NO;
@@ -250,7 +251,7 @@
 
 - (void)confirmCodeTextFieldChanged:(UITextField*)tf {
 //    if (!([phone_area.text isEqualToString:@""] || [confirm_area.text isEqualToString:@""])) {
-    if (![phone_area.text isEqualToString:@""] && confirm_area.text.length >= 5) {
+    if (![phone_area.text isEqualToString:@""] && confirm_area.text.length >= CODE_DIG_COUNT) {
         next_btn.enabled = YES;
     } else {
         next_btn.enabled = NO;
@@ -258,7 +259,7 @@
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    if (textField == confirm_area && confirm_area.text.length >= 5 && ![string isEqualToString:@""]) return NO;
+    if (textField == confirm_area && confirm_area.text.length >= CODE_DIG_COUNT && ![string isEqualToString:@""]) return NO;
     else return YES;
 }
 

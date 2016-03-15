@@ -256,10 +256,12 @@
     
     [dic setValue:[NSNumber numberWithInteger:self.gender] forKey:@"gender"];
     
+    [dic setValue:[Tools getDeviceUUID] forKey:@"uuid"];
+    [dic setValue:[NSNumber numberWithInt:1] forKey:@"refresh_token"];
+    
     if ([[_login_attr allKeys] containsObject:@"phoneNo"]) {
         [dic setValue:[_login_attr objectForKey:@"phoneNo"] forKey:@"phoneNo"];
         [dic setValue:[NSNumber numberWithInt:1] forKey:@"create"];
-        [dic setValue:[Tools getDeviceUUID] forKey:@"uuid"];
     }
     
     if (isChangeImg) {
