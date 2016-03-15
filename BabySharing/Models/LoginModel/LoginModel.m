@@ -168,11 +168,12 @@
     }
 }
 
-- (LoginModelConfirmResult)sendConfirrmCode:(NSString*)code ToPhone:(NSString*) phoneNum withToken:(NSString*)reg_token toResult:(NSDictionary**)reVal {
+- (LoginModelConfirmResult)sendConfirmCode:(NSString*)code ToPhone:(NSString*) phoneNum withToken:(NSString*)reg_token toResult:(NSDictionary**)reVal {
     
     NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
     [dic setValue:phoneNum forKey:@"phoneNo"];
     [dic setValue:reg_token forKey:@"reg_token"];
+    [dic setValue:[Tools getDeviceUUID] forKey:@"uuid"];
     [dic setValue:code forKey:@"code"];
    
     NSError * error = nil;
@@ -689,6 +690,7 @@
     [dic setValue:@"" forKey:@"provide_screen_photo"];
     [dic setValue:provide_user_id forKey:@"provide_uid"];
     [dic setValue:provide_token forKey:@"provide_token"];
+    [dic setValue:[Tools getDeviceUUID] forKey:@"uuid"];
     
     NSError * error = nil;
     NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
@@ -1302,8 +1304,10 @@
     dispatch_queue_t queue = dispatch_queue_create("get_userInfo", nil);
     dispatch_async(queue, ^{
         NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
-        [dic setValue:self.current_auth_token forKey:@"query_auth_token"];
-        [dic setValue:self.current_user_id forKey:@"query_user_id"];
+//        [dic setValue:self.current_auth_token forKey:@"query_auth_token"];
+//        [dic setValue:self.current_user_id forKey:@"query_user_id"];
+        [dic setValue:self.current_auth_token forKey:@"auth_token"];
+        [dic setValue:self.current_user_id forKey:@"user_id"];
         [dic setValue:self.current_user_id forKey:@"owner_user_id"];
         
         NSError * error = nil;

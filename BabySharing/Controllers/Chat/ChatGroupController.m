@@ -146,8 +146,10 @@
     dispatch_async(up, ^{
         
         NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
-        [dic setValue:_lm.current_auth_token forKey:@"query_auth_token"];
-        [dic setValue:_lm.current_user_id forKey:@"query_user_id"];
+//        [dic setValue:_lm.current_auth_token forKey:@"query_auth_token"];
+//        [dic setValue:_lm.current_user_id forKey:@"query_user_id"];
+        [dic setValue:_lm.current_auth_token forKey:@"auth_token"];
+        [dic setValue:_lm.current_user_id forKey:@"user_id"];
         [dic setValue:_founder_id forKey:@"owner_user_id"];
         
         NSError * error = nil;

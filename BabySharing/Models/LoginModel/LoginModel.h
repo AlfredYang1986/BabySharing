@@ -53,7 +53,7 @@ typedef void(^requestUserInfoSeccess)(NSDictionary *data);
 - (id)init;
 
 - (BOOL)sendLoginRequestToPhone:(NSString*) phoneNum;
-- (LoginModelConfirmResult)sendConfirrmCode:(NSString*)code ToPhone:(NSString*) phoneNum withToken:(NSString*)reg_token toResult:(NSDictionary**)reVal;
+- (LoginModelConfirmResult)sendConfirmCode:(NSString*)code ToPhone:(NSString*) phoneNum withToken:(NSString*)reg_token toResult:(NSDictionary**)reVal;
 - (BOOL)sendScreenName:(NSString*)screen_name forToken:(NSString*)auth_token andUserID:(NSString*)user_id;
 - (BOOL)updateUserProfile:(NSDictionary*)attrs;
 - (BOOL)updateAndCreateUserProfile:(NSDictionary*)attrs andUserId:(NSString**)new_user_id;

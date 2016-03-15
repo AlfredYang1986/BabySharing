@@ -397,7 +397,7 @@ enum DisplaySide {
         [alert show];
     } else {
         NSDictionary *tmp = nil;//[[NSDictionary alloc] init];
-        LoginModelConfirmResult reVal = [self.lm sendConfirrmCode:code ToPhone:phoneNo withToken:token.reg_token toResult:&tmp];
+        LoginModelConfirmResult reVal = [self.lm sendConfirmCode:code ToPhone:phoneNo withToken:token.reg_token toResult:&tmp];
         if (reVal == LoginModelResultSuccess) {
             [self performSegueWithIdentifier:@"loginSuccessSegue" sender:tmp];
             NSLog(@"login success");

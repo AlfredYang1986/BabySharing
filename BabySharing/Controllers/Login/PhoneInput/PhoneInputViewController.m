@@ -63,7 +63,7 @@
         [alert show];
     } else {
         NSDictionary* tmp =[[NSDictionary alloc]init];
-        LoginModelConfirmResult reVal = [self.lm sendConfirrmCode:code ToPhone:_inputing_phone_number withToken:token.reg_token toResult:&tmp];
+        LoginModelConfirmResult reVal = [self.lm sendConfirmCode:code ToPhone:_inputing_phone_number withToken:token.reg_token toResult:&tmp];
         result = tmp;
         if (reVal == LoginModelResultSuccess) {
             [self performSegueWithIdentifier:@"loginSuccessSegue" sender:nil];

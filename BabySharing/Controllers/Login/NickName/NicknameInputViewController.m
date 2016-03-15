@@ -21,6 +21,8 @@
 #import "RemoteInstance.h"
 #import "OBShapedButton.h"
 
+#import "Tools.h"
+
 #define NEXT_BTN_MARGIN_BOTTOM  80
 
 #define SCREEN_WIDTH                            [UIScreen mainScreen].bounds.size.width
@@ -257,6 +259,7 @@
     if ([[_login_attr allKeys] containsObject:@"phoneNo"]) {
         [dic setValue:[_login_attr objectForKey:@"phoneNo"] forKey:@"phoneNo"];
         [dic setValue:[NSNumber numberWithInt:1] forKey:@"create"];
+        [dic setValue:[Tools getDeviceUUID] forKey:@"uuid"];
     }
     
     if (isChangeImg) {

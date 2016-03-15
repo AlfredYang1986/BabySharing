@@ -237,8 +237,10 @@
     dispatch_queue_t up = dispatch_queue_create("Get Profile Details", nil);
     dispatch_async(up, ^{
         NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
-        [dic setValue:_lm.current_auth_token forKey:@"query_auth_token"];
-        [dic setValue:_lm.current_user_id forKey:@"query_user_id"];
+//        [dic setValue:_lm.current_auth_token forKey:@"query_auth_token"];
+//        [dic setValue:_lm.current_user_id forKey:@"query_user_id"];
+        [dic setValue:_lm.current_auth_token forKey:@"auth_token"];
+        [dic setValue:_lm.current_user_id forKey:@"user_id"];
         [dic setValue:_message.sender.name forKey:@"owner_user_id"];
         
         NSError * error = nil;
