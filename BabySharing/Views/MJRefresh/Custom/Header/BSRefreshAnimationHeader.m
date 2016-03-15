@@ -133,6 +133,7 @@
 }
 
 - (void)setLastUpdatedTimeKey:(NSString *)lastUpdatedTimeKey {
-    
+    [super setLastUpdatedTimeKey:lastUpdatedTimeKey];
+    self.lastUpdatedTimeLabel.text = @"";
 }
 @end

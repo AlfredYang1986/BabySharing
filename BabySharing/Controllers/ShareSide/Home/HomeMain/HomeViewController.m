@@ -205,6 +205,25 @@
                     [tableView.mj_footer endRefreshing];
                 }];
             }];
+            
+            // 下拉刷新
+//            tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+//                [_delegate collectData:^(NSArray *data) {
+//                    [queryView reloadData];
+//                    [tableView.mj_header endRefreshing];
+//                }];
+//            }];
+//            
+//            // 设置自动切换透明度(在导航栏下面自动隐藏)
+//            tableView.mj_header.automaticallyChangeAlpha = YES;
+//            
+//            // 上拉刷新
+//            tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+//                [_delegate appendData:^(NSArray *data) {
+//                    [queryView reloadData];
+//                    [tableView.mj_footer endRefreshing];
+//                }];
+//            }];
         }
         
         [self.view addSubview:queryView];

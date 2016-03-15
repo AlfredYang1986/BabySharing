@@ -107,6 +107,9 @@
         if (oldState != MJRefreshStateRefreshing) return;
         
         // 保存刷新时间
+//        if (self.lastUpdatedTimeKey == nil) {
+//            self.lastUpdatedTimeKey = @"lastTime";
+//        }
         [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:self.lastUpdatedTimeKey];
         [[NSUserDefaults standardUserDefaults] synchronize];
         

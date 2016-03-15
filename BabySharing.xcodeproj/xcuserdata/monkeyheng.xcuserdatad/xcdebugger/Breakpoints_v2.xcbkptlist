@@ -19,13 +19,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BabySharing/Views/Home/HomeCell/HomeCell.m"
-            timestampString = "479700527.930155"
+            filePath = "BabySharing/Views/MJRefresh/Base/MJRefreshHeader.m"
+            timestampString = "479701602.660254"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "298"
-            endingLineNumber = "298"
-            landmarkName = "-mainImageTap"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "-prepare"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

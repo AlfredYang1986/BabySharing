@@ -144,9 +144,9 @@
         
         self.contentView.layer.cornerRadius = 19;
         self.contentView.layer.shadowColor = [UIColor blackColor].CGColor;
-        self.contentView.layer.shadowOffset = CGSizeMake(1, 1);
+        self.contentView.layer.shadowOffset = CGSizeMake(0, 0);
         self.contentView.layer.shadowOpacity = 0.3;
-        self.contentView.layer.shadowRadius = 1;
+        self.contentView.layer.shadowRadius = 3;
         self.contentView.layer.shouldRasterize = YES;
         self.contentView.layer.rasterizationScale = [UIScreen mainScreen].scale;
         self.backgroundColor = [Tools colorWithRED:242.0 GREEN:242.0 BLUE:242.0 ALPHA:1.0];
