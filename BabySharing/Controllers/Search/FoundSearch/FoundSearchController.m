@@ -9,6 +9,7 @@
 #import "FoundSearchController.h"
 #import "SearchSegView2.h"
 
+#import "Define.h"
 #import "AppDelegate.h"
 #import "FoundSearchModel.h"
 
@@ -51,7 +52,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    _seg = [[SearchSegView2 alloc]initWithFrame:CGRectMake(0, 0, 100, 200)];
+    _seg = [[SearchSegView2 alloc] initWithFrame:CGRectMake(0, 0, 100, 200)];
     [_seg addItemWithTitle:@"标签"];
     [_seg addItemWithTitle:@"角色"];
     _seg.delegate = self;
@@ -61,6 +62,12 @@
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     _seg.frame = CGRectMake(0, 0, width, SEG_BAR_HEIGHT);
     _seg.backgroundColor = [UIColor whiteColor];
+//    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, SEG_BAR_HEIGHT, width, 1)];
+//    line.backgroundColor = [UIColor re];
+//    [_seg addSubview:line];
+    
+    
+
     
 //    _queryView.scrollEnabled = NO;
     _queryView.backgroundColor = [UIColor whiteColor]; //[UIColor colorWithWhite:0.9490 alpha:1.f];
@@ -76,7 +83,7 @@
     [self.view addSubview:bkView];
     [self.view bringSubviewToFront:bkView];
 
-    tagDelegate = [[FoundSearchTagDeleage alloc]init];
+    tagDelegate = [[FoundSearchTagDeleage alloc] init];
     AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
     tagDelegate.fm = app.fm;
     tagDelegate.controller = self;
@@ -91,6 +98,15 @@
     
     _searchBar.delegate = self;
     _searchBar.showsCancelButton = YES;
+    _searchBar.showsCancelButton = YES;
+    for(UIView *view in  [[[_searchBar subviews] objectAtIndex:0] subviews]) {
+        if([view isKindOfClass:[NSClassFromString(@"UINavigationButton") class]]) {
+            UIButton * cancel =(UIButton *)view;
+            [cancel setTitle:@"取消" forState:UIControlStateNormal];
+            [cancel  setTintColor:[UIColor blackColor]];
+            [cancel.titleLabel setTextColor:[UIColor blackColor]];
+        }
+    }
     _searchBar.placeholder = @"搜索";
     _searchBar.backgroundColor = [UIColor clearColor];
     UIImageView* iv = [[UIImageView alloc] initWithImage:[self imageWithColor:[UIColor whiteColor] size:CGSizeMake(width, SEARCH_BAR_HEIGHT)]];
@@ -110,17 +126,18 @@
     }
     
     CALayer* layer = [CALayer layer];
-    layer.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.25].CGColor;
+    layer.borderColor = UpLineColor.CGColor;
+//    layer.borderColor = [UIColor redColor].CGColor;
     layer.borderWidth = 1.f;
     layer.frame = CGRectMake(0, STATUS_BAR_HEIGHT + SEARCH_BAR_HEIGHT + SEG_BAR_HEIGHT, [UIScreen mainScreen].bounds.size.width, 1);
     [self.view.layer addSublayer:layer];
    
     CALayer* line = [CALayer layer];
-    line.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.10].CGColor;
+    line.borderColor = DownLineColor.CGColor;
+//    line.borderColor = [UIColor redColor].CGColor;
     line.borderWidth = 1.f;
     line.frame = CGRectMake(0, STATUS_BAR_HEIGHT + SEARCH_BAR_HEIGHT + SEG_BAR_HEIGHT + MARGIN - 1, [UIScreen mainScreen].bounds.size.width, 1);
     [self.view.layer addSublayer:line];
-    
     [_searchBar becomeFirstResponder];
     _queryView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }

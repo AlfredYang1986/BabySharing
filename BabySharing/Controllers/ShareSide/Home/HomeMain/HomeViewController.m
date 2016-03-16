@@ -32,6 +32,7 @@
 #import "ContentCardView.h"
 #import "HomeCell.h"
 #import "MJRefresh.h"
+#import "Define.h"
 
 #define HEADER_MARGIN_TO_SCREEN 10.5
 #define CONTENT_START_POINT     71
@@ -183,6 +184,9 @@
         queryView.dataSource = self;
         queryView.delegate = self;
         queryView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 12.5)];
+        footView.backgroundColor = Background;
+        [queryView setTableFooterView:footView];
        
         if (!_isPushed) {
             __unsafe_unretained UITableView *tableView = queryView;
@@ -749,6 +753,18 @@
         return rowHeight;
 //    }
 }
+
+//- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+//    UIView *view = [[UIView alloc] init];
+//    view.backgroundColor = [UIColor redColor];
+//    return view;
+//}
+//
+//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+//    return 10;
+//}
+//
+//- tab
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 //    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"defatult"];

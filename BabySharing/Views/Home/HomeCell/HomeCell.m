@@ -158,7 +158,7 @@
         self.contentView.layer.cornerRadius = 8;
         self.contentView.layer.shadowColor = [UIColor blackColor].CGColor;
         self.contentView.layer.shadowOffset = CGSizeMake(0, 0);
-        self.contentView.layer.shadowOpacity = 0.3;
+        self.contentView.layer.shadowOpacity = 0.25;
         self.contentView.layer.shadowRadius = 2;
         self.contentView.layer.shouldRasterize = YES;
         self.contentView.layer.rasterizationScale = [UIScreen mainScreen].scale;
@@ -177,11 +177,12 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
 //    if (self.indexPath.row == 0) {
-//        self.contentView.frame = CGRectMake(12.5, 10, CGRectGetWidth(self.contentView.frame) - 25, CGRectGetHeight(self.contentView.frame) - 15);
+//        self.contentView.frame = CGRectMake(12.5, 10, CGRectGetWidth(self.contentView.frame) - 25, CGRectGetHeight(self.contentView.frame) - 18.5);
 //    } else {
-//        self.contentView.frame = CGRectInset(self.contentView.frame, 12.5, 5);
+//        self.contentView.frame = CGRectInset(self.contentView.frame, 12.5, 12.5 / 2);
 //    }
-    self.contentView.frame = CGRectInset(self.contentView.frame, 10, 5);
+    self.contentView.frame = CGRectMake(12.5, 10.5, CGRectGetWidth(self.contentView.frame) - 25, CGRectGetHeight(self.contentView.frame) - 12.5);
+//    self.contentView.frame = CGRectInset(self.contentView.frame, 12.5, 6);
     _ownerImage.frame = CGRectMake(12, 10, 28, 28);
     
     [_ownerNameLable sizeToFit];

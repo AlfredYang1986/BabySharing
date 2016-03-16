@@ -63,13 +63,10 @@
         
     //    [self.navigationController pushViewController:svc animated:YES];
     [_controller.navigationController pushViewControllerRetro:svc];
-
-
 }
 
 - (UITableViewCell*)queryHotTagCellInTableView:(UITableView*)tableView {
     FoundHotTagsCell* cell = [tableView dequeueReusableCellWithIdentifier:@"Hot Tag Cell"];
-    
     if (cell == nil) {
         cell = [[FoundHotTagsCell alloc]init];
     }
@@ -111,18 +108,10 @@
     FoundSearchHeader* header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"found header"];
     
     if (header == nil) {
-        header = [[FoundSearchHeader alloc]initWithReuseIdentifier:@"found header"];
+        header = [[FoundSearchHeader alloc] initWithReuseIdentifier:@"found header"];
     }
     
-    //    if (section == 0) {
     if (_fm.previewDic.count == 0) {
-        //        NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
-        //        NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-        //        NSString* filepath = [resourceBundle pathForResource:@"found_hot_tag" ofType:@"png"];
-        //        UIImage* img = [UIImage imageNamed:filepath];
-        //        header.headImg.image = img;
-        //        header.headImg.frame = CGRectMake(header.headImg.frame.origin.x, header.headImg.frame.origin.y, 25, 25);
-        //        header.headImg.contentMode = UIViewContentModeScaleAspectFit;
         header.headLabell.text = @"热门标签";
         header.headLabell.textColor = [UIColor colorWithWhite:0.3059 alpha:1.f];
         header.headLabell.font = [UIFont systemFontOfSize:14.f];

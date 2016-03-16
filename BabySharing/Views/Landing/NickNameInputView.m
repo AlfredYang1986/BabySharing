@@ -215,14 +215,13 @@
     [self createLabelInRect:rect andTitle:@"角色" andTopMargin:BASICMARGIN + /*2 * */(INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN)];
     tag_text_field = [self createInputAreaInRect:rect andTopMargin:BASICMARGIN + /*2 * */(INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN) andPlaceholder:@"萌妹？辣妈？快来认领！" andPreString:[_delegate getPreRoleTag] andRightImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"dongda_next" ofType:@"png"]] andCallback:@selector(textFieldChanged:) andCancelBtn:NO];
     tag_text_field.frame = CGRectMake(tag_text_field.frame.origin.x, tag_text_field.frame.origin.y, tag_text_field.frame.size.width, tag_text_field.frame.size.height);
-    UIImageView *goTo = [[UIImageView alloc] initWithFrame:CGRectMake(width - AREA_CODE_WIDTH - 2 * INPUT_MARGIN - 40, 0, 45.5, 45.5)];
+    UIImageView *goTo = [[UIImageView alloc] initWithFrame:CGRectMake(width - AREA_CODE_WIDTH - 2 * INPUT_MARGIN - 40, 1, 45.5, 45.5)];
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
     goTo.image = [UIImage imageNamed:[resourceBundle pathForResource:@"next" ofType:@"png"]];
     goTo.contentMode = UIViewContentModeCenter;
     goTo.transform = CGAffineTransformMakeScale(0.7f, 0.7f);
     [tag_text_field addSubview:goTo];
-    
     [self createNextBtnInRect:rect];
 
     CGFloat height = BASICMARGIN + 2 * (INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN) + INPUT_TEXT_FIELD_HEIGHT + LOGIN_BTN_TOP_MARGIN + LOGIN_BTN_HEIGHT + BASICMARGIN;

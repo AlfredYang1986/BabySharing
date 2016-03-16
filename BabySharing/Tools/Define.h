@@ -18,4 +18,5 @@
 #define Blue [UIColor colorWithRed:70.0 / 255.0 green:219.0 / 255.0 blue:209.0 / 255.0 alpha:1.0]
 #define FontColor1 [UIColor colorWithRed:155.0 / 255.0 green:155.0 / 255.0 blue:155.0 / 255.0 alpha:1.0]
 #define Background [UIColor colorWithRed:242.0 / 255.0 green:242.0 / 255.0 blue:242.0 / 255.0 alpha:1.0]
-#define LineColor  [UIColor colorWithRed:0.5922 green:0.5922 blue:0.5922 alpha:0.25]
+#define UpLineColor  [UIColor colorWithRed:0.5922 green:0.5922 blue:0.5922 alpha:0.25]
+#define DownLineColor  [UIColor colorWithRed:0.5922 green:0.5922 blue:0.5922 alpha:0.10]

@@ -137,47 +137,6 @@
     return tmp.title;
 }
 
-//- (void)refreshTitle:(NSDictionary*)lines, ... {
-//    
-//}
-//
-//- (void)addRefreshWithTitle:(NSDictionary*)lines, ... {
-//    va_list params;
-//    va_start(params, lines);
-//    
-//    NSDictionary *line;
-////    FiniteTimeAction *prev = action1;
-//    
-//    while(lines) {
-//        line = va_arg(params, NSDictionary*);
-//        if (line) {
-//            switch (((NSNumber*)[line objectForKey:@"type"]).integerValue) {
-//                case SearchSegLineTypeImg:      // wait for refactoring the code
-//                    
-//                    break;
-//                case SearchSegLineTypeText: {
-//                    
-//                    
-//                    }
-//                    break;
-//                default:
-//                    break;
-//            }
-//        }
-//        else
-//            break;
-//    }
-//    va_end(params);
-//}
-//
-//- (void)addTextLineWithArgs:(NSDictionary*)dic {
-//    CATextLayer* layer = [CATextLayer layer];
-//    layer.string = [dic objectForKey:@"text"];
-//    layer.contentsScale = 2.f;
-//    layer.fontSize = ((NSNumber*)[dic objectForKey:@"fontSize"]).floatValue;
-//    
-//}
-
 - (void)refreshItemTitle:(NSString*)title atIndex:(NSInteger)index {
     id item = [self viewWithTag:index + 1];
     if ([item isKindOfClass:[SearchSegTextTextItem class]]) {

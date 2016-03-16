@@ -11,13 +11,14 @@
 #import "RecommandRoleTag.h"
 #import "FoundHotTagBtn.h"
 #import "Tools.h"
+#import "Define.h"
 
 #define MARGIN                  13
 #define MARGIN_VER              12
 
 // 内部
-#define ICON_WIDTH              11
-#define ICON_HEIGHT             11
+#define ICON_WIDTH              12
+#define ICON_HEIGHT             12
 
 #define TAG_HEIGHT              25
 #define TAG_MARGIN              10
@@ -33,7 +34,6 @@
 @synthesize isDarkTheme = _isDarkTheme;
 @synthesize isHiddenSepline = _isHiddenSepline;
 @synthesize ver_margin = _ver_margin;
-
 @synthesize delegate = _delegate;
 
 - (id)init {
@@ -101,12 +101,12 @@
         label.font = font;
         label.text = tmp; //tmp.tag_name;
 //        label.textColor = _isDarkTheme ? [UIColor whiteColor] : [UIColor brownColor];
-        label.textColor = [Tools colorWithRED:74 GREEN:74 BLUE:74 ALPHA:1.0];
+        label.textColor = TextColor;
         label.frame = CGRectMake(TAG_MARGIN /*+ ICON_WIDTH*/, 0 + 2, sz_font.width, TAG_HEIGHT);
         label.textAlignment = NSTextAlignmentLeft;
         [btn addSubview:label];
         
-        btn.layer.borderColor = _isDarkTheme ?[UIColor whiteColor].CGColor : [UIColor colorWithWhite:0.5922 alpha:1.f].CGColor;
+        btn.layer.borderColor = _isDarkTheme ? [UIColor whiteColor].CGColor : TextColor.CGColor;
         btn.layer.borderWidth = 1.f;
         btn.layer.cornerRadius = TAG_CORDIUS;
         btn.clipsToBounds = YES;
@@ -176,14 +176,24 @@
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
     
-    UIImage* image0 = [UIImage imageNamed:[resourceBundle pathForResource:@"tag_time_dark" ofType:@"png"]];
-    UIImage* image1 = [UIImage imageNamed:[resourceBundle pathForResource:@"tag_location_dark" ofType:@"png"]];
+//    TagTypeLocation,
+//    TagTypeTime,
+//    TagTypeTags,
+//    TagTypeBrand,
+    
+    UIImage* image0 = [UIImage imageNamed:[resourceBundle pathForResource:@"tag_location_dark" ofType:@"png"]];
+    UIImage* image1 = [UIImage imageNamed:[resourceBundle pathForResource:@"tag_time_dark" ofType:@"png"]];
+    UIImage* image2 = [UIImage imageNamed:[resourceBundle pathForResource:@"tag_tag_dark" ofType:@"png"]];
+
     int index = 0;
     CGFloat offset = 0;
     for (RecommandTag* tmp in arr) {
-       
         UIFont* font = [UIFont systemFontOfSize:11.f];
-        CGSize sz_font = [tmp.tag_name sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
+        
+        CGSize size = CGSizeMake(320, 2000); //设置一个行高上限
+        NSDictionary *attribute = @{NSFontAttributeName: font};
+        CGSize sz_font = [tmp.tag_name boundingRectWithSize:size options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attribute context:nil].size;
+//        CGSize sz_font = [tmp.tag_name sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
         CGSize sz = CGSizeMake(TAG_MARGIN + ICON_WIDTH + sz_font.width + TAG_MARGIN, TAG_HEIGHT);
         
 //        UIView* btn = [[UIView alloc]initWithFrame:CGRectMake(0, 0, sz.width, sz.height)];
@@ -191,24 +201,29 @@
         btn.tag_name = tmp.tag_name;
         btn.tag_type = tmp.tag_type.intValue;
         
-        UIImageView* img = [[UIImageView alloc]initWithFrame:CGRectMake(TAG_MARGIN / 2, TAG_MARGIN / 4, ICON_WIDTH, ICON_HEIGHT)];
-        img.center = CGPointMake(TAG_MARGIN / 2 + img.frame.size.width / 2, TAG_HEIGHT / 2);
-        if (tmp.tag_type.integerValue == 0)
+        UIImageView* img = [[UIImageView alloc] initWithFrame:CGRectMake(TAG_MARGIN / 2, TAG_MARGIN / 4, ICON_WIDTH, ICON_HEIGHT)];
+        img.center = CGPointMake(TAG_MARGIN / 2 + img.frame.size.width / 2, TAG_HEIGHT / 2 + 1);
+        if (tmp.tag_type.integerValue == 0) {
             img.image = image0;
-        else
+        } else if (tmp.tag_type.integerValue == 1) {
             img.image = image1;
-        
+        } else {
+            img.image = image2;
+        }
+    
         [btn addSubview:img];
         
         UILabel* label = [[UILabel alloc]init];
         label.font = font;
         label.text = tmp.tag_name;
-        label.textColor = [UIColor colorWithWhite:0.3059 alpha:1.f];
+//        label.textColor = [UIColor colorWithWhite:0.3059 alpha:1.f];
+        label.textColor = TextColor;
         label.frame = CGRectMake(TAG_MARGIN + ICON_WIDTH, 0, sz_font.width, TAG_HEIGHT);
         label.textAlignment = NSTextAlignmentLeft;
         [btn addSubview:label];
         
-        btn.layer.borderColor = [UIColor colorWithWhite:0.6078 alpha:1.f].CGColor;
+//        btn.layer.borderColor = [UIColor colorWithWhite:0.6078 alpha:1.f].CGColor;
+        btn.layer.borderColor = TextColor.CGColor;
         btn.layer.borderWidth = 1.f;
         btn.layer.cornerRadius = TAG_CORDIUS;
         btn.clipsToBounds = YES;

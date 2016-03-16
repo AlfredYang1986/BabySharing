@@ -445,7 +445,11 @@
     UILabel* label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 0, 0)];
     
     if (section == 0) {
-        label.text = @"最近关注的";
+        if ([tableView numberOfRowsInSection:section] == 0) {
+            label.text = @"还没有加入过任何圈聊哦:)";
+        } else {
+            label.text = @"最近关注的";
+        }
     } else {
         label.text = @"猜你喜欢";
     }
