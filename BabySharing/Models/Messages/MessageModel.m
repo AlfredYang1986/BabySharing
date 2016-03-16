@@ -33,7 +33,7 @@
     dispatch_async(aq, ^(void){
         dispatch_async(dispatch_get_main_queue(), ^(void){
             [document.managedObjectContext performBlock:^(void){
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"message data ready" object:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kDongDaNotificationkeyMessageIsReady object:nil];
             }];
         });
     });

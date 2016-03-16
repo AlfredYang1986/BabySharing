@@ -37,6 +37,16 @@ static const NSString* kUserPostOwnerConnectionsFollowing = @"kUserPostOwnerConn
 static const NSString* kUserPostOwnerConnectionsFollowed = @"kUserPostOwnerConnectionsFollowed";
 static const NSString* kUserPostOwnerConnectionsFriends = @"kUserPostOwnerConnectionsFriends";
 
+//static NSString* const kDongDaNotificationkey = @"";
+static NSString* const kDongDaNotificationkeySNSLoginSuccess = @"SNS login success";
+static NSString* const kDongDaNotificationkeyLoginSuccess = @"login success";
+static NSString* const kDongDaNotificationkeyAppReady = @"app ready";
+static NSString* const kDongDaNotificationkeyQueryDataReady = @"query data ready";
+static NSString* const kDongDaNotificationkeyMessageIsReady = @"message data ready";
+static NSString* const kDongDaNotificationkeyUserSignOut = @"current user sign out";
+static NSString* const kDongDaNotificationkeyUserSignOutSuccess = @"sign out already";
+static NSString* const kDongDaNotificationkeySideChange = @"changing side";
+
 #pragma mark -- HOST DOMAIN
 #define HOST_DOMAIN                     @"http://www.altlys.com:9000/"
 //#define HOST_DOMAIN                     @"http://192.168.3.105:9000/"

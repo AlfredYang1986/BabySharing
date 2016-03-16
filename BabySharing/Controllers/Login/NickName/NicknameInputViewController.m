@@ -289,7 +289,7 @@
         LoginToken* token = [LoginToken enumLoginUserInContext:_lm.doc.managedObjectContext withUserID:newID];
         [_lm setCurrentUser:token];
         [_lm.doc.managedObjectContext save:nil];        
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"login success" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kDongDaNotificationkeyLoginSuccess object:nil];
     } else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"set nick name error" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
         [alert show];

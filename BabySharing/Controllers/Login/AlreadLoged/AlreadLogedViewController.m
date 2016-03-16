@@ -13,6 +13,7 @@
 #import "OBShapedButton.h"
 #import "SGActionView.h"
 #import "Tools.h"
+#import "ModelDefines.h"
 
 @interface AlreadLogedViewController ()
 @property (strong, nonatomic) IBOutlet UIButton *loginImgBtn;
@@ -315,7 +316,7 @@
     
     [_lm setCurrentUser:token];
     [_lm.doc.managedObjectContext save:nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"login success" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kDongDaNotificationkeyLoginSuccess object:nil];
 //    [self.navigationController dismissViewControllerAnimated:YES completion:^(void){
 //        NSLog(@"Login success");
 //        [_lm reloadDataFromLocalDB];

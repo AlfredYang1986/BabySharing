@@ -11,6 +11,7 @@
 #import "TmpFileStorageModel.h"
 #import "PersonalSettingController.h"
 #import "OBShapedButton.h"
+#import "ModelDefines.h"
 #import "Define.h"
 
 @interface SettingCell : UITableViewCell
@@ -254,7 +255,7 @@
 }
 
 - (void)signOutSelected {
-    [[NSNotificationCenter defaultCenter]postNotificationName:@"current user sign out" object:nil];
+    [[NSNotificationCenter defaultCenter]postNotificationName:kDongDaNotificationkeyUserSignOut object:nil];
 }
 
 - (void)clearTmpStorageSelectd {

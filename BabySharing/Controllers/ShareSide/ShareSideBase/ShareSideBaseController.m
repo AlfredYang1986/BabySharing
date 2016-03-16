@@ -7,6 +7,7 @@
 //
 
 #import "ShareSideBaseController.h"
+#import "ModelDefines.h"
 
 @implementation ShareSideBaseController
 
@@ -17,6 +18,6 @@
 #pragma mark -- Changing Side
 - (void)didSelectChangingBtn:(id)sender {
     NSDictionary* dic = [[NSDictionary alloc]initWithObjects:[[NSArray alloc]initWithObjects:self, nil] forKeys:[[NSArray alloc]initWithObjects:@"parent", nil]];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"changing side" object:self userInfo:dic];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kDongDaNotificationkeySideChange object:self userInfo:dic];
 }
 @end

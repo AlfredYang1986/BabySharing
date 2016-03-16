@@ -21,6 +21,7 @@
 #import "GotyeOCAPI.h"
 #import "GotyeOCDeleget.h"
 #import "RemoteInstance.h"
+#import "UIGifView.h"
 
 @interface ViewController () <LoginInputViewDelegate, AreaViewControllerDelegate, GotyeOCDelegate>
 
@@ -53,6 +54,9 @@ enum DisplaySide {
     
     LoginInputView* inputView;
     LoginSNSView* snsView;
+    
+    UIGifView* loadingView;
+    
     BOOL isSNSLogin;
     
     BOOL isQueryModelReady;
@@ -82,16 +86,17 @@ enum DisplaySide {
    
     [self createSubviews];
    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(SNSLogedIn:) name:@"SNS login success" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(SNSLogedIn:) name:kDongDaNotificationkeySNSLoginSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogedIn:) name:kDongDaNotificationkeyLoginSuccess object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogedIn:) name:@"login success" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appIsReady:) name:@"app ready" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(queryDataIsReady:) name:@"query data ready" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(messageAndNotificationDataIsReady:) name:@"message data ready" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appIsReady:) name:kDongDaNotificationkeyAppReady object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogedOut:) name:@"current user sign out" object:nil];
-
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changingSide:) name:@"changing side" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(queryDataIsReady:) name:kDongDaNotificationkeyQueryDataReady object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(messageAndNotificationDataIsReady:) name:kDongDaNotificationkeyMessageIsReady object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogedOut:) name:kDongDaNotificationkeyUserSignOut object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogedOutSuccessLocal:) name:kDongDaNotificationkeyUserSignOutSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changingSide:) name:kDongDaNotificationkeySideChange object:nil];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [self.view addGestureRecognizer:tap];
@@ -170,7 +175,7 @@ enum DisplaySide {
     inputView.frame = CGRectMake(0, INPUT_VIEW_START_POINT, width, last_height);
     [self.view addSubview:inputView];
     [self.view bringSubviewToFront:inputView];
-
+    inputView.hidden = YES;
     
     /**
      * 4. SNS view
@@ -183,7 +188,26 @@ enum DisplaySide {
 //    snsView.backgroundColor = [UIColor greenColor];
     [self.view addSubview:snsView];
     [self.view bringSubviewToFront:snsView];
+    snsView.hidden = YES;
+    
+    /**
+     * 5. loading view
+     */
+    NSString* str = [resourceBundle pathForResource:@"home_refresh" ofType:@"gif"];
+    loadingView = [[UIGifView alloc]initWithCenter:inputView.center fileURL:[NSURL fileURLWithPath:str] andSize:CGSizeMake(30, 30)];
+    [self.view addSubview:loadingView];
+    [self.view bringSubviewToFront:loadingView];
+    loadingView.hidden = NO;
+    [loadingView startGif];
+}
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [loadingView stopGif];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -250,6 +274,11 @@ enum DisplaySide {
     isSNSLogin = NO;
     [self.navigationController popToRootViewControllerAnimated:NO];
     
+    snsView.hidden = YES;
+    inputView.hidden = YES;
+    loadingView.hidden = NO;
+    [loadingView startGif];
+    
     if ([_lm isLoginedByUser]) {
         AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
         if (!isQueryModelReady) [delegate createQueryModel];
@@ -268,6 +297,15 @@ enum DisplaySide {
     }
 }
 
+- (void)userLogedOutSuccessLocal:(id)sender {
+    NSLog(@"user login out local");
+    
+    snsView.hidden = NO;
+    inputView.hidden = NO;
+    loadingView.hidden = YES;
+    [loadingView stopGif];
+}
+
 - (void)appIsReady:(id)sender {
     NSLog(@"application is ready");
     
@@ -279,6 +317,11 @@ enum DisplaySide {
         [delegate registerDeviceTokenWithCurrentUser];
         [_lm onlineCurrentUser];
 //        [GotyeOCAPI login:_lm.current_user_id password:nil];
+    } else {
+        snsView.hidden = NO;
+        inputView.hidden = NO;
+        loadingView.hidden = YES;
+        [loadingView stopGif];
     }
 }
 
@@ -448,7 +491,7 @@ enum DisplaySide {
     NSValue *value = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
     keyBoardFrame = value.CGRectValue;
     
-    CGFloat height = [UIScreen mainScreen].bounds.size.height - (inputView.frame.size.height + inputView.frame.origin.y) + modify;
+//    CGFloat height = [UIScreen mainScreen].bounds.size.height - (inputView.frame.size.height + inputView.frame.origin.y) + modify;
     if (!inputView.isMoved) {
 //        [self moveView:height - keyBoardFrame.size.height];
         [self moveView:-120];
@@ -464,7 +507,7 @@ enum DisplaySide {
 }
 
 - (void)keyboardDidHidden:(NSNotification*)notification {
-    CGFloat height = [UIScreen mainScreen].bounds.size.height - (inputView.frame.size.height + inputView.frame.origin.y) + modify;
+//    CGFloat height = [UIScreen mainScreen].bounds.size.height - (inputView.frame.size.height + inputView.frame.origin.y) + modify;
     if (inputView.isMoved) {
 //        [self moveView:keyBoardFrame.size.height - height];
         [self moveView:120];

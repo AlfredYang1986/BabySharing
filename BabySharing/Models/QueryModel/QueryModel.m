@@ -33,7 +33,7 @@
                 if (_querydata == nil || _querydata.count == 0) {
                     [self refreshQueryDataByUser:self.delegate.lm.current_user_id withToken:self.delegate.lm.current_auth_token];
                 }
-                [[NSNotificationCenter defaultCenter]postNotificationName:@"query data ready" object:nil];
+                [[NSNotificationCenter defaultCenter]postNotificationName:kDongDaNotificationkeyQueryDataReady object:nil];
             }];
         });
     });
