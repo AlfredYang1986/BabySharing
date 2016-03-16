@@ -369,14 +369,17 @@ enum DisplaySide {
     [self performSegueWithIdentifier:@"areaCode" sender:nil];
 }
 
-- (void)didSelectConfirmBtn {
+- (void)didSelectConfirmBtn:(UIButton *)button {
     NSString* phoneNo = [inputView getInputPhoneNumber];
-    
     if ([self isValidPhoneNumber:phoneNo inArea:@"+86"]) {
-        if ([self.lm sendLoginRequestToPhone:phoneNo]) {
-            
-        }
-        [inputView sendConfirmCodeRequestSuccess];
+        dispatch_queue_t queue = dispatch_queue_create("code", nil);
+        dispatch_async(queue, ^{
+            if ([self.lm sendLoginRequestToPhone:phoneNo]) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [inputView sendConfirmCodeRequestSuccess];
+                });
+            }
+        });
     } else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"input wrong phone number" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
         [alert show];

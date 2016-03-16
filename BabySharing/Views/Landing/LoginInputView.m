@@ -279,7 +279,7 @@
 }
 
 - (void)confirmBtnSelected:(UIButton*)sender {
-    [_delegate didSelectConfirmBtn];
+    [_delegate didSelectConfirmBtn:sender];
 }
 
 - (void)nextBtnSelected:(UIButton*)sender {

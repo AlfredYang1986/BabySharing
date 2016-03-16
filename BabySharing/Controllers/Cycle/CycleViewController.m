@@ -170,7 +170,7 @@
     NSString* filepath = [resourceBundle pathForResource:@"home_chat_back" ofType:@"png"];
     CALayer *layer = [[CALayer alloc] init];
     layer.frame = CGRectMake(0, 0, 30, 30);
-    layer.position = CGPointMake(CGRectGetWidth(actionView.frame) / 2, CGRectGetHeight(actionView.frame) / 2);
+    layer.position = CGPointMake(CGRectGetWidth(actionView.frame) / 2 - 4.5, CGRectGetHeight(actionView.frame) / 2);
     layer.contents = (__bridge id _Nullable)([UIImage imageNamed:filepath].CGImage);
     [actionView.layer addSublayer:layer];
     

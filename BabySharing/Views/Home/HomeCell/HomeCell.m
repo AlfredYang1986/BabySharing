@@ -12,6 +12,7 @@
 #import "QueryContentItem.h"
 #import <AVFoundation/AVFoundation.h>
 #import "GPUImage.h"
+#import "Define.h"
 
 @interface HomeCell()
 
@@ -47,6 +48,14 @@
     UIView *jionGroupView;
 }
 
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier indexPath:(NSIndexPath *)indexPath {
+    self = [self initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        self.indexPath = indexPath;
+    }
+    return self;
+}
+
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
@@ -57,6 +66,7 @@
         
         _ownerNameLable = [[UILabel alloc] init];
         _ownerNameLable.font = [UIFont systemFontOfSize:14];
+        _ownerNameLable.textColor = TextColor;
         [self.contentView addSubview:_ownerNameLable];
         
         _ownerRole = [[UILabel alloc] init];
@@ -74,12 +84,15 @@
         _ownerDate = [[UILabel alloc] init];
         _ownerDate.font = [UIFont systemFontOfSize:11];
         _ownerDate.textAlignment = NSTextAlignmentRight;
+        _ownerDate.textColor = TextColor;
         [self.contentView addSubview:_ownerDate];
         
         _mainImage = [[UIImageView alloc] init];
         [self.contentView addSubview:_mainImage];
         
         _descriptionLabel = [[UILabel alloc] init];
+        _descriptionLabel.font = [UIFont systemFontOfSize:15.0];
+        _descriptionLabel.textColor = TextColor;
         [self.contentView addSubview:_descriptionLabel];
         
         praiseImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
@@ -109,13 +122,15 @@
         [self.contentView addSubview:_thirdImage];
         _talkerCount = [[UILabel alloc] init];
         _talkerCount.text = @"没有返回全聊人数";
-        _talkerCount.font = [UIFont systemFontOfSize:13];
+        _talkerCount.font = [UIFont systemFontOfSize:12];
+        _talkerCount.textColor = TextColor;
         [self.contentView addSubview:_talkerCount];
         
         _jionGroup = [[UITextField alloc] init];
         _jionGroup.enabled = YES;
-        _jionGroup.font = [UIFont systemFontOfSize:13];
-        _jionGroup.text = @" 加入圈聊";
+        _jionGroup.font = [UIFont systemFontOfSize:12];
+        _jionGroup.text = @"  加入圈聊";
+        _jionGroup.textColor = TextColor;
         [self.contentView addSubview:_jionGroup];
         jionImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
         jionImage.image = [UIImage imageNamed:[resourceBundle pathForResource:@"home_chat" ofType:@"png"]];
@@ -136,17 +151,15 @@
         _videoSign.frame = CGRectMake(0, 0, 30, 30);
         [_mainImage addSubview:_videoSign];
 
-//        _playerLayer = [[AVPlayerLayer alloc] init];
-//        [_mainImage.layer addSublayer:_playerLayer];
         _gpuImageView = [[GPUImageView alloc] init];
         _gpuImageView.fillMode = kGPUImageFillModePreserveAspectRatioAndFill;
         [_mainImage addSubview:_gpuImageView];
         
-        self.contentView.layer.cornerRadius = 19;
+        self.contentView.layer.cornerRadius = 8;
         self.contentView.layer.shadowColor = [UIColor blackColor].CGColor;
         self.contentView.layer.shadowOffset = CGSizeMake(0, 0);
         self.contentView.layer.shadowOpacity = 0.3;
-        self.contentView.layer.shadowRadius = 3;
+        self.contentView.layer.shadowRadius = 2;
         self.contentView.layer.shouldRasterize = YES;
         self.contentView.layer.rasterizationScale = [UIScreen mainScreen].scale;
         self.backgroundColor = [Tools colorWithRED:242.0 GREEN:242.0 BLUE:242.0 ALPHA:1.0];
@@ -163,20 +176,28 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
+//    if (self.indexPath.row == 0) {
+//        self.contentView.frame = CGRectMake(12.5, 10, CGRectGetWidth(self.contentView.frame) - 25, CGRectGetHeight(self.contentView.frame) - 15);
+//    } else {
+//        self.contentView.frame = CGRectInset(self.contentView.frame, 12.5, 5);
+//    }
     self.contentView.frame = CGRectInset(self.contentView.frame, 10, 5);
-    _ownerImage.frame = CGRectMake(12, 8, 28, 28);
+    _ownerImage.frame = CGRectMake(12, 10, 28, 28);
     
     [_ownerNameLable sizeToFit];
     _ownerNameLable.frame = CGRectMake(50, 16, CGRectGetWidth(_ownerNameLable.frame), 14);
     [_ownerRole sizeToFit];
-    _ownerRole.frame = CGRectMake(CGRectGetMaxX(_ownerNameLable.frame) + 10, 16, CGRectGetWidth(_ownerRole.frame) + 3, 16);
+    _ownerRole.frame = CGRectMake(CGRectGetMaxX(_ownerNameLable.frame) + 10, 15, CGRectGetWidth(_ownerRole.frame) + 3, 16);
     
     _ownerDate.frame = CGRectMake(CGRectGetWidth(self.contentView.frame) - 60, 16, 50, 14);
     _mainImage.frame = CGRectMake(0, 46, CGRectGetWidth(self.contentView.frame), CGRectGetHeight(self.contentView.frame) - 176);
     _videoSign.center = CGPointMake(CGRectGetWidth(_mainImage.frame) - CGRectGetWidth(_videoSign.frame) / 2 - 10, CGRectGetHeight(_videoSign.frame) / 2 + 10);
 //    _playerLayer.frame = CGRectMake(0, 0, CGRectGetWidth(_mainImage.frame), CGRectGetHeight(_mainImage.frame));
     _gpuImageView.frame = CGRectMake(0, 0, CGRectGetWidth(_mainImage.frame), CGRectGetHeight(_mainImage.frame));
-    _descriptionLabel.frame = CGRectMake(10, CGRectGetMaxY(_mainImage.frame), CGRectGetWidth(self.contentView.frame) - 18, 30);
+    
+    _descriptionLabel.frame = CGRectMake(10, CGRectGetMaxY(_mainImage.frame) + 0, CGRectGetWidth(self.contentView.frame) - 20, 18);
+    _descriptionLabel.center = CGPointMake(CGRectGetWidth(self.contentView.frame) / 2, CGRectGetMaxY(_mainImage.frame) + 2 + CGRectGetHeight(_descriptionLabel.frame));
+    
     praiseImage.frame = CGRectMake(17, CGRectGetMaxY(_descriptionLabel.frame) + 15, 25, 25);
     _praiseCount.frame = CGRectMake(57, CGRectGetMaxY(_descriptionLabel.frame) + 20, 30, 15);
     _praiseCount.backgroundColor = [UIColor redColor];
@@ -212,7 +233,12 @@
     self.firstImage.layer.shouldRasterize = YES;
     self.firstImage.layer.rasterizationScale = [UIScreen mainScreen].scale;
     
-    _jionGroup.frame = CGRectMake(CGRectGetWidth(self.contentView.frame) - 95 , CGRectGetMaxY(lineView.frame) + 7, 82, CGRectGetHeight(self.contentView.frame) - CGRectGetMaxY(lineView.frame) - 14);
+    [_talkerCount sizeToFit];
+    _talkerCount.frame = CGRectMake(0, 0, CGRectGetWidth(_talkerCount.frame), CGRectGetHeight(_talkerCount.frame));
+    CGFloat x = self.thirdImage.center.x + CGRectGetWidth(_talkerCount.frame) / 2 + CGRectGetWidth(_firstImage.frame) / 2 + 9;
+    CGFloat y = self.thirdImage.center.y;
+    _talkerCount.center = CGPointMake([NSNumber numberWithFloat:x].intValue, [NSNumber numberWithFloat:y].intValue);
+    _jionGroup.frame = CGRectMake(CGRectGetWidth(self.contentView.frame) - 97 , CGRectGetMaxY(lineView.frame) + 7, 90, CGRectGetHeight(self.contentView.frame) - CGRectGetMaxY(lineView.frame) - 14);
     jionGroupView.frame = CGRectMake(0, 0, CGRectGetWidth(_jionGroup.frame), CGRectGetHeight(_jionGroup.frame));
 }
 
@@ -236,6 +262,7 @@
     self.ownerNameLable.text = content.owner_name;
     self.descriptionLabel.text = content.content_description;
     self.ownerDate.text = [Tools compareCurrentTime:content.content_post_date];
+    self.talkerCount.text = [NSString stringWithFormat:@"%d人正在圈聊", self.content.group_chat_count.intValue];
     
     // 设置头像
     NSString *bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];

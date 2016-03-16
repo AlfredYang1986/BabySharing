@@ -14,7 +14,7 @@
 @protocol LoginInputViewDelegate <NSObject>
 #pragma mark -- button actions
 - (void)didSelectAreaCodeBtn;
-- (void)didSelectConfirmBtn;
+- (void)didSelectConfirmBtn:(UIButton *)button;
 - (void)didSelectNextBtn;
 
 #pragma mark -- text delegate

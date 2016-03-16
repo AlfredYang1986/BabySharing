@@ -280,7 +280,7 @@
     NSString* filepath = [resourceBundle pathForResource:@"home_chat_back" ofType:@"png"];
     CALayer *layer = [[CALayer alloc] init];
     layer.frame = CGRectMake(0, 0, 30, 30);
-    layer.position = CGPointMake(CGRectGetWidth(actionView.frame) / 2 - 65 / 2 - 0.5, CGRectGetHeight(actionView.frame) / 2);
+    layer.position = CGPointMake(CGRectGetWidth(actionView.frame) / 2 - 65 / 2 - 0.5 - 4.5, CGRectGetHeight(actionView.frame) / 2);
     layer.contents = (__bridge id _Nullable)([UIImage imageNamed:filepath].CGImage);
     [actionView.layer addSublayer:layer];
 
@@ -684,7 +684,7 @@
     CABasicAnimation *shadowAnimation = [CABasicAnimation animationWithKeyPath:@"shadowOpacity"];
     shadowAnimation.fillMode=kCAFillModeForwards;
     shadowAnimation.removedOnCompletion = NO;
-    shadowAnimation.duration = 0.25;
+    shadowAnimation.duration = 0.0;
     shadowAnimation.fromValue = [NSNumber numberWithFloat:0.3];
     shadowAnimation.toValue = [NSNumber numberWithFloat:0.0];
     [actionView.layer addAnimation:shadowAnimation forKey:@"shadowOpacity"];
@@ -717,7 +717,14 @@
                 subView.frame = CGRectMake(CGRectGetMinX(subView.frame) + [UIScreen mainScreen].bounds.size.width, CGRectGetMinY(subView.frame), CGRectGetWidth(subView.frame), CGRectGetHeight(subView.frame));
             }
         }
-        actionView.layer.shadowOpacity = 0.3;
+        CABasicAnimation *shadowAnimation = [CABasicAnimation animationWithKeyPath:@"shadowOpacity"];
+        shadowAnimation.fillMode=kCAFillModeForwards;
+        shadowAnimation.removedOnCompletion = NO;
+        shadowAnimation.duration = 0.0;
+        shadowAnimation.fromValue = [NSNumber numberWithFloat:0.0];
+        shadowAnimation.toValue = [NSNumber numberWithFloat:0.3];
+        [actionView.layer addAnimation:shadowAnimation forKey:@"shadowOpacity"];
+//        actionView.layer.shadowOpacity = 0.3;
         actionView.enabled = YES;
     }];
 }
@@ -736,7 +743,11 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 //    CGFloat h = [QueryHeader preferredHeight] + [QueryCell preferredHeightWithDescription:@"Any Word"];
 //    return h + HEADER_MARGIN_TO_SCREEN + 2;
-    return rowHeight;
+//    if (indexPath.row) {
+//        return rowHeight + 5;
+//    } else {
+        return rowHeight;
+//    }
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -755,6 +766,7 @@
 //    
 //    tmp.queryView.tag = indexPath.row;
 //    return cell;
+    
     HomeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"homeCell"];
     if (cell == nil) {
         cell = [[HomeCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"homeCell"];
@@ -762,6 +774,7 @@
         cell.number.textAlignment = NSTextAlignmentCenter;
         cell.delegate = self;
     }
+    cell.indexPath = indexPath;
     [cell updateViewWith:[_delegate queryItemAtIndex:indexPath.row]];
 //    cell.number.text = [NSString stringWithFormat:@"%ld", indexPath.row];
     return cell;
