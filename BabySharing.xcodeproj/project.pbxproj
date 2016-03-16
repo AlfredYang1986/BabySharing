@@ -81,6 +81,7 @@
 		A00946381C96A4D80015A641 /* BSRefreshAnimationFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = A00946371C96A4D80015A641 /* BSRefreshAnimationFooter.m */; };
 		A009463A1C96A9CD0015A641 /* DongDaBoundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A00946391C96A9CD0015A641 /* DongDaBoundle.bundle */; };
 		A00946961C96E66E0015A641 /* QueryLocalModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A00946941C96E66E0015A641 /* QueryLocalModel.xcdatamodeld */; };
+		A00946DE1C996FA40015A641 /* TalkerHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A00946DD1C996FA40015A641 /* TalkerHeaderView.m */; };
 		A011A62B1C8D352100553B80 /* LengthTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = A011A62A1C8D352100553B80 /* LengthTextField.m */; };
 		A02154531C89387500791291 /* UIImage+fixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = A02154521C89387500791291 /* UIImage+fixOrientation.m */; };
 		A02154591C893A7200791291 /* PointLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A02154561C893A7200791291 /* PointLayer.m */; };
@@ -533,6 +534,8 @@
 		A00946371C96A4D80015A641 /* BSRefreshAnimationFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSRefreshAnimationFooter.m; sourceTree = "<group>"; };
 		A00946391C96A9CD0015A641 /* DongDaBoundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DongDaBoundle.bundle; sourceTree = "<group>"; };
 		A00946951C96E66E0015A641 /* QueryLocalModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = QueryLocalModel.xcdatamodel; sourceTree = "<group>"; };
+		A00946DC1C996FA40015A641 /* TalkerHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TalkerHeaderView.h; sourceTree = "<group>"; };
+		A00946DD1C996FA40015A641 /* TalkerHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TalkerHeaderView.m; sourceTree = "<group>"; };
 		A011A6291C8D352100553B80 /* LengthTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LengthTextField.h; sourceTree = "<group>"; };
 		A011A62A1C8D352100553B80 /* LengthTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LengthTextField.m; sourceTree = "<group>"; };
 		A02154511C89387500791291 /* UIImage+fixOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+fixOrientation.h"; sourceTree = "<group>"; };
@@ -2684,6 +2687,8 @@
 				EEBE1B7D1C17CB4E00EAA9D2 /* FoundHotTagsCell.m */,
 				EEBE1B7E1C17CB4E00EAA9D2 /* FoundSearchResultCell.h */,
 				EEBE1B7F1C17CB4E00EAA9D2 /* FoundSearchResultCell.m */,
+				A00946DC1C996FA40015A641 /* TalkerHeaderView.h */,
+				A00946DD1C996FA40015A641 /* TalkerHeaderView.m */,
 				EEBE1B801C17CB4E00EAA9D2 /* FoundSearchResultCell.xib */,
 			);
 			path = FoundSearch;
@@ -3128,7 +3133,7 @@
 				TargetAttributes = {
 					EEAAC8F71B44E81A00D05C0B = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = V6843SSXWV;
+						DevelopmentTeam = 6AUL2A4AE9;
 					};
 					EEAAC9131B44E81A00D05C0B = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -3313,6 +3318,7 @@
 				EEAACD151B44E90400D05C0B /* ProfileDetailPostCell.m in Sources */,
 				EEBE1B6E1C17CA9400EAA9D2 /* SearchSegView2.m in Sources */,
 				EEDCF6881B9AB42B005F4F4D /* SystemSettingLocalModel.xcdatamodeld in Sources */,
+				A00946DE1C996FA40015A641 /* TalkerHeaderView.m in Sources */,
 				70079F891C59B6FC00DB8D85 /* ChatGroupUserInfoTableDelegateAndDatasource.m in Sources */,
 				70D15B4D1C5B64C9007AC9AB /* MJRefreshBackStateFooter.m in Sources */,
 				70D15B441C5B64C9007AC9AB /* MJRefreshBackFooter.m in Sources */,
@@ -3678,7 +3684,7 @@
 					"-ObjC",
 					"-fobjc-arc",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = BS.BabySharing;
+				PRODUCT_BUNDLE_IDENTIFIER = monkeyheng.BabySharing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -3718,7 +3724,7 @@
 					"-ObjC",
 					"-fobjc-arc",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = BS.BabySharing;
+				PRODUCT_BUNDLE_IDENTIFIER = monkeyheng.BabySharing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;

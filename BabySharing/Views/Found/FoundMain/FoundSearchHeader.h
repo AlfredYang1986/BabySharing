@@ -11,6 +11,7 @@
 @interface FoundSearchHeader : UITableViewHeaderFooterView
 @property (weak, nonatomic) IBOutlet UILabel *headLabell;
 @property (weak, nonatomic) IBOutlet UIImageView *headImg;
-
+@property (strong, nonatomic) UIView *line1;
+@property (strong, nonatomic) UIView *line;
 + (CGFloat)prefferredHeight;
 @end

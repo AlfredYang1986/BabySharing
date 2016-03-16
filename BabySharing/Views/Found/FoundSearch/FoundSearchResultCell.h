@@ -8,11 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+
+typedef NS_ENUM(NSInteger, SearchType) {
+    SearchSige,
+    SearchRole,
+};
+
 @interface FoundSearchResultCell : UITableViewCell
 
 @property (strong, nonatomic) NSString* tag_name;
 @property (strong, nonatomic) NSNumber* tag_type;
 @property (nonatomic) BOOL isScreenPhoto;
+@property (nonatomic, assign) SearchType type;
 
 + (CGFloat)preferredHeight;
 - (void)setUserPhotoImage:(NSArray*)img_arr;

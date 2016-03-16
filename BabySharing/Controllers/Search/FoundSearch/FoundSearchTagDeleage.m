@@ -7,7 +7,7 @@
 //
 
 #import "FoundSearchTagDeleage.h"
-
+#import "FoundSearchResultCell.h"
 #import "FoundSearchModel.h"
 #import "FoundSearchHeader.h"
 #import "FoundHotTagsCell.h"
@@ -35,7 +35,9 @@
     if (_fm.previewDic.count == 0) {
         return [self queryHotTagCellInTableView:tableView];
     } else {
-        return [self querySearchResultInTableView:tableView atIndex:indexPath.row];
+        FoundSearchResultCell *cell = (FoundSearchResultCell *)[self querySearchResultInTableView:tableView atIndex:indexPath.row type:SearchSige];
+        return cell;
+//        return [self querySearchResultInTableView:tableView atIndex:indexPath.row];
     }
 }
 
@@ -76,7 +78,7 @@
     return cell;
 }
 
-- (UITableViewCell*)querySearchResultInTableView:(UITableView*)tableView atIndex:(NSInteger)index {
+- (UITableViewCell*)querySearchResultInTableView:(UITableView*)tableView atIndex:(NSInteger)index type:(SearchType)type{
     FoundSearchResultCell* cell = [tableView dequeueReusableCellWithIdentifier:@"Search Result"];
     
     if (cell == nil) {
@@ -84,6 +86,7 @@
         cell = [nib firstObject];
     }
     //    [cell setSearchResultCount:188];
+    cell.type = type;
     NSDictionary* dic = [_fm.previewDic objectAtIndex:index];
     [cell setSearchTag:[dic objectForKey:@"tag_name"] andType:[dic objectForKey:@"type"]];
     [cell setUserContentImages:[dic objectForKey:@"content"]];
@@ -106,16 +109,20 @@
 
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     FoundSearchHeader* header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"found header"];
-    
     if (header == nil) {
         header = [[FoundSearchHeader alloc] initWithReuseIdentifier:@"found header"];
+    }
+    
+    if ([tableView numberOfRowsInSection:section] > 1) {
+        header.line.hidden = NO;
+    } else {
+        header.line.hidden = YES;
     }
     
     if (_fm.previewDic.count == 0) {
         header.headLabell.text = @"热门标签";
         header.headLabell.textColor = [UIColor colorWithWhite:0.3059 alpha:1.f];
         header.headLabell.font = [UIFont systemFontOfSize:14.f];
-        
     } else {
         header.headLabell.text = @"搜索结果";
         header.headLabell.textColor = [UIColor colorWithWhite:0.3059 alpha:1.f];
@@ -123,6 +130,7 @@
     }
     
     header.backgroundView = [[UIImageView alloc] initWithImage:[FoundSearchTagDeleage imageWithColor:[UIColor whiteColor] size:header.bounds.size alpha:1.0]];
+    
     return header;
 }
 

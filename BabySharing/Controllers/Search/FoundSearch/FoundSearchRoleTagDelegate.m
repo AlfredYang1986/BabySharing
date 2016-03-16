@@ -36,10 +36,14 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell;
     if (_fm.previewRoleDic.count == 0) {
-        return [self queryHotTagCellInTableView:tableView];
+        cell = [self queryHotTagCellInTableView:tableView];
+        return cell;
     } else {
-        return [self querySearchResultInTableView:tableView atIndex:indexPath.row];
+        FoundSearchResultCell *cell = (FoundSearchResultCell *)[self querySearchResultInTableView:tableView atIndex:indexPath.row typo:SearchRole];
+        return cell;
+//        return [self querySearchResultInTableView:tableView atIndex:indexPath.row];
     }
 }
 
@@ -84,7 +88,7 @@
     return cell;
 }
 
-- (UITableViewCell*)querySearchResultInTableView:(UITableView*)tableView atIndex:(NSInteger)index {
+- (UITableViewCell*)querySearchResultInTableView:(UITableView*)tableView atIndex:(NSInteger)index typo:(SearchType)type{
     FoundSearchResultCell* cell = [tableView dequeueReusableCellWithIdentifier:@"Search Result"];
     
     if (cell == nil) {
@@ -93,6 +97,7 @@
     }
     //    [cell setSearchResultCount:188];
     NSDictionary* dic = [_fm.previewRoleDic objectAtIndex:index];
+    cell.type = type;
     [cell setSearchTag:[dic objectForKey:@"role_tag"] andType:[NSNumber numberWithInt:-1]];
     [cell setUserPhotoImage:[dic objectForKey:@"content"]];
     
@@ -118,6 +123,13 @@
     if (header == nil) {
         header = [[FoundSearchHeader alloc]initWithReuseIdentifier:@"found header"];
     }
+    
+    if ([tableView numberOfRowsInSection:section] > 1) {
+        header.line.hidden = NO;
+    } else {
+        header.line.hidden = YES;
+    }
+    
     
     //    if (section == 0) {
     if (_fm.previewDic.count == 0) {

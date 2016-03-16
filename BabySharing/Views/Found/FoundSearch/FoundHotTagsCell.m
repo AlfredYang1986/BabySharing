@@ -135,7 +135,10 @@
     for (RecommandRoleTag* tmp in arr) {
         
         UIFont* font = [UIFont systemFontOfSize:11.f];
-        CGSize sz_font = [tmp.tag_name sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
+//        CGSize sz_font = [tmp.tag_name sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
+        CGSize size = CGSizeMake(320, 2000); //设置一个行高上限
+        NSDictionary *attribute = @{NSFontAttributeName: font};
+        CGSize sz_font = [tmp.tag_name boundingRectWithSize:size options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attribute context:nil].size;
         CGSize sz = CGSizeMake(TAG_MARGIN /*+ ICON_WIDTH*/ + sz_font.width + TAG_MARGIN, TAG_HEIGHT);
         
         FoundHotTagBtn* btn = [[FoundHotTagBtn alloc]initWithFrame:CGRectMake(0, 0, sz.width, sz.height)];
@@ -144,18 +147,20 @@
         UILabel* label = [[UILabel alloc]init];
         label.font = font;
         label.text = tmp.tag_name;
-        label.textColor = _isDarkTheme ? [UIColor whiteColor] : [UIColor brownColor];
+//        label.textColor = _isDarkTheme ? [UIColor whiteColor] : [UIColor brownColor];
+        label.textColor = _isDarkTheme ? [UIColor whiteColor] : TextColor;
         label.frame = CGRectMake(TAG_MARGIN /*+ ICON_WIDTH*/, 0, sz_font.width, TAG_HEIGHT);
         label.textAlignment = NSTextAlignmentLeft;
         [btn addSubview:label];
         
-        btn.layer.borderColor = _isDarkTheme ?[UIColor whiteColor].CGColor : [UIColor colorWithWhite:0.5922 alpha:1.f].CGColor;
+        btn.layer.borderColor = _isDarkTheme ?[UIColor whiteColor].CGColor : [UIColor colorWithWhite:0.5922 alpha:1.0f].CGColor;
         btn.layer.borderWidth = 1.f;
         btn.layer.cornerRadius = TAG_CORDIUS;
         btn.clipsToBounds = YES;
         
 //        btn.center = CGPointMake(MARGIN + btn.frame.size.width / 2 + index * (MARGIN + btn.frame.size.width), MARGIN_VER + btn.frame.size.height / 2);
-        btn.center = CGPointMake(MARGIN + btn.frame.size.width / 2 + offset, _ver_margin + btn.frame.size.height / 2);
+//        btn.center = CGPointMake(MARGIN + btn.frame.size.width / 2 + offset, _ver_margin + btn.frame.size.height / 2);
+        btn.center = CGPointMake(MARGIN + btn.frame.size.width / 2 + offset, 66 / 2 - 10);
         offset += btn.frame.size.width + TAG_MARGIN_BETWEEN;
 
         UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(roleTagBtnSelected:)];
@@ -217,19 +222,21 @@
         label.font = font;
         label.text = tmp.tag_name;
 //        label.textColor = [UIColor colorWithWhite:0.3059 alpha:1.f];
-        label.textColor = TextColor;
+        label.textColor = [UIColor colorWithRed:74.0 / 255.0 green:74.0 / 255.0 blue:74.0 / 255.0 alpha:0.9f];
         label.frame = CGRectMake(TAG_MARGIN + ICON_WIDTH, 0, sz_font.width, TAG_HEIGHT);
         label.textAlignment = NSTextAlignmentLeft;
         [btn addSubview:label];
         
 //        btn.layer.borderColor = [UIColor colorWithWhite:0.6078 alpha:1.f].CGColor;
-        btn.layer.borderColor = TextColor.CGColor;
+        btn.layer.borderColor = [UIColor colorWithRed:74.0 / 255.0 green:74.0 / 255.0 blue:74.0 / 255.0 alpha:0.45f].CGColor;
         btn.layer.borderWidth = 1.f;
         btn.layer.cornerRadius = TAG_CORDIUS;
         btn.clipsToBounds = YES;
         
 //        btn.center = CGPointMake(MARGIN + btn.frame.size.width / 2 + index * (MARGIN + btn.frame.size.width), MARGIN_VER + btn.frame.size.height / 2);
-        btn.center = CGPointMake(MARGIN + btn.frame.size.width / 2 + offset, _ver_margin + btn.frame.size.height / 2);
+//        btn.center = CGPointMake(MARGIN + btn.frame.size.width / 2 + offset, _ver_margin + btn.frame.size.height / 2);
+        btn.center = CGPointMake(MARGIN + btn.frame.size.width / 2 + offset, 66 / 2 - 10
+                                 );
         offset += btn.frame.size.width + TAG_MARGIN_BETWEEN;
         
         if (offset >= [UIScreen mainScreen].bounds.size.width - 10)

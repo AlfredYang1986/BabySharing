@@ -70,7 +70,13 @@
 
     
 //    _queryView.scrollEnabled = NO;
-    _queryView.backgroundColor = [UIColor whiteColor]; //[UIColor colorWithWhite:0.9490 alpha:1.f];
+//    _queryView.backgroundColor = [UIColor whiteColor]; //[UIColor colorWithWhite:0.9490 alpha:1.f];
+    
+    _queryView.backgroundColor = Background;
+    
+//    UIView *footView = [[UIView alloc] init];
+//    footView.backgroundColor = [UIView alloc];
+    
     self.view.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
     
     [_queryView registerNib:[UINib nibWithNibName:@"FoundSearchHeader" bundle:[NSBundle mainBundle]] forHeaderFooterViewReuseIdentifier:@"found header"];
@@ -92,7 +98,7 @@
         [_queryView reloadData];
     }];
     
-    roleDelegate = [[FoundSearchRoleTagDelegate alloc]init];
+    roleDelegate = [[FoundSearchRoleTagDelegate alloc] init];
     roleDelegate.fm = app.fm;
     roleDelegate.controller = self;
     
@@ -103,11 +109,11 @@
         if([view isKindOfClass:[NSClassFromString(@"UINavigationButton") class]]) {
             UIButton * cancel =(UIButton *)view;
             [cancel setTitle:@"取消" forState:UIControlStateNormal];
-            [cancel  setTintColor:[UIColor blackColor]];
-            [cancel.titleLabel setTextColor:[UIColor blackColor]];
+            [cancel  setTintColor:TextColor];
+            [cancel.titleLabel setTextColor:TextColor];
         }
     }
-    _searchBar.placeholder = @"搜索";
+    _searchBar.placeholder = @"搜索标签";
     _searchBar.backgroundColor = [UIColor clearColor];
     UIImageView* iv = [[UIImageView alloc] initWithImage:[self imageWithColor:[UIColor whiteColor] size:CGSizeMake(width, SEARCH_BAR_HEIGHT)]];
     [_searchBar insertSubview:iv atIndex:1];
@@ -132,12 +138,12 @@
     layer.frame = CGRectMake(0, STATUS_BAR_HEIGHT + SEARCH_BAR_HEIGHT + SEG_BAR_HEIGHT, [UIScreen mainScreen].bounds.size.width, 1);
     [self.view.layer addSublayer:layer];
    
-    CALayer* line = [CALayer layer];
-    line.borderColor = DownLineColor.CGColor;
-//    line.borderColor = [UIColor redColor].CGColor;
-    line.borderWidth = 1.f;
-    line.frame = CGRectMake(0, STATUS_BAR_HEIGHT + SEARCH_BAR_HEIGHT + SEG_BAR_HEIGHT + MARGIN - 1, [UIScreen mainScreen].bounds.size.width, 1);
-    [self.view.layer addSublayer:line];
+//    CALayer* line = [CALayer layer];
+//    line.borderColor = DownLineColor.CGColor;
+////    line.borderColor = [UIColor redColor].CGColor;
+//    line.borderWidth = 1.f;
+//    line.frame = CGRectMake(0, STATUS_BAR_HEIGHT + SEARCH_BAR_HEIGHT + SEG_BAR_HEIGHT + MARGIN - 1, [UIScreen mainScreen].bounds.size.width, 1);
+//    [self.view.layer addSublayer:line];
     [_searchBar becomeFirstResponder];
     _queryView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
@@ -194,9 +200,9 @@
 #pragma mark -- text field delegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
-    [_current_delegate queryFoundTagSearchWithInput:_searchBar.text andFinishBlock:^(BOOL success, NSDictionary *preview) {
-        [_queryView reloadData];
-    }];
+//    [_current_delegate queryFoundTagSearchWithInput:_searchBar.text andFinishBlock:^(BOOL success, NSDictionary *preview) {
+//        [_queryView reloadData];
+//    }];
     
     [textField resignFirstResponder];
     return YES;
@@ -215,10 +221,23 @@
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    
     if ([searchText isEqualToString:@""]) {
 //        _fm.previewDic = nil;
         [_current_delegate resetCurrentSearchData];
         [_queryView reloadData];
+    } else {
+        dispatch_queue_t queue = dispatch_queue_create("search", nil);
+        dispatch_async(queue, ^{
+            NSInteger reloadIndex = _seg.selectedIndex;
+            [_current_delegate queryFoundTagSearchWithInput:_searchBar.text andFinishBlock:^(BOOL success, NSDictionary *preview) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (_seg.selectedIndex == reloadIndex) {
+                        [_queryView reloadData];
+                    }
+                });
+            }];
+        });
     }
 }
 
@@ -249,8 +268,10 @@
 //    _fm.previewDic = nil;
 //    [_queryView reloadData];
     if (seg.selectedIndex == 0) {
+        _searchBar.placeholder = @"搜索标签";
         self.current_delegate = tagDelegate;
     } else {
+        _searchBar.placeholder = @"搜索角色";
         self.current_delegate = roleDelegate;
     }
 }

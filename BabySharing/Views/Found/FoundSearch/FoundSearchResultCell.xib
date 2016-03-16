@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -22,47 +23,59 @@
                             <constraint firstAttribute="height" constant="13" id="vR6-su-2SK"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" tag="-3" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FK0-S6-3L0">
-                        <rect key="frame" x="363" y="16" width="45" height="45"/>
+                    <imageView userInteractionEnabled="NO" tag="-3" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FK0-S6-3L0" userLabel="1">
+                        <rect key="frame" x="370" y="19" width="38" height="38"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="45" id="GbS-eK-GfP"/>
+                            <constraint firstAttribute="width" constant="38" id="GbS-eK-GfP"/>
                             <constraint firstAttribute="height" constant="45" id="Jbc-Rx-yhc"/>
+                            <constraint firstAttribute="width" secondItem="FK0-S6-3L0" secondAttribute="height" multiplier="1:1" id="loI-rv-9Fa"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Jbc-Rx-yhc"/>
+                            </mask>
+                        </variation>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" tag="-2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KIi-pJ-96g">
-                        <rect key="frame" x="300" y="13" width="50" height="50"/>
+                    <imageView userInteractionEnabled="NO" tag="-2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KIi-pJ-96g" userLabel="2">
+                        <rect key="frame" x="328" y="19" width="38" height="38"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="45" id="UGl-mB-rsg"/>
+                            <constraint firstAttribute="width" secondItem="KIi-pJ-96g" secondAttribute="height" multiplier="1:1" id="5hd-W7-wbr"/>
+                            <constraint firstAttribute="width" constant="38" id="UGl-mB-rsg"/>
                             <constraint firstAttribute="height" constant="45" id="cLX-nq-CbR"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="cLX-nq-CbR"/>
+                            </mask>
+                        </variation>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" tag="-1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fAu-Zm-eJE">
-                        <rect key="frame" x="242" y="13" width="50" height="50"/>
+                    <imageView userInteractionEnabled="NO" tag="-1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fAu-Zm-eJE" userLabel="3">
+                        <rect key="frame" x="286" y="19" width="38" height="38"/>
                         <constraints>
+                            <constraint firstAttribute="width" secondItem="fAu-Zm-eJE" secondAttribute="height" multiplier="1:1" id="FDp-GX-aKO"/>
                             <constraint firstAttribute="height" constant="50" id="P2z-61-Np4"/>
                             <constraint firstAttribute="width" constant="45" id="TCY-gZ-0gw"/>
-                            <constraint firstAttribute="height" constant="45" id="geZ-ua-oan"/>
+                            <constraint firstAttribute="height" constant="38" id="geZ-ua-oan"/>
                             <constraint firstAttribute="width" constant="50" id="pP0-1X-6wp"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="P2z-61-Np4"/>
+                                <exclude reference="TCY-gZ-0gw"/>
                                 <exclude reference="pP0-1X-6wp"/>
                             </mask>
                         </variation>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rms-cc-DID">
-                        <rect key="frame" x="115" y="27" width="119" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rms-cc-DID">
+                        <rect key="frame" x="229" y="31" width="29" height="14"/>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="fAu-Zm-eJE" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="CQf-2o-za1"/>
                     <constraint firstItem="FK0-S6-3L0" firstAttribute="leading" secondItem="KIi-pJ-96g" secondAttribute="trailing" constant="4" id="CzE-0s-s4q"/>
                     <constraint firstItem="FK0-S6-3L0" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="LYS-h1-dbP"/>
-                    <constraint firstItem="KIi-pJ-96g" firstAttribute="leading" secondItem="fAu-Zm-eJE" secondAttribute="trailing" constant="8" id="XEo-w7-9Ge"/>
                     <constraint firstItem="fAu-Zm-eJE" firstAttribute="leading" secondItem="rms-cc-DID" secondAttribute="trailing" constant="28" id="ak1-ZX-1vb"/>
                     <constraint firstItem="KIi-pJ-96g" firstAttribute="leading" secondItem="fAu-Zm-eJE" secondAttribute="trailing" constant="4" id="cor-VD-442"/>
                     <constraint firstItem="dLk-81-nF9" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="kzD-Rm-oV9"/>
@@ -72,14 +85,10 @@
                     <constraint firstItem="dLk-81-nF9" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="xo0-Rk-b2u"/>
                     <constraint firstItem="fAu-Zm-eJE" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ycp-pK-G16"/>
                 </constraints>
-                <variation key="default">
-                    <mask key="constraints">
-                        <exclude reference="CQf-2o-za1"/>
-                        <exclude reference="XEo-w7-9Ge"/>
-                    </mask>
-                </variation>
             </tableViewCellContentView>
             <connections>
+                <outlet property="margin1" destination="CzE-0s-s4q" id="1Ie-br-Whl"/>
+                <outlet property="margin2" destination="cor-VD-442" id="Mhm-vk-4NI"/>
                 <outlet property="nextIcon" destination="dLk-81-nF9" id="0un-8i-vJR"/>
                 <outlet property="resultCountLabel" destination="rms-cc-DID" id="M5M-bi-Ihh"/>
             </connections>

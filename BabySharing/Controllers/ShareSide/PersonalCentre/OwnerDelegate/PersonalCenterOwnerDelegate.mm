@@ -278,6 +278,26 @@
     NSInteger index = [_delegate getCurrentSegIndex];
     CellCountParameters* para = [[CellCountParameters alloc] init];
     SuppressPerformSelectorLeakWarning([self performSelector:cell_constructor_count[index] withObject:para]);
+    UILabel *label = [tableView viewWithTag:-9];
+    if (label == nil) {
+        label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 200)];
+        label.textColor = TextColor;
+        label.textAlignment = NSTextAlignmentCenter;
+        label.center = CGPointMake(CGRectGetWidth(tableView.frame) / 2, CGRectGetHeight(tableView.frame) / 2 - 20);
+        label.tag = -9;
+        [tableView addSubview:label];
+    }
+    
+    if ([_delegate getQueryData].count == 0) {
+        label.hidden = NO;
+        if (index == 0) {
+            label.text = @"您还没有发布任何照片\n快去发布吧";
+        } else {
+            label.text = @"您还没有推出任何照片\n快去推出吧";
+        }
+    } else {
+        label.hidden = YES;
+    }
     return para.count;
 }
 
@@ -285,7 +305,8 @@
     NSInteger index = [_delegate getCurrentSegIndex];
     CellConstructParameters* para = [[CellConstructParameters alloc] initWithTableView:tableView atIndex:indexPath];
     SuppressPerformSelectorLeakWarning([self performSelector:cell_constructor_func[index] withObject:para]);
-     return para.cell;
+    para.cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    return para.cell;
 }
 
 

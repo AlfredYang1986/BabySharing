@@ -7,6 +7,7 @@
 //
 
 #import "SearchSegItem.h"
+#import "Define.h"
 
 #define DEFAULT_MARGIN_HER          30
 #define ITEM_WIDTH                  71
@@ -52,6 +53,7 @@
     _title = title;
     
     UILabel* label = [self viewWithTag:-1];
+    label.textColor = TextColor;
     label.text = _title;
     [label sizeToFit];
     label.center = CGPointMake(ITEM_WIDTH / 2, ITEM_HEIGHT / 2);

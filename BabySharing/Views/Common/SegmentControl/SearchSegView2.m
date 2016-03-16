@@ -11,6 +11,7 @@
 #import "SearchSegItem.h"
 #import "SearchSegImgTextItem.h"
 #import "SearchSegTextTextItem.h"
+#import "Define.h"
 
 @implementation SearchSegView2
 
@@ -172,7 +173,8 @@
     item.tag = [self getSegItemsCount] + 1;
     item.isLayerHidden = _isLayerHidden;
     item.select_font_color = _select_font_color;
-    item.font_color = _font_color;
+//    item.font_color = _font_color;
+    item.font_color = TextColor;
     
     UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(segSelected:)];
     [item addGestureRecognizer:tap];
