@@ -660,6 +660,7 @@
     PersonalCentreOthersDelegate* delegate = [[PersonalCentreOthersDelegate alloc]init];
     pc.current_delegate = delegate;
     pc.owner_id = ((QueryContent*)content).owner_id;
+    pc.isPushed = YES;
     [self.navigationController setNavigationBarHidden:NO];
     [self.navigationController pushViewController:pc animated:YES];
 }

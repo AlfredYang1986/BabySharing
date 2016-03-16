@@ -125,6 +125,7 @@
     PersonalCentreOthersDelegate* delegate = [[PersonalCentreOthersDelegate alloc]init];
     pc.current_delegate = delegate;
     pc.owner_id = notify.sender_id;
+    pc.isPushed = YES;
     [self.controller.navigationController setNavigationBarHidden:NO];
     [self.controller.navigationController pushViewController:pc animated:YES];
 }

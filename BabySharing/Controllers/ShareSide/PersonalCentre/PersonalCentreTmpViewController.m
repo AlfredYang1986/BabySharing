@@ -128,8 +128,8 @@
     [self createHeadView];
     [self createSegamentCtr];
     [self createFakeNaviBar];
-    
-    _queryView.frame = CGRectMake(QUERY_VIEW_MARGIN_LEFT, QUERY_VIEW_MARGIN_UP + HEADER_VIEW_HEIGHT + SEG_CTR_HEIGHT - 2, [UIScreen mainScreen].bounds.size.width - QUERY_VIEW_MARGIN_LEFT - QUERY_VIEW_MARGIN_RIGHT, [UIScreen mainScreen].bounds.size.height - QUERY_VIEW_MARGIN_UP - QUERY_VIEW_MARGIN_BOTTOM - HEADER_VIEW_HEIGHT - 100);
+#define PUSHED_MODIFY           (_isPushed ? 49 : 0)
+    _queryView.frame = CGRectMake(QUERY_VIEW_MARGIN_LEFT, QUERY_VIEW_MARGIN_UP + HEADER_VIEW_HEIGHT + SEG_CTR_HEIGHT - 2, [UIScreen mainScreen].bounds.size.width - QUERY_VIEW_MARGIN_LEFT - QUERY_VIEW_MARGIN_RIGHT, [UIScreen mainScreen].bounds.size.height - QUERY_VIEW_MARGIN_UP - QUERY_VIEW_MARGIN_BOTTOM - HEADER_VIEW_HEIGHT - 100 + PUSHED_MODIFY);
     _queryView.backgroundColor = [UIColor whiteColor];
     _queryView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view bringSubviewToFront:_queryView];
@@ -198,22 +198,22 @@
     [self.view bringSubviewToFront:fake_bar];
     
     if (self.navigationController.viewControllers.count > 1) {
-        UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 25)];
+        UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(10, 10, 30, 25)];
         NSString* filepath = [resourceBundle pathForResource:@"dongda_back" ofType:@"png"];
         CALayer * layer = [CALayer layer];
         layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
-        layer.frame = CGRectMake(10, 10, 25, 25);
+        layer.frame = CGRectMake(0, 0, 25, 25);
         [barBtn.layer addSublayer:layer];
         [barBtn addTarget:self action:@selector(didPopControllerSelected) forControlEvents:UIControlEventTouchDown];
         [fake_bar addSubview:barBtn];
         
     } else {
         CGFloat width = [UIScreen mainScreen].bounds.size.width;
-        UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(width - 15 - 30, 0, 30, 25)];
+        UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(width - 15 - 30, 10, 30, 25)];
         NSString* filepath = [resourceBundle pathForResource:@"profile_setting_dark" ofType:@"png"];
         CALayer * layer = [CALayer layer];
         layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
-        layer.frame = CGRectMake(0, 10, 25, 25);
+        layer.frame = CGRectMake(0, 0, 25, 25);
         [barBtn.layer addSublayer:layer];
         [barBtn addTarget:self action:@selector(didSelectSettingBtn) forControlEvents:UIControlEventTouchDown];
         [fake_bar addSubview:barBtn];
@@ -229,6 +229,8 @@
 - (void)viewWillAppear:(BOOL)animated  {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:NO];
+    
+    self.tabBarController.tabBar.hidden = _isPushed;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -238,7 +240,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 [_queryView reloadData];
                 [self resetProfileData];
-                [search_seg refreshItemTitle:[NSString stringWithFormat:@"%lu", _ownerQueryModel.querydata.count] atIndex:0];
+                [search_seg refreshItemTitle:[NSString stringWithFormat:@"%u", _ownerQueryModel.querydata.count] atIndex:0];
             });
         }];
         dispatch_semaphore_signal(semaphore_om);
@@ -250,7 +252,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 [_queryView reloadData];
                 [self resetProfileData];
-                [search_seg refreshItemTitle:[NSString stringWithFormat:@"%lu", _ownerQueryPushModel.querydata.count] atIndex:1];
+                [search_seg refreshItemTitle:[NSString stringWithFormat:@"%u", _ownerQueryPushModel.querydata.count] atIndex:1];
                 
             });
         }];

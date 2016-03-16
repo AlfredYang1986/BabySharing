@@ -51,6 +51,7 @@
     PersonalCentreTmpViewController* pc = [storyboard instantiateViewControllerWithIdentifier:@"PersonalCenter"];
     PersonalCentreOthersDelegate* delegate = [[PersonalCentreOthersDelegate alloc]init];
     pc.current_delegate = delegate;
+    pc.isPushed = YES;
     NSDictionary* tmp = [data_arr objectAtIndex:indexPath.row];
     pc.owner_id = [tmp objectForKey:@"user_id"];
     [self.current.navigationController pushViewController:pc animated:YES];
@@ -195,6 +196,7 @@
     PersonalCentreOthersDelegate* delegate = [[PersonalCentreOthersDelegate alloc]init];
     pc.current_delegate = delegate;
     pc.owner_id = user_id;
+    pc.isPushed = YES;
     [_current.navigationController setNavigationBarHidden:NO];
     [_current.navigationController pushViewController:pc animated:YES];
 }
