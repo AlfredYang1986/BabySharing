@@ -32,6 +32,7 @@
 #import "SearchSegView2.h"
 
 #import "UINavigationController+Retro.h"
+#import "UIGifView.h"
 
 #define STATUS_BAR_HEIGHT       20
 #define FAKE_BAR_HEIGHT        44
@@ -65,7 +66,8 @@
     
     ProfileOverView *head_view;
     SearchSegView2 *search_seg;
-    
+   
+//    UIGifView* loadingView;
     
     dispatch_semaphore_t semaphore_om;
     dispatch_semaphore_t semaphore_opm;
@@ -141,6 +143,17 @@
     label.text = @"用户信息";
     [label sizeToFit];
     self.navigationItem.titleView = label;
+  
+//    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
+//    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+//    
+//    loadingView = [[UIGifView alloc]initWithCenter:CGPointMake(_queryView.center.x, _queryView.center.y)
+//                                           fileURL:[NSURL fileURLWithPath:[resourceBundle pathForResource:@"home_refresh" ofType:@"gif"]]
+//                                           andSize:CGSizeMake(30, 30)];
+//    [self.view addSubview:loadingView];
+//    [self.view bringSubviewToFront:loadingView];
+//    loadingView.hidden = NO;
+//    [loadingView startGif];
 }
 
 - (void)createSegamentCtr {

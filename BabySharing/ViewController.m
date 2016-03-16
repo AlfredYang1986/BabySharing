@@ -175,7 +175,6 @@ enum DisplaySide {
     inputView.frame = CGRectMake(0, INPUT_VIEW_START_POINT, width, last_height);
     [self.view addSubview:inputView];
     [self.view bringSubviewToFront:inputView];
-    inputView.hidden = YES;
     
     /**
      * 4. SNS view
@@ -188,7 +187,6 @@ enum DisplaySide {
 //    snsView.backgroundColor = [UIColor greenColor];
     [self.view addSubview:snsView];
     [self.view bringSubviewToFront:snsView];
-    snsView.hidden = YES;
     
     /**
      * 5. loading view
@@ -197,8 +195,8 @@ enum DisplaySide {
     loadingView = [[UIGifView alloc]initWithCenter:inputView.center fileURL:[NSURL fileURLWithPath:str] andSize:CGSizeMake(30, 30)];
     [self.view addSubview:loadingView];
     [self.view bringSubviewToFront:loadingView];
-    loadingView.hidden = NO;
-    [loadingView startGif];
+    
+    [self showLoadingView];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -273,11 +271,8 @@ enum DisplaySide {
     
     isSNSLogin = NO;
     [self.navigationController popToRootViewControllerAnimated:NO];
-    
-    snsView.hidden = YES;
-    inputView.hidden = YES;
-    loadingView.hidden = NO;
-    [loadingView startGif];
+   
+    [self showLoadingView];
     
     if ([_lm isLoginedByUser]) {
         AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
@@ -300,10 +295,7 @@ enum DisplaySide {
 - (void)userLogedOutSuccessLocal:(id)sender {
     NSLog(@"user login out local");
     
-    snsView.hidden = NO;
-    inputView.hidden = NO;
-    loadingView.hidden = YES;
-    [loadingView stopGif];
+    [self hideLoadingView];
 }
 
 - (void)appIsReady:(id)sender {
@@ -364,6 +356,26 @@ enum DisplaySide {
     if (_currentDispley == shareSide) {
         [((TabBarController*)_contentController) showSecretSideOnController:[sender.userInfo objectForKey:@"parent"]];
     }
+}
+
+- (void)showLoadingView {
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    inputView.hidden = YES;
+    [inputView endEditing];
+    inputView.isMoved = NO;
+    CGFloat last_height = inputView.bounds.size.height;
+    inputView.frame = CGRectMake(0, INPUT_VIEW_START_POINT, width, last_height);
+    
+    snsView.hidden = YES;
+    loadingView.hidden = NO;
+    [loadingView startGif];
+}
+
+- (void)hideLoadingView {
+    snsView.hidden = NO;
+    inputView.hidden = NO;
+    loadingView.hidden = YES;
+    [loadingView stopGif];
 }
 
 - (void)moveView:(float)move {
@@ -430,6 +442,9 @@ enum DisplaySide {
 }
 
 - (void)didSelectNextBtn {
+    
+    [inputView endEditing];
+    
     NSString* code = [inputView getInputConfirmCode];
     NSString* phoneNo = [inputView getInputPhoneNumber];
     

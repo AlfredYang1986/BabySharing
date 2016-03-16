@@ -296,11 +296,13 @@
     
     NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
     [dic setValue:phoneNo forKey:@"phoneNo"];
+    [dic setValue:[Tools getDeviceUUID] forKey:@"uuid"];
     
     NSError * error = nil;
     NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
     
-    NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:[AUTH_HOST_DOMAIN stringByAppendingString:AUTH_CREATE_WITH_PHONE]]];
+//    NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:[AUTH_HOST_DOMAIN stringByAppendingString:AUTH_CREATE_WITH_PHONE]]];
+    NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:AUTH_TMP_WITH_PHONE]];
     
     if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
         *reVal = [result objectForKey:@"result"];

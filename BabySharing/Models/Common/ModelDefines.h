@@ -48,8 +48,8 @@ static NSString* const kDongDaNotificationkeyUserSignOutSuccess = @"sign out alr
 static NSString* const kDongDaNotificationkeySideChange = @"changing side";
 
 #pragma mark -- HOST DOMAIN
-#define HOST_DOMAIN                     @"http://www.altlys.com:9000/"
-//#define HOST_DOMAIN                     @"http://192.168.3.105:9000/"
+//#define HOST_DOMAIN                     @"http://www.altlys.com:9000/"
+#define HOST_DOMAIN                     @"http://192.168.3.105:9000/"
 //#define HOST_DOMAIN_SENDBOX             @"http://192.168.1.105:9000/"
 
 #pragma mark -- DOWNLOAD
@@ -77,6 +77,7 @@ static NSString* const kDongDaNotificationkeySideChange = @"changing side";
 #define AUTH_SINGOUT_USER                   [AUTH_HOST_DOMAIN stringByAppendingString:@"signout"]
 
 #define AUTH_PING_TEST                      [AUTH_HOST_DOMAIN stringByAppendingString:@"pingtest"]
+#define AUTH_TMP_WITH_PHONE                 [AUTH_HOST_DOMAIN stringByAppendingString:@"authCreateTmpUserWithPhone"]
 
 #pragma mark -- POST
 #define POST_HOST_DOMAIN                    [HOST_DOMAIN stringByAppendingString:@"post/"]

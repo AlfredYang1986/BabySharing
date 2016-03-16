@@ -219,6 +219,8 @@
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     [self.navigationController.navigationBar addSubview:sg];
     [self.navigationController.navigationBar addSubview:btn];
+    
+    self.tabBarController.tabBar.hidden = NO;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

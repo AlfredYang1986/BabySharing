@@ -14,7 +14,7 @@
     UIViewController* src = self.sourceViewController;
     UIViewController* dst = self.destinationViewController;
    
-    [UIView transitionFromView:src.view toView:dst.view duration:0.4f options:UIViewAnimationOptionTransitionCrossDissolve completion:^(BOOL finished) {
+    [UIView transitionFromView:src.view toView:dst.view duration:0.8f options:UIViewAnimationOptionTransitionCrossDissolve completion:^(BOOL finished) {
         [src presentViewController:dst animated:NO completion:^{
             NSLog(@"show content segue");
         }];
