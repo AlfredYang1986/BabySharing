@@ -29,7 +29,7 @@
 #define CANCEL_BTN_WIDTH                70
 #define CANCEL_BTN_WIDTH_WITH_MARGIN    70
 #define STATUS_BAR_HEIGHT               20
-#define TAB_BAR_HEIGHT                  49
+#define TAB_BAR_HEIGHT                  0 //49
 
 @interface FoundSearchController () <UISearchBarDelegate, SearchSegViewDelegate>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;

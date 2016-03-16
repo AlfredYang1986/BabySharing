@@ -8,7 +8,7 @@
 
 #import "DongDaTabBarItem.h"
 
-#define LAYER_ICON_MID_WIDTH_S     27.5
+#define LAYER_ICON_MID_WIDTH_S     32
 #define LAYER_ICON_MID_HEIGHT_S    LAYER_ICON_MID_WIDTH_S
 
 #define LAYER_ICON_NORMAL_WIDTH  25

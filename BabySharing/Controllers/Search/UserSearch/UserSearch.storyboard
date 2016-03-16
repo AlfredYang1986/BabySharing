@@ -9,7 +9,7 @@
         <!--认识更多的朋友-->
         <scene sceneID="CB3-Xe-s4V">
             <objects>
-                <viewController storyboardIdentifier="UserSearch" automaticallyAdjustsScrollViewInsets="NO" id="bUp-GG-spM" customClass="UserSearchController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UserSearch" automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="bUp-GG-spM" customClass="UserSearchController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="LWr-lG-khV"/>
                         <viewControllerLayoutGuide type="bottom" id="aJu-4L-z4e"/>

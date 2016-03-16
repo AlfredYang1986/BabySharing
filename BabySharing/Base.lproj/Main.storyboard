@@ -413,7 +413,7 @@
         <!--Setting-->
         <scene sceneID="zcu-Tp-Ihk">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Epo-Wf-qOr" customClass="ProfileSettingController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="Epo-Wf-qOr" customClass="ProfileSettingController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jBv-pD-cZV"/>
                         <viewControllerLayoutGuide type="bottom" id="hQ9-J5-2Fb"/>
@@ -492,7 +492,7 @@
         <!--个人信息-->
         <scene sceneID="9Zr-gx-T8d">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Qni-nN-2Jw" customClass="PersonalSettingController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="Qni-nN-2Jw" customClass="PersonalSettingController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hlw-Fq-R6p"/>
                         <viewControllerLayoutGuide type="bottom" id="Fb2-hU-bcJ"/>
@@ -627,7 +627,7 @@
         <!--search-->
         <scene sceneID="aqg-9M-0r3">
             <objects>
-                <viewController id="cou-sa-Bod" customClass="HomeSearchController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="cou-sa-Bod" customClass="HomeSearchController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cis-E1-EFY"/>
                         <viewControllerLayoutGuide type="bottom" id="myk-uE-6wP"/>
@@ -646,7 +646,7 @@
         <!--Detail-->
         <scene sceneID="LEa-He-PDn">
             <objects>
-                <viewController storyboardIdentifier="DetailContent" id="xUO-Ek-g05" customClass="HomeDetailViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailContent" automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="xUO-Ek-g05" customClass="HomeDetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rqK-yN-DbQ"/>
                         <viewControllerLayoutGuide type="bottom" id="Mnx-9N-dSO"/>
@@ -886,7 +886,7 @@
         <!--ChatGroup-->
         <scene sceneID="cQr-Si-4Sy">
             <objects>
-                <viewController storyboardIdentifier="chatGroup" automaticallyAdjustsScrollViewInsets="NO" id="lUX-aE-qZw" customClass="ChatGroupController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="chatGroup" automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="lUX-aE-qZw" customClass="ChatGroupController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fRE-X0-z2p"/>
                         <viewControllerLayoutGuide type="bottom" id="71x-7F-O97"/>
@@ -1117,7 +1117,7 @@
         <!--添加好友-->
         <scene sceneID="3yB-0q-i35">
             <objects>
-                <viewController id="fav-i3-Xga" customClass="AddingFriendsController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="fav-i3-Xga" customClass="AddingFriendsController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qfA-9O-jco"/>
                         <viewControllerLayoutGuide type="bottom" id="lz4-14-1BE"/>
@@ -1469,6 +1469,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="2PU-iO-cFw"/>
-        <segue reference="Xl7-6t-OQ8"/>
+        <segue reference="mYA-47-s6C"/>
     </inferredMetricsTieBreakers>
 </document>

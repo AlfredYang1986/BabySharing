@@ -174,10 +174,11 @@
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
 #ifdef DEBUG_NEW_HOME_PAGE
+#define CONTENT_TAB_BAT_HEIGHT          (_isPushed ? 0 : 49)
     {
         
         CGFloat width = [UIScreen mainScreen].bounds.size.width;
-        CGFloat height = [UIScreen mainScreen].bounds.size.height - 64 - 49;
+        CGFloat height = [UIScreen mainScreen].bounds.size.height - 64 - CONTENT_TAB_BAT_HEIGHT;
         queryViewData = [NSMutableArray array];
         queryView = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, width, height)];
         queryView.backgroundColor = [UIColor colorWithRed:0.9529 green:0.9529 blue:0.9529 alpha:1.f];
@@ -548,7 +549,10 @@
     }
     
     if ([_delegate isKindOfClass:[MainHomeViewDataDelegate class]]) {
-        self.navigationController.navigationBar.hidden = NO;
+//        self.navigationController.navigationBar.hidden = NO;
+        self.tabBarController.tabBar.hidden = NO;
+    } else {
+        self.tabBarController.tabBar.hidden = YES;
     }
 }
 

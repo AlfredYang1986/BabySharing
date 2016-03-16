@@ -9,7 +9,7 @@
         <!--Found Search Controller-->
         <scene sceneID="OLh-yG-uMs">
             <objects>
-                <viewController storyboardIdentifier="FoundSearch" automaticallyAdjustsScrollViewInsets="NO" id="Zxh-Ll-vwG" customClass="FoundSearchController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FoundSearch" automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="Zxh-Ll-vwG" customClass="FoundSearchController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="JJD-4t-83K"/>
                         <viewControllerLayoutGuide type="bottom" id="yQJ-Nw-A7Q"/>

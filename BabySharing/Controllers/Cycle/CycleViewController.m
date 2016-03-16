@@ -31,13 +31,8 @@
 
 //<<<<<<< HEAD
 ///*DropDownMenuProcotol, WEPopoverControllerDelegate, UIPopoverControllerDelegate,*/
-//@interface CycleViewController () <UITableViewDataSource, UITableViewDelegate,  createUpdateDetailProtocol>
-//@property (weak, nonatomic) IBOutlet UITableView *cycleTableView;
-//=======
-@interface CycleViewController () <UITableViewDataSource, UITableViewDelegate, DropDownMenuProcotol, WEPopoverControllerDelegate, UIPopoverControllerDelegate, createUpdateDetailProtocol>
-//@property (weak, nonatomic) IBOutlet UIView *descriptionView;
-@property (strong, nonatomic) IBOutlet UITableView *cycleTableView;
-//>>>>>>> monkeyheng_test1
+@interface CycleViewController () <UITableViewDataSource, UITableViewDelegate,  createUpdateDetailProtocol>
+@property (strong, nonatomic) UITableView *cycleTableView;
 
 @property (weak, nonatomic) LoginModel* lm;
 @property (weak, nonatomic) MessageModel* mm;
@@ -149,6 +144,7 @@
     self.view.backgroundColor = [UIColor colorWithRed:0.9529 green:0.9529 blue:0.9529 alpha:1.f];
     
     _cycleTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.hidesBottomBarWhenPushed = YES;
 }
 
 - (void)createNavigationBar {
@@ -411,18 +407,6 @@
     return @[act2, act];
 }
 
-//<<<<<<< HEAD
-//=======
-
-/*删除用到的函数*/
--(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete && indexPath.row > 0) {
-        NSLog(@"delete one row");
-    }
-}
-
-
-//>>>>>>> monkeyheng_test1
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
 }
@@ -500,55 +484,10 @@
     } else {
         tmp = [chatGroupArray_recommend objectAtIndex:indexPath.row];
     }
-//<<<<<<< HEAD
    
     cell.current_session = tmp;
     
     return cell;
-////=======
-//    
-//    cell.themeLabel.text = tmp.target_name;
-//    
-//    return cell;
-//}
-//
-//- (void)plusBtnSelected:(id)sender {
-//
-//    if (!popoverController) {
-//     
-//        NSArray* arr = nil;
-//        arr = @[@"创建圈子", @"编辑描述", @"更多推荐", @"取消"];
-//        DropDownMenu* menu = [[DropDownMenu alloc]init];
-//        [menu setMenuText:arr];
-//        menu.dropdownDelegate = self;
-//        
-//        popoverController = [[WEPopoverController alloc] initWithContentViewController:menu];
-//        popoverController.delegate = self;
-//        popoverController.passthroughViews = [NSArray arrayWithObject:self.navigationController.navigationBar];
-//    
-//        [popoverController presentPopoverFromBarButtonItem:self.navigationItem.rightBarButtonItem
-//                                  permittedArrowDirections:(UIPopoverArrowDirectionUp)
-//                                                  animated:YES];
-//        
-//    } else {
-//        [popoverController dismissPopoverAnimated:YES];
-//        popoverController = nil;
-//    }
-//}
-//
-//
-//#pragma mark -- drop down menu
-//- (void)dropDownMenu:(DropDownMenu *)menu didSelectMuneItemAtIndex:(NSInteger)index {
-//   
-//    if (index == 0) {
-//        [self performSegueWithIdentifier:@"addCycle" sender:nil];
-//    } else if (index == 1) {
-//        [self performSegueWithIdentifier:@"addDescription" sender:nil];
-//    }
-//    
-//    [popoverController dismissPopoverAnimated:YES];
-//    popoverController = nil;
-//>>>>>>> monkeyheng_test1
 }
 
 #pragma mark -- segue

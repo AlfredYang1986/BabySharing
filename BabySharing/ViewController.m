@@ -110,15 +110,15 @@ enum DisplaySide {
     /**
      * input method
      */
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasChange:) name:UIKeyboardDidChangeFrameNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHidden:) name:UIKeyboardDidHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHidden:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidChangeFrameNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
     [GotyeOCAPI removeListener:self];
 }
 
@@ -450,7 +450,8 @@ enum DisplaySide {
     
     CGFloat height = [UIScreen mainScreen].bounds.size.height - (inputView.frame.size.height + inputView.frame.origin.y) + modify;
     if (!inputView.isMoved) {
-        [self moveView:height - keyBoardFrame.size.height];
+//        [self moveView:height - keyBoardFrame.size.height];
+        [self moveView:-120];
         slg.hidden = YES;
         title.hidden = YES;
     }
@@ -465,7 +466,8 @@ enum DisplaySide {
 - (void)keyboardDidHidden:(NSNotification*)notification {
     CGFloat height = [UIScreen mainScreen].bounds.size.height - (inputView.frame.size.height + inputView.frame.origin.y) + modify;
     if (inputView.isMoved) {
-        [self moveView:keyBoardFrame.size.height - height];
+//        [self moveView:keyBoardFrame.size.height - height];
+        [self moveView:120];
         slg.hidden = NO;
         title.hidden = NO;
     }
@@ -573,8 +575,7 @@ enum DisplaySide {
 //                  [_contentController addOneNotification];
                 }];
             }
-            
-        
+
             [GotyeOCAPI markOneMessageAsRead:m isRead:YES];
         }
     }

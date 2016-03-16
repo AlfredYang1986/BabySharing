@@ -9,7 +9,7 @@
         <!--Search View Controller-->
         <scene sceneID="RKL-fb-Idc">
             <objects>
-                <viewController storyboardIdentifier="Search" id="W41-5b-ov8" customClass="SearchViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Search" hidesBottomBarWhenPushed="YES" id="W41-5b-ov8" customClass="SearchViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ZDK-ld-I54"/>
                         <viewControllerLayoutGuide type="bottom" id="hiL-pe-EbI"/>
@@ -82,7 +82,7 @@
         <!--Search Add Controller2-->
         <scene sceneID="S9r-xd-Nw6">
             <objects>
-                <viewController storyboardIdentifier="SearchAdd2" automaticallyAdjustsScrollViewInsets="NO" id="d3O-zg-98z" customClass="SearchAddController2" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchAdd2" automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="d3O-zg-98z" customClass="SearchAddController2" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="QmQ-3y-Gpr"/>
                         <viewControllerLayoutGuide type="bottom" id="W8b-LG-Pi7"/>
@@ -138,7 +138,7 @@
         <!--Search Add View Controller-->
         <scene sceneID="HQq-xI-DjN">
             <objects>
-                <viewController storyboardIdentifier="SearchAdd" automaticallyAdjustsScrollViewInsets="NO" id="xHA-NB-4ii" customClass="SearchAddViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchAdd" automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="xHA-NB-4ii" customClass="SearchAddViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rji-nd-qhb"/>
                         <viewControllerLayoutGuide type="bottom" id="S04-RC-1V8"/>
