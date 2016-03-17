@@ -211,6 +211,18 @@
 }
 
 + (NSString *)compareCurrentTime:(NSDate *)compareDate {
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    
+    
+    
+    //zzz表示时区，zzz可以删除，这样返回的日期字符将不包含时区信息。
+    
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss zzz"];
+    
+    
+    
+    
 //    秒数差
     NSTimeInterval  timeInterval = [compareDate timeIntervalSinceNow];
     timeInterval = -timeInterval;
@@ -233,6 +245,7 @@
         temp = timeInterval / (60 * 60) / 24 / 30 / 12;
         result = [NSString stringWithFormat:@"%ld年前",temp];
     }
+    NSLog(@"MonkeyHengLog: %@ === %@", [dateFormatter stringFromDate:compareDate], result);
     return result;
 }
 
