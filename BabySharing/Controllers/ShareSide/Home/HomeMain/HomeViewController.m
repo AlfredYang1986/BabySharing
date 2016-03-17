@@ -83,7 +83,8 @@
     UITableView *queryView;
     CGFloat rowHeight;
     NSMutableArray<QueryContent *> *queryViewData;
-    
+   
+    CATextLayer* badge;
     
     CGFloat contentOffsetY;
     NSTimer *timer;
@@ -253,6 +254,8 @@
         
         bkView.hidden = YES;
     }
+    
+
 }
 
 - (void)setDataelegate:(id<HomeViewControllerDataDelegate>)delegate {
@@ -286,7 +289,7 @@
     CALayer *layer = [[CALayer alloc] init];
     layer.frame = CGRectMake(0, 0, 30, 30);
     layer.position = CGPointMake(CGRectGetWidth(actionView.frame) / 2 - 65 / 2 - 0.5 - 4.5, CGRectGetHeight(actionView.frame) / 2);
-    layer.contents = (__bridge id _Nullable)([UIImage imageNamed:filepath].CGImage);
+    layer.contents = (id)([UIImage imageNamed:filepath].CGImage);
     [actionView.layer addSublayer:layer];
 
     maskLayer = [[CALayer alloc] init];
@@ -302,6 +305,21 @@
     actionView.layer.shadowRadius = 1;
 //    加入两个线条
     [bkView addSubview:actionView];
+    
+    // badge
+    CGPoint animateCenter = [actionView convertPoint:CGPointMake(28, actionView.frame.size.height / 2) toView:actionView];
+    badge = [CATextLayer layer];
+    badge.fontSize = 11.f;
+    badge.contentsScale = 2.f;
+    badge.backgroundColor = [UIColor clearColor].CGColor;
+    badge.foregroundColor = [UIColor whiteColor].CGColor;
+    badge.alignmentMode = @"center";
+    
+    CGSize sz = [@"..." sizeWithFont:[UIFont systemFontOfSize:11.f] constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
+    badge.frame = CGRectMake(0, 0, sz.width, sz.height);
+    
+    badge.position = CGPointMake(animateCenter.x, animateCenter.y);
+    [actionView.layer addSublayer:badge];
 }
 
 #pragma mark -- dong da home content logo
@@ -314,6 +332,8 @@
     imgView.center = CGPointMake([UIScreen mainScreen].bounds.size.width / 2 + 2, 12 + 64 / 2);
     imgView.tag = -98;
     [bkView addSubview:imgView];
+    
+
 }
 
 - (void)createAnimateView {
@@ -336,6 +356,8 @@
     [bkView addSubview:animationView];
     bkView.clipsToBounds = YES;
     [bkView bringSubviewToFront:actionView];
+    
+
 }
 
 - (NSInteger)getShowingIndex:(UITableView*)tableView {
@@ -383,6 +405,15 @@
         self.tabBarController.tabBar.hidden = NO;
     } else {
         self.tabBarController.tabBar.hidden = YES;
+    }
+    
+    int count = [GotyeOCAPI getTotalUnreadMessageCount];
+    if (count == 0) {
+        badge.hidden = YES;
+    } else if (count > 99) {
+        badge.string = @"...";
+    } else {
+        badge.string = [NSString stringWithFormat:@"%d", count];
     }
 }
 

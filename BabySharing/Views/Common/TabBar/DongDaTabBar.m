@@ -132,4 +132,11 @@
     
     [_bar.tabBar.delegate tabBar:_bar.tabBar didSelectItem:[_bar.tabBar.items objectAtIndex:index]];
 }
+
+- (void)changeItemImage:(UIImage*)img andIndex:(NSInteger)index {
+    DongDaTabBarItem* btn = (DongDaTabBarItem*)[self viewWithTag:index];
+    if (btn.img != img) {
+        btn.img = img;
+    }
+}
 @end

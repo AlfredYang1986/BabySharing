@@ -10,6 +10,9 @@
 
 @interface DongDaTabBarItem : UIButton
 
+@property (strong, nonatomic, setter=setNormalImg:) UIImage* img;
+@property (strong, nonatomic) UIImage* select_img;
+
 - (id)initWithMidImage:(UIImage*)image;
 - (id)initWithImage:(UIImage*)image andSelectImage:(UIImage*)selectImg;
 - (id)initWithImage:(UIImage*)image andSelectImage:(UIImage*)selectImg andTitle:(NSString*)title;

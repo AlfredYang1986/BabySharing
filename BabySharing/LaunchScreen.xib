@@ -8,26 +8,24 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchImage" translatesAutoresizingMaskIntoConstraints="NO" id="RZB-Q7-FDo">
-                    <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default.png" translatesAutoresizingMaskIntoConstraints="NO" id="cML-qc-XIB">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <color key="backgroundColor" red="0.66666666666666663" green="0.28568866985472063" blue="0.2696667955365406" alpha="1" colorSpace="calibratedRGB"/>
                 </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="RZB-Q7-FDo" secondAttribute="trailing" id="1so-Sp-4gv"/>
-                <constraint firstAttribute="bottom" secondItem="RZB-Q7-FDo" secondAttribute="bottom" id="IfI-QT-V9A"/>
-                <constraint firstItem="RZB-Q7-FDo" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="UQg-o0-kyz"/>
-                <constraint firstItem="RZB-Q7-FDo" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="hps-Vq-exW"/>
+                <constraint firstAttribute="bottom" secondItem="cML-qc-XIB" secondAttribute="bottom" id="445-MP-A1l"/>
+                <constraint firstItem="cML-qc-XIB" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Gx6-fd-R4I"/>
+                <constraint firstAttribute="trailing" secondItem="cML-qc-XIB" secondAttribute="trailing" id="VBp-uL-JBt"/>
+                <constraint firstItem="cML-qc-XIB" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="gqv-NC-QDT"/>
             </constraints>
-            <nil key="simulatedStatusBarMetrics"/>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="548" y="455"/>
         </view>
     </objects>
     <resources>
-        <image name="LaunchImage" width="375" height="667"/>
+        <image name="default.png" width="750" height="1334"/>
     </resources>
 </document>

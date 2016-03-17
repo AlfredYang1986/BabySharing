@@ -11,6 +11,8 @@
 		700AC5A21C7EE21400BA4F96 /* AddressBookDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 700AC5A11C7EE21400BA4F96 /* AddressBookDelegate.m */; };
 		700B0B881C5A1D5E00692A20 /* Notifications+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 700B0B851C5A1D5E00692A20 /* Notifications+CoreDataProperties.m */; };
 		700B0B891C5A1D5E00692A20 /* Notifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 700B0B871C5A1D5E00692A20 /* Notifications.m */; };
+		700FF9F11C9AE3F6009FB08B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 700FF9F01C9AE3F6009FB08B /* LaunchScreen.xib */; };
+		700FF9F31C9AE6CA009FB08B /* default.png in Resources */ = {isa = PBXBuildFile; fileRef = 700FF9F21C9AE6CA009FB08B /* default.png */; };
 		701233BF1C915260007F79C2 /* Targets+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 701233BC1C915260007F79C2 /* Targets+CoreDataProperties.m */; };
 		701233C01C915260007F79C2 /* Targets.m in Sources */ = {isa = PBXBuildFile; fileRef = 701233BE1C915260007F79C2 /* Targets.m */; };
 		702491D81C93EE60007922BC /* RegCurrentToken+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 702491D51C93EE60007922BC /* RegCurrentToken+CoreDataProperties.m */; };
@@ -130,7 +132,6 @@
 		EE0CEC571BDB13070016B6F4 /* PhoneInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0CEC4B1BDB13070016B6F4 /* PhoneInputViewController.m */; };
 		EE0CEC581BDB13070016B6F4 /* UserPrivacyController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0CEC4E1BDB13070016B6F4 /* UserPrivacyController.m */; };
 		EE0CEC5D1BDB15790016B6F4 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0CEC5C1BDB15790016B6F4 /* LoginViewController.m */; };
-		EE0DCE7E1C081FD400B5386B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE0DCE7D1C081FD400B5386B /* LaunchScreen.xib */; };
 		EE20BED41B6F430D00DE8455 /* OwnerQueryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EE20BED31B6F430D00DE8455 /* OwnerQueryModel.m */; };
 		EE262C991C1958F8008DCC4E /* DONNotificationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EE262C981C1958F8008DCC4E /* DONNotificationDelegate.m */; };
 		EE26D7621C1EB8AA00342E02 /* FoundSearchData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EE26D7601C1EB8AA00342E02 /* FoundSearchData.xcdatamodeld */; };
@@ -395,6 +396,8 @@
 		700B0B851C5A1D5E00692A20 /* Notifications+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Notifications+CoreDataProperties.m"; sourceTree = "<group>"; };
 		700B0B861C5A1D5E00692A20 /* Notifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notifications.h; sourceTree = "<group>"; };
 		700B0B871C5A1D5E00692A20 /* Notifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Notifications.m; sourceTree = "<group>"; };
+		700FF9F01C9AE3F6009FB08B /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		700FF9F21C9AE6CA009FB08B /* default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default.png; sourceTree = "<group>"; };
 		701233BB1C915260007F79C2 /* Targets+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Targets+CoreDataProperties.h"; sourceTree = "<group>"; };
 		701233BC1C915260007F79C2 /* Targets+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Targets+CoreDataProperties.m"; sourceTree = "<group>"; };
 		701233BD1C915260007F79C2 /* Targets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Targets.h; sourceTree = "<group>"; };
@@ -638,7 +641,6 @@
 		EE0CEC4E1BDB13070016B6F4 /* UserPrivacyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserPrivacyController.m; sourceTree = "<group>"; };
 		EE0CEC5B1BDB15790016B6F4 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		EE0CEC5C1BDB15790016B6F4 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
-		EE0DCE7D1C081FD400B5386B /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		EE20BED21B6F430D00DE8455 /* OwnerQueryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OwnerQueryModel.h; sourceTree = "<group>"; };
 		EE20BED31B6F430D00DE8455 /* OwnerQueryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OwnerQueryModel.m; sourceTree = "<group>"; };
 		EE262C971C1958F8008DCC4E /* DONNotificationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DONNotificationDelegate.h; path = BabySharing/Controllers/Message/NotificationsView/DONNotificationDelegate.h; sourceTree = SOURCE_ROOT; };
@@ -1963,6 +1965,7 @@
 		EEAAC8FB1B44E81A00D05C0B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				700FF9F21C9AE6CA009FB08B /* default.png */,
 				A00946391C96A9CD0015A641 /* DongDaBoundle.bundle */,
 				A0B7A7621C7C23CC00D78E6E /* YYBoundle.bundle */,
 				EE7416251B5B8CDF002CA1BC /* AreaCodeJson.txt */,
@@ -2579,7 +2582,6 @@
 		EEAACDB51B44F61700D05C0B /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				EE0DCE7D1C081FD400B5386B /* LaunchScreen.xib */,
 				EE7415C61B5B7097002CA1BC /* Main.storyboard */,
 				EEAACAF01B44E90300D05C0B /* AppDelegate.h */,
 				EEAACAF11B44E90300D05C0B /* AppDelegate.m */,
@@ -2587,6 +2589,7 @@
 				EEAACBBA1B44E90300D05C0B /* ViewController.m */,
 				EEAACB571B44E90300D05C0B /* GPUImage.h */,
 				EEAACB581B44E90300D05C0B /* Images.xcassets */,
+				700FF9F01C9AE3F6009FB08B /* LaunchScreen.xib */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -3181,8 +3184,8 @@
 				EE7910461B841AC8005E455B /* MessageViewCell.xib in Resources */,
 				EEBE1B891C17CB4E00EAA9D2 /* FoundSearchResultCell.xib in Resources */,
 				7041A5BD1C575A8700FEBFCD /* MessageChatGroupHeader2.xib in Resources */,
-				EE0DCE7E1C081FD400B5386B /* LaunchScreen.xib in Resources */,
 				A0B7A7631C7C23CC00D78E6E /* YYBoundle.bundle in Resources */,
+				700FF9F11C9AE3F6009FB08B /* LaunchScreen.xib in Resources */,
 				EE7C68731B82D31F0003C593 /* CycleOverCell.xib in Resources */,
 				EE9F736F1B8576C400F800DC /* MessageChatGroupHeader.xib in Resources */,
 				EE7416261B5B8CDF002CA1BC /* AreaCodeJson.txt in Resources */,
@@ -3213,6 +3216,7 @@
 				EEBE1B861C17CB4E00EAA9D2 /* FoundSearchHeader.xib in Resources */,
 				70D15B511C5B64C9007AC9AB /* MJRefresh.bundle in Resources */,
 				EEC980B21B8EB9EA0087E5A7 /* status-bar-pattern-black@2x.jpg in Resources */,
+				700FF9F31C9AE6CA009FB08B /* default.png in Resources */,
 				EE97441F1B78944600E81A70 /* MessageNotificationDetailCell.xib in Resources */,
 				70F5014B1C23ADC2007769F4 /* PostPreview.storyboard in Resources */,
 				EEAACD7A1B44EA8800D05C0B /* BabySharing.mobileprovision in Resources */,
@@ -3655,7 +3659,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
@@ -3695,7 +3698,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;

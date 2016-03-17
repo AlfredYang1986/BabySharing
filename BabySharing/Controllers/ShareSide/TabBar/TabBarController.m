@@ -28,6 +28,8 @@
 #import "HomeNavigationController.h"
 #import "AlbumViewController2.h"
 
+#import "GotyeOCAPI.h"
+
 //#define MOVING_DISTANCE     90
 //#define MOVING_BASE         20
 //#define MOVING_ANGLE        0.6
@@ -44,6 +46,9 @@
     UIView* backView;
     
     DongDaTabBar* dongda_tabbar;
+    
+    UIImage* img_home_with_no_message;
+    UIImage* img_home_with_unread_message;
 }
 
 @synthesize lm = _lm;
@@ -61,9 +66,12 @@
     [self unReadMessageCountChanged:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unReadMessageCountChanged:) name:@"unRead Message Changed" object:nil];
+   
+    img_home_with_no_message = [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"tab_home"] ofType:@"png"]];
+    img_home_with_unread_message = [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"tab_home_unread"] ofType:@"png"]];
     
     dongda_tabbar = [[DongDaTabBar alloc]initWithBar:self];
-    [dongda_tabbar addItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"tab_home"] ofType:@"png"]] andSelectedImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"tab_home_selected"] ofType:@"png"]] andTitle:@"主页"];
+    [dongda_tabbar addItemWithImg:img_home_with_no_message andSelectedImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"tab_home_selected"] ofType:@"png"]] andTitle:@"主页"];
     [dongda_tabbar addItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"tab_found"] ofType:@"png"]] andSelectedImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"tab_found_selected"] ofType:@"png"]] andTitle:@"发现"];
     [dongda_tabbar addMidItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"tab_publish"] ofType:@"png"]]];
     [dongda_tabbar addItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"tab_friends"] ofType:@"png"]] andSelectedImg:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"tab_friends_selected"] ofType:@"png"]] andTitle:@"好友"];
@@ -159,6 +167,13 @@
    
     if ([item.title isEqualToString:@"Post"]) {
         [self showCameraControllerOnController:self];
+    } else {
+        int count = [GotyeOCAPI getTotalUnreadMessageCount];
+        if (count > 0) {
+            [dongda_tabbar changeItemImage:img_home_with_unread_message andIndex:0];
+        } else {
+            [dongda_tabbar changeItemImage:img_home_with_no_message andIndex:0];
+        }
     }
 }
 
