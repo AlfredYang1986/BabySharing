@@ -117,20 +117,17 @@
 
 #pragma mark -- table view
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _um.userSearchPreviewResult.count;
+    return _um.userSearchPreviewResult.count + 20;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UserSearchCell* cell = [tableView dequeueReusableCellWithIdentifier:@"user search cell"];
     
     if (cell == nil) {
-//        NSArray* nib = [[NSBundle mainBundle] loadNibNamed:@"UserSearchCell" owner:self options:nil];
-//        cell = [nib firstObject];
         cell = [[UserSearchCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"user search cell"];
     }
-  
-    NSDictionary* dic = [_um.userSearchPreviewResult objectAtIndex:indexPath.row];
- 
+//    NSDictionary* dic = [_um.userSearchPreviewResult objectAtIndex:indexPath.row];
+    NSDictionary* dic = [_um.userSearchPreviewResult objectAtIndex:0];
     cell.delegate = self;
     cell.user_id = [dic objectForKey:@"user_id"];
     cell.screen_name = [dic objectForKey:@"screen_name"];

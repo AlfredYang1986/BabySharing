@@ -59,7 +59,7 @@
     FoundSearchResultCell* cell = [tableView cellForRowAtIndexPath:indexPath];
    
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    HomeTagsController* svc = [storyboard instantiateViewControllerWithIdentifier:@"TagSearch"];
+    HomeTagsController *svc = [storyboard instantiateViewControllerWithIdentifier:@"TagSearch"];
     svc.tag_name = cell.tag_name;
     svc.tag_type = cell.tag_type.integerValue;
         
@@ -69,6 +69,7 @@
 
 - (UITableViewCell*)queryHotTagCellInTableView:(UITableView*)tableView {
     FoundHotTagsCell* cell = [tableView dequeueReusableCellWithIdentifier:@"Hot Tag Cell"];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if (cell == nil) {
         cell = [[FoundHotTagsCell alloc]init];
     }
@@ -80,7 +81,7 @@
 
 - (UITableViewCell*)querySearchResultInTableView:(UITableView*)tableView atIndex:(NSInteger)index type:(SearchType)type{
     FoundSearchResultCell* cell = [tableView dequeueReusableCellWithIdentifier:@"Search Result"];
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if (cell == nil) {
         NSArray* nib = [[NSBundle mainBundle] loadNibNamed:@"FoundSearchResultCell" owner:self options:nil];
         cell = [nib firstObject];
@@ -109,6 +110,7 @@
 
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     FoundSearchHeader* header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"found header"];
+    
     if (header == nil) {
         header = [[FoundSearchHeader alloc] initWithReuseIdentifier:@"found header"];
     }
@@ -130,7 +132,6 @@
     }
     
     header.backgroundView = [[UIImageView alloc] initWithImage:[FoundSearchTagDeleage imageWithColor:[UIColor whiteColor] size:header.bounds.size alpha:1.0]];
-    
     return header;
 }
 
@@ -170,5 +171,10 @@
     [_fm queryFoundTagSearchWithInput:input andFinishBlock:^(BOOL success, NSDictionary *preview) {
         block(success, preview);
     }];
+}
+
+// 滚动收回键盘
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"hideKeyBoard" object:nil];
 }
 @end

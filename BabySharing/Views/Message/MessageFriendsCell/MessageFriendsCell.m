@@ -161,8 +161,8 @@
 
 - (void)setUserScreenName:(NSString*)name {
     _userNameLabel.text = name;
+    _userNameLabel.font = [UIFont systemFontOfSize:14.0f];
     [_userNameLabel sizeToFit];
-    
 #define TAG_2_NAME_MARGIN   10
 #define USER_NAME_TOP_MARGIN    8
 //    _userNameLabel.center = CGPointMake(_user_screen_photo.center.x + _user_screen_photo.frame.size.width / 2 + NAME_LEFT_MARGIN + _userNameLabel.frame.size.width / 2, PREFERRED_HEIGHT / 2);
@@ -173,7 +173,7 @@
     _userRoleTagBtn.hidden = NO;
     UILabel* label = [_userRoleTagBtn viewWithTag:-19];
     if (label == nil) {
-        label = [[UILabel alloc]init];
+        label = [[UILabel alloc] init];
         label.font = [UIFont systemFontOfSize:12.f];
         label.textColor = [UIColor whiteColor];
         label.tag = -19;

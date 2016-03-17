@@ -16,7 +16,7 @@
 #import "QueryContentItem.h"
 #import "HomeViewController.h"
 #import "UserHomeViewDataDelegate.h"
-
+#import "Define.h"
 //#define TAGED_USER_CELL                 0
 #define TAGED_RESULT_COUNT_CELL         0
 
@@ -70,7 +70,7 @@
     
     UILabel* label_t = [[UILabel alloc]init];
     label_t.text = _tag_name;
-    label_t.textColor = [UIColor colorWithWhite:0.5050 alpha:1.f];
+    label_t.textColor = TextColor;
     [label_t sizeToFit];
     self.navigationItem.titleView = label_t;
    
@@ -194,25 +194,25 @@
 //    
 //    } else
     if (indexPath.row == TAGED_RESULT_COUNT_CELL) {
-        UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"defatult"];
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"defatult"];
         
         if (cell == nil) {
             cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"default"];
         }
        
         if ([cell viewWithTag:-1] == nil) {
-            UIView* margin = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, COUNT_CELL_MARGIN)];
+            UIView *margin = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, COUNT_CELL_MARGIN)];
             margin.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
             margin.tag = -1;
             [cell addSubview:margin];
             
-            CALayer* layer = [CALayer layer];
+            CALayer *layer = [CALayer layer];
             layer.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.25].CGColor;
             layer.borderWidth = 1.f;
             layer.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 1);
             [cell.layer addSublayer:layer];
             
-            CALayer* line = [CALayer layer];
+            CALayer *line = [CALayer layer];
             line.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.10].CGColor;
             line.borderWidth = 1.f;
             line.frame = CGRectMake(0, COUNT_CELL_MARGIN - 1, [UIScreen mainScreen].bounds.size.width, 1);
@@ -220,16 +220,17 @@
         }
        
         if ([cell viewWithTag:-2] == nil) {
-            UILabel* label = [[UILabel alloc]init];
+            UILabel *label = [[UILabel alloc]init];
             label.tag = -2;
             label.textColor = [UIColor colorWithWhite:0.5059 alpha:1.f];
             label.font = [UIFont systemFontOfSize:14.f];
             
             [cell addSubview:label];
-        }
+         }
 
         UILabel* label = (UILabel*)[cell viewWithTag:-2];
         label.text = [NSString stringWithFormat:@"%lu个分享", (unsigned long)content_arr.count];
+        label.textColor = TextColor;
         [label sizeToFit];
         label.center = CGPointMake(10.5 + label.frame.size.width / 2, COUNT_CELL_MARGIN + COUNT_CELL_CONTENT_HEIGHT / 2);
 

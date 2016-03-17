@@ -66,7 +66,7 @@
 //    line.backgroundColor = [UIColor re];
 //    [_seg addSubview:line];
     
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideKeyBoard) name:@"hideKeyBoard" object:nil];
 
     
 //    _queryView.scrollEnabled = NO;
@@ -283,5 +283,9 @@
     [_current_delegate asyncQueryFoundSearchDataWithFinishBlock:^{
         [_queryView reloadData];
     }];
+}
+
+- (void)hideKeyBoard {
+    [_searchBar resignFirstResponder];
 }
 @end

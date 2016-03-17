@@ -41,10 +41,11 @@
         cell = [self queryHotTagCellInTableView:tableView];
         return cell;
     } else {
-        FoundSearchResultCell *cell = (FoundSearchResultCell *)[self querySearchResultInTableView:tableView atIndex:indexPath.row typo:SearchRole];
-        return cell;
+        cell = (FoundSearchResultCell *)[self querySearchResultInTableView:tableView atIndex:indexPath.row typo:SearchRole];
 //        return [self querySearchResultInTableView:tableView atIndex:indexPath.row];
     }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -65,7 +66,7 @@
     FoundSearchResultCell* cell = [tableView cellForRowAtIndexPath:indexPath];
    
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"UserSearch" bundle:nil];
-    UserSearchController* svc = [storyboard instantiateViewControllerWithIdentifier:@"UserSearch"];
+    UserSearchController *svc = [storyboard instantiateViewControllerWithIdentifier:@"UserSearch"];
     svc.role_tag = cell.tag_name;
     svc.user_search_type = UserSearchTypeRoleTag;
     
@@ -78,7 +79,7 @@
 
 - (UITableViewCell*)queryHotTagCellInTableView:(UITableView*)tableView {
     FoundHotTagsCell* cell = [tableView dequeueReusableCellWithIdentifier:@"Hot Tag Cell"];
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if (cell == nil) {
         cell = [[FoundHotTagsCell alloc]init];
     }
@@ -90,7 +91,7 @@
 
 - (UITableViewCell*)querySearchResultInTableView:(UITableView*)tableView atIndex:(NSInteger)index typo:(SearchType)type{
     FoundSearchResultCell* cell = [tableView dequeueReusableCellWithIdentifier:@"Search Result"];
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if (cell == nil) {
         NSArray* nib = [[NSBundle mainBundle] loadNibNamed:@"FoundSearchResultCell" owner:self options:nil];
         cell = [nib firstObject];
@@ -190,5 +191,10 @@
     [_fm queryFoundRoleTagSearchWithInput:input andFinishBlock:^(BOOL success, NSDictionary *preview) {
         block(success, preview);
     }];
+}
+
+#pragma 键盘收回通知
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"hideKeyBoard" object:nil];
 }
 @end

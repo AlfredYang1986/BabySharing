@@ -186,9 +186,13 @@
 //    TagTypeTags,
 //    TagTypeBrand,
     
+    //    0
     UIImage* image0 = [UIImage imageNamed:[resourceBundle pathForResource:@"tag_location_dark" ofType:@"png"]];
+    //    1
     UIImage* image1 = [UIImage imageNamed:[resourceBundle pathForResource:@"tag_time_dark" ofType:@"png"]];
-    UIImage* image2 = [UIImage imageNamed:[resourceBundle pathForResource:@"tag_tag_dark" ofType:@"png"]];
+    //    3
+    UIImage* image2 = [UIImage imageNamed:[resourceBundle pathForResource:@"tag_brand_dark" ofType:@"png"]];
+    
 
     int index = 0;
     CGFloat offset = 0;
@@ -212,7 +216,7 @@
             img.image = image0;
         } else if (tmp.tag_type.integerValue == 1) {
             img.image = image1;
-        } else {
+        } else if (tmp.tag_type.integerValue == 3){
             img.image = image2;
         }
     

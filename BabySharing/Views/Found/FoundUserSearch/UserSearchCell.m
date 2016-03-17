@@ -14,13 +14,13 @@
 
 #import "QueryContent.h"
 #import "QueryContentItem.h"
-
+#import "Define.h"
 #import "HomeViewController.h"
 #import "UserHomeViewDataDelegate.h"
 #import "AppDelegate.h"
 
-#define CELL_HEADER_HEIGHT  55
-#define CELL_FOOTER_HEIGHT  25 + 10
+#define CELL_HEADER_HEIGHT  59
+#define CELL_FOOTER_HEIGHT  10
 
 #define PHOTO_PER_LINE      3
 
@@ -41,6 +41,8 @@
     NSString* role_tag;
 //
     NSArray* contents;
+    UIView *upline;
+    UIView *downline;
 }
 
 @end
@@ -62,21 +64,31 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    queryView = [[UITableView alloc]init];
+    queryView = [[UITableView alloc] init];
     queryView.backgroundColor = [UIColor whiteColor];
     queryView.scrollEnabled = NO;
     queryView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self addSubview:queryView];
-    
+    self.contentView.backgroundColor = Background;
     queryView.delegate = self;
     queryView.dataSource = self;
 
-    [queryView registerNib:[UINib nibWithNibName:@"MessageFriendsCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"Header Cell"];
+    downline = [[UIView alloc] init];
+    downline.backgroundColor = DownLineColor;
+    upline = [[UIView alloc] init];
+    upline.backgroundColor = UpLineColor;
+    [queryView registerNib: [UINib nibWithNibName:@"MessageFriendsCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"Header Cell"];
 }
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    queryView.frame = CGRectMake(4, 0, self.bounds.size.width, self.bounds.size.height);
+    queryView.frame = CGRectMake(4, 0, self.bounds.size.width, self.bounds.size.height - 5);
+    upline.frame = CGRectMake(0, CGRectGetHeight(queryView.frame) - 1, CGRectGetWidth(queryView.frame), 10);
+    downline.frame = CGRectMake(0, 0, CGRectGetWidth(queryView.frame), 1);
+    [queryView addSubview:upline];
+    [queryView bringSubviewToFront:upline];
+    [queryView addSubview:downline];
+    [queryView bringSubviewToFront:downline];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -112,7 +124,7 @@
 + (CGFloat)preferredHeight {
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     CGFloat img_height = width / PHOTO_PER_LINE;
-    return CELL_HEADER_HEIGHT + img_height + CELL_FOOTER_HEIGHT;
+    return CELL_HEADER_HEIGHT + img_height + CELL_FOOTER_HEIGHT + 5;
 }
 
 - (void)setConnections:(UserPostOwnerConnections)connections {
@@ -129,7 +141,7 @@
     if (indexPath.row == 0) {
         return CELL_HEADER_HEIGHT;
     } else if (indexPath.row == 1) {
-        return [UIScreen mainScreen].bounds.size.width / PHOTO_PER_LINE;
+        return ([UIScreen mainScreen].bounds.size.width - 64) / PHOTO_PER_LINE - 5;
     } else {
         return CELL_FOOTER_HEIGHT;
     }
@@ -142,13 +154,12 @@
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (indexPath.row == 0) {
-        MessageFriendsCell* cell = [tableView dequeueReusableCellWithIdentifier:@"Header Cell"];
+        MessageFriendsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Header Cell"];
         
         if (cell == nil) {
             NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MessageFriendsCell" owner:self options:nil];
             cell = [nib objectAtIndex:0];
         }
-        
 //        NSDictionary* tmp = [data_arr objectAtIndex:indexPath.row];
         cell.delegate = self;
         cell.cellHeight = CELL_HEADER_HEIGHT;
@@ -201,29 +212,29 @@
             cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"default"];
         }
         
-        if ([cell viewWithTag:1] == nil) {
-            UIView* bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 25)];
-            bgView.backgroundColor = [UIColor whiteColor];
-            [cell addSubview:bgView];
-        }
-        
-        if ([cell viewWithTag:2] == nil) {
-            UIView* marginView = [[UIView alloc]initWithFrame:CGRectMake(0, 25, [UIScreen mainScreen].bounds.size.width, 10)];
-            marginView.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
-            [cell addSubview:marginView];
-            
-            CALayer* layer = [CALayer layer];
-            layer.borderWidth = 1.f;
-            layer.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.35].CGColor;
-            layer.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 1);
-            [marginView.layer addSublayer:layer];
-            
-            CALayer* line = [CALayer layer];
-            line.borderWidth = 1.f;
-            line.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.10].CGColor;
-            line.frame = CGRectMake(0, 10 - 1, [UIScreen mainScreen].bounds.size.width, 1);
-            [marginView.layer addSublayer:line];
-        }
+//        if ([cell viewWithTag:1] == nil) {
+//            UIView* bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 25)];
+//            bgView.backgroundColor = [UIColor whiteColor];
+//            [cell addSubview:bgView];
+//        }
+//        
+//        if ([cell viewWithTag:2] == nil) {
+//            UIView* marginView = [[UIView alloc]initWithFrame:CGRectMake(0, 25, [UIScreen mainScreen].bounds.size.width, 10)];
+//            marginView.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
+//            [cell addSubview:marginView];
+//            
+//            CALayer* layer = [CALayer layer];
+//            layer.borderWidth = 1.f;
+//            layer.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.35].CGColor;
+//            layer.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 1);
+//            [marginView.layer addSublayer:layer];
+//            
+//            CALayer* line = [CALayer layer];
+//            line.borderWidth = 1.f;
+//            line.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.10].CGColor;
+//            line.frame = CGRectMake(0, 10 - 1, [UIScreen mainScreen].bounds.size.width, 1);
+//            [marginView.layer addSublayer:line];
+//        }
         
         return cell;
     }
@@ -263,4 +274,5 @@
 //    [_delegate didSelectedUserContentImages:0 andUserID:user_id];
     [_delegate didSelectedUserRelationsUserID:_user_id andCurrentConnection:connections];
 }
+
 @end

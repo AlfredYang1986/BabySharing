@@ -12,7 +12,9 @@
 
 #define BORDER_MODIFY       1
 
-@implementation AlbumTableCell
+@implementation AlbumTableCell {
+    NSMutableArray *arr;
+}
 
 @synthesize delegate = _delegate;
 @synthesize cannot_selected = _cannot_selected;
@@ -36,6 +38,8 @@
     if (_marign_between == 0) {
         _marign_between = 1.f;
     }
+    
+
     
     CGFloat screen_width = [UIScreen mainScreen].bounds.size.width - _margin_left - _margin_right - _marign_between * (views_count + 1);
     CGFloat step_width = screen_width / views_count;
@@ -73,6 +77,15 @@
         [self addSubview:tmp];
     }
 }
+
+//- (void)layoutSubviews {
+//    CGFloat width = CGRectGetWidth(self.frame) / 3;
+//    CGFloat height = CGRectGetHeight(self.frame);
+//    for (int i = 0; i < image_view.count; i++) {
+//        UIView *view = [image_view objectAtIndex:i];
+//        view.frame = CGRectMake(width * i, 0, width - 2, height);
+//    }
+//}
 
 - (void)setUpContentViewWithImageURLs2:(NSArray*)image_arr atLine:(NSInteger)row andType:(AlbumControllerType)type {
     views_count = [_delegate getViewsCount];
@@ -137,6 +150,9 @@
 
     for (int index = 0; index < image_view.count; ++index) {
         [((UIView*)[image_view objectAtIndex:index]) removeFromSuperview];
+    }
+    if (image_view == nil) {
+        image_view = [NSMutableArray array];
     }
     [image_view removeAllObjects];
         

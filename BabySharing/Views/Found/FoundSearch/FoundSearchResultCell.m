@@ -10,6 +10,8 @@
 #import "TmpFileStorageModel.h"
 #import "RemoteInstance.h"
 #import "TalkerHeaderView.h"
+#import "Define.h"
+#import "Tools.h"
 
 #define RECOMMEND_COUNT         3
 
@@ -27,7 +29,7 @@
 @interface FoundSearchResultCell ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *nextIcon;
-@property (weak, nonatomic) IBOutlet UILabel *resultCountLabel;
+//@property (weak, nonatomic) IBOutlet UILabel *resultCountLabel;
 @property (strong, nonatomic) UIView* btn;
 @property (nonatomic, strong) TalkerHeaderView *headerView;
 
@@ -35,22 +37,20 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *margin2;
 @property (weak, nonatomic) NSArray *imageArr;
 
+@property (strong, nonatomic) UILabel *resultCountLabel;
 
 
 @end
 
 @implementation FoundSearchResultCell
 
-@synthesize resultCountLabel = _resultCountLabel;
+//@synthesize resultCountLabel = _resultCountLabel;
 @synthesize nextIcon = _nextIcon;
 
 @synthesize isScreenPhoto = _isScreenPhoto;
 
 - (void)awakeFromNib {
     // Initialization code
-    _resultCountLabel.text = @"共%d个结果";
-    _resultCountLabel.hidden = YES;
-    [_resultCountLabel sizeToFit];
     
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"YYBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
@@ -192,9 +192,6 @@
     NSDictionary *attribute = @{NSFontAttributeName: font};
     CGSize sz_font = [title boundingRectWithSize:size options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attribute context:nil].size;
 //    CGSize sz_font = [title sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
-    CGSize sz = CGSizeMake(TAG_MARGIN + ICON_WIDTH + sz_font.width + TAG_MARGIN, TAG_HEIGHT);
-    
-    _btn = [[UIView alloc]initWithFrame:CGRectMake(0, 0, sz.width, sz.height)];
    
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
@@ -204,9 +201,12 @@
     //    TagTypeTags,
     //    TagTypeBrand,
     
+//    0 
     UIImage* image0 = [UIImage imageNamed:[resourceBundle pathForResource:@"tag_location_dark" ofType:@"png"]];
+//    1
     UIImage* image1 = [UIImage imageNamed:[resourceBundle pathForResource:@"tag_time_dark" ofType:@"png"]];
-    UIImage* image2 = [UIImage imageNamed:[resourceBundle pathForResource:@"tag_tag_dark" ofType:@"png"]];
+//    3
+    UIImage* image2 = [UIImage imageNamed:[resourceBundle pathForResource:@"tag_brand_dark" ofType:@"png"]];
     
     UIImageView* img = [[UIImageView alloc]initWithFrame:CGRectMake(TAG_MARGIN / 2, TAG_MARGIN / 4, ICON_WIDTH, ICON_HEIGHT)];
     img.center = CGPointMake(TAG_MARGIN / 2 + img.frame.size.width / 2, TAG_HEIGHT / 2);
@@ -215,41 +215,83 @@
         img.image = image0;
     } else if (type.integerValue == 1) {
         img.image = image1;
-    } else {
+    } else if (type.integerValue == 3){
         img.image = image2;
+    } else {
+
     }
     
-    [_btn addSubview:img];
-    
-    UILabel* label = [[UILabel alloc]init];
-    label.font = font;
-    label.text = title;
-    label.textColor = [UIColor colorWithWhite:0.3059 alpha:1.f];
-    label.frame = CGRectMake(TAG_MARGIN + ICON_WIDTH, 0, sz_font.width, TAG_HEIGHT);
-    label.textAlignment = NSTextAlignmentLeft;
-    [_btn addSubview:label];
-    
-    _btn.layer.borderColor = [UIColor colorWithWhite:0.6078 alpha:1.f].CGColor;
-    _btn.layer.borderWidth = 1.f;
-    _btn.layer.cornerRadius = TAG_CORDIUS;
-    _btn.clipsToBounds = YES;
-    _btn.center = CGPointMake(MARGIN + _btn.frame.size.width / 2, [FoundSearchResultCell preferredHeight] / 2);
-    [self addSubview:_btn];
-    
-    CGFloat width = self.frame.size.width;;
-    UIView* tmp = [self viewWithTag:-1];
-    if (width - MARGIN - sz.width - tmp.frame.origin.x > _resultCountLabel.frame.size.width + 20) {
-        _resultCountLabel.hidden = YES;
+    if (type.integerValue == -1) {
+        CGSize sz = CGSizeMake(sz_font.width + TAG_MARGIN, TAG_HEIGHT);
+        _btn = [[UIView alloc] initWithFrame:CGRectMake(0, 0, sz.width, 16)];
+        UILabel* label = [[UILabel alloc]init];
+        label.font = font;
+        label.text = title;
+        label.textColor = [UIColor whiteColor];
+        label.frame = CGRectMake(5, 0, sz_font.width, TAG_HEIGHT);
+        label.textAlignment = NSTextAlignmentCenter;
+        label.center = CGPointMake(CGRectGetWidth(_btn.frame) / 2, CGRectGetHeight(_btn.frame) / 2);
+        [_btn addSubview:label];
+        
+        [_btn setBackgroundColor:[Tools colorWithRED:254.0 GREEN:192.0 BLUE:0.0 ALPHA:1.0]];
+        _btn.layer.masksToBounds = YES;
+        _btn.layer.cornerRadius = 3;
+        _btn.layer.shouldRasterize = YES;
+        _btn.layer.rasterizationScale = [UIScreen mainScreen].scale;
+        _btn.center = CGPointMake(CGRectGetWidth(_btn.frame) / 2 + MARGIN, [FoundSearchResultCell preferredHeight] / 2);
+        [self addSubview:_btn];
+    } else {
+        CGSize sz = CGSizeMake(TAG_MARGIN + ICON_WIDTH + sz_font.width + TAG_MARGIN, TAG_HEIGHT);
+        
+        _btn = [[UIView alloc]initWithFrame:CGRectMake(0, 0, sz.width, sz.height)];
+        [_btn addSubview:img];
+        UILabel* label = [[UILabel alloc]init];
+        label.font = font;
+        label.text = title;
+        label.textColor = [UIColor colorWithWhite:0.3059 alpha:1.f];
+        label.frame = CGRectMake(TAG_MARGIN + ICON_WIDTH, 0, sz_font.width, TAG_HEIGHT);
+        label.textAlignment = NSTextAlignmentLeft;
+        [_btn addSubview:label];
+        _btn.layer.borderColor = [UIColor colorWithWhite:0.6078 alpha:1.f].CGColor;
+        _btn.layer.borderWidth = 1.f;
+        _btn.layer.cornerRadius = TAG_CORDIUS;
+        _btn.clipsToBounds = YES;
+        _btn.center = CGPointMake(MARGIN + _btn.frame.size.width / 2, [FoundSearchResultCell preferredHeight] / 2);
+        [self addSubview:_btn];
     }
+    
+//    [_btn addSubview:img];
+//    
+//    UILabel* label = [[UILabel alloc]init];
+//    label.font = font;
+//    label.text = title;
+//    label.textColor = [UIColor colorWithWhite:0.3059 alpha:1.f];
+//    label.frame = CGRectMake(TAG_MARGIN + ICON_WIDTH, 0, sz_font.width, TAG_HEIGHT);
+//    label.textAlignment = NSTextAlignmentLeft;
+//    [_btn addSubview:label];
+//    
+//    _btn.layer.borderColor = [UIColor colorWithWhite:0.6078 alpha:1.f].CGColor;
+//    _btn.layer.borderWidth = 1.f;
+//    _btn.layer.cornerRadius = TAG_CORDIUS;
+//    _btn.clipsToBounds = YES;
+//    _btn.center = CGPointMake(MARGIN + _btn.frame.size.width / 2, [FoundSearchResultCell preferredHeight] / 2);
+//    [self addSubview:_btn];
+
+//    3-17夜 也许没用
+//    CGFloat width = self.frame.size.width;;
+//    UIView* tmp = [self viewWithTag:-1];
+//    if (width - MARGIN - sz.width - tmp.frame.origin.x > self.resultCountLabel.frame.size.width + 20) {
+//        self.resultCountLabel.hidden = NO;
+//    }
 }
 
 - (void)setSearchResultCount:(NSInteger)count {
     if (count > 0) {
-        _resultCountLabel.text = self.type == SearchRole ? [NSString stringWithFormat:@"已有%ld个人认领了该角色", (long)count] : [NSString stringWithFormat:@"共%ld个分享", (long)count];
-        [_resultCountLabel sizeToFit];
-        _resultCountLabel.hidden = NO;
+        self.resultCountLabel.text = self.type == SearchRole ? [NSString stringWithFormat:@"已有%ld个人认领了该角色", (long)count] : [NSString stringWithFormat:@"共%ld个分享", (long)count];
+        [self.resultCountLabel sizeToFit];
+        self.resultCountLabel.hidden = NO;
     } else {
-        _resultCountLabel.hidden = YES;
+        self.resultCountLabel.hidden = YES;
     }
 
 }
@@ -271,9 +313,16 @@
         UIView *view = (UIView*)[self viewWithTag:-3 + i];
         [view.subviews firstObject].hidden = NO;
         [view.subviews firstObject].center = CGPointMake(CGRectGetWidth(view.frame) / 2, CGRectGetHeight(view.frame) / 2);
-        NSLog(@"MonkeyHengLog: %@ === %@", @"view", view);
-        NSLog(@"MonkeyHengLog: %f === %f", [view.subviews firstObject].center.x, [view.subviews firstObject].center.y);
     }
+}
 
+- (UILabel *)resultCountLabel {
+    if (_resultCountLabel == nil) {
+        _resultCountLabel = [[UILabel alloc] init];
+        _resultCountLabel.font = [UIFont systemFontOfSize:11.0];
+        _resultCountLabel.textColor = TextColor;
+        [self addSubview:_resultCountLabel];
+    }
+    return _resultCountLabel;
 }
 @end
