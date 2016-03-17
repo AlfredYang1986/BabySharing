@@ -348,7 +348,7 @@
     }
 }
 
-- (void)postNotLikeToServiceWithPostID:(NSString*)post_id withFinishBlock:(likeFinishBlock)block {
+- (void)postUnLikeToServiceWithPostID:(NSString*)post_id withFinishBlock:(likeFinishBlock)block {
     AppDelegate* delegate = (AppDelegate*)([UIApplication sharedApplication].delegate);
     NSString* auth_token = delegate.lm.current_auth_token;
     NSString* user_id = delegate.lm.current_user_id;
@@ -361,15 +361,15 @@
     NSError * error = nil;
     NSData* jsonData =[NSJSONSerialization dataWithJSONObject:[dic copy] options:NSJSONWritingPrettyPrinted error:&error];
     
-    NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:[POST_HOST_DOMAIN stringByAppendingString:POST_LIKE]]];
+    NSDictionary* result = [RemoteInstance remoteSeverRequestData:jsonData toUrl:[NSURL URLWithString:POST_UN_LIKE]];
     
     if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
-        NSLog(@"post like success");
+        NSLog(@"post unlike success");
         NSArray* like_array =  [[result objectForKey:@"result"] objectForKey:@"likes"];
         NSNumber* like_count =  [[result objectForKey:@"result"] objectForKey:@"likes_count"];
         block(YES, [QueryContent refreshLikesToPostWithID:post_id withArr:like_array andLikesCount:like_count inContext:delegate.qm.doc.managedObjectContext]);
     } else {
-        NSLog(@"post like failed");
+        NSLog(@"post unlike failed");
         //        NSDictionary* reError = [result objectForKey:@"error"];
         //        NSString* msg = [reError objectForKey:@"message"];
         //        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:msg delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];

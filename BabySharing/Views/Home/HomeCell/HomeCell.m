@@ -366,7 +366,7 @@
 }
 
 - (void)praiseImageTap {
-    NSLog(@"给了个赞");
+    NSLog(@"heart btn did selected");
     if (self.content.isLike.integerValue == 1) {
         [_delegate didSelectNotLikeBtn:_content complete:^(BOOL success) {
             if (!success) {

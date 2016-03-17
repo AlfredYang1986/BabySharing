@@ -26,6 +26,10 @@
 - (NSInteger)getRelations;
 - (NSString*)getNickName;
 
+- (NSInteger)getLikesCount;
+- (NSInteger)getBeenLikedCount;
+- (NSInteger)getBeenPushCount;
+
 - (OwnerQueryModel *)getOM;
 - (OwnerQueryPushModel *)getOPM;
 - (NSObject *)getOwnerModel;

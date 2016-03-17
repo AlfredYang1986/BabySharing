@@ -23,7 +23,7 @@
 - (void)setNickName:(NSString*)nickName;
 - (void)setRelations:(UserPostOwnerConnections)relations;
 
-- (void)setShareCount:(NSInteger)share_count andThumUpCount:(NSInteger)thumup_count andBeenThumupCount:(NSInteger)been_thumup_count;
+- (void)setThumUpCount:(NSInteger)thumup_count andBeenThumUpCount:(NSInteger)been_thump andBeenPushCount:(NSInteger)been_push;
 
 //+ (CGFloat)preferredHeight;
 

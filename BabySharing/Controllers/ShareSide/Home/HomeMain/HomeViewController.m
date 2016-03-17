@@ -507,7 +507,20 @@
 }
 
 - (void)didSelectNotLikeBtn:(id)content complete:(complete)complete{
+    NSLog(@"collect for this user");
+    QueryContent* cur = (QueryContent*)content;
+    NSLog(@"like post id: %@", cur.content_post_id);
     
+    AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    [delegate.pm postUnLikeToServiceWithPostID:cur.content_post_id withFinishBlock:^(BOOL success, QueryContent *content) {
+        //        if (success) {
+        //            NSLog(@"like post success");
+        //            NSString* msg = @"like post success";
+        //            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success" message:msg delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+        //            [alert show];
+        //        }
+        complete(success);
+    }];
 }
 
 - (void)didSelectScreenImg:(id)content {

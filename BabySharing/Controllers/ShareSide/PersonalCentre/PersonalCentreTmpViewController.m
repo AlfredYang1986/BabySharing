@@ -198,7 +198,7 @@
     [head_view setNickName:[self getNickName]];
     [head_view setRoleTag:[self getRoleTag]];
     [head_view setRelations:[self getRelations]];
-    [head_view setShareCount:[self getSharedCount] andThumUpCount:[self getSharedCount] andBeenThumupCount:[self getSharedCount]];
+    [head_view setThumUpCount:[self getLikesCount] andBeenThumUpCount:[self getBeenLikedCount] andBeenPushCount:[self getBeenPushCount]];
 }
 
 - (void)createFakeNaviBar {
@@ -356,6 +356,25 @@
     } else return nil;
 }
 
+- (NSInteger)getLikesCount {
+    if (dic_profile_details) {
+        return ((NSNumber*)[dic_profile_details objectForKey:@"likes_count"]).integerValue;
+    } else return 0;
+}
+     
+- (NSInteger)getBeenLikedCount {
+    if (dic_profile_details) {
+        return ((NSNumber*)[dic_profile_details objectForKey:@"been_liked"]).integerValue;
+    } else return 0;
+}
+     
+- (NSInteger)getBeenPushCount {
+    if (dic_profile_details) {
+        return ((NSNumber*)[dic_profile_details objectForKey:@"been_pushed"]).integerValue;
+    } else return 0;
+}
+     
+     
 - (NSInteger)getSharedCount {
     if (dic_profile_details) {
         return ((NSNumber*)[dic_profile_details objectForKey:@"posts_count"]).integerValue;
@@ -375,8 +394,7 @@
 }
 
 - (NSString*)getLocation {
-    //    return @"Not Implemented";
-    return @"北京 东城区";
+    return @"Not Implemented";
 }
 
 - (NSString*)getNickName {

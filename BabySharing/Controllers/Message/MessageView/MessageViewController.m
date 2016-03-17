@@ -237,8 +237,10 @@
     CGFloat offset_y = 0;
    
     offset_y = 20 + 44 + 10;
+    
+#define BOTTOM_BAR_HEIGHT           49
 
-    _queryView.frame = CGRectMake(offset_x, offset_y, width, height - offset_y);
+    _queryView.frame = CGRectMake(offset_x, offset_y, width, height - offset_y - BOTTOM_BAR_HEIGHT);
     offset_x += width;
 
     offset_y += SEARCH_BAR_MARGIN_TOP;
@@ -251,7 +253,7 @@
 
     offset_y += SEGAMENT_MARGIN_BOTTOM;
     
-    CGFloat height_last = height - offset_y;
+    CGFloat height_last = height - offset_y - BOTTOM_BAR_HEIGHT;
     _friendsQueryView.frame = CGRectMake(offset_x, offset_y, width, height_last);
 }
 
