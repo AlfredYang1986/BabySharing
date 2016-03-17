@@ -21,7 +21,7 @@
                             CGFloat found_height = [UIScreen mainScreen].bounds.size.height; \
                             CGRect rc1 = CGRectMake(0, search_height, found_width, found_height);
 
-#define FOUND_VIEW_START    CGRectMake(0, STATUS_HEIGHT + search_height + 10, rc1.size.width, rc1.size.height - STATUS_HEIGHT - search_height - 49)
+#define FOUND_VIEW_START    CGRectMake(0, STATUS_HEIGHT + search_height + 10, rc1.size.width, rc1.size.height - STATUS_HEIGHT - search_height - 49 - 12)
 #define FOUND_VIEW_END      CGRectMake(0, 0, rc1.size.width, rc1.size.height - STATUS_HEIGHT - 49)
 
 #define SEARCH_RECT         CGRectMake(0, STATUS_HEIGHT, rc_search.size.width, rc_search.size.height)
@@ -150,24 +150,24 @@
 }
 
 - (void)scrollDidScroll:(UIScrollView*)scrollView {
-    SEARCH_BOUNDS
-    FOUND_BOUNDS
-    if (scrollView.contentOffset.y > 100) {
-        if (_searchBar.hidden == NO) {
-            _searchBar.hidden = YES;
-            _queryView.frame = FOUND_VIEW_END;
-            line.hidden = YES;
-            line1.hidden = YES;
-        }
-        
-    } else {
-        if (_searchBar.hidden == YES) {
-            _searchBar.hidden = NO;
-            _queryView.frame = FOUND_VIEW_START;
-            line.hidden = NO;
-            line1.hidden = NO;
-        }
-    }
+//    SEARCH_BOUNDS
+//    FOUND_BOUNDS
+//    if (scrollView.contentOffset.y > 100) {
+//        if (_searchBar.hidden == NO) {
+//            _searchBar.hidden = YES;
+//            _queryView.frame = FOUND_VIEW_END;
+//            line.hidden = YES;
+//            line1.hidden = YES;
+//        }
+//        
+//    } else {
+//        if (_searchBar.hidden == YES) {
+//            _searchBar.hidden = NO;
+//            _queryView.frame = FOUND_VIEW_START;
+//            line.hidden = NO;
+//            line1.hidden = NO;
+//        }
+//    }
 }
 
 /*

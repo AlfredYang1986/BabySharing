@@ -445,6 +445,15 @@
     svc.delegate = sd;
 }
 
+- (NSString*)getPlaceHolder {
+    NSString *str = [self.dic_profile_details objectForKey:@"rele_tag"];
+    if (str != nil && ![str isEqualToString:@""] ) {
+        return str;
+    } else {
+        return @"说说你是谁";
+    }
+}
+
 - (void)personalSignSelected {
     [self performSegueWithIdentifier:@"signature" sender:nil];
 }
@@ -504,9 +513,9 @@
     return @"添加你的角色";
 }
 
-- (NSString *)getPlaceHolder {
-    return @"说说你是谁";
-}
+//- (NSString *)getPlaceHolder {
+//    return @"说说你是谁";
+//}
 
 - (UINavigationController*)getViewController {
     return self.navigationController;

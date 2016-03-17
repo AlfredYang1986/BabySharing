@@ -52,7 +52,7 @@
 @interface PersonalCentreTmpViewController () <PersonalCenterProtocol, ProfileViewDelegate, AlbumTableCellDelegate, personalDetailChanged, SearchSegViewDelegate>
 @property (weak, nonatomic, readonly) NSString* current_user_id;
 @property (weak, nonatomic, readonly) NSString* current_auth_token;
-@property (weak, nonatomic) IBOutlet UITableView *queryView;
+@property (weak, nonatomic) IBOutlet  UITableView *queryView;
 
 @property (weak, nonatomic, readonly) OwnerQueryModel* ownerQueryModel;
 @property (weak, nonatomic, readonly) OwnerQueryPushModel* ownerQueryPushModel;

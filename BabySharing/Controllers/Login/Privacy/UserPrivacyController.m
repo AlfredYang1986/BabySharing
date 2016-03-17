@@ -63,13 +63,13 @@
     NSString * bundlePath_dongda = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle_dongda = [NSBundle bundleWithPath:bundlePath_dongda];
     
-    NSString* filepath2 = [resourceBundle_dongda pathForResource:@"home_chat" ofType:@"png"];
-    UIButton* barBtn2 = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
+    NSString* filepath2 = [resourceBundle_dongda pathForResource:@"privacy_more" ofType:@"png"];
+    UIButton* barBtn2 = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 25, 25)];
     [barBtn2 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     CALayer * layer2 = [CALayer layer];
     layer2.contents = (id)[UIImage imageNamed:filepath2].CGImage;
-    layer2.frame = CGRectMake(0, 0, 13, 20);
-    layer2.position = CGPointMake(10, barBtn2.frame.size.height / 2);
+    layer2.frame = CGRectMake(0, 0, 20, 20);
+//    layer2.position = CGPointMake(10, barBtn2.frame.size.height / 2);
     [barBtn2.layer addSublayer:layer2];
     [barBtn2 addTarget:self action:@selector(menuBtnSelected) forControlEvents:UIControlEventTouchDown];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barBtn2];
@@ -81,11 +81,11 @@
     [label sizeToFit];
     self.navigationItem.titleView = label;
    
-    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 25, 25)];
+    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(6, 32, 25, 25)];
     NSString* filepath = [resourceBundle_dongda pathForResource:@"dongda_back" ofType:@"png"];
     CALayer * layer = [CALayer layer];
     layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
-    layer.frame = CGRectMake(-7, 0, 25, 25);
+    layer.frame = CGRectMake(0, 0, 25, 25);
 //    layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
     [barBtn.layer addSublayer:layer];
 //    [barBtn setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];

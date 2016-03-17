@@ -9,6 +9,7 @@
 #import "MessageNotificationDetailCell.h"
 #import "TmpFileStorageModel.h"
 #import "Notifications.h"
+#import "Tools.h"
 
 @interface MessageNotificationDetailCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *imgView;
@@ -237,12 +238,15 @@
 }
 
 - (void)setTimeLabel:(NSDate*)time_label {
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    formatter.formatterBehavior = NSDateFormatterBehavior10_4;
-    formatter.dateStyle = NSDateFormatterShortStyle;
-    formatter.timeStyle = NSDateFormatterShortStyle;
+//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//    formatter.formatterBehavior = NSDateFormatterBehavior10_4;
+//    formatter.dateStyle = NSDateFormatterShortStyle;
+//    formatter.timeStyle = NSDateFormatterShortStyle;
+//    
+//    _postTimeLabel.text = [formatter stringForObjectValue:time_label];
+//    [_postTimeLabel sizeToFit];
     
-    _postTimeLabel.text = [formatter stringForObjectValue:time_label];
+    _postTimeLabel.text = [Tools compareCurrentTime:time_label];
     [_postTimeLabel sizeToFit];
 }
 

@@ -35,11 +35,11 @@
 //#define FOUND_REF_INDEX             -2
 //#define FOUND_IMG_INDEX             -1
 //#define FOUND_SEARCH_INDEX          0
-#define FOUND_USER_PHOTO_INDEX      0
-#define FOUND_TITLE_INDEX           1
-#define FOUND_CONTENT_INDEX         2
+//#define FOUND_USER_PHOTO_INDEX      0
+#define FOUND_TITLE_INDEX           0
+#define FOUND_CONTENT_INDEX         1
 
-#define FOUND_SECTION_COUNT         3
+#define FOUND_SECTION_COUNT         2
 
 #define PHOTO_PER_LINE  3
 
@@ -58,7 +58,8 @@
     self = [super init];
     if (self) {
         _tableView = tableView;
-        _container = container;
+        _tableView.showsVerticalScrollIndicator = NO;
+        _container = (FoundViewController*)container;
         
         /**
          * regisiter pcg view
@@ -103,27 +104,6 @@
         AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
         svc.um = app.um;
         [_container.navigationController pushViewController:svc animated:YES];
-//        [_container.navigationController pushViewController:svc animated:NO];
-        
-//        [UIView  beginAnimations:nil context:NULL];
-//        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-//        [UIView setAnimationDuration:0.75];
-//        [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:_container.navigationController.view cache:NO];
-//        [UIView commitAnimations];
-        
-//        CATransition* transition = [CATransition animation];
-//        transition.duration = 0.5;
-//        transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-//        transition.type = kCATransitionPush; //kCATransitionMoveIn; //, kCATransitionPush, kCATransitionReveal, kCATransitionFade
-//        transition.subtype = kCATransitionFromRight; //kCATransitionFromLeft, kCATransitionFromRight, kCATransitionFromTop, kCATransitionFromBottom
-//        [svc.view.layer addAnimation:transition forKey:nil];
-        
-//        CATransition *transition = [CATransition animation];
-//        transition.duration = 0.5f;
-//        transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-//        transition.type = kCATransitionMoveIn;
-//        transition.subtype = kCATransitionFromRight;
-//        [svc.view.layer addAnimation:transition forKey:nil];
     }
 }
 
@@ -145,11 +125,10 @@
 //    if (index == FOUND_SEARCH_INDEX) {
 //        return 44;
 //    }else
-    if (index == FOUND_USER_PHOTO_INDEX) {
-//        CGFloat width = [UIScreen mainScreen].bounds.size.width - 32;
-//        return width / 5;
-        return [FoundMoreFriendCell preferredHeight];
-    } else if (index == FOUND_TITLE_INDEX) {
+//    if (index == FOUND_USER_PHOTO_INDEX) {
+//        return [FoundMoreFriendCell preferredHeight];
+//    } else
+    if (index == FOUND_TITLE_INDEX) {
         return [FoundMotherChoiceCell preferredHeight];
     } else {
         CGFloat width = [UIScreen mainScreen].bounds.size.width;
@@ -164,9 +143,10 @@
 //    if (index == FOUND_SEARCH_INDEX) {
 //        return [self querySearchCellWithTabelView:tableView];
 //    }else
-    if (index == FOUND_USER_PHOTO_INDEX) {
-        return [self queryRecommendUserCellWithTableView:tableView];
-    } else if (index == FOUND_TITLE_INDEX) {
+//    if (index == FOUND_USER_PHOTO_INDEX) {
+//        return [self queryRecommendUserCellWithTableView:tableView];
+//    } else
+    if (index == FOUND_TITLE_INDEX) {
         return [self queryMotherChoiceCellWithTableView:tableView];
     } else {
         return [self queryTagsRowCellWithTableView:tableView atIndex:indexPath];
@@ -181,9 +161,10 @@
 //    if (section == FOUND_SEARCH_INDEX) {
 //        return 10;
 //    }else
-    if (section == FOUND_USER_PHOTO_INDEX) {
-        return 10;
-    } else if (section == FOUND_TITLE_INDEX) {
+//    if (section == FOUND_USER_PHOTO_INDEX) {
+//        return 10;
+//    } else
+    if (section == FOUND_TITLE_INDEX) {
         return 0;
     } else {
         return 0;
@@ -213,9 +194,10 @@
 //    if (section == FOUND_SEARCH_INDEX) {
 //        return 1;
 //    }else
-    if (section == FOUND_USER_PHOTO_INDEX) {
-        return 1;
-    } else if (section == FOUND_TITLE_INDEX) {
+//    if (section == FOUND_USER_PHOTO_INDEX) {
+//        return 1;
+//    } else
+    if (section == FOUND_TITLE_INDEX) {
         return 1;
     } else {
         return app.qm.querydata.count / PHOTO_PER_LINE;
@@ -366,44 +348,6 @@
     return cell;
 }
 
-#pragma mark -- scroll view delegate
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-//    NSLog(@"scrolling ... ");
-    // 假设偏移表格高度的20%进行刷新
-//    if (!_isLoading) { // 判断是否处于刷新状态，刷新中就不执行
-//        // 取内容的高度：
-//        // 如果内容高度大于UITableView高度，就取TableView高度
-//        // 如果内容高度小于UITableView高度，就取内容的实际高度
-//        float height = scrollView.contentSize.height > _queryView.frame.size.height ?_queryView.frame.size.height : scrollView.contentSize.height;
-//        
-//        if ((height - scrollView.contentSize.height + scrollView.contentOffset.y) / height > 0.2) { // 调用上拉刷新方
-//            CGRect rc = _queryView.frame;
-//            rc.origin.y = rc.origin.y - 44;
-//            [_queryView setFrame:rc];
-//            [_qm appendQueryDataByUser:_current_user_id withToken:_current_auth_token andBeginIndex:_qm.querydata.count];
-//            rc.origin.y = rc.origin.y + 44;
-//            [_queryView setFrame:rc];
-//            [_queryView reloadData];
-//            return;
-//            
-//        } else if (- scrollView.contentOffset.y / _queryView.frame.size.height > 0.2) { // 调用下拉刷新方法
-//            CGRect rc = _queryView.frame;
-//            rc.origin.y = rc.origin.y + 44;
-//            [_queryView setFrame:rc];
-//            [_qm refreshQueryDataByUser:_current_user_id withToken:_current_auth_token];
-//            rc.origin.y = rc.origin.y - 44;
-//            [_queryView setFrame:rc];
-//            [_queryView reloadData];
-//            
-//            return;
-//        }
-//        
-//        
-//        // move and change
-//    }
-//    
-//}
-
 - (void)queryUserDataAsync {
     dispatch_queue_t aq = dispatch_queue_create("query new user", nil);
     dispatch_async(aq, ^{
@@ -464,8 +408,8 @@
 }
 
 #pragma mark -- scroll view delegate
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    [_container scrollDidScroll:scrollView];
-
-}
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+//    [_container scrollDidScroll:scrollView];
+//
+//}
 @end
