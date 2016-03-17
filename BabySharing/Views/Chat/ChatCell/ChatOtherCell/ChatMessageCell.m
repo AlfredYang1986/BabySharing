@@ -13,8 +13,9 @@
 #import "RemoteInstance.h"
 #import "TmpFileStorageModel.h"
 #import "OBShapedButton.h"
+#import "Tools.h"
 
-#define IMG_WIDTH               40
+#define IMG_WIDTH               32
 #define IMG_HEIGHT              IMG_WIDTH
 
 #define MARGIN                  8
@@ -26,6 +27,9 @@
 #define TIME_FONT_SIZE          10.f
 #define NAME_FONT_SIZE          10.f
 #define CONTENT_FONT_SIZE       14.f
+
+#define MARGIN_BOTTOM       8
+#define NAME_MARGIN_TOP     10
 
 @implementation ChatMessageCell {
 //    OBShapedButton* time_label;
@@ -89,20 +93,6 @@
     _lm = app.lm;
     self.backgroundColor = [UIColor clearColor];
     
-//    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
-//    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-//
-//    if (time_label == nil) {
-//        time_label = [[OBShapedButton alloc]init];
-//        [self addSubview:time_label];
-//        time_label.titleLabel.font = [UIFont systemFontOfSize:TIME_FONT_SIZE];
-//        time_label.backgroundColor = [UIColor darkGrayColor];
-//        time_label.layer.cornerRadius = TIME_LABEL_HEIGHT / 2;
-//        time_label.textAlignment = NSTextAlignmentCenter;
-//        time_label.clipsToBounds = YES;
-//        [time_label setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"chat_time_label" ofType:@"png"]] forState:UIControlStateNormal];
-//    }
-    
     if (time_label == nil) {
         time_label = [[UILabel alloc]init];
         time_label.font = [UIFont systemFontOfSize:TIME_FONT_SIZE];
@@ -120,9 +110,7 @@
     if (content == nil) {
 
         content = [[UITextView alloc]init];
-//        content = [[UILabel alloc]init];
         content.editable = NO;
-//        content.numberOfLines = 0;
         [self addSubview:content];
         content.textColor = [UIColor colorWithWhite:0.2902 alpha:1.f];
         content.layer.cornerRadius = 5.f;
@@ -135,12 +123,14 @@
         layer = [CALayer layer];
         layer.frame = CGRectMake(0, 0, 7, 14);
         [self.layer addSublayer:layer];
+        
+        [content addObserver:self forKeyPath:@"contentSize" options:(NSKeyValueObservingOptionNew) context:NULL];
     }
     
     if (imgView == nil) {
         imgView = [[UIImageView alloc]init];
         imgView.bounds = CGRectMake(0, 0, IMG_WIDTH, IMG_HEIGHT);
-        imgView.layer.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.25].CGColor;
+        imgView.layer.borderColor = [UIColor colorWithWhite:1.f alpha:0.3].CGColor;
         imgView.layer.borderWidth = 1.5f;
         imgView.layer.cornerRadius = IMG_WIDTH / 2;
         imgView.clipsToBounds = YES;
@@ -152,6 +142,27 @@
     }
 }
 
+#pragma mark - KVO
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    UITextView *tv = object;
+    // Center vertical alignment
+    
+    CGFloat topCorrect = ([tv bounds].size.height - [tv contentSize].height * [tv zoomScale])/2.0;
+    topCorrect = ( topCorrect < 0.0 ? 0.0 : topCorrect );
+    tv.contentOffset = (CGPoint){.x = 0, .y = -topCorrect};
+    
+    //    // Bottom vertical alignment
+    //    CGFloat topCorrect = ([tv bounds].size.height - [tv contentSize].height);
+    //    topCorrect = (topCorrect <0.0 ? 0.0 : topCorrect);
+    //    tv.contentOffset = (CGPoint){.x = 0, .y = -topCorrect};
+    
+}
+
+- (void)dealloc {
+    [content removeObserver:self forKeyPath:@"contentSize"];
+}
+
 - (void)screenPhotoTaped:(UITapGestureRecognizer*)gusture {
     [_delegate didSelectedScreenPhotoForUserID:sender_user_id];
 }
@@ -159,25 +170,20 @@
 - (void)layoutSubviews {
     if (isSenderByOwner) {
         
-        CGFloat width = [UIScreen mainScreen].bounds.size.width * (1 - 0.18);
-        CGFloat offset_x = 0.18 * width + width - MARGIN_BIG;
-//        CGFloat offset_y = MARGIN;
-        CGFloat offset_y = MARGIN_BIG; // + TIME_LABEL_MARGIN + TIME_LABEL_HEIGHT;
-        imgView.frame = CGRectMake(offset_x - IMG_WIDTH, offset_y, IMG_WIDTH, IMG_HEIGHT);
+        CGFloat width = [UIScreen mainScreen].bounds.size.width;
+        CGFloat img_container = (MARGIN_BIG + IMG_WIDTH + 2 * MARGIN);
+        CGFloat offset_x = width - img_container;
+        CGFloat offset_y = MARGIN_BIG + NAME_MARGIN_TOP;
+        imgView.frame = CGRectMake(width - MARGIN_BIG - IMG_WIDTH, offset_y, IMG_WIDTH, IMG_HEIGHT);
         
-        offset_x -= IMG_WIDTH + MARGIN_BIG;
+        name_label.hidden = YES;
         
-        [name_label sizeToFit];
-        name_label.center = CGPointMake(offset_x - name_label.bounds.size.width / 2, name_label.bounds.size.height / 2);
-        
-        CGFloat content_width = width - 3 * MARGIN - 2 * IMG_WIDTH; // - label_size.width;
+        CGFloat content_width = width - 2 * img_container; //3 * MARGIN - (width - offset_x) - IMG_WIDTH;
         UIFont* content_font = [UIFont systemFontOfSize:CONTENT_FONT_SIZE];
         CGSize content_size = [content.text sizeWithFont:content_font constrainedToSize:CGSizeMake(content_width, FLT_MAX)];
-//        content.frame = CGRectMake(offset_x - content_size.width - 16, offset_y, content_size.width + 16, MAX(content_size.height + 2 * MARGIN, IMG_HEIGHT));
-        content.frame = CGRectMake(offset_x - content_size.width - 16, offset_y, content_size.width + 16, content_size.height + 2 * MARGIN);
-//        content.backgroundColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
+        content.frame = CGRectMake(offset_x - content_size.width - 2 * MARGIN, offset_y, content_size.width + MARGIN * 2, MAX(content_size.height + 2 * MARGIN, IMG_HEIGHT));
+        content.contentSize = CGSizeMake(content_size.width + 16, content_size.height + 2 * MARGIN);
         content.backgroundColor = [UIColor colorWithWhite:1.f alpha:0.8];
-//        content.backgroundColor = [UIColor clearColor];
         
         NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
         NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
@@ -192,23 +198,22 @@
     } else {
 
         CGFloat offset_x = MARGIN_BIG;
-        CGFloat offset_y = MARGIN_BIG; // + TIME_LABEL_MARGIN + TIME_LABEL_HEIGHT;
-//        CGFloat offset_y = MARGIN;
+        CGFloat offset_y = MARGIN_BIG + NAME_MARGIN_TOP;
+        CGFloat img_container = (MARGIN_BIG + IMG_WIDTH + 2 * MARGIN);
         imgView.frame = CGRectMake(offset_x, offset_y, IMG_WIDTH, IMG_HEIGHT);
         
-        offset_x += IMG_WIDTH + MARGIN_BIG;
+        offset_x += IMG_WIDTH + 2 * MARGIN;
 
         [name_label sizeToFit];
-        name_label.center = CGPointMake(offset_x + name_label.bounds.size.width / 2, name_label.bounds.size.height / 2);
+        name_label.center = CGPointMake(offset_x + name_label.bounds.size.width / 2, name_label.bounds.size.height / 2 + NAME_MARGIN_TOP);
         
-        CGFloat width = [UIScreen mainScreen].bounds.size.width * (1 - 0.18);
-        CGFloat content_width = width - 3 * MARGIN - 2 * IMG_WIDTH; // - label_size.width;
+        CGFloat width = [UIScreen mainScreen].bounds.size.width;
+        CGFloat content_width = width - 2 * img_container;
         UIFont* content_font = [UIFont systemFontOfSize:CONTENT_FONT_SIZE];
         CGSize content_size = [content.text sizeWithFont:content_font constrainedToSize:CGSizeMake(content_width, FLT_MAX)];
-        content.frame = CGRectMake(offset_x, offset_y, content_size.width + 16, MAX(content_size.height + 2 * MARGIN, IMG_HEIGHT));
-//        content.frame = CGRectMake(offset_x - content_size.width - 16, offset_y, content_size.width + 16, content_size.height + 2 * MARGIN);
+        content.frame = CGRectMake(offset_x, offset_y, content_size.width + 2 * MARGIN, MAX(content_size.height + 2 * MARGIN, IMG_HEIGHT));
+        content.contentSize = CGSizeMake(content_size.width + 2 * MARGIN, content_size.height + 2 * MARGIN);
         content.backgroundColor = [UIColor colorWithRed:0.2745 green:0.8588 blue:0.7922 alpha:0.6];
-//        [content removeFromSuperview];
 
         NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
         NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
@@ -288,51 +293,26 @@
 }
 
 - (void)setContentDate:(NSDate*)date2 {
-    NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
-    [formatter setDateStyle:NSDateFormatterMediumStyle];
-    [formatter setTimeStyle:NSDateFormatterShortStyle];
-    
-    NSTimeInterval now_time = [NSDate date].timeIntervalSince1970;
-    if (now_time - _message.date > 24 * 60 * 60) {
-        [formatter setDateFormat:@"MM-dd"];
-    } else {
-        [formatter setDateFormat:@"hh:mm"];
-    }
-    
-    NSDate* date = [NSDate dateWithTimeIntervalSince1970:_message.date];
-    time_label.text = [formatter stringFromDate:date];
-//    time_label.text = @"刚刚";
-//    [time_label setTitle:[formatter stringFromDate:date] forState:UIControlStateNormal];
+    time_label.text = [Tools compareCurrentTime:date2];
 }
 
-+ (CGFloat)preferredHeightWithInputText:(NSString*)content {
++ (CGFloat)preferredHeightWithInputText:(NSString*)content andSenderID:(NSString*)sender_user_id {
     /**
      * 1. get screen width
      */
-//    CGFloat width = [UIScreen mainScreen].bounds.size.width;
-    CGFloat width = [UIScreen mainScreen].bounds.size.width * (1 - 0.18);
-    
-    /**
-     * 2. get image width and height
-     */
-//    CGFloat img_width = IMG_WIDTH;
-//    CGFloat img_height = IMG_HEIGHT;
-    
-    /**
-     * 3. time label width and height
-     */
-//    UIFont* font = [UIFont systemFontOfSize:TIME_FONT_SIZE];
-//    CGSize label_size = [@"88-88" sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
-//    CGFloat time_label_width = label_size.width;
-//    CGFloat time_lable_height = label_size.height;
-   
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+  
     /**
      * 4. width left for content
      */
-    CGFloat content_width = width - 3 * MARGIN - IMG_WIDTH; // - label_size.width;
+    CGFloat img_container = (MARGIN_BIG + IMG_WIDTH + 2 * MARGIN);
+    CGFloat content_width = width - 2 * img_container;
     UIFont* content_font = [UIFont systemFontOfSize:CONTENT_FONT_SIZE];
     CGSize content_size = [content sizeWithFont:content_font constrainedToSize:CGSizeMake(content_width, FLT_MAX)];
+  
+    AppDelegate* app = [UIApplication sharedApplication].delegate;
     
-    return MAX(IMG_HEIGHT + 2 * MARGIN, content_size.height + 6 * MARGIN); // + TIME_LABEL_HEIGHT + TIME_LABEL_MARGIN;
+//    return (MAX(IMG_HEIGHT, content_size.height + 2 * MARGIN) + MARGIN_BIG + MARGIN_BOTTOM) + (app.lm.current_user_id == sender_user_id ? 0 : NAME_MARGIN_TOP);
+    return (MAX(IMG_HEIGHT, content_size.height + 2 * MARGIN) + MARGIN_BIG + MARGIN_BOTTOM) + NAME_MARGIN_TOP;
 }
 @end

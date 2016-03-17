@@ -182,7 +182,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     GotyeOCMessage* m = [[_mm getAllMessagesWithTarget:_chat_user_id andTargetType:MessageReceiverTypeUser] objectAtIndex:indexPath.row];
-    return [ChatMessageCell preferredHeightWithInputText:m.text];
+    return [ChatMessageCell preferredHeightWithInputText:m.text andSenderID:m.sender.name];
 }
 
 // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:

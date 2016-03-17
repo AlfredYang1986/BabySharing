@@ -8,7 +8,7 @@
 
 #import "MessageChatGroupHeader3.h"
 
-#define LABEL_MARGIN_TOP    64
+#define LABEL_MARGIN_TOP    40 //64
 #define LABEL_HEIGHT        32
 
 #define PADDING_HER         10.5

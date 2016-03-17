@@ -22,7 +22,7 @@
 @property (nonatomic, weak) LoginModel* lm;
 @property (nonatomic, weak) id<ChatMessageCellDelegate> delegate;
 
-+ (CGFloat)preferredHeightWithInputText:(NSString*)content;
++ (CGFloat)preferredHeightWithInputText:(NSString*)content andSenderID:(NSString*)sender_user_id;
 
 - (void)setGotyeOCMessage:(GotyeOCMessage*)msg;
 @end

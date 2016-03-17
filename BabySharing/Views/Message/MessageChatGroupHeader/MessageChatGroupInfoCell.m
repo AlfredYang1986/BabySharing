@@ -25,7 +25,7 @@
     _user_list_view.backgroundColor = [UIColor clearColor];
     
     _online_count_label.font = [UIFont systemFontOfSize:14.f];
-    _online_count_label.textColor = [UIColor colorWithWhite:151.f / 255.f alpha:1.f];
+    _online_count_label.textColor = [UIColor colorWithWhite:0.2902 alpha:1.f];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

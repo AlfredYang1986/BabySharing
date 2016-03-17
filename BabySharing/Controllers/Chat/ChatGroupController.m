@@ -52,7 +52,7 @@
 #define USER_INFO_BACK_BTN_WIDTH            30
 
 @interface ChatGroupController () <UITableViewDataSource, UITableViewDelegate, /*UITextFieldDelegate,*/ GotyeOCDelegate, /*ChatEmoji,*/ UITextViewDelegate, userInfoPaneDelegate, ChatMessageCellDelegate>
-@property (strong, nonatomic) IBOutlet UITableView *queryView;
+@property (strong, nonatomic) UITableView *queryView;
 @end
 
 @implementation ChatGroupController {
@@ -227,8 +227,9 @@
 //    CGFloat header_height = [MessageChatGroupHeader2 preferredHeightWithContent:@"abcde"];
     CGFloat header_height = [header preferredHeight];
     header.frame = CGRectMake(0, 0, width, header_height);
-    
-    _queryView.frame = CGRectMake(0, header_height, width, height - header_height - INPUT_CONTAINER_HEIGHT);
+#define MARGIN_BETWEEN_TABVIEW_2_HEADER         20
+#define MARGIN_BETWEEN_TABVIEW_2_BOTTOM         10
+    _queryView.frame = CGRectMake(0, header_height + MARGIN_BETWEEN_TABVIEW_2_HEADER, width, height - header_height - INPUT_CONTAINER_HEIGHT - MARGIN_BETWEEN_TABVIEW_2_BOTTOM - MARGIN_BETWEEN_TABVIEW_2_HEADER);
     inputContainer.frame = CGRectMake(0, height - INPUT_CONTAINER_HEIGHT, SCREEN_WIDTH, INPUT_CONTAINER_HEIGHT);
     userInfoTable.frame = CGRectMake(USER_INFO_PANE_MARGIN + width, height - USER_INFO_CONTAINER_HEIGHT, USER_INFO_PANE_WIDTH, USER_INFO_CONTAINER_HEIGHT);
     //CGRectMake(USER_INFO_PANE_MARGIN + width, height - USER_INGO_PANE_BOTTOM_MARGIN - USER_INFO_PANE_HEIGHT, width - 2 * USER_INFO_PANE_MARGIN, USER_INFO_PANE_HEIGHT);
@@ -331,7 +332,7 @@
     userInfoTable.dataSource = delegate;
     userInfoTable.scrollEnabled = NO;
     userInfoTable.separatorStyle = UITableViewCellSeparatorStyleNone;
-    userInfoTable.backgroundColor = [UIColor colorWithWhite:1.f alpha:0.6];
+    userInfoTable.backgroundColor = [UIColor whiteColor];
     userInfoTable.layer.cornerRadius = 5.0;
     userInfoTable.clipsToBounds = YES;
     [userInfoTable registerNib:[UINib nibWithNibName:@"MessageFriendsCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"user info header"];
@@ -521,7 +522,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     GotyeOCMessage* m = [current_message objectAtIndex:indexPath.row];
-    return [ChatMessageCell preferredHeightWithInputText:m.text];
+    return [ChatMessageCell preferredHeightWithInputText:m.text andSenderID:m.sender.name];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
