@@ -236,10 +236,10 @@
     CGFloat offset_x = 0;
     CGFloat offset_y = 0;
    
-    _queryView.frame = CGRectMake(offset_x, offset_y + 74, width, height);
-    offset_x += width;
-
     offset_y = 20 + 44 + 10;
+
+    _queryView.frame = CGRectMake(offset_x, offset_y, width, height - offset_y);
+    offset_x += width;
 
     offset_y += SEARCH_BAR_MARGIN_TOP;
     _friendsSearchBar.frame = CGRectMake(offset_x, offset_y, width, SEARCH_BAR_HEIGHT);

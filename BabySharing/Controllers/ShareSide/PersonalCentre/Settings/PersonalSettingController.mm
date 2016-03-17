@@ -402,6 +402,10 @@
     svc.delegate = sd;
 }
 
+- (NSString*)getPlaceHolder {
+    return [self.dic_profile_details objectForKey:@"rele_tag"];
+}
+
 - (void)personalSignSelected {
     [self performSegueWithIdentifier:@"signature" sender:nil];
 }

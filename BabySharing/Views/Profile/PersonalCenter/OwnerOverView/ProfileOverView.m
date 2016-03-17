@@ -82,58 +82,13 @@
 }
 
 - (void)setUpViews {
-
-//    CGFloat width = [UIScreen mainScreen].bounds.size.width;
-    
-    /*************************************************************************************************************************/
-    // split line
-//    CALayer* layer = [CALayer layer];
-//    layer.borderColor = [UIColor whiteColor].CGColor;
-//    layer.borderWidth = 2.f;
-//    layer.frame = CGRectMake(0, self.frame.size.height - SPLIT_LINE_HEIGHT /*- [SearchSegView2 preferredHeight]*/, width, SPLIT_LINE_HEIGHT);
-//    [bkView.layer addSublayer:layer];
-//    [self.layer addSublayer:layer];
-    /*************************************************************************************************************************/
-    
-    /*************************************************************************************************************************/
-    // seg
-//    search_seg = [[SearchSegView2 alloc]initWithFrame:CGRectMake(0, self.frame.size.height - [SearchSegView2 preferredHeight], width, [SearchSegView2 preferredHeight])];
-
-    // seg background
-//    UIImage* img_seg_bg = [UIImage imageNamed:[resourceBundle pathForResource:@"profile_seg_bg" ofType:@"png"]];
-//    CALayer* seg_bg = [CALayer layer];
-//    seg_bg.contents = (id)img_seg_bg.CGImage;
-//    seg_bg.frame = CGRectMake(0, 0, SCREEN_WIDTH, [SearchSegView2 preferredHeight]);
-//    [search_seg.layer addSublayer:seg_bg];
-//    
-//    [search_seg addItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:@"profile_grid" ofType:@"png"]] andSelectImage:[UIImage imageNamed:[resourceBundle pathForResource:@"profile_grid_selected" ofType:@"png"]]];
-//    [search_seg addItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:@"profile_tag" ofType:@"png"]] andSelectImage:[UIImage imageNamed:[resourceBundle pathForResource:@"profile_tag_selected" ofType:@"png"]]];
-//    [search_seg addItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:@"profile_forward" ofType:@"png"]] andSelectImage:[UIImage imageNamed:[resourceBundle pathForResource:@"profile_forward_selected" ofType:@"png"]]];
-//   
-//    search_seg.selectedIndex = 0;
-//    search_seg.margin_between_items = 0.148 * SCREEN_WIDTH;
-//    [bkView addSubview:search_seg];
-    
-//    CALayer* line0 = [CALayer layer];
-//    line0.borderWidth = 1.5f;
-//    line0.borderColor = [UIColor whiteColor].CGColor;
-//    line0.frame = CGRectMake(SCREEN_WIDTH / 3, 11, 1, 22);
-//    [search_seg.layer addSublayer:line0];
-//    
-//    CALayer* line1 = [CALayer layer];
-//    line1.borderWidth = 1.5f;
-//    line1.borderColor = [UIColor whiteColor].CGColor;
-//    line1.frame = CGRectMake(SCREEN_WIDTH * 2 / 3, 11, 1, 22);
-//    [search_seg.layer addSublayer:line1];
-    
-    /*************************************************************************************************************************/
     
     /*************************************************************************************************************************/
     // location label
-    _locationLabel = [[UILabel alloc]init];
-    _locationLabel.textColor = [UIColor whiteColor];
-    _locationLabel.font = [UIFont systemFontOfSize:LOCATION_LABEL_FONT_SIZE];
-    [self addSubview:_locationLabel];
+//    _locationLabel = [[UILabel alloc]init];
+//    _locationLabel.textColor = [UIColor whiteColor];
+//    _locationLabel.font = [UIFont systemFontOfSize:LOCATION_LABEL_FONT_SIZE];
+//    [self addSubview:_locationLabel];
     /*************************************************************************************************************************/
     
     /*************************************************************************************************************************/
@@ -210,12 +165,7 @@
     [white_area addSubview:relations_btn];
     [white_area bringSubviewToFront:relations_btn];
     /*************************************************************************************************************************/
-    
-//    hotTagView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 90, 25)];
-//    [self addSubview:hotTagView];
-    
-//    hotTagView.center = CGPointMake(17.5 + 90 / 2, BASE_LINE_HEIGHT + MARGIN_AFTER_BASE_LINE + BUTTON_HEIGHT / 2 + 4);
-//    relations_btn.center = CGPointMake(width - 10.5 - 69 / 2 , BASE_LINE_HEIGHT + MARGIN_AFTER_BASE_LINE + BUTTON_HEIGHT / 2);
+
     /*************************************************************************************************************************/
 #define THUMSUP_DES_FONT_SIZE       13.f
     thumup = [[UILabel alloc]init];
@@ -300,6 +250,7 @@
     
 //    _locationLabel.center = CGPointMake(SCREEN_WIDTH / 2, _imgView.center.y + _imgView.frame.size.height / 2 + LOCATION_LABEL_2_SCREEN_PHOTO_MARGIN);
     _locationLabel.center = CGPointMake(SCREEN_WIDTH - _locationLabel.frame.size.width / 2 - MARGIN_REGIT * 2, WHITE_AREA_ORIGIN_Y - _locationLabel.frame.size.height / 2 - WHITE_AREA_TO_LOCATION);
+    _locationLabel.hidden = YES;
 }
 
 - (void)setPersonalSign:(NSString*)sign_content {

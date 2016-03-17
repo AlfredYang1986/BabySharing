@@ -30,7 +30,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 //    titles = @[@"用户协议", @"隐私政策", @"版本更新介绍"];
-    titles = @[@"用户协议", @"隐私政策"];
+//    titles = @[@"用户协议", @"隐私政策"];
+    titles = @[@"用户协议"];
 
     UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
@@ -126,7 +127,7 @@
 
 #pragma mark -- table view data source
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
+    return [titles count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

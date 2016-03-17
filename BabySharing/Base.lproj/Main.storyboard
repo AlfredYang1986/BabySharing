@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登录即表示同意用户协议&amp;隐私政策" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fJh-Ts-ais">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登录即表示同意用户协议" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fJh-Ts-ais">
                                 <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="ukJ-NR-XY8"/>
@@ -1443,7 +1443,7 @@
         <!--Alread Loged View Controller-->
         <scene sceneID="I8u-FB-54S">
             <objects>
-                <viewController id="zja-7A-2Mn" customClass="AlreadLogedViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="zja-7A-2Mn" customClass="AlreadLogedViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="w5i-RD-8Cs"/>
                         <viewControllerLayoutGuide type="bottom" id="xAf-nk-aEA"/>
@@ -1469,6 +1469,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="2PU-iO-cFw"/>
-        <segue reference="Xl7-6t-OQ8"/>
+        <segue reference="mYA-47-s6C"/>
     </inferredMetricsTieBreakers>
 </document>

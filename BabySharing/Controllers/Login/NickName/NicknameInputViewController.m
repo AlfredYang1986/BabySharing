@@ -120,12 +120,14 @@
     // private button
 #define PRIVACY_BOTTOM_MARGIN               35
     UIFont* font = [UIFont systemFontOfSize:12.f];
-    CGSize sz = [@"点击进入即同意隐私条款&用户协议" sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
+//    CGSize sz = [@"点击进入即同意隐私条款&用户协议" sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
+    CGSize sz = [@"点击进入即同意用户协议" sizeWithFont:font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)];
     
     user_private_btn = [[UIButton alloc]initWithFrame:CGRectMake((SCREEN_WIDTH - sz.width) / 2 /*+ TICK_BTN_2_PRIVACY_MARGIN*/, SCREEN_HEIGHT - PRIVACY_BOTTOM_MARGIN, sz.width, sz.height)];
     user_private_btn.titleLabel.font = [UIFont systemFontOfSize:12.f];
     [user_private_btn setTitleColor:[UIColor colorWithWhite:0.6078 alpha:1.f] forState:UIControlStateNormal];
-    [user_private_btn setTitle:@"点击进入即同意隐私条款&用户协议" forState:UIControlStateNormal];
+//    [user_private_btn setTitle:@"点击进入即同意隐私条款&用户协议" forState:UIControlStateNormal];
+    [user_private_btn setTitle:@"点击进入即同意用户协议" forState:UIControlStateNormal];
     [user_private_btn addTarget:self action:@selector(userPrivacyBtnSelected) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:user_private_btn];
     /***********************************************************************************************************************/
