@@ -64,18 +64,18 @@
     return 1;
 }
 
-- (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return @"添加新时刻标签";
-    //    return [_delegate getAddSectionTitle];
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (showing_data.count == 0) {
-        return 22;
-    } else {
-        return 0;
-    }
-}
+//- (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+//    return @"添加新时刻标签";
+//    //    return [_delegate getAddSectionTitle];
+//}
+//
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+//    if (showing_data.count == 0) {
+//        return 22;
+//    } else {
+//        return 0;
+//    }
+//}
 
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
@@ -108,6 +108,10 @@
         cell.textLabel.text = [_delegate getUserInputString];
     } else {
         cell.textLabel.text = [showing_data objectAtIndex:indexPath.row];
+    }
+    
+    if ([tableView numberOfRowsInSection:indexPath.section] == 1) {
+        cell.textLabel.text = [NSString stringWithFormat:@"添加新时刻:%@", cell.textLabel.text];
     }
     
     cell.textLabel.font = [UIFont systemFontOfSize:14.f];

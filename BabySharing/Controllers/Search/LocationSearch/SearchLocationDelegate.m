@@ -18,6 +18,7 @@
 #import "FoundSearchModel.h"
 #import "RecommandTag.h"
 #import "LocalTag.h"
+#import "Define.h"
 
 #import "HomeTagsController.h"
 
@@ -43,7 +44,7 @@
 }
 
 - (NSString*)getSearchPlaceHolder {
-    return @"搜索地点标签";
+    return @"添加地点标签";
 }
 
 - (void)collectData {
@@ -56,6 +57,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     return 1;
 }
 
@@ -81,7 +83,7 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 1;
 }
 
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -92,10 +94,12 @@
     }
     
     if (section == 0) {
-        header.headLabell.text = @"使用过的品牌";
+        header.headLabell.text = @"热门品牌";
+        header.headLabell.textColor = TextColor;
     } else {
         header.headLabell.text = @"已用品牌";
     }
+    
     //    header.headLabell.textColor = [UIColor colorWithWhite:0.3059 alpha:1.f];
 //    header.headLabell.textColor = [UIColor whiteColor];
     header.headLabell.font = [UIFont systemFontOfSize:14.f];

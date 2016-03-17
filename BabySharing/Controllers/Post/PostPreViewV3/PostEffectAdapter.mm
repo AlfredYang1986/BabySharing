@@ -142,7 +142,7 @@ UIView* addTagBtn(NSString* title, CGRect bounds, CGPoint center, NSObject* call
     UIView* reVal = [[UIView alloc]initWithFrame:CGRectMake(0, 0, TAG_VIEW_WIDTH, TAG_VIEW_HEIGHT)];
     
     UIButton* tag_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, TAG_BTN_WIDTH, TAG_BTN_WIDTH)];
-    tag_btn.backgroundColor = [UIColor colorWithWhite:0.1098 alpha:0.7];
+//    tag_btn.backgroundColor = [UIColor colorWithWhite:0.1098 alpha:0.7];
     tag_btn.layer.cornerRadius = TAG_BTN_WIDTH / 2;
     tag_btn.clipsToBounds = YES;
     tag_btn.titleLabel.text = title;
@@ -150,14 +150,15 @@ UIView* addTagBtn(NSString* title, CGRect bounds, CGPoint center, NSObject* call
     
     CALayer* icon = [CALayer layer];
     icon.contents = (id)img.CGImage;
-    icon.frame = CGRectMake(0, 0, TAG_ICON_WIDTH, TAG_ICON_HEIGHT);
+//    icon.frame = CGRectMake(0, 0, TAG_ICON_WIDTH, TAG_ICON_HEIGHT);
+    icon.frame = CGRectMake(0, 0, TAG_BTN_WIDTH, TAG_BTN_WIDTH);
     icon.position = CGPointMake(TAG_BTN_WIDTH / 2, TAG_BTN_HEIGHT / 2);
     [tag_btn.layer addSublayer:icon];
     
     [tag_btn addTarget:callBackObj action:callBack forControlEvents:UIControlEventTouchUpInside];
     [reVal addSubview:tag_btn];
     
-    UILabel* tag_label = [[UILabel alloc]initWithFrame:CGRectMake(0, TAG_BTN_HEIGHT + 2, TAG_LABEL_WIDTH, TAG_LABEL_HEIGHT)];
+    UILabel* tag_label = [[UILabel alloc] initWithFrame:CGRectMake(0, TAG_BTN_HEIGHT + 2, TAG_LABEL_WIDTH, TAG_LABEL_HEIGHT)];
     tag_label.font = [UIFont systemFontOfSize:14.f];
     tag_label.textColor = [UIColor whiteColor];
 
@@ -226,7 +227,7 @@ UIView* tagForPhoto(PostEffectAdapter* adapter, CGFloat height) {
     
    
     UILabel* label = [[UILabel alloc]init];
-    label.text = @"标记这一时刻，这一地点";
+    label.text = @"记录时刻，标记生活";
     label.textColor = [UIColor lightGrayColor];
     [label sizeToFit];
     [reVal addSubview:label];
@@ -242,11 +243,11 @@ UIView* tagForPhoto(PostEffectAdapter* adapter, CGFloat height) {
     bg.backgroundColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.2f];
    
 #define TAG_BTN_MARGIN_BETWEEN          (50 + TAG_BTN_WIDTH)
-    [bg addSubview:addTagBtn(@"品牌", CGRectMake(0, 0, 3 * button_height, button_height), CGPointMake(bg.frame.size.width / 2 - TAG_BTN_MARGIN_BETWEEN, bg.frame.size.height / 2), adapter, @selector(didSelectTagForPhoto:), [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"tag_tag"] ofType:@"png"]])];
+    [bg addSubview:addTagBtn(@"品牌", CGRectMake(0, 0, 3 * button_height, button_height), CGPointMake(bg.frame.size.width / 2 - TAG_BTN_MARGIN_BETWEEN, bg.frame.size.height / 2), adapter, @selector(didSelectTagForPhoto:), [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"post_band_tag"] ofType:@"png"]])];
     
-    [bg addSubview:addTagBtn(@"时刻", CGRectMake(0, 0, 3 * button_height, button_height), CGPointMake(bg.frame.size.width / 2, bg.frame.size.height / 2), adapter, @selector(didSelectTagForPhoto:), [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"tag_time"] ofType:@"png"]])];
+    [bg addSubview:addTagBtn(@"时刻", CGRectMake(0, 0, 3 * button_height, button_height), CGPointMake(bg.frame.size.width / 2, bg.frame.size.height / 2), adapter, @selector(didSelectTagForPhoto:), [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"post_time_tag"] ofType:@"png"]])];
     
-    [bg addSubview:addTagBtn(@"地点", CGRectMake(0, 0, 3 * button_height, button_height), CGPointMake(bg.frame.size.width / 2 + TAG_BTN_MARGIN_BETWEEN, bg.frame.size.height / 2), adapter, @selector(didSelectTagForPhoto:), [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"tag_location"] ofType:@"png"]])];
+    [bg addSubview:addTagBtn(@"地点", CGRectMake(0, 0, 3 * button_height, button_height), CGPointMake(bg.frame.size.width / 2 + TAG_BTN_MARGIN_BETWEEN, bg.frame.size.height / 2), adapter, @selector(didSelectTagForPhoto:), [UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"post_location_tag"] ofType:@"png"]])];
     
     [adapter.content_parent_view addSubview:bg];
     

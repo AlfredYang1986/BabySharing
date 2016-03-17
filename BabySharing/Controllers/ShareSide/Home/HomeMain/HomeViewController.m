@@ -429,11 +429,6 @@
         complete(success);
     }];
 }
-
-- (void)didSelectShareBtn:(id)content {
-    
-}
-
 - (void)didSelectJoinGroupBtn:(id)content {
 //    [self performSegueWithIdentifier:@"HomeDetailSegue" sender:content];
   
@@ -474,7 +469,7 @@
         if (success) {
             NSLog(@"push post success");
             NSString* msg = @"push post success";
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success" message:msg delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"暂时先给个暂时的" message:msg delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
             [alert show];
         }
     }];

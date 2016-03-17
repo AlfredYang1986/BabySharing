@@ -41,7 +41,7 @@
 }
 
 - (NSString*)getSearchPlaceHolder {
-    return @"搜索时刻标签";
+    return @"添加时刻标签";
 }
 
 - (void)collectData {
@@ -54,6 +54,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     return 1;
 }
 
@@ -79,7 +80,7 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 1;
 }
 
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -90,7 +91,7 @@
     }
     
     if (section == 0) {
-        header.headLabell.text = @"使用过的品牌";
+        header.headLabell.text = @"热门时刻";
     } else {
         header.headLabell.text = @"已用品牌";
     }

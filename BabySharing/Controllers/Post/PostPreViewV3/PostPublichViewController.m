@@ -16,6 +16,7 @@
 #import "INTUAnimationEngine.h"
 #import "Tools.h"
 #import "TmpFileStorageModel.h"
+#import "Define.h"
 
 #define FAKE_NAVIGATION_BAR_HEIGHT  64
 #define SNS_BUTTON_WIDTH            25
@@ -27,9 +28,9 @@
 
 #define SNS_BTN_COUNT               3
 
-#define BOTTON_BAR_HEIGHT           74
+#define BOTTON_BAR_HEIGHT           (149.0 / 667.0) * [UIScreen mainScreen].bounds.size.height
 
-@interface PostPublichViewController () <UITextViewDelegate>
+@interface PostPublichViewController () <UITextViewDelegate, UITextFieldDelegate>
 @property (nonatomic, strong) UITextView* descriptionView;
 @property (nonatomic) BOOL isShareWeibo;
 @property (nonatomic) BOOL isShareWechat;
@@ -109,7 +110,7 @@
 #define CARD_CONTENG_MARGIN             10.5
     
     CGFloat height = [UIScreen mainScreen].bounds.size.height;
-    mainContentContainer = [[UIView alloc]initWithFrame:CGRectMake(CARD_CONTENG_MARGIN, FAKE_NAVIGATION_BAR_HEIGHT, width - 2 * CARD_CONTENG_MARGIN, height - FAKE_NAVIGATION_BAR_HEIGHT - BOTTON_BAR_HEIGHT - CARD_CONTENG_MARGIN)];
+    mainContentContainer = [[UIView alloc] initWithFrame:CGRectMake(CARD_CONTENG_MARGIN, FAKE_NAVIGATION_BAR_HEIGHT + 10, width - 2 * CARD_CONTENG_MARGIN, height - FAKE_NAVIGATION_BAR_HEIGHT - BOTTON_BAR_HEIGHT - CARD_CONTENG_MARGIN)];
     mainContentContainer.layer.cornerRadius = 5.f;
     mainContentContainer.clipsToBounds = YES;
     [self.view addSubview:mainContentContainer];
@@ -258,20 +259,29 @@
      * description view
      */
 //    _descriptionView = [[UITextView alloc]initWithFrame:CGRectMake(CARD_CONTENG_MARGIN, img_height + FAKE_NAVIGATION_BAR_HEIGHT + CARD_CONTENG_MARGIN, width - 2 * CARD_CONTENG_MARGIN, height - img_height - FAKE_NAVIGATION_BAR_HEIGHT - BOTTON_BAR_HEIGHT - 2 * CARD_CONTENG_MARGIN)];
-    _descriptionView = [[UITextView alloc]initWithFrame:CGRectMake(0, img_height , width - 2 * CARD_CONTENG_MARGIN, height - img_height - FAKE_NAVIGATION_BAR_HEIGHT - BOTTON_BAR_HEIGHT - CARD_CONTENG_MARGIN)];
+    _descriptionView = [[UITextView alloc] initWithFrame:CGRectMake(0, img_height , width - 2 * CARD_CONTENG_MARGIN, height - img_height - FAKE_NAVIGATION_BAR_HEIGHT - BOTTON_BAR_HEIGHT - CARD_CONTENG_MARGIN)];
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    _descriptionView.font = [UIFont systemFontOfSize:15.0];
     _descriptionView.delegate = self;
     _descriptionView.editable = YES;
 //    [self.view addSubview:_descriptionView];
-    [mainContentContainer addSubview:_descriptionView];
+    
+    UIView *view = [[UIView alloc] initWithFrame:_descriptionView.frame];
+    view.backgroundColor = [UIColor whiteColor];
+    _descriptionView.frame = CGRectInset(CGRectMake(0, 0, CGRectGetWidth(view.frame), CGRectGetHeight(view.frame)), 9, 7);
+    [view addSubview:_descriptionView];
+    [mainContentContainer addSubview:view];
   
     placeholder = [[UILabel alloc]init];
-    placeholder.textColor = [UIColor darkGrayColor];
+    placeholder.font = [UIFont systemFontOfSize:15.0];
+    placeholder.textColor = FontColor1;
     placeholder.numberOfLines = 2;
-    placeholder.text = @"4-18个字节，\n限中英文，数字，表情符号";
+    placeholder.text = @"一句话传递你的主张(18个字)";
     placeholder.textAlignment = NSTextAlignmentCenter;
     [placeholder sizeToFit];
-    placeholder.center = CGPointMake(_descriptionView.frame.size.width / 2, _descriptionView.frame.size.height / 2);
-    [_descriptionView addSubview:placeholder];
+    placeholder.frame = CGRectMake(12, img_height + 13, placeholder.frame.size.width, placeholder.frame.size.height);
+    [mainContentContainer addSubview:placeholder];
+//    [_descriptionView addSubview:placeholder];
     /***************************************************************************************/
 
     /***************************************************************************************/
@@ -283,25 +293,13 @@
     
     UILabel* label = [[UILabel alloc]init];
     label.textColor = [UIColor whiteColor];
-    label.text = @"同步到";
+    label.text = @"多平台同步分享";
     [label sizeToFit];
-    CGFloat margin = 45;
-    label.center = CGPointMake(width / 2 - margin - label.frame.size.width, BOTTON_BAR_HEIGHT / 2);
+    CGFloat margin = 0;
+    label.center = CGPointMake(width / 2, BOTTON_BAR_HEIGHT / 3);
     [SNS_bar addSubview:label];
     
     margin -= 20;
-   
-    UIButton* wechat_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, SNS_BUTTON_WIDTH, SNS_BUTTON_HEIGHT)];
-    NSString * wechat_file = [resourceBundle pathForResource:[NSString stringWithFormat:@"login_wechat"] ofType:@"png"];
-    NSString * wechat_file_click = [resourceBundle pathForResource:[NSString stringWithFormat:@"login_wechat_clicked"] ofType:@"png"];
-    UIImage * wechat_image = [UIImage imageNamed:wechat_file];
-    UIImage * wechat_image_click = [UIImage imageNamed:wechat_file_click];
-    [wechat_btn setBackgroundImage:wechat_image forState:UIControlStateNormal];
-    [wechat_btn setBackgroundImage:wechat_image_click forState:UIControlStateSelected];
-    [wechat_btn addTarget:self action:@selector(SNSBtnSelected:) forControlEvents:UIControlEventTouchDown];
-    wechat_btn.backgroundColor = [UIColor clearColor];
-    wechat_btn.center = CGPointMake(width / 2 - margin, BOTTON_BAR_HEIGHT / 2);
-    [SNS_bar addSubview:wechat_btn];
     
     UIButton* qq_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, SNS_BUTTON_WIDTH, SNS_BUTTON_HEIGHT)];
     NSString * qq_file = [resourceBundle pathForResource:[NSString stringWithFormat:@"login_qq"] ofType:@"png"];
@@ -312,8 +310,20 @@
     [qq_btn setBackgroundImage:qq_image_click forState:UIControlStateSelected];
     [qq_btn addTarget:self action:@selector(SNSBtnSelected:) forControlEvents:UIControlEventTouchDown];
     qq_btn.backgroundColor = [UIColor clearColor];
-    qq_btn.center = CGPointMake(width / 2 + 60 - margin, BOTTON_BAR_HEIGHT / 2);
+    qq_btn.center = CGPointMake(width / 2 / 2, BOTTON_BAR_HEIGHT * 2 / 3);
     [SNS_bar addSubview:qq_btn];
+   
+    UIButton* wechat_btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SNS_BUTTON_WIDTH, SNS_BUTTON_HEIGHT)];
+    NSString * wechat_file = [resourceBundle pathForResource:[NSString stringWithFormat:@"friendShip"] ofType:@"png"];
+    NSString * wechat_file_click = [resourceBundle pathForResource:[NSString stringWithFormat:@"friendShip_select"] ofType:@"png"];
+    UIImage * wechat_image = [UIImage imageNamed:wechat_file];
+    UIImage * wechat_image_click = [UIImage imageNamed:wechat_file_click];
+    [wechat_btn setBackgroundImage:wechat_image forState:UIControlStateNormal];
+    [wechat_btn setBackgroundImage:wechat_image_click forState:UIControlStateSelected];
+    [wechat_btn addTarget:self action:@selector(SNSBtnSelected:) forControlEvents:UIControlEventTouchDown];
+    wechat_btn.backgroundColor = [UIColor clearColor];
+    wechat_btn.center = CGPointMake(width / 2 , BOTTON_BAR_HEIGHT * 2 / 3);
+    [SNS_bar addSubview:wechat_btn];
     
     // 同步到微博
     UIButton* weibo_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, SNS_BUTTON_WIDTH, SNS_BUTTON_HEIGHT)];
@@ -325,7 +335,7 @@
     [weibo_btn setBackgroundImage:weibo_image_click forState:UIControlStateSelected];
     [weibo_btn addTarget:self action:@selector(SNSBtnSelected:) forControlEvents:UIControlEventTouchDown];
     weibo_btn.backgroundColor = [UIColor clearColor];
-    weibo_btn.center = CGPointMake(width / 2 + 120 - margin, BOTTON_BAR_HEIGHT / 2);
+    weibo_btn.center = CGPointMake(width * 0.75, BOTTON_BAR_HEIGHT * 2 / 3);
     [SNS_bar addSubview:weibo_btn];
    
     sns_buttons = @[wechat_btn, weibo_btn, qq_btn];
@@ -446,7 +456,10 @@
         bar_cancel_btn.hidden = YES;
         bar_save_btn.hidden = YES;
         bar_publich_btn.hidden = NO;
-        [self moveView:KEYBOARD_HEIGHT];
+        if ([_descriptionView.text isEqualToString:@""]) {
+            placeholder.hidden = NO;
+        }
+        [self moveView:-(-KEYBOARD_HEIGHT + BOTTON_BAR_HEIGHT - 74)];
     }
 }
 
@@ -598,50 +611,62 @@
     if ([_descriptionView isFirstResponder]) {
         [_descriptionView resignFirstResponder];
         _descriptionView.text = @"";
-        placeholder.hidden = NO;
+        if ([_descriptionView.text isEqualToString:@""]) {
+            placeholder.hidden = NO;
+        }
         bar_cancel_btn.hidden = YES;
         bar_save_btn.hidden = YES;
-        [self moveView:KEYBOARD_HEIGHT];
+        [self moveView:-(-KEYBOARD_HEIGHT + BOTTON_BAR_HEIGHT - 74)];
     }
 }
 
 - (void)didSelectSaveBtn {
+    
+    if ([Tools bityWithStr:_descriptionView.text] > 36) {
+        [[[UIAlertView  alloc] initWithTitle:@"通知" message:@"说好的18个字呢" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil] show];
+        return;
+    }
+    
     if ([_descriptionView isFirstResponder]) {
         [_descriptionView resignFirstResponder];
         bar_cancel_btn.hidden = YES;
         bar_save_btn.hidden = YES;
         bar_publich_btn.hidden = NO;
-        [self moveView:KEYBOARD_HEIGHT];
+        if ([_descriptionView.text isEqualToString:@""]) {
+            placeholder.hidden = NO;
+        }
+        [self moveView:-(-KEYBOARD_HEIGHT + BOTTON_BAR_HEIGHT - 74)];
     }
 }
 
 #pragma mark -- text area delegate
 - (void)textViewDidChange:(UITextView *)textView {
     if (textView.text.length < 1) {
-        placeholder.hidden = NO;
+//        placeholder.hidden = NO;
         bar_publich_btn.enabled = NO;
     } else {
-        placeholder.hidden = YES;
+//        placeholder.hidden = YES;
         bar_publich_btn.enabled = YES;
     }
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
+    placeholder.hidden = YES;
     bar_cancel_btn.hidden = NO;
     bar_save_btn.hidden = NO;
     bar_publich_btn.hidden = YES;
-    [self moveView:-KEYBOARD_HEIGHT];
+    [self moveView:-KEYBOARD_HEIGHT + BOTTON_BAR_HEIGHT - 74];
 }
 
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    if ([text isEqualToString:@""]) {
-        return YES;
-    }
-    if ([Tools bityWithStr:textView.text] >= 18) {
-        return NO;
-    } else {
-        return YES;
-    }
-}
-
+//- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+//    NSLog(@"MonkeyHengLog: %@ === %@", @"text", text);
+//    if ([text isEqualToString:@""]) {
+//        return YES;
+//    }
+//    if ([Tools bityWithStr:textView.text] >= 36) {
+//        return NO;
+//    } else {
+//        return YES;
+//    }
+//}
 @end

@@ -489,7 +489,7 @@
             </objects>
             <point key="canvasLocation" x="2412" y="5742"/>
         </scene>
-        <!--个人信息-->
+        <!--Personal Setting Controller-->
         <scene sceneID="9Zr-gx-T8d">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="Qni-nN-2Jw" customClass="PersonalSettingController" sceneMemberID="viewController">
@@ -501,7 +501,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="oix-Er-DQz">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="oix-Er-DQz">
                                 <rect key="frame" x="4" y="74" width="592" height="526"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -524,7 +524,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="个人信息" id="gzV-kX-Ww8"/>
+                    <navigationItem key="navigationItem" id="gzV-kX-Ww8"/>
                     <connections>
                         <outlet property="queryView" destination="oix-Er-DQz" id="wRt-Iq-Yvr"/>
                         <segue destination="ydZ-5V-8Oa" kind="push" identifier="addScreenName" id="ZM9-kh-H5L"/>
@@ -1468,7 +1468,7 @@
         <image name="ProfileBgImage" width="375" height="667"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="2PU-iO-cFw"/>
+        <segue reference="qbd-0n-vJA"/>
         <segue reference="Xl7-6t-OQ8"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -19,6 +19,7 @@ typedef NS_ENUM(NSInteger, PersonalSettingCellType) {
 @interface PersonInfoCell : UITableViewCell<UITextFieldDelegate>
 
 @property (nonatomic, strong) UITextField *nickTextFiled;
+@property (nonatomic, strong) UIButton *cancelBtn;
 @property (nonatomic, strong) UIImageView *headView;
 @property (nonatomic, strong) UILabel *titleLable;;
 @property (nonatomic, strong) UILabel *roleLable;

@@ -21,6 +21,7 @@
 #import "RemoteInstance.h"
 #import "LoginModel.h"
 #import "PersonInfoCell.h"
+#import "Define.h"
 
 @interface PersonalSettingController () <UITableViewDataSource, UITableViewDelegate, chanageScreenNameProtocol, /*SearchUserTagControllerDelegate,*/ PersonalSignatureProtocol, UINavigationControllerDelegate, UIImagePickerControllerDelegate, SearchActionsProtocol>
 @property (weak, nonatomic) IBOutlet UITableView *queryView;
@@ -56,7 +57,6 @@
     functions.push_back(@selector(personalDescriptionSelected));
     functions.push_back(nil);
     functions.push_back(@selector(accountBoundSelected));
-
 //    _queryView.scrollEnabled = NO;
     [_queryView setSeparatorColor:[UIColor clearColor]];
     
@@ -65,10 +65,30 @@
     UILabel* label = [[UILabel alloc]init];
 //    label.text = ;
 //    label.textColor = [UIColor whiteColor];
-    label.textColor = [UIColor lightGrayColor];
+    label.textColor = TextColor;
     [label sizeToFit];
-    self.navigationItem.title = @"个人信息";
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStyleDone target:self action:@selector(savePersonInfomation)];
+    UILabel *titleLabel = [[UILabel alloc] init];
+    titleLabel.frame =CGRectMake(0, 0, 100, 20);
+    titleLabel.font = [UIFont systemFontOfSize:18];
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    titleLabel.text = @"个人信息";
+    titleLabel.textColor = TextColor;
+    
+    
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.titleLabel.textColor = TextColor;
+    [btn setTintColor:TextColor];
+    [btn setTitleColor:TextColor forState:UIControlStateNormal];
+    [btn setTitle:@"保存" forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(savePersonInfomation) forControlEvents:UIControlEventTouchUpInside];
+    [btn sizeToFit];
+    btn.center = CGPointMake([UIScreen mainScreen].bounds.size.width - btn.frame.size.width, 44 / 2);
+    titleLabel.center = CGPointMake([UIScreen mainScreen].bounds.size.width / 2, 44 / 2);
+    [self.navigationController.navigationBar addSubview:titleLabel];
+    [self.navigationController.navigationBar addSubview:btn];
+//    self.navigationItem.title = @"个人信息";
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStyleDone target:self action:@selector(savePersonInfomation)];
+//    self.navigationItem.rightBarButtonItem
     self.navigationItem.rightBarButtonItem.tintColor = [UIColor blackColor];
    
     UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
@@ -128,6 +148,7 @@
 
 - (void)savePersonInfomation {
 #pragma mark 保存操作
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"hideCancel" object:nil];
     // 获取昵称
     PersonInfoCell *cell = [_queryView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
     AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
@@ -141,6 +162,11 @@
     
     [app.lm updateUserProfile:[dic copy]];
     [self didChangeScreenName:cell.nickTextFiled.text];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"hideCancel" object:nil];
 }
 
 #pragma mark - uitableview delegate
@@ -170,21 +196,44 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
+    PersonInfoCell *cell;
     static NSArray *indentifierArr = @[@"HeadViewType",@"NickNameType",@"RoleType"];
-    PersonInfoCell *cell = (PersonInfoCell *)[tableView dequeueReusableCellWithIdentifier:[indentifierArr objectAtIndex:indexPath.row]];
-    if (cell == nil) {
-        cell = [[PersonInfoCell alloc] initWithCellType:PersonalSettingCellType(indexPath.row)];
-    }
-    
     // 提取元素
     if (indexPath.row == 0) {
+        cell = (PersonInfoCell *)[tableView dequeueReusableCellWithIdentifier:[indentifierArr objectAtIndex:indexPath.row]];
+        if (cell == nil) {
+            cell = [[PersonInfoCell alloc] initWithCellType:PersonalSettingCellType(indexPath.row)];
+            CALayer* line = [CALayer layer];
+            line.borderColor = UpLineColor.CGColor;
+            line.borderWidth = 1.f;
+            line.frame = CGRectMake(0, [PersonalSettingCell preferredHeightWithImage:indexPath.row == 0] - 1, [UIScreen mainScreen].bounds.size.width, 1);
+            [cell.layer addSublayer:line];
+        }
         id image = [self.dic_profile_details objectForKey:[title objectAtIndex:indexPath.row]];
         [cell changeCellWithImageName:image];
     } else if (indexPath.row == 1) {
+        cell = (PersonInfoCell *)[tableView dequeueReusableCellWithIdentifier:[indentifierArr objectAtIndex:indexPath.row]];
+        if (cell == nil) {
+            cell = [[PersonInfoCell alloc] initWithCellType:PersonalSettingCellType(indexPath.row)];
+            CALayer* line = [CALayer layer];
+            line.borderColor = UpLineColor.CGColor;
+            line.borderWidth = 1.f;
+            line.frame = CGRectMake(0, [PersonalSettingCell preferredHeightWithImage:indexPath.row == 0] - 1, [UIScreen mainScreen].bounds.size.width, 1);
+            [cell.layer addSublayer:line];
+        }
         id nickName = [self.dic_profile_details objectForKey:[title objectAtIndex:indexPath.row]];
         [cell changeCellWithNickName:nickName];
     } else if (indexPath.row == 2) {
+        cell = (PersonInfoCell *)[tableView dequeueReusableCellWithIdentifier:[indentifierArr objectAtIndex:indexPath.row]];
+        if (cell == nil) {
+            cell = [[PersonInfoCell alloc] initWithCellType:PersonalSettingCellType(indexPath.row)];
+            
+            CALayer* line = [CALayer layer];
+            line.borderColor = UpLineColor.CGColor;
+            line.borderWidth = 1.f;
+            line.frame = CGRectMake(0, [PersonalSettingCell preferredHeightWithImage:indexPath.row == 0] - 1, [UIScreen mainScreen].bounds.size.width, 1);
+            [cell.layer addSublayer:line];
+        }
         id role = [self.dic_profile_details objectForKey:[title objectAtIndex:indexPath.row]];
         [cell changeCellRoleRoleStr:role];
     }
@@ -212,12 +261,6 @@
 ////    if (indexPath.row % 2 == 1) {
 ////        cell.accessoryType = UITableViewCellAccessoryNone;
 ////    }
-    
-    CALayer* line = [CALayer layer];
-    line.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.10].CGColor;
-    line.borderWidth = 1.f;
-    line.frame = CGRectMake(8, [PersonalSettingCell preferredHeightWithImage:indexPath.row == 0] - 1, [UIScreen mainScreen].bounds.size.width, 1);
-    [cell.layer addSublayer:line];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
@@ -459,6 +502,10 @@
 
 - (NSString*)getControllerTitle {
     return @"添加你的角色";
+}
+
+- (NSString *)getPlaceHolder {
+    return @"说说你是谁";
 }
 
 - (UINavigationController*)getViewController {

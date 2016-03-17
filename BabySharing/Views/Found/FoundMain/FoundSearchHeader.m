@@ -39,11 +39,12 @@
 //        _headLabell.center = CGPointMake(CGRectGetWidth(self.frame) / 2, CGRectGetHeight(self.frame) / 2 + 7);
         _headLabell.center = CGPointMake(CGRectGetWidth(self.frame) / 2 - (CGRectGetWidth(self.frame) / 2 + 2 -(_headLabell.frame.size.width + 20) / 2), CGRectGetHeight(self.frame) / 2);
     }
-    if (self.line == nil) {
-        self.line = [[UIView alloc] init];
-        self.line.backgroundColor = UpLineColor;
-        [self addSubview:self.line];
-    }
+    
+//    if (self.line == nil) {
+//        self.line = [[UIView alloc] init];
+//        self.line.backgroundColor = UpLineColor;
+//        [self addSubview:self.line];
+//    }
     
     self.line.frame = CGRectMake(0, CGRectGetMaxY(self.frame), CGRectGetWidth(self.frame), 1);
     

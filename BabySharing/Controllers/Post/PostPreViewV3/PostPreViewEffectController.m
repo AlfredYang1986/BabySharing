@@ -179,7 +179,8 @@
      * funciton bar
      */
     CGFloat height = FAKE_NAVIGATION_BAR_HEIGHT + img_height; //width * aspectRatio;
-    f_bar = [[SearchSegView2 alloc]initWithFrame:CGRectMake(0, height, width, FUNC_BAR_HEIGHT)];
+
+    f_bar = [[SearchSegView2 alloc] initWithFrame:CGRectMake(0, height, width, FUNC_BAR_HEIGHT) theme:Dark];
     f_bar.backgroundColor = [UIColor colorWithWhite:0.0706 alpha:1.f];
     f_bar.delegate = self;
     [self.view addSubview:f_bar];
@@ -208,7 +209,7 @@
      */
     function_dic = [[NSMutableDictionary alloc] init];
 
-    adapter = [[PostEffectAdapter alloc]init];
+    adapter = [[PostEffectAdapter alloc] init];
     adapter.delegate = self;
     adapter.content_parent_view = self.view;
     adapter.movie_url = _editing_movie;
