@@ -9,6 +9,7 @@
 #import "SearchAddController2.h"
 #import "DongDaSearchBar2.h"
 #import "AppDelegate.h"
+#import "Define.h"
 
 @interface SearchAddController2 ()
 
@@ -31,13 +32,13 @@
     //    _bkView.backgroundColor = [UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f];
 //    _bkView.backgroundColor = [UIColor colorWithWhite:0.1098 alpha:1.f];
     _bkView.backgroundColor = [UIColor whiteColor];
-    
+    self.view.backgroundColor = Background;
     _searchBar.delegate = _delegate;
     _queryView.dataSource = _delegate;
     _queryView.delegate = _delegate;
     
     _searchBar.showsCancelButton = YES;
-    _searchBar.placeholder = @"搜索角色标签";
+    _searchBar.placeholder = @"添加角色标签";
     [_searchBar becomeFirstResponder];
     // 获取当前的用户id
     self.loginModel = [AppDelegate defaultAppDelegate].lm;
@@ -52,7 +53,7 @@
     _searchBar.textField.clearButtonMode = UITextFieldViewModeWhileEditing;
     [_searchBar.cancleBtn setTitleColor:[UIColor colorWithWhite:1.f alpha:1.f] forState:UIControlStateNormal];
     [_searchBar.cancleBtn setTitleColor:[UIColor colorWithWhite:1.f alpha:1.f] forState:UIControlStateDisabled];
-    _searchBar.cancleBtn.backgroundColor = [UIColor colorWithRed:100.0 / 255.0 green:210.0 / 255.0 blue:210.0 / 255.0 alpha:1.f];
+    _searchBar.cancleBtn.backgroundColor = Blue;
     _searchBar.cancleBtn.layer.cornerRadius = 5.f;
     _searchBar.cancleBtn.clipsToBounds = YES;
     _searchBar.cancleBtn.titleLabel.font = [UIFont systemFontOfSize:14.f];

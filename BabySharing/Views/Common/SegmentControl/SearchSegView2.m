@@ -13,6 +13,12 @@
 #import "SearchSegTextTextItem.h"
 #import "Define.h"
 
+@interface SearchSegView2()
+
+@property (nonatomic, assign) Theme theme;
+
+@end
+
 @implementation SearchSegView2
 
 /*
@@ -39,8 +45,7 @@
     self = [super init];
     if (self) {
         self.tag = -99;
-        self.font_color = [UIColor grayColor];
-        self.select_font_color = [UIColor colorWithRed:0.2745f green:0.8588 blue:0.7922 alpha:1.f];
+        self.theme = Light;
     }
     return self;
 }
@@ -49,8 +54,16 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.tag = -99;
-        self.font_color = [UIColor grayColor];
-        self.select_font_color = [UIColor colorWithRed:0.2745f green:0.8588 blue:0.7922 alpha:1.f];
+        self.theme = Light;
+    }
+    return self;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame theme:(Theme)theme {
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.tag = -99;
+        self.theme = theme;
     }
     return self;
 }
@@ -173,8 +186,8 @@
     item.tag = [self getSegItemsCount] + 1;
     item.isLayerHidden = _isLayerHidden;
     item.select_font_color = _select_font_color;
-//    item.font_color = _font_color;
-    item.font_color = TextColor;
+    item.font_color = _font_color;
+//    item.font_color = TextColor;
     
     UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(segSelected:)];
     [item addGestureRecognizer:tap];
@@ -273,4 +286,21 @@
 + (CGFloat)preferredHeightWithImgAndText {
     return 70;
 }
+
+- (void)setTheme:(Theme)theme {
+    _theme = theme;
+    switch (_theme) {
+        case Dark:
+            self.font_color = Background;
+            self.select_font_color = [UIColor colorWithRed:0.2745f green:0.8588 blue:0.7922 alpha:1.f];
+            break;
+        case Light:
+            self.font_color = TextColor;
+            self.select_font_color = [UIColor colorWithRed:0.2745f green:0.8588 blue:0.7922 alpha:1.f];
+            break;
+        default:
+            break;
+    }
+}
+
 @end

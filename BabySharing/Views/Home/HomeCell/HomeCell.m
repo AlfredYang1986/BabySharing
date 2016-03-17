@@ -43,6 +43,7 @@
 
 @implementation HomeCell {
     UIImageView *praiseImage;
+    UIImageView *pushImage;
     UIImageView *jionImage;
     UIView *lineView;
     UIView *jionGroupView;
@@ -98,12 +99,15 @@
         praiseImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
         praiseImage.image = [UIImage imageNamed:[resourceBundle pathForResource:@"home_like_default" ofType:@"png"]];
         [self.contentView addSubview:praiseImage];
+//        _praiseCount = [[UILabel alloc] init];
         
-        [self.contentView addSubview:praiseImage];
-        _praiseCount = [[UILabel alloc] init];
         
+        pushImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+        pushImage.image = [UIImage imageNamed:[resourceBundle pathForResource:@"push" ofType:@"png"]];
+        [self.contentView addSubview:pushImage];
         [self.contentView addSubview:_praiseCount];
-        _usefulCount = [[UILabel alloc] init];
+//        _usefulCount = [[UILabel alloc] init];
+        
         
         // 中间的一条线
         lineView = [[UIView alloc] init];
@@ -165,6 +169,8 @@
         self.backgroundColor = [Tools colorWithRED:242.0 GREEN:242.0 BLUE:242.0 ALPHA:1.0];
         self.contentView.backgroundColor = [UIColor whiteColor];
         // 加入动作
+        pushImage.userInteractionEnabled = YES;
+        [pushImage addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pushGroupTap)]];
         _mainImage.userInteractionEnabled = YES;
         [_mainImage addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(mainImageTap)]];
         praiseImage.userInteractionEnabled = YES;
@@ -202,6 +208,8 @@
     praiseImage.frame = CGRectMake(17, CGRectGetMaxY(_descriptionLabel.frame) + 15, 25, 25);
     _praiseCount.frame = CGRectMake(57, CGRectGetMaxY(_descriptionLabel.frame) + 20, 30, 15);
     _praiseCount.backgroundColor = [UIColor redColor];
+    
+    pushImage.frame = CGRectMake(CGRectGetWidth(self.contentView.frame) / 2, CGRectGetMaxY(_descriptionLabel.frame) + 15, 25, 25);
     _usefulCount.frame = CGRectMake(CGRectGetMaxX(_praiseCount.frame) + 80, CGRectGetMinY(_praiseCount.frame), 30, 15);
     _usefulCount.backgroundColor = [UIColor redColor];
     lineView.frame = CGRectMake(15, CGRectGetMaxY(praiseImage.frame) + 15, CGRectGetWidth(self.contentView.frame) - 30, 1);
@@ -380,6 +388,11 @@
             }
         }];
     }
+}
+
+- (void)pushGroupTap {
+    NSLog(@"推了一个");
+    [_delegate didSelectCollectionBtn:_content];
 }
 
 - (void)jionGroupTap {

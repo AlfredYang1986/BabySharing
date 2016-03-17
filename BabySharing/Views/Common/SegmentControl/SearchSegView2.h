@@ -14,6 +14,12 @@ typedef enum : NSUInteger {
     SearchSegLineTypeText,
 } SearchSegLineType;
 
+typedef enum : NSInteger {
+    Light,
+    Dark,
+}Theme;
+
+
 @interface SearchSegView2 : UIView
 
 @property (nonatomic, getter=getSegItems, readonly) NSArray* items;
@@ -29,6 +35,8 @@ typedef enum : NSUInteger {
 @property (nonatomic) CGFloat margin_to_edge;
 @property (nonatomic) CGFloat margin_between_items;
 
+
+- (instancetype)initWithFrame:(CGRect)frame theme:(Theme)theme;
 - (NSString*)queryItemTitleAtIndex:(NSInteger)index;
 
 - (void)refreshItemTitle:(NSString*)title atIndex:(NSInteger)index;

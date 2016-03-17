@@ -49,7 +49,8 @@
 + (NSInteger)bityWithStr:(NSString *)str {
     NSInteger count = 0;
     for (NSInteger i = 0; i < str.length; i++) {
-        if ([str characterAtIndex:i] >= 32 && [str characterAtIndex:i] <= 126) {
+        unichar aa = [str characterAtIndex:i];
+        if (aa >= 32 && aa <= 126) {
             count += 1;
         } else {
             count += 2;

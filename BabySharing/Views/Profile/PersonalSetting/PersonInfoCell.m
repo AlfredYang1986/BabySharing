@@ -20,27 +20,45 @@
     NSString *identifier = cellType == HeadViewType ? @"HeadViewType" : (cellType == NickNameType ? @"NickNameType" : @"RoleType");
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideCancel) name:@"hideCancel" object:nil];
         self.type = cellType;
         self.titleLable = [[UILabel alloc] init];
         self.titleLable.text = cellType == HeadViewType ? @"头像" : (cellType == NickNameType ? @"昵称" : @"角色");
         self.titleLable.font = [UIFont systemFontOfSize:14];
         [self.titleLable sizeToFit];
         if (self.type == HeadViewType) {
-            self.headView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 26, 26)];
+            if (self.headView == nil) {
+                self.headView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 26, 26)];
+            }
         }
         if (self.type == NickNameType) {
-            self.nickTextFiled = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+            if (self.nickTextFiled == nil) {
+                self.nickTextFiled = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+            }
+            if (self.cancelBtn == nil) {
+                self.cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            }
+            NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
+            NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+            self.cancelBtn.hidden = YES;
+            [self.cancelBtn setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"cancel_circle" ofType:@"png"]] forState:UIControlStateNormal];
+            [self.cancelBtn addTarget:self action:@selector(deleleNickName) forControlEvents:UIControlEventTouchUpInside];
             self.nickTextFiled.font = [UIFont systemFontOfSize:12];
             self.nickTextFiled.textAlignment = NSTextAlignmentRight;
+            self.nickTextFiled.delegate  = self;
+            
         }
         if (self.type == RoleType) {
-            self.roleLable = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+            if (self.roleLable == nil) {
+                self.roleLable = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+            }
         }
         
         [self.contentView addSubview:self.titleLable];
         if (self.headView) [self.contentView addSubview:self.headView];
         if (self.nickTextFiled) {
            [self.contentView addSubview:self.nickTextFiled];
+            [self.contentView addSubview:self.cancelBtn];
             self.nickTextFiled.placeholder = @"4-18个字节，限中英文，数字，表情符号";
             self.nickTextFiled.delegate = self;
         }
@@ -58,11 +76,20 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     self.titleLable.center = CGPointMake(CGRectGetWidth(self.titleLable.frame) / 2 + 10, CGRectGetHeight(self.frame) / 2);
-    if (self.type == HeadViewType) self.headView.center = CGPointMake(CGRectGetWidth(self.frame) - CGRectGetWidth(self.headView.frame) / 2 - 30, CGRectGetHeight(self.frame) / 2);
+    if (self.type == HeadViewType) {
+        self.headView.center = CGPointMake(CGRectGetWidth(self.frame) - CGRectGetWidth(self.headView.frame) / 2 - 30, CGRectGetHeight(self.frame) / 2);
+        self.headView.clipsToBounds = YES;
+        self.headView.layer.cornerRadius = CGRectGetWidth(self.headView.frame) / 2;
+    }
     self.nickTextFiled.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame) - 150, CGRectGetHeight(self.frame));
 //    [self.nickTextFiled sizeToFit];
-    if (self.type == NickNameType) self.nickTextFiled.center = CGPointMake(CGRectGetWidth(self.frame) - CGRectGetWidth(self.nickTextFiled.frame) / 2 - 30, CGRectGetHeight(self.frame) / 2);
+    if (self.type == NickNameType) {
+        self.nickTextFiled.center = CGPointMake(CGRectGetWidth(self.frame) - CGRectGetWidth(self.nickTextFiled.frame) / 2 - 30 - 12, CGRectGetHeight(self.frame) / 2);
+        self.cancelBtn.frame = CGRectMake(0, 0, 13, 13);
+        self.cancelBtn.center = CGPointMake([UIScreen mainScreen].bounds.size.width - 25, 22);
+    }
     [self.roleLable sizeToFit];
+    
     if (self.type == RoleType) self.roleLable.center = CGPointMake(CGRectGetWidth(self.frame) - CGRectGetWidth(self.roleLable.frame) / 2 - 30, CGRectGetHeight(self.frame) / 2);
     self.arrowImageView.center = CGPointMake(CGRectGetWidth(self.frame) - CGRectGetWidth(self.arrowImageView.frame) / 2 - 10, CGRectGetHeight(self.frame) / 2);
 }
@@ -102,6 +129,11 @@
     
 }
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    self.cancelBtn.hidden = NO;
+}
+
+
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     if ([string isEqualToString:@""]) {
         return YES;
@@ -111,6 +143,15 @@
     } else {
         return YES;
     }
+}
+
+- (void)deleleNickName {
+    self.nickTextFiled.text = @"";
+}
+
+- (void)hideCancel{
+    [self.nickTextFiled resignFirstResponder];
+    self.cancelBtn.hidden = YES;
 }
 
 @end

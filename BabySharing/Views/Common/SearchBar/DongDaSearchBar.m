@@ -91,7 +91,7 @@
     }
     
     if (cancelBtn == nil) {
-        cancelBtn = [[UIButton alloc]init];
+        cancelBtn = [[UIButton alloc] init];
         [cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
         [cancelBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
         [cancelBtn addTarget:self action:@selector(cancelBtnSelected) forControlEvents:UIControlEventTouchUpInside];

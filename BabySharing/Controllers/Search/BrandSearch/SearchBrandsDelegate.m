@@ -13,7 +13,7 @@
 
 #import "FoundSearchHeader.h"
 #import "FoundHotTagsCell.h"
-
+#import "Define.h"
 #import "AppDelegate.h"
 #import "FoundSearchModel.h"
 
@@ -49,7 +49,7 @@
 }
 
 - (NSString*)getSearchPlaceHolder {
-    return @"搜索品牌标签";
+    return @"添加品牌标签";
 }
 
 #pragma mark -- table view delegate and datasource
@@ -86,7 +86,7 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 1;
 }
 
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -104,13 +104,16 @@
         NSString* filepath = [resourceBundle pathForResource:@"post_resent_tag" ofType:@"png"];
         
         header.headImg.image = [UIImage imageNamed:filepath];
-        header.headLabell.text = @"使用过的品牌";
+        header.headLabell.text = @"热门品牌";
+        header.headLabell.textColor = TextColor;
     } else {
 
         NSString* filepath = [resourceBundle pathForResource:@"post_recommand_brand" ofType:@"png"];
         
         header.headImg.image = [UIImage imageNamed:filepath];
-        header.headLabell.text = @"推荐品牌";
+        header.headLabell.text = @"热门品牌";
+        header.headLabell.textColor = TextColor;
+
     }
     //    header.headLabell.textColor = [UIColor colorWithWhite:0.3059 alpha:1.f];
 //    header.headLabell.textColor = [UIColor whiteColor];
