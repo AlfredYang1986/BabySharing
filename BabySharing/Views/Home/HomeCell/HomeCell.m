@@ -44,6 +44,7 @@
 
 @property (nonatomic, strong) GPUImageMovie *gpuImageMovie;
 @property (nonatomic, strong) GPUImageView *gpuImageView;
+
 @property (nonatomic, strong) PhotoTagView *tagViewBand;
 @property (nonatomic, strong) PhotoTagView *tagViewTime;
 @property (nonatomic, strong) PhotoTagView *tagViewLocation;
@@ -410,22 +411,22 @@
             if (success) {
                 _gpuImageView.hidden = NO;
                 _videoSign.hidden = YES;
+                [_gpuImageMovie addTarget:_gpuImageView];
                 _gpuImageMovie = [[GPUImageMovie alloc] initWithURL:path];
                 _gpuImageMovie.playAtActualSpeed = YES;
                 _gpuImageMovie.shouldRepeat = YES;
-                [_gpuImageMovie addTarget:_gpuImageView];
                 [_gpuImageMovie startProcessing];
             } else {
                 NSLog(@"down load movie %@ failed", _queryContentItem.item_name);
             }
         }];
         if (url) {
+            [_gpuImageMovie addTarget:_gpuImageView];
             _gpuImageMovie = [[GPUImageMovie alloc] initWithURL:url];
             _gpuImageView.hidden = NO;
             _videoSign.hidden = YES;
             _gpuImageMovie.playAtActualSpeed = YES;
             _gpuImageMovie.shouldRepeat = YES;
-            [_gpuImageMovie addTarget:_gpuImageView];
             [_gpuImageMovie startProcessing];
         }
     }
