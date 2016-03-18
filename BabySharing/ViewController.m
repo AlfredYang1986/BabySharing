@@ -432,6 +432,8 @@ enum DisplaySide {
             if ([self.lm sendLoginRequestToPhone:phoneNo]) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [inputView sendConfirmCodeRequestSuccess];
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"验证码已发送" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                    [alert show];
                 });
             }
         });

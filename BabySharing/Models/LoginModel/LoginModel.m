@@ -261,6 +261,7 @@
         NSDictionary* reVal = [result objectForKey:@"result"];
         NSString* user_id = (NSString*)[reVal objectForKey:@"user_id"];
         [LoginToken createTokenInContext:_doc.managedObjectContext withUserID:user_id andAttrs:reVal];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:kDongDaNotificationkeyUserprofileUpdate object:nil userInfo:reVal];
         return YES;
     } else {
         NSDictionary* reError = [result objectForKey:@"error"];
@@ -422,14 +423,16 @@
 
     // 获取头像
     if (_reg_user.who.screen_image == nil || [_reg_user.who.screen_image isEqualToString:@""]) {
+        NSData* data = [RemoteInstance remoteDownDataFromUrl:[NSURL URLWithString:[infoDic valueForKey:@"headimgurl"]]];
+        UIImage* img = [UIImage imageWithData:data];
+        
+        NSString* img_name = [TmpFileStorageModel generateFileName];
+        [TmpFileStorageModel saveToTmpDirWithImage:img withName:img_name];
+        _reg_user.who.screen_image = img_name;
+        
         dispatch_queue_t aq = dispatch_queue_create("qq profile img queue", nil);
         dispatch_async(aq, ^{
-            NSData* data = [RemoteInstance remoteDownDataFromUrl:[NSURL URLWithString:[infoDic valueForKey:@"headimgurl"]]];
-            UIImage* img = [UIImage imageWithData:data];
             if (img) {
-                NSString* img_name = [TmpFileStorageModel generateFileName];
-                [TmpFileStorageModel saveToTmpDirWithImage:img withName:img_name];
-                
                 dispatch_queue_t post_queue = dispatch_queue_create("post queue", nil);
                 dispatch_async(post_queue, ^(void){
                     [RemoteInstance uploadPicture:img withName:img_name toUrl:[NSURL URLWithString:[POST_HOST_DOMAIN stringByAppendingString:POST_UPLOAD]] callBack:^(BOOL successs, NSString *message) {
@@ -509,14 +512,17 @@
     
     // 获取头像
     if (_reg_user.who.screen_image == nil || [_reg_user.who.screen_image isEqualToString:@""]) {
+        
+        NSData* data = [RemoteInstance remoteDownDataFromUrl:[NSURL URLWithString:[infoDic valueForKey:@"figureurl_qq_2"]]];
+        UIImage* img = [UIImage imageWithData:data];
+        
+        NSString* img_name = [TmpFileStorageModel generateFileName];
+        [TmpFileStorageModel saveToTmpDirWithImage:img withName:img_name];
+        _reg_user.who.screen_image = img_name;
+        
         dispatch_queue_t aq = dispatch_queue_create("qq profile img queue", nil);
         dispatch_async(aq, ^{
-            NSData* data = [RemoteInstance remoteDownDataFromUrl:[NSURL URLWithString:[infoDic valueForKey:@"figureurl_qq_2"]]];
-            UIImage* img = [UIImage imageWithData:data];
             if (img) {
-                NSString* img_name = [TmpFileStorageModel generateFileName];
-                [TmpFileStorageModel saveToTmpDirWithImage:img withName:img_name];
-                
                 dispatch_queue_t post_queue = dispatch_queue_create("post queue", nil);
                 dispatch_async(post_queue, ^(void){
                     [RemoteInstance uploadPicture:img withName:img_name toUrl:[NSURL URLWithString:[POST_HOST_DOMAIN stringByAppendingString:POST_UPLOAD]] callBack:^(BOOL successs, NSString *message) {
@@ -778,14 +784,17 @@
             NSLog(@"new user photo %@", _reg_user.who.screen_image);
             
             if (_reg_user.who.screen_image == nil || [_reg_user.who.screen_image isEqualToString:@""]) {
+                
+                NSData* data = [RemoteInstance remoteDownDataFromUrl:[NSURL URLWithString:user.profileImageUrl]];
+                UIImage* img = [UIImage imageWithData:data];
+                
+                NSString* img_name = [TmpFileStorageModel generateFileName];
+                [TmpFileStorageModel saveToTmpDirWithImage:img withName:img_name];
+                _reg_user.who.screen_image = img_name;
+                
                 dispatch_queue_t aq = dispatch_queue_create("weibo profile img queue", nil);
                 dispatch_async(aq, ^{
-                    NSData* data = [RemoteInstance remoteDownDataFromUrl:[NSURL URLWithString:user.profileImageUrl]];
-                    UIImage* img = [UIImage imageWithData:data];
                     if (img) {
-                        NSString* img_name = [TmpFileStorageModel generateFileName];
-                        [TmpFileStorageModel saveToTmpDirWithImage:img withName:img_name];
-                        
                         dispatch_queue_t post_queue = dispatch_queue_create("post queue", nil);
                         dispatch_async(post_queue, ^(void){
                             [RemoteInstance uploadPicture:img withName:img_name toUrl:[NSURL URLWithString:[POST_HOST_DOMAIN stringByAppendingString:POST_UPLOAD]] callBack:^(BOOL successs, NSString *message) {
