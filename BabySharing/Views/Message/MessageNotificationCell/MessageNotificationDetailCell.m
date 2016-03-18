@@ -223,12 +223,74 @@
             }
             
             [self UIImageView:tmp setPostImage:_notification.action_post_item];
-            
 
             }
             break;
-        case NotificationActionTypePush:
-        case NotificationActionTypeMessage:
+        case NotificationActionTypePush: {
+            NSString* sender_name = _notification.sender_screen_name;
+            NSString* receiver_id = _notification.receiver_screen_name;
+            
+            NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:[[[sender_name stringByAppendingString:@" 推了 "] stringByAppendingString:receiver_id] stringByAppendingString:@" 的照片"]];
+            [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:70.f / 255.f green:219.f / 255.f blue:202.f / 255.f alpha:1.f] range:NSMakeRange(0,sender_name.length)];
+            [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:70.f / 255.f green:219.f / 255.f blue:202.f / 255.f alpha:1.f] range:NSMakeRange(sender_name.length + 4, receiver_id.length)];
+            [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithWhite:151.f / 255.f alpha:1.f] range:NSMakeRange(sender_name.length, 4)];
+            [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithWhite:151.f / 255.f alpha:1.f] range:NSMakeRange(sender_name.length + 4 + receiver_id.length, 4)];
+            _detailLabel.attributedText = str;
+            
+            UIImageView* tmp = [_connectContentView viewWithTag:-1];
+            if (tmp == nil) {
+                tmp = [[UIImageView alloc]init];
+                [_connectContentView addSubview:tmp];
+                
+                tmp.frame = CGRectMake(0, 0, 45, 45);
+                tmp.center = CGPointMake(25, 25);
+                tmp.layer.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.3].CGColor;
+                tmp.layer.borderWidth = 1.f;
+                tmp.layer.cornerRadius = 5.f;
+                tmp.clipsToBounds = YES;
+                
+                tmp.userInteractionEnabled = YES;
+                UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(postContentClicked:)];
+                [tmp addGestureRecognizer:tap];
+            }
+            
+            [self UIImageView:tmp setPostImage:_notification.action_post_item];
+            
+            }
+            break;
+        case NotificationActionTypeUnlike: {
+            NSString* sender_name = _notification.sender_screen_name;
+            NSString* receiver_id = _notification.receiver_screen_name;
+            
+            NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:[[[sender_name stringByAppendingString:@" 收回了赞 "] stringByAppendingString:receiver_id] stringByAppendingString:@" 的照片"]];
+            [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:70.f / 255.f green:219.f / 255.f blue:202.f / 255.f alpha:1.f] range:NSMakeRange(0,sender_name.length)];
+            [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:70.f / 255.f green:219.f / 255.f blue:202.f / 255.f alpha:1.f] range:NSMakeRange(sender_name.length + 6, receiver_id.length)];
+            [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithWhite:151.f / 255.f alpha:1.f] range:NSMakeRange(sender_name.length, 6)];
+            [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithWhite:151.f / 255.f alpha:1.f] range:NSMakeRange(sender_name.length + 6 + receiver_id.length, 4)];
+            _detailLabel.attributedText = str;
+            
+            UIImageView* tmp = [_connectContentView viewWithTag:-1];
+            if (tmp == nil) {
+                tmp = [[UIImageView alloc]init];
+                [_connectContentView addSubview:tmp];
+                
+                tmp.frame = CGRectMake(0, 0, 45, 45);
+                tmp.center = CGPointMake(25, 25);
+                tmp.layer.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.3].CGColor;
+                tmp.layer.borderWidth = 1.f;
+                tmp.layer.cornerRadius = 5.f;
+                tmp.clipsToBounds = YES;
+                
+                tmp.userInteractionEnabled = YES;
+                UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(postContentClicked:)];
+                [tmp addGestureRecognizer:tap];
+            }
+            
+            [self UIImageView:tmp setPostImage:_notification.action_post_item];
+            
+            }
+            break;
+        case NotificationActionTypeUnpush:
             break;
             
         default:
