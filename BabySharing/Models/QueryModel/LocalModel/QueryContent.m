@@ -11,6 +11,7 @@
 #import "QueryContentItem.h"
 #import "QueryContentTag.h"
 #import "QueryLikes.h"
+#import "QueryContentChaters.h"
 
 
 @implementation QueryContent
@@ -27,11 +28,13 @@
 @dynamic owner_id;
 @dynamic owner_name;
 @dynamic owner_photo;
+@dynamic owner_role;
 @dynamic relations;
 @dynamic comments;
 @dynamic items;
 @dynamic likes;
 @dynamic tags;
+@dynamic chaters;
 @dynamic isPush;
 @dynamic isLike;
 @dynamic group_chat_count;

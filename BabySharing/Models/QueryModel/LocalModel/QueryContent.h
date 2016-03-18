@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class QueryComments, QueryContentItem, QueryContentTag, QueryLikes, QueryTalkers;
+
+@class QueryComments, QueryContentItem, QueryContentTag, QueryLikes, QueryContentChaters;
 
 @interface QueryContent : NSManagedObject
 
@@ -25,11 +26,13 @@
 @property (nonatomic, retain) NSString * owner_id;
 @property (nonatomic, retain) NSString * owner_name;
 @property (nonatomic, retain) NSString * owner_photo;
+@property (nonatomic, retain) NSString * owner_role;
 @property (nonatomic, retain) NSNumber * relations;
 @property (nonatomic, retain) NSSet *comments;
 @property (nonatomic, retain) NSSet *items;
 @property (nonatomic, retain) NSSet *likes;
 @property (nonatomic, retain) NSSet *tags;
+@property (nonatomic, retain) NSSet *chaters;
 
 @property (nonatomic, retain) NSNumber *isLike;
 @property (nonatomic, retain) NSNumber *isPush;
@@ -59,9 +62,10 @@
 - (void)addTags:(NSSet *)values;
 - (void)removeTags:(NSSet *)values;
 
-- (void)addChatsObject:(QueryTalkers *)value;
-- (void)removeChatsObject:(QueryTalkers *)value;
-- (void)addChats:(NSSet *)values;
-- (void)removeChats:(NSSet *)values;
+- (void)addChatersObject:(QueryContentChaters *)value;
+- (void)removeChatersObject:(QueryContentChaters *)value;
+- (void)addChaters:(NSSet<QueryContentChaters *> *)values;
+- (void)removeChaters:(NSSet<QueryContentChaters *> *)values;
+
 
 @end

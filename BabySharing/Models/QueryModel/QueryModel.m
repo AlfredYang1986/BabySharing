@@ -30,6 +30,8 @@
         dispatch_async(dispatch_get_main_queue(), ^(void){
             [document.managedObjectContext performBlock:^(void){
                 _querydata =  [QueryContent enumLocalQueyDataInContext:document.managedObjectContext];
+                QueryContent *contet = [_querydata firstObject];
+                NSLog(@"MonkeyHengLog: %@ === %d", contet.content_post_id, contet.isLike.intValue);
                 if (_querydata == nil || _querydata.count == 0) {
                     [self refreshQueryDataByUser:self.delegate.lm.current_user_id withToken:self.delegate.lm.current_auth_token];
                 }
@@ -49,7 +51,7 @@
          */
         NSString* docs=[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
         NSURL* url =[NSURL fileURLWithPath:[docs stringByAppendingPathComponent:LOCALDB_QUERY]];
-        _doc = (UIManagedDocument*)[[UIManagedDocument alloc]initWithFileURL:url];
+        _doc = (UIManagedDocument*)[[UIManagedDocument alloc] initWithFileURL:url];
         
         if (![[NSFileManager defaultManager]fileExistsAtPath:[url path] isDirectory:nil]) {
             [_doc saveToURL:url forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
@@ -148,6 +150,8 @@
     [QueryContent saveTop:top inContext:_doc.managedObjectContext];
 }
 
+
+
 #pragma mark -- comments query operation
 - (QueryContent*)refreshCommentsByUser:(NSString*)user_id withToken:(NSString*)token andPostID:(NSString*)post_id {
    
@@ -217,6 +221,32 @@
     return content;
 }
 
+#pragma mark -- refresh Islike
+- (QueryContent *)refreshIslike:(NSNumber *)islike postId:(NSString *)post_id {
+    NSFetchRequest* request = [NSFetchRequest fetchRequestWithEntityName:@"QueryContent"];
+    request.predicate = [NSPredicate predicateWithFormat:@"content_post_id = %@", post_id];
+    NSSortDescriptor* des = [NSSortDescriptor sortDescriptorWithKey:@"content_post_date" ascending:NO];
+    
+    request.sortDescriptors = [NSArray arrayWithObjects: des, nil];
+    
+    NSError *error;
+    NSArray* matches = [_doc.managedObjectContext executeFetchRequest:request error:&error];
+    
+    for (QueryContent *content in matches) {
+        content.isLike = islike;
+    }
+    
+    if (!matches || matches.count > 1) {
+        NSLog(@"error with primary key");
+        return nil;
+    } else if (matches.count == 1) {
+        return matches.firstObject;
+        
+    } else {
+        NSLog(@"nothing need to be delected");
+        return nil;
+    }
+}
 #pragma mark -- query relations between owner and current user
 - (UserPostOwnerConnections)queryRelationsWithPost:(NSString*)post_id withFinishBlock:(finishBlock)block {
 

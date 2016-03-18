@@ -143,7 +143,6 @@
 
 + (UIImage*)enumImageWithName:(NSString*)name withDownLoadFinishBolck:(imageDidDownloadBlock)block {
     NSString* path = [[[TmpFileStorageModel BMTmpImageDir] stringByAppendingPathComponent:name] stringByAppendingPathExtension:@"png"];
-    
     UIImage* reVal = [UIImage imageWithContentsOfFile:path];
     if (!reVal) {
         /**

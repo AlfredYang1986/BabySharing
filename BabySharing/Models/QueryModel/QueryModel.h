@@ -36,6 +36,8 @@ typedef void(^finishBlock)(void);
 - (QueryContent *)refreshCommentsByUser:(NSString*)user_id withToken:(NSString*)token andPostID:(NSString*)post_id;
 - (QueryContent *)appendCommentsByUser:(NSString*)user_id withToken:(NSString*)token andBeginIndex:(NSInteger)skip andPostID:(NSString*)post_id;
 
+- (QueryContent *)refreshIslike:(NSNumber *)islike postId:(NSString *)post_id;
+
 #pragma mark -- query relations between owner and current user
 - (UserPostOwnerConnections)queryRelationsWithPost:(NSString*)post_id withFinishBlock:(finishBlock)block;
 - (UserPostOwnerConnections)queryLocalRelationsWithPost:(NSString*)post_id;

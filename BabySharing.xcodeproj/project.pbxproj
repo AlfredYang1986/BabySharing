@@ -106,6 +106,8 @@
 		A066496F1C89A2B90043FF07 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A066495E1C89A2B90043FF07 /* UIImageView+WebCache.m */; };
 		A06649701C89A2B90043FF07 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A06649601C89A2B90043FF07 /* UIView+WebCacheOperation.m */; };
 		A08AE9541C7E9C1A0029B660 /* libiconv.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A08AE9531C7E9C1A0029B660 /* libiconv.2.dylib */; };
+		A0963F121C9C0EB00066F5B7 /* QueryContentChaters+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A0963F0F1C9C0EB00066F5B7 /* QueryContentChaters+CoreDataProperties.m */; };
+		A0963F131C9C0EB00066F5B7 /* QueryContentChaters.m in Sources */ = {isa = PBXBuildFile; fileRef = A0963F111C9C0EB00066F5B7 /* QueryContentChaters.m */; };
 		A09DF94E1C80440C00484FAB /* AlbumCollectionViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A09DF94D1C80440C00484FAB /* AlbumCollectionViewDelegate.m */; };
 		A09DF9511C8044C500484FAB /* PhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A09DF9501C8044C500484FAB /* PhotoCollectionViewCell.m */; };
 		A0A5C53E1C7DB1DF00F07FE8 /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A5C5311C7DB1DF00F07FE8 /* libWeiboSDK.a */; };
@@ -279,7 +281,6 @@
 		EEAACD1F1B44E90400D05C0B /* SGActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACC1F1B44E90400D05C0B /* SGActionView.m */; };
 		EEAACD201B44E90400D05C0B /* SGAlertMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACC211B44E90400D05C0B /* SGAlertMenu.m */; };
 		EEAACD411B44E90400D05C0B /* PhotoPreViewEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAACC6A1B44E90400D05C0B /* PhotoPreViewEditView.m */; };
-		EEAACD7A1B44EA8800D05C0B /* BabySharing.mobileprovision in Resources */ = {isa = PBXBuildFile; fileRef = EEAACD791B44EA8800D05C0B /* BabySharing.mobileprovision */; };
 		EEAACD801B44EBDE00D05C0B /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEAACD7D1B44EBA400D05C0B /* MediaPlayer.framework */; };
 		EEAACD811B44EBDE00D05C0B /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EEAACD7B1B44EB9800D05C0B /* libicucore.dylib */; };
 		EEAACD8E1B44ECDD00D05C0B /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEAACD8C1B44ECC900D05C0B /* CoreMedia.framework */; };
@@ -585,6 +586,10 @@
 		A066495F1C89A2B90043FF07 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		A06649601C89A2B90043FF07 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
 		A08AE9531C7E9C1A0029B660 /* libiconv.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.2.dylib; path = /usr/lib/libiconv.2.dylib; sourceTree = "<absolute>"; };
+		A0963F0E1C9C0EB00066F5B7 /* QueryContentChaters+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QueryContentChaters+CoreDataProperties.h"; sourceTree = "<group>"; };
+		A0963F0F1C9C0EB00066F5B7 /* QueryContentChaters+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "QueryContentChaters+CoreDataProperties.m"; sourceTree = "<group>"; };
+		A0963F101C9C0EB00066F5B7 /* QueryContentChaters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryContentChaters.h; sourceTree = "<group>"; };
+		A0963F111C9C0EB00066F5B7 /* QueryContentChaters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryContentChaters.m; sourceTree = "<group>"; };
 		A09DF94C1C80440C00484FAB /* AlbumCollectionViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumCollectionViewDelegate.h; sourceTree = "<group>"; };
 		A09DF94D1C80440C00484FAB /* AlbumCollectionViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumCollectionViewDelegate.m; sourceTree = "<group>"; };
 		A09DF94F1C8044C500484FAB /* PhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCollectionViewCell.h; sourceTree = "<group>"; };
@@ -940,7 +945,6 @@
 		EEAACC6C1B44E90400D05C0B /* PhotoTagControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoTagControlView.m; sourceTree = "<group>"; };
 		EEAACC721B44E90400D05C0B /* PhotoTagView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoTagView.h; sourceTree = "<group>"; };
 		EEAACC731B44E90400D05C0B /* PhotoTagView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoTagView.m; sourceTree = "<group>"; };
-		EEAACD791B44EA8800D05C0B /* BabySharing.mobileprovision */ = {isa = PBXFileReference; lastKnownFileType = file; path = BabySharing.mobileprovision; sourceTree = "<group>"; };
 		EEAACD7B1B44EB9800D05C0B /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		EEAACD7D1B44EBA400D05C0B /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		EEAACD821B44EC9900D05C0B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -1921,7 +1925,6 @@
 		EEAAC8EF1B44E81A00D05C0B = {
 			isa = PBXGroup;
 			children = (
-				EEAACD791B44EA8800D05C0B /* BabySharing.mobileprovision */,
 				A066493F1C89A2B90043FF07 /* SDWebImage */,
 				A0423D221C84253700039991 /* libGPUImage */,
 				EE4082501B70C0CE0094A88B /* gotyeapi */,
@@ -2289,6 +2292,10 @@
 				A00946941C96E66E0015A641 /* QueryLocalModel.xcdatamodeld */,
 				EEAACB981B44E90300D05C0B /* QueryComments.h */,
 				EEAACB991B44E90300D05C0B /* QueryComments.m */,
+				A0963F0E1C9C0EB00066F5B7 /* QueryContentChaters+CoreDataProperties.h */,
+				A0963F0F1C9C0EB00066F5B7 /* QueryContentChaters+CoreDataProperties.m */,
+				A0963F101C9C0EB00066F5B7 /* QueryContentChaters.h */,
+				A0963F111C9C0EB00066F5B7 /* QueryContentChaters.m */,
 				EEAACB9E1B44E90300D05C0B /* QueryContentItem.h */,
 				EEAACB9F1B44E90300D05C0B /* QueryContentItem.m */,
 				EEAACBA01B44E90300D05C0B /* QueryContentTag.h */,
@@ -3136,7 +3143,7 @@
 				TargetAttributes = {
 					EEAAC8F71B44E81A00D05C0B = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = V6843SSXWV;
+						DevelopmentTeam = 6AUL2A4AE9;
 					};
 					EEAAC9131B44E81A00D05C0B = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -3219,7 +3226,6 @@
 				700FF9F31C9AE6CA009FB08B /* default.png in Resources */,
 				EE97441F1B78944600E81A70 /* MessageNotificationDetailCell.xib in Resources */,
 				70F5014B1C23ADC2007769F4 /* PostPreview.storyboard in Resources */,
-				EEAACD7A1B44EA8800D05C0B /* BabySharing.mobileprovision in Resources */,
 				EEA1F54D1C169049009B8724 /* SearchViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3344,6 +3350,7 @@
 				EEAACCDA1B44E90400D05C0B /* Providers.m in Sources */,
 				70D15B491C5B64C9007AC9AB /* MJRefreshAutoNormalFooter.m in Sources */,
 				EEB8122C1B7AECF800BC0774 /* CycleViewController.m in Sources */,
+				A0963F121C9C0EB00066F5B7 /* QueryContentChaters+CoreDataProperties.m in Sources */,
 				70A9BB711C3CF5F1000DFE53 /* SearchFriendsController.m in Sources */,
 				EEDCF69B1B9AB674005F4F4D /* PrivacySetting.m in Sources */,
 				EEBE1B6B1C17CA9400EAA9D2 /* HomeSegControl.m in Sources */,
@@ -3508,6 +3515,7 @@
 				A0C4D8231C81FC7900F55B20 /* LocalTag.m in Sources */,
 				70530B141C3F9D1E00505121 /* SearchSegItem.m in Sources */,
 				EE817F491B79A78E00988734 /* UserChatController.m in Sources */,
+				A0963F131C9C0EB00066F5B7 /* QueryContentChaters.m in Sources */,
 				EE76A5791B7205CF00036747 /* ConnectionOwner+ContextOpt.m in Sources */,
 				EEE94E271B74BE3B0011321A /* ProfileSettingController.mm in Sources */,
 				EEAACCC01B44E90400D05C0B /* PersonalCentreTmpViewController.m in Sources */,
@@ -3687,7 +3695,7 @@
 					"-ObjC",
 					"-fobjc-arc",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = BS.BabySharing;
+				PRODUCT_BUNDLE_IDENTIFIER = monkeyheng.BabySharing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -3726,7 +3734,7 @@
 					"-ObjC",
 					"-fobjc-arc",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = BS.BabySharing;
+				PRODUCT_BUNDLE_IDENTIFIER = monkeyheng.BabySharing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";

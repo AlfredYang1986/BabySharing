@@ -149,6 +149,7 @@
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     [_qm saveTop:50];
     [_lm.doc.managedObjectContext save:nil];
+    [_qm.doc.managedObjectContext save:nil];
     [_mm save];
     if (_reachability) {
         [_reachability stopNotifier];
@@ -173,6 +174,7 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     [_qm saveTop:50];
     [_lm.doc.managedObjectContext save:nil];
+    [_qm.doc.managedObjectContext save:nil];
     [_mm save];
     NSLog(@"save content in termination");
     [_lm offlineCurrentUser];

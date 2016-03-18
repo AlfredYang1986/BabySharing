@@ -12,7 +12,7 @@
 #import "QueryLikes.h"
 #import "QueryTimeSpan.h"
 #import "QueryContentTag.h"
-
+#import "QueryContentChaters.h"
 
 @implementation QueryContent (ContextOpt)
 
@@ -92,6 +92,7 @@
     tmp.owner_id = [attr objectForKey:@"owner_id"];
     tmp.owner_name = [attr objectForKey:@"owner_name"];
     tmp.owner_photo = [attr objectForKey:@"owner_photo"];
+    tmp.owner_role = [attr objectForKey:@"role_tag"];
     
     NSNumber* mills = [attr objectForKey:@"date"];
     NSTimeInterval seconds = mills.longLongValue / 1000.0;
@@ -109,7 +110,7 @@
     tmp.isLike = [attr objectForKey:@"isLiked"];
     tmp.isPush = [attr objectForKey:@"isPush"];
     tmp.group_chat_count = [attr objectForKey:@"group_chat_count"];
-   
+
     NSArray* items = [attr objectForKey:@"items"];
     for (NSDictionary* item in items) {
         [QueryContent addOneItemToContent:tmp withAttr:item inContext:context];
@@ -128,6 +129,10 @@
     NSArray *tags = [attr objectForKey:@"tags"];
     for (NSDictionary* item in tags) {
         [QueryContent addOneTagToContent:tmp withAttr:item inContext:context];
+    }
+    NSArray *chaters = [attr objectForKey:@"group_user_list"];
+    for (NSString *item in chaters) {
+        [QueryContent addOneChaterToContent:tmp withTalkerId:item inContext:context];
     }
     
     return tmp;
@@ -287,13 +292,13 @@
     }
 }
 
-#pragma mark -- chats
-//+ (void)addOneTalkerToContent:(QueryContent *)content withTalkerId:(NSString *)talkerId inContext:(NSManagedObjectContext*)context {
-//    QueryTalkers *tmp_talker = [NSEntityDescription insertNewObjectForEntityForName:@"QueryTalkers" inManagedObjectContext:context];
-//    tmp_talker.userid = talkerId;
-//    [content addChatsObject:tmp_talker];
-//}
-//
+#pragma mark -- private op chats
++ (void)addOneChaterToContent:(QueryContent *)content withTalkerId:(NSString *)chater inContext:(NSManagedObjectContext*)context {
+    QueryContentChaters *tmp_chater = [NSEntityDescription insertNewObjectForEntityForName:@"QueryContentChaters" inManagedObjectContext:context];
+    tmp_chater.chaterImg = chater;
+    [content addChatersObject:tmp_chater];
+}
+
 //+ (void)removeAllChatsForContext:(QueryContent *)content inContext:(NSManagedObjectContext*)context {
 //    while (content.chats.count != 0) {
 //        QueryTalkers *chat = [content.chats.objectEnumerator nextObject];

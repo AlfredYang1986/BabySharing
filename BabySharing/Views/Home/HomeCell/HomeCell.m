@@ -15,6 +15,10 @@
 #import "Define.h"
 #import "PhotoTagView.h"
 #import "QueryContentTag.h"
+#import "QueryContentChaters.h"
+#import "QueryContent+ContextOpt.h"
+#import "AppDelegate.h"
+
 
 @interface HomeCell()
 
@@ -44,6 +48,7 @@
 @property (nonatomic, strong) PhotoTagView *tagViewTime;
 @property (nonatomic, strong) PhotoTagView *tagViewLocation;
 
+
 @end
 
 @implementation HomeCell {
@@ -52,6 +57,7 @@
     UIImageView *jionImage;
     UIView *lineView;
     UIView *jionGroupView;
+    NSInteger indexChater;
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier indexPath:(NSIndexPath *)indexPath {
@@ -76,7 +82,7 @@
         [self.contentView addSubview:_ownerNameLable];
         
         _ownerRole = [[UILabel alloc] init];
-        _ownerRole.text = @"没有返回角色标签";
+        _ownerRole.text = @"";
         _ownerRole.font = [UIFont systemFontOfSize:12];
         _ownerRole.backgroundColor = [Tools colorWithRED:254.0 GREEN:192.0 BLUE:0.0 ALPHA:1.0];
         _ownerRole.textAlignment = NSTextAlignmentCenter;
@@ -121,12 +127,20 @@
         
         [self.contentView addSubview:_usefulCount];
         _firstImage = [[UIImageView alloc] init];
+        _firstImage.tag = 1;
+        _firstImage.clipsToBounds = YES;
         
         [self.contentView addSubview:_firstImage];
         _secondImage = [[UIImageView alloc] init];
+        _secondImage.tag = 2;
+        _secondImage.clipsToBounds = YES;
+
         
         [self.contentView addSubview:_secondImage];
         _thirdImage = [[UIImageView alloc] init];
+        _thirdImage.tag = 3;
+        _thirdImage.clipsToBounds = YES;
+
         
         [self.contentView addSubview:_thirdImage];
         _talkerCount = [[UILabel alloc] init];
@@ -220,11 +234,9 @@
     
     praiseImage.frame = CGRectMake(17, CGRectGetMaxY(_descriptionLabel.frame) + 15, 25, 25);
     _praiseCount.frame = CGRectMake(57, CGRectGetMaxY(_descriptionLabel.frame) + 20, 30, 15);
-    _praiseCount.backgroundColor = [UIColor redColor];
     
     pushImage.frame = CGRectMake(CGRectGetWidth(self.contentView.frame) / 2, CGRectGetMaxY(_descriptionLabel.frame) + 15, 25, 25);
     _usefulCount.frame = CGRectMake(CGRectGetMaxX(_praiseCount.frame) + 80, CGRectGetMinY(_praiseCount.frame), 30, 15);
-    _usefulCount.backgroundColor = [UIColor redColor];
     lineView.frame = CGRectMake(15, CGRectGetMaxY(praiseImage.frame) + 15, CGRectGetWidth(self.contentView.frame) - 30, 1);
     CGFloat radius = (CGRectGetHeight(self.contentView.frame) - CGRectGetMaxY(lineView.frame)) / 2;
     _firstImage.frame = CGRectMake(0, 0, radius * 2 - 18, radius * 2 - 18);
@@ -233,18 +245,18 @@
     _secondImage.center = CGPointMake(CGRectGetMidX(_firstImage.frame) + radius, CGRectGetMaxY(lineView.frame) + radius);
     _thirdImage.frame = CGRectMake(0, 0, radius * 2 - 18, radius * 2 - 18);
     _thirdImage.center = CGPointMake(CGRectGetMidX(_secondImage.frame) + radius, CGRectGetMaxY(lineView.frame) + radius);
-    _firstImage.backgroundColor = [UIColor redColor];
-    _secondImage.backgroundColor = [UIColor yellowColor];
-    _thirdImage.backgroundColor = [UIColor greenColor];
     [self.contentView bringSubviewToFront:_thirdImage];
     [self.contentView bringSubviewToFront:_secondImage];
     [self.contentView bringSubviewToFront:_firstImage];
+    
+    
     
     // 圆角
     _ownerImage.layer.cornerRadius = CGRectGetWidth(_ownerImage.frame) / 2;
     _ownerImage.layer.masksToBounds = YES;
     self.ownerImage.layer.shouldRasterize = YES;
     self.ownerImage.layer.rasterizationScale = [UIScreen mainScreen].scale;
+    
     _thirdImage.layer.cornerRadius = CGRectGetWidth(_thirdImage.frame) / 2;
     self.thirdImage.layer.shouldRasterize = YES;
     self.contentView.layer.rasterizationScale = [UIScreen mainScreen].scale;
@@ -257,7 +269,7 @@
     
     [_talkerCount sizeToFit];
     _talkerCount.frame = CGRectMake(0, 0, CGRectGetWidth(_talkerCount.frame), CGRectGetHeight(_talkerCount.frame));
-    CGFloat x = self.thirdImage.center.x + CGRectGetWidth(_talkerCount.frame) / 2 + CGRectGetWidth(_firstImage.frame) / 2 + 9;
+    CGFloat x = self.thirdImage.center.x + CGRectGetWidth(_talkerCount.frame) / 2 + CGRectGetWidth(_firstImage.frame) / 2 + 9 - (3 - indexChater) * 30 + 5;
     CGFloat y = self.thirdImage.center.y;
     _talkerCount.center = CGPointMake([NSNumber numberWithFloat:x].intValue, [NSNumber numberWithFloat:y].intValue);
     _jionGroup.frame = CGRectMake(CGRectGetWidth(self.contentView.frame) - 97 , CGRectGetMaxY(lineView.frame) + 7, 90, CGRectGetHeight(self.contentView.frame) - CGRectGetMaxY(lineView.frame) - 14);
@@ -269,24 +281,41 @@
 }
 
 - (void)updateViewWith:(QueryContent *)content {
-//    @property (nonatomic, strong, readonly) UIImageView *ownerImage;
-//    @property (nonatomic, strong, readonly) UILabel *ownerNameLable;
-//    @property (nonatomic, strong, readonly) UILabel *ownerTags;
-//    @property (nonatomic, strong, readonly) UILabel *ownerDate;
-//    @property (nonatomic, strong, readonly) UIImageView *mainImage;
-//    @property (nonatomic, strong, readonly) UILabel *descriptionLabel;
-//    @property (nonatomic, strong, readonly) UILabel *praiseCount;
-//    @property (nonatomic, strong, readonly) UILabel *usefulCount;
-//    @property (nonatomic, strong, readonly) UIImageView *firstImage;
-//    @property (nonatomic, strong, readonly) UIImageView *secondImage;
-//    @property (nonatomic, strong, readonly) UIImageView *thirdImage;
-//    @property (nonatomic, strong, readonly) UILabel *talkerCount;
-//    @property (nonatomic, strong, readonly) UITextField *jionGroup;
+    
+    _firstImage.hidden = YES;
+    _secondImage.hidden = YES;
+    _thirdImage.hidden = YES;
     
     self.content = content;
+    if (self.content.chaters.count > 0) {
+        indexChater = 0;
+        NSString *bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
+        NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+        NSString *defaultHeadPath;
+        for (QueryContentChaters *chater in self.content.chaters) {
+            NSLog(@"MonkeyHengLog: %@ === %@", @"头像：", chater.chaterImg);
+            defaultHeadPath = [resourceBundle pathForResource:[NSString stringWithFormat:@"default_user"] ofType:@"png"];
+            UIImageView *imageView = [self.contentView viewWithTag:++indexChater];
+            imageView.image = [UIImage imageNamed:defaultHeadPath];
+            imageView.hidden = NO;
+             UIImage *image = [TmpFileStorageModel enumImageWithName:chater.chaterImg withDownLoadFinishBolck:^(BOOL success, UIImage *img) {
+                if (success) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        imageView.image = img;
+                    });
+                } else {
+                    NSLog(@"MonkeyHengLog: %@ === %@", @"下载头像失败", chater.chaterImg);
+                }
+            }];
+            if (image) {
+                imageView.image = image;
+            }
+        }
+    }
     
     self.ownerNameLable.text = content.owner_name;
     self.descriptionLabel.text = content.content_description;
+    self.ownerRole.text = content.owner_role;
     self.ownerDate.text = [Tools compareCurrentTime:content.content_post_date];
     self.talkerCount.text = [NSString stringWithFormat:@"%d人正在圈聊", self.content.group_chat_count.intValue];
     
@@ -424,6 +453,11 @@
                 NSString *bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
                 NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
                 praiseImage.image = [UIImage imageNamed:[resourceBundle pathForResource:@"home_like_default" ofType:@"png"]];
+                // 更新本地数据库
+                [[AppDelegate defaultAppDelegate].qm refreshIslike:[NSNumber numberWithInteger:0] postId:self.content.content_post_id];
+                self.content.isLike = [NSNumber numberWithInteger:0];
+                
+//                [[AppDelegate defaultAppDelegate].qm refreshIslike:[NSNumber numberWithInteger:0] postId:self.content.content_post_id];
             }
         }];
     } else {
@@ -434,6 +468,10 @@
                 NSString *bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
                 NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
                 praiseImage.image = [UIImage imageNamed:[resourceBundle pathForResource:@"home_like_like" ofType:@"png"]];
+                // 更新本地数据库
+                // 更新本地数据库
+                [[AppDelegate defaultAppDelegate].qm refreshIslike:[NSNumber numberWithInteger:1] postId:self.content.content_post_id];
+                self.content.isLike = [NSNumber numberWithInteger:1];
             }
         }];
     }
