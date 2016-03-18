@@ -264,6 +264,7 @@
     _descriptionView.font = [UIFont systemFontOfSize:15.0];
     _descriptionView.delegate = self;
     _descriptionView.editable = YES;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChanged:) name:UITextViewTextDidChangeNotification object:_descriptionView];
 //    [self.view addSubview:_descriptionView];
     
     UIView *view = [[UIView alloc] initWithFrame:_descriptionView.frame];
@@ -642,10 +643,8 @@
 #pragma mark -- text area delegate
 - (void)textViewDidChange:(UITextView *)textView {
     if (textView.text.length < 1) {
-//        placeholder.hidden = NO;
         bar_publich_btn.enabled = NO;
     } else {
-//        placeholder.hidden = YES;
         bar_publich_btn.enabled = YES;
     }
 }
@@ -658,15 +657,25 @@
     [self moveView:-KEYBOARD_HEIGHT + BOTTON_BAR_HEIGHT - 74];
 }
 
-//- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-//    NSLog(@"MonkeyHengLog: %@ === %@", @"text", text);
-//    if ([text isEqualToString:@""]) {
-//        return YES;
-//    }
-//    if ([Tools bityWithStr:textView.text] >= 36) {
-//        return NO;
-//    } else {
-//        return YES;
-//    }
-//}
+- (void)textFieldChanged:(NSNotification *)obj {
+    UITextView *textView = (UITextView *)obj.object;
+    NSString *toBeString = textView.text;
+    NSString *lang = textView.textInputMode.primaryLanguage; // 键盘输入模式
+    if ([lang isEqualToString:@"zh-Hans"]) { // 简体中文输入，包括简体拼音，健体五笔，简体手写
+        UITextRange *selectedRange = [textView markedTextRange];
+        //获取高亮部分
+        UITextPosition *position = [textView positionFromPosition:selectedRange.start offset:0];
+        // 没有高亮选择的字，则对已输入的文字进行字数统计和限制
+        if (!position) {
+            if ([Tools bityWithStr:textView.text] > 18) {
+                textView.text = [Tools subStringWithByte:18 str:toBeString];
+            }
+        }
+    } else {
+        // 中文输入法以外的直接对其统计限制即可，不考虑其他语种情况
+        if (toBeString.length > 18) {
+            textView.text = [Tools subStringWithByte:18 str:textView.text];
+        }
+    }
+}
 @end
