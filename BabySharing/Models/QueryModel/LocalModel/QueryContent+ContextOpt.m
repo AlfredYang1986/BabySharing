@@ -275,7 +275,7 @@
     tmp_tag.tag_offset_x = [tag_attr objectForKey:@"offsetX"];
     tmp_tag.tag_offset_y = [tag_attr objectForKey:@"offsetY"];
     
-//    [content addTagsObject:tmp_tag];
+    [content addTagsObject:tmp_tag];
 }
 
 + (void)removeAllTagsForContent:(QueryContent*)content inContext:(NSManagedObjectContext*)context {

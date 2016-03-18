@@ -2,16 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UILaunchImageFile</key>
-	<string>default.png</string>
-	<key>CFBundleIconFile</key>
-	<string>icon.png</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
 	<string>Lite Project</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIconFile</key>
+	<string>icon.png</string>
 	<key>CFBundleIcons~ipad</key>
 	<dict/>
 	<key>CFBundleIdentifier</key>
@@ -102,6 +100,8 @@
 	<array>
 		<string>remote-notification</string>
 	</array>
+	<key>UILaunchImageFile</key>
+	<string>default.png</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -113,6 +113,7 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>

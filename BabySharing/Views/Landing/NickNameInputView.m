@@ -210,10 +210,14 @@
     name_text_field = [self createInputAreaInRect:rect andTopMargin:BASICMARGIN andPlaceholder:@"请输入你的昵称" andPreString:[_delegate getPreScreenName] andRightImage:nil andCallback:@selector(textFieldChanged:) andCancelBtn:YES];
     name_text_field.font = [UIFont systemFontOfSize:14];
     name_text_field.delegate = self;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textfieldLenght:) name:UITextFieldTextDidChangeNotification object:name_text_field];
+    
     [self createLabelInRect:rect andTitle:@"性别" andTopMargin:BASICMARGIN + INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN];
 //    [self createColorfulLabelInRect:rect andTopMargin:BASICMARGIN + INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN];
     [self createLabelInRect:rect andTitle:@"角色" andTopMargin:BASICMARGIN + /*2 * */(INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN)];
     tag_text_field = [self createInputAreaInRect:rect andTopMargin:BASICMARGIN + /*2 * */(INPUT_TEXT_FIELD_HEIGHT + LINE_MARGIN) andPlaceholder:@"萌妹？辣妈？快来认领！" andPreString:[_delegate getPreRoleTag] andRightImage:[UIImage imageNamed:[resourceBundle_dongda pathForResource:@"dongda_next" ofType:@"png"]] andCallback:@selector(textFieldChanged:) andCancelBtn:NO];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textfieldLenght:) name:UITextFieldTextDidChangeNotification object:tag_text_field];
     tag_text_field.frame = CGRectMake(tag_text_field.frame.origin.x, tag_text_field.frame.origin.y, tag_text_field.frame.size.width, tag_text_field.frame.size.height);
     UIImageView *goTo = [[UIImageView alloc] initWithFrame:CGRectMake(width - AREA_CODE_WIDTH - 2 * INPUT_MARGIN - 40, 1, 45.5, 45.5)];
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
@@ -247,7 +251,7 @@
         [_delegate didEditRoleTag];
         return NO;
     } else if (textField == name_text_field) {
-        name_text_field.placeholder = @"4-18个字节，限中英文，数字，表情符号";
+        name_text_field.placeholder = @"4-16个字节，限中英文，数字，表情符号";
         name_text_field.font = [UIFont systemFontOfSize:12];
     }
     return YES;
@@ -276,7 +280,7 @@
 #pragma mark -- public
 - (void)setScreenName:(NSString*)name {
     // 设置字符串长度
-    name_text_field.text = [Tools subStringWithByte:18 str:name];
+    name_text_field.text = name;
 }
 - (NSString*)getScreenName {
     return name_text_field.text;
@@ -293,4 +297,32 @@
     [name_text_field resignFirstResponder];
 //    [_delegate didEndEditingScreenName];
 }
+
+- (void)textfieldLenght:(NSNotification *)noti {
+    UITextField *field = (UITextField *)noti.object;
+    NSString *toBeString = field.text;
+    NSString *lang = field.textInputMode.primaryLanguage; // 键盘输入模式
+    CGFloat lenght = 16;
+    if ([field isEqual:tag_text_field]) {
+        lenght = 12;
+    }
+
+    if ([lang isEqualToString:@"zh-Hans"]) { // 简体中文输入，包括简体拼音，健体五笔，简体手写
+        UITextRange *selectedRange = [field markedTextRange];
+        //获取高亮部分
+        UITextPosition *position = [field positionFromPosition:selectedRange.start offset:0];
+        // 没有高亮选择的字，则对已输入的文字进行字数统计和限制
+        if (!position) {
+            if ([Tools bityWithStr:field.text] > lenght) {
+                field.text = [Tools subStringWithByte:lenght str:toBeString];
+            }
+        }
+    } else {
+        // 中文输入法以外的直接对其统计限制即可，不考虑其他语种情况
+        if (toBeString.length > lenght) {
+            field.text = [Tools subStringWithByte:lenght str:field.text];
+        }
+    }
+}
+
 @end

@@ -614,6 +614,7 @@
 
 #pragma mark -- table view delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+//    return 100;
     return [_delegate count];
 }
 
@@ -631,7 +632,10 @@
         cell.delegate = self;
     }
     cell.indexPath = indexPath;
+//    UILabel *lable = [cell.contentView viewWithTag:90];
+//    lable.text = [NSString stringWithFormat:@"%ld", indexPath.row];
     [cell updateViewWith:[_delegate queryItemAtIndex:indexPath.row]];
+//    [cell updateViewWith:[_delegate queryItemAtIndex:0]];
 //    cell.number.text = [NSString stringWithFormat:@"%ld", indexPath.row];
     return cell;
 }
@@ -647,6 +651,7 @@
 //    contentOffsetY = scrollView.contentOffset.y;
 //    [timer invalidate];
 //    timer = nil;
+    [self stopAnimation];
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
@@ -665,7 +670,7 @@
     isDecelerate = decelerate;
     [scrollView setContentOffset:scrollView.contentOffset];
     velocity = -[[scrollView panGestureRecognizer] velocityInView:scrollView].y / rowHeight;
-    acceleration = -velocity * 30 * (1.0 - 0.95);
+    acceleration = -velocity * 30 * (1.0 - 0.9);
     distance = -pow(velocity, 2.0) / (2.0 * acceleration);
     dispatch_async(dispatch_get_main_queue(), ^{
         [scrollView setContentOffset:scrollView.contentOffset animated:NO];

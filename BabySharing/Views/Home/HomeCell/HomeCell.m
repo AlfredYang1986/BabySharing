@@ -13,6 +13,8 @@
 #import <AVFoundation/AVFoundation.h>
 #import "GPUImage.h"
 #import "Define.h"
+#import "PhotoTagView.h"
+#import "QueryContentTag.h"
 
 @interface HomeCell()
 
@@ -38,6 +40,9 @@
 
 @property (nonatomic, strong) GPUImageMovie *gpuImageMovie;
 @property (nonatomic, strong) GPUImageView *gpuImageView;
+@property (nonatomic, strong) PhotoTagView *tagViewBand;
+@property (nonatomic, strong) PhotoTagView *tagViewTime;
+@property (nonatomic, strong) PhotoTagView *tagViewLocation;
 
 @end
 
@@ -159,6 +164,14 @@
         _gpuImageView.fillMode = kGPUImageFillModePreserveAspectRatioAndFill;
         [_mainImage addSubview:_gpuImageView];
         
+        _tagViewBand = [[PhotoTagView alloc] initWithTagName:@"" andType:TagTypeBrand];
+        [_mainImage addSubview:_tagViewBand];
+        _tagViewTime = [[PhotoTagView alloc] initWithTagName:@"" andType:TagTypeTime];
+        [_mainImage addSubview:_tagViewTime];
+        _tagViewLocation = [[PhotoTagView alloc] initWithTagName:@"" andType:TagTypeLocation];
+        [_mainImage addSubview:_tagViewLocation];
+
+        
         self.contentView.layer.cornerRadius = 8;
         self.contentView.layer.shadowColor = [UIColor blackColor].CGColor;
         self.contentView.layer.shadowOffset = CGSizeMake(0, 0);
@@ -249,6 +262,10 @@
     _talkerCount.center = CGPointMake([NSNumber numberWithFloat:x].intValue, [NSNumber numberWithFloat:y].intValue);
     _jionGroup.frame = CGRectMake(CGRectGetWidth(self.contentView.frame) - 97 , CGRectGetMaxY(lineView.frame) + 7, 90, CGRectGetHeight(self.contentView.frame) - CGRectGetMaxY(lineView.frame) - 14);
     jionGroupView.frame = CGRectMake(0, 0, CGRectGetWidth(_jionGroup.frame), CGRectGetHeight(_jionGroup.frame));
+    
+    _tagViewBand.frame = CGRectMake(_tagViewBand.offset_x * _mainImage.frame.size.width, _tagViewBand.offset_y * _mainImage.frame.size.height, CGRectGetWidth(_tagViewBand.frame), CGRectGetHeight(_tagViewBand.frame));
+    _tagViewTime.frame = CGRectMake(_tagViewTime.offset_x * _mainImage.frame.size.width, _tagViewTime.offset_y * _mainImage.frame.size.height, CGRectGetWidth(_tagViewTime.frame), CGRectGetHeight(_tagViewTime.frame));
+    _tagViewLocation.frame = CGRectMake(_tagViewLocation.offset_x * _mainImage.frame.size.width, _tagViewLocation.offset_y * _mainImage.frame.size.height, CGRectGetWidth(_tagViewLocation.frame), CGRectGetHeight(_tagViewLocation.frame));
 }
 
 - (void)updateViewWith:(QueryContent *)content {
@@ -324,6 +341,38 @@
     _gpuImageView.hidden = YES;
     
     praiseImage.image = self.content.isLike.integerValue == 0 ? [UIImage imageNamed:[resourceBundle pathForResource:@"home_like_default" ofType:@"png"]] : [UIImage imageNamed:[resourceBundle pathForResource:@"home_like_like" ofType:@"png"]] ;
+    
+    // 添加标签
+    self.tagViewLocation.hidden = YES;
+    self.tagViewBand.hidden = YES;
+    self.tagViewTime.hidden = YES;
+
+    QueryContent *tmp = (QueryContent*)_content;
+    for (QueryContentTag *tag in tmp.tags) {
+        NSLog(@"MonkeyHengLog: %@ === %d", @"tag", tag.tag_type.intValue);
+        switch (tag.tag_type.intValue) {
+            case TagTypeBrand:
+                self.tagViewBand.hidden = NO;
+                self.tagViewBand.content = tag.tag_content;
+                self.tagViewBand.offset_x = tag.tag_offset_x.floatValue;
+                self.tagViewBand.offset_y = tag.tag_offset_y.floatValue;
+                break;
+            case TagTypeTime:
+                self.tagViewTime.hidden = NO;
+                self.tagViewTime.content = tag.tag_content;
+                self.tagViewTime.offset_x = tag.tag_offset_x.floatValue;
+                self.tagViewTime.offset_y = tag.tag_offset_y.floatValue;
+                break;
+            case TagTypeLocation:
+                self.tagViewLocation.hidden = NO;
+                self.tagViewLocation.content = tag.tag_content;
+                self.tagViewLocation.offset_x = tag.tag_offset_x.floatValue;
+                self.tagViewLocation.offset_y = tag.tag_offset_y.floatValue;
+                break;
+            default:
+                break;
+        }
+    }
 }
 
 - (void)mainImageTap {

@@ -270,8 +270,17 @@
 //    UIImage *image=[params objectForKey:@"pic"];
     //得到图片的data
 //    NSData* data = UIImagePNGRepresentation(image);
-    CGFloat kCompressQuality = 0.3;
-    NSData* data = UIImageJPEGRepresentation(image, kCompressQuality);
+    
+    NSData * imageData = UIImageJPEGRepresentation(image,1);
+    CGFloat length = [imageData length] / 1024;
+    NSData* data;
+    if (length > 100) {
+       data = UIImageJPEGRepresentation(image, 100.0 / [imageData length]/1024.0);
+    } else {
+        CGFloat kCompressQuality = 0.3;
+        data = UIImageJPEGRepresentation(image, kCompressQuality);
+    }
+    
     //http body的字符串
     NSMutableString *body=[[NSMutableString alloc]init];
     //参数的集合的所有key的集合

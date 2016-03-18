@@ -585,7 +585,7 @@
         /**
          * create tag dictionary
          */
-        NSMutableArray* arr = [[NSMutableArray alloc]init];
+        NSMutableArray* arr = [[NSMutableArray alloc] init];
         for (PhotoTagView* view in _already_taged) {
             NSMutableDictionary* dic = [[NSMutableDictionary alloc] init];
             [dic setObject:[NSNumber numberWithInt:view.type] forKey:@"type"];
@@ -623,8 +623,8 @@
 
 - (void)didSelectSaveBtn {
     
-    if ([Tools bityWithStr:_descriptionView.text] > 36) {
-        [[[UIAlertView  alloc] initWithTitle:@"通知" message:@"说好的18个字呢" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil] show];
+    if ([Tools bityWithStr:_descriptionView.text] == 0) {
+        [[[UIAlertView  alloc] initWithTitle:@"通知" message:@"先空着先空着" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil] show];
         return;
     }
     
@@ -667,14 +667,14 @@
         UITextPosition *position = [textView positionFromPosition:selectedRange.start offset:0];
         // 没有高亮选择的字，则对已输入的文字进行字数统计和限制
         if (!position) {
-            if ([Tools bityWithStr:textView.text] > 18) {
-                textView.text = [Tools subStringWithByte:18 str:toBeString];
+            if ([Tools bityWithStr:textView.text] > 36) {
+                textView.text = [Tools subStringWithByte:36 str:toBeString];
             }
         }
     } else {
         // 中文输入法以外的直接对其统计限制即可，不考虑其他语种情况
-        if (toBeString.length > 18) {
-            textView.text = [Tools subStringWithByte:18 str:textView.text];
+        if (toBeString.length > 36) {
+            textView.text = [Tools subStringWithByte:36 str:textView.text];
         }
     }
 }

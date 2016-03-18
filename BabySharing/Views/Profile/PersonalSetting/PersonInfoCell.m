@@ -38,6 +38,7 @@
             if (self.cancelBtn == nil) {
                 self.cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             }
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChanged:) name:UITextFieldTextDidChangeNotification object:_nickTextFiled];
             NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
             NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
             self.cancelBtn.hidden = YES;
@@ -59,7 +60,7 @@
         if (self.nickTextFiled) {
            [self.contentView addSubview:self.nickTextFiled];
             [self.contentView addSubview:self.cancelBtn];
-            self.nickTextFiled.placeholder = @"4-18个字节，限中英文，数字，表情符号";
+            self.nickTextFiled.placeholder = @"4-16个字符，限中英文，数字，表情符号";
             self.nickTextFiled.delegate = self;
         }
         if (self.roleLable) {
@@ -133,18 +134,6 @@
     self.cancelBtn.hidden = NO;
 }
 
-
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    if ([string isEqualToString:@""]) {
-        return YES;
-    }
-    if ([Tools bityWithStr:textField.text] >= 18) {
-        return NO;
-    } else {
-        return YES;
-    }
-}
-
 - (void)deleleNickName {
     self.nickTextFiled.text = @"";
 }
@@ -152,6 +141,28 @@
 - (void)hideCancel{
     [self.nickTextFiled resignFirstResponder];
     self.cancelBtn.hidden = YES;
+}
+
+- (void)textFieldChanged:(NSNotification *)noti {
+    UITextField *textFile = (UITextField *)noti.object;
+    NSString *toBeString = textFile.text;
+    NSString *lang = textFile.textInputMode.primaryLanguage; // 键盘输入模式
+    if ([lang isEqualToString:@"zh-Hans"]) { // 简体中文输入，包括简体拼音，健体五笔，简体手写
+        UITextRange *selectedRange = [textFile markedTextRange];
+        //获取高亮部分
+        UITextPosition *position = [textFile positionFromPosition:selectedRange.start offset:0];
+        // 没有高亮选择的字，则对已输入的文字进行字数统计和限制
+        if (!position) {
+            if ([Tools bityWithStr:textFile.text] > 16) {
+                textFile.text = [Tools subStringWithByte:16 str:toBeString];
+            }
+        }
+    } else {
+        // 中文输入法以外的直接对其统计限制即可，不考虑其他语种情况
+        if (toBeString.length > 16) {
+            textFile.text = [Tools subStringWithByte:16 str:textFile.text];
+        }
+    }
 }
 
 @end

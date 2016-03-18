@@ -348,7 +348,7 @@
 
 - (void)didNextBtnSelected {
 
-    PostPublichViewController* pub = [[PostPublichViewController alloc]init];
+    PostPublichViewController* pub = [[PostPublichViewController alloc] init];
 //    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"PhotoPreView" bundle:nil];
 //    PhotoPublishController* publishController = [storyboard instantiateViewControllerWithIdentifier:@"publishController"];
     if (_type == PostPreViewPhote) {
@@ -359,11 +359,11 @@
         
         NSMutableArray* arr = [[NSMutableArray alloc]initWithCapacity:tags.count];
         for (int index = 0; index < tags.allValues.count; ++index) {
-            PhotoTagView* view = [tags.allValues objectAtIndex:index];
+            PhotoTagView *view = [tags.allValues objectAtIndex:index];
             if (view) {
-                PhotoTagView* tmp = [[PhotoTagView alloc]initWithTagName:view.content andType:view.type];
-                tmp.offset_x = view.frame.origin.x;
-                tmp.offset_y = view.frame.origin.y;
+                PhotoTagView *tmp = [[PhotoTagView alloc] initWithTagName:view.content andType:view.type];
+                tmp.offset_x = view.frame.origin.x / view.superview.frame.size.width;
+                tmp.offset_y = view.frame.origin.y / view.superview.frame.size.height;
                 [arr addObject:tmp];
             }
         }

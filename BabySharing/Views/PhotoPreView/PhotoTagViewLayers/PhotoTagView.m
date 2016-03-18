@@ -138,4 +138,9 @@
         }
     }
 }
+
+- (void)setContent:(NSString *)content {
+    _content = content;
+    [self setUpTagView];
+}
 @end

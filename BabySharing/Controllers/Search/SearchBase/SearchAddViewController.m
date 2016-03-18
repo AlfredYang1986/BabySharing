@@ -43,7 +43,8 @@
     [_searchBar addSubview:line2];
     
     _searchBar.showsCancelButton = YES;
-    _searchBar.placeholder = @"4-14个字节，限中英文、数字、表情";
+    _searchBar.placeholder = @"4-12个字节，限中英文、数字、表情";
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChanged:) name:UITextFieldTextDidChangeNotification object:_searchBar.textField];
     [_searchBar becomeFirstResponder];
     
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
@@ -133,5 +134,27 @@
 
 - (NSString*)getUserInputString {
     return _searchBar.text;
+}
+
+- (void)textFieldChanged:(NSNotification *)noti {
+    UITextField *textFile = (UITextField *)noti.object;
+    NSString *toBeString = textFile.text;
+    NSString *lang = textFile.textInputMode.primaryLanguage; // 键盘输入模式
+    if ([lang isEqualToString:@"zh-Hans"]) { // 简体中文输入，包括简体拼音，健体五笔，简体手写
+        UITextRange *selectedRange = [textFile markedTextRange];
+        //获取高亮部分
+        UITextPosition *position = [textFile positionFromPosition:selectedRange.start offset:0];
+        // 没有高亮选择的字，则对已输入的文字进行字数统计和限制
+        if (!position) {
+            if ([Tools bityWithStr:textFile.text] > 12) {
+                textFile.text = [Tools subStringWithByte:12 str:toBeString];
+            }
+        }
+    } else {
+        // 中文输入法以外的直接对其统计限制即可，不考虑其他语种情况
+        if (toBeString.length > 12) {
+            textFile.text = [Tools subStringWithByte:12 str:textFile.text];
+        }
+    }
 }
 @end
