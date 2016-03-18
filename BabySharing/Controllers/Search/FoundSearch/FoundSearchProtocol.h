@@ -17,7 +17,7 @@ typedef void(^FoundSearchFinishBlock)(BOOL success, NSDictionary* preview);
 
 - (void)asyncQueryFoundSearchDataWithFinishBlock:(asyncFoundSearchBlock)block;
 //- (void)syncQueryFoundSearchDataWithFinishBlock:(syncFoundSearchBlock)block;
-- (void)resetCurrentSearchData;
+- (void)resetCurrentSearchDataWithInput:(NSString*)input;
 - (void)queryFoundTagSearchWithInput:(NSString*)input andFinishBlock:(FoundSearchFinishBlock)block;
 
 @end

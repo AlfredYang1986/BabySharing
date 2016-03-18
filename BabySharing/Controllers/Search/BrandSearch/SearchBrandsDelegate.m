@@ -22,6 +22,8 @@
 #import "HomeTagsController.h"
 #import "LocalTag.h"
 
+#import "searchViewController.h"
+
 @interface SearchBrandsDelegate () <FoundHotTagsCellDelegate>
 
 @property (nonatomic, weak, readonly, getter=getFoundTagModel) FoundSearchModel* fm;
@@ -46,6 +48,25 @@
 
 - (void)collectData {
 
+}
+
+- (void)setInitialSearchBarText:(NSString*)text {
+    if (text.length > 0) {
+        SearchAddBrandsDelegate* sd = [[SearchAddBrandsDelegate alloc]init];
+        ((SearchViewController*)self.controller).delegate = sd;
+        sd.delegate = self;
+        sd.actions = self;
+        
+        NSMutableArray *localArr = [[NSMutableArray alloc] init];
+        for (LocalTag *localTag in [[AppDelegate defaultAppDelegate].localTagManager enumLocalTagWithType:1]) {
+            NSLog(@"%@ === %@", @"", localTag.tag_text);
+            [localArr addObject:localTag.tag_text];
+        }
+        [sd pushExistingData:[localArr copy] withHeader:text];
+        
+//        ((SearchViewController*)self.controller).searchBar.text = text;
+        [((SearchViewController*)self.controller).queryView reloadData];
+    }
 }
 
 - (NSString*)getSearchPlaceHolder {
@@ -142,23 +163,22 @@
 }
 
 #pragma mark -- search bar delegate
-- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
-    
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SearchViewController" bundle:nil];
-    SearchAddController2* svc = [storyboard instantiateViewControllerWithIdentifier:@"SearchAdd2"];
-    SearchAddBrandsDelegate* sd = [[SearchAddBrandsDelegate alloc] init];
-    sd.delegate = svc;
-    sd.actions = self;
-    [[_actions getViewController] pushViewController:svc animated:NO];
-    svc.delegate = sd;
-    // 本地数据库
-    NSMutableArray *localArr = [[NSMutableArray alloc] init];
-    for (LocalTag *localTag in [[AppDelegate defaultAppDelegate].localTagManager enumLocalTagWithType:3]) {
-        NSLog(@"%@ === %@", @"", localTag.tag_text);
-        [localArr addObject:localTag.tag_text];
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    if (searchText.length > 0) {
+        SearchAddBrandsDelegate* sd = [[SearchAddBrandsDelegate alloc]init];
+        ((SearchViewController*)self.controller).delegate = sd;
+        sd.delegate = self;
+        sd.actions = self;
+        
+        NSMutableArray *localArr = [[NSMutableArray alloc] init];
+        for (LocalTag *localTag in [[AppDelegate defaultAppDelegate].localTagManager enumLocalTagWithType:1]) {
+            NSLog(@"%@ === %@", @"", localTag.tag_text);
+            [localArr addObject:localTag.tag_text];
+        }
+        [sd pushExistingData:[localArr copy] withHeader:searchText];
+        
+        [((SearchViewController*)self.controller).queryView reloadData];
     }
-    [sd pushExistingData:[localArr copy]];
-    return NO;
 }
 
 #pragma mark -- SearchViewControllerProtocol
@@ -181,6 +201,10 @@
 
 - (UINavigationController*)getViewController {
     return [_actions getViewController];
+}
+
+- (NSString*)getUserInputString {
+    return [_delegate getUserInputString];
 }
 
 #pragma mark -- async query data

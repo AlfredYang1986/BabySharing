@@ -785,13 +785,8 @@
         [self.navigationController pushViewController:svc animated:YES];
         svc.delegate = sd;
         
-        SearchAddController2* svc2 = [storyboard instantiateViewControllerWithIdentifier:@"SearchAdd2"];
-        SearchAddBrandsDelegate* sd2 = [[SearchAddBrandsDelegate alloc]init];
-        sd2.delegate = svc2;
-        sd2.actions = sd;
-        [self.navigationController pushViewController:svc2 animated:NO];
-        svc2.delegate = sd2;
-        [sd2 pushExistingData:@[@"abcde", @"brand"]];
+        PhotoTagView* tmp = [tags objectForKey:[NSNumber numberWithInt:TagTypeBrand]];
+        svc.pre_text = tmp.content;
         
     } else if (tag_type == TagTypeLocation) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SearchViewController" bundle:nil];
@@ -803,14 +798,9 @@
         current_type = TagTypeLocation;
         [self.navigationController pushViewController:svc animated:YES];
         svc.delegate = sd;
-        
-        SearchAddController2* svc2 = [storyboard instantiateViewControllerWithIdentifier:@"SearchAdd2"];
-        SearchAddLocationDelegate* sd2 = [[SearchAddLocationDelegate alloc]init];
-        sd2.delegate = svc2;
-        sd2.actions = sd;
-        [self.navigationController pushViewController:svc2 animated:NO];
-        svc2.delegate = sd2;
-        [sd2 pushExistingData:@[@"abcde", @"location"]];
+
+        PhotoTagView* tmp = [tags objectForKey:[NSNumber numberWithInt:TagTypeLocation]];
+        svc.pre_text = tmp.content;
         
     } else if (tag_type == TagTypeTime) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SearchViewController" bundle:nil];
@@ -822,14 +812,10 @@
         current_type = TagTypeTime;
         [self.navigationController pushViewController:svc animated:YES];
         svc.delegate = sd;
+
+        PhotoTagView* tmp = [tags objectForKey:[NSNumber numberWithInt:TagTypeTime]];
+        svc.pre_text = tmp.content;
         
-        SearchAddController2* svc2 = [storyboard instantiateViewControllerWithIdentifier:@"SearchAdd2"];
-        SearchAddTimeDelegate* sd2 = [[SearchAddTimeDelegate alloc]init];
-        sd2.delegate = svc2;
-        sd2.actions = sd;
-        [self.navigationController pushViewController:svc2 animated:NO];
-        svc2.delegate = sd2;
-        [sd2 pushExistingData:@[@"abcde", @"time"]];
     }
 }
 

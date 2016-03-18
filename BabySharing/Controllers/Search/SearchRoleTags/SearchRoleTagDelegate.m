@@ -233,7 +233,7 @@ typedef void(^queryRoleTagFinishBlock)(BOOL success, NSString* msg, NSArray* res
     sd.actions = self;
     [[_actions getViewController] pushViewController:svc animated:NO];
     svc.delegate = sd;
-    [sd pushExistingData:test_tag_arr];
+    [sd pushExistingData:test_tag_arr withHeader:@""];
     return NO;
 }
 

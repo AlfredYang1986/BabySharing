@@ -21,12 +21,14 @@ typedef void(^SearchCallback)(BOOL success, NSArray* data);
 @optional
 - (NSString*)getControllerTitle;
 - (void)collectData;
-- (void)pushExistingData:(NSArray*)data;
+- (void)pushExistingData:(NSArray*)data withHeader:(NSString*)header;
 //- (void)dataWithCallBack:(SearchCallback)block;
 - (NSArray*)enumedData;
 - (NSArray*)enumedDataWithPredicate:(NSPredicate*)pred;
 - (NSString*)enumedDataAtIndex:(NSInteger)index;
 - (NSString*)getSearchPlaceHolder;
+
+- (void)setInitialSearchBarText:(NSString*)text;
 
 @optional
 - (void)asyncQueryDataWithFinishCallback:(SearchCallback)block;

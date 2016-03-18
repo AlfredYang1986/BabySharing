@@ -10,14 +10,11 @@
 #import "SearchRoleTagDelegate.h"
 
 #import "FoundHotTagsCell.h"
-#import "DongDaSearchBar2.h"
 #import "Tools.h"
 #import <objc/runtime.h>
 
 @interface SearchViewController () <UITextFieldDelegate>
 
-@property (weak, nonatomic) IBOutlet DongDaSearchBar2 *searchBar;
-@property (weak, nonatomic) IBOutlet UITableView *queryView;
 @property (weak, nonatomic) IBOutlet UIView *bkView;
 @property (weak, nonatomic) IBOutlet UIView *line;
 
@@ -74,7 +71,6 @@
     _bkView.backgroundColor =  [UIColor whiteColor];
     [_delegate collectData];
    
-    
     UILabel* lb = [[UILabel alloc]init];
     lb.text = [_delegate getControllerTitle];
     lb.font = [UIFont systemFontOfSize:18.f];
@@ -125,6 +121,13 @@
     line_2.borderWidth = 1.f;
     line_2.frame = CGRectMake(0, 127, width, 1);
     [self.view.layer addSublayer:line_2];
+    
+    [_searchBar becomeFirstResponder];
+    
+    if (_pre_text) {
+        _searchBar.text = _pre_text;
+        [_delegate setInitialSearchBarText:_searchBar.text];
+    }
 }
 
 - (void)didPopViewControllerBtn {
@@ -160,6 +163,10 @@
 
 - (BOOL)prefersStatusBarHidden {
     return NO; //返回NO表示要显示，返回YES将hiden
+}
+
+- (NSString*)getUserInputString {
+    return _searchBar.text;
 }
 
 - (void)needToReloadData {

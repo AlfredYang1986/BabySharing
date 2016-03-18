@@ -12,8 +12,7 @@
 
 @interface SearchAddTimeDelegate : NSObject <SearchDataCollectionProtocol>
 
-@property (weak, nonatomic) id<SearchViewControllerProtocol> delegate;
-@property (weak, nonatomic) id<SearchActionsProtocol> actions;
+@property (strong, nonatomic) id<SearchViewControllerProtocol> delegate;
+@property (strong, nonatomic) id<SearchActionsProtocol> actions;
 
-- (void)pushExistingData:(NSArray*)data;
 @end

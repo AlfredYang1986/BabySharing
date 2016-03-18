@@ -7,14 +7,12 @@
 //
 
 #import "SearchAddController2.h"
-#import "DongDaSearchBar2.h"
 #import "AppDelegate.h"
 #import "Define.h"
 
 @interface SearchAddController2 ()
 
 @property (weak, nonatomic) IBOutlet UIView *bkView;
-@property (weak, nonatomic) IBOutlet DongDaSearchBar2 *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *queryView;
 @property (weak, nonatomic) LoginModel *loginModel;
 

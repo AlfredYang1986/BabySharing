@@ -174,14 +174,12 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasChange:) name:UIKeyboardDidChangeFrameNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHidden:) name:UIKeyboardDidHideNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userProfileUpdated:) name:kDongDaNotificationkeyUserprofileUpdate object:nil];
 }
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidChangeFrameNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidHideNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kDongDaNotificationkeyUserprofileUpdate object:nil];
 }
 
 - (void)didPopViewController {
@@ -519,12 +517,5 @@
     if (inputView.isMoved) {
         [self moveView:height];
     }
-}
-
-- (void)userProfileUpdated:(NSNotification*)notification {
-    NSDictionary* reVal = [notification userInfo];
-    NSLog(@"info : %@", reVal);
-    
-    
 }
 @end

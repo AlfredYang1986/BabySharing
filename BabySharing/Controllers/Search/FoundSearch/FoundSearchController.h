@@ -10,5 +10,5 @@
 #import "FoundHotTagsCell.h"
 
 @interface FoundSearchController : UIViewController <FoundHotTagsCellDelegate>
-
+@property (weak, nonatomic) IBOutlet UITableView* queryView;
 @end

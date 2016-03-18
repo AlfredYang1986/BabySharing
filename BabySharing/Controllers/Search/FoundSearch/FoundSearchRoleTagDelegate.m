@@ -25,6 +25,7 @@
 
 @synthesize fm = _fm;
 @synthesize controller = _controller;
+@synthesize current_search = _current_search;
 
 #pragma mark -- table view
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -183,11 +184,25 @@
     });
 }
 
-- (void)resetCurrentSearchData {
-    _fm.previewRoleDic = nil;
+- (void)resetCurrentSearchDataWithInput:(NSString*)input {
+    
+    if (![_current_search isEqualToString:input]) {
+//        _current_search = input;
+        
+        if ([input isEqualToString:@""]) {
+            _fm.previewRoleDic = nil;
+        } else {
+            [self queryFoundTagSearchWithInput:input andFinishBlock:^(BOOL success, NSDictionary *preview) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [_controller.queryView reloadData];
+                });
+            }];
+        }
+    }
 }
 
 - (void)queryFoundTagSearchWithInput:(NSString*)input andFinishBlock:(FoundSearchFinishBlock)block {
+    _current_search = input;
     [_fm queryFoundRoleTagSearchWithInput:input andFinishBlock:^(BOOL success, NSDictionary *preview) {
         block(success, preview);
     }];

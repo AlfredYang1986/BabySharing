@@ -17,4 +17,5 @@
 
 @property (weak, nonatomic) FoundSearchModel* fm;
 @property (weak, nonatomic) FoundSearchController* controller;
+@property (strong, nonatomic) NSString* current_search;
 @end

@@ -33,7 +33,7 @@
 
 @interface FoundSearchController () <UISearchBarDelegate, SearchSegViewDelegate>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
-@property (weak, nonatomic) IBOutlet UITableView *queryView;
+//@property (weak, nonatomic) IBOutlet UITableView *queryView;
 @property (strong, nonatomic) SearchSegView2* seg;
 @property (weak, nonatomic, setter=setCurrentTableViewDelegate:) id<UITableViewDataSource, UITableViewDelegate, FoundSearchProtocol> current_delegate;
 @end
@@ -224,7 +224,7 @@
     
     if ([searchText isEqualToString:@""]) {
 //        _fm.previewDic = nil;
-        [_current_delegate resetCurrentSearchData];
+        [_current_delegate resetCurrentSearchDataWithInput:@""];
         [_queryView reloadData];
     } else {
         dispatch_queue_t queue = dispatch_queue_create("search", nil);
@@ -263,10 +263,6 @@
 
 #pragma mark -- search seg view delegate
 - (void)segValueChanged2:(SearchSegView2*)seg {
-    _searchBar.text = @"";
-    [_current_delegate resetCurrentSearchData];
-//    _fm.previewDic = nil;
-//    [_queryView reloadData];
     if (seg.selectedIndex == 0) {
         _searchBar.placeholder = @"搜索标签";
         self.current_delegate = tagDelegate;
@@ -274,6 +270,7 @@
         _searchBar.placeholder = @"搜索角色";
         self.current_delegate = roleDelegate;
     }
+    [_current_delegate resetCurrentSearchDataWithInput:_searchBar.text];
 }
 
 - (void)setCurrentTableViewDelegate:(id<UITableViewDataSource,UITableViewDelegate, FoundSearchProtocol>)current_delegate {

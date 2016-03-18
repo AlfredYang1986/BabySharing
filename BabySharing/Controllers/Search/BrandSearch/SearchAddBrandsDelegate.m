@@ -14,6 +14,7 @@
 #import "AppDelegate.h"
 #import "FoundSearchModel.h"
 #import "LocalTag.h"
+#import "SearchViewController.h"
 
 @interface SearchAddBrandsDelegate ()
 
@@ -29,16 +30,11 @@
 @synthesize actions = _actions;
 
 @synthesize fm = _fm;
+@synthesize controller = _controller;
 
-- (void)pushExistingData:(NSArray *)data localTag:(NSArray *)localTag {
+- (void)pushExistingData:(NSArray *)data withHeader:(NSString *)header {
     exist_data = data;
-    showing_data = exist_data;
-}
-
-- (void)pushExistingData:(NSArray *)data{
-    exist_data = data;
-    showing_data = [Tools sortWithArr:exist_data headStr:@""];
-    [_delegate needToReloadData];
+    showing_data = [Tools sortWithArr:exist_data headStr:header];
 }
 
 - (FoundSearchModel*)getFoundSearchModel {
@@ -49,12 +45,26 @@
     return _fm;
 }
 
+- (void)collectData {
+    
+}
+
+- (NSString*)getSearchPlaceHolder {
+    return @"添加品牌标签";
+}
+
 #pragma mark -- search bar delegate
 #define BRAND 3
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+   
+    if (searchText.length > 0) {
+        showing_data = [[Tools sortWithArr:exist_data headStr:searchText] copy];
+        [_delegate needToReloadData];
+    } else {
+        ((SearchViewController*)self.controller).delegate = (id<SearchDataCollectionProtocol, SearchActionsProtocol, SearchViewControllerProtocol>)_delegate;
+        [((SearchViewController*)self.controller).queryView reloadData];
+    }
     
-    showing_data = [[Tools sortWithArr:exist_data headStr:searchText] copy];
-    [_delegate needToReloadData];
 //    [self.fm queryFoundTagSearchWithInput:searchText andType:BRAND andFinishBlock:^(BOOL success, NSDictionary *preview) {
 //        NSMutableArray* arr = [[NSMutableArray alloc]initWithCapacity:self.fm.tagSearchResult.count];
 //        for (NSDictionary* iter in self.fm.tagSearchResult) {
@@ -67,7 +77,13 @@
 
 #pragma mark -- search bar delegate
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-    [[_actions getViewController] popViewControllerAnimated:NO];
+//    [[_actions getViewController] popViewControllerAnimated:NO];
+    if (showing_data.count == 0) {
+        [_actions addNewItem:[_delegate getUserInputString]];
+        [[AppDelegate defaultAppDelegate].localTagManager updateLocalTagWithType:BRAND text:[_delegate getUserInputString]];
+    } else {
+        [_actions didSelectItem:searchBar.text];
+    }
 }
 
 #pragma mark -- table view datasource
@@ -116,12 +132,9 @@
     
     if (showing_data.count == 0) {
         cell.textLabel.text = [_delegate getUserInputString];
+        cell.textLabel.text = [NSString stringWithFormat:@"添加新品牌:%@", cell.textLabel.text];
     } else {
         cell.textLabel.text = [showing_data objectAtIndex:indexPath.row];
-    }
-    
-    if ([tableView numberOfRowsInSection:indexPath.section] == 1) {
-        cell.textLabel.text = [NSString stringWithFormat:@"添加新品牌:%@", cell.textLabel.text];
     }
     
     cell.textLabel.font = [UIFont systemFontOfSize:14.f];
