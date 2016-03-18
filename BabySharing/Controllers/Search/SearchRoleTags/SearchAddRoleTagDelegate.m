@@ -16,9 +16,9 @@
 }
 
 @synthesize delegate = _delegate;
-//@synthesize controller = _controller;
+@synthesize controller = _controller;
 
-- (void)pushExistingData:(NSArray *)data {
+- (void)pushExistingData:(NSArray *)data withHeader:(NSString *)header {
     exist_data = data;
     showing_data = exist_data;
 }

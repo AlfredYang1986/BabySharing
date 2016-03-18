@@ -17,6 +17,8 @@
 #import "FoundSearchHeader.h"
 #import "HomeTagsController.h"
 
+#import "SearchViewController.h"
+
 typedef void(^queryRoleTagFinishBlock)(BOOL success, NSString* msg, NSArray* result);
 
 @interface SearchRoleTagDelegate () <FoundHotTagsCellDelegate>
@@ -62,6 +64,10 @@ typedef void(^queryRoleTagFinishBlock)(BOOL success, NSString* msg, NSArray* res
     } else  {
 //        block(YES, test_tag_arr);
     }
+}
+
+- (void)pushExistingData:(NSArray *)data withHeader:(NSString *)header {
+    
 }
 
 - (NSString*)getSearchPlaceHolder {
