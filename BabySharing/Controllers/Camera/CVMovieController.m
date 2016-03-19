@@ -364,6 +364,7 @@
             [alert show];
             return;
         }
+        
         NSString* strDir = [TmpFileStorageModel BMTmpMovieDir];
         NSString *testfile = [strDir stringByAppendingPathComponent:[TmpFileStorageModel generateFileName]];
         NSString* path = [testfile stringByAppendingPathExtension:@"mp4"];
@@ -373,6 +374,7 @@
         [filter addTarget:movieWriter];
         videoCamera.audioEncodingTarget = movieWriter;
         isRecording = true;
+        [videoCamera addAudioInputsAndOutputs];
         [movieWriter startRecording];
         [self startRecordingAnimation];
         delete_current_movie_btn.hidden = NO;

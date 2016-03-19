@@ -67,8 +67,8 @@
     GPUImageMovie* movieFile;
     GPUImageView* filterView;
     GPUImageFilter* filter;
-//    AVPlayer* player;
-//    AVPlayerLayer *avPlayerLayer;
+    AVPlayer* player;
+    AVPlayerItem *avPlayerItem;
     /***********************************************************************/
     
     /***********************************************************************/
@@ -228,7 +228,11 @@
     else if (_type == PostPreViewMovie) {
 
         if (movieFile == nil) {
-            movieFile = [[GPUImageMovie alloc] initWithURL:_editing_movie];
+            
+            avPlayerItem = [[AVPlayerItem alloc] initWithURL:_editing_movie];
+            player = [AVPlayer playerWithPlayerItem:avPlayerItem];
+            
+            movieFile = [[GPUImageMovie alloc] initWithPlayerItem:avPlayerItem];
             movieFile.runBenchmark = YES;
             movieFile.playAtActualSpeed = NO;
             movieFile.shouldRepeat = YES;
@@ -299,25 +303,25 @@
     edit.hidden = YES;
     
     if (_type == PostPreViewMovie) {
-        
-        if (movieFile == nil) {
-            movieFile = [[GPUImageMovie alloc] initWithURL:_editing_movie];
-            movieFile.runBenchmark = YES;
-            movieFile.playAtActualSpeed = NO;
-            movieFile.shouldRepeat = YES;
-            
-            filter = [[GPUImageFilter alloc] init];
-            [movieFile addTarget:filter];
-            
-            CGFloat width = [UIScreen mainScreen].bounds.size.width;
-            CGFloat img_height = width; //width * aspectRatio;
-            
-            filterView = [[GPUImageView alloc]init];
-            filterView.fillMode = kGPUImageFillModePreserveAspectRatioAndFill;
-            filterView.frame = CGRectMake(0, -FAKE_NAVIGATION_BAR_HEIGHT, width, img_height + FAKE_NAVIGATION_BAR_HEIGHT);
-            [mainContentView addSubview:filterView];
-            [filter addTarget:filterView];
-        }
+//        if (movieFile == nil) {
+//            movieFile = [[GPUImageMovie alloc] initWithURL:_editing_movie];
+//            movieFile.runBenchmark = YES;
+//            movieFile.playAtActualSpeed = NO;
+//            movieFile.shouldRepeat = YES;
+//            
+//            filter = [[GPUImageFilter alloc] init];
+//            [movieFile addTarget:filter];
+//            
+//            CGFloat width = [UIScreen mainScreen].bounds.size.width;
+//            CGFloat img_height = width; //width * aspectRatio;
+//            
+//            filterView = [[GPUImageView alloc]init];
+//            filterView.fillMode = kGPUImageFillModePreserveAspectRatioAndFill;
+//            filterView.frame = CGRectMake(0, -FAKE_NAVIGATION_BAR_HEIGHT, width, img_height + FAKE_NAVIGATION_BAR_HEIGHT);
+//            [mainContentView addSubview:filterView];
+//            [filter addTarget:filterView];
+//        }
+         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:avPlayerItem];
         
     } else {
         if (![mainContentView.layer.sublayers containsObject:img_layer]) {
@@ -328,9 +332,18 @@
     }
 }
 
+-(void)moviePlayDidEnd:(NSNotification*)notification{
+    NSLog(@"play end");
+    [player seekToTime:kCMTimeZero completionHandler:^(BOOL finished) {
+        [player play];
+    }];
+}
+
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [movieFile endProcessing];
+    [player pause];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:avPlayerItem];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -747,7 +760,10 @@
     if ([title isEqualToString:@"滤镜"] && _type == PostPreViewMovie) {
 //        avPlayerLayer.hidden = NO;
         filterView.hidden = NO;
-        [movieFile startProcessing];
+        [player seekToTime:kCMTimeZero completionHandler:^(BOOL finished) {
+            [movieFile startProcessing];
+            [player play];
+        }];
     } else {
    
     }

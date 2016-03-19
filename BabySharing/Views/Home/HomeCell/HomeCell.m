@@ -48,8 +48,6 @@
 @property (nonatomic, strong) PhotoTagView *tagViewBand;
 @property (nonatomic, strong) PhotoTagView *tagViewTime;
 @property (nonatomic, strong) PhotoTagView *tagViewLocation;
-
-
 @end
 
 @implementation HomeCell {
