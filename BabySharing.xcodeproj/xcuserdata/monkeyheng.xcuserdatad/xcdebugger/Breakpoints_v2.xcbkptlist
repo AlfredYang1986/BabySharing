@@ -20,11 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BabySharing/Views/Home/HomeCell/HomeCell.m"
-            timestampString = "479995895.92356"
+            timestampString = "480059561.178474"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "411"
-            endingLineNumber = "411"
+            startingLineNumber = "429"
+            endingLineNumber = "429"
             landmarkName = "-mainImageTap"
             landmarkType = "5">
          </BreakpointContent>
@@ -36,11 +36,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BabySharing/Views/Home/HomeCell/HomeCell.m"
-            timestampString = "479996046.766268"
+            timestampString = "480059561.178474"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "425"
-            endingLineNumber = "425"
+            startingLineNumber = "443"
+            endingLineNumber = "443"
             landmarkName = "-mainImageTap"
             landmarkType = "5">
          </BreakpointContent>

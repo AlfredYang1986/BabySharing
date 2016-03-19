@@ -59,6 +59,7 @@
     UIView *lineView;
     UIView *jionGroupView;
     NSInteger indexChater;
+    CGFloat originX;
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier indexPath:(NSIndexPath *)indexPath {
@@ -111,14 +112,22 @@
         praiseImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
         praiseImage.image = [UIImage imageNamed:[resourceBundle pathForResource:@"home_like_default" ofType:@"png"]];
         [self.contentView addSubview:praiseImage];
-//        _praiseCount = [[UILabel alloc] init];
+        _praiseCount = [[UILabel alloc] init];
+        _praiseCount.font = [UIFont systemFontOfSize:12];
+        _praiseCount.textAlignment = NSTextAlignmentCenter;
+        _praiseCount.textColor = TextColor;
+        _praiseCount.text = @"赞";
         
         
         pushImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
         pushImage.image = [UIImage imageNamed:[resourceBundle pathForResource:@"push" ofType:@"png"]];
         [self.contentView addSubview:pushImage];
         [self.contentView addSubview:_praiseCount];
-//        _usefulCount = [[UILabel alloc] init];
+        _usefulCount = [[UILabel alloc] init];
+        _usefulCount.textAlignment = NSTextAlignmentCenter;
+        _usefulCount.font = [UIFont systemFontOfSize:12];
+        _usefulCount.textColor = TextColor;
+        _usefulCount.text = @"推";
         
         
         // 中间的一条线
@@ -234,10 +243,11 @@
     _descriptionLabel.center = CGPointMake(CGRectGetWidth(self.contentView.frame) / 2, CGRectGetMaxY(_mainImage.frame) + 2 + CGRectGetHeight(_descriptionLabel.frame));
     
     praiseImage.frame = CGRectMake(17, CGRectGetMaxY(_descriptionLabel.frame) + 15, 25, 25);
-    _praiseCount.frame = CGRectMake(57, CGRectGetMaxY(_descriptionLabel.frame) + 20, 30, 15);
+    _praiseCount.frame = CGRectMake(CGRectGetMaxX(praiseImage.frame) + 5, CGRectGetMaxY(_descriptionLabel.frame) + 20, 15, 15);
     
     pushImage.frame = CGRectMake(CGRectGetWidth(self.contentView.frame) / 2, CGRectGetMaxY(_descriptionLabel.frame) + 15, 25, 25);
-    _usefulCount.frame = CGRectMake(CGRectGetMaxX(_praiseCount.frame) + 80, CGRectGetMinY(_praiseCount.frame), 30, 15);
+    _usefulCount.frame = CGRectMake(CGRectGetMaxX(pushImage.frame) + 5, CGRectGetMinY(_praiseCount.frame), 15, 15);
+    
     lineView.frame = CGRectMake(15, CGRectGetMaxY(praiseImage.frame) + 15, CGRectGetWidth(self.contentView.frame) - 30, 1);
     CGFloat radius = (CGRectGetHeight(self.contentView.frame) - CGRectGetMaxY(lineView.frame)) / 2;
     _firstImage.frame = CGRectMake(0, 0, radius * 2 - 18, radius * 2 - 18);
@@ -270,9 +280,11 @@
     
     [_talkerCount sizeToFit];
     _talkerCount.frame = CGRectMake(0, 0, CGRectGetWidth(_talkerCount.frame), CGRectGetHeight(_talkerCount.frame));
-    CGFloat x = self.thirdImage.center.x + CGRectGetWidth(_talkerCount.frame) / 2 + CGRectGetWidth(_firstImage.frame) / 2 + 9 - (3 - indexChater) * 30 + 5;
+    ;
+    
     CGFloat y = self.thirdImage.center.y;
-    _talkerCount.center = CGPointMake([NSNumber numberWithFloat:x].intValue, [NSNumber numberWithFloat:y].intValue);
+    _talkerCount.center = CGPointMake(originX + CGRectGetWidth(_talkerCount.frame) / 2, [NSNumber numberWithFloat:y].intValue);
+    
     _jionGroup.frame = CGRectMake(CGRectGetWidth(self.contentView.frame) - 97 , CGRectGetMaxY(lineView.frame) + 7, 90, CGRectGetHeight(self.contentView.frame) - CGRectGetMaxY(lineView.frame) - 14);
     jionGroupView.frame = CGRectMake(0, 0, CGRectGetWidth(_jionGroup.frame), CGRectGetHeight(_jionGroup.frame));
     
@@ -288,12 +300,18 @@
     _thirdImage.hidden = YES;
     
     self.content = content;
+    originX = 20;
     if (self.content.chaters.count > 0) {
         indexChater = 0;
         NSString *bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
         NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
         NSString *defaultHeadPath;
         for (QueryContentChaters *chater in self.content.chaters) {
+            if (indexChater == 0) {
+                originX += 30;
+            } else {
+                originX += 20;
+            }
             NSLog(@"MonkeyHengLog: %@ === %@", @"头像：", chater.chaterImg);
             defaultHeadPath = [resourceBundle pathForResource:[NSString stringWithFormat:@"default_user"] ofType:@"png"];
             UIImageView *imageView = [self.contentView viewWithTag:++indexChater];

@@ -189,7 +189,7 @@
         UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 12.5)];
         footView.backgroundColor = Background;
         [queryView setTableFooterView:footView];
-       
+        
         if (!_isPushed) {
             __unsafe_unretained UITableView *tableView = queryView;
             
@@ -267,7 +267,7 @@
     _current_index = current_index;
     
     for (int index = 0; index < queryViewLst.count; ++index) {
-        ContentCardView* tmp = [queryViewLst objectAtIndex:index];
+        ContentCardView *tmp = [queryViewLst objectAtIndex:index];
         tmp.queryView.tag = index + current_index;
     }
 }
@@ -415,6 +415,15 @@
     } else {
         badge.string = [NSString stringWithFormat:@"%d", count];
     }
+    if ([self getShowingIndex:queryView] != 0) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:[self getShowingIndex:queryView] inSection:0];
+        [queryView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    _current_index = 0;
 }
 
 - (void)back2TopHandler:(UITapGestureRecognizer*)gesture {

@@ -49,6 +49,7 @@
     NSArray* permissions;
     NSString *wechatopenid;
     NSString *wechattoken;
+    BOOL ShareWeibo;
 }
 
 @synthesize doc = _doc;
@@ -664,11 +665,6 @@
          */
         dispatch_queue_t wb_query_queue = dispatch_queue_create("wb query queus", nil);
         dispatch_async(wb_query_queue, ^{
-//            NSMutableDictionary* dic = [[NSMutableDictionary alloc]initWithCapacity:2];
-//            [dic setObject:cur.provider_user_id forKey:@"uid"];
-//            [dic setObject:cur.provider_token forKey:@"access_token"];
-//            [dic setObject:@"2" forKey:@"page"];
-//            [dic setObject:@"100" forKey:@"count"];
             [WBHttpRequest requestForBilateralFriendsListOfUser:cur.provider_user_id withAccessToken:cur.provider_token andOtherProperties:nil queue:[NSOperationQueue currentQueue] withCompletionHandler:^(WBHttpRequest *httpRequest, id result, NSError *error) {
     
                 NSArray* friends = [result objectForKey:@"users"];
@@ -730,7 +726,7 @@
     Providers* cur = [Providers enumProvideInContext:_doc.managedObjectContext ByName:@"weibo" andCurrentUserID:self.current_user_id];
     
     if (cur == nil) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"请先绑定微博或用微博登录" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"通知" message:@"请先绑定微博或用微博登录" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil];
         [alert show];
     } else {
         dispatch_queue_t wb_query_queue = dispatch_queue_create("wb share queus", nil);
