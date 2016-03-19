@@ -18,7 +18,7 @@
 //@class GPUImageSketchFilter;
 //@class GPUImageColorInvertFilter;
 //@class GPUImageSmoothToonFilter;
-@class GPUImageFilterGroup;
+@class GPUImageFilter;
 @class GPUImageView;
 @class GPUImageMovie;
 
@@ -83,12 +83,12 @@
 //@property (nonatomic, strong, readonly) GPUImageColorInvertFilter* colorInvertFilter;
 //@property (nonatomic, strong, readonly) GPUImageSmoothToonFilter* smoothToonFilter;
 
-@property (nonatomic, strong, readonly) GPUImageFilterGroup* blackWhite;
-@property (nonatomic, strong, readonly) GPUImageFilterGroup* scene;
-@property (nonatomic, strong, readonly) GPUImageFilterGroup* avater;
-@property (nonatomic, strong, readonly) GPUImageFilterGroup* food;
+@property (nonatomic, strong, readonly) GPUImageFilter* blackWhite;
+@property (nonatomic, strong, readonly) GPUImageFilter* scene;
+@property (nonatomic, strong, /*readonly*/) GPUImageFilter* avater;
+@property (nonatomic, strong, readonly) GPUImageFilter* food;
 
-@property (nonatomic, strong, readonly) GPUImageFilterGroup* normal;
+@property (nonatomic, strong, readonly) GPUImageFilter* normal;
 //@property (nonatomic, strong, readonly) GPUImageFilterGroup* saturation;
 //@property (nonatomic, strong, readonly) GPUImageFilterGroup* exposure;
 //@property (nonatomic, strong, readonly) GPUImageFilterGroup* contrast;

@@ -9,17 +9,13 @@
 #import <Foundation/Foundation.h>
 //#import "GPUImage.h"
 
-@class GPUImageFilterGroup;
+@class GPUImageFilter;
 
 @interface ImageFilterFactory : NSObject
-+ (GPUImageFilterGroup *)normal;
-+ (GPUImageFilterGroup *)saturation;
-+ (GPUImageFilterGroup *)exposure;
-+ (GPUImageFilterGroup *)contrast;
-+ (GPUImageFilterGroup *)testGroup1;
++ (GPUImageFilter*)normal;
 
-+ (GPUImageFilterGroup *)blackWhite;
-+ (GPUImageFilterGroup *)scene;
-+ (GPUImageFilterGroup *)avater;
-+ (GPUImageFilterGroup *)food;
++ (GPUImageFilter*)blackWhite;
++ (GPUImageFilter*)scene;
++ (GPUImageFilter*)avater;
++ (GPUImageFilter*)food;
 @end
