@@ -9,7 +9,7 @@
         <!--咚哒用户协议-->
         <scene sceneID="T9M-JH-kxB">
             <objects>
-                <viewController storyboardIdentifier="UserPrivacy" id="abe-ov-l8U" customClass="UserPrivacyController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UserPrivacy" automaticallyAdjustsScrollViewInsets="NO" id="abe-ov-l8U" customClass="UserPrivacyController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="do5-gs-m9i"/>
                         <viewControllerLayoutGuide type="bottom" id="i1W-mi-dmf"/>
@@ -176,7 +176,7 @@
         <!--Nickname Input View Controller-->
         <scene sceneID="b4L-Nn-gx0">
             <objects>
-                <viewController id="SUX-v2-GUS" customClass="NicknameInputViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="SUX-v2-GUS" customClass="NicknameInputViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cZc-zF-xeI"/>
                         <viewControllerLayoutGuide type="bottom" id="7OL-Gv-vsV"/>
@@ -199,7 +199,7 @@
         <!--添加你的角色-->
         <scene sceneID="qQG-qZ-iuA">
             <objects>
-                <viewController storyboardIdentifier="SearchPickRoleTags" id="SBe-tp-xup" customClass="SearchUserTagsController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchPickRoleTags" automaticallyAdjustsScrollViewInsets="NO" id="SBe-tp-xup" customClass="SearchUserTagsController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9iT-Oy-MJ9"/>
                         <viewControllerLayoutGuide type="bottom" id="keQ-O6-4hN"/>
@@ -1468,7 +1468,7 @@
         <image name="ProfileBgImage" width="375" height="667"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="qbd-0n-vJA"/>
+        <segue reference="2PU-iO-cFw"/>
         <segue reference="mYA-47-s6C"/>
     </inferredMetricsTieBreakers>
 </document>

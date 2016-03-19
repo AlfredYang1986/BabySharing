@@ -353,7 +353,7 @@
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     CGFloat height = [UIScreen mainScreen].bounds.size.height;
   
-    CGRect rc = CGRectMake(0, TABLE_VIEW_TOP_MARGIN, width, height);
+    CGRect rc = CGRectMake(0, TABLE_VIEW_TOP_MARGIN, width, height - TABLE_VIEW_TOP_MARGIN);
     _cycleTableView.frame = rc;
     
 //    [self resetViews];
