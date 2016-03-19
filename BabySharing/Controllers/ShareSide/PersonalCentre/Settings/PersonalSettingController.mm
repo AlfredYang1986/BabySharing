@@ -160,8 +160,14 @@
     [dic setValue:app.lm.current_auth_token forKey:@"auth_token"];
     [dic setValue:app.lm.current_user_id forKey:@"user_id"];
     
-    [app.lm updateUserProfile:[dic copy]];
-    [self didChangeScreenName:cell.nickTextFiled.text];
+    dispatch_async(dispatch_queue_create("update", nil), ^{
+        if ([app.lm updateUserProfile:[dic copy]]) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[[UIAlertView alloc] initWithTitle:@"通知" message:@"修改个人信息成功" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil] show];
+                [self didChangeScreenName:cell.nickTextFiled.text];
+            });
+        };
+    });
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

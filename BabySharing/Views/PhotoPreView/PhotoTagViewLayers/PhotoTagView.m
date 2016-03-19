@@ -76,10 +76,11 @@
 //    self.backgroundColor = [UIColor redColor];
     
     // 脉冲动画
-    if (radarView == nil) {
-        radarView = [[WKFRadarView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.bounds), CGRectGetHeight(self.bounds) * 1.4, CGRectGetHeight(self.bounds) * 1.4)];
-        radarView.backgroundColor = [UIColor clearColor];
+    if (radarView != nil) {
+        [radarView removeFromSuperview];
     }
+    radarView = [[WKFRadarView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.bounds), CGRectGetHeight(self.bounds) * 1.4, CGRectGetHeight(self.bounds) * 1.4)];
+    radarView.backgroundColor = [UIColor clearColor];
     
     radarView.center = CGPointMake(0 + 3.5, CGRectGetHeight(self.bounds) / 2);
     [self addSubview:radarView];

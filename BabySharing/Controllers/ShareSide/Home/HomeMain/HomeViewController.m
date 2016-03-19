@@ -395,6 +395,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:!_isPushed animated:YES];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ViewWillAppear" object:nil];
     
     if (_delegate == nil) {
         self.delegate = [[MainHomeViewDataDelegate alloc] init];
@@ -421,6 +422,9 @@
     }
 }
 
+- (void)test {
+    NSLog(@"fdfdsd");
+}
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     _current_index = 0;
@@ -554,7 +558,7 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIViewController* groupVC = [storyboard instantiateViewControllerWithIdentifier:@"cycleViewController"];
     groupVC.view.frame = CGRectMake(CGRectGetWidth(self.navigationController.view.frame), 0, CGRectGetWidth(self.navigationController.view.frame), CGRectGetHeight(self.navigationController.view.frame));
-    groupVC.view.backgroundColor = [UIColor redColor];
+//    groupVC.view.backgroundColor = [UIColor redColor];
     
     [self.view addSubview:groupVC.view];
     [self.view bringSubviewToFront:bkView];

@@ -295,7 +295,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES];
-    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ViewWillAppear" object:nil];
     /**
      * clear view
      */
@@ -793,7 +793,7 @@
     if (tag_type == TagTypeBrand) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SearchViewController" bundle:nil];
         SearchViewController* svc = [storyboard instantiateViewControllerWithIdentifier:@"Search"];
-        SearchBrandsDelegate* sd = [[SearchBrandsDelegate alloc]init];
+        SearchBrandsDelegate* sd = [[SearchBrandsDelegate alloc] init];
         sd.delegate = svc;
         sd.actions = self;
         searchControllerTitle = @"添加品牌标签";
@@ -807,7 +807,7 @@
     } else if (tag_type == TagTypeLocation) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SearchViewController" bundle:nil];
         SearchViewController* svc = [storyboard instantiateViewControllerWithIdentifier:@"Search"];
-        SearchLocationDelegate* sd = [[SearchLocationDelegate alloc]init];
+        SearchLocationDelegate* sd = [[SearchLocationDelegate alloc] init];
         sd.delegate = svc;
         sd.actions = self;
         searchControllerTitle = @"添加地点标签";

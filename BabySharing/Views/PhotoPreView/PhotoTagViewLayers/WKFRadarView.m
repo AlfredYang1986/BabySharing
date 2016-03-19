@@ -56,11 +56,21 @@
 @end
 
 @implementation WKFRadarView
--(instancetype)initWithFrame:(CGRect)frame andThumbnail:(NSString *)thumbnailUrl
-{
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        //当重后台进入前台，防止假死状态
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resume) name:UIApplicationDidBecomeActiveNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resume) name:@"ViewWillAppear" object:nil];
+    }
+    return self;
+}
+
+-(instancetype)initWithFrame:(CGRect)frame andThumbnail:(NSString *)thumbnailUrl {
     if (self = [super initWithFrame:frame]) {
         //当重后台进入前台，防止假死状态
-        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(resume) name:UIApplicationDidBecomeActiveNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resume) name:UIApplicationDidBecomeActiveNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resume) name:@"ViewWillAppear" object:nil];
         self.backgroundColor = [UIColor clearColor];
         items = [[NSMutableArray alloc] init];
         itemSize = CGSizeMake(40, 40);
@@ -101,6 +111,7 @@
         scaleAnimation.fromValue = [NSNumber numberWithDouble:0.0];
         scaleAnimation.toValue = [NSNumber numberWithDouble:1.0];
         
+        
         CAKeyframeAnimation * opacityAnimation = [CAKeyframeAnimation animationWithKeyPath:@"opacity"];
         opacityAnimation.values = @[[NSNumber numberWithDouble:1.0], [NSNumber numberWithDouble:0.5],[NSNumber numberWithDouble:0.3], [NSNumber numberWithDouble:0.0]];
         opacityAnimation.keyTimes = @[[NSNumber numberWithDouble:0.0], [NSNumber numberWithDouble:0.25],[NSNumber numberWithDouble:0.5], [NSNumber numberWithDouble:1.0]];
@@ -108,6 +119,7 @@
         
         [pulsingLayer addAnimation:animationGroup forKey:@"pulsing"];
         [animationLayer addSublayer:pulsingLayer];
+        
     }
     
     self.animationLayer.zPosition = -1;//重新加载时，使动画至底层
@@ -175,8 +187,7 @@
 
 
 // 防止假死
--(void)resume
-{
+-(void)resume {
     if (self.animationLayer) {
         [self.animationLayer removeFromSuperlayer];
         [self setNeedsDisplay];

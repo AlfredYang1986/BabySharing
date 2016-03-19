@@ -532,8 +532,12 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     HomeViewController* hv = [storyboard instantiateViewControllerWithIdentifier:@"HomeView"];
     hv.isPushed = YES;
-    hv.delegate = [[UserHomeViewDataDelegate alloc]init];
-    [hv.delegate pushExistingData:[self getOM].querydata];
+    hv.delegate = [[UserHomeViewDataDelegate alloc] init];
+    if (search_seg.selectedIndex == 0) {
+        [hv.delegate pushExistingData:[self getOM].querydata];
+    } else {
+        [hv.delegate pushExistingData:[self getOPM].querydata];
+    }
     [hv.delegate setSelectIndex:index];
     hv.nav_title = [self getNickName];
     hv.current_index = index;
