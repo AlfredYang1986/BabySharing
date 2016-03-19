@@ -191,6 +191,7 @@
         
         if ([input isEqualToString:@""]) {
             _fm.previewRoleDic = nil;
+            [_controller.queryView reloadData];
         } else {
             [self queryFoundTagSearchWithInput:input andFinishBlock:^(BOOL success, NSDictionary *preview) {
                 dispatch_async(dispatch_get_main_queue(), ^{

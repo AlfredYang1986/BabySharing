@@ -22,6 +22,8 @@
 #import "LoginModel.h"
 #import "PersonInfoCell.h"
 #import "Define.h"
+#import "UIImage+fixOrientation.h"
+
 
 @interface PersonalSettingController () <UITableViewDataSource, UITableViewDelegate, chanageScreenNameProtocol, /*SearchUserTagControllerDelegate,*/ PersonalSignatureProtocol, UINavigationControllerDelegate, UIImagePickerControllerDelegate, SearchActionsProtocol>
 @property (weak, nonatomic) IBOutlet UITableView *queryView;
@@ -362,14 +364,16 @@
 #pragma mark -- UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(nullable NSDictionary<NSString *,id> *)editingInfo {
     [picker dismissViewControllerAnimated:YES completion:nil];
-    [self updateImage:image];
+    
+    [self updateImage:[image fixOrientation]];
 }
 
 //完成拍照
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     [picker dismissViewControllerAnimated:YES completion:^{}];
-    UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
+    
+    UIImage *image = [[info objectForKey:UIImagePickerControllerEditedImage] fixOrientation];
     if (image == nil) {
         image = [info objectForKey:UIImagePickerControllerOriginalImage];
     }

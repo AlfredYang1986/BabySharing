@@ -61,7 +61,7 @@
     if (self) {
         //当重后台进入前台，防止假死状态
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resume) name:UIApplicationDidBecomeActiveNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resume) name:@"ViewWillAppear" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resume) name:@"refreshTagAnimation" object:nil];
     }
     return self;
 }
@@ -70,7 +70,7 @@
     if (self = [super initWithFrame:frame]) {
         //当重后台进入前台，防止假死状态
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resume) name:UIApplicationDidBecomeActiveNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resume) name:@"ViewWillAppear" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resume) name:@"refreshTagAnimation" object:nil];
         self.backgroundColor = [UIColor clearColor];
         items = [[NSMutableArray alloc] init];
         itemSize = CGSizeMake(40, 40);

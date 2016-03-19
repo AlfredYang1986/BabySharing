@@ -277,8 +277,8 @@
     if (length > 100) {
        data = UIImageJPEGRepresentation(image, 100.0 / [imageData length]/1024.0);
     } else {
-        CGFloat kCompressQuality = 0.3;
-        data = UIImageJPEGRepresentation(image, kCompressQuality);
+//        CGFloat kCompressQuality = 0.3;
+        data = UIImageJPEGRepresentation(image, 1.0);
     }
     
     //http body的字符串

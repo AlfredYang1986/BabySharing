@@ -395,7 +395,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:!_isPushed animated:YES];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"ViewWillAppear" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshTagAnimation" object:nil];
     
     if (_delegate == nil) {
         self.delegate = [[MainHomeViewDataDelegate alloc] init];

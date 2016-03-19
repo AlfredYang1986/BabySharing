@@ -72,7 +72,6 @@
             tmp.viewSelected = YES;
         }
 
-        
         [image_view addObject:tmp];
         [self addSubview:tmp];
     }

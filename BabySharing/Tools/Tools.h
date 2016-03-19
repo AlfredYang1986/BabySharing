@@ -20,6 +20,5 @@
 + (UIImage *)addPortraitToImage:(UIImage *)image userHead:(UIImage *)userhead userName:(NSString *)userName;
 + (NSString *)stringFromDate:(NSDate *)date;
 + (NSString *)compareCurrentTime:(NSDate*) compareDate;
-
 + (NSString*)getDeviceUUID;
 @end

@@ -37,6 +37,7 @@
     [self changeImage];
     [self changeThemeText];
     [self changeUnreadLabel];
+    NSLog(@"MonkeyHengLog: %@ === %lld", @"_current_session.group_id.longLongValue", _current_session.group_id.longLongValue);
 
     GotyeOCGroup* group = [GotyeOCGroup groupWithId:_current_session.group_id.longLongValue];
     GotyeOCMessage* m = [GotyeOCAPI getLastMessage:group];
@@ -105,11 +106,11 @@
     }
 }
 
-- (void)changeTimeTextWithMessage:(GotyeOCMessage*)m {
+- (void)changeTimeTextWithMessage:(GotyeOCMessage *)m {
 //    GotyeOCGroup* group = [GotyeOCGroup groupWithId:_current_session.group_id.longLongValue];
 //    GotyeOCMessage* m = [GotyeOCAPI getLastMessage:group];
     
-    NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
     [formatter setDateStyle:NSDateFormatterMediumStyle];
     [formatter setTimeStyle:NSDateFormatterShortStyle];
     
@@ -119,7 +120,7 @@
     } else {
         [formatter setDateFormat:@"hh:mm"];
     }
-    
+    NSLog(@"MonkeyHengLog: %f === %u", now_time, m.date);
     NSDate* date = [NSDate dateWithTimeIntervalSince1970:m.date];
     _timeLabel.text = [formatter stringFromDate:date];
 }

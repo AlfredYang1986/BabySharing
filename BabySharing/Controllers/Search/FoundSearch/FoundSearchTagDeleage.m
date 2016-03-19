@@ -72,7 +72,7 @@
     FoundHotTagsCell* cell = [tableView dequeueReusableCellWithIdentifier:@"Hot Tag Cell"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if (cell == nil) {
-        cell = [[FoundHotTagsCell alloc]init];
+        cell = [[FoundHotTagsCell alloc] init];
     }
     
     [cell setHotTags:_fm.recommandsdata];
@@ -167,9 +167,9 @@
 - (void)resetCurrentSearchDataWithInput:(NSString *)input {
     if (![_current_search isEqualToString:input]) {
 //        _current_search = input;
-        
         if ([input isEqualToString:@""]) {
-            _fm.previewRoleDic = nil;
+            _fm.previewDic = [NSArray array];
+            [_controller.queryView reloadData];
         } else {
             [self queryFoundTagSearchWithInput:input andFinishBlock:^(BOOL success, NSDictionary *preview) {
                 dispatch_async(dispatch_get_main_queue(), ^{

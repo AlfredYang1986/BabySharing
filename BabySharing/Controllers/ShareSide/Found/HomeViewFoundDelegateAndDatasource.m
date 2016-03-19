@@ -324,9 +324,9 @@
     }
     @catch (NSException *exception) {
         NSArray* arr_tmp = [app.qm.querydata objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(row * PHOTO_PER_LINE, app.qm.querydata.count - row * PHOTO_PER_LINE)]];
-        NSMutableArray* arr_content = [[NSMutableArray alloc]initWithCapacity:PHOTO_PER_LINE];
+        NSMutableArray* arr_content = [[NSMutableArray alloc] initWithCapacity:PHOTO_PER_LINE];
         for (QueryContent* item in arr_tmp) {
-            [arr_content addObject:((QueryContentItem*)item.items.allObjects.firstObject).item_name];
+            [arr_content addObject:((QueryContentItem *)item.items.allObjects.firstObject).item_name];
         }
         [cell setUpContentViewWithImageNames:arr_content atLine:row andType:AlbumControllerTypePhoto];
         cell.cannot_selected = YES;

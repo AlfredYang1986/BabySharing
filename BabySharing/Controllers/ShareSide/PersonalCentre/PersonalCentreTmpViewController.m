@@ -165,7 +165,7 @@
     [self.view bringSubviewToFront:search_seg];
 
     [search_seg addItemWithTitle:@"0" andSubTitle:@"发布"];
-    [search_seg addItemWithTitle:@"0" andSubTitle:@"推出"];
+    [search_seg addItemWithTitle:@"0" andSubTitle:@"咚"];
     search_seg.delegate = self;
     search_seg.isLayerHidden = YES;
 

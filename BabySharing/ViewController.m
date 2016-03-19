@@ -66,6 +66,8 @@ enum DisplaySide {
     
     CGRect keyBoardFrame;
     CGFloat modify;
+    CGFloat diff;
+    BOOL isUpAnimation;
 }
 
 @synthesize lm = _lm;
@@ -77,6 +79,7 @@ enum DisplaySide {
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self classForCoder];
+    isUpAnimation = NO;
     // Do any additional setup after loading the view, typically from a nib.
     [self.navigationController setNavigationBarHidden:YES animated:NO];
 //    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:0.3126 green:0.7529 blue:0.6941 alpha:1.f]];
@@ -115,14 +118,17 @@ enum DisplaySide {
     /**
      * input method
      */
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHidden:) name:UIKeyboardWillHideNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardWillShowNotification object:nil];
+////    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHidden:) name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
     [GotyeOCAPI removeListener:self];
 }
@@ -484,53 +490,86 @@ enum DisplaySide {
 }
 
 #pragma mark -- get input view height
-- (void)keyboardDidShow:(NSNotification*)notification {
-    UIView *result = nil;
-    NSArray *windowsArray = [UIApplication sharedApplication].windows;
-    for (UIView *tmpWindow in windowsArray) {
-        NSArray *viewArray = [tmpWindow subviews];
-        for (UIView *tmpView  in viewArray) {
-            NSLog(@"%@", [NSString stringWithUTF8String:object_getClassName(tmpView)]);
-            // if ([[NSString stringWithUTF8String:object_getClassName(tmpView)] isEqualToString:@"UIPeripheralHostView"]) {
-            if ([[NSString stringWithUTF8String:object_getClassName(tmpView)] isEqualToString:@"UIInputSetContainerView"]) {
-                result = tmpView;
-                break;
-            }
-        }
-        
-        if (result != nil) {
-            break;
-        }
+//- (void)keyboardDidShow:(NSNotification*)notification {
+//    UIView *result = nil;
+//    NSArray *windowsArray = [UIApplication sharedApplication].windows;
+//    for (UIView *tmpWindow in windowsArray) {
+//        NSArray *viewArray = [tmpWindow subviews];
+//        for (UIView *tmpView  in viewArray) {
+//            NSLog(@"%@", [NSString stringWithUTF8String:object_getClassName(tmpView)]);
+//            // if ([[NSString stringWithUTF8String:object_getClassName(tmpView)] isEqualToString:@"UIPeripheralHostView"]) {
+//            if ([[NSString stringWithUTF8String:object_getClassName(tmpView)] isEqualToString:@"UIInputSetContainerView"]) {
+//                result = tmpView;
+//                break;
+//            }
+//        }
+//        
+//        if (result != nil) {
+//            break;
+//        }
+//    }
+//    
+//    //    keyboardView = result;
+//    NSDictionary *userInfo = [notification userInfo];
+//    NSValue *value = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+//    keyBoardFrame = value.CGRectValue;
+//    
+////    CGFloat height = [UIScreen mainScreen].bounds.size.height - (inputView.frame.size.height + inputView.frame.origin.y) + modify;
+//    if (!inputView.isMoved) {
+////        [self moveView:height - keyBoardFrame.size.height];
+//        [self moveView:-120];
+//        slg.hidden = YES;
+//        title.hidden = YES;
+//    }
+//}
+//
+//- (void)keyboardWasChange:(NSNotification *)notification {
+//    NSDictionary *userInfo = [notification userInfo];
+//    NSValue *value = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+//    keyBoardFrame = value.CGRectValue;
+//}
+//
+//- (void)keyboardDidHidden:(NSNotification*)notification {
+////    CGFloat height = [UIScreen mainScreen].bounds.size.height - (inputView.frame.size.height + inputView.frame.origin.y) + modify;
+//    if (inputView.isMoved) {
+////        [self moveView:keyBoardFrame.size.height - height];
+//        [self moveView:120];
+//        slg.hidden = NO;
+//        title.hidden = NO;
+//    }
+//}
+#pragma mark zhangheng inputView annimation
+- (void)keyBoardWillShow:(NSNotification *)notification {
+    if (isUpAnimation) {
+        return;
     }
-    
-    //    keyboardView = result;
+    isUpAnimation = !isUpAnimation;
     NSDictionary *userInfo = [notification userInfo];
     NSValue *value = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
     keyBoardFrame = value.CGRectValue;
-    
-//    CGFloat height = [UIScreen mainScreen].bounds.size.height - (inputView.frame.size.height + inputView.frame.origin.y) + modify;
-    if (!inputView.isMoved) {
-//        [self moveView:height - keyBoardFrame.size.height];
-        [self moveView:-120];
-        slg.hidden = YES;
-        title.hidden = YES;
-    }
+    CGFloat maxY = CGRectGetMaxY(inputView.frame);
+    diff = self.view.frame.size.height - maxY - keyBoardFrame.size.height;
+
+    [UIView animateWithDuration:0.3 animations:^{
+        inputView.center = CGPointMake(inputView.center.x, inputView.center.y + diff);
+        title.center = CGPointMake(title.center.x, title.center.y + diff);
+        slg.center = CGPointMake(slg.center.x, slg.center.y + diff);
+    }];
 }
 
-- (void)keyboardWasChange:(NSNotification *)notification {
+- (void)keyBoardWillHide:(NSNotification *)notification {
+    if (!isUpAnimation) {
+        return;
+    }
+    isUpAnimation = !isUpAnimation;
     NSDictionary *userInfo = [notification userInfo];
     NSValue *value = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
     keyBoardFrame = value.CGRectValue;
-}
-
-- (void)keyboardDidHidden:(NSNotification*)notification {
-//    CGFloat height = [UIScreen mainScreen].bounds.size.height - (inputView.frame.size.height + inputView.frame.origin.y) + modify;
-    if (inputView.isMoved) {
-//        [self moveView:keyBoardFrame.size.height - height];
-        [self moveView:120];
-        slg.hidden = NO;
-        title.hidden = NO;
-    }
+    [UIView animateWithDuration:0.3 animations:^{
+        inputView.center = CGPointMake(inputView.center.x, inputView.center.y - diff);
+        title.center = CGPointMake(title.center.x, title.center.y - diff);
+        slg.center = CGPointMake(slg.center.x, slg.center.y - diff);
+    }];
 }
 
 #pragma mark -- Gotaye Delegate

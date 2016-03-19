@@ -209,6 +209,7 @@
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    [_current_delegate resetCurrentSearchDataWithInput:@""];
     [self cancelSearchSelected];
 }
 
@@ -216,7 +217,6 @@
     [_current_delegate queryFoundTagSearchWithInput:_searchBar.text andFinishBlock:^(BOOL success, NSDictionary *preview) {
         [_queryView reloadData];
     }];
-    
     [_searchBar resignFirstResponder];
 }
 

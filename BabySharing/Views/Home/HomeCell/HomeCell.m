@@ -130,7 +130,7 @@
         _usefulCount.textAlignment = NSTextAlignmentCenter;
         _usefulCount.font = [UIFont systemFontOfSize:12];
         _usefulCount.textColor = TextColor;
-        _usefulCount.text = @"推";
+        _usefulCount.text = @"咚";
         
         
         // 中间的一条线
@@ -473,7 +473,6 @@
             [_gpuImageMovie addTarget:filter];
             
             _gpuImageView.hidden = NO;
-            _gpuImageView.backgroundColor = [UIColor redColor];
             [_gpuImageView.superview bringSubviewToFront:_gpuImageView];
             _videoSign.hidden = YES;
            

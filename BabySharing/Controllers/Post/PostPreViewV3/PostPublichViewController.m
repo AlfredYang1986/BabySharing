@@ -201,7 +201,16 @@
     titleView.tag = -1;
     titleView.textAlignment = NSTextAlignmentCenter;
     titleView.font = [UIFont systemFontOfSize:18.f];
-    titleView.text = @"编辑图片";
+    switch (self.type) {
+        case PostPreViewMovie:
+            titleView.text = @"视频说明";
+            break;
+        case PostPreViewPhote:
+            titleView.text = @"图片说明";
+            break;
+        default:
+            break;
+    }
     titleView.textColor = [UIColor whiteColor];
     [titleView sizeToFit];
     titleView.center = CGPointMake(width / 2, FAKE_NAVIGATION_BAR_HEIGHT / 2);
@@ -506,6 +515,10 @@
 #pragma mark -- post the content
 - (void)didSelectPostBtn {
     NSLog(@"发布按钮点击");
+    if ([Tools bityWithStr:_descriptionView.text] == 0) {
+        [[[UIAlertView  alloc] initWithTitle:@"通知" message:@"请添加一句描述吧" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil] show];
+        return;
+    }
     
     AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     if (_isShareWeibo) {

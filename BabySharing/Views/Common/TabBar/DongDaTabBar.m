@@ -82,7 +82,7 @@
 }
 
 - (void)addMidItemWithImg:(UIImage*)image {
-    DongDaTabBarItem* item = [[DongDaTabBarItem alloc]initWithMidImage:image];
+    DongDaTabBarItem* item = [[DongDaTabBarItem alloc] initWithMidImage:image];
     item.tag = self.count;
     [item addTarget:self action:@selector(itemSelected:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:item];
@@ -95,7 +95,13 @@
    
     for (int index = 0; index < self.count; ++index) {
         UIButton* tmp = (UIButton*)[self viewWithTag:index];
-        tmp.frame = CGRectMake(index * step, 0, step, height);
+        if (index == 1) {
+            tmp.frame = CGRectMake(index * step - 6, 0, step, height);
+        } else if (index == 3) {
+            tmp.frame = CGRectMake(index * step + 6, 0, step, height);
+        } else {
+            tmp.frame = CGRectMake(index * step, 0, step, height);
+        }
 //        tmp.frame = CGRectMake(index * step, index == 2 ? -8 : 0 , step, height);
         if ([tmp isSelected]) {
             selected_layer.position = CGPointMake(tmp.center.x, 5);
