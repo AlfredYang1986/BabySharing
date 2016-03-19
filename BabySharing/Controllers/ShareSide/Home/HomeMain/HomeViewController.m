@@ -654,8 +654,8 @@
 }
 
 - (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-//    HomeCell *homeCell = (HomeCell *)cell;
-//    [homeCell stopViedo];
+    HomeCell *homeCell = (HomeCell *)cell;
+    [homeCell stopViedo];
 }
 
 #pragma mark scrollViewDelegate

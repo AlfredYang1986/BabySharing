@@ -37,9 +37,7 @@
 @property (nonatomic, strong, readonly) UITextField *jionGroup;
 @property (nonatomic, strong, readonly) UIImageView *videoSign;
 @property (nonatomic, strong, readonly) QueryContentItem *queryContentItem;
-//@property (nonatomic, strong) AVPlayer *avplayer;
-//@property (nonatomic, strong) AVPlayerItem *avplayerItem;
-//@property (nonatomic, strong) AVPlayerLayer *playerLayer;
+
 @property (nonatomic, weak) QueryContent *content;
 
 @property (nonatomic, strong) GPUImageMovie *gpuImageMovie;
@@ -59,7 +57,7 @@
     NSInteger indexChater;
     CGFloat originX;
     
-    AVPlayerItem* avPlayerItem;
+//    AVPlayerItem* avPlayerItem;
     AVPlayer* player;
     
     GPUImageFilter* filter;
@@ -216,6 +214,14 @@
         praiseImage.userInteractionEnabled = YES;
         [praiseImage addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(praiseImageTap)]];
         [_jionGroup addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(jionGroupTap)]];
+        
+        // play movie
+        _gpuImageMovie = [[GPUImageMovie alloc]init];
+        filter = [[GPUImageFilter alloc]init];
+        [filter addTarget:_gpuImageView];
+        
+        
+        player = [[AVPlayer alloc]init];
     }
     return self;
 }
@@ -262,8 +268,6 @@
     [self.contentView bringSubviewToFront:_thirdImage];
     [self.contentView bringSubviewToFront:_secondImage];
     [self.contentView bringSubviewToFront:_firstImage];
-    
-    
     
     // 圆角
     _ownerImage.layer.cornerRadius = CGRectGetWidth(_ownerImage.frame) / 2;
@@ -439,6 +443,23 @@
 //    }
 //}
 
+- (void)changeMovie:(NSURL*)path {
+    AVPlayerItem* item = [[AVPlayerItem alloc] initWithURL:path];
+    if (player.currentItem != nil) {
+        [player pause];
+    }
+    _gpuImageMovie = [[GPUImageMovie alloc]initWithPlayerItem:item];
+    [_gpuImageMovie addTarget:filter];
+    _gpuImageMovie.runBenchmark = YES;
+    _gpuImageMovie.playAtActualSpeed = NO;
+    _gpuImageMovie.shouldRepeat = YES;
+    
+    [player replaceCurrentItemWithPlayerItem:item];
+    
+    [_gpuImageMovie startProcessing];
+    [player play];
+}
+
 - (void)mainImageTap {
 //    if (_queryContentItem != nil && _gpuImageMovie.progress == 0) {
     if (_queryContentItem != nil) { //&& _gpuImageMovie.progress == 0) {
@@ -446,38 +467,19 @@
             if (success) {
                 _gpuImageView.hidden = NO;
                 _videoSign.hidden = YES;
+               
+                [self changeMovie:path];
                 
-                [filter addTarget:_gpuImageView];
-                [_gpuImageMovie addTarget:filter];
-                
-                avPlayerItem = [[AVPlayerItem alloc] initWithURL:path];
-                player = [AVPlayer playerWithPlayerItem:avPlayerItem];
-                
-                _gpuImageMovie = [[GPUImageMovie alloc] initWithPlayerItem:avPlayerItem];
-              
             } else {
                 NSLog(@"down load movie %@ failed", _queryContentItem.item_name);
             }
         }];
         if (url) {
-            avPlayerItem = [[AVPlayerItem alloc] initWithURL:url];
-            player = [AVPlayer playerWithPlayerItem:avPlayerItem];
            
-            filter = [[GPUImageFilter alloc]init];
-            [filter addTarget:_gpuImageView];
-            
-            _gpuImageMovie = [[GPUImageMovie alloc] initWithPlayerItem:avPlayerItem];
-            _gpuImageMovie.runBenchmark = YES;
-            _gpuImageMovie.playAtActualSpeed = NO;
-            _gpuImageMovie.shouldRepeat = YES;
-            [_gpuImageMovie addTarget:filter];
-            
             _gpuImageView.hidden = NO;
-            [_gpuImageView.superview bringSubviewToFront:_gpuImageView];
             _videoSign.hidden = YES;
            
-            [_gpuImageMovie startProcessing];
-            [player play];
+            [self changeMovie:url];
         }
     }
 //    if (_gpuImageMovie.progress != 0) {
@@ -489,6 +491,7 @@
     NSLog(@"停止播放视频");
     _gpuImageView.hidden = YES;
     _videoSign.hidden = NO;
+
     [_gpuImageMovie endProcessing];
 //    [_gpuImageMovie cancelProcessing];
 //    [_gpuImageMovie removeAllTargets];
