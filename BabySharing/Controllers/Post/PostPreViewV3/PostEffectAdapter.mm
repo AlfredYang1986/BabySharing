@@ -201,7 +201,7 @@ UIView* effectFilterForPhoto(PostEffectAdapter* adapter, CGFloat height) {
 //    reVal.backgroundColor = [UIColor darkGrayColor];
 //    reVal.backgroundColor = [UIColor colorWithRed:0.9050 green:0.9050 blue:0.9050 alpha:1.f];
   
-    [reVal addSubview:addPhotoEffectBtn(@"saturation", CGRectMake(0, 0, button_height, button_height), CGPointMake(edge_margin + margin + button_height / 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:))];
+    [reVal addSubview:addPhotoEffectBtn(@"黑白", CGRectMake(0, 0, button_height, button_height), CGPointMake(edge_margin + margin + button_height / 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:))];
     [reVal addSubview:addPhotoEffectBtn(@"exposure", CGRectMake(0, 0, button_height, button_height), CGPointMake(edge_margin + 2 * margin + button_height * 3/ 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:))];
     [reVal addSubview:addPhotoEffectBtn(@"normal", CGRectMake(0, 0, button_height, button_height), CGPointMake(edge_margin + 3 * margin + button_height * 5/ 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:))];
     [reVal addSubview:addPhotoEffectBtn(@"contrast", CGRectMake(0, 0, button_height, button_height), CGPointMake(edge_margin + 4 * margin + button_height * 7/ 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:))];
@@ -300,7 +300,7 @@ UIView* effectFilterForMovie(PostEffectAdapter* adapter, CGFloat height) {
     //    reVal.backgroundColor = [UIColor darkGrayColor];
     //    reVal.backgroundColor = [UIColor colorWithRed:0.9050 green:0.9050 blue:0.9050 alpha:1.f];
     
-    [reVal addSubview:addPhotoEffectBtn(@"saturation", CGRectMake(0, 0, button_height, button_height), CGPointMake(edge_margin + margin + button_height / 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:), @selector(didSelectEffectFilterForMovie:))];
+    [reVal addSubview:addPhotoEffectBtn(@"黑白", CGRectMake(0, 0, button_height, button_height), CGPointMake(edge_margin + margin + button_height / 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:), @selector(didSelectEffectFilterForMovie:))];
     [reVal addSubview:addPhotoEffectBtn(@"exposure", CGRectMake(0, 0, button_height, button_height), CGPointMake(edge_margin + 2 * margin + button_height * 3/ 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:), @selector(didSelectEffectFilterForMovie:))];
     [reVal addSubview:addPhotoEffectBtn(@"normal", CGRectMake(0, 0, button_height, button_height), CGPointMake(edge_margin + 3 * margin + button_height * 5/ 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:), @selector(didSelectEffectFilterForMovie:))];
     [reVal addSubview:addPhotoEffectBtn(@"contrast", CGRectMake(0, 0, button_height, button_height), CGPointMake(edge_margin + 4 * margin + button_height * 7/ 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:), @selector(didSelectEffectFilterForMovie:))];
@@ -397,6 +397,27 @@ UIView* soundForMovie(PostEffectAdapter* adapter, CGFloat height) {
 /**
  * photo effects
  */
+UIImage* blackAndWhiteEffect(UIImage* source, PostEffectAdapter* obj) {
+    GPUImagePicture* tmp = [[GPUImagePicture alloc]initWithImage:source];
+    [tmp addTarget:obj.blackWhite];
+    [obj.blackWhite useNextFrameForImageCapture];
+    [tmp processImage];
+    return [obj.blackWhite imageFromCurrentFramebuffer];
+}
+
+void blackAndWhiteEffectMovie(PostEffectAdapter* obj) {
+    GPUImageMovie* m = [obj.delegate getInput];
+    GPUImageView* v = [obj.delegate getOutput];
+    
+    [m endProcessing];
+    [obj.blackWhite removeAllTargets];
+    [m removeAllTargets];
+    [m addTarget:obj.blackWhite];
+    [obj.blackWhite addTarget:v];
+    
+    [m startProcessing];
+}
+
 UIImage* saturationEffect(UIImage* source, PostEffectAdapter* obj) {
     GPUImagePicture* tmp = [[GPUImagePicture alloc]initWithImage:source];
     [tmp addTarget:obj.saturation];
@@ -552,6 +573,8 @@ void brandTagView(PostEffectAdapter* obj, UIImage* tag_img) {
 @synthesize contrast = _contrast;
 @synthesize group = _group;
 
+@synthesize blackWhite = _blackWhite;
+
 - (void)setUp {
 //    if ([_delegate currentType] == PostPreViewPhote) {
         if (_normal == nil) {
@@ -560,6 +583,10 @@ void brandTagView(PostEffectAdapter* obj, UIImage* tag_img) {
         
         if (_saturation == nil) {
             _saturation = [ImageFilterFactory saturation];
+        }
+
+        if (_blackWhite == nil) {
+            _blackWhite = [ImageFilterFactory blackWhite];
         }
         
         if (_exposure == nil) {
@@ -626,6 +653,7 @@ void brandTagView(PostEffectAdapter* obj, UIImage* tag_img) {
 
 - (void)didSelectEffectFilterForMovie:(UIButton*)sender {
     static const vector<movieEffectNode> vec = {
+        movieEffectNode{"黑白", &blackAndWhiteEffectMovie},
         movieEffectNode{"saturation", &saturationEffectMovie},
         movieEffectNode{"exposure", &exposureEffectMovie},
         movieEffectNode{"contrast", &contrastEffectMovie},
@@ -648,6 +676,7 @@ void brandTagView(PostEffectAdapter* obj, UIImage* tag_img) {
 
 - (UIImage*)didSelectEffectFilterForPhoto:(UIButton*)sender {
     static const vector<effectNode> vec = {
+        effectNode{"黑白", &blackAndWhiteEffect},
         effectNode{"saturation", &saturationEffect},
         effectNode{"exposure", &exposureEffect},
         effectNode{"contrast", &contrastEffect},

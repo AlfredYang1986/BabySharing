@@ -85,6 +85,7 @@
 
 @property (nonatomic, strong, readonly) GPUImageFilterGroup* normal;
 @property (nonatomic, strong, readonly) GPUImageFilterGroup* saturation;
+@property (nonatomic, strong, readonly) GPUImageFilterGroup* blackWhite;
 @property (nonatomic, strong, readonly) GPUImageFilterGroup* exposure;
 @property (nonatomic, strong, readonly) GPUImageFilterGroup* contrast;
 @property (nonatomic, strong, readonly) GPUImageFilterGroup* group;

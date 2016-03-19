@@ -129,7 +129,7 @@
             NSLog(@"%@", url);
             NSError* error = nil;
             if ([data writeToFile:fullname options:NSDataWritingFileProtectionComplete error:&error]) {
-                NSLog(@"write data to file error: %@", error);
+                NSLog(@"write data to file success");
                 block(YES, url);
             } else {
                 NSLog(@"write data to file error: %@", error);

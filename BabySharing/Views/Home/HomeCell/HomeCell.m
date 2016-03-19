@@ -58,6 +58,11 @@
     UIView *jionGroupView;
     NSInteger indexChater;
     CGFloat originX;
+    
+    AVPlayerItem* avPlayerItem;
+    AVPlayer* player;
+    
+    GPUImageFilter* filter;
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier indexPath:(NSIndexPath *)indexPath {
@@ -421,34 +426,64 @@
     }
 }
 
+//- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+//    //    NSLog(@"keyPath:%@,object:%@",keyPath,NSStringFromClass([object class]));
+//    if ([keyPath isEqualToString:@"status"]) {
+//        AVPlayerItem *playerItem = (AVPlayerItem*)object;
+//        if (playerItem.status == AVPlayerStatusReadyToPlay) {
+//            [player seekToTime:kCMTimeZero completionHandler:^(BOOL finished) {
+//                [_gpuImageMovie startProcessing];
+//                [player play];
+//            }];
+//        }
+//    }
+//}
+
 - (void)mainImageTap {
-    if (_queryContentItem != nil && _gpuImageMovie.progress == 0) {
+//    if (_queryContentItem != nil && _gpuImageMovie.progress == 0) {
+    if (_queryContentItem != nil) { //&& _gpuImageMovie.progress == 0) {
         NSURL* url = [TmpFileStorageModel enumFileWithName:_queryContentItem.item_name andType:_queryContentItem.item_type.unsignedIntegerValue withDownLoadFinishBlock:^(BOOL success, NSURL *path) {
             if (success) {
                 _gpuImageView.hidden = NO;
                 _videoSign.hidden = YES;
-                [_gpuImageMovie addTarget:_gpuImageView];
-                _gpuImageMovie = [[GPUImageMovie alloc] initWithURL:path];
-                _gpuImageMovie.playAtActualSpeed = YES;
-                _gpuImageMovie.shouldRepeat = YES;
-                [_gpuImageMovie startProcessing];
+                
+                [filter addTarget:_gpuImageView];
+                [_gpuImageMovie addTarget:filter];
+                
+                avPlayerItem = [[AVPlayerItem alloc] initWithURL:path];
+                player = [AVPlayer playerWithPlayerItem:avPlayerItem];
+                
+                _gpuImageMovie = [[GPUImageMovie alloc] initWithPlayerItem:avPlayerItem];
+              
             } else {
                 NSLog(@"down load movie %@ failed", _queryContentItem.item_name);
             }
         }];
         if (url) {
-            [_gpuImageMovie addTarget:_gpuImageView];
-            _gpuImageMovie = [[GPUImageMovie alloc] initWithURL:url];
-            _gpuImageView.hidden = NO;
-            _videoSign.hidden = YES;
-            _gpuImageMovie.playAtActualSpeed = YES;
+            avPlayerItem = [[AVPlayerItem alloc] initWithURL:url];
+            player = [AVPlayer playerWithPlayerItem:avPlayerItem];
+           
+            filter = [[GPUImageFilter alloc]init];
+            [filter addTarget:_gpuImageView];
+            
+            _gpuImageMovie = [[GPUImageMovie alloc] initWithPlayerItem:avPlayerItem];
+            _gpuImageMovie.runBenchmark = YES;
+            _gpuImageMovie.playAtActualSpeed = NO;
             _gpuImageMovie.shouldRepeat = YES;
+            [_gpuImageMovie addTarget:filter];
+            
+            _gpuImageView.hidden = NO;
+            _gpuImageView.backgroundColor = [UIColor redColor];
+            [_gpuImageView.superview bringSubviewToFront:_gpuImageView];
+            _videoSign.hidden = YES;
+           
             [_gpuImageMovie startProcessing];
+            [player play];
         }
     }
-    if (_gpuImageMovie.progress != 0) {
-        [self stopViedo];
-    }
+//    if (_gpuImageMovie.progress != 0) {
+//        [self stopViedo];
+//    }
 }
 
 - (void)stopViedo {
@@ -456,8 +491,9 @@
     _gpuImageView.hidden = YES;
     _videoSign.hidden = NO;
     [_gpuImageMovie endProcessing];
-    [_gpuImageMovie cancelProcessing];
-    [_gpuImageMovie removeAllTargets];
+//    [_gpuImageMovie cancelProcessing];
+//    [_gpuImageMovie removeAllTargets];
+    [player pause];
 }
 
 - (void)praiseImageTap {

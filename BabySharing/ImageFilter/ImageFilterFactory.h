@@ -17,4 +17,6 @@
 + (GPUImageFilterGroup *)exposure;
 + (GPUImageFilterGroup *)contrast;
 + (GPUImageFilterGroup *)testGroup1;
+
++ (GPUImageFilterGroup *)blackWhite;
 @end

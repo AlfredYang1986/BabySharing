@@ -18,6 +18,35 @@
     return group;
 }
 
++ (GPUImageFilterGroup *)blackWhite {
+    
+    
+    GPUImageFilterGroup *filters = [[GPUImageFilterGroup alloc] init];
+
+    GPUImageSaturationFilter *filter_saturation = [[GPUImageSaturationFilter alloc] init]; //饱和度
+    filter_saturation.saturation = 0.f;
+    
+    GPUImageBrightnessFilter* filter_brightness = [[GPUImageBrightnessFilter alloc]init]; // 亮度
+    filter_brightness.brightness = 0.15f;
+
+    GPUImageContrastFilter *filter_contrast = [[GPUImageContrastFilter alloc] init]; // 对比度
+    filter_contrast.contrast = 1.5f;
+    
+//    GPUImageToneCurveFilter * filter_curve = [[GPUImageToneCurveFilter alloc] init]; // 曲线
+//    filter_curve.rgbCompositeControlPoints = [NSArray arrayWithObjects:[NSValue valueWithCGPoint:CGPointMake(0.f, 0.f)],
+//                                              [NSValue valueWithCGPoint:CGPointMake(0.4283, 0.5647)],
+//                                              [NSValue valueWithCGPoint:CGPointMake(1.f, 1.f)], nil];
+    
+    [filter_saturation addTarget:filter_contrast];
+    [filter_contrast addTarget:filter_brightness];
+//    [filter_brightness addTarget:filter_curve];
+    
+    [filters setInitialFilters:[NSArray arrayWithObject:filter_saturation]];
+    [filters setTerminalFilter:filter_brightness];
+   
+    return filters;
+}
+
 + (GPUImageFilterGroup *)saturation {
     GPUImageSaturationFilter *filter = [[GPUImageSaturationFilter alloc] init]; //饱和度
     filter.saturation = 2.0f;
