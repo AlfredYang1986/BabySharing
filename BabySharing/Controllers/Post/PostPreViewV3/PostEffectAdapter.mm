@@ -202,10 +202,10 @@ UIView* effectFilterForPhoto(PostEffectAdapter* adapter, CGFloat height) {
 //    reVal.backgroundColor = [UIColor colorWithRed:0.9050 green:0.9050 blue:0.9050 alpha:1.f];
   
     [reVal addSubview:addPhotoEffectBtn(@"黑白", CGRectMake(0, 0, button_height, button_height), CGPointMake(edge_margin + margin + button_height / 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:))];
-    [reVal addSubview:addPhotoEffectBtn(@"exposure", CGRectMake(0, 0, button_height, button_height), CGPointMake(edge_margin + 2 * margin + button_height * 3/ 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:))];
+    [reVal addSubview:addPhotoEffectBtn(@"美景", CGRectMake(0, 0, button_height, button_height), CGPointMake(edge_margin + 2 * margin + button_height * 3/ 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:))];
     [reVal addSubview:addPhotoEffectBtn(@"normal", CGRectMake(0, 0, button_height, button_height), CGPointMake(edge_margin + 3 * margin + button_height * 5/ 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:))];
-    [reVal addSubview:addPhotoEffectBtn(@"contrast", CGRectMake(0, 0, button_height, button_height), CGPointMake(edge_margin + 4 * margin + button_height * 7/ 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:))];
-    [reVal addSubview:addPhotoEffectBtn(@"group", CGRectMake(0, 0, button_height, button_height), CGPointMake(edge_margin + 5 * margin + button_height * 9/ 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:))];
+    [reVal addSubview:addPhotoEffectBtn(@"美肤", CGRectMake(0, 0, button_height, button_height), CGPointMake(edge_margin + 4 * margin + button_height * 7/ 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:))];
+    [reVal addSubview:addPhotoEffectBtn(@"美食", CGRectMake(0, 0, button_height, button_height), CGPointMake(edge_margin + 5 * margin + button_height * 9/ 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:))];
 
     return reVal;
 }
@@ -301,10 +301,10 @@ UIView* effectFilterForMovie(PostEffectAdapter* adapter, CGFloat height) {
     //    reVal.backgroundColor = [UIColor colorWithRed:0.9050 green:0.9050 blue:0.9050 alpha:1.f];
     
     [reVal addSubview:addPhotoEffectBtn(@"黑白", CGRectMake(0, 0, button_height, button_height), CGPointMake(edge_margin + margin + button_height / 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:), @selector(didSelectEffectFilterForMovie:))];
-    [reVal addSubview:addPhotoEffectBtn(@"exposure", CGRectMake(0, 0, button_height, button_height), CGPointMake(edge_margin + 2 * margin + button_height * 3/ 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:), @selector(didSelectEffectFilterForMovie:))];
+    [reVal addSubview:addPhotoEffectBtn(@"美景", CGRectMake(0, 0, button_height, button_height), CGPointMake(edge_margin + 2 * margin + button_height * 3/ 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:), @selector(didSelectEffectFilterForMovie:))];
     [reVal addSubview:addPhotoEffectBtn(@"normal", CGRectMake(0, 0, button_height, button_height), CGPointMake(edge_margin + 3 * margin + button_height * 5/ 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:), @selector(didSelectEffectFilterForMovie:))];
-    [reVal addSubview:addPhotoEffectBtn(@"contrast", CGRectMake(0, 0, button_height, button_height), CGPointMake(edge_margin + 4 * margin + button_height * 7/ 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:), @selector(didSelectEffectFilterForMovie:))];
-    [reVal addSubview:addPhotoEffectBtn(@"group", CGRectMake(0, 0, button_height, button_height), CGPointMake(edge_margin + 5 * margin + button_height * 9/ 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:), @selector(didSelectEffectFilterForMovie:))];
+    [reVal addSubview:addPhotoEffectBtn(@"美肤", CGRectMake(0, 0, button_height, button_height), CGPointMake(edge_margin + 4 * margin + button_height * 7/ 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:), @selector(didSelectEffectFilterForMovie:))];
+    [reVal addSubview:addPhotoEffectBtn(@"美食", CGRectMake(0, 0, button_height, button_height), CGPointMake(edge_margin + 5 * margin + button_height * 9/ 2, height / 2), adapter, @selector(didSelectEffectFilterForPhoto:), @selector(didSelectEffectFilterForMovie:))];
     
     return reVal;
 }
@@ -418,89 +418,155 @@ void blackAndWhiteEffectMovie(PostEffectAdapter* obj) {
     [m startProcessing];
 }
 
-UIImage* saturationEffect(UIImage* source, PostEffectAdapter* obj) {
+UIImage* sceneEffect(UIImage* source, PostEffectAdapter* obj) {
     GPUImagePicture* tmp = [[GPUImagePicture alloc]initWithImage:source];
-    [tmp addTarget:obj.saturation];
-    [obj.saturation useNextFrameForImageCapture];
+    [tmp addTarget:obj.scene];
+    [obj.scene useNextFrameForImageCapture];
     [tmp processImage];
-    return [obj.saturation imageFromCurrentFramebuffer];
+    return [obj.scene imageFromCurrentFramebuffer];
 }
 
-void saturationEffectMovie(PostEffectAdapter* obj) {
-    GPUImageMovie* m = [obj.delegate getInput];
-    GPUImageView* v = [obj.delegate getOutput];
-
-    [m endProcessing];
-    [obj.saturation removeAllTargets];
-    [m removeAllTargets];
-    [m addTarget:obj.saturation];
-    [obj.saturation addTarget:v];
-    
-    [m startProcessing];
-}
-
-UIImage* exposureEffect(UIImage* source, PostEffectAdapter* obj) {
-    GPUImagePicture* tmp = [[GPUImagePicture alloc]initWithImage:source];
-    [tmp addTarget:obj.exposure];
-    [obj.exposure useNextFrameForImageCapture];
-    [tmp processImage];
-    return [obj.exposure imageFromCurrentFramebuffer];
-}
-
-void exposureEffectMovie(PostEffectAdapter* obj) {
+void sceneEffectMovie(PostEffectAdapter* obj) {
     GPUImageMovie* m = [obj.delegate getInput];
     GPUImageView* v = [obj.delegate getOutput];
     
     [m endProcessing];
-    [obj.exposure removeAllTargets];
+    [obj.scene removeAllTargets];
     [m removeAllTargets];
-    [m addTarget:obj.exposure];
-    [obj.exposure addTarget:v];
+    [m addTarget:obj.scene];
+    [obj.scene addTarget:v];
     
     [m startProcessing];
 }
 
-UIImage* contrastEffect(UIImage* source, PostEffectAdapter* obj) {
+/**
+ * TODO: FUCK
+ */
+UIImage* avaterEffect(UIImage* source, PostEffectAdapter* obj) {
     GPUImagePicture* tmp = [[GPUImagePicture alloc]initWithImage:source];
-    [tmp addTarget:obj.contrast];
-    [obj.contrast useNextFrameForImageCapture];
+    [tmp addTarget:obj.food];
+    [obj.food useNextFrameForImageCapture];
     [tmp processImage];
-    return [obj.contrast imageFromCurrentFramebuffer];
+    return [obj.food imageFromCurrentFramebuffer];
 }
 
-void contrastEffectMovie(PostEffectAdapter* obj) {
+void avaterEffectMovie(PostEffectAdapter* obj) {
     GPUImageMovie* m = [obj.delegate getInput];
     GPUImageView* v = [obj.delegate getOutput];
     
     [m endProcessing];
-    [obj.contrast removeAllTargets];
+    [obj.food removeAllTargets];
     [m removeAllTargets];
-    [m addTarget:obj.contrast];
-    [obj.contrast addTarget:v];
+    [m addTarget:obj.food];
+    [obj.food addTarget:v];
     
     [m startProcessing];
 }
 
-UIImage* groupEffect(UIImage* source, PostEffectAdapter* obj) {
+UIImage* foodEffect(UIImage* source, PostEffectAdapter* obj) {
     GPUImagePicture* tmp = [[GPUImagePicture alloc]initWithImage:source];
-    [tmp addTarget:obj.group];
-    [obj.group useNextFrameForImageCapture];
+    [tmp addTarget:obj.food];
+    [obj.food useNextFrameForImageCapture];
     [tmp processImage];
-    return [obj.group imageFromCurrentFramebuffer];
+    return [obj.food imageFromCurrentFramebuffer];
 }
 
-void groupEffectMovie(PostEffectAdapter* obj) {
+void foodEffectMovie(PostEffectAdapter* obj) {
     GPUImageMovie* m = [obj.delegate getInput];
     GPUImageView* v = [obj.delegate getOutput];
     
     [m endProcessing];
-    [obj.group removeAllTargets];
+    [obj.food removeAllTargets];
     [m removeAllTargets];
-    [m addTarget:obj.group];
-    [obj.group addTarget:v];
+    [m addTarget:obj.food];
+    [obj.food addTarget:v];
     
     [m startProcessing];
 }
+
+//UIImage* saturationEffect(UIImage* source, PostEffectAdapter* obj) {
+//    GPUImagePicture* tmp = [[GPUImagePicture alloc]initWithImage:source];
+//    [tmp addTarget:obj.saturation];
+//    [obj.saturation useNextFrameForImageCapture];
+//    [tmp processImage];
+//    return [obj.saturation imageFromCurrentFramebuffer];
+//}
+//
+//void saturationEffectMovie(PostEffectAdapter* obj) {
+//    GPUImageMovie* m = [obj.delegate getInput];
+//    GPUImageView* v = [obj.delegate getOutput];
+//
+//    [m endProcessing];
+//    [obj.avater removeAllTargets];
+//    [m removeAllTargets];
+//    [m addTarget:obj.avater];
+//    [obj.avater addTarget:v];
+//    
+//    [m startProcessing];
+//}
+//
+//UIImage* exposureEffect(UIImage* source, PostEffectAdapter* obj) {
+//    GPUImagePicture* tmp = [[GPUImagePicture alloc]initWithImage:source];
+//    [tmp addTarget:obj.exposure];
+//    [obj.exposure useNextFrameForImageCapture];
+//    [tmp processImage];
+//    return [obj.exposure imageFromCurrentFramebuffer];
+//}
+//
+//void exposureEffectMovie(PostEffectAdapter* obj) {
+//    GPUImageMovie* m = [obj.delegate getInput];
+//    GPUImageView* v = [obj.delegate getOutput];
+//    
+//    [m endProcessing];
+//    [obj.exposure removeAllTargets];
+//    [m removeAllTargets];
+//    [m addTarget:obj.exposure];
+//    [obj.exposure addTarget:v];
+//    
+//    [m startProcessing];
+//}
+//
+//UIImage* contrastEffect(UIImage* source, PostEffectAdapter* obj) {
+//    GPUImagePicture* tmp = [[GPUImagePicture alloc]initWithImage:source];
+//    [tmp addTarget:obj.contrast];
+//    [obj.contrast useNextFrameForImageCapture];
+//    [tmp processImage];
+//    return [obj.contrast imageFromCurrentFramebuffer];
+//}
+//
+//void contrastEffectMovie(PostEffectAdapter* obj) {
+//    GPUImageMovie* m = [obj.delegate getInput];
+//    GPUImageView* v = [obj.delegate getOutput];
+//    
+//    [m endProcessing];
+//    [obj.contrast removeAllTargets];
+//    [m removeAllTargets];
+//    [m addTarget:obj.contrast];
+//    [obj.contrast addTarget:v];
+//    
+//    [m startProcessing];
+//}
+//
+//UIImage* groupEffect(UIImage* source, PostEffectAdapter* obj) {
+//    GPUImagePicture* tmp = [[GPUImagePicture alloc]initWithImage:source];
+//    [tmp addTarget:obj.group];
+//    [obj.group useNextFrameForImageCapture];
+//    [tmp processImage];
+//    return [obj.group imageFromCurrentFramebuffer];
+//}
+//
+//void groupEffectMovie(PostEffectAdapter* obj) {
+//    GPUImageMovie* m = [obj.delegate getInput];
+//    GPUImageView* v = [obj.delegate getOutput];
+//    
+//    [m endProcessing];
+//    [obj.group removeAllTargets];
+//    [m removeAllTargets];
+//    [m addTarget:obj.group];
+//    [obj.group addTarget:v];
+//    
+//    [m startProcessing];
+//}
 
 UIImage* normalEffect(UIImage* source, PostEffectAdapter* obj) {
 //    [obj.ip removeAllTargets];
@@ -568,10 +634,10 @@ void brandTagView(PostEffectAdapter* obj, UIImage* tag_img) {
 //@synthesize smoothToonFilter = _smoothToonFilter;
 
 @synthesize normal = _normal;
-@synthesize saturation = _saturation;
-@synthesize exposure = _exposure;
-@synthesize contrast = _contrast;
-@synthesize group = _group;
+//@synthesize saturation = _saturation;
+//@synthesize exposure = _exposure;
+//@synthesize contrast = _contrast;
+//@synthesize group = _group;
 
 @synthesize blackWhite = _blackWhite;
 
@@ -580,27 +646,40 @@ void brandTagView(PostEffectAdapter* obj, UIImage* tag_img) {
         if (_normal == nil) {
             _normal = [ImageFilterFactory normal];
         }
-        
-        if (_saturation == nil) {
-            _saturation = [ImageFilterFactory saturation];
-        }
-
+    
         if (_blackWhite == nil) {
             _blackWhite = [ImageFilterFactory blackWhite];
         }
-        
-        if (_exposure == nil) {
-            _exposure = [ImageFilterFactory exposure];
+    
+        if (_scene == nil) {
+            _scene = [ImageFilterFactory scene];
         }
-        
-        if (_contrast == nil) {
-            _contrast = [ImageFilterFactory contrast];
+    
+        if (_avater == nil) {
+            _avater = [ImageFilterFactory avater];
         }
-        
-        if (_originFilter == nil) {
-            _group = [ImageFilterFactory testGroup1];
+
+        if (_food == nil) {
+            _food = [ImageFilterFactory food];
         }
-        
+    
+//        if (_saturation == nil) {
+//            _saturation = [ImageFilterFactory saturation];
+//        }
+//
+//    
+//        if (_exposure == nil) {
+//            _exposure = [ImageFilterFactory exposure];
+//        }
+//        
+//        if (_contrast == nil) {
+//            _contrast = [ImageFilterFactory contrast];
+//        }
+//        
+//        if (_originFilter == nil) {
+//            _group = [ImageFilterFactory testGroup1];
+//        }
+    
 //        if (_ip == nil) {
 //            _ip = [[GPUImagePicture alloc]initWithImage:[_delegate originImage]];
 //        }
@@ -654,10 +733,13 @@ void brandTagView(PostEffectAdapter* obj, UIImage* tag_img) {
 - (void)didSelectEffectFilterForMovie:(UIButton*)sender {
     static const vector<movieEffectNode> vec = {
         movieEffectNode{"黑白", &blackAndWhiteEffectMovie},
-        movieEffectNode{"saturation", &saturationEffectMovie},
-        movieEffectNode{"exposure", &exposureEffectMovie},
-        movieEffectNode{"contrast", &contrastEffectMovie},
-        movieEffectNode{"group", &groupEffectMovie},
+        movieEffectNode{"美景", &sceneEffectMovie},
+        movieEffectNode{"美肤", &avaterEffectMovie},
+        movieEffectNode{"美食", &foodEffectMovie},
+//        movieEffectNode{"saturation", &saturationEffectMovie},
+//        movieEffectNode{"exposure", &exposureEffectMovie},
+//        movieEffectNode{"contrast", &contrastEffectMovie},
+//        movieEffectNode{"group", &groupEffectMovie},
         movieEffectNode{"normal", &normalEffectMovie},
     };
     
@@ -677,10 +759,13 @@ void brandTagView(PostEffectAdapter* obj, UIImage* tag_img) {
 - (UIImage*)didSelectEffectFilterForPhoto:(UIButton*)sender {
     static const vector<effectNode> vec = {
         effectNode{"黑白", &blackAndWhiteEffect},
-        effectNode{"saturation", &saturationEffect},
-        effectNode{"exposure", &exposureEffect},
-        effectNode{"contrast", &contrastEffect},
-        effectNode{"group", &groupEffect},
+        effectNode{"美景", &sceneEffect},
+        effectNode{"美肤", &avaterEffect},
+        effectNode{"美食", &foodEffect},
+//        effectNode{"saturation", &saturationEffect},
+//        effectNode{"exposure", &exposureEffect},
+//        effectNode{"contrast", &contrastEffect},
+//        effectNode{"group", &groupEffect},
         effectNode{"normal", &normalEffect},
     };
   

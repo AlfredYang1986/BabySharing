@@ -83,12 +83,16 @@
 //@property (nonatomic, strong, readonly) GPUImageColorInvertFilter* colorInvertFilter;
 //@property (nonatomic, strong, readonly) GPUImageSmoothToonFilter* smoothToonFilter;
 
-@property (nonatomic, strong, readonly) GPUImageFilterGroup* normal;
-@property (nonatomic, strong, readonly) GPUImageFilterGroup* saturation;
 @property (nonatomic, strong, readonly) GPUImageFilterGroup* blackWhite;
-@property (nonatomic, strong, readonly) GPUImageFilterGroup* exposure;
-@property (nonatomic, strong, readonly) GPUImageFilterGroup* contrast;
-@property (nonatomic, strong, readonly) GPUImageFilterGroup* group;
+@property (nonatomic, strong, readonly) GPUImageFilterGroup* scene;
+@property (nonatomic, strong, readonly) GPUImageFilterGroup* avater;
+@property (nonatomic, strong, readonly) GPUImageFilterGroup* food;
+
+@property (nonatomic, strong, readonly) GPUImageFilterGroup* normal;
+//@property (nonatomic, strong, readonly) GPUImageFilterGroup* saturation;
+//@property (nonatomic, strong, readonly) GPUImageFilterGroup* exposure;
+//@property (nonatomic, strong, readonly) GPUImageFilterGroup* contrast;
+//@property (nonatomic, strong, readonly) GPUImageFilterGroup* group;
 
 - (UIView*)getFunctionViewByTitle:(NSString*)title andType:(PostPreViewType)type andPreferedHeight:(CGFloat)height;
 - (UIImage*)didSelectEffectFilterForPhoto:(UIButton*)sender;

@@ -19,4 +19,7 @@
 + (GPUImageFilterGroup *)testGroup1;
 
 + (GPUImageFilterGroup *)blackWhite;
++ (GPUImageFilterGroup *)scene;
++ (GPUImageFilterGroup *)avater;
++ (GPUImageFilterGroup *)food;
 @end
