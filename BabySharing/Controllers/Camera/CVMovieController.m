@@ -373,9 +373,9 @@
         movieWriter = [[GPUImageMovieWriter alloc] initWithMovieURL:dis size:CGSizeMake(480.0, 640.0)];
         movieWriter.encodingLiveVideo = YES;
         [filter addTarget:movieWriter];
+        [videoCamera addAudioInputsAndOutputs];
         videoCamera.audioEncodingTarget = movieWriter;
         isRecording = true;
-        [videoCamera addAudioInputsAndOutputs];
         [movieWriter startRecording];
         [self startRecordingAnimation];
         delete_current_movie_btn.hidden = NO;
