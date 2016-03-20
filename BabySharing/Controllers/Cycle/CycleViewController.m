@@ -86,7 +86,8 @@
     [self createAnimateView];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.extendedLayoutIncludesOpaqueBars = NO;
-    
+//    GotyeOCGroup* group = [GotyeOCGroup groupWithId:_current_session.group_id.longLongValue];
+
     CALayer* line_notify = [CALayer layer];
     line_notify.borderWidth = 1.f;
     line_notify.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.10].CGColor;
@@ -465,8 +466,11 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0) return chatGroupArray_mine.count;
-    else return chatGroupArray_recommend.count;
+    if (section == 0) {
+        return chatGroupArray_mine.count;
+    } else {
+        return chatGroupArray_recommend.count;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

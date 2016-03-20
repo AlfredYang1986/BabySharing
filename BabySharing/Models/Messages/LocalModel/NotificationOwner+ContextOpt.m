@@ -14,7 +14,7 @@
 @implementation NotificationOwner(ContextOpt)
 
 #pragma mark -- notification functions
-+ (NotificationOwner*)enumNotificationOwnerWithID:(NSString*)user_id inContext:(NSManagedObjectContext*)context {
++ (NotificationOwner *)enumNotificationOwnerWithID:(NSString*)user_id inContext:(NSManagedObjectContext*)context {
     
     NSFetchRequest* request = [NSFetchRequest fetchRequestWithEntityName:@"NotificationOwner"];
     request.predicate = [NSPredicate predicateWithFormat:@"user_id = %@", user_id];

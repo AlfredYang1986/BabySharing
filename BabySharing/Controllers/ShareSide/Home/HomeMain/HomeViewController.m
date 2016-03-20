@@ -512,10 +512,10 @@
     AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     [delegate.pm postPushToServiceWithPostID:cur.content_post_id withFinishBlock:^(BOOL success, QueryContent *content) {
         if (success) {
-            NSLog(@"push post success");
-            NSString* msg = @"push post success";
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"暂时先给个暂时的" message:msg delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-            [alert show];
+//            NSLog(@"push post success");
+//            NSString* msg = @"push post success";
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"暂时先给个暂时的" message:msg delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+//            [alert show];
         }
     }];
 }

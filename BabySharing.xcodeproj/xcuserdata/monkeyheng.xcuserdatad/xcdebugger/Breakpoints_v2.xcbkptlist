@@ -19,13 +19,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BabySharing/Controllers/Chat/ChatGroupController.m"
-            timestampString = "480160850.568789"
+            filePath = "BabySharing/Models/Messages/MessageModel.m"
+            timestampString = "480164812.511339"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "808"
-            endingLineNumber = "808"
-            landmarkName = "-didSelectedRelationBtn:andCurrentRelation:origin:"
+            startingLineNumber = "271"
+            endingLineNumber = "271"
+            landmarkName = "-enumMyChatGroupLocal"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -35,157 +35,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BabySharing/Controllers/Chat/ChatGroupController.m"
-            timestampString = "480160850.568789"
+            filePath = "BabySharing/Controllers/Search/BrandSearch/SearchBrandsDelegate.m"
+            timestampString = "480165999.811374"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "821"
-            endingLineNumber = "821"
-            landmarkName = "-didSelectedRelationBtn:andCurrentRelation:origin:"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[ChatGroupController didSelectedRelationBtn:andCurrentRelation:origin:]"
-                  moduleName = "BabySharing"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/monkeyheng/Desktop/BabySharing/BabySharing/Controllers/Chat/ChatGroupController.m"
-                  timestampString = "480163040.298557"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "821"
-                  endingLineNumber = "821"
-                  offsetFromSymbolStart = "413">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__72-[ChatGroupController didSelectedRelationBtn:andCurrentRelation:origin:]_block_invoke500"
-                  moduleName = "BabySharing"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/monkeyheng/Desktop/BabySharing/BabySharing/Controllers/Chat/ChatGroupController.m"
-                  timestampString = "480163040.298905"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "821"
-                  endingLineNumber = "821"
-                  offsetFromSymbolStart = "59">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BabySharing/Controllers/Chat/ChatGroupController.m"
-            timestampString = "480160850.568789"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "835"
-            endingLineNumber = "835"
-            landmarkName = "-didSelectedRelationBtn:andCurrentRelation:origin:"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[ChatGroupController didSelectedRelationBtn:andCurrentRelation:origin:]"
-                  moduleName = "BabySharing"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/monkeyheng/Desktop/BabySharing/BabySharing/Controllers/Chat/ChatGroupController.m"
-                  timestampString = "480163040.299754"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "835"
-                  endingLineNumber = "835"
-                  offsetFromSymbolStart = "666">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__72-[ChatGroupController didSelectedRelationBtn:andCurrentRelation:origin:]_block_invoke506"
-                  moduleName = "BabySharing"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/monkeyheng/Desktop/BabySharing/BabySharing/Controllers/Chat/ChatGroupController.m"
-                  timestampString = "480163040.2999"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "835"
-                  endingLineNumber = "835"
-                  offsetFromSymbolStart = "59">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BabySharing/Controllers/Chat/ChatGroupController.m"
-            timestampString = "480160850.568789"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "847"
-            endingLineNumber = "847"
-            landmarkName = "-didSelectedRelationBtn:andCurrentRelation:origin:"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[ChatGroupController didSelectedRelationBtn:andCurrentRelation:origin:]"
-                  moduleName = "BabySharing"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/monkeyheng/Desktop/BabySharing/BabySharing/Controllers/Chat/ChatGroupController.m"
-                  timestampString = "480163040.301048"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "847"
-                  endingLineNumber = "847"
-                  offsetFromSymbolStart = "940">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__72-[ChatGroupController didSelectedRelationBtn:andCurrentRelation:origin:]_block_invoke510"
-                  moduleName = "BabySharing"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/monkeyheng/Desktop/BabySharing/BabySharing/Controllers/Chat/ChatGroupController.m"
-                  timestampString = "480163040.301317"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "847"
-                  endingLineNumber = "847"
-                  offsetFromSymbolStart = "59">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BabySharing/Controllers/Chat/ChatGroupController.m"
-            timestampString = "480160850.568789"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "850"
-            endingLineNumber = "850"
-            landmarkName = "-didSelectedRelationBtn:andCurrentRelation:origin:"
+            startingLineNumber = "207"
+            endingLineNumber = "207"
+            landmarkName = "-getUserInputString"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -195,13 +51,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BabySharing/Controllers/Chat/ChatGroupController.m"
-            timestampString = "480160850.568789"
+            filePath = "BabySharing/Controllers/Search/BrandSearch/SearchBrandsDelegate.m"
+            timestampString = "480166059.731443"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "853"
-            endingLineNumber = "853"
-            landmarkName = "-didSelectedRelationBtn:andCurrentRelation:origin:"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
+            landmarkName = "-getSearchPlaceHolder"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -211,125 +67,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BabySharing/Controllers/Chat/ChatGroupController.m"
-            timestampString = "480160850.568789"
+            filePath = "BabySharing/Controllers/Search/BrandSearch/SearchAddBrandsDelegate.m"
+            timestampString = "480166061.570972"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "526"
-            endingLineNumber = "526"
-            landmarkName = "-tableView:numberOfRowsInSection:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BabySharing/Controllers/Ablum/AlbumViewController2.m"
-            timestampString = "480162784.893591"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "615"
-            endingLineNumber = "615"
-            landmarkName = "-enumPhotoAblumByAlbum:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BabySharing/Models/Album/AlbumModule.m"
-            timestampString = "480162736.52837"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "22"
-            endingLineNumber = "22"
-            landmarkName = "+enumAllPhotoWithBlock:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BabySharing/Models/Album/AlbumModule.m"
-            timestampString = "480162738.689488"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
-            landmarkName = "+enumAllAlbumWithBlock:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BabySharing/Models/Album/AlbumModule.m"
-            timestampString = "480162773.235773"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
-            landmarkName = "+enumAllPhotoWithPHFetchResult:block:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BabySharing/Models/Album/AlbumModule.m"
-            timestampString = "480162775.790049"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "117"
-            endingLineNumber = "117"
-            landmarkName = "+getRealPhotoWithPHAsset:block:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BabySharing/Views/DropDownView/DropDownItem.m"
-            timestampString = "480163140.4353"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
-            landmarkName = "-setAlbum:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BabySharing/Views/DropDownView/DropDownItem.m"
-            timestampString = "480163140.4353"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
-            landmarkName = "-setAlbum:"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "-getSearchPlaceHolder"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

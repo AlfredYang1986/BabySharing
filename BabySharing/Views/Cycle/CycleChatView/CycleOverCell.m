@@ -162,7 +162,7 @@
     _themeImg.layer.cornerRadius = 8.f;
     _themeImg.clipsToBounds = YES;
     
-    brage = [[OBShapedButton alloc]init];
+    brage = [[OBShapedButton alloc] init];
     [brage setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:@"chat_round" ofType:@"png"]] forState:UIControlStateNormal];
 #define BRAGE_WIDTH     25
 #define BRAGE_HEIGHT    BRAGE_WIDTH
@@ -190,5 +190,6 @@
 
     // Configure the view for the selected state
 }
+
 
 @end
