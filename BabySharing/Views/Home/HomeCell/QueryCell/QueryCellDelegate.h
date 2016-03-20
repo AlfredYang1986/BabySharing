@@ -13,7 +13,7 @@ typedef void(^complete)(BOOL success);
 
 @protocol QueryCellActionProtocol <NSObject>
 - (void)didSelectLikeBtn:(id)content complete:(complete)complete;
-- (void)didSelectShareBtn:(id)content;
+//- (void)didSelectShareBtn:(id)content;
 //- (void)didSelectCommentsBtn:(id)content;
 - (void)didSelectJoinGroupBtn:(id)content;
 

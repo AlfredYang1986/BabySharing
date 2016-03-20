@@ -237,7 +237,8 @@
     if (_isPushed) {
         UILabel* label = [[UILabel alloc]init];
         label.text = _nav_title;
-        label.textColor = [UIColor colorWithWhite:0.5059 alpha:1.f];
+        label.textColor = [UIColor colorWithWhite:0.2902 alpha:1.f];
+        label.font = [UIFont systemFontOfSize:18.f];
         [label sizeToFit];
         self.navigationItem.titleView = label;
         

@@ -108,7 +108,7 @@
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
+    return NO;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -401,7 +401,7 @@
     AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
     [hv.delegate pushExistingData:app.qm.querydata];
     [hv.delegate setSelectIndex:index];
-    hv.nav_title = @"发现更多内容";
+    hv.nav_title = @"发现更多";
     hv.current_index = index;
     [_container.navigationController pushViewController:hv animated:YES];
 }

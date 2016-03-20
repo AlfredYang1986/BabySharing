@@ -44,7 +44,7 @@
     _cm = app.cm;
     
     _searchBar.showsCancelButton = YES;
-    _searchBar.placeholder = @"搜索好友";
+    _searchBar.placeholder = @"搜索昵称";
     _searchBar.backgroundColor = [UIColor clearColor];
     UIImageView* iv = [[UIImageView alloc] initWithImage:[self imageWithColor:[UIColor whiteColor] size:_searchBar.bounds.size]];
     [_searchBar insertSubview:iv atIndex:1];
@@ -120,50 +120,56 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     [_um queryUserSearchWithScreenName:searchBar.text andFinishBlock:^(BOOL success, NSDictionary *result) {
         [_queryView reloadData];
     }];
 }
 
+//- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+//    [_um queryUserSearchWithScreenName:searchBar.text andFinishBlock:^(BOOL success, NSDictionary *result) {
+//        [_queryView reloadData];
+//    }];
+//}
+
 #pragma mark -- table view 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
-}
+//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+//    return 3;
+//}
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-   
-    UIView* reVal = [[UIView alloc]init];
-    reVal.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
-   
-    CGFloat width = [UIScreen mainScreen].bounds.size.width;
-#define HEARDER_OFFSET      0
-#define LEFT_MARGIN         10.5
-#define TOP_MARGIN          14
-    UIView* content = [[UIView alloc]initWithFrame:CGRectMake(0, HEARDER_OFFSET, width, 36 - HEARDER_OFFSET)];
-    content.backgroundColor = [UIColor whiteColor];
-    
-    UILabel* label = [[UILabel alloc]initWithFrame:CGRectMake(LEFT_MARGIN + (section == 0 ? 5 : 0), TOP_MARGIN, 1, 1)];
-    label.text = [arr_section_title objectAtIndex:section];
-    label.textColor = [UIColor colorWithWhite:0.4667 alpha:1.f];
-    label.font = [UIFont systemFontOfSize:14.f];
-    [label sizeToFit];
-    [content addSubview:label];
-    
-    [reVal addSubview:content];
-    
-    CALayer* line_up = [CALayer layer];
-    line_up.borderWidth = 1.f;
-    line_up.borderColor = [UIColor colorWithWhite:0.4667 alpha:0.10].CGColor;
-    line_up.frame = CGRectMake(0, HEARDER_OFFSET, width + 10, 1);
-    [reVal.layer addSublayer:line_up];
-    
-    return reVal;
-}
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+//   
+//    UIView* reVal = [[UIView alloc]init];
+//    reVal.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
+//   
+//    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+//#define HEARDER_OFFSET      0
+//#define LEFT_MARGIN         10.5
+//#define TOP_MARGIN          14
+//    UIView* content = [[UIView alloc]initWithFrame:CGRectMake(0, HEARDER_OFFSET, width, 36 - HEARDER_OFFSET)];
+//    content.backgroundColor = [UIColor whiteColor];
+//    
+//    UILabel* label = [[UILabel alloc]initWithFrame:CGRectMake(LEFT_MARGIN + (section == 0 ? 5 : 0), TOP_MARGIN, 1, 1)];
+//    label.text = [arr_section_title objectAtIndex:section];
+//    label.textColor = [UIColor colorWithWhite:0.4667 alpha:1.f];
+//    label.font = [UIFont systemFontOfSize:14.f];
+//    [label sizeToFit];
+//    [content addSubview:label];
+//    
+//    [reVal addSubview:content];
+//    
+//    CALayer* line_up = [CALayer layer];
+//    line_up.borderWidth = 1.f;
+//    line_up.borderColor = [UIColor colorWithWhite:0.4667 alpha:0.10].CGColor;
+//    line_up.frame = CGRectMake(0, HEARDER_OFFSET, width + 10, 1);
+//    [reVal.layer addSublayer:line_up];
+//    
+//    return reVal;
+//}
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 36;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+//    return 36;
+//}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return [MessageFriendsCell preferredHeight];

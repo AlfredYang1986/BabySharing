@@ -44,6 +44,8 @@
 @synthesize tag_name = _tag_name;
 @synthesize tag_type = _tag_type;
 
+@synthesize isRoleTag = _isRoleTag;
+
 //@synthesize imgView = _imgView;
 @synthesize queryView = _queryView;
 
@@ -112,30 +114,41 @@
 
 #pragma mark -- query tag content
 - (void)refreshTagData {
+    
     AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    [app.tm queryTagContentsByUser:app.lm.current_user_id withToken:app.lm.current_auth_token andTagType:_tag_type andTagName:_tag_name withStartIndex:0 finishedBlock:^(BOOL success){
-        if (success) {
-            content_arr = app.tm.querydata;
-            dispatch_async(dispatch_get_main_queue(), ^{
+    if (_isRoleTag) {
+        
+        
+    } else {
+        [app.tm queryTagContentsByUser:app.lm.current_user_id withToken:app.lm.current_auth_token andTagType:_tag_type andTagName:_tag_name withStartIndex:0 finishedBlock:^(BOOL success){
+            if (success) {
                 content_arr = app.tm.querydata;
-                [_queryView reloadData];
-            });
-        }
-    }];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    content_arr = app.tm.querydata;
+                    [_queryView reloadData];
+                });
+            }
+        }];       
+    }
 }
 
 - (void)appendTagData {
     AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    NSInteger cur_total = content_arr.count;
-    [app.tm appendTagContentsByUser:app.lm.current_user_id withToken:app.lm.current_auth_token andTagType:_tag_type andTagName:_tag_name withStartIndex:cur_total finishedBlock:^(BOOL success){
-        if (success) {
-            content_arr = app.tm.querydata;
-            dispatch_async(dispatch_get_main_queue(), ^{
+    
+    if (_isRoleTag) {
+        
+    } else {
+        NSInteger cur_total = content_arr.count;
+        [app.tm appendTagContentsByUser:app.lm.current_user_id withToken:app.lm.current_auth_token andTagType:_tag_type andTagName:_tag_name withStartIndex:cur_total finishedBlock:^(BOOL success){
+            if (success) {
                 content_arr = app.tm.querydata;
-                [_queryView reloadData];
-            });
-        }
-    }];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    content_arr = app.tm.querydata;
+                    [_queryView reloadData];
+                });
+            }
+        }];       
+    }
 }
 
 - (void)queryUserDataAsync {

@@ -151,7 +151,7 @@
         <!--View Controller-->
         <scene sceneID="tU0-YP-U0q">
             <objects>
-                <viewController id="ZJt-wa-DFJ" customClass="ViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="ZJt-wa-DFJ" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="KdM-g7-ePs"/>
                         <viewControllerLayoutGuide type="bottom" id="jhr-zt-DSk"/>
@@ -252,7 +252,7 @@
         <!--Choose Contry or Area-->
         <scene sceneID="js4-2n-umP">
             <objects>
-                <viewController id="xdg-vF-3pg" customClass="ChooseAreaViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="xdg-vF-3pg" customClass="ChooseAreaViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lAU-OW-yGM"/>
                         <viewControllerLayoutGuide type="bottom" id="ngx-1N-Gpn"/>
@@ -1468,7 +1468,7 @@
         <image name="ProfileBgImage" width="375" height="667"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="2PU-iO-cFw"/>
+        <segue reference="qbd-0n-vJA"/>
         <segue reference="mYA-47-s6C"/>
     </inferredMetricsTieBreakers>
 </document>

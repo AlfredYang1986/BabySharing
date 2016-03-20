@@ -9,7 +9,7 @@
         <!--Search View Controller-->
         <scene sceneID="RKL-fb-Idc">
             <objects>
-                <viewController storyboardIdentifier="Search" hidesBottomBarWhenPushed="YES" id="W41-5b-ov8" customClass="SearchViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Search" automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="W41-5b-ov8" customClass="SearchViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ZDK-ld-I54"/>
                         <viewControllerLayoutGuide type="bottom" id="hiL-pe-EbI"/>

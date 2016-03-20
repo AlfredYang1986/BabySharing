@@ -19,6 +19,8 @@
 
 #import "SearchViewController.h"
 
+#import "SearchAddRoleTagDelegate.h"
+
 typedef void(^queryRoleTagFinishBlock)(BOOL success, NSString* msg, NSArray* result);
 
 @interface SearchRoleTagDelegate () <FoundHotTagsCellDelegate>
@@ -64,10 +66,6 @@ typedef void(^queryRoleTagFinishBlock)(BOOL success, NSString* msg, NSArray* res
     } else  {
 //        block(YES, test_tag_arr);
     }
-}
-
-- (void)pushExistingData:(NSArray *)data withHeader:(NSString *)header {
-    
 }
 
 - (NSString*)getSearchPlaceHolder {
@@ -116,7 +114,27 @@ typedef void(^queryRoleTagFinishBlock)(BOOL success, NSString* msg, NSArray* res
 
 
 
-#pragma mark -- Dongda Search Bar
+
+#pragma mark -- search bar delegate
+- (BOOL)searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if (!isSync) {
+        return NO;
+    } else return YES;
+}
+
+//- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
+//    
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SearchViewController" bundle:nil];
+//    SearchAddViewController* svc = [storyboard instantiateViewControllerWithIdentifier:@"SearchAdd"];
+//    SearchAddRoleTagDelegate* sd = [[SearchAddRoleTagDelegate alloc]init];
+//    sd.delegate = svc;
+//    sd.actions = self;
+//    [[_actions getViewController] pushViewController:svc animated:NO];
+//    svc.delegate = sd;
+//    [sd pushExistingData:test_tag_arr withHeader:@""];
+//    return NO;
+//}
+
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     
     if (!isSync) {
@@ -125,30 +143,16 @@ typedef void(^queryRoleTagFinishBlock)(BOOL success, NSString* msg, NSArray* res
         return;
     }
     
-    if ([searchText isEqualToString:@""]) {
-        final_tag_arr = test_tag_arr;
-//        self.current_delegate = self;
-//        [_searchBar resignFirstResponder];
+    if (searchText.length > 0) {
+        SearchAddRoleTagDelegate* sd = [[SearchAddRoleTagDelegate alloc]init];
+        ((SearchViewController*)self.controller).delegate = sd;
+        sd.delegate = self;
+        sd.actions = self;
         
-    } else {
-//        NSString *regex = [NSString stringWithFormat:@"^[%@]\\w*", searchText];
-        NSString *regex = [NSString stringWithFormat:@"^%@\\w*", searchText];
-        NSPredicate* p = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
-       
-        NSMutableArray* tmp = [[NSMutableArray alloc]initWithCapacity:test_tag_arr.count];
-        for (NSString* iter in test_tag_arr) {
-            if ([p evaluateWithObject:iter]) {
-                [tmp addObject:iter];
-            }
-        }
-        final_tag_arr = [tmp copy];
+        [sd pushExistingData:[final_tag_arr copy] withHeader:searchText];
         
-//        if (final_tag_arr.count == 0) self.current_delegate = add_delegate;
-//        else self.current_delegate = self;
+        [((SearchViewController*)self.controller).queryView reloadData];
     }
-    
-//    [_queryView reloadData];
-    [_delegate needToReloadData];
 }
 
 #pragma mark -- table view delegate
@@ -229,19 +233,7 @@ typedef void(^queryRoleTagFinishBlock)(BOOL success, NSString* msg, NSArray* res
     return cell;
 }
 
-#pragma mark -- search bar delegate
-- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
-    
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SearchViewController" bundle:nil];
-    SearchAddViewController* svc = [storyboard instantiateViewControllerWithIdentifier:@"SearchAdd"];
-    SearchAddRoleTagDelegate* sd = [[SearchAddRoleTagDelegate alloc]init];
-    sd.delegate = svc;
-    sd.actions = self;
-    [[_actions getViewController] pushViewController:svc animated:NO];
-    svc.delegate = sd;
-    [sd pushExistingData:test_tag_arr withHeader:@""];
-    return NO;
-}
+
 
 #pragma mark -- actions delegate
 - (UINavigationController*)getViewController {

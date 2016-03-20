@@ -117,6 +117,10 @@
     _font_size = font_size;
     UILabel* label = [self viewWithTag:-1];
     label.font = [UIFont systemFontOfSize:_font_size];
+    [label sizeToFit];
+    label.center = CGPointMake(ITEM_WIDTH / 2,  18 + ITEM_HEIGHT / 2);
+
+    [self setNeedsDisplay];
 }
 
 - (void)resetFontColor:(UIColor *)font_color {

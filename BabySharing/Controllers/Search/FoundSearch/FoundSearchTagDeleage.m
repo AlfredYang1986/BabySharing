@@ -15,7 +15,6 @@
 #import "HomeTagsController.h"
 #import "UserSearchController.h"
 #import "FoundSearchController.h"
-#import "UINavigationController+Retro.h"
 
 @implementation FoundSearchTagDeleage
 
@@ -64,8 +63,8 @@
     svc.tag_name = cell.tag_name;
     svc.tag_type = cell.tag_type.integerValue;
         
-    //    [self.navigationController pushViewController:svc animated:YES];
-    [_controller.navigationController pushViewControllerRetro:svc];
+    [_controller.navigationController pushViewController:svc animated:YES];
+//    [_controller.navigationController pushViewControllerRetro:svc];
 }
 
 - (UITableViewCell*)queryHotTagCellInTableView:(UITableView*)tableView {

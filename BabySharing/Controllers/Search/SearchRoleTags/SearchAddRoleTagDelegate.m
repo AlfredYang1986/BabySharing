@@ -9,6 +9,7 @@
 #import "SearchAddRoleTagDelegate.h"
 #import "searchDefines.h"
 #import "Tools.h"
+#import "SearchViewController.h"
 
 @implementation SearchAddRoleTagDelegate {
     NSArray* exist_data;
@@ -26,11 +27,11 @@
 #pragma mark -- search bar delegate
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
 
-//    if (!isSync) {
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"cannot edit until sync" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-//        [alert show];
-//        return;
-//    }
+    if ([searchText isEqualToString:@""]) {
+        ((SearchViewController*)self.controller).delegate = (id<SearchDataCollectionProtocol, SearchActionsProtocol, SearchViewControllerProtocol>)_delegate;
+        [((SearchViewController*)self.controller).queryView reloadData];
+        return;
+    }
     
     if ([searchText isEqualToString:@""]) {
         showing_data = exist_data;
@@ -59,7 +60,30 @@
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-    [[_actions getViewController] popViewControllerAnimated:NO];
+//    [[_actions getViewController] popViewControllerAnimated:NO];
+    SearchStatus status = [self status];
+    
+    switch (status) {
+        case SearchStatusNoInput:
+//            [_actions didSelectItem:[showing_data objectAtIndex:indexPath.row]];
+            break;
+            
+        case SearchStatusInputWithNoResult:
+            [_actions addNewItem:[_delegate getUserInputString]];
+            break;
+            
+        case SearchStatusInputWithResult: {
+//            if (indexPath.section == 0) {
+                [_actions addNewItem:[_delegate getUserInputString]];
+//            } else {
+//                [_actions didSelectItem:[showing_data objectAtIndex:indexPath.row]];
+//            }
+        }
+            break;
+            
+        default:
+            NSLog(@"error with status");
+    }
 }
 
 #pragma mark -- table view delegate

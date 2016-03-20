@@ -11,4 +11,5 @@
 @interface HomeTagsController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, weak) NSString* tag_name;
 @property (nonatomic) NSInteger tag_type;
+@property (nonatomic) BOOL isRoleTag;
 @end

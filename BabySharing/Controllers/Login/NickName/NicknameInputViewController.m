@@ -167,7 +167,9 @@
     [self.view addGestureRecognizer:tap];
 
     self.view.backgroundColor = [UIColor colorWithWhite:0.9490 alpha:1.f];
-    
+}
+
+- (void)viewDidAppear:(BOOL)animated {
     /**
      * input method
      */
@@ -176,7 +178,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHidden:) name:UIKeyboardDidHideNotification object:nil];
 }
 
-- (void)dealloc {
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
+
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidChangeFrameNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidHideNotification object:nil];
@@ -197,11 +202,6 @@
     }
     
     [self.navigationController setNavigationBarHidden:NO animated:YES];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:NO];
 }
 
 - (void)asyncGetUserImage {

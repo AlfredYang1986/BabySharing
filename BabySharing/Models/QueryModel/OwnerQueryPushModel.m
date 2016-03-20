@@ -71,11 +71,11 @@
 - (NSArray*)queryContentsByUser:(NSString*)user_id withToken:(NSString*)token andOwner:(NSString*)owner_id withStartIndex:(NSInteger)startIndex finishedBlock:(queryFinishedBlock)block {
     
 //    NSMutableDictionary* dic_conditions = [[NSMutableDictionary alloc]init];
-//    [dic_conditions setObject:owner_id forKey:@"owner_id"];
     
     NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
     [dic setValue:token forKey:@"auth_token"];
     [dic setValue:user_id forKey:@"user_id"];
+    [dic setObject:owner_id forKey:@"owner_id"];
 //    [dic setValue:[dic_conditions copy] forKey:@"conditions"];
     [dic setValue:[NSNumber numberWithInteger:startIndex] forKey:@"skip"];
     

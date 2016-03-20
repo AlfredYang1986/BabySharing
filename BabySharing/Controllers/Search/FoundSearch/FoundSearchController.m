@@ -21,6 +21,7 @@
 #import "FoundSearchRoleTagDelegate.h"
 
 #import "FoundSearchProtocol.h"
+#import "UserSearchController.h"
 
 #define SEARCH_BAR_HEIGHT               44
 #define SEG_BAR_HEIGHT                  44
@@ -254,10 +255,15 @@
 
 - (void)recommandRoleTagBtnSelected:(NSString *)tag_name {
     
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    HomeTagsController* svc = [storyboard instantiateViewControllerWithIdentifier:@"TagSearch"];
-    svc.tag_name = tag_name;
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"UserSearch" bundle:nil];
+    UserSearchController *svc = [storyboard instantiateViewControllerWithIdentifier:@"UserSearch"];
+    svc.role_tag = tag_name;
+    svc.user_search_type = UserSearchTypeRoleTag;
     
+    AppDelegate* app = [UIApplication sharedApplication].delegate;
+    svc.um = app.um;
+    
+    //    [self.navigationController pushViewController:svc animated:YES];
     [self.navigationController pushViewController:svc animated:YES];
 }
 

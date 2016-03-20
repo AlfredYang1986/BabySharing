@@ -52,6 +52,8 @@
     [_seg addItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:@"friend_wechat" ofType:@"png"]] andSelectImage:[UIImage imageNamed:[resourceBundle pathForResource:@"friend_wechat" ofType:@"png"]] andTitle:@"微信"];
     [_seg addItemWithImg:[UIImage imageNamed:[resourceBundle pathForResource:@"friend_qq" ofType:@"png"]] andSelectImage:[UIImage imageNamed:[resourceBundle pathForResource:@"friend_qq" ofType:@"png"]] andTitle:@"QQ"];
     _seg.isLayerHidden = YES;
+    _seg.font_size = 12.f;
+    _seg.font_color = [UIColor colorWithWhite:0.2902 alpha:1.f];
     _seg.margin_between_items = 0.10 * [UIScreen mainScreen].bounds.size.width;
     _seg.selectedIndex = -1;
     _seg.delegate = self;
@@ -167,12 +169,13 @@
 
 #pragma mark -- seg delegate
 - (void)segValueChanged2:(SearchSegView2 *)seg {
+    int count = [_queryView.dataSource tableView:_queryView numberOfRowsInSection:0];
     if (seg.selectedIndex == 2) {
-        [seg setSegSelectedIndex:0];
+        [seg setSegSelectedIndex:count > 0 ? 0 : -1];
         [[AppDelegate defaultAppDelegate].lm postContentOnQQzoneWithText:@"快来加入咚哒吧!!!" andImage:[UIImage imageNamed:[[NSBundle mainBundle] pathForResource:@"icon" ofType:@"png"]] type:ShareNews];
     } else if (seg.selectedIndex == 1) {
+        [seg setSegSelectedIndex:count > 0 ? 0 : -1];
         [[AppDelegate defaultAppDelegate].lm postContentOnWeChatWithText:@"快来加入咚哒吧!!!" andImage:[UIImage imageNamed:[[NSBundle mainBundle] pathForResource:@"icon" ofType:@"png"]]];
-        [seg setSegSelectedIndex:0];
     } else if (seg.selectedIndex == 0) {
         AppDelegate* app = [UIApplication sharedApplication].delegate;
         [app.lm queryUserList:[ab getAllPhones] withProviderName:@"phone" andFinishBlock:^(BOOL success, NSArray *lst) {

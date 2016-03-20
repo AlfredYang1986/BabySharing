@@ -117,7 +117,7 @@
 
 #pragma mark -- table view
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _um.userSearchPreviewResult.count + 20;
+    return _um.userSearchPreviewResult.count;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -126,8 +126,8 @@
     if (cell == nil) {
         cell = [[UserSearchCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"user search cell"];
     }
-//    NSDictionary* dic = [_um.userSearchPreviewResult objectAtIndex:indexPath.row];
-    NSDictionary* dic = [_um.userSearchPreviewResult objectAtIndex:0];
+    NSDictionary* dic = [_um.userSearchPreviewResult objectAtIndex:indexPath.row];
+//    NSDictionary* dic = [_um.userSearchPreviewResult objectAtIndex:0];
     cell.delegate = self;
     cell.user_id = [dic objectForKey:@"user_id"];
     cell.screen_name = [dic objectForKey:@"screen_name"];

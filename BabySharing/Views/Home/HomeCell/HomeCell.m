@@ -472,10 +472,11 @@
     if (_queryContentItem != nil) { //&& _gpuImageMovie.progress == 0) {
         NSURL* url = [TmpFileStorageModel enumFileWithName:_queryContentItem.item_name andType:_queryContentItem.item_type.unsignedIntegerValue withDownLoadFinishBlock:^(BOOL success, NSURL *path) {
             if (success) {
-                _gpuImageView.hidden = NO;
-                _videoSign.hidden = YES;
-               
-                [self changeMovie:path];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    _gpuImageView.hidden = NO;
+                    _videoSign.hidden = YES;
+                    [self changeMovie:path];
+                });
                 
             } else {
                 NSLog(@"down load movie %@ failed", _queryContentItem.item_name);

@@ -13,6 +13,6 @@
 
 @interface SearchAddRoleTagDelegate : NSObject <SearchDataCollectionProtocol>
 
-@property (weak, nonatomic) id<SearchViewControllerProtocol> delegate;
-@property (weak, nonatomic) id<SearchActionsProtocol> actions;
+@property (strong, nonatomic) id<SearchViewControllerProtocol> delegate;
+@property (strong, nonatomic) id<SearchActionsProtocol> actions;
 @end
