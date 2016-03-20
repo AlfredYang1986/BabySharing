@@ -455,6 +455,56 @@
     [self.navigationController pushViewController:chat animated:YES];
 }
 
+- (void)followBtnSelectedComplete:(ProfileViewDelegate)complete {
+    NSString* follow_user_id = _owner_id;
+    NSNumber* relations = [dic_profile_details objectForKey:@"relations"];
+    
+    switch (relations.integerValue) {
+        case UserPostOwnerConnectionsSamePerson:
+            // my own post, do nothing
+            break;
+        case UserPostOwnerConnectionsNone:
+        case UserPostOwnerConnectionsFollowed: {
+            [_cm followOneUser:follow_user_id withFinishBlock:^(BOOL success, NSString *message, UserPostOwnerConnections new_connections) {
+                if (success) {
+                    NSLog(@"follow success");
+                    if (relations.integerValue == UserPostOwnerConnectionsNone) {
+                        [dic_profile_details setValue:[NSNumber numberWithInteger:UserPostOwnerConnectionsFollowing] forKey:@"relations"];
+                    } else {
+                        [dic_profile_details setValue:[NSNumber numberWithInteger:UserPostOwnerConnectionsFriends] forKey:@"relations"];
+                        [dic_profile_details setValue:[NSNumber numberWithInteger:[self getFriendsCount] + 1] forKey:@"friends_count"];
+                    }
+                    [_queryView reloadData];
+                } else {
+                    NSLog(@"follow error, %@", message);
+                }
+                complete(new_connections);
+            }];}
+            break;
+        case UserPostOwnerConnectionsFollowing:
+        case UserPostOwnerConnectionsFriends: {
+            [_cm unfollowOneUser:follow_user_id withFinishBlock:^(BOOL success, NSString *message, UserPostOwnerConnections new_connections) {
+                if (success) {
+                    NSLog(@"unfollow success");
+                    if (relations.integerValue == UserPostOwnerConnectionsFollowing) {
+                        [dic_profile_details setValue:[NSNumber numberWithInteger:UserPostOwnerConnectionsNone] forKey:@"relations"];
+                    } else {
+                        [dic_profile_details setValue:[NSNumber numberWithInteger:UserPostOwnerConnectionsFollowed] forKey:@"relations"];
+                        [dic_profile_details setValue:[NSNumber numberWithInteger:[self getFriendsCount] - 1] forKey:@"friends_count"];
+                    }
+                    [_queryView reloadData];
+                    
+                } else {
+                    NSLog(@"follow error, %@", message);
+                }
+                complete(new_connections);
+            }];}
+            break;
+        default:
+            break;
+    }
+}
+
 - (void)followBtnSelected {
     NSLog(@"follow button selected");
     

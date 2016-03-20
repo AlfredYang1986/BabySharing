@@ -341,7 +341,33 @@
     if (relations_btn.tag == 100 - UserPostOwnerConnectionsSamePerson) {
         [_deleagate editBtnSelected];
     } else {
-        [_deleagate followBtnSelected];
+//        [_deleagate followBtnSelected];
+        NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
+        NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+        [_deleagate followBtnSelectedComplete:^(UserPostOwnerConnections new_connections) {
+            switch (new_connections) {
+                case UserPostOwnerConnectionsSamePerson:
+                    // my own post, do nothing
+                    [relations_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"friend_relation_myself"] ofType:@"png"]] forState:UIControlStateNormal];
+                    break;
+                case UserPostOwnerConnectionsNone:
+                case UserPostOwnerConnectionsFollowed:
+                    [relations_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"friend_relation_follow"] ofType:@"png"]] forState:UIControlStateNormal];
+                    break;
+                    //            return @"+关注";
+                case UserPostOwnerConnectionsFollowing:
+                    [relations_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"friend_relation_following"] ofType:@"png"]] forState:UIControlStateNormal];
+                    break;
+                case UserPostOwnerConnectionsFriends:
+                    [relations_btn setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"friend_relation_muture_follow"] ofType:@"png"]] forState:UIControlStateNormal];
+                    //                return @"取消关注";
+                    break;
+                    //            return @"-取关";
+                default:
+                    break;
+            }
+
+        }];
     }
 }
 

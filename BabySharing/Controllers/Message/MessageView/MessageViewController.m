@@ -87,7 +87,7 @@
 //    _queryView.dataSource = md;
 //    md.queryView = _queryView;
 //    md.current = self;
-    del = [[DONNotificationDelegate alloc]init];
+    del = [[DONNotificationDelegate alloc] init];
     _queryView.delegate = del;
     _queryView.dataSource = del;
     del.controller = self;

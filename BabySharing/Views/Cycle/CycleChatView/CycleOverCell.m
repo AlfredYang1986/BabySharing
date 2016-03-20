@@ -109,7 +109,10 @@
 - (void)changeTimeTextWithMessage:(GotyeOCMessage *)m {
 //    GotyeOCGroup* group = [GotyeOCGroup groupWithId:_current_session.group_id.longLongValue];
 //    GotyeOCMessage* m = [GotyeOCAPI getLastMessage:group];
-    
+    if ([GotyeOCAPI getUnreadMessageCount:[GotyeOCGroup groupWithId:_current_session.group_id.longLongValue]] == 0) {
+        _timeLabel.text = @"";
+        return;
+    }
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
     [formatter setDateStyle:NSDateFormatterMediumStyle];
     [formatter setTimeStyle:NSDateFormatterShortStyle];

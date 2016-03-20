@@ -8,16 +8,23 @@
 
 #import <UIKit/UIKit.h>
 #import "EnumDefines.h"
+#import "ModelDefines.h"
 
 @class Notifications;
 
+typedef void(^complete)(BOOL success);
+
 @protocol MessageNotificationCellDelegate <NSObject>
 
-- (void)didSelectedSender:(Notifications*)notify;
-- (void)didSelectedReceiver:(Notifications*)notify;
-- (void)didselectedPostContent:(Notifications*)notify;
-- (void)didselectedRelationsBtn:(Notifications*)notify;
+- (void)didSelectedSender:(Notifications *)notify;
+- (void)didSelectedReceiver:(Notifications *)notify;
+- (void)didselectedPostContent:(Notifications *)notify;
+- (void)didselectedRelationsBtn:(Notifications *)notify;
+- (void)didSelectedRelationBtn:(NSString*)user_id complete:(complete)complete;
+
 @end
+
+
 
 @interface MessageNotificationDetailCell : UITableViewCell
 @property (strong, nonatomic) UILabel *postTimeLabel;
@@ -32,4 +39,6 @@
 
 - (void)setDetailTarget:(NSString*)screen_name andActionType:(NotificationActionType)type andConnectContent:(NSString*)Post_id;
 - (void)setTimeLabel:(NSDate*)time_label;
+- (void)setRelationShip:(UserPostOwnerConnections)connetions;
+
 @end

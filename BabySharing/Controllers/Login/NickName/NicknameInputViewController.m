@@ -242,7 +242,7 @@
     }
     
     if ([Tools bityWithStr:inputView.screen_name] < 4 || [Tools bityWithStr:inputView.role_tag] < 4) {
-        [[[UIAlertView alloc] initWithTitle:@"通知" message:@"您的名称或者角色没有过短" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil] show];
+        [[[UIAlertView alloc] initWithTitle:@"通知" message:@"您的名称或者角色过短" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil] show];
         return;
     }
     

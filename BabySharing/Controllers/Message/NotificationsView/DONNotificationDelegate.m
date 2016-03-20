@@ -85,6 +85,7 @@
  
     cell.delegate = self;
     cell.notification = tmp;
+
     [cell setUserImage:tmp.sender_screen_photo];
 //    cell.detailView.text = [cell getActtionTmplate:tmp.type.integerValue];//, tmp.sender_screen_name];
 //    cell.nameLabel.text = tmp.sender_screen_name;
@@ -126,7 +127,9 @@
     [self.controller.navigationController pushViewController:hv animated:YES];
 }
 
-- (void)didselectedRelationsBtn:(Notifications*)notify {
-    NSLog(@"relations button pushed");
+- (void)didSelectedRelationBtn:(NSString *)user_id complete:(complete)complete {
+    [[AppDelegate defaultAppDelegate].cm followOneUser:user_id withFinishBlock:^(BOOL success, NSString *message, UserPostOwnerConnections new_relations) {
+        complete(success);
+    }];
 }
 @end

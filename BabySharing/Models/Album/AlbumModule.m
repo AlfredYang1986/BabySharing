@@ -20,6 +20,7 @@
 + (void)enumAllPhotoWithBlock:(PhotoFindishBlock)block {
     PHFetchOptions *options = [[PHFetchOptions alloc] init];
     options.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:NO]];
+    options.predicate = [NSPredicate predicateWithFormat:@"mediaType = %d",PHAssetMediaTypeImage];
     PHFetchResult *fetchResult = [PHAsset fetchAssetsWithOptions:options];
     if (fetchResult.count == 0) {
         return;

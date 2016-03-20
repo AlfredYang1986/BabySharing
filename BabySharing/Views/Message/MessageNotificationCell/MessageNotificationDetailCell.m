@@ -169,6 +169,9 @@
 }
 
 - (void)setDetailTarget:(NSString*)screen_name andActionType:(NotificationActionType)type andConnectContent:(NSString*)Post_id {
+    if (screen_name == nil) {
+        screen_name = self.notification.sender_screen_name;
+    }
     switch (type) {
         case NotificationActionTypeFollow: {
             NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:[screen_name stringByAppendingString:@" 关注了你"]];
@@ -184,7 +187,7 @@
            
             UIImageView* tmp = [_connectContentView viewWithTag:-1];
             if (tmp == nil) {
-                tmp = [[UIImageView alloc]init];
+                tmp = [[UIImageView alloc] init];
                 [_connectContentView addSubview:tmp];
 
                 tmp.frame = CGRectMake(0, 0, 45, 20.5);
@@ -197,7 +200,7 @@
             
             NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
             NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-            NSString* filepath = [resourceBundle pathForResource:@"command_follow" ofType:@"png"];
+            NSString* filepath = [resourceBundle pathForResource:@"command_following" ofType:@"png"];
             tmp.image = [UIImage imageNamed:filepath];
 
             }
@@ -337,8 +340,21 @@
     [_postTimeLabel sizeToFit];
 }
 
+- (void)setRelationShip:(UserPostOwnerConnections)connetions {
+    
+}
+
 - (void)relationBtnClicked:(UITapGestureRecognizer*)gesture {
-    [_delegate didselectedRelationsBtn:_notification];
+//    [_delegate didselectedRelationsBtn:_notification];
+    [_delegate didSelectedRelationBtn:self.notification.sender_id complete:^(BOOL success) {
+        if (success) {
+            NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
+            NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+            NSString* filepath = [resourceBundle pathForResource:@"command_follow" ofType:@"png"];
+            UIImageView *imgeView = (UIImageView *)gesture.view;
+            imgeView.image = [UIImage imageNamed:filepath];
+        };
+    }];
 }
 
 - (void)senderImgSelected:(UITapGestureRecognizer*)geture {
