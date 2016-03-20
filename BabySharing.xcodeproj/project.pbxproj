@@ -36,6 +36,11 @@
 		7082FFCA1C59D2BA0056D1FC /* MessageChatGroupInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7082FFC81C59D2BA0056D1FC /* MessageChatGroupInfoCell.xib */; };
 		70A93CD41C7448F100026A6A /* FoundHotTagBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 70A93CD31C7448F100026A6A /* FoundHotTagBtn.m */; };
 		70A9BB711C3CF5F1000DFE53 /* SearchFriendsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70A9BB701C3CF5F1000DFE53 /* SearchFriendsController.m */; };
+		70B63DB91C9F38CB0024532E /* icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = 70B63DB61C9F38CB0024532E /* icon-76.png */; };
+		70B63DBA1C9F38CB0024532E /* icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 70B63DB71C9F38CB0024532E /* icon-120.png */; };
+		70B63DBB1C9F38CB0024532E /* icon-152.png in Resources */ = {isa = PBXBuildFile; fileRef = 70B63DB81C9F38CB0024532E /* icon-152.png */; };
+		70B63DBD1C9F38D50024532E /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 70B63DBC1C9F38D50024532E /* icon@2x.png */; };
+		70B63DBF1C9F39490024532E /* icon-167.png in Resources */ = {isa = PBXBuildFile; fileRef = 70B63DBE1C9F39490024532E /* icon-167.png */; };
 		70B9BE8F1C884F73004C4413 /* OwnerQueryPushModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B9BE8E1C884F73004C4413 /* OwnerQueryPushModel.m */; };
 		70C75B5B1C50B5E000E7587A /* DongDaSearchBar2.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C75B5A1C50B5E000E7587A /* DongDaSearchBar2.m */; };
 		70C75B621C50DF1100E7587A /* SearchAddController2.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C75B611C50DF1100E7587A /* SearchAddController2.m */; };
@@ -449,6 +454,11 @@
 		70A93CD31C7448F100026A6A /* FoundHotTagBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoundHotTagBtn.m; sourceTree = "<group>"; };
 		70A9BB6F1C3CF5F1000DFE53 /* SearchFriendsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchFriendsController.h; sourceTree = "<group>"; };
 		70A9BB701C3CF5F1000DFE53 /* SearchFriendsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchFriendsController.m; sourceTree = "<group>"; };
+		70B63DB61C9F38CB0024532E /* icon-76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-76.png"; sourceTree = "<group>"; };
+		70B63DB71C9F38CB0024532E /* icon-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-120.png"; sourceTree = "<group>"; };
+		70B63DB81C9F38CB0024532E /* icon-152.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-152.png"; sourceTree = "<group>"; };
+		70B63DBC1C9F38D50024532E /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
+		70B63DBE1C9F39490024532E /* icon-167.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-167.png"; sourceTree = "<group>"; };
 		70B9BE8D1C884F73004C4413 /* OwnerQueryPushModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OwnerQueryPushModel.h; sourceTree = "<group>"; };
 		70B9BE8E1C884F73004C4413 /* OwnerQueryPushModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OwnerQueryPushModel.m; sourceTree = "<group>"; };
 		70C75B591C50B5E000E7587A /* DongDaSearchBar2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DongDaSearchBar2.h; sourceTree = "<group>"; };
@@ -1983,11 +1993,16 @@
 		EEAAC8FB1B44E81A00D05C0B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				70B63DBE1C9F39490024532E /* icon-167.png */,
+				EE7415D61B5B7740002CA1BC /* icon.png */,
+				70B63DBC1C9F38D50024532E /* icon@2x.png */,
+				70B63DB61C9F38CB0024532E /* icon-76.png */,
+				70B63DB71C9F38CB0024532E /* icon-120.png */,
+				70B63DB81C9F38CB0024532E /* icon-152.png */,
 				70490A7B1C9F023300983794 /* default3.png */,
 				A00946391C96A9CD0015A641 /* DongDaBoundle.bundle */,
 				A0B7A7621C7C23CC00D78E6E /* YYBoundle.bundle */,
 				EE7416251B5B8CDF002CA1BC /* AreaCodeJson.txt */,
-				EE7415D61B5B7740002CA1BC /* icon.png */,
 				EEAAC8FC1B44E81A00D05C0B /* Info.plist */,
 				EEAAC8FD1B44E81A00D05C0B /* main.m */,
 				EE7415CE1B5B70D5002CA1BC /* InfoPlist.strings */,
@@ -3205,12 +3220,15 @@
 				A0E5126A1C7EDEDB00A7E947 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				EE79104C1B841B49005E455B /* MessageNotificationCell.xib in Resources */,
 				EEC980B41B8EB9EA0087E5A7 /* status-bar-pattern-default@2x.jpg in Resources */,
+				70B63DBB1C9F38CB0024532E /* icon-152.png in Resources */,
 				EEB4C8BF1BFC823C0023E2AD /* QueryCell.xib in Resources */,
 				EE7910461B841AC8005E455B /* MessageViewCell.xib in Resources */,
 				EEBE1B891C17CB4E00EAA9D2 /* FoundSearchResultCell.xib in Resources */,
 				7041A5BD1C575A8700FEBFCD /* MessageChatGroupHeader2.xib in Resources */,
 				A0B7A7631C7C23CC00D78E6E /* YYBoundle.bundle in Resources */,
 				700FF9F11C9AE3F6009FB08B /* LaunchScreen.xib in Resources */,
+				70B63DBA1C9F38CB0024532E /* icon-120.png in Resources */,
+				70B63DBF1C9F39490024532E /* icon-167.png in Resources */,
 				EE7C68731B82D31F0003C593 /* CycleOverCell.xib in Resources */,
 				70490A7C1C9F023300983794 /* default3.png in Resources */,
 				EE9F736F1B8576C400F800DC /* MessageChatGroupHeader.xib in Resources */,
@@ -3219,6 +3237,7 @@
 				EEE94E191B74BDDD0011321A /* ProfileDetailNib.storyboard in Resources */,
 				EED64D4C1B8189C6008CB134 /* CycleAddKidsFooter.xib in Resources */,
 				EE7415D71B5B7740002CA1BC /* icon.png in Resources */,
+				70B63DB91C9F38CB0024532E /* icon-76.png in Resources */,
 				EEBE1B841C17CB4E00EAA9D2 /* FoundMotherChoiceCell.xib in Resources */,
 				EE7415C91B5B7097002CA1BC /* Main.storyboard in Resources */,
 				EEAACCA51B44E90400D05C0B /* MovieNib.storyboard in Resources */,
@@ -3245,6 +3264,7 @@
 				EE97441F1B78944600E81A70 /* MessageNotificationDetailCell.xib in Resources */,
 				70F5014B1C23ADC2007769F4 /* PostPreview.storyboard in Resources */,
 				EEA1F54D1C169049009B8724 /* SearchViewController.storyboard in Resources */,
+				70B63DBD1C9F38D50024532E /* icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3687,8 +3707,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Yuan Yang (2X5VX27Y79)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yuan Yang (2X5VX27Y79)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3715,14 +3735,10 @@
 					"-ObjC",
 					"-fobjc-arc",
 				);
-<<<<<<< Updated upstream
-				PRODUCT_BUNDLE_IDENTIFIER = monkeyheng.blackmirror.dongda;
-=======
 				PRODUCT_BUNDLE_IDENTIFIER = com.blackmirror.BabySharing;
->>>>>>> Stashed changes
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "424d83eb-d563-44ef-8304-8ba79154e289";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -3730,8 +3746,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Yuan Yang (2X5VX27Y79)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yuan Yang (2X5VX27Y79)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3754,18 +3770,15 @@
 					"$(PROJECT_DIR)/gotyeapi/libs",
 					"$(PROJECT_DIR)/libGPUImage",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-fobjc-arc",
 				);
-<<<<<<< Updated upstream
-				PRODUCT_BUNDLE_IDENTIFIER = monkeyheng.blackmirror.dongda;
-=======
 				PRODUCT_BUNDLE_IDENTIFIER = com.blackmirror.BabySharing;
->>>>>>> Stashed changes
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "424d83eb-d563-44ef-8304-8ba79154e289";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
