@@ -251,10 +251,12 @@
     } else if((temp = timeInterval / (60 * 60) / 24) / 30 < 12){
 //        几月内
         result = [NSString stringWithFormat:@"%ld月前",temp];
-    } else {
+    } else if(timeInterval / (60 * 60) / 24 / 30 / 12 < 12){
 //         几年内
         temp = timeInterval / (60 * 60) / 24 / 30 / 12;
         result = [NSString stringWithFormat:@"%ld年前",temp];
+    } else {
+        return @"";
     }
     NSLog(@"MonkeyHengLog: %@ === %@", [dateFormatter stringFromDate:compareDate], result);
     return result;

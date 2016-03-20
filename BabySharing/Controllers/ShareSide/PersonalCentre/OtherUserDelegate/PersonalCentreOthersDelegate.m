@@ -43,8 +43,10 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    OwnerQueryModel* om = [_delegate getOM];
-    return ((om.querydata.count) / PHOTO_PER_LINE) + 1;
+    return ([_delegate getQueryData].count /  PHOTO_PER_LINE) + 1;
+//    NSArray *arr = index ==  0 ? [_delegate getOM].querydata : [_delegate getOPM].querydata;
+////    OwnerQueryModel* om = index ==  0 ? [_delegate getOM] : [_delegate getOPM] ;
+//    return ((om.querydata.count) / PHOTO_PER_LINE) + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -557,7 +557,7 @@
  * @param more: 是否获取更多
  * @return 消息列表
  */
-+(NSArray *)getMessageList:(GotyeOCChatTarget*)target more:(bool)more;
++(NSArray *)getMessageList:(GotyeOCChatTarget *)target more:(bool)more;
 
 /**
  * @brief 将和指定聊天对象的全部消息置为已读/未读
