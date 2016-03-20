@@ -44,10 +44,10 @@ enum DisplaySide {
     
     BOOL isMoved;
     
-    BOOL isHerMoved;
+//    BOOL isHerMoved;
     
-    NSTimer* timer;
-    NSInteger seconds;
+//    NSTimer* timer;
+//    NSInteger seconds;
    
     UIImageView* title;                // title
     UILabel* slg;
@@ -437,6 +437,7 @@ enum DisplaySide {
             if ([self.lm sendLoginRequestToPhone:phoneNo]) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [inputView sendConfirmCodeRequestSuccess];
+                    [inputView resignToConfirmCode];
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"验证码已发送" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil];
                     [alert show];
                 });

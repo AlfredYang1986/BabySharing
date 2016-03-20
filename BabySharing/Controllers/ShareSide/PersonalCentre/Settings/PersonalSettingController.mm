@@ -75,7 +75,7 @@
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.text = @"个人信息";
     titleLabel.textColor = TextColor;
-    
+    self.navigationItem.titleView = titleLabel;
     
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.titleLabel.textColor = TextColor;
@@ -86,21 +86,16 @@
     [btn sizeToFit];
     btn.center = CGPointMake([UIScreen mainScreen].bounds.size.width - btn.frame.size.width, 44 / 2);
     titleLabel.center = CGPointMake([UIScreen mainScreen].bounds.size.width / 2, 44 / 2);
-    [self.navigationController.navigationBar addSubview:titleLabel];
-    [self.navigationController.navigationBar addSubview:btn];
-//    self.navigationItem.title = @"个人信息";
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStyleDone target:self action:@selector(savePersonInfomation)];
-//    self.navigationItem.rightBarButtonItem
-    self.navigationItem.rightBarButtonItem.tintColor = [UIColor blackColor];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
    
-    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(13, 32, 30, 25)];
+    UIButton* barBtn = [[UIButton alloc]initWithFrame:CGRectMake(-2, 32, 30, 25)];
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
 //    NSString* filepath = [resourceBundle pathForResource:@"Previous_blue" ofType:@"png"];
     NSString* filepath = [resourceBundle pathForResource:@"dongda_back" ofType:@"png"];
     CALayer * layer = [CALayer layer];
     layer.contents = (id)[UIImage imageNamed:filepath].CGImage;
-    layer.frame = CGRectMake(-15, 0, 25, 25);
+    layer.frame = CGRectMake(0, 0, 25, 25);
 //    layer.position = CGPointMake(10, barBtn.frame.size.height / 2);
     [barBtn.layer addSublayer:layer];
 //    [barBtn setBackgroundImage:[UIImage imageNamed:filepath] forState:UIControlStateNormal];

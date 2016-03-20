@@ -256,7 +256,7 @@
     _descriptionLabel.center = CGPointMake(CGRectGetWidth(self.contentView.frame) / 2, CGRectGetMaxY(_mainImage.frame) + 2 + CGRectGetHeight(_descriptionLabel.frame));
     
     praiseImage.frame = CGRectMake(17, CGRectGetMaxY(_descriptionLabel.frame) + 15, 25, 25);
-    _praiseCount.frame = CGRectMake(CGRectGetMaxX(praiseImage.frame) + 5, CGRectGetMaxY(_descriptionLabel.frame) + 20, 15, 15);
+    _praiseCount.frame = CGRectMake(CGRectGetMaxX(praiseImage.frame) + 11, CGRectGetMaxY(_descriptionLabel.frame) + 20, 15, 15);
     
     pushImage.frame = CGRectMake(CGRectGetWidth(self.contentView.frame) / 3, CGRectGetMaxY(_descriptionLabel.frame) + 15, 25, 25);
     _usefulCount.frame = CGRectMake(CGRectGetMaxX(pushImage.frame) + 5, CGRectGetMinY(_praiseCount.frame), 15, 15);

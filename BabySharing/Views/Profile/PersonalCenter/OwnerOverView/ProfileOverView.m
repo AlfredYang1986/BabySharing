@@ -372,7 +372,8 @@
 }
 
 - (void)setThumUpCount:(NSInteger)thumup_count andBeenThumUpCount:(NSInteger)been_thump andBeenPushCount:(NSInteger)been_push {
-    thumup.text = [NSString stringWithFormat:@"赞 %ld    被赞 %ld    被推 %ld", (long)thumup_count, (long)been_thump, (long)been_push];
+//    thumup.text = [NSString stringWithFormat:@"赞 %ld    被赞 %ld    被推 %ld", (long)thumup_count, (long)been_thump, (long)been_push];
+    thumup.text = [NSString stringWithFormat:@"送出的赞 %ld    收到的赞 %ld", (long)thumup_count, (long)been_thump]; //, (long)been_push];
     [thumup sizeToFit];
     thumup.frame = CGRectMake(MARGIN_LEFT, NAME_MARGIN_TOP + thumup.frame.size.height + 18, thumup.frame.size.width, thumup.frame.size.height);
     thumup.center = CGPointMake(thumup.center.x, relations_btn.center.y);

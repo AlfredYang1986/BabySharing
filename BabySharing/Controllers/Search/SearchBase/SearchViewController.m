@@ -140,10 +140,10 @@
     [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
-//- (void)viewDidAppear:(BOOL)animated {
-//    [super viewDidAppear:animated];
-//    [_searchBar becomeFirstResponder];
-//}
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [_searchBar resignFirstResponder];
+}
 
 - (void)setDataDelegate:(id<SearchDataCollectionProtocol>)protocol {
     _delegate = protocol;

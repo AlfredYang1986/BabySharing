@@ -171,7 +171,6 @@
     layer.contents = (__bridge id _Nullable)([UIImage imageNamed:filepath].CGImage);
     [actionView.layer addSublayer:layer];
     
-    
     scaleMaskLayer = [[CALayer alloc] init];
     scaleMaskLayer.frame = CGRectMake(0, 0, 15, 15);
     scaleMaskLayer.transform = CATransform3DMakeScale(0, 0, 0);
@@ -195,7 +194,6 @@
 
 - (void)createAnimateView {
     // 动画的layer
-    
     CGPoint animateCenter = [actionView convertPoint:CGPointMake(19, actionView.frame.size.height / 2) toView:bkView];
     
     // 半径
@@ -203,7 +201,6 @@
     animationView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, radius * 2, radius * 2)];
     animationView.backgroundColor = [UIColor colorWithRed:78.0/255.0 green:219.0/255.0 blue:202.0/255.0 alpha:1.0];
     animationView.center = animateCenter;
-    
     
     UIBezierPath *startCircle = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 0, CGRectGetWidth(animationView.frame), CGRectGetHeight(animationView.frame))];
     circleLayer = [[CAShapeLayer alloc] init];

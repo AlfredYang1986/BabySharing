@@ -338,4 +338,7 @@
     [tmp sizeToFit];
 }
 
+- (void)resignToConfirmCode {
+    [confirm_area becomeFirstResponder];
+}
 @end

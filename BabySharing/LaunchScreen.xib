@@ -11,20 +11,19 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default2.png" translatesAutoresizingMaskIntoConstraints="NO" id="cML-qc-XIB">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default3.png" translatesAutoresizingMaskIntoConstraints="NO" id="a4s-2A-hIo">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="cML-qc-XIB" secondAttribute="bottom" id="445-MP-A1l"/>
-                <constraint firstItem="cML-qc-XIB" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Gx6-fd-R4I"/>
-                <constraint firstAttribute="trailing" secondItem="cML-qc-XIB" secondAttribute="trailing" id="VBp-uL-JBt"/>
-                <constraint firstItem="cML-qc-XIB" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="gqv-NC-QDT"/>
+                <constraint firstItem="a4s-2A-hIo" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="2UW-pg-bus"/>
+                <constraint firstAttribute="trailing" secondItem="a4s-2A-hIo" secondAttribute="trailing" id="9V1-7x-mUA"/>
+                <constraint firstItem="a4s-2A-hIo" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="S5i-k1-EVk"/>
+                <constraint firstAttribute="bottom" secondItem="a4s-2A-hIo" secondAttribute="bottom" id="mNz-Cc-3OM"/>
             </constraints>
         </view>
     </objects>
     <resources>
-        <image name="default2.png" width="750" height="1334"/>
+        <image name="default3.png" width="750" height="1334"/>
     </resources>
 </document>

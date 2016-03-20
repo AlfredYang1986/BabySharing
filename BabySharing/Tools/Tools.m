@@ -224,19 +224,17 @@
 + (NSString *)compareCurrentTime:(NSDate *)compareDate {
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    
-    
-    
     //zzz表示时区，zzz可以删除，这样返回的日期字符将不包含时区信息。
-    
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss zzz"];
-    
-    
-    
-    
 //    秒数差
     NSTimeInterval  timeInterval = [compareDate timeIntervalSinceNow];
     timeInterval = -timeInterval;
+    
+    // TODO: 一个bug， 2039穿越时间显示刚刚
+    if (compareDate.timeIntervalSince1970 > [NSDate date].timeIntervalSince1970) {
+        return @"";
+    }
+    
     long temp = 0;
     NSString *result;
     if (timeInterval < 60 * 60) {

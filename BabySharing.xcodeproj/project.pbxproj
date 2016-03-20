@@ -12,7 +12,6 @@
 		700B0B881C5A1D5E00692A20 /* Notifications+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 700B0B851C5A1D5E00692A20 /* Notifications+CoreDataProperties.m */; };
 		700B0B891C5A1D5E00692A20 /* Notifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 700B0B871C5A1D5E00692A20 /* Notifications.m */; };
 		700FF9F11C9AE3F6009FB08B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 700FF9F01C9AE3F6009FB08B /* LaunchScreen.xib */; };
-		700FF9F31C9AE6CA009FB08B /* default2.png in Resources */ = {isa = PBXBuildFile; fileRef = 700FF9F21C9AE6CA009FB08B /* default2.png */; };
 		701233BF1C915260007F79C2 /* Targets+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 701233BC1C915260007F79C2 /* Targets+CoreDataProperties.m */; };
 		701233C01C915260007F79C2 /* Targets.m in Sources */ = {isa = PBXBuildFile; fileRef = 701233BE1C915260007F79C2 /* Targets.m */; };
 		702491D81C93EE60007922BC /* RegCurrentToken+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 702491D51C93EE60007922BC /* RegCurrentToken+CoreDataProperties.m */; };
@@ -20,6 +19,7 @@
 		702491DC1C93EED1007922BC /* RegCurrentToken+ContextOpt.m in Sources */ = {isa = PBXBuildFile; fileRef = 702491DB1C93EED1007922BC /* RegCurrentToken+ContextOpt.m */; };
 		7041A5BB1C575A7400FEBFCD /* MessageChatGroupHeader2.m in Sources */ = {isa = PBXBuildFile; fileRef = 7041A5BA1C575A7400FEBFCD /* MessageChatGroupHeader2.m */; };
 		7041A5BD1C575A8700FEBFCD /* MessageChatGroupHeader2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7041A5BC1C575A8700FEBFCD /* MessageChatGroupHeader2.xib */; };
+		70490A7C1C9F023300983794 /* default3.png in Resources */ = {isa = PBXBuildFile; fileRef = 70490A7B1C9F023300983794 /* default3.png */; };
 		70530B121C3F9D1E00505121 /* SearchSegImgItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 70530B0D1C3F9D1E00505121 /* SearchSegImgItem.m */; };
 		70530B131C3F9D1E00505121 /* SearchSegImgTextItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 70530B0F1C3F9D1E00505121 /* SearchSegImgTextItem.m */; };
 		70530B141C3F9D1E00505121 /* SearchSegItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 70530B111C3F9D1E00505121 /* SearchSegItem.m */; };
@@ -400,7 +400,6 @@
 		700B0B861C5A1D5E00692A20 /* Notifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notifications.h; sourceTree = "<group>"; };
 		700B0B871C5A1D5E00692A20 /* Notifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Notifications.m; sourceTree = "<group>"; };
 		700FF9F01C9AE3F6009FB08B /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
-		700FF9F21C9AE6CA009FB08B /* default2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default2.png; sourceTree = "<group>"; };
 		701233BB1C915260007F79C2 /* Targets+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Targets+CoreDataProperties.h"; sourceTree = "<group>"; };
 		701233BC1C915260007F79C2 /* Targets+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Targets+CoreDataProperties.m"; sourceTree = "<group>"; };
 		701233BD1C915260007F79C2 /* Targets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Targets.h; sourceTree = "<group>"; };
@@ -414,6 +413,7 @@
 		7041A5B91C575A7400FEBFCD /* MessageChatGroupHeader2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageChatGroupHeader2.h; sourceTree = "<group>"; };
 		7041A5BA1C575A7400FEBFCD /* MessageChatGroupHeader2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageChatGroupHeader2.m; sourceTree = "<group>"; };
 		7041A5BC1C575A8700FEBFCD /* MessageChatGroupHeader2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageChatGroupHeader2.xib; sourceTree = "<group>"; };
+		70490A7B1C9F023300983794 /* default3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default3.png; sourceTree = "<group>"; };
 		704A3CD81C7AABC8009D62A2 /* AddingTagsProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddingTagsProtocol.h; sourceTree = "<group>"; };
 		70530B0C1C3F9D1E00505121 /* SearchSegImgItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSegImgItem.h; sourceTree = "<group>"; };
 		70530B0D1C3F9D1E00505121 /* SearchSegImgItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSegImgItem.m; sourceTree = "<group>"; };
@@ -1983,7 +1983,7 @@
 		EEAAC8FB1B44E81A00D05C0B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				700FF9F21C9AE6CA009FB08B /* default2.png */,
+				70490A7B1C9F023300983794 /* default3.png */,
 				A00946391C96A9CD0015A641 /* DongDaBoundle.bundle */,
 				A0B7A7621C7C23CC00D78E6E /* YYBoundle.bundle */,
 				EE7416251B5B8CDF002CA1BC /* AreaCodeJson.txt */,
@@ -3212,6 +3212,7 @@
 				A0B7A7631C7C23CC00D78E6E /* YYBoundle.bundle in Resources */,
 				700FF9F11C9AE3F6009FB08B /* LaunchScreen.xib in Resources */,
 				EE7C68731B82D31F0003C593 /* CycleOverCell.xib in Resources */,
+				70490A7C1C9F023300983794 /* default3.png in Resources */,
 				EE9F736F1B8576C400F800DC /* MessageChatGroupHeader.xib in Resources */,
 				EE7416261B5B8CDF002CA1BC /* AreaCodeJson.txt in Resources */,
 				EE7415CC1B5B70D5002CA1BC /* InfoPlist.strings in Resources */,
@@ -3241,7 +3242,6 @@
 				EEBE1B861C17CB4E00EAA9D2 /* FoundSearchHeader.xib in Resources */,
 				70D15B511C5B64C9007AC9AB /* MJRefresh.bundle in Resources */,
 				EEC980B21B8EB9EA0087E5A7 /* status-bar-pattern-black@2x.jpg in Resources */,
-				700FF9F31C9AE6CA009FB08B /* default2.png in Resources */,
 				EE97441F1B78944600E81A70 /* MessageNotificationDetailCell.xib in Resources */,
 				70F5014B1C23ADC2007769F4 /* PostPreview.storyboard in Resources */,
 				EEA1F54D1C169049009B8724 /* SearchViewController.storyboard in Resources */,

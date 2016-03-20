@@ -25,4 +25,6 @@
 - (BOOL)isEditing;
 
 - (void)setAreaCode:(NSString*)code;
+
+- (void)resignToConfirmCode;
 @end
