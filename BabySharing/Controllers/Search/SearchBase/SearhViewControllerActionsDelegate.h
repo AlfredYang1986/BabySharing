@@ -36,8 +36,8 @@ typedef void(^SearchCallback)(BOOL success, NSArray* data);
 
 @protocol SearchViewControllerProtocol <NSObject>
 - (void)needToReloadData;
-
 @optional
+- (void)keyboardHide;
 - (NSString*)getUserInputString;
 - (NSString*)getAddSectionTitle;
 @end

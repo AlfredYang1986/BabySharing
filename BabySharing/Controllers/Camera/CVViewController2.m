@@ -18,6 +18,7 @@
 #import "PostPreViewEffectController.h"
 #import "OBShapedButton.h"
 #import "SearchSegView2.h"
+#import "AlertView.h"
 
 //#define FAKE_NAVIGATION_BAR_HEIGHT 49
 #define FAKE_NAVIGATION_BAR_HEIGHT 64

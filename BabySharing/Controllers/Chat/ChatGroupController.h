@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ProfileViewDelegate.h"
 
 @class LoginModel;
 @class MessageModel;
@@ -18,4 +19,7 @@
 @property (strong, nonatomic) NSNumber* joiner_count;
 @property (weak, nonatomic, readonly) LoginModel* lm;
 @property (weak, nonatomic, readonly) MessageModel* mm;
+
+@property (assign, nonatomic) id<ProfileViewDelegate> delegate;
+
 @end

@@ -47,12 +47,12 @@
         [cell setRelationship:[_delegate getFounderRelations]];
         [cell setUserScreenName:[_delegate getFounderScreenName]];
         [cell setUserRoleTag:[_delegate getFounderRoleTag]];
-     
+        cell.user_id = [_delegate getFounderUserId];
         cell.isTopLine = YES;
 //        cell.cellHeight = 55.f;
         cell.lineMargin = 10.f;
         cell.backgroundColor = [UIColor clearColor];
-
+        cell.delegate = self.action;
         return cell;
         
     } else {

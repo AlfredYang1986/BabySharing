@@ -105,6 +105,7 @@
 		A066496E1C89A2B90043FF07 /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A066495C1C89A2B90043FF07 /* UIImageView+HighlightedWebCache.m */; };
 		A066496F1C89A2B90043FF07 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A066495E1C89A2B90043FF07 /* UIImageView+WebCache.m */; };
 		A06649701C89A2B90043FF07 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A06649601C89A2B90043FF07 /* UIView+WebCacheOperation.m */; };
+		A07F4B2B1C9E708F003F5EBC /* AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A07F4B2A1C9E708F003F5EBC /* AlertView.m */; };
 		A08AE9541C7E9C1A0029B660 /* libiconv.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A08AE9531C7E9C1A0029B660 /* libiconv.2.dylib */; };
 		A0963F121C9C0EB00066F5B7 /* QueryContentChaters+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A0963F0F1C9C0EB00066F5B7 /* QueryContentChaters+CoreDataProperties.m */; };
 		A0963F131C9C0EB00066F5B7 /* QueryContentChaters.m in Sources */ = {isa = PBXBuildFile; fileRef = A0963F111C9C0EB00066F5B7 /* QueryContentChaters.m */; };
@@ -586,6 +587,8 @@
 		A066495E1C89A2B90043FF07 /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		A066495F1C89A2B90043FF07 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		A06649601C89A2B90043FF07 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
+		A07F4B291C9E708F003F5EBC /* AlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertView.h; sourceTree = "<group>"; };
+		A07F4B2A1C9E708F003F5EBC /* AlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertView.m; sourceTree = "<group>"; };
 		A08AE9531C7E9C1A0029B660 /* libiconv.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.2.dylib; path = /usr/lib/libiconv.2.dylib; sourceTree = "<absolute>"; };
 		A0963F0E1C9C0EB00066F5B7 /* QueryContentChaters+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QueryContentChaters+CoreDataProperties.h"; sourceTree = "<group>"; };
 		A0963F0F1C9C0EB00066F5B7 /* QueryContentChaters+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "QueryContentChaters+CoreDataProperties.m"; sourceTree = "<group>"; };
@@ -1421,6 +1424,15 @@
 				A06649601C89A2B90043FF07 /* UIView+WebCacheOperation.m */,
 			);
 			path = SDWebImage;
+			sourceTree = "<group>";
+		};
+		A07F4B281C9E7078003F5EBC /* AlertView */ = {
+			isa = PBXGroup;
+			children = (
+				A07F4B291C9E708F003F5EBC /* AlertView.h */,
+				A07F4B2A1C9E708F003F5EBC /* AlertView.m */,
+			);
+			path = AlertView;
 			sourceTree = "<group>";
 		};
 		A0A5C52D1C7DAD0500F07FE8 /* libs */ = {
@@ -2879,6 +2891,7 @@
 		EEDAF4651BA674300035CC31 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				A07F4B281C9E7078003F5EBC /* AlertView */,
 				EEBE1B541C17CA9400EAA9D2 /* RelationBtn */,
 				EEBE1B571C17CA9400EAA9D2 /* SearchBar */,
 				EEBE1B5A1C17CA9400EAA9D2 /* SegmentControl */,
@@ -3148,7 +3161,7 @@
 				TargetAttributes = {
 					EEAAC8F71B44E81A00D05C0B = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = V6843SSXWV;
+						DevelopmentTeam = 6AUL2A4AE9;
 					};
 					EEAAC9131B44E81A00D05C0B = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -3484,6 +3497,7 @@
 				A0B7A7661C7C563400D78E6E /* PersonInfoCell.m in Sources */,
 				EE26D7761C1EBA2700342E02 /* RecommandTag.m in Sources */,
 				EE9744171B78886300E81A70 /* MessageNotificationCell.m in Sources */,
+				A07F4B2B1C9E708F003F5EBC /* AlertView.m in Sources */,
 				EED5EABA1BD73710000AFF36 /* PhotoTagRoundPointLayer.m in Sources */,
 				EED5EABB1BD73710000AFF36 /* PhotoTagTariangleLayer.m in Sources */,
 				EE0CEC561BDB13070016B6F4 /* NicknameInputViewController.m in Sources */,
@@ -3701,7 +3715,7 @@
 					"-ObjC",
 					"-fobjc-arc",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.blackmirror.dongda;
+				PRODUCT_BUNDLE_IDENTIFIER = com.monkeyheng.dongda;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -3740,7 +3754,7 @@
 					"-ObjC",
 					"-fobjc-arc",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.blackmirror.dongda;
+				PRODUCT_BUNDLE_IDENTIFIER = com.monkeyheng.dongda;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -61,13 +61,23 @@
 
 + (UIImage *)imageWithView:(UIView *)view {
     // 绘制UIview成图片
-    CGRect rect = [view bounds];
-    UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0.0);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    [view.layer renderInContext:context];
-    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+//    CGRect rect = [view bounds];
+//    UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0.0);
+//    CGContextRef context = UIGraphicsGetCurrentContext();
+//    [view.layer.presentationLayer renderInContext:context];
+//    [view.layer renderInContext:context];
+//    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+//    UIGraphicsEndImageContext();
+//    return img;
+    
+    
+    UIImage *image;
+    CGSize blurredImageSize = [view frame].size;
+    UIGraphicsBeginImageContextWithOptions(blurredImageSize, YES, .0f);
+    [view drawViewHierarchyInRect: [view bounds] afterScreenUpdates: YES];
+    image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    return img;
+    return image;
 }
 
 + (UIImage*) OriginImage:(UIImage *)image scaleToSize:(CGSize)size

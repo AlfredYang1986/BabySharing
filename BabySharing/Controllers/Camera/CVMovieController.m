@@ -18,6 +18,7 @@
 #import "OBShapedButton.h"
 #import "SearchSegView2.h"
 #import "ProgressLayer.h"
+#import "AlertView.h"
 
 #define UNITLENGTH ([UIScreen mainScreen].bounds.size.width - 4) / 15
 #define MOVIE_MAX_SECONDS       15
@@ -433,13 +434,17 @@
 
 #pragma mark -- dismiss camera controller
 - (void)dismissCVViewController {
-    
-    for (NSURL* iter in movie_list) {
-        [TmpFileStorageModel deleteOneMovieFileWithUrl:iter];
-    }
-    
-    [self dismissViewControllerAnimated:YES completion:^(void){
-        NSLog(@"dismiss CV controller");
+    AlertView *alertView = [[AlertView alloc] initWithTitle:@"通知" message:@"关闭录像机，您的视频将被删除" cancelButtonTitle:@"取消" otherButtonTitles:@"确认"];
+    [alertView show:^{
+        
+    } confirm:^{
+        for (NSURL* iter in movie_list) {
+            [TmpFileStorageModel deleteOneMovieFileWithUrl:iter];
+        }
+        
+        [self dismissViewControllerAnimated:YES completion:^(void){
+            NSLog(@"dismiss CV controller");
+        }];
     }];
 }
 

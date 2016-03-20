@@ -157,4 +157,8 @@
         }
     }
 }
+
+- (void)keyboardHide {
+    [_searchBar.textField resignFirstResponder];
+}
 @end

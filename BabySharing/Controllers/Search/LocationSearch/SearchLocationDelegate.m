@@ -113,10 +113,10 @@
     }
     
     if (section == 0) {
-        header.headLabell.text = @"热门品牌";
+        header.headLabell.text = @"热门地点";
         header.headLabell.textColor = TextColor;
     } else {
-        header.headLabell.text = @"已用品牌";
+        header.headLabell.text = @"已用地点";
     }
     
     //    header.headLabell.textColor = [UIColor colorWithWhite:0.3059 alpha:1.f];

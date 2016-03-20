@@ -14,4 +14,5 @@
 
 - (void)setChatGroupJoinerNumber:(NSNumber*)number;
 - (void)setChatGroupUserList:(NSArray*)user_lst;
+
 @end

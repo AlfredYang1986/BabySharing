@@ -41,13 +41,13 @@
 @synthesize reachability = _reachability;
 
 - (void)createQueryModel {
-    if (!_qm) _qm = [[QueryModel alloc]initWithDelegate:self];
-    if (!_tm) _tm = [[TagQueryModel alloc]initWithDelegate:self];
-    if (!_om) _om = [[OwnerQueryModel alloc]initWithDelegate:self];
-    if (!_opm) _opm = [[OwnerQueryPushModel alloc]initWithDelegate:self];
-    if (!_cm) _cm = [[ConnectionModel alloc]initWithDelegate:self];
-    if (!_cqm) _cqm = [[CollectionQueryModel alloc]initWithDelegate:self];
-    if (!_sm) _sm = [[SystemSettingModel alloc]initWithDelegate:self];
+    if (!_qm) _qm = [[QueryModel alloc] initWithDelegate:self];
+    if (!_tm) _tm = [[TagQueryModel alloc] initWithDelegate:self];
+    if (!_om) _om = [[OwnerQueryModel alloc] initWithDelegate:self];
+    if (!_opm) _opm = [[OwnerQueryPushModel alloc] initWithDelegate:self];
+    if (!_cm) _cm = [[ConnectionModel alloc] initWithDelegate:self];
+    if (!_cqm) _cqm = [[CollectionQueryModel alloc] initWithDelegate:self];
+    if (!_sm) _sm = [[SystemSettingModel alloc] initWithDelegate:self];
     
     [self createSearchModel];
 }

@@ -27,6 +27,7 @@
 #import "ChatGroupUserInfoTableDelegateAndDatasource.h"
 #import "PersonalCentreTmpViewController.h"
 #import "PersonalCentreOthersDelegate.h"
+#import "MessageFriendsCell.h"
 
 #define BACK_BTN_WIDTH          23
 #define BACK_BTN_HEIGHT         23
@@ -51,7 +52,7 @@
 #define USER_INFO_BACK_BTN_HEIGHT           30
 #define USER_INFO_BACK_BTN_WIDTH            30
 
-@interface ChatGroupController () <UITableViewDataSource, UITableViewDelegate, /*UITextFieldDelegate,*/ GotyeOCDelegate, /*ChatEmoji,*/ UITextViewDelegate, userInfoPaneDelegate, ChatMessageCellDelegate>
+@interface ChatGroupController () <UITableViewDataSource, UITableViewDelegate, /*UITextFieldDelegate,*/ GotyeOCDelegate, /*ChatEmoji,*/ UITextViewDelegate, userInfoPaneDelegate, ChatMessageCellDelegate, MessageFriendsCellDelegate>
 @property (strong, nonatomic) UITableView *queryView;
 @end
 
@@ -325,7 +326,8 @@
 
     userInfoTable = [[UITableView alloc]initWithFrame:CGRectMake(USER_INFO_PANE_MARGIN, height - USER_INFO_CONTAINER_HEIGHT, USER_INFO_PANE_WIDTH, USER_INFO_CONTAINER_HEIGHT)];
     
-    delegate = [[ChatGroupUserInfoTableDelegateAndDatasource alloc]init];
+    delegate = [[ChatGroupUserInfoTableDelegateAndDatasource alloc] init];
+    delegate.action = self;
     delegate.delegate = self;
     
     userInfoTable.delegate = delegate;
@@ -582,7 +584,6 @@
                                   animations:^(CGFloat progress) {
                                       _queryView.frame = INTUInterpolateCGRect(rc_start, rc_end, progress);
                                       inputContainer.frame = INTUInterpolateCGRect(input_start, input_end, progress);
-                                      
                                       // NSLog(@"Progress: %.2f", progress);
                                   }
                                   completion:^(BOOL finished) {
@@ -695,6 +696,10 @@
 //    return 2;
 }
 
+- (NSString *)getFounderUserId {
+    return [founder_dic objectForKey:@"user_id"];
+}
+
 - (NSNumber*)getGroupJoinNumber {
     return _joiner_count;
 }
@@ -775,5 +780,79 @@
     pc.isPushed = YES;
     [self.navigationController setNavigationBarHidden:NO];
     [self.navigationController pushViewController:pc animated:YES];
+}
+
+#pragma mark -- MessageFriendsCellDelegate
+- (void)didSelectedScreenPhoto:(NSString *)user_id {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    PersonalCentreTmpViewController* pc = [storyboard instantiateViewControllerWithIdentifier:@"PersonalCenter"];
+    PersonalCentreOthersDelegate* pcdelegate = [[PersonalCentreOthersDelegate alloc]init];
+    pc.current_delegate = pcdelegate;
+    pc.owner_id = user_id;
+    pc.isPushed = YES;
+    [self.navigationController setNavigationBarHidden:NO];
+    [self.navigationController pushViewController:pc animated:YES];
+}
+
+- (void)didSelectedRelationBtn:(NSString *)user_id andCurrentRelation:(UserPostOwnerConnections)connections origin:(NSObject *)cell{
+    
+    MessageFriendsCell *origin = (MessageFriendsCell *)cell;
+    
+    switch (connections) {
+        case UserPostOwnerConnectionsNone: {
+            
+            [[AppDelegate defaultAppDelegate].cm followOneUser:user_id withFinishBlock:^(BOOL success, NSString *message, UserPostOwnerConnections new_relations) {
+                if (success) {
+                    [[[UIAlertView alloc] initWithTitle:@"通知" message:@"关注成功" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil] show];
+                    [origin setRelationship:UserPostOwnerConnectionsFollowing];
+                } else {
+                    [[[UIAlertView alloc] initWithTitle:@"通知" message:@"关注失败" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil] show];
+                    [origin setRelationship:UserPostOwnerConnectionsNone];
+                }
+            }];
+        }
+            break;
+        case UserPostOwnerConnectionsFollowing: {
+            
+            [[AppDelegate defaultAppDelegate].cm unfollowOneUser:user_id withFinishBlock:^(BOOL success, NSString *message, UserPostOwnerConnections new_relations) {
+                
+                if (success) {
+                    [[[UIAlertView alloc] initWithTitle:@"通知" message:@"取消关注成功" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil] show];
+                    [origin setRelationship:UserPostOwnerConnectionsNone];
+                } else {
+                    [[[UIAlertView alloc] initWithTitle:@"通知" message:@"取消关注失败" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil] show];
+                    [origin setRelationship:UserPostOwnerConnectionsFollowing];
+                }
+            }];
+        }
+            break;
+        case UserPostOwnerConnectionsFollowed: {
+            
+            [[AppDelegate defaultAppDelegate].cm followOneUser:user_id withFinishBlock:^(BOOL success, NSString *message, UserPostOwnerConnections new_relations) {
+                if (success) {
+                    [[[UIAlertView alloc] initWithTitle:@"通知" message:@"关注成功" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil] show];
+                    [origin setRelationship:UserPostOwnerConnectionsFriends];
+                } else {
+                    [[[UIAlertView alloc] initWithTitle:@"通知" message:@"关注失败" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil] show];
+                    [origin setRelationship:UserPostOwnerConnectionsNone];
+                }
+            }];
+        }
+            break;
+        case UserPostOwnerConnectionsFriends: {
+            [[AppDelegate defaultAppDelegate].cm unfollowOneUser:user_id withFinishBlock:^(BOOL success, NSString *message, UserPostOwnerConnections new_relations) {                
+                if (success) {
+                    [[[UIAlertView alloc] initWithTitle:@"通知" message:@"取消关注成功" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil] show];
+                    [origin setRelationship:UserPostOwnerConnectionsFollowed];
+                } else {
+                    [[[UIAlertView alloc] initWithTitle:@"通知" message:@"取消关注失败" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil] show];
+                    [origin setRelationship:UserPostOwnerConnectionsFriends];
+                }
+            }];
+        }
+            break;
+        default:
+            break;
+    }
 }
 @end

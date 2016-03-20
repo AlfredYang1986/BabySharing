@@ -79,6 +79,7 @@
         _ownerImage = [[UIImageView alloc] init];
         [self.contentView addSubview:_ownerImage];
         
+        
         _ownerNameLable = [[UILabel alloc] init];
         _ownerNameLable.font = [UIFont systemFontOfSize:14];
         _ownerNameLable.textColor = TextColor;
@@ -208,6 +209,8 @@
         self.backgroundColor = [Tools colorWithRED:242.0 GREEN:242.0 BLUE:242.0 ALPHA:1.0];
         self.contentView.backgroundColor = [UIColor whiteColor];
         // 加入动作
+        _ownerImage.userInteractionEnabled = YES;
+        [_ownerImage addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(otherInfo)]];
         pushImage.userInteractionEnabled = YES;
         [pushImage addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pushGroupTap)]];
         _mainImage.userInteractionEnabled = YES;
@@ -273,17 +276,24 @@
     // 圆角
     _ownerImage.layer.cornerRadius = CGRectGetWidth(_ownerImage.frame) / 2;
     _ownerImage.layer.masksToBounds = YES;
-    _ownerImage.layer.borderWidth = 3;
+    _ownerImage.layer.borderColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.25].CGColor;
+    _ownerImage.layer.borderWidth = 2;
     self.ownerImage.layer.shouldRasterize = YES;
     self.ownerImage.layer.rasterizationScale = [UIScreen mainScreen].scale;
     
     _thirdImage.layer.cornerRadius = CGRectGetWidth(_thirdImage.frame) / 2;
+    _thirdImage.layer.borderColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.25 ].CGColor;
+    _thirdImage.layer.borderWidth = 2.0;
     self.thirdImage.layer.shouldRasterize = YES;
-    self.contentView.layer.rasterizationScale = [UIScreen mainScreen].scale;
+    self.thirdImage.layer.rasterizationScale = [UIScreen mainScreen].scale;
     _secondImage.layer.cornerRadius = CGRectGetWidth(_secondImage.frame) / 2;
+    _secondImage.layer.borderColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.25 ].CGColor;
+    _secondImage.layer.borderWidth = 2.0;
     self.secondImage.layer.shouldRasterize = YES;
     self.secondImage.layer.rasterizationScale = [UIScreen mainScreen].scale;
     _firstImage.layer.cornerRadius = CGRectGetWidth(_firstImage.frame) / 2;
+    _firstImage.layer.borderColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.25 ].CGColor;
+    _firstImage.layer.borderWidth = 2.0;
     self.firstImage.layer.shouldRasterize = YES;
     self.firstImage.layer.rasterizationScale = [UIScreen mainScreen].scale;
     
@@ -348,7 +358,9 @@
     self.descriptionLabel.text = content.content_description;
     self.ownerRole.text = content.owner_role;
     self.ownerDate.text = [Tools compareCurrentTime:content.content_post_date];
-    NSLog(@"MonkeyHengLog: %lu === %d", (unsigned long)self.content.chaters.count, self.content.group_chat_count.intValue);
+    if ((unsigned long)self.content.chaters.count > 3) {
+        NSLog(@"MonkeyHengLog: %lu === %d, %@", (unsigned long)self.content.chaters.count, self.content.group_chat_count.intValue, self.content.content_post_id);
+    }
 //    self.talkerCount.text = [NSString stringWithFormat:@"%d人正在圈聊", self.content.group_chat_count.intValue];
     self.talkerCount.text = [NSString stringWithFormat:@"%lu人正在圈聊", (unsigned long)(self.content.chaters == nil ? 0 : self.content.chaters.count)];
 
@@ -548,6 +560,10 @@
 - (void)jionGroupTap {
     NSLog(@"加入圈聊");
     [_delegate didSelectJoinGroupBtn:_content];
+}
+
+- (void)otherInfo {
+    [_delegate didSelectScreenImg:_content];
 }
 
 @end

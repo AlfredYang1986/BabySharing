@@ -295,7 +295,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"ViewWillAppear" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshTagAnimation" object:nil];
     /**
      * clear view
      */
@@ -844,7 +844,22 @@
 #pragma mark -- tap to main image
 - (void)mainViewHandleTap:(UIGestureRecognizer*)tap {
     if (f_bar.selectedIndex == 0 && _type == PostPreViewPhote) {
+//        [self.view viewWithTag:-9].hidden = NO;
+        // animation
+        UIView *view = [self.view viewWithTag:-9];
+        view.alpha = 0;
         [self.view viewWithTag:-9].hidden = NO;
+        [UIView animateWithDuration:0.3 animations:^{
+            view.alpha = 1.0;
+        }];
+        for (UIView *view in [self.view viewWithTag:-9].subviews) {
+            CGRect endRect = view.frame;
+            CGRect startRect = CGRectMake(endRect.origin.x, endRect.origin.y + 200, endRect.size.width, endRect.size.height);
+            view.frame = startRect;
+            [UIView animateWithDuration:0.3 animations:^{
+                view.frame = endRect;
+            }];
+        }
     }
 }
 @end

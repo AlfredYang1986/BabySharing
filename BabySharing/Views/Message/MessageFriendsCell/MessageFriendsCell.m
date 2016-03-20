@@ -150,7 +150,7 @@
             break;
         case UserPostOwnerConnectionsFriends:
             [tmp setBackgroundImage:[UIImage imageNamed:[resourceBundle pathForResource:[NSString stringWithFormat:@"friend_relation_muture_follow"] ofType:@"png"]] forState:UIControlStateNormal];
-            //                return @"取消关注";
+//                return @"取消关注";
             break;
 //            return @"-取关";
         default:
@@ -217,6 +217,6 @@
 }
 
 - (void)didSelectedRelationBtn {
-    [_delegate didSelectedRelationBtn:_user_id andCurrentRelation:_connections];
+    [_delegate didSelectedRelationBtn:_user_id andCurrentRelation:_connections origin:self];
 }
 @end

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "MessageFriendsCell.h"
 
 @protocol userInfoPaneDelegate <NSObject>
 
@@ -15,7 +16,7 @@
 - (NSString*)getFounderScreenPhoto;
 - (NSString*)getFounderRoleTag;
 - (NSInteger)getFounderRelations;
-
+- (NSString*)getFounderUserId;
 - (NSNumber*)getGroupJoinNumber;
 - (NSArray*)getGroupJoinNumberList;
 
@@ -25,4 +26,6 @@
 @interface ChatGroupUserInfoTableDelegateAndDatasource : NSObject <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, weak) id<userInfoPaneDelegate> delegate;
+@property (nonatomic, weak) id<MessageFriendsCellDelegate> action;
+
 @end

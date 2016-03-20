@@ -11,7 +11,7 @@
 #import "Targets.h"
 #import "TmpFileStoragemodel.h"
 #import "GotyeOCAPI.h"
-
+#import "Tools.h"
 #import "AppDelegate.h"
 #import "RemoteInstance.h"
 
@@ -122,7 +122,9 @@
     }
     NSLog(@"MonkeyHengLog: %f === %u", now_time, m.date);
     NSDate* date = [NSDate dateWithTimeIntervalSince1970:m.date];
-    _timeLabel.text = [formatter stringFromDate:date];
+    
+//    _timeLabel.text = [formatter stringFromDate:date];
+    _timeLabel.text = [Tools compareCurrentTime:date];
 }
 
 - (void)changeImage {

@@ -241,7 +241,7 @@
         return;
     }
     
-    if (inputView.screen_name.length == 0 || inputView.role_tag.length == 0) {
+    if ([Tools bityWithStr:inputView.screen_name] < 4 || [Tools bityWithStr:inputView.role_tag] < 4) {
         [[[UIAlertView alloc] initWithTitle:@"通知" message:@"您的名称或者角色没有输入，请输入" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil] show];
         return;
     }

@@ -12,7 +12,8 @@
 @protocol MessageFriendsCellDelegate <NSObject>
 
 - (void)didSelectedScreenPhoto:(NSString*)user_id;
-- (void)didSelectedRelationBtn:(NSString*)user_id andCurrentRelation:(UserPostOwnerConnections)connections;
+- (void)didSelectedRelationBtn:(NSString*)user_id andCurrentRelation:(UserPostOwnerConnections)connections origin:(NSObject *)cell;
+
 @end
 
 @interface MessageFriendsCell : UITableViewCell
@@ -32,4 +33,5 @@
 - (void)setUserRoleTag:(NSString*)role_tag;
 - (void)setUserScreenPhoto:(NSString*)photo_name;
 - (void)setRelationship:(UserPostOwnerConnections)connections;
+
 @end

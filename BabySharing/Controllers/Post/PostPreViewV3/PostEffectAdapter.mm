@@ -693,7 +693,25 @@ void brandTagView(PostEffectAdapter* obj, UIImage* tag_img) {
 }
 
 - (void)didSelectHideTagView:(UITapGestureRecognizer*)gesture {
-    gesture.view.hidden = YES;
+//    gesture.view.hidden = YES;
+    //        [self.view viewWithTag:-9].hidden = NO;
+    // animation
+    
+    for (UIView *view in gesture.view.subviews) {
+        CGRect endRect = view.frame;
+        CGRect startRect = CGRectMake(endRect.origin.x, endRect.origin.y + 200, endRect.size.width, endRect.size.height);
+        [UIView animateWithDuration:0.3 animations:^{
+            view.frame = startRect;
+        } completion:^(BOOL finished) {
+            view.frame = endRect;
+        }];
+    }
+    [UIView animateWithDuration:0.3 animations:^{
+        gesture.view.alpha = 0;
+    } completion:^(BOOL finished) {
+        gesture.view.hidden = YES;
+        gesture.view.alpha = 1.0;
+    }];
 }
 
 - (void)didClickThumb:(UITapGestureRecognizer*)gesture {
