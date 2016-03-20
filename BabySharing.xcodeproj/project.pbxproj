@@ -3715,9 +3715,13 @@
 					"-ObjC",
 					"-fobjc-arc",
 				);
+<<<<<<< Updated upstream
 				PRODUCT_BUNDLE_IDENTIFIER = monkeyheng.blackmirror.dongda;
+=======
+				PRODUCT_BUNDLE_IDENTIFIER = com.blackmirror.BabySharing;
+>>>>>>> Stashed changes
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "424d83eb-d563-44ef-8304-8ba79154e289";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -3754,9 +3758,13 @@
 					"-ObjC",
 					"-fobjc-arc",
 				);
+<<<<<<< Updated upstream
 				PRODUCT_BUNDLE_IDENTIFIER = monkeyheng.blackmirror.dongda;
+=======
+				PRODUCT_BUNDLE_IDENTIFIER = com.blackmirror.BabySharing;
+>>>>>>> Stashed changes
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "424d83eb-d563-44ef-8304-8ba79154e289";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -3775,7 +3783,7 @@
 				);
 				INFOPLIST_FILE = BabySharingTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "BM.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.blackmirror.dongda;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BabySharing.app/BabySharing";
 			};
@@ -3791,7 +3799,7 @@
 				);
 				INFOPLIST_FILE = BabySharingTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "BM.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.blackmirror.dongda;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BabySharing.app/BabySharing";
 			};

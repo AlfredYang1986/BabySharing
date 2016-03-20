@@ -33,30 +33,24 @@
         return;
     }
     
-    if ([searchText isEqualToString:@""]) {
-        showing_data = exist_data;
-//        self.current_delegate = self;
-//        [_searchBar resignFirstResponder];
-        
-    } else {
-        //        NSString *regex = [NSString stringWithFormat:@"^[%@]\\w*", searchText];
-        NSString *regex = [NSString stringWithFormat:@"^%@\\w*", searchText];
-        NSPredicate* p = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
-        
-        NSMutableArray* tmp = [[NSMutableArray alloc]initWithCapacity:exist_data.count];
-        for (NSString* iter in exist_data) {
-            if ([p evaluateWithObject:iter]) {
-                [tmp addObject:iter];
-            }
-        }
-        showing_data = [tmp copy];
-        
-//        if (final_tag_arr.count == 0) self.current_delegate = add_delegate;
-//        else self.current_delegate = self;
-    }
-    
-//    [_queryView reloadData];
-    [_delegate needToReloadData];
+//    if ([searchText isEqualToString:@""]) {
+//        showing_data = exist_data;
+//        
+//    } else {
+//        //        NSString *regex = [NSString stringWithFormat:@"^[%@]\\w*", searchText];
+//        NSString *regex = [NSString stringWithFormat:@"^%@\\w*", searchText];
+//        NSPredicate* p = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+//        
+//        NSMutableArray* tmp = [[NSMutableArray alloc]initWithCapacity:exist_data.count];
+//        for (NSString* iter in exist_data) {
+//            if ([p evaluateWithObject:iter]) {
+//                [tmp addObject:iter];
+//            }
+//        }
+//        showing_data = [tmp copy];
+//    }
+//    
+//    [_delegate needToReloadData];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
@@ -90,15 +84,17 @@
 
 - (SearchStatus)status {
    
-    NSString* input = [_delegate getUserInputString];
-    if (input.length == 0) return SearchStatusNoInput;
-    else if (input.length > 0 && showing_data.count == 0) return SearchStatusInputWithNoResult;
-    else if (input.length > 0 && showing_data.count > 0) return SearchStatusInputWithResult;
-    else return SearchStatusUnknow;
+//    NSString* input = [_delegate getUserInputString];
+//    if (input.length == 0) return SearchStatusNoInput;
+//    else if (input.length > 0 && showing_data.count == 0) return SearchStatusInputWithNoResult;
+//    else if (input.length > 0 && showing_data.count > 0) return SearchStatusInputWithResult;
+//    else return SearchStatusUnknow;
+    
+    return SearchStatusInputWithNoResult;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-   
+
     SearchStatus status = [self status];
    
     switch (status) {
@@ -117,54 +113,54 @@
     }
 }
 
-- (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+//- (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+//
+//    SearchStatus status = [self status];
+//    
+//    switch (status) {
+//        case SearchStatusNoInput:
+//            return @"解锁新角色:";
+//            
+//        case SearchStatusInputWithNoResult:
+//            return @"解锁新角色:";
+//            
+//        case SearchStatusInputWithResult: {
+//            if (section == 0) {
+//                return @"解锁新角色:";
+//            } else {
+//                return @"搜索结果";
+//            }
+//        }
+//        default:
+//            NSLog(@"error with status");
+//            return @"";
+//    }
+//}
 
-    SearchStatus status = [self status];
-    
-    switch (status) {
-        case SearchStatusNoInput:
-            return @"";
-            
-        case SearchStatusInputWithNoResult:
-            return @"解锁新角色:";
-            
-        case SearchStatusInputWithResult: {
-            if (section == 0) {
-                return @"解锁新角色:";
-            } else {
-                return @"搜索结果";
-            }
-        }
-        default:
-            NSLog(@"error with status");
-            return @"";
-    }
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    SearchStatus status = [self status];
-    
-    switch (status) {
-        case SearchStatusNoInput:
-            return 0;
-            
-        case SearchStatusInputWithNoResult:
-            if (section == 0) {
-                return 0;
-            } else {
-                return 22;
-            }
-        case SearchStatusInputWithResult:
-            if (section == 0) {
-                return 0;
-            } else {
-                return 22;
-            }
-        default:
-            NSLog(@"error with status");
-            return 0;
-    }
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+//    SearchStatus status = [self status];
+//    
+//    switch (status) {
+//        case SearchStatusNoInput:
+//            return 0;
+//            
+//        case SearchStatusInputWithNoResult:
+//            if (section == 0) {
+//                return 0;
+//            } else {
+//                return 22;
+//            }
+//        case SearchStatusInputWithResult:
+//            if (section == 0) {
+//                return 0;
+//            } else {
+//                return 22;
+//            }
+//        default:
+//            NSLog(@"error with status");
+//            return 0;
+//    }
+//}
 
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;

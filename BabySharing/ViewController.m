@@ -159,7 +159,7 @@ enum DisplaySide {
     /**
      * 3. slogen view
      */
-    slg = [[UILabel alloc]init];
+//    slg = [[UILabel alloc]init];
     slg.textAlignment = NSTextAlignmentCenter;
     slg.textColor = [UIColor colorWithWhite:0.5922 alpha:1.f];
     slg.font = [UIFont systemFontOfSize:15.f];

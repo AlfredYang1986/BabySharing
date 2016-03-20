@@ -22,8 +22,15 @@
     return data;
 }
 
-+ (id)searchDataFromData:(NSData*)data
-{
++ (id)searchDataFromData:(NSData*)data {
+    
+    if (data == nil) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"错误" message:@"访问超时，请检查网络" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+            [alert show];
+        });
+    }
+    
     NSError * error = nil;
     NSDictionary * apperals = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves | NSJSONReadingMutableContainers error:&error];
     if (apperals == nil) {
