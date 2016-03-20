@@ -52,6 +52,9 @@
     _album = album;
     if ([_album isKindOfClass:[PHFetchResult class]]) {
         PHFetchResult *fetchResult = (PHFetchResult *)_album;
+        if (fetchResult.count == 0) {
+            return;
+        }
         PHAsset *firstAsset = [fetchResult firstObject];
         PHCachingImageManager *imageManager = [[PHCachingImageManager alloc] init];
         [imageManager requestImageForAsset:firstAsset targetSize:self.albumImage.frame.size contentMode:PHImageContentModeAspectFit options:nil resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
@@ -61,6 +64,9 @@
     } else if ([_album isKindOfClass:[PHCollection class]]) {
         PHAssetCollection *assetCollection = (PHAssetCollection *)_album;
         PHFetchResult *fetchResult = [PHAsset fetchAssetsInAssetCollection:assetCollection options:nil];
+        if (fetchResult.count == 0) {
+            return;
+        }
         PHAsset *firstAsset = [fetchResult firstObject];
         PHCachingImageManager *imageManager = [[PHCachingImageManager alloc] init];
         [imageManager requestImageForAsset:firstAsset targetSize:CGSizeMake(self.albumImage.frame.size.width * 2, self.albumImage.frame.size.width * 2) contentMode:PHImageContentModeAspectFit options:nil resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
@@ -70,11 +76,5 @@
     }
 }
 
-//- (void)setGroup:(ALAssetsGroup *)group {
-//    _group = group;
-//    [self.albumImage setImage:[UIImage imageWithCGImage:group.posterImage]];
-//    self.albumTitle.text = [NSString stringWithFormat:@"%@ %ld", [group valueForProperty:ALAssetsGroupPropertyName], (long)[group numberOfAssets]];
-//    [self.albumTitle sizeToFit];
-//}
 
 @end

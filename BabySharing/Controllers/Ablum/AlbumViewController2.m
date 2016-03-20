@@ -68,7 +68,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-
+    
     self.view.backgroundColor = [UIColor colorWithWhite:0.1098 alpha:1.f];
 
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
@@ -577,12 +577,14 @@
 - (void)enumAllAssetWithProprty:(NSString*)type {
     bLoadData = NO;
     [AlbumModule enumAllPhotoWithBlock:^(NSArray *thumbnailImage, NSArray<PHAsset *> *phAsset) {
-        bLoadData = YES;
-        images_arr = thumbnailImage;
-        phAssetArr = phAsset;
-        [images_select_arr removeAllObjects];
-        [albumView reloadData];
-        [self changeMainContentWithPHAsset:[phAsset firstObject]];
+        if (phAsset.count > 0) {
+            bLoadData = YES;
+            images_arr = thumbnailImage;
+            phAssetArr = phAsset;
+            [images_select_arr removeAllObjects];
+            [albumView reloadData];
+            [self changeMainContentWithPHAsset:[phAsset firstObject]];
+        }
     }];
     
     
@@ -610,11 +612,13 @@
 - (void)enumPhotoAblumByAlbum:(PHFetchResult *)album {
     bLoadData = NO;
     [AlbumModule enumAllPhotoWithPHFetchResult:album block:^(NSArray<UIImage *> *thumbnailImage, NSArray<PHAsset *> *phAsset) {
-        bLoadData = YES;
-        images_arr = thumbnailImage;
-        phAssetArr = phAsset;
-        [images_select_arr removeAllObjects];
-        [albumView reloadData];
+        if (thumbnailImage.count > 0 ||  phAsset > 0) {
+            bLoadData = YES;
+            images_arr = thumbnailImage;
+            phAssetArr = phAsset;
+            [images_select_arr removeAllObjects];
+            [albumView reloadData];
+        }
     }];
 //    [albumModule enumPhotoAblumByAlbumName:group finishBlock:^(NSArray *result) {
 //        bLoadData = YES;
@@ -846,7 +850,7 @@
 
 #pragma mark -- DropDownDatasource
 - (NSInteger)itemCount {
-    return album_name_arr.count;
+    return album_name_arr == nil ? 0 : album_name_arr.count;
 }
 
 - (UITableViewCell *)cellForRow:(NSInteger)row inTableView:(UITableView*)tableview {

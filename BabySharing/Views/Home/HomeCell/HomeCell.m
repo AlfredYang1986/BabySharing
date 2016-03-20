@@ -258,7 +258,7 @@
     praiseImage.frame = CGRectMake(17, CGRectGetMaxY(_descriptionLabel.frame) + 15, 25, 25);
     _praiseCount.frame = CGRectMake(CGRectGetMaxX(praiseImage.frame) + 5, CGRectGetMaxY(_descriptionLabel.frame) + 20, 15, 15);
     
-    pushImage.frame = CGRectMake(CGRectGetWidth(self.contentView.frame) / 2, CGRectGetMaxY(_descriptionLabel.frame) + 15, 25, 25);
+    pushImage.frame = CGRectMake(CGRectGetWidth(self.contentView.frame) / 3, CGRectGetMaxY(_descriptionLabel.frame) + 15, 25, 25);
     _usefulCount.frame = CGRectMake(CGRectGetMaxX(pushImage.frame) + 5, CGRectGetMinY(_praiseCount.frame), 15, 15);
     
     lineView.frame = CGRectMake(15, CGRectGetMaxY(praiseImage.frame) + 15, CGRectGetWidth(self.contentView.frame) - 30, 1);
@@ -415,6 +415,7 @@
     _gpuImageView.hidden = YES;
     
     praiseImage.image = self.content.isLike.integerValue == 0 ? [UIImage imageNamed:[resourceBundle pathForResource:@"home_like_default" ofType:@"png"]] : [UIImage imageNamed:[resourceBundle pathForResource:@"home_like_like" ofType:@"png"]] ;
+    pushImage.image = self.content.isPush.integerValue == 0 ? [UIImage imageNamed:[resourceBundle pathForResource:@"push" ofType:@"png"]] : [UIImage imageNamed:[resourceBundle pathForResource:@"pushed" ofType:@"png"]];
     
     // 添加标签
     self.tagViewLocation.hidden = YES;
@@ -554,6 +555,10 @@
 
 - (void)pushGroupTap {
     NSLog(@"推了一个");
+    self.content.isPush = self.content.isPush.intValue == 0 ? [NSNumber numberWithInt:1] : [NSNumber numberWithInt:0];
+    NSString *bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+    pushImage.image = self.content.isPush.integerValue == 0 ? [UIImage imageNamed:[resourceBundle pathForResource:@"push" ofType:@"png"]] : [UIImage imageNamed:[resourceBundle pathForResource:@"pushed" ofType:@"png"]];
     [_delegate didSelectCollectionBtn:_content];
 }
 

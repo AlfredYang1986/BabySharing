@@ -18,10 +18,12 @@
 }
 
 + (void)enumAllPhotoWithBlock:(PhotoFindishBlock)block {
-
     PHFetchOptions *options = [[PHFetchOptions alloc] init];
     options.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:NO]];
     PHFetchResult *fetchResult = [PHAsset fetchAssetsWithOptions:options];
+    if (fetchResult.count == 0) {
+        return;
+    }
     dispatch_queue_t queue = dispatch_queue_create("getThumbnailImage", nil);
 //    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     PHCachingImageManager *imageManager = [[PHCachingImageManager alloc] init];
@@ -76,6 +78,9 @@
  */
 + (void)enumAllPhotoWithPHFetchResult:(PHFetchResult *)fetchResult block:(PhotoFindishBlock)block {
     // 缩略图和PHAsset
+    if (fetchResult.count == 0) {
+        return;
+    }
     dispatch_queue_t queue = dispatch_queue_create("getThumbnailImage", nil);
     //    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     PHCachingImageManager *imageManager = [[PHCachingImageManager alloc] init];

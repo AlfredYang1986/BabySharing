@@ -237,12 +237,12 @@
 
     NSString* screen_photo = [_login_attr objectForKey:@"screen_photo"];
     if (!screen_photo || [screen_photo isEqualToString:@""]) {
-        [[[UIAlertView alloc] initWithTitle:@"通知" message:@"您的用户头像没有输入，请选择" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil] show];
+        [[[UIAlertView alloc] initWithTitle:@"通知" message:@"您没有选择用户头像" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil] show];
         return;
     }
     
     if ([Tools bityWithStr:inputView.screen_name] < 4 || [Tools bityWithStr:inputView.role_tag] < 4) {
-        [[[UIAlertView alloc] initWithTitle:@"通知" message:@"您的名称或者角色没有输入，请输入" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil] show];
+        [[[UIAlertView alloc] initWithTitle:@"通知" message:@"您的名称或者角色没有过短" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil] show];
         return;
     }
     

@@ -201,7 +201,7 @@
     [_current.navigationController pushViewController:pc animated:YES];
 }
 
-- (void)didSelectedRelationBtn:(NSString*)user_id andCurrentRelation:(UserPostOwnerConnections)connections {
+- (void)didSelectedRelationBtn:(NSString*)user_id andCurrentRelation:(UserPostOwnerConnections)connections origin:(NSObject *)cell{
     NSLog(@"follow button selected");
     
     NSString* follow_user_id = user_id;
@@ -217,7 +217,7 @@
                 if (success && [self changeArrWithUserID:follow_user_id andConnections:new_connections]) {
                     NSLog(@"follow success");
                     [_queryView reloadData];
-                    
+            
                 } else {
                     NSLog(@"follow error, %@", message);
                 }
