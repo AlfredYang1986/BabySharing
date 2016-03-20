@@ -121,9 +121,11 @@
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    [_um queryUserSearchWithScreenName:searchBar.text andFinishBlock:^(BOOL success, NSDictionary *result) {
-        [_queryView reloadData];
-    }];
+    if (searchBar.text.length > 0) {
+        [_um queryUserSearchWithScreenName:searchBar.text andFinishBlock:^(BOOL success, NSDictionary *result) {
+            [_queryView reloadData];
+        }];
+    }
 }
 
 //- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
@@ -131,8 +133,8 @@
 //        [_queryView reloadData];
 //    }];
 //}
-
-#pragma mark -- table view 
+//
+//#pragma mark -- table view
 //- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 //    return 3;
 //}
