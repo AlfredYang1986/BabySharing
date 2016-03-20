@@ -197,6 +197,7 @@
         [_mainImage addSubview:_tagViewLocation];
 
         
+        
         self.contentView.layer.cornerRadius = 8;
         self.contentView.layer.shadowColor = [UIColor blackColor].CGColor;
         self.contentView.layer.shadowOffset = CGSizeMake(0, 0);
@@ -262,9 +263,9 @@
     _firstImage.frame = CGRectMake(0, 0, radius * 2 - 18, radius * 2 - 18);
     _firstImage.center = CGPointMake(18 + radius / 2, CGRectGetMaxY(lineView.frame) + radius);
     _secondImage.frame = CGRectMake(0, 0, radius * 2 - 18, radius * 2 - 18);
-    _secondImage.center = CGPointMake(CGRectGetMidX(_firstImage.frame) + radius, CGRectGetMaxY(lineView.frame) + radius);
+    _secondImage.center = CGPointMake(CGRectGetMidX(_firstImage.frame) + radius - 5, CGRectGetMaxY(lineView.frame) + radius);
     _thirdImage.frame = CGRectMake(0, 0, radius * 2 - 18, radius * 2 - 18);
-    _thirdImage.center = CGPointMake(CGRectGetMidX(_secondImage.frame) + radius, CGRectGetMaxY(lineView.frame) + radius);
+    _thirdImage.center = CGPointMake(CGRectGetMidX(_secondImage.frame) + radius - 5, CGRectGetMaxY(lineView.frame) + radius);
     [self.contentView bringSubviewToFront:_thirdImage];
     [self.contentView bringSubviewToFront:_secondImage];
     [self.contentView bringSubviewToFront:_firstImage];
@@ -272,6 +273,7 @@
     // 圆角
     _ownerImage.layer.cornerRadius = CGRectGetWidth(_ownerImage.frame) / 2;
     _ownerImage.layer.masksToBounds = YES;
+    _ownerImage.layer.borderWidth = 3;
     self.ownerImage.layer.shouldRasterize = YES;
     self.ownerImage.layer.rasterizationScale = [UIScreen mainScreen].scale;
     
@@ -291,7 +293,7 @@
     
     CGFloat y = self.thirdImage.center.y;
     _talkerCount.center = CGPointMake(originX + CGRectGetWidth(_talkerCount.frame) / 2, [NSNumber numberWithFloat:y].intValue);
-    
+
     _jionGroup.frame = CGRectMake(CGRectGetWidth(self.contentView.frame) - 97 , CGRectGetMaxY(lineView.frame) + 7, 90, CGRectGetHeight(self.contentView.frame) - CGRectGetMaxY(lineView.frame) - 14);
     jionGroupView.frame = CGRectMake(0, 0, CGRectGetWidth(_jionGroup.frame), CGRectGetHeight(_jionGroup.frame));
     
@@ -314,6 +316,9 @@
         NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
         NSString *defaultHeadPath;
         for (QueryContentChaters *chater in self.content.chaters) {
+            if (indexChater == 3) {
+                break;
+            }
             if (indexChater == 0) {
                 originX += 30;
             } else {
@@ -343,8 +348,10 @@
     self.descriptionLabel.text = content.content_description;
     self.ownerRole.text = content.owner_role;
     self.ownerDate.text = [Tools compareCurrentTime:content.content_post_date];
-    self.talkerCount.text = [NSString stringWithFormat:@"%d人正在圈聊", self.content.group_chat_count.intValue];
-    
+    NSLog(@"MonkeyHengLog: %lu === %d", (unsigned long)self.content.chaters.count, self.content.group_chat_count.intValue);
+//    self.talkerCount.text = [NSString stringWithFormat:@"%d人正在圈聊", self.content.group_chat_count.intValue];
+    self.talkerCount.text = [NSString stringWithFormat:@"%lu人正在圈聊", (unsigned long)(self.content.chaters == nil ? 0 : self.content.chaters.count)];
+
     // 设置头像
     NSString *bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];

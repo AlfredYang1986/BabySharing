@@ -114,6 +114,7 @@
     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @"DongDaBoundle" ofType :@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
     NSString * filePath = [resourceBundle pathForResource:[NSString stringWithFormat:@"relase_imge_default"] ofType:@"png"];
+    
     [self setImage:[UIImage imageNamed:filePath]];
     UIImage* userImg = [TmpFileStorageModel enumImageWithName:photo_name withDownLoadFinishBolck:^(BOOL success, UIImage *user_img) {
         if (success) {

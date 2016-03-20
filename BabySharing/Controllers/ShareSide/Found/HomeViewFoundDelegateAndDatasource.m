@@ -317,7 +317,13 @@
         NSArray* arr_tmp = [app.qm.querydata objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(row * PHOTO_PER_LINE, PHOTO_PER_LINE)]];
         NSMutableArray* arr_content = [[NSMutableArray alloc]initWithCapacity:PHOTO_PER_LINE];
         for (QueryContent* item in arr_tmp) {
-            [arr_content addObject:((QueryContentItem*)item.items.allObjects.firstObject).item_name];
+            for (QueryContentItem *aaa in item.items) {
+    
+                if (aaa.item_type.unsignedIntegerValue != PostPreViewMovie) {
+                    [arr_content addObject:aaa.item_name];
+                    break;
+                }
+            }
         }
         [cell setUpContentViewWithImageNames:arr_content atLine:row andType:AlbumControllerTypePhoto];
         cell.cannot_selected = YES;
@@ -326,7 +332,12 @@
         NSArray* arr_tmp = [app.qm.querydata objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(row * PHOTO_PER_LINE, app.qm.querydata.count - row * PHOTO_PER_LINE)]];
         NSMutableArray* arr_content = [[NSMutableArray alloc] initWithCapacity:PHOTO_PER_LINE];
         for (QueryContent* item in arr_tmp) {
-            [arr_content addObject:((QueryContentItem *)item.items.allObjects.firstObject).item_name];
+            for (QueryContentItem *aaa in item.items) {
+                if (aaa.item_type.unsignedIntegerValue != PostPreViewMovie) {
+                    [arr_content addObject:aaa.item_name];
+                    break;
+                }
+            }
         }
         [cell setUpContentViewWithImageNames:arr_content atLine:row andType:AlbumControllerTypePhoto];
         cell.cannot_selected = YES;
@@ -391,7 +402,7 @@
     [hv.delegate pushExistingData:app.qm.querydata];
     [hv.delegate setSelectIndex:index];
     hv.nav_title = @"发现更多内容";
-//    hv.nav_title = @"Mother's Choice";
+    hv.current_index = index;
     [_container.navigationController pushViewController:hv animated:YES];
 }
 

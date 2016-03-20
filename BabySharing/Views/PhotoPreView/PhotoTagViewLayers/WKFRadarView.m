@@ -60,8 +60,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         //当重后台进入前台，防止假死状态
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resume) name:UIApplicationDidBecomeActiveNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resume) name:@"refreshTagAnimation" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resumeAnimation) name:UIApplicationDidBecomeActiveNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resumeAnimation) name:@"refreshTagAnimation" object:nil];
     }
     return self;
 }
@@ -69,8 +69,8 @@
 -(instancetype)initWithFrame:(CGRect)frame andThumbnail:(NSString *)thumbnailUrl {
     if (self = [super initWithFrame:frame]) {
         //当重后台进入前台，防止假死状态
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resume) name:UIApplicationDidBecomeActiveNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resume) name:@"refreshTagAnimation" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resumeAnimation) name:UIApplicationDidBecomeActiveNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resumeAnimation) name:@"refreshTagAnimation" object:nil];
         self.backgroundColor = [UIColor clearColor];
         items = [[NSMutableArray alloc] init];
         itemSize = CGSizeMake(40, 40);
@@ -187,19 +187,15 @@
 
 
 // 防止假死
--(void)resume {
+-(void)resumeAnimation {
     if (self.animationLayer) {
         [self.animationLayer removeFromSuperlayer];
         [self setNeedsDisplay];
     }
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-*/
 
 @end

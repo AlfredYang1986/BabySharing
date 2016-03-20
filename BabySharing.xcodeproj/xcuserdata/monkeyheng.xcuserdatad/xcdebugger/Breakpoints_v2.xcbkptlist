@@ -116,28 +116,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BabySharing/Controllers/ShareSide/Home/HomeMain/HomeViewController.m"
-            timestampString = "480069180.68895"
+            timestampString = "480142832.269165"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "426"
             endingLineNumber = "426"
             landmarkName = "-test"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BabySharing/Controllers/Ablum/AlbumViewController2.m"
-            timestampString = "480069544.707705"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "441"
-            endingLineNumber = "441"
-            landmarkName = "-didNextBtnSelected"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -170,22 +154,6 @@
             startingLineNumber = "644"
             endingLineNumber = "644"
             landmarkName = "-didSelectSaveBtn"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BabySharing/Controllers/Post/PostPreViewV3/PostPreViewEffectController.m"
-            timestampString = "480076282.561668"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "156"
-            endingLineNumber = "156"
-            landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -240,16 +208,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BabySharing/Views/Album/AlbumTableCell.m"
+            timestampString = "480140113.037711"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "-setUpContentViewWithImageNames:atLine:andType:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BabySharing/Controllers/Cycle/CycleViewController.m"
-            timestampString = "480086915.079224"
+            filePath = "BabySharing/Controllers/ShareSide/Found/HomeViewFoundDelegateAndDatasource.m"
+            timestampString = "480140792.894863"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "474"
-            endingLineNumber = "474"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            startingLineNumber = "342"
+            endingLineNumber = "342"
+            landmarkName = "-queryTagsRowCellWithTableView:atIndex:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
