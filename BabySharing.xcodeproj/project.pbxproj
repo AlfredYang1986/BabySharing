@@ -12,7 +12,7 @@
 		700B0B881C5A1D5E00692A20 /* Notifications+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 700B0B851C5A1D5E00692A20 /* Notifications+CoreDataProperties.m */; };
 		700B0B891C5A1D5E00692A20 /* Notifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 700B0B871C5A1D5E00692A20 /* Notifications.m */; };
 		700FF9F11C9AE3F6009FB08B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 700FF9F01C9AE3F6009FB08B /* LaunchScreen.xib */; };
-		700FF9F31C9AE6CA009FB08B /* default.png in Resources */ = {isa = PBXBuildFile; fileRef = 700FF9F21C9AE6CA009FB08B /* default.png */; };
+		700FF9F31C9AE6CA009FB08B /* default2.png in Resources */ = {isa = PBXBuildFile; fileRef = 700FF9F21C9AE6CA009FB08B /* default2.png */; };
 		701233BF1C915260007F79C2 /* Targets+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 701233BC1C915260007F79C2 /* Targets+CoreDataProperties.m */; };
 		701233C01C915260007F79C2 /* Targets.m in Sources */ = {isa = PBXBuildFile; fileRef = 701233BE1C915260007F79C2 /* Targets.m */; };
 		702491D81C93EE60007922BC /* RegCurrentToken+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 702491D51C93EE60007922BC /* RegCurrentToken+CoreDataProperties.m */; };
@@ -399,7 +399,7 @@
 		700B0B861C5A1D5E00692A20 /* Notifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notifications.h; sourceTree = "<group>"; };
 		700B0B871C5A1D5E00692A20 /* Notifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Notifications.m; sourceTree = "<group>"; };
 		700FF9F01C9AE3F6009FB08B /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
-		700FF9F21C9AE6CA009FB08B /* default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default.png; sourceTree = "<group>"; };
+		700FF9F21C9AE6CA009FB08B /* default2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default2.png; sourceTree = "<group>"; };
 		701233BB1C915260007F79C2 /* Targets+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Targets+CoreDataProperties.h"; sourceTree = "<group>"; };
 		701233BC1C915260007F79C2 /* Targets+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Targets+CoreDataProperties.m"; sourceTree = "<group>"; };
 		701233BD1C915260007F79C2 /* Targets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Targets.h; sourceTree = "<group>"; };
@@ -1971,7 +1971,7 @@
 		EEAAC8FB1B44E81A00D05C0B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				700FF9F21C9AE6CA009FB08B /* default.png */,
+				700FF9F21C9AE6CA009FB08B /* default2.png */,
 				A00946391C96A9CD0015A641 /* DongDaBoundle.bundle */,
 				A0B7A7621C7C23CC00D78E6E /* YYBoundle.bundle */,
 				EE7416251B5B8CDF002CA1BC /* AreaCodeJson.txt */,
@@ -3228,7 +3228,7 @@
 				EEBE1B861C17CB4E00EAA9D2 /* FoundSearchHeader.xib in Resources */,
 				70D15B511C5B64C9007AC9AB /* MJRefresh.bundle in Resources */,
 				EEC980B21B8EB9EA0087E5A7 /* status-bar-pattern-black@2x.jpg in Resources */,
-				700FF9F31C9AE6CA009FB08B /* default.png in Resources */,
+				700FF9F31C9AE6CA009FB08B /* default2.png in Resources */,
 				EE97441F1B78944600E81A70 /* MessageNotificationDetailCell.xib in Resources */,
 				70F5014B1C23ADC2007769F4 /* PostPreview.storyboard in Resources */,
 				EEA1F54D1C169049009B8724 /* SearchViewController.storyboard in Resources */,
@@ -3701,7 +3701,7 @@
 					"-ObjC",
 					"-fobjc-arc",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = BS.BabySharing;
+				PRODUCT_BUNDLE_IDENTIFIER = com.blackmirror.dongda;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -3740,7 +3740,7 @@
 					"-ObjC",
 					"-fobjc-arc",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = BS.BabySharing;
+				PRODUCT_BUNDLE_IDENTIFIER = com.blackmirror.dongda;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -96,6 +96,7 @@
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"
+      customArchiveName = "DongDa"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

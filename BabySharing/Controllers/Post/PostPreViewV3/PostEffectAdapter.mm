@@ -441,10 +441,10 @@ void sceneEffectMovie(PostEffectAdapter* obj) {
 
 UIImage* avaterEffect(UIImage* source, PostEffectAdapter* obj) {
     GPUImagePicture* tmp = [[GPUImagePicture alloc]initWithImage:source];
-    obj.avater = [ImageFilterFactory avater];
+//    obj.avater = [ImageFilterFactory avater];
     [tmp addTarget:obj.avater];
-    [tmp processImage];
     [obj.avater useNextFrameForImageCapture];
+    [tmp processImage];
     return [obj.avater imageFromCurrentFramebuffer];
 }
 
