@@ -9,8 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "AddingFriendsProtocol.h"
+#import "MessageFriendsCell.h"
 
-@interface AddressBookDelegate : NSObject <UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate, AddingFriendsProtocol>
+@interface AddressBookDelegate : NSObject <UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate, AddingFriendsProtocol, MessageFriendsCellDelegate>
 
 @property (nonatomic, weak) id<AsyncDelegateProtocol> delegate;
 

@@ -200,7 +200,7 @@
    
     if (isFriends) {
         NSDictionary* tmp = [friend_profile_lst objectAtIndex:indexPath.row];
-//        cell.delegate = self;
+        cell.delegate = self;
         cell.user_id = [tmp objectForKey:@"user_id"];
         [cell setUserScreenPhoto:[tmp objectForKey:@"screen_photo"]];
         [cell setRelationship:((NSNumber*)[tmp objectForKey:@"relations"]).integerValue];
@@ -296,4 +296,66 @@
     
     none_friend_lst = [people filteredArrayUsingPredicate:p_not];
 }
+
+- (void)didSelectedRelationBtn:(NSString *)user_id andCurrentRelation:(UserPostOwnerConnections)connections origin:(NSObject *)cell {
+    MessageFriendsCell *origin = (MessageFriendsCell *)cell;
+    
+    switch (connections) {
+        case UserPostOwnerConnectionsNone: {
+            
+            [[AppDelegate defaultAppDelegate].cm followOneUser:user_id withFinishBlock:^(BOOL success, NSString *message, UserPostOwnerConnections new_relations) {
+                if (success) {
+                    //                    [[[UIAlertView alloc] initWithTitle:@"通知" message:@"关注成功" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil] show];
+                    [origin setRelationship:UserPostOwnerConnectionsFollowing];
+                } else {
+                    //                    [[[UIAlertView alloc] initWithTitle:@"通知" message:@"关注失败" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil] show];
+                    [origin setRelationship:UserPostOwnerConnectionsNone];
+                }
+            }];
+        }
+            break;
+        case UserPostOwnerConnectionsFollowing: {
+            
+            [[AppDelegate defaultAppDelegate].cm unfollowOneUser:user_id withFinishBlock:^(BOOL success, NSString *message, UserPostOwnerConnections new_relations) {
+                
+                if (success) {
+                    //                    [[[UIAlertView alloc] initWithTitle:@"通知" message:@"取消关注成功" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil] show];
+                    [origin setRelationship:UserPostOwnerConnectionsNone];
+                } else {
+                    //                    [[[UIAlertView alloc] initWithTitle:@"通知" message:@"取消关注失败" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil] show];
+                    [origin setRelationship:UserPostOwnerConnectionsFollowing];
+                }
+            }];
+        }
+            break;
+        case UserPostOwnerConnectionsFollowed: {
+            
+            [[AppDelegate defaultAppDelegate].cm followOneUser:user_id withFinishBlock:^(BOOL success, NSString *message, UserPostOwnerConnections new_relations) {
+                if (success) {
+                    //                    [[[UIAlertView alloc] initWithTitle:@"通知" message:@"关注成功" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil] show];
+                    [origin setRelationship:UserPostOwnerConnectionsFriends];
+                } else {
+                    //                    [[[UIAlertView alloc] initWithTitle:@"通知" message:@"关注失败" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil] show];
+                    [origin setRelationship:UserPostOwnerConnectionsNone];
+                }
+            }];
+        }
+            break;
+        case UserPostOwnerConnectionsFriends: {
+            [[AppDelegate defaultAppDelegate].cm unfollowOneUser:user_id withFinishBlock:^(BOOL success, NSString *message, UserPostOwnerConnections new_relations) {
+                if (success) {
+                    //                    [[[UIAlertView alloc] initWithTitle:@"通知" message:@"取消关注成功" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil] show];
+                    [origin setRelationship:UserPostOwnerConnectionsFollowed];
+                } else {
+                    //                    [[[UIAlertView alloc] initWithTitle:@"通知" message:@"取消关注失败" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil] show];
+                    [origin setRelationship:UserPostOwnerConnectionsFriends];
+                }
+            }];
+        }
+            break;
+        default:
+            break;
+    }
+}
+
 @end
