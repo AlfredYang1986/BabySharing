@@ -31,6 +31,11 @@
         ((SearchViewController*)self.controller).delegate = (id<SearchDataCollectionProtocol, SearchActionsProtocol, SearchViewControllerProtocol>)_delegate;
         [((SearchViewController*)self.controller).queryView reloadData];
         return;
+    } else {
+        if (searchText.length > 0) {
+            showing_data = [[Tools sortWithArr:exist_data headStr:searchText] copy];
+            [_delegate needToReloadData];
+        }
     }
     
 //    if ([searchText isEqualToString:@""]) {

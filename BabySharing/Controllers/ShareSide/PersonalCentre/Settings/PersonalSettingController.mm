@@ -486,11 +486,11 @@
     dispatch_queue_t aq = dispatch_queue_create("add tag", nil);
     dispatch_async(aq, ^{
         
-        AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//        AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
         
         NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
-        [dic setValue:app.lm.current_user_id forKey:@"user_id"];
-        [dic setValue:app.lm.current_auth_token forKey:@"auth_token"];
+//        [dic setValue:app.lm.current_user_id forKey:@"user_id"];
+//        [dic setValue:app.lm.current_auth_token forKey:@"auth_token"];
         [dic setValue:item forKey:@"tag_name"];
         
         NSError * error = nil;
