@@ -53,6 +53,7 @@
 
 - (BOOL)appendData:(SyncDataCallBack)block {
     [_qm appendQueryDataByUser:_lm.current_user_id withToken:_lm.current_auth_token andBeginIndex:_qm.querydata.count];
+    data = _qm.querydata;
     block(_qm.querydata);
     return YES;
 }
@@ -80,9 +81,9 @@
 }
 
 - (NSArray*)data {// TODO: need to delete
-    if (data == nil) {
+//    if (data == nil) {
         data = _qm.querydata;
-    }
+//    }
     return data;
 }
 @end
