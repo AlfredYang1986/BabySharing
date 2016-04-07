@@ -152,8 +152,9 @@
     [self.navigationController setNavigationBarHidden:NO];
     [self.navigationController pushViewController:pc animated:YES];
 }
+//-(void)didSelectedUserRelationsUserID:(NSString *)user_id andCurrentConnection:(UserPostOwnerConnections)new_connections
 
-- (void)didSelectedUserRelationsUserID:(NSString *)user_id andCurrentConnection:(UserPostOwnerConnections)connections {
+- (void)didSelectedUserRelationsUserID:(NSString *)user_id andCurrentConnection:(UserPostOwnerConnections)connections{
     NSLog(@"follow button selected");
    
     AppDelegate* app = [UIApplication sharedApplication].delegate;

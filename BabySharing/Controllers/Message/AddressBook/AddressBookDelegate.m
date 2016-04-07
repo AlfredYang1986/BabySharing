@@ -357,5 +357,9 @@
             break;
     }
 }
+-(void)didSelectedScreenPhoto:(NSString *)user_id{
+    NSLog(@"didSelectedScreenPhoto:(NSString *)user_id--%@",user_id);
+//    [_delegate didSelectScreenImg:_content];
+}
 
 @end

@@ -218,7 +218,11 @@
     [self.navigationController pushViewController:pc animated:YES];
 }
 
-- (void)didSelectedRelationBtn:(NSString*)user_id andCurrentRelation:(UserPostOwnerConnections)connections {
+//-(void)didSelectedRelationBtn:(NSString *)user_id andCurrentRelation:(UserPostOwnerConnections)connections origin:(NSObject *)cell{
+//
+//}
+
+- (void)didSelectedRelationBtn:(NSString*)user_id andCurrentRelation:(UserPostOwnerConnections)connections origin:(NSObject *)cell{
     NSLog(@"follow button selected");
     
     NSString* follow_user_id = user_id;

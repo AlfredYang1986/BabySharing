@@ -3176,7 +3176,7 @@
 				TargetAttributes = {
 					EEAAC8F71B44E81A00D05C0B = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = 6AUL2A4AE9;
+						DevelopmentTeam = 45E5AAUFA8;
 					};
 					EEAAC9131B44E81A00D05C0B = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -3707,8 +3707,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Yuan Yang (2X5VX27Y79)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yuan Yang (2X5VX27Y79)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3737,7 +3737,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.blackmirror.BabySharing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "424d83eb-d563-44ef-8304-8ba79154e289";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -3746,8 +3746,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Yuan Yang (2X5VX27Y79)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yuan Yang (2X5VX27Y79)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3777,7 +3777,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.blackmirror.BabySharing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "424d83eb-d563-44ef-8304-8ba79154e289";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

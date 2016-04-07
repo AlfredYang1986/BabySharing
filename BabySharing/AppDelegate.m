@@ -189,7 +189,7 @@
     //    if (types == 5 || types == 7) {
     //        application.applicationIconBadgeNumber = 0;
     //    }
-    //注册远程通知
+    //  注册远程通知
     [application registerForRemoteNotifications];
 }
 

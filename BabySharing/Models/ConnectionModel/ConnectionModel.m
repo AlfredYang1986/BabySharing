@@ -64,7 +64,7 @@
     
     return self;
 }
-
+//MXSBUG - 536
 #pragma mark -- follow and unfollow
 - (void)followOneUser:(NSString*)follow_user_id withFinishBlock:(followFinishBlock)block {
     NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];

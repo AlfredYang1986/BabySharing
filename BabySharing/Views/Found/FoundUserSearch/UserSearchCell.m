@@ -270,9 +270,13 @@
     [_delegate didSelectedUserScreenPhoto:_user_id];
 }
 
-- (void)didSelectedRelationBtn:(NSString *)user_id andCurrentRelation:(UserPostOwnerConnections)connections {
+//-(void)didSelectedRelationBtn:(NSString *)user_id andCurrentRelation:(UserPostOwnerConnections)connections origin:(NSObject *)cell
+
+- (void)didSelectedRelationBtn:(NSString *)user_id andCurrentRelation:(UserPostOwnerConnections)connections origin:(NSObject *)cell{
 //    [_delegate didSelectedUserContentImages:0 andUserID:user_id];
-    [_delegate didSelectedUserRelationsUserID:_user_id andCurrentConnection:connections];
+    NSLog(@"tags 01 --- %ld",(long)_connections);
+    [_delegate didSelectedUserRelationsUserID:_user_id andCurrentConnection:_connections];
+    
 }
 
 @end
