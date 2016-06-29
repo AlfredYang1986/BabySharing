@@ -105,7 +105,6 @@
     
     _searchBar.delegate = self;
     _searchBar.showsCancelButton = YES;
-    _searchBar.showsCancelButton = YES;
     for(UIView *view in  [[[_searchBar subviews] objectAtIndex:0] subviews]) {
         if([view isKindOfClass:[NSClassFromString(@"UINavigationButton") class]]) {
             UIButton * cancel =(UIButton *)view;

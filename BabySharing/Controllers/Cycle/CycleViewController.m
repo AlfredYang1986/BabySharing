@@ -29,7 +29,6 @@
 
 #define TABLE_VIEW_TOP_MARGIN   74
 
-//<<<<<<< HEAD
 ///*DropDownMenuProcotol, WEPopoverControllerDelegate, UIPopoverControllerDelegate,*/
 @interface CycleViewController () <UITableViewDataSource, UITableViewDelegate,  createUpdateDetailProtocol>
 @property (strong, nonatomic) UITableView *cycleTableView;

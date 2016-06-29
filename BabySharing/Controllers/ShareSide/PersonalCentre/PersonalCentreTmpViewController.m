@@ -113,7 +113,7 @@
     _queryView.showsHorizontalScrollIndicator = FALSE;
     _queryView.delegate = _current_delegate;
     _queryView.dataSource = _current_delegate;
-    NSLog(@"MonkeyHengLog: %@ === %u", @"_om.querydata.count", _ownerQueryModel.querydata.count);
+    NSLog(@"MonkeyHengLog: %@ === %lu", @"_om.querydata.count", (unsigned long)_ownerQueryModel.querydata.count);
 //    if (_om.querydata.count == 0) {
 //        // 没有东西加一句话
 //        UILabel *inform = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 50)];

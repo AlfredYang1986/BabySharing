@@ -67,8 +67,6 @@
 
 - (void)enumDataFromLocalDB:(UIManagedDocument*)document {
     dispatch_queue_t aq = dispatch_queue_create("load_data", NULL);
-   
-    
     dispatch_async(aq, ^(void){
         dispatch_async(dispatch_get_main_queue(), ^(void){
             [document.managedObjectContext performBlock:^(void){

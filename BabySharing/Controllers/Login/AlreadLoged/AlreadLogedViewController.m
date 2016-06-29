@@ -304,8 +304,6 @@
 //    [self presentModalViewController:picker animated:YES];//进入照相界面
 }
 
-
-
 #pragma mark --
 - (IBAction)didSelectMeButton {
 

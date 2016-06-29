@@ -78,7 +78,6 @@ enum DisplaySide {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self classForCoder];
     isUpAnimation = NO;
     // Do any additional setup after loading the view, typically from a nib.
     [self.navigationController setNavigationBarHidden:YES animated:NO];

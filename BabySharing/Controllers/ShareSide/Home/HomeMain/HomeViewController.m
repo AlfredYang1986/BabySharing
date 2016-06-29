@@ -423,9 +423,6 @@
     }
 }
 
-- (void)test {
-    NSLog(@"fdfdsd");
-}
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     _current_index = 0;

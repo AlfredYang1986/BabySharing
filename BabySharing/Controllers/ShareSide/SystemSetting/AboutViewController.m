@@ -141,7 +141,8 @@
     cell.textLabel.text = [titles objectAtIndex:indexPath.row];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.textLabel.textColor = [UIColor colorWithWhite:0.3059 alpha:1.f];
-    
+  
+    // TODO: bugs need rewrite
     CALayer* line = [CALayer layer];
     line.borderWidth = 1.f;
     line.borderColor = [UIColor colorWithWhite:0.5922 alpha:0.10].CGColor;
